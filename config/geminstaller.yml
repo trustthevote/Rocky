@@ -12,10 +12,6 @@ gems:
   <% else %>
   version: 2.3.2
   <% end %>
-- name: capistrano
-  version: 2.5.3
-- name: capistrano-ext
-  version: 1.2.1
 - name: rspec
   version: ~> 1.2.7
 - name: rspec-rails
