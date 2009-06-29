@@ -2,7 +2,7 @@ defaults:
   install_options: --no-ri --no-rdoc
 gems:
 - name: rake
-  version: >= 0.8.4
+  version: ~> 0.8.7
 - name: rails
   <% if ENV['RAILS_GEM_VERSION'] %>
   # To see more recent preview gems, run 'gem list rails --source=http://gems.rubyonrails.org --remote'
