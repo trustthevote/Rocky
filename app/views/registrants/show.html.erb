@@ -1,0 +1,10 @@
+<h1>Registrant</h1>
+
+<p><%= @registrant.name_prefix %></p>
+<p><%= @registrant.first_name %></p>
+<p><%= @registrant.middle_name %></p>
+<p><%= @registrant.last_name %></p>
+<p><%= @registrant.name_suffix %></p>
+
+<%= link_to 'Edit', edit_registrant_path(@registrant) %> |
+<%= link_to 'Back', registrants_path %>

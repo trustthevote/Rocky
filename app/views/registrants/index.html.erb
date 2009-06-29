@@ -1,0 +1,25 @@
+<h1>Listing registrants</h1>
+
+<table>
+  <thead>
+    
+  </thead>
+  <tbody>
+    <% @registrants.each do |registrant| %>
+      <tr>
+        <td><%= registrant.name_prefix %></td>
+        <td><%= registrant.first_name %></td>
+        <td><%= registrant.middle_name %></td>
+        <td><%= registrant.last_name %></td>
+        <td><%= registrant.name_suffix %></td>
+        <td><%= link_to 'Show', registrant %></td>
+        <td><%= link_to 'Edit', edit_registrant_path(registrant) %></td>
+        <td><%= link_to 'Destroy', registrant, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New registrant', new_registrant_path %>
