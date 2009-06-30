@@ -12,7 +12,8 @@
 ActiveRecord::Schema.define(:version => 20090629205052) do
 
   create_table "registrants", :force => true do |t|
-    t.string   "name_prefix"
+    t.string   "status"
+    t.string   "name_title"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"

@@ -1,7 +1,8 @@
 class CreateRegistrants < ActiveRecord::Migration
   def self.up
     create_table "registrants" do |t|
-      t.string      "name_prefix"
+      t.string      "status"
+      t.string      "name_title"
       t.string      "first_name"
       t.string      "middle_name"
       t.string      "last_name"
