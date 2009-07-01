@@ -20,8 +20,6 @@ gems:
   version: ~> 1.2.7
 - name: rspec-rails
   version: ~> 1.2.7
-- name: jnunemaker-validatable
-  version: ~> 1.7.0
 - name: rubyist-aasm
   version: ~> 2.0.5
 - name: thoughtbot-factory_girl
