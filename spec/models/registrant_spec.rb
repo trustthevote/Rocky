@@ -22,10 +22,10 @@ describe Registrant do
 
   describe "step 2 validations" do
     it "should require contact information" do
-      assert_attribute_invalid_with(:step_2_registrant, :us_citizen => false)
+      assert_attribute_invalid_with(:step_2_registrant, :us_citizen   => false)
       assert_attribute_invalid_with(:step_2_registrant, :home_address => nil)
-      assert_attribute_invalid_with(:step_2_registrant, :home_city => nil)
-      assert_attribute_invalid_with(:step_2_registrant, :home_state => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :home_city    => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :home_state   => nil)
     end
   end
 

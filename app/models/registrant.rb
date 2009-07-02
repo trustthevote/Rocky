@@ -1,8 +1,10 @@
 class Registrant < ActiveRecord::Base
+  include AASM
+
+  STEPS = [:blank, :step_1, :step_2, :step_3, :complete]
 
   attr_protected :status
 
-  include AASM
   aasm_column :status
   aasm_initial_state :blank
   aasm_state :blank
@@ -27,7 +29,21 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :home_state
   end
 
-  STEPS = [:blank, :step_1, :step_2, :step_3, :complete]
+  def self.transition_if_ineligible(event)
+    event.send(:transitions, :to => :ineligible, :from => Registrant::STEPS, :guard => :check_ineligible?)
+  end
+
+  aasm_event :advance_to_step_1 do
+    Registrant.transition_if_ineligible(self)
+    transitions :to => :step_1, :from => [:blank]
+  end
+
+  # aasm_event :advance_to_step_2 do
+  #   Registrant.transition_if_ineligible(self)
+  #   transitions :to => :step_2, :from => [:step_1]
+  # end
+
+  ### instance methods
 
   def at_least_step_1?
     at_least_step?(1)
@@ -36,12 +52,6 @@ class Registrant < ActiveRecord::Base
   def at_least_step_2?
     at_least_step?(2)
   end
-
-  aasm_event :advance_to_step_1 do
-    transitions :to => :step_1, :from => [:blank]
-  end
-
-  # aasm_event :complete_step_1 { transitions :to => :step_1, :from => [:blank] }
 
 
   # def advance_to!(next_step, new_attributes = {})
@@ -64,6 +74,10 @@ class Registrant < ActiveRecord::Base
 
   def at_least_step?(step)
     STEPS.index(aasm_current_state) >= step
+  end
+
+  def check_ineligible?
+    false # TODO: check eligiblity for reals
   end
 
 end
