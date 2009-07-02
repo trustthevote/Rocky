@@ -1,4 +1,5 @@
-Factory.define :ready_for_step_1_registrant, :class => "registrant" do |f|
+Factory.define :step_1_registrant, :class => "registrant" do |f|
+  f.status          "step_1"
   f.name_title      "Mr."
   f.first_name      "John"
   f.last_name       "Public"
@@ -7,7 +8,7 @@ Factory.define :ready_for_step_1_registrant, :class => "registrant" do |f|
   f.home_zip_code   "94113"
 end
 
-Factory.define :step_1_registrant, :parent => :ready_for_step_1_registrant do |f|
-  f.status "step_1"
+Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
+  f.status      "step_2"
+  f.us_citizen  true
 end
-
