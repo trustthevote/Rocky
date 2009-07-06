@@ -10,7 +10,7 @@ class RegistrantsController < ApplicationController
     if @registrant.advance_to_step_1!
       redirect_to new_registrant_step_2_path(@registrant)
     else
-      # render "new"
+      render "new"
     end
   end
 end

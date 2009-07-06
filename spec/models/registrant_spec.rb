@@ -4,16 +4,16 @@ describe Registrant do
   
   describe "step 1 validations" do
     it "should require personal info" do
-      assert_attribute_invalid_with(:step_1_registrant, :name_title => nil)
-      assert_attribute_invalid_with(:step_1_registrant, :first_name => nil)
-      assert_attribute_invalid_with(:step_1_registrant, :last_name => nil)
       assert_attribute_invalid_with(:step_1_registrant, :email_address => nil)
       assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => nil)
       assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => nil)
+      assert_attribute_invalid_with(:step_1_registrant, :us_citizen => false)
     end
     
     it "should not require contact information" do
-      assert_attribute_valid_with(:step_1_registrant, :us_citizen => false)
+      assert_attribute_valid_with(:step_1_registrant, :name_title => nil)
+      assert_attribute_valid_with(:step_1_registrant, :first_name => nil)
+      assert_attribute_valid_with(:step_1_registrant, :last_name => nil)
       assert_attribute_valid_with(:step_1_registrant, :home_address => nil)
       assert_attribute_valid_with(:step_1_registrant, :home_city => nil)
       assert_attribute_valid_with(:step_1_registrant, :home_state => nil)
@@ -22,10 +22,12 @@ describe Registrant do
 
   describe "step 2 validations" do
     it "should require contact information" do
-      assert_attribute_invalid_with(:step_2_registrant, :us_citizen   => false)
+      assert_attribute_invalid_with(:step_2_registrant, :name_title => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :first_name => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :last_name => nil)
       assert_attribute_invalid_with(:step_2_registrant, :home_address => nil)
-      assert_attribute_invalid_with(:step_2_registrant, :home_city    => nil)
-      assert_attribute_invalid_with(:step_2_registrant, :home_state   => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :home_city => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :home_state => nil)
     end
   end
 

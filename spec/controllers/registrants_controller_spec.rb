@@ -7,5 +7,12 @@ describe RegistrantsController do
       assert_not_nil assigns[:registrant]
       assert_redirected_to new_registrant_step_2_path(assigns[:registrant])
     end
+
+    it "should reject invalid input and show form again" do
+      post :create, :registrant => Factory.attributes_for(:step_1_registrant, :home_zip_code => "")
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].new_record?
+      assert_template "new"
+    end
   end
 end

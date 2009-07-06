@@ -3,7 +3,7 @@
 <% form_for(@registrant) do |form| %>
   <%= form.error_messages %>
   <%= render :partial => 'form', :object => form %>
-  <p><%= form.submit 'Create' %></p>
+  <div class="row"><%= form.submit 'Create' %></div>
 <% end %>
 
-<%= link_to 'Back', registrants_path %>
+<%= link_to 'Home', '/' %>
