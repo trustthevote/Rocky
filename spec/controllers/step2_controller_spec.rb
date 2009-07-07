@@ -4,7 +4,7 @@ describe Step2Controller do
   describe "#show" do
     it "should show the step 2 input form" do
       reg = Factory.create(:step_1_registrant)
-      get :show, :registrant_id => reg.id
+      get :show, :registrant_id => reg.to_param
       assert assigns[:registrant].step_1?
       assert_template "show"
     end
@@ -16,14 +16,14 @@ describe Step2Controller do
     end
 
     it "should update registrant and complete step 2" do
-      put :update, :registrant_id => @registrant.id, :registrant => Factory.attributes_for(:step_2_registrant)
+      put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_2_registrant)
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].step_2?
-      assert_redirected_to new_registrant_step_3_path(assigns[:registrant])
+      assert_redirected_to registrant_step_3_path(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do
-      put :update, :registrant_id => @registrant.id, :registrant => Factory.attributes_for(:step_2_registrant, :first_name => nil)
+      put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_2_registrant, :first_name => nil)
       assert assigns[:registrant].step_1?
       assert_template "show"
     end
