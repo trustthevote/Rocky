@@ -1,0 +1,67 @@
+<h1>Personal Information</h1>
+
+<% form_for(@registrant, :url => registrant_step_2_path(@registrant)) do |form| %>
+  <%= form.error_messages %>
+  <div class="row">
+    <fieldset>
+      <legend>Name</legend>
+      <div class="setrow">
+        <h3><%= form.label :name_title, "Title" %></h3>
+        <p><%= form.select :name_title, %w[Mr. Mrs. Miss Ms.], :include_blank => true %></p>
+      </div>
+      <div>
+        <h3><%= form.label :first_name, "First" %></h3>
+        <p><%= form.text_field :first_name, :size => 15 %></p>
+      </div>
+      <div>
+        <h3><%= form.label :middle_name, "Middle" %></h3>
+        <p><%= form.text_field :middle_name, :size => 10 %></p>
+      </div>
+      <div>
+        <h3><%= form.label :last_name, "Last" %></h3>
+        <p><%= form.text_field :last_name, :size => 15 %></p>
+      </div>
+      <div>
+        <h3><%= form.label :name_suffix, "Suffix" %></h3>
+        <p><%= form.select :name_suffix, %w[Jr. Sr. II III IV], :include_blank => true %></p>
+      </div>
+    </fieldset>
+  </div>
+  <div class="row">
+    <fieldset>
+      <legend>Home Address</legend>
+      <div class="setrow">
+        <h3><%= form.label :home_address, "Address" %></h3>
+        <p><%= form.text_field :home_address %></p>
+      </div>
+      <div class="setrow">
+        <h3 style="display:none;"><%= form.label :home_address2 %></h3>
+        <p><%= form.text_field :home_address2 %></p>
+      </div>
+      <div class="setrow">
+        <h3><%= form.label :home_city, "City" %></h3>
+        <p><%= form.text_field :home_city %></p>
+      </div>
+      <div>
+        <h3><%= form.label :home_state, "State" %></h3>
+        <p><%= form.text_field :home_state, :size => 2, :maxlength => 2 %></p>
+      </div>
+      <div>
+        <h3><%= form.label :home_zip_code, "ZIP Code" %></h3>
+        <p><%= form.text_field :home_zip_code, :size => 10, :maxlength => 10, :disabled => true %></p>
+      </div>
+    </fieldset>
+  </div>
+  <div class="row">
+    <h3><%= form.label :race %></h3>
+    <p><%= form.text_field :race %></p>
+  </div>
+  <div class="row">
+    <h3><%= form.label :party %></h3>
+    <p><%= form.text_field :party %></p>
+  </div>
+
+  <div class="row"><%= form.submit 'Submit' %></div>
+<% end %>
+
+<%= link_to 'Home', '/' %>

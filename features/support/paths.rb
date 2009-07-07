@@ -8,12 +8,10 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
     
-    when /the home page/
-      '/'
     when /a new registration page/, /a new step 1 page/
-      new_registrant_step_1_path("new")
-    when /a new step 2 page for registrant (.*)/
-      new_registrant_step_2_path($1)
+      new_registrant_path
+    when /the step 2 page/
+      registrant_step_2_path(@registrant)
 
     
     # Add more mappings here.

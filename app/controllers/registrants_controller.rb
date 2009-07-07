@@ -8,7 +8,7 @@ class RegistrantsController < ApplicationController
   def create
     @registrant = Registrant.new(params[:registrant])
     if @registrant.advance_to_step_1!
-      redirect_to new_registrant_step_2_path(@registrant)
+      redirect_to registrant_step_2_path(@registrant)
     else
       render "new"
     end

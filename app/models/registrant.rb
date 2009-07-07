@@ -1,13 +1,13 @@
 class Registrant < ActiveRecord::Base
   include AASM
 
-  STEPS = [:blank, :step_1, :step_2, :step_3, :complete]
+  STEPS = [:initial, :step_1, :step_2, :step_3, :complete]
 
   attr_protected :status
 
   aasm_column :status
-  aasm_initial_state :blank
-  aasm_state :blank
+  aasm_initial_state :initial
+  aasm_state :initial
   aasm_state :step_1
   aasm_state :step_2
   aasm_state :step_3
@@ -35,13 +35,13 @@ class Registrant < ActiveRecord::Base
 
   aasm_event :advance_to_step_1 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_1, :from => [:blank]
+    transitions :to => :step_1, :from => [:initial]
   end
 
-  # aasm_event :advance_to_step_2 do
-  #   Registrant.transition_if_ineligible(self)
-  #   transitions :to => :step_2, :from => [:step_1]
-  # end
+  aasm_event :advance_to_step_2 do
+    Registrant.transition_if_ineligible(self)
+    transitions :to => :step_2, :from => [:step_1]
+  end
 
   ### instance methods
 

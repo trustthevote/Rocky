@@ -11,4 +11,7 @@ Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
   f.name_title      "Mr."
   f.first_name      "John"
   f.last_name       "Public"
+  f.home_address    "123 Market St."
+  f.home_city       "San Francisco"
+  f.home_state      "CA"
 end
