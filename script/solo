@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+# solo
+
+def usage(message)
+  $stderr.puts message
+  $stderr.puts
+  $stderr.puts "#{File.basename($0)} envname [commit] [migrate]"
+  exit 1
+end
+ 
+envname = ARGV.shift || usage("Specify the envname")
+commit = ARGV.shift  || 'HEAD'
+migrate = ARGV.shift
+if commit == 'migrate'
+  commit = 'HEAD'
+  migrate = 'migrate'
+end
+token = `git config --get cloud.token`.chomp
+ 
+if token.empty?
+  $stderr.puts <<-EOT
+The cloud token is not set."
+To store the token, use:
+$ git config --add cloud.token SOMETOKEN
+  EOT
+  exit 2
+end
+ 
+hash = `git rev-parse #{commit}`.chomp
+payload = {
+ "commits" => [{"id" => hash, "message"=>"[deploy #{envname}#{migrate ? ' migrate' : ''}]"}],
+ "ref" => "refs/heads/master",
+}
+ 
+require 'rubygems'
+require 'json'
+require 'restclient'
+ 
+puts "Triggering a deploy for #{hash} on #{envname}"
+begin
+  response = RestClient.post("https://cloud.engineyard.com/github/#{token}",
+                             :payload => payload.to_json)
+  puts "Successfully triggered the deploy"
+rescue RestClient::RequestFailed => e
+  puts "Could not deploy your changes"
+  puts e.response.code
+  puts e.response.body
+end
