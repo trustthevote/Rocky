@@ -10,6 +10,7 @@ class Step2Controller < ApplicationController
     @registrant = Registrant.find(params[:registrant_id])
     @registrant.attributes = params[:registrant]
     if @registrant.advance_to_step_2!
+      flash[:success] = "Thanks for that"
       redirect_to registrant_step_3_path(@registrant)
     else
       render "show"
