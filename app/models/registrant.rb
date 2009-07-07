@@ -16,10 +16,9 @@ class Registrant < ActiveRecord::Base
   aasm_state :step_2
   aasm_state :step_3
   aasm_state :complete
-  
-  attr_accessor :has_mailing_address
 
   before_validation :upcase_states
+  before_validation :clear_mailing_address_unless_checked
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :email_address
@@ -55,6 +54,15 @@ class Registrant < ActiveRecord::Base
 
   ### instance methods
 
+  def has_mailing_address=(has_mailing_address)
+    @has_mailing_address = !!(/^1|true$/i =~ has_mailing_address) # yes, we need a boolean
+  end
+
+  def has_mailing_address
+    @has_mailing_address
+  end
+  alias_method :has_mailing_address?, :has_mailing_address
+
   def at_least_step_1?
     at_least_step?(1)
   end
@@ -67,6 +75,16 @@ class Registrant < ActiveRecord::Base
     home_state.upcase!    unless home_state.blank?
     mailing_state.upcase! unless mailing_state.blank?
     prev_state.upcase!    unless prev_state.blank?
+  end
+
+  def clear_mailing_address_unless_checked
+    unless has_mailing_address?
+      self.mailing_address = nil
+      self.mailing_address2 = nil
+      self.mailing_city = nil
+      self.mailing_state = nil
+      self.mailing_zip_code = nil
+    end
   end
 
   # def advance_to!(next_step, new_attributes = {})

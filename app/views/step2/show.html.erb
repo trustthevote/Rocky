@@ -1,3 +1,21 @@
+<% content_for :head do %>
+<script>
+  $(document).ready(function() {
+    var toggleMailingAddress = function(speed) {
+      if ( $('#registrant_has_mailing_address').attr('checked') ) {
+        $('#mailing_address_set').show(speed);
+      } else {
+        $('#mailing_address_set').hide(speed);
+      }
+    }
+    toggleMailingAddress(0);
+    $('#registrant_has_mailing_address').change(function () {
+      toggleMailingAddress('fast');
+    });
+  });
+</script>
+<% end %>
+
 <h1>Personal Information</h1>
 
 <% form_for(@registrant, :url => registrant_step_2_path(@registrant)) do |form| %>
@@ -54,9 +72,14 @@
   </div>
   <div class="row">
     <div class="setrow">
-      <h3><%= form.check_box :has_mailing_address %> <%= form.label :has_mailing_address, "I get my mail at a different address from the one above" %></h3>
+      <h3>
+        <%= form.check_box :has_mailing_address %>
+        <%= form.label :has_mailing_address, "I get my mail at a different address from the one above" %>
+      </h3>
     </div>
-    <fieldset id="mailing_address_set" style="display:none">
+  </div>
+  <div id="mailing_address_set" class="row">
+    <fieldset>
       <legend>Mailing Address</legend>
       <div class="setrow">
         <h3><%= form.label :mailing_address, "Address" %></h3>
