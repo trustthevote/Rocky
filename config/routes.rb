@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :registrants do |reg|   # , :only => [:new, :create]
+  map.resources :registrants, :only => [:new, :create] do |reg|
     reg.resource :step_1, :controller => "step1", :only => [:show, :update]
     reg.resource :step_2, :controller => "step2", :only => [:show, :update]
     reg.resource :step_3, :controller => "step3", :only => [:show, :update]
