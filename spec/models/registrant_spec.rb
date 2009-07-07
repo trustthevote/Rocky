@@ -29,6 +29,12 @@ describe Registrant do
       assert_attribute_invalid_with(:step_2_registrant, :home_city => nil)
       assert_attribute_invalid_with(:step_2_registrant, :home_state => nil)
     end
+
+    it "should upcase state abbreviation" do
+      reg = Factory.create(:step_2_registrant, :home_state => "ca", :mailing_state => "ny")
+      assert_equal "CA", reg.home_state
+      assert_equal "NY", reg.mailing_state
+    end
   end
 
   def assert_attribute_invalid_with(model, attributes)

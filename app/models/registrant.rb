@@ -13,6 +13,10 @@ class Registrant < ActiveRecord::Base
   aasm_state :step_3
   aasm_state :complete
   
+  attr_accessor :has_mailing_address
+
+  before_validation :upcase_states
+
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :email_address
     reg.validates_presence_of :home_zip_code
@@ -27,6 +31,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
     reg.validates_presence_of :home_state
+    reg.validates_format_of :home_state, :with => /[A-Z]{2}/
   end
 
   def self.transition_if_ineligible(event)
@@ -53,6 +58,11 @@ class Registrant < ActiveRecord::Base
     at_least_step?(2)
   end
 
+  def upcase_states
+    home_state.upcase!    unless home_state.blank?
+    mailing_state.upcase! unless mailing_state.blank?
+    prev_state.upcase!    unless prev_state.blank?
+  end
 
   # def advance_to!(next_step, new_attributes = {})
   #   self.attributes = new_attributes

@@ -17,11 +17,11 @@ class CreateRegistrants < ActiveRecord::Migration
       t.string      "home_address"
       t.string      "home_address2"
       t.string      "home_city"
-      t.string      "home_state"
+      t.string      "home_state", :limit => 2
       t.string      "mailing_address"
       t.string      "mailing_address2"
       t.string      "mailing_city"
-      t.string      "mailing_state"
+      t.string      "mailing_state", :limit => 2
       t.string      "mailing_zip_code", :limit => 10
       t.string      "party"
       t.string      "race"
@@ -41,7 +41,7 @@ class CreateRegistrants < ActiveRecord::Migration
       t.string      "prev_address"
       t.string      "prev_address2"
       t.string      "prev_city"
-      t.string      "prev_state"
+      t.string      "prev_state", :limit => 2
       t.string      "prev_zip_code", :limit => 10
 
       t.boolean     "opt_in_email"

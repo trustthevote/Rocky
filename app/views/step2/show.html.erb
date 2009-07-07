@@ -53,6 +53,34 @@
     </fieldset>
   </div>
   <div class="row">
+    <div class="setrow">
+      <h3><%= form.check_box :has_mailing_address %> <%= form.label :has_mailing_address, "I get my mail at a different address from the one above" %></h3>
+    </div>
+    <fieldset id="mailing_address_set" style="display:none">
+      <legend>Mailing Address</legend>
+      <div class="setrow">
+        <h3><%= form.label :mailing_address, "Address" %></h3>
+        <p><%= form.text_field :mailing_address %></p>
+      </div>
+      <div class="setrow">
+        <h3 style="display:none;"><%= form.label :mailing_address2 %></h3>
+        <p><%= form.text_field :mailing_address2 %></p>
+      </div>
+      <div class="setrow">
+        <h3><%= form.label :mailing_city, "City" %></h3>
+        <p><%= form.text_field :mailing_city %></p>
+      </div>
+      <div>
+        <h3><%= form.label :mailing_state, "State" %></h3>
+        <p><%= form.text_field :mailing_state, :size => 2, :maxlength => 2 %></p>
+      </div>
+      <div>
+        <h3><%= form.label :mailing_zip_code, "ZIP Code" %></h3>
+        <p><%= form.text_field :mailing_zip_code, :size => 10, :maxlength => 10 %></p>
+      </div>
+    </fieldset>
+  </div>
+  <div class="row">
     <h3><%= form.label :race %></h3>
     <p><%= form.text_field :race %></p>
   </div>
