@@ -2,6 +2,10 @@ class Registrant < ActiveRecord::Base
   include AASM
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :complete]
+  TITLES = %w[Mr. Mrs. Miss Ms.]
+  SUFFIXES = %w[Jr. Sr. II III IV]
+
+
 
   attr_protected :status
 
@@ -25,9 +29,10 @@ class Registrant < ActiveRecord::Base
   end
 
   with_options :if => :at_least_step_2? do |reg|
-    reg.validates_presence_of :name_title
+    reg.validates_inclusion_of :name_title, :in => TITLES
     reg.validates_presence_of :first_name
     reg.validates_presence_of :last_name
+    reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
     reg.validates_presence_of :home_state

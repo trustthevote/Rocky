@@ -7,7 +7,7 @@
       <legend>Name</legend>
       <div class="setrow">
         <h3><%= form.label :name_title, "Title" %></h3>
-        <p><%= form.select :name_title, %w[Mr. Mrs. Miss Ms.], :include_blank => true %></p>
+        <p><%= form.select :name_title, Registrant::TITLES, :include_blank => true %></p>
       </div>
       <div>
         <h3><%= form.label :first_name, "First" %></h3>
@@ -23,7 +23,7 @@
       </div>
       <div>
         <h3><%= form.label :name_suffix, "Suffix" %></h3>
-        <p><%= form.select :name_suffix, %w[Jr. Sr. II III IV], :include_blank => true %></p>
+        <p><%= form.select :name_suffix, Registrant::SUFFIXES, :include_blank => true %></p>
       </div>
     </fieldset>
   </div>
