@@ -4,8 +4,9 @@ class Registrant < ActiveRecord::Base
   STEPS = [:initial, :step_1, :step_2, :step_3, :complete]
   TITLES = %w[Mr. Mrs. Miss Ms.]
   SUFFIXES = %w[Jr. Sr. II III IV]
-
-
+  RACES = [ "American Indian / Alaskan Native", "Asian / Pacific Islander", "Black (not Hispanic)",
+            "Hispanic", "Multi-racial", "White (not Hispanic)", "Other" ]
+  PARTIES = [ "American Co-dependent", "Birthday", "Republicratic", "Sub-genius", "Suprise" ]
 
   attr_protected :status
 
@@ -36,6 +37,8 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :home_city
     reg.validates_presence_of :home_state
     reg.validates_format_of :home_state, :with => /[A-Z]{2}/
+    reg.validates_inclusion_of :race, :in => RACES, :if => :state_requires_race?
+    reg.validates_inclusion_of :party, :in => PARTIES, :if => :state_requires_party?
   end
 
   def self.transition_if_ineligible(event)
@@ -85,6 +88,14 @@ class Registrant < ActiveRecord::Base
       self.mailing_state = nil
       self.mailing_zip_code = nil
     end
+  end
+
+  def state_requires_race?
+    false
+  end
+
+  def state_requires_party?
+    false
   end
 
   # def advance_to!(next_step, new_attributes = {})

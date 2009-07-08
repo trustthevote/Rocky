@@ -105,11 +105,11 @@
   </div>
   <div class="row">
     <h3><%= form.label :race %></h3>
-    <p><%= form.text_field :race %></p>
+    <p><%= form.select :race, Registrant::RACES, :include_blank => true %></p>
   </div>
   <div class="row">
     <h3><%= form.label :party %></h3>
-    <p><%= form.text_field :party %></p>
+    <p><%= form.select :party, Registrant::PARTIES, :include_blank => true %></p>
   </div>
 
   <div class="row"><%= form.submit 'Submit' %></div>
