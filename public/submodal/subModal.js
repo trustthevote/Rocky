@@ -17,22 +17,22 @@
  */
 
 RTVModal = {
-  gPopupIsShown: false,
-  gPopupMask: null,
-  gPopupContainer: null,
-  gPopFrame: null,
-  gReturnFunc: null,
+  popupIsShown: false,
+  popupMask: null,
+  popupContainer: null,
+  popFrame: null,
+  returnFunc: null,
   
-  gDefaultPage: "http://localhost:3000/submodal/loading.html",
-  gHideSelects: false,
-  gReturnVal: null,
+  defaultPage: "http://localhost:3000/submodal/loading.html",
+  hideSelects: false,
+  returnVal: null,
   // We can set this from within the modal to ALWAYS call the return function,
   // even from the close box.
-  gCallReturnFunc: false,
+  callReturnFunc: false,
   
-  gTabIndexes: new Array(),
+  tabIndexes: new Array(),
   // Pre-defined list of tags we want to disable/enable tabbing into
-  gTabbableTags: new Array("A","BUTTON","TEXTAREA","INPUT","IFRAME")  
+  tabbableTags: new Array("A","BUTTON","TEXTAREA","INPUT","IFRAME")  
 };
 
 /**
@@ -162,21 +162,21 @@ RTVModal.initPopUp = function() {
           '<img src="http://localhost:3000/submodal/close.gif" onclick="RTVModal.hidePopWin(false);" id="popCloseBox" />' +
         '</div>' +
       '</div>' +
-      '<iframe src="'+ RTVModal.gDefaultPage +'" style="width:100%;height:100%;background-color:transparent;" scrolling="auto" frameborder="0" allowtransparency="true" id="popupFrame" name="popupFrame" width="100%" height="100%"></iframe>' +
+      '<iframe src="'+ RTVModal.defaultPage +'" style="width:100%;height:100%;background-color:transparent;" scrolling="auto" frameborder="0" allowtransparency="true" id="popupFrame" name="popupFrame" width="100%" height="100%"></iframe>' +
     '</div>';
   theBody.appendChild(popmask);
   theBody.appendChild(popcont);
   // RTVModal.addEvent(popmask, "click", RTVModal.hidePopWin);
   
-  RTVModal.gPopupMask = document.getElementById("popupMask");
-  RTVModal.gPopupContainer = document.getElementById("popupContainer");
-  RTVModal.gPopFrame = document.getElementById("popupFrame");  
+  RTVModal.popupMask = document.getElementById("popupMask");
+  RTVModal.popupContainer = document.getElementById("popupContainer");
+  RTVModal.popFrame = document.getElementById("popupFrame");  
   
   // check to see if this is IE version 6 or lower. hide select boxes if so
   // maybe they'll fix this in version 7?
   var brsVersion = parseInt(window.navigator.appVersion.charAt(0), 10);
   if (brsVersion <= 6 && window.navigator.userAgent.indexOf("MSIE") > -1) {
-    RTVModal.gHideSelects = true;
+    RTVModal.hideSelects = true;
   }
   
   // Add onclick handlers to 'a' elements of class submodal or submodal-width-height
@@ -217,31 +217,31 @@ RTVModal.showPopWin = function(url, width, height, returnFunc, showCloseBox) {
   } else {
     document.getElementById("popCloseBox").style.display = "none";
   }
-  RTVModal.gPopupIsShown = true;
+  RTVModal.popupIsShown = true;
   RTVModal.disableTabIndexes();
-  RTVModal.gPopupMask.style.display = "block";
-  RTVModal.gPopupContainer.style.display = "block";
+  RTVModal.popupMask.style.display = "block";
+  RTVModal.popupContainer.style.display = "block";
   // calculate where to place the window on screen
   RTVModal.centerPopWin(width, height);
   
   var titleBarHeight = parseInt(document.getElementById("popupTitleBar").offsetHeight, 10);
 
-  RTVModal.gPopupContainer.style.width = width + "px";
-  RTVModal.gPopupContainer.style.height = (height+titleBarHeight) + "px";
+  RTVModal.popupContainer.style.width = width + "px";
+  RTVModal.popupContainer.style.height = (height+titleBarHeight) + "px";
   
   RTVModal.setMaskSize();
 
   // need to set the width of the iframe to the title bar width because of the dropshadow
   // some oddness was occuring and causing the frame to poke outside the border in IE6
-  RTVModal.gPopFrame.style.width = parseInt(document.getElementById("popupTitleBar").offsetWidth, 10) + "px";
-  RTVModal.gPopFrame.style.height = (height) + "px";
+  RTVModal.popFrame.style.width = parseInt(document.getElementById("popupTitleBar").offsetWidth, 10) + "px";
+  RTVModal.popFrame.style.height = (height) + "px";
   
   // set the url
-  RTVModal.gPopFrame.src = url;
+  RTVModal.popFrame.src = url;
   
-  RTVModal.gReturnFunc = returnFunc;
+  RTVModal.returnFunc = returnFunc;
   // for IE
-  if (RTVModal.gHideSelects == true) {
+  if (RTVModal.hideSelects == true) {
     RTVModal.hideSelectBoxes();
   }
   
@@ -251,12 +251,12 @@ RTVModal.showPopWin = function(url, width, height, returnFunc, showCloseBox) {
 //
 // var gi = 0;
 RTVModal.centerPopWin = function(width, height) {
-  if (RTVModal.gPopupIsShown == true) {
+  if (RTVModal.popupIsShown == true) {
     if (width == null || isNaN(width)) {
-      width = RTVModal.gPopupContainer.offsetWidth;
+      width = RTVModal.popupContainer.offsetWidth;
     }
     if (height == null) {
-      height = RTVModal.gPopupContainer.offsetHeight;
+      height = RTVModal.popupContainer.offsetHeight;
     }
 
     var theBody = document.getElementsByTagName("BODY")[0];
@@ -265,16 +265,16 @@ RTVModal.centerPopWin = function(width, height) {
 
     RTVModal.setMaskSize();
 
-    //window.status = RTVModal.gPopupMask.style.top + " " + RTVModal.gPopupMask.style.left + " " + gi++;
+    //window.status = RTVModal.popupMask.style.top + " " + RTVModal.popupMask.style.left + " " + gi++;
 
     var titleBarHeight = parseInt(document.getElementById("popupTitleBar").offsetHeight, 10);
 
     var fullHeight = RTVModal.getViewportHeight();
     var fullWidth = RTVModal.getViewportWidth();
 
-    RTVModal.gPopupContainer.style.top = Math.max((((fullHeight - (height+titleBarHeight)) / 2)), 0) + "px";
-    RTVModal.gPopupContainer.style.left =  Math.max((((fullWidth - width) / 2)), 0) + "px";
-    //alert(fullWidth + " " + width + " " + RTVModal.gPopupContainer.style.left);
+    RTVModal.popupContainer.style.top = Math.max((((fullHeight - (height+titleBarHeight)) / 2)), 0) + "px";
+    RTVModal.popupContainer.style.left =  Math.max((((fullWidth - width) / 2)), 0) + "px";
+    //alert(fullWidth + " " + width + " " + RTVModal.popupContainer.style.left);
   }
 }
 RTVModal.addEvent(window, "resize", RTVModal.centerPopWin);
@@ -292,8 +292,8 @@ RTVModal.setMaskSize = function() {
   popHeight = Math.max(fullHeight, theBody.scrollHeight);
   popWidth = Math.max(fullWidth, theBody.scrollWidth);
 
-  RTVModal.gPopupMask.style.height = popHeight + "px";
-  RTVModal.gPopupMask.style.width = popWidth + "px";
+  RTVModal.popupMask.style.height = popHeight + "px";
+  RTVModal.popupMask.style.width = popWidth + "px";
 }
 
 /**
@@ -301,26 +301,26 @@ RTVModal.setMaskSize = function() {
  * @argument returnVal - anything - return value 
  */
 RTVModal.hidePopWin = function(callReturnFunc) {
-  RTVModal.gPopupIsShown = false;
+  RTVModal.popupIsShown = false;
   var theBody = document.getElementsByTagName("BODY")[0];
   theBody.style.overflow = "";
   RTVModal.restoreTabIndexes();
-  if (RTVModal.gPopupMask == null) {
+  if (RTVModal.popupMask == null) {
     return;
   }
-  RTVModal.gPopupMask.style.display = "none";
-  RTVModal.gPopupContainer.style.display = "none";
-  if ((callReturnFunc == true || RTVModal.gCallReturnFunc == true) && RTVModal.gReturnFunc != null) {
+  RTVModal.popupMask.style.display = "none";
+  RTVModal.popupContainer.style.display = "none";
+  if ((callReturnFunc == true || RTVModal.callReturnFunc == true) && RTVModal.returnFunc != null) {
     // Set the return code to run in a timeout.
     // Was having issues using with an Ajax.Request();
-    RTVModal.gReturnVal = window.frames["popupFrame"].returnVal;
-    window.setTimeout('RTVModal.gReturnFunc(RTVModal.gReturnVal);', 1);
+    RTVModal.returnVal = window.frames["popupFrame"].returnVal;
+    window.setTimeout('RTVModal.returnFunc(RTVModal.returnVal);', 1);
     // Reset global return function boolean.
-    RTVModal.gCallReturnFunc = false;
+    RTVModal.callReturnFunc = false;
   }
-  RTVModal.gPopFrame.src = RTVModal.gDefaultPage;
+  RTVModal.popFrame.src = RTVModal.defaultPage;
   // display all select boxes
-  if (RTVModal.gHideSelects == true) {
+  if (RTVModal.hideSelects == true) {
     RTVModal.displaySelectBoxes();
   }
 }
@@ -341,17 +341,17 @@ RTVModal.setPopTitle = function() {
 // Tab key trap. iff popup is shown and key was [TAB], suppress it.
 // @argument e - event - keyboard event that caused this function to be called.
 RTVModal.keyDownHandler = function(e) {
-  if (RTVModal.gPopupIsShown && e.keyCode == 9)  return false;
+  if (RTVModal.popupIsShown && e.keyCode == 9)  return false;
 }
 
 // For IE.  Go through predefined tags and disable tabbing into them.
 RTVModal.disableTabIndexes = function() {
   if (document.all) {
     var i = 0;
-    for (var j = 0; j < RTVModal.gTabbableTags.length; j++) {
-      var tagElements = document.getElementsByTagName(RTVModal.gTabbableTags[j]);
+    for (var j = 0; j < RTVModal.tabbableTags.length; j++) {
+      var tagElements = document.getElementsByTagName(RTVModal.tabbableTags[j]);
       for (var k = 0 ; k < tagElements.length; k++) {
-        RTVModal.gTabIndexes[i] = tagElements[k].tabIndex;
+        RTVModal.tabIndexes[i] = tagElements[k].tabIndex;
         tagElements[k].tabIndex="-1";
         i++;
       }
@@ -363,10 +363,10 @@ RTVModal.disableTabIndexes = function() {
 RTVModal.restoreTabIndexes = function() {
   if (document.all) {
     var i = 0;
-    for (var j = 0; j < RTVModal.gTabbableTags.length; j++) {
-      var tagElements = document.getElementsByTagName(RTVModal.gTabbableTags[j]);
+    for (var j = 0; j < RTVModal.tabbableTags.length; j++) {
+      var tagElements = document.getElementsByTagName(RTVModal.tabbableTags[j]);
       for (var k = 0 ; k < tagElements.length; k++) {
-        tagElements[k].tabIndex = RTVModal.gTabIndexes[i];
+        tagElements[k].tabIndex = RTVModal.tabIndexes[i];
         tagElements[k].tabEnabled = true;
         i++;
       }
