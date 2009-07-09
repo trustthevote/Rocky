@@ -22,7 +22,7 @@ var gPopupContainer = null;
 var gPopFrame = null;
 var gReturnFunc;
 var gPopupIsShown = false;
-var gDefaultPage = "http://172.17.1.188:3000/submodal/loading.html";
+var gDefaultPage = "http://localhost:3000/submodal/loading.html";
 var gHideSelects = false;
 var gReturnVal = null;
 // We can set this from within the modal to ALWAYS call the return function,
@@ -55,7 +55,7 @@ function initPopUp() {
       '<div id="popupTitleBar">' +
         '<div id="popupTitle"></div>' +
         '<div id="popupControls">' +
-          '<img src="http://172.17.1.188:3000/submodal/close.gif" onclick="hidePopWin(false);" id="popCloseBox" />' +
+          '<img src="http://localhost:3000/submodal/close.gif" onclick="hidePopWin(false);" id="popCloseBox" />' +
         '</div>' +
       '</div>' +
       '<iframe src="'+ gDefaultPage +'" style="width:100%;height:100%;background-color:transparent;" scrolling="auto" frameborder="0" allowtransparency="true" id="popupFrame" name="popupFrame" width="100%" height="100%"></iframe>' +
@@ -155,20 +155,22 @@ function centerPopWin(width, height) {
     if (height == null) {
       height = gPopupContainer.offsetHeight;
     }
-    
+
     var theBody = document.getElementsByTagName("BODY")[0];
-  
+    theBody.width = Math.max(theBody.width, width);
+    theBody.height = Math.max(theBody.height, height);
+
     setMaskSize();
-    
+
     //window.status = gPopupMask.style.top + " " + gPopupMask.style.left + " " + gi++;
-    
+
     var titleBarHeight = parseInt(document.getElementById("popupTitleBar").offsetHeight, 10);
-    
+
     var fullHeight = getViewportHeight();
     var fullWidth = getViewportWidth();
-    
-    gPopupContainer.style.top = (((fullHeight - (height+titleBarHeight)) / 2)) + "px";
-    gPopupContainer.style.left =  (((fullWidth - width) / 2)) + "px";
+
+    gPopupContainer.style.top = Math.max((((fullHeight - (height+titleBarHeight)) / 2)), 0) + "px";
+    gPopupContainer.style.left =  Math.max((((fullWidth - width) / 2)), 0) + "px";
     //alert(fullWidth + " " + width + " " + gPopupContainer.style.left);
   }
 }
@@ -180,23 +182,13 @@ addEvent(window, "resize", centerPopWin);
  */
 function setMaskSize() {
   var theBody = document.getElementsByTagName("BODY")[0];
-      
+
   var fullHeight = getViewportHeight();
   var fullWidth = getViewportWidth();
-  
-  // Determine what's bigger, scrollHeight or fullHeight / width
-  if (fullHeight > theBody.scrollHeight) {
-    popHeight = fullHeight;
-  } else {
-    popHeight = theBody.scrollHeight;
-  }
-  
-  if (fullWidth > theBody.scrollWidth) {
-    popWidth = fullWidth;
-  } else {
-    popWidth = theBody.scrollWidth;
-  }
-  
+
+  popHeight = Math.max(fullHeight, theBody.scrollHeight);
+  popWidth = Math.max(fullWidth, theBody.scrollWidth);
+
   gPopupMask.style.height = popHeight + "px";
   gPopupMask.style.width = popWidth + "px";
 }
