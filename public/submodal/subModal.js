@@ -87,18 +87,18 @@ RTVModal.addEvent = function(obj, evType, fn){
  * Gets the full width/height because it's different for most browsers.
  */
 RTVModal.getViewportHeight = function() {
-	if (window.innerHeight!=window.undefined) return window.innerHeight;
-	if (document.compatMode=='CSS1Compat') return document.documentElement.clientHeight;
-	if (document.body) return document.body.clientHeight; 
+  if (window.innerHeight!=window.undefined) return window.innerHeight;
+  if (document.compatMode=='CSS1Compat') return document.documentElement.clientHeight;
+  if (document.body) return document.body.clientHeight; 
 
-	return window.undefined; 
+  return window.undefined; 
 }
 RTVModal.getViewportWidth = function() {
-	var offset = 17;
-	var width = null;
-	if (window.innerWidth!=window.undefined) return window.innerWidth; 
-	if (document.compatMode=='CSS1Compat') return document.documentElement.clientWidth; 
-	if (document.body) return document.body.clientWidth; 
+  var offset = 17;
+  var width = null;
+  if (window.innerWidth!=window.undefined) return window.innerWidth; 
+  if (document.compatMode=='CSS1Compat') return document.documentElement.clientWidth; 
+  if (document.body) return document.body.clientWidth; 
 }
 
 /**
