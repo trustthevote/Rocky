@@ -11,7 +11,7 @@ setTimeout(function() {
 },0);
 
 function rtvShowOverlay(e) {
-  showPopWin('http://rocky-demo.pivotallabs.com/registrants/new', 600, 500, null);
+  RTVModal.showPopWin('http://rocky-demo.pivotallabs.com/registrants/new', 600, 500, null);
   e = e || event
   e.preventDefault ? e.preventDefault() : e.returnValue = false;
 }
