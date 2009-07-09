@@ -11,3 +11,4 @@ Feature: Step 1
        And I check "I am a U.S. citizen"
        And I press "Submit"
       Then I should see "You are eligible"
+       And I should see "Personal Information"
