@@ -23,7 +23,10 @@ RTVModal = {
   popFrame: null,
   returnFunc: null,
   
-  defaultPage: "http://localhost:3000/submodal/loading.html",
+  urlRoot: "http://localhost:3000",
+  defaultPage: function() {
+    RTVModal.urlRoot + "/submodal/loading.html";
+  },
   hideSelects: false,
   returnVal: null,
   // We can set this from within the modal to ALWAYS call the return function,
@@ -151,31 +154,31 @@ RTVModal.initPopUp = function() {
   // Add the HTML to the body
   theBody = document.getElementsByTagName('BODY')[0];
   popmask = document.createElement('div');
-  popmask.id = 'popupMask';
+  popmask.id = 'rtvModalPopupMask';
   popcont = document.createElement('div');
-  popcont.id = 'popupContainer';
+  popcont.id = 'rtvModalPopupContainer';
   popcont.innerHTML = '' +
-    '<div id="popupInner">' +
-      '<div id="popupTitleBar">' +
-        '<div id="popupTitle"></div>' +
-        '<div id="popupControls">' +
-          '<img src="http://localhost:3000/submodal/close.gif" onclick="RTVModal.hidePopWin(false);" id="popCloseBox" />' +
+    '<div id="rtvModalPopupInner">' +
+      '<div id="rtvModalPopupTitleBar">' +
+        '<div id="rtvModalPopupTitle"></div>' +
+        '<div id="rtvModalPopupControls">' +
+          '<img src="' + RTVModal.urlRoot + '/submodal/close.gif" onclick="RTVModal.hidePopWin(false);" id="rtvModalPopCloseBox" />' +
         '</div>' +
       '</div>' +
-      '<iframe src="'+ RTVModal.defaultPage +'" style="width:100%;height:100%;background-color:transparent;" scrolling="auto" frameborder="0" allowtransparency="true" id="popupFrame" name="popupFrame" width="100%" height="100%"></iframe>' +
+      '<iframe src="'+ RTVModal.defaultPage() +'" style="width:100%;height:100%;background-color:transparent;" scrolling="auto" frameborder="0" allowtransparency="true" id="rtvModalPopupFrame" name="rtvModalPopupFrame" width="100%" height="100%"></iframe>' +
     '</div>';
   theBody.appendChild(popmask);
   theBody.appendChild(popcont);
   // RTVModal.addEvent(popmask, "click", RTVModal.hidePopWin);
   
-  RTVModal.popupMask = document.getElementById("popupMask");
-  RTVModal.popupContainer = document.getElementById("popupContainer");
-  RTVModal.popFrame = document.getElementById("popupFrame");  
+  RTVModal.popupMask = document.getElementById("rtvModalPopupMask");
+  RTVModal.popupContainer = document.getElementById("rtvModalPopupContainer");
+  RTVModal.popFrame = document.getElementById("rtvModalPopupFrame");  
   
   // check to see if this is IE version 6 or lower. hide select boxes if so
   // maybe they'll fix this in version 7?
-  var brsVersion = parseInt(window.navigator.appVersion.charAt(0), 10);
-  if (brsVersion <= 6 && window.navigator.userAgent.indexOf("MSIE") > -1) {
+  var browserVersion = parseInt(window.navigator.appVersion.charAt(0), 10);
+  if (browserVersion <= 6 && window.navigator.userAgent.indexOf("MSIE") > -1) {
     RTVModal.hideSelects = true;
   }
   
@@ -213,9 +216,9 @@ RTVModal.addEvent(window, "load", RTVModal.initPopUp);
 RTVModal.showPopWin = function(url, width, height, returnFunc, showCloseBox) {
   // show or hide the window close widget
   if (showCloseBox == null || showCloseBox == true) {
-    document.getElementById("popCloseBox").style.display = "block";
+    document.getElementById("rtvModalPopCloseBox").style.display = "block";
   } else {
-    document.getElementById("popCloseBox").style.display = "none";
+    document.getElementById("rtvModalPopCloseBox").style.display = "none";
   }
   RTVModal.popupIsShown = true;
   RTVModal.disableTabIndexes();
@@ -224,7 +227,7 @@ RTVModal.showPopWin = function(url, width, height, returnFunc, showCloseBox) {
   // calculate where to place the window on screen
   RTVModal.centerPopWin(width, height);
   
-  var titleBarHeight = parseInt(document.getElementById("popupTitleBar").offsetHeight, 10);
+  var titleBarHeight = parseInt(document.getElementById("rtvModalPopupTitleBar").offsetHeight, 10);
 
   RTVModal.popupContainer.style.width = width + "px";
   RTVModal.popupContainer.style.height = (height+titleBarHeight) + "px";
@@ -233,7 +236,7 @@ RTVModal.showPopWin = function(url, width, height, returnFunc, showCloseBox) {
 
   // need to set the width of the iframe to the title bar width because of the dropshadow
   // some oddness was occuring and causing the frame to poke outside the border in IE6
-  RTVModal.popFrame.style.width = parseInt(document.getElementById("popupTitleBar").offsetWidth, 10) + "px";
+  RTVModal.popFrame.style.width = parseInt(document.getElementById("rtvModalPopupTitleBar").offsetWidth, 10) + "px";
   RTVModal.popFrame.style.height = (height) + "px";
   
   // set the url
@@ -267,7 +270,7 @@ RTVModal.centerPopWin = function(width, height) {
 
     //window.status = RTVModal.popupMask.style.top + " " + RTVModal.popupMask.style.left + " " + gi++;
 
-    var titleBarHeight = parseInt(document.getElementById("popupTitleBar").offsetHeight, 10);
+    var titleBarHeight = parseInt(document.getElementById("rtvModalPopupTitleBar").offsetHeight, 10);
 
     var fullHeight = RTVModal.getViewportHeight();
     var fullWidth = RTVModal.getViewportWidth();
@@ -313,12 +316,12 @@ RTVModal.hidePopWin = function(callReturnFunc) {
   if ((callReturnFunc == true || RTVModal.callReturnFunc == true) && RTVModal.returnFunc != null) {
     // Set the return code to run in a timeout.
     // Was having issues using with an Ajax.Request();
-    RTVModal.returnVal = window.frames["popupFrame"].returnVal;
+    RTVModal.returnVal = window.frames["rtvModalPopupFrame"].returnVal;
     window.setTimeout('RTVModal.returnFunc(RTVModal.returnVal);', 1);
     // Reset global return function boolean.
     RTVModal.callReturnFunc = false;
   }
-  RTVModal.popFrame.src = RTVModal.defaultPage;
+  RTVModal.popFrame.src = RTVModal.defaultPage();
   // display all select boxes
   if (RTVModal.hideSelects == true) {
     RTVModal.displaySelectBoxes();
@@ -331,10 +334,10 @@ RTVModal.hidePopWin = function(callReturnFunc) {
  */
 RTVModal.setPopTitle = function() {
   return;
-  if (window.frames["popupFrame"].document.title == null) {
+  if (window.frames["rtvModalPopupFrame"].document.title == null) {
     window.setTimeout("RTVModal.setPopTitle();", 10);
   } else {
-    document.getElementById("popupTitle").innerHTML = window.frames["popupFrame"].document.title;
+    document.getElementById("rtvModalPopupTitle").innerHTML = window.frames["rtvModalPopupFrame"].document.title;
   }
 }
 
