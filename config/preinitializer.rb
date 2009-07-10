@@ -27,7 +27,7 @@ module GemInstallerRailsPreinitializer
       # sudoers file to avoid having to type a password.  It can be omitted if you don't want to use sudo.
       # See http://geminstaller.rubyforge.org/documentation/documentation.html#dealing_with_sudo
       # Note that environment variables will NOT be passed via sudo!
-      #args += " --sudo" unless RUBY_PLATFORM =~ /mswin/
+      args += " --sudo" unless RUBY_PLATFORM =~ /mswin/
 
       # The 'install' method will auto-install gems as specified by the args and config
       GemInstaller.install(args)
