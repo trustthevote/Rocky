@@ -3,7 +3,7 @@
  */
 #rtvModalPopupMask {
 	position: fixed;
-	z-index: 999998;
+	z-index: 998;
 	top: 0px;
 	left: 0px;
 	width: 100%;
@@ -19,7 +19,7 @@
 }
 #rtvModalPopupContainer {
 	position: absolute;
-	z-index: 999999;
+	z-index: 999;
 	top: 0px;
 	left: 0px;
 	display:none;
