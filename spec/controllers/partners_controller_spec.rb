@@ -16,4 +16,18 @@ describe PartnersController do
     end
   end
 
+  describe "dashboard" do
+    integrate_views
+    
+    it "shows widget html" do
+      stub(request).protocol { "http://" }
+      stub(request).host_with_port { "example.com:3000" }
+      get :show, :id => "5"
+      assert_response :success
+      assert_select 'textarea[readonly]'
+      assert_match %r{http://example.com:3000}, response.body
+      assert_match %r{partners/5/widget_loader\.js}, response.body
+    end
+  end
+
 end
