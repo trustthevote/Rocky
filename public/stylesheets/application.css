@@ -71,6 +71,11 @@ form {
   width: 500px;
 }
 
+form.copy_html {
+  width: inherit;
+}
+
+
 form div.row {
   margin: 0.5em 0 1em;
   border-top: 1px dotted gray;
@@ -108,4 +113,10 @@ div.row fieldset div p {
 div.row fieldset div.setrow {
   margin-left: 2em;
   clear: both;
+}
+
+.copy_html textarea {
+  padding: 1em;
+  font-family: Menlo, Courier, "Courier New", monospace;
+  font-size: 11px;
 }

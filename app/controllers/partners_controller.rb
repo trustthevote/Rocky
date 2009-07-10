@@ -8,6 +8,12 @@ class PartnersController < ApplicationController
   <script type="text/javascript" src="#{widget_loader_partner_url(params[:id], :format => 'js')}"></script>
 </div>
 WIDGET_HTML
+
+    @link_html = <<LINK_HTML
+<a href="#{host_url}/">
+  <img src="http://www.rockthevote.com/assets/images/pages/home/top-boxes/register_to_vote.jpg"></img>
+</a>
+LINK_HTML
   end
 
   def widget_loader
