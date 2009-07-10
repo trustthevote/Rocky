@@ -23,7 +23,7 @@ RTVModal = {
   popFrame: null,
   returnFunc: null,
   
-  urlRoot: "http://localhost:3000",
+  urlRoot: "",
   loadingPage: function() {
     return RTVModal.urlRoot + "/submodal/loading.html";
   },

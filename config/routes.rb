@@ -5,4 +5,5 @@ ActionController::Routing::Routes.draw do |map|
     reg.resource :step_3, :controller => "step3", :only => [:show, :update]
     reg.resource :step_4, :controller => "step4", :only => [:show, :update]
   end
+  map.resources :partners, :member => {:widget_loader => :get}
 end
