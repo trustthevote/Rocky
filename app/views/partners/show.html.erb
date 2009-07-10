@@ -1,11 +1,11 @@
 
 <form class="copy_html" action="#" method="get" accept-charset="utf-8">
   <div>
-    <h3><label for="widget_html">Copy this for an overlay on your site:</label></h3>
+    <h3><label for="widget_html">Copy this for an overlay on your site:</label> <%= clippy(h @widget_html) %></h3>
     <p><textarea name="widget_html" readonly="readonly" rows="7" cols="110"><%= h @widget_html %></textarea></p>
   </div>
   <div>
-    <h3><label for="link_html">Or this to link to Rock the Vote's site:</label></h3>
+    <h3><label for="link_html">Or this to link to Rock the Vote's site:</label> <%= clippy(h @link_html) %></h3>
     <p><textarea name="link_html" readonly="readonly" rows="4" cols="110"><%= h @link_html %></textarea></p>
   </div>
 </form>
