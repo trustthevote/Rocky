@@ -24,8 +24,8 @@ RTVModal = {
   returnFunc: null,
   
   urlRoot: "http://localhost:3000",
-  defaultPage: function() {
-    RTVModal.urlRoot + "/submodal/loading.html";
+  loadingPage: function() {
+    return RTVModal.urlRoot + "/submodal/loading.html";
   },
   hideSelects: false,
   returnVal: null,
@@ -150,7 +150,8 @@ if (!document.all) {
 /**
  * Initializes popup code on load.  
  */
-RTVModal.initPopUp = function() {
+RTVModal.initPopUp = function(urlRoot) {
+  RTVModal.urlRoot = urlRoot;
   // Add the HTML to the body
   theBody = document.getElementsByTagName('BODY')[0];
   popmask = document.createElement('div');
@@ -165,7 +166,7 @@ RTVModal.initPopUp = function() {
           '<img src="' + RTVModal.urlRoot + '/submodal/close.gif" onclick="RTVModal.hidePopWin(false);" id="rtvModalPopCloseBox" />' +
         '</div>' +
       '</div>' +
-      '<iframe src="'+ RTVModal.defaultPage() +'" style="width:100%;height:100%;background-color:transparent;" scrolling="auto" frameborder="0" allowtransparency="true" id="rtvModalPopupFrame" name="rtvModalPopupFrame" width="100%" height="100%"></iframe>' +
+      '<iframe src="'+ RTVModal.loadingPage() +'" style="width:100%;height:100%;background-color:transparent;" scrolling="auto" frameborder="0" allowtransparency="true" id="rtvModalPopupFrame" name="rtvModalPopupFrame" width="100%" height="100%"></iframe>' +
     '</div>';
   theBody.appendChild(popmask);
   theBody.appendChild(popcont);
@@ -203,7 +204,6 @@ RTVModal.initPopUp = function() {
   //   }
   // }
 }
-RTVModal.addEvent(window, "load", RTVModal.initPopUp);
 
  /**
   * @argument width - int in pixels
@@ -213,7 +213,7 @@ RTVModal.addEvent(window, "load", RTVModal.initPopUp);
   * @argument showCloseBox - show the close box - default true
   */
 
-RTVModal.showPopWin = function(url, width, height, returnFunc, showCloseBox) {
+RTVModal.showPopWin = function(path, width, height, returnFunc, showCloseBox) {
   // show or hide the window close widget
   if (showCloseBox == null || showCloseBox == true) {
     document.getElementById("rtvModalPopCloseBox").style.display = "block";
@@ -240,7 +240,7 @@ RTVModal.showPopWin = function(url, width, height, returnFunc, showCloseBox) {
   RTVModal.popFrame.style.height = (height) + "px";
   
   // set the url
-  RTVModal.popFrame.src = url;
+  RTVModal.popFrame.src = RTVModal.urlRoot + path;
   
   RTVModal.returnFunc = returnFunc;
   // for IE
@@ -321,7 +321,7 @@ RTVModal.hidePopWin = function(callReturnFunc) {
     // Reset global return function boolean.
     RTVModal.callReturnFunc = false;
   }
-  RTVModal.popFrame.src = RTVModal.defaultPage();
+  RTVModal.popFrame.src = RTVModal.loadingPage();
   // display all select boxes
   if (RTVModal.hideSelects == true) {
     RTVModal.displaySelectBoxes();
