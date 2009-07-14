@@ -2,4 +2,40 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      registrant:
+        home_zip_code: ZIP Code
+        us_citizen: I am a U.S. citizen
+        first_registration: I am registering to vote for the the first time
+    errors:
+      models:
+        registrant:
+          attributes:
+            us_citizen:
+              accepted: "You must be a U.S. citizen to register to vote."
+      messages:
+        inclusion: "{{attribute}} is not included in the list"
+        exclusion: "{{attribute}} is reserved"
+        invalid: "{{attribute}} is invalid"
+        confirmation: "{{attribute}} doesn't match confirmation"
+        accepted: "{{attribute}} must be accepted"
+        empty: "{{attribute}} can't be empty"
+        blank: "{{attribute}} can't be blank"
+        too_long: "{{attribute}} is too long (maximum is {{count}} characters)"
+        too_short: "{{attribute}} is too short (minimum is {{count}} characters)"
+        wrong_length: "{{attribute}} is the wrong length (should be {{count}} characters)"
+        taken: "{{attribute}} has already been taken"
+        not_a_number: "{{attribute}} is not a number"
+        greater_than: "{{attribute}} must be greater than {{count}}"
+        greater_than_or_equal_to: "{{attribute}} must be greater than or equal to {{count}}"
+        equal_to: "{{attribute}} must be equal to {{count}}"
+        less_than: "{{attribute}} must be less than {{count}}"
+        less_than_or_equal_to: "{{attribute}} must be less than or equal to {{count}}"
+        odd: "{{attribute}} must be odd"
+        even: "{{attribute}} must be even"
+  txt:
+    flash:
+      eligible: You are eligible
+    registration:
+      

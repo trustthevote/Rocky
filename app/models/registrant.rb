@@ -25,7 +25,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :email_address
     reg.validates_presence_of :home_zip_code
     reg.validates_presence_of :date_of_birth
-    reg.validates_acceptance_of :us_citizen, :accept => true, :message => "You must be a U.S. citizen to register to vote."
+    reg.validates_acceptance_of :us_citizen, :accept => true
   end
 
   with_options :if => :at_least_step_2? do |reg|
