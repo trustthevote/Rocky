@@ -31,6 +31,19 @@ describe Registrant do
       assert reg.errors.on(:home_state_id)
     end
 
+    it "should require race but only for certain states" do
+      state_with = GeoState.find_by_requires_race(true)
+      reg = Factory.build(:step_2_registrant, :home_state_abbrev => state_with.abbreviation, :race => nil)
+      assert reg.invalid?
+      assert reg.errors.on(:race)
+    end
+
+    it "should not require race for some states" do
+      state_without = GeoState.find_by_requires_race(false)
+      reg = Factory.build(:step_2_registrant, :home_state_abbrev => state_without.abbreviation, :race => nil)
+      assert reg.valid?
+    end
+
     it "should only update mailing address attributes if :has_mailing_address is set" do
       reg = Factory.create(:step_2_registrant, :mailing_state_abbrev => "PA", :has_mailing_address => "0")
       assert_nil reg.mailing_state

@@ -38,7 +38,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
     reg.validates_presence_of :home_state_id
-    # reg.validate :validate_race
+    reg.validate :validate_race
     # reg.validate :validate_party
   end
 
@@ -86,7 +86,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def validate_race
-    if true # TODO: home_state.requires_race?
+    if home_state && home_state.requires_race?
       errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
     end
   end
