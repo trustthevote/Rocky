@@ -5,9 +5,49 @@ en:
   activerecord:
     attributes:
       registrant:
+        # date_of_birth: 
+        # email_address: 
+        first_registration: I am registering to vote for the the first time
         home_zip_code: ZIP Code
         us_citizen: I am a U.S. citizen
-        first_registration: I am registering to vote for the the first time
+        name_title: Title
+        first_name: First
+        middle_name: Middle
+        last_name: Last
+        name_suffix: Suffix
+        home_address: Address
+        # home_address2: 
+        home_city: City
+        home_state: State
+        has_mailing_address: I get my mail at a different address from the one above
+        mailing_address: Address
+        # mailing_address2: 
+        mailing_city: City
+        mailing_state: State
+        mailing_zip_code: ZIP Code
+        # party: 
+        # race: 
+        # state_id_number: 
+        # ssn4: 
+        # phone: 
+        # phone_type: 
+        # change_of_party: 
+        # change_of_name: 
+        # prev_name_title: 
+        # prev_first_name: 
+        # prev_middle_name: 
+        # prev_last_name: 
+        # prev_name_suffix: 
+        # change_of_address: 
+        # prev_address: 
+        # prev_address2: 
+        # prev_city: 
+        # prev_state: 
+        # prev_zip_code: 
+        # opt_in_email: 
+        # opt_in_sms: 
+        # attest_true: 
+        # attest_eligible: 
     errors:
       models:
         registrant:
@@ -37,5 +77,30 @@ en:
   txt:
     flash:
       eligible: You are eligible
+    button:
+      submit: Submit
     registration:
-      
+      step_1_header: New registrant
+      step_2_header: Personal Information
+      name: Name
+      home_address: Home Address
+      mailing_address: Mailing Address
+      titles:
+      - Mr.
+      - Mrs.
+      - Miss
+      - Ms.
+      suffixes:
+      - Jr.
+      - Sr.
+      - II
+      - III
+      - IV
+      races:
+      - American Indian / Alaskan Native
+      - Asian / Pacific Islander
+      - Black (not Hispanic)
+      - Hispanic
+      - Multi-racial
+      - White (not Hispanic)
+      - Other

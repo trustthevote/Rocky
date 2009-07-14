@@ -16,40 +16,40 @@
 </script>
 <% end %>
 
-<h1>Personal Information</h1>
+<h1><%= t('txt.registration.step_2_header') %></h1>
 
 <% form_for(@registrant, :url => registrant_step_2_path(@registrant)) do |form| %>
   <%= form.error_messages %>
   <div class="row">
     <fieldset>
-      <legend>Name</legend>
+      <legend><%= I18n.t('txt.registration.name') %></legend>
       <div class="setrow">
-        <h3><%= form.label :name_title, "Title" %></h3>
-        <p><%= form.select :name_title, Registrant::TITLES, :include_blank => true %></p>
+        <h3><%= form.label :name_title %></h3>
+        <p><%= form.select :name_title, I18n.t('txt.registration.titles'), :include_blank => true %></p>
       </div>
       <div>
-        <h3><%= form.label :first_name, "First" %></h3>
+        <h3><%= form.label :first_name %></h3>
         <p><%= form.text_field :first_name, :size => 15 %></p>
       </div>
       <div>
-        <h3><%= form.label :middle_name, "Middle" %></h3>
+        <h3><%= form.label :middle_name %></h3>
         <p><%= form.text_field :middle_name, :size => 10 %></p>
       </div>
       <div>
-        <h3><%= form.label :last_name, "Last" %></h3>
+        <h3><%= form.label :last_name %></h3>
         <p><%= form.text_field :last_name, :size => 15 %></p>
       </div>
       <div>
-        <h3><%= form.label :name_suffix, "Suffix" %></h3>
-        <p><%= form.select :name_suffix, Registrant::SUFFIXES, :include_blank => true %></p>
+        <h3><%= form.label :name_suffix %></h3>
+        <p><%= form.select :name_suffix, t('txt.registration.suffixes'), :include_blank => true %></p>
       </div>
     </fieldset>
   </div>
   <div class="row">
     <fieldset>
-      <legend>Home Address</legend>
+      <legend><%= I18n.t('txt.registration.home_address') %></legend>
       <div class="setrow">
-        <h3><%= form.label :home_address, "Address" %></h3>
+        <h3><%= form.label :home_address %></h3>
         <p><%= form.text_field :home_address %></p>
       </div>
       <div class="setrow">
@@ -57,15 +57,15 @@
         <p><%= form.text_field :home_address2 %></p>
       </div>
       <div class="setrow">
-        <h3><%= form.label :home_city, "City" %></h3>
+        <h3><%= form.label :home_city %></h3>
         <p><%= form.text_field :home_city %></p>
       </div>
       <div>
-        <h3><%= form.label :home_state, "State" %></h3>
+        <h3><%= form.label :home_state %></h3>
         <p><%= form.text_field :home_state, :size => 2, :maxlength => 2 %></p>
       </div>
       <div>
-        <h3><%= form.label :home_zip_code, "ZIP Code" %></h3>
+        <h3><%= form.label :home_zip_code %></h3>
         <p><%= form.text_field :home_zip_code, :size => 10, :maxlength => 10, :disabled => true %></p>
       </div>
     </fieldset>
@@ -74,15 +74,15 @@
     <div class="setrow">
       <h3>
         <%= form.check_box :has_mailing_address %>
-        <%= form.label :has_mailing_address, "I get my mail at a different address from the one above" %>
+        <%= form.label :has_mailing_address %>
       </h3>
     </div>
   </div>
   <div id="mailing_address_set" class="row">
     <fieldset>
-      <legend>Mailing Address</legend>
+      <legend><%= I18n.t('txt.registration.mailing_address') %></legend>
       <div class="setrow">
-        <h3><%= form.label :mailing_address, "Address" %></h3>
+        <h3><%= form.label :mailing_address %></h3>
         <p><%= form.text_field :mailing_address %></p>
       </div>
       <div class="setrow">
@@ -90,29 +90,29 @@
         <p><%= form.text_field :mailing_address2 %></p>
       </div>
       <div class="setrow">
-        <h3><%= form.label :mailing_city, "City" %></h3>
+        <h3><%= form.label :mailing_city %></h3>
         <p><%= form.text_field :mailing_city %></p>
       </div>
       <div>
-        <h3><%= form.label :mailing_state, "State" %></h3>
+        <h3><%= form.label :mailing_state %></h3>
         <p><%= form.text_field :mailing_state, :size => 2, :maxlength => 2 %></p>
       </div>
       <div>
-        <h3><%= form.label :mailing_zip_code, "ZIP Code" %></h3>
+        <h3><%= form.label :mailing_zip_code %></h3>
         <p><%= form.text_field :mailing_zip_code, :size => 10, :maxlength => 10 %></p>
       </div>
     </fieldset>
   </div>
   <div class="row">
     <h3><%= form.label :race %></h3>
-    <p><%= form.select :race, Registrant::RACES, :include_blank => true %></p>
+    <p><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></p>
   </div>
   <div class="row">
     <h3><%= form.label :party %></h3>
     <p><%= form.select :party, Registrant::PARTIES, :include_blank => true %></p>
   </div>
 
-  <div class="row"><%= form.submit 'Submit' %></div>
+  <div class="row"><%= form.submit I18n.t('txt.button.submit') %></div>
 <% end %>
 
 <%= link_to 'Home', '/' %>

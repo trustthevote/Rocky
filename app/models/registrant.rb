@@ -2,10 +2,10 @@ class Registrant < ActiveRecord::Base
   include AASM
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :complete]
-  TITLES = %w[Mr. Mrs. Miss Ms.]
-  SUFFIXES = %w[Jr. Sr. II III IV]
-  RACES = [ "American Indian / Alaskan Native", "Asian / Pacific Islander", "Black (not Hispanic)",
-            "Hispanic", "Multi-racial", "White (not Hispanic)", "Other" ]
+  # TODO: add :es to get full set for validation
+  TITLES = I18n.t('txt.registration.titles', :locale => :en)
+  SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en)
+  RACES = I18n.t('txt.registration.races', :locale => :en)
   PARTIES = [ "American Co-dependent", "Birthday", "Republicratic", "Sub-genius", "Suprise" ]
 
   attr_protected :status
