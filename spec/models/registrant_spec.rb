@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Registrant do
-  
   describe "step 1" do
     it "should require personal info" do
       assert_attribute_invalid_with(:step_1_registrant, :email_address => nil)
@@ -27,19 +26,36 @@ describe Registrant do
       assert_attribute_invalid_with(:step_2_registrant, :last_name => nil)
       assert_attribute_invalid_with(:step_2_registrant, :home_address => nil)
       assert_attribute_invalid_with(:step_2_registrant, :home_city => nil)
-      assert_attribute_invalid_with(:step_2_registrant, :home_state => nil)
-    end
-
-    it "should upcase state abbreviation" do
-      reg = Factory.create(:step_2_registrant, :home_state => "ca")
-      assert_equal "CA", reg.home_state
-      reg = Factory.create(:step_2_registrant, :has_mailing_address => "1", :mailing_state => "ny")
-      assert_equal "NY", reg.mailing_state
+      reg = Factory.build(:step_2_registrant, :home_state_abbrev => nil)
+      reg.invalid?
+      assert reg.errors.on(:home_state_id)
     end
 
     it "should only update mailing address attributes if :has_mailing_address is set" do
-      reg = Factory.create(:step_2_registrant, :mailing_state => "PA", :has_mailing_address => "0")
+      reg = Factory.create(:step_2_registrant, :mailing_state_abbrev => "PA", :has_mailing_address => "0")
       assert_nil reg.mailing_state
+    end
+  end
+
+  describe "states by abbreviation" do
+    it "sets state by abbreviation" do
+      new_york = GeoState['NY']
+      reg = Factory.create(:step_1_registrant, :home_state_abbrev => "NY",
+                                               :mailing_state_abbrev => "NY", :has_mailing_address => "1",
+                                               :prev_state_abbrev => "NY")
+      assert_equal new_york.id, reg.home_state_id
+      assert_equal new_york.id, reg.mailing_state_id
+      assert_equal new_york.id, reg.prev_state_id
+    end
+
+    it "gets abbrev for state" do
+      new_york = GeoState['NY']
+      reg = Factory.create(:step_1_registrant, :home_state => new_york,
+                                               :mailing_state => new_york, :has_mailing_address => "1",
+                                               :prev_state => new_york)
+      assert_equal new_york.abbreviation, reg.home_state_abbrev
+      assert_equal new_york.abbreviation, reg.mailing_state_abbrev
+      assert_equal new_york.abbreviation, reg.prev_state_abbrev
     end
   end
 

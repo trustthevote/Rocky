@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090629205052) do
+ActiveRecord::Schema.define(:version => 20090714182329) do
+
+  create_table "geo_states", :force => true do |t|
+    t.string   "name",           :limit => 21
+    t.string   "abbreviation",   :limit => 2
+    t.boolean  "requires_race"
+    t.boolean  "requires_party"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "registrants", :force => true do |t|
     t.string   "status"
@@ -26,11 +35,11 @@ ActiveRecord::Schema.define(:version => 20090629205052) do
     t.string   "home_address"
     t.string   "home_address2"
     t.string   "home_city"
-    t.string   "home_state",         :limit => 2
+    t.integer  "home_state_id"
     t.string   "mailing_address"
     t.string   "mailing_address2"
     t.string   "mailing_city"
-    t.string   "mailing_state",      :limit => 2
+    t.integer  "mailing_state_id"
     t.string   "mailing_zip_code",   :limit => 10
     t.string   "party"
     t.string   "race"
@@ -49,12 +58,20 @@ ActiveRecord::Schema.define(:version => 20090629205052) do
     t.string   "prev_address"
     t.string   "prev_address2"
     t.string   "prev_city"
-    t.string   "prev_state",         :limit => 2
+    t.integer  "prev_state_id"
     t.string   "prev_zip_code",      :limit => 10
     t.boolean  "opt_in_email"
     t.boolean  "opt_in_sms"
     t.boolean  "attest_true"
     t.boolean  "attest_eligible"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "state_localizations", :force => true do |t|
+    t.integer  "state_id"
+    t.string   "locale",     :limit => 2
+    t.string   "parties"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

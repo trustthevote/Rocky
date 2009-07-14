@@ -61,8 +61,8 @@
         <p><%= form.text_field :home_city %></p>
       </div>
       <div>
-        <h3><%= form.label :home_state %></h3>
-        <p><%= form.text_field :home_state, :size => 2, :maxlength => 2 %></p>
+        <h3><%= form.label :home_state_abbrev %></h3>
+        <p><%= form.select :home_state_abbrev, GeoState.collection_for_select %></p>
       </div>
       <div>
         <h3><%= form.label :home_zip_code %></h3>
@@ -94,8 +94,8 @@
         <p><%= form.text_field :mailing_city %></p>
       </div>
       <div>
-        <h3><%= form.label :mailing_state %></h3>
-        <p><%= form.text_field :mailing_state, :size => 2, :maxlength => 2 %></p>
+        <h3><%= form.label :mailing_state_abbrev %></h3>
+        <p><%= form.select :mailing_state_abbrev, GeoState.collection_for_select %></p>
       </div>
       <div>
         <h3><%= form.label :mailing_zip_code %></h3>

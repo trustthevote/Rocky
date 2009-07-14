@@ -18,12 +18,12 @@ en:
         home_address: Address
         # home_address2: 
         home_city: City
-        home_state: State
+        home_state_abbrev: State
         has_mailing_address: I get my mail at a different address from the one above
         mailing_address: Address
         # mailing_address2: 
         mailing_city: City
-        mailing_state: State
+        mailing_state_abbrev: State
         mailing_zip_code: ZIP Code
         # party: 
         # race: 
@@ -42,7 +42,7 @@ en:
         # prev_address: 
         # prev_address2: 
         # prev_city: 
-        # prev_state: 
+        # prev_state_abbrev: 
         # prev_zip_code: 
         # opt_in_email: 
         # opt_in_sms: 

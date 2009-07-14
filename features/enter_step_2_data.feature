@@ -11,6 +11,6 @@ Feature: Step 2
        And I fill in "last" with "Public"
        And I fill in "address" with "123 Market St."
        And I fill in "city" with "San Francisco"
-       And I fill in "state" with "CA"
+       And I select "California" from "state"
        And I press "Submit"
       Then I should see "Thanks for that"

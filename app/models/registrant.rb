@@ -17,7 +17,10 @@ class Registrant < ActiveRecord::Base
   aasm_state :step_3
   aasm_state :complete
 
-  before_validation :upcase_states
+  belongs_to :home_state, :class_name => "GeoState"
+  belongs_to :mailing_state, :class_name => "GeoState"
+  belongs_to :prev_state, :class_name => "GeoState"
+
   before_validation :clear_mailing_address_unless_checked
 
   with_options :if => :at_least_step_1? do |reg|
@@ -34,10 +37,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
-    reg.validates_presence_of :home_state
-    reg.validates_format_of :home_state, :with => /[A-Z]{2}/
-    # reg.validates_inclusion_of :race, :in => RACES, :if => :state_requires_race?
-    # reg.validates_inclusion_of :party, :in => PARTIES
+    reg.validates_presence_of :home_state_id
     # reg.validate :validate_race
     # reg.validate :validate_party
   end
@@ -75,12 +75,6 @@ class Registrant < ActiveRecord::Base
     at_least_step?(2)
   end
 
-  def upcase_states
-    home_state.upcase!    unless home_state.blank?
-    mailing_state.upcase! unless mailing_state.blank?
-    prev_state.upcase!    unless prev_state.blank?
-  end
-
   def clear_mailing_address_unless_checked
     unless has_mailing_address?
       self.mailing_address = nil
@@ -92,7 +86,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def validate_race
-    if true # TODO: state.requires_race?
+    if true # TODO: home_state.requires_race?
       errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
     end
   end
@@ -112,6 +106,30 @@ class Registrant < ActiveRecord::Base
   #   validates_presence_of "#{location}_city"
   #   validates_presence_of "#{location}_state"
   # end
+
+  def home_state_abbrev=(abbrev)
+    self.home_state = GeoState[abbrev]
+  end
+
+  def home_state_abbrev
+    home_state && home_state.abbreviation
+  end
+
+  def mailing_state_abbrev=(abbrev)
+    self.mailing_state = GeoState[abbrev]
+  end
+
+  def mailing_state_abbrev
+    mailing_state && mailing_state.abbreviation
+  end
+
+  def prev_state_abbrev=(abbrev)
+    self.prev_state = GeoState[abbrev]
+  end
+
+  def prev_state_abbrev
+    prev_state && prev_state.abbreviation
+  end
 
   private
 

@@ -10,6 +10,12 @@ require 'cucumber/formatter/unicode'
 # open/roll back around each scenario
 Cucumber::Rails.use_transactional_fixtures
 
+#Seed the DB
+Fixtures.reset_cache  
+fixtures_folder = File.join(RAILS_ROOT, 'test', 'fixtures')
+fixtures = Dir[File.join(fixtures_folder, '*.{yml,csv}')].map {|f| File.basename(f, '.*') }
+Fixtures.create_fixtures(fixtures_folder, fixtures)
+
 # Comment out the next line if you want Rails' own error handling
 # (e.g. rescue_action_in_public / rescue_responses / rescue_from)
 Cucumber::Rails.bypass_rescue
