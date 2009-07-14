@@ -5,7 +5,6 @@ class Registrant < ActiveRecord::Base
   # TODO: add :es to get full set for validation
   TITLES = I18n.t('txt.registration.titles', :locale => :en)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en)
-  RACES = I18n.t('txt.registration.races', :locale => :en)
   PARTIES = [ "American Co-dependent", "Birthday", "Republicratic", "Sub-genius", "Suprise" ]
 
   attr_protected :status
@@ -37,8 +36,10 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :home_city
     reg.validates_presence_of :home_state
     reg.validates_format_of :home_state, :with => /[A-Z]{2}/
-    reg.validates_inclusion_of :race, :in => RACES, :if => :state_requires_race?
-    reg.validates_inclusion_of :party, :in => PARTIES, :if => :state_requires_party?
+    # reg.validates_inclusion_of :race, :in => RACES, :if => :state_requires_race?
+    # reg.validates_inclusion_of :party, :in => PARTIES
+    # reg.validate :validate_race
+    # reg.validate :validate_party
   end
 
   def self.transition_if_ineligible(event)
@@ -90,12 +91,10 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def state_requires_race?
-    false
-  end
-
-  def state_requires_party?
-    false
+  def validate_race
+    if true # TODO: state.requires_race?
+      errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
+    end
   end
 
   # def advance_to!(next_step, new_attributes = {})
