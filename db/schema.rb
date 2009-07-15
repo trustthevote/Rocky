@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20090714182329) do
 
   create_table "registrants", :force => true do |t|
     t.string   "status"
+    t.string   "locale",             :limit => 2
     t.date     "date_of_birth"
     t.string   "email_address"
     t.boolean  "first_registration"

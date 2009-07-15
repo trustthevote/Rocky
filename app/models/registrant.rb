@@ -17,9 +17,15 @@ class Registrant < ActiveRecord::Base
   aasm_state :step_3
   aasm_state :complete
 
-  belongs_to :home_state, :class_name => "GeoState"
+  belongs_to :home_state,    :class_name => "GeoState"
   belongs_to :mailing_state, :class_name => "GeoState"
-  belongs_to :prev_state, :class_name => "GeoState"
+  belongs_to :prev_state,    :class_name => "GeoState"
+
+  has_many :localizations, :through => :home_state, :class_name => 'StateLocalization' do
+    def by_locale(loc)
+      find_by_locale(loc.to_s)
+    end
+  end
 
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
@@ -28,6 +34,7 @@ class Registrant < ActiveRecord::Base
   before_validation :clear_party_unless_required
 
   with_options :if => :at_least_step_1? do |reg|
+    reg.validates_inclusion_of :locale, :in => %w(en es)
     reg.validates_presence_of :email_address
     reg.validates_presence_of :home_zip_code
     reg.validates_presence_of :date_of_birth
@@ -105,7 +112,7 @@ class Registrant < ActiveRecord::Base
 
   def state_parties
     if requires_party?
-      home_state.localizations.find_by_locale(I18n.locale.to_s).parties
+      localizations.by_locale(locale).parties
     else
       nil
     end

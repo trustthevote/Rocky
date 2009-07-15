@@ -1,5 +1,6 @@
 Factory.define :step_1_registrant, :class => "registrant" do |f|
   f.status          "step_1"
+  f.locale          "en"
   f.sequence(:email_address) { |n| "registrant_#{n}@example.com" }
   f.date_of_birth   20.years.ago.to_date
   f.home_zip_code   "94113"

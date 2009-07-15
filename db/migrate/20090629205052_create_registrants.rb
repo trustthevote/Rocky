@@ -2,6 +2,7 @@ class CreateRegistrants < ActiveRecord::Migration
   def self.up
     create_table "registrants" do |t|
       t.string      "status"
+      t.string      "locale", :limit => 2
 
       t.date        "date_of_birth"
       t.string      "email_address"

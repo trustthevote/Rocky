@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Registrant do
   describe "step 1" do
     it "should require personal info" do
+      assert_attribute_invalid_with(:step_1_registrant, :locale => nil)
       assert_attribute_invalid_with(:step_1_registrant, :email_address => nil)
       assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => nil, :home_state_id => nil)
       assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => nil)
@@ -74,8 +75,10 @@ describe Registrant do
 
   describe "state parties" do
     it "gets parties by locale when required" do
-      reg = Factory.build(:step_2_registrant, :home_state => GeoState["CA"])
+      reg = Factory.build(:step_2_registrant, :locale => 'en', :home_state => GeoState["CA"])
       assert_equal %w(Democratic Green Libertarian Republican), reg.state_parties
+      reg.locale = 'es'
+      assert_equal %w(Demócrata Verde Libertariano Republicano), reg.state_parties
     end
 
     it "gets no parties when not required" do
@@ -85,20 +88,21 @@ describe Registrant do
 
     it "included in validations when required by state" do
       reg = Factory.build(:step_2_registrant, :party => "bogus")
-      stub(reg).home_state {GeoState["CA"]}
+      stub(reg).requires_party? { true }
+      stub(reg).state_parties { %w[Democratic Republican] }
       assert reg.invalid?
       assert reg.errors.on(:party)
     end
 
     it "not included in validations when not required by state" do
       reg = Factory.build(:step_2_registrant, :party => nil)
-      stub(reg).home_state {GeoState["PA"]}
+      stub(reg).requires_party? { false }
       assert reg.valid?
     end
 
     it "not saved when not required by state" do
       reg = Factory.build(:step_2_registrant, :party => "bogus")
-      stub(reg).home_state {GeoState["PA"]}
+      stub(reg).requires_party? { false }
       reg.save
       assert_nil reg.party
     end

@@ -1,7 +1,10 @@
 class RegistrantsController < ApplicationController
   # GET /registrants/new
   def new
-    @registrant = Registrant.new
+    # locale = params[:locale] || 'en'
+    # session[:locale] = locale
+    # I18n.locale = locale.to_sym
+    @registrant = Registrant.new #(:locale => locale)
   end
 
   # POST /registrants
