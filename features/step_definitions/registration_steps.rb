@@ -10,3 +10,11 @@ Given /^I have not set a locale$/ do
   I18n.locale = nil
 end
 
+Given /^I have completed step 2$/ do
+  @registrant = Factory.create(:step_2_registrant)
+end
+
+Given /^I am a first time registrant$/ do
+  @registrant.first_registration = true
+  @registrant.save
+end

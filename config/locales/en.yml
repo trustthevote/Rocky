@@ -27,7 +27,7 @@ en:
         mailing_zip_code: ZIP Code
         # party: 
         # race: 
-        # state_id_number: 
+        state_id_number: ID Number
         # ssn4: 
         # phone: 
         # phone_type: 

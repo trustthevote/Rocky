@@ -17,3 +17,8 @@ Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
   # f.home_state      { GeoState['CA'] }
   f.race            "Hispanic"
 end
+
+Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|
+  f.status          "step_3"
+  f.state_id_number "2345"
+end

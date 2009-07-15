@@ -1,0 +1,12 @@
+<h1><%= t('txt.registration.step_3_header') %></h1>
+
+<% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
+  <%= form.error_messages %>
+  <div class="row">
+    <h3><%= form.label :state_id_number %></h3>
+    <p><%= form.text_field :state_id_number %></p>
+  </div>
+  <div class="row"><%= form.submit I18n.t('txt.button.submit') %></div>
+<% end %>
+
+<%= link_to 'Home', '/' %>

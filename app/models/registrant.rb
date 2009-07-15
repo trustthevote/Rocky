@@ -53,6 +53,10 @@ class Registrant < ActiveRecord::Base
     reg.validate :validate_party
   end
 
+  with_options :if => :at_least_step_3? do |reg|
+    reg.validates_presence_of :state_id_number
+  end
+
   def self.transition_if_ineligible(event)
     event.send(:transitions, :to => :ineligible, :from => Registrant::STEPS, :guard => :check_ineligible?)
   end
@@ -65,6 +69,11 @@ class Registrant < ActiveRecord::Base
   aasm_event :advance_to_step_2 do
     Registrant.transition_if_ineligible(self)
     transitions :to => :step_2, :from => [:step_1]
+  end
+
+  aasm_event :advance_to_step_3 do
+    Registrant.transition_if_ineligible(self)
+    transitions :to => :step_3, :from => [:step_2]
   end
 
   ### instance methods
@@ -84,6 +93,10 @@ class Registrant < ActiveRecord::Base
 
   def at_least_step_2?
     at_least_step?(2)
+  end
+
+  def at_least_step_3?
+    at_least_step?(3)
   end
 
   def set_home_state_from_zip_code

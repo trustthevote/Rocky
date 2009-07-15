@@ -28,6 +28,10 @@ describe Registrant do
       assert_attribute_invalid_with(:step_2_registrant, :home_city => nil)
     end
 
+    it "should not require state id" do
+      assert_attribute_valid_with(:step_2_registrant, :state_id_number => nil)
+    end
+
     it "should require race but only for certain states" do
       reg = Factory.build(:step_2_registrant, :race => nil)
       mock(reg).requires_race? {true}
@@ -46,6 +50,13 @@ describe Registrant do
       assert_nil reg.mailing_state
     end
   end
+
+  describe "step 3" do
+    it "should require state id" do
+      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => nil)
+    end
+  end
+
 
   describe "home state name" do
     it "gets name for state" do

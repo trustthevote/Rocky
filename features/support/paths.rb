@@ -14,7 +14,8 @@ module NavigationHelpers
       new_registrant_path(:locale => 'es')
     when /the step 2 page/
       registrant_step_2_path(@registrant)
-
+    when /the step 3 page/
+      registrant_step_3_path(@registrant)
     
     # Add more mappings here.
     # Here is a more fancy example:
