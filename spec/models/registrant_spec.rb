@@ -82,6 +82,26 @@ describe Registrant do
       reg = Factory.build(:step_2_registrant, :home_state => GeoState["PA"])
       assert_equal nil, reg.state_parties
     end
+
+    it "included in validations when required by state" do
+      reg = Factory.build(:step_2_registrant, :party => "bogus")
+      stub(reg).home_state {GeoState["CA"]}
+      assert reg.invalid?
+      assert reg.errors.on(:party)
+    end
+
+    it "not included in validations when not required by state" do
+      reg = Factory.build(:step_2_registrant, :party => nil)
+      stub(reg).home_state {GeoState["PA"]}
+      assert reg.valid?
+    end
+
+    it "not saved when not required by state" do
+      reg = Factory.build(:step_2_registrant, :party => "bogus")
+      stub(reg).home_state {GeoState["PA"]}
+      reg.save
+      assert_nil reg.party
+    end
   end
 
   def assert_attribute_invalid_with(model, attributes)

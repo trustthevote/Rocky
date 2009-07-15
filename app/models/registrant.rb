@@ -21,10 +21,11 @@ class Registrant < ActiveRecord::Base
   belongs_to :mailing_state, :class_name => "GeoState"
   belongs_to :prev_state, :class_name => "GeoState"
 
-  delegate :requires_race?, :to => :home_state, :allow_nil => true
+  delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
   before_validation :set_home_state_from_zip_code
   before_validation :clear_mailing_address_unless_checked
+  before_validation :clear_party_unless_required
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :email_address
@@ -42,7 +43,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
     reg.validate :validate_race
-    # reg.validate :validate_party
+    reg.validate :validate_party
   end
 
   def self.transition_if_ineligible(event)
@@ -92,17 +93,27 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def clear_party_unless_required
+    self.party = nil unless requires_party?
+  end
+
   def validate_race
     if requires_race?
       errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
     end
   end
-  
+
   def state_parties
-    if home_state && home_state.requires_party?
+    if requires_party?
       home_state.localizations.find_by_locale(I18n.locale.to_s).parties
     else
       nil
+    end
+  end
+
+  def validate_party
+    if requires_party?
+      errors.add(:party, :inclusion) unless state_parties.include?(party)
     end
   end
 
