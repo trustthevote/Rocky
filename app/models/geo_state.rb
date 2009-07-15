@@ -1,5 +1,7 @@
 class GeoState < ActiveRecord::Base
 
+  has_many :localizations, :class_name => 'StateLocalization', :foreign_key => 'state_id'
+
   def self.[](abbrev)
     init_all_states
     @@all_states[abbrev]

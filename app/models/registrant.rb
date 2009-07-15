@@ -21,6 +21,9 @@ class Registrant < ActiveRecord::Base
   belongs_to :mailing_state, :class_name => "GeoState"
   belongs_to :prev_state, :class_name => "GeoState"
 
+  delegate :requires_race?, :to => :home_state, :allow_nil => true
+
+  before_validation :set_home_state_from_zip_code
   before_validation :clear_mailing_address_unless_checked
 
   with_options :if => :at_least_step_1? do |reg|
@@ -28,6 +31,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :home_zip_code
     reg.validates_presence_of :date_of_birth
     reg.validates_acceptance_of :us_citizen, :accept => true
+    reg.validates_presence_of :home_state_id
   end
 
   with_options :if => :at_least_step_2? do |reg|
@@ -37,7 +41,6 @@ class Registrant < ActiveRecord::Base
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
-    reg.validates_presence_of :home_state_id
     reg.validate :validate_race
     # reg.validate :validate_party
   end
@@ -75,6 +78,10 @@ class Registrant < ActiveRecord::Base
     at_least_step?(2)
   end
 
+  def set_home_state_from_zip_code
+    self.home_state = home_zip_code && (home_zip_code.to_i.even? ? GeoState['CA'] : GeoState['PA'])
+  end
+
   def clear_mailing_address_unless_checked
     unless has_mailing_address?
       self.mailing_address = nil
@@ -86,8 +93,16 @@ class Registrant < ActiveRecord::Base
   end
 
   def validate_race
-    if home_state && home_state.requires_race?
+    if requires_race?
       errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
+    end
+  end
+  
+  def state_parties
+    if home_state && home_state.requires_party?
+      home_state.localizations.find_by_locale(I18n.locale.to_s).parties
+    else
+      nil
     end
   end
 
@@ -107,12 +122,8 @@ class Registrant < ActiveRecord::Base
   #   validates_presence_of "#{location}_state"
   # end
 
-  def home_state_abbrev=(abbrev)
-    self.home_state = GeoState[abbrev]
-  end
-
-  def home_state_abbrev
-    home_state && home_state.abbreviation
+  def home_state_name
+    home_state && home_state.name
   end
 
   def mailing_state_abbrev=(abbrev)

@@ -2,12 +2,12 @@ class Step2Controller < ApplicationController
 
   # GET /registrants/:registrant_id/step_2
   def show
-    @registrant = Registrant.find(params[:registrant_id])
+    find_registrant
   end
 
   # PUT /registrants/:registrant_id/step_2
   def update
-    @registrant = Registrant.find(params[:registrant_id])
+    find_registrant
     @registrant.attributes = params[:registrant]
     if @registrant.advance_to_step_2!
       flash[:success] = "Thanks for that"
@@ -15,5 +15,12 @@ class Step2Controller < ApplicationController
     else
       render "show"
     end
+  end
+
+protected
+
+  def find_registrant
+    @registrant = Registrant.find(params[:registrant_id])
+    @state_parties = @registrant.state_parties
   end
 end

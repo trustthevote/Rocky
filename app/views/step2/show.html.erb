@@ -61,12 +61,12 @@
         <p><%= form.text_field :home_city %></p>
       </div>
       <div>
-        <h3><%= form.label :home_state_abbrev %></h3>
-        <p><%= form.select :home_state_abbrev, GeoState.collection_for_select %></p>
+        <h3><%= form.label :home_state_name %></h3>
+        <p><%= form.text_field :home_state_name, :size => 15, :disabled => true %></p>
       </div>
       <div>
         <h3><%= form.label :home_zip_code %></h3>
-        <p><%= form.text_field :home_zip_code, :size => 10, :maxlength => 10, :disabled => true %></p>
+        <p><%= form.text_field :home_zip_code, :size => 8, :disabled => true %></p>
       </div>
     </fieldset>
   </div>
@@ -107,10 +107,12 @@
     <h3><%= form.label :race %></h3>
     <p><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></p>
   </div>
-  <div class="row">
-    <h3><%= form.label :party %></h3>
-    <p><%= form.select :party, Registrant::PARTIES, :include_blank => true %></p>
-  </div>
+  <% if @state_parties %>
+    <div class="row">
+      <h3><%= form.label :party %></h3>
+      <p><%= form.select :party, @state_parties, :include_blank => true %></p>
+    </div>
+  <% end %>
 
   <div class="row"><%= form.submit I18n.t('txt.button.submit') %></div>
 <% end %>

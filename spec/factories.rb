@@ -13,6 +13,6 @@ Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
   f.last_name       "Public"
   f.home_address    "123 Market St."
   f.home_city       "San Francisco"
-  f.home_state_abbrev "CA"
+  # f.home_state      { GeoState['CA'] }
   f.race            "Hispanic"
 end

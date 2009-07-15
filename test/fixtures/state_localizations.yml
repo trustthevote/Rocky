@@ -1,0 +1,8 @@
+california_en:
+  state_id: 5
+  locale: en
+  parties: 
+  - Democratic
+  - Green
+  - Libertarian
+  - Republican
