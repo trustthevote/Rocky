@@ -1,6 +1,20 @@
 class GeoState < ActiveRecord::Base
 
-  has_many :localizations, :class_name => 'StateLocalization', :foreign_key => 'state_id'
+  has_many :localizations, :class_name => 'StateLocalization', :foreign_key => 'state_id' do
+    def for_current_locale
+      self.find_by_locale(I18n.locale.to_s)
+    end
+  end
+
+  def current_localization
+    @cached_localizations ||= {}
+    @cached_localizations[I18n.locale] ||= localizations.for_current_locale
+    @cached_localizations[I18n.locale]
+  end
+
+  def parties
+    current_localization.parties
+  end
 
   def self.[](abbrev)
     init_all_states
