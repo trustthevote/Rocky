@@ -28,10 +28,8 @@ class CreateRegistrants < ActiveRecord::Migration
       t.string      "race"
 
       t.string      "state_id_number"
-      t.string      "ssn4", :limit => 4
       t.string      "phone"
       t.string      "phone_type"
-      t.boolean     "change_of_party"
       t.boolean     "change_of_name"
       t.string      "prev_name_title"
       t.string      "prev_first_name"

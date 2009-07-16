@@ -1,18 +1,8 @@
 <% content_for :head do %>
 <script>
-  $(document).ready(function() {
-    var toggleMailingAddress = function(speed) {
-      if ( $('#registrant_has_mailing_address').attr('checked') ) {
-        $('#mailing_address_set').show(speed);
-      } else {
-        $('#mailing_address_set').hide(speed);
-      }
-    }
-    toggleMailingAddress(0);
-    $('#registrant_has_mailing_address').change(function () {
-      toggleMailingAddress('fast');
-    });
-  });
+$(document).ready(function() {
+  checkboxTogglesSet($('#registrant_has_mailing_address'), $('#mailing_address_set'));
+});
 </script>
 <% end %>
 

@@ -28,22 +28,20 @@ en:
         # party: 
         # race: 
         state_id_number: ID Number
-        # ssn4: 
         # phone: 
         # phone_type: 
-        # change_of_party: 
-        # change_of_name: 
-        # prev_name_title: 
-        # prev_first_name: 
-        # prev_middle_name: 
-        # prev_last_name: 
-        # prev_name_suffix: 
-        # change_of_address: 
-        # prev_address: 
+        change_of_name: I have changed my name
+        prev_name_title: Title
+        prev_first_name: First
+        prev_middle_name: Middle
+        prev_last_name: Last
+        prev_name_suffix: Suffix
+        change_of_address: I have changed my address
+        prev_address: Address
         # prev_address2: 
-        # prev_city: 
-        # prev_state_abbrev: 
-        # prev_zip_code: 
+        prev_city: City
+        prev_state_abbrev: State
+        prev_zip_code: ZIP Code
         # opt_in_email: 
         # opt_in_sms: 
         # attest_true: 
@@ -82,9 +80,12 @@ en:
     registration:
       step_1_header: New registrant
       step_2_header: Personal Information
+      step_3_header: Numbers and Changes
       name: Name
       home_address: Home Address
       mailing_address: Mailing Address
+      previous_name: Previous Name
+      previous_address: Previous Address
       titles:
       - Mr.
       - Mrs.
