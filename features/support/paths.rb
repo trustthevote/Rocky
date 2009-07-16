@@ -10,6 +10,8 @@ module NavigationHelpers
     
     when /a new registration page/, /a new step 1 page/
       new_registrant_path
+    when /new Spanish registration page/
+      new_registrant_path(:locale => 'es')
     when /the step 2 page/
       registrant_step_2_path(@registrant)
 

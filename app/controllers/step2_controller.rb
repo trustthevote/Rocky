@@ -1,4 +1,5 @@
 class Step2Controller < ApplicationController
+  include RegistrationStep
 
   # GET /registrants/:registrant_id/step_2
   def show
@@ -20,7 +21,7 @@ class Step2Controller < ApplicationController
 protected
 
   def find_registrant
-    @registrant = Registrant.find(params[:registrant_id])
+    super
     @state_parties = @registrant.state_parties
   end
 end

@@ -6,3 +6,7 @@ When /^I am (\d+) years old$/ do |age|
   fill_in("date of birth", :with => age.to_i.years.ago.to_date)
 end
 
+Given /^I have not set a locale$/ do
+  I18n.locale = nil
+end
+
