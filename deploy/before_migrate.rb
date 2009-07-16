@@ -1,1 +1,1 @@
-sudo "geminstaller -c #{release_path}/config/geminstaller.yml"
+# sudo "geminstaller -c #{release_path}/config/geminstaller.yml"
