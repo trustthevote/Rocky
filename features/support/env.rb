@@ -6,10 +6,6 @@ require 'cucumber/rails/world'
 # Comment out the next line if you don't want Cucumber Unicode support
 require 'cucumber/formatter/unicode'
 
-# Comment out the next line if you don't want transactions to
-# open/roll back around each scenario
-Cucumber::Rails.use_transactional_fixtures
-
 #Seed the DB
 Fixtures.reset_cache  
 fixtures_folder = File.join(RAILS_ROOT, 'test', 'fixtures')
@@ -30,3 +26,4 @@ require 'cucumber/rails/rspec'
 require 'webrat/core/matchers'
 require 'factory_girl'
 Factory.find_definitions
+

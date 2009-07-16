@@ -1,5 +1,5 @@
-Given /^I have completed step 1$/ do
-  @registrant = Factory.create(:step_1_registrant)
+Given /^I have completed step (\d+)$/ do |step_num|
+  @registrant = Factory.create("step_#{step_num}_registrant")
 end
 
 When /^I am (\d+) years old$/ do |age|
@@ -8,10 +8,6 @@ end
 
 Given /^I have not set a locale$/ do
   I18n.locale = nil
-end
-
-Given /^I have completed step 2$/ do
-  @registrant = Factory.create(:step_2_registrant)
 end
 
 Given /^I am a first time registrant$/ do
