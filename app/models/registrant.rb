@@ -87,7 +87,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def set_home_state_from_zip_code
-    self.home_state = home_zip_code && (home_zip_code.to_i.even? ? GeoState['CA'] : GeoState['PA'])
+    return unless home_zip_code
+    self.home_state = case home_zip_code.to_i % 3
+      when 0 then GeoState['CA']
+      when 1 then GeoState['PA']
+      when 2 then GeoState['FL']
+    end
   end
 
   def clear_mailing_address_unless_checked

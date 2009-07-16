@@ -14,15 +14,15 @@ california_es:
   - Verde
   - Libertariano
   - Republicano
-pennsylvania_en:
-  state_id: 39
+florida_en:
+  state_id: 10
   locale: en
   parties: 
-  - Keystone
-  - Pirates
-pennsylvania_es:
-  state_id: 39
+  - Orange
+  - Mickey Mouse
+florida_es:
+  state_id: 10
   locale: es
   parties: 
-  - Piedra angular
-  - Pirata
+  - Naranja
+  - Ratoncito

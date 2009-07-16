@@ -1,1 +1,1 @@
-run "cd #{release_path} && rake db:fixtures:load"
+# run "cd #{release_path} && rake db:fixtures:load"
