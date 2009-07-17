@@ -44,11 +44,6 @@ describe Registrant do
       mock(reg).requires_race? {false}
       assert reg.valid?
     end
-
-    it "should only update mailing address attributes if :has_mailing_address is set" do
-      reg = Factory.create(:step_2_registrant, :mailing_state_abbrev => "PA", :has_mailing_address => "0")
-      assert_nil reg.mailing_state
-    end
   end
 
   describe "step 3" do
@@ -69,16 +64,14 @@ describe Registrant do
   describe "states by abbreviation" do
     it "sets state by abbreviation" do
       new_york = GeoState['NY']
-      reg = Factory.create(:step_1_registrant, :mailing_state_abbrev => "NY", :has_mailing_address => "1",
-                                               :prev_state_abbrev => "NY")
+      reg = Factory.create(:step_1_registrant, :mailing_state_abbrev => "NY", :prev_state_abbrev => "NY")
       assert_equal new_york.id, reg.mailing_state_id
       assert_equal new_york.id, reg.prev_state_id
-    end
+    end 
 
     it "gets abbrev for state" do
       new_york = GeoState['NY']
-      reg = Factory.create(:step_1_registrant, :mailing_state => new_york, :has_mailing_address => "1",
-                                               :prev_state => new_york)
+      reg = Factory.create(:step_1_registrant, :mailing_state => new_york, :prev_state => new_york)
       assert_equal new_york.abbreviation, reg.mailing_state_abbrev
       assert_equal new_york.abbreviation, reg.prev_state_abbrev
     end

@@ -30,7 +30,6 @@ class Registrant < ActiveRecord::Base
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
   before_validation :set_home_state_from_zip_code
-  before_validation :clear_mailing_address_unless_checked
   before_validation :clear_party_unless_required
 
   with_options :if => :at_least_step_1? do |reg|
@@ -76,16 +75,25 @@ class Registrant < ActiveRecord::Base
     transitions :to => :step_3, :from => [:step_2]
   end
 
+  ### meta magic
+  def self.attr_boolean(attr_name)
+    class_eval(<<-CODE, __FILE__, __LINE__)
+      def #{attr_name}=(#{attr_name})
+        @#{attr_name} = !!(/^1|true$/i =~ #{attr_name}) # yes, we need a boolean
+      end
+
+      def #{attr_name}
+        @#{attr_name}
+      end
+      alias_method :#{attr_name}?, :#{attr_name}
+    CODE
+  end
+
+  attr_boolean :has_mailing_address
+  attr_boolean :change_of_name
+  attr_boolean :change_of_address
+
   ### instance methods
-
-  def has_mailing_address=(has_mailing_address)
-    @has_mailing_address = !!(/^1|true$/i =~ has_mailing_address) # yes, we need a boolean
-  end
-
-  def has_mailing_address
-    @has_mailing_address
-  end
-  alias_method :has_mailing_address?, :has_mailing_address
 
   def at_least_step_1?
     at_least_step?(1)
@@ -105,16 +113,6 @@ class Registrant < ActiveRecord::Base
       when 0 then GeoState['CA']
       when 1 then GeoState['PA']
       when 2 then GeoState['FL']
-    end
-  end
-
-  def clear_mailing_address_unless_checked
-    unless has_mailing_address?
-      self.mailing_address = nil
-      self.mailing_address2 = nil
-      self.mailing_city = nil
-      self.mailing_state = nil
-      self.mailing_zip_code = nil
     end
   end
 

@@ -105,3 +105,8 @@ en:
       - Multi-racial
       - White (not Hispanic)
       - Other
+      phone_types:
+      - Home
+      - Mobile
+      - Work
+      - Other

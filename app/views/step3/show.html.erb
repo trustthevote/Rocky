@@ -17,9 +17,10 @@ $(document).ready(function() {
   </div>
   <div class="row">
     <h3><%= form.label :phone %></h3>
-    <p><%= form.text_field :phone %></p>
+    <p><%= form.text_field :phone %> <%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></p>
   </div>
 
+<% unless @registrant.first_registration? %>
   <div class="row">
     <div class="setrow">
       <h3>
@@ -87,7 +88,7 @@ $(document).ready(function() {
       </div>
     </fieldset>
   </div>
-
+<% end %>
 
   <div class="row"><%= form.submit I18n.t('txt.button.submit') %></div>
 <% end %>
