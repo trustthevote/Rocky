@@ -16,6 +16,8 @@ module NavigationHelpers
       registrant_step_2_path(@registrant)
     when /the step 3 page/
       registrant_step_3_path(@registrant)
+    when /the Moose page/
+      '/bullwinkle.html'
     
     # Add more mappings here.
     # Here is a more fancy example:

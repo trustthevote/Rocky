@@ -1,12 +1,3 @@
-<% content_for :head do %>
-<script>
-$(document).ready(function() {
-  checkboxTogglesSet($('#registrant_change_of_name'), $('#prev_name_set'));
-  checkboxTogglesSet($('#registrant_change_of_address'), $('#prev_address_set'));
-});
-</script>
-<% end %>
-
 <h1><%= t('txt.registration.step_3_header') %></h1>
 
 <% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
@@ -21,6 +12,14 @@ $(document).ready(function() {
   </div>
 
 <% unless @registrant.first_registration? %>
+  <% content_for :head do %>
+    <script>
+    $(document).ready(function() {
+      checkboxTogglesSet($('#registrant_change_of_name'), $('#prev_name_set'));
+      checkboxTogglesSet($('#registrant_change_of_address'), $('#prev_address_set'));
+    });
+    </script>
+  <% end %>
   <div class="row">
     <div class="setrow">
       <h3>

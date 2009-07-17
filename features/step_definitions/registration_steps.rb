@@ -14,7 +14,3 @@ Given /^I am a first time registrant$/ do
   @registrant.first_registration = true
   @registrant.save
 end
-
-Given /^I visit the Moose page$/ do
-  visit('http://localhost:3000/bullwinkle.html')
-end
