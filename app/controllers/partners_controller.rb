@@ -2,7 +2,7 @@ class PartnersController < ApplicationController
   def show
     @widget_html = <<-HTML
 <div id="widget_box">
-  <a href="#{host_url}/" id="rtv-widget-link">
+  <a href="#{new_registrant_url(:partner => params[:id])}" id="rtv-widget-link">
     <img src="http://www.rockthevote.com/assets/images/pages/home/top-boxes/register_to_vote.jpg"></img>
   </a>
   <script type="text/javascript" src="#{widget_loader_partner_url(params[:id], :format => 'js')}"></script>
@@ -10,7 +10,7 @@ class PartnersController < ApplicationController
 HTML
 
     @link_html = <<-HTML
-<a href="#{host_url}/">
+<a href="#{new_registrant_url(:partner => params[:id])}">
   <img src="http://www.rockthevote.com/assets/images/pages/home/top-boxes/register_to_vote.jpg"></img>
 </a>
 HTML
