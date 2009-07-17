@@ -19,6 +19,11 @@
       <%= flash[:success] %>
     </div>
     <%= yield %>
+    <% if @registrant %>
+      <br/>
+      <br/>
+      <p style="color:#ccc;">partner: <%= @registrant.partner_id %> locale: <%= @registrant.locale %></p>
+    <% end %>
   </div>
   <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
 </body>

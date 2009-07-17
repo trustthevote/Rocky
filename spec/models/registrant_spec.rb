@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Registrant do
   describe "step 1" do
     it "should require personal info" do
+      assert_attribute_invalid_with(:step_1_registrant, :partner_id => nil)
       assert_attribute_invalid_with(:step_1_registrant, :locale => nil)
       assert_attribute_invalid_with(:step_1_registrant, :email_address => nil)
       assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => nil, :home_state_id => nil)

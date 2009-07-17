@@ -1,9 +1,10 @@
 class RegistrantsController < ApplicationController
   # GET /registrants/new
   def new
+    partner_id = params[:partner] || Partner.default_id
     locale = params[:locale] || 'en'
     I18n.locale = locale.to_sym
-    @registrant = Registrant.new(:locale => locale)
+    @registrant = Registrant.new(:partner_id => partner_id, :locale => locale)
   end
 
   # POST /registrants

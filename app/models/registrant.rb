@@ -33,6 +33,7 @@ class Registrant < ActiveRecord::Base
   before_validation :clear_party_unless_required
 
   with_options :if => :at_least_step_1? do |reg|
+    reg.validates_presence_of :partner_id
     reg.validates_inclusion_of :locale, :in => %w(en es)
     reg.validates_presence_of :email_address
     reg.validates_presence_of :home_zip_code

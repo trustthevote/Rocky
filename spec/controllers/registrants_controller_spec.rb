@@ -7,6 +7,25 @@ describe RegistrantsController do
       assert_not_nil assigns[:registrant]
       assert_template "new"
     end
+
+    it "should start with partner id and locale" do
+      get :new, :locale => 'es', :partner => '2'
+      reg = assigns[:registrant]
+      assert_equal 'es', reg.locale
+      assert_equal 2, reg.partner_id
+    end
+
+    it "should default partner id to RTV" do
+      get :new
+      reg = assigns[:registrant]
+      assert_equal Partner.default_id, reg.partner_id
+    end
+
+    it "should default locale to English" do
+      get :new
+      reg = assigns[:registrant]
+      assert_equal 'en', reg.locale
+    end
   end
 
   describe "#create" do
