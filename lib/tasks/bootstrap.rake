@@ -33,9 +33,10 @@ namespace :db do
       Fixtures.create_fixtures(File.join('db', 'bootstrap'), "enumerations")
     end
   end
-end
+  
+  desc "migrate:reset and then bootstrap"
+  task :reboot => %w[db:migrate:reset db:bootstrap]
 
-namespace :db do
   namespace :test do
     task :prepare do
       Rake::Task["db:bootstrap"].invoke
