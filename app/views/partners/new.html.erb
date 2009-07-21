@@ -1,6 +1,6 @@
 <h1>Register</h1>
 
-<% form_for @partner do |f| %>
+<% form_for @partner, :url => partner_path do |f| %>
   <%= f.error_messages %>
   <p><%= f.label :username %></p>
   <p><%= f.text_field :username %></p>

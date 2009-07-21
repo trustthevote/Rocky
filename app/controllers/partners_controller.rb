@@ -9,7 +9,7 @@ class PartnersController < ApplicationController
     @partner = Partner.new(params[:partner])
     if @partner.save
       flash[:success] = "Registered!"
-      redirect_back_or_default dashboard_url
+      redirect_back_or_default partner_url
     else
       render "new"
     end
@@ -21,7 +21,7 @@ class PartnersController < ApplicationController
   <a href="#{new_registrant_url(:partner => partner_id)}" id="rtv-widget-link">
     <img src="http://www.rockthevote.com/assets/images/pages/home/top-boxes/register_to_vote.jpg"></img>
   </a>
-  <script type="text/javascript" src="#{widget_loader_partner_url(partner_id, :format => 'js')}"></script>
+  <script type="text/javascript" src="#{widget_loader_url(partner_id, :format => 'js')}"></script>
 </div>
 HTML
 

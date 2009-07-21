@@ -24,13 +24,13 @@ module NavigationHelpers
       '/bullwinkle.html'
 
     when /the register page/i
-      register_path
+      new_partner_path
     when /the login page/i
       login_path
     # when /the partner password reset request page/i
     #   new_partner_password_path
     when /the partner dashboard/
-      dashboard_path
+      partner_path
 
 
     # Add more mappings here.

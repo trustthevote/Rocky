@@ -56,7 +56,7 @@ describe PartnersController do
         assert_response :success
         assert_select 'textarea[readonly]', 2
         assert_match %r{http://example.com:3000/registrants/new\?partner=5}, response.body
-        assert_match %r{partners/5/widget_loader\.js}, response.body
+        assert_match %r{partner/5/widget_loader\.js}, response.body
       end
     end
   end
