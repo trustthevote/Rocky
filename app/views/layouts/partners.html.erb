@@ -16,11 +16,7 @@
     <div id="header">
       <p><%= link_to "Log out", logout_path %></p>
     </div>
-    <div id="flash">
-      <%= flash[:warning] %>
-      <%= flash[:message] %>
-      <%= flash[:success] %>
-    </div>
+    <%= flash_messages %>
     <%= yield %>
   </div>
   <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
