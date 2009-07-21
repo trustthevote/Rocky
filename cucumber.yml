@@ -1,2 +1,2 @@
-default: -r features/support/env.rb -r features/support/webrat.rb -r features/step_definitions features/webrat
-selenium: -r features/support/env.rb -r features/support/selenium.rb -r features/step_definitions features/selenium
+# default: -r features/support/env.rb -r features/support/webrat.rb -r features/step_definitions features/webrat
+selenium: -r features/support/env.rb -r selenium/support/selenium.rb -r features/step_definitions selenium
