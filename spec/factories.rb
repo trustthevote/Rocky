@@ -23,3 +23,10 @@ Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|
   f.status          "step_3"
   f.state_id_number "2345"
 end
+
+Factory.define :partner do |partner|
+  partner.sequence(:login)      { |n| "partner_#{n}" }
+  partner.sequence(:email)      { |n| "partner_#{n}@example.com" }
+  partner.password              "password"
+  partner.password_confirmation "password"
+end

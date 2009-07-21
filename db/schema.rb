@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090714182329) do
+ActiveRecord::Schema.define(:version => 20090720222522) do
 
   create_table "geo_states", :force => true do |t|
     t.string   "name",           :limit => 21
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(:version => 20090714182329) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "partners", :force => true do |t|
+    t.string   "login",             :null => false
+    t.string   "email",             :null => false
+    t.string   "crypted_password",  :null => false
+    t.string   "password_salt",     :null => false
+    t.string   "persistence_token", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "partners", ["email"], :name => "index_partners_on_email"
+  add_index "partners", ["login"], :name => "index_partners_on_login"
+  add_index "partners", ["persistence_token"], :name => "index_partners_on_persistence_token"
 
   create_table "registrants", :force => true do |t|
     t.string   "status"

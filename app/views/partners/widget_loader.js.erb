@@ -16,7 +16,7 @@ if ((parent == window) && (/WebKit\/[4-7]|MSIE [6-9]|Gecko\/200(51[12]|[6-9])|Op
 
     var rtvShowOverlay = function (e) {
       RTVModal.initPopUp('<%= @host %>');
-      RTVModal.showPopWin('<%= new_registrant_path(:partner => params[:id]) %>', 600, 500, null);
+      RTVModal.showPopWin('<%= new_registrant_path(:partner => @partner_id) %>', 600, 500, null);
       e = e || event
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
     }

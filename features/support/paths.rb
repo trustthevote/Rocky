@@ -8,6 +8,9 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
     
+    when /the homepage/i
+      root_path
+
     when /a new registration page/, /a new step 1 page/
       new_registrant_path
     when /new Spanish registration page/
@@ -16,9 +19,20 @@ module NavigationHelpers
       registrant_step_2_path(@registrant)
     when /the step 3 page/
       registrant_step_3_path(@registrant)
+
     when /the Moose page/
       '/bullwinkle.html'
-    
+
+    when /the partner sign up page/i
+      new_partner_path
+    when /the partner sign in page/i
+      new_partner_session_path
+    when /the partner password reset request page/i
+      new_partner_password_path
+    when /the partner dashboard/
+      dashboard_path
+
+
     # Add more mappings here.
     # Here is a more fancy example:
     #
