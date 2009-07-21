@@ -10,20 +10,20 @@ Given /^no partner exists with a login of "(.*)"$/ do |login|
   assert_nil Partner.find_by_login(login)
 end
 
-Given /^I signed up with "(.*)\/(.*)"$/ do |login, password|
+Given /^I registered with "(.*)\/(.*)"$/ do |login, password|
   partner = Factory :partner,
-    :login                 => login,
+    :username              => login,
     :password              => password,
     :password_confirmation => password
 end 
 
 # Session
 
-Then /^I should be signed in$/ do
+Then /^I should be logged in$/ do
   assert_not_nil controller.send(:current_partner_session)
 end
 
-Then /^I should be signed out$/ do
+Then /^I should be logged out$/ do
   assert_nil controller.send(:current_partner_session)
 end
 
@@ -39,15 +39,11 @@ end
 
 # Actions
 
-When /^I sign in as "(.*)\/(.*)"$/ do |login, password|
-  When %{I go to the partner sign in page}
+When /^I log in as "(.*)\/(.*)"$/ do |login, password|
+  When %{I go to the login page}
   And %{I fill in "Login" with "#{login}"}
   And %{I fill in "Password" with "#{password}"}
   And %{I press "Log In"}
-end
-
-When /^I sign out$/ do
-  visit '/session', :delete
 end
 
 # When /^I request password reset link to be sent to "(.*)"$/ do |login|

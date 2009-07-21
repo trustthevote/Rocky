@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
   end
 
   create_table "partners", :force => true do |t|
-    t.string   "login",             :null => false
+    t.string   "username",          :null => false
     t.string   "email",             :null => false
     t.string   "crypted_password",  :null => false
     t.string   "password_salt",     :null => false
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email"
-  add_index "partners", ["login"], :name => "index_partners_on_login"
   add_index "partners", ["persistence_token"], :name => "index_partners_on_persistence_token"
+  add_index "partners", ["username"], :name => "index_partners_on_username"
 
   create_table "registrants", :force => true do |t|
     t.string   "status"

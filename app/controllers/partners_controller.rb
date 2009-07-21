@@ -1,6 +1,20 @@
 class PartnersController < ApplicationController
   before_filter :require_partner, :only => [:show, :edit, :update]
   
+  def new
+    @partner = Partner.new
+  end
+
+  def create
+    @partner = Partner.new(params[:partner])
+    if @partner.save
+      flash[:success] = "Registered!"
+      redirect_back_or_default dashboard_url
+    else
+      render "new"
+    end
+  end
+
   def show
     @widget_html = <<-HTML
 <div id="widget_box">

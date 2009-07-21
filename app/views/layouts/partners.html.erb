@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title> Rocky </title>
+  <%= stylesheet_link_tag "application" %>
+  <!--[if lt IE 7]>
+     <%#= stylesheet_link_tag "ie6" %>
+  <![endif]-->
+  <%= javascript_include_tag 'application',
+                              Rails.env.production? ? 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' : 'jquery-1.3.2' %>
+  <%= yield :head %>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <p><%= link_to "Log out", logout_path %></p>
+    </div>
+    <div id="flash">
+      <%= flash[:warning] %>
+      <%= flash[:message] %>
+      <%= flash[:success] %>
+    </div>
+    <%= yield %>
+  </div>
+  <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
+</body>
+</html>

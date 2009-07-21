@@ -23,12 +23,12 @@ module NavigationHelpers
     when /the Moose page/
       '/bullwinkle.html'
 
-    when /the partner sign up page/i
-      new_partner_path
-    when /the partner sign in page/i
-      new_partner_session_path
-    when /the partner password reset request page/i
-      new_partner_password_path
+    when /the register page/i
+      register_path
+    when /the login page/i
+      login_path
+    # when /the partner password reset request page/i
+    #   new_partner_password_path
     when /the partner dashboard/
       dashboard_path
 

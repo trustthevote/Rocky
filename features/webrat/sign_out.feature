@@ -1,13 +1,12 @@
-Feature: Sign out
+Feature: Log out
   To protect my account from unauthorized access
-  A signed in partner
-  Should be able to sign out
+  A logged in partner
+  Should be able to log out
 
-    Scenario: Partner signs out
-      Given I am signed up and confirmed as "email@person.com/password"
-      When I sign in as "email@person.com/password"
-      Then I should be signed in
-      And I sign out
-      Then I should see "Signed out"
-      And I should be signed out
-
+    Scenario: Partner logs out
+      Given I registered with "bullwinkle/password"
+      When I log in as "bullwinkle/password"
+      Then I should be logged in
+      And I follow "Log out"
+      Then I should see "Logged out"
+      And I should be logged out

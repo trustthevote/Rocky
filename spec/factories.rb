@@ -25,8 +25,8 @@ Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|
 end
 
 Factory.define :partner do |partner|
-  partner.sequence(:login)      { |n| "partner_#{n}" }
-  partner.sequence(:email)      { |n| "partner_#{n}@example.com" }
+  partner.sequence(:username)   { |n| "partner_#{n}" }
+  partner.email                 { |p| "#{p.username}@example.com" }
   partner.password              "password"
   partner.password_confirmation "password"
 end
