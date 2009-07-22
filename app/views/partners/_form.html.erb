@@ -1,0 +1,26 @@
+<%= form.error_messages %>
+<p><%= form.label :username %></p>
+<p><%= form.text_field :username, :disabled => !form.object.new_record? %></p>
+<p><%= form.label :email %></p>
+<p><%= form.text_field :email %></p>
+<p><%= form.label :password, form.object.new_record? ? nil : "Change password" %></p>
+<p><%= form.password_field :password %></p>
+<p><%= form.label :password_confirmation, "Confirm password" %></p>
+<p><%= form.password_field :password_confirmation %></p>
+
+<p><%= form.label :name %></p>
+<p><%= form.text_field :name %></p>
+<p><%= form.label :organization, "Organization (optional)" %></p>
+<p><%= form.text_field :organization %></p>
+<p><%= form.label :url %></p>
+<p><%= form.text_field :url %></p>
+<p><%= form.label :address %></p>
+<p><%= form.text_field :address %></p>
+<p><%= form.label :city %></p>
+<p><%= form.text_field :city %></p>
+<p><%= form.label :state_abbrev, "State" %></p>
+<p><%= form.select :state_abbrev, GeoState.collection_for_select %></p>
+<p><%= form.label :zip_code, "ZIP Code" %></p>
+<p><%= form.text_field :zip_code %></p>
+<p><%= form.label :phone %></p>
+<p><%= form.text_field :phone %></p>

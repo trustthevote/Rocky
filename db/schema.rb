@@ -21,11 +21,19 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
   end
 
   create_table "partners", :force => true do |t|
-    t.string   "username",          :null => false
-    t.string   "email",             :null => false
-    t.string   "crypted_password",  :null => false
-    t.string   "password_salt",     :null => false
-    t.string   "persistence_token", :null => false
+    t.string   "username",                        :null => false
+    t.string   "email",                           :null => false
+    t.string   "crypted_password",                :null => false
+    t.string   "password_salt",                   :null => false
+    t.string   "persistence_token",               :null => false
+    t.string   "name"
+    t.string   "organization"
+    t.string   "url"
+    t.string   "address"
+    t.string   "city"
+    t.integer  "state_id"
+    t.string   "zip_code",          :limit => 10
+    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

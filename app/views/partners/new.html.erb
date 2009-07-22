@@ -1,14 +1,6 @@
 <h1>Register</h1>
 
-<% form_for @partner, :url => partner_path do |f| %>
-  <%= f.error_messages %>
-  <p><%= f.label :username %></p>
-  <p><%= f.text_field :username %></p>
-  <p><%= f.label :email %></p>
-  <p><%= f.text_field :email %></p>
-  <p><%= f.label :password, f.object.new_record? ? nil : "Change password" %></p>
-  <p><%= f.password_field :password %></p>
-  <p><%= f.label :password_confirmation, "Confirm password" %></p>
-  <p><%= f.password_field :password_confirmation %></p>
-  <p><%= f.submit "Register" %></p>
+<% form_for @partner, :url => partner_path do |form| %>
+  <%= render :partial => form %>
+  <p><%= form.submit "Register" %></p>
 <% end %>

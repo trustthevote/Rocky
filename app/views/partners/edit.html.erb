@@ -1,0 +1,6 @@
+<h1>Profile</h1>
+
+<% form_for @partner, :url => partner_path, :method => :put do |form| %>
+  <%= render :partial => form %>
+  <p><%= form.submit "Update" %></p>
+<% end %>

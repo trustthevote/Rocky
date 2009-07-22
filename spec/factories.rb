@@ -29,4 +29,11 @@ Factory.define :partner do |partner|
   partner.email                 { |p| "#{p.username}@example.com" }
   partner.password              "password"
   partner.password_confirmation "password"
+  partner.name                  { |p| p.username && p.username.humanize }
+  partner.url                   { |p| "#{p.username}.example.com" }
+  partner.address               "123 Liberty Ave."
+  partner.city                  "Pittsburgh"
+  partner.state                 { GeoState['PA'] }
+  partner.zip_code              "15215"
+  partner.phone                 "412-555-1234"
 end

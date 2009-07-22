@@ -43,7 +43,8 @@ describe PartnersController do
   describe "when logged in" do
     before(:each) do
       activate_authlogic
-      PartnerSession.create(Factory.build(:partner, :id => 5))
+      @partner = Factory.create(:partner, :id => 5)
+      PartnerSession.create(@partner)
     end
 
     describe "dashboard" do
@@ -57,6 +58,28 @@ describe PartnersController do
         assert_select 'textarea[readonly]', 2
         assert_match %r{http://example.com:3000/registrants/new\?partner=5}, response.body
         assert_match %r{partner/5/widget_loader\.js}, response.body
+      end
+    end
+
+    describe "profile" do
+      integrate_views
+
+      it "shows profile edit form" do
+        get :edit
+        assert_response :success
+        assert_equal @partner, assigns[:partner]
+        assert_select "form[action=/partner]"
+      end
+
+      it "shows dashboard after updating" do
+        put :update, :partner => {:name => "Friends of the Moose"}
+        assert_redirected_to partner_url
+      end
+
+      it "update requires valid input" do
+        put :update, :partner => {:email => "bogus!!!!!"}
+        assert_response :success
+        assert_template "edit"
       end
     end
   end
