@@ -6,5 +6,5 @@ task :cruise do
   Rake::Task["db:migrate:reset"].invoke   # TODO: remove :reset when migrations stabilize
   Rake::Task["default"].invoke            # rake db:test:prepare invokes db:bootstrap
   Rake::Task["features"].invoke
-  Rake::Task["features:selenium"].invoke
+  # Rake::Task["features:selenium"].invoke
 end
