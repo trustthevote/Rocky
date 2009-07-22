@@ -14,7 +14,7 @@ gems:
   version: <%= ENV['RAILS_GEM_VERSION'] %>
   install_options: -y --source=http://gems.rubyonrails.org
 <% else %>
-  version: 2.3.2
+  version: 2.3.3
 <% end %>
 - name: rubyist-aasm
   version: ~> 2.0.5
