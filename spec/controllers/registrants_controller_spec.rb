@@ -42,4 +42,21 @@ describe RegistrantsController do
       assert_template "new"
     end
   end
+
+  describe "PDF" do
+    before(:each) do
+      @registrant = Factory.create(:maximal_registrant)
+      `touch #{@registrant.pdf_path}`
+    end
+
+    it "downloads the PDF to the browser" do
+      get :pdf, :id => @registrant.to_param
+      assert_equal 'application/pdf', response.content_type
+    end
+
+    after(:each) do
+      `rm #{@registrant.pdf_path}`
+    end
+  end
+
 end

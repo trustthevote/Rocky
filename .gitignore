@@ -1,5 +1,5 @@
 .DS_Store
+config/database.yml
 log/*.log
 tmp/*
-config/database.yml
-
+public/pdf/*

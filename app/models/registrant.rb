@@ -31,7 +31,6 @@ class Registrant < ActiveRecord::Base
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
   before_validation :set_home_state_from_zip_code
-  before_validation :clear_party_unless_required
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :partner_id
@@ -118,10 +117,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def clear_party_unless_required
-    self.party = nil unless requires_party?
-  end
-
   def validate_race
     if requires_race?
       errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
@@ -184,6 +179,27 @@ class Registrant < ActiveRecord::Base
 
   def pdf_date_of_birth
     "%d/%d/%d" % [date_of_birth.month, date_of_birth.mday, date_of_birth.year]
+  end
+
+  def generate_pdf!
+    unless File.exists?(pdf_path)
+      Tempfile.open("nvra-#{to_param}") do |f|
+        f.puts to_xfdf
+        f.close
+        merge_pdf(f)
+      end
+    end
+  end
+
+  def merge_pdf(tmp)
+    nvra_path = File.join(Rails.root, "data", "nvra_pg4.pdf")
+    classpath = ["$CLASSPATH", File.join(Rails.root, "lib/pdf_merge/lib/iText-2.1.7.jar"), File.join(Rails.root, "lib/pdf_merge/out/production/Rocky_pdf")].join(":")
+    `java -classpath #{classpath} PdfMerge #{nvra_path} #{tmp.path} #{pdf_path}`
+  end
+
+  def pdf_path
+    FileUtils.mkdir_p(File.join(Rails.root, "public", "pdf"))
+    File.join(Rails.root, "public", "pdf", "nvra-#{to_param}.pdf")
   end
 
   private

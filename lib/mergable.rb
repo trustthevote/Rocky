@@ -60,6 +60,12 @@ module Mergable
     <field name="topmostSubform[0].Page4[0].DateTimeField1[0]">
       <value><%= pdf_date_of_birth %></value>
     </field>
+    <field name="topmostSubform[0].Page4[0].NumericField1[0]">
+      <value><%= phone %></value>
+    </field>
+    <field name="topmostSubform[0].Page4[0].TextField11[0]">
+      <value><%= state_id_number %></value>
+    </field>
     <field name="topmostSubform[0].Page4[0].TextField22[0]">
       <value><%= party %></value>
     </field>

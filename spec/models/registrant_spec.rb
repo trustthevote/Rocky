@@ -104,12 +104,26 @@ describe Registrant do
       stub(reg).requires_party? { false }
       assert reg.valid?
     end
+  end
 
-    it "not saved when not required by state" do
-      reg = Factory.build(:step_2_registrant, :party => "bogus")
-      stub(reg).requires_party? { false }
-      reg.save
-      assert_nil reg.party
+  describe "PDF" do
+    before(:each) do
+      @registrant = Factory.create(:maximal_registrant)
+    end
+
+    it "generates PDF with merged data" do
+      assert_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
+        @registrant.generate_pdf!
+      end
+      `rm #{@registrant.pdf_path}`
+    end
+
+    it "returns PDF if already exists" do
+      `touch #{@registrant.pdf_path}`
+      assert_no_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
+        @registrant.generate_pdf!
+      end
+      `rm #{@registrant.pdf_path}`
     end
   end
 

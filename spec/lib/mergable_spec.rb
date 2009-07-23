@@ -77,6 +77,14 @@ describe Mergable do
     assert_equal  @registrant.pdf_date_of_birth,
                   @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].DateTimeField1[0]"] value').text
   end
+  it "should output phone" do
+    assert_equal  @registrant.phone,
+                  @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].NumericField1[0]"] value').text
+  end
+  it "should output state ID number" do
+    assert_equal  @registrant.state_id_number,
+                  @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].TextField11[0]"] value').text
+  end
   it "should output party" do
     assert_equal  @registrant.party,
                   @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].TextField22[0]"] value').text
