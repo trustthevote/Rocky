@@ -34,7 +34,7 @@ module Mergable
       <value><%= home_address %></value>
     </field>
     <field name="topmostSubform[0].Page4[0].TextField3[0]">
-      <value><%= home_address2 %></value>
+      <value><%= home_unit %></value>
     </field>
     <field name="topmostSubform[0].Page4[0].TextField4[0]">
       <value><%= home_city %></value>
@@ -46,7 +46,7 @@ module Mergable
       <value><%= home_zip_code %></value>
     </field>
     <field name="topmostSubform[0].Page4[0].TextField7[0]">
-      <value><%= mailing_address %> <%= mailing_address2 %></value>
+      <value><%= mailing_address %> <%= mailing_unit %></value>
     </field>
     <field name="topmostSubform[0].Page4[0].TextField8[0]">
       <value><%= mailing_city %></value>
@@ -85,7 +85,7 @@ module Mergable
       <value><%= prev_address %></value>
     </field>
     <field name="topmostSubform[0].Page4[0].TextField16[0]">
-      <value><%= prev_address2 %></value>
+      <value><%= prev_unit %></value>
     </field>
     <field name="topmostSubform[0].Page4[0].TextField17[0]">
       <value><%= prev_city %></value>

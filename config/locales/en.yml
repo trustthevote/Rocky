@@ -16,12 +16,12 @@ en:
         last_name: Last
         name_suffix: Suffix
         home_address: Address
-        # home_address2: 
+        # home_unit: 
         home_city: City
         home_state_name: State
         has_mailing_address: I get my mail at a different address from the one above
         mailing_address: Address
-        # mailing_address2: 
+        # mailing_unit: 
         mailing_city: City
         mailing_state_abbrev: State
         mailing_zip_code: ZIP Code
@@ -38,7 +38,7 @@ en:
         prev_name_suffix: Suffix
         change_of_address: I have changed my address
         prev_address: Address
-        # prev_address2: 
+        # prev_unit: 
         prev_city: City
         prev_state_abbrev: State
         prev_zip_code: ZIP Code

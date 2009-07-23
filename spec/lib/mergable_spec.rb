@@ -40,7 +40,7 @@ describe Mergable do
                   @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].TextField2[0]"] value').text
   end
   it "should output home address unit" do
-    assert_equal  @registrant.home_address2,
+    assert_equal  @registrant.home_unit,
                   @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].TextField3[0]"] value').text
   end
   it "should output home address city" do
@@ -57,7 +57,7 @@ describe Mergable do
   end
 
   it "should output mailing address street" do
-    assert_equal  "#{@registrant.mailing_address} #{@registrant.mailing_address2}",
+    assert_equal  "#{@registrant.mailing_address} #{@registrant.mailing_unit}",
                   @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].TextField7[0]"] value').text
   end
   it "should output mailing address city" do
@@ -112,7 +112,7 @@ describe Mergable do
                   @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].TextField15[0]"] value').text
   end
   it "should output previous address unit" do
-    assert_equal  @registrant.prev_address2,
+    assert_equal  @registrant.prev_unit,
                   @doc.css('xfdf fields field[name="topmostSubform[0].Page4[0].TextField16[0]"] value').text
   end
   it "should output previous address city" do

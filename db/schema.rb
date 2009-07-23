@@ -57,11 +57,11 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.string   "last_name"
     t.string   "name_suffix"
     t.string   "home_address"
-    t.string   "home_address2"
+    t.string   "home_unit"
     t.string   "home_city"
     t.integer  "home_state_id"
     t.string   "mailing_address"
-    t.string   "mailing_address2"
+    t.string   "mailing_unit"
     t.string   "mailing_city"
     t.integer  "mailing_state_id"
     t.string   "mailing_zip_code",   :limit => 10
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.string   "prev_last_name"
     t.string   "prev_name_suffix"
     t.string   "prev_address"
-    t.string   "prev_address2"
+    t.string   "prev_unit"
     t.string   "prev_city"
     t.integer  "prev_state_id"
     t.string   "prev_zip_code",      :limit => 10
