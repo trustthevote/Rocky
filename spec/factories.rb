@@ -24,6 +24,51 @@ Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|
   f.state_id_number "2345"
 end
 
+Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
+  f.status              "complete"
+  f.locale              "en"
+  f.partner_id          "1"
+  f.date_of_birth       20.years.ago.to_date
+  f.email_address       "citizen@example.com"
+  f.first_registration  false
+  f.home_zip_code       "02134"
+  f.us_citizen          true
+  f.name_title          "Mrs."
+  f.first_name          "Susan"
+  f.middle_name         "Brownell"
+  f.last_name           "Anthony"
+  f.name_suffix         "III"
+  f.home_address        "123 Civil Rights Way"
+  f.home_address2       "Apt 2"
+  f.home_city           "West Grove"
+  f.home_state          { GeoState['MA'] }
+  f.mailing_address     "10 Main St"
+  f.mailing_address2    "Box 5"
+  f.mailing_city        "Adams"
+  f.mailing_state_id    { GeoState['MA'] }
+  f.mailing_zip_code    "02135"
+  f.party               "Democratic"
+  f.race                "White, not of Hispanic origin"
+  f.state_id_number     "5678"
+  f.phone               "123-456-7890"
+  f.phone_type          "Mobile"
+  f.prev_name_title     "Ms."
+  f.prev_first_name     "Susana"
+  f.prev_middle_name    "B."
+  f.prev_last_name      "Antonia"
+  f.prev_name_suffix    "Jr."
+  f.prev_address        "321 Civil Wrongs Way"
+  f.prev_address2       "#9"
+  f.prev_city           "Pittsburgh"
+  f.prev_state          { GeoState["PA"] }
+  f.prev_zip_code       "15215"
+  f.opt_in_email        true
+  f.opt_in_sms          true
+  f.attest_true         true
+  f.attest_eligible     true
+end
+
+
 Factory.define :partner do |partner|
   partner.sequence(:username)   { |n| "partner_#{n}" }
   partner.email                 { |p| "#{p.username}@example.com" }

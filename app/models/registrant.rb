@@ -1,5 +1,6 @@
 class Registrant < ActiveRecord::Base
   include AASM
+  include Mergable
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :complete]
   # TODO: add :es to get full set for validation
@@ -175,6 +176,14 @@ class Registrant < ActiveRecord::Base
 
   def prev_state_abbrev
     prev_state && prev_state.abbreviation
+  end
+  
+  def will_be_18_by_election?
+    true
+  end
+
+  def pdf_date_of_birth
+    "%d/%d/%d" % [date_of_birth.month, date_of_birth.mday, date_of_birth.year]
   end
 
   private
