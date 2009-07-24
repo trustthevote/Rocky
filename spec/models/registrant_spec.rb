@@ -54,7 +54,7 @@ describe Registrant do
 
     it "blanks mailing address fields unless has_mailing_address" do
       reg = Factory.build(:maximal_registrant, :has_mailing_address => false)
-      assert reg.valid?
+      assert reg.valid?, reg.errors.full_messages
       assert_nil reg.mailing_address
       assert_nil reg.mailing_unit
       assert_nil reg.mailing_city
@@ -128,14 +128,14 @@ describe Registrant do
   describe "states by abbreviation" do
     it "sets state by abbreviation" do
       new_york = GeoState['NY']
-      reg = Factory.create(:step_1_registrant, :mailing_state_abbrev => "NY", :prev_state_abbrev => "NY")
+      reg = Factory.build(:step_1_registrant, :mailing_state_abbrev => "NY", :prev_state_abbrev => "NY")
       assert_equal new_york.id, reg.mailing_state_id
       assert_equal new_york.id, reg.prev_state_id
     end 
 
     it "gets abbrev for state" do
       new_york = GeoState['NY']
-      reg = Factory.create(:step_1_registrant, :mailing_state => new_york, :prev_state => new_york)
+      reg = Factory.build(:step_1_registrant, :mailing_state => new_york, :prev_state => new_york)
       assert_equal new_york.abbreviation, reg.mailing_state_abbrev
       assert_equal new_york.abbreviation, reg.prev_state_abbrev
     end

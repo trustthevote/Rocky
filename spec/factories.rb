@@ -4,7 +4,7 @@ Factory.define :step_1_registrant, :class => "registrant" do |f|
   f.locale          "en"
   f.sequence(:email_address) { |n| "registrant_#{n}@example.com" }
   f.date_of_birth   20.years.ago.to_date
-  f.home_zip_code   "00001"  # == Pennsylvania
+  f.home_zip_code   "15215"  # == Pennsylvania
   f.us_citizen      true
 end
 
@@ -48,7 +48,7 @@ Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
   f.mailing_state_id    { GeoState['MA'] }
   f.mailing_zip_code    "02135"
   f.party               "Democratic"
-  f.race                "White, not of Hispanic origin"
+  f.race                "White (not Hispanic)"
   f.state_id_number     "5678"
   f.phone               "123-456-7890"
   f.phone_type          "Mobile"

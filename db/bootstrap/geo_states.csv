@@ -20,7 +20,7 @@ id,abbreviation,name,requires_race,requires_party
 19,LA,Louisiana,1,1
 20,ME,Maine,1,1
 21,MD,Maryland,1,1
-22,MA,Massachusetts,1,1
+22,MA,Massachusetts,0,0
 23,MI,Michigan,1,1
 24,MN,Minnesota,1,1
 25,MS,Mississippi,1,1

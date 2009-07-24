@@ -24,7 +24,7 @@ class Registrant < ActiveRecord::Base
 
   has_many :localizations, :through => :home_state, :class_name => 'StateLocalization' do
     def by_locale(loc)
-      find_by_locale(loc.to_s)
+      find_by_locale(loc.to_s) || StateLocalization.find_by_state_id_and_locale(GeoState['CA'].id, loc.to_s) # TODO remove when we have localizations for all states
     end
   end
 
@@ -39,6 +39,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :email_address
     reg.validates_format_of :email_address, :with => Authlogic::Regex.email, :allow_blank => true
     reg.validates_presence_of :home_zip_code
+    # reg.validate :zip_code_exists   # TODO
     reg.validates_presence_of :date_of_birth
     reg.validate :validate_age
     reg.validates_acceptance_of :us_citizen, :accept => true
@@ -113,11 +114,7 @@ class Registrant < ActiveRecord::Base
 
   def set_home_state_from_zip_code
     return unless home_zip_code
-    self.home_state = case home_zip_code.to_i % 3
-      when 0 then GeoState['CA']
-      when 1 then GeoState['PA']
-      when 2 then GeoState['FL']
-    end
+    self.home_state = GeoState.for_zip_code(home_zip_code.strip)
   end
 
   def clear_superfluous_fields
@@ -125,7 +122,7 @@ class Registrant < ActiveRecord::Base
       self.mailing_address = nil
       self.mailing_unit = nil
       self.mailing_city = nil
-      self.mailing_state_id = nil
+      self.mailing_state = nil
       self.mailing_zip_code = nil
     end
     unless change_of_name?
@@ -139,7 +136,7 @@ class Registrant < ActiveRecord::Base
       self.prev_address = nil
       self.prev_unit = nil
       self.prev_city = nil
-      self.prev_state_id = nil
+      self.prev_state = nil
       self.prev_zip_code = nil
     end
   end
