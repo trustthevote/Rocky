@@ -52,6 +52,16 @@ describe Registrant do
       assert_attribute_invalid_with(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => nil)
     end
 
+    it "blanks mailing address fields unless has_mailing_address" do
+      reg = Factory.build(:maximal_registrant, :has_mailing_address => false)
+      assert reg.valid?
+      assert_nil reg.mailing_address
+      assert_nil reg.mailing_unit
+      assert_nil reg.mailing_city
+      assert_nil reg.mailing_state_id
+      assert_nil reg.mailing_zip_code
+    end
+
     it "should require race but only for certain states" do
       reg = Factory.build(:step_2_registrant, :race => nil)
       mock(reg).requires_race? {true}
@@ -83,6 +93,27 @@ describe Registrant do
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_state_id => nil)
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
     end
+
+    it "blanks previous address fields unless change_of_name" do
+      reg = Factory.build(:maximal_registrant, :change_of_name => false)
+      assert reg.valid?
+      assert_nil reg.prev_name_title
+      assert_nil reg.prev_first_name
+      assert_nil reg.prev_middle_name
+      assert_nil reg.prev_last_name
+      assert_nil reg.prev_name_suffix
+    end
+
+    it "blanks previous address fields unless change_of_address" do
+      reg = Factory.build(:maximal_registrant, :change_of_address => false)
+      assert reg.valid?
+      assert_nil reg.prev_address
+      assert_nil reg.prev_unit
+      assert_nil reg.prev_city
+      assert_nil reg.prev_state_id
+      assert_nil reg.prev_zip_code
+    end
+
   end
 
 

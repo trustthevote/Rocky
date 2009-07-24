@@ -31,6 +31,7 @@ class Registrant < ActiveRecord::Base
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
   before_validation :set_home_state_from_zip_code
+  before_validation :clear_superfluous_fields
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :partner_id
@@ -116,6 +117,30 @@ class Registrant < ActiveRecord::Base
       when 0 then GeoState['CA']
       when 1 then GeoState['PA']
       when 2 then GeoState['FL']
+    end
+  end
+
+  def clear_superfluous_fields
+    unless has_mailing_address?
+      self.mailing_address = nil
+      self.mailing_unit = nil
+      self.mailing_city = nil
+      self.mailing_state_id = nil
+      self.mailing_zip_code = nil
+    end
+    unless change_of_name?
+      self.prev_name_title = nil
+      self.prev_first_name = nil
+      self.prev_middle_name = nil
+      self.prev_last_name = nil
+      self.prev_name_suffix = nil
+    end
+    unless change_of_address?
+      self.prev_address = nil
+      self.prev_unit = nil
+      self.prev_city = nil
+      self.prev_state_id = nil
+      self.prev_zip_code = nil
     end
   end
 
