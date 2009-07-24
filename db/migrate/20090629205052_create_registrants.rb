@@ -48,6 +48,9 @@ class CreateRegistrants < ActiveRecord::Migration
       t.boolean     "opt_in_email"
       t.boolean     "opt_in_sms"
 
+      t.string      "survey_answer_1"
+      t.string      "survey_answer_2"
+
       t.boolean     "attest_true"
       t.boolean     "attest_eligible"
 

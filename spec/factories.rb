@@ -1,6 +1,6 @@
 Factory.define :step_1_registrant, :class => "registrant" do |f|
   f.status          "step_1"
-  f.partner_id      "1"
+  f.association     :partner, :factory => :partner
   f.locale          "en"
   f.sequence(:email_address) { |n| "registrant_#{n}@example.com" }
   f.date_of_birth   20.years.ago.to_date
@@ -22,6 +22,13 @@ end
 Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|
   f.status          "step_3"
   f.state_id_number "2345"
+end
+
+Factory.define :step_4_registrant, :parent => :step_3_registrant do |f|
+  f.status          "step_4"
+  f.opt_in_email    false
+  f.opt_in_sms      false
+
 end
 
 Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
@@ -84,4 +91,6 @@ Factory.define :partner do |partner|
   partner.state                 { GeoState['PA'] }
   partner.zip_code              "15215"
   partner.phone                 "412-555-1234"
+  partner.survey_question_1_en  "Hello?"
+  partner.survey_question_2_en  "Outta here?"
 end

@@ -21,19 +21,23 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
   end
 
   create_table "partners", :force => true do |t|
-    t.string   "username",                        :null => false
-    t.string   "email",                           :null => false
-    t.string   "crypted_password",                :null => false
-    t.string   "password_salt",                   :null => false
-    t.string   "persistence_token",               :null => false
+    t.string   "username",                           :null => false
+    t.string   "email",                              :null => false
+    t.string   "crypted_password",                   :null => false
+    t.string   "password_salt",                      :null => false
+    t.string   "persistence_token",                  :null => false
     t.string   "name"
     t.string   "organization"
     t.string   "url"
     t.string   "address"
     t.string   "city"
     t.integer  "state_id"
-    t.string   "zip_code",          :limit => 10
+    t.string   "zip_code",             :limit => 10
     t.string   "phone"
+    t.string   "survey_question_1_en"
+    t.string   "survey_question_1_es"
+    t.string   "survey_question_2_en"
+    t.string   "survey_question_2_es"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,6 +89,8 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.string   "prev_zip_code",       :limit => 10
     t.boolean  "opt_in_email"
     t.boolean  "opt_in_sms"
+    t.string   "survey_answer_1"
+    t.string   "survey_answer_2"
     t.boolean  "attest_true"
     t.boolean  "attest_eligible"
     t.datetime "created_at"

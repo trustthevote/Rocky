@@ -2,7 +2,7 @@ class Registrant < ActiveRecord::Base
   include AASM
   include Mergable
 
-  STEPS = [:initial, :step_1, :step_2, :step_3, :complete]
+  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :complete]
   # TODO: add :es to get full set for validation
   TITLES = I18n.t('txt.registration.titles', :locale => :en)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en)
@@ -16,8 +16,10 @@ class Registrant < ActiveRecord::Base
   aasm_state :step_1
   aasm_state :step_2
   aasm_state :step_3
+  aasm_state :step_4
   aasm_state :complete
 
+  belongs_to :partner
   belongs_to :home_state,    :class_name => "GeoState"
   belongs_to :mailing_state, :class_name => "GeoState"
   belongs_to :prev_state,    :class_name => "GeoState"
@@ -92,6 +94,11 @@ class Registrant < ActiveRecord::Base
   aasm_event :advance_to_step_3 do
     Registrant.transition_if_ineligible(self)
     transitions :to => :step_3, :from => [:step_2]
+  end
+
+  aasm_event :advance_to_step_4 do
+    Registrant.transition_if_ineligible(self)
+    transitions :to => :step_4, :from => [:step_3]
   end
 
   ### instance methods

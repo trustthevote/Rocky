@@ -30,7 +30,8 @@ describe RegistrantsController do
 
   describe "#create" do
     it "should create a new registrant and complete step 1" do
-      post :create, :registrant => Factory.attributes_for(:step_1_registrant)
+      partner = Factory.create(:partner)
+      post :create, :registrant => Factory.attributes_for(:step_1_registrant, :partner_id => partner.to_param)
       assert_not_nil assigns[:registrant]
       assert_redirected_to registrant_step_2_path(assigns[:registrant])
     end

@@ -1,1 +1,22 @@
-<%= link_to "Download PDF!", pdf_registrant_path(@registrant) %>
+<h1><%= t('txt.registration.step_4_header') %></h1>
+
+<% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
+  <%= form.error_messages %>
+  <div class="row">
+    <h3>
+      <%= form.check_box :opt_in_email %> <%= form.label :opt_in_email %>
+      <%= form.check_box :opt_in_sms %> <%= form.label :opt_in_sms %>
+    </h3>
+  </div>
+  <div class="row">
+    <h3><%= form.label :survey_answer_1, @question_1 %></h3>
+    <p><%= form.text_field :survey_answer_1 %></p>
+  </div>
+  <div class="row">
+    <h3><%= form.label :survey_answer_2, @question_2 %></h3>
+    <p><%= form.text_field :survey_answer_2 %></p>
+  </div>
+  <div class="row"><%= form.submit 'Submit' %></div>
+<% end %>
+
+<%= link_to 'Home', '/' %>

@@ -42,8 +42,8 @@ en:
         prev_city: City
         prev_state_abbrev: State
         prev_zip_code: ZIP Code
-        # opt_in_email: 
-        # opt_in_sms: 
+        opt_in_email: Receive emails
+        opt_in_sms: Receive txt messages
         # attest_true: 
         # attest_eligible: 
     errors:
@@ -81,6 +81,8 @@ en:
       step_1_header: New registrant
       step_2_header: Personal Information
       step_3_header: Numbers and Changes
+      step_4_header: Opt In and Speak Out
+      step_5_header: Confirm Your Info
       name: Name
       home_address: Home Address
       mailing_address: Mailing Address
