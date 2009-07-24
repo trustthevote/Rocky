@@ -18,6 +18,18 @@ describe Registrant do
       assert_attribute_valid_with(:step_1_registrant, :home_address => nil)
       assert_attribute_valid_with(:step_1_registrant, :home_city => nil)
     end
+
+    it "should require email address is valid" do
+      assert_attribute_invalid_with(:step_1_registrant, :email_address => "bogus")
+      assert_attribute_invalid_with(:step_1_registrant, :email_address => "bogus@bogus")
+      assert_attribute_invalid_with(:step_1_registrant, :email_address => "bogus@bogus.")
+      assert_attribute_invalid_with(:step_1_registrant, :email_address => "@bogus.com")
+    end
+    
+    it "should require at least 16 years old" do
+      assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => 5.years.ago.to_date)
+      assert_attribute_valid_with(:step_1_registrant, :date_of_birth => 17.years.ago.to_date)
+    end
   end
 
   describe "step 2" do
@@ -112,6 +124,7 @@ describe Registrant do
     end
 
     it "generates PDF with merged data" do
+      `rm #{@registrant.pdf_path}`
       assert_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
         @registrant.generate_pdf!
       end

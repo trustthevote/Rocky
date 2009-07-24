@@ -36,8 +36,10 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :partner_id
     reg.validates_inclusion_of :locale, :in => %w(en es)
     reg.validates_presence_of :email_address
+    reg.validates_format_of :email_address, :with => Authlogic::Regex.email, :allow_blank => true
     reg.validates_presence_of :home_zip_code
     reg.validates_presence_of :date_of_birth
+    reg.validate :validate_age
     reg.validates_acceptance_of :us_citizen, :accept => true
     reg.validates_presence_of :home_state_id
   end
@@ -114,6 +116,12 @@ class Registrant < ActiveRecord::Base
       when 0 then GeoState['CA']
       when 1 then GeoState['PA']
       when 2 then GeoState['FL']
+    end
+  end
+
+  def validate_age
+    if date_of_birth
+      errors.add(:date_of_birth, "You must be at least 16 years old") unless date_of_birth < 16.years.ago.to_date
     end
   end
 
