@@ -14,3 +14,11 @@ Given /^I am a first time registrant$/ do
   @registrant.first_registration = true
   @registrant.save
 end
+
+Given /^I have not downloaded the PDF before$/ do
+  assert !File.exists?(@registrant.pdf_path)
+end
+
+Then /^I should see a new download$/ do
+  assert File.exists?(@registrant.pdf_path)
+end
