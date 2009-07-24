@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
 
   create_table "registrants", :force => true do |t|
     t.string   "status"
-    t.string   "locale",             :limit => 2
+    t.string   "locale",              :limit => 2
     t.integer  "partner_id"
     t.date     "date_of_birth"
     t.string   "email_address"
     t.boolean  "first_registration"
-    t.string   "home_zip_code",      :limit => 10
+    t.string   "home_zip_code",       :limit => 10
     t.boolean  "us_citizen"
     t.string   "name_title"
     t.string   "first_name"
@@ -60,26 +60,29 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.string   "home_unit"
     t.string   "home_city"
     t.integer  "home_state_id"
+    t.boolean  "has_mailing_address"
     t.string   "mailing_address"
     t.string   "mailing_unit"
     t.string   "mailing_city"
     t.integer  "mailing_state_id"
-    t.string   "mailing_zip_code",   :limit => 10
+    t.string   "mailing_zip_code",    :limit => 10
     t.string   "party"
     t.string   "race"
     t.string   "state_id_number"
     t.string   "phone"
     t.string   "phone_type"
+    t.boolean  "change_of_name"
     t.string   "prev_name_title"
     t.string   "prev_first_name"
     t.string   "prev_middle_name"
     t.string   "prev_last_name"
     t.string   "prev_name_suffix"
+    t.boolean  "change_of_address"
     t.string   "prev_address"
     t.string   "prev_unit"
     t.string   "prev_city"
     t.integer  "prev_state_id"
-    t.string   "prev_zip_code",      :limit => 10
+    t.string   "prev_zip_code",       :limit => 10
     t.boolean  "opt_in_email"
     t.boolean  "opt_in_sms"
     t.boolean  "attest_true"

@@ -51,12 +51,26 @@ class Registrant < ActiveRecord::Base
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
-    reg.validate :validate_race
+    reg.validates_inclusion_of :race, :in => I18n.t('txt.registration.races'), :if => lambda { |reg| reg.all? :at_least_step_2?, :requires_race? }
     reg.validate :validate_party
+    needs_mailing_address = lambda { |reg| reg.all? :at_least_step_2?, :has_mailing_address? }
+    reg.validates_presence_of :mailing_address, :if => needs_mailing_address
+    reg.validates_presence_of :mailing_city, :if => needs_mailing_address
+    reg.validates_presence_of :mailing_state_id, :if => needs_mailing_address
+    reg.validates_presence_of :mailing_zip_code, :if => needs_mailing_address
   end
 
   with_options :if => :at_least_step_3? do |reg|
     reg.validates_presence_of :state_id_number
+    needs_prev_name = lambda { |reg| reg.all? :at_least_step_3?, :change_of_name? }
+    reg.validates_presence_of :prev_name_title, :if => needs_prev_name
+    reg.validates_presence_of :prev_first_name, :if => needs_prev_name
+    reg.validates_presence_of :prev_last_name, :if => needs_prev_name
+    needs_prev_address = lambda { |reg| reg.all? :at_least_step_3?, :change_of_address? }
+    reg.validates_presence_of :prev_address, :if => needs_prev_address
+    reg.validates_presence_of :prev_city, :if => needs_prev_address
+    reg.validates_presence_of :prev_state_id, :if => needs_prev_address
+    reg.validates_presence_of :prev_zip_code, :if => needs_prev_address
   end
 
   def self.transition_if_ineligible(event)
@@ -78,25 +92,11 @@ class Registrant < ActiveRecord::Base
     transitions :to => :step_3, :from => [:step_2]
   end
 
-  ### meta magic
-  def self.attr_boolean(attr_name)
-    class_eval(<<-CODE, __FILE__, __LINE__)
-      def #{attr_name}=(#{attr_name})
-        @#{attr_name} = !!(/^1|true$/i =~ #{attr_name}) # yes, we need a boolean
-      end
-
-      def #{attr_name}
-        @#{attr_name}
-      end
-      alias_method :#{attr_name}?, :#{attr_name}
-    CODE
-  end
-
-  attr_boolean :has_mailing_address
-  attr_boolean :change_of_name
-  attr_boolean :change_of_address
-
   ### instance methods
+
+  def all?(*methods)
+    methods.all? { |m| self.send(m) }
+  end
 
   def at_least_step_1?
     at_least_step?(1)
@@ -151,14 +151,6 @@ class Registrant < ActiveRecord::Base
   #   next_status_number = STEPS.index(next_step)
   #   status_number = [current_status_number, next_status_number].max
   #   send("advance_to_#{STEPS[status_number]}!")
-  # end
-
-
-
-  # %w(home mailing).each do |location|
-  #   validates_presence_of "#{location}_address"
-  #   validates_presence_of "#{location}_city"
-  #   validates_presence_of "#{location}_state"
   # end
 
   def home_state_name

@@ -45,6 +45,13 @@ describe Registrant do
       assert_attribute_valid_with(:step_2_registrant, :state_id_number => nil)
     end
 
+    it "requires mailing address fields if has_mailing_address" do
+      assert_attribute_invalid_with(:step_2_registrant, :has_mailing_address => true, :mailing_address => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :has_mailing_address => true, :mailing_city => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :has_mailing_address => true, :mailing_state_id => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => nil)
+    end
+
     it "should require race but only for certain states" do
       reg = Factory.build(:step_2_registrant, :race => nil)
       mock(reg).requires_race? {true}
@@ -62,6 +69,19 @@ describe Registrant do
   describe "step 3" do
     it "should require state id" do
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => nil)
+    end
+
+    it "should require previous name fields if change_of_name" do
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_name => true, :prev_name_title => nil)
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_name => true, :prev_first_name => nil)
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_name => true, :prev_last_name => nil)
+    end
+
+    it "requires previous address fields if change_of_address" do
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_address => nil)
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_city => nil)
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_state_id => nil)
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
     end
   end
 
@@ -143,9 +163,7 @@ describe Registrant do
   def assert_attribute_invalid_with(model, attributes)
     reg = Factory.build(model, attributes)
     reg.invalid?
-    attributes.keys.each do |attr_name|
-      assert reg.errors.on(attr_name), "expected error on #{attr_name} but got none"
-    end
+    assert attributes.keys.any? { |attr_name| reg.errors.on(attr_name) }
   end
 
   def assert_attribute_valid_with(model, attributes)
