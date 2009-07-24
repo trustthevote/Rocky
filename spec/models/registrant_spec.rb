@@ -171,7 +171,7 @@ describe Registrant do
 
   describe "PDF" do
     before(:each) do
-      @registrant = Factory.create(:maximal_registrant)
+      @registrant = Factory.build(:maximal_registrant)
       stub(@registrant).merge_pdf { `touch #{@registrant.pdf_path}` }
     end
 

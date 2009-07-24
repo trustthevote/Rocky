@@ -39,11 +39,12 @@ Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
   f.last_name           "Anthony"
   f.name_suffix         "III"
   f.home_address        "123 Civil Rights Way"
-  f.home_unit       "Apt 2"
+  f.home_unit           "Apt 2"
   f.home_city           "West Grove"
   f.home_state          { GeoState['MA'] }
+  f.has_mailing_address true
   f.mailing_address     "10 Main St"
-  f.mailing_unit    "Box 5"
+  f.mailing_unit        "Box 5"
   f.mailing_city        "Adams"
   f.mailing_state_id    { GeoState['MA'] }
   f.mailing_zip_code    "02135"
@@ -52,13 +53,15 @@ Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
   f.state_id_number     "5678"
   f.phone               "123-456-7890"
   f.phone_type          "Mobile"
+  f.change_of_name      true
   f.prev_name_title     "Ms."
   f.prev_first_name     "Susana"
   f.prev_middle_name    "B."
   f.prev_last_name      "Antonia"
   f.prev_name_suffix    "Jr."
+  f.change_of_address   true
   f.prev_address        "321 Civil Wrongs Way"
-  f.prev_unit       "#9"
+  f.prev_unit           "#9"
   f.prev_city           "Pittsburgh"
   f.prev_state          { GeoState["PA"] }
   f.prev_zip_code       "15215"
