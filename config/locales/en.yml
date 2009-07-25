@@ -52,6 +52,8 @@ en:
           attributes:
             us_citizen:
               accepted: "You must be a U.S. citizen to register to vote."
+            date_of_birth:
+              inclusion: "You must be at least 16 years old"
       messages:
         inclusion: "{{attribute}} is not included in the list"
         exclusion: "{{attribute}} is reserved"
@@ -77,6 +79,7 @@ en:
       eligible: You are eligible
     button:
       submit: Submit
+      download: "Download PDF!"
     registration:
       step_1_header: New registrant
       step_2_header: Personal Information

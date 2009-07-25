@@ -16,7 +16,7 @@
     <h3><%= form.label :survey_answer_2, @question_2 %></h3>
     <p><%= form.text_field :survey_answer_2 %></p>
   </div>
-  <div class="row"><%= form.submit 'Submit' %></div>
+  <div class="row"><%= form.submit I18n.t('txt.button.submit') %></div>
 <% end %>
 
 <%= link_to 'Home', '/' %>

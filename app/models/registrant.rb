@@ -150,7 +150,7 @@ class Registrant < ActiveRecord::Base
 
   def validate_age
     if date_of_birth
-      errors.add(:date_of_birth, "You must be at least 16 years old") unless date_of_birth < 16.years.ago.to_date
+      errors.add(:date_of_birth, :inclusion) unless date_of_birth < 16.years.ago.to_date
     end
   end
 
