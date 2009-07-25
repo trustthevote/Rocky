@@ -16,12 +16,12 @@ en:
         last_name: Last
         name_suffix: Suffix
         home_address: Address
-        # home_unit: 
+        home_unit: "Unit/Lot #"
         home_city: City
         home_state_name: State
         has_mailing_address: I get my mail at a different address from the one above
         mailing_address: Address
-        # mailing_unit: 
+        mailing_unit: "Unit/Lot #"
         mailing_city: City
         mailing_state_abbrev: State
         mailing_zip_code: ZIP Code
@@ -38,7 +38,7 @@ en:
         prev_name_suffix: Suffix
         change_of_address: I have changed my address
         prev_address: Address
-        # prev_unit: 
+        prev_unit: "Unit/Lot #"
         prev_city: City
         prev_state_abbrev: State
         prev_zip_code: ZIP Code
@@ -53,7 +53,7 @@ en:
             us_citizen:
               accepted: "You must be a U.S. citizen to register to vote."
             date_of_birth:
-              inclusion: "You must be at least 16 years old"
+              inclusion: "You must be at least 16 years old."
       messages:
         inclusion: "{{attribute}} is not included in the list"
         exclusion: "{{attribute}} is reserved"
@@ -74,6 +74,19 @@ en:
         less_than_or_equal_to: "{{attribute}} must be less than or equal to {{count}}"
         odd: "{{attribute}} must be odd"
         even: "{{attribute}} must be even"
+  authlogic:
+    error_messages:
+      login_blank: "Login can not be blank"
+      login_not_found: "Login/password combination is not valid"
+      login_invalid: "Username should use only letters, numbers, spaces, and .-_@ please."
+      consecutive_failed_logins_limit_exceeded: "Consecutive failed logins limit exceeded, account is disabled."
+      email_invalid: "Email is not a valid address"
+      password_blank: "Password can not be blank"
+      password_invalid: "Login/password combination is not valid"
+      not_active: "Your account is not active"
+      not_confirmed: "Your account is not confirmed"
+      not_approved: "Your account is not approved"
+      no_authentication_details: "You did not provide any details for authentication."
   txt:
     flash:
       eligible: You are eligible
