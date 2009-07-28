@@ -51,29 +51,3 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 10px;
 }
-
-#container {
-  margin: 2em;
-}
-
-h1, h2, h3, h4, h5, h6, legend {
-  font-family: Trebuchet, "Trebuchet MS", Arial, sans-serif;
-  font-weight: bold;
-  font-size: 1.4em;
-}
-
-h1 {
-  font-size: 1.6em;
-  margin: 1em 0;
-}
-
-p {
-  font-size: 1.2em;
-  margin: 0.5em 0;
-}
-
-.copy_html textarea {
-  padding: 1em;
-  font-family: Menlo, Courier, "Courier New", monospace;
-  font-size: 11px;
-}

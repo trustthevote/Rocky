@@ -1,32 +1,35 @@
 <%= form.hidden_field :partner_id %>
 <%= form.hidden_field :locale %>
-<ul>
-  <li class="left-label">
-    <h2><%= form.label :email_address %></h2>
-  </li>
-  <li><%= form.text_field :email_address %></li>
-</ul>
-<ul>
-  <li class="left-label">
-    <h2><%= form.label :home_zip_code %></h2>
-  </li>
-  <li><%= form.text_field :home_zip_code %></li>
-</ul>
-<ul>
-  <li class="left-label">
-    <h2><%= form.label :date_of_birth %></h2>
-  </li>
-  <li><%= form.text_field :date_of_birth %></li>
-</ul>
-
-<ul>
+<ul class="flat">
   <li>
-    <h2><%= form.check_box :us_citizen %> <%= form.label :us_citizen %></h2>
+    <h3><%= form.label :email_address %></h3>
+    <div><%= form.text_field :email_address %></div>
+    <!-- <span>error</span> -->
+  </li>
+</ul>
+<ul class="flat">
+  <li>
+    <h3><%= form.label :home_zip_code %></h3>
+    <div><%= form.text_field :home_zip_code %></div>
+    <!-- <span>error</span> -->
+  </li>
+</ul>
+<ul class="flat">
+  <li>
+    <h3><%= form.label :date_of_birth %></h3>
+    <div><%= form.text_field :date_of_birth %></div>
+    <!-- <span>error</span> -->
   </li>
 </ul>
 
-<ul>
+<ul class="checkbox">
   <li>
-    <h2><%= form.check_box :first_registration %> <%= form.label :first_registration %></h2>
+    <h3><%= form.check_box :us_citizen %> <%= form.label :us_citizen %></h3>
+  </li>
+</ul>
+
+<ul class="checkbox">
+  <li>
+    <h3><%= form.check_box :first_registration %> <%= form.label :first_registration %></h3>
   </li>
 </ul>

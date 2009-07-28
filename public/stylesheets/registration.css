@@ -7,16 +7,17 @@ h1, h2, h3, h4, h5, h6, legend {
   font-weight: bold;
 }
 
-h1 { font-size: 1.8em; }
-h2, legend { font-size: 1.6em; }
-h3 { font-size: 1.4em; }
-h4 { font-size: 1.8em; }
-h5 { font-size: 1.8em; }
-h6 { font-size: 1.8em; }
+h1 { font-size: 18px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+h4 { font-size: 12px; }
+h5 { font-size: 12px; }
+h6 { font-size: 12px; }
+legend { font-size: 14px; }
 
 input, select, textarea {
   font-family: Tahoma, sans-serif;
-  font-size: 1.1em;
+  font-size: 12px;
 }
 
 input, textarea {
@@ -59,13 +60,13 @@ form.copy_html {
 }
 
 fieldset {
-  margin-bottom: 1em;
+  margin: 10px 0;
   border: 1px solid #ccc;
-  padding: 1em;
+  padding: 0 10px 10px 5px;
 }
 
 legend {
-  padding: 0.25em;
+  padding: 0 5px;
 }
 
 form ul {
@@ -74,7 +75,7 @@ form ul {
 }
 
 form fieldset ul {
-  margin: 0 0 0 0;
+  margin: 0 0 0 5px;
 }
 
 form li {
@@ -82,18 +83,64 @@ form li {
   margin-right: 0.5em;
 }
 
-form li.left-label {
-  width: 12em;
-}
-
-form li.left-label h2 {
-  text-align: right;
-}
-
 form h3 {
   font-weight: normal;
   color: #434343;
-  margin: 0.2em 0 -0.3em 0;
+  margin: 0;
+}
+
+
+ul.flat h3 {
+  float: left;
+  height: 25px;
+  width: 120px;
+  margin-right: 0.5em;
+  line-height: 26px;      /* browser diff */
+  text-align: right;
+  font-size: 14px;
+/*  font-weight: bold;*/
+}
+
+ul.flat .secondary h3 {
+  width: inherit;
+  margin-left: 10px;
+}
+
+ul.flat div {
+  float: left;
+  height: 25px;
+}
+
+
+ul.stacked {
+  margin-top: 5px;
+}
+
+ul.stacked h3 {
+  margin-bottom: 1px;
+  font-size: 13px;
+}
+
+
+ul.checkbox h3 {
+  height: 25px;
+  line-height: 20px;
+}
+
+
+ul.question {
+  width: 75%;
+  margin-top: 20px;
+}
+
+ul.question li, ul.question h3 {
+  width: 100%;
+}
+
+ul.question textarea {
+  width: 95%;
+  margin-top: 6px;
+  margin-left: 3%;
 }
 
 form hr {
@@ -112,54 +159,13 @@ form div.button input {
   color: white;
   background-color: #e22;
   font-weight: bold;
-  font-size: 1.8em;
+  font-size: 18px;
   letter-spacing: -0.005em;
   text-transform: uppercase;
 }
 
-/*form div.row {
-  margin: 0.5em 0 1em;
-  border-top: 1px dotted gray;
-  padding-top: 0.5em;
-}
-
-form div h3 {
-  margin-bottom: 0.25em;
-}
-
-form div p {
-  margin-left: 2em;
-  font-size: 1.2em;
-}
-
-div.row fieldset {
-  overflow: hidden;
-}
-
-div.row fieldset div {
-  float: left;
-  padding-right: 0.5em;
-}
-
-div.row fieldset div h3 {
-  margin-bottom: 0.1em;
-  font-size: 1.2em;
-  color: #666;
-}
-
-div.row fieldset div p {
-  margin-left: 0;
-}
-
-div.row fieldset div.setrow {
-  margin-left: 2em;
-  clear: both;
-}
-
-*/
-
 .error {
   color: red;
-  font-size: 90%;
+  font-size: 10px;
   font-style: italic;
 }

@@ -2,21 +2,21 @@
 
 <% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
   <%= form.error_messages %>
-  <ul>
-    <li class="left-label">
-      <h2><%= form.label :state_id_number %></h2>
-    </li>
-    <li><%= form.text_field :state_id_number %></li>
-  </ul>
-  <ul>
-    <li class="left-label">
-      <h2><%= form.label :phone %></h2>
-    </li>
-    <li><%= form.text_field :phone %></li>
+  <ul class="flat">
     <li>
-      <h2><%= form.label :phone_type, 'Type' %></h2>
+      <h3><%= form.label :state_id_number %></h3>
+      <div><%= form.text_field :state_id_number, :size => 20 %></div>
     </li>
-    <li><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></li>
+  </ul>
+  <ul class="flat">
+    <li>
+      <h3><%= form.label :phone %></h3>
+      <div><%= form.text_field :phone, :size => 20 %></div>
+    </li>
+    <li class="secondary">
+      <h3><%= form.label :phone_type, 'Type' %></h3>
+      <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
+    </li>
   </ul>
 
   <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>

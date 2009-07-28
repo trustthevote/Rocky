@@ -2,45 +2,29 @@
 
 <% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
   <%= form.error_messages %>
-  <ul>
-    <li class="left-label">&nbsp;</li>
+  <ul class="checkbox">
     <li>
-      <h2><%= form.check_box :opt_in_email %> <%= form.label :opt_in_email %></h2>
+      <h3><%= form.check_box :opt_in_email %> <%= form.label :opt_in_email %></h3>
     </li>
   </ul>
 
-  <ul>
-    <li class="left-label">&nbsp;</li>
+  <ul class="checkbox">
     <li>
-      <h2><%= form.check_box :opt_in_sms %> <%= form.label :opt_in_sms %></h2>
+      <h3><%= form.check_box :opt_in_sms %> <%= form.label :opt_in_sms %></h3>
     </li>
   </ul>
 
-  <br/>
-  <ul>
-    <li class="left-label">
-      <h2>Question 1</h2>
+  <ul class="question">
+    <li>
+      <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>
+      <div><%= form.text_area :survey_answer_1, :size => "40x3" %></div>
     </li>
-    <li><p><%=h @question_1 %></p></li>
   </ul>
-  <ul>
-    <li class="left-label">
-      <h2><%= form.label :survey_answer_1, "Answer 1" %></h2>
+  <ul class="question">
+    <li>
+      <h3><%= form.label :survey_answer_2, h(@question_2 * 8) %></h3>
+      <div><%= form.text_area :survey_answer_2, :size => "40x3" %></div>
     </li>
-    <li><%= form.text_area :survey_answer_1, :size => "40x3"  %></li>
-  </ul>
-  <br/>
-  <ul>
-    <li class="left-label">
-      <h2>Question 2</h2>
-    </li>
-    <li><p><%=h @question_2 %></p></li>
-  </ul>
-  <ul>
-    <li class="left-label">
-      <h2><%= form.label :survey_answer_2, "Answer 2" %></h2>
-    </li>
-    <li><%= form.text_area :survey_answer_2, :size => "40x3"  %></li>
   </ul>
 
   <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>

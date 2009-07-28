@@ -12,108 +12,105 @@ $(document).ready(function() {
   <%= form.error_messages %>
   <fieldset>
     <legend><%= I18n.t('txt.registration.name') %></legend>
-    <ul>
+    <ul class="stacked">
       <li>
         <h3><%= form.label :name_title %></h3>
-        <p><%= form.select :name_title, I18n.t('txt.registration.titles'), :include_blank => true %></p>
-        <p class="error">required</p>
+        <div><%= form.select :name_title, I18n.t('txt.registration.titles'), :include_blank => true %></div>
       </li>
       <li>
-        <h3><%= form.label :first_name %> <span class="error"> ! required</span></h3>
-        <p><%= form.text_field :first_name, :size => 15 %></p>
-        <p class="error">required</p>
+        <h3><%= form.label :first_name %></h3>
+        <div><%= form.text_field :first_name, :size => 15 %></div>
       </li>
       <li>
         <h3><%= form.label :middle_name %></h3>
-        <p><%= form.text_field :middle_name, :size => 10 %></p>
+        <div><%= form.text_field :middle_name, :size => 10 %></div>
       </li>
       <li>
         <h3><%= form.label :last_name %></h3>
-        <p><%= form.text_field :last_name, :size => 15 %></p>
-        <p class="error">required</p>
+        <div><%= form.text_field :last_name, :size => 15 %></div>
       </li>
       <li>
         <h3><%= form.label :name_suffix %></h3>
-        <p><%= form.select :name_suffix, t('txt.registration.suffixes'), :include_blank => t('txt.registration.select_none') %></p>
+        <div><%= form.select :name_suffix, t('txt.registration.suffixes'), :include_blank => t('txt.registration.select_none') %></div>
       </li>
     </ul>
   </fieldset>
 
   <fieldset>
     <legend><%= I18n.t('txt.registration.home_address') %></legend>
-    <ul>
+    <ul class="stacked">
       <li>
         <h3><%= form.label :home_address %></h3>
-        <p><%= form.text_field :home_address %></p>
+        <div><%= form.text_field :home_address %></div>
       </li>
       <li>
         <h3><%= form.label :home_unit %></h3>
-        <p><%= form.text_field :home_unit, :size => 15 %></p>
+        <div><%= form.text_field :home_unit, :size => 15 %></div>
       </li>
     </ul>
-    <ul>
+    <ul class="stacked">
       <li>
         <h3><%= form.label :home_city %></h3>
-        <p><%= form.text_field :home_city %></p>
+        <div><%= form.text_field :home_city %></div>
       </li>
       <li>
         <h3><%= form.label :home_state_name %></h3>
-        <p><%= form.text_field :home_state_name, :size => 15, :disabled => true %></p>
+        <div><%= form.text_field :home_state_name, :size => 15, :disabled => true %></div>
       </li>
       <li>
         <h3><%= form.label :home_zip_code %></h3>
-        <p><%= form.text_field :home_zip_code, :size => 8, :disabled => true %></p>
+        <div><%= form.text_field :home_zip_code, :size => 8, :disabled => true %></div>
       </li>
     </ul>
   </fieldset>
 
-  <ul>
+  <ul class="checkbox">
     <li>
-      <h2><%= form.check_box :has_mailing_address %> <%= form.label :has_mailing_address %></h2>
+      <h3><%= form.check_box :has_mailing_address %> <%= form.label :has_mailing_address %></h3>
     </li>
   </ul>
 
   <fieldset id="mailing_address_set">
     <legend><%= I18n.t('txt.registration.mailing_address') %></legend>
-    <ul>
+    <ul class="stacked">
       <li>
         <h3><%= form.label :mailing_address %></h3>
-        <p><%= form.text_field :mailing_address %></p>
+        <div><%= form.text_field :mailing_address %></div>
       </li>
       <li>
         <h3><%= form.label :mailing_unit %></h3>
-        <p><%= form.text_field :mailing_unit, :size => 15 %></p>
+        <div><%= form.text_field :mailing_unit, :size => 15 %></div>
       </li>
     </ul>
-    <ul>
+    <ul class="stacked">
       <li>
         <h3><%= form.label :mailing_city %></h3>
-        <p><%= form.text_field :mailing_city %></p>
+        <div><%= form.text_field :mailing_city %></div>
       </li>
       <li>
         <h3><%= form.label :mailing_state_abbrev %></h3>
-        <p><%= form.select :mailing_state_abbrev, GeoState.collection_for_select %></p>
+        <div><%= form.select :mailing_state_abbrev, GeoState.collection_for_select %></div>
       </li>
       <li>
         <h3><%= form.label :mailing_zip_code %></h3>
-        <p><%= form.text_field :mailing_zip_code, :size => 10, :maxlength => 10 %></p>
+        <div><%= form.text_field :mailing_zip_code, :size => 10, :maxlength => 10 %></div>
       </li>
     </ul>
   </fieldset>
   <hr id="mailing_address_rule" style="display:none;" />
 
-  <ul>
-    <li class="left-label">
-      <h2><%= form.label :race %></h2>
+  <ul class="flat">
+    <li>
+      <h3><%= form.label :race %></h3>
+      <div><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></div>
     </li>
-    <li><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></li>
   </ul>
   <% if @state_parties %>
-    <ul>
-      <li class="left-label">
-        <h2><%= form.label :party %></h2>
+    <ul class="flat">
+      <li>
+        <h3><%= form.label :party %></h3>
+        <div><%= form.select :party, @state_parties, :include_blank => true %></div>
       </li>
-      <li><%= form.select :party, @state_parties, :include_blank => true %></li>
     </ul>
   <% end %>
 
