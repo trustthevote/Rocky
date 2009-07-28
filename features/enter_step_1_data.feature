@@ -20,8 +20,7 @@ Feature: Step 1
        And I am 20 years old
        And I check "I am a U.S. citizen"
        And I press "registrant_submit"
-      Then I should see "You are eligible"
-       And I should see "Personal Information"
+      Then I should see "Personal Information"
 
     Scenario: completing step 1 in Spanish
       When I go to a new Spanish registration page

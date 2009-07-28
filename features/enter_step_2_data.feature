@@ -12,4 +12,4 @@ Feature: Step 2
        And I fill in "address" with "123 Market St."
        And I fill in "city" with "Pittsburgh"
        And I press "registrant_submit"
-      Then I should see "Thanks for that"
+      Then I should see "Numbers and Changes"

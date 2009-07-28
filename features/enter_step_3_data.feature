@@ -12,7 +12,7 @@ Feature: Step 3
        And I fill in "Phone" with "415-555-4254"
        And I select "Mobile" from "registrant_phone_type"
        And I press "registrant_submit"
-      Then I should see "Gotcha"
+      Then I should see "Opt In"
 
     Scenario: first time registrant
      Given I have completed step 2
@@ -30,7 +30,7 @@ Feature: Step 3
        And I fill in "first" with "John"
        And I fill in "last" with "Public"
        And I press "registrant_submit"
-      Then I should see "Gotcha"
+      Then I should see "Opt In"
 
     Scenario: changing address
      Given I have completed step 2
@@ -42,4 +42,4 @@ Feature: Step 3
        And I select "Pennsylvania" from "state"
        And I fill in "zip code" with "15215"
        And I press "registrant_submit"
-      Then I should see "Gotcha"
+      Then I should see "Opt In"
