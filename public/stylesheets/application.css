@@ -52,6 +52,10 @@ body {
   font-size: 10px;
 }
 
+#container {
+  margin: 2em;
+}
+
 h1, h2, h3, h4, h5, h6, legend {
   font-family: Trebuchet, "Trebuchet MS", Arial, sans-serif;
   font-weight: bold;
@@ -63,56 +67,9 @@ h1 {
   margin: 1em 0;
 }
 
-#container {
-  margin: 2em;
-}
-
-form {
-  width: 500px;
-}
-
-form.copy_html {
-  width: inherit;
-}
-
-
-form div.row {
-  margin: 0.5em 0 1em;
-  border-top: 1px dotted gray;
-  padding-top: 0.5em;
-}
-
-form div h3 {
-  margin-bottom: 0.25em;
-}
-
-form div p {
-  margin-left: 2em;
+p {
   font-size: 1.2em;
-}
-
-div.row fieldset {
-  overflow: hidden;
-}
-
-div.row fieldset div {
-  float: left;
-  padding-right: 0.5em;
-}
-
-div.row fieldset div h3 {
-  margin-bottom: 0.1em;
-  font-size: 1.2em;
-  color: #666;
-}
-
-div.row fieldset div p {
-  margin-left: 0;
-}
-
-div.row fieldset div.setrow {
-  margin-left: 2em;
-  clear: both;
+  margin: 0.5em 0;
 }
 
 .copy_html textarea {

@@ -11,5 +11,5 @@ Feature: Step 2
        And I fill in "last" with "Public"
        And I fill in "address" with "123 Market St."
        And I fill in "city" with "Pittsburgh"
-       And I press "Submit"
+       And I press "registrant_submit"
       Then I should see "Thanks for that"

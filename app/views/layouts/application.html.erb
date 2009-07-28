@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
   <title> Rocky </title>
-  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "application", "registration" %>
   <!--[if lt IE 7]>
      <%#= stylesheet_link_tag "ie6" %>
   <![endif]-->
@@ -13,13 +13,16 @@
 </head>
 <body>
   <div id="container">
-    <%= flash_messages %>
-    <%= yield %>
-    <% if @registrant %>
-      <br/>
-      <br/>
-      <p style="color:#ccc;">partner: <%= @registrant.partner_id %> locale: <%= @registrant.locale %></p>
-    <% end %>
+    <div id="header">
+      <%= image_tag("reg/header.jpg") %>
+    </div>
+    <div id="main">
+      <%= flash_messages %>
+      <%= yield %>
+    </div>
+    <div id="footer">
+      <p>Rocky by RockTheVote</p>
+    </div>
   </div>
   <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
 </body>

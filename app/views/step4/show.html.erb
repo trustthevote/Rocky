@@ -2,21 +2,46 @@
 
 <% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
   <%= form.error_messages %>
-  <div class="row">
-    <h3>
-      <%= form.check_box :opt_in_email %> <%= form.label :opt_in_email %>
-      <%= form.check_box :opt_in_sms %> <%= form.label :opt_in_sms %>
-    </h3>
-  </div>
-  <div class="row">
-    <h3><%= form.label :survey_answer_1, @question_1 %></h3>
-    <p><%= form.text_field :survey_answer_1 %></p>
-  </div>
-  <div class="row">
-    <h3><%= form.label :survey_answer_2, @question_2 %></h3>
-    <p><%= form.text_field :survey_answer_2 %></p>
-  </div>
-  <div class="row"><%= form.submit I18n.t('txt.button.submit') %></div>
-<% end %>
+  <ul>
+    <li class="left-label">&nbsp;</li>
+    <li>
+      <h2><%= form.check_box :opt_in_email %> <%= form.label :opt_in_email %></h2>
+    </li>
+  </ul>
 
-<%= link_to 'Home', '/' %>
+  <ul>
+    <li class="left-label">&nbsp;</li>
+    <li>
+      <h2><%= form.check_box :opt_in_sms %> <%= form.label :opt_in_sms %></h2>
+    </li>
+  </ul>
+
+  <br/>
+  <ul>
+    <li class="left-label">
+      <h2>Question 1</h2>
+    </li>
+    <li><p><%=h @question_1 %></p></li>
+  </ul>
+  <ul>
+    <li class="left-label">
+      <h2><%= form.label :survey_answer_1, "Answer 1" %></h2>
+    </li>
+    <li><%= form.text_area :survey_answer_1, :size => "40x3"  %></li>
+  </ul>
+  <br/>
+  <ul>
+    <li class="left-label">
+      <h2>Question 2</h2>
+    </li>
+    <li><p><%=h @question_2 %></p></li>
+  </ul>
+  <ul>
+    <li class="left-label">
+      <h2><%= form.label :survey_answer_2, "Answer 2" %></h2>
+    </li>
+    <li><%= form.text_area :survey_answer_2, :size => "40x3"  %></li>
+  </ul>
+
+  <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
+<% end %>

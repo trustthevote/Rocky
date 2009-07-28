@@ -1,14 +1,16 @@
-function toggleFieldSet(checkbox, set, speed) {
+function toggleFieldSet(checkbox, set, rule, speed) {
   if ( $(checkbox).attr('checked') ) {
-    $(set).show(speed);
+    $(rule).hide(0);
+    $(set).fadeIn(speed);
   } else {
-    $(set).hide(speed);
+    $(set).fadeOut(speed);
+    $(rule).show(0);
   }
 }
 
-function checkboxTogglesSet(checkbox, set) {
-  toggleFieldSet(checkbox, set, 0);
+function checkboxTogglesSet(checkbox, set, rule) {
+  toggleFieldSet(checkbox, set, rule, 0);
   $(checkbox).change(function () {
-    toggleFieldSet(checkbox, set, 'fast');
+    toggleFieldSet(checkbox, set, rule, 'fast');
   });
 }

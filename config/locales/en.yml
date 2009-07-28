@@ -91,7 +91,7 @@ en:
     flash:
       eligible: You are eligible
     button:
-      submit: Submit
+      submit: Next Step >
       download: "Download PDF!"
     registration:
       step_1_header: New registrant
@@ -100,6 +100,7 @@ en:
       step_4_header: Opt In and Speak Out
       step_5_header: Confirm Your Info
       name: Name
+      select_none: (none)
       home_address: Home Address
       mailing_address: Mailing Address
       previous_name: Previous Name

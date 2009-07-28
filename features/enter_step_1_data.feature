@@ -19,7 +19,7 @@ Feature: Step 1
        And I fill in "zip code" with "94113"
        And I am 20 years old
        And I check "I am a U.S. citizen"
-       And I press "Submit"
+       And I press "registrant_submit"
       Then I should see "You are eligible"
        And I should see "Personal Information"
 
@@ -30,6 +30,6 @@ Feature: Step 1
        And I fill in "home zip code" with "94113"
        And I am 20 years old
        And I check "US citizen"
-       And I press "Submit"
+       And I press "registrant_submit"
       Then I should not see "Personal Information"
        And I should see "es, txt, registration"

@@ -11,7 +11,7 @@ Feature: Step 3
        And I fill in "ID Number" with "1234"
        And I fill in "Phone" with "415-555-4254"
        And I select "Mobile" from "registrant_phone_type"
-       And I press "Submit"
+       And I press "registrant_submit"
       Then I should see "Gotcha"
 
     Scenario: first time registrant
@@ -29,7 +29,7 @@ Feature: Step 3
        And I select "Mr." from "title"
        And I fill in "first" with "John"
        And I fill in "last" with "Public"
-       And I press "Submit"
+       And I press "registrant_submit"
       Then I should see "Gotcha"
 
     Scenario: changing address
@@ -41,5 +41,5 @@ Feature: Step 3
        And I fill in "city" with "Pittsburgh"
        And I select "Pennsylvania" from "state"
        And I fill in "zip code" with "15215"
-       And I press "Submit"
+       And I press "registrant_submit"
       Then I should see "Gotcha"

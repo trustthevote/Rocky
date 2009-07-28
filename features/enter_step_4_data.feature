@@ -15,5 +15,5 @@ Feature: Step 4
        And I check "Receive txt messages"
        And I fill in "registrant_survey_answer_1" with "o hai"
        And I fill in "registrant_survey_answer_2" with "kthxbye"
-       And I press "Submit"
+       And I press "registrant_submit"
       Then I should see "Confirm"

@@ -2,94 +2,24 @@
 
 <% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
   <%= form.error_messages %>
-  <div class="row">
-    <h3><%= form.label :state_id_number %></h3>
-    <p><%= form.text_field :state_id_number %></p>
-  </div>
-  <div class="row">
-    <h3><%= form.label :phone %></h3>
-    <p><%= form.text_field :phone %> <%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></p>
-  </div>
+  <ul>
+    <li class="left-label">
+      <h2><%= form.label :state_id_number %></h2>
+    </li>
+    <li><%= form.text_field :state_id_number %></li>
+  </ul>
+  <ul>
+    <li class="left-label">
+      <h2><%= form.label :phone %></h2>
+    </li>
+    <li><%= form.text_field :phone %></li>
+    <li>
+      <h2><%= form.label :phone_type, 'Type' %></h2>
+    </li>
+    <li><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></li>
+  </ul>
 
-<% unless @registrant.first_registration? %>
-  <% content_for :head do %>
-    <script>
-    $(document).ready(function() {
-      checkboxTogglesSet($('#registrant_change_of_name'), $('#prev_name_set'));
-      checkboxTogglesSet($('#registrant_change_of_address'), $('#prev_address_set'));
-    });
-    </script>
-  <% end %>
-  <div class="row">
-    <div class="setrow">
-      <h3>
-        <%= form.check_box :change_of_name %>
-        <%= form.label :change_of_name %>
-      </h3>
-    </div>
-  </div>
-  <div id="prev_name_set" class="row">
-    <fieldset>
-      <legend><%= I18n.t('txt.registration.previous_name') %></legend>
-      <div>
-        <h3><%= form.label :prev_name_title %></h3>
-        <p><%= form.select :prev_name_title, I18n.t('txt.registration.titles'), :include_blank => true %></p>
-      </div>
-      <div>
-        <h3><%= form.label :prev_first_name %></h3>
-        <p><%= form.text_field :prev_first_name, :size => 15 %></p>
-      </div>
-      <div>
-        <h3><%= form.label :prev_middle_name %></h3>
-        <p><%= form.text_field :prev_middle_name, :size => 10 %></p>
-      </div>
-      <div>
-        <h3><%= form.label :prev_last_name %></h3>
-        <p><%= form.text_field :prev_last_name, :size => 15 %></p>
-      </div>
-      <div>
-        <h3><%= form.label :prev_name_suffix %></h3>
-        <p><%= form.select :prev_name_suffix, t('txt.registration.suffixes'), :include_blank => true %></p>
-      </div>
-    </fieldset>
-  </div>
+  <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
 
-  <div class="row">
-    <div class="setrow">
-      <h3>
-        <%= form.check_box :change_of_address %>
-        <%= form.label :change_of_address %>
-      </h3>
-    </div>
-  </div>
-  <div id="prev_address_set" class="row">
-    <fieldset>
-      <legend><%= I18n.t('txt.registration.previous_address') %></legend>
-      <div class="setrow">
-        <h3><%= form.label :prev_address %></h3>
-        <p><%= form.text_field :prev_address %></p>
-      </div>
-      <div class="setrow">
-        <h3 style="display:none;"><%= form.label :prev_unit %></h3>
-        <p><%= form.text_field :prev_unit %></p>
-      </div>
-      <div class="setrow">
-        <h3><%= form.label :prev_city %></h3>
-        <p><%= form.text_field :prev_city %></p>
-      </div>
-      <div>
-        <h3><%= form.label :prev_state_abbrev %></h3>
-        <p><%= form.select :prev_state_abbrev, GeoState.collection_for_select %></p>
-      </div>
-      <div>
-        <h3><%= form.label :prev_zip_code %></h3>
-        <p><%= form.text_field :prev_zip_code, :size => 10, :maxlength => 10 %></p>
-      </div>
-    </fieldset>
-  </div>
+  <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
 <% end %>
-
-  <div class="row"><%= form.submit I18n.t('txt.button.submit') %></div>
-<% end %>
-
-<%= link_to 'Home', '/' %>

@@ -1,0 +1,76 @@
+<% content_for :head do %>
+  <script>
+  $(document).ready(function() {
+    checkboxTogglesSet($('#registrant_change_of_name'), $('#prev_name_set'), $('#prev_name_rule'));
+    checkboxTogglesSet($('#registrant_change_of_address'), $('#prev_address_set'), $('#prev_address_rule'));
+  });
+  </script>
+<% end %>
+
+<hr/>
+<ul>
+  <li>
+    <h2><%= form.check_box :change_of_name %> <%= form.label :change_of_name %></h2>
+  </li>
+</ul>
+
+<fieldset id="prev_name_set">
+  <legend><%= I18n.t('txt.registration.previous_name') %></legend>
+  <ul>
+    <li>
+      <h3><%= form.label :prev_name_title %></h3>
+      <p><%= form.select :prev_name_title, I18n.t('txt.registration.titles'), :include_blank => true %></p>
+    </li>
+    <li>
+      <h3><%= form.label :prev_first_name %></h3>
+      <p><%= form.text_field :prev_first_name, :size => 15 %></p>
+    </li>
+    <li>
+      <h3><%= form.label :prev_middle_name %></h3>
+      <p><%= form.text_field :prev_middle_name, :size => 10 %></p>
+    </li>
+    <li>
+      <h3><%= form.label :prev_last_name %></h3>
+      <p><%= form.text_field :prev_last_name, :size => 15 %></p>
+    </li>
+    <li>
+      <h3><%= form.label :prev_name_suffix %></h3>
+      <p><%= form.select :prev_name_suffix, t('txt.registration.suffixes'), :include_blank => true %></p>
+    </li>
+  </ul>
+</fieldset>
+<hr id="prev_name_rule" style="display:none;" />
+
+<ul>
+  <li>
+    <h2><%= form.check_box :change_of_address %> <%= form.label :change_of_address %></h2>
+  </li>
+</ul>
+
+<fieldset id="prev_address_set">
+  <legend><%= I18n.t('txt.registration.previous_address') %></legend>
+  <ul>
+    <li>
+      <h3><%= form.label :prev_address %></h3>
+      <p><%= form.text_field :prev_address %></p>
+    </li>
+    <li>
+      <h3><%= form.label :prev_unit %></h3>
+      <p><%= form.text_field :prev_unit, :size => 15 %></p>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <h3><%= form.label :prev_city %></h3>
+      <p><%= form.text_field :prev_city %></p>
+    </li>
+    <li>
+      <h3><%= form.label :prev_state_abbrev %></h3>
+      <p><%= form.select :prev_state_abbrev, GeoState.collection_for_select %></p>
+    </li>
+    <li>
+      <h3><%= form.label :prev_zip_code %></h3>
+      <p><%= form.text_field :prev_zip_code, :size => 10, :maxlength => 10 %></p>
+    </li>
+  </ul>
+</fieldset>
