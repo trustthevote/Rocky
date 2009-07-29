@@ -9,17 +9,18 @@ $(document).ready(function() {
 <h1><%= t('txt.registration.step_2_header') %></h1>
 
 <% form_for(@registrant, :url => registrant_step_2_path(@registrant)) do |form| %>
-  <%= form.error_messages %>
   <fieldset>
     <legend><%= I18n.t('txt.registration.name') %></legend>
     <ul class="stacked">
       <li>
         <h3><%= form.label :name_title %></h3>
         <div><%= form.select :name_title, I18n.t('txt.registration.titles'), :include_blank => true %></div>
+        <span class="error"><%= form.object.errors.on :name_title %></span>
       </li>
       <li>
         <h3><%= form.label :first_name %></h3>
         <div><%= form.text_field :first_name, :size => 15 %></div>
+        <span class="error"><%= form.object.errors.on :first_name %></span>
       </li>
       <li>
         <h3><%= form.label :middle_name %></h3>
@@ -28,6 +29,7 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :last_name %></h3>
         <div><%= form.text_field :last_name, :size => 15 %></div>
+        <span class="error"><%= form.object.errors.on :last_name %></span>
       </li>
       <li>
         <h3><%= form.label :name_suffix %></h3>
@@ -42,6 +44,7 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :home_address %></h3>
         <div><%= form.text_field :home_address %></div>
+        <span class="error"><%= form.object.errors.on :home_address %></span>
       </li>
       <li>
         <h3><%= form.label :home_unit %></h3>
@@ -52,6 +55,7 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :home_city %></h3>
         <div><%= form.text_field :home_city %></div>
+        <span class="error"><%= form.object.errors.on :home_city %></span>
       </li>
       <li>
         <h3><%= form.label :home_state_name %></h3>
@@ -76,6 +80,7 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :mailing_address %></h3>
         <div><%= form.text_field :mailing_address %></div>
+        <span class="error"><%= form.object.errors.on :mailing_address %></span>
       </li>
       <li>
         <h3><%= form.label :mailing_unit %></h3>
@@ -86,14 +91,17 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :mailing_city %></h3>
         <div><%= form.text_field :mailing_city %></div>
+        <span class="error"><%= form.object.errors.on :mailing_city %></span>
       </li>
       <li>
         <h3><%= form.label :mailing_state_abbrev %></h3>
         <div><%= form.select :mailing_state_abbrev, GeoState.collection_for_select %></div>
+        <span class="error"><%= form.object.errors.on :mailing_state_id %></span>
       </li>
       <li>
         <h3><%= form.label :mailing_zip_code %></h3>
         <div><%= form.text_field :mailing_zip_code, :size => 10, :maxlength => 10 %></div>
+        <span class="error"><%= form.object.errors.on :mailing_zip_code %></span>
       </li>
     </ul>
   </fieldset>
@@ -103,6 +111,7 @@ $(document).ready(function() {
     <li>
       <h3><%= form.label :race %></h3>
       <div><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></div>
+      <span class="error"><%= form.object.errors.on :race %></span>
     </li>
   </ul>
   <% if @state_parties %>
@@ -110,6 +119,7 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :party %></h3>
         <div><%= form.select :party, @state_parties, :include_blank => true %></div>
+        <span class="error"><%= form.object.errors.on :party %></span>
       </li>
     </ul>
   <% end %>

@@ -1,7 +1,6 @@
 <h1><%= t('txt.registration.step_1_header') %></h1>
 
 <% form_for(@registrant) do |form| %>
-  <%= form.error_messages %>
   <%= render :partial => 'form', :object => form %>
   <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
 <% end %>

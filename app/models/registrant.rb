@@ -41,6 +41,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :email_address
     reg.validates_format_of :email_address, :with => Authlogic::Regex.email, :allow_blank => true
     reg.validates_presence_of :home_zip_code
+    reg.validates_format_of :home_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true
     # reg.validate :zip_code_exists   # TODO
     reg.validates_presence_of :date_of_birth
     reg.validate :validate_age
@@ -49,7 +50,8 @@ class Registrant < ActiveRecord::Base
   end
 
   with_options :if => :at_least_step_2? do |reg|
-    reg.validates_inclusion_of :name_title, :in => TITLES
+    reg.validates_presence_of :name_title
+    reg.validates_inclusion_of :name_title, :in => TITLES, :allow_blank => true
     reg.validates_presence_of :first_name
     reg.validates_presence_of :last_name
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
@@ -62,6 +64,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :mailing_city, :if => needs_mailing_address
     reg.validates_presence_of :mailing_state_id, :if => needs_mailing_address
     reg.validates_presence_of :mailing_zip_code, :if => needs_mailing_address
+    reg.validates_format_of :mailing_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true, :if => needs_mailing_address
   end
 
   with_options :if => :at_least_step_3? do |reg|

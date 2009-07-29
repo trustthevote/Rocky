@@ -4,21 +4,21 @@
   <li>
     <h3><%= form.label :email_address %></h3>
     <div><%= form.text_field :email_address %></div>
-    <!-- <span>error</span> -->
+    <span class="error"><%= form.object.errors.on :email_address %></span>
   </li>
 </ul>
 <ul class="flat">
   <li>
     <h3><%= form.label :home_zip_code %></h3>
     <div><%= form.text_field :home_zip_code %></div>
-    <!-- <span>error</span> -->
+    <span class="error"><%= form.object.errors.on :home_zip_code %></span>
   </li>
 </ul>
 <ul class="flat">
   <li>
     <h3><%= form.label :date_of_birth %></h3>
     <div><%= form.text_field :date_of_birth %></div>
-    <!-- <span>error</span> -->
+    <span class="error"><%= form.object.errors.on :date_of_birth %></span>
   </li>
 </ul>
 

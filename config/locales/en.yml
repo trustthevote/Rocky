@@ -29,7 +29,7 @@ en:
         # race: 
         state_id_number: ID Number
         # phone: 
-        # phone_type: 
+        phone_type: Type
         change_of_name: I have changed my name
         prev_name_title: Title
         prev_first_name: First
@@ -49,7 +49,16 @@ en:
     errors:
       models:
         registrant:
+          blank: "Required"
           attributes:
+            home_zip_code:
+              invalid: "Use ZIP or ZIP+4"
+            mailing_zip_code:
+              invalid: "Use ZIP or ZIP+4"
+            prev_zip_code:
+              invalid: "Use ZIP or ZIP+4"
+            email_address:
+              invalid: "Not a valid address"
             us_citizen:
               accepted: "You must be a U.S. citizen to register to vote."
             date_of_birth:

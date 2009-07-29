@@ -1,7 +1,6 @@
 <h1><%= t('txt.registration.step_3_header') %></h1>
 
 <% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
-  <%= form.error_messages %>
   <ul class="flat">
     <li>
       <h3><%= form.label :state_id_number %></h3>
@@ -14,7 +13,7 @@
       <div><%= form.text_field :phone, :size => 20 %></div>
     </li>
     <li class="secondary">
-      <h3><%= form.label :phone_type, 'Type' %></h3>
+      <h3><%= form.label :phone_type %></h3>
       <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
     </li>
   </ul>

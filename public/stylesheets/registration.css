@@ -62,7 +62,7 @@ form.copy_html {
 fieldset {
   margin: 10px 0;
   border: 1px solid #ccc;
-  padding: 0 10px 10px 5px;
+  padding: 5px;
 }
 
 legend {
@@ -117,8 +117,12 @@ ul.stacked {
 }
 
 ul.stacked h3 {
-  margin-bottom: 1px;
+  margin-bottom: 3px;
   font-size: 13px;
+}
+
+ul.stacked li div {
+  height: 25px;
 }
 
 
@@ -164,8 +168,21 @@ form div.button input {
   text-transform: uppercase;
 }
 
-.error {
+span.error {
+  display: inline-block;
   color: red;
+}
+
+.flat span.error {
+  font-size: 11px;
+  height: 24px;
+  line-height: 24px;
+  margin-left: 5px;
+}
+
+.stacked span.error {
   font-size: 10px;
-  font-style: italic;
+  height: 12px;
+  line-height: 15px;
+  margin-left: 5px;
 }
