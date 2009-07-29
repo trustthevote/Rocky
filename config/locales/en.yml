@@ -53,6 +53,8 @@ en:
           attributes:
             home_zip_code:
               invalid: "Use ZIP or ZIP+4"
+            home_state_id:
+              blank: "Invalid ZIP"
             mailing_zip_code:
               invalid: "Use ZIP or ZIP+4"
             prev_zip_code:

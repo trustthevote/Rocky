@@ -11,7 +11,7 @@
   <li>
     <h3><%= form.label :home_zip_code %></h3>
     <div><%= form.text_field :home_zip_code %></div>
-    <span class="error"><%= form.object.errors.on :home_zip_code %></span>
+    <span class="error"><%= form.object.errors.on :home_zip_code %> <%= form.object.errors.on :home_state_id %></span>
   </li>
 </ul>
 <ul class="flat">
@@ -24,12 +24,18 @@
 
 <ul class="checkbox">
   <li>
-    <h3><%= form.check_box :us_citizen %> <%= form.label :us_citizen %></h3>
+    <h3>
+			<%= form.check_box :us_citizen %> <%= form.label :us_citizen %>
+			<span class="error"><%= form.object.errors.on :us_citizen %></span>
+		</h3>
   </li>
 </ul>
 
 <ul class="checkbox">
   <li>
-    <h3><%= form.check_box :first_registration %> <%= form.label :first_registration %></h3>
+    <h3>
+			<%= form.check_box :first_registration %> <%= form.label :first_registration %>
+			<span class="error"><%= form.object.errors.on :first_registration %></span>
+		</h3>
   </li>
 </ul>
