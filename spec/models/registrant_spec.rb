@@ -176,11 +176,10 @@ describe Registrant do
     end
 
     it "generates PDF with merged data" do
-      `rm #{@registrant.pdf_path}`
+      `rm -f #{@registrant.pdf_path}`
       assert_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
         @registrant.generate_pdf!
       end
-      `rm #{@registrant.pdf_path}`
     end
 
     it "returns PDF if already exists" do
@@ -188,6 +187,9 @@ describe Registrant do
       assert_no_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
         @registrant.generate_pdf!
       end
+    end
+    
+    after do
       `rm #{@registrant.pdf_path}`
     end
   end
