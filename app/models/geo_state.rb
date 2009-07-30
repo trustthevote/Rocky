@@ -39,4 +39,7 @@ class GeoState < ActiveRecord::Base
     self[ zip5map[zip[0,5]] || zip3map[zip[0,3]] ]
   end
 
+  def self.valid_zip_code?(zip)
+    !for_zip_code(zip).nil?
+  end
 end

@@ -53,12 +53,13 @@ en:
           attributes:
             home_zip_code:
               invalid: "Use ZIP or ZIP+4"
-            home_state_id:
-              blank: "Invalid ZIP"
+              inclusion: "Invalid ZIP"
             mailing_zip_code:
               invalid: "Use ZIP or ZIP+4"
+              inclusion: "Invalid ZIP"
             prev_zip_code:
               invalid: "Use ZIP or ZIP+4"
+              inclusion: "Invalid ZIP"
             email_address:
               invalid: "Not a valid address"
             us_citizen:

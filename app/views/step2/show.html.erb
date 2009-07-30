@@ -60,10 +60,12 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :home_state_name %></h3>
         <div><%= form.text_field :home_state_name, :size => 15, :disabled => true %></div>
+        <span class="error"><%= form.object.errors.on :home_state_name %></span>
       </li>
       <li>
         <h3><%= form.label :home_zip_code %></h3>
         <div><%= form.text_field :home_zip_code, :size => 8, :disabled => true %></div>
+        <span class="error"><%= form.object.errors.on :home_zip_code %></span>
       </li>
     </ul>
   </fieldset>

@@ -7,10 +7,25 @@ describe Registrant do
       assert_attribute_invalid_with(:step_1_registrant, :locale => nil)
       assert_attribute_invalid_with(:step_1_registrant, :email_address => nil)
       assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => nil, :home_state_id => nil)
+      assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => '00000')
       assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => nil)
       assert_attribute_invalid_with(:step_1_registrant, :us_citizen => false)
     end
-    
+
+    it "should limit number of simultaneous errors on home_zip_code" do
+      reg = Factory.build(:step_1_registrant, :home_zip_code => nil)
+      reg.invalid?
+
+      assert_equal ["Required"], [reg.errors.on(:home_zip_code)].flatten
+    end
+
+    it "should check format of home_zip_code" do
+      reg = Factory.build(:step_1_registrant, :home_zip_code => 'ABCDE')
+      reg.invalid?
+
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:home_zip_code)].flatten
+    end
+
     it "should not require contact information" do
       assert_attribute_valid_with(:step_1_registrant, :name_title => nil)
       assert_attribute_valid_with(:step_1_registrant, :first_name => nil)
@@ -25,7 +40,7 @@ describe Registrant do
       assert_attribute_invalid_with(:step_1_registrant, :email_address => "bogus@bogus.")
       assert_attribute_invalid_with(:step_1_registrant, :email_address => "@bogus.com")
     end
-    
+
     it "should require at least 16 years old" do
       assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => 5.years.ago.to_date)
       assert_attribute_valid_with(:step_1_registrant, :date_of_birth => 17.years.ago.to_date)
@@ -50,6 +65,20 @@ describe Registrant do
       assert_attribute_invalid_with(:step_2_registrant, :has_mailing_address => true, :mailing_city => nil)
       assert_attribute_invalid_with(:step_2_registrant, :has_mailing_address => true, :mailing_state_id => nil)
       assert_attribute_invalid_with(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => nil)
+    end
+
+    it "should check format of mailing_zip_code" do
+      reg = Factory.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => 'ABCDE')
+      reg.invalid?
+
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:mailing_zip_code)].flatten
+    end
+
+    it "should limit number of simultaneous errors on mailing_zip_code" do
+      reg = Factory.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => nil)
+      reg.invalid?
+
+      assert_equal ["Required"], [reg.errors.on(:mailing_zip_code)].flatten
     end
 
     it "blanks mailing address fields unless has_mailing_address" do
@@ -92,6 +121,21 @@ describe Registrant do
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_city => nil)
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_state_id => nil)
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => '00000')
+    end
+
+    it "should check format of prev_zip_code" do
+      reg = Factory.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => 'ABCDE')
+      reg.invalid?
+
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:prev_zip_code)].flatten
+    end
+
+    it "should limit number of simultaneous errors on prev_zip_code" do
+      reg = Factory.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
+      reg.invalid?
+
+      assert_equal ["Required"], [reg.errors.on(:prev_zip_code)].flatten
     end
 
     it "blanks previous address fields unless change_of_name" do
@@ -131,7 +175,7 @@ describe Registrant do
       reg = Factory.build(:step_1_registrant, :mailing_state_abbrev => "NY", :prev_state_abbrev => "NY")
       assert_equal new_york.id, reg.mailing_state_id
       assert_equal new_york.id, reg.prev_state_id
-    end 
+    end
 
     it "gets abbrev for state" do
       new_york = GeoState['NY']
@@ -188,7 +232,7 @@ describe Registrant do
         @registrant.generate_pdf!
       end
     end
-    
+
     after do
       `rm #{@registrant.pdf_path}`
     end
