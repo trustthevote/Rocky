@@ -112,22 +112,22 @@ class Registrant < ActiveRecord::Base
 
   aasm_event :advance_to_step_1 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_1, :from => [:initial]
+    transitions :to => :step_1, :from => [:initial, :step_1, :step_2, :step_3, :step_4, :complete]
   end
 
   aasm_event :advance_to_step_2 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_2, :from => [:step_1]
+    transitions :to => :step_2, :from => [:step_1, :step_2, :step_3, :step_4, :complete]
   end
 
   aasm_event :advance_to_step_3 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_3, :from => [:step_2]
+    transitions :to => :step_3, :from => [:step_2, :step_3, :step_4, :complete]
   end
 
   aasm_event :advance_to_step_4 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_4, :from => [:step_3]
+    transitions :to => :step_4, :from => [:step_3, :step_4, :complete]
   end
 
   ### instance methods
