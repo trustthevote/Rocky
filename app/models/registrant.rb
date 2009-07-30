@@ -32,6 +32,17 @@ class Registrant < ActiveRecord::Base
 
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
+  def self.validates_zip_code(*attr_names)
+    configuration = { }
+    configuration.update(attr_names.extract_options!)
+
+    validates_each(attr_names, configuration) do |record, attr_name, value|
+      if record.errors.on(attr_name).nil? && !GeoState.valid_zip_code?(record.send(attr_name))
+        record.errors.add(attr_name, :invalid_zip, :default => configuration[:message], :value => value) 
+      end
+    end
+  end
+
   before_validation :set_home_state_from_zip_code
   before_validation :clear_superfluous_fields
 
@@ -42,7 +53,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_format_of :email_address, :with => Authlogic::Regex.email, :allow_blank => true
     reg.validates_presence_of :home_zip_code
     reg.validates_format_of :home_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true
-    reg.validate :validate_home_zip_code
+    reg.validates_zip_code :home_zip_code
     reg.validates_presence_of :home_state_id
     reg.validates_presence_of :date_of_birth
     reg.validate :validate_age
@@ -65,7 +76,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :mailing_state_id, :if => needs_mailing_address
     reg.validates_presence_of :mailing_zip_code, :if => needs_mailing_address
     reg.validates_format_of :mailing_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true, :if => needs_mailing_address
-    reg.validate :validate_mailing_zip_code, :if => needs_mailing_address
+    reg.validates_zip_code :mailing_zip_code, :if => needs_mailing_address
   end
 
   with_options :if => :at_least_step_3? do |reg|
@@ -79,8 +90,8 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :prev_city, :if => needs_prev_address
     reg.validates_presence_of :prev_state_id, :if => needs_prev_address
     reg.validates_presence_of :prev_zip_code, :if => needs_prev_address
-    reg.validates_format_of :prev_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true, :if => needs_prev_address
-    reg.validate :validate_prev_zip_code, :if => needs_prev_address
+    reg.validates_format_of   :prev_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true, :if => needs_prev_address
+    reg.validates_zip_code    :prev_zip_code, :if => needs_prev_address
   end
 
   def self.transition_if_ineligible(event)
@@ -180,22 +191,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def validate_mailing_zip_code
-    validate_zip_code(:mailing_zip_code)
-  end
-
-  def validate_home_zip_code
-    validate_zip_code(:home_zip_code)
-  end
-  
-  def validate_prev_zip_code
-    validate_zip_code(:prev_zip_code)
-  end
-  
-  def validate_zip_code(field)
-    errors.add(field, :inclusion) if errors.on(field).nil? && !GeoState.valid_zip_code?(send(field))
-  end
-  
   # def advance_to!(next_step, new_attributes = {})
   #   self.attributes = new_attributes
   #   current_status_number = STEPS.index(aasm_current_state)
