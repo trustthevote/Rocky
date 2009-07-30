@@ -181,10 +181,10 @@ class Registrant < ActiveRecord::Base
 
   def validate_race
     if requires_race?
-      if race
-        errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
-      else
+      if race.blank?
         errors.add(:race, :blank)
+      else
+        errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
       end
     end
   end
@@ -199,10 +199,10 @@ class Registrant < ActiveRecord::Base
 
   def validate_party
     if requires_party?
-      if party
-        errors.add(:party, :inclusion) unless state_parties.include?(party)
-      else
+      if party.blank?
         errors.add(:party, :blank)
+      else
+        errors.add(:party, :inclusion) unless state_parties.include?(party)
       end
     end
   end
