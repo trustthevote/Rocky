@@ -36,6 +36,9 @@ class Registrant < ActiveRecord::Base
     configuration = { }
     configuration.update(attr_names.extract_options!)
 
+    validates_presence_of(attr_names, configuration)
+    validates_format_of(attr_names, configuration.merge(:with => /^\d{5}(-\d{4})?$/, :allow_blank => true));
+
     validates_each(attr_names, configuration) do |record, attr_name, value|
       if record.errors.on(attr_name).nil? && !GeoState.valid_zip_code?(record.send(attr_name))
         record.errors.add(attr_name, :invalid_zip, :default => configuration[:message], :value => value) 
@@ -51,9 +54,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_inclusion_of :locale, :in => %w(en es)
     reg.validates_presence_of :email_address
     reg.validates_format_of :email_address, :with => Authlogic::Regex.email, :allow_blank => true
-    reg.validates_presence_of :home_zip_code
-    reg.validates_format_of :home_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true
-    reg.validates_zip_code :home_zip_code
+    reg.validates_zip_code    :home_zip_code
     reg.validates_presence_of :home_state_id
     reg.validates_presence_of :date_of_birth
     reg.validate :validate_age
@@ -68,30 +69,41 @@ class Registrant < ActiveRecord::Base
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
-    reg.validates_inclusion_of :race, :in => I18n.t('txt.registration.races'), :if => lambda { |reg| reg.all? :at_least_step_2?, :requires_race? }
+    reg.validate :validate_race
     reg.validate :validate_party
-    needs_mailing_address = lambda { |reg| reg.all? :at_least_step_2?, :has_mailing_address? }
-    reg.validates_presence_of :mailing_address, :if => needs_mailing_address
-    reg.validates_presence_of :mailing_city, :if => needs_mailing_address
-    reg.validates_presence_of :mailing_state_id, :if => needs_mailing_address
-    reg.validates_presence_of :mailing_zip_code, :if => needs_mailing_address
-    reg.validates_format_of :mailing_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true, :if => needs_mailing_address
-    reg.validates_zip_code :mailing_zip_code, :if => needs_mailing_address
+  end
+  with_options :if => :needs_mailing_address? do |reg|
+    reg.validates_presence_of :mailing_address
+    reg.validates_presence_of :mailing_city
+    reg.validates_presence_of :mailing_state_id
+    reg.validates_zip_code    :mailing_zip_code
   end
 
   with_options :if => :at_least_step_3? do |reg|
     reg.validates_presence_of :state_id_number
-    needs_prev_name = lambda { |reg| reg.all? :at_least_step_3?, :change_of_name? }
-    reg.validates_presence_of :prev_name_title, :if => needs_prev_name
-    reg.validates_presence_of :prev_first_name, :if => needs_prev_name
-    reg.validates_presence_of :prev_last_name, :if => needs_prev_name
-    needs_prev_address = lambda { |reg| reg.all? :at_least_step_3?, :change_of_address? }
-    reg.validates_presence_of :prev_address, :if => needs_prev_address
-    reg.validates_presence_of :prev_city, :if => needs_prev_address
-    reg.validates_presence_of :prev_state_id, :if => needs_prev_address
-    reg.validates_presence_of :prev_zip_code, :if => needs_prev_address
-    reg.validates_format_of   :prev_zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true, :if => needs_prev_address
-    reg.validates_zip_code    :prev_zip_code, :if => needs_prev_address
+  end
+  with_options :if => :needs_prev_name? do |reg|
+    reg.validates_presence_of :prev_name_title
+    reg.validates_presence_of :prev_first_name
+    reg.validates_presence_of :prev_last_name
+  end
+  with_options :if => :needs_prev_address? do |reg|
+    reg.validates_presence_of :prev_address
+    reg.validates_presence_of :prev_city
+    reg.validates_presence_of :prev_state_id
+    reg.validates_zip_code    :prev_zip_code
+  end
+
+  def needs_mailing_address?
+    at_least_step_2? && has_mailing_address?
+  end
+
+  def needs_prev_name?
+    at_least_step_3? && change_of_name?
+  end
+
+  def needs_prev_address?
+    at_least_step_3? && change_of_address?
   end
 
   def self.transition_if_ineligible(event)
@@ -119,10 +131,6 @@ class Registrant < ActiveRecord::Base
   end
 
   ### instance methods
-
-  def all?(*methods)
-    methods.all? { |m| self.send(m) }
-  end
 
   def at_least_step_1?
     at_least_step?(1)
@@ -173,7 +181,11 @@ class Registrant < ActiveRecord::Base
 
   def validate_race
     if requires_race?
-      errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
+      if race
+        errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
+      else
+        errors.add(:race, :blank)
+      end
     end
   end
 
@@ -187,7 +199,11 @@ class Registrant < ActiveRecord::Base
 
   def validate_party
     if requires_party?
-      errors.add(:party, :inclusion) unless state_parties.include?(party)
+      if party
+        errors.add(:party, :inclusion) unless state_parties.include?(party)
+      else
+        errors.add(:party, :blank)
+      end
     end
   end
 
