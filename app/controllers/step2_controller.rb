@@ -17,7 +17,7 @@ class Step2Controller < ApplicationController
     end
   end
 
-protected
+  protected
 
   def find_registrant
     super

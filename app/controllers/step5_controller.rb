@@ -1,11 +1,12 @@
 class Step5Controller < ApplicationController
+  include RegistrationStep
 
   def show
-    @registrant = Registrant.find(params[:registrant_id])
+    find_registrant
   end
 
   def update
-    @registrant = Registrant.find(params[:registrant_id])
+    find_registrant
     @registrant.attributes = params[:registrant]
     if @registrant.advance_to_step_5!
       redirect_to download_registrant_url(@registrant)
