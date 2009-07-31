@@ -33,7 +33,7 @@ describe RegistrantsController do
       partner = Factory.create(:partner)
       post :create, :registrant => Factory.attributes_for(:step_1_registrant, :partner_id => partner.to_param)
       assert_not_nil assigns[:registrant]
-      assert_redirected_to registrant_step_2_path(assigns[:registrant])
+      assert_redirected_to registrant_step_2_url(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do
@@ -53,7 +53,7 @@ describe RegistrantsController do
       put :update, :id => @registrant.to_param, :registrant => {:email_address => "new@example.com"}
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].step_1?
-      assert_redirected_to registrant_step_2_path(assigns[:registrant])
+      assert_redirected_to registrant_step_2_url(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do

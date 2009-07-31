@@ -11,7 +11,7 @@ class Step2Controller < ApplicationController
     find_registrant
     @registrant.attributes = params[:registrant]
     if @registrant.advance_to_step_2!
-      redirect_to registrant_step_3_path(@registrant)
+      redirect_to registrant_step_3_url(@registrant)
     else
       render "show"
     end

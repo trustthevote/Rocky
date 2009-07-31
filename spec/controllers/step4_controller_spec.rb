@@ -34,7 +34,7 @@ describe Step4Controller do
       put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_4_registrant)
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].step_4?
-      assert_redirected_to registrant_step_5_path(assigns[:registrant])
+      assert_redirected_to registrant_step_5_url(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do
