@@ -23,3 +23,12 @@ Then /^I should see a new download$/ do
   assert File.exists?(@registrant.pdf_path)
   `rm #{@registrant.pdf_path}`
 end
+
+Then /^I should see my email$/ do
+  Then %Q{the "Email" field should contain "#{@registrant.email_address}"}
+end
+
+Then /^I should see my date of birth$/ do
+  Then %Q{the "Date of Birth" field should contain "#{@registrant.date_of_birth.year}"}
+end
+

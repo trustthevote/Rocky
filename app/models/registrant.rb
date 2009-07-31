@@ -180,6 +180,8 @@ class Registrant < ActiveRecord::Base
       self.prev_state = nil
       self.prev_zip_code = nil
     end
+    # self.race = nil unless requires_race?
+    self.party = nil unless requires_party?
   end
 
   def validate_age

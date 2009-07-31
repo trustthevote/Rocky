@@ -1,6 +1,21 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Registrant do
+  describe "any step" do
+    xit "blanks race unless requires race" do
+      reg = Factory.build(:maximal_registrant)
+      stub(reg).requires_race? { false }
+      assert reg.valid?, reg.errors.full_messages
+      assert_nil reg.race
+    end
+    it "blanks party unless requires party" do
+      reg = Factory.build(:maximal_registrant)
+      stub(reg).requires_party? { false }
+      assert reg.valid?, reg.errors.full_messages
+      assert_nil reg.party
+    end
+  end
+
   describe "step 1" do
     it "should require personal info" do
       assert_attribute_invalid_with(:step_1_registrant, :partner_id => nil)
@@ -93,14 +108,14 @@ describe Registrant do
 
     it "should require race but only for certain states" do
       reg = Factory.build(:step_2_registrant, :race => nil)
-      mock(reg).requires_race? {true}
+      stub(reg).requires_race? {true}
       assert reg.invalid?
       assert reg.errors.on(:race)
     end
 
     it "should not require race for some states" do
       reg = Factory.build(:step_2_registrant, :race => nil)
-      mock(reg).requires_race? {false}
+      stub(reg).requires_race? {false}
       assert reg.valid?
     end
   end
@@ -143,7 +158,7 @@ describe Registrant do
       assert_equal ["Required"], [reg.errors.on(:prev_zip_code)].flatten
     end
 
-    it "blanks previous address fields unless change_of_name" do
+    it "blanks previous name fields unless change_of_name" do
       reg = Factory.build(:maximal_registrant, :change_of_name => false)
       assert reg.valid?
       assert_nil reg.prev_name_title
@@ -162,7 +177,6 @@ describe Registrant do
       assert_nil reg.prev_state_id
       assert_nil reg.prev_zip_code
     end
-
   end
   
   describe "step 5" do

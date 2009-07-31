@@ -44,6 +44,25 @@ describe RegistrantsController do
     end
   end
 
+  describe "#update" do
+    before(:each) do
+      @registrant = Factory.create(:step_4_registrant)
+    end
+
+    it "should update registrant and complete step 1" do
+      put :update, :id => @registrant.to_param, :registrant => {:email_address => "new@example.com"}
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].step_1?
+      assert_redirected_to registrant_step_2_path(assigns[:registrant])
+    end
+
+    it "should reject invalid input and show form again" do
+      put :update, :id => @registrant.to_param, :registrant => {:email_address => nil}
+      assert assigns[:registrant].step_4?
+      assert_template "new"
+    end
+  end
+
   describe "download" do
     it "provides a link to download the PDF" do
       @registrant = Factory.create(:maximal_registrant)

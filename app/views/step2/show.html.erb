@@ -125,6 +125,6 @@ $(document).ready(function() {
       </li>
     </ul>
   <% end %>
-
+  <div class="back"><%= link_to t('txt.button.back'), registrant_path(@registrant) %></div>
   <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
 <% end %>

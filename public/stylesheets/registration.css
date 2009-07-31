@@ -173,6 +173,10 @@ ul.affirm li {
   font-size: 16px;
 }
 
+form.edit_registrant {
+  position: relative;
+}
+
 form hr {
   color: #ccc;
   background-color: #ccc;
@@ -192,6 +196,19 @@ form div.button input {
   font-size: 18px;
   letter-spacing: -0.005em;
   text-transform: uppercase;
+}
+
+div.back {
+  position: absolute;
+  left: 10px;
+  height: 30px;
+  font-size: 12px;
+  line-height: 30px;
+}
+
+.back a, .review_edit a {
+  color: blue;
+  font-weight: bold;
 }
 
 span.error {

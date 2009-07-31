@@ -107,6 +107,7 @@ en:
     button:
       submit: Next Step >
       edit: Edit
+      back: Previous Step
       download: "Download PDF!"
     registration:
       step_1_header: New registrant

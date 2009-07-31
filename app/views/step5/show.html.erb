@@ -110,6 +110,8 @@
         <div><%= form.select :attest_true, yes_no_options %></div>
       </li>
     </ul>
+
+    <div class="back"><%= link_to t('txt.button.back'), registrant_step_4_path(@registrant) %></div>
     <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
     <span class="error">Eligible: <%= form.object.errors.on :attest_eligible %>&nbsp;</span>
     <span class="error">True: <%= form.object.errors.on :attest_true %>&nbsp;</span>

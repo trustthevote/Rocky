@@ -11,7 +11,24 @@ class RegistrantsController < ApplicationController
   def create
     @registrant = Registrant.new(params[:registrant])
     if @registrant.advance_to_step_1!
-      redirect_to registrant_step_2_path(@registrant)
+      redirect_to registrant_step_2_url(@registrant)
+    else
+      render "new"
+    end
+  end
+
+  # GET /registrants/:id
+  def show
+    @registrant = Registrant.find(params[:id])
+    render "new"
+  end
+
+  # PUT /registrants/:id
+  def update
+    @registrant = Registrant.find(params[:id])
+    @registrant.attributes = params[:registrant]
+    if @registrant.advance_to_step_1!
+      redirect_to registrant_step_2_url(@registrant)
     else
       render "new"
     end

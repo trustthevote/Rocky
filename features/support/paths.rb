@@ -15,6 +15,8 @@ module NavigationHelpers
       new_registrant_path
     when /new Spanish registration page/
       new_registrant_path(:locale => 'es')
+    when /the step 1 page/
+      registrant_path(@registrant)
     when /the step (\d) page/
       send("registrant_step_#{$1}_path", @registrant)
     when /the download page/

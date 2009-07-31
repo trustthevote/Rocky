@@ -32,3 +32,9 @@ Feature: Step 1
        And I press "registrant_submit"
       Then I should not see "Personal Information"
        And I should see "es, txt, registration"
+
+    Scenario: modifying step 1 data
+      Given I have completed step 4
+      When I go to the step 1 page
+      Then I should see my email
+       And I should see my date of birth
