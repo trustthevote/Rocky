@@ -44,6 +44,16 @@ describe RegistrantsController do
     end
   end
 
+  describe "download" do
+    it "provides a link to download the PDF" do
+      @registrant = Factory.create(:maximal_registrant)
+      get :download, :id => @registrant.to_param
+      assert_not_nil assigns[:registrant]
+      assert_response :success
+      assert_template "download"
+    end
+  end
+
   describe "PDF" do
     before(:each) do
       @registrant = Factory.create(:maximal_registrant)

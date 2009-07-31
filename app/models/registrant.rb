@@ -2,7 +2,7 @@ class Registrant < ActiveRecord::Base
   include AASM
   include Mergable
 
-  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :complete]
+  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
   # TODO: add :es to get full set for validation
   TITLES = I18n.t('txt.registration.titles', :locale => :en)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en)
@@ -12,12 +12,7 @@ class Registrant < ActiveRecord::Base
 
   aasm_column :status
   aasm_initial_state :initial
-  aasm_state :initial
-  aasm_state :step_1
-  aasm_state :step_2
-  aasm_state :step_3
-  aasm_state :step_4
-  aasm_state :complete
+  STEPS.each { |step| aasm_state step }
 
   belongs_to :partner
   belongs_to :home_state,    :class_name => "GeoState"
@@ -94,6 +89,11 @@ class Registrant < ActiveRecord::Base
     reg.validates_zip_code    :prev_zip_code
   end
 
+  with_options :if => :at_least_step_5? do |reg|
+    reg.validates_inclusion_of :attest_true, :in => [false, true]
+    reg.validates_inclusion_of :attest_eligible, :in => [false, true]
+  end
+
   def needs_mailing_address?
     at_least_step_2? && has_mailing_address?
   end
@@ -112,22 +112,27 @@ class Registrant < ActiveRecord::Base
 
   aasm_event :advance_to_step_1 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_1, :from => [:initial, :step_1, :step_2, :step_3, :step_4, :complete]
+    transitions :to => :step_1, :from => [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
   end
 
   aasm_event :advance_to_step_2 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_2, :from => [:step_1, :step_2, :step_3, :step_4, :complete]
+    transitions :to => :step_2, :from => [:step_1, :step_2, :step_3, :step_4, :step_5, :complete]
   end
 
   aasm_event :advance_to_step_3 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_3, :from => [:step_2, :step_3, :step_4, :complete]
+    transitions :to => :step_3, :from => [:step_2, :step_3, :step_4, :step_5, :complete]
   end
 
   aasm_event :advance_to_step_4 do
     Registrant.transition_if_ineligible(self)
-    transitions :to => :step_4, :from => [:step_3, :step_4, :complete]
+    transitions :to => :step_4, :from => [:step_3, :step_4, :step_5, :complete]
+  end
+
+  aasm_event :advance_to_step_5 do
+    Registrant.transition_if_ineligible(self)
+    transitions :to => :step_5, :from => [:step_4, :step_5, :complete]
   end
 
   ### instance methods
@@ -142,6 +147,10 @@ class Registrant < ActiveRecord::Base
 
   def at_least_step_3?
     at_least_step?(3)
+  end
+
+  def at_least_step_5?
+    at_least_step?(5)
   end
 
   def set_home_state_from_zip_code
@@ -237,6 +246,14 @@ class Registrant < ActiveRecord::Base
   
   def will_be_18_by_election?
     true
+  end
+
+  def full_name
+    [name_title, first_name, middle_name, last_name, name_suffix].compact.join(" ")
+  end
+
+  def prev_full_name
+    [prev_name_title, prev_first_name, prev_middle_name, prev_last_name, prev_name_suffix].compact.join(" ")
   end
 
   def pdf_date_of_birth

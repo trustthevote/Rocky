@@ -1,4 +1,117 @@
 <h1><%= t('txt.registration.step_5_header') %></h1>
 
-<%= link_to I18n.t('txt.button.download'), pdf_registrant_path(@registrant) %>
+<div class="review">
+  <h2>
+    <span><%= t('txt.registration.step_1_header') %></span>
+    <div class="review_edit"><%= link_to t("txt.button.edit"), registrant_path(@registrant) %></div>
+  </h2>
+  
+  <ul>
+    <li>
+      <span><%= I18n.t('activerecord.attributes.registrant.email_address') %></span>
+      <div><%=h @registrant.email_address %></div>
+    </li>
+    <li>
+      <span><%= I18n.t('activerecord.attributes.registrant.home_zip_code') %></span>
+      <div><%=h @registrant.home_zip_code %></div>
+    </li>
+    <li>
+      <span><%= I18n.t('activerecord.attributes.registrant.date_of_birth') %></span>
+      <div><%=h @registrant.date_of_birth.strftime("%B %e, %Y") %></div>
+    </li>
+  </ul>
 
+  <h2>
+    <span><%= t('txt.registration.step_2_header') %></span>
+    <div class="review_edit"><%= link_to t("txt.button.edit"), registrant_step_2_path(@registrant) %></div>
+  </h2>
+
+  <ul>
+    <li>
+      <span><%= I18n.t('txt.registration.name') %></span>
+      <div><%=h @registrant.full_name %></div>
+    </li>
+    <li class="tall">
+      <span><%= I18n.t('txt.registration.home_address') %></span>
+      <div>
+        <%=h @registrant.home_address %> <%=h octothorpe(@registrant.home_unit) %><br/>
+        <%=h @registrant.home_city %>, <%=h @registrant.home_state_name %> <%=h @registrant.home_zip_code %>
+      </div>
+    </li>
+    <% if @registrant.has_mailing_address? %>
+    <li class="tall">
+      <span><%= I18n.t('txt.registration.mailing_address') %></span>
+      <div>
+        <%=h @registrant.mailing_address %> <%=h octothorpe(@registrant.mailing_unit) %><br/>
+        <%=h @registrant.mailing_city %>, <%=h @registrant.mailing_state.name %> <%=h @registrant.mailing_zip_code %>
+      </div>
+    </li>
+    <% end %>
+    <% unless @registrant.race.blank? %>
+      <li>
+        <span><%= I18n.t('activerecord.attributes.registrant.race') %></span>
+        <div><%=h @registrant.race %></div>
+      </li>
+    <% end %>
+    <% unless @registrant.party.blank? %>
+      <li>
+        <span><%= I18n.t('activerecord.attributes.registrant.party') %></span>
+        <div><%=h @registrant.party %></div>
+      </li>
+    <% end %>
+  </ul>
+
+  <h2>
+    <span><%= t('txt.registration.step_3_header') %></span>
+    <div class="review_edit"><%= link_to t("txt.button.edit"), registrant_step_3_path(@registrant) %></div>
+  </h2>
+
+  <ul>
+    <li>
+      <span><%= I18n.t('activerecord.attributes.registrant.state_id_number') %></span>
+      <div><%=h @registrant.state_id_number %></div>
+    </li>
+    <li>
+      <span><%= I18n.t('activerecord.attributes.registrant.phone') %></span>
+      <div><%=h @registrant.phone_type %>: <%=h @registrant.phone %></div>
+    </li>
+    <% if @registrant.change_of_name? %>
+      <li>
+        <span><%= I18n.t('txt.registration.previous_name') %></span>
+        <div><%=h @registrant.prev_full_name %></div>
+      </li>
+    <% end %>
+    <% if @registrant.change_of_address? %>
+    <li class="tall">
+      <span><%= I18n.t('txt.registration.previous_address') %></span>
+      <div>
+        <%=h @registrant.prev_address %> <%=h octothorpe(@registrant.prev_unit) %><br/>
+        <%=h @registrant.prev_city %>, <%=h @registrant.prev_state.name %> <%=h @registrant.prev_zip_code %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  <h2>
+    <span>Legal Stuff</span>
+  </h2>
+</div>
+<div>
+  <p class="instructions">I have reviewed my state's instructions and I swear/affirm that:</p>
+
+  <% form_for(@registrant, :url => registrant_step_5_path(@registrant)) do |form| %>
+    <ul class="affirm">
+      <li><h3>I am a United States citizen.</h3></li>
+      <li>
+        <h3><%= form.label :attest_eligible %></h3>
+        <div><%= form.select :attest_eligible, yes_no_options %></div>
+      </li>
+      <li>
+        <h3><%= form.label :attest_true %></h3>
+        <div><%= form.select :attest_true, yes_no_options %></div>
+      </li>
+    </ul>
+    <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
+    <span class="error">Eligible: <%= form.object.errors.on :attest_eligible %>&nbsp;</span>
+    <span class="error">True: <%= form.object.errors.on :attest_true %>&nbsp;</span>
+  <% end %>
+</div>

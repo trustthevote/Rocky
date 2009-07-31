@@ -123,6 +123,11 @@ describe Registrant do
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => '00000')
     end
+    
+    it "should not require attestations" do
+      assert_attribute_valid_with(:step_3_registrant, :attest_true => nil)
+      assert_attribute_valid_with(:step_3_registrant, :attest_eligible => nil)
+    end
 
     it "should check format of prev_zip_code" do
       reg = Factory.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => 'ABCDE')
@@ -158,6 +163,13 @@ describe Registrant do
       assert_nil reg.prev_zip_code
     end
 
+  end
+  
+  describe "step 5" do
+    it "requires attestations" do
+      assert_attribute_invalid_with(:step_5_registrant, :attest_true => nil)
+      assert_attribute_invalid_with(:step_5_registrant, :attest_eligible => nil)
+    end
   end
 
 

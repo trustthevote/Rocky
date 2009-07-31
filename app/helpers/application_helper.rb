@@ -48,4 +48,13 @@ module ApplicationHelper
       </object>
     HTML
   end
+
+  def yes_no_options
+    [['', nil], ['Yes', true], ['No', false]]
+  end
+
+  def octothorpe(unit)
+    unit =~ /^\d+$/ ? "##{unit}" : unit
+  end
+
 end

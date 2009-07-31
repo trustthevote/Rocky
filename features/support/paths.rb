@@ -17,6 +17,8 @@ module NavigationHelpers
       new_registrant_path(:locale => 'es')
     when /the step (\d) page/
       send("registrant_step_#{$1}_path", @registrant)
+    when /the download page/
+      download_registrant_path(@registrant)
 
     when /the Moose page/
       '/bullwinkle.html'

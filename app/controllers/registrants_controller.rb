@@ -17,6 +17,10 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  def download
+    @registrant = Registrant.find(params[:id])
+  end
+
   def pdf
     @registrant = Registrant.find(params[:id])
     @registrant.generate_pdf!

@@ -21,7 +21,7 @@ input, select, textarea {
 }
 
 input, textarea {
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
 }
 
 #container {
@@ -137,7 +137,13 @@ ul.question {
   margin-top: 20px;
 }
 
-ul.question li, ul.question h3 {
+ul.affirm {
+  width: 100%;
+  margin-top: 20px;
+}
+
+ul.question li, ul.question h3, ul.question div,
+ul.affirm li, ul.affirm h3, ul.affirm div {
   width: 100%;
 }
 
@@ -145,6 +151,26 @@ ul.question textarea {
   width: 95%;
   margin-top: 6px;
   margin-left: 3%;
+}
+
+ul.question select, ul.affirm select, ul.question span{
+  display: block;
+  margin: 1em auto;
+  width: 10em;
+}
+
+ul.affirm {
+  list-style: disc outside !important;
+}
+
+ul.affirm select {
+  margin: 5px auto;
+}
+
+ul.affirm li {
+  width: 80%;
+  margin: 0 0 10px 30px;
+  font-size: 16px;
 }
 
 form hr {
@@ -185,4 +211,53 @@ span.error {
   height: 12px;
   line-height: 15px;
   margin-left: 5px;
+}
+
+.review h2 {
+  width: 100%;
+  margin: 10px 0;
+  padding: 6px 0;
+  background-color: #aaa;
+  color: black;
+  text-indent: 20px;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.review h2 span {
+  float: left;
+}
+
+.review_edit {
+  float: right;
+  padding: 0px 10px;
+}
+
+.review li {
+  position: relative;
+  height: 20px;
+  line-height: 14px;
+  font-size: 12px;
+}
+
+.review li.tall {
+  height: 35px;
+}
+
+.review li span {
+  position: absolute;
+  width: 150px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.review li div {
+  position: absolute;
+  left: 160px;
+  font-family: Tahoma, sans-serif;
+  letter-spacing: 0.08em;
+}
+
+p.instructions {
+  font-size: 14px;
 }

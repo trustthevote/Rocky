@@ -28,7 +28,12 @@ Factory.define :step_4_registrant, :parent => :step_3_registrant do |f|
   f.status          "step_4"
   f.opt_in_email    false
   f.opt_in_sms      false
+end
 
+Factory.define :step_5_registrant, :parent => :step_4_registrant do |f|
+  f.status          "step_5"
+  f.attest_true     true
+  f.attest_eligible true
 end
 
 Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
