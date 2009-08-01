@@ -258,6 +258,14 @@ class Registrant < ActiveRecord::Base
     [prev_name_title, prev_first_name, prev_middle_name, prev_last_name, prev_name_suffix].compact.join(" ")
   end
 
+  def phone_and_type
+    if phone.blank?
+      I18n.t('txt.registration.not_given')
+    else
+      "#{phone} (#{phone_type})"
+    end
+  end
+
   def pdf_date_of_birth
     "%d/%d/%d" % [date_of_birth.month, date_of_birth.mday, date_of_birth.year]
   end

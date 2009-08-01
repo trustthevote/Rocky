@@ -121,6 +121,9 @@ en:
       mailing_address: Mailing Address
       previous_name: Previous Name
       previous_address: Previous Address
+      opt_in_sms: "Receive txt messages at {{phone}}"
+      opt_in_email: "Receive emails at {{email_address}}"
+      not_given: none
       titles:
       - Mr.
       - Mrs.

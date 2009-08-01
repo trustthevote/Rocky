@@ -73,7 +73,7 @@
     </li>
     <li>
       <span><%= I18n.t('activerecord.attributes.registrant.phone') %></span>
-      <div><%=h @registrant.phone_type %>: <%=h @registrant.phone %></div>
+      <div><%=h @registrant.phone_and_type %></div>
     </li>
     <% if @registrant.change_of_name? %>
       <li>

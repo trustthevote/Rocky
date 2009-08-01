@@ -15,6 +15,11 @@ Given /^I am a first time registrant$/ do
   @registrant.save
 end
 
+Given /^my phone number is not blank$/ do
+  @registrant.phone = "415-555-1234"
+  @registrant.save
+end
+
 Given /^I have not downloaded the PDF before$/ do
   `rm #{@registrant.pdf_path}`
 end

@@ -3,15 +3,23 @@
 <% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
   <ul class="checkbox">
     <li>
-      <h3><%= form.check_box :opt_in_email %> <%= form.label :opt_in_email %></h3>
+      <h3>
+        <%= form.check_box :opt_in_email %>
+        <%= form.label :opt_in_email, t('txt.registration.opt_in_email', :email_address => h(@registrant.email_address)) %>
+      </h3>
     </li>
   </ul>
 
-  <ul class="checkbox">
-    <li>
-      <h3><%= form.check_box :opt_in_sms %> <%= form.label :opt_in_sms %></h3>
-    </li>
-  </ul>
+  <% unless @registrant.phone.blank? %>
+    <ul class="checkbox">
+      <li>
+        <h3>
+          <%= form.check_box :opt_in_sms %>
+          <%= form.label :opt_in_sms, t('txt.registration.opt_in_sms', :phone => h(@registrant.phone)) %>
+        </h3>
+      </li>
+    </ul>
+  <% end %>
 
   <ul class="question">
     <li>
