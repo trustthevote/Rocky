@@ -37,3 +37,6 @@ Then /^I should see my date of birth$/ do
   Then %Q{the "Date of Birth" field should contain "#{@registrant.date_of_birth.year}"}
 end
 
+Then /^I should see "([^\"]*)" in select box "([^\"]*)"$/ do |select_value, select_box|
+  assert_equal select_value, current_dom.css("##{select_box} option[selected]").text
+end

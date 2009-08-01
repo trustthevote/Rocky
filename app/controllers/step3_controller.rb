@@ -14,4 +14,11 @@ class Step3Controller < ApplicationController
       render "show"
     end
   end
+
+  protected
+
+  def find_registrant
+    super
+    @registrant.prev_state ||= @registrant.home_state
+  end
 end

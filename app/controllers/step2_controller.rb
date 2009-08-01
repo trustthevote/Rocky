@@ -21,6 +21,7 @@ class Step2Controller < ApplicationController
 
   def find_registrant
     super
+    @registrant.mailing_state ||= @registrant.home_state
     @state_parties = @registrant.state_parties
   end
 end

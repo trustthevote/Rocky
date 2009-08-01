@@ -13,3 +13,8 @@ Feature: Step 2
        And I fill in "city" with "Pittsburgh"
        And I press "registrant_submit"
       Then I should see "Numbers and Changes"
+
+    Scenario: default mailing state to home state
+      Given I have completed step 1
+      When I go to the step 2 page
+      Then I should see "Pennsylvania" in select box "registrant_mailing_state_abbrev"

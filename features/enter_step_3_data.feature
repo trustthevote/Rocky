@@ -43,3 +43,8 @@ Feature: Step 3
        And I fill in "zip code" with "15215"
        And I press "registrant_submit"
       Then I should see "Opt In"
+
+    Scenario: default prev state to home state
+      Given I have completed step 2
+      When I go to the step 3 page
+      Then I should see "Pennsylvania" in select box "registrant_prev_state_abbrev"
