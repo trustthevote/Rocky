@@ -278,3 +278,19 @@ span.error {
 p.instructions {
   font-size: 14px;
 }
+
+.download {
+  border: 1px solid black;
+  background-color: #ccc;
+  width: 80%;
+  margin: 20px auto;
+}
+
+.download p {
+  font-size: 14px;
+  margin: 15px;
+}
+
+.download h2 {
+  margin: 15px;
+}
