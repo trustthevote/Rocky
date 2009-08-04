@@ -3,7 +3,7 @@ Factory.define :step_1_registrant, :class => "registrant" do |f|
   f.association     :partner, :factory => :partner
   f.locale          "en"
   f.sequence(:email_address) { |n| "registrant_#{n}@example.com" }
-  f.date_of_birth   20.years.ago.to_date
+  f.date_of_birth   20.years.ago.to_date.strftime("%m/%d/%Y")
   f.home_zip_code   "15215"  # == Pennsylvania
   f.us_citizen      true
 end
@@ -40,7 +40,7 @@ Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
   f.status              "complete"
   f.locale              "en"
   f.partner_id          "1"
-  f.date_of_birth       20.years.ago.to_date
+  f.date_of_birth       20.years.ago.to_date.strftime("%m/%d/%Y")
   f.email_address       "citizen@example.com"
   f.first_registration  false
   f.home_zip_code       "02134"

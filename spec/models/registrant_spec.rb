@@ -8,11 +8,45 @@ describe Registrant do
       assert reg.valid?, reg.errors.full_messages
       assert_nil reg.race
     end
+
     it "blanks party unless requires party" do
       reg = Factory.build(:maximal_registrant)
       stub(reg).requires_party? { false }
       assert reg.valid?, reg.errors.full_messages
       assert_nil reg.party
+    end
+
+    it "parses date of birth before validation" do
+      reg = Factory.build(:step_1_registrant)
+      reg.date_of_birth = "08/27/1978"
+      assert reg.valid?
+      assert_equal Date.parse("Aug 27, 1978"), reg.date_of_birth
+      reg.date_of_birth = "5/3/1978"
+      assert reg.valid?
+      assert_equal Date.parse("May 3, 1978"), reg.date_of_birth
+      reg.date_of_birth = "5-3-1978"
+      assert reg.valid?
+      assert_equal Date.parse("May 3, 1978"), reg.date_of_birth
+
+      reg.date_of_birth = "1978/5/3"
+      assert reg.valid?
+      assert_equal Date.parse("May 3, 1978"), reg.date_of_birth
+      reg.date_of_birth = "1978-5-3"
+      assert reg.valid?
+      assert_equal Date.parse("May 3, 1978"), reg.date_of_birth
+
+      reg.date_of_birth = "2/30/1978"
+      assert reg.invalid?
+      assert reg.errors.on(:date_of_birth)
+      assert_equal "2/30/1978", reg.date_of_birth_before_type_cast
+      reg.date_of_birth = "5-3-78"
+      assert reg.invalid?
+      assert reg.errors.on(:date_of_birth)
+      assert_equal "5-3-78", reg.date_of_birth_before_type_cast
+      reg.date_of_birth = "May 3, 1978"
+      assert reg.invalid?
+      assert reg.errors.on(:date_of_birth)
+      assert_equal "May 3, 1978", reg.date_of_birth_before_type_cast
     end
   end
 
@@ -57,8 +91,8 @@ describe Registrant do
     end
 
     it "should require at least 16 years old" do
-      assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => 5.years.ago.to_date)
-      assert_attribute_valid_with(:step_1_registrant, :date_of_birth => 17.years.ago.to_date)
+      assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => 5.years.ago.to_date.strftime("%m/%d/%Y"))
+      assert_attribute_valid_with(:step_1_registrant, :date_of_birth => 17.years.ago.to_date.strftime("%m/%d/%Y"))
     end
   end
 

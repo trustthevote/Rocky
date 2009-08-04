@@ -3,7 +3,7 @@ Given /^I have completed step (\d+)$/ do |step_num|
 end
 
 When /^I am (\d+) years old$/ do |age|
-  fill_in("date of birth", :with => age.to_i.years.ago.to_date)
+  fill_in("date of birth", :with => age.to_i.years.ago.to_date.strftime("%m/%d/%Y"))
 end
 
 Given /^I have not set a locale$/ do

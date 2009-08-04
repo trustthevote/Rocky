@@ -51,7 +51,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_format_of :email_address, :with => Authlogic::Regex.email, :allow_blank => true
     reg.validates_zip_code    :home_zip_code
     reg.validates_presence_of :home_state_id
-    reg.validates_presence_of :date_of_birth
+    reg.validate :validate_date_of_birth
     reg.validate :validate_age
     reg.validates_acceptance_of :us_citizen, :accept => true
   end
@@ -184,6 +184,29 @@ class Registrant < ActiveRecord::Base
     self.party = nil unless requires_party?
   end
 
+  def validate_date_of_birth
+    return if date_of_birth_before_type_cast.is_a?(Date)
+    if date_of_birth_before_type_cast.blank?
+      errors.add(:date_of_birth, :blank)
+    else
+      @raw_date_of_birth = date_of_birth_before_type_cast
+      date = nil
+      if matches = date_of_birth_before_type_cast.match(/^(\d{1,2})\D+(\d{1,2})\D+(\d{4})$/)
+        m,d,y = matches.captures
+        date = Date.civil(y.to_i, m.to_i, d.to_i) rescue nil
+      elsif matches = date_of_birth_before_type_cast.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})$/)
+        y,m,d = matches.captures
+        date = Date.civil(y.to_i, m.to_i, d.to_i) rescue nil
+      end
+      if date
+        @raw_date_of_birth = nil
+        self[:date_of_birth] = date
+      else
+        errors.add(:date_of_birth, :format)
+      end
+    end
+  end
+
   def validate_age
     if date_of_birth
       errors.add(:date_of_birth, :inclusion) unless date_of_birth < 16.years.ago.to_date
@@ -245,7 +268,7 @@ class Registrant < ActiveRecord::Base
   def prev_state_abbrev
     prev_state && prev_state.abbreviation
   end
-  
+
   def will_be_18_by_election?
     true
   end
@@ -268,6 +291,16 @@ class Registrant < ActiveRecord::Base
 
   def pdf_date_of_birth
     "%d/%d/%d" % [date_of_birth.month, date_of_birth.mday, date_of_birth.year]
+  end
+
+  def form_date_of_birth
+    if @raw_date_of_birth
+      @raw_date_of_birth
+    elsif date_of_birth
+      "%d-%d-%d" % [date_of_birth.month, date_of_birth.mday, date_of_birth.year]
+    else
+      nil
+    end
   end
 
   def generate_pdf!

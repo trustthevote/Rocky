@@ -65,6 +65,7 @@ en:
             us_citizen:
               accepted: "You must be a U.S. citizen to register to vote."
             date_of_birth:
+              format: "Should be MM-DD-YYYY"
               inclusion: "You must be at least 16 years old."
             attest_true:
               inclusion: "Select Yes or No"

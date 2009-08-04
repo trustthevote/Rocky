@@ -17,7 +17,7 @@
 <ul class="flat">
   <li>
     <h3><%= form.label :date_of_birth %></h3>
-    <div><%= form.text_field :date_of_birth %></div>
+    <div><%= form.text_field :date_of_birth, :value => form.object.form_date_of_birth %></div>
     <span class="error"><%= form.object.errors.on :date_of_birth %></span>
   </li>
 </ul>
