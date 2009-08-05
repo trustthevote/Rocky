@@ -334,27 +334,36 @@ describe Registrant do
   end
 
   describe "PDF" do
-    before(:each) do
-      @registrant = Factory.build(:maximal_registrant)
-      stub(@registrant).merge_pdf { `touch #{@registrant.pdf_path}` }
-    end
-
-    it "generates PDF with merged data" do
-      `rm -f #{@registrant.pdf_path}`
-      assert_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
-        @registrant.generate_pdf!
+    describe "template path" do
+      it "determined by state and locale" do
+        registrant = Factory.build(:maximal_registrant, :home_state => GeoState['NV'], :locale => 'es')
+        assert_match(/_es_nv\.pdf/, registrant.nvra_template_path)
       end
     end
 
-    it "returns PDF if already exists" do
-      `touch #{@registrant.pdf_path}`
-      assert_no_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
-        @registrant.generate_pdf!
+    describe "merge" do
+      before(:each) do
+        @registrant = Factory.build(:maximal_registrant)
+        stub(@registrant).merge_pdf { `touch #{@registrant.pdf_path}` }
       end
-    end
 
-    after do
-      `rm #{@registrant.pdf_path}`
+      it "generates PDF with merged data" do
+        `rm -f #{@registrant.pdf_path}`
+        assert_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
+          @registrant.generate_pdf!
+        end
+      end
+
+      it "returns PDF if already exists" do
+        `touch #{@registrant.pdf_path}`
+        assert_no_difference('Dir[File.join(RAILS_ROOT, "public/pdf/*")].length') do
+          @registrant.generate_pdf!
+        end
+      end
+
+      after do
+        `rm #{@registrant.pdf_path}`
+      end
     end
   end
 

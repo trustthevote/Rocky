@@ -10,12 +10,12 @@ module RegistrationStep
     @registrant.attributes = params[:registrant]
     attempt_to_advance
   end
-  
+
   protected
-  
+
   def set_up_view_variables
   end
-  
+
   def attempt_to_advance
     advance_to_next_step
 
@@ -30,12 +30,10 @@ module RegistrationStep
       render "show"
     end
   end
-  
+
   def find_registrant
     @registrant = Registrant.find(params[:registrant_id] || params[:id])
     I18n.locale = @registrant.locale
   end
-  
-
 end
 

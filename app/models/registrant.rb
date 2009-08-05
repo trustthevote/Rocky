@@ -308,9 +308,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def merge_pdf(tmp)
-    nvra_path = File.join(Rails.root, "data", "nvra_pg4.pdf")
     classpath = ["$CLASSPATH", File.join(Rails.root, "lib/pdf_merge/lib/iText-2.1.7.jar"), File.join(Rails.root, "lib/pdf_merge/out/production/Rocky_pdf")].join(":")
-    `java -classpath #{classpath} PdfMerge #{nvra_path} #{tmp.path} #{pdf_path}`
+    `java -classpath #{classpath} PdfMerge #{nvra_template_path} #{tmp.path} #{pdf_path}`
+  end
+  
+  def nvra_template_path
+    File.join(Rails.root, "data", "nvra_templates", "nvra_#{locale && locale.downcase}_#{home_state && home_state.abbreviation.downcase}.pdf")
   end
 
   def pdf_path
