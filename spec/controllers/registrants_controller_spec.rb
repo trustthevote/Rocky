@@ -5,7 +5,7 @@ describe RegistrantsController do
     it "should show the step 1 input form" do
       get :new
       assert_not_nil assigns[:registrant]
-      assert_template "new"
+      assert_template "show"
     end
 
     it "should start with partner id and locale" do
@@ -43,7 +43,7 @@ describe RegistrantsController do
       post :create, :registrant => @reg_attributes.merge(:home_zip_code => "")
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].new_record?, assigns[:registrant].inspect
-      assert_template "new"
+      assert_template "show"
     end
 
     it "should reject ineligible registrants" do
@@ -73,7 +73,7 @@ describe RegistrantsController do
       put :update, :id => @registrant.to_param, :registrant => {:email_address => nil}
       assert assigns[:registrant].step_1?
       assert assigns[:registrant].reload.step_4?
-      assert_template "new"
+      assert_template "show"
     end
     
     it "should reject ineligible registrants" do

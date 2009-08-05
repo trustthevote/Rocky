@@ -24,7 +24,8 @@ describe Step3Controller do
 
     it "should reject invalid input and show form again" do
       put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_3_registrant, :state_id_number => nil)
-      assert assigns[:registrant].step_2?
+      assert assigns[:registrant].step_3?
+      assert assigns[:registrant].reload.step_2?
       assert_template "show"
     end
   end

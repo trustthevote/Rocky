@@ -7,47 +7,13 @@ class RegistrantsController < ApplicationController
     locale = params[:locale] || 'en'
     I18n.locale = locale.to_sym
     @registrant = Registrant.new(:partner_id => partner_id, :locale => locale)
+    render "show"
   end
 
   # POST /registrants
   def create
     @registrant = Registrant.new(params[:registrant])
-    @registrant.advance_to_step_1
-
-    if @registrant.valid?
-      @registrant.save_or_reject!
-      if @registrant.eligible?
-        redirect_to registrant_step_2_url(@registrant)
-      else
-        redirect_to ineligible_registrant_url(@registrant)
-      end
-    else
-      render "new"
-    end
-  end
-
-  # GET /registrants/:id
-  def show
-    find_registrant
-    render "new"
-  end
-
-  # PUT /registrants/:id
-  def update
-    find_registrant
-    @registrant.attributes = params[:registrant]
-    @registrant.advance_to_step_1
-
-    if @registrant.valid?
-      @registrant.save_or_reject!
-      if @registrant.eligible?
-        redirect_to registrant_step_2_url(@registrant)
-      else
-        redirect_to ineligible_registrant_url(@registrant)
-      end
-    else
-      render "new"
-    end
+    attempt_to_advance
   end
 
   def ineligible
@@ -64,4 +30,16 @@ class RegistrantsController < ApplicationController
     # TODO: serve this as a static asset
     send_file(@registrant.pdf_path, :type => :pdf, :filename => "voter_registration_form.pdf")
   end
+  
+  protected
+  
+  def advance_to_next_step
+    @registrant.advance_to_step_1
+  end
+
+  def next_url
+    registrant_step_2_url(@registrant)
+  end
+
+  
 end

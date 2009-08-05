@@ -1,24 +1,17 @@
 class Step3Controller < ApplicationController
   include RegistrationStep
 
-  def show
-    find_registrant
-  end
-
-  def update
-    find_registrant
-    @registrant.attributes = params[:registrant]
-    if @registrant.advance_to_step_3!
-      redirect_to registrant_step_4_url(@registrant)
-    else
-      render "show"
-    end
-  end
-
   protected
 
-  def find_registrant
-    super
+  def advance_to_next_step
+    @registrant.advance_to_step_3
+  end
+
+  def next_url
+    registrant_step_4_url(@registrant)
+  end
+
+  def set_up_view_variables
     @registrant.prev_state ||= @registrant.home_state
   end
 end
