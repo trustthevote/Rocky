@@ -58,7 +58,7 @@ describe Registrant do
       assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => nil, :home_state_id => nil)
       assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => '00000')
       assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => nil)
-      assert_attribute_invalid_with(:step_1_registrant, :us_citizen => false)
+      assert_attribute_invalid_with(:step_1_registrant, :us_citizen => nil)
     end
 
     it "should limit number of simultaneous errors on home_zip_code" do
@@ -90,9 +90,37 @@ describe Registrant do
       assert_attribute_invalid_with(:step_1_registrant, :email_address => "@bogus.com")
     end
 
-    it "should require at least 16 years old" do
-      assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => 5.years.ago.to_date.strftime("%m/%d/%Y"))
-      assert_attribute_valid_with(:step_1_registrant, :date_of_birth => 17.years.ago.to_date.strftime("%m/%d/%Y"))
+    it "should be ineligible when in state that doesn't participate" do
+      reg = Factory.build(:step_1_registrant, :home_zip_code => '58001')  # North Dakota
+      assert reg.valid?
+      assert reg.ineligible?
+      assert reg.ineligible_non_participating_state?
+      reg = Factory.build(:step_1_registrant, :home_zip_code => '94101')  # California
+      assert reg.valid?
+      assert reg.eligible?
+      assert !reg.ineligible_non_participating_state?
+    end
+
+    it "should be ineligible when too young" do
+      reg = Factory.build(:step_1_registrant, :date_of_birth => 10.years.ago.to_date.to_s(:db))
+      assert reg.valid?
+      assert reg.ineligible?
+      assert reg.ineligible_age?
+      reg = Factory.build(:step_1_registrant, :date_of_birth => 20.years.ago.to_date.to_s(:db))
+      assert reg.valid?
+      assert reg.eligible?
+      assert !reg.ineligible_age?
+    end
+
+    it "should be ineligible when not a citizen" do
+      reg = Factory.build(:step_1_registrant, :us_citizen => false)
+      assert reg.valid?
+      assert reg.ineligible?
+      assert reg.ineligible_non_citizen?
+      reg = Factory.build(:step_1_registrant, :us_citizen => true)
+      assert reg.valid?
+      assert reg.eligible?
+      assert !reg.ineligible_non_citizen?
     end
   end
 
@@ -218,6 +246,28 @@ describe Registrant do
       assert_attribute_invalid_with(:step_5_registrant, :attest_true => nil)
       assert_attribute_invalid_with(:step_5_registrant, :attest_eligible => nil)
     end
+
+    it "should be ineligible when not telling the truth" do
+      reg = Factory.build(:step_5_registrant, :attest_true => false)
+      assert reg.valid?
+      assert reg.ineligible?
+      assert reg.ineligible_attest?
+      reg = Factory.build(:step_5_registrant, :attest_true => true)
+      assert reg.valid?
+      assert reg.eligible?
+      assert !reg.ineligible_attest?
+    end
+
+    it "should be ineligible when attesting ineligible" do
+      reg = Factory.build(:step_5_registrant, :attest_eligible => false)
+      assert reg.valid?
+      assert reg.ineligible?
+      assert reg.ineligible_attest?
+      reg = Factory.build(:step_5_registrant, :attest_eligible => true)
+      assert reg.valid?
+      assert reg.eligible?
+      assert !reg.ineligible_attest?
+    end
   end
 
 
@@ -270,6 +320,16 @@ describe Registrant do
       reg = Factory.build(:step_2_registrant, :party => nil)
       stub(reg).requires_party? { false }
       assert reg.valid?
+    end
+  end
+
+  describe "at least step N" do
+    it "should say whether step is at least N" do
+      reg = Factory.build(:step_2_registrant)
+      assert reg.at_least_step_1?
+      assert reg.at_least_step_2?
+      assert !reg.at_least_step_3?
+      
     end
   end
 

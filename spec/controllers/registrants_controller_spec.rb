@@ -29,18 +29,31 @@ describe RegistrantsController do
   end
 
   describe "#create" do
+    before(:each) do
+      @partner = Factory.create(:partner)
+      @reg_attributes = Factory.attributes_for(:step_1_registrant, :partner_id => @partner.to_param)
+    end
     it "should create a new registrant and complete step 1" do
-      partner = Factory.create(:partner)
-      post :create, :registrant => Factory.attributes_for(:step_1_registrant, :partner_id => partner.to_param)
+      post :create, :registrant => @reg_attributes
       assert_not_nil assigns[:registrant]
       assert_redirected_to registrant_step_2_url(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do
-      post :create, :registrant => Factory.attributes_for(:step_1_registrant, :home_zip_code => "")
+      post :create, :registrant => @reg_attributes.merge(:home_zip_code => "")
       assert_not_nil assigns[:registrant]
-      assert assigns[:registrant].new_record?
+      assert assigns[:registrant].new_record?, assigns[:registrant].inspect
       assert_template "new"
+    end
+
+    it "should reject ineligible registrants" do
+      north_dakota_zip = "58001"
+      post :create, :registrant => @reg_attributes.merge(:home_zip_code => north_dakota_zip)
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].ineligible?
+      assert assigns[:registrant].ineligible_non_participating_state?
+      assert assigns[:registrant].rejected?
+      assert_redirected_to ineligible_registrant_url(assigns[:registrant])
     end
   end
 
@@ -58,9 +71,21 @@ describe RegistrantsController do
 
     it "should reject invalid input and show form again" do
       put :update, :id => @registrant.to_param, :registrant => {:email_address => nil}
-      assert assigns[:registrant].step_4?
+      assert assigns[:registrant].step_1?
+      assert assigns[:registrant].reload.step_4?
       assert_template "new"
     end
+    
+    it "should reject ineligible registrants" do
+      north_dakota_zip = "58001"
+      put :update, :id => @registrant.to_param, :registrant => {:home_zip_code => north_dakota_zip}
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].ineligible?
+      assert assigns[:registrant].ineligible_non_participating_state?
+      assert assigns[:registrant].rejected?
+      assert_redirected_to ineligible_registrant_url(assigns[:registrant])
+    end
+
   end
 
   describe "download" do

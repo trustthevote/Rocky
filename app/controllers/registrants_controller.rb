@@ -12,8 +12,15 @@ class RegistrantsController < ApplicationController
   # POST /registrants
   def create
     @registrant = Registrant.new(params[:registrant])
-    if @registrant.advance_to_step_1!
-      redirect_to registrant_step_2_url(@registrant)
+    @registrant.advance_to_step_1
+
+    if @registrant.valid?
+      @registrant.save_or_reject!
+      if @registrant.eligible?
+        redirect_to registrant_step_2_url(@registrant)
+      else
+        redirect_to ineligible_registrant_url(@registrant)
+      end
     else
       render "new"
     end
@@ -29,11 +36,22 @@ class RegistrantsController < ApplicationController
   def update
     find_registrant
     @registrant.attributes = params[:registrant]
-    if @registrant.advance_to_step_1!
-      redirect_to registrant_step_2_url(@registrant)
+    @registrant.advance_to_step_1
+
+    if @registrant.valid?
+      @registrant.save_or_reject!
+      if @registrant.eligible?
+        redirect_to registrant_step_2_url(@registrant)
+      else
+        redirect_to ineligible_registrant_url(@registrant)
+      end
     else
       render "new"
     end
+  end
+
+  def ineligible
+    find_registrant
   end
 
   def download

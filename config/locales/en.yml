@@ -110,6 +110,7 @@ en:
       edit: Edit
       back: Previous Step
       download: "Download PDF!"
+      ineligible_try_again: Return
     registration:
       step_1_header: New registrant
       step_2_header: Personal Information
@@ -117,6 +118,7 @@ en:
       step_4_header: Opt In and Speak Out
       step_5_header: Review and Confirm
       download_header: Print Your Form
+      ineligible_header: Sorry, you are not eligible to register to vote for the following reasons
       name: Name
       select_none: (none)
       home_address: Home Address
@@ -154,3 +156,8 @@ en:
         download: You're not done. Click on the print form button to print out your voter registration form.
           Sign it and mail to the address located on the form.
         download_2: You won't be registered unless you print, sign and mail in your form!
+      ineligible:
+        non_participating_state: "{{state}} does not register voters"
+        age: You must be 16 years old to register to vote
+        non_citizen: You must be a U.S. citizen to register to vote.
+        attest: You must confirm you are eligible to vote

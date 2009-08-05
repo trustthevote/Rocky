@@ -54,6 +54,11 @@ class CreateRegistrants < ActiveRecord::Migration
       t.boolean     "attest_true"
       t.boolean     "attest_eligible"
 
+      t.boolean     "ineligible_non_participating_state"
+      t.boolean     "ineligible_age"
+      t.boolean     "ineligible_non_citizen"
+      t.boolean     "ineligible_attest"
+
       t.timestamps
     end
   end

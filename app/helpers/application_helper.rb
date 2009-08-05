@@ -57,4 +57,12 @@ module ApplicationHelper
     unit =~ /^\d+$/ ? "##{unit}" : unit
   end
 
+  def try_again_path(registrant)
+    if registrant.ineligible_attest?
+      registrant_step_5_path(registrant)
+    else
+      registrant_path(registrant)
+    end
+  end
+
 end

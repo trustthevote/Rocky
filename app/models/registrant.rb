@@ -13,6 +13,7 @@ class Registrant < ActiveRecord::Base
   aasm_column :status
   aasm_initial_state :initial
   STEPS.each { |step| aasm_state step }
+  aasm_state :rejected
 
   belongs_to :partner
   belongs_to :home_state,    :class_name => "GeoState"
@@ -43,6 +44,8 @@ class Registrant < ActiveRecord::Base
 
   before_validation :set_home_state_from_zip_code
   before_validation :clear_superfluous_fields
+  
+  after_validation :check_ineligible
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :partner_id
@@ -52,8 +55,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_zip_code    :home_zip_code
     reg.validates_presence_of :home_state_id
     reg.validate :validate_date_of_birth
-    reg.validate :validate_age
-    reg.validates_acceptance_of :us_citizen, :accept => true
+    reg.validates_inclusion_of :us_citizen, :in => [false, true]
   end
 
   with_options :if => :at_least_step_2? do |reg|
@@ -106,33 +108,31 @@ class Registrant < ActiveRecord::Base
     at_least_step_3? && change_of_address?
   end
 
-  def self.transition_if_ineligible(event)
-    event.send(:transitions, :to => :ineligible, :from => Registrant::STEPS, :guard => :check_ineligible?)
+  aasm_event :save_or_reject do
+    transitions :to => :rejected, :from => Registrant::STEPS, :guard => :ineligible?
+    [:step_1, :step_2, :step_3, :step_4, :step_5].each do |step|
+      transitions :to => step, :from => step
+    end
   end
 
   aasm_event :advance_to_step_1 do
-    Registrant.transition_if_ineligible(self)
-    transitions :to => :step_1, :from => [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
+    transitions :to => :step_1, :from => [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete, :rejected]
   end
-
+  
   aasm_event :advance_to_step_2 do
-    Registrant.transition_if_ineligible(self)
-    transitions :to => :step_2, :from => [:step_1, :step_2, :step_3, :step_4, :step_5, :complete]
+    transitions :to => :step_2, :from => [:step_1, :step_2, :step_3, :step_4, :step_5, :complete, :rejected]
   end
 
   aasm_event :advance_to_step_3 do
-    Registrant.transition_if_ineligible(self)
-    transitions :to => :step_3, :from => [:step_2, :step_3, :step_4, :step_5, :complete]
+    transitions :to => :step_3, :from => [:step_2, :step_3, :step_4, :step_5, :complete, :rejected]
   end
 
   aasm_event :advance_to_step_4 do
-    Registrant.transition_if_ineligible(self)
-    transitions :to => :step_4, :from => [:step_3, :step_4, :step_5, :complete]
+    transitions :to => :step_4, :from => [:step_3, :step_4, :step_5, :complete, :rejected]
   end
 
   aasm_event :advance_to_step_5 do
-    Registrant.transition_if_ineligible(self)
-    transitions :to => :step_5, :from => [:step_4, :step_5, :complete]
+    transitions :to => :step_5, :from => [:step_4, :step_5, :complete, :rejected]
   end
 
   ### instance methods
@@ -204,12 +204,6 @@ class Registrant < ActiveRecord::Base
       else
         errors.add(:date_of_birth, :format)
       end
-    end
-  end
-
-  def validate_age
-    if date_of_birth
-      errors.add(:date_of_birth, :inclusion) unless date_of_birth < 16.years.ago.to_date
     end
   end
 
@@ -324,14 +318,26 @@ class Registrant < ActiveRecord::Base
     File.join(Rails.root, "public", "pdf", "nvra-#{to_param}.pdf")
   end
 
+  def check_ineligible
+    self.ineligible_non_participating_state = home_state && !home_state.participating?
+    self.ineligible_age = date_of_birth && (date_of_birth > 16.years.ago.to_date)
+    self.ineligible_non_citizen = !us_citizen?
+    self.ineligible_attest = (attest_true == false || attest_eligible == false)
+    true # don't halt save in after_validation
+  end
+
+  def ineligible?
+    ineligible_non_participating_state || ineligible_age || ineligible_non_citizen || ineligible_attest
+  end
+
+  def eligible?
+    !ineligible?
+  end
+
   private
 
   def at_least_step?(step)
-    STEPS.index(aasm_current_state) >= step
+    current_step = STEPS.index(aasm_current_state)
+    current_step && (current_step >= step)
   end
-
-  def check_ineligible?
-    false # TODO: check eligiblity for reals
-  end
-
 end

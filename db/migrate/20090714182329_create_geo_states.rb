@@ -5,6 +5,7 @@ class CreateGeoStates < ActiveRecord::Migration
       t.string "abbreviation", :limit => 2
       t.boolean "requires_race"
       t.boolean "requires_party"
+      t.boolean "participating"
       t.timestamps
     end
 

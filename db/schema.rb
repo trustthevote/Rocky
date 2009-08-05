@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.string   "abbreviation",   :limit => 2
     t.boolean  "requires_race"
     t.boolean  "requires_party"
+    t.boolean  "participating"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -48,12 +49,12 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
 
   create_table "registrants", :force => true do |t|
     t.string   "status"
-    t.string   "locale",              :limit => 2
+    t.string   "locale",                             :limit => 2
     t.integer  "partner_id"
     t.date     "date_of_birth"
     t.string   "email_address"
     t.boolean  "first_registration"
-    t.string   "home_zip_code",       :limit => 10
+    t.string   "home_zip_code",                      :limit => 10
     t.boolean  "us_citizen"
     t.string   "name_title"
     t.string   "first_name"
@@ -69,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.string   "mailing_unit"
     t.string   "mailing_city"
     t.integer  "mailing_state_id"
-    t.string   "mailing_zip_code",    :limit => 10
+    t.string   "mailing_zip_code",                   :limit => 10
     t.string   "party"
     t.string   "race"
     t.string   "state_id_number"
@@ -86,13 +87,17 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.string   "prev_unit"
     t.string   "prev_city"
     t.integer  "prev_state_id"
-    t.string   "prev_zip_code",       :limit => 10
+    t.string   "prev_zip_code",                      :limit => 10
     t.boolean  "opt_in_email"
     t.boolean  "opt_in_sms"
     t.string   "survey_answer_1"
     t.string   "survey_answer_2"
     t.boolean  "attest_true"
     t.boolean  "attest_eligible"
+    t.boolean  "ineligible_non_participating_state"
+    t.boolean  "ineligible_age"
+    t.boolean  "ineligible_non_citizen"
+    t.boolean  "ineligible_attest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
