@@ -67,6 +67,8 @@ en:
             date_of_birth:
               format: "Should be MM-DD-YYYY"
               inclusion: "You must be at least 16 years old."
+            phone:
+              invalid: "Should be ###-###-####"
             attest_true:
               inclusion: "Select Yes or No"
             attest_eligible:

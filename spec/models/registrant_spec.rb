@@ -200,7 +200,7 @@ describe Registrant do
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
       assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => '00000')
     end
-    
+
     it "should not require attestations" do
       assert_attribute_valid_with(:step_3_registrant, :attest_true => nil)
       assert_attribute_valid_with(:step_3_registrant, :attest_eligible => nil)
@@ -239,8 +239,33 @@ describe Registrant do
       assert_nil reg.prev_state_id
       assert_nil reg.prev_zip_code
     end
+
+    it "should not require phone number" do
+      reg = Factory.build(:step_3_registrant, :phone => "")
+      assert reg.valid?
+    end
+
+    it "should require a valid phone number" do
+      reg = Factory.build(:step_3_registrant, :phone => "1234567890")
+      assert reg.valid?
+
+      reg = Factory.build(:step_3_registrant, :phone => "123-456-7890")
+      assert reg.valid?, reg.errors.full_messages
+
+      reg = Factory.build(:step_3_registrant, :phone => "(123) 456 7890x123")
+      assert reg.valid?
+
+      reg = Factory.build(:step_3_registrant, :phone => "123.456.7890 ext 123")
+      assert reg.valid?
+
+      reg = Factory.build(:step_3_registrant, :phone => "asdfg")
+      assert !reg.valid?
+
+      reg = Factory.build(:step_3_registrant, :phone => "555-1234")
+      assert !reg.valid?
+    end
   end
-  
+
   describe "step 5" do
     it "requires attestations" do
       assert_attribute_invalid_with(:step_5_registrant, :attest_true => nil)
@@ -329,7 +354,7 @@ describe Registrant do
       assert reg.at_least_step_1?
       assert reg.at_least_step_2?
       assert !reg.at_least_step_3?
-      
+
     end
   end
 
