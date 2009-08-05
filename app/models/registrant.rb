@@ -79,6 +79,7 @@ class Registrant < ActiveRecord::Base
   with_options :if => :at_least_step_3? do |reg|
     reg.validates_presence_of :state_id_number
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
+    reg.validates_presence_of :phone_type, :if => :has_phone?
   end
   with_options :if => :needs_prev_name? do |reg|
     reg.validates_presence_of :prev_name_title
@@ -343,5 +344,9 @@ class Registrant < ActiveRecord::Base
   def at_least_step?(step)
     current_step = STEPS.index(aasm_current_state)
     current_step && (current_step >= step)
+  end
+  
+  def has_phone?
+    !phone.blank?
   end
 end

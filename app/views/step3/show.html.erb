@@ -16,7 +16,7 @@
     </li>
     <li class="secondary">
       <h3><%= form.label :phone_type %></h3>
-      <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
+      <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types'), :include_blank => true %></div>
       <span class="error"><%= form.object.errors.on :phone_type %></span>
     </li>
   </ul>

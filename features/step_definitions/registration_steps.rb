@@ -17,6 +17,7 @@ end
 
 Given /^my phone number is not blank$/ do
   @registrant.phone = "415-555-1234"
+  @registrant.phone_type = "Mobile"
   @registrant.save
 end
 

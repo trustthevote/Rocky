@@ -246,22 +246,33 @@ describe Registrant do
     end
 
     it "should require a valid phone number" do
-      reg = Factory.build(:step_3_registrant, :phone => "1234567890")
+      reg = Factory.build(:step_3_registrant, :phone_type => "Mobile")
+      reg.phone = "1234567890"
       assert reg.valid?
 
-      reg = Factory.build(:step_3_registrant, :phone => "123-456-7890")
+      reg.phone = "123-456-7890"
       assert reg.valid?, reg.errors.full_messages
 
-      reg = Factory.build(:step_3_registrant, :phone => "(123) 456 7890x123")
+      reg.phone = "(123) 456 7890x123"
       assert reg.valid?
 
-      reg = Factory.build(:step_3_registrant, :phone => "123.456.7890 ext 123")
+      reg.phone = "123.456.7890 ext 123"
       assert reg.valid?
 
-      reg = Factory.build(:step_3_registrant, :phone => "asdfg")
+      reg.phone = "asdfg"
       assert !reg.valid?
 
-      reg = Factory.build(:step_3_registrant, :phone => "555-1234")
+      reg.phone = "555-1234"
+      assert !reg.valid?
+    end
+    
+    it "should not require phone type when registrant does not provide phone" do
+      reg = Factory.build(:step_3_registrant, :phone_type => "")
+      assert reg.valid?
+    end
+    
+    it "should require phone type when registrant provides phone" do
+      reg = Factory.build(:step_3_registrant, :phone_type => "", :phone => "123-456-7890")
       assert !reg.valid?
     end
   end
