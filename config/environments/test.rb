@@ -28,3 +28,5 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
 require 'factory_girl'
+
+USE_HTTPS = false

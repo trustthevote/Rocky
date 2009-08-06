@@ -38,4 +38,16 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
+  # override in subclass controller if plain HTTP is allowed
+  def require_https?
+    true
+  end
+
+  def ensure_https
+    if USE_HTTPS && require_https? && !request.ssl?
+      flash.keep
+      redirect_to(:protocol => "https://")
+      false
+    end
+  end
 end
