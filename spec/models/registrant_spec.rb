@@ -1,6 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Registrant do
+  describe "to_param hides id" do
+    it "should be nil for new records" do
+      reg = Registrant.new
+      assert_nil reg.to_param
+    end
+    
+    it "should be non nil for saved records" do
+      reg = Factory.create(:step_1_registrant)
+      assert_not_nil reg.to_param
+    end
+    
+    it "should not be the record id" do
+      reg = Factory.create(:step_1_registrant)
+      assert_not_equal reg.id.to_s, reg.to_param
+    end
+    
+    it "should be findable by param" do
+      reg = Factory.create(:step_1_registrant)
+      assert_equal reg, Registrant.find_by_param(reg.to_param)
+    end
+  end
+  
   describe "any step" do
     xit "blanks race unless requires race" do
       reg = Factory.build(:maximal_registrant)

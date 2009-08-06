@@ -46,6 +46,8 @@ class Registrant < ActiveRecord::Base
   before_validation :clear_superfluous_fields
   
   after_validation :check_ineligible
+  
+  before_create :generate_uuid
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :partner_id
@@ -136,8 +138,16 @@ class Registrant < ActiveRecord::Base
   aasm_event :advance_to_step_5 do
     transitions :to => :step_5, :from => [:step_4, :step_5, :complete, :rejected]
   end
+  
+  def self.find_by_param(param)
+    find_by_perishable_token(param)
+  end
 
   ### instance methods
+  
+  def to_param
+    perishable_token
+  end
 
   def at_least_step_1?
     at_least_step?(1)
@@ -348,5 +358,9 @@ class Registrant < ActiveRecord::Base
   
   def has_phone?
     !phone.blank?
+  end
+  
+  def generate_uuid
+    self.perishable_token = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
   end
 end

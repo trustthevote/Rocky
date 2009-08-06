@@ -32,7 +32,7 @@ module RegistrationStep
   end
 
   def find_registrant
-    @registrant = Registrant.find(params[:registrant_id] || params[:id])
+    @registrant = Registrant.find_by_param(params[:registrant_id] || params[:id])
     I18n.locale = @registrant.locale
   end
 end
