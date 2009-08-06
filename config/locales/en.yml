@@ -62,11 +62,8 @@ en:
               invalid: "Use ZIP or ZIP+4"
             email_address:
               invalid: "Not a valid address"
-            us_citizen:
-              accepted: "You must be a U.S. citizen to register to vote."
             date_of_birth:
               format: "Should be MM-DD-YYYY"
-              inclusion: "You must be at least 16 years old."
             phone:
               invalid: "Should be ###-###-####"
             attest_true:
