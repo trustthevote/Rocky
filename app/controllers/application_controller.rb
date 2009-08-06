@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
 
   before_filter :ensure_https
 
+  def current_step
+    -1
+  end
+
+  hide_action :current_step
+
   private
 
   def current_partner_session

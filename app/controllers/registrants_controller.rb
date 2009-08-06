@@ -30,7 +30,13 @@ class RegistrantsController < ApplicationController
     # TODO: serve this as a static asset
     send_file(@registrant.pdf_path, :type => :pdf, :filename => "voter_registration_form.pdf")
   end
-  
+
+  def current_step
+    action_name == "download" ? 6 : 1
+  end
+
+  hide_action :current_step
+
   protected
   
   def advance_to_next_step
@@ -40,6 +46,4 @@ class RegistrantsController < ApplicationController
   def next_url
     registrant_step_2_url(@registrant)
   end
-
-  
 end

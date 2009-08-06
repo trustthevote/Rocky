@@ -1,6 +1,12 @@
 class Step2Controller < ApplicationController
   include RegistrationStep
 
+  def current_step
+    2
+  end
+
+  hide_action :current_step
+
   protected
   
   def advance_to_next_step
