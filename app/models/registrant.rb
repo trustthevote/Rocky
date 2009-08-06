@@ -47,7 +47,7 @@ class Registrant < ActiveRecord::Base
   
   after_validation :check_ineligible
   
-  before_create :generate_uuid
+  before_create :generate_uid
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :partner_id
@@ -140,13 +140,13 @@ class Registrant < ActiveRecord::Base
   end
   
   def self.find_by_param(param)
-    find_by_perishable_token(param)
+    find_by_uid(param)
   end
 
   ### instance methods
   
   def to_param
-    perishable_token
+    uid
   end
 
   def at_least_step_1?
@@ -360,7 +360,7 @@ class Registrant < ActiveRecord::Base
     !phone.blank?
   end
   
-  def generate_uuid
-    self.perishable_token = Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(10000000)} -- #{email_address}" )
+  def generate_uid
+    self.uid = Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)} -- #{email_address} -- #{home_zip_code}" )
   end
 end

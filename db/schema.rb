@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.string   "status"
     t.string   "locale",                             :limit => 2
     t.integer  "partner_id"
-    t.string   "perishable_token"
+    t.string   "uid"
     t.date     "date_of_birth"
     t.string   "email_address"
     t.boolean  "first_registration"
