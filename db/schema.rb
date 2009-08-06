@@ -22,11 +22,12 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
   end
 
   create_table "partners", :force => true do |t|
-    t.string   "username",                           :null => false
-    t.string   "email",                              :null => false
-    t.string   "crypted_password",                   :null => false
-    t.string   "password_salt",                      :null => false
-    t.string   "persistence_token",                  :null => false
+    t.string   "username",                                           :null => false
+    t.string   "email",                                              :null => false
+    t.string   "crypted_password",                                   :null => false
+    t.string   "password_salt",                                      :null => false
+    t.string   "persistence_token",                                  :null => false
+    t.string   "perishable_token",                   :default => "", :null => false
     t.string   "name"
     t.string   "organization"
     t.string   "url"
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email"
+  add_index "partners", ["perishable_token"], :name => "index_partners_on_perishable_token"
   add_index "partners", ["persistence_token"], :name => "index_partners_on_persistence_token"
   add_index "partners", ["username"], :name => "index_partners_on_username"
 
@@ -102,6 +104,8 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "registrants", ["uid"], :name => "index_registrants_on_uid"
 
   create_table "state_localizations", :force => true do |t|
     t.integer  "state_id"

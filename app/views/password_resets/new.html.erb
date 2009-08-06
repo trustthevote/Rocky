@@ -1,0 +1,12 @@
+<h1>Forgot Password</h1>
+<p>Fill out the form below and instructions to reset your password will be emailed to you:</p>
+
+<% form_tag :password_resets, :id => "new_password_resets" do %>
+  <p>
+    <label for="login">Username or Email Address</label>
+    <%= text_field_tag "login", "" %>
+  </p>
+  <div>
+    <%= submit_tag "Reset Password", :tag => "button" %>
+  </div>
+<% end %>

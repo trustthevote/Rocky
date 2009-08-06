@@ -62,6 +62,7 @@ class CreateRegistrants < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index "registrants", "uid"
   end
 
   def self.down

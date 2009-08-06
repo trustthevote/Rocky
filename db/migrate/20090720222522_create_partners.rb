@@ -6,6 +6,7 @@ class CreatePartners < ActiveRecord::Migration
       t.string    "crypted_password",   :null => false
       t.string    "password_salt",      :null => false
       t.string    "persistence_token",  :null => false
+      t.string    "perishable_token",   :default => "", :null => false
       t.string    "name"
       t.string    "organization"
       t.string    "url"
@@ -23,6 +24,7 @@ class CreatePartners < ActiveRecord::Migration
     add_index "partners", "username"
     add_index "partners", "email"
     add_index "partners", "persistence_token"
+    add_index "partners", "perishable_token"
   end
 
   def self.down
