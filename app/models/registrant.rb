@@ -361,6 +361,6 @@ class Registrant < ActiveRecord::Base
   end
   
   def generate_uuid
-    self.perishable_token = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    self.perishable_token = Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(10000000)} -- #{email_address}" )
   end
 end
