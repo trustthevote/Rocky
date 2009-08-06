@@ -183,24 +183,21 @@ ul.question textarea {
   margin-left: 3%;
 }
 
-ul.question select, ul.affirm select, ul.question span{
+ul.question select, ul.question span{
   display: block;
   margin: 1em auto;
   width: 10em;
-}
-
-ul.affirm {
-  list-style: disc outside !important;
-}
-
-ul.affirm select {
-  margin: 5px auto;
 }
 
 ul.affirm li {
   width: 80%;
   margin: 0 0 10px 30px;
   font-size: 16px;
+}
+
+ul.affirm input {
+  float: left;
+  margin-right:10px;
 }
 
 form.edit_registrant {

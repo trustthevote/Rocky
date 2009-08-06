@@ -52,9 +52,6 @@ class CreateRegistrants < ActiveRecord::Migration
       t.string      "survey_answer_1"
       t.string      "survey_answer_2"
 
-      t.boolean     "attest_true"
-      t.boolean     "attest_eligible"
-
       t.boolean     "ineligible_non_participating_state"
       t.boolean     "ineligible_age"
       t.boolean     "ineligible_non_citizen"

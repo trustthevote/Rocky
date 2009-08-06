@@ -23,20 +23,10 @@ describe Step5Controller do
     end
 
     it "should reject invalid input and show form again" do
-      put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_5_registrant, :state_id_number => nil)
+      put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_5_registrant, :attest_true => false)
       assert assigns[:registrant].step_5?
       assert assigns[:registrant].reload.step_4?
       assert_template "show"
     end
-    
-    it "should reject ineligible registrants" do
-      put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_5_registrant, :attest_true => false)
-      assert_not_nil assigns[:registrant]
-      assert assigns[:registrant].ineligible?
-      assert assigns[:registrant].ineligible_attest?
-      assert assigns[:registrant].rejected?
-      assert_redirected_to ineligible_registrant_url(assigns[:registrant])
-    end
-
   end
 end

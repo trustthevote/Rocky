@@ -96,8 +96,7 @@ class Registrant < ActiveRecord::Base
   end
 
   with_options :if => :at_least_step_5? do |reg|
-    reg.validates_inclusion_of :attest_true, :in => [false, true]
-    reg.validates_inclusion_of :attest_eligible, :in => [false, true]
+    reg.validates_acceptance_of :attest_true
   end
 
   def needs_mailing_address?
@@ -144,6 +143,7 @@ class Registrant < ActiveRecord::Base
   end
 
   ### instance methods
+  attr_accessor :attest_true
   
   def to_param
     uid
@@ -337,12 +337,11 @@ class Registrant < ActiveRecord::Base
     self.ineligible_non_participating_state = home_state && !home_state.participating?
     self.ineligible_age = date_of_birth && (date_of_birth > 16.years.ago.to_date)
     self.ineligible_non_citizen = !us_citizen?
-    self.ineligible_attest = (attest_true == false || attest_eligible == false)
     true # don't halt save in after_validation
   end
 
   def ineligible?
-    ineligible_non_participating_state || ineligible_age || ineligible_non_citizen || ineligible_attest
+    ineligible_non_participating_state || ineligible_age || ineligible_non_citizen
   end
 
   def eligible?

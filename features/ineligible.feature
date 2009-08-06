@@ -39,32 +39,6 @@ Feature: Ineligible
        And I press "registrant_submit"
       Then I should see "Personal Information"
 
-    Scenario: didn't affirm truth
-     Given I have completed step 4
-      When I go to the step 5 page
-       And I select "Yes" from "registrant_attest_eligible"
-       But I select "No" from "registrant_attest_true"
-      When I press "registrant_submit"
-      Then I should see "not eligible"
-       And I should see "confirm you are eligible"
-      When I follow "Return"
-       And I select "Yes" from "registrant_attest_true"
-       And I press "registrant_submit"
-      Then I should see "Download"
-      
-    Scenario: didn't affirm eligible
-     Given I have completed step 4
-      When I go to the step 5 page
-       And I select "Yes" from "registrant_attest_true"
-       But I select "No" from "registrant_attest_eligible"
-      When I press "registrant_submit"
-      Then I should see "not eligible"
-       And I should see "confirm you are eligible"
-      When I follow "Return"
-       And I select "Yes" from "registrant_attest_eligible"
-       And I press "registrant_submit"
-      Then I should see "Download"
-
     Scenario: multiple reasons on same page
      Given I go to a new registration page
        And I enter valid data for step 1
