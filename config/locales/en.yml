@@ -44,10 +44,7 @@ en:
         prev_zip_code: ZIP Code
         opt_in_email: Receive emails
         opt_in_sms: Receive txt messages
-        attest_true: The information I have provided is true to the best of my knowledge under penalty of perjury.
-          If I have provided false information, I may be fined, imprisoned,
-          or (if not a U.S. citizen) deported from or refused entry to the United States.
-        attest_eligible: "I meet the eligibility requirements of my state and subscribe to any oath required."
+        attest_true: I have reviewed the above information, which is true to the best of my knowledge.
     errors:
       models:
         registrant:
@@ -67,9 +64,7 @@ en:
             phone:
               invalid: "Should be ###-###-####"
             attest_true:
-              inclusion: "Select Yes or No"
-            attest_eligible:
-              inclusion: "Select Yes or No"
+              accepted: "You must indicate the above information is correct."
       messages:
         inclusion: "{{attribute}} is not included in the list"
         exclusion: "{{attribute}} is reserved"

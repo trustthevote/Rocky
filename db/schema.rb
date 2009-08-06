@@ -95,8 +95,6 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.boolean  "opt_in_sms"
     t.string   "survey_answer_1"
     t.string   "survey_answer_2"
-    t.boolean  "attest_true"
-    t.boolean  "attest_eligible"
     t.boolean  "ineligible_non_participating_state"
     t.boolean  "ineligible_age"
     t.boolean  "ineligible_non_citizen"

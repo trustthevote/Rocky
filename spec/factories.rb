@@ -32,8 +32,7 @@ end
 
 Factory.define :step_5_registrant, :parent => :step_4_registrant do |f|
   f.status          "step_5"
-  f.attest_true     true
-  f.attest_eligible true
+  f.attest_true     "1"
 end
 
 Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
@@ -79,8 +78,7 @@ Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
   f.prev_zip_code       "15215"
   f.opt_in_email        true
   f.opt_in_sms          true
-  f.attest_true         true
-  f.attest_eligible     true
+  f.attest_true         "1"
 end
 
 

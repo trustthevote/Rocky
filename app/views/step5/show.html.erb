@@ -91,29 +91,22 @@
     </li>
     <% end %>
   </ul>
-  <h2>
-    <span>Legal Stuff</span>
-  </h2>
 </div>
-<div>
-  <p class="instructions">I have reviewed my state's instructions and I swear/affirm that:</p>
 
-  <% form_for(@registrant, :url => registrant_step_5_path(@registrant)) do |form| %>
-    <ul class="affirm">
-      <li><h3>I am a United States citizen.</h3></li>
-      <li>
-        <h3><%= form.label :attest_eligible %></h3>
-        <div><%= form.select :attest_eligible, yes_no_options %></div>
-      </li>
-      <li>
-        <h3><%= form.label :attest_true %></h3>
-        <div><%= form.select :attest_true, yes_no_options %></div>
-      </li>
-    </ul>
+<% form_for(@registrant, :url => registrant_step_5_path(@registrant)) do |form| %>
+  <ul class="affirm">
+    <li>
+      <h3>
+        <%= form.check_box :attest_true %>
+        <div>
+          <%= form.label :attest_true %>
+          <span class="error"><%= form.object.errors.on :attest_true %></span>
+        </div>
+      </h3>
+    </li>
+  </ul>
 
-    <div class="back"><%= link_to t('txt.button.back'), registrant_step_4_path(@registrant) %></div>
-    <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
-    <span class="error">Eligible: <%= form.object.errors.on :attest_eligible %>&nbsp;</span>
-    <span class="error">True: <%= form.object.errors.on :attest_true %>&nbsp;</span>
-  <% end %>
-</div>
+  <div class="back"><%= link_to t('txt.button.back'), registrant_step_4_path(@registrant) %></div>
+  <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
+  
+<% end %>

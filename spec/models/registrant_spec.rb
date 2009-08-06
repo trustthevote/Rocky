@@ -225,7 +225,6 @@ describe Registrant do
 
     it "should not require attestations" do
       assert_attribute_valid_with(:step_3_registrant, :attest_true => nil)
-      assert_attribute_valid_with(:step_3_registrant, :attest_eligible => nil)
     end
 
     it "should check format of prev_zip_code" do
@@ -301,30 +300,7 @@ describe Registrant do
 
   describe "step 5" do
     it "requires attestations" do
-      assert_attribute_invalid_with(:step_5_registrant, :attest_true => nil)
-      assert_attribute_invalid_with(:step_5_registrant, :attest_eligible => nil)
-    end
-
-    it "should be ineligible when not telling the truth" do
-      reg = Factory.build(:step_5_registrant, :attest_true => false)
-      assert reg.valid?
-      assert reg.ineligible?
-      assert reg.ineligible_attest?
-      reg = Factory.build(:step_5_registrant, :attest_true => true)
-      assert reg.valid?
-      assert reg.eligible?
-      assert !reg.ineligible_attest?
-    end
-
-    it "should be ineligible when attesting ineligible" do
-      reg = Factory.build(:step_5_registrant, :attest_eligible => false)
-      assert reg.valid?
-      assert reg.ineligible?
-      assert reg.ineligible_attest?
-      reg = Factory.build(:step_5_registrant, :attest_eligible => true)
-      assert reg.valid?
-      assert reg.eligible?
-      assert !reg.ineligible_attest?
+      assert_attribute_invalid_with(:step_5_registrant, :attest_true => "0")
     end
   end
 
