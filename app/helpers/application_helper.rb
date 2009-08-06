@@ -65,4 +65,22 @@ module ApplicationHelper
     end
   end
 
+  def progress_indicator(registrant)
+    if controller.class == RegistrantsController
+      current_controller_step = 1
+    elsif controller.class.name =~ /^Step(\d)Controller$/
+      current_controller_step = $1.to_i
+    else
+      current_controller_step = -1
+    end
+      
+    (1..4).map do |step_index|
+      progress = case step_index <=> current_controller_step
+      when 0 then "progress-current"
+      when -1 then "progress-done"
+      else "progress-todo"
+      end
+      content_tag :li, step_index, :class => progress
+    end.join
+  end
 end

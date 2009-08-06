@@ -31,7 +31,37 @@ input, textarea {
 }
 
 #header {
-  
+  height: 95px;
+  background-image: url('/images/reg/header.jpg');
+  background-repeat: no-repeat;
+}
+
+#progress-bar {
+  padding: 70px 0 0 5px;
+}
+
+#progress-bar li {
+  float: left;
+  width: 27px;
+  height: 22px;
+  margin: 0 2px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 28px;
+  background-repeat: no-repeat;
+}
+
+#progress-bar li.progress-done {
+  background-image: url('/images/buttons/progress_done.gif');
+}
+
+#progress-bar li.progress-current {
+  background-image: url('/images/buttons/progress_current.gif');
+}
+
+#progress-bar li.progress-todo {
+  background-image: url('/images/buttons/progress_todo.gif');
 }
 
 #footer {

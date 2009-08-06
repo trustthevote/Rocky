@@ -14,7 +14,12 @@
 <body>
   <div id="container">
     <div id="header">
-      <%= image_tag("reg/header.jpg") %>
+      <div id="progress-bar">
+        <ul>
+          <li>Step:</li>
+          <%= progress_indicator(@registrant) %>
+        </ul>
+      </div>
     </div>
     <div id="main">
       <%= flash_messages %>
