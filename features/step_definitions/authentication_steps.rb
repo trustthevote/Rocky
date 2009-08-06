@@ -4,6 +4,10 @@ Then /^I should see error messages$/ do
   assert_match /error(s)? prohibited/m, response.body
 end
 
+Then /^I should not see error messages$/ do
+  assert_no_match /error(s)? prohibited/m, response.body
+end
+
 # Database
 
 Given /^no partner exists with a login of "(.*)"$/ do |login|
@@ -35,6 +39,11 @@ end
 
 Then /^I should be forbidden$/ do
   assert_response :forbidden
+end
+
+Given /^I am logged in as a valid partner$/ do
+  partner = Factory.create(:partner)
+  And %Q{I log in as "#{partner.username}/password"}
 end
 
 # Actions

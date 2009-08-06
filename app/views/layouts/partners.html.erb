@@ -15,7 +15,12 @@
   <div id="container">
     <div id="header">
       <% if current_partner_session %>
-        <p><%= link_to "Profile", edit_partner_path %> | <%= link_to "Log out", logout_path %></p>
+        <p>
+          <%= link_to "Show Statistics", '#' %> |
+          <%= link_to "Download Registration Data", '#' %> |
+          <%= link_to "Profile", edit_partner_path %> |
+          <%= link_to "Log out", logout_path %>
+        </p>
       <% end %>
     </div>
     <%= flash_messages %>

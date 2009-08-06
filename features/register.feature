@@ -17,5 +17,13 @@ Feature: Register
       And I fill in "Email" with "email@person.com"
       And I fill in "Password" with "password"
       And I fill in "Confirm password" with "password"
+      And I fill in "Name" with "My Name"
+      And I fill in "Url" with "example.com"
+      And I fill in "Address" with "123 Market St"
+      And I fill in "City" with "San Francisco"
+      And I select "California" from "State"
+      And I fill in "ZIP Code" with "94113"
+      And I fill in "Phone" with "415-555-1234"
       And I press "Register"
-      Then I should be on the partner dashboard page
+      Then I should not see error messages
+      And I should see "Log out"

@@ -1,0 +1,14 @@
+<h1>Survey Questions</h1>
+
+<% form_for @partner, :url => partner_questions_path, :method => :put do |form| %>
+  <%= form.error_messages %>
+  <p><%= form.label :survey_question_1_en, "Question 1, English" %></p>
+  <p><%= form.text_field :survey_question_1_en, :size => 100 %></p>
+  <p><%= form.label :survey_question_1_es, "Question 1, Spanish" %></p>
+  <p><%= form.text_field :survey_question_1_es, :size => 100 %></p>
+  <p><%= form.label :survey_question_2_en, "Question 2, English" %></p>
+  <p><%= form.text_field :survey_question_2_en, :size => 100 %></p>
+  <p><%= form.label :survey_question_2_es, "Question 2, Spanish" %></p>
+  <p><%= form.text_field :survey_question_2_es, :size => 100 %></p>
+  <p><%= form.submit "Submit" %></p>
+<% end %>

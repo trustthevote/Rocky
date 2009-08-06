@@ -1,4 +1,13 @@
 
+<div>
+  <h2>Survey Questions</h2>
+  <p>1. English: <%= h @partner.survey_question_1_en %></p>
+  <p>1. Spanish: <%= h @partner.survey_question_1_es %></p>
+  <p>2. English: <%= h @partner.survey_question_2_en %></p>
+  <p>2. Spanish: <%= h @partner.survey_question_2_es %></p>
+  <p><%= link_to "Edit Questions", edit_partner_questions_path %></p>
+</div>
+
 <form class="copy_html" action="#" method="get" accept-charset="utf-8">
   <div>
     <h3><label for="widget_html">Copy this for an overlay on your site:</label> <%= clippy(h(@widget_html)) %></h3>

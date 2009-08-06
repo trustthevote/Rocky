@@ -1,6 +1,6 @@
 class PartnersController < ApplicationController
   before_filter :require_partner, :only => [:show, :edit, :update]
-  
+
   def new
     @partner = Partner.new
   end
@@ -30,6 +30,7 @@ class PartnersController < ApplicationController
   end
 
   def show
+    @partner = current_partner
     @widget_html = <<-HTML
 <div id="widget_box">
   <a href="#{new_registrant_url(:partner => partner_id)}" id="rtv-widget-link">
