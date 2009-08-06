@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_partner_session, :current_partner
   filter_parameter_logging :password, :password_confirmation
 
+  before_filter :ensure_https
+
   private
 
   def current_partner_session
