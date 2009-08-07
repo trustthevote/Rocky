@@ -11,7 +11,7 @@
 
 <ul class="checkbox">
   <li>
-    <h3><%= form.check_box :change_of_name %> <%= form.label :change_of_name %></h3>
+    <h3><%= form.check_box :change_of_name %> <%= form.label :change_of_name %> <%= tooltip_tag :previous_name %></h3>
     <span class="error"><%= form.object.errors.on :change_of_name %></span>
   </li>
 </ul>
@@ -50,7 +50,7 @@
 
 <ul class="checkbox">
   <li>
-    <h3><%= form.check_box :change_of_address %> <%= form.label :change_of_address %></h3>
+    <h3><%= form.check_box :change_of_address %> <%= form.label :change_of_address %> <%= tooltip_tag :previous_address %></h3>
     <span class="error"><%= form.object.errors.on :change_of_address %></span>
   </li>
 </ul>

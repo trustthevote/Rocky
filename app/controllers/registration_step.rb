@@ -1,4 +1,8 @@
 module RegistrationStep
+  def self.included(controller)
+    controller.layout "registration"
+  end
+
   def show
     find_registrant
     set_up_view_variables

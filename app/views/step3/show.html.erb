@@ -5,6 +5,7 @@
     <li>
       <h3><%= form.label :state_id_number %></h3>
       <div><%= form.text_field :state_id_number, :size => 20 %></div>
+      <%= tooltip_tag :state_id_number %>
       <span class="error"><%= form.object.errors.on :state_id_number %></span>
     </li>
   </ul>
@@ -12,6 +13,7 @@
     <li>
       <h3><%= form.label :phone %></h3>
       <div><%= form.text_field :phone, :size => 20 %></div>
+      <%= tooltip_tag :phone %>
       <span class="error"><%= form.object.errors.on :phone %></span>
     </li>
     <li class="secondary">

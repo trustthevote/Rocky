@@ -105,6 +105,7 @@ en:
       back: Previous Step
       download: "Download PDF!"
       ineligible_try_again: Return
+      help: Help
     registration:
       step_1_header: New registrant
       step_2_header: Personal Information
@@ -155,3 +156,26 @@ en:
         age: You must be 16 years old to register to vote
         non_citizen: You must be a U.S. citizen to register to vote.
         attest: You must confirm you are eligible to vote
+      tooltips:
+        email_address: We need your email address to make sure you can download your registration form. 
+          Later, we'll also give you a chance to sign-up to receive more information from us.
+        home_zip_code: We need your zip code to make sure your state registers voters.
+        date_of_birth: You must be 16 years old to register to vote.
+        registrant_name: Title is required.
+        home_address: Where you reside, even if it isn't where you receive mail.
+        mailing_address: Where you receive mail.
+        race: This isn't per-state yet.
+        party: This isn't per-state yet.  Please enter the name of the political party with which you wish to register.  If you
+          do not wish to register with an party, enter "Decline to State" in the space provided.
+          California law allows voters who "decline to state" an affiliation with a qualified political party or who affiliate
+          with a nonqualified political party that files a notice with the Secretary of State allowing them to do so.  You can 
+          call 1-800-345-VOTE or visit www.ss.ca.gov to learn which political parties are allowing nonaffiliated voters to 
+          participate in their primary election.
+        state_id_number: This isn't per-state yet.  When you register to vote, you must provide your California driver's license
+          or California identification card number, if you have one.  If you do not have a driver's license or ID card, you must
+          provide the last four digits of your Social Security Number (SSN).  If you do not include this information, you will 
+          be require to provide identification when you vote.
+        phone: We'd like to be able to call you or send you text messages about getting involved.  However, phone isn't required.
+        previous_name: If you've changed your name since your last registration, enter your previous name.
+        previous_address: If you've moved since your last registration, enter your previous address.
+        
