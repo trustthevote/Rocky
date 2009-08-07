@@ -254,6 +254,10 @@ span.error {
   margin: 4px;
 }
 
+legend img.tooltip {
+  margin-left: 4px;
+}
+
 .stacked span.error {
   font-size: 10px;
   height: 12px;

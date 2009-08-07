@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 <% form_for(@registrant, :url => registrant_step_2_path(@registrant)) do |form| %>
   <fieldset>
-    <legend><%= I18n.t('txt.registration.name') %></legend>
+    <legend><%= I18n.t('txt.registration.name') %><%= tooltip_tag :registrant_name %></legend>
     <ul class="stacked">
       <li>
         <h3><%= form.label :name_title %></h3>
@@ -39,7 +39,7 @@ $(document).ready(function() {
   </fieldset>
 
   <fieldset>
-    <legend><%= I18n.t('txt.registration.home_address') %></legend>
+    <legend><%= I18n.t('txt.registration.home_address') %><%= tooltip_tag :home_address %></legend>
     <ul class="stacked">
       <li>
         <h3><%= form.label :home_address %></h3>
@@ -77,7 +77,7 @@ $(document).ready(function() {
   </ul>
 
   <fieldset id="mailing_address_set">
-    <legend><%= I18n.t('txt.registration.mailing_address') %></legend>
+    <legend><%= I18n.t('txt.registration.mailing_address') %><%= tooltip_tag :mailing_address %></legend>
     <ul class="stacked">
       <li>
         <h3><%= form.label :mailing_address %></h3>
@@ -113,6 +113,7 @@ $(document).ready(function() {
     <li>
       <h3><%= form.label :race %></h3>
       <div><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></div>
+      <%= tooltip_tag :race %>
       <span class="error"><%= form.object.errors.on :race %></span>
     </li>
   </ul>
@@ -121,6 +122,7 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :party %></h3>
         <div><%= form.select :party, @state_parties, :include_blank => true %></div>
+        <%= tooltip_tag :party %>
         <span class="error"><%= form.object.errors.on :party %></span>
       </li>
     </ul>

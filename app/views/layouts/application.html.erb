@@ -11,6 +11,17 @@
                               Rails.env.production? ? 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' : 'jquery-1.3.2',
                               Rails.env.production? ? 'qtip/jquery.qtip-1.0.0-rc3.min.js' : 'qtip/jquery.qtip-1.0.0-rc3.js' %>
   <%= yield :head %>
+  <script type="text/javascript" charset="utf-8">
+    $.fn.qtip.styles.registrant = { 
+      name: 'blue',
+      width: { max: '200px' },
+      color: '#006',
+      border: { // Rounded corners
+        width: 3,
+        radius: 8
+      }
+    }
+  </script>
 </head>
 <body>
   <div id="container">
@@ -31,5 +42,37 @@
     </div>
   </div>
   <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
+  <script>
+    $('.flat img.tooltip, .checkbox img.tooltip').qtip({
+      style: {
+        name: 'registrant',
+        tip: 'bottomLeft'
+      },
+      position: {
+        corner: {
+          target: 'topRight',
+          tooltip: 'bottomLeft'
+        },
+        adjust: { screen: true } // Change positioning if tooltip would be offscreen.
+      },
+      hide: { effect: { length: 50 } },
+      show: { effect: { length: 50 } }
+    })
+    $('legend img.tooltip').qtip({
+      style: {
+        name: 'registrant',
+        tip: 'leftBottom'
+      },
+      position: {
+        corner: {
+          target: 'rightMiddle',
+          tooltip: 'leftBottom'
+        },
+        adjust: { screen: true } // Change positioning if tooltip would be offscreen.
+      },
+      hide: { effect: { length: 50 } },
+      show: { effect: { length: 50 } }
+    })
+  </script>
 </body>
 </html>
