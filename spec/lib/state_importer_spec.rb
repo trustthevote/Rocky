@@ -17,7 +17,9 @@ CSV
       GeoState.reset_all_states
     end
     it "sets fields in state record" do
-      StateImporter.import(file_basic)
+      silence_output do
+        StateImporter.import(file_basic)
+      end
 
       state = GeoState['AL']
       assert_equal true, state.participating
@@ -42,7 +44,9 @@ CSV
     it "updates existing state with new values" do
       alabama = GeoState['AL']
       alabama.update_attributes!(:name => "ALABAMA")
-      StateImporter.import(file_basic)
+      silence_output do
+        StateImporter.import(file_basic)
+      end
       alabama.reload
       assert_equal "Alabama", alabama.name
     end
@@ -54,7 +58,9 @@ CSV
       StateLocalization.destroy_all
     end
     it "sets fields in each locale's record" do
-      StateImporter.import(file_basic)
+      silence_output do
+        StateImporter.import(file_basic)
+      end
 
       state = GeoState['AL']
       en = state.localizations.find_by_locale!('en')
@@ -92,10 +98,20 @@ CSV
       err_output = StringIO.new('')
       $stderr = err_output
       assert_nothing_raised do
-        StateImporter.import(file_bad)
+        silence_output do
+          StateImporter.import(file_bad)
+        end
       end
       $stderr = old_stderr
       assert_match /could not import state data/, err_output.string
     end
+  end
+
+  def silence_output
+    old_stdout = $stdout
+    $stdout = StringIO.new('')
+    yield
+  ensure
+    $stdout = old_stdout
   end
 end
