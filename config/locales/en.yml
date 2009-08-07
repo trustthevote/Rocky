@@ -161,7 +161,10 @@ en:
           Later, we'll also give you a chance to sign-up to receive more information from us.
         home_zip_code: We need your zip code to make sure your state registers voters.
         date_of_birth: You must be 16 years old to register to vote.
-        registrant_name: Title is required.
+        registrant_name: You must provide your first and last name, and a prefix such as Ms., Mr., Mrs., or Miss. In addition, 
+          you may provide your middle name and suffix, such as Jr., Sr. Providing your complete name, including middle name and 
+          suffix, will be extremely helpful in identifying you in subsequent voter registration request, such as change of 
+          address, and in finding an exact match with other state records such your driver's license or state ID card.
         home_address: Where you reside, even if it isn't where you receive mail.
         mailing_address: Where you receive mail.
         race: This isn't per-state yet.
@@ -171,11 +174,14 @@ en:
           with a nonqualified political party that files a notice with the Secretary of State allowing them to do so.  You can 
           call 1-800-345-VOTE or visit www.ss.ca.gov to learn which political parties are allowing nonaffiliated voters to 
           participate in their primary election.
-        state_id_number: This isn't per-state yet.  When you register to vote, you must provide your California driver's license
-          or California identification card number, if you have one.  If you do not have a driver's license or ID card, you must
-          provide the last four digits of your Social Security Number (SSN).  If you do not include this information, you will 
-          be require to provide identification when you vote.
-        phone: We'd like to be able to call you or send you text messages about getting involved.  However, phone isn't required.
+        state_id_number: This isn't per-state yet. You must provide an existing ID number in order to register to vote, so that your state can accurately 
+          identify your voter registration records. Federal law requires you to provide an ID number from a state-issued driver's 
+          license or identity card, if you have one. If you don't, then you must provide the last four digits of your Social 
+          Security Number -- and only the last 4 digits. You should use this ID number any time you re-register to vote, or 
+          update your address or other part of your voter registration record. If you're registering for the first time, 
+          your state may have additional requirements for proof of identity the first time you vote -- please review the state 
+          specific instructions in the voter registration form that you will shortly be printing out.
+        phone: Your phone number is not required, but will be helpful in contacting you in a timely manner about voter registration matters.
         previous_name: If you've changed your name since your last registration, enter your previous name.
         previous_address: If you've moved since your last registration, enter your previous address.
         
