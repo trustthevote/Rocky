@@ -105,6 +105,7 @@ en:
       back: Previous Step
       download: "Download PDF!"
       ineligible_try_again: Return
+      help: Help
     registration:
       step_1_header: New registrant
       step_2_header: Personal Information
@@ -155,3 +156,8 @@ en:
         age: You must be 16 years old to register to vote
         non_citizen: You must be a U.S. citizen to register to vote.
         attest: You must confirm you are eligible to vote
+      tooltips:
+        email_address: We need your email address to make sure you can download your registration form. 
+          Later, we'll also give you a chance to sign-up to receive more information from us.
+        home_zip_code: We need your zip code to make sure your state registers voters.
+        date_of_birth: You must be 16 years old to register to vote.

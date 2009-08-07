@@ -4,3 +4,31 @@
   <%= render :partial => 'form', :object => form %>
   <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
 <% end %>
+
+<script>
+  $.fn.qtip.styles.registrant = { 
+    name: 'blue',
+    width: { max: '200px' },
+    color: '#006',
+    border: { // Rounded corners
+      width: 3,
+      radius: 8
+    }
+  }
+
+  $('img.tooltip').qtip({
+    style: {
+      name: 'registrant',
+      tip: 'bottomLeft'
+    },
+    position: {
+      corner: {
+        target: 'topRight',
+        tooltip: 'bottomLeft'
+      },
+      adjust: { screen: true } // Change positioning if tooltip would be offscreen.
+    },
+    hide: { effect: { length: 50 } },
+    show: { effect: { length: 50 } }
+  })
+</script>

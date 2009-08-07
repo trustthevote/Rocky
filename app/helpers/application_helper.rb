@@ -75,4 +75,10 @@ module ApplicationHelper
       content_tag :li, step_index, :class => progress
     end.join
   end
+  
+  def tooltip_tag(tooltip_id)
+    image_tag 'buttons/help_icon.gif', :mouseover => 'buttons/help_icon_over.gif', :alt => t('txt.button.help'), 
+      :class => 'tooltip', :id => "tooltip-#{tooltip_id}", 
+      :title => t("txt.registration.tooltips.#{tooltip_id}")
+  end
 end
