@@ -4,8 +4,10 @@ class StateImporter
   def self.import(file)
     FasterCSV.new(file, :headers => true).each do |row|
       begin
+        print "#{row['name']}... "
         import_state(row)
         import_localizations(row)
+        puts "DONE!"
       rescue StandardError => e
         $stderr.puts "!!! could not import state data for #{row['name']}"
         $stderr.puts e.message
