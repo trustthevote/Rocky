@@ -1,6 +1,6 @@
 module RegistrationStep
   def self.included(controller)
-    controller.layout "registrant"
+    controller.layout "registration"
   end
 
   def show
