@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
     t.boolean  "requires_race"
     t.boolean  "requires_party"
     t.boolean  "participating"
+    t.integer  "id_length_min"
+    t.integer  "id_length_max"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -107,8 +109,12 @@ ActiveRecord::Schema.define(:version => 20090720222522) do
 
   create_table "state_localizations", :force => true do |t|
     t.integer  "state_id"
-    t.string   "locale",     :limit => 2
+    t.string   "locale",                    :limit => 2
     t.string   "parties"
+    t.string   "no_party"
+    t.string   "not_participating_tooltip", :limit => 500
+    t.string   "race_tooltip"
+    t.string   "id_number_tooltip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
