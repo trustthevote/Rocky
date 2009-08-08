@@ -24,13 +24,6 @@ describe Registrant do
   end
   
   describe "any step" do
-    xit "blanks race unless requires race" do
-      reg = Factory.build(:maximal_registrant)
-      stub(reg).requires_race? { false }
-      assert reg.valid?, reg.errors.full_messages
-      assert_nil reg.race
-    end
-
     it "blanks party unless requires party" do
       reg = Factory.build(:maximal_registrant)
       stub(reg).requires_party? { false }
@@ -332,9 +325,9 @@ describe Registrant do
   describe "state parties" do
     it "gets parties by locale when required" do
       reg = Factory.build(:step_2_registrant, :locale => 'en', :home_state => GeoState["CA"])
-      assert_equal %w(Democratic Green Libertarian Republican), reg.state_parties
+      assert_equal %w(Democratic Green Libertarian Republican Decline\ to\ State), reg.state_parties
       reg.locale = 'es'
-      assert_equal %w(Demócrata Verde Libertariano Republicano), reg.state_parties
+      assert_equal %w(Demócrata Verde Libertariano Republicano Disminución\ del\ Estado), reg.state_parties
     end
 
     it "gets no parties when not required" do

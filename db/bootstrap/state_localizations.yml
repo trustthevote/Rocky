@@ -6,6 +6,7 @@ california_en:
   - Green
   - Libertarian
   - Republican
+  no_party: Decline to State
 california_es:
   state_id: 5
   locale: es
@@ -14,15 +15,18 @@ california_es:
   - Verde
   - Libertariano
   - Republicano
+  no_party: Disminución del Estado
 florida_en:
   state_id: 10
   locale: en
   parties: 
   - Orange
   - Mickey Mouse
+  no_party: Decline to State
 florida_es:
   state_id: 10
   locale: es
   parties: 
   - Naranja
   - Ratoncito
+  no_party: Disminución del Estado

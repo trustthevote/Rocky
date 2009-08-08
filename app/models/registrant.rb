@@ -231,7 +231,8 @@ class Registrant < ActiveRecord::Base
 
   def state_parties
     if requires_party?
-      localizations.by_locale(locale).parties
+      loc = localizations.by_locale(locale)
+      loc.parties + [loc.no_party]
     else
       nil
     end
