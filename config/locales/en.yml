@@ -148,6 +148,8 @@ en:
       - Work
       - Other
       instructions:
+        state_id_number: You must provide an ID number from your state-issued driver's license or identity card.
+          If you don't have either, then you must provide the last 4 digits of your Social Security Number.
         download: You're not done. Click on the print form button to print out your voter registration form.
           Sign it and mail to the address located on the form.
         download_2: You won't be registered unless you print, sign and mail in your form!

@@ -310,8 +310,14 @@ legend img.tooltip {
   letter-spacing: 0.08em;
 }
 
-p.instructions {
-  font-size: 14px;
+li.instructions {
+  font-size: 11px;
+}
+
+.instructions p {
+  margin: 5px 75px 10px 130px;
+  color: #434343;
+  font-size: 10px;
 }
 
 .download {
