@@ -20,5 +20,6 @@ class Step2Controller < ApplicationController
   def set_up_view_variables
     @registrant.mailing_state ||= @registrant.home_state
     @state_parties = @registrant.state_parties
+    @race_tooltip = @registrant.race_tooltip
   end
 end

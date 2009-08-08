@@ -19,5 +19,6 @@ class Step3Controller < ApplicationController
 
   def set_up_view_variables
     @registrant.prev_state ||= @registrant.home_state
+    @state_id_tooltip = @registrant.state_id_tooltip
   end
 end

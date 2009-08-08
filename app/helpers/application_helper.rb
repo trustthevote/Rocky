@@ -76,9 +76,9 @@ module ApplicationHelper
     end.join
   end
   
-  def tooltip_tag(tooltip_id)
-    image_tag 'buttons/help_icon.gif', :mouseover => 'buttons/help_icon_over.gif', :alt => t('txt.button.help'), 
-      :class => 'tooltip', :id => "tooltip-#{tooltip_id}", 
-      :title => t("txt.registration.tooltips.#{tooltip_id}")
+  def tooltip_tag(tooltip_id, content = t("txt.registration.tooltips.#{tooltip_id}"))
+    image_tag 'buttons/help_icon.gif', :mouseover => 'buttons/help_icon_over.gif', :alt => t('txt.button.help'),
+      :class => 'tooltip', :id => "tooltip-#{tooltip_id}",
+      :title => content
   end
 end

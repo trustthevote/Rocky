@@ -113,7 +113,7 @@ $(document).ready(function() {
     <li>
       <h3><%= form.label :race %></h3>
       <div><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></div>
-      <%= tooltip_tag :race %>
+      <%= tooltip_tag :race, @race_tooltip %>
       <span class="error"><%= form.object.errors.on :race %></span>
     </li>
   </ul>

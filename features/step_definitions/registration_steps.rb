@@ -25,6 +25,10 @@ Given /^I have not downloaded the PDF before$/ do
   `rm #{@registrant.pdf_path}`
 end
 
+Given /there is localized state data/ do
+  @registrant.home_state.localizations << StateLocalization.new(:locale => 'en', :id_number_tooltip => 'local tooltip')
+end
+
 Then /^I should see a new download$/ do
   assert File.exists?(@registrant.pdf_path)
   `rm #{@registrant.pdf_path}`

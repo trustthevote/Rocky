@@ -237,6 +237,14 @@ class Registrant < ActiveRecord::Base
       nil
     end
   end
+  
+  def state_id_tooltip
+    localizations.by_locale(locale).id_number_tooltip
+  end
+
+  def race_tooltip
+    localizations.by_locale(locale).race_tooltip
+  end
 
   def validate_party
     if requires_party?

@@ -13,3 +13,11 @@ Feature: Tooltips
       And I hover over the "email_address" tooltip
       And I stop hovering over the "email_address" tooltip
       Then I should not see "to receive more information"
+
+    Scenario: See state-specific tooltip
+     Given I have completed step 2
+      And there is localized state data
+      When I go to the step 3 page
+      And I hover over the "state_id_number" tooltip
+      Then I should see "local tooltip"
+
