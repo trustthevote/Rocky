@@ -3,7 +3,7 @@
 <div class="review">
   <h2>
     <span><%= t('txt.registration.step_1_header') %></span>
-    <div class="review_edit"><%= link_to t("txt.button.edit"), registrant_path(@registrant) %></div>
+    <div class="review_edit"><%= link_to image_tag("#{I18n.locale}/button_edit.gif", :alt => t("txt.button.edit")), registrant_path(@registrant) %></div>
   </h2>
   
   <ul>
@@ -23,7 +23,7 @@
 
   <h2>
     <span><%= t('txt.registration.step_2_header') %></span>
-    <div class="review_edit"><%= link_to t("txt.button.edit"), registrant_step_2_path(@registrant) %></div>
+    <div class="review_edit"><%= link_to image_tag("#{I18n.locale}/button_edit.gif", :alt => t("txt.button.edit")), registrant_step_2_path(@registrant) %></div>
   </h2>
 
   <ul>
@@ -63,7 +63,7 @@
 
   <h2>
     <span><%= t('txt.registration.step_3_header') %></span>
-    <div class="review_edit"><%= link_to t("txt.button.edit"), registrant_step_3_path(@registrant) %></div>
+    <div class="review_edit"><%= link_to image_tag("#{I18n.locale}/button_edit.gif", :alt => t("txt.button.edit")), registrant_step_3_path(@registrant) %></div>
   </h2>
 
   <ul>
@@ -107,6 +107,5 @@
   </ul>
 
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_4_path(@registrant) %></div>
-  <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
-  
+  <div class="button"><%= image_submit_tag "#{I18n.locale}/button_prepareform.gif", :alt => I18n.t('txt.button.prepare'), :id => "registrant_submit" %></div>
 <% end %>

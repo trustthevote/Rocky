@@ -29,11 +29,11 @@
   </ul>
   <ul class="question">
     <li>
-      <h3><%= form.label :survey_answer_2, h(@question_2 * 8) %></h3>
+      <h3><%= form.label :survey_answer_2, h(@question_2) %></h3>
       <div><%= form.text_area :survey_answer_2, :size => "40x3" %></div>
     </li>
   </ul>
 
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_3_path(@registrant) %></div>
-  <div class="button"><%= form.submit I18n.t('txt.button.submit') %></div>
+  <div class="button"><%= image_submit_tag "#{I18n.locale}/button_reviewregistration.gif", :alt => I18n.t('txt.button.review'), :id => "registrant_submit" %></div>
 <% end %>

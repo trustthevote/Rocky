@@ -106,6 +106,8 @@ en:
       download: "Download PDF!"
       ineligible_try_again: Return
       help: Help
+      prepare: Prepare Form
+      review: Review Application
     registration:
       step_1_header: New registrant
       step_2_header: Personal Information

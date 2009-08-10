@@ -20,4 +20,4 @@ Feature: Step 5
       When I go to the step 5 page
        And I check "registrant_attest_true"
        And I press "registrant_submit"
-      Then I should see "Download"
+      Then I should see "Print Your Form"
