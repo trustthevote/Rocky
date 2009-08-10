@@ -2,6 +2,7 @@
 <script>
 $(document).ready(function() {
   checkboxTogglesSet($('#registrant_has_mailing_address'), $('#mailing_address_set'), $('#mailing_address_rule'));
+  $('#javascript_disabled').remove();
 });
 </script>
 <% end %>
@@ -77,6 +78,7 @@ $(document).ready(function() {
   </ul>
 
   <fieldset id="mailing_address_set">
+    <%= hidden_field_tag "javascript_disabled", "1"  %>
     <legend><%= I18n.t('txt.registration.mailing_address') %><%= tooltip_tag :mailing_address %></legend>
     <ul class="stacked">
       <li>

@@ -3,6 +3,7 @@
   $(document).ready(function() {
     checkboxTogglesSet($('#registrant_change_of_name'), $('#prev_name_set'), $('#prev_name_rule'));
     checkboxTogglesSet($('#registrant_change_of_address'), $('#prev_address_set'), $('#prev_address_rule'));
+    $('#javascript_disabled').remove();
   });
   </script>
 <% end %>
@@ -17,6 +18,7 @@
 </ul>
 
 <fieldset id="prev_name_set">
+  <%= hidden_field_tag "javascript_disabled", "1"  %>
   <legend><%= I18n.t('txt.registration.previous_name') %></legend>
   <ul class="stacked">
     <li>

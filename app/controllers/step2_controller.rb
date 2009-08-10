@@ -1,6 +1,14 @@
 class Step2Controller < ApplicationController
   include RegistrationStep
 
+  def update
+    if params[:javascript_disabled] == "1" && params[:registrant]
+      reg = params[:registrant]
+      reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
+    end
+    super
+  end
+
   def current_step
     2
   end

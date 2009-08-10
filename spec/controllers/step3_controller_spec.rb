@@ -28,5 +28,18 @@ describe Step3Controller do
       assert assigns[:registrant].reload.step_2?
       assert_template "show"
     end
+
+    it "should notice disabled javascript and override has_mailing_address" do
+      put :update, :registrant_id => @registrant.to_param,
+                   :registrant => Factory.attributes_for(:step_3_registrant, :prev_address => "submitted", :change_of_address => "0"),
+                   :javascript_disabled => "1"
+      assert assigns[:registrant].invalid?
+      assert_template "show"
+      put :update, :registrant_id => @registrant.to_param,
+                   :registrant => Factory.attributes_for(:step_3_registrant, :prev_first_name => "submitted", :change_of_name => "0"),
+                   :javascript_disabled => "1"
+      assert assigns[:registrant].invalid?
+      assert_template "show"
+    end
   end
 end

@@ -1,6 +1,15 @@
 class Step3Controller < ApplicationController
   include RegistrationStep
 
+  def update
+    if params[:javascript_disabled] == "1" && params[:registrant]
+      reg = params[:registrant]
+      reg[:change_of_address] = !"#{reg[:prev_address]}#{reg[:prev_unit]}#{reg[:prev_city]}#{reg[:prev_zip_code]}".blank?
+      reg[:change_of_name] = !"#{reg[:prev_first_name]}#{reg[:prev_middle_name]}#{reg[:prev_last_name]}".blank?
+    end
+    super
+  end
+
   def current_step
     3
   end
