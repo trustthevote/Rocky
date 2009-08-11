@@ -15,6 +15,7 @@ Feature: Step 5
        And I press "registrant_submit"
       Then I should see "Review"
 
+    @cleanup_pdf
     Scenario: enter data
      Given I have completed step 4
       When I go to the step 5 page

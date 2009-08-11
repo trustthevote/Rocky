@@ -319,7 +319,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def generate_pdf!
-    unless File.exists?(pdf_path)
+    unless File.exists?(pdf_file_path)
       Tempfile.open("nvra-#{to_param}") do |f|
         f.puts to_xfdf
         f.close
@@ -330,7 +330,7 @@ class Registrant < ActiveRecord::Base
 
   def merge_pdf(tmp)
     classpath = ["$CLASSPATH", File.join(Rails.root, "lib/pdf_merge/lib/iText-2.1.7.jar"), File.join(Rails.root, "lib/pdf_merge/out/production/Rocky_pdf")].join(":")
-    `java -classpath #{classpath} PdfMerge #{nvra_template_path} #{tmp.path} #{pdf_path}`
+    `java -classpath #{classpath} PdfMerge #{nvra_template_path} #{tmp.path} #{pdf_file_path}`
   end
   
   def nvra_template_path
@@ -338,8 +338,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def pdf_path
-    FileUtils.mkdir_p(File.join(Rails.root, "public", "pdf"))
-    File.join(Rails.root, "public", "pdf", "nvra-#{to_param}.pdf")
+    "/pdf/nvra-#{to_param}.pdf"
+  end
+
+  def pdf_file_path
+    FileUtils.mkdir_p(File.join(Rails.root, "pdf"))
+    File.join(Rails.root, pdf_path)
   end
 
   def check_ineligible

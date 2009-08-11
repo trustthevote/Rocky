@@ -22,7 +22,7 @@ Given /^my phone number is not blank$/ do
 end
 
 Given /^I have not downloaded the PDF before$/ do
-  `rm #{@registrant.pdf_path}`
+  `rm #{@registrant.pdf_file_path}`
 end
 
 Given /there is localized state data/ do
@@ -30,8 +30,7 @@ Given /there is localized state data/ do
 end
 
 Then /^I should see a new download$/ do
-  assert File.exists?(@registrant.pdf_path)
-  `rm #{@registrant.pdf_path}`
+  assert File.exists?(@registrant.pdf_file_path)
 end
 
 Then /^I should see my email$/ do
@@ -57,4 +56,8 @@ When /^I live in (.*)$/ do |state_name|
   state = GeoState.find_by_name(state_name)
   zip_prefix = GeoState.zip3map.index(state.abbreviation)
   When %Q{I fill in "zip code" with "#{zip_prefix}01"}
+end
+
+After('@cleanup_pdf') do
+  `rm #{@registrant.pdf_file_path}`
 end

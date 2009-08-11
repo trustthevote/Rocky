@@ -1,6 +1,6 @@
 <h1><%= I18n.t('txt.registration.download_header') %></h1>
 <div class="download">
   <h2><%= I18n.t('txt.registration.instructions.download') %></h2>
-  <p><%= link_to image_tag("#{I18n.locale}/button_printform.gif", :alt => I18n.t('txt.button.download')), pdf_registrant_path(@registrant) %></p>
+  <p><%= link_to image_tag("#{I18n.locale}/button_printform.gif", :alt => I18n.t('txt.button.download')), @registrant.pdf_path %></p>
   <p><%= I18n.t('txt.registration.instructions.download_2') %></p>
 </div>

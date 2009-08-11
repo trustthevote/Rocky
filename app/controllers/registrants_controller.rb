@@ -22,13 +22,7 @@ class RegistrantsController < ApplicationController
 
   def download
     find_registrant
-  end
-
-  def pdf
-    find_registrant
     @registrant.generate_pdf!
-    # TODO: serve this as a static asset
-    send_file(@registrant.pdf_path, :type => :pdf, :filename => "voter_registration_form.pdf")
   end
 
   def current_step
