@@ -13,14 +13,18 @@
   <ul class="flat">
     <li>
       <h3><%= form.label :phone %></h3>
-      <div><%= form.text_field :phone, :size => 20 %></div>
+      <div class="flat-stack">
+        <div><%= form.text_field :phone, :size => 20 %></div>
+        <span class="error"><%= form.object.errors.on :phone %></span>
+      </div>
       <%= tooltip_tag :phone %>
-      <span class="error"><%= form.object.errors.on :phone %></span>
     </li>
     <li class="secondary">
       <h3><%= form.label :phone_type %></h3>
-      <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types'), :include_blank => true %></div>
-      <span class="error"><%= form.object.errors.on :phone_type %></span>
+      <div class="flat-stack">
+        <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types'), :include_blank => true %></div>
+        <span class="error"><%= form.object.errors.on :phone_type %></span>
+      </div>
     </li>
   </ul>
 

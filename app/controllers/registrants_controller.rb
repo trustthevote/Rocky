@@ -13,6 +13,7 @@ class RegistrantsController < ApplicationController
   # POST /registrants
   def create
     @registrant = Registrant.new(params[:registrant])
+    I18n.locale = @registrant.locale
     attempt_to_advance
   end
 

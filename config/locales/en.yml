@@ -109,6 +109,7 @@ en:
       prepare: Prepare Form
       review: Review Application
     registration:
+      other_language: "En español"
       step_1_header: New registrant
       step_2_header: Personal Information
       step_3_header: Numbers and Changes

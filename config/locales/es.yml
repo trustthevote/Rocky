@@ -96,6 +96,7 @@ es:
       prepare: XXXX
       review: XXXX
     registration:
+      other_language: In English
       step_1_header: XXXX
       step_2_header: XXXX
       step_3_header: XXXX

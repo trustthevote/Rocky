@@ -77,8 +77,31 @@ input, textarea {
   text-align: right;
 }
 
+#footer span {
+  margin: 0 0.5em;
+}
+
+#footer a {
+  color: #d0d0d0;
+  text-decoration: none;
+}
+
+#footer a:hover {
+  color: white;
+}
+
 #main {
+  position: relative;
   margin: 20px;
+}
+
+#other_language_link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 form {
@@ -141,6 +164,14 @@ ul.flat div {
   height: 25px;
 }
 
+ul.flat div.flat-stack {
+  height: 50px;
+  overflow: hidden;
+}
+
+ul.flat div div {
+  float: none;
+}
 
 ul.stacked {
   margin-top: 5px;
@@ -318,6 +349,10 @@ li.instructions {
   margin: 5px 75px 10px 130px;
   color: #434343;
   font-size: 10px;
+}
+
+p.centered {
+  text-align: center;
 }
 
 .download {

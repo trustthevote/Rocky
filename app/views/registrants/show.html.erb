@@ -1,5 +1,11 @@
 <h1><%= t('txt.registration.step_1_header') %></h1>
 
+<% if @registrant.new_record? %>
+  <%= link_to t('txt.registration.other_language'),
+                I18n.locale == :en ? new_registrant_path(:locale => 'es') : new_registrant_path,
+                :id => 'other_language_link' %>
+<% end %>
+
 <% form_for(@registrant) do |form| %>
   <%= render :partial => 'form', :object => form %>
   <div class="button"><%= image_submit_tag "#{I18n.locale}/button_nextstep.gif", :alt => I18n.t('txt.button.submit'), :id => "registrant_submit" %></div>
