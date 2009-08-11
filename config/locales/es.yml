@@ -142,7 +142,6 @@ es:
         download: XXXX
         download_2: XXXX
       ineligible:
-        non_participating_state: XXXX
         age: XXXX
         non_citizen: XXXX
         attest: XXXX

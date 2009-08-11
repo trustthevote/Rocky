@@ -30,3 +30,19 @@ florida_es:
   - Naranja
   - Ratoncito
   no_party: Disminución del Estado
+north_dakota_en:
+  state_id: 35
+  locale: en
+  parties: 
+  - Left
+  - Right
+  no_party: Decline to State
+  not_participating_tooltip: North Dakota does not register voters
+north_dakota_es:
+  state_id: 35
+  locale: es
+  parties: 
+  - Izquierda
+  - Derecha
+  no_party: Disminución del Estado
+  not_participating_tooltip: Dakota del Norte no se insegña para votar

@@ -157,7 +157,6 @@ en:
           Sign it and mail to the address located on the form.
         download_2: You won't be registered unless you print, sign and mail in your form!
       ineligible:
-        non_participating_state: "{{state}} does not register voters"
         age: You must be 16 years old to register to vote
         non_citizen: You must be a U.S. citizen to register to vote.
         attest: You must confirm you are eligible to vote

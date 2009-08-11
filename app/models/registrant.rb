@@ -246,6 +246,10 @@ class Registrant < ActiveRecord::Base
     localizations.by_locale(locale).race_tooltip
   end
 
+  def home_state_not_participating_text
+    localizations.by_locale(locale).not_participating_tooltip
+  end
+
   def validate_party
     if requires_party?
       if party.blank?

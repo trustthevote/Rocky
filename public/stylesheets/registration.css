@@ -269,6 +269,12 @@ div.back {
   font-weight: bold;
 }
 
+.return a {
+  color: blue;
+  font-weight: bold;
+  font-size: 12px;
+}
+
 span.error {
   display: inline-block;
   color: red;
@@ -369,4 +375,11 @@ p.centered {
 
 .download h2 {
   margin: 15px;
+}
+
+.reason {
+  margin: 25px auto;
+  width: 65%;
+  color: #434343;
+  font-size: 12px;
 }
