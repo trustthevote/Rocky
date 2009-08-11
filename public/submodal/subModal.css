@@ -43,7 +43,11 @@
 	font-size: 1.1em;
 }
 #rtvModalPopupControls {
-	float: right;
+/*  float: right;*/
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 999;
 	cursor: pointer;
 	cursor: hand;
 }
