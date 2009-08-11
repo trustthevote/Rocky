@@ -31,13 +31,45 @@ input, textarea {
 }
 
 #header {
+  position: relative;
   height: 95px;
   background-image: url('/images/reg/header.jpg');
   background-repeat: no-repeat;
 }
 
+#partner-logo {
+  position: absolute;
+  top: 13px;
+  left: 20px;
+}
+
+#powered-by {
+  position: absolute;
+  top: 30px;
+  right: 27px;
+  width: 142px;
+  height: 42px;
+}
+
+#powered-by span {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  color: white;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+}
+
+#powered-by img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 #progress-bar {
-  padding: 70px 0 0 5px;
+  position: absolute;
+  bottom: 3px;
+  left: 5px;
 }
 
 #progress-bar li {
