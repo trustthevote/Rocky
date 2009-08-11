@@ -22,7 +22,7 @@ class RegistrantsController < ApplicationController
 
   def download
     find_registrant
-    @registrant.generate_pdf!
+    @registrant.generate_pdf
   end
 
   def current_step

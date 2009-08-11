@@ -318,7 +318,7 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def generate_pdf!
+  def generate_pdf
     unless File.exists?(pdf_file_path)
       Tempfile.open("nvra-#{to_param}") do |f|
         f.puts to_xfdf

@@ -19,3 +19,9 @@ config.action_mailer.raise_delivery_errors = false
 FROM_ADDRESS = "rocky-dev@example.com"
 
 USE_HTTPS = false
+
+### uncomment to use DelayedJob in development.
+### rake jobs:work  # to run the jobs
+# config.after_initialize do
+#   Registrant.handle_asynchronously :generate_pdf
+# end

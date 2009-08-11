@@ -377,14 +377,14 @@ describe Registrant do
       it "generates PDF with merged data" do
         `rm -f #{@registrant.pdf_file_path}`
         assert_difference('Dir[File.join(RAILS_ROOT, "pdf/*")].length') do
-          @registrant.generate_pdf!
+          @registrant.generate_pdf
         end
       end
 
       it "returns PDF if already exists" do
         `touch #{@registrant.pdf_file_path}`
         assert_no_difference('Dir[File.join(RAILS_ROOT, "pdf/*")].length') do
-          @registrant.generate_pdf!
+          @registrant.generate_pdf
         end
       end
 
