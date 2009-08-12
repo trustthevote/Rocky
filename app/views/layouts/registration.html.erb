@@ -16,11 +16,13 @@
   <div id="container">
     <div id="header">
       <div id="partner-logo">
-        <%= image_tag "partner_logo.jpg" %>
+        <%= image_tag @registrant.partner.logo_image_url %>
       </div>
+      <% unless @registrant.partner.primary? %>
       <div id="powered-by">
         <span>powered by:</span><%= image_tag "reg/rtv_powered_by_logo.gif" %>
       </div>
+      <% end %>
       <div id="progress-bar">
         <ol>
           <li>Step:</li>

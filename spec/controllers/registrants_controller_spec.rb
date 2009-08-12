@@ -26,6 +26,33 @@ describe RegistrantsController do
       reg = assigns[:registrant]
       assert_equal 'en', reg.locale
     end
+
+    describe "partner logo" do
+      integrate_views
+
+      it "should hide powered-by for primary partner" do
+        get :new
+        assert_select "#powered-by", false
+      end
+
+      it "should show powered-by for non-primary partner" do
+        partner = Factory.create(:partner)
+        get :new, :partner => partner.to_param
+        assert_select "#powered-by"
+      end
+
+      it "should show primary logo for primary partner" do
+        get :new
+        assert_select "#partner-logo img[src^=/]"
+      end
+
+      it "should show partner logo for non-primary partner" do
+        logo = "http://example.com/logo.jpg"
+        partner = Factory.create(:partner, :logo_image_url => logo)
+        get :new, :partner => partner.to_param
+        assert_select "#partner-logo img[src=#{logo}]"
+      end
+    end
   end
 
   describe "#create" do

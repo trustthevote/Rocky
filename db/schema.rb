@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20090811003128) do
     t.integer  "state_id"
     t.string   "zip_code",             :limit => 10
     t.string   "phone"
+    t.string   "logo_image_url"
     t.string   "survey_question_1_en"
     t.string   "survey_question_1_es"
     t.string   "survey_question_2_en"
