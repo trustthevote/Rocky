@@ -25,11 +25,19 @@ p {
 }
 
 .stats {
-  font-size: 12px;
+  font-size: 13px;
+}
+
+.stats table {
+  border: 1px solid #c7c7c7;
+}
+
+.stats thead th, .stats thead td {
+  font-weight: bold;
 }
 
 .stats th, .stats td {
-  padding: 2px 4px;
+  padding: 4px 8px;
 }
 
 .stats th {

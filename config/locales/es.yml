@@ -114,29 +114,29 @@ es:
       opt_in_email: XXXX
       not_given: XXXX
       titles:
-      - XXXX
-      - XXXX
-      - XXXX
-      - XXXX
+      - Mr.
+      - Mrs.
+      - Miss
+      - Ms.
       suffixes:
-      - XXXX
-      - XXXX
-      - XXXX
-      - XXXX
-      - XXXX
+      - Jr.
+      - Sr.
+      - II
+      - III
+      - IV
       races:
-      - XXXX
-      - XXXX
-      - XXXX
-      - XXXX
-      - XXXX
-      - XXXX
-      - XXXX
+      - SPANISH American Indian / Alaskan Native
+      - SPANISH Asian / Pacific Islander
+      - SPANISH Black (not Hispanic)
+      - SPANISH Hispanic
+      - SPANISH Multi-racial
+      - SPANISH White (not Hispanic)
+      - SPANISH Other
       phone_types:
-      - XXXX
-      - XXXX
-      - XXXX
-      - XXXX
+      - Home
+      - Mobile
+      - Work
+      - Other
       instructions:
         state_id_number: XXXX
         download: XXXX

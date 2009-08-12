@@ -24,15 +24,17 @@ class Partner < ActiveRecord::Base
   def self.default_id
     1
   end
-  
-  def registrations_state_and_count
+
+  def registration_stats_state
     counts = Registrant.connection.select_all(<<-"SQL")
-      SELECT count(*) as registrants_count, home_state_id FROM `registrants` WHERE partner_id = #{self.id} GROUP BY home_state_id
+      SELECT count(*) as registrations_count, home_state_id FROM `registrants`
+      WHERE (status = 'complete' OR status = 'step_5') AND partner_id = #{self.id}
+      GROUP BY home_state_id
     SQL
-    sum = counts.sum {|row| row["registrants_count"].to_i}
+    sum = counts.sum {|row| row["registrations_count"].to_i}
     named_counts = counts.collect do |row|
       { :state_name => GeoState[row["home_state_id"].to_i].name,
-        :registrations_count => (c = row["registrants_count"].to_i),
+        :registrations_count => (c = row["registrations_count"].to_i),
         :registrations_percentage => c.to_f / sum
       }
     end
@@ -41,6 +43,41 @@ class Partner < ActiveRecord::Base
 
   def primary?
     self.id == self.class.default_id
+  end
+
+  def registration_stats_race
+    counts = Registrant.connection.select_all(<<-"SQL")
+      SELECT count(*) as registrations_count, race, locale FROM `registrants`
+      WHERE (status = 'complete' OR status = 'step_5') AND partner_id = #{self.id}
+      GROUP BY race
+    SQL
+
+    en_races = I18n.backend.send(:lookup, :en, "txt.registration.races")
+    es_races = I18n.backend.send(:lookup, :es, "txt.registration.races")
+    counts, es_counts = counts.partition { |row| row["locale"] == "en" || !es_races.include?(row["race"]) }
+    counts.each do |row|
+      if ( i = en_races.index(row["race"]) )
+        race_name_es = es_races[i]
+        es_row = nil
+        es_counts.reject! {|r| es_row = r if r["race"] == race_name_es }
+        row["registrations_count"] = row["registrations_count"].to_i + es_row["registrations_count"].to_i if es_row
+      else
+        row["race"] = "Unknown"
+      end
+    end
+    es_counts.each do |row|
+      row["race"] = en_races[ es_races.index(row["race"]) ]
+      counts << row
+    end
+
+    sum = counts.sum {|row| row["registrations_count"].to_i}
+    named_counts = counts.collect do |row|
+      { :race => row["race"],
+        :registrations_count => (c = row["registrations_count"].to_i),
+        :registrations_percentage => c.to_f / sum
+      }
+    end
+    named_counts.sort_by {|r| [-r[:registrations_count], r[:race]]}
   end
 
   def state_abbrev=(abbrev)
