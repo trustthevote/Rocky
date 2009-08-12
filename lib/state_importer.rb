@@ -1,5 +1,3 @@
-require 'fastercsv'
-
 class StateImporter
   def self.import(file)
     FasterCSV.new(file, :headers => true).each do |row|

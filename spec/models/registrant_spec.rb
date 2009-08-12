@@ -394,6 +394,95 @@ describe Registrant do
     end
   end
 
+  describe "CSV" do
+    it "renders minimal CSV" do
+      reg = Factory.build(:step_1_registrant)
+      assert_equal [ "Step 1",
+                     "English",
+                     "8/12/1989",
+                     reg.email_address,
+                     "No",
+                     "Yes",
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     "15215",
+                     "No",
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     nil,
+                     "No",
+                     "No",
+                     nil,
+                     nil,
+                     nil,
+                     nil], 
+                  reg.to_csv_array
+    end
+
+    it "renders maximal CSCV" do
+      reg = Factory.create(:maximal_registrant)
+      reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
+      assert_equal [ "Complete",
+                     "English",
+                     "8/12/1989",
+                     "citizen@example.com",
+                     "No",
+                     "Yes",
+                     "Mrs.",
+                     "Susan",
+                     "Brownell",
+                     "Anthony",
+                     "III",
+                     "123 Civil Rights Way",
+                     "Apt 2",
+                     "West Grove",
+                     "CA",
+                     "94110",
+                     "Yes",
+                     "10 Main St",
+                     "Box 5",
+                     "Adams",
+                     "AL",
+                     "02135",
+                     "Democratic",
+                     "White (not Hispanic)",
+                     "123-456-7890",
+                     "Mobile",
+                     "Yes",
+                     "Yes",
+                     "blue",
+                     "fido",
+                     nil,
+                     "8/12/2009"], 
+                 reg.to_csv_array
+    end
+    
+    it "renders ineligible CSV" do
+      reg = Factory.create(:step_1_registrant, :us_citizen => false)
+      assert_equal "Not a US citizen", reg.to_csv_array[-2]
+    end
+    
+    it "has a CSV header" do
+      assert_not_nil Registrant::CSV_HEADER
+
+      reg = Factory.build(:maximal_registrant)
+      assert_equal Registrant::CSV_HEADER.size, reg.to_csv_array.size
+    end
+  end
+
   def assert_attribute_invalid_with(model, attributes)
     reg = Factory.build(model, attributes)
     reg.invalid?

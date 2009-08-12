@@ -1,1 +1,2 @@
 require 'aasm'
+require 'fastercsv'

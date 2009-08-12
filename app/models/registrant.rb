@@ -7,6 +7,79 @@ class Registrant < ActiveRecord::Base
   TITLES = I18n.t('txt.registration.titles', :locale => :en)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en)
   PARTIES = [ "American Co-dependent", "Birthday", "Republicratic", "Sub-genius", "Suprise" ]
+  
+  CSV_HEADER = [
+    "Status",
+    "Language",
+    "Date of birth",
+    "Email address",
+    "First registration?",
+    "US citizen?",
+    "Salutation",
+    "First name",
+    "Middle name",
+    "Last name",
+    "Name suffix",
+    "Home address",
+    "Home unit",
+    "Home city",
+    "Home state",
+    "Home zip code",
+    "Has mailing address?",
+    "Mailing address",
+    "Mailing unit",
+    "Mailing city",
+    "Mailing state",
+    "Mailing zip code",
+    "Party",
+    "Race",
+    "Phone",
+    "Phone type",
+    "Opt-in to email?",
+    "Opt-in to sms?",
+    "Survey answer 1",
+    "Survey answer 2",
+    "Ineligible reason",
+    "Registered at"
+  ]
+  
+  def to_csv_array
+    [
+      status.humanize,
+      locale == 'en' ? "English" : "Spanish",
+      pdf_date_of_birth,
+      email_address,
+      yes_no(first_registration?),
+      yes_no(us_citizen?),
+      name_title,
+      first_name,
+      middle_name,
+      last_name,
+      name_suffix,
+      home_address,
+      home_unit,
+      home_city,
+      home_state && home_state.abbreviation,
+      home_zip_code,
+      yes_no(has_mailing_address?),
+      mailing_address,
+      mailing_unit,
+      mailing_city,
+      mailing_state_abbrev,
+      mailing_zip_code,
+      party,
+      race,
+      phone,
+      phone_type,
+      yes_no(opt_in_email?),
+      yes_no(opt_in_sms?),
+      survey_answer_1,
+      survey_answer_2,
+      ineligible_reason,
+      month_day_year(created_at)
+    ]
+  end
+  
 
   attr_protected :status
 
@@ -309,7 +382,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def pdf_date_of_birth
-    "%d/%d/%d" % [date_of_birth.month, date_of_birth.mday, date_of_birth.year]
+    month_day_year(date_of_birth)
   end
 
   def form_date_of_birth
@@ -378,5 +451,22 @@ class Registrant < ActiveRecord::Base
   
   def generate_uid
     self.uid = Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)} -- #{email_address} -- #{home_zip_code}" )
+  end
+
+  def yes_no(attribute)
+    attribute ? "Yes" : "No"
+  end
+
+  def ineligible_reason
+    case
+    when ineligible_non_citizen? then "Not a US citizen"
+    when ineligible_non_participating_state? then "State doesn't participate"
+    when ineligible_age? then "Not old enough to register"
+    else nil
+    end
+  end
+
+  def month_day_year(date)
+    "%d/%d/%d" % [date.month, date.mday, date.year] if date
   end
 end

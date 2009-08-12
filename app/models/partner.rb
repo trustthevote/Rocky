@@ -2,6 +2,7 @@ class Partner < ActiveRecord::Base
   acts_as_authentic
 
   belongs_to :state, :class_name => "GeoState"
+  has_many :registrants
 
   before_validation :reformat_phone
 
@@ -49,4 +50,14 @@ class Partner < ActiveRecord::Base
     reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)
   end
+
+  def generate_registrants_csv
+    FasterCSV.generate do |csv|
+      csv << Registrant::CSV_HEADER
+      registrants.all(:include => [:home_state, :mailing_state]).each do |reg|
+        csv << reg.to_csv_array
+      end
+    end
+  end
+
 end

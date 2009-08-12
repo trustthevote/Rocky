@@ -78,6 +78,8 @@ Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
   f.prev_zip_code       "15215"
   f.opt_in_email        true
   f.opt_in_sms          true
+  f.survey_answer_1     "blue"
+  f.survey_answer_2     "fido"
   f.attest_true         "1"
 end
 
