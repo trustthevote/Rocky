@@ -337,6 +337,7 @@ class Registrant < ActiveRecord::Base
 
   def home_zip_code=(zip)
     self[:home_zip_code] = zip
+    self.home_state = nil
     self[:home_state_id] = zip && (s = GeoState.for_zip_code(zip.strip)) && s.id
   end
 

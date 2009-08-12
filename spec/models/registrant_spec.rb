@@ -411,7 +411,7 @@ describe Registrant do
                      nil,
                      nil,
                      nil,
-                     nil,
+                     "PA",
                      "15215",
                      "No",
                      nil,

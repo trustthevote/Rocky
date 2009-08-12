@@ -47,11 +47,11 @@ describe Partner do
         partner = Factory.create(:partner)
         3.times do
           reg = Factory.create(:maximal_registrant, :partner => partner)
-          reg.update_attributes(:home_zip_code => "32001")
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         2.times do
           reg = Factory.create(:maximal_registrant, :partner => partner)
-          reg.update_attributes(:home_zip_code => "94101")
+          reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")
         end
         stats = partner.registration_stats_state
         assert_equal 2, stats.length
@@ -67,15 +67,15 @@ describe Partner do
         partner = Factory.create(:partner)
         3.times do
           reg = Factory.create(:maximal_registrant, :partner => partner)
-          reg.update_attributes(:home_zip_code => "32001")
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         3.times do
           reg = Factory.create(:step_4_registrant, :partner => partner)
-          reg.update_attributes(:home_zip_code => "32001")
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         2.times do
           reg = Factory.create(:step_5_registrant, :partner => partner)
-          reg.update_attributes(:home_zip_code => "94101")
+          reg.update_attributes(:home_zip_code => "94101", :party => "Decline to State")
         end
         stats = partner.registration_stats_state
         assert_equal 2, stats.length
