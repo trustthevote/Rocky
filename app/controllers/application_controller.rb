@@ -54,7 +54,9 @@ class ApplicationController < ActionController::Base
   def ensure_https
     if USE_HTTPS && require_https? && !request.ssl?
       flash.keep
-      redirect_to(:protocol => "https://")
+      url = URI.parse(request.url)
+      url.scheme = "https"
+      redirect_to(url.to_s)
       false
     end
   end
