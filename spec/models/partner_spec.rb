@@ -40,4 +40,28 @@ describe Partner do
       assert_equal registrants[3].to_csv_array, csv[4]
     end
   end
+
+  describe "registration statistics" do
+    describe "by state" do
+      it "should tally registrants by state" do
+        partner = Factory.create(:partner)
+        3.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg.update_attributes(:home_zip_code => "32001")
+        end
+        2.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg.update_attributes(:home_zip_code => "94101")
+        end
+        stats = partner.registrations_state_and_count
+        assert_equal 2, stats.length
+        assert_equal "Florida", stats[0][:state_name]
+        assert_equal 3, stats[0][:registrations_count]
+        assert_equal 0.6, stats[0][:registrations_percentage]
+        assert_equal "California", stats[1][:state_name]
+        assert_equal 2, stats[1][:registrations_count]
+        assert_equal 0.4, stats[1][:registrations_percentage]
+      end
+    end
+  end
 end

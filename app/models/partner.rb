@@ -24,6 +24,20 @@ class Partner < ActiveRecord::Base
   def self.default_id
     1
   end
+  
+  def registrations_state_and_count
+    counts = Registrant.connection.select_all(<<-"SQL")
+      SELECT count(*) as registrants_count, home_state_id FROM `registrants` WHERE partner_id = #{self.id} GROUP BY home_state_id
+    SQL
+    sum = counts.sum {|row| row["registrants_count"].to_i}
+    named_counts = counts.collect do |row|
+      { :state_name => GeoState[row["home_state_id"].to_i].name,
+        :registrations_count => (c = row["registrants_count"].to_i),
+        :registrations_percentage => c.to_f / sum
+      }
+    end
+    named_counts.sort_by {|r| [-r[:registrations_count], r[:state_name]]}
+  end
 
   def primary?
     self.id == self.class.default_id

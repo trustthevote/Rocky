@@ -2,22 +2,29 @@ class GeoState < ActiveRecord::Base
 
   has_many :localizations, :class_name => 'StateLocalization', :foreign_key => 'state_id'
 
-  def self.[](abbrev)
+  def self.[](id_or_abbrev)
     init_all_states
-    @@all_states[abbrev]
+    case id_or_abbrev
+    when Fixnum
+      @@all_states_by_id[id_or_abbrev]
+    when String
+      @@all_states_by_abbrev[id_or_abbrev]
+    end
   end
   
   def self.collection_for_select
     init_all_states
-    @@all_states.map { |abbrev, state| [state.name, abbrev] }.sort
+    @@all_states_by_abbrev.map { |abbrev, state| [state.name, abbrev] }.sort
   end
   
   def self.init_all_states
-    @@all_states ||= all.index_by(&:abbreviation)
+    @@all_states_by_id ||= all.inject([]) { |arr,state| arr[state.id] = state; arr }
+    @@all_states_by_abbrev ||= @@all_states_by_id[1..-1].index_by(&:abbreviation)
   end
 
   def self.reset_all_states
-    @@all_states = nil
+    @@all_states_by_id = nil
+    @@all_states_by_abbrev = nil
   end
 
   # ZIP codes

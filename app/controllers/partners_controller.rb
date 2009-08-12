@@ -47,6 +47,11 @@ HTML
 HTML
   end
 
+  def statistics
+    @partner = current_partner
+    @stats_by_state = @partner.registrations_state_and_count
+  end
+
   def widget_loader
     @partner_id = params[:id]
     @host = host_url

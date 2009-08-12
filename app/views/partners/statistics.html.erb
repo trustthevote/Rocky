@@ -1,0 +1,11 @@
+<table class="stats">
+  <tbody>
+    <% @stats_by_state.each do |stat| %>
+      <tr class="<%= cycle('even', 'odd') %>">
+        <th><%= stat[:state_name] %></th>
+        <td><%= stat[:registrations_count] %></td>
+        <td><%= "%.1f" % (stat[:registrations_percentage] * 100) %>%</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
