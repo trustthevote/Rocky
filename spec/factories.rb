@@ -17,6 +17,7 @@ Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
   f.home_city       "San Francisco"
   # f.home_state      { GeoState['CA'] }
   f.race            "Hispanic"
+  f.party           "Decline to State"
 end
 
 Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|
@@ -35,7 +36,11 @@ Factory.define :step_5_registrant, :parent => :step_4_registrant do |f|
   f.attest_true     "1"
 end
 
-Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
+Factory.define :completed_registrant, :parent => :step_5_registrant do |f|
+  f.status          "complete"
+end
+
+Factory.define :maximal_registrant, :parent => :completed_registrant do |f|
   f.status              "complete"
   f.locale              "en"
   f.partner_id          "1"
@@ -52,14 +57,14 @@ Factory.define :maximal_registrant, :parent => :step_3_registrant do |f|
   f.home_address        "123 Civil Rights Way"
   f.home_unit           "Apt 2"
   f.home_city           "West Grove"
-  f.home_state          { GeoState['MA'] }
+  # f.home_state          { GeoState['MA'] }
   f.has_mailing_address true
   f.mailing_address     "10 Main St"
   f.mailing_unit        "Box 5"
   f.mailing_city        "Adams"
   f.mailing_state_id    { GeoState['MA'] }
   f.mailing_zip_code    "02135"
-  f.party               "Democratic"
+  f.party               "Decline to State"
   f.race                "White (not Hispanic)"
   f.state_id_number     "5678"
   f.phone               "123-456-7890"

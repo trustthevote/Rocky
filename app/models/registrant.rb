@@ -92,7 +92,7 @@ class Registrant < ActiveRecord::Base
   belongs_to :mailing_state, :class_name => "GeoState"
   belongs_to :prev_state,    :class_name => "GeoState"
 
-  has_many :localizations, :through => :home_state, :class_name => 'StateLocalization' do
+  has_many :localizations, :through => :home_state, :class_name => 'StateLocalization', :autosave => false do
     def by_locale(loc)
       find_by_locale(loc.to_s) || StateLocalization.find_by_state_id_and_locale(GeoState['CA'].id, loc.to_s) # TODO remove when we have localizations for all states
     end
@@ -114,7 +114,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  before_validation :set_home_state_from_zip_code
   before_validation :clear_superfluous_fields
   
   after_validation :check_ineligible
@@ -237,11 +236,6 @@ class Registrant < ActiveRecord::Base
     at_least_step?(5)
   end
 
-  def set_home_state_from_zip_code
-    return unless home_zip_code
-    self.home_state = GeoState.for_zip_code(home_zip_code.strip)
-  end
-
   def clear_superfluous_fields
     unless has_mailing_address?
       self.mailing_address = nil
@@ -339,6 +333,12 @@ class Registrant < ActiveRecord::Base
   #   status_number = [current_status_number, next_status_number].max
   #   send("advance_to_#{STEPS[status_number]}!")
   # end
+
+  def home_zip_code=(zip)
+    self[:home_zip_code] = zip
+    self.home_state = nil
+    self[:home_state_id] = zip && (s = GeoState.for_zip_code(zip.strip)) && s.id
+  end
 
   def home_state_name
     home_state && home_state.name

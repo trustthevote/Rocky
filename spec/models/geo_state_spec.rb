@@ -5,6 +5,11 @@ describe GeoState do
     assert_equal(GeoState['CA'].object_id, GeoState['CA'].object_id)
   end
 
+  it "should cache by id" do
+    assert_equal(GeoState['CA'].object_id, GeoState[5].object_id)
+    assert_equal(GeoState[5].object_id, GeoState[5].object_id)
+  end
+
   it "constructs array of name/abbrev tuples in alphabetical order" do
     states = GeoState.collection_for_select
     assert_equal 51, states.size

@@ -301,7 +301,7 @@ describe Registrant do
   describe "home state name" do
     it "gets name for state" do
       new_york = GeoState['NY']
-      reg = Factory.build(:step_1_registrant, :home_state => new_york)
+      reg = Factory.build(:step_1_registrant, :home_zip_code => "00501")
       assert_equal new_york.name, reg.home_state_name
     end
   end
@@ -324,7 +324,7 @@ describe Registrant do
 
   describe "state parties" do
     it "gets parties by locale when required" do
-      reg = Factory.build(:step_2_registrant, :locale => 'en', :home_state => GeoState["CA"])
+      reg = Factory.build(:step_2_registrant, :locale => 'en', :home_zip_code => '94101')
       assert_equal %w(Democratic Green Libertarian Republican Decline\ to\ State), reg.state_parties
       reg.locale = 'es'
       assert_equal %w(Demócrata Verde Libertariano Republicano Disminución\ del\ Estado), reg.state_parties
@@ -363,8 +363,8 @@ describe Registrant do
   describe "PDF" do
     describe "template path" do
       it "determined by state and locale" do
-        registrant = Factory.build(:maximal_registrant, :home_state => GeoState['NV'], :locale => 'es')
-        assert_match(/_es_nv\.pdf/, registrant.nvra_template_path)
+        registrant = Factory.build(:maximal_registrant, :home_zip_code => "00501", :locale => 'es')
+        assert_match(/_es_ny\.pdf/, registrant.nvra_template_path)
       end
     end
 
@@ -411,7 +411,7 @@ describe Registrant do
                      nil,
                      nil,
                      nil,
-                     nil,
+                     "PA",
                      "15215",
                      "No",
                      nil,

@@ -61,6 +61,17 @@ describe PartnersController do
       end
     end
 
+    describe "statistics" do
+      # integrate_views
+
+      it "shows registration statistics" do
+        get :statistics
+        assert_response :success
+        assert_not_nil assigns[:stats_by_state]
+        assert_not_nil assigns[:stats_by_race]
+      end
+    end
+
     describe "profile" do
       integrate_views
 
