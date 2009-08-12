@@ -40,9 +40,9 @@ class Registrant < ActiveRecord::Base
     "Survey answer 1",
     "Survey answer 2",
     "Ineligible reason",
-    "Registered at"
+    "Started registration"
   ]
-  
+
   def to_csv_array
     [
       status.humanize,
@@ -79,7 +79,6 @@ class Registrant < ActiveRecord::Base
       month_day_year(created_at)
     ]
   end
-  
 
   attr_protected :status
 

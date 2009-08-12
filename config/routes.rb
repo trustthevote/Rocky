@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login  "login",  :controller => "partner_sessions", :action => "new"
   map.logout "logout", :controller => "partner_sessions", :action => "destroy"
 
-  map.resource "partner", :path_names => {:new => "register", :edit => "profile"} do |partner|
+  map.resource "partner", :path_names => {:new => "register", :edit => "profile"}, :member => {:registrations => :get} do |partner|
     partner.resource "questions", :only => [:edit, :update]
   end
   map.widget_loader "partner/:id/widget_loader.js", :format => "js", :controller => "partners", :action => "widget_loader"

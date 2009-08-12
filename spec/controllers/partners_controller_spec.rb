@@ -82,5 +82,13 @@ describe PartnersController do
         assert_template "edit"
       end
     end
+
+    describe "download registration data" do
+      it "triggers download" do
+        get :registrations, :format => 'csv'
+        assert_response :success
+        assert_equal "text/csv", response.headers["Content-Type"]
+      end
+    end
   end
 end
