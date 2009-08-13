@@ -159,4 +159,7 @@ es:
         phone: XXXX
         previous_name: XXXX
         previous_address: XXXX
-        
+  email:
+    confirmation:
+      subject: XXXX
+      body: XXXX

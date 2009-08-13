@@ -393,6 +393,12 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def finalize_registration
+    generate_pdf
+    deliver_confirmation_email
+    # TODO: transition to completed status?
+  end
+
   def generate_pdf
     unless File.exists?(pdf_file_path)
       Tempfile.open("nvra-#{to_param}") do |f|
@@ -403,11 +409,15 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def deliver_confirmation_email
+    Notifier.deliver_confirmation(self)
+  end
+
   def merge_pdf(tmp)
     classpath = ["$CLASSPATH", File.join(Rails.root, "lib/pdf_merge/lib/iText-2.1.7.jar"), File.join(Rails.root, "lib/pdf_merge/out/production/Rocky_pdf")].join(":")
     `java -classpath #{classpath} PdfMerge #{nvra_template_path} #{tmp.path} #{pdf_file_path}`
   end
-  
+
   def nvra_template_path
     File.join(Rails.root, "data", "nvra_templates", "nvra_#{locale && locale.downcase}_#{home_state && home_state.abbreviation.downcase}.pdf")
   end

@@ -24,5 +24,5 @@ USE_HTTPS = false
 ### you must set config.cache_classes = true
 ### rake jobs:work  # to run the jobs
 # config.after_initialize do
-#   Registrant.handle_asynchronously :generate_pdf
+#   Registrant.handle_asynchronously :finalize_registration
 # end

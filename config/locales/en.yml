@@ -190,4 +190,8 @@ en:
         phone: Your phone number is not required, but will be helpful in contacting you in a timely manner about voter registration matters.
         previous_name: If you've changed your name since your last registration, enter your previous name.
         previous_address: If you've moved since your last registration, enter your previous address.
-        
+  email:
+    confirmation:
+      subject: "Reminder: Mail your voter registration form"
+      body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have 
+        it you can get it here: {{url}}) and mail it to the address on the form."
