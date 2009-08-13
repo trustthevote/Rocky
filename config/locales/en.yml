@@ -109,6 +109,8 @@ en:
       prepare: Prepare Form
       review: Review Application
     registration:
+      powered_by: "powered by:"
+      progress_indicator: "Step:"
       other_language: "En español"
       step_1_header: New registrant
       step_2_header: Personal Information

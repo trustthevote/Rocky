@@ -96,6 +96,8 @@ es:
       prepare: XXXX
       review: XXXX
     registration:
+      powered_by: XXXX
+      progress_indicator: XXXX
       other_language: In English
       step_1_header: XXXX
       step_2_header: XXXX

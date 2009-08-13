@@ -20,12 +20,12 @@
       </div>
       <% unless @registrant.partner.primary? %>
       <div id="powered-by">
-        <span>powered by:</span><%= image_tag "reg/rtv_powered_by_logo.gif" %>
+        <span><%= t('txt.registration.powered_by') %></span><%= image_tag "reg/rtv_powered_by_logo.gif" %>
       </div>
       <% end %>
       <div id="progress-bar">
         <ol>
-          <li>Step:</li>
+          <li><%= t('txt.registration.progress_indicator') %></li>
           <%= progress_indicator(@registrant) %>
         </ol>
       </div>
