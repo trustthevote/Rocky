@@ -484,6 +484,14 @@ describe Registrant do
     end
   end
 
+  describe "deliver_confirmation_email" do
+    it "should deliver an email" do
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Factory.create(:maximal_registrant).deliver_confirmation_email
+      end
+    end
+  end
+
   def assert_attribute_invalid_with(model, attributes)
     reg = Factory.build(model, attributes)
     reg.invalid?
