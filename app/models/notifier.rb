@@ -12,7 +12,7 @@ class Notifier < ActionMailer::Base
     from FROM_ADDRESS
     recipients registrant.email_address
     sent_on Time.now.to_s(:db)
-    body :pdf_url => "http://#{default_url_options[:host]}/#{registrant.pdf_path}",
+    body :pdf_url => "http://#{default_url_options[:host]}#{registrant.pdf_path}",
          :locale => registrant.locale
   end
 end
