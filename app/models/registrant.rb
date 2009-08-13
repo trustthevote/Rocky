@@ -42,43 +42,6 @@ class Registrant < ActiveRecord::Base
     "Started registration"
   ]
 
-  def to_csv_array
-    [
-      status.humanize,
-      locale == 'en' ? "English" : "Spanish",
-      pdf_date_of_birth,
-      email_address,
-      yes_no(first_registration?),
-      yes_no(us_citizen?),
-      name_title,
-      first_name,
-      middle_name,
-      last_name,
-      name_suffix,
-      home_address,
-      home_unit,
-      home_city,
-      home_state && home_state.abbreviation,
-      home_zip_code,
-      yes_no(has_mailing_address?),
-      mailing_address,
-      mailing_unit,
-      mailing_city,
-      mailing_state_abbrev,
-      mailing_zip_code,
-      party,
-      race,
-      phone,
-      phone_type,
-      yes_no(opt_in_email?),
-      yes_no(opt_in_sms?),
-      survey_answer_1,
-      survey_answer_2,
-      ineligible_reason,
-      created_at && created_at.to_s(:month_day_year)
-    ]
-  end
-
   attr_protected :status
 
   aasm_column :status
@@ -444,6 +407,43 @@ class Registrant < ActiveRecord::Base
 
   def eligible?
     !ineligible?
+  end
+
+  def to_csv_array
+    [
+      status.humanize,
+      locale == 'en' ? "English" : "Spanish",
+      pdf_date_of_birth,
+      email_address,
+      yes_no(first_registration?),
+      yes_no(us_citizen?),
+      name_title,
+      first_name,
+      middle_name,
+      last_name,
+      name_suffix,
+      home_address,
+      home_unit,
+      home_city,
+      home_state && home_state.abbreviation,
+      home_zip_code,
+      yes_no(has_mailing_address?),
+      mailing_address,
+      mailing_unit,
+      mailing_city,
+      mailing_state_abbrev,
+      mailing_zip_code,
+      party,
+      race,
+      phone,
+      phone_type,
+      yes_no(opt_in_email?),
+      yes_no(opt_in_sms?),
+      survey_answer_1,
+      survey_answer_2,
+      ineligible_reason,
+      created_at && created_at.to_s(:month_day_year)
+    ]
   end
 
   private ###
