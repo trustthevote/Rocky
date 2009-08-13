@@ -57,6 +57,10 @@ HTML
     @partner_id = params[:id]
     @host = host_url
   end
+  
+  def registrations
+    send_data(current_partner.generate_registrants_csv, :filename => "registrations.csv", :type => :csv)
+  end
 
   protected
 
