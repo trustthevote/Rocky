@@ -162,5 +162,66 @@ describe Partner do
         assert_equal 0.4, stats[1][:registrations_percentage]
       end
     end
+
+    describe "by gender" do
+      it "should tally registrants by gender based on name_title" do
+        partner = Factory.create(:partner)
+        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
+        stats = partner.registration_stats_gender
+        assert_equal 2, stats.length
+        assert_equal "Male", stats[0][:gender]
+        assert_equal 3, stats[0][:registrations_count]
+        assert_equal 0.6, stats[0][:registrations_percentage]
+        assert_equal "Female", stats[1][:gender]
+        assert_equal 2, stats[1][:registrations_count]
+        assert_equal 0.4, stats[1][:registrations_percentage]
+      end
+
+      it "should treat race names in different languages as equivalent" do
+        partner = Factory.create(:partner)
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Sr.") }
+        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Sra.") }
+        stats = partner.registration_stats_gender
+        assert_equal 2, stats.length
+        assert_equal "Male", stats[0][:gender]
+        assert_equal 6, stats[0][:registrations_count]
+        assert_equal 0.6, stats[0][:registrations_percentage]
+        assert_equal "Female", stats[1][:gender]
+        assert_equal 4, stats[1][:registrations_count]
+        assert_equal 0.4, stats[1][:registrations_percentage]
+      end
+
+      it "doesn't need both English and Spanish results" do
+        partner = Factory.create(:partner)
+        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Sra.") }
+        stats = partner.registration_stats_gender
+        assert_equal 2, stats.length
+        assert_equal "Male", stats[0][:gender]
+        assert_equal 3, stats[0][:registrations_count]
+        assert_equal 0.6, stats[0][:registrations_percentage]
+        assert_equal "Female", stats[1][:gender]
+        assert_equal 2, stats[1][:registrations_count]
+        assert_equal 0.4, stats[1][:registrations_percentage]
+      end
+
+      it "only uses completed/step_5 registrations for stats" do
+        partner = Factory.create(:partner)
+        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { Factory.create(:step_4_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { Factory.create(:step_5_registrant, :partner => partner, :name_title => "Sra.") }
+        stats = partner.registration_stats_gender
+        assert_equal 2, stats.length
+        assert_equal "Male", stats[0][:gender]
+        assert_equal 3, stats[0][:registrations_count]
+        assert_equal 0.6, stats[0][:registrations_percentage]
+        assert_equal "Female", stats[1][:gender]
+        assert_equal 2, stats[1][:registrations_count]
+        assert_equal 0.4, stats[1][:registrations_percentage]
+      end
+    end
   end
 end

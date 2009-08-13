@@ -25,6 +25,10 @@ class Partner < ActiveRecord::Base
     1
   end
 
+  def primary?
+    self.id == self.class.default_id
+  end
+
   def registration_stats_state
     counts = Registrant.connection.select_all(<<-"SQL")
       SELECT count(*) as registrations_count, home_state_id FROM `registrants`
@@ -39,10 +43,6 @@ class Partner < ActiveRecord::Base
       }
     end
     named_counts.sort_by {|r| [-r[:registrations_count], r[:state_name]]}
-  end
-
-  def primary?
-    self.id == self.class.default_id
   end
 
   def registration_stats_race
@@ -78,6 +78,36 @@ class Partner < ActiveRecord::Base
       }
     end
     named_counts.sort_by {|r| [-r[:registrations_count], r[:race]]}
+  end
+
+  def registration_stats_gender
+    counts = Registrant.connection.select_all(<<-"SQL")
+      SELECT count(*) as registrations_count, name_title FROM `registrants`
+      WHERE (status = 'complete' OR status = 'step_5') AND partner_id = #{self.id}
+      GROUP BY name_title
+    SQL
+
+    male_titles = [I18n.backend.send(:lookup, :en, "txt.registration.titles")[0], I18n.backend.send(:lookup, :es, "txt.registration.titles")[0]]
+    male_count = female_count = 0
+
+    counts.each do |row|
+      if male_titles.include?(row["name_title"])
+        male_count += row["registrations_count"].to_i
+      else
+        female_count += row["registrations_count"].to_i
+      end
+    end
+
+    sum = male_count + female_count
+    [ { :gender => "Male",
+        :registrations_count => male_count,
+        :registrations_percentage => male_count.to_f / sum
+      },
+      { :gender => "Female",
+        :registrations_count => female_count,
+        :registrations_percentage => female_count.to_f / sum
+      }
+    ].sort_by { |r| [ -r[:registrations_count], r[:gender] ] }
   end
 
   def state_abbrev=(abbrev)

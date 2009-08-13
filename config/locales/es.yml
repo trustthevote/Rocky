@@ -114,10 +114,9 @@ es:
       opt_in_email: XXXX
       not_given: XXXX
       titles:
-      - Mr.
-      - Mrs.
-      - Miss
-      - Ms.
+      - Sr.
+      - Sra.
+      - Srta.
       suffixes:
       - Jr.
       - Sr.

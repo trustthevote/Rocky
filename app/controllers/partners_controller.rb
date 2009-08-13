@@ -51,6 +51,7 @@ HTML
     @partner = current_partner
     @stats_by_state = @partner.registration_stats_state
     @stats_by_race = @partner.registration_stats_race
+    @stats_by_gender = @partner.registration_stats_gender
   end
 
   def widget_loader
