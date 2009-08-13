@@ -399,7 +399,7 @@ describe Registrant do
       reg = Factory.build(:step_1_registrant)
       assert_equal [ "Step 1",
                      "English",
-                     "8/12/1989",
+                     reg.date_of_birth.to_s(:month_day_year),
                      reg.email_address,
                      "No",
                      "Yes",
@@ -437,7 +437,7 @@ describe Registrant do
       reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
       assert_equal [ "Complete",
                      "English",
-                     "8/12/1989",
+                     reg.date_of_birth.to_s(:month_day_year),
                      "citizen@example.com",
                      "No",
                      "Yes",
@@ -466,7 +466,8 @@ describe Registrant do
                      "blue",
                      "fido",
                      nil,
-                     "8/12/2009"], 
+                     reg.created_at && reg.created_at.to_s(:month_day_year)
+                     ],
                  reg.to_csv_array
     end
     

@@ -4,10 +4,9 @@ class Registrant < ActiveRecord::Base
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
   # TODO: add :es to get full set for validation
-  TITLES = I18n.t('txt.registration.titles', :locale => :en)
-  SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en)
-  PARTIES = [ "American Co-dependent", "Birthday", "Republicratic", "Sub-genius", "Suprise" ]
-  
+  TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
+  SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
+
   CSV_HEADER = [
     "Status",
     "Language",
@@ -42,7 +41,7 @@ class Registrant < ActiveRecord::Base
     "Ineligible reason",
     "Registered at"
   ]
-  
+
   def to_csv_array
     [
       status.humanize,
@@ -76,7 +75,7 @@ class Registrant < ActiveRecord::Base
       survey_answer_1,
       survey_answer_2,
       ineligible_reason,
-      month_day_year(created_at)
+      created_at && created_at.to_s(:month_day_year)
     ]
   end
   
@@ -382,7 +381,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def pdf_date_of_birth
-    month_day_year(date_of_birth)
+    date_of_birth.to_s(:month_day_year)
   end
 
   def form_date_of_birth
@@ -438,7 +437,7 @@ class Registrant < ActiveRecord::Base
     !ineligible?
   end
 
-  private
+  private ###
 
   def at_least_step?(step)
     current_step = STEPS.index(aasm_current_state)
@@ -464,9 +463,5 @@ class Registrant < ActiveRecord::Base
     when ineligible_age? then "Not old enough to register"
     else nil
     end
-  end
-
-  def month_day_year(date)
-    "%d/%d/%d" % [date.month, date.mday, date.year] if date
   end
 end
