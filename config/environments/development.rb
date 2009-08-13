@@ -21,6 +21,7 @@ FROM_ADDRESS = "rocky-dev@example.com"
 USE_HTTPS = false
 
 ### uncomment to use DelayedJob in development.
+### you must set config.cache_classes = true
 ### rake jobs:work  # to run the jobs
 # config.after_initialize do
 #   Registrant.handle_asynchronously :generate_pdf
