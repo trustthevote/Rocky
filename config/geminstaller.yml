@@ -1,8 +1,8 @@
 defaults:
-<% unless ENV['RAILS_ENV'] != "development" %>
-  install_options: --no-ri --no-rdoc --source http://gems.github.com --source http://gems.rubyforge.org
-<% else %>
+<% if ENV['RAILS_ENV'] == "development" %>
   install_options: --source http://gems.github.com --source http://gems.rubyforge.org
+<% else %>
+  install_options: --no-ri --no-rdoc --source http://gems.github.com --source http://gems.rubyforge.org
 <% end %>
 gems:
 - name: rake
