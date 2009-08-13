@@ -16,9 +16,9 @@ class CreateGeoStates < ActiveRecord::Migration
       t.string "locale", :limit => 2
       t.string "parties"
       t.string "no_party"
-      t.string "not_participating_tooltip", :limit => 500
-      t.string "race_tooltip"
-      t.string "id_number_tooltip"
+      t.string "not_participating_tooltip", :limit => 1024
+      t.string "race_tooltip", :limit => 1024
+      t.string "id_number_tooltip", :limit => 1024
       t.timestamps
     end
   end
