@@ -52,6 +52,7 @@ HTML
     @stats_by_state = @partner.registration_stats_state
     @stats_by_race = @partner.registration_stats_race
     @stats_by_gender = @partner.registration_stats_gender
+    @stats_by_completion_date = @partner.registration_stats_completion_date
   end
 
   def widget_loader

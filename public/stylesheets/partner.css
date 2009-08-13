@@ -24,12 +24,25 @@ p {
   font-size: 11px;
 }
 
+.wrapper {
+  position: relative;
+}
+
+.column-right {
+  position: absolute;
+  top: 0;
+  left: 300px;
+}
+
 .stats {
+  margin-bottom: 20px;
+  width: 275px;
   font-size: 13px;
 }
 
 .stats table {
   border: 1px solid #c7c7c7;
+  width: 100%;
 }
 
 .stats thead th, .stats thead td {

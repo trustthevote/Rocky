@@ -110,6 +110,18 @@ class Partner < ActiveRecord::Base
     ].sort_by { |r| [ -r[:registrations_count], r[:gender] ] }
   end
 
+  def registration_stats_completion_date
+    conditions = "partner_id = ? AND (status = 'complete' OR status = 'step_5') AND created_at >= ?"
+    stats = {}
+    stats[:day_count] =   Registrant.count(:conditions => [conditions, self, 1.day.ago])
+    stats[:week_count] =  Registrant.count(:conditions => [conditions, self, 1.week.ago])
+    stats[:month_count] = Registrant.count(:conditions => [conditions, self, 1.month.ago])
+    stats[:year_count] =  Registrant.count(:conditions => [conditions, self, 1.year.ago])
+    stats[:total_count] = Registrant.count(:conditions => ["partner_id = ? AND (status = 'complete' OR status = 'step_5')", self])
+    stats[:percent_complete] = stats[:total_count].to_f / Registrant.count(:conditions => ["partner_id = ? AND (status != 'initial')", self])
+    stats
+  end
+
   def state_abbrev=(abbrev)
     self.state = GeoState[abbrev]
   end

@@ -16,6 +16,8 @@
     <div id="header">
       <% if current_partner_session %>
         <p>
+          Hello, <%= current_partner.name %>.&nbsp;&nbsp;&nbsp;
+          <%= link_to "Dashboard", partner_path %> |
           <%= link_to "Show Statistics", statistics_partner_path %> |
           <%= link_to "Download Registration Data", registrations_partner_path(:format => 'csv') %> |
           <%= link_to "Profile", edit_partner_path %> |

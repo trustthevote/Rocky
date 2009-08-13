@@ -1,48 +1,86 @@
 <h1>Statistics</h1>
+<div class="wrapper">
 
-<div class="stats" id="stats_by_state">
-  <table>
-    <thead><tr><th colspan="3">Registrations by State</th></tr></thead>
-    <tbody>
-      <% @stats_by_state.each do |stat| %>
-        <tr class="<%= cycle('even', 'odd') %>">
-          <th><%= stat[:state_name] %></th>
-          <td><%= stat[:registrations_count] %></td>
-          <td><%= "%.1f" % (stat[:registrations_percentage] * 100) %>%</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <div class="stats" id="stats_by_state">
+    <table>
+      <thead><tr><th colspan="3">Registrations by State</th></tr></thead>
+      <tbody>
+        <% @stats_by_state.each do |stat| %>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th><%= stat[:state_name] %></th>
+            <td><%= stat[:registrations_count] %></td>
+            <td><%= "%.1f" % (stat[:registrations_percentage] * 100) %>%</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<% reset_cycle %>
-<div class="stats" id="stats_by_race">
-  <table>
-    <thead><tr><th colspan="3">Registrations by Ethnicity</th></tr></thead>
-    <tbody>
-      <% @stats_by_race.each do |stat| %>
-        <tr class="<%= cycle('even', 'odd') %>">
-          <th><%= stat[:race] %></th>
-          <td><%= stat[:registrations_count] %></td>
-          <td><%= "%.1f" % (stat[:registrations_percentage] * 100) %>%</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <div class="column-right">
+    <% reset_cycle %>
+    <div class="stats" id="stats_by_completion_date">
+      <table>
+        <thead><tr><th colspan="3">Completed Registrations</th></tr></thead>
+        <tbody>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>Today</th>
+            <td><%= @stats_by_completion_date[:day_count] %></td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>This Week</th>
+            <td><%= @stats_by_completion_date[:week_count] %></td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>This Month</th>
+            <td><%= @stats_by_completion_date[:month_count] %></td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>This Year</th>
+            <td><%= @stats_by_completion_date[:year_count] %></td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>Total</th>
+            <td><%= @stats_by_completion_date[:total_count] %></td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>Completion Rate</th>
+            <td><%= "%.1f" % (@stats_by_completion_date[:percent_complete] * 100) %>%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<% reset_cycle %>
-<div class="stats" id="stats_by_gender">
-  <table>
-    <thead><tr><th colspan="3">Registrations by Gender</th></tr></thead>
-    <tbody>
-      <% @stats_by_gender.each do |stat| %>
-        <tr class="<%= cycle('even', 'odd') %>">
-          <th><%= stat[:gender] %></th>
-          <td><%= stat[:registrations_count] %></td>
-          <td><%= "%.1f" % (stat[:registrations_percentage] * 100) %>%</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <% reset_cycle %>
+    <div class="stats" id="stats_by_race">
+      <table>
+        <thead><tr><th colspan="3">Registrations by Ethnicity</th></tr></thead>
+        <tbody>
+          <% @stats_by_race.each do |stat| %>
+            <tr class="<%= cycle('even', 'odd') %>">
+              <th><%= stat[:race] %></th>
+              <td><%= stat[:registrations_count] %></td>
+              <td><%= "%.1f" % (stat[:registrations_percentage] * 100) %>%</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% reset_cycle %>
+    <div class="stats" id="stats_by_gender">
+      <table>
+        <thead><tr><th colspan="3">Registrations by Gender</th></tr></thead>
+        <tbody>
+          <% @stats_by_gender.each do |stat| %>
+            <tr class="<%= cycle('even', 'odd') %>">
+              <th><%= stat[:gender] %></th>
+              <td><%= stat[:registrations_count] %></td>
+              <td><%= "%.1f" % (stat[:registrations_percentage] * 100) %>%</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>

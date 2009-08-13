@@ -223,5 +223,60 @@ describe Partner do
         assert_equal 0.4, stats[1][:registrations_percentage]
       end
     end
+
+    describe "by registration date" do
+      it "should tally registrants by date bucket" do
+        partner = Factory.create(:partner)
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        5.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago) }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago) }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago) }
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.years.ago) }
+        stats = partner.registration_stats_completion_date
+        assert_equal  8, stats[:day_count]
+        assert_equal 13, stats[:week_count]
+        assert_equal 17, stats[:month_count]
+        assert_equal 19, stats[:year_count]
+        assert_equal 20, stats[:total_count]
+      end
+
+      it "should not include incomplete registrations in counts" do
+        partner = Factory.create(:partner)
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
+        stats = partner.registration_stats_completion_date
+        assert_equal  8, stats[:day_count]
+      end
+
+      it "should show percent complete" do
+        partner = Factory.create(:partner)
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
+        stats = partner.registration_stats_completion_date
+        assert_equal 0.5, stats[:percent_complete]
+      end
+
+      it "should not include :initial state registrants in calculations" do
+        partner = Factory.create(:partner)
+        5.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago) }
+        5.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago) }
+        5.times { Factory.create(:step_1_registrant,  :partner => partner, :created_at => 2.days.ago, :status => :initial) }
+        stats = partner.registration_stats_completion_date
+        assert_equal   5, stats[:week_count]
+        assert_equal 0.5, stats[:percent_complete]
+      end
+      
+      it "should only include data for this partner" do
+        partner = Factory.create(:partner)
+        other_partner = Factory.create(:partner)
+        Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago)
+        Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago)
+        Factory.create(:maximal_registrant, :partner => other_partner, :created_at => 2.days.ago)
+        stats = partner.registration_stats_completion_date
+        assert_equal   1, stats[:week_count]
+        assert_equal 0.5, stats[:percent_complete]
+      end
+    end
   end
 end
+

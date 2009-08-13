@@ -70,6 +70,7 @@ describe PartnersController do
         assert_not_nil assigns[:stats_by_state]
         assert_not_nil assigns[:stats_by_race]
         assert_not_nil assigns[:stats_by_gender]
+        assert_not_nil assigns[:stats_by_completion_date]
       end
     end
 
