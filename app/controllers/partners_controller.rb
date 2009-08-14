@@ -34,7 +34,7 @@ class PartnersController < ApplicationController
     @widget_html = <<-HTML
 <div id="widget_box">
   <a href="#{new_registrant_url(:partner => partner_id)}" id="rtv-widget-link">
-    <img src="http://www.rockthevote.com/assets/images/pages/home/top-boxes/register_to_vote.jpg"></img>
+    <img src="http://register.rockthevote.com/images/widget/rtv-big.jpg"></img>
   </a>
   <script type="text/javascript" src="#{widget_loader_url(partner_id, :format => 'js')}"></script>
 </div>
@@ -42,7 +42,7 @@ HTML
 
     @link_html = <<-HTML
 <a href="#{new_registrant_url(:partner => partner_id)}">
-  <img src="http://www.rockthevote.com/assets/images/pages/home/top-boxes/register_to_vote.jpg"></img>
+  <img src="http://register.rockthevote.com/images/widget/rtv-big.jpg"></img>
 </a>
 HTML
   end
