@@ -8,11 +8,21 @@ class Notifier < ActionMailer::Base
   end
 
   def confirmation(registrant)
-    subject I18n.t('email.confirmation.subject')
+    setup_registrant_email(registrant, 'confirmation')
+  end
+
+  def reminder(registrant)
+    setup_registrant_email(registrant, 'reminder')
+  end
+
+  protected
+
+  def setup_registrant_email(registrant, type)
+    subject I18n.t("email.#{type}.subject", :locale => registrant.locale.to_sym)
     from FROM_ADDRESS
     recipients registrant.email_address
     sent_on Time.now.to_s(:db)
     body :pdf_url => "http://#{default_url_options[:host]}#{registrant.pdf_path}",
-         :locale => registrant.locale
+         :locale => registrant.locale.to_sym
   end
 end

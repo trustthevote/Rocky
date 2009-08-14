@@ -492,6 +492,60 @@ describe Registrant do
     end
   end
 
+  describe "reminder emails" do
+    it "on incomplete registrant, it should be 0" do
+      assert_equal 0, Factory.build(:step_4_registrant).reminders_left
+    end
+
+    it "should know how many reminder emails are left" do
+      assert_equal Registrant::REMINDER_EMAILS_TO_SEND, Factory.build(:maximal_registrant, :reminders_left => Registrant::REMINDER_EMAILS_TO_SEND).reminders_left
+    end
+
+    it "should queue series of reminder emails" do
+      reg = Factory.create(:maximal_registrant, :reminders_left => 0)
+      assert_difference('Delayed::Job.count', 1) do
+        reg.enqueue_reminder_emails
+        assert_equal Registrant::REMINDER_EMAILS_TO_SEND, reg.reload.reminders_left
+      end
+    end
+
+    describe "delivery" do
+      it "should send an email" do
+        assert_difference('ActionMailer::Base.deliveries.size', 1) do
+          reg = Factory.create(:maximal_registrant, :reminders_left => 1)
+          reg.deliver_reminder_email
+        end
+      end
+
+      it "should not send an email if no reminders left" do
+        assert_no_difference('ActionMailer::Base.deliveries.size') do
+          reg = Factory.create(:maximal_registrant, :reminders_left => 0)
+          reg.deliver_reminder_email
+        end
+      end
+
+      it "should decrement reminders left" do
+        reg = Factory.create(:maximal_registrant, :reminders_left => 3)
+        reg.deliver_reminder_email
+        assert_equal 2, reg.reload.reminders_left
+      end
+
+      it "should enqueue another reminder email" do
+        assert_difference('Delayed::Job.count', 1) do
+          reg = Factory.create(:maximal_registrant, :reminders_left => 3)
+          reg.deliver_reminder_email
+        end
+      end
+
+      it "should not enqueue another reminder email if on last email" do
+        assert_no_difference('Delayed::Job.count') do
+          reg = Factory.create(:maximal_registrant, :reminders_left => 1)
+          reg.deliver_reminder_email
+        end
+      end
+    end
+  end
+
   def assert_attribute_invalid_with(model, attributes)
     reg = Factory.build(model, attributes)
     reg.invalid?

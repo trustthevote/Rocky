@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20090811003128) do
     t.string   "locale",                             :limit => 2
     t.integer  "partner_id"
     t.string   "uid"
+    t.integer  "reminders_left",                                   :default => 0
     t.date     "date_of_birth"
     t.string   "email_address"
     t.boolean  "first_registration"

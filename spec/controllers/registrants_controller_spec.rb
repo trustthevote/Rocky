@@ -126,6 +126,11 @@ describe RegistrantsController do
       assert_response :success
       assert_template "download"
     end
+    it "envokes finalize on registrant" do
+      mock(@registrant).finalize_registration
+      stub(Registrant).find_by_param.with(anything).returns(@registrant)
+      get :download, :id => @registrant.to_param
+    end
     after(:each) do
       `rm #{@registrant.pdf_file_path}`
     end

@@ -163,3 +163,6 @@ es:
     confirmation:
       subject: XXXX
       body: XXXX
+    reminder:
+      subject: XXXX
+      body: XXXX

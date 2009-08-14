@@ -6,6 +6,8 @@ class Registrant < ActiveRecord::Base
   # TODO: add :es to get full set for validation
   TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
+  REMINDER_EMAILS_TO_SEND = 3
+  DAYS_BETWEEN_REMINDER_EMAILS = 5.days
 
   CSV_HEADER = [
     "Status",
@@ -359,6 +361,7 @@ class Registrant < ActiveRecord::Base
   def finalize_registration
     generate_pdf
     deliver_confirmation_email
+    enqueue_reminder_emails
     # TODO: transition to completed status?
   end
 
@@ -374,6 +377,24 @@ class Registrant < ActiveRecord::Base
 
   def deliver_confirmation_email
     Notifier.deliver_confirmation(self)
+  end
+
+  def enqueue_reminder_emails
+    update_attributes(:reminders_left => REMINDER_EMAILS_TO_SEND)
+    enqueue_reminder_email
+  end
+
+  def enqueue_reminder_email
+    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [])
+    Delayed::Job.enqueue(action, 0, DAYS_BETWEEN_REMINDER_EMAILS.from_now)
+  end
+
+  def deliver_reminder_email
+    if reminders_left > 0
+      Notifier.deliver_reminder(self)
+      update_attributes(:reminders_left => reminders_left - 1)
+      enqueue_reminder_email if reminders_left > 0
+    end
   end
 
   def merge_pdf(tmp)

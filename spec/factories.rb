@@ -44,6 +44,7 @@ Factory.define :maximal_registrant, :parent => :completed_registrant do |f|
   f.status              "complete"
   f.locale              "en"
   f.partner_id          "1"
+  f.reminders_left      "3"
   f.date_of_birth       20.years.ago.to_date.strftime("%m/%d/%Y")
   f.email_address       "citizen@example.com"
   f.first_registration  false
