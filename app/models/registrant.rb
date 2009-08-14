@@ -181,6 +181,10 @@ class Registrant < ActiveRecord::Base
     find_by_uid(param)
   end
 
+  def self.find_by_param!(param)
+    find_by_param(param) || begin raise ActiveRecord::RecordNotFound end
+  end
+
   ### instance methods
   attr_accessor :attest_true
   

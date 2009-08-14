@@ -22,8 +22,7 @@ class RegistrantsController < ApplicationController
   end
 
   def download
-    @getting_download = true
-    find_registrant
+    find_registrant(:download)
   end
 
   def current_step
