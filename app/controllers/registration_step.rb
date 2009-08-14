@@ -38,7 +38,7 @@ module RegistrationStep
   def find_registrant
     @registrant = Registrant.find_by_param(params[:registrant_id] || params[:id])
     unless @registrant && !@registrant.complete?
-      raise ActiveRecord::RecordNotFound
+      raise ActiveRecord::RecordNotFound unless @getting_download
     end
     I18n.locale = @registrant.locale
   end

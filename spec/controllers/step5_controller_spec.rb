@@ -37,8 +37,8 @@ describe Step5Controller do
         put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_5_registrant)
       end
 
-      it "reload only sends one confirmation email" do
-        assert_difference('ActionMailer::Base.deliveries.size', 1) do
+      it "can't submit updates twice" do
+        assert_raises(ActiveRecord::RecordNotFound) do
           put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_5_registrant)
           put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_5_registrant)
         end
