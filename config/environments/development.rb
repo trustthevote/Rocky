@@ -23,7 +23,8 @@ USE_HTTPS = false
 ### uncomment to use DelayedJob in development.
 ### you must set config.cache_classes = true
 ### rake jobs:work  # to run the jobs
-# config.after_initialize do
-#   I18n.reload!
-#   Registrant.handle_asynchronously :finalize_registration
-# end
+  # config.cache_classes = true
+  # config.after_initialize do
+  #   I18n.reload!
+  #   Registrant.handle_asynchronously :wrap_up
+  # end

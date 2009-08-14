@@ -491,6 +491,15 @@ describe Registrant do
       reg.wrap_up
       assert reg.reload.complete?
     end
+
+    it "clears out sensitive data" do
+      reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+      stub(reg).generate_pdf                  # avoid messy out-of-band action in tests
+      stub(reg).deliver_confirmation_email    # avoid messy out-of-band action in tests
+      stub(reg).enqueue_reminder_emails       # avoid messy out-of-band action in tests
+      reg.complete_registration
+      assert_nil reg.state_id_number
+    end
   end
 
   describe "deliver_confirmation_email" do

@@ -375,6 +375,7 @@ class Registrant < ActiveRecord::Base
     generate_pdf
     deliver_confirmation_email
     enqueue_reminder_emails
+    redact_sensitive_data
   end
 
   def generate_pdf
@@ -407,6 +408,10 @@ class Registrant < ActiveRecord::Base
       update_attributes(:reminders_left => reminders_left - 1)
       enqueue_reminder_email if reminders_left > 0
     end
+  end
+  
+  def redact_sensitive_data
+    self.state_id_number = nil
   end
 
   def merge_pdf(tmp)
