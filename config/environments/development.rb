@@ -24,5 +24,6 @@ USE_HTTPS = false
 ### you must set config.cache_classes = true
 ### rake jobs:work  # to run the jobs
 # config.after_initialize do
+#   I18n.reload!
 #   Registrant.handle_asynchronously :finalize_registration
 # end

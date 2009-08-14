@@ -6,6 +6,8 @@ class Registrant < ActiveRecord::Base
   # TODO: add :es to get full set for validation
   TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
+  REMINDER_EMAILS_TO_SEND = 3
+  DAYS_BETWEEN_REMINDER_EMAILS = 5.days
 
   CSV_HEADER = [
     "Status",
@@ -41,43 +43,6 @@ class Registrant < ActiveRecord::Base
     "Ineligible reason",
     "Started registration"
   ]
-
-  def to_csv_array
-    [
-      status.humanize,
-      locale == 'en' ? "English" : "Spanish",
-      pdf_date_of_birth,
-      email_address,
-      yes_no(first_registration?),
-      yes_no(us_citizen?),
-      name_title,
-      first_name,
-      middle_name,
-      last_name,
-      name_suffix,
-      home_address,
-      home_unit,
-      home_city,
-      home_state && home_state.abbreviation,
-      home_zip_code,
-      yes_no(has_mailing_address?),
-      mailing_address,
-      mailing_unit,
-      mailing_city,
-      mailing_state_abbrev,
-      mailing_zip_code,
-      party,
-      race,
-      phone,
-      phone_type,
-      yes_no(opt_in_email?),
-      yes_no(opt_in_sms?),
-      survey_answer_1,
-      survey_answer_2,
-      ineligible_reason,
-      created_at && created_at.to_s(:month_day_year)
-    ]
-  end
 
   attr_protected :status
 
@@ -396,6 +361,7 @@ class Registrant < ActiveRecord::Base
   def finalize_registration
     generate_pdf
     deliver_confirmation_email
+    enqueue_reminder_emails
     # TODO: transition to completed status?
   end
 
@@ -411,6 +377,24 @@ class Registrant < ActiveRecord::Base
 
   def deliver_confirmation_email
     Notifier.deliver_confirmation(self)
+  end
+
+  def enqueue_reminder_emails
+    update_attributes(:reminders_left => REMINDER_EMAILS_TO_SEND)
+    enqueue_reminder_email
+  end
+
+  def enqueue_reminder_email
+    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [])
+    Delayed::Job.enqueue(action, 0, DAYS_BETWEEN_REMINDER_EMAILS.from_now)
+  end
+
+  def deliver_reminder_email
+    if reminders_left > 0
+      Notifier.deliver_reminder(self)
+      update_attributes(:reminders_left => reminders_left - 1)
+      enqueue_reminder_email if reminders_left > 0
+    end
   end
 
   def merge_pdf(tmp)
@@ -444,6 +428,43 @@ class Registrant < ActiveRecord::Base
 
   def eligible?
     !ineligible?
+  end
+
+  def to_csv_array
+    [
+      status.humanize,
+      locale == 'en' ? "English" : "Spanish",
+      pdf_date_of_birth,
+      email_address,
+      yes_no(first_registration?),
+      yes_no(us_citizen?),
+      name_title,
+      first_name,
+      middle_name,
+      last_name,
+      name_suffix,
+      home_address,
+      home_unit,
+      home_city,
+      home_state && home_state.abbreviation,
+      home_zip_code,
+      yes_no(has_mailing_address?),
+      mailing_address,
+      mailing_unit,
+      mailing_city,
+      mailing_state_abbrev,
+      mailing_zip_code,
+      party,
+      race,
+      phone,
+      phone_type,
+      yes_no(opt_in_email?),
+      yes_no(opt_in_sms?),
+      survey_answer_1,
+      survey_answer_2,
+      ineligible_reason,
+      created_at && created_at.to_s(:month_day_year)
+    ]
   end
 
   private ###
