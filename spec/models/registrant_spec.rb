@@ -484,13 +484,12 @@ describe Registrant do
     end
   end
 
-  describe "finalize" do
-    it "should only run once" do
+  describe "wrapping up" do
+    it "should transition to complete state" do
       reg = Factory.create(:step_5_registrant)
-      stub(reg).generate_pdf
-      mock.proxy(reg).complete! # check complete! is called once
-      reg.finalize_registration
-      reg.finalize_registration
+      mock(reg).complete_registration
+      reg.wrap_up
+      assert reg.reload.complete?
     end
   end
 

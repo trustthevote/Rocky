@@ -31,9 +31,9 @@ describe Step5Controller do
       assert_template "show"
     end
 
-    describe "finalization" do
-      it "invokes finalize on registrant" do
-        mock(@registrant).finalize_registration
+    describe "completing registration" do
+      it "invokes wrap_up on registrant" do
+        mock(@registrant).wrap_up
         put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_5_registrant)
       end
 

@@ -2,7 +2,7 @@ class Registrant < ActiveRecord::Base
   include AASM
   include Mergable
 
-  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
+  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5]
   # TODO: add :es to get full set for validation
   TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
@@ -49,6 +49,7 @@ class Registrant < ActiveRecord::Base
   aasm_column :status
   aasm_initial_state :initial
   STEPS.each { |step| aasm_state step }
+  aasm_state :complete, :enter => :complete_registration
   aasm_state :rejected
 
   belongs_to :partner
@@ -366,13 +367,14 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def finalize_registration
-    if step_5?
-      generate_pdf
-      deliver_confirmation_email
-      enqueue_reminder_emails
-      complete!
-    end
+  def wrap_up
+    complete!
+  end
+
+  def complete_registration
+    generate_pdf
+    deliver_confirmation_email
+    enqueue_reminder_emails
   end
 
   def generate_pdf

@@ -16,7 +16,7 @@ class Step5Controller < ApplicationController
     if @registrant.valid?
       @registrant.save_or_reject!
       if @registrant.eligible?
-        @registrant.finalize_registration
+        @registrant.wrap_up
         redirect_to next_url
       else
         redirect_to ineligible_registrant_url(@registrant)
