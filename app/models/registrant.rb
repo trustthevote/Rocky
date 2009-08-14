@@ -6,8 +6,8 @@ class Registrant < ActiveRecord::Base
   # TODO: add :es to get full set for validation
   TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
-  REMINDER_EMAILS_TO_SEND = 3
-  DAYS_BETWEEN_REMINDER_EMAILS = 5.days
+  REMINDER_EMAILS_TO_SEND = 2
+  INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
 
   CSV_HEADER = [
     "Status",
@@ -396,7 +396,7 @@ class Registrant < ActiveRecord::Base
 
   def enqueue_reminder_email
     action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [])
-    Delayed::Job.enqueue(action, 0, DAYS_BETWEEN_REMINDER_EMAILS.from_now)
+    Delayed::Job.enqueue(action, 0, INTERVAL_BETWEEN_REMINDER_EMAILS.from_now)
   end
 
   def deliver_reminder_email
