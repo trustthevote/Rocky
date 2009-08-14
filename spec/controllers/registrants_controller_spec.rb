@@ -117,7 +117,7 @@ describe RegistrantsController do
 
   describe "download" do
     before(:each) do
-      @registrant = Factory.create(:maximal_registrant)
+      @registrant = Factory.create(:step_5_registrant)
       `touch #{@registrant.pdf_file_path}`
     end
     it "provides a link to download the PDF" do
@@ -133,6 +133,15 @@ describe RegistrantsController do
     end
     after(:each) do
       `rm #{@registrant.pdf_file_path}`
+    end
+  end
+
+  describe "completed registration" do
+    it "should not be visible" do
+      reg = Factory.create(:completed_registrant)
+      assert_raise ActiveRecord::RecordNotFound do
+        get :show, :id => reg.to_param
+      end
     end
   end
 end
