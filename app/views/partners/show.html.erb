@@ -1,20 +1,20 @@
 
 <div>
   <h2>Survey Questions</h2>
-  <p>1. English: <%= h @partner.survey_question_1_en %></p>
-  <p>1. Spanish: <%= h @partner.survey_question_1_es %></p>
-  <p>2. English: <%= h @partner.survey_question_2_en %></p>
-  <p>2. Spanish: <%= h @partner.survey_question_2_es %></p>
+  <p><strong>1.</strong> English: <%= h @partner.survey_question_1_en %></p>
+  <p><strong>1.</strong> Spanish: <%= h @partner.survey_question_1_es %></p>
+  <p><strong>2.</strong> English: <%= h @partner.survey_question_2_en %></p>
+  <p><strong>2.</strong> Spanish: <%= h @partner.survey_question_2_es %></p>
   <p><%= link_to "Edit Questions", edit_partner_questions_path %></p>
 </div>
 
 <form class="copy_html" action="#" method="get" accept-charset="utf-8">
   <div>
-    <h3><label for="widget_html">Copy this for an overlay on your site:</label> <%= clippy(h(@widget_html)) %></h3>
-    <p><textarea name="widget_html" readonly="readonly" rows="7" cols="110"><%= h @widget_html %></textarea></p>
+    <h2><label for="widget_html">Copy this for an overlay on your site:</label> <%= clippy(h(@widget_html)) %></h2>
+    <p><textarea name="widget_html" readonly="readonly" rows="7" cols="100"><%= h @widget_html %></textarea></p>
   </div>
   <div>
-    <h3><label for="link_html">Or this to link to Rock the Vote's site:</label> <%= clippy(h(@link_html)) %></h3>
-    <p><textarea name="link_html" readonly="readonly" rows="4" cols="110"><%= h @link_html %></textarea></p>
+    <h2><label for="link_html">Or this to link to Rock the Vote's site:</label> <%= clippy(h(@link_html)) %></h2>
+    <p><textarea name="link_html" readonly="readonly" rows="4" cols="100"><%= h @link_html %></textarea></p>
   </div>
 </form>

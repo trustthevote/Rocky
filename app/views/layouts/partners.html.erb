@@ -14,9 +14,10 @@
 <body>
   <div id="container">
     <div id="header">
+      <img src="/images/home_rtv_logo.png"/>
       <% if current_partner_session %>
+        <span>Hello, <%= current_partner.name %>.</span>
         <p>
-          Hello, <%= current_partner.name %>.&nbsp;&nbsp;&nbsp;
           <%= link_to "Dashboard", partner_path %> |
           <%= link_to "Show Statistics", statistics_partner_path %> |
           <%= link_to "Download Registration Data", registrations_partner_path(:format => 'csv') %> |
@@ -25,8 +26,10 @@
         </p>
       <% end %>
     </div>
-    <%= flash_messages %>
-    <%= yield %>
+    <div id="main">
+      <%= flash_messages %>
+      <%= yield %>
+    </div>
   </div>
   <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
 </body>

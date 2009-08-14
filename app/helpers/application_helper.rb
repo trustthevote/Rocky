@@ -22,7 +22,7 @@ module ApplicationHelper
     content_tag(:ul, messages.join("\n"), :class => "flash")
   end
 
-  def clippy(text, bgcolor='#FFFFFF')
+  def clippy(text, bgcolor='#EAEAEA')
     html = <<-HTML
       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
