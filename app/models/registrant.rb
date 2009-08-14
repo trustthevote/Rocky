@@ -154,23 +154,27 @@ class Registrant < ActiveRecord::Base
   end
 
   aasm_event :advance_to_step_1 do
-    transitions :to => :step_1, :from => [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete, :rejected]
+    transitions :to => :step_1, :from => [:initial, :step_1, :step_2, :step_3, :step_4, :rejected]
   end
   
   aasm_event :advance_to_step_2 do
-    transitions :to => :step_2, :from => [:step_1, :step_2, :step_3, :step_4, :step_5, :complete, :rejected]
+    transitions :to => :step_2, :from => [:step_1, :step_2, :step_3, :step_4, :rejected]
   end
 
   aasm_event :advance_to_step_3 do
-    transitions :to => :step_3, :from => [:step_2, :step_3, :step_4, :step_5, :complete, :rejected]
+    transitions :to => :step_3, :from => [:step_2, :step_3, :step_4, :rejected]
   end
 
   aasm_event :advance_to_step_4 do
-    transitions :to => :step_4, :from => [:step_3, :step_4, :step_5, :complete, :rejected]
+    transitions :to => :step_4, :from => [:step_3, :step_4, :rejected]
   end
 
   aasm_event :advance_to_step_5 do
-    transitions :to => :step_5, :from => [:step_4, :step_5, :complete, :rejected]
+    transitions :to => :step_5, :from => [:step_4, :rejected]
+  end
+  
+  aasm_event :complete do
+    transitions :to => :complete, :from => [:step_5]
   end
   
   def self.find_by_param(param)
@@ -359,10 +363,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def finalize_registration
-    generate_pdf
-    deliver_confirmation_email
-    enqueue_reminder_emails
-    # TODO: transition to completed status?
+    if step_5?
+      generate_pdf
+      deliver_confirmation_email
+      enqueue_reminder_emails
+      complete!
+    end
   end
 
   def generate_pdf

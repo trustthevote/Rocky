@@ -23,7 +23,6 @@ class RegistrantsController < ApplicationController
 
   def download
     find_registrant
-    @registrant.finalize_registration
   end
 
   def current_step

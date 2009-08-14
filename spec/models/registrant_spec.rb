@@ -484,6 +484,16 @@ describe Registrant do
     end
   end
 
+  describe "finalize" do
+    it "should only run once" do
+      reg = Factory.create(:step_5_registrant)
+      stub(reg).generate_pdf
+      mock.proxy(reg).complete! # check complete! is called once
+      reg.finalize_registration
+      reg.finalize_registration
+    end
+  end
+
   describe "deliver_confirmation_email" do
     it "should deliver an email" do
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
