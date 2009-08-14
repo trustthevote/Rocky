@@ -30,7 +30,14 @@ module GemInstallerRailsPreinitializer
       args += " --sudo" unless RUBY_PLATFORM =~ /mswin/
 
       # The 'install' method will auto-install gems as specified by the args and config
-      GemInstaller.install(args)
+      if ENV['IS_CI_BOX']
+        # you can change the output defaults under cruise if you want
+        # args += " --geminstaller-output=all --rubygems-output=all"
+
+        # Only install gems on Rails startup if we are on CI.  In local dev environment, this avoids having to type the sudo
+        # password on every app/test run, and on deployment you should be calling this before app startup as a capistrano task.
+        GemInstaller.install(args)
+      end
 
       # The 'autogem' method will automatically add all gems in the GemInstaller config to your load path,
       # using the rubygems 'gem' method.  Note that only the *first* version of any given gem will be loaded.

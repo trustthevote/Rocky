@@ -24,7 +24,7 @@ set :deploy_to, "/var/www/register.rockthevote.com/rocky"
 role :web,  "hood.osuosl.org"
 role :app,  "hood.osuosl.org"
 role :util, "rainier.osuosl.org"
-role :db,   "hood.osuosl.org"
+role :db,   "hood.osuosl.org", :primary => true
 
 set :scm, "git"
 set :user, "rocky"
@@ -32,7 +32,25 @@ set :branch, "master"
 
 set :deploy_via, :remote_cache
 
+set :use_sudo, false
+
+after "deploy:update_code", "deploy:symlink_configs"
+after "deploy:symlink_configs", "deploy:geminstaller" 
+
 namespace :deploy do
+  desc "run GemInstaller"
+  task :geminstaller, :roles => [:app, :util] do
+    sudo "geminstaller -c #{current_release}/config/geminstaller.yml"
+  end
+
+  desc "Link the database.yml and mongrel_cluster.yml files into the current release path."
+  task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
+    run <<-CMD
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml
+    CMD
+  end
+
   desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
