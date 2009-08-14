@@ -32,6 +32,7 @@ set :branch, "master"
 
 set :deploy_via, :remote_cache
 
+set :group_writable, false
 set :use_sudo, false
 
 after "deploy:update_code", "deploy:symlink_configs"
