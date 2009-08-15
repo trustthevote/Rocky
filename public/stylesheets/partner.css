@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: #2a2a2a;
 }
@@ -13,15 +17,31 @@ h4 { font-size: 12px; }
 h5 { font-size: 12px; }
 h6 { font-size: 12px; }
 
+ul.flash {
+  margin: 10px auto;
+  width: 50%;
+  background-color: #a7a;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flash li {
+  padding: 10px;
+}
+
 #container {
-  margin: 2em;
-  width: 80%;
+  width: 800px;
+  height: 100%;
   margin: 0 auto;
+  background-color: #eaeaea;
 }
 
 #header {
+  position: relative;
   padding: 0px 20px 5px;
-  background-color: black;
+  height: 110px;
+  background: black url(/images/home_rtv_logo.png) no-repeat 20px 0;
   color: #d8d8d8;
 }
 
@@ -35,24 +55,23 @@ h6 { font-size: 12px; }
 }
 
 #header span {
-  float: right;
-  margin-top: 10px;
+  position: absolute;
+  top: 10px;
+  right: 20px;
   font-size: 12px;
 }
 
 #header p {
-  text-align: center;
-}
-
-#header img {
-  margin-bottom: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
 
 #main {
   background-color: #eaeaea;
   position: relative;
   padding: 10px 20px;
-  min-height: 500px;
+/*  min-height: 500px;*/
 }
 
 h1, h2, h3, h4, h5, h6, legend {
@@ -101,6 +120,8 @@ p {
 }
 
 .stats thead th, .stats thead td {
+  color: #d8d8d8;
+  background-color: black;
   font-weight: bold;
 }
 
@@ -116,6 +137,10 @@ p {
   text-align: right;
 }
 
-.even th, .even td {
+.stats th, .stats td {
   background-color: #d8d8d8;
+}
+
+.stats .even th, .stats .even td {
+  background-color: #a0a0a0;
 }
