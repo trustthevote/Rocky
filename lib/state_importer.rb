@@ -23,6 +23,8 @@ class StateImporter
     state.requires_party = row["requires_party"]
     state.id_length_min = row["id_length_min"]
     state.id_length_max = row["id_length_max"]
+    state.registrar_address = row["sos_address"]
+    state.registrar_phone = row["sos_phone"]
     state.save!
   end
 

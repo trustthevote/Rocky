@@ -8,6 +8,8 @@ class CreateGeoStates < ActiveRecord::Migration
       t.boolean "participating"
       t.integer "id_length_min"
       t.integer "id_length_max"
+      t.string "registrar_address"
+      t.string "registrar_phone"
       t.timestamps
     end
 

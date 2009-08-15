@@ -25,13 +25,15 @@ ActiveRecord::Schema.define(:version => 20090811003128) do
   end
 
   create_table "geo_states", :force => true do |t|
-    t.string   "name",           :limit => 21
-    t.string   "abbreviation",   :limit => 2
+    t.string   "name",              :limit => 21
+    t.string   "abbreviation",      :limit => 2
     t.boolean  "requires_race"
     t.boolean  "requires_party"
     t.boolean  "participating"
     t.integer  "id_length_min"
     t.integer  "id_length_max"
+    t.string   "registrar_address"
+    t.string   "registrar_phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

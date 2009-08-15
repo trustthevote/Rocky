@@ -4,10 +4,10 @@ describe StateImporter do
   attr_accessor :csv_basic, :file_basic
   before(:each) do
     @csv_basic = <<CSV
-abbreviation,name,participating,not_participating_tooltip_en,not_participating_tooltip_es,requires_race,race_tooltip_en,race_tooltip_es,requires_party,parties_en,parties_es,no_party_en,no_party_es,id_length_min,id_length_max,id_number_tooltip_en,id_number_tooltip_es
-AL,Alabama,1,dead_end_en,dead_end_es,1,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,8,12,id_number_tooltip_en,id_number_tooltip_es
-AK,Alaska,0,dead_end_en,dead_end_es,1,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,10,13,id_number_tooltip_en,id_number_tooltip_es
-AZ,Arizona,1,dead_end_en,dead_end_es,0,race_tooltip_en,race_tooltip_es,0,,,,,8,12,id_number_tooltip_en,id_number_tooltip_es
+abbreviation,name,participating,not_participating_tooltip_en,not_participating_tooltip_es,requires_race,race_tooltip_en,race_tooltip_es,requires_party,parties_en,parties_es,no_party_en,no_party_es,id_length_min,id_length_max,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone
+AL,Alabama,1,dead_end_en,dead_end_es,1,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone
+AK,Alaska,0,dead_end_en,dead_end_es,1,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,10,13,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone
+AZ,Arizona,1,dead_end_en,dead_end_es,0,race_tooltip_en,race_tooltip_es,0,,,,,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone
 CSV
     @file_basic = StringIO.new(@csv_basic)
   end
@@ -27,6 +27,8 @@ CSV
       assert_equal true, state.requires_party
       assert_equal 8, state.id_length_min
       assert_equal 12, state.id_length_max
+      assert_equal "sos_address", state.registrar_address
+      assert_equal "sos_phone", state.registrar_phone
 
       state = GeoState['AK']
       assert_equal false, state.participating

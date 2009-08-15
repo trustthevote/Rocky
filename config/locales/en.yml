@@ -194,8 +194,10 @@ en:
     confirmation:
       subject: "Reminder: Mail your voter registration form"
       body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have 
-        it you can get it here: {{url}}) and mail it to the address on the form."
+        it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state
+        registrar at {{registrar_phone}}."
     reminder:
       subject: "Reminder: Mail your voter registration form"
       body: "This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have 
-        it you can get it here: {{url}}) and mail it to the address on the form."
+        it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state
+        registrar at {{registrar_phone}}."

@@ -1,1 +1,4 @@
-<%= t('email.confirmation.body', :url => @pdf_url, :locale => @locale) %>
+<%= t('email.confirmation.body', :url => @pdf_url,
+                                 :locale => @locale,
+                                 :registrar_address => @registrar_address,
+                                 :registrar_phone => @registrar_phone) %>
