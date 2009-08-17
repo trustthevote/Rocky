@@ -62,3 +62,15 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
 end
+
+namespace :import do
+  task :states, :roles => :app do
+    local_path = ENV['CSV_FILE'] || 'states.csv'
+    remote_dir = File.join(shared_path, "uploads")
+    remote_path = File.join(remote_dir, File.basename(local_path))
+    run "mkdir -p #{remote_dir}"
+    upload local_path, remote_path, :via => :scp
+    run "cd #{current_path} && rake import:states CSV_FILE=#{remote_path}"
+    find_and_execute_task "deploy:restart"
+  end
+end
