@@ -120,6 +120,7 @@ describe RegistrantsController do
       @registrant = Factory.create(:step_5_registrant)
       `touch #{@registrant.pdf_file_path}`
     end
+
     it "provides a link to download the PDF" do
       get :download, :id => @registrant.to_param
       assert_not_nil assigns[:registrant]
@@ -139,5 +140,16 @@ describe RegistrantsController do
         get :show, :id => reg.to_param
       end
     end
+  end
+  
+  describe "abandoned registration" do
+    integrate_views
+
+    it "should show a timeout page" do
+      reg = Factory.create(:step_1_registrant, :abandoned => true)
+      get :show, :id => reg.to_param
+      assert_redirected_to '/timeout.html'
+    end
+    
   end
 end

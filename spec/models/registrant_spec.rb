@@ -6,23 +6,32 @@ describe Registrant do
       reg = Registrant.new
       assert_nil reg.to_param
     end
-    
+
     it "should be non nil for saved records" do
       reg = Factory.create(:step_1_registrant)
       assert_not_nil reg.to_param
     end
-    
+
     it "should not be the record id" do
       reg = Factory.create(:step_1_registrant)
       assert_not_equal reg.id.to_s, reg.to_param
     end
-    
-    it "should be findable by param" do
+  end
+
+  describe "find_by_param" do
+    it "should find record by url param" do
       reg = Factory.create(:step_1_registrant)
       assert_equal reg, Registrant.find_by_param(reg.to_param)
     end
+
+    it "should raise AbandonedRecord when registrant is abandoned" do
+      reg = Factory.create(:step_1_registrant, :abandoned => true)
+      assert_raise Registrant::AbandonedRecord do
+        Registrant.find_by_param(reg.to_param)
+      end
+    end
   end
-  
+
   describe "any step" do
     it "blanks party unless requires party" do
       reg = Factory.build(:maximal_registrant)
@@ -357,6 +366,15 @@ describe Registrant do
       assert reg.at_least_step_2?
       assert !reg.at_least_step_3?
 
+    end
+  end
+
+  describe "#abandon!" do
+    it "should mark as abandoned" do
+      reg = Factory.create(:step_1_registrant)
+      assert !reg.abandoned?
+      reg.abandon!
+      assert reg.abandoned?
     end
   end
 

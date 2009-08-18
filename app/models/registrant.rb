@@ -1,4 +1,9 @@
 class Registrant < ActiveRecord::Base
+
+  class AbandonedRecord < StandardError
+  end
+
+
   include AASM
   include Mergable
 
@@ -179,7 +184,9 @@ class Registrant < ActiveRecord::Base
   end
   
   def self.find_by_param(param)
-    find_by_uid(param)
+    reg = find_by_uid(param)
+    raise AbandonedRecord if reg && reg.abandoned?
+    reg
   end
 
   def self.find_by_param!(param)
@@ -297,6 +304,10 @@ class Registrant < ActiveRecord::Base
         errors.add(:party, :inclusion) unless state_parties.include?(party)
       end
     end
+  end
+
+  def abandon!
+    self.update_attribute(:abandoned, true)
   end
 
   # def advance_to!(next_step, new_attributes = {})

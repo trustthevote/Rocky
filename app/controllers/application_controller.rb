@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_partner_session, :current_partner
   filter_parameter_logging :password, :password_confirmation
 
+  rescue_from Registrant::AbandonedRecord do |exception|
+    redirect_to '/timeout.html'
+  end
+
   before_filter :ensure_https
 
   def current_step

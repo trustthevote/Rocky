@@ -11,7 +11,7 @@ class Step5Controller < ApplicationController
     find_registrant
     @registrant.attributes = params[:registrant]
 
-    @registrant.advance_to_step_5 unless @registrant.complete? # already been here
+    advance_to_next_step
 
     if @registrant.valid?
       @registrant.save_or_reject!
