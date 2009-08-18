@@ -29,6 +29,6 @@ function addTooltips(selector, target_corner, tooltip_corner) {
       adjust: { screen: true } // Change positioning if tooltip would be offscreen.
     },
     hide: { fixed: true, delay: 300, effect: { length: 50 } }, // Hovering over tooltip keeps them visible
-    show: { effect: { length: 50 } }
+    show: { delay: 50, effect: { length: 50 } }
   })
 };
