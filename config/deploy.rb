@@ -64,6 +64,7 @@ namespace :deploy do
 end
 
 namespace :import do
+  desc "Upload state data from CSV_FILE and restart server"
   task :states, :roles => :app do
     local_path = ENV['CSV_FILE'] || 'states.csv'
     remote_dir = File.join(shared_path, "uploads")
