@@ -13,26 +13,26 @@ $(document).ready(function() {
   <fieldset>
     <legend><%= I18n.t('txt.registration.name') %><%= tooltip_tag :registrant_name %></legend>
     <ul class="stacked">
-      <li>
+      <li class="width_d">
         <h3><%= form.label :name_title %></h3>
         <div><%= form.select :name_title, I18n.t('txt.registration.titles'), :include_blank => true %></div>
         <span class="error"><%= form.object.errors.on :name_title %></span>
       </li>
-      <li>
+      <li class="width_b">
         <h3><%= form.label :first_name %></h3>
         <div><%= form.text_field :first_name, :size => 15 %></div>
         <span class="error"><%= form.object.errors.on :first_name %></span>
       </li>
-      <li>
+      <li class="width_c">
         <h3><%= form.label :middle_name %></h3>
         <div><%= form.text_field :middle_name, :size => 10 %></div>
       </li>
-      <li>
+      <li class="width_b">
         <h3><%= form.label :last_name %></h3>
         <div><%= form.text_field :last_name, :size => 15 %></div>
         <span class="error"><%= form.object.errors.on :last_name %></span>
       </li>
-      <li>
+      <li class="width_d">
         <h3><%= form.label :name_suffix %></h3>
         <div><%= form.select :name_suffix, t('txt.registration.suffixes'), :include_blank => t('txt.registration.select_none') %></div>
       </li>
@@ -42,28 +42,28 @@ $(document).ready(function() {
   <fieldset>
     <legend><%= I18n.t('txt.registration.home_address') %><%= tooltip_tag :home_address %></legend>
     <ul class="stacked">
-      <li>
+      <li class="width_a">
         <h3><%= form.label :home_address %></h3>
         <div><%= form.text_field :home_address %></div>
         <span class="error"><%= form.object.errors.on :home_address %></span>
       </li>
-      <li>
+      <li class="width_b">
         <h3><%= form.label :home_unit %></h3>
         <div><%= form.text_field :home_unit, :size => 15 %></div>
       </li>
     </ul>
     <ul class="stacked">
-      <li>
+      <li class="width_a">
         <h3><%= form.label :home_city %></h3>
         <div><%= form.text_field :home_city %></div>
         <span class="error"><%= form.object.errors.on :home_city %></span>
       </li>
-      <li>
+      <li class="width_b">
         <h3><%= form.label :home_state_name %></h3>
         <div><%= form.text_field :home_state_name, :size => 15, :disabled => true %></div>
         <span class="error"><%= form.object.errors.on :home_state_name %></span>
       </li>
-      <li>
+      <li class="width_c">
         <h3><%= form.label :home_zip_code %></h3>
         <div><%= form.text_field :home_zip_code, :size => 8, :disabled => true %></div>
         <span class="error"><%= form.object.errors.on :home_zip_code %></span>
@@ -81,28 +81,28 @@ $(document).ready(function() {
     <%= hidden_field_tag "javascript_disabled", "1"  %>
     <legend><%= I18n.t('txt.registration.mailing_address') %><%= tooltip_tag :mailing_address %></legend>
     <ul class="stacked">
-      <li>
+      <li class="width_a">
         <h3><%= form.label :mailing_address %></h3>
         <div><%= form.text_field :mailing_address %></div>
         <span class="error"><%= form.object.errors.on :mailing_address %></span>
       </li>
-      <li>
+      <li class="width_b">
         <h3><%= form.label :mailing_unit %></h3>
         <div><%= form.text_field :mailing_unit, :size => 15 %></div>
       </li>
     </ul>
     <ul class="stacked">
-      <li>
+      <li class="width_a">
         <h3><%= form.label :mailing_city %></h3>
         <div><%= form.text_field :mailing_city %></div>
         <span class="error"><%= form.object.errors.on :mailing_city %></span>
       </li>
-      <li>
+      <li class="width_b">
         <h3><%= form.label :mailing_state_abbrev %></h3>
         <div><%= form.select :mailing_state_abbrev, GeoState.collection_for_select %></div>
         <span class="error"><%= form.object.errors.on :mailing_state_id %></span>
       </li>
-      <li>
+      <li class="width_c">
         <h3><%= form.label :mailing_zip_code %></h3>
         <div><%= form.text_field :mailing_zip_code, :size => 10, :maxlength => 10 %></div>
         <span class="error"><%= form.object.errors.on :mailing_zip_code %></span>

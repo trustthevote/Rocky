@@ -8,8 +8,8 @@
       <%= tooltip_tag :state_id_number, @state_id_tooltip %>
       <span class="error"><%= form.object.errors.on :state_id_number %></span>
     </li>
-    <li class="instructions"><p><%= I18n.t('txt.registration.instructions.state_id_number') %></p></li>
   </ul>
+  <div class="instructions"><p><%= I18n.t('txt.registration.instructions.state_id_number') %></p></div>
   <ul class="flat">
     <li>
       <h3><%= form.label :phone %></h3>

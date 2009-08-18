@@ -25,6 +25,7 @@ input, textarea {
 }
 
 #container {
+  zoom: 1;
   width: 600px;
   margin: 0 auto;
   background-color: #eaeaea;
@@ -127,11 +128,13 @@ input, textarea {
 }
 
 #main {
+  zoom: 1;
   position: relative;
   margin: 20px;
 }
 
 #other_language_link {
+  zoom: 1;
   position: absolute;
   top: 0;
   right: 0;
@@ -159,6 +162,7 @@ legend {
 }
 
 form ul {
+  zoom: 1;
   margin: 1em 0 1em 10px;
   overflow: hidden;
 }
@@ -191,7 +195,7 @@ ul.flat h3 {
 }
 
 ul.flat .secondary h3 {
-  width: inherit;
+  width: 30px;
   margin-left: 10px;
 }
 
@@ -202,6 +206,7 @@ ul.flat div {
 
 ul.flat div.flat-stack {
   height: 50px;
+  width: 130px;
   overflow: hidden;
 }
 
@@ -338,6 +343,13 @@ legend img.tooltip {
   margin-left: 5px;
 }
 
+/* classes for floating field widths */
+.width_a { width: 230px; }
+.width_b { width: 125px; }
+.width_c { width:  90px; }
+.width_d { width:  70px; }
+
+
 .review h2 {
   width: 100%;
   margin: 10px 0;
@@ -383,12 +395,8 @@ legend img.tooltip {
   letter-spacing: 0.08em;
 }
 
-li.instructions {
-  font-size: 11px;
-}
-
 .instructions p {
-  margin: 5px 75px 10px 130px;
+  margin: -5px 75px 10px 140px;
   color: #434343;
   font-size: 10px;
 }
