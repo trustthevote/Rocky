@@ -376,6 +376,27 @@ describe Registrant do
       reg.abandon!
       assert reg.abandoned?
     end
+    
+    it "should clear sensitive data" do
+      reg = Factory.create(:step_4_registrant)
+      assert_not_nil reg.state_id_number
+      reg.abandon!
+      assert_nil reg.state_id_number
+    end
+  end
+
+  describe "stale records" do
+    it "should become abandoned" do
+      stale_rec = Factory.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
+      fresh_rec = Factory.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT - 10).seconds.ago)
+      complete_rec = Factory.create(:maximal_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
+      
+      Registrant.abandon_stale_records
+      
+      assert stale_rec.reload.abandoned?
+      assert !fresh_rec.reload.abandoned?
+      assert !complete_rec.reload.abandoned?
+    end
   end
 
   describe "PDF" do

@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(:version => 20090818174503) do
     t.boolean  "ineligible_attest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "abandoned"
+    t.boolean  "abandoned",                                        :default => false, :null => false
   end
 
   add_index "registrants", ["uid"], :name => "index_registrants_on_uid"

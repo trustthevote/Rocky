@@ -13,6 +13,7 @@ class Registrant < ActiveRecord::Base
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
   REMINDER_EMAILS_TO_SEND = 2
   INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
+  STALE_TIMEOUT = 30.minutes
 
   CSV_HEADER = [
     "Status",
@@ -193,6 +194,14 @@ class Registrant < ActiveRecord::Base
     find_by_param(param) || begin raise ActiveRecord::RecordNotFound end
   end
 
+  def self.abandon_stale_records
+    stale = self.find(:all, :conditions => ["(NOT abandoned) AND (status != 'complete') AND (updated_at < ?)", STALE_TIMEOUT.seconds.ago])
+    stale.each do |reg|
+      reg.abandon!
+      Rails.logger.info "Registrant #{reg.id} abandoned at #{Time.now}"
+    end
+  end
+
   ### instance methods
   attr_accessor :attest_true
   
@@ -307,7 +316,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def abandon!
-    self.update_attribute(:abandoned, true)
+    self.attributes = {:abandoned => true, :state_id_number => nil}
+    self.save(false)
   end
 
   # def advance_to!(next_step, new_attributes = {})
