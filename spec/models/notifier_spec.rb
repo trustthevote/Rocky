@@ -43,7 +43,6 @@ describe Notifier do
       Notifier.deliver_reminder(registrant)
       email = ActionMailer::Base.deliveries.last
       email.subject.should include(I18n.t("email.reminder.subject", :locale => :es))
-      email.body.should include(I18n.t("email.reminder.body", :locale => :es))
     end
   end
 end

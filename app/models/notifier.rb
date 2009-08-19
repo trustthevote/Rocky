@@ -22,10 +22,12 @@ class Notifier < ActionMailer::Base
     from FROM_ADDRESS
     recipients registrant.email_address
     sent_on Time.now.to_s(:db)
+    content_type "text/html"
     body :pdf_url => "http://#{default_url_options[:host]}#{registrant.pdf_path}",
          :locale => registrant.locale.to_sym,
          # TODO: strip HTML from address when rendering in plain text
          :registrar_phone => registrant.home_state.registrar_phone,
-         :registrar_address => registrant.home_state.registrar_address
+         :registrar_address => registrant.home_state.registrar_address,
+         :registrant => registrant
   end
 end
