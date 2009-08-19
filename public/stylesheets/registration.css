@@ -343,10 +343,10 @@ legend img.tooltip {
 }
 
 /* classes for floating field widths */
-.width_a { width: 230px; }
-.width_b { width: 125px; }
-.width_c { width:  90px; }
-.width_d { width:  70px; }
+.width_a { _width: 230px; }
+.width_b { _width: 125px; }
+.width_c { _width:  90px; }
+.width_d { _width:  70px; }
 
 
 .review h2 {
