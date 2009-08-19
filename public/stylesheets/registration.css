@@ -1,5 +1,24 @@
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   background-color: #2a2a2a;
+}
+
+a { text-decoration: none; }
+a:link    { color: #B2272C; }
+a:visited { color: #B2272C; } 
+a:hover   { color: #000000; }
+a:active  { color: #666666; }
+
+#main a {
+  font-weight: bold;
+}
+
+.return a {
+  font-size: 12px;
 }
 
 h1, h2, h3, h4, h5, h6, legend {
@@ -28,7 +47,8 @@ input, textarea {
   zoom: 1;
   width: 600px;
   margin: 0 auto;
-  background-color: #eaeaea;
+  border: 2px solid #444;
+  background-color: #dcdcdc;
 }
 
 #header {
@@ -103,15 +123,17 @@ input, textarea {
 
 #footer {
   width: 100%;
-  height: 30px;
+  height: 40px;
   color: #d0d0d0;
   background-color: black;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 1.15em;
 }
 
 #footer p {
   padding-right: 1em;
-  line-height: 30px;
-  text-align: right;
+  line-height: 40px;
+  text-align: center;
 }
 
 #footer span {
@@ -127,10 +149,21 @@ input, textarea {
   color: white;
 }
 
+.copyright {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1em;
+  font-style: oblique;
+  color: #CCCCCC;
+}
+
+#main_bg {
+  padding: 20px;
+  background: transparent url(/images/reg/content_bg_repeat_x.gif) top left repeat-x;
+}
 #main {
   zoom: 1;
   position: relative;
-  margin: 20px;
+  background: none;
 }
 
 #other_language_link {
@@ -138,7 +171,6 @@ input, textarea {
   position: absolute;
   top: 0;
   right: 0;
-  color: red;
   font-size: 14px;
   font-weight: bold;
 }
@@ -178,7 +210,7 @@ form li {
 
 form h3 {
   font-weight: normal;
-  color: #434343;
+  color: #222;
   margin: 0;
 }
 
@@ -286,6 +318,7 @@ form hr {
 
 form div.button {
   text-align: center;
+  margin: 25px 0;
 }
 
 form div.button input {
@@ -304,20 +337,9 @@ div.back {
   line-height: 30px;
 }
 
-.back a, .review_edit a {
-  color: blue;
-  font-weight: bold;
-}
-
-.return a {
-  color: blue;
-  font-weight: bold;
-  font-size: 12px;
-}
-
 span.error {
   display: inline-block;
-  color: red;
+  color: #B2272C;
 }
 
 .flat span.error {
@@ -332,11 +354,11 @@ span.error {
 }
 
 legend img.tooltip {
-  margin-left: 4px;
+  margin-left: 6px;
 }
 
 .stacked span.error {
-  font-size: 10px;
+  font-size: 11px;
   height: 12px;
   line-height: 15px;
   margin-left: 5px;
@@ -397,7 +419,7 @@ legend img.tooltip {
 .instructions p {
   margin: -5px 75px 10px 140px;
   color: #434343;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 p.centered {
@@ -405,7 +427,7 @@ p.centered {
 }
 
 .download {
-  border: 1px solid black;
+  border: 3px solid #333;
   background-color: #ccc;
   width: 80%;
   margin: 20px auto;

@@ -30,9 +30,11 @@
         </ol>
       </div>
     </div>
-    <div id="main">
-      <%= flash_messages %>
-      <%= yield %>
+    <div id="main_bg">
+      <div id="main">
+        <%= flash_messages %>
+        <%= yield %>
+      </div>
     </div>
     <div id="footer">
       <p>
@@ -41,7 +43,7 @@
         <span><a href="/contact.html" target="_blank">Contact Us</a></span>
         <span><a href="/about.html" target="_blank">About</a></span>
 
-        <span>&copy; Copyright 2009, <a href="#">Rock the Vote</a></span>
+        <span class="copyright">&copy; Copyright 2009, <a href="#">Rock the Vote</a></span>
       </p>
     </div>
   </div>
