@@ -1,9 +1,7 @@
 <h1><%= t('txt.registration.step_1_header') %></h1>
 
 <% if @registrant.new_record? %>
-  <%= link_to t('txt.registration.other_language'),
-                I18n.locale == :en ? new_registrant_path(:locale => 'es') : new_registrant_path,
-                :id => 'other_language_link' %>
+  <%= link_to t('txt.registration.other_language'), new_registrant_path(@alt_locale_options), :id => 'other_language_link' %>
 <% end %>
 
 <% form_for(@registrant) do |form| %>
