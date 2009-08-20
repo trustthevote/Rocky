@@ -130,7 +130,7 @@ class Partner < ActiveRecord::Base
   end
 
   def reformat_phone
-    unless phone.blank?
+    if phone.present? && phone_changed?
       digits = phone.gsub(/\D/,'')
       if digits.length == 10
         self.phone = [digits[0..2], digits[3..5], digits[6..9]].join('-')

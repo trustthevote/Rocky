@@ -86,9 +86,11 @@ class Registrant < ActiveRecord::Base
   end
 
   before_validation :clear_superfluous_fields
-  
+  before_validation :reformat_state_id_number
+  before_validation :reformat_phone
+
   after_validation :check_ineligible
-  
+
   before_create :generate_uid
 
   with_options :if => :at_least_step_1? do |reg|
@@ -122,7 +124,7 @@ class Registrant < ActiveRecord::Base
 
   with_options :if => :at_least_step_3? do |reg|
     reg.validates_presence_of :state_id_number
-    reg.validates_format_of :state_id_number, :with => /^(\d{4}|\d{7,42})$/
+    reg.validates_format_of :state_id_number, :with => /^(\d{4}|[A-Z0-9]{7,42})$/
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
   end
@@ -250,6 +252,19 @@ class Registrant < ActiveRecord::Base
     end
     # self.race = nil unless requires_race?
     self.party = nil unless requires_party?
+  end
+
+  def reformat_state_id_number
+    self.state_id_number.upcase! if self.state_id_number.present? && self.state_id_number_changed?
+  end
+
+  def reformat_phone
+    if phone.present? && phone_changed?
+      digits = phone.gsub(/\D/,'')
+      if digits.length == 10
+        self.phone = [digits[0..2], digits[3..5], digits[6..9]].join('-')
+      end
+    end
   end
 
   def validate_date_of_birth

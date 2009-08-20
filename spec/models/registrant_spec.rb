@@ -209,6 +209,7 @@ describe Registrant do
   describe "step 3" do
     it "should require state id" do
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => nil)
+
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "123")
       assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "1234")
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "12345")
@@ -216,6 +217,22 @@ describe Registrant do
       assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "1234567")
       assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "1"*42)
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "1"*43)
+
+      assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "A234567")
+      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "*234567")
+      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "1-234567")
+    end
+
+    it "should upcase state id" do
+      reg = Factory.build(:step_3_registrant, :state_id_number => "abc12345")
+      assert reg.valid?
+      assert_equal "ABC12345", reg.state_id_number
+    end
+
+    it "should format phone as ###-###-####" do
+      reg = Factory.build(:step_3_registrant, :phone => "1234567890", :phone_type => "mobile")
+      assert reg.valid?
+      assert_equal "123-456-7890", reg.phone
     end
 
     it "should require previous name fields if change_of_name" do
