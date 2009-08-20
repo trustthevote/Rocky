@@ -9,97 +9,97 @@ module Mergable
   <f href=""/>
   <ids original="" modified=""/>
   <fields>
-    <field name="topmostSubform[0].Page4[0].DropDownList2[0]">
+    <field name="us_citizen">
       <value><%= us_citizen? ? 'Yes' : 'No' %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].DropDownList2[1]">
+    <field name="will_be_18_by_election">
       <value><%= will_be_18_by_election? ? 'Yes' : 'No' %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].DropDownList1[0]">
+    <field name="name.title">
       <value><%= name_title %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField1[1]">
+    <field name="name.first">
       <value><%= first_name %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField1[0]">
+    <field name="name.middle">
       <value><%= middle_name %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField1[2]">
+    <field name="name.last">
       <value><%= last_name %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].DropDownList1[1]">
+    <field name="name.suffix">
       <value><%= name_suffix %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField2[0]">
+    <field name="home_address.street">
       <value><%= home_address %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField3[0]">
+    <field name="home_address.unit">
       <value><%= home_unit %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField4[0]">
+    <field name="home_address.city">
       <value><%= home_city %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField5[0]">
+    <field name="home_address.state">
       <value><%= home_state.abbreviation %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField6[0]">
+    <field name="home_address.zip_code">
       <value><%= home_zip_code %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField7[0]">
+    <field name="mailing_address.street">
       <value><%= mailing_address %> <%= mailing_unit %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField8[0]">
+    <field name="mailing_address.city">
       <value><%= mailing_city %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField9[0]">
+    <field name="mailing_address.state">
       <value><%= mailing_state_abbrev %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField10[0]">
+    <field name="mailing_address.zip_code">
       <value><%= mailing_zip_code %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].DateTimeField1[0]">
+    <field name="date_of_birth">
       <value><%= pdf_date_of_birth %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].NumericField1[0]">
+    <field name="phone_number">
       <value><%= phone %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField11[0]">
+    <field name="id_number">
       <value><%= state_id_number %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField22[0]">
+    <field name="party">
       <value><%= party %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField23[0]">
+    <field name="race">
       <value><%= race %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].DropDownList1[2]">
+    <field name="previous_name.title">
       <value><%= prev_name_title %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField13[0]">
+    <field name="previous_name.first">
       <value><%= prev_first_name %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField14[0]">
+    <field name="previous_name.middle">
       <value><%= prev_middle_name %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField12[0]">
+    <field name="previous_name.last">
       <value><%= prev_last_name %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].DropDownList1[3]">
+    <field name="previous_name.suffix">
       <value><%= prev_name_suffix %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField15[0]">
+    <field name="previous_address.street">
       <value><%= prev_address %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField16[0]">
+    <field name="previous_address.unit">
       <value><%= prev_unit %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField17[0]">
+    <field name="previous_address.city">
       <value><%= prev_city %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField18[0]">
+    <field name="previous_address.state">
       <value><%= prev_state_abbrev %></value>
     </field>
-    <field name="topmostSubform[0].Page4[0].TextField19[0]">
+    <field name="previous_address.zip_code">
       <value><%= prev_zip_code %></value>
     </field>
   </fields>
