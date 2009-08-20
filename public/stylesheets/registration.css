@@ -219,7 +219,7 @@ ul.flat h3 {
   float: left;
   height: 25px;
   width: 120px;
-  margin-right: 0.5em;
+  margin-right: 5px;
   line-height: 26px;      /* browser diff */
   text-align: right;
   font-size: 14px;
@@ -265,6 +265,10 @@ ul.checkbox h3 {
   line-height: 20px;
 }
 
+ul.checkbox li.spacer {
+  width: 120px;
+  margin: 0;
+}
 
 ul.question {
   width: 75%;
@@ -337,13 +341,20 @@ div.back {
   line-height: 30px;
 }
 
-span.error {
+span.error, span.example {
   display: inline-block;
+  font-size: 11px;
+}
+
+.error {
   color: #B2272C;
 }
 
-.flat span.error {
-  font-size: 11px;
+.example {
+  color: #838383;
+}
+
+.flat span.error, .flat span.example {
   height: 24px;
   line-height: 24px;
   margin-left: 5px;
@@ -357,8 +368,7 @@ legend img.tooltip {
   margin-left: 6px;
 }
 
-.stacked span.error {
-  font-size: 11px;
+.stacked span.error, .stacked span.example {
   height: 12px;
   line-height: 15px;
   margin-left: 5px;

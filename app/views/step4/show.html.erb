@@ -10,17 +10,6 @@
     </li>
   </ul>
 
-  <% unless @registrant.phone.blank? %>
-    <ul class="checkbox">
-      <li>
-        <h3>
-          <%= form.check_box :opt_in_sms %>
-          <%= form.label :opt_in_sms, t('txt.registration.opt_in_sms', :phone => h(@registrant.phone)) %>
-        </h3>
-      </li>
-    </ul>
-  <% end %>
-
   <ul class="question">
     <li>
       <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>

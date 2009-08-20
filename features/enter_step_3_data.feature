@@ -11,6 +11,7 @@ Feature: Step 3
        And I fill in "ID Number" with "1234"
        And I fill in "Phone" with "415-555-4254"
        And I select "Mobile" from "registrant_phone_type"
+       And I check "Receive txt messages"
        And I press "registrant_submit"
       Then I should see "Opt In"
 

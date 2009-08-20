@@ -13,7 +13,6 @@ Feature: Step 4
        And my phone number is not blank
       When I go to the step 4 page
        And I check "Receive emails"
-       And I check "Receive txt messages"
        And I fill in "registrant_survey_answer_1" with "o hai"
        And I fill in "registrant_survey_answer_2" with "kthxbye"
        And I press "registrant_submit"

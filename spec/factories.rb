@@ -23,12 +23,12 @@ end
 Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|
   f.status          "step_3"
   f.state_id_number "2345"
+  f.opt_in_sms      false
 end
 
 Factory.define :step_4_registrant, :parent => :step_3_registrant do |f|
   f.status          "step_4"
   f.opt_in_email    false
-  f.opt_in_sms      false
 end
 
 Factory.define :step_5_registrant, :parent => :step_4_registrant do |f|
