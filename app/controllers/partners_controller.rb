@@ -36,15 +36,6 @@ class PartnersController < ApplicationController
 
   def show
     @partner = current_partner
-    @widget_html = <<-HTML
-<div id="widget_box">
-  <a href="#{new_registrant_url(:partner => partner_id)}" id="rtv-widget-link">
-    <img src="http://register.rockthevote.com/images/widget/rtv-big.jpg"></img>
-  </a>
-  <script type="text/javascript" src="#{widget_loader_url(partner_id, :format => 'js')}"></script>
-</div>
-HTML
-
     @link_html = <<-HTML
 <a href="#{new_registrant_url(:partner => partner_id)}">
   <img src="http://register.rockthevote.com/images/widget/rtv-big.jpg"></img>
@@ -60,11 +51,6 @@ HTML
     @stats_by_completion_date = @partner.registration_stats_completion_date
   end
 
-  def widget_loader
-    @partner_id = params[:id]
-    @host = host_url
-  end
-  
   def registrations
     send_data(current_partner.generate_registrants_csv, :filename => "registrations.csv", :type => :csv)
   end
