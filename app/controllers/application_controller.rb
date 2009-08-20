@@ -41,6 +41,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def force_logout
+    current_partner_session.destroy if current_partner
+    remove_instance_variable :@current_partner_session if defined?(@current_partner_session)
+    remove_instance_variable :@current_partner if defined?(@current_partner)
+    reset_session
+  end
+
   def store_location
     session[:return_to] = request.request_uri
   end

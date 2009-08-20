@@ -15,7 +15,7 @@
   <div id="container">
     <div id="header">
       <% if current_partner_session %>
-        <span>Hello, <%= current_partner.name %>.</span>
+        <span>Hello, <%= current_partner.name %>. [<%= current_partner.id %>]</span>
         <p>
           <%= link_to "Dashboard", partner_path %> |
           <%= link_to "Show Statistics", statistics_partner_path %> |
@@ -23,6 +23,8 @@
           <%= link_to "Profile", edit_partner_path %> |
           <%= link_to "Log out", logout_path %>
         </p>
+      <% else %>
+        <p><%= link_to "Log in", login_path %></p>
       <% end %>
     </div>
     <div id="main">
@@ -30,6 +32,5 @@
       <%= yield %>
     </div>
   </div>
-  <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
 </body>
 </html>

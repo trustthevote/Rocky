@@ -2,7 +2,12 @@ class PartnersController < ApplicationController
   before_filter :require_partner, :only => [:show, :edit, :update]
 
   def new
-    @partner = Partner.new
+    if current_partner
+      force_logout
+      redirect_to new_partner_url
+    else
+      @partner = Partner.new
+    end
   end
 
   def create
