@@ -390,10 +390,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def pdf_date_of_birth
-    date_of_birth.to_s(:month_day_year)
-  end
-
   def form_date_of_birth
     if @raw_date_of_birth
       @raw_date_of_birth

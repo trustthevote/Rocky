@@ -356,7 +356,7 @@ span.error, span.example {
 
 .flat span.error, .flat span.example {
   height: 24px;
-  line-height: 24px;
+  line-height: 28px;
   margin-left: 5px;
 }
 
@@ -429,7 +429,8 @@ legend img.tooltip {
 .instructions p {
   margin: -5px 75px 10px 140px;
   color: #434343;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 15px;
 }
 
 p.centered {

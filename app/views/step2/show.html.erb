@@ -115,7 +115,7 @@ $(document).ready(function() {
     <li>
       <h3><%= form.label :race %></h3>
       <div><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></div>
-      <%= tooltip_tag :race, @race_tooltip %>
+      <div class="tooltip"><%= tooltip_tag :race, @race_tooltip %></div>
       <span class="error"><%= form.object.errors.on :race %></span>
     </li>
   </ul>
@@ -124,7 +124,7 @@ $(document).ready(function() {
       <li>
         <h3><%= form.label :party %></h3>
         <div><%= form.select :party, @state_parties, :include_blank => true %></div>
-        <%= tooltip_tag :party %>
+        <div class="tooltip"><%= tooltip_tag :party %></div>
         <span class="error"><%= form.object.errors.on :party %></span>
       </li>
     </ul>

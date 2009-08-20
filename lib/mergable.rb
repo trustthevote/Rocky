@@ -1,4 +1,12 @@
 module Mergable
+  def pdf_date_of_birth
+    date_of_birth.to_s(:month_day_year)
+  end
+
+  def pdf_race
+    race == I18n.t('txt.registration.races').last ? "" : race
+   end
+  
   def to_xfdf
     ERB.new(XFDF_TEMPLATE).result(binding)
   end
@@ -70,7 +78,7 @@ module Mergable
       <value><%= party %></value>
     </field>
     <field name="race">
-      <value><%= race %></value>
+      <value><%= pdf_race %></value>
     </field>
     <field name="previous_name.title">
       <value><%= prev_name_title %></value>
