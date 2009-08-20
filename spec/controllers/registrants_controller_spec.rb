@@ -30,20 +30,15 @@ describe RegistrantsController do
     describe "partner logo" do
       integrate_views
 
-      it "should hide powered-by for primary partner" do
+      it "should show powered-by for primary partner" do
         get :new
-        assert_select "#powered-by", false
+        assert_select "#powered-by", true
       end
 
       it "should show powered-by for non-primary partner" do
         partner = Factory.create(:partner)
         get :new, :partner => partner.to_param
         assert_select "#powered-by"
-      end
-
-      it "should show primary logo for primary partner" do
-        get :new
-        assert_select "#partner-logo img[src^=/]"
       end
 
       it "should show partner logo for non-primary partner" do
