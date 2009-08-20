@@ -122,6 +122,7 @@ class Registrant < ActiveRecord::Base
 
   with_options :if => :at_least_step_3? do |reg|
     reg.validates_presence_of :state_id_number
+    reg.validates_format_of :state_id_number, :with => /^(\d{4}|\d{7,42})$/
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
   end

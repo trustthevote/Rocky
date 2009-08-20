@@ -209,6 +209,13 @@ describe Registrant do
   describe "step 3" do
     it "should require state id" do
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => nil)
+      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "123")
+      assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "1234")
+      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "12345")
+      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "123456")
+      assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "1234567")
+      assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "1"*42)
+      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "1"*43)
     end
 
     it "should require previous name fields if change_of_name" do
