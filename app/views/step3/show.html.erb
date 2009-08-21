@@ -13,7 +13,7 @@
     <li>
       <h3><%= form.label :phone %></h3>
       <div class="flat-stack">
-        <%= field_div form, :phone, :size => 20 %>
+        <%= field_div form, :phone %>
         <% if form.object.errors.on :phone %>
           <span class="error"><%= form.object.errors.on :phone %></span>
         <% else %>

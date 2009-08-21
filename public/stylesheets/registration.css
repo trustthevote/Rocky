@@ -252,8 +252,12 @@ ul.flat div {
 
 ul.flat div.flat-stack {
   height: 50px;
-  width: 130px;
+  width: 150px;
   overflow: hidden;
+}
+
+ul.flat .secondary div.flat-stack {
+  width: 130px;
 }
 
 ul.flat div div {
