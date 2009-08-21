@@ -93,8 +93,12 @@ input, textarea {
 
 #progress-bar {
   position: absolute;
-  bottom: 3px;
+  bottom: 0px;
   left: 5px;
+}
+
+.progress-title {
+  padding-right: 5px;
 }
 
 #progress-bar li {
@@ -119,6 +123,11 @@ input, textarea {
 
 #progress-bar li.progress-todo {
   background-image: url('/images/buttons/progress_todo.gif');
+}
+
+/*added larger font size for tooltips*/
+.qtip-content {
+font-size: 1.15em;
 }
 
 #footer {
@@ -191,6 +200,7 @@ fieldset {
 
 legend {
   padding: 0 5px;
+  line-height: 17px;
 }
 
 form ul {
@@ -364,11 +374,14 @@ span.error, span.example {
 }
 
 .flat img.tooltip {
-  margin: 4px;
+  margin: 1px 5px 0 5px;
 }
 
 legend img.tooltip {
-  margin-left: 6px;
+  margin: 0 0 0 5px;
+  vertical-align: middle;
+  height: 17px;
+  width: 16px;
 }
 
 .stacked span.error, .stacked span.example {
@@ -448,8 +461,8 @@ p.centered {
 
 .download {
   border: 3px solid #333;
-  background-color: #ccc;
-  width: 80%;
+  background-color: #ddd;
+  width: 85%;
   margin: 20px auto;
 }
 
