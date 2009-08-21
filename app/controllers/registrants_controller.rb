@@ -3,19 +3,19 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/new
   def new
-    partner_id = params[:partner] || Partner.default_id
     locale = params[:locale] || 'en'
     I18n.locale = locale.to_sym
     @alt_locale_options = {}
     @alt_locale_options[:locale] = 'es' if locale == 'en'
-    @alt_locale_options[:partner] = partner_id if partner_id.to_i != Partner.default_id
-    @registrant = Registrant.new(:partner_id => partner_id, :locale => locale)
+    @registrant = Registrant.new(:partner_id => session[:partner_id], :locale => locale)
     render "show"
   end
 
   # POST /registrants
   def create
-    @registrant = Registrant.new(params[:registrant].merge(:opt_in_sms => true, :opt_in_email => true))
+    @registrant = Registrant.new(params[:registrant].reverse_merge(
+                                    :partner_id => session[:partner_id],
+                                    :opt_in_sms => true, :opt_in_email => true))
     I18n.locale = @registrant.locale
     attempt_to_advance
   end

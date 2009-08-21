@@ -1,6 +1,9 @@
 module RegistrationStep
   def self.included(controller)
-    controller.layout "registration"
+    controller.class_eval do
+      layout "registration"
+      before_filter :find_partner
+    end
   end
 
   def show
@@ -41,5 +44,10 @@ module RegistrationStep
       raise ActiveRecord::RecordNotFound
     end
     I18n.locale = @registrant.locale
+  end
+
+  def find_partner
+    session[:partner_id] = params[:partner] || session[:partner_id] || Partner.default_id
+    @partner = Partner.find(session[:partner_id])
   end
 end

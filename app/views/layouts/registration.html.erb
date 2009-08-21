@@ -16,8 +16,8 @@
   <div id="container">
     <div id="header">
       <div id="partner-logo">
-        <% unless @registrant.partner.primary? || @registrant.partner.logo_image_url.blank? %>
-          <%= image_tag @registrant.partner.logo_image_url %>
+        <% unless @partner.primary? || @partner.logo_image_url.blank? %>
+          <%= image_tag @partner.logo_image_url %>
         <% end %>
       </div>
       <div id="powered-by">
@@ -26,7 +26,7 @@
       <div id="progress-bar">
         <ol>
           <li class="progress-title"><%= t('txt.registration.progress_indicator') %></li>
-          <%= progress_indicator(@registrant) %>
+          <%= progress_indicator %>
         </ol>
       </div>
     </div>

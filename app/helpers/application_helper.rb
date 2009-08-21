@@ -65,7 +65,7 @@ module ApplicationHelper
     end
   end
 
-  def progress_indicator(registrant)
+  def progress_indicator
     (1..5).map do |step_index|
       progress = case step_index <=> controller.current_step
       when 0 then "progress-current"
