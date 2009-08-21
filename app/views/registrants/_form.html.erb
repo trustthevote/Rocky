@@ -3,7 +3,7 @@
 <ul class="flat">
   <li>
     <h3><%= form.label :email_address %></h3>
-    <div><%= form.text_field :email_address %></div>
+    <%= field_div form, :email_address %>
     <div class="tooltip"><%= tooltip_tag :email_address %></div>
     <span class="error"><%= form.object.errors.on :email_address %></span>
   </li>
@@ -11,7 +11,7 @@
 <ul class="flat">
   <li>
     <h3><%= form.label :home_zip_code %></h3>
-    <div><%= form.text_field :home_zip_code %></div>
+    <%= field_div form, :home_zip_code %>
     <div class="tooltip"><%= tooltip_tag :home_zip_code %></div>
     <span class="error"><%= form.object.errors.on :home_zip_code %></span>
   </li>
@@ -19,7 +19,7 @@
 <ul class="flat">
   <li>
     <h3><%= form.label :date_of_birth %></h3>
-    <div><%= form.text_field :date_of_birth, :value => form.object.form_date_of_birth %></div>
+    <%= field_div form, :date_of_birth, :value => form.object.form_date_of_birth %>
     <div class="tooltip"><%= tooltip_tag :date_of_birth %></div>
     <% if form.object.errors.on :date_of_birth %>
       <span class="error"><%= form.object.errors.on :date_of_birth %></span>

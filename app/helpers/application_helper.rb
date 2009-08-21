@@ -81,4 +81,10 @@ module ApplicationHelper
       :class => 'tooltip', :id => "tooltip-#{tooltip_id}",
       :title => content
   end
+
+  def field_div(form, field, options={})
+    has_error = form.object.errors.on(field) ? "has_error" : nil
+    content_tag(:div, form.text_field(field, options), :class => has_error)
+  end
+
 end

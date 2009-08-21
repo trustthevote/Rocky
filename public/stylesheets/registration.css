@@ -340,6 +340,10 @@ div.back {
   line-height: 30px;
 }
 
+.has_error input {
+  background-color: #fcc;
+}
+
 span.error, span.example {
   display: inline-block;
   font-size: 11px;

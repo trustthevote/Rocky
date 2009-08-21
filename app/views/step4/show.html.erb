@@ -15,13 +15,13 @@
   <ul class="question">
     <li>
       <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>
-      <div><%= form.text_field :survey_answer_1, :size => 65 %></div>
+      <%= field_div form, :survey_answer_1, :size => 65 %>
     </li>
   </ul>
   <ul class="question">
     <li>
       <h3><%= form.label :survey_answer_2, h(@question_2) %></h3>
-      <div><%= form.text_field :survey_answer_2, :size => 65 %></div>
+      <%= field_div form, :survey_answer_2, :size => 65 %>
     </li>
   </ul>
 </fieldset>

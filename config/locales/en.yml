@@ -48,43 +48,43 @@ en:
     errors:
       models:
         registrant:
-          blank: "Required"
-          invalid_zip: "Invalid ZIP"
+          blank: "* Required"
+          invalid_zip: "* Invalid ZIP"
           attributes:
             home_zip_code:
-              invalid: "Use ZIP or ZIP+4"
+              invalid: "* Use ZIP or ZIP+4"
             mailing_zip_code:
-              invalid: "Use ZIP or ZIP+4"
+              invalid: "* Use ZIP or ZIP+4"
             prev_zip_code:
-              invalid: "Use ZIP or ZIP+4"
+              invalid: "* Use ZIP or ZIP+4"
             email_address:
-              invalid: "Not a valid address"
+              invalid: "* Not a valid address"
             date_of_birth:
-              format: "Should be MM-DD-YYYY"
+              format: "* Should be MM-DD-YYYY"
             phone:
-              invalid: "Should be ###-###-####"
+              invalid: "* Should be ###-###-####"
             attest_true:
-              accepted: "You must indicate the above information is correct."
+              accepted: "* You must indicate the above information is correct."
       messages:
-        inclusion: "{{attribute}} is not included in the list"
-        exclusion: "{{attribute}} is reserved"
-        invalid: "{{attribute}} is invalid"
-        confirmation: "{{attribute}} doesn't match confirmation"
-        accepted: "{{attribute}} must be accepted"
-        empty: "{{attribute}} can't be empty"
-        blank: "{{attribute}} can't be blank"
-        too_long: "{{attribute}} is too long (maximum is {{count}} characters)"
-        too_short: "{{attribute}} is too short (minimum is {{count}} characters)"
-        wrong_length: "{{attribute}} is the wrong length (should be {{count}} characters)"
-        taken: "{{attribute}} has already been taken"
-        not_a_number: "{{attribute}} is not a number"
-        greater_than: "{{attribute}} must be greater than {{count}}"
-        greater_than_or_equal_to: "{{attribute}} must be greater than or equal to {{count}}"
-        equal_to: "{{attribute}} must be equal to {{count}}"
-        less_than: "{{attribute}} must be less than {{count}}"
-        less_than_or_equal_to: "{{attribute}} must be less than or equal to {{count}}"
-        odd: "{{attribute}} must be odd"
-        even: "{{attribute}} must be even"
+        inclusion: "* {{attribute}} is not included in the list"
+        exclusion: "* {{attribute}} is reserved"
+        invalid: "* {{attribute}} is invalid"
+        confirmation: "* {{attribute}} doesn't match confirmation"
+        accepted: "* {{attribute}} must be accepted"
+        empty: "* {{attribute}} can't be empty"
+        blank: "* {{attribute}} can't be blank"
+        too_long: "* {{attribute}} is too long (maximum is {{count}} characters)"
+        too_short: "* {{attribute}} is too short (minimum is {{count}} characters)"
+        wrong_length: "* {{attribute}} is the wrong length (should be {{count}} characters)"
+        taken: "* {{attribute}} has already been taken"
+        not_a_number: "* {{attribute}} is not a number"
+        greater_than: "* {{attribute}} must be greater than {{count}}"
+        greater_than_or_equal_to: "* {{attribute}} must be greater than or equal to {{count}}"
+        equal_to: "* {{attribute}} must be equal to {{count}}"
+        less_than: "* {{attribute}} must be less than {{count}}"
+        less_than_or_equal_to: "* {{attribute}} must be less than or equal to {{count}}"
+        odd: "* {{attribute}} must be odd"
+        even: "* {{attribute}} must be even"
   authlogic:
     error_messages:
       login_blank: "Login can not be blank"

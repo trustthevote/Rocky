@@ -20,16 +20,16 @@ $(document).ready(function() {
       </li>
       <li class="width_b">
         <h3><%= form.label :first_name %></h3>
-        <div><%= form.text_field :first_name, :size => 15 %></div>
+        <%= field_div form, :first_name, :size => 15 %>
         <span class="error"><%= form.object.errors.on :first_name %></span>
       </li>
       <li class="width_c">
         <h3><%= form.label :middle_name %></h3>
-        <div><%= form.text_field :middle_name, :size => 10 %></div>
+        <%= field_div form, :middle_name, :size => 10 %>
       </li>
       <li class="width_b">
         <h3><%= form.label :last_name %></h3>
-        <div><%= form.text_field :last_name, :size => 15 %></div>
+        <%= field_div form, :last_name, :size => 15 %>
         <span class="error"><%= form.object.errors.on :last_name %></span>
       </li>
       <li class="width_d">
@@ -44,28 +44,28 @@ $(document).ready(function() {
     <ul class="stacked">
       <li class="width_a">
         <h3><%= form.label :home_address %></h3>
-        <div><%= form.text_field :home_address %></div>
+        <%= field_div form, :home_address %>
         <span class="error"><%= form.object.errors.on :home_address %></span>
       </li>
       <li class="width_b">
         <h3><%= form.label :home_unit %></h3>
-        <div><%= form.text_field :home_unit, :size => 15 %></div>
+        <%= field_div form, :home_unit, :size => 15 %>
       </li>
     </ul>
     <ul class="stacked">
       <li class="width_a">
         <h3><%= form.label :home_city %></h3>
-        <div><%= form.text_field :home_city %></div>
+        <%= field_div form, :home_city %>
         <span class="error"><%= form.object.errors.on :home_city %></span>
       </li>
       <li class="width_b">
         <h3><%= form.label :home_state_name %></h3>
-        <div><%= form.text_field :home_state_name, :size => 15, :disabled => true %></div>
+        <%= field_div form, :home_state_name, :size => 15, :disabled => true %>
         <span class="error"><%= form.object.errors.on :home_state_name %></span>
       </li>
       <li class="width_c">
         <h3><%= form.label :home_zip_code %></h3>
-        <div><%= form.text_field :home_zip_code, :size => 8, :disabled => true %></div>
+        <%= field_div form, :home_zip_code, :size => 8, :disabled => true %>
         <span class="error"><%= form.object.errors.on :home_zip_code %></span>
       </li>
     </ul>
@@ -83,18 +83,18 @@ $(document).ready(function() {
     <ul class="stacked">
       <li class="width_a">
         <h3><%= form.label :mailing_address %></h3>
-        <div><%= form.text_field :mailing_address %></div>
+        <%= field_div form, :mailing_address %>
         <span class="error"><%= form.object.errors.on :mailing_address %></span>
       </li>
       <li class="width_b">
         <h3><%= form.label :mailing_unit %></h3>
-        <div><%= form.text_field :mailing_unit, :size => 15 %></div>
+        <%= field_div form, :mailing_unit, :size => 15 %>
       </li>
     </ul>
     <ul class="stacked">
       <li class="width_a">
         <h3><%= form.label :mailing_city %></h3>
-        <div><%= form.text_field :mailing_city %></div>
+        <%= field_div form, :mailing_city %>
         <span class="error"><%= form.object.errors.on :mailing_city %></span>
       </li>
       <li class="width_b">
@@ -104,7 +104,7 @@ $(document).ready(function() {
       </li>
       <li class="width_c">
         <h3><%= form.label :mailing_zip_code %></h3>
-        <div><%= form.text_field :mailing_zip_code, :size => 10, :maxlength => 10 %></div>
+        <%= field_div form, :mailing_zip_code, :size => 10, :maxlength => 10 %>
         <span class="error"><%= form.object.errors.on :mailing_zip_code %></span>
       </li>
     </ul>
