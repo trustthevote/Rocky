@@ -15,7 +15,7 @@ $(document).ready(function() {
     <ul class="stacked">
       <li class="width_d">
         <h3><%= form.label :name_title %></h3>
-        <div><%= form.select :name_title, I18n.t('txt.registration.titles'), :include_blank => true %></div>
+        <%= select_div form, :name_title, I18n.t('txt.registration.titles'), :include_blank => true %>
         <span class="error"><%= form.object.errors.on :name_title %></span>
       </li>
       <li class="width_b">
@@ -123,7 +123,7 @@ $(document).ready(function() {
     <ul class="flat">
       <li>
         <h3><%= form.label :party %></h3>
-        <div><%= form.select :party, @state_parties, :include_blank => true %></div>
+        <%= select_div form, :party, @state_parties, :include_blank => true %>
         <div class="tooltip"><%= tooltip_tag :party %></div>
         <span class="error"><%= form.object.errors.on :party %></span>
       </li>

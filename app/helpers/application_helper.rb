@@ -87,4 +87,9 @@ module ApplicationHelper
     content_tag(:div, form.text_field(field, options), :class => has_error)
   end
 
+  def select_div(form, field, contents, options={})
+    has_error = form.object.errors.on(field) ? "has_error" : nil
+    content_tag(:div, form.select(field, contents, options), :class => has_error)
+  end
+
 end
