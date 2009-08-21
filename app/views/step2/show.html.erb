@@ -129,6 +129,6 @@ $(document).ready(function() {
       </li>
     </ul>
   <% end %>
-  <div class="back"><%= link_to t('txt.button.back'), registrant_path(@registrant) %></div>
   <div class="button"><%= image_submit_tag "#{I18n.locale}/button_nextstep.gif", :alt => I18n.t('txt.button.submit'), :id => "registrant_submit" %></div>
+  <div class="back"><%= link_to t('txt.button.back'), registrant_path(@registrant) %></div>
 <% end %>

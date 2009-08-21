@@ -343,11 +343,8 @@ form div.button input {
 }
 
 div.back {
-  position: absolute;
-  left: 10px;
-  height: 30px;
+  text-align: center;
   font-size: 12px;
-  line-height: 30px;
 }
 
 .has_error input, .has_error select {

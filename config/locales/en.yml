@@ -100,9 +100,9 @@ en:
       no_authentication_details: "You did not provide any details for authentication."
   txt:
     button:
-      submit: Next Step >
+      submit: "Next Step &gt;"
       edit: Edit
-      back: Previous Step
+      back: "&lt; Previous Step"
       download: "Download PDF!"
       ineligible_try_again: Return
       help: Help
