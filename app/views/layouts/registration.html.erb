@@ -14,15 +14,12 @@
 </head>
 <body>
   <div id="container">
-    <div id="header">
-      <div id="partner-logo">
-        <% unless @partner.primary? || @partner.logo_image_url.blank? %>
+    <div id="header"<%= @partner.primary? ? '' : ' class="partner"' %>>
+      <% unless @partner.primary? || @partner.logo_image_url.blank? %>
+        <div id="partner-logo">
           <%= image_tag @partner.logo_image_url %>
-        <% end %>
-      </div>
-      <div id="powered-by">
-        <span><%= t('txt.registration.powered_by') %></span><%= image_tag "reg/rtv_powered_by_logo.gif" %>
-      </div>
+        </div>
+      <% end %>
       <div id="progress-bar">
         <ol>
           <li class="progress-title"><%= t('txt.registration.progress_indicator') %></li>

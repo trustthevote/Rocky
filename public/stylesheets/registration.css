@@ -58,6 +58,10 @@ input, textarea {
   background-repeat: no-repeat;
 }
 
+#header.partner {
+  background-image: url('/images/reg/partner-header.jpg');
+}
+
 #partner-logo {
   position: absolute;
   top: 13px;
