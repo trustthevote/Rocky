@@ -289,8 +289,24 @@ ul.affirm {
   margin-top: 20px;
 }
 
+ul.affirm li {
+  width: 80%;
+  margin: 10px 0 0 30px;
+  font-size: 16px;
+}
+
+ul.affirm input {
+  float: left;
+  margin-right:10px;
+}
+
+ul.affirm li .error {
+  margin-left: 30px;
+  font-size: 13px;
+}
+
 ul.question li, ul.question h3, ul.question div,
-ul.affirm li, ul.affirm h3, ul.affirm div {
+ul.affirm h3, ul.affirm div {
   width: 100%;
 }
 
@@ -306,16 +322,6 @@ ul.question select, ul.question span{
   width: 10em;
 }
 
-ul.affirm li {
-  width: 80%;
-  margin: 0 0 10px 30px;
-  font-size: 16px;
-}
-
-ul.affirm input {
-  float: left;
-  margin-right:10px;
-}
 
 form.edit_registrant, form.new_registrant {
   position: relative;
@@ -440,7 +446,7 @@ legend img.tooltip {
 }
 
 .instructions p {
-  margin: -5px 75px 10px 140px;
+  margin: -5px 75px 10px 135px;
   color: #434343;
   font-size: 13px;
   line-height: 15px;
