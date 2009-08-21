@@ -115,6 +115,7 @@ es:
       previous_address: XXXX
       opt_in_sms: XXXX
       opt_in_email: XXXX
+      volunteer: XXXX {{organization}}
       not_given: XXXX
       titles:
       - Sr.

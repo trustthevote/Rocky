@@ -23,6 +23,30 @@ describe Step4Controller do
       get :show, :registrant_id => reg.to_param
       assert_equal "En Español?", assigns[:question_1]
     end
+
+    describe "when partner wants volunteers" do
+      integrate_views
+      it "should show volunteer checkbox" do
+        partner = Factory.create(:partner, :ask_for_volunteers => true)
+
+        reg = Factory.create(:step_3_registrant, :partner_id => partner.to_param)
+        get :show, :registrant_id => reg.to_param
+
+        assert_select "#registrant_volunteer"
+      end
+    end
+
+    describe "when partner does not want volunteers" do
+      integrate_views
+      it "should show volunteer checkbox" do
+        partner = Factory.create(:partner, :ask_for_volunteers => false)
+
+        reg = Factory.create(:step_3_registrant, :partner_id => partner.to_param)
+        get :show, :registrant_id => reg.to_param
+
+        assert_select "#registrant_volunteer", 0
+      end
+    end
   end
 
   describe "#update" do

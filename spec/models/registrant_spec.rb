@@ -490,6 +490,7 @@ describe Registrant do
                      "No",
                      nil,
                      nil,
+                     "No",  # volunteer
                      nil,
                      nil], 
                   reg.to_csv_array
@@ -528,6 +529,7 @@ describe Registrant do
                      "Yes",
                      "blue",
                      "fido",
+                     "Yes",
                      nil,
                      reg.created_at && reg.created_at.to_s(:month_day_year)
                      ],

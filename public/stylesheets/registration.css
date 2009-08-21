@@ -288,8 +288,8 @@ ul.checkbox li.spacer {
   margin: 0;
 }
 
-ul.question {
-  margin-top: 20px;
+fieldset.questions ul li {
+  margin: 10px 0;
 }
 
 ul.affirm {

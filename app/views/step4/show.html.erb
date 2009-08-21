@@ -10,21 +10,37 @@
     </li>
   </ul>
 
-<fieldset>
-  <legend><%= t('txt.registration.survey_title') %></legend>
-  <ul class="question">
-    <li>
-      <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>
-      <%= field_div form, :survey_answer_1, :size => 65, :maxlength => 60 %>
-    </li>
-  </ul>
-  <ul class="question">
-    <li>
-      <h3><%= form.label :survey_answer_2, h(@question_2) %></h3>
-      <%= field_div form, :survey_answer_2, :size => 65, :maxlength => 60 %>
-    </li>
-  </ul>
-</fieldset>
+<% unless @question_1.blank? && @question_2.blank? && !@registrant.partner.ask_for_volunteers? %>
+  <fieldset class="questions">
+    <legend><%= t('txt.registration.survey_title') %></legend>
+    <% unless @question_1.blank? %>
+      <ul class="question">
+        <li>
+          <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>
+          <%= field_div form, :survey_answer_1, :size => 65, :maxlength => 60 %>
+        </li>
+      </ul>
+    <% end %>
+    <% unless @question_2.blank? %>
+      <ul class="question">
+        <li>
+          <h3><%= form.label :survey_answer_2, h(@question_2) %></h3>
+          <%= field_div form, :survey_answer_2, :size => 65, :maxlength => 60 %>
+        </li>
+      </ul>
+    <% end %>
+    <% if @registrant.partner.ask_for_volunteers? %>
+      <ul class="checkbox">
+        <li>
+          <h3>
+            <%= form.check_box :volunteer %>
+            <%= form.label :volunteer, t('txt.registration.volunteer', :organization => h(@registrant.partner.organization)) %>
+          </h3>
+        </li>
+      </ul>
+    <% end %>
+  </fieldset>
+<% end %>
 
   <div class="button"><%= image_submit_tag "#{I18n.locale}/button_reviewregistration.gif", :alt => I18n.t('txt.button.review'), :id => "registrant_submit" %></div>
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_3_path(@registrant) %></div>

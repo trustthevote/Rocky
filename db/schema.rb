@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090818174503) do
+ActiveRecord::Schema.define(:version => 20090821222639) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20090818174503) do
     t.string   "survey_question_2_es"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "ask_for_volunteers"
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email"
@@ -121,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20090818174503) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "abandoned",                                        :default => false, :null => false
+    t.boolean  "volunteer"
   end
 
   add_index "registrants", ["uid"], :name => "index_registrants_on_uid"

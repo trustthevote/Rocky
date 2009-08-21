@@ -46,6 +46,7 @@ class Registrant < ActiveRecord::Base
     "Opt-in to sms?",
     "Survey answer 1",
     "Survey answer 2",
+    "Volunteer",
     "Ineligible reason",
     "Started registration"
   ]
@@ -512,6 +513,7 @@ class Registrant < ActiveRecord::Base
       yes_no(opt_in_sms?),
       survey_answer_1,
       survey_answer_2,
+      yes_no(volunteer?),
       ineligible_reason,
       created_at && created_at.to_s(:month_day_year)
     ]

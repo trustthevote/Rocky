@@ -5,6 +5,7 @@
   <p><strong>1.</strong> Spanish: <%= h @partner.survey_question_1_es %></p>
   <p><strong>2.</strong> English: <%= h @partner.survey_question_2_en %></p>
   <p><strong>2.</strong> Spanish: <%= h @partner.survey_question_2_es %></p>
+  <p><strong>Ask for volunteers: </strong> <%=@partner.ask_for_volunteers? ? "Yes" : "No" %></p>
   <p><%= link_to "Edit Questions", edit_partner_questions_path %></p>
 </div>
 

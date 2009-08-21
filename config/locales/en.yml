@@ -128,6 +128,7 @@ en:
       previous_address: Previous Address
       opt_in_sms: "Receive txt messages at above mobile number"
       opt_in_email: "Receive emails at {{email_address}}"
+      volunteer: "I would like to volunteer with {{organization}}"
       not_given: none
       titles:
       - Mr.

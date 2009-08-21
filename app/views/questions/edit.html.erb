@@ -10,5 +10,12 @@
   <p><%= form.text_field :survey_question_2_en, :size => 100 %></p>
   <p><%= form.label :survey_question_2_es, "Question 2, Spanish" %></p>
   <p><%= form.text_field :survey_question_2_es, :size => 100 %></p>
+  <p>
+    <%= form.check_box :ask_for_volunteers %>
+    <%= form.label :ask_for_volunteers, "Ask for volunteers for <strong>#{@partner.organization}</strong>" %>
+    <% if @partner.organization.blank? %>
+      &hellip; (you should fill in your organization name in your <%= link_to "profile", edit_partner_path %>)
+    <% end %>
+  </p>
   <p><%= form.submit "Submit" %></p>
 <% end %>
