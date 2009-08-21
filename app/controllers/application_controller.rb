@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
 
   rescue_from Registrant::AbandonedRecord do |exception|
-    redirect_to '/timeout.html'
+    redirect_to timeout_registrants_url
   end
 
   before_filter :ensure_https

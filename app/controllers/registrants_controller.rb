@@ -24,12 +24,17 @@ class RegistrantsController < ApplicationController
     find_registrant
   end
 
+  def timeout
+    @current_step = 0
+  end
+
   def download
+    @current_step = 6
     find_registrant(:download)
   end
 
   def current_step
-    action_name == "download" ? 6 : 1
+    @current_step ||= 1
   end
 
   hide_action :current_step

@@ -29,13 +29,17 @@ module RegistrationStep
     if @registrant.valid?
       @registrant.save_or_reject!
       if @registrant.eligible?
-        redirect_to next_url
+        redirect_when_eligible
       else
         redirect_to ineligible_registrant_url(@registrant)
       end
     else
       render "show"
     end
+  end
+
+  def redirect_when_eligible
+    redirect_to next_url
   end
 
   def find_registrant(special_case=nil)
