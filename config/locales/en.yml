@@ -117,6 +117,7 @@ en:
       step_3_header: Numbers and Changes
       step_4_header: Opt In and Speak Out
       step_5_header: Review and Confirm
+      survey_title: Questions For You
       download_header: Print Your Form
       ineligible_header: Sorry, you are not eligible to register to vote for the following reasons
       name: Name
@@ -158,6 +159,7 @@ en:
           If you don't have either, then you must provide the last 4 digits of your Social Security Number.
         opt_in_sms:
           TBD opt in sms description
+        review: Please review the following information and confirm its accuracy
         download: You're not done. Click on the print form button to print out your voter registration form.
           Sign it and mail to the address located on the form.
         download_2: You won't be registered unless you print, sign and mail in your form!

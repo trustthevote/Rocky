@@ -271,7 +271,6 @@ ul.checkbox li.spacer {
 }
 
 ul.question {
-  width: 75%;
   margin-top: 20px;
 }
 
@@ -431,6 +430,12 @@ legend img.tooltip {
   color: #434343;
   font-size: 13px;
   line-height: 15px;
+}
+
+.text p {
+  margin: 20px;
+  color: #434343;
+  font-size: 15px;
 }
 
 p.centered {

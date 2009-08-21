@@ -104,6 +104,7 @@ es:
       step_3_header: XXXX
       step_4_header: XXXX
       step_5_header: XXXX
+      survey_title: XXXX
       download_header: XXXX
       ineligible_header: XXXX
       name: XXXX
@@ -134,12 +135,13 @@ es:
       - SPANISH White (not Hispanic)
       - SPANISH Other
       phone_types:
-      - Home
       - Mobile
+      - Home
       - Work
       - Other
       instructions:
         state_id_number: XXXX
+        opt_in_sms: XXXX
         download: XXXX
         download_2: XXXX
       ineligible:

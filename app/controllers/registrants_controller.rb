@@ -15,7 +15,7 @@ class RegistrantsController < ApplicationController
 
   # POST /registrants
   def create
-    @registrant = Registrant.new(params[:registrant].merge(:opt_in_sms => true))
+    @registrant = Registrant.new(params[:registrant].merge(:opt_in_sms => true, :opt_in_email => true))
     I18n.locale = @registrant.locale
     attempt_to_advance
   end

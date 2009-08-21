@@ -10,18 +10,21 @@
     </li>
   </ul>
 
+<fieldset>
+  <legend><%= t('txt.registration.survey_title') %></legend>
   <ul class="question">
     <li>
       <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>
-      <div><%= form.text_area :survey_answer_1, :size => "40x3" %></div>
+      <div><%= form.text_field :survey_answer_1, :size => 65 %></div>
     </li>
   </ul>
   <ul class="question">
     <li>
       <h3><%= form.label :survey_answer_2, h(@question_2) %></h3>
-      <div><%= form.text_area :survey_answer_2, :size => "40x3" %></div>
+      <div><%= form.text_field :survey_answer_2, :size => 65 %></div>
     </li>
   </ul>
+</fieldset>
 
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_3_path(@registrant) %></div>
   <div class="button"><%= image_submit_tag "#{I18n.locale}/button_reviewregistration.gif", :alt => I18n.t('txt.button.review'), :id => "registrant_submit" %></div>
