@@ -15,7 +15,7 @@
   <div id="container">
     <div id="header">
       <% if current_partner_session %>
-        <span>Hello, <%= current_partner.name %>. [<%= current_partner.id %>]</span>
+        <span>Hello, <%= current_partner.name %>.</span>
         <p>
           <%= link_to "Dashboard", partner_path %> |
           <%= link_to "Show Statistics", statistics_partner_path %> |
