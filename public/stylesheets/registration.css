@@ -97,7 +97,7 @@ input, textarea {
 
 #progress-bar {
   position: absolute;
-  bottom: 0px;
+  top: 73px;
   left: 5px;
 }
 
@@ -170,8 +170,10 @@ font-size: 1.15em;
 }
 
 #main_bg {
+  width: 560px;
   padding: 20px;
   background: transparent url(/images/reg/content_bg_repeat_x.gif) top left repeat-x;
+  overflow: hidden;
 }
 #main {
   zoom: 1;
