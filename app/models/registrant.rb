@@ -14,6 +14,8 @@ class Registrant < ActiveRecord::Base
   REMINDER_EMAILS_TO_SEND = 2
   INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
   STALE_TIMEOUT = 30.minutes
+  SECONDS_PER_BUCKET = 316
+  NUM_BUCKETS = 4096
 
   CSV_HEADER = [
     "Status",
@@ -458,12 +460,16 @@ class Registrant < ActiveRecord::Base
   end
 
   def pdf_path
-    "/pdf/nvra-#{to_param}.pdf"
+    "/pdf/#{bucket_code}/#{to_param}.pdf"
   end
 
   def pdf_file_path
-    FileUtils.mkdir_p(File.join(Rails.root, "pdf"))
+    FileUtils.mkdir_p(File.join(Rails.root, "pdf", bucket_code))
     File.join(Rails.root, pdf_path)
+  end
+
+  def bucket_code
+    ((self.created_at.to_i/SECONDS_PER_BUCKET) % NUM_BUCKETS).to_s(16)
   end
 
   def check_ineligible

@@ -433,26 +433,27 @@ describe Registrant do
 
     describe "merge" do
       before(:each) do
-        @registrant = Factory.build(:maximal_registrant)
+        @registrant = Factory.create(:maximal_registrant)
         stub(@registrant).merge_pdf { `touch #{@registrant.pdf_file_path}` }
       end
 
       it "generates PDF with merged data" do
         `rm -f #{@registrant.pdf_file_path}`
-        assert_difference('Dir[File.join(RAILS_ROOT, "pdf/*")].length') do
+        assert_difference(%Q{Dir[File.join(RAILS_ROOT, "pdf/#{@registrant.bucket_code}/*")].length}) do
           @registrant.generate_pdf
         end
       end
 
       it "returns PDF if already exists" do
         `touch #{@registrant.pdf_file_path}`
-        assert_no_difference('Dir[File.join(RAILS_ROOT, "pdf/*")].length') do
+        assert_no_difference(%Q{Dir[File.join(RAILS_ROOT, "pdf/#{@registrant.bucket_code}/*")].length}) do
           @registrant.generate_pdf
         end
       end
 
       after do
         `rm #{@registrant.pdf_file_path}`
+        `rmdir #{File.dirname(@registrant.pdf_file_path)}`
       end
     end
   end
