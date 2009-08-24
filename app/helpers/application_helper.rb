@@ -84,7 +84,7 @@ module ApplicationHelper
 
   def field_div(form, field, options={})
     has_error = form.object.errors.on(field) ? "has_error" : nil
-    content_tag(:div, form.text_field(field, options), :class => has_error)
+    content_tag(:div, form.text_field(field, {:size => nil}.merge(options)), :class => has_error)
   end
 
   def select_div(form, field, contents, options={})

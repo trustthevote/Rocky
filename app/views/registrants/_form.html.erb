@@ -1,6 +1,6 @@
 <%= form.hidden_field :locale %>
 <ul class="flat">
-  <li>
+  <li class="width_f">
     <h3><%= form.label :email_address %></h3>
     <%= field_div form, :email_address %>
     <div class="tooltip"><%= tooltip_tag :email_address %></div>
@@ -8,7 +8,7 @@
   </li>
 </ul>
 <ul class="flat">
-  <li>
+  <li class="width_f">
     <h3><%= form.label :home_zip_code %></h3>
     <%= field_div form, :home_zip_code %>
     <div class="tooltip"><%= tooltip_tag :home_zip_code %></div>
@@ -16,7 +16,7 @@
   </li>
 </ul>
 <ul class="flat">
-  <li>
+  <li class="width_f">
     <h3><%= form.label :date_of_birth %></h3>
     <%= field_div form, :date_of_birth, :value => form.object.form_date_of_birth %>
     <div class="tooltip"><%= tooltip_tag :date_of_birth %></div>

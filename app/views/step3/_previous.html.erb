@@ -42,7 +42,7 @@
     </li>
     <li class="width_d">
       <h3><%= form.label :prev_name_suffix %></h3>
-      <div><%= form.select :prev_name_suffix, t('txt.registration.suffixes'), :include_blank => true %></div>
+      <div><%= form.select :prev_name_suffix, t('txt.registration.suffixes'), :include_blank => t('txt.registration.select_none') %></div>
       <span class="error"><%= form.object.errors.on :prev_name_suffix %></span>
     </li>
   </ul>

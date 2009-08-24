@@ -15,17 +15,17 @@
     <legend><%= t('txt.registration.survey_title') %></legend>
     <% unless @question_1.blank? %>
       <ul class="question">
-        <li>
+        <li class="width_e">
           <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>
-          <%= field_div form, :survey_answer_1, :size => 65, :maxlength => 60 %>
+          <%= field_div form, :survey_answer_1, :maxlength => 60 %>
         </li>
       </ul>
     <% end %>
     <% unless @question_2.blank? %>
       <ul class="question">
-        <li>
+        <li class="width_e">
           <h3><%= form.label :survey_answer_2, h(@question_2) %></h3>
-          <%= field_div form, :survey_answer_2, :size => 65, :maxlength => 60 %>
+          <%= field_div form, :survey_answer_2, :maxlength => 60 %>
         </li>
       </ul>
     <% end %>

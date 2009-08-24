@@ -20,16 +20,16 @@ $(document).ready(function() {
       </li>
       <li class="width_b">
         <h3><%= form.label :first_name %></h3>
-        <%= field_div form, :first_name, :size => 15 %>
+        <%= field_div form, :first_name %>
         <span class="error"><%= form.object.errors.on :first_name %></span>
       </li>
       <li class="width_c">
         <h3><%= form.label :middle_name %></h3>
-        <%= field_div form, :middle_name, :size => 10 %>
+        <%= field_div form, :middle_name %>
       </li>
       <li class="width_b">
         <h3><%= form.label :last_name %></h3>
-        <%= field_div form, :last_name, :size => 15 %>
+        <%= field_div form, :last_name %>
         <span class="error"><%= form.object.errors.on :last_name %></span>
       </li>
       <li class="width_d">
@@ -49,7 +49,7 @@ $(document).ready(function() {
       </li>
       <li class="width_b">
         <h3><%= form.label :home_unit %></h3>
-        <%= field_div form, :home_unit, :size => 15 %>
+        <%= field_div form, :home_unit %>
       </li>
     </ul>
     <ul class="stacked">
@@ -60,7 +60,7 @@ $(document).ready(function() {
       </li>
       <li class="width_b">
         <h3><%= form.label :home_state_name %></h3>
-        <%= field_div form, :home_state_name, :size => 15, :disabled => true %>
+        <%= field_div form, :home_state_name, :disabled => true %>
         <span class="error"><%= form.object.errors.on :home_state_name %></span>
       </li>
       <li class="width_c">

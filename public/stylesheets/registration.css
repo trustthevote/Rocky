@@ -77,29 +77,6 @@ input, textarea {
   height: 43px;
 }
 
-#powered-by {
-  position: absolute;
-  top: 30px;
-  right: 27px;
-  width: 142px;
-  height: 42px;
-}
-
-#powered-by span {
-  position: absolute;
-  top: 25px;
-  left: 0;
-  color: white;
-  font-size: 11px;
-  letter-spacing: 0.3px;
-}
-
-#powered-by img {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
 #progress-bar {
   position: absolute;
   top: 73px;
@@ -227,7 +204,8 @@ form fieldset ul {
 
 form li {
   float: left;
-  margin-right: 0.5em;
+  margin-right: 5px;
+  zoom: 1;
 }
 
 form h3 {
@@ -235,6 +213,22 @@ form h3 {
   color: #222;
   margin: 0;
 }
+
+/* classes for floating field widths */
+li.width_a div { width: 230px; }
+li.width_b div { width: 125px; }
+li.width_c div { width:  90px; }
+li.width_d div { width:  80px; }
+li.width_e div { width: 540px; }
+li.width_f div { width: 150px; }
+
+form li.width_a input, form li.width_a select { width: 224px; }
+form li.width_b input, form li.width_b select { width: 119px; }
+form li.width_c input, form li.width_c select { width:  84px; }
+form li.width_d input, form li.width_d select { width:  74px; }
+form li.width_e input, form li.width_e select { width: 534px; }
+form li.width_f input, form li.width_f select { width: 144px; }
+
 
 
 ul.flat h3 {
@@ -260,7 +254,6 @@ ul.flat div {
 
 ul.flat div.flat-stack {
   height: 50px;
-  width: 150px;
   overflow: hidden;
 }
 
@@ -313,7 +306,7 @@ ul.affirm li {
 
 ul.affirm input {
   float: left;
-  margin-right:10px;
+  margin-right: 10px;
 }
 
 ul.affirm li .error {
@@ -392,29 +385,11 @@ span.error, span.example {
   margin-left: 5px;
 }
 
-.flat img.tooltip {
-  margin: 1px 5px 0 5px;
-}
-
-legend img.tooltip {
-  margin: 0 0 0 5px;
-  vertical-align: middle;
-  height: 17px;
-  width: 16px;
-}
-
 .stacked span.error, .stacked span.example {
   height: 12px;
   line-height: 15px;
   margin-left: 5px;
 }
-
-/* classes for floating field widths */
-.width_a { _width: 230px; }
-.width_b { _width: 125px; }
-.width_c { _width:  90px; }
-.width_d { _width:  70px; }
-
 
 .review h2 {
   width: 100%;
@@ -500,3 +475,19 @@ p.centered {
   color: #434343;
   font-size: 12px;
 }
+
+div.tooltip {
+  width: 25px !important;
+}
+
+.flat img.tooltip {
+  margin: 1px 5px 0 5px;
+}
+
+legend img.tooltip {
+  margin: 0 0 0 5px;
+  vertical-align: middle;
+  height: 17px;
+  width: 16px;
+}
+
