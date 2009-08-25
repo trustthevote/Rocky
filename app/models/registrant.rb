@@ -6,6 +6,7 @@ class Registrant < ActiveRecord::Base
 
   include AASM
   include Mergable
+  include Lolrus
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5]
   # TODO: add :es to get full set for validation
@@ -14,8 +15,6 @@ class Registrant < ActiveRecord::Base
   REMINDER_EMAILS_TO_SEND = 2
   INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
   STALE_TIMEOUT = 30.minutes
-  SECONDS_PER_BUCKET = 316
-  NUM_BUCKETS = 4096
 
   CSV_HEADER = [
     "Status",
@@ -469,7 +468,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def bucket_code
-    ((self.created_at.to_i/SECONDS_PER_BUCKET) % NUM_BUCKETS).to_s(16)
+    super(self.created_at)
   end
 
   def check_ineligible

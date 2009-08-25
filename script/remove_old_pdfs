@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib/lolrus"))
+
+class BucketRemover
+  include Lolrus
+
+  SECONDS_IN_15_DAYS = 1_296_000
+  BACKTRACK_SIZE = 5
+
+  def remove_buckets
+    buckets.each do |bucket|
+      begin
+        FileUtils.rm_r(File.join(pdf_dir, bucket))
+      rescue Errno::ENOENT => e
+        # noop
+      end
+    end
+  end
+
+  def buckets
+    bc = bucket_code(expired_time).to_i(16)
+    (0...BACKTRACK_SIZE).collect {|n| (bc-n).to_s(16)}
+  end
+
+  def expired_time
+    Time.at(Time.now.to_i - SECONDS_IN_15_DAYS)
+  end
+
+  def pdf_dir
+    @pdf_dir ||= File.expand_path(File.join(File.dirname(__FILE__), "..", "pdf"))
+  end
+end
+
+BucketRemover.new.remove_buckets

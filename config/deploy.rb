@@ -35,8 +35,8 @@ set :deploy_via, :remote_cache
 set :group_writable, false
 set :use_sudo, false
 
-after "deploy:update_code", "deploy:symlink_configs"
-after "deploy:symlink_configs", "deploy:geminstaller" 
+after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
+after "deploy:symlink_configs", "deploy:geminstaller"
 
 namespace :deploy do
   desc "run GemInstaller"
@@ -49,6 +49,15 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml
+    CMD
+  end
+
+  desc "Link the pdf dir to /data/rocky/pdf"
+  task :symlink_pdf, :roles => [:util], :except => {:no_release => true} do
+    run <<-CMD
+      cd #{latest_release} &&
+      rm -rf pdf &&
+      ln -nfs /data/rocky/pdf
     CMD
   end
 
