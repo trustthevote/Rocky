@@ -7,9 +7,9 @@ en:
       registrant:
         date_of_birth: Date of Birth
         email_address: Email Address
-        first_registration: I am registering to vote for the the first time
+        first_registration: I am registering to vote for the first time.
         home_zip_code: ZIP Code
-        us_citizen: I am a U.S. citizen
+        us_citizen: I am a U.S. citizen.
         name_title: Title
         first_name: First
         middle_name: Middle
@@ -19,7 +19,7 @@ en:
         home_unit: "Unit/Lot #"
         home_city: City
         home_state_name: State
-        has_mailing_address: I get my mail at a different address from the one above
+        has_mailing_address: I get my mail at a different address from the one above.
         mailing_address: Address
         mailing_unit: "Unit/Lot #"
         mailing_city: City
@@ -44,59 +44,59 @@ en:
         prev_zip_code: ZIP Code
         opt_in_email: Receive emails
         opt_in_sms: Receive txt messages
-        attest_true: I have reviewed the above information, which is true to the best of my knowledge.
+        attest_true: I have reviewed the above information, and it is true and accurate to the best of my knowledge.
     errors:
       models:
         registrant:
-          blank: "* Required"
-          invalid_zip: "* Invalid ZIP"
+          blank: "Required"
+          invalid_zip: "Invalid ZIP"
           attributes:
             home_zip_code:
-              invalid: "* Use ZIP or ZIP+4"
+              invalid: "Use ZIP or ZIP+4"
             mailing_zip_code:
-              invalid: "* Use ZIP or ZIP+4"
+              invalid: "Use ZIP or ZIP+4"
             prev_zip_code:
-              invalid: "* Use ZIP or ZIP+4"
+              invalid: "Use ZIP or ZIP+4"
             email_address:
-              invalid: "* Not a valid address"
+              invalid: "Not a valid address"
             date_of_birth:
-              format: "* Should be MM-DD-YYYY"
+              format: "Should be MM-DD-YYYY"
             phone:
-              invalid: "* Should be ###-###-####"
+              invalid: "Should be ###-###-####"
             attest_true:
-              accepted: "* You must indicate the above information is correct."
+              accepted: "You must indicate whether the above information is correct."
       messages:
-        inclusion: "* {{attribute}} is not included in the list"
-        exclusion: "* {{attribute}} is reserved"
-        invalid: "* {{attribute}} is invalid"
-        confirmation: "* {{attribute}} doesn't match confirmation"
-        accepted: "* {{attribute}} must be accepted"
-        empty: "* {{attribute}} can't be empty"
-        blank: "* {{attribute}} can't be blank"
-        too_long: "* {{attribute}} is too long (maximum is {{count}} characters)"
-        too_short: "* {{attribute}} is too short (minimum is {{count}} characters)"
-        wrong_length: "* {{attribute}} is the wrong length (should be {{count}} characters)"
-        taken: "* {{attribute}} has already been taken"
-        not_a_number: "* {{attribute}} is not a number"
-        greater_than: "* {{attribute}} must be greater than {{count}}"
-        greater_than_or_equal_to: "* {{attribute}} must be greater than or equal to {{count}}"
-        equal_to: "* {{attribute}} must be equal to {{count}}"
-        less_than: "* {{attribute}} must be less than {{count}}"
-        less_than_or_equal_to: "* {{attribute}} must be less than or equal to {{count}}"
-        odd: "* {{attribute}} must be odd"
-        even: "* {{attribute}} must be even"
+        inclusion: "{{attribute}} is not included in the list"
+        exclusion: "{{attribute}} is reserved"
+        invalid: "{{attribute}} is invalid"
+        confirmation: "{{attribute}} doesn't match confirmation"
+        accepted: "{{attribute}} must be accepted"
+        empty: "{{attribute}} can't be empty"
+        blank: "{{attribute}} can't be blank"
+        too_long: "{{attribute}} is too long (maximum is {{count}} characters)"
+        too_short: "{{attribute}} is too short (minimum is {{count}} characters)"
+        wrong_length: "{{attribute}} is the wrong length (should be {{count}} characters)"
+        taken: "{{attribute}} has already been taken"
+        not_a_number: "{{attribute}} is not a number"
+        greater_than: "{{attribute}} must be greater than {{count}}"
+        greater_than_or_equal_to: "{{attribute}} must be greater than or equal to {{count}}"
+        equal_to: "{{attribute}} must be equal to {{count}}"
+        less_than: "{{attribute}} must be less than {{count}}"
+        less_than_or_equal_to: "{{attribute}} must be less than or equal to {{count}}"
+        odd: "{{attribute}} must be odd"
+        even: "{{attribute}} must be even"
   authlogic:
     error_messages:
-      login_blank: "Login can not be blank"
+      login_blank: "Login cannot be blank."
       login_not_found: "Login/password combination is not valid"
       login_invalid: "Username should use only letters, numbers, spaces, and .-_@ please."
       consecutive_failed_logins_limit_exceeded: "Consecutive failed logins limit exceeded, account is disabled."
-      email_invalid: "Email is not a valid address"
-      password_blank: "Password can not be blank"
-      password_invalid: "Login/password combination is not valid"
-      not_active: "Your account is not active"
-      not_confirmed: "Your account is not confirmed"
-      not_approved: "Your account is not approved"
+      email_invalid: "Email is not a valid address."
+      password_blank: "Password can not be blank."
+      password_invalid: "Login/password combination is not valid."
+      not_active: "Your account is not active."
+      not_confirmed: "Your account is not confirmed."
+      not_approved: "Your account is not approved."
       no_authentication_details: "You did not provide any details for authentication."
   txt:
     button:
@@ -112,10 +112,10 @@ en:
       powered_by: "powered by:"
       progress_indicator: "Step:"
       other_language: "En español"
-      step_1_header: New registrant
+      step_1_header: New Registrant
       step_2_header: Personal Information
-      step_3_header: Numbers and Changes
-      step_4_header: Opt In and Speak Out
+      step_3_header: Additional Registration Information
+      step_4_header: Stay Informed and Take Action
       step_5_header: Review and Confirm
       survey_title: Questions For You
       download_header: Print Your Form
@@ -126,7 +126,7 @@ en:
       mailing_address: Mailing Address
       previous_name: Previous Name
       previous_address: Previous Address
-      opt_in_sms: "Receive txt messages at above mobile number"
+      opt_in_sms: Send me txt reminders about voting.
       opt_in_email: "Receive emails at {{email_address}}"
       volunteer: "I would like to volunteer with {{organization}}"
       not_given: none
@@ -149,53 +149,33 @@ en:
       - Multi-racial
       - White (not Hispanic)
       - Other
-      - Decline to state
+      - Decline to State
       phone_types:
       - Mobile
       - Home
       - Work
       - Other
       instructions:
-        state_id_number: You must provide an ID number from your state-issued driver's license or identity card.
-          If you don't have either, then you must provide the last 4 digits of your Social Security Number.
         opt_in_sms:
           TBD opt in sms description
-        review: Please review the following information and confirm its accuracy
+        review: Please review the following information and confirm its accuracy.
         download: You're not done. Click on the print form button to print out your voter registration form.
           Sign it and mail to the address located on the form.
         download_2: You won't be registered unless you print, sign and mail in your form!
       ineligible:
-        age: You must be 16 years old to register to vote
+        age: You must be 18 years old by the date of the next election.
         non_citizen: You must be a U.S. citizen to register to vote.
-        attest: You must confirm you are eligible to vote
+        attest: You must confirm that you are eligible to vote.
       tooltips:
-        email_address: We need your email address to make sure you can download your registration form. 
-          Later, we'll also give you a chance to sign-up to receive more information from us.
-        home_zip_code: We need your zip code to make sure your state registers voters.
-        date_of_birth: You must be 16 years old to register to vote.
-        registrant_name: You must provide your first and last name, and a prefix such as Ms., Mr., Mrs., or Miss. In addition, 
-          you may provide your middle name and suffix, such as Jr., Sr. Providing your complete name, including middle name and 
-          suffix, will be extremely helpful in identifying you in subsequent voter registration request, such as change of 
-          address, and in finding an exact match with other state records such your driver's license or state ID card.
-        home_address: Where you reside, even if it isn't where you receive mail.
-        mailing_address: Where you receive mail.
-        race: This isn't per-state yet.
-        party: This isn't per-state yet.  Please enter the name of the political party with which you wish to register.  If you
-          do not wish to register with an party, enter "Decline to State" in the space provided.
-          California law allows voters who "decline to state" an affiliation with a qualified political party or who affiliate
-          with a nonqualified political party that files a notice with the Secretary of State allowing them to do so.  You can 
-          call 1-800-345-VOTE or visit www.ss.ca.gov to learn which political parties are allowing nonaffiliated voters to 
-          participate in their primary election.
-        state_id_number: This isn't per-state yet. You must provide an existing ID number in order to register to vote, so that your state can accurately 
-          identify your voter registration records. Federal law requires you to provide an ID number from a state-issued driver's 
-          license or identity card, if you have one. If you don't, then you must provide the last four digits of your Social 
-          Security Number -- and only the last 4 digits. You should use this ID number any time you re-register to vote, or 
-          update your address or other part of your voter registration record. If you're registering for the first time, 
-          your state may have additional requirements for proof of identity the first time you vote -- please review the state 
-          specific instructions in the voter registration form that you will shortly be printing out.
-        phone: Your phone number is not required, but will be helpful in contacting you in a timely manner about voter registration matters.
-        previous_name: If you've changed your name since your last registration, enter your previous name.
-        previous_address: If you've moved since your last registration, enter your previous address.
+        email_address: We will email you a copy of your voter registration form.
+        home_zip_code: "Enter ZIP code for the address where you live, even if you don't receive mail there."
+        date_of_birth: "You must be 18 years old by the date of the next election."
+        registrant_name: Put your full name and in these boxes. Please do not use nicknames or initials. If this application is for a change of name you will be asked for your previous name in a later section.  And don't forget to include your title (Mr., Mrs., Miss, Ms.).
+        home_address: Put your home address in these boxes. Do not put your mailing address here if it is different from your home address. Do not use a post office box or rural route without a box number. If you live in a rural area but do not have a street address, or if you have no address, please show where you live using the map on the printed form.
+        mailing_address: Put your mailing address in this box if you get your mail at an address that is different from your home address. If you do not receive mail at your home address you must fill out this section to indicate where you can be reached by mail. 
+        phone: Most states ask for your telephone number in case there are questions about your application. You are not required to provide your phone number.
+        previous_name: If you have changed your name since your last registration, enter your previous name.
+        previous_address: If you have moved since your last registration, enter your previous address.
   email:
     confirmation:
       subject: "Reminder: Mail your voter registration form"
