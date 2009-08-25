@@ -28,9 +28,8 @@ role :db,   "hood.osuosl.org", :primary => true
 
 set :scm, "git"
 set :user, "rocky"
-set :branch, "master"
-
 set :deploy_via, :remote_cache
+set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 
 set :group_writable, false
 set :use_sudo, false
