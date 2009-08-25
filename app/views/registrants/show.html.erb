@@ -6,5 +6,5 @@
 
 <% form_for(@registrant) do |form| %>
   <%= render :partial => 'form', :object => form %>
-  <div class="button"><%= image_submit_tag "#{I18n.locale}/button_nextstep.gif", :alt => I18n.t('txt.button.submit'), :id => "registrant_submit" %></div>
+  <%= rollover_button(:nextstep, I18n.t('txt.button.submit')) %>
 <% end %>

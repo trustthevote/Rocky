@@ -42,6 +42,6 @@
   </fieldset>
 <% end %>
 
-  <div class="button"><%= image_submit_tag "#{I18n.locale}/button_reviewregistration.gif", :alt => I18n.t('txt.button.review'), :id => "registrant_submit" %></div>
+  <%= rollover_button(:review, I18n.t('txt.button.review')) %>
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_3_path(@registrant) %></div>
 <% end %>

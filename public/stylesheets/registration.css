@@ -344,19 +344,6 @@ form hr {
   border: none;
 }
 
-form div.button {
-  text-align: center;
-  margin: 25px 0;
-}
-
-form div.button input {
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
-}
-
 div.back {
   text-align: center;
   font-size: 12px;
@@ -391,24 +378,23 @@ span.error, span.example {
   margin-left: 5px;
 }
 
-.review h2 {
-  width: 100%;
-  margin: 10px 0;
-  padding: 6px 0;
-  background-color: #aaa;
-  color: black;
-  text-indent: 20px;
-  font-size: 14px;
-  overflow: hidden;
+div.section {
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.review h2 span {
-  float: left;
+.section span.button {
+  display: block;
+  position: absolute;
+  top: 0;
+  _top: 5px;
+  right: 10px;
+  _left: 505px;
 }
 
-.review_edit {
-  float: right;
-  padding: 0px 10px;
+.review ul {
+  margin-top: 5px;
+  _margin-top: 10px;
 }
 
 .review li {
@@ -491,3 +477,63 @@ legend img.tooltip {
   width: 16px;
 }
 
+/* rollover buttons */
+
+form div.button {
+  text-align: center;
+  margin: 25px auto;
+}
+
+span.button {
+  
+}
+
+.button a {
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
+}
+
+.button a button {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.button a span {
+  position: relative;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  text-indent: -9999em;
+  white-space: nowrap;
+}
+
+a.button_edit_en          { width:  45px; height: 22px; }
+a.button_nextstep_en      { width: 150px; height: 36px; }
+a.button_review_en        { width: 207px; height: 56px; }
+a.button_prepare_en       { width: 207px; height: 36px; }
+a.button_print_en         { width: 207px; height: 80px; }
+a.button_edit_es          { width:  45px; height: 22px; }
+a.button_nextstep_es      { width: 150px; height: 36px; }
+a.button_review_es        { width: 207px; height: 56px; }
+a.button_prepare_es       { width: 207px; height: 36px; }
+a.button_print_es         { width: 207px; height: 80px; }
+
+a.button_edit_en     span { width:  45px; height: 22px; background-image: url(/images/en/button_edit_ro.gif); }
+a.button_nextstep_en span { width: 150px; height: 36px; background-image: url(/images/en/button_nextstep_ro.gif); }
+a.button_review_en   span { width: 207px; height: 56px; background-image: url(/images/en/button_review_ro.gif); }
+a.button_prepare_en  span { width: 207px; height: 36px; background-image: url(/images/en/button_prepare_ro.gif); }
+a.button_print_en    span { width: 207px; height: 80px; background-image: url(/images/en/button_print_ro.gif); }
+a.button_edit_es     span { width:  45px; height: 22px; background-image: url(/images/es/button_edit_ro.gif); }
+a.button_nextstep_es span { width: 150px; height: 36px; background-image: url(/images/es/button_nextstep_ro.gif); }
+a.button_review_es   span { width: 207px; height: 56px; background-image: url(/images/es/button_review_ro.gif); }
+a.button_prepare_es  span { width: 207px; height: 36px; background-image: url(/images/es/button_prepare_ro.gif); }
+a.button_print_es    span { width: 207px; height: 80px; background-image: url(/images/es/button_print_ro.gif); }
+
+.button a:hover span  {
+  background-position: right top;
+}

@@ -92,4 +92,19 @@ module ApplicationHelper
     content_tag(:div, form.select(field, contents, options), :class => has_error)
   end
 
+  def rollover_button(name, text)
+    <<-HTML
+      <div class="button">
+        <a class="button_#{name}_#{I18n.locale}" href="#"><button type="submit" id="registrant_submit"><span>#{text}</span></button></a>
+      </div>
+    HTML
+  end
+  
+  def rollover_image_link(name, text, url)
+    <<-HTML
+      <span class="button">
+        <a class="button_#{name}_#{I18n.locale}" href="#{url}"><span>#{text}</span></a>
+      </span>
+    HTML
+  end
 end

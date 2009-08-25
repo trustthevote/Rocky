@@ -18,6 +18,5 @@ Feature: Tooltips
      Given I have completed step 2
       And there is localized state data
       When I go to the step 3 page
-      And I hover over the "state_id_number" tooltip
       Then I should see "local tooltip"
 
