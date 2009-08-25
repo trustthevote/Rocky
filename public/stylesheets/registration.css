@@ -167,8 +167,8 @@ font-size: 1.15em;
 #other_language_link {
   zoom: 1;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 20px;
+  right: 20px;
   font-size: 14px;
   font-weight: bold;
 }
