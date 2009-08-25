@@ -29,3 +29,8 @@ config.action_mailer.delivery_method = :test
 # config.threadsafe!
 
 USE_HTTPS = true
+
+config.after_initialize do
+  I18n.reload!
+  Registrant.handle_asynchronously :wrap_up
+end
