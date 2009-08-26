@@ -34,7 +34,7 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 set :group_writable, false
 set :use_sudo, false
 
-after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_app_vhost", "deploy:symlink_util_vhost", "deploy:symlink_pdf"
+after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
 after "deploy:symlink_configs", "deploy:geminstaller"
 
 namespace :deploy do
@@ -48,22 +48,6 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml
-    CMD
-  end
-  
-  desc "Link the app vhost to shared/config/vhost.d"
-  task :symlink_app_vhost, :roles => :app, :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/vhost.d #{latest_release}/config/vhost.d/app
-    CMD
-  end
-  
-  desc "Link the util vhost to shared/config/vhost.d"
-  task :symlink_util_vhost, :roles => :util, :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/vhost.d #{latest_release}/config/vhost.d/util
     CMD
   end
 
