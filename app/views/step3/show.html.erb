@@ -39,7 +39,6 @@
       </h3>
     </li>
   </ul>
-  <div class="instructions"><p><%= I18n.t('txt.registration.instructions.opt_in_sms') %></p></div>
 
   <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
 
