@@ -107,8 +107,8 @@ es:
       review: es Review Application
     registration:
       powered_by: "es powered by:"
-      progress_indicator: "es Step:"
-      other_language: "es En español"
+      progress_indicator: "Paso:"
+      other_language: In English
       step_1_header: es New Registrant
       step_2_header: es Personal Information
       step_3_header: es Additional Registration Information
