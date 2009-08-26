@@ -1,171 +1,183 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 es:
   activerecord:
     attributes:
       registrant:
-        date_of_birth: XXXX
-        email_address: XXXX
-        first_registration: XXXX
-        home_zip_code: XXXX
-        us_citizen: XXXX
-        name_title: XXXX
-        first_name: XXXX
-        middle_name: XXXX
-        last_name: XXXX
-        name_suffix: XXXX
-        home_address: XXXX
-        home_unit: XXXX
-        home_city: XXXX
-        home_state_name: XXXX
-        has_mailing_address: XXXX
-        mailing_address: XXXX
-        mailing_unit: XXXX
-        mailing_city: XXXX
-        mailing_state_abbrev: XXXX
-        mailing_zip_code: XXXX
-        party: XXXX
-        race: XXXX
-        state_id_number: XXXX
-        phone: XXXX
-        phone_type: XXXX
-        change_of_name: XXXX
-        prev_name_title: XXXX
-        prev_first_name: XXXX
-        prev_middle_name: XXXX
-        prev_last_name: XXXX
-        prev_name_suffix: XXXX
-        change_of_address: XXXX
-        prev_address: XXXX
-        prev_unit: XXXX
-        prev_city: XXXX
-        prev_state_abbrev: XXXX
-        prev_zip_code: XXXX
-        opt_in_email: XXXX
-        opt_in_sms: XXXX
-        attest_true: XXXX
+        date_of_birth: es Date of Birth
+        email_address: es Email Address
+        first_registration: es I am registering to vote for the first time.
+        home_zip_code: es ZIP Code
+        us_citizen: es I am a U.S. citizen.
+        name_title: es Title
+        first_name: es First
+        middle_name: es Middle
+        last_name: es Last
+        name_suffix: es Suffix
+        home_address: es Address
+        home_unit: "es Unit/Lot #"
+        home_city: es City
+        home_state_name: es State
+        has_mailing_address: es I get my mail at a different address from the one above.
+        mailing_address: es Address
+        mailing_unit: "es Unit/Lot #"
+        mailing_city: es City
+        mailing_state_abbrev: es State
+        mailing_zip_code: es ZIP Code
+        party: es Party
+        race: es Race
+        state_id_number: es ID Number
+        phone: es Phone
+        phone_type: es Type
+        change_of_name: es I have changed my name
+        prev_name_title: es Title
+        prev_first_name: es First
+        prev_middle_name: es Middle
+        prev_last_name: es Last
+        prev_name_suffix: es Suffix
+        change_of_address: es I have changed my address
+        prev_address: es Address
+        prev_unit: "es Unit/Lot #"
+        prev_city: es City
+        prev_state_abbrev: es State
+        prev_zip_code: es ZIP Code
+        opt_in_email: es Receive emails
+        opt_in_sms: es Receive txt messages
+        attest_true: es I have reviewed the above information, and it is true and accurate to the best of my knowledge.
     errors:
       models:
         registrant:
-          blank: XXXX
-          invalid_zip: XXXX
+          blank: "es Required"
+          invalid_zip: "es Invalid ZIP"
           attributes:
             home_zip_code:
-              invalid: XXXX
+              invalid: "es Use ZIP or ZIP+4"
             mailing_zip_code:
-              invalid: XXXX
+              invalid: "es Use ZIP or ZIP+4"
             prev_zip_code:
-              invalid: XXXX
+              invalid: "es Use ZIP or ZIP+4"
             email_address:
-              invalid: XXXX
+              invalid: "es Not a valid address"
             date_of_birth:
-              format: XXXX
+              format: "es Should be MM-DD-YYYY"
             phone:
-              invalid: XXXX
+              invalid: "es Should be ###-###-####"
             attest_true:
-              accepted: XXXX
+              accepted: "es You must indicate whether the above information is correct."
       messages:
-        inclusion: XXXX
-        exclusion: XXXX
-        invalid: XXXX
-        confirmation: XXXX
-        accepted: XXXX
-        empty: XXXX
-        blank: XXXX
-        too_long: XXXX
-        too_short: XXXX
-        wrong_length: XXXX
-        taken: XXXX
-        not_a_number: XXXX
-        greater_than: XXXX
-        greater_than_or_equal_to: XXXX
-        equal_to: XXXX
-        less_than: XXXX
-        less_than_or_equal_to: XXXX
-        odd: XXXX
-        even: XXXX
+        inclusion: "es {{attribute}} is not included in the list"
+        exclusion: "es {{attribute}} is reserved"
+        invalid: "es {{attribute}} is invalid"
+        confirmation: "es {{attribute}} doesn't match confirmation"
+        accepted: "es {{attribute}} must be accepted"
+        empty: "es {{attribute}} can't be empty"
+        blank: "es {{attribute}} can't be blank"
+        too_long: "es {{attribute}} is too long (maximum is {{count}} characters)"
+        too_short: "es {{attribute}} is too short (minimum is {{count}} characters)"
+        wrong_length: "es {{attribute}} is the wrong length (should be {{count}} characters)"
+        taken: "es {{attribute}} has already been taken"
+        not_a_number: "es {{attribute}} is not a number"
+        greater_than: "es {{attribute}} must be greater than {{count}}"
+        greater_than_or_equal_to: "es {{attribute}} must be greater than or equal to {{count}}"
+        equal_to: "es {{attribute}} must be equal to {{count}}"
+        less_than: "es {{attribute}} must be less than {{count}}"
+        less_than_or_equal_to: "es {{attribute}} must be less than or equal to {{count}}"
+        odd: "es {{attribute}} must be odd"
+        even: "es {{attribute}} must be even"
+  authlogic:
+    error_messages:
+      login_blank: "es Login cannot be blank."
+      login_not_found: "es Login/password combination is not valid"
+      login_invalid: "es Username should use only letters, numbers, spaces, and .-_@ please."
+      consecutive_failed_logins_limit_exceeded: "es Consecutive failed logins limit exceeded, account is disabled."
+      email_invalid: "es Email is not a valid address."
+      password_blank: "es Password can not be blank."
+      password_invalid: "es Login/password combination is not valid."
+      not_active: "es Your account is not active."
+      not_confirmed: "es Your account is not confirmed."
+      not_approved: "es Your account is not approved."
+      no_authentication_details: "es You did not provide any details for authentication."
   txt:
     button:
-      submit: XXXX
-      edit: XXXX
-      back: XXXX
-      download: XXXX
-      ineligible_try_again: XXXX
-      help: XXXX
-      prepare: XXXX
-      review: XXXX
+      submit: "es Next Step &gt;"
+      edit: es Edit
+      back: "es &lt; Previous Step"
+      download: "es Download PDF!"
+      ineligible_try_again: es Return
+      help: es Help
+      prepare: es Prepare Form
+      review: es Review Application
     registration:
-      powered_by: XXXX
-      progress_indicator: XXXX
-      other_language: In English
-      step_1_header: XXXX
-      step_2_header: XXXX
-      step_3_header: XXXX
-      step_4_header: XXXX
-      step_5_header: XXXX
-      survey_title: XXXX
-      download_header: XXXX
-      ineligible_header: XXXX
-      name: XXXX
-      select_none: XXXX
-      home_address: XXXX
-      mailing_address: XXXX
-      previous_name: XXXX
-      previous_address: XXXX
-      opt_in_sms: XXXX
-      opt_in_email: XXXX
-      volunteer: XXXX {{organization}}
-      not_given: XXXX
+      powered_by: "es powered by:"
+      progress_indicator: "es Step:"
+      other_language: "es En español"
+      step_1_header: es New Registrant
+      step_2_header: es Personal Information
+      step_3_header: es Additional Registration Information
+      step_4_header: es Stay Informed and Take Action
+      step_5_header: es Review and Confirm
+      survey_title: es Questions For You
+      download_header: es Print Your Form
+      ineligible_header: es Sorry, you are not eligible to register to vote for the following reasons
+      name: es Name
+      select_none: es (none)
+      home_address: es Home Address
+      mailing_address: es Mailing Address
+      previous_name: es Previous Name
+      previous_address: es Previous Address
+      opt_in_sms: es Send me txt reminders about voting.
+      opt_in_email: "es Receive emails at {{email_address}}"
+      volunteer: "es I would like to volunteer with {{organization}}"
+      not_given: es none
       titles:
       - Sr.
       - Sra.
       - Srta.
       suffixes:
-      - Jr.
-      - Sr.
-      - II
-      - III
-      - IV
+      - es Jr.
+      - es Sr.
+      - es II
+      - es III
+      - es IV
       races:
-      - SPANISH American Indian / Alaskan Native
-      - SPANISH Asian / Pacific Islander
-      - SPANISH Black (not Hispanic)
-      - SPANISH Hispanic
-      - SPANISH Multi-racial
-      - SPANISH White (not Hispanic)
-      - SPANISH Other
+      - es American Indian / Alaskan Native
+      - es Asian / Pacific Islander
+      - es Black (not Hispanic)
+      - es Hispanic
+      - es Multi-racial
+      - es White (not Hispanic)
+      - es Other
+      - es Decline to State
       phone_types:
-      - Mobile
-      - Home
-      - Work
-      - Other
+      - es Mobile
+      - es Home
+      - es Work
+      - es Other
       instructions:
-        state_id_number: XXXX
-        opt_in_sms: XXXX
-        download: XXXX
-        download_2: XXXX
+        review: es Please review the following information and confirm its accuracy.
+        download: es You're not done. Click on the print form button to print out your voter registration form.
+          Sign it and mail to the address located on the form.
+        download_2: es You won't be registered unless you print, sign and mail in your form!
       ineligible:
-        age: XXXX
-        non_citizen: XXXX
-        attest: XXXX
+        age: es You must be 18 years old by the date of the next election.
+        non_citizen: es You must be a U.S. citizen to register to vote.
+        attest: es You must confirm that you are eligible to vote.
       tooltips:
-        email_address: XXXX
-        home_zip_code: XXXX
-        date_of_birth: XXXX
-        registrant_name: XXXX
-        home_address: XXXX
-        mailing_address: XXXX
-        race: XXXX
-        party: XXXX
-        state_id_number: XXXX
-        phone: XXXX
-        previous_name: XXXX
-        previous_address: XXXX
+        email_address: es We will email you a copy of your voter registration form.
+        home_zip_code: "es Enter ZIP code for the address where you live, even if you don't receive mail there."
+        date_of_birth: "es You must be 18 years old by the date of the next election."
+        registrant_name: es Put your full name and in these boxes. Please do not use nicknames or initials. If this application is for a change of name you will be asked for your previous name in a later section.  And don't forget to include your title (Mr., Mrs., Miss, Ms.).
+        home_address: es Put your home address in these boxes. Do not put your mailing address here if it is different from your home address. Do not use a post office box or rural route without a box number. If you live in a rural area but do not have a street address, or if you have no address, please show where you live using the map on the printed form.
+        mailing_address: es Put your mailing address in this box if you get your mail at an address that is different from your home address. If you do not receive mail at your home address you must fill out this section to indicate where you can be reached by mail. 
+        phone: es Most states ask for your telephone number in case there are questions about your application. You are not required to provide your phone number.
+        previous_name: es If you have changed your name since your last registration, enter your previous name.
+        previous_address: es If you have moved since your last registration, enter your previous address.
   email:
     confirmation:
-      subject: XXXX
-      body: XXXX
+      subject: "es Reminder: Mail your voter registration form"
+      body: "es Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have 
+        it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state
+        registrar at {{registrar_phone}}."
     reminder:
-      subject: XXXX
-      body: XXXX
+      subject: "es Reminder: Mail your voter registration form"
+      body: "es This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have 
+        it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state
+        registrar at {{registrar_phone}}."
