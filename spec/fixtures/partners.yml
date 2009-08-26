@@ -1,0 +1,39 @@
+rockthevote:
+  id: 1
+  username: rtv
+  email: rocky@example.com
+  crypted_password: "c8e5b51b237344fe0e72539af0cac7197f094a5e933ffacf6e7fa612363c5933f520710c6427ac31fc4c68a2d7bb48eae601c74b96e7838f9ca1a0740b67576a"
+  password_salt: "Y4PPzYx2ert3vC0OhEMo"
+  name: Rocky
+  organization: Rock The Vote
+  url: http://rockthevote.com
+  address: 123 Wherever
+  city: Washington
+  state_id: 9
+  zip_code: 20001
+  phone: 555-555-1234
+  logo_image_url: "reg/rtv_powered_by_logo.gif"
+  survey_question_1_en: "What school did you go to?"
+  survey_question_2_en: "What is your favorite musical group?"
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+# TODO: remove partner 2 in production
+bullwinkle:
+  id: 2
+  username: bull_winkle
+  email: bull_winkle@example.com
+  crypted_password: "c8e5b51b237344fe0e72539af0cac7197f094a5e933ffacf6e7fa612363c5933f520710c6427ac31fc4c68a2d7bb48eae601c74b96e7838f9ca1a0740b67576a"
+  password_salt: "Y4PPzYx2ert3vC0OhEMo"
+  name: Bullwinkle
+  organization: Bullwinkle, Inc.
+  url: http://example.com
+  address: 123 Wherever
+  city: Washington
+  state_id: 9
+  zip_code: 20001
+  phone: 555-555-1234
+  logo_image_url: "http://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Moose_crossing_a_road.jpg/120px-Moose_crossing_a_road.jpg"
+  survey_question_1_en: "What school did you go to?"
+  survey_question_2_en: "What is your favorite musical group?"
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>

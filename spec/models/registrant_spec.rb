@@ -89,14 +89,14 @@ describe Registrant do
       reg = Factory.build(:step_1_registrant, :home_zip_code => nil)
       reg.invalid?
 
-      assert_equal ["* Required"], [reg.errors.on(:home_zip_code)].flatten
+      assert_equal ["Required"], [reg.errors.on(:home_zip_code)].flatten
     end
 
     it "should check format of home_zip_code" do
       reg = Factory.build(:step_1_registrant, :home_zip_code => 'ABCDE')
       reg.invalid?
 
-      assert_equal ["* Use ZIP or ZIP+4"], [reg.errors.on(:home_zip_code)].flatten
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:home_zip_code)].flatten
     end
 
     it "should not require contact information" do
@@ -172,14 +172,14 @@ describe Registrant do
       reg = Factory.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => 'ABCDE')
       reg.invalid?
 
-      assert_equal ["* Use ZIP or ZIP+4"], [reg.errors.on(:mailing_zip_code)].flatten
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:mailing_zip_code)].flatten
     end
 
     it "should limit number of simultaneous errors on mailing_zip_code" do
       reg = Factory.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => nil)
       reg.invalid?
 
-      assert_equal ["* Required"], [reg.errors.on(:mailing_zip_code)].flatten
+      assert_equal ["Required"], [reg.errors.on(:mailing_zip_code)].flatten
     end
 
     it "blanks mailing address fields unless has_mailing_address" do
@@ -257,14 +257,14 @@ describe Registrant do
       reg = Factory.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => 'ABCDE')
       reg.invalid?
 
-      assert_equal ["* Use ZIP or ZIP+4"], [reg.errors.on(:prev_zip_code)].flatten
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:prev_zip_code)].flatten
     end
 
     it "should limit number of simultaneous errors on prev_zip_code" do
       reg = Factory.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
       reg.invalid?
 
-      assert_equal ["* Required"], [reg.errors.on(:prev_zip_code)].flatten
+      assert_equal ["Required"], [reg.errors.on(:prev_zip_code)].flatten
     end
 
     it "blanks previous name fields unless change_of_name" do
@@ -358,9 +358,14 @@ describe Registrant do
   describe "state parties" do
     it "gets parties by locale when required" do
       reg = Factory.build(:step_2_registrant, :locale => 'en', :home_zip_code => '94101')
-      assert_equal %w(Democratic Green Libertarian Republican Decline\ to\ State), reg.state_parties
+      state = reg.home_state
+      localization = state.localizations.detect {|l| l.locale == 'en'}
+      localization.update_attributes(:parties => %w(red green blue), :no_party => "black")
+      assert_equal %w(red green blue black), reg.state_parties
       reg.locale = 'es'
-      assert_equal %w(Demócrata Verde Libertariano Republicano Disminución\ del\ Estado), reg.state_parties
+      localization = state.localizations.detect {|l| l.locale == 'es'}
+      localization.update_attributes(:parties => %w(red green blue), :no_party => "black")
+      assert_equal %w(red green blue black), reg.state_parties
     end
 
     it "gets no parties when not required" do

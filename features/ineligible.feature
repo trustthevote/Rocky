@@ -21,7 +21,7 @@ Feature: Ineligible
        But I am 15 years old
       When I press "registrant_submit"
       Then I should see "not eligible"
-       And I should see "must be 16 years old"
+       And I should see "must be 18 years old"
       When I follow "Return"
        And I am 18 years old
        And I press "registrant_submit"
@@ -46,7 +46,7 @@ Feature: Ineligible
        And I live in North Dakota
       When I press "registrant_submit"
       Then I should see "not eligible"
-       And I should see "must be 16 years old"
+       And I should see "must be 18 years old"
        And I should see "North Dakota"
       When I follow "Return"
        And I am 18 years old

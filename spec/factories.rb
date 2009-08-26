@@ -17,7 +17,7 @@ Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
   f.home_city       "San Francisco"
   # f.home_state      { GeoState['CA'] }
   f.race            "Hispanic"
-  f.party           "Decline to State"
+  f.party           "None"
 end
 
 Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|

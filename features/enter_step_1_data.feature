@@ -5,11 +5,11 @@ Feature: Step 1
 
     Scenario: start
       When I go to a new registration page
-      Then I should see "New registrant"
+      Then I should see "New Registrant"
 
     Scenario: start in Spanish
       When I go to a new Spanish registration page
-      Then I should not see "New registrant"
+      Then I should not see "New Registrant"
        And I should see "XXXX"
 
     Scenario: completing step 1

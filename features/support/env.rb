@@ -8,7 +8,7 @@ require 'cucumber/formatter/unicode'
 
 #Seed the DB
 Fixtures.reset_cache  
-fixtures_folder = File.join(RAILS_ROOT, 'test', 'fixtures')
+fixtures_folder = File.join(RAILS_ROOT, 'spec', 'fixtures')
 fixtures = Dir[File.join(fixtures_folder, '*.{yml,csv}')].map {|f| File.basename(f, '.*') }
 Fixtures.create_fixtures(fixtures_folder, fixtures)
 

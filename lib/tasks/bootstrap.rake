@@ -35,10 +35,4 @@ namespace :db do
   
   desc "migrate:reset and then bootstrap"
   task :reboot => %w[db:migrate:reset db:bootstrap]
-
-  namespace :test do
-    task :prepare do
-      Rake::Task["db:bootstrap"].invoke
-    end
-  end
 end

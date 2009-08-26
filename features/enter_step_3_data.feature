@@ -11,9 +11,9 @@ Feature: Step 3
        And I fill in "ID Number" with "1234"
        And I fill in "Phone" with "415-555-4254"
        And I select "Mobile" from "registrant_phone_type"
-       And I check "Receive txt messages"
+       And I check "Send me txt reminders"
        And I press "registrant_submit"
-      Then I should see "Opt In"
+      Then I should see "Stay Informed and Take Action"
 
     Scenario: first time registrant
      Given I have completed step 2
@@ -31,7 +31,7 @@ Feature: Step 3
        And I fill in "first" with "John"
        And I fill in "last" with "Public"
        And I press "registrant_submit"
-      Then I should see "Opt In"
+      Then I should see "Stay Informed and Take Action"
 
     Scenario: changing address
      Given I have completed step 2
@@ -43,7 +43,7 @@ Feature: Step 3
        And I select "Pennsylvania" from "state"
        And I fill in "zip code" with "15215"
        And I press "registrant_submit"
-      Then I should see "Opt In"
+      Then I should see "Stay Informed and Take Action"
 
     Scenario: default prev state to home state
       Given I have completed step 2

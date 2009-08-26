@@ -67,7 +67,7 @@ class Registrant < ActiveRecord::Base
 
   has_many :localizations, :through => :home_state, :class_name => 'StateLocalization', :autosave => false do
     def by_locale(loc)
-      find_by_locale(loc.to_s) || StateLocalization.find_by_state_id_and_locale(GeoState['CA'].id, loc.to_s) # TODO remove when we have localizations for all states
+      find_by_locale(loc.to_s)
     end
   end
 

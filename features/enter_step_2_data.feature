@@ -12,7 +12,7 @@ Feature: Step 2
        And I fill in "address" with "123 Market St."
        And I fill in "city" with "Pittsburgh"
        And I press "registrant_submit"
-      Then I should see "Numbers and Changes"
+      Then I should see "Additional Registration Information"
 
     Scenario: default mailing state to home state
       Given I have completed step 1

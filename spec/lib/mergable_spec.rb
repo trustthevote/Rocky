@@ -94,7 +94,7 @@ describe Mergable do
                   @doc.css('xfdf fields field[name="race"] value').text
   end
   it "should not output race as decline to state" do
-    @registrant = Factory.build(:maximal_registrant, :race => "Decline to state")
+    @registrant = Factory.build(:maximal_registrant, :race => "Decline to State")
     @doc = Nokogiri::XML(@registrant.to_xfdf)
     assert_equal  "",
                   @doc.css('xfdf fields field[name="race"] value').text
