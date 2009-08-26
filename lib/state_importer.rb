@@ -33,6 +33,7 @@ class StateImporter
     en = state.localizations.find_or_initialize_by_locale('en')
     en.not_participating_tooltip  = row["not_participating_tooltip_en"]
     en.race_tooltip               = row["race_tooltip_en"]
+    en.party_tooltip              = row["party_tooltip_en"]
     en.parties                    = read_parties(row["parties_en"])
     en.no_party                   = row["no_party_en"]
     en.id_number_tooltip          = row["id_number_tooltip_en"]
@@ -40,6 +41,7 @@ class StateImporter
     es = state.localizations.find_or_initialize_by_locale('es')
     es.not_participating_tooltip  = row["not_participating_tooltip_es"]
     es.race_tooltip               = row["race_tooltip_es"]
+    es.party_tooltip              = row["party_tooltip_es"]
     es.parties                    = read_parties(row["parties_es"])
     es.no_party                   = row["no_party_es"]
     es.id_number_tooltip          = row["id_number_tooltip_es"]

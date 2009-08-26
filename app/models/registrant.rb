@@ -319,6 +319,10 @@ class Registrant < ActiveRecord::Base
     localizations.by_locale(locale).race_tooltip
   end
 
+  def party_tooltip
+    localizations.by_locale(locale).party_tooltip
+  end
+
   def home_state_not_participating_text
     localizations.by_locale(locale).not_participating_tooltip
   end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090821222639) do
+ActiveRecord::Schema.define(:version => 20090826003717) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20090821222639) do
     t.string   "id_number_tooltip",         :limit => 1024
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "party_tooltip",             :limit => 1024
   end
 
 end

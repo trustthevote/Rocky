@@ -29,5 +29,6 @@ class Step2Controller < ApplicationController
     @registrant.mailing_state ||= @registrant.home_state
     @state_parties = @registrant.state_parties
     @race_tooltip = @registrant.race_tooltip
+    @party_tooltip = @registrant.party_tooltip
   end
 end
