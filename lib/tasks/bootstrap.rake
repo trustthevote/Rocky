@@ -27,11 +27,10 @@ namespace :db do
 
     load_fixtures_in_dir(File.join('db', 'bootstrap'))
     load_fixtures_in_dir(env_dir) # override common fixtures for this environment
-  end
-  namespace :bootstrap do
-    task :update => :environment do
-      Fixtures.create_fixtures(File.join('db', 'bootstrap'), "enumerations")
-    end
+
+    GeoState.reset_all_states
+    ENV['CSV_FILE'] = File.join('db', 'bootstrap', 'import', 'states.csv')
+    Rake::Task["import:states"].execute
   end
   
   desc "migrate:reset and then bootstrap"
