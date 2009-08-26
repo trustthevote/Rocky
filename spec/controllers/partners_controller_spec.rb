@@ -36,18 +36,15 @@ describe PartnersController do
       integrate_views
 
       it "shows widget html" do
-        stub(request).protocol { "http://" }
-        stub(request).host_with_port { "example.com:3000" }
+        stub(request).host { "example.com" }
         get :show
         assert_response :success
         assert_select 'textarea[readonly]', 1
-        assert_match %r{http://example.com:3000/registrants/new\?partner=5}, response.body
+        assert_match %r{https://example.com/registrants/new\?partner=5}, response.body
       end
     end
 
     describe "statistics" do
-      # integrate_views
-
       it "shows registration statistics" do
         get :statistics
         assert_response :success

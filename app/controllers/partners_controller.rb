@@ -37,8 +37,8 @@ class PartnersController < ApplicationController
   def show
     @partner = current_partner
     @link_html = <<-HTML
-<a href="#{new_registrant_url(:partner => partner_id)}">
-  <img src="http://register.rockthevote.com/images/widget/rtv-big.jpg"></img>
+<a href="https://#{request.host}#{new_registrant_path(:partner => partner_id)}">
+  <img src="http://#{request.host}/images/widget/rtv-big.jpg"></img>
 </a>
 HTML
   end
