@@ -1,6 +1,23 @@
-
+<p>
+  With your Partner Portal dashboard, you can modify your survey questions, and copy some HTML to use
+  on your Web site to link to the RTV online registration tool. You can also
+  <%= link_to "see statistics", statistics_partner_path %>
+  about the the people you are registering to vote, 
+  <%= link_to "download the registration data", registrations_partner_path(:format => 'csv') %>
+  of those who register to vote through your website, and 
+  <%= link_to "modify your partner profile", edit_partner_path %>.
+</p>
 <div>
   <h2>Survey Questions</h2>
+  <p>
+    The survey questions are your opportunity to ask the applicant two questions during the voter
+    registration process, and to ask the applicant if he or she would like to volunteer with your
+    organization. You are not required to ask any questions if you don't want to. You can 
+    <%= link_to "Edit Questions", edit_partner_questions_path %>
+    to define or modify your questions. The answers provided by the applicants can be seen
+    when you 
+    <%= link_to "download your voter registration data", registrations_partner_path(:format => 'csv') %>.
+  </p>
   <p><strong>1.</strong> English: <%= h @partner.survey_question_1_en %></p>
   <p><strong>1.</strong> Spanish: <%= h @partner.survey_question_1_es %></p>
   <p><strong>2.</strong> English: <%= h @partner.survey_question_2_en %></p>

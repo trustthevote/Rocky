@@ -1,5 +1,15 @@
 <h1>Register</h1>
 
+<p>
+  Welcome to the Partner Portal of the Rock the Vote online voter registration tool. If you've already
+  registered as a partner, you can <%= link_to "log in", login_path %>
+  to return to your dashboard. If you're a new partner, then you
+  can sign up below, and start your own voter registration drive. Once you have created your profile, you
+  will be able to use your Partner Dashboard to customize portions of the voter registration tool, get code
+  to embed buttons onto your website, see statistics about the people you are registering to vote, and
+  download the registration data of those who register to vote through your website.
+</p>
+
 <% form_for @partner, :url => partner_path do |form| %>
   <%= render :partial => form %>
   <p><%= form.submit "Register" %></p>

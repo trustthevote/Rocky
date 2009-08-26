@@ -1,5 +1,20 @@
 <h1>Survey Questions</h1>
 
+<p>
+  To customize 2 questions to your applicants, use the fields below to provide the text of the 2 questions. Also, you can check the box below to ask applicants to volunteer for your organization. If you do ask questions, they will appear at step four of the five-step voter registration process. We recommend asking questions that can be answered in a few words. For example:
+</p>
+
+<ul>
+  <li>What is the top issue facing the country right now?</li>
+  <li>If you are in college, where do go?</li>
+  <li>What is your favorite band?</li>
+</ul>
+  
+<p>
+  You can see the applicants' answers when you 
+  <%= link_to "download your voter registration data", registrations_partner_path(:format => 'csv') %>.
+</p>
+
 <% form_for @partner, :url => partner_questions_path, :method => :put do |form| %>
   <%= form.error_messages %>
   <p><%= form.label :survey_question_1_en, "Question 1, English" %></p>
