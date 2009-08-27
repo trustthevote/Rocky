@@ -207,8 +207,11 @@ describe Registrant do
   end
 
   describe "step 3" do
-    it "should require state id" do
+    it "should require valid state id" do
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => nil)
+
+      assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "NONE")
+      assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "none")
 
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "123")
       assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "1234")
