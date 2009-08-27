@@ -1,5 +1,6 @@
 .DS_Store
 config/database.yml
+config/newrelic.yml
 log/*.log
 tmp/*
 public/pdf/*
