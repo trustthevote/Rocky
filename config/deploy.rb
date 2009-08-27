@@ -53,6 +53,10 @@ namespace :deploy do
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/newrelic.yml #{latest_release}/config/newrelic.yml
     CMD
+    run <<-CMD
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/config/initializers/hoptoad.rb #{latest_release}/config/initializers/hoptoad.rb
+    CMD
   end
 
   desc "Link the pdf dir to /data/rocky/pdf"

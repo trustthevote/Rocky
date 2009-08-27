@@ -1,6 +1,7 @@
 .DS_Store
 config/database.yml
 config/newrelic.yml
+config/initializers/hoptoad.rb
 log/*.log
 tmp/*
 public/pdf/*
