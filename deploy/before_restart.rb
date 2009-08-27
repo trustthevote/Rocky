@@ -1,1 +1,1 @@
-# run "cd #{release_path} && rake db:fixtures:load"
+run "ln -nfs #{shared_path}/config/newrelic.yml #{release_path}/config/newrelic.yml"
