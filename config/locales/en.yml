@@ -30,13 +30,13 @@ en:
         state_id_number: ID Number
         phone: Phone
         phone_type: Type
-        change_of_name: I have changed my name
+        change_of_name: I have changed my name.
         prev_name_title: Title
         prev_first_name: First
         prev_middle_name: Middle
         prev_last_name: Last
         prev_name_suffix: Suffix
-        change_of_address: I have changed my address
+        change_of_address: I have changed my address.
         prev_address: Address
         prev_unit: "Unit/Lot #"
         prev_city: City
@@ -66,29 +66,29 @@ en:
             attest_true:
               accepted: "You must indicate whether the above information is correct."
       messages:
-        inclusion: "{{attribute}} is not included in the list"
-        exclusion: "{{attribute}} is reserved"
-        invalid: "{{attribute}} is invalid"
-        confirmation: "{{attribute}} doesn't match confirmation"
-        accepted: "{{attribute}} must be accepted"
-        empty: "{{attribute}} can't be empty"
-        blank: "{{attribute}} can't be blank"
-        too_long: "{{attribute}} is too long (maximum is {{count}} characters)"
-        too_short: "{{attribute}} is too short (minimum is {{count}} characters)"
-        wrong_length: "{{attribute}} is the wrong length (should be {{count}} characters)"
-        taken: "{{attribute}} has already been taken"
-        not_a_number: "{{attribute}} is not a number"
-        greater_than: "{{attribute}} must be greater than {{count}}"
-        greater_than_or_equal_to: "{{attribute}} must be greater than or equal to {{count}}"
-        equal_to: "{{attribute}} must be equal to {{count}}"
-        less_than: "{{attribute}} must be less than {{count}}"
-        less_than_or_equal_to: "{{attribute}} must be less than or equal to {{count}}"
-        odd: "{{attribute}} must be odd"
-        even: "{{attribute}} must be even"
+        inclusion: "{{attribute}} is not included in the list."
+        exclusion: "{{attribute}} is reserved."
+        invalid: "{{attribute}} is invalid."
+        confirmation: "{{attribute}} doesn't match confirmation."
+        accepted: "{{attribute}} must be accepted."
+        empty: "{{attribute}} can't be empty."
+        blank: "{{attribute}} can't be blank."
+        too_long: "{{attribute}} is too long (maximum is {{count}} characters)."
+        too_short: "{{attribute}} is too short (minimum is {{count}} characters)."
+        wrong_length: "{{attribute}} is the wrong length (should be {{count}} characters)."
+        taken: "{{attribute}} has already been taken."
+        not_a_number: "{{attribute}} is not a number."
+        greater_than: "{{attribute}} must be greater than {{count}}."
+        greater_than_or_equal_to: "{{attribute}} must be greater than or equal to {{count}}."
+        equal_to: "{{attribute}} must be equal to {{count}}."
+        less_than: "{{attribute}} must be less than {{count}}."
+        less_than_or_equal_to: "{{attribute}} must be less than or equal to {{count}}."
+        odd: "{{attribute}} must be odd."
+        even: "{{attribute}} must be even."
   authlogic:
     error_messages:
       login_blank: "Login cannot be blank."
-      login_not_found: "Login/password combination is not valid"
+      login_not_found: "Login/password combination is not valid."
       login_invalid: "Username should use only letters, numbers, spaces, and .-_@ please."
       consecutive_failed_logins_limit_exceeded: "Consecutive failed logins limit exceeded, account is disabled."
       email_invalid: "Email is not a valid address."
@@ -119,7 +119,7 @@ en:
       step_5_header: Review and Confirm
       survey_title: Questions For You
       download_header: Print Your Form
-      ineligible_header: Sorry, you are not eligible to register to vote for the following reasons
+      ineligible_header: "Sorry, you are not eligible to register to vote for the following reason(s):"
       name: Name
       select_none: (none)
       home_address: Home Address
@@ -128,7 +128,7 @@ en:
       previous_address: Previous Address
       opt_in_sms: Send me txt reminders about voting.
       opt_in_email: "Receive emails at {{email_address}}"
-      volunteer: "I would like to volunteer with {{organization}}"
+      volunteer: "I would like to volunteer with {{organization}}."
       not_given: none
       titles:
       - Mr.
@@ -158,7 +158,7 @@ en:
       instructions:
         opt_in_email: We will send you timely election reminders, polling place information, and information about music and issues.
         review: Please review the following information and confirm its accuracy.
-        download: You're not done. Click on the print form button to print out your voter registration form.
+        download: You are not done. Click on the print form button to print out your voter registration form.
           Sign it and mail to the address located on the form.
         download_2: You won't be registered unless you print, sign and mail in your form!
       ineligible:
@@ -168,7 +168,7 @@ en:
       tooltips:
         email_address: We will email you a copy of your voter registration form.
         home_zip_code: "Enter ZIP code for the address where you live, even if you don't receive mail there."
-        date_of_birth: "You must be 18 years old by the date of the next election."
+        date_of_birth: 'On your voter registration application, you are required to indicate whether you will be 18 years old on or before election day.  However, many states allow you to register before your 18th birthday, so please <a href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">click here</a> to see the rule for your state.'
         registrant_name: Put your full name and in these boxes. Please do not use nicknames or initials. If this application is for a change of name you will be asked for your previous name in a later section.  And don't forget to include your title (Mr., Mrs., Miss, Ms.).
         home_address: Put your home address in these boxes. Do not put your mailing address here if it is different from your home address. Do not use a post office box or rural route without a box number. If you live in a rural area but do not have a street address, or if you have no address, please show where you live using the map on the printed form.
         mailing_address: Put your mailing address in this box if you get your mail at an address that is different from your home address. If you do not receive mail at your home address you must fill out this section to indicate where you can be reached by mail. 
