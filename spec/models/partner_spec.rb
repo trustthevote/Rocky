@@ -13,11 +13,18 @@ describe Partner do
 
   describe "#logo_image_url" do
     it "is saved for non-primary partner" do
-      url = "http://example.com/logo.jpg"
+      url = "https://example.com/logo.jpg"
       assert_equal url, Factory.create(:partner, :logo_image_url => url).logo_image_url
     end
     it "is local for primary partner" do
       assert_match /^reg/, Partner.find(Partner.default_id).logo_image_url
+    end
+    it "only accepts urls with https protocol" do
+      partner = Factory.build(:partner)
+      partner.logo_image_url = "http://example.com/logo.jpg"
+      assert partner.invalid?
+      partner.logo_image_url = "https://example.com/logo.jpg"
+      assert partner.valid?
     end
   end
 

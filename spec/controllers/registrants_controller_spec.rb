@@ -44,7 +44,7 @@ describe RegistrantsController do
       end
 
       it "should show partner banner and logo for non-primary partner" do
-        logo = "http://example.com/logo.jpg"
+        logo = "https://example.com/logo.jpg"
         partner = Factory.create(:partner, :logo_image_url => logo)
         get :new, :partner => partner.to_param
         assert_select "#header.partner"
