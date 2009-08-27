@@ -47,9 +47,11 @@ namespace :deploy do
   task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
-        ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml
+      ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml
+    CMD
+    run <<-CMD
       cd #{latest_release} &&
-        ln -nfs #{shared_path}/config/newrelic.yml #{latest_release}/config/newrelic.yml
+      ln -nfs #{shared_path}/config/newrelic.yml #{latest_release}/config/newrelic.yml
     CMD
   end
 
