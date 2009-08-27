@@ -435,6 +435,12 @@ div.section {
   font-size: 15px;
 }
 
+.checkbox-explanation p {
+  margin: -5px 0px 20px 40px;
+  color: #434343;
+  font-size: 13px;
+}
+
 p.centered {
   text-align: center;
 }

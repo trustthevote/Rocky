@@ -9,6 +9,9 @@
       </h3>
     </li>
   </ul>
+  <div class="checkbox-explanation">
+    <p><%= t('txt.registration.instructions.opt_in_email') %></p>
+  </div>
 
 <% unless @question_1.blank? && @question_2.blank? && !@registrant.partner.ask_for_volunteers? %>
   <fieldset class="questions">
