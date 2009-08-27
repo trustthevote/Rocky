@@ -56,7 +56,7 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       rm -rf pdf &&
-      ln -nfs /data/rocky/pdf
+      ln -nfs /data/rocky/html pdf
     CMD
   end
 
