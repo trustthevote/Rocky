@@ -4,9 +4,13 @@ module Mergable
   end
 
   def pdf_race
-    race == I18n.t('txt.registration.races').last ? "" : race
-   end
-  
+    if requires_race? && race != I18n.t('txt.registration.races').last
+      race
+    else
+      ""
+    end
+  end
+
   def to_xfdf
     ERB.new(XFDF_TEMPLATE).result(binding)
   end
