@@ -1,6 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RegistrantsController do
+  describe "landing" do
+    it "redirects to /new" do
+      get :landing
+      assert_redirected_to new_registrant_url(:protocol => "https")
+    end
+  end
+
   describe "#new" do
     it "should show the step 1 input form" do
       get :new

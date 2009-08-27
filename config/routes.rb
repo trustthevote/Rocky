@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.root :controller => "registrants", :action => "landing"
   map.resources "registrants", :only => [:new, :create, :show, :update],
                                :member => {:ineligible => :get, :download => :get},
                                :collection => {:timeout => :get} do |reg|

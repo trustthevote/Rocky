@@ -1,6 +1,14 @@
 class RegistrantsController < ApplicationController
   include RegistrationStep
 
+  def landing
+    if Rails.env.development?
+      redirect_to new_registrant_url
+    else
+      redirect_to new_registrant_url(:protocol => "https")
+    end
+  end
+
   # GET /registrants/new
   def new
     locale = params[:locale] || 'en'
