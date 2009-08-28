@@ -222,14 +222,12 @@ li.width_d div { width:  80px; }
 li.width_e div { width: 540px; }
 li.width_f div { width: 150px; }
 
-form li.width_a input, form li.width_a select { width: 224px; }
-form li.width_b input, form li.width_b select { width: 119px; }
-form li.width_c input, form li.width_c select { width:  84px; }
-form li.width_d input, form li.width_d select { width:  74px; }
-form li.width_e input, form li.width_e select { width: 534px; }
-form li.width_f input, form li.width_f select { width: 144px; }
-
-
+li.width_a input, li.width_a select { width: 224px; }
+li.width_b input, li.width_b select { width: 119px; }
+li.width_c input, li.width_c select { width:  84px; }
+li.width_d input, li.width_d select { width:  74px; }
+li.width_e input, li.width_e select { width: 534px; }
+li.width_f input, li.width_f select { width: 144px; }
 
 ul.flat h3 {
   float: left;
@@ -472,6 +470,11 @@ div.tooltip {
   width: 25px !important;
 }
 
+img.tooltip {
+  height: 17px;
+  width: 16px;
+}
+
 .flat img.tooltip {
   margin: 1px 5px 0 5px;
 }
@@ -479,8 +482,6 @@ div.tooltip {
 legend img.tooltip {
   margin: 0 0 0 5px;
   vertical-align: middle;
-  height: 17px;
-  width: 16px;
 }
 
 /* rollover buttons */
