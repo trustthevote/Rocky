@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-loop do
-  `touch #{File.dirname(__FILE__)}/../RUNNING`
-  sleep 1
-end
+#!/bin/bash
+cd $1/lib/pdf_merge
+rake pdfmerge:server

@@ -454,8 +454,18 @@ class Registrant < ActiveRecord::Base
   end
 
   def merge_pdf(tmp)
-    classpath = ["$CLASSPATH", File.join(Rails.root, "lib/pdf_merge/lib/iText-2.1.7.jar"), File.join(Rails.root, "lib/pdf_merge/out/production/Rocky_pdf")].join(":")
-    `java -classpath #{classpath} PdfMerge #{nvra_template_path} #{tmp.path} #{pdf_file_path}`
+    if File.exist?('tmp/pids/rocky_pdf_worker.pid')
+      response = Net::HTTP.post_form(URI.parse('http://localhost:8080/pdfmerge/'),
+                                     {'nvraTemplatePath'=> nvra_template_path, 'tmpPath'=> tmp.path, 'pdfFilePath' => pdf_file_path })
+      raise "PDF merge failed with status #{response.code}" unless response.code == "200"
+    else
+      classpath = [
+          "$CLASSPATH",
+          File.join(Rails.root, "lib/pdf_merge/lib/iText-2.1.7.jar"),
+          File.join(Rails.root, "lib/pdf_merge/lib/pdfmerge.jar")
+        ].join(":")
+      `java -classpath #{classpath} com.pivotallabs.rocky.PdfMerge #{nvra_template_path} #{tmp.path} #{pdf_file_path}`
+    end
   end
 
   def nvra_template_path
