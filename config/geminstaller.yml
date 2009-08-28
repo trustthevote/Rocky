@@ -22,6 +22,8 @@ gems:
   version: ~> 2.1.1
 - name: fastercsv
   version: ~> 1.5.0
+- name: daemons
+  version: ~> 1.0.10
 
 - name: rspec
   version: ~> 1.2.7
