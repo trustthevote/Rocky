@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'daemons'
 
-script = File.join(File.dirname(__FILE__), 'rocky_worker')
+script = File.join(File.dirname(__FILE__), 'rocky_pdf_worker')
 dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 Daemons.run(script, :ARGV => ARGV + ['--', dir],

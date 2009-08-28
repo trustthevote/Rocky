@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+loop do
+  `touch #{File.dirname(__FILE__)}/../RUNNING`
+  sleep 1
+end

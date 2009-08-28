@@ -36,6 +36,7 @@ set :use_sudo, false
 
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
 after "deploy:symlink_configs", "deploy:geminstaller"
+after "deploy:restart", "deploy:run_workers"
 
 namespace :deploy do
   desc "run GemInstaller"
@@ -76,6 +77,15 @@ namespace :deploy do
   [:start, :stop].each do |t|
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
+  end
+
+  desc "Run (or restart) worker processes on util server"
+  task :run_workers, :roles => :util do
+    run "cd #{latest_release} && ruby script/rocky_runner stop"
+    run "cd #{latest_release} && ruby script/rocky_runner start"
+
+    run "cd #{latest_release} && ruby script/rocky_pdf_runner stop"
+    run "cd #{latest_release} && ruby script/rocky_pdf_runner start"
   end
 end
 
