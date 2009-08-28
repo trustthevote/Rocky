@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-require 'rubygems'
-require 'daemons'
-
-Daemons.run_proc('worker') do
-  `rake jobs:work`
-end
