@@ -1,0 +1,21 @@
+namespace :pdfmerge do 
+  desc "compile the server code"
+  task :compile do 
+    puts "cleaning up... "
+    system "rm -rf classes"
+    system "mkdir classes"
+
+    puts "compiling java sources to classes/ dir"    
+    system "javac -cp lib/javaee.jar:lib/iText-2.1.7.jar:lib/jetty-6.1.20.jar:lib/jetty-util-6.1.20.jar -d classes src/com/pivotallabs/rocky/*.java"
+
+    puts "creating lib/pdfmerge.jar"    
+    system "cd classes;jar -cf ../lib/pdfmerge.jar com;cd .."
+    system "rm -rf classes"
+  end
+
+  desc "run it"
+  task :server do 
+    system "java -Xmx512m -classpath lib/javaee.jar:lib/iText-2.1.7.jar:lib/jetty-6.1.20.jar:lib/jetty-util-6.1.20.jar:lib/pdfmerge.jar com.pivotallabs.rocky.PdfServer"
+  end
+  
+end
