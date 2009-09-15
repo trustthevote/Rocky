@@ -21,10 +21,8 @@ set :repository,  "git@github.com:pivotal/rocky.git"
 
 set :deploy_to, "/var/www/register.rockthevote.com/rocky"
 
-role :web,  "hood.osuosl.org"
-role :app,  "hood.osuosl.org"
-role :util, "rainier.osuosl.org"
-role :db,   "hood.osuosl.org", :primary => true
+set :stages, Dir["config/deploy/*"].map {|stage|File.basename(stage, '.rb')}
+require 'capistrano/ext/multistage'
 
 set :scm, "git"
 set :user, "rocky"
