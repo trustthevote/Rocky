@@ -22,6 +22,7 @@ set :repository,  "git@git.osuosl.org:/var/git/rocky.git"
 set :deploy_to, "/var/www/register.rockthevote.com/rocky"
 
 set :stages, Dir["config/deploy/*"].map {|stage|File.basename(stage, '.rb')}
+set :default_stage, "production"
 require 'capistrano/ext/multistage'
 
 set :scm, "git"
