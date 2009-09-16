@@ -80,10 +80,11 @@ namespace :deploy do
   desc "Run (or restart) worker processes on util server"
   task :run_workers, :roles => :util do
     run "cd #{latest_release} && ruby script/rocky_runner stop"
-    run "cd #{latest_release} && ruby script/rocky_runner start"
-
+    run "cd #{latest_release} && pkill -P $(cat tmp/pids/rocky_pdf_worker.pid)"
     run "cd #{latest_release} && ruby script/rocky_pdf_runner stop"
+    sleep 5
     run "cd #{latest_release} && ruby script/rocky_pdf_runner start"
+    run "cd #{latest_release} && ruby script/rocky_runner start"
   end
 end
 
