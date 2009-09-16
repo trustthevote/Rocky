@@ -1,3 +1,3 @@
 #!/bin/bash
 cd $1
-rake jobs:work
+exec rake jobs:work
