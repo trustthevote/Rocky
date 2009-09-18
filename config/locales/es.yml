@@ -159,11 +159,11 @@ es:
        download: No has acabado aún.  Da click en el boton para imprimir tu forma de registro para votar.  
          Firma y envíalo vía correo a la dirección provista en tu forma.
        download_2: No serás registrado si no imprimes, firmas y mandas tu forma vía correo! 
-     ineligible: inelegible
-       age: Debes ser mayor a 18 años para la fecha de la elección.
+       ineligible: inelegible
+       age: Debes ser mayor a 18 aÃ±os para la fecha de la elecciÃ³n.
        non_citizen: Debes ser ciudadano de EU para registrarte a votar
        attest: Debes confirmar que eres elegible para votar
-     tooltips:
+   tooltips:
        email_address: Te enviaremos una copia de tu forma de registro para votar vía correo electronico.
        home_zip_code: "Entra el código postal y la direcciones donde vives, aunque no recibas correo ahí."
        date_of_birth: "Debes ser mayor a 18 años para el día de la elección."
