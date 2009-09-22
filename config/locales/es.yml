@@ -2,7 +2,7 @@ es:
  activerecord:
    attributes:
      registrant:
-       date_of_birth: fecha de nacimiento
+       date_of_birth: fecha de nac imiento
        email_address: correo electrónico
        first_registration: Me estoy registrando por primera vez para votar
        home_zip_code: Código postal
@@ -153,14 +153,14 @@ es:
      - Trabajo
      - Otro
      instructions:
-       opt_in_sms:
-         Enviarme recordatorios para votar vía txt.
+       opt_in_sms: Enviarme recordatorios para votar vía txt.
+       opt_in_email: We will send you timely election reminders, polling place information, and information about music and issues.
        review: Porfavor revisar la siguiente información y confirmar su autenticidad.
        download: No has acabado aún.  Da click en el boton para imprimir tu forma de registro para votar.  
          Firma y envíalo vía correo a la dirección provista en tu forma.
        download_2: No serás registrado si no imprimes, firmas y mandas tu forma vía correo! 
      ineligible:
-       age: Debes ser mayor a 18 aÃ±os para la fecha de la elecciÃ³n.
+       age: Debes ser mayor a 18 años para la fecha de la elección.
        non_citizen: Debes ser ciudadano de EU para registrarte a votar
        attest: Debes confirmar que eres elegible para votar
      tooltips:
@@ -173,3 +173,10 @@ es:
        phone: Muchos estados piden tu número de teléfono en caso de que tengan preguntas sobre tu aplicación.  No estás obligado a proveer to número de teléfono.
        previous_name: Si has cambiado tu nombre desde tu ultimo registro, poner tu nombre anterior.
        previous_address: Si te has cambiado de dirección desde tu ultimo registro, favor de proveer la dirección anterior.
+  email:
+    confirmation:
+      subject: "Reminder: Mail your voter registration form"
+      body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
+    reminder:
+      subject: "Reminder: Mail your voter registration form"
+      body: "This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
