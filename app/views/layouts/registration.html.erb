@@ -42,6 +42,17 @@
       <span><a href="http://www.rockthevote.com/voter-registration/online-application-system/about.html" target="_blank" title="About">About</a></span>
       <span class="copyright">&copy; Copyright 2009, <a href="#">Rock the Vote</a></span>
     </p>
+    <% if ENV['RAILS_ENV'] == 'staging' %>
+      <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+        var pageTracker = _gat._getTracker(<%=GOOGLE_ANALYTICS%>);
+        pageTracker._initData();
+        pageTracker._trackPageview();
+      </script>
+    <% end %>
   </div>
 </body>
 </html>

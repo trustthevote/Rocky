@@ -26,6 +26,7 @@ config.action_view.cache_template_loading            = true
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.default_url_options = { :host => "rtvstaging.osuosl.org" }
 FROM_ADDRESS = "register@rockthevote.com"
+GOOGLE_ANALYTICS = "UA-1913089-11"
 
 # Enable threaded mode
 # config.threadsafe!
