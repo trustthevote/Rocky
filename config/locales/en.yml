@@ -163,7 +163,7 @@ en:
         download_2: You won't be registered unless you print, sign and mail in your form!
       ineligible:
         age: You must be 18 years old by the date of the next election.
-        non_citizen: You must be a U.S. citizen to register to vote.
+        non_citizen: Your registration cannot be completed because you did not check the box indicating that you are a U.S. citizen. You must be a U.S. citizen to register to vote. If you are a citizen, please return to the previous page and check the citizenship box.
         attest: You must confirm that you are eligible to vote.
       tooltips:
         email_address: We will email you a copy of your voter registration form.
