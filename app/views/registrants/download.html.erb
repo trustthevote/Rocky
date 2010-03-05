@@ -1,6 +1,7 @@
 <h1><%= I18n.t('txt.registration.download_header') %></h1>
 <div class="download">
   <h2><%= I18n.t('txt.registration.instructions.download') %></h2>
-  <p class="centered"><%= rollover_image_link(:print, I18n.t('txt.button.download'), @registrant.pdf_path) %></p>
+  <p class="centered"><%= rollover_image_link(:print, I18n.t('txt.button.download'), @registrant.pdf_path,
+                            :target => "_blank", :onclick => "window.location='#{finish_registrant_path(@registrant)}';") %></p>
   <p><%= I18n.t('txt.registration.instructions.download_2') %></p>
 </div>

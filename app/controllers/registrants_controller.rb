@@ -39,6 +39,10 @@ class RegistrantsController < ApplicationController
     find_registrant(:download)
   end
 
+  def finish
+    
+  end
+
   def current_step
     @current_step ||= 1
   end

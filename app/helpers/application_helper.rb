@@ -100,10 +100,11 @@ module ApplicationHelper
     HTML
   end
   
-  def rollover_image_link(name, text, url)
+  def rollover_image_link(name, text, url, options={})
+    optional_attrs = options.inject("") {|s,(k,v)| s << %Q[ #{k}="#{v}"] }
     <<-HTML
       <span class="button">
-        <a class="button_#{name}_#{I18n.locale}" href="#{url}"><span>#{text}</span></a>
+        <a class="button_#{name}_#{I18n.locale}" href="#{url}"#{optional_attrs}><span>#{text}</span></a>
       </span>
     HTML
   end
