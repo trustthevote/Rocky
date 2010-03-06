@@ -17,6 +17,10 @@ a:active  { color: #666666; }
   font-weight: bold;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .return a {
   font-size: 12px;
 }
@@ -466,6 +470,25 @@ p.centered {
   font-size: 12px;
 }
 
+.fulltext p {
+  margin: 20px 0px;
+  color: #434343;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.share {
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.share div {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+
+
 div.tooltip {
   width: 25px !important;
 }
@@ -524,6 +547,7 @@ a.button_nextstep_en      { width: 150px; height: 36px; }
 a.button_review_en        { width: 207px; height: 56px; }
 a.button_prepare_en       { width: 207px; height: 36px; }
 a.button_print_en         { width: 207px; height: 80px; }
+
 a.button_edit_es          { width:  65px; height: 22px; }
 a.button_nextstep_es      { width: 150px; height: 36px; }
 a.button_review_es        { width: 207px; height: 56px; }
@@ -535,6 +559,7 @@ a.button_nextstep_en span { width: 150px; height: 36px; background-image: url(/i
 a.button_review_en   span { width: 207px; height: 56px; background-image: url(/images/en/button_review_ro.gif); }
 a.button_prepare_en  span { width: 207px; height: 36px; background-image: url(/images/en/button_prepare_ro.gif); }
 a.button_print_en    span { width: 207px; height: 80px; background-image: url(/images/en/button_print_ro.gif); }
+
 a.button_edit_es     span { width:  65px; height: 22px; background-image: url(/images/es/button_edit_ro.gif); }
 a.button_nextstep_es span { width: 150px; height: 36px; background-image: url(/images/es/button_nextstep_ro.gif); }
 a.button_review_es   span { width: 207px; height: 56px; background-image: url(/images/es/button_review_ro.gif); }

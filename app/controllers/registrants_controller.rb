@@ -40,7 +40,8 @@ class RegistrantsController < ApplicationController
   end
 
   def finish
-    
+    @current_step = 7
+    find_registrant(:tell_friend)
   end
 
   def current_step

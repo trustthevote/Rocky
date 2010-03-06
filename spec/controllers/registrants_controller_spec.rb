@@ -135,13 +135,22 @@ describe RegistrantsController do
     end
   end
 
-  # describe "#finish" do
-  #   integrate_views
-  # 
-  #   it "does something" do
-  #     
-  #   end
-  # end
+  describe "#finish" do
+    integrate_views
+
+    before(:each) do
+      @registrant = Factory.create(:step_5_registrant)
+    end
+
+    it "shows share links and tell-a-friend email form" do
+      get :finish, :id => @registrant.to_param
+      assert_not_nil assigns[:registrant]
+      assert_response :success
+      assert_template "finish"
+      assert_select "div.share div", 3
+      assert_select "form.edit_registrant"
+    end
+  end
 
   describe "completed registration" do
     it "should not be visible" do

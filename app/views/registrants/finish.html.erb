@@ -1,1 +1,33 @@
-<h1>Spread the word!</h1>
+<h1><%= I18n.t('txt.registration.finish_header') %></h1>
+<div class="fulltext"><p><%= I18n.t('txt.registration.instructions.finish') %></p></div>
+<div class="share">
+  <div><%= link_to image_tag("share-facebook.gif"), "http://www.facebook.com/" %></div>
+  <div><%= link_to image_tag("share-twitter.gif"), "http://twitter.com/" %></div>
+  <div><%= link_to image_tag("share-googlebuzz.gif"), "http://www.google.com/buzz" %></div>
+</div>
+
+<% form_for(@registrant, :url => registrant_tell_friend_path(@registrant)) do |form| %>
+  <fieldset>
+    <legend><%= I18n.t('txt.registration.tell_a_friend_title') %></legend>
+    <ul class="stacked">
+      <li class="width_a">
+        <h3><%#= form.label :from_name %></h3>
+        <%#= field_div form, :from_name %>
+        <span class="error"><%#= form.object.errors.on :from_name %></span>
+      </li>
+      <li class="width_a">
+        <h3><%#= form.label :from_email %></h3>
+        <%#= field_div form, :from_email %>
+        <span class="error"><%#= form.object.errors.on :from_email %></span>
+      </li>
+    </ul>
+  </fieldset>
+  <%= rollover_button(:sendemail, I18n.t('txt.button.submit')) %>
+<% end %>
+
+<div class="fulltext">
+  <p class="bold">
+    <%= I18n.t('txt.registration.instructions.finish_2') %>
+    <a href="http://www.rockthevote.com/partner">http://www.rockthevote.com/partner</a>
+  </p>
+</div>

@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     reg.resource "step_3", :controller => "step3", :only => [:show, :update]
     reg.resource "step_4", :controller => "step4", :only => [:show, :update]
     reg.resource "step_5", :controller => "step5", :only => [:show, :update]
+    reg.resource "tell_friend", :controller => "tell_friend", :only => :create
   end
 
   map.resource  "partner_session"
