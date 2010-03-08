@@ -6,19 +6,39 @@
   <div><%= link_to image_tag("share-googlebuzz.gif"), "http://www.google.com/buzz" %></div>
 </div>
 
-<% form_for(@registrant, :url => registrant_tell_friend_path(@registrant)) do |form| %>
+<% form_for(:tell_friend, @registrant, :url => registrant_tell_friends_path(@registrant), :method => :post) do |form| %>
   <fieldset>
     <legend><%= I18n.t('txt.registration.tell_a_friend_title') %></legend>
     <ul class="stacked">
       <li class="width_a">
-        <h3><%#= form.label :from_name %></h3>
-        <%#= field_div form, :from_name %>
-        <span class="error"><%#= form.object.errors.on :from_name %></span>
+        <h3><%= form.label :tell_from, "From:" %></h3>
+        <%= field_div form, :tell_from %>
+        <span class="error"><%= form.object.errors.on :tell_from %></span>
       </li>
       <li class="width_a">
-        <h3><%#= form.label :from_email %></h3>
-        <%#= field_div form, :from_email %>
-        <span class="error"><%#= form.object.errors.on :from_email %></span>
+        <h3><%= form.label :tell_email, "Your Email:" %></h3>
+        <%= field_div form, :tell_email %>
+        <span class="error"><%= form.object.errors.on :tell_email %></span>
+      </li>
+    </ul>
+    <ul class="stacked">
+      <li class="width_a">
+        <h3><%= form.label :tell_recipients, "Recipients:" %></h3>
+        <%= field_div form, :tell_recipients %>
+        <span class="error"><%= form.object.errors.on :tell_recipients %></span>
+      </li>
+    </ul>
+    <ul class="stacked">
+      <li class="width_a">
+        <h3><%= form.label :tell_subject, "Subject:" %></h3>
+        <%= field_div form, :tell_subject %>
+        <span class="error"><%= form.object.errors.on :tell_subject %></span>
+      </li>
+    </ul>
+    <ul class="flat">
+      <li>
+        <h3><%= form.label :tell_message, "Personal Message:" %></h3>
+        <div><%= form.text_area :tell_message %></div>
       </li>
     </ul>
   </fieldset>

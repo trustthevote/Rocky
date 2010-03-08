@@ -638,6 +638,50 @@ describe Registrant do
     end
   end
 
+  describe "tell-a-friend emails" do
+    describe "attributes for form fields have smart defaults" do
+      attr_accessor :reg
+      before(:each) do
+        @reg = Factory.build( :step_5_registrant,
+                              :name_title => "Mr.",
+                              :first_name => "John", :middle_name => "Queue", :last_name => "Public",
+                              :name_suffix => "Jr.",
+                              :email_address => "jqp@example.com" )
+      end
+
+      it "has tell_name" do
+        assert_equal "John Public", reg.tell_from
+        reg.tell_from = "J. Public"
+        assert_equal "J. Public", reg.tell_from
+      end
+
+      it "has tell_email" do
+        assert_equal "jqp@example.com", reg.tell_email
+        reg.tell_email = "jqp@gmail.com"
+        assert_equal "jqp@gmail.com", reg.tell_email
+      end
+
+      it "has tell_recipients" do
+        assert reg.tell_recipients.blank?
+        reg.tell_recipients = "jqp@gmail.com"
+        assert_equal "jqp@gmail.com", reg.tell_recipients
+      end
+
+      it "has tell_subject" do
+        assert_equal "Register to vote the easy way", reg.tell_subject
+        reg.tell_subject = "This is super cool"
+        assert_equal "This is super cool", reg.tell_subject
+      end
+
+      it "has tell_message" do
+        assert_match /^I just registered to vote/, reg.tell_message
+        reg.tell_message = "Do you believe I just registered to vote?"
+        assert_equal "Do you believe I just registered to vote?", reg.tell_message
+      end
+    end
+
+  end
+
   def assert_attribute_invalid_with(model, attributes)
     reg = Factory.build(model, attributes)
     reg.invalid?

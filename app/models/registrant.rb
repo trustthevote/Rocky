@@ -538,6 +538,30 @@ class Registrant < ActiveRecord::Base
     ]
   end
 
+  ### tell-a-friend email
+
+  attr_writer :tell_from, :tell_email, :tell_recipients, :tell_subject, :tell_message
+
+  def tell_from
+    @tell_from ||= "#{first_name} #{last_name}"
+  end
+
+  def tell_email
+    @tell_email ||= email_address
+  end
+
+  def tell_recipients
+    @tell_recipients
+  end
+
+  def tell_subject
+    @tell_subject ||= "Register to vote the easy way" # TODO: localize
+  end
+
+  def tell_message
+    @tell_message ||= "I just registered to vote" # TODO: localize
+  end
+
   private ###
 
   def at_least_step?(step)
