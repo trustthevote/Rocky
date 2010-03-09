@@ -148,7 +148,7 @@ describe RegistrantsController do
       assert_response :success
       assert_template "finish"
       assert_select "div.share div", 3
-      assert_select "form.edit_registrant"
+      assert_select "form div.button a.button_sendemail_en"
     end
   end
 

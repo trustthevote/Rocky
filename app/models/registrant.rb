@@ -92,6 +92,7 @@ class Registrant < ActiveRecord::Base
   before_validation :reformat_phone
 
   after_validation :check_ineligible
+  after_validation :enqueue_tell_friends_emails
 
   before_create :generate_uid
 
@@ -144,6 +145,16 @@ class Registrant < ActiveRecord::Base
 
   with_options :if => :at_least_step_5? do |reg|
     reg.validates_acceptance_of :attest_true
+  end
+
+  attr_accessor :telling_friends
+  with_options :if => :telling_friends do |reg|
+    reg.validates_presence_of :tell_from
+    reg.validates_presence_of :tell_email
+    reg.validates_format_of :tell_email, :with => Authlogic::Regex.email
+    reg.validates_presence_of :tell_recipients
+    reg.validates_presence_of :tell_subject
+    reg.validates_presence_of :tell_message
   end
 
   def needs_mailing_address?
@@ -560,6 +571,25 @@ class Registrant < ActiveRecord::Base
 
   def tell_message
     @tell_message ||= "I just registered to vote" # TODO: localize
+  end
+
+  def enqueue_tell_friends_emails
+    if @telling_friends && self.errors.blank?
+        tell_params = {
+          :tell_from       => self.tell_from,
+          :tell_email      => self.tell_email,
+          :tell_recipients => self.tell_recipients,
+          :tell_subject    => self.tell_subject,
+          :tell_message    => self.tell_message
+        }
+      self.class.send_later(:deliver_tell_friends_emails, tell_params)
+    end
+  end
+
+  def self.deliver_tell_friends_emails(tell_params)
+    tell_params[:tell_recipients].split(",").each do |recipient|
+      Notifier.deliver_tell_friends(tell_params.merge(:tell_recipients => recipient))
+    end
   end
 
   private ###

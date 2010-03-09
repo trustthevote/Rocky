@@ -15,6 +15,14 @@ class Notifier < ActionMailer::Base
     setup_registrant_email(registrant, 'reminder')
   end
 
+  def tell_friends(tell_params)
+    subject tell_params[:tell_subject]
+    from "#{tell_params[:tell_from]} <#{tell_params[:tell_email]}>"
+    recipients tell_params[:tell_recipients]
+    sent_on Time.now.to_s(:db)
+    body :message => tell_params[:tell_message]
+  end
+
   protected
 
   def setup_registrant_email(registrant, type)

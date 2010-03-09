@@ -218,6 +218,41 @@ form h3 {
   margin: 0;
 }
 
+.tell_friend {
+  width: 520px;
+  padding: 0 20px;
+}
+
+.tell_friend fieldset {
+  width: 488px;
+  padding: 5px 15px;
+}
+
+.tell_friend ul {
+  width: 488px;
+  margin-left: 0;
+}
+
+.tell_friend ul li {
+  margin-right: 0;
+}
+
+.tell_friend ul li.width_x {
+  width: 16px;
+}
+
+.tell_friend label {
+  font-weight: bold;
+}
+
+.tell_friend div.tall {
+  height: inherit;
+}
+
+.tell_friend textarea {
+  height: 240px;
+}
+
 /* classes for floating field widths */
 li.width_a div { width: 230px; }
 li.width_b div { width: 125px; }
@@ -225,6 +260,8 @@ li.width_c div { width:  90px; }
 li.width_d div { width:  80px; }
 li.width_e div { width: 540px; }
 li.width_f div { width: 150px; }
+li.width_g div { width: 236px; }
+li.width_h div { width: 488px; }
 
 li.width_a input, li.width_a select { width: 224px; }
 li.width_b input, li.width_b select { width: 119px; }
@@ -232,6 +269,9 @@ li.width_c input, li.width_c select { width:  84px; }
 li.width_d input, li.width_d select { width:  74px; }
 li.width_e input, li.width_e select { width: 534px; }
 li.width_f input, li.width_f select { width: 144px; }
+li.width_g input, li.width_g select { width: 230px; }
+li.width_h input, li.width_h select { width: 482px; }
+li.width_h textarea { width: 486px; }
 
 ul.flat h3 {
   float: left;
@@ -554,17 +594,19 @@ a.button_review_es        { width: 207px; height: 56px; }
 a.button_prepare_es       { width: 207px; height: 36px; }
 a.button_print_es         { width: 207px; height: 80px; }
 
-a.button_edit_en     span { width:  45px; height: 22px; background-image: url(/images/en/button_edit_ro.gif); }
-a.button_nextstep_en span { width: 150px; height: 36px; background-image: url(/images/en/button_nextstep_ro.gif); }
-a.button_review_en   span { width: 207px; height: 56px; background-image: url(/images/en/button_review_ro.gif); }
-a.button_prepare_en  span { width: 207px; height: 36px; background-image: url(/images/en/button_prepare_ro.gif); }
-a.button_print_en    span { width: 207px; height: 80px; background-image: url(/images/en/button_print_ro.gif); }
+a.button_edit_en       span { width:  45px; height: 22px; background-image: url(/images/en/button_edit_ro.gif); }
+a.button_nextstep_en   span { width: 150px; height: 36px; background-image: url(/images/en/button_nextstep_ro.gif); }
+a.button_review_en     span { width: 207px; height: 56px; background-image: url(/images/en/button_review_ro.gif); }
+a.button_prepare_en    span { width: 207px; height: 36px; background-image: url(/images/en/button_prepare_ro.gif); }
+a.button_print_en      span { width: 207px; height: 80px; background-image: url(/images/en/button_print_ro.gif); }
+a.button_sendemail_en  span { width: 137px; height: 22px; background-image: url(/images/en/button_sendemail_ro.gif); }
 
-a.button_edit_es     span { width:  65px; height: 22px; background-image: url(/images/es/button_edit_ro.gif); }
-a.button_nextstep_es span { width: 150px; height: 36px; background-image: url(/images/es/button_nextstep_ro.gif); }
-a.button_review_es   span { width: 207px; height: 56px; background-image: url(/images/es/button_review_ro.gif); }
-a.button_prepare_es  span { width: 207px; height: 36px; background-image: url(/images/es/button_prepare_ro.gif); }
-a.button_print_es    span { width: 207px; height: 80px; background-image: url(/images/es/button_print_ro.gif); }
+a.button_edit_es       span { width:  65px; height: 22px; background-image: url(/images/es/button_edit_ro.gif); }
+a.button_nextstep_es   span { width: 150px; height: 36px; background-image: url(/images/es/button_nextstep_ro.gif); }
+a.button_review_es     span { width: 207px; height: 56px; background-image: url(/images/es/button_review_ro.gif); }
+a.button_prepare_es    span { width: 207px; height: 36px; background-image: url(/images/es/button_prepare_ro.gif); }
+a.button_print_es      span { width: 207px; height: 80px; background-image: url(/images/es/button_print_ro.gif); }
+a.button_sendemail_es  span { width: 137px; height: 22px; background-image: url(/images/es/button_sendemail_ro.gif); }
 
 .button a:hover span  {
   background-position: right top;

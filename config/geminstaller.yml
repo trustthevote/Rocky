@@ -30,7 +30,7 @@ gems:
 - name: rspec-rails
   version: ~> 1.2.7
 - name: rr
-  version: ~> 0.10.0
+  version: ~> 0.10.10
 - name: thoughtbot-factory_girl
   version: ~> 1.2.1
 - name: nokogiri

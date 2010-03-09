@@ -639,17 +639,17 @@ describe Registrant do
   end
 
   describe "tell-a-friend emails" do
-    describe "attributes for form fields have smart defaults" do
-      attr_accessor :reg
-      before(:each) do
-        @reg = Factory.build( :step_5_registrant,
-                              :name_title => "Mr.",
-                              :first_name => "John", :middle_name => "Queue", :last_name => "Public",
-                              :name_suffix => "Jr.",
-                              :email_address => "jqp@example.com" )
-      end
+    attr_accessor :reg
+    before(:each) do
+      @reg = Factory.build( :step_5_registrant,
+                            :name_title => "Mr.",
+                            :first_name => "John", :middle_name => "Queue", :last_name => "Public",
+                            :name_suffix => "Jr.",
+                            :email_address => "jqp@example.com" )
+    end
 
-      it "has tell_name" do
+    describe "attributes for form fields have smart defaults" do
+      it "has tell_from" do
         assert_equal "John Public", reg.tell_from
         reg.tell_from = "J. Public"
         assert_equal "J. Public", reg.tell_from
@@ -680,6 +680,37 @@ describe Registrant do
       end
     end
 
+    describe "enqueue emails when registrant has valid tell-a-friend params" do
+      before(:each) do
+        @tell_params = {
+          :telling_friends => true,
+          :tell_from => "Bob Dobbs",
+          :tell_email => "bob@example.com",
+          :tell_recipients => "arnold@example.com, obo@example.com, slack@example.com",
+          :tell_subject => "Register to vote the easy way",
+          :tell_message => "I registered to vote and you can too."
+        }
+      end
+
+      it "enqueues email when valid" do
+        reg.attributes = @tell_params
+        assert_difference "Delayed::Job.count" do
+          assert reg.valid?
+        end
+      end
+
+      it "does not enqueue when invalid" do
+        reg.attributes = @tell_params.merge(:tell_recipients => "")
+        assert_difference "Delayed::Job.count", 0 do
+          assert reg.invalid?
+        end
+      end
+
+      it "sends one email per recipient" do
+        mock(Notifier).deliver_tell_friends(anything).times(3)
+        Registrant.deliver_tell_friends_emails(@tell_params)
+      end
+    end
   end
 
   def assert_attribute_invalid_with(model, attributes)
