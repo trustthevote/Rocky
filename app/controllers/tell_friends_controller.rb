@@ -5,12 +5,9 @@ class TellFriendsController < ApplicationController
     find_registrant(:tell_friend)
     @registrant.attributes = params[:tell_friend] if params[:tell_friend]
     @registrant.telling_friends = true
-    if @registrant.valid?
-      # registrant sends email as side-effect of there being valid tell-friend params
-      redirect_to registrant_tell_friends_url(@registrant)  # TODO: go somewhere else
-    else
-      render "registrants/finish"
-    end
+    @email_sent = @registrant.valid?
+    # registrant sends email as side-effect of there being valid tell-friend params
+    render "registrants/finish"
   end
 
   def current_step
@@ -26,6 +23,6 @@ class TellFriendsController < ApplicationController
   end
 
   def next_url
-    registrant_tell_friends_url(@registrant)
+    finish_registrant_url(@registrant)
   end
 end

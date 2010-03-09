@@ -19,8 +19,10 @@ describe TellFriendsController do
         post :create, :registrant_id => @registrant.to_param, :tell_friend => tell_params
       end
       assert_not_nil assigns[:registrant]
+      assert assigns[:email_sent]
 
-      assert_redirected_to registrant_tell_friends_url(assigns[:registrant])
+      assert :success
+      assert_template "registrants/finish"
     end
 
     it "should show form again when fields are missing" do
@@ -36,8 +38,10 @@ describe TellFriendsController do
         post :create, :registrant_id => @registrant.to_param, :tell_friend => tell_params
       end
       assert_not_nil assigns[:registrant]
+      assert !assigns[:email_sent]
 
       assert :success
+      assert_template "registrants/finish"
     end
   end
 end

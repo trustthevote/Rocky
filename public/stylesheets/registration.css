@@ -228,6 +228,10 @@ form h3 {
   padding: 5px 15px;
 }
 
+.tell_friend legend {
+  font-size: 16px;
+}
+
 .tell_friend ul {
   width: 488px;
   margin-left: 0;
@@ -251,6 +255,12 @@ form h3 {
 
 .tell_friend textarea {
   height: 240px;
+}
+
+.tell_friend form p {
+  margin: 1.5em 1em;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 /* classes for floating field widths */

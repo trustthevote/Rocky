@@ -172,6 +172,8 @@ en:
         finish: "Don't forget to tell your friends and family how easy it was to register. Here are a few tools you can use to spread the word about voter registration:"
         finish_2: "Get this voter registration tool on your website. Sign up free at"
         finish_tell_recipients: "(separated by commas)"
+        finish_email_sent: "Email sent!"
+        finish_update_status: "Don't forget to update your status on Facebook and Twitter!"
       ineligible:
         age: You must be 18 years old by the date of the next election.
         non_citizen: You must be a U.S. citizen to register to vote.
