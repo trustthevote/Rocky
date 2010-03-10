@@ -7,6 +7,7 @@
 require File.join(File.dirname(__FILE__), 'boot')
 
 FROM_ADDRESS = "rocky@example.com"
+BARCODE_PREFIX = "RTV"
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.

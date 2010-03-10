@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Mergable do
   describe "attributes" do
     before(:each) do
-      @registrant = Factory.build(:maximal_registrant)
+      @registrant = Factory.create(:maximal_registrant)
       @doc = Nokogiri::XML(@registrant.to_xfdf)
     end
     it "should output us citizen" do
@@ -87,7 +87,7 @@ describe Mergable do
                     @doc.css('xfdf fields field[name="id_number"] value').text
     end
     it "should output party" do
-      assert_equal  @registrant.party,
+      assert_equal  @registrant.party.to_s,
                     @doc.css('xfdf fields field[name="party"] value').text
     end
     it "should output previous name title" do
@@ -135,25 +135,42 @@ describe Mergable do
 
   describe "race" do
     it "should output race" do
-      @registrant = Factory.build(:maximal_registrant)
+      @registrant = Factory.create(:maximal_registrant)
       stub(@registrant).requires_race? { true }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  @registrant.race,
                     @doc.css('xfdf fields field[name="race"] value').text
     end
     it "should not output race as decline to state" do
-      @registrant = Factory.build(:maximal_registrant, :race => "Decline to State")
+      @registrant = Factory.create(:maximal_registrant, :race => "Decline to State")
       stub(@registrant).requires_race? { true }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  "",
                     @doc.css('xfdf fields field[name="race"] value').text
     end
     it "should not output race if it is not required" do
-      @registrant = Factory.build(:maximal_registrant, :race => "Multi-racial")
+      @registrant = Factory.create(:maximal_registrant, :race => "Multi-racial")
       stub(@registrant).requires_race? { false }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  "",
                     @doc.css('xfdf fields field[name="race"] value').text
+    end
+  end
+
+  describe "barcode" do
+    before(:each) do
+      @registrant = Factory.build(:maximal_registrant)
+      @registrant.id = 42_000_000
+      @doc = Nokogiri::XML(@registrant.to_xfdf)
+    end
+
+    it "generates barcode text" do
+      assert_equal  "*RTV-P07EO*", @registrant.pdf_barcode
+    end
+
+    it "should output barcode text" do
+      assert_equal  @registrant.pdf_barcode,
+                    @doc.css('xfdf fields field[name="uidbarcode"] value').text
     end
   end
 end
