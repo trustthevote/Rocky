@@ -42,4 +42,7 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
   config.action_mailer.default_url_options = { :host => "rocky.example.com" }
+
+  # Disable request forgery protection in all environments
+  config.action_controller.allow_forgery_protection = false
 end
