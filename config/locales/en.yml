@@ -114,6 +114,9 @@ en:
       prepare: Prepare Form
       review: Review Application
       sendmail: Send Email
+      share_facebook: Share on Facebook!
+      share_twitter: Share on Twitter!
+      share_googlebuzz: Share on Buzz!
     registration:
       powered_by: "powered by:"
       progress_indicator: "Step:"

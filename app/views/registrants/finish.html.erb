@@ -1,9 +1,9 @@
 <h1><%= I18n.t('txt.registration.finish_header') %></h1>
 <div class="fulltext"><p><%= I18n.t('txt.registration.instructions.finish') %></p></div>
 <div class="share">
-  <div><%= link_to image_tag("share-facebook.gif"), "http://www.facebook.com/" %></div>
-  <div><%= link_to image_tag("share-twitter.gif"), "http://twitter.com/" %></div>
-  <div><%= link_to image_tag("share-googlebuzz.gif"), "http://www.google.com/buzz" %></div>
+  <div><%= rollover_image_link(:share_facebook, I18n.t('txt.button.share_facebook'), "http://www.facebook.com/") %></div>
+  <div><%= rollover_image_link(:share_twitter, I18n.t('txt.button.share_twitter'), "http://www.twitter.com/") %></div>
+  <div><%= rollover_image_link(:share_googlebuzz, I18n.t('txt.button.share_googlebuzz'), "http://www.google.com/buzz") %></div>
 </div>
 
 <div class="tell_friend">
