@@ -127,13 +127,7 @@ describe RegistrantsController do
     it "should show a timeout page" do
       reg = Factory.create(:step_1_registrant, :abandoned => true)
       get :show, :id => reg.to_param
-      assert_redirected_to timeout_registrants_url
+      assert_redirected_to registrants_timeout_url
     end
-
-    it "shows timeout page" do
-      get :timeout
-      assert_response :success
-    end
-
   end
 end

@@ -68,8 +68,8 @@ module ApplicationHelper
   def progress_indicator
     (1..5).map do |step_index|
       progress = case step_index <=> controller.current_step
-      when 0 then "progress-current"
       when -1 then "progress-done"
+      when 0 then "progress-current"
       else "progress-todo"
       end
       content_tag :li, step_index, :class => progress

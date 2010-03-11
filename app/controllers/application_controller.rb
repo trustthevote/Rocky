@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Registrant::AbandonedRecord do |exception|
     # reg = exception.registrant
-    redirect_to timeout_registrants_url #(:partner => reg.partner, :locale => reg.locale)
+    redirect_to registrants_timeout_url #(:partner => reg.partner, :locale => reg.locale)
   end
 
   before_filter :ensure_https

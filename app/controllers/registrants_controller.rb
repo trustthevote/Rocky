@@ -30,10 +30,6 @@ class RegistrantsController < ApplicationController
     find_registrant
   end
 
-  def timeout
-    @current_step = 0
-  end
-
   def current_step
     @current_step ||= 1
   end
