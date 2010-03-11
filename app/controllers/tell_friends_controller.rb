@@ -18,6 +18,6 @@ class TellFriendsController < ApplicationController
   end
 
   def next_url
-    finish_registrant_url(@registrant)
+    registrant_finish_url(@registrant)
   end
 end
