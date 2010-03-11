@@ -34,11 +34,6 @@ class RegistrantsController < ApplicationController
     @current_step = 0
   end
 
-  def download
-    @current_step = 6
-    find_registrant(:download)
-  end
-
   def finish
     @current_step = 7
     find_registrant(:tell_friend)

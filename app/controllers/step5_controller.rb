@@ -9,7 +9,7 @@ class Step5Controller < ApplicationController
   end
 
   def next_url
-    download_registrant_url(@registrant)
+    registrant_download_url(@registrant)
   end
 
   def redirect_when_eligible

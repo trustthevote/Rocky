@@ -21,7 +21,7 @@ describe Step5Controller do
       put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_5_registrant)
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].complete?
-      assert_redirected_to download_registrant_url(assigns[:registrant])
+      assert_redirected_to registrant_download_url(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do
