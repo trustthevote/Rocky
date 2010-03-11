@@ -3,6 +3,7 @@ module RegistrationStep
     controller.class_eval do
       layout "registration"
       before_filter :find_partner
+      hide_action :current_step
     end
   end
 
@@ -16,6 +17,10 @@ module RegistrationStep
     set_up_view_variables
     @registrant.attributes = params[:registrant]
     attempt_to_advance
+  end
+
+  def current_step
+    self.class::CURRENT_STEP
   end
 
   protected

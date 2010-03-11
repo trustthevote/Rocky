@@ -1,6 +1,8 @@
 class RegistrantsController < ApplicationController
   include RegistrationStep
+  CURRENT_STEP = 1
 
+  # GET /registrants
   def landing
     if Rails.env.development?
       redirect_to new_registrant_url
@@ -29,12 +31,6 @@ class RegistrantsController < ApplicationController
   def ineligible
     find_registrant
   end
-
-  def current_step
-    @current_step ||= 1
-  end
-
-  hide_action :current_step
 
   protected
 

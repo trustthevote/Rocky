@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
   before_filter :ensure_https
 
   CURRENT_STEP = -1
-  def current_step
-    self.class::CURRENT_STEP
-  end
-  hide_action :current_step
 
   private
 
