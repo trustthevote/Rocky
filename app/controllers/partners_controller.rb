@@ -1,4 +1,4 @@
-class PartnersController < ApplicationController
+class PartnersController < PartnerBase
   before_filter :require_partner, :only => [:show, :edit, :update]
 
   def new

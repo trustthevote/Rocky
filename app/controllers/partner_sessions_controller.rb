@@ -1,6 +1,4 @@
-class PartnerSessionsController < ApplicationController
-  layout "partners"
-
+class PartnerSessionsController < PartnerBase
   def new
     @partner_session = PartnerSession.new
   end
