@@ -1,5 +1,4 @@
-class Step2Controller < ApplicationController
-  include RegistrationStep
+class Step2Controller < RegistrationStep
   CURRENT_STEP = 2
 
   def update

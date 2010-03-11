@@ -1,5 +1,4 @@
-class Step5Controller < ApplicationController
-  include RegistrationStep
+class Step5Controller < RegistrationStep
   CURRENT_STEP = 5
 
   protected

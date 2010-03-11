@@ -1,10 +1,12 @@
-module RegistrationStep
-  def self.included(controller)
-    controller.class_eval do
-      layout "registration"
-      before_filter :find_partner
-      hide_action :current_step
-    end
+class RegistrationStep < ApplicationController
+  CURRENT_STEP = -1
+
+  layout "registration"
+  before_filter :find_partner
+
+  rescue_from Registrant::AbandonedRecord do |exception|
+    # reg = exception.registrant
+    redirect_to registrants_timeout_url #(:partner => reg.partner, :locale => reg.locale)
   end
 
   def show
@@ -22,6 +24,7 @@ module RegistrationStep
   def current_step
     self.class::CURRENT_STEP
   end
+  hide_action :current_step
 
   protected
 

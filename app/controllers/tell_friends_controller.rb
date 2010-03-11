@@ -1,5 +1,4 @@
-class TellFriendsController < ApplicationController
-  include RegistrationStep
+class TellFriendsController < RegistrationStep
   CURRENT_STEP = 7
 
   def create

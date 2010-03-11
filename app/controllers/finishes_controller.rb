@@ -1,5 +1,4 @@
-class FinishesController < ApplicationController
-  include RegistrationStep
+class FinishesController < RegistrationStep
   CURRENT_STEP = 7
 
   def show

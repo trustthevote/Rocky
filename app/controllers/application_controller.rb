@@ -7,14 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_partner_session, :current_partner
   filter_parameter_logging :password, :password_confirmation
 
-  rescue_from Registrant::AbandonedRecord do |exception|
-    # reg = exception.registrant
-    redirect_to registrants_timeout_url #(:partner => reg.partner, :locale => reg.locale)
-  end
-
   before_filter :ensure_https
-
-  CURRENT_STEP = -1
 
   private
 

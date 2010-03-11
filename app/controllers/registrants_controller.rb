@@ -1,5 +1,4 @@
-class RegistrantsController < ApplicationController
-  include RegistrationStep
+class RegistrantsController < RegistrationStep
   CURRENT_STEP = 1
 
   # GET /registrants

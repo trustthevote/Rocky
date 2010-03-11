@@ -1,5 +1,4 @@
-class DownloadsController < ApplicationController
-  include RegistrationStep
+class DownloadsController < RegistrationStep
   CURRENT_STEP = 6
 
   def show
