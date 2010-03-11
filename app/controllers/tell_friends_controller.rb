@@ -1,5 +1,6 @@
 class TellFriendsController < ApplicationController
   include RegistrationStep
+  CURRENT_STEP = 7
 
   def create
     find_registrant(:tell_friend)
@@ -10,13 +11,7 @@ class TellFriendsController < ApplicationController
     render "registrants/finish"
   end
 
-  def current_step
-    7
-  end
-
-  hide_action :current_step
-
-  private
+  protected
 
   def advance_to_next_step
     # noop

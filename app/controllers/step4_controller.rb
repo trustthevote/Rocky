@@ -1,11 +1,6 @@
 class Step4Controller < ApplicationController
   include RegistrationStep
-
-  def current_step
-    4
-  end
-
-  hide_action :current_step
+  CURRENT_STEP = 4
 
   protected
 
@@ -16,7 +11,6 @@ class Step4Controller < ApplicationController
   def next_url
     registrant_step_5_url(@registrant)
   end
-
 
   def set_up_view_variables
     @question_1 = @registrant.partner.send("survey_question_1_#{@registrant.locale}")

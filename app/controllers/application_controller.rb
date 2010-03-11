@@ -8,15 +8,16 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
 
   rescue_from Registrant::AbandonedRecord do |exception|
-    redirect_to timeout_registrants_url
+    # reg = exception.registrant
+    redirect_to timeout_registrants_url #(:partner => reg.partner, :locale => reg.locale)
   end
 
   before_filter :ensure_https
 
+  CURRENT_STEP = -1
   def current_step
-    -1
+    self.class::CURRENT_STEP
   end
-
   hide_action :current_step
 
   private

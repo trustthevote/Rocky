@@ -1,5 +1,6 @@
 class Step2Controller < ApplicationController
   include RegistrationStep
+  CURRENT_STEP = 2
 
   def update
     if params[:javascript_disabled] == "1" && params[:registrant]
@@ -9,12 +10,6 @@ class Step2Controller < ApplicationController
     end
     super
   end
-
-  def current_step
-    2
-  end
-
-  hide_action :current_step
 
   protected
   

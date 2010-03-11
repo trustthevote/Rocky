@@ -1,13 +1,8 @@
 class Step5Controller < ApplicationController
   include RegistrationStep
+  CURRENT_STEP = 5
 
-  def current_step
-    5
-  end
-
-  hide_action :current_step
-
-  private
+  protected
 
   def advance_to_next_step
     @registrant.advance_to_step_5
