@@ -3,17 +3,17 @@ class RegistrantsController < RegistrationStep
 
   # GET /registrants
   def landing
-    if Rails.env.development?
-      redirect_to new_registrant_url
-    else
-      redirect_to new_registrant_url(:protocol => "https")
-    end
+    options = {}
+    options[:partner] = params[:partner] if params[:partner]
+    options[:locale] = params[:locale] if params[:locale]
+    options.merge!(:protocol => "https") unless Rails.env.development?
+    redirect_to new_registrant_url(options)
   end
 
   # GET /registrants/new
   def new
     set_up_locale
-    @registrant = Registrant.new(:partner_id => session[:partner_id], :locale => session[:locale])
+    @registrant = Registrant.new(:partner_id => @partner_id, :locale => @locale)
     render "show"
   end
 
@@ -21,22 +21,18 @@ class RegistrantsController < RegistrationStep
   def create
     set_up_locale
     @registrant = Registrant.new(params[:registrant].reverse_merge(
-                                    :locale => session[:locale],
-                                    :partner_id => session[:partner_id],
+                                    :locale => @locale,
+                                    :partner_id => @partner_id,
                                     :opt_in_sms => true, :opt_in_email => true))
     attempt_to_advance
-  end
-
-  def ineligible
-    find_registrant
   end
 
   protected
 
   def set_up_locale
-    session[:locale] = params[:locale] || session[:locale] || 'en'
-    I18n.locale = session[:locale].to_sym
-    @alt_locale = (session[:locale] == 'en' ? 'es' : 'en')
+    @locale = params[:locale] || 'en'
+    I18n.locale = @locale.to_sym
+    @alt_locale = (@locale == 'en' ? 'es' : 'en')
   end
 
   def advance_to_next_step

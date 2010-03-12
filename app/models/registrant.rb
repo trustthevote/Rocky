@@ -1,6 +1,10 @@
 class Registrant < ActiveRecord::Base
 
   class AbandonedRecord < StandardError
+    attr_reader :registrant
+    def initialize(registrant)
+      @registrant = registrant
+    end
   end
 
 
@@ -202,7 +206,7 @@ class Registrant < ActiveRecord::Base
   
   def self.find_by_param(param)
     reg = find_by_uid(param)
-    raise AbandonedRecord if reg && reg.abandoned?
+    raise AbandonedRecord.new(reg) if reg && reg.abandoned?
     reg
   end
 

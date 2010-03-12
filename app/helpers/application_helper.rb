@@ -49,6 +49,13 @@ module ApplicationHelper
     HTML
   end
 
+  def partner_locale_options(partner, locale)
+    opts = {}
+    opts[:partner] = partner unless partner == Partner.default_id
+    opts[:locale]  = locale  unless locale == "en"
+    opts
+  end
+
   def yes_no_options
     [['', nil], ['Yes', true], ['No', false]]
   end

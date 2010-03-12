@@ -1,12 +1,13 @@
 class RegistrationStep < ApplicationController
   CURRENT_STEP = -1
+  include ApplicationHelper
 
   layout "registration"
   before_filter :find_partner
 
   rescue_from Registrant::AbandonedRecord do |exception|
-    # reg = exception.registrant
-    redirect_to registrants_timeout_url #(:partner => reg.partner, :locale => reg.locale)
+    reg = exception.registrant
+    redirect_to registrants_timeout_url(partner_locale_options(reg.partner.id, reg.locale))
   end
 
   def show
@@ -39,7 +40,7 @@ class RegistrationStep < ApplicationController
       if @registrant.eligible?
         redirect_when_eligible
       else
-        redirect_to ineligible_registrant_url(@registrant)
+        redirect_to registrant_ineligible_url(@registrant)
       end
     else
       render "show"
@@ -59,7 +60,7 @@ class RegistrationStep < ApplicationController
   end
 
   def find_partner
-    session[:partner_id] = params[:partner] || session[:partner_id] || Partner.default_id
-    @partner = Partner.find(session[:partner_id])
+    @partner_id = (params[:partner] || Partner.default_id).to_i
+    @partner = Partner.find(@partner_id)
   end
 end

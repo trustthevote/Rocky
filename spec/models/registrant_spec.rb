@@ -30,6 +30,15 @@ describe Registrant do
         Registrant.find_by_param(reg.to_param)
       end
     end
+
+    it "should attach registrant to AbandonedRecord exception" do
+      reg = Factory.create(:step_1_registrant, :abandoned => true)
+      begin
+        Registrant.find_by_param(reg.to_param)
+      rescue Registrant::AbandonedRecord => exception
+        assert_equal reg, exception.registrant
+      end
+    end
   end
 
   describe "any step" do

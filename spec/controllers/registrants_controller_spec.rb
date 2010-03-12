@@ -6,6 +6,15 @@ describe RegistrantsController do
       get :landing
       assert_redirected_to new_registrant_url(:protocol => "https")
     end
+
+    it "keeps partner and locale params when redirecting" do
+      get :landing, :partner => "2"
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2")
+      get :landing, :locale => "es"
+      assert_redirected_to new_registrant_url(:protocol => "https", :locale => "es")
+      get :landing, :partner => "2", :locale => "es"
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es")
+    end
   end
 
   describe "#new" do
@@ -54,9 +63,11 @@ describe RegistrantsController do
   end
 
   describe "#create" do
+    integrate_views
+
     before(:each) do
       @partner = Factory.create(:partner)
-      @reg_attributes = Factory.attributes_for(:step_1_registrant, :partner_id => @partner.to_param)
+      @reg_attributes = Factory.attributes_for(:step_1_registrant)
     end
     it "should create a new registrant and complete step 1" do
       post :create, :registrant => @reg_attributes
@@ -71,6 +82,15 @@ describe RegistrantsController do
       assert_template "show"
     end
 
+    it "should keep partner and locale for next attempt" do
+      post :create, :registrant => @reg_attributes.merge(:home_zip_code => ""), :partner => "2", :locale => "es"
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].new_record?, assigns[:registrant].inspect
+      assert_template "show"
+      assert_select "input[name=partner]"
+      assert_select "input[name=locale]"
+    end
+
     it "should reject ineligible registrants" do
       north_dakota_zip = "58001"
       post :create, :registrant => @reg_attributes.merge(:home_zip_code => north_dakota_zip)
@@ -78,7 +98,7 @@ describe RegistrantsController do
       assert assigns[:registrant].ineligible?
       assert assigns[:registrant].ineligible_non_participating_state?
       assert assigns[:registrant].rejected?
-      assert_redirected_to ineligible_registrant_url(assigns[:registrant])
+      assert_redirected_to registrant_ineligible_url(assigns[:registrant])
     end
   end
 
@@ -108,7 +128,7 @@ describe RegistrantsController do
       assert assigns[:registrant].ineligible?
       assert assigns[:registrant].ineligible_non_participating_state?
       assert assigns[:registrant].rejected?
-      assert_redirected_to ineligible_registrant_url(assigns[:registrant])
+      assert_redirected_to registrant_ineligible_url(assigns[:registrant])
     end
   end
 
@@ -125,9 +145,9 @@ describe RegistrantsController do
     integrate_views
 
     it "should show a timeout page" do
-      reg = Factory.create(:step_1_registrant, :abandoned => true)
+      reg = Factory.create(:step_1_registrant, :abandoned => true, :locale => "es")
       get :show, :id => reg.to_param
-      assert_redirected_to registrants_timeout_url
+      assert_redirected_to registrants_timeout_url(:partner => reg.partner.id, :locale => reg.locale)
     end
   end
 end

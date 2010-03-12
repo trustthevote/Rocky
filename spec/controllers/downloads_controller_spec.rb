@@ -12,7 +12,6 @@ describe DownloadsController do
     get :show, :registrant_id => @registrant.to_param
     assert_not_nil assigns[:registrant]
     assert_response :success
-    assert_template "download"
     assert_select "span.button a[target=_blank]"
     assert_select "span.button a[onclick]"
   end
