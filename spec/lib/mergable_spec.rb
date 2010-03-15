@@ -164,8 +164,8 @@ describe Mergable do
       @doc = Nokogiri::XML(@registrant.to_xfdf)
     end
 
-    it "generates barcode text" do
-      assert_equal  "*RTV-P07EO*", @registrant.pdf_barcode
+    it "generates ppp-nnnnnn barcode text" do
+      assert_equal  "*RTV-0P07EO*", @registrant.pdf_barcode
     end
 
     it "should output barcode text" do
