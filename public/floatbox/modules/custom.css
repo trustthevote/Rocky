@@ -1,0 +1,59 @@
+/* Floatbox v3.54.3 */
+
+/* overlay color */
+#fbOverlay.fb_custom { background-color: #1b2642; }
+
+/* outerBorder and main floatbox color */
+#fbBox.fb_custom {
+	border-color: #da7b4d;
+	background-color: #eed39e;  /* if you're using round corners, you need to edit the custom corner images in the graphics folder too */
+	background-image: url(../graphics/blank.gif);  /* use this to add a custom background image to the main floatbox area */
+}
+
+/* animated 'loading' graphic */
+#fbBox #fbBoxLoader.fb_custom { background-image: url(../graphics/loader_black_small.gif); }
+
+/* innerBorder color */
+#fbBox #fbMainDiv.fb_custom { border-color: #b64; }
+
+/* resize button graphic in the top left corner */
+#fbBox #fbResizer.fb_custom { background-image: url(../graphics/resizer_custom.gif); }
+/* note: if you want the smaller resize button, change #fbResizer width and height to 19px */
+/* and also add "_small" to the resize gif name (e.g., graphics/resizer_custom_small.gif) */
+
+/* resize dragger in the lower right corner */
+#fbBox #fbDragger.fb_custom { background-image: url(../graphics/dragger_custom.gif); }
+
+/* on-mouse-over upper nav graphics */
+#fbBox #fbOverlayPrev.fb_custom { background-image: url(../graphics/overlayPrev_custom.gif); }
+#fbBox #fbOverlayNext.fb_custom { background-image: url(../graphics/overlayNext_custom.gif); }
+
+/* new window background image */
+#fbBox #fbNewWindowLink.fb_custom a {
+	background-image: url(../graphics/newWindow_custom.png);
+	_background-image: url(../graphics/newWindow_custom.gif);  /* ie6 */
+}
+
+/* 'image x of y', indexLinks & newWindowLink color */
+#fbBox #fbIndexLinks.fb_custom, #fbBox #fbIndexLinks.fb_custom a:link, #fbBox #fbIndexLinks.fb_custom a:visited,
+#fbBox #fbNewWindowLink.fb_custom a:link, #fbBox #fbNewWindowLink.fb_custom a:visited,
+#fbBox #fbItemNumber.fb_custom { color: #666; }
+
+/* captions, infoLink, printLink, indexLinks:hover & newWindowLink:hover color */
+#fbBox #fbCaptionDiv.fb_custom, #fbBox #fbCaption2Div.fb_custom,
+#fbBox #fbtlWidgetDiv.fb_custom a:link, #fbBox #fbtlWidgetDiv.fb_custom a:visited,
+#fbBox #fbtrWidgetDiv.fb_custom a:link, #fbBox #fbtrWidgetDiv.fb_custom a:visited,
+#fbBox #fbblWidgetDiv.fb_custom a:link, #fbBox #fbblWidgetDiv.fb_custom a:visited,
+#fbBox #fbbrWidgetDiv.fb_custom a:link, #fbBox #fbbrWidgetDiv.fb_custom a:visited,
+#fbBox #fbIndexLinks.fb_custom a:hover, #fbBox #fbNewWindowLink.fb_custom a:hover { color: #000; }
+
+/* lower nav graphics */
+#fbBox #fbPrev.fb_custom { background-image: url(../graphics/prev_custom.gif); }
+#fbBox #fbNext.fb_custom { background-image: url(../graphics/next_custom.gif); }
+
+/* 'play' and 'pause' graphics */
+#fbBox #fbPlay.fb_custom { background-image: url(../graphics/play_custom.gif); }
+#fbBox #fbPause.fb_custom { background-image: url(../graphics/pause_custom.gif); }
+
+/* 'close' graphic */
+#fbBox #fbClose.fb_custom { background-image: url(../graphics/close_custom.gif); }
