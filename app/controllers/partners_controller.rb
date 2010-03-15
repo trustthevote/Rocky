@@ -55,6 +55,11 @@ HTML
     send_data(current_partner.generate_registrants_csv, :filename => "registrations.csv", :type => :csv)
   end
 
+  def widget_loader
+    @partner_id = params[:id]
+    @host = host_url
+  end
+
   protected
 
   def host_url
