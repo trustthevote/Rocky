@@ -50,7 +50,7 @@ input, textarea {
 #header-fixed {
   position: fixed;
   top: 0;
-  height: 95px;
+  height: 97px;
   width: 100%;
 }
 
@@ -59,7 +59,7 @@ input, textarea {
   height: 100%;
   width: 600px;
   margin: 0 auto;
-  border-width: 0 2px;
+  border-width: 2px 2px 0 2px;
   border-style: solid;
   border-color: #444;
   background-image: url('/images/reg/header.jpg');
@@ -122,16 +122,16 @@ font-size: 1.15em;
 #footer-fixed {
   position: fixed;
   bottom: 0;
-  height: 40px;
+  height: 42px;
   width: 100%;
 }
 
 #footer {
   zoom: 1;
-  height: 100%;
+  height: 40px;
   width: 600px;
   margin: 0 auto;
-  border-width: 0 2px;
+  border-width: 0 2px 2px 2px;
   border-style: solid;
   border-color: #444;
   color: #d0d0d0;
@@ -182,8 +182,8 @@ font-size: 1.15em;
   zoom: 1;
   position: absolute;
   width: 100%;
-  top: 95px;
-  bottom: 40px;
+  top: 97px;
+  bottom: 42px;
   overflow-y: auto;
 }
 

@@ -27,9 +27,9 @@ shadowType:       'none'    ,// 'drop'|'halo'|'none'
 shadowSize:        0        ,// 8|12|16|24
 roundCorners:     'none'     ,// 'all'|'top'|'none'
 cornerRadius:      0       ,// 8|12|20
-roundBorder:       1        ,// 0|1
+roundBorder:       0        ,// 0|1
 outerBorder:       0        ,// pixels
-innerBorder:       1        ,// pixels
+innerBorder:       0        ,// pixels
 autoFitImages:     true     ,// true|false
 resizeImages:      true     ,// true|false
 autoFitOther:      false    ,// true|false
