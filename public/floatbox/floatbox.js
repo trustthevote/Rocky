@@ -20,15 +20,15 @@ this.defaultOptions = {
 
 /*** <General Options> ***/
 licenseKey:       ''        ,// you can paste your license key here instead of in licenseKey.js if you want
-padding:           24       ,// pixels
-panelPadding:      8        ,// pixels
+padding:           0       ,// pixels
+panelPadding:      4        ,// pixels
 overlayOpacity:    55       ,// 0-100
-shadowType:       'drop'    ,// 'drop'|'halo'|'none'
-shadowSize:        12       ,// 8|12|16|24
-roundCorners:     'all'     ,// 'all'|'top'|'none'
-cornerRadius:      12       ,// 8|12|20
+shadowType:       'none'    ,// 'drop'|'halo'|'none'
+shadowSize:        0        ,// 8|12|16|24
+roundCorners:     'none'     ,// 'all'|'top'|'none'
+cornerRadius:      0       ,// 8|12|20
 roundBorder:       1        ,// 0|1
-outerBorder:       4        ,// pixels
+outerBorder:       0        ,// pixels
 innerBorder:       1        ,// pixels
 autoFitImages:     true     ,// true|false
 resizeImages:      true     ,// true|false
@@ -42,10 +42,10 @@ printLinkPos:     'bl'      ,// 'tl'|'tc'|'tr'|'bl'|'bc'|'br'
 newWindowLinkPos: 'tr'      ,// 'tl'|'tc'|'tr'|'bl'|'bc'|'br'
 itemNumberPos:    'bl'      ,// 'tl'|'tc'|'tr'|'bl'|'bc'|'br'
 indexLinksPos:    'br'      ,// 'tl'|'tc'|'tr'|'bl'|'bc'|'br'
-controlsPos:      'br'      ,// 'tl'|'tr'|'bl'|'br'
+controlsPos:      'tr'      ,// 'tl'|'tr'|'bl'|'br'
 centerNav:         false    ,// true|false
 colorImages:      'black'   ,// 'black'|'white'|'blue'|'yellow'|'red'|'custom'
-colorHTML:        'white'   ,// 'black'|'white'|'blue'|'yellow'|'red'|'custom'
+colorHTML:        'custom'   ,// 'black'|'white'|'blue'|'yellow'|'red'|'custom'
 colorVideo:       'blue'    ,// 'black'|'white'|'blue'|'yellow'|'red'|'custom'
 boxLeft:          'auto'    ,// 'auto'|pixels|'[-]xx%'
 boxTop:           'auto'    ,// 'auto'|pixels|'[-]xx%'
@@ -58,14 +58,14 @@ minContentWidth:   140      ,// pixels
 minContentHeight:  100      ,// pixels
 centerOnResize:    true     ,// true|false
 titleAsCaption:    true     ,// true|false
-showItemNumber:    true     ,// true|false
+showItemNumber:    false     ,// true|false
 showClose:         true     ,// true|false
 showNewWindowIcon: true     ,// true|false
 closeOnNewWindow:  false    ,// true|false
 cacheAjaxContent:  false    ,// true|false
 hideObjects:       true     ,// true|false
 hideJava:          true     ,// true|false
-disableScroll:     false    ,// true|false
+disableScroll:     true    ,// true|false
 randomOrder:       false    ,// true|false
 printCSS:         ''        ,// path to css file or inline css string to apply to print pages (see showPrint)
 preloadAll:        true     ,// true|false
@@ -89,14 +89,14 @@ cycleFadeDuration:    4.5    ,// 0-10
 /*** </Animation Options> ***/
 
 /*** <Navigation Options> ***/
-navType:            'both'    ,// 'overlay'|'button'|'both'|'none'
+navType:            'button'    ,// 'overlay'|'button'|'both'|'none'
 navOverlayWidth:     35       ,// 0-50
 navOverlayPos:       30       ,// 0-100
-showNavOverlay:     'never'   ,// 'always'|'once'|'never'
+showNavOverlay:     'always'   ,// 'always'|'once'|'never'
 showHints:          'once'    ,// 'always'|'once'|'never'
 enableWrap:          true     ,// true|false
 enableKeyboardNav:   true     ,// true|false
-outsideClickCloses:  true     ,// true|false
+outsideClickCloses:  false     ,// true|false
 imageClickCloses:    false    ,// true|false
 numIndexLinks:       0        ,// number, -1 = no limit
 showIndexThumbs:     true     ,// true|false

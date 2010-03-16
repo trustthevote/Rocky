@@ -1,4 +1,4 @@
-if ((parent == window) && (/WebKit\/[4-7]|MSIE [6-9]|Gecko\/200(51[12]|[6-9])|Opera\/9/.test(navigator.userAgent))) {
+if ((parent == window) && (/WebKit\/[4-7]|MSIE [6-9]|Gecko\/20(0[6-9]|1\d)|Opera\/9/.test(navigator.userAgent))) {
   (function () {
     var rtvCss = document.createElement('link');
     rtvCss.href = '<%= @host %>/floatbox/floatbox.css';
@@ -12,20 +12,6 @@ if ((parent == window) && (/WebKit\/[4-7]|MSIE [6-9]|Gecko\/200(51[12]|[6-9])|Op
     setTimeout(function () {
       document.body.appendChild(rtvCss);
       document.body.appendChild(rtvJs);
-      // TODO: set data-fb-options attribute with width/height/scroll
     },0);
-
-    var rtvShowOverlay = function (e) {
-      // TODO: Floatbox open overlay
-      e = e || event
-      e.preventDefault ? e.preventDefault() : e.returnValue = false;
-    }
-
-    var rtvWidgetLink = document.getElementById('rtv-widget-link');
-    if (rtvWidgetLink.addEventListener){
-      rtvWidgetLink.addEventListener('click', rtvShowOverlay, false);
-    } else if (rtvWidgetLink.attachEvent){
-      rtvWidgetLink.attachEvent("onclick", rtvShowOverlay);
-    }
   })();
 }
