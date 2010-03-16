@@ -23,7 +23,7 @@ module NavigationHelpers
       registrant_download_path(@registrant)
 
     when /the Moose page/
-      '/bullwinkle.html'
+      '/bullwinkle-floatbox.html'
 
     when /the register page/i
       new_partner_path
