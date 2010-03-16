@@ -47,22 +47,21 @@ input, textarea {
   letter-spacing: 0.08em;
 }
 
-#container {
-  position: relative;
-  zoom: 1;
-  width: 600px;
-  min-height: 750px;
-  _height: 750px;
-  *height: 750px;
-  margin: 0 auto;
-  border: 2px solid #444;
-  border-bottom: none;
-  background: #dcdcdc url(/images/reg/content_bg_repeat_x.gif) repeat-x left 95px;
+#header-fixed {
+  position: fixed;
+  top: 0;
+  height: 95px;
+  width: 100%;
 }
 
 #header {
   position: relative;
-  height: 95px;
+  height: 100%;
+  width: 600px;
+  margin: 0 auto;
+  border-width: 0 2px;
+  border-style: solid;
+  border-color: #444;
   background-image: url('/images/reg/header.jpg');
   background-repeat: no-repeat;
 }
@@ -83,7 +82,7 @@ input, textarea {
 
 #progress-bar {
   position: absolute;
-  top: 73px;
+  top: 71px;
   left: 5px;
 }
 
@@ -120,13 +119,21 @@ input, textarea {
 font-size: 1.15em;
 }
 
+#footer-fixed {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+}
+
 #footer {
   zoom: 1;
-  height: 40px;
+  height: 100%;
   width: 600px;
   margin: 0 auto;
-  border: 2px solid #444;
-  border-top: none;
+  border-width: 0 2px;
+  border-style: solid;
+  border-color: #444;
   color: #d0d0d0;
   background-color: black;
   font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
@@ -159,13 +166,32 @@ font-size: 1.15em;
   color: #CCCCCC;
 }
 
-#main {
+#container {
   zoom: 1;
   position: relative;
+  height: 100%;
+  width: 600px;
+  margin: 0 auto;
+  border-width: 0 2px;
+  border-style: solid;
+  border-color: #444;
+  background: #dcdcdc url(/images/reg/content_bg_repeat_x.gif) repeat-x left top;
+}
+
+#main-scroller {
+  zoom: 1;
+  position: absolute;
+  width: 100%;
+  top: 95px;
+  bottom: 40px;
+  overflow-y: auto;
+}
+
+#main {
+  zoom: 1;
   width: 560px;
-  padding: 20px;
+  padding: 20px 0 20px 20px;
   background: none;
-  overflow: hidden;
 }
 
 #other_language_link {
@@ -347,7 +373,7 @@ fieldset.questions ul li {
 
 ul.affirm {
   width: 100%;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 ul.affirm li {
