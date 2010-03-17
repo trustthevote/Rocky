@@ -113,9 +113,9 @@ describe Partner do
       it "should treat race names in different languages as equivalent" do
         partner = Factory.create(:partner)
         4.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "es Hispanic", :locale => "es") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispano", :locale => "es") }
         3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :race => "es Multi-racial", :locale => "es") }
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial", :locale => "es") }
         stats = partner.registration_stats_race
         assert_equal 2, stats.length
         assert_equal "Hispanic", stats[0][:race]
@@ -129,7 +129,7 @@ describe Partner do
       it "doesn't need both English and Spanish results" do
         partner = Factory.create(:partner)
         3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "es Multi-racial", :locale => "es") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial", :locale => "es") }
         stats = partner.registration_stats_race
         assert_equal 2, stats.length
         assert_equal "Hispanic", stats[0][:race]

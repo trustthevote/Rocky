@@ -10,7 +10,7 @@ Feature: Step 1
     Scenario: start in Spanish
       When I go to a new Spanish registration page
       Then I should not see "^New Registrant"
-       And I should see "es New Registrant"
+       And I should see "Nuevo Registro"
 
     Scenario: completing step 1
       When I go to a new registration page
@@ -31,7 +31,7 @@ Feature: Step 1
        And I check "registrant_us_citizen"
        And I press "registrant_submit"
       Then I should not see "^Personal Information"
-       And I should see "es Personal Information"
+       And I should see "Información Personal"
 
     Scenario: modifying step 1 data
       Given I have completed step 4
