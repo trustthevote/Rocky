@@ -1,0 +1,16 @@
+if ((parent == window) && (/WebKit\/[4-7]|MSIE [6-9]|Gecko\/20(0[6-9]|1\d)|Opera\/9/.test(navigator.userAgent))) {
+  (function () {
+    var rtvCss = document.createElement('link');
+    rtvCss.href = '<%= @host %>/floatbox/floatbox.css';
+    rtvCss.rel = "stylesheet";
+    rtvCss.type = "text/css";
+    var rtvJs = document.createElement('script');
+    rtvJs.src = '<%= @host %>/floatbox/floatbox.js';
+    rtvJs.type = "text/javascript";
+
+    setTimeout(function () {
+      document.body.appendChild(rtvCss);
+      document.body.appendChild(rtvJs);
+    },0);
+  })();
+}

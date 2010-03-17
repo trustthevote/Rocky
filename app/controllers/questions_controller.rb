@@ -1,6 +1,4 @@
-class QuestionsController < ApplicationController
-  layout "partners"
-
+class QuestionsController < PartnerBase
   before_filter :require_partner, :only => [:edit, :update]
 
   def edit

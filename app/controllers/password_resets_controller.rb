@@ -1,6 +1,4 @@
-class PasswordResetsController < ApplicationController
-  layout "partners"
-
+class PasswordResetsController < PartnerBase
   before_filter :load_partner_using_perishable_token, :only => [:edit, :update]
 
   def new

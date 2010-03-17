@@ -1,19 +1,14 @@
-class Step2Controller < ApplicationController
-  include RegistrationStep
+class Step2Controller < RegistrationStep
+  CURRENT_STEP = 2
 
   def update
     if params[:javascript_disabled] == "1" && params[:registrant]
       reg = params[:registrant]
       reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
+      # TODO: reg[:has_mailing_address] = reg.slice(:mailing_address, :mailing_unit, :mailing_city, :mailing_zip_code).any? {|p| !p.blank?}
     end
     super
   end
-
-  def current_step
-    2
-  end
-
-  hide_action :current_step
 
   protected
   

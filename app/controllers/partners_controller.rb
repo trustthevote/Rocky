@@ -1,4 +1,4 @@
-class PartnersController < ApplicationController
+class PartnersController < PartnerBase
   before_filter :require_partner, :only => [:show, :edit, :update]
 
   def new
@@ -37,9 +37,10 @@ class PartnersController < ApplicationController
   def show
     @partner = current_partner
     @link_html = <<-HTML
-<a href="https://#{request.host}#{new_registrant_path(:partner => partner_id)}">
+<a href="https://#{request.host}#{new_registrant_path(:partner => partner_id)}" class="floatbox" data-fb-options="width:604 height:max scrolling:no">
   <img src="http://#{request.host}/images/widget/rtv-big.jpg"></img>
 </a>
+<script type="text/javascript" src="https://#{request.host}#{widget_loader_path(:id => partner_id, :format => 'js')}"></script>
 HTML
   end
 
@@ -53,6 +54,11 @@ HTML
 
   def registrations
     send_data(current_partner.generate_registrants_csv, :filename => "registrations.csv", :type => :csv)
+  end
+
+  def widget_loader
+    @partner_id = params[:id]
+    @host = host_url
   end
 
   protected

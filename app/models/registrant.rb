@@ -1,6 +1,10 @@
 class Registrant < ActiveRecord::Base
 
   class AbandonedRecord < StandardError
+    attr_reader :registrant
+    def initialize(registrant)
+      @registrant = registrant
+    end
   end
 
 
@@ -92,6 +96,7 @@ class Registrant < ActiveRecord::Base
   before_validation :reformat_phone
 
   after_validation :check_ineligible
+  after_validation :enqueue_tell_friends_emails
 
   before_create :generate_uid
 
@@ -126,7 +131,7 @@ class Registrant < ActiveRecord::Base
 
   with_options :if => :at_least_step_3? do |reg|
     reg.validates_presence_of :state_id_number
-    reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-A-Z0-9]{7,42})$/i, :allow_blank => true
+    reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
   end
@@ -144,6 +149,16 @@ class Registrant < ActiveRecord::Base
 
   with_options :if => :at_least_step_5? do |reg|
     reg.validates_acceptance_of :attest_true
+  end
+
+  attr_accessor :telling_friends
+  with_options :if => :telling_friends do |reg|
+    reg.validates_presence_of :tell_from
+    reg.validates_presence_of :tell_email
+    reg.validates_format_of :tell_email, :with => Authlogic::Regex.email
+    reg.validates_presence_of :tell_recipients
+    reg.validates_presence_of :tell_subject
+    reg.validates_presence_of :tell_message
   end
 
   def needs_mailing_address?
@@ -191,7 +206,7 @@ class Registrant < ActiveRecord::Base
   
   def self.find_by_param(param)
     reg = find_by_uid(param)
-    raise AbandonedRecord if reg && reg.abandoned?
+    raise AbandonedRecord.new(reg) if reg && reg.abandoned?
     reg
   end
 
@@ -536,6 +551,49 @@ class Registrant < ActiveRecord::Base
       ineligible_reason,
       created_at && created_at.to_s(:month_day_year)
     ]
+  end
+
+  ### tell-a-friend email
+
+  attr_writer :tell_from, :tell_email, :tell_recipients, :tell_subject, :tell_message
+
+  def tell_from
+    @tell_from ||= "#{first_name} #{last_name}"
+  end
+
+  def tell_email
+    @tell_email ||= email_address
+  end
+
+  def tell_recipients
+    @tell_recipients
+  end
+
+  def tell_subject
+    @tell_subject ||= "Register to vote the easy way" # TODO: localize
+  end
+
+  def tell_message
+    @tell_message ||= "I just registered to vote" # TODO: localize
+  end
+
+  def enqueue_tell_friends_emails
+    if @telling_friends && self.errors.blank?
+        tell_params = {
+          :tell_from       => self.tell_from,
+          :tell_email      => self.tell_email,
+          :tell_recipients => self.tell_recipients,
+          :tell_subject    => self.tell_subject,
+          :tell_message    => self.tell_message
+        }
+      self.class.send_later(:deliver_tell_friends_emails, tell_params)
+    end
+  end
+
+  def self.deliver_tell_friends_emails(tell_params)
+    tell_params[:tell_recipients].split(",").each do |recipient|
+      Notifier.deliver_tell_friends(tell_params.merge(:tell_recipients => recipient))
+    end
   end
 
   private ###

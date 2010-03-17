@@ -49,6 +49,14 @@ module ApplicationHelper
     HTML
   end
 
+  def partner_locale_options(partner, locale, source)
+    opts = {}
+    opts[:partner] = partner unless partner == Partner.default_id
+    opts[:locale]  = locale  unless locale == "en"
+    opts[:source]  = source  unless source.blank?
+    opts
+  end
+
   def yes_no_options
     [['', nil], ['Yes', true], ['No', false]]
   end
@@ -68,8 +76,8 @@ module ApplicationHelper
   def progress_indicator
     (1..5).map do |step_index|
       progress = case step_index <=> controller.current_step
-      when 0 then "progress-current"
       when -1 then "progress-done"
+      when 0 then "progress-current"
       else "progress-todo"
       end
       content_tag :li, step_index, :class => progress
@@ -100,11 +108,18 @@ module ApplicationHelper
     HTML
   end
   
-  def rollover_image_link(name, text, url)
+  def rollover_image_link(name, text, url, options={})
+    optional_attrs = options.inject("") {|s,(k,v)| s << %Q[ #{k}="#{v}"] }
     <<-HTML
       <span class="button">
-        <a class="button_#{name}_#{I18n.locale}" href="#{url}"><span>#{text}</span></a>
+        <a class="button_#{name}_#{I18n.locale}" href="#{url}"#{optional_attrs}><span>#{text}</span></a>
       </span>
     HTML
+  end
+
+  def rtv_partner_url(partner)
+    url = "https://register.rockthevote.com/registrants/new"
+    url << "?partner=#{partner.id}" unless partner.id == Partner.default_id
+    CGI.escape(url)
   end
 end

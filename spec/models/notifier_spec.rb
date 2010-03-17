@@ -45,4 +45,23 @@ describe Notifier do
       email.subject.should include(I18n.t("email.reminder.subject", :locale => :es))
     end
   end
+
+  describe "#tell_friends" do
+    it "delivers the expected emails" do
+      tell_params = {
+        :tell_from => "Bob Dobbs",
+        :tell_email => "bob@example.com",
+        :tell_recipients => "obo@example.com",
+        :tell_subject => "Register to vote the easy way",
+        :tell_message => "I registered to vote and you can too."
+      }
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.deliver_tell_friends(tell_params)
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include(tell_params[:tell_email])
+      email.subject.should include(tell_params[:tell_subject])
+      email.body.should include(tell_params[:tell_message])
+    end
+  end
 end

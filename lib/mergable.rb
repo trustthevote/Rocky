@@ -11,6 +11,12 @@ module Mergable
     end
   end
 
+  def pdf_barcode
+    user_code = id.to_s(36)
+    padding = "0" * (6 - user_code.length) rescue ""
+    "*#{BARCODE_PREFIX}-#{padding}#{user_code}*".upcase
+  end
+
   def to_xfdf
     ERB.new(XFDF_TEMPLATE).result(binding)
   end
@@ -113,6 +119,9 @@ module Mergable
     </field>
     <field name="previous_address.zip_code">
       <value><%= prev_zip_code %></value>
+    </field>
+    <field name="uidbarcode">
+      <value><%= pdf_barcode %></value>
     </field>
   </fields>
 </xfdf>

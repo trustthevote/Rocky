@@ -6,6 +6,19 @@ describe RegistrantsController do
       get :landing
       assert_redirected_to new_registrant_url(:protocol => "https")
     end
+
+    it "keeps partner, locale and source params when redirecting" do
+      get :landing, :partner => "2"
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2")
+      get :landing, :locale => "es"
+      assert_redirected_to new_registrant_url(:protocol => "https", :locale => "es")
+      get :landing, :source => "email"
+      assert_redirected_to new_registrant_url(:protocol => "https", :source => "email")
+      get :landing, :partner => "2", :locale => "es"
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es")
+      get :landing, :partner => "2", :locale => "es", :source => "email"
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es", :source => "email")
+    end
   end
 
   describe "#new" do
@@ -15,11 +28,12 @@ describe RegistrantsController do
       assert_template "show"
     end
 
-    it "should start with partner id and locale" do
-      get :new, :locale => 'es', :partner => '2'
+    it "should start with partner id, locale and tracking source" do
+      get :new, :locale => 'es', :partner => '2', :source => 'email'
       reg = assigns[:registrant]
       assert_equal 'es', reg.locale
       assert_equal 2, reg.partner_id
+      assert_equal 'email', reg.tracking_source
     end
 
     it "should default partner id to RTV" do
@@ -32,6 +46,20 @@ describe RegistrantsController do
       get :new
       reg = assigns[:registrant]
       assert_equal 'en', reg.locale
+    end
+
+    describe "keep initial params in hidden fields" do
+      integrate_views
+
+      it "should keep partner, locale and tracking source" do
+        get :new, :locale => 'es', :partner => '2', :source => 'email'
+        assert_equal '2', assigns[:partner_id].to_s
+        assert_equal 'es', assigns[:locale]
+        assert_equal 'email', assigns[:source]
+        assert_select "input[name=partner][value=2]"
+        assert_select "input[name=locale][value=es]"
+        assert_select "input[name=source][value=email]"
+      end
     end
 
     describe "partner logo" do
@@ -54,14 +82,25 @@ describe RegistrantsController do
   end
 
   describe "#create" do
+    integrate_views
+
     before(:each) do
       @partner = Factory.create(:partner)
-      @reg_attributes = Factory.attributes_for(:step_1_registrant, :partner_id => @partner.to_param)
+      @reg_attributes = Factory.attributes_for(:step_1_registrant)
     end
+
     it "should create a new registrant and complete step 1" do
       post :create, :registrant => @reg_attributes
       assert_not_nil assigns[:registrant]
       assert_redirected_to registrant_step_2_url(assigns[:registrant])
+    end
+
+    it "should set partner_id, locale and tracking_source" do
+      @reg_attributes.delete(:locale)
+      post :create, :registrant => @reg_attributes, :partner => "2", :locale => "es", :source => "email"
+      assert_equal 2, assigns[:registrant].partner_id
+      assert_equal "es", assigns[:registrant].locale
+      assert_equal "email", assigns[:registrant].tracking_source
     end
 
     it "should reject invalid input and show form again" do
@@ -71,6 +110,16 @@ describe RegistrantsController do
       assert_template "show"
     end
 
+    it "should keep partner and locale for next attempt" do
+      post :create, :registrant => @reg_attributes.merge(:home_zip_code => ""), :partner => "2", :locale => "es", :source => "email"
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].new_record?, assigns[:registrant].inspect
+      assert_template "show"
+      assert_select "input[name=partner][value=2]"
+      assert_select "input[name=locale][value=es]"
+      assert_select "input[name=source][value=email]"
+    end
+
     it "should reject ineligible registrants" do
       north_dakota_zip = "58001"
       post :create, :registrant => @reg_attributes.merge(:home_zip_code => north_dakota_zip)
@@ -78,7 +127,7 @@ describe RegistrantsController do
       assert assigns[:registrant].ineligible?
       assert assigns[:registrant].ineligible_non_participating_state?
       assert assigns[:registrant].rejected?
-      assert_redirected_to ineligible_registrant_url(assigns[:registrant])
+      assert_redirected_to registrant_ineligible_url(assigns[:registrant])
     end
   end
 
@@ -108,26 +157,7 @@ describe RegistrantsController do
       assert assigns[:registrant].ineligible?
       assert assigns[:registrant].ineligible_non_participating_state?
       assert assigns[:registrant].rejected?
-      assert_redirected_to ineligible_registrant_url(assigns[:registrant])
-    end
-
-  end
-
-  describe "download" do
-    before(:each) do
-      @registrant = Factory.create(:step_5_registrant)
-      `touch #{@registrant.pdf_file_path}`
-    end
-
-    it "provides a link to download the PDF" do
-      get :download, :id => @registrant.to_param
-      assert_not_nil assigns[:registrant]
-      assert_response :success
-      assert_template "download"
-    end
-
-    after(:each) do
-      `rm #{@registrant.pdf_file_path}`
+      assert_redirected_to registrant_ineligible_url(assigns[:registrant])
     end
   end
 
@@ -144,15 +174,9 @@ describe RegistrantsController do
     integrate_views
 
     it "should show a timeout page" do
-      reg = Factory.create(:step_1_registrant, :abandoned => true)
+      reg = Factory.create(:step_1_registrant, :abandoned => true, :locale => "es")
       get :show, :id => reg.to_param
-      assert_redirected_to timeout_registrants_url
+      assert_redirected_to registrants_timeout_url(:partner => reg.partner.id, :locale => reg.locale)
     end
-
-    it "shows timeout page" do
-      get :timeout
-      assert_response :success
-    end
-
   end
 end

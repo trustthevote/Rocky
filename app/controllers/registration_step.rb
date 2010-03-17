@@ -1,9 +1,13 @@
-module RegistrationStep
-  def self.included(controller)
-    controller.class_eval do
-      layout "registration"
-      before_filter :find_partner
-    end
+class RegistrationStep < ApplicationController
+  CURRENT_STEP = -1
+  include ApplicationHelper
+
+  layout "registration"
+  before_filter :find_partner
+
+  rescue_from Registrant::AbandonedRecord do |exception|
+    reg = exception.registrant
+    redirect_to registrants_timeout_url(partner_locale_options(reg.partner.id, reg.locale, reg.tracking_source))
   end
 
   def show
@@ -18,6 +22,11 @@ module RegistrationStep
     attempt_to_advance
   end
 
+  def current_step
+    self.class::CURRENT_STEP
+  end
+  hide_action :current_step
+
   protected
 
   def set_up_view_variables
@@ -31,7 +40,7 @@ module RegistrationStep
       if @registrant.eligible?
         redirect_when_eligible
       else
-        redirect_to ineligible_registrant_url(@registrant)
+        redirect_to registrant_ineligible_url(@registrant)
       end
     else
       render "show"
@@ -51,7 +60,8 @@ module RegistrationStep
   end
 
   def find_partner
-    session[:partner_id] = params[:partner] || session[:partner_id] || Partner.default_id
-    @partner = Partner.find(session[:partner_id])
+    @partner_id = (params[:partner] || Partner.default_id).to_i
+    @partner = Partner.find(@partner_id)
+    @source = params[:source]
   end
 end

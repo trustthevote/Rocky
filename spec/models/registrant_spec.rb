@@ -30,6 +30,15 @@ describe Registrant do
         Registrant.find_by_param(reg.to_param)
       end
     end
+
+    it "should attach registrant to AbandonedRecord exception" do
+      reg = Factory.create(:step_1_registrant, :abandoned => true)
+      begin
+        Registrant.find_by_param(reg.to_param)
+      rescue Registrant::AbandonedRecord => exception
+        assert_equal reg, exception.registrant
+      end
+    end
   end
 
   describe "any step" do
@@ -223,7 +232,8 @@ describe Registrant do
 
       assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "A234567")
       assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "1-234567")
-      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "*234567")
+      assert_attribute_valid_with(  :step_3_registrant, :state_id_number => "*234567")
+      assert_attribute_invalid_with(:step_3_registrant, :state_id_number => "$234567")
     end
 
     it "should upcase state id" do
@@ -634,6 +644,81 @@ describe Registrant do
           reg = Factory.create(:maximal_registrant, :reminders_left => 1)
           reg.deliver_reminder_email
         end
+      end
+    end
+  end
+
+  describe "tell-a-friend emails" do
+    attr_accessor :reg
+    before(:each) do
+      @reg = Factory.build( :step_5_registrant,
+                            :name_title => "Mr.",
+                            :first_name => "John", :middle_name => "Queue", :last_name => "Public",
+                            :name_suffix => "Jr.",
+                            :email_address => "jqp@example.com" )
+    end
+
+    describe "attributes for form fields have smart defaults" do
+      it "has tell_from" do
+        assert_equal "John Public", reg.tell_from
+        reg.tell_from = "J. Public"
+        assert_equal "J. Public", reg.tell_from
+      end
+
+      it "has tell_email" do
+        assert_equal "jqp@example.com", reg.tell_email
+        reg.tell_email = "jqp@gmail.com"
+        assert_equal "jqp@gmail.com", reg.tell_email
+      end
+
+      it "has tell_recipients" do
+        assert reg.tell_recipients.blank?
+        reg.tell_recipients = "jqp@gmail.com"
+        assert_equal "jqp@gmail.com", reg.tell_recipients
+      end
+
+      it "has tell_subject" do
+        assert_equal "Register to vote the easy way", reg.tell_subject
+        reg.tell_subject = "This is super cool"
+        assert_equal "This is super cool", reg.tell_subject
+      end
+
+      it "has tell_message" do
+        assert_match /^I just registered to vote/, reg.tell_message
+        reg.tell_message = "Do you believe I just registered to vote?"
+        assert_equal "Do you believe I just registered to vote?", reg.tell_message
+      end
+    end
+
+    describe "enqueue emails when registrant has valid tell-a-friend params" do
+      before(:each) do
+        @tell_params = {
+          :telling_friends => true,
+          :tell_from => "Bob Dobbs",
+          :tell_email => "bob@example.com",
+          :tell_recipients => "arnold@example.com, obo@example.com, slack@example.com",
+          :tell_subject => "Register to vote the easy way",
+          :tell_message => "I registered to vote and you can too."
+        }
+      end
+
+      it "enqueues email when valid" do
+        reg.attributes = @tell_params
+        assert_difference "Delayed::Job.count" do
+          assert reg.valid?
+        end
+      end
+
+      it "does not enqueue when invalid" do
+        reg.attributes = @tell_params.merge(:tell_recipients => "")
+        assert_difference "Delayed::Job.count", 0 do
+          assert reg.invalid?
+        end
+      end
+
+      it "sends one email per recipient" do
+        mock(Notifier).deliver_tell_friends(anything).times(3)
+        Registrant.deliver_tell_friends_emails(@tell_params)
       end
     end
   end

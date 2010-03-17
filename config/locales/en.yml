@@ -45,6 +45,11 @@ en:
         opt_in_email: Receive emails
         opt_in_sms: Receive txt messages
         attest_true: I have reviewed the above information, and it is true and accurate to the best of my knowledge.
+        tell_from: From
+        tell_email: Your Email
+        tell_recipients: Recipients
+        tell_subject: Subject
+        tell_message: Personal Message
     errors:
       models:
         registrant:
@@ -108,6 +113,10 @@ en:
       help: Help
       prepare: Prepare Form
       review: Review Application
+      sendmail: Send Email
+      share_facebook: Share on Facebook!
+      share_twitter: Share on Twitter!
+      share_googlebuzz: Share on Buzz!
     registration:
       powered_by: "powered by:"
       progress_indicator: "Step:"
@@ -119,6 +128,8 @@ en:
       step_5_header: Review and Confirm
       survey_title: Questions For You
       download_header: Print Your Form
+      finish_header: Spread the word!
+      tell_a_friend_title: "Tell a Friend by Email"
       ineligible_header: "Sorry, you are not eligible to register to vote for the following reason(s):"
       name: Name
       select_none: (none)
@@ -160,7 +171,12 @@ en:
         review: Please review the following information and confirm its accuracy.
         download: You are not done. Click on the print form button to print out your voter registration form.
           Sign it and mail to the address located on the form.
-        download_2: You won't be registered unless you print, sign and mail in your form!
+        download_2: "You won't be registered unless you print, sign and mail in your form!"
+        finish: "Don't forget to tell your friends and family how easy it was to register. Here are a few tools you can use to spread the word about voter registration:"
+        finish_2: "Get this voter registration tool on your website. Sign up free at"
+        finish_tell_recipients: "(separated by commas)"
+        finish_email_sent: "Email sent!"
+        finish_update_status: "Don't forget to update your status on Facebook and Twitter!"
       ineligible:
         age: You must be 18 years old by the date of the next election.
         non_citizen: Your registration cannot be completed because you did not check the box indicating that you are a U.S. citizen. You must be a U.S. citizen to register to vote. If you are a citizen, please return to the previous page and check the citizenship box.

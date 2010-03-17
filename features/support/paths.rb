@@ -20,10 +20,10 @@ module NavigationHelpers
     when /the step (\d) page/
       send("registrant_step_#{$1}_path", @registrant)
     when /the download page/
-      download_registrant_path(@registrant)
+      registrant_download_path(@registrant)
 
     when /the Moose page/
-      '/bullwinkle.html'
+      '/bullwinkle-floatbox.html'
 
     when /the register page/i
       new_partner_path
