@@ -37,9 +37,10 @@ class PartnersController < PartnerBase
   def show
     @partner = current_partner
     @link_html = <<-HTML
-<a href="https://#{request.host}#{new_registrant_path(:partner => partner_id)}">
+<a href="https://#{request.host}#{new_registrant_path(:partner => partner_id)}" class="floatbox" data-fb-options="width:604 height:max scrolling:no">
   <img src="http://#{request.host}/images/widget/rtv-big.jpg"></img>
 </a>
+<script type="text/javascript" src="https://#{request.host}#{widget_loader_path(:id => partner_id, :format => 'js')}"></script>
 HTML
   end
 

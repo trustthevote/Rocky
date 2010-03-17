@@ -12,8 +12,6 @@ describe PartnersController do
       assert_response :success
       assert_template "widget_loader.js.erb"
       assert_match %r{createElement}, response.body
-      # TODO: assert_match %r{'http://example.com:3000'}, response.body
-      # TODO: assert_match %r{'/registrants/new\?partner=2'}, response.body
     end
   end
 
@@ -55,7 +53,10 @@ describe PartnersController do
         get :show
         assert_response :success
         assert_select 'textarea[readonly]', 1
-        assert_match %r{https://example.com/registrants/new\?partner=5}, response.body
+        html = HTML::Node.parse(nil, 0, 0, assigns(:link_html))
+        assert_select html, "a[href=https://example.com/registrants/new?partner=5][class=floatbox][data-fb-options='width:604 height:max scrolling:no']"
+        html = HTML::Node.parse(nil, 0, 0, assigns(:link_html).split("\n").last)
+        assert_select html, "script[type=text/javascript][src=https://example.com/partner/5/widget_loader.js]"
       end
     end
 
