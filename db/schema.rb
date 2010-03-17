@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100317175214) do
+ActiveRecord::Schema.define(:version => 20100317234148) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20100317175214) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "party_tooltip",             :limit => 1024
+    t.string   "sub_18"
   end
 
   add_index "state_localizations", ["state_id"], :name => "index_state_localizations_on_state_id"

@@ -37,6 +37,7 @@ class StateImporter
     en.parties                    = read_parties(row["parties_en"])
     en.no_party                   = row["no_party_en"]
     en.id_number_tooltip          = row["id_number_tooltip_en"]
+    en.sub_18                     = row["sub_18_en"]
     en.save!
     es = state.localizations.find_or_initialize_by_locale('es')
     es.not_participating_tooltip  = row["not_participating_tooltip_es"]
@@ -45,6 +46,7 @@ class StateImporter
     es.parties                    = read_parties(row["parties_es"])
     es.no_party                   = row["no_party_es"]
     es.id_number_tooltip          = row["id_number_tooltip_es"]
+    es.sub_18                     = row["sub_18_es"]
     es.save!
   end
 
