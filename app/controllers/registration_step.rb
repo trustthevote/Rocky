@@ -7,7 +7,7 @@ class RegistrationStep < ApplicationController
 
   rescue_from Registrant::AbandonedRecord do |exception|
     reg = exception.registrant
-    redirect_to registrants_timeout_url(partner_locale_options(reg.partner.id, reg.locale))
+    redirect_to registrants_timeout_url(partner_locale_options(reg.partner.id, reg.locale, reg.tracking_source))
   end
 
   def show
@@ -62,5 +62,6 @@ class RegistrationStep < ApplicationController
   def find_partner
     @partner_id = (params[:partner] || Partner.default_id).to_i
     @partner = Partner.find(@partner_id)
+    @source = params[:source]
   end
 end

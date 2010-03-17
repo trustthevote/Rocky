@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090827183521) do
+ActiveRecord::Schema.define(:version => 20100317175214) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20090827183521) do
     t.datetime "updated_at"
     t.boolean  "abandoned",                                        :default => false, :null => false
     t.boolean  "volunteer"
+    t.string   "tracking_source"
   end
 
   add_index "registrants", ["uid"], :name => "index_registrants_on_uid"

@@ -49,10 +49,11 @@ module ApplicationHelper
     HTML
   end
 
-  def partner_locale_options(partner, locale)
+  def partner_locale_options(partner, locale, source)
     opts = {}
     opts[:partner] = partner unless partner == Partner.default_id
     opts[:locale]  = locale  unless locale == "en"
+    opts[:source]  = source  unless source.blank?
     opts
   end
 

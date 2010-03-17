@@ -6,6 +6,7 @@ class RegistrantsController < RegistrationStep
     options = {}
     options[:partner] = params[:partner] if params[:partner]
     options[:locale] = params[:locale] if params[:locale]
+    options[:source] = params[:source] if params[:source]
     options.merge!(:protocol => "https") unless Rails.env.development?
     redirect_to new_registrant_url(options)
   end
@@ -13,7 +14,7 @@ class RegistrantsController < RegistrationStep
   # GET /registrants/new
   def new
     set_up_locale
-    @registrant = Registrant.new(:partner_id => @partner_id, :locale => @locale)
+    @registrant = Registrant.new(:partner_id => @partner_id, :locale => @locale, :tracking_source => @source)
     render "show"
   end
 
@@ -23,6 +24,7 @@ class RegistrantsController < RegistrationStep
     @registrant = Registrant.new(params[:registrant].reverse_merge(
                                     :locale => @locale,
                                     :partner_id => @partner_id,
+                                    :tracking_source => @source,
                                     :opt_in_sms => true, :opt_in_email => true))
     attempt_to_advance
   end
