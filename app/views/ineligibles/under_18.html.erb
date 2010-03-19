@@ -1,0 +1,39 @@
+<h1><%= t('txt.registration.step_1_header') %></h1>
+
+<div class="text"><p><%= @registrant.under_18_instructions_for_home_state %></p></div>
+<div class="text"><p><%= t('txt.registration.instructions.under_18_2') %></p></div>
+
+<% form_for(@registrant) do |form| %>
+  <%= form.hidden_field :under_18_ok, :value => true %>
+  <%= rollover_button(:keepgoing, I18n.t('txt.button.keep_going')) %>
+<% end %>
+
+<div class="text"><p><%= t('txt.registration.instructions.under_18_3') %></p></div>
+
+<% form_for(@registrant, :url => registrant_ineligible_path(@registrant), :id => "edit_ineligible_registrant") do |form| %>
+  <ul class="checkbox">
+    <li>
+      <h3>
+        <%= form.check_box :remind_when_18 %>
+        <%= form.label :remind_when_18, t('txt.registration.remind_when_18') %>
+      </h3>
+    </li>
+  </ul>
+  <div class="checkbox-explanation">
+    <p><%= t('txt.registration.instructions.remind_when_18', :email_address => h(@registrant.email_address)) %></p>
+  </div>
+  <ul class="checkbox">
+    <li>
+      <h3>
+        <%= form.check_box :opt_in_email %>
+        <%= form.label :opt_in_email, t('txt.registration.get_updates') %>
+      </h3>
+    </li>
+  </ul>
+  <div class="checkbox-explanation">
+    <p><%= t('txt.registration.instructions.opt_in_email') %></p>
+  </div>
+  <%= rollover_button(:remindmelater, I18n.t('txt.button.remind_me_later')) %>
+<% end %>
+
+<div class="back"><%= link_to t('txt.button.ineligible_try_again'), registrant_path(@registrant) %></div>

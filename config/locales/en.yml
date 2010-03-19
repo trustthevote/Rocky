@@ -110,6 +110,8 @@ en:
       back: "&lt; Previous Step"
       download: "Download PDF!"
       ineligible_try_again: Return
+      keep_going: Keep Going
+      remind_me_later: Remind Me Later
       help: Help
       prepare: Prepare Form
       review: Review Application
@@ -139,6 +141,8 @@ en:
       previous_address: Previous Address
       opt_in_sms: Send me txt reminders about voting.
       opt_in_email: "Receive emails at {{email_address}}"
+      remind_when_18: Send me a reminder on my 18th birthday
+      get_updates: Get udpates from Rock the Vote
       volunteer: "I would like to volunteer with {{organization}}."
       not_given: none
       titles:
@@ -167,7 +171,11 @@ en:
       - Work
       - Other
       instructions:
-        opt_in_email: We will send you timely election reminders, polling place information, and information about music and issues.
+        opt_in_email: "We will send you timely election reminders, polling place information, and information about music and issues."
+        under_18: "Hey, it looks like you aren't 18 yet. That's cool. In {{state_name}}, you can register to vote {{state_rule}}."
+        under_18_2: "If you fit the bill, click the button to continue your application."
+        under_18_3: "If not, we'll send you a reminder to register on your 18th birthday."
+        remind_when_18: "We'll email you at {{email_address}}"
         review: Please review the following information and confirm its accuracy.
         download: You are not done. Click on the print form button to print out your voter registration form.
           Sign it and mail to the address located on the form.
@@ -179,7 +187,7 @@ en:
         finish_update_status: "Don't forget to update your status on Facebook and Twitter!"
       ineligible:
         age: You must be 18 years old by the date of the next election.
-        non_citizen: Your registration cannot be completed because you did not check the box indicating that you are a U.S. citizen. You must be a U.S. citizen to register to vote. If you are a citizen, please return to the previous page and check the citizenship box.
+        non_citizen: "Your registration cannot be completed because you did not check the box indicating that you are a U.S. citizen. You must be a U.S. citizen to register to vote. If you are a citizen, please return to the previous page and check the citizenship box."
         attest: You must confirm that you are eligible to vote.
       tooltips:
         email_address: We will email you a copy of your voter registration form.

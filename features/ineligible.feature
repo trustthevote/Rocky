@@ -14,18 +14,6 @@ Feature: Ineligible
        And I live in California
        And I press "registrant_submit"
       Then I should see "Personal Information"
-      
-    Scenario: too young
-     Given I go to a new registration page
-       And I enter valid data for step 1
-       But I am 15 years old
-      When I press "registrant_submit"
-      Then I should see "not eligible"
-       And I should see "must be 18 years old"
-      When I follow "Return"
-       And I am 18 years old
-       And I press "registrant_submit"
-      Then I should see "Personal Information"
 
     Scenario: not citizen
      Given I go to a new registration page
@@ -42,14 +30,29 @@ Feature: Ineligible
     Scenario: multiple reasons on same page
      Given I go to a new registration page
        And I enter valid data for step 1
-       But I am 15 years old
        And I live in North Dakota
       When I press "registrant_submit"
       Then I should see "not eligible"
-       And I should see "must be 18 years old"
        And I should see "North Dakota"
       When I follow "Return"
-       And I am 18 years old
        And I live in California
        And I press "registrant_submit"
       Then I should see "Personal Information"
+
+    Scenario: under 18 but old enough
+     Given I go to a new registration page
+       And I enter valid data for step 1
+       But I am 15 years old
+      When I press "registrant_submit"
+      Then I should see "you aren't 18 yet"
+      When I press "Keep Going"
+      Then I should see "Personal Information"
+
+    Scenario: under 18 and wants reminder
+     Given I go to a new registration page
+       And I enter valid data for step 1
+       But I am 15 years old
+      When I press "registrant_submit"
+      Then I should see "you aren't 18 yet"
+      When I press "Remind Me Later"
+      Then I should see "Tell a Friend by Email"

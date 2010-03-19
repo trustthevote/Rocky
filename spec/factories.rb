@@ -6,6 +6,13 @@ Factory.define :step_1_registrant, :class => "registrant" do |f|
   f.date_of_birth   20.years.ago.to_date.strftime("%m/%d/%Y")
   f.home_zip_code   "15215"  # == Pennsylvania
   f.us_citizen      true
+  f.opt_in_email    true
+  f.opt_in_sms      true
+end
+
+Factory.define :under_18_finished_registrant, :parent => :step_1_registrant do |f|
+  f.date_of_birth   17.years.ago.to_date.strftime("%m/%d/%Y")
+  f.status          "under_18"
 end
 
 Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
@@ -33,7 +40,6 @@ end
 
 Factory.define :step_5_registrant, :parent => :step_4_registrant do |f|
   f.status          "step_5"
-  f.attest_true     "1"
 end
 
 Factory.define :completed_registrant, :parent => :step_5_registrant do |f|
@@ -87,7 +93,6 @@ Factory.define :maximal_registrant, :parent => :completed_registrant do |f|
   f.survey_answer_1     "blue"
   f.survey_answer_2     "fido"
   f.volunteer           true
-  f.attest_true         "1"
 end
 
 

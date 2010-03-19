@@ -4,16 +4,8 @@
   <p class="reason"><%= @registrant.home_state_not_participating_text %></p>
 <% end %>
 
-<% if @registrant.ineligible_age? %>
-  <p class="reason"><%= I18n.t('txt.registration.ineligible.age') %></p>
-<% end %>
-
 <% if @registrant.ineligible_non_citizen? %>
   <p class="reason"><%= I18n.t('txt.registration.ineligible.non_citizen') %></p>
 <% end %>
 
-<% if @registrant.ineligible_attest? %>
-  <p class="reason"><%= I18n.t('txt.registration.ineligible.attest') %></p>
-<% end %>
-
-<div class="return"><%= link_to I18n.t('txt.button.ineligible_try_again'), try_again_path(@registrant)  %></div>
+<div class="return"><%= link_to I18n.t('txt.button.ineligible_try_again'), registrant_path(@registrant)  %></div>

@@ -62,6 +62,7 @@ class Registrant < ActiveRecord::Base
   aasm_initial_state :initial
   STEPS.each { |step| aasm_state step }
   aasm_state :complete, :enter => :complete_registration
+  aasm_state :under_18
   aasm_state :rejected
 
   belongs_to :partner
@@ -199,11 +200,15 @@ class Registrant < ActiveRecord::Base
   aasm_event :advance_to_step_5 do
     transitions :to => :step_5, :from => [:step_4, :rejected]
   end
-  
+
   aasm_event :complete do
     transitions :to => :complete, :from => [:step_5]
   end
-  
+
+  aasm_event :request_reminder do
+    transitions :to => :under_18, :from => [:rejected]
+  end
+
   def self.find_by_param(param)
     reg = find_by_uid(param)
     raise AbandonedRecord.new(reg) if reg && reg.abandoned?
@@ -340,6 +345,12 @@ class Registrant < ActiveRecord::Base
 
   def home_state_not_participating_text
     localizations.by_locale(locale).not_participating_tooltip
+  end
+
+  def under_18_instructions_for_home_state
+    I18n.t('txt.registration.instructions.under_18',
+            :state_name => home_state.name,
+            :state_rule => localizations.by_locale(locale).sub_18)
   end
 
   def validate_party
@@ -502,13 +513,13 @@ class Registrant < ActiveRecord::Base
 
   def check_ineligible
     self.ineligible_non_participating_state = home_state && !home_state.participating?
-    self.ineligible_age = date_of_birth && (date_of_birth > 16.years.ago.to_date)
+    self.ineligible_age = date_of_birth && (date_of_birth >= 18.years.ago.to_date)
     self.ineligible_non_citizen = !us_citizen?
     true # don't halt save in after_validation
   end
 
   def ineligible?
-    ineligible_non_participating_state || ineligible_age || ineligible_non_citizen
+    ineligible_non_participating_state || (ineligible_age ^ under_18_ok) || ineligible_non_citizen
   end
 
   def eligible?

@@ -53,7 +53,7 @@ class RegistrationStep < ApplicationController
 
   def find_registrant(special_case=nil)
     @registrant = Registrant.find_by_param!(params[:registrant_id] || params[:id])
-    if @registrant.complete? && special_case.nil?
+    if (@registrant.complete? || @registrant.under_18?) && special_case.nil?
       raise ActiveRecord::RecordNotFound
     end
     I18n.locale = @registrant.locale

@@ -65,14 +65,6 @@ module ApplicationHelper
     unit =~ /^\d+$/ ? "##{unit}" : unit
   end
 
-  def try_again_path(registrant)
-    if registrant.ineligible_attest?
-      registrant_step_5_path(registrant)
-    else
-      registrant_path(registrant)
-    end
-  end
-
   def progress_indicator
     (1..5).map do |step_index|
       progress = case step_index <=> controller.current_step

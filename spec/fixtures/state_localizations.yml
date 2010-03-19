@@ -7,6 +7,7 @@ california_en:
   - Libertarian
   - Republican
   no_party: Decline to State
+  sub_18: if you will turn 18 by the next election
 california_es:
   state_id: 5
   locale: es
@@ -16,6 +17,7 @@ california_es:
   - Libertariano
   - Republicano
   no_party: Disminución del Estado
+  sub_18: si va a cumplir 18 años de las próximas elecciones
 florida_en:
   state_id: 10
   locale: en
@@ -23,6 +25,7 @@ florida_en:
   - Orange
   - Mickey Mouse
   no_party: Decline to State
+  sub_18: if you will turn 18 by the next election
 florida_es:
   state_id: 10
   locale: es
@@ -30,6 +33,7 @@ florida_es:
   - Naranja
   - Ratoncito
   no_party: Disminución del Estado
+  sub_18: si va a cumplir 18 años de las próximas elecciones
 north_dakota_en:
   state_id: 35
   locale: en
@@ -37,6 +41,7 @@ north_dakota_en:
   - Left
   - Right
   no_party: Decline to State
+  sub_18: if you will turn 18 by the next election
   not_participating_tooltip: North Dakota does not register voters
 north_dakota_es:
   state_id: 35
@@ -45,6 +50,7 @@ north_dakota_es:
   - Izquierda
   - Derecha
   no_party: Disminución del Estado
+  sub_18: si va a cumplir 18 años de las próximas elecciones
   not_participating_tooltip: Dakota del Norte no se insegña para votar
 pennsylvania_en:
   state_id: 39
@@ -53,6 +59,7 @@ pennsylvania_en:
   - Steel
   - Coal
   no_party: Decline to State
+  sub_18: if you will turn 18 by the next election
 pennsylvania_es:
   state_id: 39
   locale: es
@@ -60,3 +67,4 @@ pennsylvania_es:
   - Steel
   - Coal
   no_party: Disminución del Estado
+  sub_18: si va a cumplir 18 años de las próximas elecciones

@@ -149,7 +149,7 @@ describe RegistrantsController do
       assert assigns[:registrant].reload.step_4?
       assert_template "show"
     end
-    
+
     it "should reject ineligible registrants" do
       north_dakota_zip = "58001"
       put :update, :id => @registrant.to_param, :registrant => {:home_zip_code => north_dakota_zip}
@@ -169,7 +169,16 @@ describe RegistrantsController do
       end
     end
   end
-  
+
+  describe "under-18 finished registration" do
+    it "should not be visible" do
+      reg = Factory.create(:under_18_finished_registrant)
+      assert_raise ActiveRecord::RecordNotFound do
+        get :show, :id => reg.to_param
+      end
+    end
+  end
+
   describe "abandoned registration" do
     integrate_views
 

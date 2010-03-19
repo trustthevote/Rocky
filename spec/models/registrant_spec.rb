@@ -401,6 +401,15 @@ describe Registrant do
     end
   end
 
+  describe "under_18_instructions_for_home_state" do
+    it "shows instructions with state name and localized rule" do
+      reg = Factory.build(:step_1_registrant)
+      text = reg.under_18_instructions_for_home_state
+      assert_match Regexp.compile(reg.home_state.name), text
+      assert_match Regexp.compile(reg.localizations.by_locale(:en).sub_18), text
+    end
+  end
+
   describe "at least step N" do
     it "should say whether step is at least N" do
       reg = Factory.build(:step_2_registrant)
@@ -505,8 +514,8 @@ describe Registrant do
                      nil,
                      nil,
                      nil,
-                     "No",
-                     "No",
+                     "Yes",
+                     "Yes",
                      nil,
                      nil,
                      "No",  # volunteer
