@@ -660,7 +660,7 @@ describe Registrant do
   describe "tell-a-friend emails" do
     attr_accessor :reg
     before(:each) do
-      @reg = Factory.build( :step_5_registrant,
+      @reg = Factory.build( :completed_registrant,
                             :name_title => "Mr.",
                             :first_name => "John", :middle_name => "Queue", :last_name => "Public",
                             :name_suffix => "Jr.",
@@ -728,6 +728,22 @@ describe Registrant do
       it "sends one email per recipient" do
         mock(Notifier).deliver_tell_friends(anything).times(3)
         Registrant.deliver_tell_friends_emails(@tell_params)
+      end
+    end
+
+    describe "under-18 registration" do
+      before(:each) do
+        @reg = Factory.build( :under_18_finished_registrant,
+                              :name_title => "Mr.",
+                              :first_name => "John", :middle_name => "Queue", :last_name => "Public",
+                              :name_suffix => "Jr.",
+                              :email_address => "jqp@example.com" )
+      end
+
+      describe "attributes for form fields have smart defaults" do
+        it "has tell_message" do
+          assert_match /^Are you registered to vote/, reg.tell_message
+        end
       end
     end
   end

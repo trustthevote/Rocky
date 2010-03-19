@@ -585,7 +585,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def tell_message
-    @tell_message ||= "I just registered to vote" # TODO: localize
+    @tell_message ||= case self.status.to_sym
+    when :complete
+      "I just registered to vote" # TODO: localize
+    when :under_18
+      "Are you registered to vote?"
+    end
   end
 
   def enqueue_tell_friends_emails

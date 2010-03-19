@@ -131,6 +131,7 @@ en:
       survey_title: Questions For You
       download_header: Print Your Form
       finish_header: Spread the word!
+      finish_under_18_header: "You're on the list!"
       tell_a_friend_title: "Tell a Friend by Email"
       ineligible_header: "Sorry, you are not eligible to register to vote for the following reason(s):"
       name: Name
@@ -182,6 +183,8 @@ en:
         download_2: "You won't be registered unless you print, sign and mail in your form!"
         finish: "Don't forget to tell your friends and family how easy it was to register. Here are a few tools you can use to spread the word about voter registration:"
         finish_2: "Get this voter registration tool on your website. Sign up free at"
+        finish_under_18: "We'll send you a reminder to register to vote when the big day comes."
+        finish_under_18_2: "In the meantime, tell your friends and family how easy it is to register to vote. Here are a few tools you can use to spread the word about voter registration."
         finish_tell_recipients: "(separated by commas)"
         finish_email_sent: "Email sent!"
         finish_update_status: "Don't forget to update your status on Facebook and Twitter!"
