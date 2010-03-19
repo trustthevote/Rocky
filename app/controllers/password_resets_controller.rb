@@ -27,7 +27,8 @@ class PasswordResetsController < PartnerBase
     end
   end
 
-  private
+  protected
+
   def load_partner_using_perishable_token
     unless @partner = Partner.find_using_perishable_token(params[:id])
       flash[:warning] = "We're sorry, but we could not locate your account. If you are having issues try copying and pasting the URL from your email into your browser or restarting the reset password process."
