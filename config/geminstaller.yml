@@ -16,7 +16,7 @@ gems:
 <% else %>
   version: = 2.3.2
 <% end %>
-- name: rubyist-aasm
+- name: aasm
   version: = 2.0.5
 - name: authlogic
   version: = 2.1.1
