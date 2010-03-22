@@ -12,5 +12,14 @@ Feature: Register via Overlay
     Scenario: trigger the overlay
       Given I am on the Moose page
       When I click the register button
+      Then I should see "New Registrant" in the overlay
+
+    @iframe
+    Scenario: close the overlay with confirmation
+      Given I am on the Moose page
+      When I click the register button
       Then I should see the overlay
-      And I should see "New Registrant"
+      When I click the close link and confirm with Cancel
+      Then I should see the overlay
+      And I click the close link and confirm with OK
+      Then I should not see "New Registrant"
