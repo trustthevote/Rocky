@@ -17,3 +17,6 @@ ActiveSupport.use_standard_json_time_format = true
 # Don't escape HTML entities in JSON, leave that for the #json_escape helper.
 # if you're including raw json in an HTML page.
 ActiveSupport.escape_html_entities_in_json = false
+
+# No partial updates, we don't have logic to handle update failures
+ActiveRecord::Base.partial_updates = false
