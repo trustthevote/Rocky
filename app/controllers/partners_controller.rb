@@ -51,6 +51,7 @@ HTML
     @stats_by_race = @partner.registration_stats_race
     @stats_by_gender = @partner.registration_stats_gender
     @stats_by_age = @partner.registration_stats_age
+    @stats_by_party = @partner.registration_stats_party
   end
 
   def registrations

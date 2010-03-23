@@ -95,7 +95,6 @@ Factory.define :maximal_registrant, :parent => :completed_registrant do |f|
   f.volunteer           true
 end
 
-
 Factory.define :partner do |partner|
   partner.sequence(:username)   { |n| "partner_#{n}" }
   partner.email                 { |p| "#{p.username}@example.com" }

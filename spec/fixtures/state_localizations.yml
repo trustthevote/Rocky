@@ -34,6 +34,18 @@ florida_es:
   - Ratoncito
   no_party: Se niega a declarar
   sub_18: si va a cumplir 18 años de las próximas elecciones
+massachusetts_en:
+  state_id: 22
+  locale: en
+  parties: 
+  no_party: 
+  sub_18: if you will turn 18 by the next election
+massachusetts_es:
+  state_id: 22
+  locale: es
+  parties: 
+  no_party: 
+  sub_18: si va a cumplir 18 años de las próximas elecciones
 north_dakota_en:
   state_id: 35
   locale: en

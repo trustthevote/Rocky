@@ -41,6 +41,20 @@ describe Registrant do
     end
   end
 
+  describe "localization" do
+    it "finds the state localization" do
+      reg = Factory.create(:step_5_registrant)
+      loc = StateLocalization.find(:first, :conditions => {:state_id => reg.home_state_id, :locale => reg.locale})
+      assert_equal loc, reg.localization
+    end
+
+    it "finds nothing if no home state or locale" do
+      assert_nil Registrant.new.localization
+      assert_nil Registrant.new(:home_state_id => 1).localization
+      assert_nil Registrant.new(:locale => "en").localization
+    end
+  end
+
   describe "any step" do
     it "blanks party unless requires party" do
       reg = Factory.build(:maximal_registrant)
@@ -372,12 +386,11 @@ describe Registrant do
     it "gets parties by locale when required" do
       reg = Factory.build(:step_2_registrant, :locale => 'en', :home_zip_code => '94101')
       state = reg.home_state
-      localization = state.localizations.detect {|l| l.locale == 'en'}
-      localization.update_attributes(:parties => %w(red green blue), :no_party => "black")
+      reg.localization.update_attributes(:parties => %w(red green blue), :no_party => "black")
       assert_equal %w(red green blue black), reg.state_parties
       reg.locale = 'es'
-      localization = state.localizations.detect {|l| l.locale == 'es'}
-      localization.update_attributes(:parties => %w(red green blue), :no_party => "black")
+      reg.instance_variable_set(:@localization, nil)  # registrant memoizes localization so we have to clear it
+      reg.localization.update_attributes(:parties => %w(red green blue), :no_party => "black")
       assert_equal %w(red green blue black), reg.state_parties
     end
 
@@ -423,27 +436,34 @@ describe Registrant do
 
   describe "set official party name" do
     it "uses party attribute when in English locale" do
-      reg = Factory.build(:step_2_registrant, :locale => "en", :home_zip_code => "94103", :party => "Green")
+      reg = Factory.build(:step_5_registrant, :locale => "en", :home_zip_code => "94103", :party => "Green")
       assert reg.valid?
       assert_equal "Green", reg.official_party_name
     end
 
     it "maps Spanish party name to English" do
-      reg = Factory.build(:step_2_registrant, :locale => "es", :home_zip_code => "94103", :party => "Verde")
+      reg = Factory.build(:step_5_registrant, :locale => "es", :home_zip_code => "94103", :party => "Verde")
       assert reg.valid?
       assert_equal "Green", reg.official_party_name
     end
 
     it "handles Decline to State" do
-      reg = Factory.build(:step_2_registrant, :locale => "en", :home_zip_code => "94103", :party => "Decline to State")
+      reg = Factory.build(:step_5_registrant, :locale => "en", :home_zip_code => "94103", :party => "Decline to State")
       assert reg.valid?
-      assert_equal "Decline to State", reg.official_party_name
+      assert_equal "None", reg.official_party_name
     end
 
     it "handles Decline to State in Spanish" do
-      reg = Factory.build(:step_2_registrant, :locale => "es", :home_zip_code => "94103", :party => "Se niega a declarar")
+      reg = Factory.build(:step_5_registrant, :locale => "es", :home_zip_code => "94103", :party => "Se niega a declarar")
       assert reg.valid?
-      assert_equal "Decline to State", reg.official_party_name
+      assert_equal "None", reg.official_party_name
+    end
+
+    it "sets to None for states which do not require party" do
+      reg = Factory.build(:maximal_registrant, :locale => "en", :home_zip_code => "02134", :party => nil)
+      assert !reg.home_state.requires_party?
+      assert reg.valid?
+      assert_equal "None", reg.official_party_name
     end
   end
 
@@ -452,7 +472,7 @@ describe Registrant do
       reg = Factory.build(:step_1_registrant)
       text = reg.under_18_instructions_for_home_state
       assert_match Regexp.compile(reg.home_state.name), text
-      assert_match Regexp.compile(reg.localizations.by_locale(:en).sub_18), text
+      assert_match Regexp.compile(reg.localization.sub_18), text
     end
   end
 

@@ -70,12 +70,6 @@ class Registrant < ActiveRecord::Base
   belongs_to :mailing_state, :class_name => "GeoState"
   belongs_to :prev_state,    :class_name => "GeoState"
 
-  has_many :localizations, :through => :home_state, :class_name => 'StateLocalization', :autosave => false do
-    def by_locale(loc)
-      find_by_locale(loc.to_s)
-    end
-  end
-
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
   def self.validates_zip_code(*attr_names)
@@ -231,9 +225,15 @@ class Registrant < ActiveRecord::Base
 
   ### instance methods
   attr_accessor :attest_true
-  
+
   def to_param
     uid
+  end
+
+  def localization
+    @localization ||=
+      home_state_id && locale &&
+        StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => locale})
   end
 
   def at_least_step_1?
@@ -339,49 +339,53 @@ class Registrant < ActiveRecord::Base
 
   def state_parties
     if requires_party?
-      loc = localizations.by_locale(locale)
-      loc.parties + [loc.no_party]
+      localization.parties + [localization.no_party]
     else
       nil
     end
   end
 
   def set_official_party_name
-    return if party.blank?
-    self.official_party_name = case self.locale
-      when "en"
-        party
-      when "es"
-        en_loc = localizations.by_locale(:en)
-        es_loc = localizations.by_locale(:es)
-        if party == es_loc.no_party
-          en_loc.no_party
-        else
-          en_loc[:parties][ es_loc[:parties].index(party) ]
-        end
+    return unless self.step_5? || self.complete?
+    self.official_party_name =
+      if party.blank?
+        "None"
+      else
+        en_loc = StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => "en"})
+        case self.locale
+          when "en"
+            party == en_loc.no_party ? "None" : party
+          when "es"
+            es_loc = StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => "es"})
+            if party == es_loc.no_party
+              "None"
+            else
+              en_loc[:parties][ es_loc[:parties].index(party) ]
+            end
+          end
       end
   end
 
   def state_id_tooltip
-    localizations.by_locale(locale).id_number_tooltip
+    localization.id_number_tooltip
   end
 
   def race_tooltip
-    localizations.by_locale(locale).race_tooltip
+    localization.race_tooltip
   end
 
   def party_tooltip
-    localizations.by_locale(locale).party_tooltip
+    localization.party_tooltip
   end
 
   def home_state_not_participating_text
-    localizations.by_locale(locale).not_participating_tooltip
+    localization.not_participating_tooltip
   end
 
   def under_18_instructions_for_home_state
     I18n.t('txt.registration.instructions.under_18',
             :state_name => home_state.name,
-            :state_rule => localizations.by_locale(locale).sub_18)
+            :state_rule => localization.sub_18)
   end
 
   def validate_party

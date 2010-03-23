@@ -119,8 +119,32 @@ class Partner < ActiveRecord::Base
     stats[:age_40_to_64]  = { :count => Registrant.count(:conditions => [conditions, self, 40, 64]) }
     stats[:age_65_and_up] = { :count => Registrant.count(:conditions => [conditions, self, 65, 199]) }
     total_count = stats.inject(0) {|sum, (key,stat)| sum + stat[:count]}
-    stats.each { |key, stat| stat[:percentage] = total_count > 0 ? stat[:count].to_f / total_count : 0.0 }
+    stats.each { |key, stat| stat[:percentage] = percentage(stat[:count], total_count) }
     stats
+  end
+
+  def registration_stats_party
+    sql = <<-SQL
+      SELECT official_party_name, count(registrants.id) AS registrants_count FROM registrants
+      INNER JOIN geo_states ON geo_states.id = registrants.home_state_id
+      WHERE registrants.partner_id = #{self.id}
+        AND (status = 'complete' OR status = 'step_5')
+      GROUP BY official_party_name
+      ORDER BY registrants_count DESC, official_party_name
+    SQL
+
+    stats = self.class.connection.select_all(sql)
+    total_count = stats.inject(0) { |sum, row| sum + row['registrants_count'].to_i }
+    stats.collect do |row|
+      { :party => row['official_party_name'],
+        :count => row['registrants_count'].to_i,
+        :percentage => percentage(row['registrants_count'], total_count)
+      }
+    end
+  end
+
+  def percentage(count, total_count)
+    total_count > 0 ? count.to_f / total_count : 0.0
   end
 
   def registration_stats_completion_date

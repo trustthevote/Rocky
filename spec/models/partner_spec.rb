@@ -409,6 +409,61 @@ describe Partner do
         assert_equal  1, stats[:age_65_and_up][:count]
       end
     end
+
+    describe "by party" do
+      it "should tally registrants by party" do
+        partner = Factory.create(:partner)
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Democratic") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Green") }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Republican") }
+        5.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Other") }
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Decline to State") }
+        stats = partner.registration_stats_party
+        assert_equal 5, stats.length
+        assert_equal({:count => 8, :percentage => 0.40, :party => "None"},        stats[0])
+        assert_equal({:count => 5, :percentage => 0.25, :party => "Other"},       stats[1])
+        assert_equal({:count => 4, :percentage => 0.20, :party => "Republican"},  stats[2])
+        assert_equal({:count => 2, :percentage => 0.10, :party => "Green"},       stats[3])
+        assert_equal({:count => 1, :percentage => 0.05, :party => "Democratic"},  stats[4])
+      end
+
+      it "counts states that do not require party as None" do
+        partner = Factory.create(:partner)
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Democratic") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Green") }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Republican") }
+        5.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Other") }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Decline to State") }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "02134") }
+        stats = partner.registration_stats_party
+        assert_equal 5, stats.length
+        assert_equal({:count => 8, :percentage => 0.40, :party => "None"},        stats[0])
+        assert_equal({:count => 5, :percentage => 0.25, :party => "Other"},       stats[1])
+        assert_equal({:count => 4, :percentage => 0.20, :party => "Republican"},  stats[2])
+        assert_equal({:count => 2, :percentage => 0.10, :party => "Green"},       stats[3])
+        assert_equal({:count => 1, :percentage => 0.05, :party => "Democratic"},  stats[4])
+      end
+
+      it "should only include data for this partner" do
+        partner = Factory.create(:partner)
+        other_partner = Factory.create(:partner)
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Democratic") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Green") }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Republican") }
+        5.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Other") }
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Decline to State") }
+        4.times { Factory.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Republican") }
+        5.times { Factory.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Other") }
+        8.times { Factory.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Decline to State") }
+        stats = partner.registration_stats_party
+        assert_equal 5, stats.length
+        assert_equal({:count => 8, :percentage => 0.40, :party => "None"},        stats[0])
+        assert_equal({:count => 5, :percentage => 0.25, :party => "Other"},       stats[1])
+        assert_equal({:count => 4, :percentage => 0.20, :party => "Republican"},  stats[2])
+        assert_equal({:count => 2, :percentage => 0.10, :party => "Green"},       stats[3])
+        assert_equal({:count => 1, :percentage => 0.05, :party => "Democratic"},  stats[4])
+      end
+    end
   end
 end
 

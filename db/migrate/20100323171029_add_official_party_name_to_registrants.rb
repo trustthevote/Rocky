@@ -3,31 +3,25 @@ class AddOfficialPartyNameToRegistrants < ActiveRecord::Migration
   class StateLocalization < ActiveRecord::Base
     serialize :parties
   end
-  class GeoState < ActiveRecord::Base
-    has_many :localizations, :class_name => 'AddOfficialPartyNameToRegistrants::StateLocalization', :foreign_key => 'state_id'
-  end
   class Registrant < ActiveRecord::Base
-    belongs_to :home_state,    :class_name => "AddOfficialPartyNameToRegistrants::GeoState"
-    has_many  :localizations, :through => :home_state,
-              :class_name => 'AddOfficialPartyNameToRegistrants::StateLocalization',
-              :autosave => false do
-      def by_locale(loc)
-        find_by_locale(loc.to_s)
-      end
-    end
     def set_official_party_name!
-      return if party.blank?
-      self.official_party_name = case self.locale
-        when "en"
-          party
-        when "es"
-          en_loc = localizations.by_locale(:en)
-          es_loc = localizations.by_locale(:es)
-          if party == es_loc.no_party
-            en_loc.no_party
-          else
-            en_loc[:parties][ es_loc[:parties].index(party) ]
-          end
+      return unless self.status == "step_5" || self.status == "complete"
+      self.official_party_name =
+        if party.blank?
+          "None"
+        else
+          en_loc = StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => "en"})
+          case self.locale
+            when "en"
+              party == en_loc.no_party ? "None" : party
+            when "es"
+              es_loc = StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => "es"})
+              if party == es_loc.no_party
+                "None"
+              else
+                en_loc[:parties][ es_loc[:parties].index(party) ]
+              end
+            end
         end
       self.save!
     end

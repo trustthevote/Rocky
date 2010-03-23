@@ -38,7 +38,7 @@ describe IneligiblesController do
       assert assigns[:registrant].opt_in_email
       assert_response :success
       assert_template "under_18"
-      assert_match Regexp.new(@registrant.localizations.by_locale(:en).sub_18), response.body
+      assert_match Regexp.new(@registrant.localization.sub_18), response.body
     end
   end
 end
