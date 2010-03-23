@@ -110,6 +110,19 @@ class Partner < ActiveRecord::Base
     ].sort_by { |r| [ -r[:registrations_count], r[:gender] ] }
   end
 
+  def registration_stats_age
+    conditions = "partner_id = ? AND (status = 'complete' OR status = 'step_5') AND (age BETWEEN ? AND ?)"
+    stats = {}
+    stats[:age_under_18]  = { :count => Registrant.count(:conditions => [conditions, self, 0, 17]) }
+    stats[:age_18_to_29]  = { :count => Registrant.count(:conditions => [conditions, self, 18, 29]) }
+    stats[:age_30_to_39]  = { :count => Registrant.count(:conditions => [conditions, self, 30, 39]) }
+    stats[:age_40_to_64]  = { :count => Registrant.count(:conditions => [conditions, self, 40, 64]) }
+    stats[:age_65_and_up] = { :count => Registrant.count(:conditions => [conditions, self, 65, 199]) }
+    total_count = stats.inject(0) {|sum, (key,stat)| sum + stat[:count]}
+    stats.each { |key, stat| stat[:percentage] = total_count > 0 ? stat[:count].to_f / total_count : 0.0 }
+    stats
+  end
+
   def registration_stats_completion_date
     conditions = "partner_id = ? AND (status = 'complete' OR status = 'step_5') AND created_at >= ?"
     stats = {}

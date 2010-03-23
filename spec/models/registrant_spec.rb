@@ -401,6 +401,26 @@ describe Registrant do
     end
   end
 
+  describe "calculate age" do
+    it "sets age at time of application" do
+      assert_age 17, 17.years + 1.day
+      assert_age 17, 17.years
+      assert_age 16, 17.years - 1.day
+    end
+
+    it "sets age when record is saved" do
+      reg = Factory.create(:step_1_registrant, :date_of_birth => (18.years + 1.day).ago.to_date.strftime("%m/%d/%Y"))
+      assert_equal 18, reg.age
+    end
+  end
+
+  def assert_age(years, born_on)
+    reg = Factory.build(:step_1_registrant, :date_of_birth => born_on.ago.to_date.strftime("%m/%d/%Y"))
+    reg.created_at = Time.now.utc   # TODO: change to a US time zone
+    reg.calculate_age
+    assert_equal years, reg.age
+  end
+
   describe "under_18_instructions_for_home_state" do
     it "shows instructions with state name and localized rule" do
       reg = Factory.build(:step_1_registrant)

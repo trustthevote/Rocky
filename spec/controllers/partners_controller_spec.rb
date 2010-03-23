@@ -65,9 +65,10 @@ describe PartnersController do
         get :statistics
         assert_response :success
         assert_not_nil assigns[:stats_by_state]
+        assert_not_nil assigns[:stats_by_completion_date]
         assert_not_nil assigns[:stats_by_race]
         assert_not_nil assigns[:stats_by_gender]
-        assert_not_nil assigns[:stats_by_completion_date]
+        assert_not_nil assigns[:stats_by_age]
       end
     end
 

@@ -93,6 +93,31 @@ describe Partner do
         assert_equal 2, stats[1][:registrations_count]
         assert_equal 0.4, stats[1][:registrations_percentage]
       end
+
+      it "should only include data for this partner" do
+        partner = Factory.create(:partner)
+        other_partner = Factory.create(:partner)
+        3.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
+        end
+        3.times do
+          reg = Factory.create(:maximal_registrant, :partner => other_partner)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
+        end
+        2.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")
+        end
+        stats = partner.registration_stats_state
+        assert_equal 2, stats.length
+        assert_equal "Florida", stats[0][:state_name]
+        assert_equal 3, stats[0][:registrations_count]
+        assert_equal 0.6, stats[0][:registrations_percentage]
+        assert_equal "California", stats[1][:state_name]
+        assert_equal 2, stats[1][:registrations_count]
+        assert_equal 0.4, stats[1][:registrations_percentage]
+      end
     end
 
     describe "by race" do
@@ -168,6 +193,22 @@ describe Partner do
         assert_equal 2, stats[1][:registrations_count]
         assert_equal 0.4, stats[1][:registrations_percentage]
       end
+
+      it "should only include data for this partner" do
+        partner = Factory.create(:partner)
+        other_partner = Factory.create(:partner)
+        3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
+        3.times { Factory.create(:maximal_registrant, :partner => other_partner, :race => "Hispanic") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
+        stats = partner.registration_stats_race
+        assert_equal 2, stats.length
+        assert_equal "Hispanic", stats[0][:race]
+        assert_equal 3, stats[0][:registrations_count]
+        assert_equal 0.6, stats[0][:registrations_percentage]
+        assert_equal "Multi-racial", stats[1][:race]
+        assert_equal 2, stats[1][:registrations_count]
+        assert_equal 0.4, stats[1][:registrations_percentage]
+      end
     end
 
     describe "by gender" do
@@ -185,7 +226,7 @@ describe Partner do
         assert_equal 0.4, stats[1][:registrations_percentage]
       end
 
-      it "should treat race names in different languages as equivalent" do
+      it "should treat titles in different languages as equivalent" do
         partner = Factory.create(:partner)
         4.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
         2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Sr.") }
@@ -229,6 +270,22 @@ describe Partner do
         assert_equal 2, stats[1][:registrations_count]
         assert_equal 0.4, stats[1][:registrations_percentage]
       end
+
+      it "should only include data for this partner" do
+        partner = Factory.create(:partner)
+        other_partner = Factory.create(:partner)
+        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        3.times { Factory.create(:maximal_registrant, :partner => other_partner, :name_title => "Mr.") }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
+        stats = partner.registration_stats_gender
+        assert_equal 2, stats.length
+        assert_equal "Male", stats[0][:gender]
+        assert_equal 3, stats[0][:registrations_count]
+        assert_equal 0.6, stats[0][:registrations_percentage]
+        assert_equal "Female", stats[1][:gender]
+        assert_equal 2, stats[1][:registrations_count]
+        assert_equal 0.4, stats[1][:registrations_percentage]
+      end
     end
 
     describe "by registration date" do
@@ -247,12 +304,13 @@ describe Partner do
         assert_equal 20, stats[:total_count]
       end
 
-      it "should not include incomplete registrations in counts" do
+      it "only uses completed/step_5 registrations for stats" do
         partner = Factory.create(:partner)
         8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
         8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
+        8.times { Factory.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         stats = partner.registration_stats_completion_date
-        assert_equal  8, stats[:day_count]
+        assert_equal  16, stats[:day_count]
       end
 
       it "should show percent complete" do
@@ -272,7 +330,7 @@ describe Partner do
         assert_equal   5, stats[:week_count]
         assert_equal 0.5, stats[:percent_complete]
       end
-      
+
       it "should only include data for this partner" do
         partner = Factory.create(:partner)
         other_partner = Factory.create(:partner)
@@ -282,6 +340,73 @@ describe Partner do
         stats = partner.registration_stats_completion_date
         assert_equal   1, stats[:week_count]
         assert_equal 0.5, stats[:percent_complete]
+      end
+    end
+
+    describe "by age" do
+      it "should tally registrants count and percentage by age bracket on updated_at date" do
+        partner = Factory.create(:partner)
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
+        stats = partner.registration_stats_age
+        assert_equal  8, stats[:age_under_18][:count]
+        assert_equal  5, stats[:age_18_to_29][:count]
+        assert_equal  4, stats[:age_30_to_39][:count]
+        assert_equal  2, stats[:age_40_to_64][:count]
+        assert_equal  1, stats[:age_65_and_up][:count]
+        assert_equal  0.40, stats[:age_under_18][:percentage]
+        assert_equal  0.25, stats[:age_18_to_29][:percentage]
+        assert_equal  0.20, stats[:age_30_to_39][:percentage]
+        assert_equal  0.10, stats[:age_40_to_64][:percentage]
+        assert_equal  0.05, stats[:age_65_and_up][:percentage]
+      end
+
+      it "only uses completed/step_5 registrations for stats" do
+        partner = Factory.create(:partner)
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { Factory.create(:step_5_registrant,  :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
+
+        8.times { Factory.create(:under_18_finished_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        8.times { Factory.create(:step_1_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { Factory.create(:step_2_registrant, :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { Factory.create(:step_3_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { Factory.create(:step_4_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+
+        stats = partner.registration_stats_age
+        assert_equal  8, stats[:age_under_18][:count]
+        assert_equal  5, stats[:age_18_to_29][:count]
+        assert_equal  4, stats[:age_30_to_39][:count]
+        assert_equal  2, stats[:age_40_to_64][:count]
+        assert_equal  1, stats[:age_65_and_up][:count]
+      end
+
+      it "should only include data for this partner" do
+        partner = Factory.create(:partner)
+        other_partner = Factory.create(:partner)
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { Factory.create(:step_5_registrant,  :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        1.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
+
+        8.times { Factory.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { Factory.create(:step_5_registrant,  :partner => other_partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { Factory.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { Factory.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        1.times { Factory.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
+
+        stats = partner.registration_stats_age
+        assert_equal  8, stats[:age_under_18][:count]
+        assert_equal  5, stats[:age_18_to_29][:count]
+        assert_equal  4, stats[:age_30_to_39][:count]
+        assert_equal  2, stats[:age_40_to_64][:count]
+        assert_equal  1, stats[:age_65_and_up][:count]
       end
     end
   end

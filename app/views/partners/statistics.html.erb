@@ -3,7 +3,7 @@
 
   <div class="stats" id="stats_by_state">
     <table>
-      <thead><tr><th colspan="3">Registrations by State</th></tr></thead>
+      <thead><tr><th colspan="3">Applications by State</th></tr></thead>
       <tbody>
         <% @stats_by_state.each do |stat| %>
           <tr class="<%= cycle('even', 'odd') %>">
@@ -20,7 +20,7 @@
     <% reset_cycle %>
     <div class="stats" id="stats_by_completion_date">
       <table>
-        <thead><tr><th colspan="3">Completed Registrations</th></tr></thead>
+        <thead><tr><th colspan="3">Completed Applications</th></tr></thead>
         <tbody>
           <tr class="<%= cycle('even', 'odd') %>">
             <th>Today</th>
@@ -53,7 +53,7 @@
     <% reset_cycle %>
     <div class="stats" id="stats_by_race">
       <table>
-        <thead><tr><th colspan="3">Registrations by Ethnicity</th></tr></thead>
+        <thead><tr><th colspan="3">Applications by Ethnicity</th></tr></thead>
         <tbody>
           <% @stats_by_race.each do |stat| %>
             <tr class="<%= cycle('even', 'odd') %>">
@@ -69,7 +69,7 @@
     <% reset_cycle %>
     <div class="stats" id="stats_by_gender">
       <table>
-        <thead><tr><th colspan="3">Registrations by Gender</th></tr></thead>
+        <thead><tr><th colspan="3">Applications by Gender</th></tr></thead>
         <tbody>
           <% @stats_by_gender.each do |stat| %>
             <tr class="<%= cycle('even', 'odd') %>">
@@ -78,6 +78,40 @@
               <td><%= "%.1f" % (stat[:registrations_percentage] * 100) %>%</td>
             </tr>
           <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% reset_cycle %>
+    <div class="stats" id="stats_by_age">
+      <table>
+        <thead><tr><th colspan="3">Applications by Age</th></tr></thead>
+        <tbody>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>&lt; 18</th>
+            <td><%= @stats_by_age[:age_under_18][:count] %></td>
+            <td><%= "%.1f" % (@stats_by_age[:age_under_18][:percentage] * 100) %>%</td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>18-29</th>
+            <td><%= @stats_by_age[:age_18_to_29][:count] %></td>
+            <td><%= "%.1f" % (@stats_by_age[:age_18_to_29][:percentage] * 100) %>%</td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>30-39</th>
+            <td><%= @stats_by_age[:age_30_to_39][:count] %></td>
+            <td><%= "%.1f" % (@stats_by_age[:age_30_to_39][:percentage] * 100) %>%</td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>40-64</th>
+            <td><%= @stats_by_age[:age_40_to_64][:count] %></td>
+            <td><%= "%.1f" % (@stats_by_age[:age_40_to_64][:percentage] * 100) %>%</td>
+          </tr>
+          <tr class="<%= cycle('even', 'odd') %>">
+            <th>65-up</th>
+            <td><%= @stats_by_age[:age_65_and_up][:count] %></td>
+            <td><%= "%.1f" % (@stats_by_age[:age_65_and_up][:percentage] * 100) %>%</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -96,6 +96,7 @@ class Registrant < ActiveRecord::Base
   before_validation :reformat_state_id_number
   before_validation :reformat_phone
 
+  after_validation :calculate_age
   after_validation :check_ineligible
   after_validation :enqueue_tell_friends_emails
 
@@ -312,6 +313,19 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def calculate_age
+    if errors.on(:date_of_birth).blank?
+      now = (created_at || Time.now).to_date
+      years = now.year - date_of_birth.year
+      if (date_of_birth.month > now.month) || (date_of_birth.month == now.month && date_of_birth.day > now.day)
+        years -= 1
+      end
+      self.age = years
+    else
+      self.age = nil
+    end
+  end
+
   def validate_race
     if requires_race?
       if race.blank?
@@ -513,7 +527,7 @@ class Registrant < ActiveRecord::Base
 
   def check_ineligible
     self.ineligible_non_participating_state = home_state && !home_state.participating?
-    self.ineligible_age = date_of_birth && (date_of_birth >= 18.years.ago.to_date)
+    self.ineligible_age = age && age < 18
     self.ineligible_non_citizen = !us_citizen?
     true # don't halt save in after_validation
   end
