@@ -16,7 +16,7 @@ california_es:
   - Verde
   - Libertariano
   - Republicano
-  no_party: Disminución del Estado
+  no_party: Se niega a declarar
   sub_18: si va a cumplir 18 años de las próximas elecciones
 florida_en:
   state_id: 10
@@ -32,7 +32,7 @@ florida_es:
   parties: 
   - Naranja
   - Ratoncito
-  no_party: Disminución del Estado
+  no_party: Se niega a declarar
   sub_18: si va a cumplir 18 años de las próximas elecciones
 north_dakota_en:
   state_id: 35
@@ -49,7 +49,7 @@ north_dakota_es:
   parties: 
   - Izquierda
   - Derecha
-  no_party: Disminución del Estado
+  no_party: Se niega a declarar
   sub_18: si va a cumplir 18 años de las próximas elecciones
   not_participating_tooltip: Dakota del Norte no se insegña para votar
 pennsylvania_en:
@@ -66,5 +66,5 @@ pennsylvania_es:
   parties: 
   - Steel
   - Coal
-  no_party: Disminución del Estado
+  no_party: Se niega a declarar
   sub_18: si va a cumplir 18 años de las próximas elecciones

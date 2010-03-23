@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100322170824) do
+ActiveRecord::Schema.define(:version => 20100323171029) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -126,8 +126,10 @@ ActiveRecord::Schema.define(:version => 20100322170824) do
     t.boolean  "under_18_ok"
     t.boolean  "remind_when_18"
     t.integer  "age"
+    t.string   "official_party_name"
   end
 
+  add_index "registrants", ["official_party_name"], :name => "index_registrants_on_official_party_name"
   add_index "registrants", ["uid"], :name => "index_registrants_on_uid"
 
   create_table "state_localizations", :force => true do |t|

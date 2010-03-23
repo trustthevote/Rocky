@@ -421,6 +421,32 @@ describe Registrant do
     assert_equal years, reg.age
   end
 
+  describe "set official party name" do
+    it "uses party attribute when in English locale" do
+      reg = Factory.build(:step_2_registrant, :locale => "en", :home_zip_code => "94103", :party => "Green")
+      assert reg.valid?
+      assert_equal "Green", reg.official_party_name
+    end
+
+    it "maps Spanish party name to English" do
+      reg = Factory.build(:step_2_registrant, :locale => "es", :home_zip_code => "94103", :party => "Verde")
+      assert reg.valid?
+      assert_equal "Green", reg.official_party_name
+    end
+
+    it "handles Decline to State" do
+      reg = Factory.build(:step_2_registrant, :locale => "en", :home_zip_code => "94103", :party => "Decline to State")
+      assert reg.valid?
+      assert_equal "Decline to State", reg.official_party_name
+    end
+
+    it "handles Decline to State in Spanish" do
+      reg = Factory.build(:step_2_registrant, :locale => "es", :home_zip_code => "94103", :party => "Se niega a declarar")
+      assert reg.valid?
+      assert_equal "Decline to State", reg.official_party_name
+    end
+  end
+
   describe "under_18_instructions_for_home_state" do
     it "shows instructions with state name and localized rule" do
       reg = Factory.build(:step_1_registrant)

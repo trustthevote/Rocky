@@ -97,6 +97,7 @@ class Registrant < ActiveRecord::Base
   before_validation :reformat_phone
 
   after_validation :calculate_age
+  after_validation :set_official_party_name
   after_validation :check_ineligible
   after_validation :enqueue_tell_friends_emails
 
@@ -344,7 +345,23 @@ class Registrant < ActiveRecord::Base
       nil
     end
   end
-  
+
+  def set_official_party_name
+    return if party.blank?
+    self.official_party_name = case self.locale
+      when "en"
+        party
+      when "es"
+        en_loc = localizations.by_locale(:en)
+        es_loc = localizations.by_locale(:es)
+        if party == es_loc.no_party
+          en_loc.no_party
+        else
+          en_loc[:parties][ es_loc[:parties].index(party) ]
+        end
+      end
+  end
+
   def state_id_tooltip
     localizations.by_locale(locale).id_number_tooltip
   end
