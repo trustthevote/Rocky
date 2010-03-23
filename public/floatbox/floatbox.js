@@ -93,10 +93,10 @@ navType:            'button'    ,// 'overlay'|'button'|'both'|'none'
 navOverlayWidth:     35       ,// 0-50
 navOverlayPos:       30       ,// 0-100
 showNavOverlay:     'always'   ,// 'always'|'once'|'never'
-showHints:          'once'    ,// 'always'|'once'|'never'
+showHints:          'never'    ,// 'always'|'once'|'never'
 enableWrap:          true     ,// true|false
-enableKeyboardNav:   true     ,// true|false
-outsideClickCloses:  false     ,// true|false
+enableKeyboardNav:   false    ,// true|false
+outsideClickCloses:  false    ,// true|false
 imageClickCloses:    false    ,// true|false
 numIndexLinks:       0        ,// number, -1 = no limit
 showIndexThumbs:     true     ,// true|false
