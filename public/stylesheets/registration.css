@@ -589,39 +589,6 @@ legend img.tooltip {
 
 /* rollover buttons */
 
-form div.button {
-  text-align: center;
-  margin: 25px auto;
-}
-
-span.button {
-  
-}
-
-.button a {
-  display: block;
-  margin: 0 auto;
-  text-decoration: none;
-}
-
-.button a button {
-  margin: 0;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  cursor: pointer;
-  overflow: visible;
-}
-
-.button a span {
-  position: relative;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: left top;
-  text-indent: -9999em;
-  white-space: nowrap;
-}
-
 a.button_edit_en          { width:  45px; height: 22px; }
 a.button_nextstep_en      { width: 150px; height: 36px; }
 a.button_review_en        { width: 207px; height: 56px; }
@@ -654,7 +621,3 @@ a.button_print_es             span { width: 207px; height: 80px; background-imag
 a.button_remindmelater_es     span { width: 189px; height: 22px; background-image: url(/images/es/button_remindmelater_ro.gif); }
 a.button_review_es            span { width: 207px; height: 56px; background-image: url(/images/es/button_review_ro.gif); }
 a.button_sendemail_es         span { width: 137px; height: 22px; background-image: url(/images/es/button_sendemail_ro.gif); }
-
-.button a:hover span  {
-  background-position: right top;
-}

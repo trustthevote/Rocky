@@ -31,11 +31,20 @@ ul.flash {
 }
 
 #container {
-  width: 800px;
-  height: 100%;
+  width: 720px;
   margin: 0 auto;
   background-color: #eaeaea;
 }
+
+#container a {
+  color: #b42225;
+  text-decoration: none;
+}
+
+#container a:hover {
+  color: #f33;
+}
+
 
 #header {
   position: relative;
@@ -46,7 +55,7 @@ ul.flash {
 }
 
 #header a {
-  color: #B00;
+  color: #b42225;
   text-decoration: none;
 }
 
@@ -71,7 +80,6 @@ ul.flash {
   background-color: #eaeaea;
   position: relative;
   padding: 10px 20px;
-/*  min-height: 500px;*/
 }
 
 h1, h2, h3, h4, h5, h6, legend {
@@ -90,6 +98,15 @@ h2, h3 {
 p {
   font-size: 14px;
   margin: 0.5em 0;
+}
+
+.text p {
+  margin: 1em 0;
+  line-height: 1.5em;
+}
+
+.text {
+  margin: 1em 0;
 }
 
 ul {
@@ -116,10 +133,13 @@ label {
   position: relative;
 }
 
-.column-right {
-  position: absolute;
-  top: 0;
-  left: 300px;
+#statistics {
+  margin: 10px auto;
+}
+
+#statistics div {
+  width: 300px;
+  margin: 20px;
 }
 
 .stats {
@@ -129,13 +149,15 @@ label {
 }
 
 .stats table {
-  border: 1px solid #c7c7c7;
+  border: 1px solid #c0c0c0;
   width: 100%;
 }
 
 .stats thead th, .stats thead td {
+  padding-top: 6px;
+  padding-bottom: 6px;
   color: #d8d8d8;
-  background-color: black;
+  background: #0b0b0b url(/images/partner/stats_header_bg.gif) top left repeat-x;
   font-weight: bold;
 }
 
@@ -151,10 +173,19 @@ label {
   text-align: right;
 }
 
+.stats td:last-child {
+  width: 21%;
+}
+
 .stats th, .stats td {
   background-color: #d8d8d8;
 }
 
 .stats .even th, .stats .even td {
-  background-color: #a0a0a0;
+  background-color: #c0c0c0;
 }
+
+/* rollover buttons */
+
+a.button_downloadcsv      { width: 258px; height: 22px; }
+a.button_downloadcsv span { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }

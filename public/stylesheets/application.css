@@ -51,3 +51,38 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 10px;
 }
+
+/* rollover buttons */
+
+form div.button {
+  text-align: center;
+  margin: 25px auto;
+}
+
+.button a {
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
+}
+
+.button a button {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.button a span {
+  position: relative;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  text-indent: -9999em;
+  white-space: nowrap;
+}
+
+.button a:hover span  {
+  background-position: right top;
+}
