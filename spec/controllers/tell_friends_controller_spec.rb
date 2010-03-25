@@ -22,7 +22,7 @@ describe TellFriendsController do
       assert assigns[:email_sent]
 
       assert :success
-      assert_template "registrants/finish"
+      assert_template "finishes/show"
     end
 
     it "should show form again when fields are missing" do
@@ -41,7 +41,7 @@ describe TellFriendsController do
       assert !assigns[:email_sent]
 
       assert :success
-      assert_template "registrants/finish"
+      assert_template "finishes/show"
     end
   end
 end

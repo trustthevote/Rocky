@@ -7,7 +7,7 @@ class TellFriendsController < RegistrationStep
     @registrant.telling_friends = true
     @email_sent = @registrant.valid?
     # registrant sends email as side-effect of there being valid tell-friend params
-    render "registrants/finish"
+    render "finishes/show"
   end
 
   protected

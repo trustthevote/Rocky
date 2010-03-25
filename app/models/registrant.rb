@@ -11,6 +11,7 @@ class Registrant < ActiveRecord::Base
   include AASM
   include Mergable
   include Lolrus
+  include ActionView::Helpers::UrlHelper
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5]
   # TODO: add :es to get full set for validation
@@ -602,6 +603,7 @@ class Registrant < ActiveRecord::Base
   ### tell-a-friend email
 
   attr_writer :tell_from, :tell_email, :tell_recipients, :tell_subject, :tell_message
+  attr_accessor :tell_recipients, :tell_message
 
   def tell_from
     @tell_from ||= "#{first_name} #{last_name}"
@@ -611,21 +613,12 @@ class Registrant < ActiveRecord::Base
     @tell_email ||= email_address
   end
 
-  def tell_recipients
-    @tell_recipients
-  end
-
   def tell_subject
-    @tell_subject ||= "Register to vote the easy way" # TODO: localize
-  end
-
-  def tell_message
-    @tell_message ||= case self.status.to_sym
-    when :complete
-      "I just registered to vote" # TODO: localize
-    when :under_18
-      "Are you registered to vote?"
-    end
+    @tell_subject ||=
+      case self.status.to_sym
+      when :complete ; I18n.t('email.tell_friend.subject')
+      when :under_18 ; I18n.t('email.tell_friend_under_18.subject')
+      end
   end
 
   def enqueue_tell_friends_emails

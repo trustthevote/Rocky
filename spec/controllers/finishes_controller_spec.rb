@@ -10,6 +10,12 @@ describe FinishesController do
       @registrant = Factory.create(:completed_registrant)
     end
 
+    it "sets default content for message body" do
+      get :show, :registrant_id => @registrant.to_param
+      assert_match %r(Hey, I just registered to vote), assigns[:registrant].tell_message
+      assert_match Regexp.compile(Regexp.escape(root_url(:source => "email"))), assigns[:registrant].tell_message
+    end
+
     it "shows share links and tell-a-friend email form" do
       get :show, :registrant_id => @registrant.to_param
       assert_not_nil assigns[:registrant]
@@ -42,6 +48,12 @@ describe FinishesController do
   describe "under 18" do
     before(:each) do
       @registrant = Factory.create(:under_18_finished_registrant)
+    end
+
+    it "sets default content for message body" do
+      get :show, :registrant_id => @registrant.to_param
+      assert_match %r(Are you registered to vote\?  I may not be old enough to vote), assigns[:registrant].tell_message
+      assert_match Regexp.compile(Regexp.escape(root_url(:source => "email"))), assigns[:registrant].tell_message
     end
 
     it "shows share links and tell-a-friend email form" do

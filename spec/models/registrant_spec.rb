@@ -1,5 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
+include ActionView::Helpers::UrlHelper
+
 describe Registrant do
   describe "to_param hides id" do
     it "should be nil for new records" do
@@ -746,22 +748,17 @@ describe Registrant do
         assert_equal "jqp@gmail.com", reg.tell_email
       end
 
-      it "has tell_recipients" do
-        assert reg.tell_recipients.blank?
-        reg.tell_recipients = "jqp@gmail.com"
-        assert_equal "jqp@gmail.com", reg.tell_recipients
-      end
-
       it "has tell_subject" do
-        assert_equal "Register to vote the easy way", reg.tell_subject
+        assert_equal "I just registered to vote and you should too", reg.tell_subject
         reg.tell_subject = "This is super cool"
         assert_equal "This is super cool", reg.tell_subject
       end
 
-      it "has tell_message" do
-        assert_match /^I just registered to vote/, reg.tell_message
-        reg.tell_message = "Do you believe I just registered to vote?"
-        assert_equal "Do you believe I just registered to vote?", reg.tell_message
+      it "has tell_subject default for under 18" do
+        reg = Factory.build(:under_18_finished_registrant)
+        assert_equal "Register to vote!", reg.tell_subject
+        reg.tell_subject = "This is super cool"
+        assert_equal "This is super cool", reg.tell_subject
       end
     end
 
@@ -794,22 +791,6 @@ describe Registrant do
       it "sends one email per recipient" do
         mock(Notifier).deliver_tell_friends(anything).times(3)
         Registrant.deliver_tell_friends_emails(@tell_params)
-      end
-    end
-
-    describe "under-18 registration" do
-      before(:each) do
-        @reg = Factory.build( :under_18_finished_registrant,
-                              :name_title => "Mr.",
-                              :first_name => "John", :middle_name => "Queue", :last_name => "Public",
-                              :name_suffix => "Jr.",
-                              :email_address => "jqp@example.com" )
-      end
-
-      describe "attributes for form fields have smart defaults" do
-        it "has tell_message" do
-          assert_match /^Are you registered to vote/, reg.tell_message
-        end
       end
     end
   end

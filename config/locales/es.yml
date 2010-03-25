@@ -1,182 +1,188 @@
 es:
- activerecord:
-   attributes:
-     registrant:
-       date_of_birth: fecha de cac
-       email_address: correo electrónico
-       first_registration: Me estoy registrando por primera vez para votar
-       home_zip_code: Código postal
-       us_citizen: Soy ciudadano americano
-       name_title: Titulo
-       first_name: Nombre
-       middle_name: Segundo Nombre
-       last_name: Apellido
-       name_suffix: Sufijo
-       home_address: Dirección Casa
-       home_unit: No.
-       home_city: Ciudad
-       home_state_name: Estado
-       has_mailing_address: Recibo mi correo en una dirección diferente a la provista anteriormente
-       mailing_address: Dirección Alterna
-       mailing_unit: No.
-       mailing_city: Ciudad
-       mailing_state_abbrev: Estado
-       mailing_zip_code: Código Postal
-       party: Partido
-       race: Raza
-       state_id_number: Número ID
-       phone: Teléfono
-       phone_type: Tipo
-       change_of_name: He cambiado mi nombre
-       prev_name_title: Titulo
-       prev_first_name: Nombre
-       prev_middle_name: Segundo Nombre
-       prev_last_name: Apellido
-       prev_name_suffix: Sufijo
-       change_of_address: He cambiado mi dirección
-       prev_address: Dirección
-       prev_unit: No.
-       prev_city: Ciudad
-       prev_state_abbrev: Estado
-       prev_zip_code: Código Postal
-       opt_in_email: Recibir correo electronico
-       opt_in_sms: Recibir mensajes de texto
-       attest_true: He revisado la información detalladamente, es fidedigna y veraz dentro de mi conocimiento.
-   errors:
-     models:
-       registrant:
-         blank: "Requerido"
-         invalid_zip: "Código Postal Invalido"
-         attributes:
-           home_zip_code:
-             invalid: "Utilize ZIP o ZIP+4"
-           mailing_zip_code:
-             invalid: "Utilize ZIP o ZIP+4"
-           prev_zip_code:
-             invalid: "Utilize ZIP o ZIP+4"
-           email_address:
-             invalid: "Dirección no válida"
-           date_of_birth:
-             format: "Debe ser MM-DD-AAAA"
-           phone:
-             invalid: "Deber ser ***-***-****"
-           attest_true:
-             accepted: "Debe indicar si la información arriba es correcta"
-     messages:
-       inclusion: "{{attribute}} no esta incluida en la lista"
-       exclusion: "{{attribute}} esta reservado"
-       invalid: "{{attribute}} es inválido"
-       confirmation: "{{attribute}} no concuerda con la confirmación"
-       accepted: "{{attribute}} debe ser aceptada"
-       empty: "{{attribute}} no puede estar vacio"
-       blank: "{{attribute}} no puede estar en blanco"
-       too_long: "{{attribute}} es muy largo (máximo {{count}} caracteres)"
-       too_short: "{{attribute}} es muy corto (mínimo {{count}} caracteres)"
-       wrong_length: "{{attribute}} tamaño incorrecto (deber ser {{count}} caracteres)"
-       taken: "{{attribute}} ya fue tomado"
-       not_a_number: "{{attribute}} no es un número"
-       greater_than: "{{attribute}} debe ser mayor a {{count}}"
-       greater_than_or_equal_to: "{{attribute}} deber ser mayor a o igual a {{count}}"
-       equal_to: "{{attribute}} debe ser igual a {{count}}"
-       less_than: "{{attribute}} debe ser menor a {{count}}"
-       less_than_or_equal_to: "{{attribute}} debe ser menor a o igual a {{count}}"
-       odd: "{{attribute}} debe ser impar"
-       even: "{{attribute}} debe ser par"
- authlogic:
-   error_messages:
-     login_blank: "Login no puede estar en blanco."
-     login_not_found: "Combinación de Login/Password no es válida."
-     login_invalid: "Usuario solo puede ser letras, números, espacios, y .-_@ porfavor."
-     consecutive_failed_logins_limit_exceeded: "Login consecutivo incorrecto límite excedido, la cuenta ha sido desactivada."
-     email_invalid: "Correo electronico no es una dirección válida."
-     password_blank: "Password no puede estar en blanco."
-     password_invalid: "Login/Password no es un combinación válida."
-     not_active: "Tu cuenta no está activada."
-     not_confirmed: "Tu cuenta no está confirmada."
-     not_approved: "Tu cuenta no ha sido aprobada."
-     no_authentication_details: "Faltan detalles de autentificación."
- txt:
-   button:
-     submit: "Siguientes pasos"
-     edit: Editar
-     back: "Paso Anterior"
-     download: "Descargar PDF"
-     ineligible_try_again: Regresar
-     help: Ayuda
-     prepare: Preparar Formato
-     review: Revisar Aplicación
-   registration:
-     powered_by: "accionado por:"
-     progress_indicator: "Paso"
-     other_language: "In English"
-     step_1_header: Nuevo Registro
-     step_2_header: Información Personal
-     step_3_header: Información adicional para registro
-     step_4_header: Mantente informado y toma acción
-     step_5_header: Revisar y Confirmar
-     survey_title: Preguntas para ti
-     download_header: Imprimir Formato
-     ineligible_header: "Una disculpa, no eres elegilbe para registrarte para votar por las siguientes razones:"
-     name: Nombre
-     select_none: (none)
-     home_address: Dirección casa
-     mailing_address: Dirección correo
-     previous_name: Nombre Anterior
-     previous_address: Dirección Anterior
-     opt_in_sms: Enviarme recordatorios para votar vía txt.
-     opt_in_email: "Recibir emails en {{email_address}}"
-     volunteer: "Me gustaría voluntariar para {{organization}}"
-     not_given: none
-     titles:
-     - Sr.
-     - Sra.
-     - Srta. 
-     - Ms
-     suffixes:
-     - Jr.
-     - Sr.
-     - II
-     - III
-     - IV
-     races:
-     - Indio Americano / Nativo de Alaska
-     - Asiático / Islas del Pacífico
-     - Negra (No hispano)
-     - Hispano
-     - Multi-racial
-     - Blanca (no hispano)
-     - Otra
-     - Declino comentar
-     phone_types:
-     - Móvil
-     - Casa
-     - Trabajo
-     - Otro
-     instructions:
-       opt_in_sms: Enviarme recordatorios para votar vía txt.
-       opt_in_email: Le enviaremos recordatorios de la elección, información del recinto electoral asignado, y información oportuna sobre música y temas información.
-       review: Porfavor revisar la siguiente información y confirmar su autenticidad.
-       download: No has acabado aún.  Da click en el boton para imprimir tu forma de registro para votar.  
-         Firma y envíalo vía correo a la dirección provista en tu forma.
-       download_2: No serás registrado si no imprimes, firmas y mandas tu forma vía correo! 
-     ineligible:
-       age: Debes ser mayor a 18 años para la fecha de la elección.
-       non_citizen: Debes ser ciudadano de EU para registrarte a votar
-       attest: Debes confirmar que eres elegible para votar
-     tooltips:
-       email_address: Te enviaremos una copia de tu forma de registro para votar vía correo electronico.
-       home_zip_code: "Entra el código postal y la direcciones donde vives, aunque no recibas correo ahí."
-       date_of_birth: "Debes ser mayor a 18 años para el día de la elección."
-       registrant_name: Poner tu nombre completo en estos espacios.  Porfavor no usar apodos o iniciales.  Si esta aplicación es para el cambio de nombre se te preguntará tu nombre anterior registrado.  Y no olvidar poner tu título (Sr. Sra.,Srta, Ms).
-       home_address: Poner tu dirección en estos espacios.  No poner tu dirección de correo aquí si es diferente a la dirección de tu casa.  No usar Post office Box o rural route sin un número de box.  Si vives en un area rural y no tienes calle o si no tienes dirección, favor mostrar donde vives en el mapa anexo a la forma.
-       mailing_address: Poner tu dirección de correo si recibes tu correo en una dirección distinta a la de tu casa.  Si no recibes correo en tu casa, debes llenar esta parte para indicarnos donde localizarte vía correo.
-       phone: Muchos estados piden tu número de teléfono en caso de que tengan preguntas sobre tu aplicación.  No estás obligado a proveer to número de teléfono.
-       previous_name: Si has cambiado tu nombre desde tu ultimo registro, poner tu nombre anterior.
-       previous_address: Si te has cambiado de dirección desde tu ultimo registro, favor de proveer la dirección anterior.
- email:
-   confirmation:
-     subject: "Reminder: Mail your voter registration form"
-#      body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
-   reminder:
-     subject: "Reminder: Mail your voter registration form"
-#      body: "This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
+  activerecord:
+    attributes:
+      registrant:
+        date_of_birth: fecha de cac
+        email_address: correo electrónico
+        first_registration: Me estoy registrando por primera vez para votar
+        home_zip_code: Código postal
+        us_citizen: Soy ciudadano americano
+        name_title: Titulo
+        first_name: Nombre
+        middle_name: Segundo Nombre
+        last_name: Apellido
+        name_suffix: Sufijo
+        home_address: Dirección Casa
+        home_unit: No.
+        home_city: Ciudad
+        home_state_name: Estado
+        has_mailing_address: Recibo mi correo en una dirección diferente a la provista anteriormente
+        mailing_address: Dirección Alterna
+        mailing_unit: No.
+        mailing_city: Ciudad
+        mailing_state_abbrev: Estado
+        mailing_zip_code: Código Postal
+        party: Partido
+        race: Raza
+        state_id_number: Número ID
+        phone: Teléfono
+        phone_type: Tipo
+        change_of_name: He cambiado mi nombre
+        prev_name_title: Titulo
+        prev_first_name: Nombre
+        prev_middle_name: Segundo Nombre
+        prev_last_name: Apellido
+        prev_name_suffix: Sufijo
+        change_of_address: He cambiado mi dirección
+        prev_address: Dirección
+        prev_unit: No.
+        prev_city: Ciudad
+        prev_state_abbrev: Estado
+        prev_zip_code: Código Postal
+        opt_in_email: Recibir correo electronico
+        opt_in_sms: Recibir mensajes de texto
+        attest_true: He revisado la información detalladamente, es fidedigna y veraz dentro de mi conocimiento.
+    errors:
+      models:
+        registrant:
+          blank: "Requerido"
+          invalid_zip: "Código Postal Invalido"
+          attributes:
+            home_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            mailing_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            prev_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            email_address:
+              invalid: "Dirección no válida"
+            date_of_birth:
+              format: "Debe ser MM-DD-AAAA"
+            phone:
+              invalid: "Deber ser ***-***-****"
+            attest_true:
+              accepted: "Debe indicar si la información arriba es correcta"
+      messages:
+        inclusion: "{{attribute}} no esta incluida en la lista"
+        exclusion: "{{attribute}} esta reservado"
+        invalid: "{{attribute}} es inválido"
+        confirmation: "{{attribute}} no concuerda con la confirmación"
+        accepted: "{{attribute}} debe ser aceptada"
+        empty: "{{attribute}} no puede estar vacio"
+        blank: "{{attribute}} no puede estar en blanco"
+        too_long: "{{attribute}} es muy largo (máximo {{count}} caracteres)"
+        too_short: "{{attribute}} es muy corto (mínimo {{count}} caracteres)"
+        wrong_length: "{{attribute}} tamaño incorrecto (deber ser {{count}} caracteres)"
+        taken: "{{attribute}} ya fue tomado"
+        not_a_number: "{{attribute}} no es un número"
+        greater_than: "{{attribute}} debe ser mayor a {{count}}"
+        greater_than_or_equal_to: "{{attribute}} deber ser mayor a o igual a {{count}}"
+        equal_to: "{{attribute}} debe ser igual a {{count}}"
+        less_than: "{{attribute}} debe ser menor a {{count}}"
+        less_than_or_equal_to: "{{attribute}} debe ser menor a o igual a {{count}}"
+        odd: "{{attribute}} debe ser impar"
+        even: "{{attribute}} debe ser par"
+  authlogic:
+    error_messages:
+      login_blank: "Login no puede estar en blanco."
+      login_not_found: "Combinación de Login/Password no es válida."
+      login_invalid: "Usuario solo puede ser letras, números, espacios, y .-_@ porfavor."
+      consecutive_failed_logins_limit_exceeded: "Login consecutivo incorrecto límite excedido, la cuenta ha sido desactivada."
+      email_invalid: "Correo electronico no es una dirección válida."
+      password_blank: "Password no puede estar en blanco."
+      password_invalid: "Login/Password no es un combinación válida."
+      not_active: "Tu cuenta no está activada."
+      not_confirmed: "Tu cuenta no está confirmada."
+      not_approved: "Tu cuenta no ha sido aprobada."
+      no_authentication_details: "Faltan detalles de autentificación."
+  txt:
+    button:
+      submit: "Siguientes pasos"
+      edit: Editar
+      back: "Paso Anterior"
+      download: "Descargar PDF"
+      ineligible_try_again: Regresar
+      help: Ayuda
+      prepare: Preparar Formato
+      review: Revisar Aplicación
+    registration:
+      powered_by: "accionado por:"
+      progress_indicator: "Paso"
+      other_language: "In English"
+      step_1_header: Nuevo Registro
+      step_2_header: Información Personal
+      step_3_header: Información adicional para registro
+      step_4_header: Mantente informado y toma acción
+      step_5_header: Revisar y Confirmar
+      survey_title: Preguntas para ti
+      download_header: Imprimir Formato
+      ineligible_header: "Una disculpa, no eres elegilbe para registrarte para votar por las siguientes razones:"
+      name: Nombre
+      select_none: (none)
+      home_address: Dirección casa
+      mailing_address: Dirección correo
+      previous_name: Nombre Anterior
+      previous_address: Dirección Anterior
+      opt_in_sms: Enviarme recordatorios para votar vía txt.
+      opt_in_email: "Recibir emails en {{email_address}}"
+      volunteer: "Me gustaría voluntariar para {{organization}}"
+      not_given: none
+      titles:
+      - Sr.
+      - Sra.
+      - Srta. 
+      - Ms
+      suffixes:
+      - Jr.
+      - Sr.
+      - II
+      - III
+      - IV
+      races:
+      - Indio Americano / Nativo de Alaska
+      - Asiático / Islas del Pacífico
+      - Negra (No hispano)
+      - Hispano
+      - Multi-racial
+      - Blanca (no hispano)
+      - Otra
+      - Declino comentar
+      phone_types:
+      - Móvil
+      - Casa
+      - Trabajo
+      - Otro
+      instructions:
+        opt_in_sms: Enviarme recordatorios para votar vía txt.
+        opt_in_email: Le enviaremos recordatorios de la elección, información del recinto electoral asignado, y información oportuna sobre música y temas información.
+        review: Porfavor revisar la siguiente información y confirmar su autenticidad.
+        download: No has acabado aún.  Da click en el boton para imprimir tu forma de registro para votar.  
+          Firma y envíalo vía correo a la dirección provista en tu forma.
+        download_2: No serás registrado si no imprimes, firmas y mandas tu forma vía correo! 
+      ineligible:
+        age: Debes ser mayor a 18 años para la fecha de la elección.
+        non_citizen: Debes ser ciudadano de EU para registrarte a votar
+        attest: Debes confirmar que eres elegible para votar
+      tooltips:
+        email_address: Te enviaremos una copia de tu forma de registro para votar vía correo electronico.
+        home_zip_code: "Entra el código postal y la direcciones donde vives, aunque no recibas correo ahí."
+        date_of_birth: "Debes ser mayor a 18 años para el día de la elección."
+        registrant_name: Poner tu nombre completo en estos espacios.  Porfavor no usar apodos o iniciales.  Si esta aplicación es para el cambio de nombre se te preguntará tu nombre anterior registrado.  Y no olvidar poner tu título (Sr. Sra.,Srta, Ms).
+        home_address: Poner tu dirección en estos espacios.  No poner tu dirección de correo aquí si es diferente a la dirección de tu casa.  No usar Post office Box o rural route sin un número de box.  Si vives en un area rural y no tienes calle o si no tienes dirección, favor mostrar donde vives en el mapa anexo a la forma.
+        mailing_address: Poner tu dirección de correo si recibes tu correo en una dirección distinta a la de tu casa.  Si no recibes correo en tu casa, debes llenar esta parte para indicarnos donde localizarte vía correo.
+        phone: Muchos estados piden tu número de teléfono en caso de que tengan preguntas sobre tu aplicación.  No estás obligado a proveer to número de teléfono.
+        previous_name: Si has cambiado tu nombre desde tu ultimo registro, poner tu nombre anterior.
+        previous_address: Si te has cambiado de dirección desde tu ultimo registro, favor de proveer la dirección anterior.
+  email:
+    confirmation:
+      subject: "Reminder: Mail your voter registration form"
+      # body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
+    reminder:
+      subject: "Reminder: Mail your voter registration form"
+      # body: "This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
+    tell_friend:
+      subject: "I just registered to vote and you should too"
+      body: "Hey, I just registered to vote at {{rtv_url}} and you can too.  It is really easy.  Just fill out the online form here: {{rtv_url}}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: {{rtv_url}}. Already registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at {{rtv_url}}.  Happy voting!"
+    tell_friend_under_18:
+      subject: "Register to vote!"
+      body: "Are you registered to vote?  I may not be old enough to vote yet, but you are.  You can't vote unless you are registered.  You can fill out a voter registration form only at {{rtv_url}}.  It is super easy.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  Go to {{rtv_url}}.  Already registered to vote or not old enough to vote yet?  Help others get registered to vote by sending an email to your friends and family asking them to register at {{rtv_url}}.  Happy voting!"

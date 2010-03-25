@@ -1,4 +1,4 @@
-<%= render :partial => @registrant.status.to_s %>
+<%= render :partial => "finishes/#{@registrant.status.to_s}" %>
 
 <div class="share">
   <div><%= rollover_image_link( :share_facebook,
