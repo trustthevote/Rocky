@@ -5,6 +5,7 @@ class Partner < ActiveRecord::Base
   has_many :registrants
 
   before_validation :reformat_phone
+  before_validation :set_default_widget_image
 
   validates_presence_of :name
   validates_presence_of :url
@@ -191,25 +192,14 @@ class Partner < ActiveRecord::Base
   end
 
   WIDGET_IMAGES = {
-    "rtv100x100v1"   => "rtv-100x100-v1.gif",
-    # "rtv100x100v2"   => "rtv-100x100-v2.gif",
-    # "rtv100x100v3"   => "rtv-100x100-v3.gif",
-    # "rtv180x150v1"   => "rtv-180x150-v1.gif",
-    # "rtv180x150v2"   => "rtv-180x150-v2.gif",
-    "rtv200x165v1"   => "rtv-200x165-v1.gif",
-    # "rtv200x165v2"   => "rtv-200x165-v2.gif",
-    # "rtv234x60v1sp" => "rtv-234x60-v1-sp.gif",
-    "rtv234x60v1"    => "rtv-234x60-v1.gif",
-    # "rtv234x60v2"    => "rtv-234x60-v2.gif",
-    # "rtv234x60v3"    => "rtv-234x60-v3.gif",
-    "rtv300x100v1"   => "rtv-300x100-v1.gif",
-    # "rtv300x100v2"   => "rtv-300x100-v2.gif",
-    # "rtv300x100v3"   => "rtv-300x100-v3.gif",
-    "rtv468x60v1sp" => "rtv-468x60-v1-sp.gif",
-    "rtv468x60v1"    => "rtv-468x60-v1.gif",
-    # "rtv468x60v2"    => "rtv-468x60-v2.gif",
-    # "rtv468x60v3"    => "rtv-468x60-v3.gif"
+    "rtv100x100v1"  => "rtv-100x100-v1.gif",
+    "rtv200x165v1"  => "rtv-200x165-v1.gif",
+    "rtv234x60v1"   => "rtv-234x60-v1.gif",
+    "rtv300x100v1"  => "rtv-300x100-v1.gif",
+    "rtv468x60v1"   => "rtv-468x60-v1.gif",
+    "rtv468x60v1sp" => "rtv-468x60-v1-sp.gif"
   }
+  DEFAULT_WIDGET_IMAGE_NAME = "rtv234x60v1"
 
   def widget_image_name
     WIDGET_IMAGES.index(widget_image)
@@ -219,4 +209,7 @@ class Partner < ActiveRecord::Base
     self.widget_image = WIDGET_IMAGES[name]
   end
 
+  def set_default_widget_image
+    self.widget_image_name = DEFAULT_WIDGET_IMAGE_NAME if self.widget_image.blank?
+  end
 end

@@ -13,20 +13,14 @@
     <table>
       <tbody>
         <tr>
-          <th><%= form.radio_button :widget_image_name, "" %></th>
-          <td><%= form.label :widget_image_name,
-                              'Text only:&nbsp;&nbsp;<span style="color:#B2272C">Register to Vote Here</span>',
-                              :for => "partner_widget_image_name_" %></td>
+          <th><%= form.radio_button :widget_image_name, "rtv234x60v1" %></th>
+          <td><%= form.label :widget_image_name, image_tag("widget/rtv-234x60-v1.gif"),
+                             :for => "partner_widget_image_name_rtv234x60v1" %> <em>234 x 60</em></td>
         </tr>
         <tr>
           <th><%= form.radio_button :widget_image_name, "rtv100x100v1" %></th>
           <td><%= form.label :widget_image_name, image_tag("widget/rtv-100x100-v1.gif"),
                              :for => "partner_widget_image_name_rtv100x100v1" %> <em>100 x 100</em></td>
-        </tr>
-        <tr>
-          <th><%= form.radio_button :widget_image_name, "rtv234x60v1" %></th>
-          <td><%= form.label :widget_image_name, image_tag("widget/rtv-234x60-v1.gif"),
-                             :for => "partner_widget_image_name_rtv234x60v1" %> <em>234 x 60</em></td>
         </tr>
         <tr>
           <th><%= form.radio_button :widget_image_name, "rtv300x100v1" %></th>

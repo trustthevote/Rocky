@@ -55,22 +55,8 @@ describe PartnersController do
         assert_response :success
         assert_select 'textarea[readonly]', 1
         html = HTML::Node.parse(nil, 0, 0, assigns(:link_html))
-        assert_select html, "a[href=https://example.com/registrants/new?partner=5][class=floatbox][data-fb-options='width:604 height:max scrolling:no']"
+        assert_select html, "a[href=https://example.com/registrants/new?partner=5&source=embed-rtv100x100v1][class=floatbox][data-fb-options='width:604 height:max scrolling:no']"
         assert_match %r{<img src=.*/images/widget/rtv-100x100-v1.gif}, assigns(:link_html)
-        html = HTML::Node.parse(nil, 0, 0, assigns(:link_html).split("\n").last)
-        assert_select html, "script[type=text/javascript][src=https://example.com/partner/5/widget_loader.js]"
-      end
-
-      it "shows widget html with link text" do
-        stub(request).host { "example.com" }
-        @partner.update_attributes :widget_image_name => ""
-        get :show
-        assert_response :success
-        assert_select 'textarea[readonly]', 1
-        html = HTML::Node.parse(nil, 0, 0, assigns(:link_html))
-        assert_select html, "a[href=https://example.com/registrants/new?partner=5][class=floatbox][data-fb-options='width:604 height:max scrolling:no']"
-        assert_no_match %r{<img}, assigns(:link_html)
-        assert_match %r{Register to Vote Here}, assigns(:link_html)
         html = HTML::Node.parse(nil, 0, 0, assigns(:link_html).split("\n").last)
         assert_select html, "script[type=text/javascript][src=https://example.com/partner/5/widget_loader.js]"
       end

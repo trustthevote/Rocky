@@ -29,6 +29,15 @@ describe Partner do
   end
 
   describe "widget image" do
+    it "is set to default value if none set explicitly" do
+      partner = Factory.build(:partner, :widget_image => nil)
+      assert partner.valid?
+      assert_equal Partner::DEFAULT_WIDGET_IMAGE_NAME, partner.widget_image_name
+      partner.widget_image_name = "rtv100x100v1"
+      assert partner.valid?
+      assert_equal "rtv100x100v1", partner.widget_image_name
+    end
+
     it "gets name of widget image" do
       partner = Factory.build(:partner, :widget_image => "rtv-100x100-v1.gif")
       assert_equal "rtv100x100v1", partner.widget_image_name

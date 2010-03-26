@@ -23,22 +23,11 @@ describe WidgetImagesController do
       before(:each) do
         @partner.widget_image_name = "rtv100x100v1"
       end
+
       it "changes the widget image setting" do
         get :update, :partner => {:widget_image_name => "rtv200x165v1"}
         assert_redirected_to partner_url
         assert_equal "rtv-200x165-v1.gif", assigns[:partner].widget_image
-      end
-
-      it "sets the widget image to nil when selecting text link" do
-        get :update, :partner => {:widget_image_name => ""}
-        assert_redirected_to partner_url
-        assert_nil assigns[:partner].widget_image
-      end
-
-      it "sets the widget image to nil when selecting unknown image" do
-        get :update, :partner => {:widget_image_name => "unknown_image"}
-        assert_redirected_to partner_url
-        assert_nil assigns[:partner].widget_image
       end
     end
   end
