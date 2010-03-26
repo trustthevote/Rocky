@@ -52,6 +52,30 @@ body {
   font-size: 10px;
 }
 
+/* base */
+
+h1, h2, h3, h4, h5, h6, legend {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+h1 { font-size: 18px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+h4 { font-size: 12px; }
+h5 { font-size: 12px; }
+h6 { font-size: 12px; }
+legend { font-size: 14px; }
+
+input, select, textarea {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+}
+
+input, textarea {
+  letter-spacing: 0.08em;
+}
+
 /* rollover buttons */
 
 form div.button {

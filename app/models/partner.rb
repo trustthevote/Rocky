@@ -190,4 +190,33 @@ class Partner < ActiveRecord::Base
     end
   end
 
+  WIDGET_IMAGES = {
+    "rtv100x100v1"   => "rtv-100x100-v1.gif",
+    # "rtv100x100v2"   => "rtv-100x100-v2.gif",
+    # "rtv100x100v3"   => "rtv-100x100-v3.gif",
+    # "rtv180x150v1"   => "rtv-180x150-v1.gif",
+    # "rtv180x150v2"   => "rtv-180x150-v2.gif",
+    "rtv200x165v1"   => "rtv-200x165-v1.gif",
+    # "rtv200x165v2"   => "rtv-200x165-v2.gif",
+    # "rtv234x60v1sp" => "rtv-234x60-v1-sp.gif",
+    "rtv234x60v1"    => "rtv-234x60-v1.gif",
+    # "rtv234x60v2"    => "rtv-234x60-v2.gif",
+    # "rtv234x60v3"    => "rtv-234x60-v3.gif",
+    "rtv300x100v1"   => "rtv-300x100-v1.gif",
+    # "rtv300x100v2"   => "rtv-300x100-v2.gif",
+    # "rtv300x100v3"   => "rtv-300x100-v3.gif",
+    "rtv468x60v1sp" => "rtv-468x60-v1-sp.gif",
+    "rtv468x60v1"    => "rtv-468x60-v1.gif",
+    # "rtv468x60v2"    => "rtv-468x60-v2.gif",
+    # "rtv468x60v3"    => "rtv-468x60-v3.gif"
+  }
+
+  def widget_image_name
+    WIDGET_IMAGES.index(widget_image)
+  end
+
+  def widget_image_name=(name)
+    self.widget_image = WIDGET_IMAGES[name]
+  end
+
 end

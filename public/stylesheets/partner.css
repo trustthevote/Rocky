@@ -109,6 +109,19 @@ p {
   margin: 1em 0;
 }
 
+/*** forms ***/
+
+fieldset {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+legend {
+  padding: 0 5px;
+  line-height: 17px;
+}
+
 ul {
   margin: 1em 0;
 }
@@ -132,6 +145,41 @@ label {
 .wrapper {
   position: relative;
 }
+
+/*** select widget image ***/
+
+#choose_widget fieldset {
+  width: 570px;
+  margin: 20px auto;
+}
+
+#choose_widget th, #choose_widget td {
+  padding: 10px;
+}
+
+#choose_widget th {
+  vertical-align: middle;
+}
+
+#choose_widget th input {
+  margin: 0;
+}
+
+#choose_widget td label {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+#choose_widget td em {
+  position: relative;
+  left:   4px;
+  bottom: 4px;
+  color: #909090;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/*** statistics page ***/
 
 #statistics {
   margin: 10px auto;
@@ -187,5 +235,7 @@ label {
 
 /* rollover buttons */
 
-a.button_downloadcsv      { width: 258px; height: 22px; }
-a.button_downloadcsv span { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }
+a.button_downloadcsv       { width: 258px; height: 22px; }
+a.button_downloadcsv span  { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }
+a.button_getembedcode      { width: 186px; height: 22px; }
+a.button_getembedcode span { width: 186px; height: 22px; background-image: url(/images/partner/button_getembedcode_ro.gif); }

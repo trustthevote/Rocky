@@ -1,5 +1,5 @@
 class QuestionsController < PartnerBase
-  before_filter :require_partner, :only => [:edit, :update]
+  before_filter :require_partner
 
   def edit
     @partner = current_partner

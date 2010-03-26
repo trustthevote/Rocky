@@ -28,6 +28,19 @@ describe Partner do
     end
   end
 
+  describe "widget image" do
+    it "gets name of widget image" do
+      partner = Factory.build(:partner, :widget_image => "rtv-100x100-v1.gif")
+      assert_equal "rtv100x100v1", partner.widget_image_name
+    end
+
+    it "sets widget_image by name" do
+      partner = Factory.build(:partner, :widget_image => nil)
+      partner.widget_image_name = "rtv100x100v1"
+      assert_equal "rtv-100x100-v1.gif", partner.widget_image
+    end
+  end
+
   describe "CSV" do
     it "can generate CSV of all registrants" do
       partner = Factory.create(:partner)
