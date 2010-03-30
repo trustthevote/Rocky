@@ -369,6 +369,7 @@ div.back {
 span.error, span.example {
   display: inline-block;
   font-size: 11px;
+  white-space: nowrap;
 }
 
 .error {
