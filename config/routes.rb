@@ -17,7 +17,8 @@ ActionController::Routing::Routes.draw do |map|
   map.login  "login",  :controller => "partner_sessions", :action => "new"
   map.logout "logout", :controller => "partner_sessions", :action => "destroy"
 
-  map.resource "partner", :path_names => {:new => "register", :edit => "profile"}, :member => {:statistics => :get, :registrations => :get} do |partner|
+  map.resource "partner", :path_names => {:new => "register", :edit => "profile"},
+                          :member => {:statistics => :get, :registrations => :get, :embed_codes => :get} do |partner|
     partner.resource "questions", :only => [:edit, :update]
     partner.resource "widget_image", :only => [:show, :update]
   end

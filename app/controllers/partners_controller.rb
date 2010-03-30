@@ -36,10 +36,22 @@ class PartnersController < PartnerBase
 
   def show
     @partner = current_partner
-    @link_html =
+  end
 
+  def embed_codes
+    @partner = current_partner
+    @text_link_html = %Q[<a href="https://#{request.host}#{root_path(:partner => partner_id)}">Register to Vote Here</a>]
+
+    @image_link_html =
 <<-HTML
-<a href="https://#{request.host}#{new_registrant_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="width:604 height:max scrolling:no">
+<a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}">
+  <img src="http://#{request.host}/images/widget/#{@partner.widget_image}" />
+</a>
+HTML
+
+    @image_overlay_html =
+<<-HTML
+<a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="width:604 height:max scrolling:no">
   <img src="http://#{request.host}/images/widget/#{@partner.widget_image}" />
 </a>
 <script type="text/javascript" src="https://#{request.host}#{widget_loader_path(:id => partner_id, :format => 'js')}"></script>

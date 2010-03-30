@@ -52,17 +52,38 @@ describe PartnersController do
         get :show
         assert_select "a.current", "Dashboard"
       end
+    end
 
-      it "shows widget html with link image" do
+    describe "embed codes" do
+      integrate_views
+
+      before do
         stub(request).host { "example.com" }
         @partner.update_attributes :widget_image_name => "rtv100x100v1"
-        get :show
+        get :embed_codes
         assert_response :success
-        assert_select 'textarea[readonly]', 1
-        html = HTML::Node.parse(nil, 0, 0, assigns(:link_html))
-        assert_select html, "a[href=https://example.com/registrants/new?partner=5&source=embed-rtv100x100v1][class=floatbox][data-fb-options='width:604 height:max scrolling:no']"
-        assert_match %r{<img src=.*/images/widget/rtv-100x100-v1.gif}, assigns(:link_html)
-        html = HTML::Node.parse(nil, 0, 0, assigns(:link_html).split("\n").last)
+      end
+
+      it "shows widget html for plain text link" do
+        assert_select 'textarea[name=text_link_html][readonly]', 1
+        html = HTML::Node.parse(nil, 0, 0, assigns(:text_link_html))
+        assert_select html, "a[href=https://example.com/?partner=5]"
+        assert_match />Register to Vote Here</, assigns(:text_link_html)
+      end
+
+      it "shows widget html for image link" do
+        assert_select 'textarea[name=image_link_html][readonly]', 1
+        assert_match %r{<img src=.*/images/widget/rtv-100x100-v1.gif}, assigns(:image_link_html)
+        html = HTML::Node.parse(nil, 0, 0, assigns(:image_link_html))
+        assert_select html, "a[href=https://example.com/?partner=5&source=embed-rtv100x100v1]"
+      end
+
+      it "shows widget html for image overlay widget" do
+        assert_select 'textarea[name=image_overlay_html][readonly]', 1
+        html = HTML::Node.parse(nil, 0, 0, assigns(:image_overlay_html))
+        assert_select html, "a[href=https://example.com/?partner=5&source=embed-rtv100x100v1][class=floatbox][data-fb-options='width:604 height:max scrolling:no']"
+        assert_match %r{<img src=.*/images/widget/rtv-100x100-v1.gif}, assigns(:image_overlay_html)
+        html = HTML::Node.parse(nil, 0, 0, assigns(:image_overlay_html).split("\n").last)
         assert_select html, "script[type=text/javascript][src=https://example.com/partner/5/widget_loader.js]"
       end
     end

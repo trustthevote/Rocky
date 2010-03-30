@@ -146,10 +146,6 @@ form {
   width: 100%;
 }
 
-form.copy_html {
-  width: inherit;
-}
-
 fieldset {
   margin: 10px 0;
   border: 1px solid #ccc;
