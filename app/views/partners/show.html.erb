@@ -1,3 +1,4 @@
+<% @nav_class[:dashboard] = :current -%>
 <p>
   With your Partner Portal dashboard, you can modify your survey questions, and copy some HTML to use
   on your Web site to link to the RTV online registration tool. You can also
@@ -29,7 +30,7 @@
 <form class="copy_html" action="#" method="get" accept-charset="utf-8">
   <div>
     <h2><label for="link_html">Copy this HTML to embed a Rock the Vote registration on your site:</label> <%= clippy(h(@link_html)) %></h2>
-    <p><textarea name="link_html" readonly="readonly" rows="6" cols="100"><%= h @link_html %></textarea></p>
+    <p><textarea name="link_html" readonly="readonly" rows="6" cols="80"><%= h @link_html %></textarea></p>
   </div>
 </form>
 <p>Not going on a website or have something custom in mind? Here is your unique url:</p>

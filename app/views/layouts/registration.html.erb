@@ -39,29 +39,21 @@
   </div>
 
   <div id="footer-fixed">
-    <div id="footer">
-      <p>
-        <span><a href="http://www.rockthevote.com/voter-registration/online-application-system/faq.html" target="_blank" title="FAQ">FAQ</a></span>
-        <span><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html" target="_blank" title="Privacy &amp; Security">Privacy &amp; Security</a></span>
-        <span><a href="http://www.rockthevote.com/voter-registration/online-application-system/contact.html" target="_blank" title="Contact Us">Contact Us</a></span>
-        <span><a href="http://www.rockthevote.com/voter-registration/online-application-system/about.html" target="_blank" title="About">About</a></span>
-        <span class="copyright">&copy; Copyright <%=Date.today.year%>, <a href="#">Rock the Vote</a></span>
-      </p>
-      <% if ENV['RAILS_ENV'] == 'production' %>
-        <script type="text/javascript">
-          var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." :
-          "http://www.");
-          document.write(unescape("%3Cscript src='" + gaJsHost +
-          "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        </script>
-        <script type="text/javascript">
-          try {
-          var pageTracker = _gat._getTracker("<%=GOOGLE_ANALYTICS%>");
-          pageTracker._trackPageview();
-          } catch(err) {}
-        </script>
-      <% end %>
-    </div>
+    <%= render :partial => 'layouts/footer' %>
   </div>
+<% if ENV['RAILS_ENV'] == 'production' %>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." :
+    "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost +
+    "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("<%=GOOGLE_ANALYTICS%>");
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
+<% end %>
 </body>
 </html>

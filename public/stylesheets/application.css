@@ -1,3 +1,6 @@
+#main h1 {}
+h1.foo {}
+
 /* Eric Meyer's Reset */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -67,6 +70,12 @@ h5 { font-size: 12px; }
 h6 { font-size: 12px; }
 legend { font-size: 14px; }
 
+a { text-decoration: none; }
+a:link    { color: #B2272C; }
+a:visited { color: #B2272C; }
+a:hover   { color: #000000; }
+a:active  { color: #666666; }
+
 input, select, textarea {
   font-family: Tahoma, sans-serif;
   font-size: 12px;
@@ -109,4 +118,41 @@ form div.button {
 
 .button a:hover span  {
   background-position: right top;
+}
+
+#footer {
+  zoom: 1;
+  height: 40px;
+  margin: 0 auto;
+  color: #d0d0d0;
+  background-color: black;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+}
+
+#footer p {
+  margin: 0;
+  font-size: 1.15em;
+  line-height: 40px;
+  text-align: center;
+}
+
+#footer span {
+  margin: 0 0.5em;
+}
+
+#footer a:link    { color: #D0D0D0; }
+#footer a:visited { color: #D0D0D0; }
+#footer a:hover   { color: #FFFFFF; }
+#footer a:active  { color: #FFFFFF; }
+
+
+#footer a:hover {
+  color: white;
+}
+
+.copyright {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1em;
+  font-style: oblique;
+  color: #CCCCCC;
 }

@@ -15,22 +15,22 @@
   <div id="container">
     <div id="header">
       <% if current_partner_session %>
-        <span>Hello, <%= current_partner.name %>.</span>
+        <span><%= link_to "Log out", logout_path %></span>
         <p>
-          <%= link_to "Dashboard", partner_path %> |
-          <%= link_to "Show Statistics", statistics_partner_path %> |
-          <%= link_to "Download Registration Data", registrations_partner_path(:format => 'csv') %> |
-          <%= link_to "Profile", edit_partner_path %> |
-          <%= link_to "Log out", logout_path %>
+          <%= link_to "Dashboard", partner_path, :class => @nav_class[:dashboard] %> |
+          <%= link_to "Reports", statistics_partner_path, :class => @nav_class[:statistics] %> |
+          <%= link_to "Customize", partner_widget_image_path, :class => @nav_class[:customize] %> |
+          <%= link_to "Edit Profile", edit_partner_path, :class => @nav_class[:profile] %>
         </p>
       <% else %>
-        <p><%= link_to "Log in", login_path %></p>
+        <span><%= link_to "Log in", login_path %></span>
       <% end %>
     </div>
     <div id="main">
       <%= flash_messages %>
       <%= yield %>
     </div>
+    <%= render :partial => 'layouts/footer' %>
   </div>
 </body>
 </html>

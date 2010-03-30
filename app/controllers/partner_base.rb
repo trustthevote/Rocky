@@ -2,6 +2,8 @@ class PartnerBase < ApplicationController
   layout "partners"
   helper_method :current_partner_session, :current_partner
   filter_parameter_logging :password, :password_confirmation
+  before_filter :init_nav_class
+
 
   protected
 
@@ -38,5 +40,9 @@ class PartnerBase < ApplicationController
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+
+  def init_nav_class
+    @nav_class = Hash.new
   end
 end

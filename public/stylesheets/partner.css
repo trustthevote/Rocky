@@ -10,13 +10,6 @@ strong {
   font-weight: bold;
 }
 
-h1 { font-size: 18px; }
-h2 { font-size: 16px; }
-h3 { font-size: 14px; }
-h4 { font-size: 12px; }
-h5 { font-size: 12px; }
-h6 { font-size: 12px; }
-
 ul.flash {
   margin: 10px auto;
   width: 50%;
@@ -33,58 +26,82 @@ ul.flash {
 #container {
   width: 720px;
   margin: 0 auto;
-  background-color: #eaeaea;
+  background: #ddd url(../images/partner/content_bg.gif) repeat-x top left;
+  border-width: 0 2px;
+  border-style: solid;
+  border-color: #444;
 }
 
-#container a {
-  color: #B2272C;
-  text-decoration: none;
+#main p {
+  margin: 0.5em 0;
 }
 
-#container a:hover {
+#main a:hover {
   color: #f33;
 }
 
 
 #header {
   position: relative;
-  padding: 0px 20px 5px;
-  height: 110px;
-  background: black url(/images/home_rtv_logo.png) no-repeat 20px 0;
-  color: #d8d8d8;
+  height: 100px;
+  width: 100%;
+  background: #ddd url(/images/partner/header_bg.jpg) no-repeat top left;
 }
 
-#header a {
-  color: #b42225;
-  text-decoration: none;
+#header.not_logged_in {
+  background-image: url(/images/partner/header_not_logged_in_bg.jpg);
 }
 
-#header a:hover {
-  color: #F00;
-}
+#header a:link    { color: #b42225; }
+#header a:visited { color: #b42225; }
+#header a:hover   { color: #000000; }
+#header a:active  { color: #000000; }
 
 #header span {
   position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 12px;
+  top: 15px;
+  right: 15px;
+  font-size: 13px;
+  font-weight: bold;
 }
+
+#header span a:link    { color: #b42225; }
+#header span a:visited { color: #b42225; }
+#header span a:hover   { color: #FFFFFF; }
+#header span a:active  { color: #FFFFFF; }
+
 
 #header p {
   position: absolute;
-  bottom: 10px;
-  right: 20px;
+  bottom: 0;
+  left: 20px;
+}
+
+#header p, #customize_nav p {
+  font-weight: bold;
+  color: #909090;
+}
+
+#header p a {
+  margin: 0 0.25em;
+  text-transform: uppercase;
+}
+
+#footer {
+  width: 720px;
 }
 
 #main {
-  background-color: #eaeaea;
+  background-color: transparent;
   position: relative;
   padding: 10px 20px;
 }
 
-h1, h2, h3, h4, h5, h6, legend {
-  font-family: Trebuchet, "Trebuchet MS", Arial, sans-serif;
-  font-weight: bold;
+#header a:link.current,
+#header a:visited.current,
+#main   a:link.current,
+#main   a:visited.current {
+  color: #000000;
 }
 
 h1 {
@@ -97,7 +114,6 @@ h2, h3 {
 
 p {
   font-size: 14px;
-  margin: 0.5em 0;
 }
 
 .text p {

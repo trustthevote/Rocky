@@ -7,12 +7,6 @@ body {
   background-color: #2a2a2a;
 }
 
-a { text-decoration: none; }
-a:link    { color: #B2272C; }
-a:visited { color: #B2272C; } 
-a:hover   { color: #000000; }
-a:active  { color: #666666; }
-
 #main a {
   font-weight: bold;
 }
@@ -105,43 +99,10 @@ font-size: 1.15em;
 }
 
 #footer {
-  zoom: 1;
-  height: 40px;
   width: 600px;
-  margin: 0 auto;
   border-width: 0 2px 2px 2px;
   border-style: solid;
   border-color: #444;
-  color: #d0d0d0;
-  background-color: black;
-  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
-  font-size: 1.15em;
-}
-
-#footer p {
-  padding-right: 1em;
-  line-height: 40px;
-  text-align: center;
-}
-
-#footer span {
-  margin: 0 0.5em;
-}
-
-#footer a {
-  color: #d0d0d0;
-  text-decoration: none;
-}
-
-#footer a:hover {
-  color: white;
-}
-
-.copyright {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 1em;
-  font-style: oblique;
-  color: #CCCCCC;
 }
 
 #container {

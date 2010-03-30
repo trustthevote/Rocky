@@ -48,6 +48,11 @@ describe PartnersController do
     describe "dashboard" do
       integrate_views
 
+      it "highlights dashboard nav link as current" do
+        get :show
+        assert_select "a.current", "Dashboard"
+      end
+
       it "shows widget html with link image" do
         stub(request).host { "example.com" }
         @partner.update_attributes :widget_image_name => "rtv100x100v1"
