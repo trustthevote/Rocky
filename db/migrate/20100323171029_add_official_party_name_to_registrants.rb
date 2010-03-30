@@ -19,7 +19,12 @@ class AddOfficialPartyNameToRegistrants < ActiveRecord::Migration
               if party == es_loc.no_party
                 "None"
               else
-                en_loc[:parties][ es_loc[:parties].index(party) ]
+                if (spanish_index = es_loc[:parties].index(party))
+                  en_loc[:parties][spanish_index]
+                else
+                  ActiveRecord::Migration.say "***** UNKNOWN PARTY:: registrant: #{id}, locale: #{locale}, party: #{party}"
+                  nil
+                end
               end
             end
         end
@@ -30,8 +35,8 @@ class AddOfficialPartyNameToRegistrants < ActiveRecord::Migration
   def self.up
     add_column "registrants", "official_party_name", :string
     add_index  "registrants", "official_party_name"
-    
-    Registrant.find_each { |r| r.set_official_party_name! }
+
+    Registrant.find_each { |r| r.set_official_party_name! rescue say "***** FAILED for registrant id: #{r.id}" }
   end
 
   def self.down
