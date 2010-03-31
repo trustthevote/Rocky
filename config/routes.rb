@@ -19,8 +19,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource "partner", :path_names => {:new => "register", :edit => "profile"},
                           :member => {:statistics => :get, :registrations => :get, :embed_codes => :get} do |partner|
-    partner.resource "questions", :only => [:edit, :update]
-    partner.resource "widget_image", :only => [:show, :update]
+    partner.resource "questions",     :only => [:edit, :update]
+    partner.resource "widget_image",  :only => [:show, :update]
+    partner.resource "logos",         :only => [:show, :update]
   end
   map.widget_loader "partner/:id/widget_loader.js", :format => "js", :controller => "partners", :action => "widget_loader"
   map.resources "password_resets", :only => [:new, :create, :edit, :update]
