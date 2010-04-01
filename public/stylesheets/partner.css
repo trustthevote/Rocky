@@ -174,7 +174,7 @@ label {
 #upload_logo .logo {
   width: 313px;
   height: 69px;
-  margin: 10px 20px;
+  margin: 10px 2px;
   background: white url(/images/partner/logo_frame.png) no-repeat top left;
 }
 
@@ -304,5 +304,7 @@ a.button_downloadcsv       { width: 258px; height: 22px; }
 a.button_downloadcsv span  { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }
 a.button_getembedcode      { width: 186px; height: 22px; }
 a.button_getembedcode span { width: 186px; height: 22px; background-image: url(/images/partner/button_getembedcode_ro.gif); }
+a.button_deletelogo        { width: 137px; height: 22px; }
+a.button_deletelogo span   { width: 137px; height: 22px; background-image: url(/images/partner/button_deletelogo_ro.gif); }
 a.button_uploadlogo        { width: 137px; height: 22px; }
 a.button_uploadlogo span   { width: 137px; height: 22px; background-image: url(/images/partner/button_uploadlogo_ro.gif); }

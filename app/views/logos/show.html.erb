@@ -12,7 +12,7 @@
       <%= image_tag @partner.logo.url %>
     </div>
     <% form_for @partner, :url => partner_logo_path, :html => {:method => :delete} do |form| %>
-      <p><%= form.submit "Delete Logo" %></p>
+    <%= partner_rollover_button("deletelogo", "Delete Logo") %>
     <% end %>
   <% else %>
     <div class="logo">
