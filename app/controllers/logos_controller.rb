@@ -14,4 +14,12 @@ class LogosController < PartnerBase
       render "show"
     end
   end
+
+  def destroy
+    @partner = current_partner
+    @partner.logo.destroy
+    @partner.save!
+      flash[:success] = "You have deleted your logo."
+    redirect_to partner_logo_url
+  end
 end

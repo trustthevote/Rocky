@@ -114,6 +114,14 @@ module ApplicationHelper
     HTML
   end
 
+  def partner_rollover_button(name, text)
+    <<-HTML
+      <div class="button">
+        <a class="button_#{name}" href="#"><button type="submit" id="partner_submit"><span>#{text}</span></button></a>
+      </div>
+    HTML
+  end
+
   def rtv_partner_url(partner)
     url = "https://register.rockthevote.com/registrants/new"
     url << "?partner=#{partner.id}" unless partner.id == Partner.default_id

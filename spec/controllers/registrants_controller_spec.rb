@@ -71,13 +71,16 @@ describe RegistrantsController do
         assert_select "#partner-logo", 0
       end
 
-      it "should show partner banner and logo for non-primary partner" do
-        logo_fixture = fixture_file_upload('/files/crazy.txt','text/plain')
+      it "should show partner banner and logo for non-primary partner with custom logo" do
         partner = Factory.create(:partner)
+        File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+          partner.update_attributes(:logo => logo)
+          assert partner.custom_logo?
+        end
         get :new, :partner => partner.to_param
-        partner.reload
+        assert_response :success
         assert_select "#header.partner"
-        assert_select "#partner-logo img[src=#{partner.logo}]"
+        assert_select "#partner-logo img[src=#{partner.logo.url.split('?').first}]"
       end
     end
   end

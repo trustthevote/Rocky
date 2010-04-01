@@ -29,8 +29,8 @@ describe LogosController do
   it "can upload a logo" do
     logo_fixture = fixture_file_upload('/files/partner_logo.jpg','image/jpeg')
     put :update, :partner => { :logo => logo_fixture }
+    assert_redirected_to partner_logo_url
     @partner.reload
-    assert_response :redirect
     assert_match %r{logos/\d+/original/partner_logo.jpg}, @partner.logo.url
     assert 0 < @partner.logo_file_size
   end
@@ -53,5 +53,16 @@ describe LogosController do
     end
     assert_response :success
     assert_match /megabyte/, assigns[:partner].errors.on(:logo)
+  end
+
+  it "destroys logo when there is a logo" do
+    File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+      @partner.update_attributes(:logo => logo)
+      assert @partner.custom_logo?
+    end
+    delete :destroy
+    assert_redirected_to partner_logo_url
+    @partner = Partner.find(@partner.id)  # paperclip's state isn't reset by a #reload
+    assert !@partner.custom_logo?
   end
 end

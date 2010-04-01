@@ -7,9 +7,18 @@
   <h1>Upload Your Own Logo</h1>
   <p>Take your voter registration tool to the next level by customizing the header with your own company / organization logo.</p>
   <h2>Current Logo</h2>
-  <div class="logo">
-    <%= image_tag @partner.logo.url %>
-  </div>
+  <% if @partner.custom_logo? %>
+    <div class="logo">
+      <%= image_tag @partner.logo.url %>
+    </div>
+    <% form_for @partner, :url => partner_logo_path, :html => {:method => :delete} do |form| %>
+      <p><%= form.submit "Delete Logo" %></p>
+    <% end %>
+  <% else %>
+    <div class="logo">
+      <p>your logo here</p>
+    </div>
+  <% end %>
   <h2>Upload New Logo</h2>
   <ul>
     <li>Supported formats are: JPG, GIF, and PNG</li>
@@ -23,7 +32,7 @@
     </ul>
   <% end %>
   <% form_for @partner, :url => partner_logo_path, :html => { :multipart => true } do |form| %>
-    <p><%= file_div form, :logo %></p>
-    <p><%= form.submit "Upload Logo" %></p>
+    <%= file_div form, :logo %>
+    <%= partner_rollover_button("uploadlogo", "Upload Logo") %>
   <% end %>
 </div>

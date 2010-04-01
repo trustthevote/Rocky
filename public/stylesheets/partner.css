@@ -186,6 +186,31 @@ label {
   left: 20px;
 }
 
+#upload_logo .logo p {
+  position: relative;
+  width: 63px;
+  height: 33px;
+  top: 13px;
+  left: 20px;
+  padding: 5px;
+  color: red;
+  font-size: 11px;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+  text-transform: uppercase;
+  background: white;
+}
+
+#upload_logo h3 {
+  margin-bottom: 15px;
+}
+
+#upload_logo div.button {
+  margin: 15px 0;
+  width: 137px;
+}
+
 /*** select widget image ***/
 
 #choose_widget fieldset {
@@ -279,3 +304,5 @@ a.button_downloadcsv       { width: 258px; height: 22px; }
 a.button_downloadcsv span  { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }
 a.button_getembedcode      { width: 186px; height: 22px; }
 a.button_getembedcode span { width: 186px; height: 22px; background-image: url(/images/partner/button_getembedcode_ro.gif); }
+a.button_uploadlogo        { width: 137px; height: 22px; }
+a.button_uploadlogo span   { width: 137px; height: 22px; background-image: url(/images/partner/button_uploadlogo_ro.gif); }
