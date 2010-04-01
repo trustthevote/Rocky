@@ -6,3 +6,4 @@ config/initializers/hoptoad.rb
 log/*.log
 tmp/*
 public/pdf/*
+public/system/*

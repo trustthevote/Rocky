@@ -92,6 +92,11 @@ module ApplicationHelper
     content_tag(:div, form.select(field, contents, options), :class => has_error)
   end
 
+  def file_div(form, field, options={})
+    has_error = form.object.errors.on(field) ? "has_error" : nil
+    content_tag(:div, form.file_field(field, options), :class => has_error)
+  end
+
   def rollover_button(name, text)
     <<-HTML
       <div class="button">

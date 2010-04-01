@@ -32,6 +32,7 @@ GOOGLE_ANALYTICS = "UA-1913089-11"
 # config.threadsafe!
 
 USE_HTTPS = true
+PAPERCLIP_OPTIONS = {}
 
 config.after_initialize do
   I18n.reload!

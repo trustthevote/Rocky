@@ -85,6 +85,14 @@ input, textarea {
   letter-spacing: 0.08em;
 }
 
+.has_error input, .has_error select {
+  background-color: #fcc;
+}
+
+.error {
+  color: #B2272C;
+}
+
 /* rollover buttons */
 
 form div.button {

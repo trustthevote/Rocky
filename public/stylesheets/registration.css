@@ -362,18 +362,10 @@ div.back {
   font-size: 12px;
 }
 
-.has_error input, .has_error select {
-  background-color: #fcc;
-}
-
 span.error, span.example {
   display: inline-block;
   font-size: 11px;
   white-space: nowrap;
-}
-
-.error {
-  color: #B2272C;
 }
 
 .example {

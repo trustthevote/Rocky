@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100325190624) do
+ActiveRecord::Schema.define(:version => 20100331171944) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(:version => 20100325190624) do
     t.datetime "updated_at"
     t.boolean  "ask_for_volunteers"
     t.string   "widget_image"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email"

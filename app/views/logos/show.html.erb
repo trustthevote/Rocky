@@ -1,8 +1,29 @@
-<% @nav_class[:customize] = :current; @nav_class[:embed] = :current -%>
+<% @nav_class[:customize] = :current; @nav_class[:logo] = :current -%>
 <%= render :partial => "layouts/customize_nav" %>
-<h1>Upload Your Own Logo</h1>
-<p>Take your voter registration tool to the next level by customizing the header with your own company / organization logo.</p>
-<ul>
-  <li>Appropriate formats include: JPG, GIF, or PNG</li>
-  <li>Your logo will automatically be resized to 73 pixels wide by 43 pixels tall. If you can, resize your logo to those dimensions first for optimum results.</li>
-</ul>
+<div id="upload_logo">
+  <div class="sample">
+    <%= image_tag "partner/add_logo_sample.png" %>
+  </div>
+  <h1>Upload Your Own Logo</h1>
+  <p>Take your voter registration tool to the next level by customizing the header with your own company / organization logo.</p>
+  <h2>Current Logo</h2>
+  <div class="logo">
+    <%= image_tag @partner.logo.url %>
+  </div>
+  <h2>Upload New Logo</h2>
+  <ul>
+    <li>Supported formats are: JPG, GIF, and PNG</li>
+    <li>Your logo will automatically be resized to 73 pixels wide by 43 pixels tall. If you can,
+        resize your logo to those dimensions first for optimum results.</li>
+  </ul>
+  <h3>Logo image</h3>
+  <% if @partner.errors[:logo] %>
+    <ul class="error">
+      <li><%= Array(@partner.errors[:logo]).first %></li>
+    </ul>
+  <% end %>
+  <% form_for @partner, :url => partner_logo_path, :html => { :multipart => true } do |form| %>
+    <p><%= file_div form, :logo %></p>
+    <p><%= form.submit "Upload Logo" %></p>
+  <% end %>
+</div>

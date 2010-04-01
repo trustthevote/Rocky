@@ -19,6 +19,7 @@ config.action_mailer.raise_delivery_errors = false
 FROM_ADDRESS = "rocky-dev@example.com"
 
 USE_HTTPS = false
+PAPERCLIP_OPTIONS = {}
 
 ### uncomment to use DelayedJob in development.
 ### you must set config.cache_classes = true

@@ -27,7 +27,7 @@ ul.flash {
   width: 720px;
   margin: 0 auto;
   background: #ddd url(../images/partner/content_bg.gif) repeat-x top left;
-  border-width: 0 2px;
+  border-width: 2px;
   border-style: solid;
   border-color: #444;
 }
@@ -160,6 +160,30 @@ label {
 
 .wrapper {
   position: relative;
+}
+
+#upload_logo {
+  overflow: hidden;
+}
+
+#upload_logo .sample {
+  float: right;
+  padding: 20px;
+}
+
+#upload_logo .logo {
+  width: 313px;
+  height: 69px;
+  margin: 10px 20px;
+  background: white url(/images/partner/logo_frame.png) no-repeat top left;
+}
+
+#upload_logo .logo img {
+  position: relative;
+  width: 73px;
+  height: 43px;
+  top: 13px;
+  left: 20px;
 }
 
 /*** select widget image ***/

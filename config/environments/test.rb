@@ -30,3 +30,4 @@ config.action_mailer.delivery_method = :test
 require 'factory_girl'
 
 USE_HTTPS = false
+PAPERCLIP_OPTIONS = {:path => ":rails_root/tmp/system/:attachment/:id/:style/:filename"}

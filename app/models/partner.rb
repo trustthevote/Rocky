@@ -4,6 +4,8 @@ class Partner < ActiveRecord::Base
   belongs_to :state, :class_name => "GeoState"
   has_many :registrants
 
+  has_attached_file :logo, PAPERCLIP_OPTIONS.merge(:styles => { :header => "73x43" })
+
   before_validation :reformat_phone
   before_validation :set_default_widget_image
 
@@ -17,6 +19,13 @@ class Partner < ActiveRecord::Base
   validates_presence_of :phone
   validates_format_of :phone, :with => /^\d{3}-\d{3}-\d{4}$/, :message => 'Phone must look like ###-###-####', :allow_blank => true
   validates_format_of :logo_image_url, :with => %r{^https://}, :message => 'Logo Image URL must start with https://', :allow_blank => true
+
+  validates_attachment_size :logo, :less_than => 1.megabyte, :message => "logo must not be bigger than 1 megabyte"
+  validates_attachment_content_type :logo, :message => "logo must be an image file",
+                                    :content_type => ['image/jpeg', 'image/jpg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif']
+
+  after_validation :make_paperclip_errors_readable
+
 
   def self.find_by_login(login)
     find_by_username(login) || find_by_email(login)
@@ -211,5 +220,12 @@ class Partner < ActiveRecord::Base
 
   def set_default_widget_image
     self.widget_image_name = DEFAULT_WIDGET_IMAGE_NAME if self.widget_image.blank?
+  end
+
+  def make_paperclip_errors_readable
+    if Array(errors[:logo]).any? {|e| e =~ /not recognized by the 'identify' command/}
+      errors.clear
+      errors.add(:logo, "logo must be an image file")
+    end
   end
 end

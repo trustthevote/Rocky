@@ -50,6 +50,23 @@ describe Partner do
     end
   end
 
+  describe "logo image" do
+    it "has an attached logo" do
+      partner = Factory.build(:partner)
+      assert partner.respond_to?(:logo)
+      assert_equal Paperclip::Attachment, partner.logo.class
+    end
+
+    it "has an error when the logo is not an image type" do
+      File.open(File.join(fixture_path, "files/crazy.txt"), "r") do |crazy|
+        partner = Factory.create(:partner)
+        partner.update_attributes(:logo => crazy)
+        assert !partner.valid?
+        assert_match /must be an image/, partner.errors.on(:logo)
+      end
+    end
+  end
+
   describe "CSV" do
     it "can generate CSV of all registrants" do
       partner = Factory.create(:partner)
