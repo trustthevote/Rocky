@@ -24,9 +24,9 @@
 
   <div id="header-fixed">
     <div id="header"<%= @partner.primary? ? '' : ' class="partner"' %>>
-      <% unless @partner.primary? || @partner.logo_image_url.blank? %>
+      <% unless @partner.primary? || @partner.logo.blank? %>
         <div id="partner-logo">
-          <%= image_tag @partner.logo_image_url %>
+          <%= image_tag @partner.logo.url %>
         </div>
       <% end %>
       <div id="progress-bar">

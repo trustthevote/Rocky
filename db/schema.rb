@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100331171944) do
+ActiveRecord::Schema.define(:version => 20100401172422) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20100331171944) do
     t.integer  "state_id"
     t.string   "zip_code",             :limit => 10
     t.string   "phone"
-    t.string   "logo_image_url"
     t.string   "survey_question_1_en"
     t.string   "survey_question_1_es"
     t.string   "survey_question_2_en"

@@ -107,7 +107,6 @@ Factory.define :partner do |partner|
   partner.state                 { GeoState['PA'] }
   partner.zip_code              "15215"
   partner.phone                 "412-555-1234"
-  partner.logo_image_url        "https://example.com/logo.jpg"
   partner.survey_question_1_en  "Hello?"
   partner.survey_question_2_en  "Outta here?"
 end

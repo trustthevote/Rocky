@@ -72,11 +72,12 @@ describe RegistrantsController do
       end
 
       it "should show partner banner and logo for non-primary partner" do
-        logo = "https://example.com/logo.jpg"
-        partner = Factory.create(:partner, :logo_image_url => logo)
+        logo_fixture = fixture_file_upload('/files/crazy.txt','text/plain')
+        partner = Factory.create(:partner)
         get :new, :partner => partner.to_param
+        partner.reload
         assert_select "#header.partner"
-        assert_select "#partner-logo img[src=#{logo}]"
+        assert_select "#partner-logo img[src=#{partner.logo}]"
       end
     end
   end

@@ -18,7 +18,6 @@ class Partner < ActiveRecord::Base
   validates_format_of :zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true
   validates_presence_of :phone
   validates_format_of :phone, :with => /^\d{3}-\d{3}-\d{4}$/, :message => 'Phone must look like ###-###-####', :allow_blank => true
-  validates_format_of :logo_image_url, :with => %r{^https://}, :message => 'Logo Image URL must start with https://', :allow_blank => true
 
   validates_attachment_size :logo, :less_than => 1.megabyte, :message => "logo must not be bigger than 1 megabyte"
   validates_attachment_content_type :logo, :message => "logo must be an image file",

@@ -12,7 +12,6 @@ rockthevote:
   state_id: 9
   zip_code: 20001
   phone: 555-555-1234
-  logo_image_url: "reg/rtv_powered_by_logo.gif"
   survey_question_1_en: "What school did you go to?"
   survey_question_2_en: "What is your favorite musical group?"
   created_at: <%= Time.now %>
@@ -32,7 +31,6 @@ bullwinkle:
   state_id: 9
   zip_code: 20001
   phone: 555-555-1234
-  logo_image_url: "http://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Moose_crossing_a_road.jpg/120px-Moose_crossing_a_road.jpg"
   survey_question_1_en: "What school did you go to?"
   survey_question_2_en: "What is your favorite musical group?"
   created_at: <%= Time.now %>
