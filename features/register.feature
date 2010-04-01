@@ -24,7 +24,6 @@ Feature: Register
       And I select "California" from "State"
       And I fill in "ZIP Code" with "94113"
       And I fill in "Phone" with "415-555-1234"
-      And I fill in "Logo image url" with "https://www.example.com/logo.jpg"
       And I press "Register"
       Then I should not see error messages
       And I should see "Log out"

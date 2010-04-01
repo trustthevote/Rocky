@@ -23,19 +23,21 @@
   </div>
 
   <div id="header-fixed">
-    <div id="header"<%= @partner.primary? ? '' : ' class="partner"' %>>
-      <% unless @partner.primary? || @partner.logo.blank? %>
-        <div id="partner-logo">
-          <%= image_tag @partner.logo.url %>
+    <% if @partner.custom_logo? %>
+      <div id="header" class="partner">
+          <div id="partner-logo">
+            <%= image_tag @partner.logo.url %>
+          </div>
+    <% else %>
+      <div id="header">
+    <% end %>
+        <div id="progress-bar">
+          <ol>
+            <li class="progress-title"><%= t('txt.registration.progress_indicator') %></li>
+            <%= progress_indicator %>
+          </ol>
         </div>
-      <% end %>
-      <div id="progress-bar">
-        <ol>
-          <li class="progress-title"><%= t('txt.registration.progress_indicator') %></li>
-          <%= progress_indicator %>
-        </ol>
       </div>
-    </div>
   </div>
 
   <div id="footer-fixed">

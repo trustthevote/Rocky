@@ -50,6 +50,34 @@ describe Partner do
     end
   end
 
+  describe "custom_logo?" do
+    after(:each) do
+      FileUtils.rm_rf(Rails.root.join("tmp/system/logos"))
+    end
+
+    it "is always false for primary partner" do
+      partner = Partner.find(Partner.default_id)
+      assert !partner.custom_logo?
+      File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+        partner.update_attributes(:logo => logo)
+        assert !partner.custom_logo?
+      end
+    end
+
+    it "is true for partners with logos" do
+      partner = Factory.build(:partner)
+      File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+        partner.update_attributes(:logo => logo)
+        assert partner.custom_logo?
+      end
+    end
+
+    it "is false for partners without logos" do
+      partner = Factory.build(:partner)
+      assert !partner.custom_logo?
+    end
+  end
+
   describe "CSV" do
     it "can generate CSV of all registrants" do
       partner = Factory.create(:partner)

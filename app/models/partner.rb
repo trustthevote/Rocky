@@ -38,6 +38,10 @@ class Partner < ActiveRecord::Base
     self.id == self.class.default_id
   end
 
+  def custom_logo?
+    !primary? && logo.file?
+  end
+
   def registration_stats_state
     counts = Registrant.connection.select_all(<<-"SQL")
       SELECT count(*) as registrations_count, home_state_id FROM `registrants`
