@@ -15,7 +15,7 @@ describe LogosController do
     PartnerSession.create(@partner)
   end
 
-  after(:each) do |variable|
+  after(:each) do
     FileUtils.rm_rf(Rails.root.join("tmp/system/logos"))
   end
 
@@ -39,6 +39,19 @@ describe LogosController do
     logo_fixture = fixture_file_upload('/files/crazy.txt','text/plain')
     put :update, :partner => { :logo => logo_fixture }
     assert_response :success
-    assert_not_equal nil, assigns[:partner].errors.on(:logo)
+    assert_match /image/, assigns[:partner].errors.on(:logo)
+  end
+
+  it "shows an error message when you upload a HUGE file" do
+    unless File.exist?("/tmp/over_a_megabyte.jpg")
+      File.open("/tmp/over_a_megabyte.jpg", "w") do |big_file|
+        big_file.puts "1234567890\n" * 100_000
+      end
+    end
+    File.open("/tmp/over_a_megabyte.jpg") do |big_file|
+      put :update, :partner => { :logo => big_file }
+    end
+    assert_response :success
+    assert_match /megabyte/, assigns[:partner].errors.on(:logo)
   end
 end
