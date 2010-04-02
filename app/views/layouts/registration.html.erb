@@ -26,7 +26,7 @@
 <% if @partner.custom_logo? -%>
     <div id="header" class="partner">
       <div id="partner-logo">
-        <%= image_tag @partner.logo.url %>
+        <%= image_tag @partner.logo.url(:header) %>
       </div>
 <% else -%>
     <div id="header">

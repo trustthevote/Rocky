@@ -31,7 +31,7 @@ describe LogosController do
     put :update, :partner => { :logo => logo_fixture }
     assert_redirected_to partner_logo_url
     @partner.reload
-    assert_match %r{logos/\d+/original/partner_logo.jpg}, @partner.logo.url
+    assert_match %r{logos/\d+/header/partner_logo.jpg}, @partner.logo.url(:header)
     assert 0 < @partner.logo_file_size
   end
 
