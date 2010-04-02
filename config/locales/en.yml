@@ -143,7 +143,7 @@ en:
       opt_in_sms: Send me txt reminders about voting.
       opt_in_email: "Receive emails at {{email_address}}"
       remind_when_18: Send me a reminder on my 18th birthday
-      get_updates: Get udpates from Rock the Vote
+      get_updates: Get updates from Rock the Vote
       volunteer: "I would like to volunteer with {{organization}}."
       not_given: none
       titles:

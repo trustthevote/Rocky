@@ -368,35 +368,42 @@ legend img.tooltip {
 
 /* rollover buttons */
 
-a.button_edit_en          { width:  45px; height: 22px; }
-a.button_nextstep_en      { width: 150px; height: 36px; }
-a.button_review_en        { width: 207px; height: 56px; }
-a.button_prepare_en       { width: 207px; height: 36px; }
-a.button_print_en         { width: 207px; height: 80px; }
-
-a.button_edit_es          { width:  65px; height: 22px; }
-a.button_nextstep_es      { width: 150px; height: 36px; }
-a.button_review_es        { width: 207px; height: 56px; }
-a.button_prepare_es       { width: 207px; height: 36px; }
-a.button_print_es         { width: 207px; height: 80px; }
-
+a.button_edit_en                   { width:  45px; height: 22px; }
 a.button_edit_en              span { width:  45px; height: 22px; background-image: url(/images/en/button_edit_ro.gif); }
+a.button_keepgoing_en              { width: 207px; height: 36px; }
 a.button_keepgoing_en         span { width: 207px; height: 36px; background-image: url(/images/en/button_keepgoing_ro.gif); }
+a.button_nextstep_en               { width: 150px; height: 36px; }
 a.button_nextstep_en          span { width: 150px; height: 36px; background-image: url(/images/en/button_nextstep_ro.gif); }
+a.button_prepare_en                { width: 207px; height: 36px; }
 a.button_prepare_en           span { width: 207px; height: 36px; background-image: url(/images/en/button_prepare_ro.gif); }
+a.button_print_en                  { width: 207px; height: 80px; }
 a.button_print_en             span { width: 207px; height: 80px; background-image: url(/images/en/button_print_ro.gif); }
+a.button_remindmelater_en          { width: 189px; height: 22px; }
 a.button_remindmelater_en     span { width: 189px; height: 22px; background-image: url(/images/en/button_remindmelater_ro.gif); }
+a.button_review_en                 { width: 207px; height: 56px; }
 a.button_review_en            span { width: 207px; height: 56px; background-image: url(/images/en/button_review_ro.gif); }
+a.button_sendemail_en              { width: 137px; height: 22px; }
 a.button_sendemail_en         span { width: 137px; height: 22px; background-image: url(/images/en/button_sendemail_ro.gif); }
+a.button_share_facebook_en         { width: 122px; height: 42px; }
 a.button_share_facebook_en    span { width: 122px; height: 42px; background-image: url(/images/en/button_share_facebook_ro.gif); }
+a.button_share_googlebuzz_en       { width: 122px; height: 42px; }
 a.button_share_googlebuzz_en  span { width: 122px; height: 42px; background-image: url(/images/en/button_share_googlebuzz_ro.gif); }
+a.button_share_twitter_en          { width: 122px; height: 42px; }
 a.button_share_twitter_en     span { width: 122px; height: 42px; background-image: url(/images/en/button_share_twitter_ro.gif); }
 
+a.button_edit_es                   { width:  65px; height: 22px; }
 a.button_edit_es              span { width:  65px; height: 22px; background-image: url(/images/es/button_edit_ro.gif); }
+a.button_keepgoing_es              { width: 207px; height: 36px; }
 a.button_keepgoing_es         span { width: 207px; height: 36px; background-image: url(/images/es/button_keepgoing_ro.gif); }
+a.button_nextstep_es               { width: 150px; height: 36px; }
 a.button_nextstep_es          span { width: 150px; height: 36px; background-image: url(/images/es/button_nextstep_ro.gif); }
+a.button_prepare_es                { width: 207px; height: 36px; }
 a.button_prepare_es           span { width: 207px; height: 36px; background-image: url(/images/es/button_prepare_ro.gif); }
+a.button_print_es                  { width: 207px; height: 80px; }
 a.button_print_es             span { width: 207px; height: 80px; background-image: url(/images/es/button_print_ro.gif); }
-a.button_remindmelater_es     span { width: 189px; height: 22px; background-image: url(/images/es/button_remindmelater_ro.gif); }
+a.button_remindmelater_es          { width: 275px; height: 22px; }
+a.button_remindmelater_es     span { width: 275px; height: 22px; background-image: url(/images/es/button_remindmelater_ro.gif); }
+a.button_review_es                 { width: 207px; height: 56px; }
 a.button_review_es            span { width: 207px; height: 56px; background-image: url(/images/es/button_review_ro.gif); }
+a.button_sendemail_es              { width: 137px; height: 22px; }
 a.button_sendemail_es         span { width: 137px; height: 22px; background-image: url(/images/es/button_sendemail_ro.gif); }
