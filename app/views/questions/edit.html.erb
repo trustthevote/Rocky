@@ -1,5 +1,7 @@
-<% @nav_class[:customize] = :current; @nav_class[:questions] = :current -%>
-<%= render :partial => "layouts/customize_nav" %>
+<% content_for :subnav do -%>
+  <% @nav_class[:customize] = :current; @nav_class[:questions] = :current -%>
+  <%= render :partial => "layouts/customize_nav" %>
+<% end -%>
 <h1>Survey Questions</h1>
 
 <p>
