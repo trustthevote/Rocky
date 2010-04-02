@@ -1,11 +1,11 @@
 # General
 
 Then /^I should see error messages$/ do
-  assert_match /error(s)? prohibited/m, response.body
+  assert_select "span.error"
 end
 
 Then /^I should not see error messages$/ do
-  assert_no_match /error(s)? prohibited/m, response.body
+  assert_select "span.error", false
 end
 
 # Database

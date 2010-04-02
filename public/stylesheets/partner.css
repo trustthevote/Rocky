@@ -115,9 +115,9 @@ h2, h3 {
 p {
   font-size: 14px;
 }
-
 .text p {
   margin: 1em 0;
+  font-size: 13px;
   line-height: 1.5em;
 }
 
@@ -127,10 +127,21 @@ p {
 
 /*** forms ***/
 
+.profile form {
+  position: relative;
+  width: 560px;
+  margin: 0 auto;
+}
+
+
 fieldset {
   margin: 10px 0;
   border: 1px solid #ccc;
   padding: 5px;
+}
+
+.profile fieldset {
+  padding: 10px 20px;
 }
 
 legend {
@@ -148,8 +159,9 @@ li {
   margin: 0.5em 2em;
 }
 
-label {
-  font-weight: bold;
+form li {
+  list-style: none;
+  margin: 0 5px 0 0;
 }
 
 .copy_html textarea {
@@ -300,11 +312,15 @@ label {
 
 /* rollover buttons */
 
-a.button_downloadcsv       { width: 258px; height: 22px; }
-a.button_downloadcsv span  { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }
-a.button_getembedcode      { width: 186px; height: 22px; }
-a.button_getembedcode span { width: 186px; height: 22px; background-image: url(/images/partner/button_getembedcode_ro.gif); }
-a.button_deletelogo        { width: 137px; height: 22px; }
-a.button_deletelogo span   { width: 137px; height: 22px; background-image: url(/images/partner/button_deletelogo_ro.gif); }
-a.button_uploadlogo        { width: 137px; height: 22px; }
-a.button_uploadlogo span   { width: 137px; height: 22px; background-image: url(/images/partner/button_uploadlogo_ro.gif); }
+a.button_downloadcsv        { width: 258px; height: 22px; }
+a.button_downloadcsv span   { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }
+a.button_getembedcode       { width: 186px; height: 22px; }
+a.button_getembedcode span  { width: 186px; height: 22px; background-image: url(/images/partner/button_getembedcode_ro.gif); }
+a.button_deletelogo         { width: 137px; height: 22px; }
+a.button_deletelogo span    { width: 137px; height: 22px; background-image: url(/images/partner/button_deletelogo_ro.gif); }
+a.button_uploadlogo         { width: 137px; height: 22px; }
+a.button_uploadlogo span    { width: 137px; height: 22px; background-image: url(/images/partner/button_uploadlogo_ro.gif); }
+a.button_signup             { width: 207px; height: 36px; }
+a.button_signup span        { width: 207px; height: 36px; background-image: url(/images/partner/button_signup_ro.gif); }
+a.button_update             { width: 207px; height: 36px; }
+a.button_update span        { width: 207px; height: 36px; background-image: url(/images/partner/button_update_ro.gif); }

@@ -1,7 +1,9 @@
 <% @nav_class[:profile] = :current -%>
-<h1>Profile</h1>
+<h1>Edit Your Profile</h1>
 
-<% form_for @partner, :url => partner_path, :method => :put do |form| %>
-  <%= render :partial => form %>
-  <p><%= form.submit "Update" %></p>
-<% end %>
+<div class="profile">
+  <% form_for @partner, :url => partner_path, :method => :put do |form| %>
+    <%= render :partial => form %>
+    <%= partner_rollover_button("update", "update") %>
+  <% end %>
+</div>

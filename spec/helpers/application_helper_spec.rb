@@ -55,4 +55,25 @@ describe ApplicationHelper do
       assert_match %r{%3Fpartner%3D}, url
     end
   end
+
+  describe "form helpers" do
+    attr_accessor :form
+    before(:each) do
+      @form = Object.new
+      partner = Partner.new
+      stub(form).object { partner }
+      stub(form).text_field { '<input type="text">' }
+      stub(form).password_field { '<input type="password">' }
+    end
+
+    it "makes a text field by default" do
+      html = helper.field_div(form, :name)
+      assert_match /input type="text"/, html
+    end
+
+    it "uses :kind option to make a different type of field" do
+      html = helper.field_div(form, :name, :kind => "password")
+      assert_match /input type="password"/, html
+    end
+  end
 end
