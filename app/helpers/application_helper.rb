@@ -75,7 +75,7 @@ module ApplicationHelper
       content_tag :li, step_index, :class => progress
     end.join
   end
-  
+
   def tooltip_tag(tooltip_id, content = t("txt.registration.tooltips.#{tooltip_id}"))
     image_tag 'buttons/help_icon.gif', :mouseover => 'buttons/help_icon_over.gif', :alt => t('txt.button.help'),
       :class => 'tooltip', :id => "tooltip-#{tooltip_id}",
@@ -94,11 +94,6 @@ module ApplicationHelper
     content_tag(:div, form.select(field, contents, options), :class => has_error)
   end
 
-  def file_div(form, field, options={})
-    has_error = form.object.errors.on(field) ? "has_error" : nil
-    content_tag(:div, form.file_field(field, options), :class => has_error)
-  end
-
   def rollover_button(name, text)
     <<-HTML
       <div class="button">
@@ -106,7 +101,7 @@ module ApplicationHelper
       </div>
     HTML
   end
-  
+
   def rollover_image_link(name, text, url, options={})
     optional_attrs = options.inject("") {|s,(k,v)| s << %Q[ #{k}="#{v}"] }
     <<-HTML

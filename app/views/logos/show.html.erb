@@ -34,7 +34,7 @@
     </ul>
   <% end %>
   <% form_for @partner, :url => partner_logo_path, :html => { :multipart => true } do |form| %>
-    <%= file_div form, :logo %>
+    <%= field_div form, :logo, :kind => "file", :size => 40 %>
     <%= partner_rollover_button("uploadlogo", "Upload Logo") %>
   <% end %>
 </div>
