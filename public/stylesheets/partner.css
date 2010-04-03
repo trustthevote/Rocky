@@ -192,17 +192,17 @@ form li {
 
 #upload_logo .logo img {
   position: relative;
-  width: 73px;
-  height: 43px;
-  top: 13px;
+  width: 75px;
+  height: 45px;
+  top: 12px;
   left: 20px;
 }
 
 #upload_logo .logo p {
   position: relative;
-  width: 63px;
-  height: 33px;
-  top: 13px;
+  width: 65px;
+  height: 35px;
+  top: 12px;
   left: 20px;
   padding: 5px;
   color: red;

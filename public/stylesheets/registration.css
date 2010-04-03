@@ -44,12 +44,12 @@ body {
 
 #partner-logo {
   position: absolute;
-  top: 13px;
+  top: 12px;
   left: 20px;
 }
 #partner-logo img {
-  width: 73px;
-  height: 43px;
+  width: 75px;
+  height: 45px;
 }
 
 #progress-bar {

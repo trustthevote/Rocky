@@ -4,7 +4,7 @@ class Partner < ActiveRecord::Base
   belongs_to :state, :class_name => "GeoState"
   has_many :registrants
 
-  has_attached_file :logo, PAPERCLIP_OPTIONS.merge(:styles => { :header => "73x43" })
+  has_attached_file :logo, PAPERCLIP_OPTIONS.merge(:styles => { :header => "75x45" })
 
   before_validation :reformat_phone
   before_validation :set_default_widget_image
