@@ -52,15 +52,25 @@ describe PasswordResetsController do
   end
 
   describe "PUT #update" do
+    integrate_views
+
     attr_reader :partner
     before do
       @partner = Factory.create(:partner)
       mock(Partner).find_using_perishable_token(anything) { partner }
     end
+
     it "should work" do
       put :update, :id => partner.perishable_token, :partner => {:password => 'newpassword', :password_confirmation => 'newpassword'}
       assert_redirected_to login_url
       flash[:success].should =~ /Password successfully updated/i
+    end
+
+    it "shows an error when password is blank" do
+      put :update, :id => partner.perishable_token, :partner => {:password => '', :password_confirmation => ''}
+      assert_response :success
+      assert_template "edit"
+      assert_select "span.error", "Password cannot be blank"
     end
   end
 end

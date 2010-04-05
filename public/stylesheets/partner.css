@@ -127,6 +127,30 @@ p {
 
 /*** forms ***/
 
+div.login {
+  margin-top: 30px;
+}
+
+.login form {
+  position: relative;
+  width: 280px;
+  margin: 0 auto;
+}
+
+.login form fieldset ul {
+  margin-left: 18px;
+}
+
+.login .stacked span.error {
+  width: 228px;
+  white-space: normal;
+}
+
+
+#main .login p {
+  margin: 10px 0 10px 18px;
+}
+
 .profile form {
   position: relative;
   width: 560px;
@@ -322,5 +346,9 @@ a.button_uploadlogo         { width: 137px; height: 22px; }
 a.button_uploadlogo span    { width: 137px; height: 22px; background-image: url(/images/partner/button_uploadlogo_ro.gif); }
 a.button_signup             { width: 207px; height: 36px; }
 a.button_signup span        { width: 207px; height: 36px; background-image: url(/images/partner/button_signup_ro.gif); }
+a.button_login              { width: 207px; height: 36px; }
+a.button_login span         { width: 207px; height: 36px; background-image: url(/images/partner/button_login_ro.gif); }
+a.button_reset              { width: 240px; height: 36px; }
+a.button_reset span         { width: 240px; height: 36px; background-image: url(/images/partner/button_reset_ro.gif); }
 a.button_update             { width: 207px; height: 36px; }
 a.button_update span        { width: 207px; height: 36px; background-image: url(/images/partner/button_update_ro.gif); }

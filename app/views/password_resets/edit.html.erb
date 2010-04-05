@@ -1,17 +1,24 @@
 <h1>Change My Password</h1>
 
-<% form_for @partner, :url => password_reset_path(@partner.perishable_token), :method => :put do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </p>
-
-  <p>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <div>
-    <%= f.submit "Change Password", :tag => "button" %>
-  </div>
-<% end %>
+<div class="login">
+  <% form_for @partner, :url => password_reset_path(@partner.perishable_token), :method => :put do |form| %>
+    <fieldset>
+      <legend>Reset Password</legend>
+      <ul class="stacked">
+        <li class="width_a">
+          <h3><%= form.label :password, "New password" %></h3>
+          <%= field_div form, :password, :kind => "password" %>
+          <span class="error"><%= Array(form.object.errors.on(:password)).first %></span>
+        </li>
+      </ul>
+      <ul class="stacked">
+        <li class="width_a">
+          <h3><%= form.label :password_confirmation, "Confirm Password" %></h3>
+          <%= field_div form, :password_confirmation, :kind => "password" %>
+          <span class="error"><%= form.object.errors.on :password_confirmation %></span>
+        </li>
+      </ul>
+    </fieldset>
+    <%= partner_rollover_button("reset", "reset") %>
+  <% end %>
+</div>

@@ -1,12 +1,21 @@
 <h1>Forgot Password</h1>
-<p>Fill out the form below and instructions to reset your password will be emailed to you:</p>
 
-<% form_tag :password_resets, :id => "new_password_resets" do %>
-  <p>
-    <label for="login">Username or Email Address</label>
-    <%= text_field_tag "login", "" %>
-  </p>
-  <div>
-    <%= submit_tag "Reset Password", :tag => "button" %>
-  </div>
-<% end %>
+<p>Fill out the form below and instructions to reset your password will be emailed to you.</p>
+
+<div class="login">
+  <% form_tag :password_resets, :id => "new_password_resets" do %>
+    <fieldset>
+      <legend>Reset</legend>
+      <ul class="stacked">
+        <li class="width_a">
+          <h3><label>Username or Email Address</label></h3>
+          <div><input type="text" value="" name="login" id="login"></div>
+          <span class="error"></span>
+        </li>
+      </ul>
+    </fieldset>
+    <div>
+      <%= partner_rollover_button("reset", "reset") %>
+    </div>
+  <% end %>
+</div>

@@ -1,13 +1,30 @@
-<h1>Log In</h1>
+<h1>Voter Registration Partner Portal Log In</h1>
 
-<% form_for @partner_session, :url => partner_session_path do |f| %>
-  <%= f.error_messages %>
-  <%= f.label :username, "Login" %><br />
-  <%= f.text_field :username, :value => "" %><br />
-  <br />
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.submit "Log In" %>
-<% end %>
-<p><%= link_to "Forgot your password?", new_password_reset_path %></p>
+<p>
+  Welcome to the Partner Portal of the Rock the Vote online voter registration tool.
+  Please log in with your username and password below.
+</p>
+
+<div class="login">
+  <% form_for @partner_session, :url => partner_session_path do |form| %>
+    <fieldset>
+      <legend>Log In</legend>
+      <ul class="stacked">
+        <li class="width_a">
+          <h3><%= form.label :username %></h3>
+          <%= field_div form, :username %>
+          <span class="error"><%= form.object.errors.on(:base) || form.object.errors.on(:username) %></span>
+        </li>
+      </ul>
+      <ul class="stacked">
+        <li class="width_a">
+          <h3><%= form.label :password %></h3>
+          <%= field_div form, :password, :kind => "password" %>
+          <span class="error"><%= form.object.errors.on(:password) %></span>
+        </li>
+      </ul>
+      <p><%= link_to "Forgot your password?", new_password_reset_path %></p>
+    </fieldset>
+    <%= partner_rollover_button("login", "login") %>
+  <% end %>
+</div>
