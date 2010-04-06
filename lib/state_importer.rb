@@ -25,6 +25,7 @@ class StateImporter
     state.id_length_max = row["id_length_max"]
     state.registrar_address = row["sos_address"]
     state.registrar_phone = row["sos_phone"]
+    state.registrar_url = row["sos_url"]
     state.save!
   end
 

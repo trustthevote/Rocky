@@ -4,10 +4,10 @@ describe StateImporter do
   attr_accessor :csv_basic, :file_basic
   before(:each) do
     @csv_basic = <<CSV
-abbreviation,name,participating,not_participating_tooltip_en,not_participating_tooltip_es,requires_race,race_tooltip_en,race_tooltip_es,requires_party,parties_en,parties_es,no_party_en,no_party_es,id_length_min,id_length_max,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sub_18_en,sub_18_es
-AL,Alabama,1,dead_end_en,dead_end_es,1,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sub_18_en,sub_18_es
-AK,Alaska,0,dead_end_en,dead_end_es,1,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,10,13,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sub_18_en,sub_18_es
-AZ,Arizona,1,dead_end_en,dead_end_es,0,race_tooltip_en,race_tooltip_es,0,,,,,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sub_18_en,sub_18_es
+abbreviation,name,participating,not_participating_tooltip_en,not_participating_tooltip_es,requires_race,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,requires_party,parties_en,parties_es,no_party_en,no_party_es,id_length_min,id_length_max,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
+AL,Alabama,1,dead_end_en,dead_end_es,1,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
+AK,Alaska,0,dead_end_en,dead_end_es,1,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,10,13,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
+AZ,Arizona,1,dead_end_en,dead_end_es,0,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,0,,,,,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
 CSV
     @file_basic = StringIO.new(@csv_basic)
   end
@@ -29,6 +29,7 @@ CSV
       assert_equal 12, state.id_length_max
       assert_equal "sos_address", state.registrar_address
       assert_equal "sos_phone", state.registrar_phone
+      assert_equal "sos_url", state.registrar_url
 
       state = GeoState['AK']
       assert_equal false, state.participating
@@ -59,6 +60,7 @@ CSV
       GeoState.reset_all_states
       StateLocalization.destroy_all
     end
+
     it "sets fields in each locale's record" do
       silence_output do
         StateImporter.import(file_basic)
@@ -83,6 +85,14 @@ CSV
       state = GeoState['AZ']
       en = state.localizations.find_by_locale!('en')
       assert_equal [], en.parties
+    end
+
+    it "checks sanity of actual states.csv file" do
+      headers = File.open(Rails.root.join("db/bootstrap/import/states.csv")) do |csv_file|
+        csv_file.gets.chomp.split(",").sort
+      end
+
+      assert_equal headers, @csv_basic.split("\n").first.split(",").sort
     end
   end
 
