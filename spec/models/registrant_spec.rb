@@ -661,6 +661,21 @@ describe Registrant do
       reg.complete_registration
       assert_nil reg.state_id_number
     end
+
+    it "sets system locale using registrant's locale" do
+      reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+      stub(reg).generate_pdf                  # avoid messy out-of-band action in tests
+      stub(reg).deliver_confirmation_email    # avoid messy out-of-band action in tests
+      stub(reg).enqueue_reminder_emails       # avoid messy out-of-band action in tests
+
+      reg.locale = 'en'
+      reg.complete_registration
+      assert_equal :en, I18n.locale
+
+      reg.locale = 'es'
+      reg.complete_registration
+      assert_equal :es, I18n.locale
+    end
   end
 
   describe "deliver_confirmation_email" do

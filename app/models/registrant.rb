@@ -473,6 +473,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def complete_registration
+    I18n.locale = self.locale.to_sym
     generate_pdf
     deliver_confirmation_email
     enqueue_reminder_emails
