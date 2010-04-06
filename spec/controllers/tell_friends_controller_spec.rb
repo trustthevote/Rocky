@@ -22,6 +22,8 @@ describe TellFriendsController do
       assert assigns[:email_sent]
 
       assert :success
+
+      assert_not_nil assigns[:root_url_escaped]
       assert_template "finishes/show"
     end
 

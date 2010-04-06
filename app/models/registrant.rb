@@ -601,6 +601,16 @@ class Registrant < ActiveRecord::Base
     ]
   end
 
+  def status_text
+    @status_text ||=
+      CGI.escape(
+        case self.status.to_sym
+        when :complete ; "I just registered to vote and you can too!"
+        when :under_18 ; "Make sure you register to vote. It's easy!"
+        end
+        )
+  end
+
   ### tell-a-friend email
 
   attr_writer :tell_from, :tell_email, :tell_recipients, :tell_subject, :tell_message

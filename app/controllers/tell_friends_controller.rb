@@ -7,6 +7,7 @@ class TellFriendsController < RegistrationStep
     @registrant.telling_friends = true
     @email_sent = @registrant.valid?
     # registrant sends email as side-effect of there being valid tell-friend params
+    @root_url_escaped = CGI::escape(root_url)
     render "finishes/show"
   end
 

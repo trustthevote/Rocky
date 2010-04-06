@@ -740,6 +740,21 @@ describe Registrant do
     end
   end
 
+  describe "shared_text" do
+    describe "when complete" do
+      it "says I voted" do
+        reg = Factory.build(:completed_registrant)
+        assert_match Regexp.new(Regexp.escape("I+just+registered+to+vote+and+you+can+too")), reg.status_text
+      end
+    end
+    describe "when under 18" do
+      it "says registering is easy" do
+        reg = Factory.build(:under_18_finished_registrant)
+        assert_match Regexp.new(Regexp.escape("Make+sure+you+register+to+vote")), reg.status_text
+      end
+    end
+  end
+
   describe "tell-a-friend emails" do
     attr_accessor :reg
     before(:each) do
