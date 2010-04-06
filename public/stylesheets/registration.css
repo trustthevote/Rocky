@@ -407,3 +407,9 @@ a.button_review_es                 { width: 207px; height: 56px; }
 a.button_review_es            span { width: 207px; height: 56px; background-image: url(/images/es/button_review_ro.gif); }
 a.button_sendemail_es              { width: 137px; height: 22px; }
 a.button_sendemail_es         span { width: 137px; height: 22px; background-image: url(/images/es/button_sendemail_ro.gif); }
+a.button_share_facebook_es         { width: 122px; height: 42px; }
+a.button_share_facebook_es    span { width: 122px; height: 42px; background-image: url(/images/es/button_share_facebook_ro.gif); }
+a.button_share_googlebuzz_es       { width: 122px; height: 42px; }
+a.button_share_googlebuzz_es  span { width: 122px; height: 42px; background-image: url(/images/es/button_share_googlebuzz_ro.gif); }
+a.button_share_twitter_es          { width: 122px; height: 42px; }
+a.button_share_twitter_es     span { width: 122px; height: 42px; background-image: url(/images/es/button_share_twitter_ro.gif); }
