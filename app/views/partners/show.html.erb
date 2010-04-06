@@ -1,28 +1,47 @@
 <% @nav_class[:dashboard] = :current -%>
+
+<h1>Welcome <%= @partner.name %>!</h1>
+
 <p>
-  With your Partner Portal dashboard, you can modify your survey questions, and copy some HTML to use
-  on your Web site to link to the RTV online registration tool. You can also
-  <%= link_to "see statistics", statistics_partner_path %>
-  about the the people you are registering to vote, 
-  <%= link_to "download the registration data", registrations_partner_path(:format => 'csv') %>
-  of those who register to vote through your website, and 
-  <%= link_to "modify your partner profile", edit_partner_path %>.
+  With your Partner Dashboard, you can customize your tool and copy and pase the HTML code to embed
+  your online registration tool on your website. You can access statistics and download registration
+  data about the people you are registering to vote. You can also modify your partner profile.
 </p>
-<div>
-  <h2>Survey Questions</h2>
-  <p>
-    The survey questions are your opportunity to ask the applicant two questions during the voter
-    registration process, and to ask the applicant if he or she would like to volunteer with your
-    organization. You are not required to ask any questions if you don't want to. You can 
-    <%= link_to "Edit Questions", edit_partner_questions_path %>
-    to define or modify your questions. The answers provided by the applicants can be seen
-    when you 
-    <%= link_to "download your voter registration data", registrations_partner_path(:format => 'csv') %>.
-  </p>
-  <p><strong>1.</strong> English: <%= h @partner.survey_question_1_en %></p>
-  <p><strong>1.</strong> Spanish: <%= h @partner.survey_question_1_es %></p>
-  <p><strong>2.</strong> English: <%= h @partner.survey_question_2_en %></p>
-  <p><strong>2.</strong> Spanish: <%= h @partner.survey_question_2_es %></p>
-  <p><strong>Ask for volunteers: </strong> <%=@partner.ask_for_volunteers? ? "Yes" : "No" %></p>
-  <p><%= link_to "Edit Questions", edit_partner_questions_path %></p>
+
+<div id="dashboard">
+  <div id="dash_right" class="dash">
+    <div id="customize" class="stats">
+      <table>
+        <thead><tr><th colspan="3">Customize Your Registration Tool</th></tr></thead>
+        <tbody>
+          <tr class="odd">
+            <th>
+              <ul>
+                <li>Add custom survey questions and set volunteer sign up options</li>
+                <li>Upload your own custom logo</li>
+                <li>Get custom buttons and banners</li>
+                <li>Get your embed code</li>
+              </ul>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <span class="button" id="link_customizetool">
+      <a class="button_customizetool" href="<%= partner_logo_path %>"><span>Customize Tool</span></a>
+    </span>
+    <span class="button" id="link_editprofile">
+      <a class="button_editprofile" href="<%= edit_partner_path %>"><span>Edit Profile</span></a>
+    </span>
+  </div>
+
+  <div id="dash_left" class="dash">
+    <%= render :partial => 'stats_by_completion_date' %>
+    <span class="button" id="link_viewreport">
+      <a class="button_viewreport" href="<%= statistics_partner_path %>"><span>View Full Report</span></a>
+    </span>
+    <span class="button" id="link_downloaddata">
+      <a class="button_downloaddata" href="<%= registrations_partner_path(:format => :csv) %>"><span>Download Data</span></a>
+    </span>
+  </div>
 </div>

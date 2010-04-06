@@ -36,6 +36,7 @@ class PartnersController < PartnerBase
 
   def show
     @partner = current_partner
+    @stats_by_completion_date = @partner.registration_stats_completion_date
   end
 
   def embed_codes

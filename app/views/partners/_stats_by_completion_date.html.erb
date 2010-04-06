@@ -1,0 +1,32 @@
+<% reset_cycle %>
+<div class="stats" id="stats_by_completion_date">
+  <table>
+    <thead><tr><th colspan="3">Completed Applications</th></tr></thead>
+    <tbody>
+      <tr class="<%= cycle('even', 'odd') %>">
+        <th>Today</th>
+        <td><%= @stats_by_completion_date[:day_count] %></td>
+      </tr>
+      <tr class="<%= cycle('even', 'odd') %>">
+        <th>This Week</th>
+        <td><%= @stats_by_completion_date[:week_count] %></td>
+      </tr>
+      <tr class="<%= cycle('even', 'odd') %>">
+        <th>This Month</th>
+        <td><%= @stats_by_completion_date[:month_count] %></td>
+      </tr>
+      <tr class="<%= cycle('even', 'odd') %>">
+        <th>This Year</th>
+        <td><%= @stats_by_completion_date[:year_count] %></td>
+      </tr>
+      <tr class="<%= cycle('even', 'odd') %>">
+        <th>Total</th>
+        <td><%= @stats_by_completion_date[:total_count] %></td>
+      </tr>
+      <tr class="<%= cycle('even', 'odd') %>">
+        <th>Completion Rate</th>
+        <td><%= "%.1f" % (@stats_by_completion_date[:percent_complete] * 100) %>%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
