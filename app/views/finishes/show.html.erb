@@ -3,18 +3,18 @@
 <div class="share">
   <div><%= rollover_image_link( :share_facebook,
                                 I18n.t('txt.button.share_facebook'),
-                                "http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.rockthevote.com%2Fregister%2Ffb",
+                                "http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.rockthevote.com%2Fregister%2Ffb&t=#{@status_text}",
                                 :target => "_blank" ) %>
   </div>
   <div><%= rollover_image_link( :share_twitter,
                                 I18n.t('txt.button.share_twitter'),
-                                "http://twitter.com/home?status=I%20just%20registered%20to%20vote%20and%20you%20can%20too%21%20#{root_url}",
+                                "http://twitter.com/home?status=#{@status_text}+#{@root_url_escaped}",
                                 :target => "_blank") %>
   </div>
   <div><%= rollover_image_link( :share_googlebuzz,
                                 I18n.t('txt.button.share_googlebuzz'),
-                                "http://www.google.com/reader/link?url=#{root_url}&amp;srcURL=#{root_url}" +
-                                "&amp;srcTitle=Rock%20the%20Vote&amp;title=I%20just%20registered%20to%20vote%20and%20you%20can%20too%21",
+                                "http://www.google.com/reader/link?url=#{@root_url_escaped}&amp;srcURL=#{@root_url_escaped}" +
+                                "&amp;srcTitle=Rock%20the%20Vote&amp;title=#{@status_text}",
                                 :target => "_blank") %>
   </div>
 </div>
