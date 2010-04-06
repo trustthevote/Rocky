@@ -6,7 +6,10 @@
     <a href="#">Here are some ways to help market your tool.</a>
   </p>
 </div>
-<%= partner_rollover_button("downloadcsv", "Download CSV") %>
+
+<span class="button">
+  <a class="button_downloadcsv" href="<%= registrations_partner_path(:format => :csv) %>"><span>Download CSV</span></a>
+</span>
 
 <table id="statistics">
   <tr>
