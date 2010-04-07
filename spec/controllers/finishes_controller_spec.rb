@@ -5,6 +5,17 @@ include ActionView::Helpers::UrlHelper
 describe FinishesController do
   integrate_views
 
+  describe "waiting for delayed job to complete registration" do
+    before(:each) do
+      @registrant = Factory.create(:step_5_registrant)
+    end
+    it "renders :complete partial when still in step_5" do
+      get :show, :registrant_id => @registrant.to_param
+      assert_response :success
+      assert_select "h1", "Spread the word!"
+    end
+  end
+
   describe "complete registration" do
     before(:each) do
       @registrant = Factory.create(:completed_registrant)

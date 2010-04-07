@@ -1,4 +1,8 @@
-<%= render :partial => "finishes/#{@registrant.status.to_s}" %>
+<%= case @registrant.status.to_sym
+    when :complete, :step_5 ; render :partial => "finishes/complete"
+    when :under_18          ; render :partial => "finishes/under_18"
+    end
+  %>
 
 <div class="share">
   <div><%= rollover_image_link( :share_facebook,

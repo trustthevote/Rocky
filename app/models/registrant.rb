@@ -605,8 +605,9 @@ class Registrant < ActiveRecord::Base
     @status_text ||=
       CGI.escape(
         case self.status.to_sym
-        when :complete ; "I just registered to vote and you can too!"
+        when :complete, :step_5 ; "I just registered to vote and you can too!"
         when :under_18 ; "Make sure you register to vote. It's easy!"
+        else ""
         end
         )
   end
