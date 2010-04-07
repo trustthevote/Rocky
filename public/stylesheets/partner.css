@@ -147,9 +147,8 @@ p {
   margin: 0.7em 1.5em;
 }
 
-#customize a {
-  color: #000;
-}
+#customize a       { color: #000000; }
+#customize a:hover { color: #B42225; }
 
 #dash_left, #dash_right {
   position: relative;

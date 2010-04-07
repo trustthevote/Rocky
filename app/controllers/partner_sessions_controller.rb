@@ -6,7 +6,6 @@ class PartnerSessionsController < PartnerBase
   def create
     @partner_session = PartnerSession.new(params[:partner_session])
     if @partner_session.save
-      flash[:success] = "Login successful!"
       redirect_back_or_default partner_url
     else
       render :action => :new
