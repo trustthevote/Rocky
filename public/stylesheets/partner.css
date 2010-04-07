@@ -147,6 +147,10 @@ p {
   margin: 0.7em 1.5em;
 }
 
+#customize a {
+  color: #000;
+}
+
 #dash_left, #dash_right {
   position: relative;
   height: 190px;
