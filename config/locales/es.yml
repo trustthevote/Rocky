@@ -173,6 +173,9 @@ es:
         phone: Muchos estados piden tu número de teléfono en caso de que tengan preguntas sobre tu aplicación.  No estás obligado a proveer to número de teléfono.
         previous_name: Si has cambiado tu nombre desde tu ultimo registro, poner tu nombre anterior.
         previous_address: Si te has cambiado de dirección desde tu ultimo registro, favor de proveer la dirección anterior.
+    status_text:
+      message: ""
+      under_18_message: ""
   email:
     confirmation:
       subject: "Reminder: Mail your voter registration form"

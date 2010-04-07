@@ -602,11 +602,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def status_text
+    I18n.locale = self.locale.to_sym
     @status_text ||=
       CGI.escape(
         case self.status.to_sym
-        when :complete, :step_5 ; "I just registered to vote and you can too!"
-        when :under_18 ; "Make sure you register to vote. It's easy!"
+        when :complete, :step_5 ; I18n.t('txt.status_text.message')
+        when :under_18 ; I18n.t('txt.status_text.under_18_message')
         else ""
         end
         )
