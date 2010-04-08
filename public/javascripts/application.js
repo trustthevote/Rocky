@@ -1,3 +1,11 @@
+function hideErrors() {
+  $('.error').each(function(){ $(this).css('opacity', 0); });
+};
+
+function revealErrors() {
+  $('.error').each(function() { $(this).animate({opacity: 1}); });
+};
+
 function toggleFieldSet(checkbox, set, rule, speed) {
   if ( $(checkbox).attr('checked') ) {
     $(rule).hide(0);
