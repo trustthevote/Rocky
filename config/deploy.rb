@@ -36,6 +36,7 @@ set :use_sudo, false
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
 after "deploy:symlink_configs", "deploy:geminstaller"
 after "deploy:restart", "deploy:run_workers"
+after "deploy", "deploy:cleanup"
 
 namespace :deploy do
   desc "run GemInstaller"
