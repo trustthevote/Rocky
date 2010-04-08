@@ -8,9 +8,8 @@ if ((parent == window) && (/WebKit\/[4-7]|MSIE [6-9]|Gecko\/20(0[6-9]|1\d)|Opera
     rtvJs.src = '<%= @host %>/floatbox/floatbox.js';
     rtvJs.type = "text/javascript";
 
-    setTimeout(function () {
-      document.body.appendChild(rtvCss);
-      document.body.appendChild(rtvJs);
-    },0);
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(rtvCss);
+    head.appendChild(rtvJs);
   })();
 }
