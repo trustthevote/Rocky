@@ -11,16 +11,32 @@ strong {
 }
 
 ul.flash {
+  width: 100%;
   margin: 10px auto;
-  width: 50%;
-  background-color: #a7a;
   font-size: 12px;
   font-weight: bold;
   text-align: center;
 }
 
 .flash li {
-  padding: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.flash li {
+  border-color: blue;
+  background-color: #ddf;
+}
+
+.flash li.flash-warning {
+  border-color: red;
+  background-color: #fdd;
 }
 
 #container {
@@ -105,7 +121,7 @@ ul.flash {
 }
 
 h1 {
-  margin: 1em 0;
+  margin: 0.5em 0 1em 0;
 }
 
 h2, h3 {
@@ -241,7 +257,7 @@ form li {
 
 #upload_logo .sample {
   float: right;
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 #upload_logo .logo {
