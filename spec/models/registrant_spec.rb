@@ -737,6 +737,15 @@ describe Registrant do
           reg.deliver_reminder_email
         end
       end
+
+      it "should log an error to HopToad if something blows up" do
+        reg = Factory.create(:maximal_registrant, :reminders_left => 1)
+        stub(reg).valid? { false }
+
+        stub(HoptoadNotifier).notify
+        reg.deliver_reminder_email
+        HoptoadNotifier.should have_received.notify(is_a(Hash))
+      end
     end
   end
 

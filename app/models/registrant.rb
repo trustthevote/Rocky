@@ -18,7 +18,7 @@ class Registrant < ActiveRecord::Base
   TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
   REMINDER_EMAILS_TO_SEND = 2
-  INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
+  INTERVAL_BETWEEN_REMINDER_EMAILS = 2.minutes # TODO: 5.days
   STALE_TIMEOUT = 30.minutes
 
   CSV_HEADER = [
@@ -507,9 +507,14 @@ class Registrant < ActiveRecord::Base
   def deliver_reminder_email
     if reminders_left > 0
       Notifier.deliver_reminder(self)
-      update_attributes(:reminders_left => reminders_left - 1)
+      update_attributes!(:reminders_left => reminders_left - 1)
       enqueue_reminder_email if reminders_left > 0
     end
+  rescue StandardError => error
+    HoptoadNotifier.notify(
+      :error_class => error.class.name,
+      :error_message => "DelayedJob Worker Error(#{error.class.name}): #{error.message}",
+      :request => { :params => {:worker => "deliver_reminder_email", :registrant_id => self.id} })
   end
   
   def redact_sensitive_data

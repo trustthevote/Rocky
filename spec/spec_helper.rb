@@ -6,6 +6,7 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'authlogic/test_case'
 require 'nokogiri'
+require 'rr'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
@@ -45,9 +46,16 @@ Spec::Runner.configure do |config|
   #
   # config.mock_with :mocha
   # config.mock_with :flexmock
-  config.mock_with :rr
+  config.mock_with RR::Adapters::Rspec
 
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+end
+
+
+module HoptoadNotifier
+  def self.notify(thing)
+    # do nothing.
+  end
 end
