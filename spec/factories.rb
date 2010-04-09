@@ -107,6 +107,7 @@ Factory.define :partner do |partner|
   partner.state                 { GeoState['PA'] }
   partner.zip_code              "15215"
   partner.phone                 "412-555-1234"
+  partner.organization          "Consolidated Amalgamated, Inc."
   partner.survey_question_1_en  "Hello?"
   partner.survey_question_2_en  "Outta here?"
 end

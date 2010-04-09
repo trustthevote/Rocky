@@ -45,7 +45,7 @@ describe Partner do
         partner = Factory.create(:partner)
         partner.update_attributes(:logo => crazy)
         assert !partner.valid?
-        assert_match /must be an image/, partner.errors.on(:logo)
+        assert_match /must be a JPG, GIF, or PNG/, partner.errors.on(:logo)
       end
     end
   end

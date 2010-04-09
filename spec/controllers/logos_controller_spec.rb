@@ -39,7 +39,7 @@ describe LogosController do
     logo_fixture = fixture_file_upload('/files/crazy.txt','text/plain')
     put :update, :partner => { :logo => logo_fixture }
     assert_response :success
-    assert_match /image/, assigns[:partner].errors.on(:logo)
+    assert_match /JPG, GIF, or PNG/, assigns[:partner].errors.on(:logo)
   end
 
   it "shows an error message when you upload a HUGE file" do

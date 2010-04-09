@@ -13,8 +13,8 @@
 </head>
 <body>
   <div id="container">
-    <div id="header">
-      <% if current_partner_session %>
+    <% if current_partner_session %>
+      <div id="header">
         <span><%= link_to "Log out", logout_path %></span>
         <p>
           <%= link_to "Dashboard", partner_path, :class => @nav_class[:dashboard] %> |
@@ -22,9 +22,10 @@
           <%= link_to "Customize", partner_logo_path, :class => @nav_class[:customize] %> |
           <%= link_to "Edit Profile", edit_partner_path, :class => @nav_class[:profile] %>
         </p>
-      <% else %>
+    <% else %>
+      <div id="header" class="not_logged_in">
         <span><%= link_to "Log in", login_path %></span>
-      <% end %>
+    <% end %>
     </div>
     <div id="main">
       <%= yield :subnav %>

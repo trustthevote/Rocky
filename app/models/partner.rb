@@ -18,9 +18,10 @@ class Partner < ActiveRecord::Base
   validates_format_of :zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true
   validates_presence_of :phone
   validates_format_of :phone, :with => /^\d{3}-\d{3}-\d{4}$/, :message => 'Phone must look like ###-###-####', :allow_blank => true
+  validates_presence_of :organization
 
-  validates_attachment_size :logo, :less_than => 1.megabyte, :message => "logo must not be bigger than 1 megabyte"
-  validates_attachment_content_type :logo, :message => "logo must be an image file",
+  validates_attachment_size :logo, :less_than => 1.megabyte, :message => "Logo must not be bigger than 1 megabyte"
+  validates_attachment_content_type :logo, :message => "Logo must be a JPG, GIF, or PNG file",
                                     :content_type => ['image/jpeg', 'image/jpg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif']
 
   after_validation :make_paperclip_errors_readable
