@@ -35,6 +35,7 @@ set :use_sudo, false
 
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
 after "deploy:symlink_configs", "deploy:geminstaller"
+after "deploy:restart", "deploy:import_states_csv"
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
@@ -42,6 +43,14 @@ namespace :deploy do
   desc "run GemInstaller"
   task :geminstaller, :roles => [:app, :util] do
     sudo "geminstaller -c #{current_release}/config/geminstaller.yml"
+  end
+
+  desc "import states.csv data"
+  task :import_states_csv, :roles => [:app] do
+    run <<-CMD
+      cd #{latest_release} &&
+      rake import:states CSV_FILE=db/bootstrap/import/states.csv
+    CMD
   end
 
   desc "Link the database.yml and mongrel_cluster.yml files into the current release path."
