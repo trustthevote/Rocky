@@ -7,14 +7,14 @@
       <ul class="stacked">
         <li class="width_a">
           <h3><%= form.label :password, "New password" %></h3>
-          <%= field_div form, :password, :kind => "password" %>
           <span class="error"><%= Array(form.object.errors.on(:password)).first %></span>
+          <%= field_div form, :password, :kind => "password", :value => "" %>
         </li>
       </ul>
       <ul class="stacked">
         <li class="width_a">
           <h3><%= form.label :password_confirmation, "Confirm Password" %></h3>
-          <%= field_div form, :password_confirmation, :kind => "password" %>
+          <%= field_div form, :password_confirmation, :kind => "password", :value => "" %>
           <span class="error"><%= form.object.errors.on :password_confirmation %></span>
         </li>
       </ul>
