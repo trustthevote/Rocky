@@ -17,3 +17,5 @@ config.action_mailer.delivery_method = :test
 
 USE_HTTPS = false
 PAPERCLIP_OPTIONS = {:path => ":rails_root/tmp/system/:attachment/:id/:style/:filename"}
+
+PDF_EXPIRATION_AGE = BucketRemover::SECONDS_IN_14_DAYS

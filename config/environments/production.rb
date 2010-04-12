@@ -34,6 +34,8 @@ GOOGLE_ANALYTICS = "UA-1913089-11"
 USE_HTTPS = true
 PAPERCLIP_OPTIONS = {}
 
+PDF_EXPIRATION_AGE = BucketRemover::SECONDS_IN_14_DAYS
+
 config.after_initialize do
   I18n.reload!
   Registrant.handle_asynchronously :wrap_up

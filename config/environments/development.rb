@@ -21,6 +21,8 @@ FROM_ADDRESS = "rocky-dev@example.com"
 USE_HTTPS = false
 PAPERCLIP_OPTIONS = {}
 
+PDF_EXPIRATION_AGE = BucketRemover::SECONDS_IN_14_DAYS
+
 ### uncomment to use DelayedJob in development.
 ### you must set config.cache_classes = true
 ### rake jobs:work  # to run the jobs
