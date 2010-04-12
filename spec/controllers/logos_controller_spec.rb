@@ -42,6 +42,20 @@ describe LogosController do
     assert_match /JPG, GIF, or PNG/, assigns[:partner].errors.on(:logo)
   end
 
+  describe "shows an error message when you upload nothing" do
+    it "no partner params" do
+      put :update, :partner => {}
+      assert_response :success
+      assert_match /You must select an image file to upload/, assigns[:partner].errors.on(:logo)
+    end
+
+    it "no partner[logo] param" do
+      put :update, :partner => { :logo => "" }
+      assert_response :success
+      assert_match /You must select an image file to upload/, assigns[:partner].errors.on(:logo)
+    end
+  end
+
   it "shows an error message when you upload a HUGE file" do
     unless File.exist?("/tmp/over_a_megabyte.jpg")
       File.open("/tmp/over_a_megabyte.jpg", "w") do |big_file|

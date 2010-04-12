@@ -7,7 +7,10 @@ class LogosController < PartnerBase
 
   def update
     @partner = current_partner
-    if @partner.update_attributes(:logo => params[:partner][:logo])
+    if params[:partner].blank? || params[:partner][:logo].blank?
+      @partner.errors.add(:logo, "You must select an image file to upload")
+      render "show"
+    elsif @partner.update_attributes(:logo => params[:partner][:logo])
       flash[:success] = "You have updated your logo."
       redirect_to partner_logo_url
     else
