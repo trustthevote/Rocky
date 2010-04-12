@@ -29,6 +29,8 @@ FROM_ADDRESS = "register@rockthevote.com"
 GOOGLE_ANALYTICS = "UA-1913089-11"
 
 PDF_EXPIRATION_AGE = 6.minutes
+INTERVAL_BETWEEN_REMINDER_EMAILS = 2.minutes # 5.days everywhere else
+
 
 # Enable threaded mode
 # config.threadsafe!

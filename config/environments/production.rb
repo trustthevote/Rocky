@@ -35,6 +35,7 @@ USE_HTTPS = true
 PAPERCLIP_OPTIONS = {}
 
 PDF_EXPIRATION_AGE = BucketRemover::SECONDS_IN_14_DAYS
+INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
 
 config.after_initialize do
   I18n.reload!

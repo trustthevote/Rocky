@@ -18,7 +18,6 @@ class Registrant < ActiveRecord::Base
   TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
   REMINDER_EMAILS_TO_SEND = 2
-  INTERVAL_BETWEEN_REMINDER_EMAILS = 2.minutes # TODO: 5.days
   STALE_TIMEOUT = 30.minutes
 
   CSV_HEADER = [

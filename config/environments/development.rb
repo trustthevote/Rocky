@@ -22,6 +22,7 @@ USE_HTTPS = false
 PAPERCLIP_OPTIONS = {}
 
 PDF_EXPIRATION_AGE = BucketRemover::SECONDS_IN_14_DAYS
+INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
 
 ### uncomment to use DelayedJob in development.
 ### you must set config.cache_classes = true
