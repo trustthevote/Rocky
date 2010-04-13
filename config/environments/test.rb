@@ -32,5 +32,4 @@ require 'factory_girl'
 USE_HTTPS = false
 PAPERCLIP_OPTIONS = {:path => ":rails_root/tmp/system/:attachment/:id/:style/:filename"}
 
-PDF_EXPIRATION_AGE = BucketRemover::SECONDS_IN_14_DAYS
 INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days

@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-
-BucketRemover.new.remove_buckets!
