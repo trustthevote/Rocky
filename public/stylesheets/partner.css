@@ -399,8 +399,8 @@ a.button_editprofile        { width: 127px; height: 22px; }
 a.button_editprofile span   { width: 127px; height: 22px; background-image: url(/images/partner/button_editprofile_ro.gif); }
 a.button_downloadcsv        { width: 258px; height: 22px; }
 a.button_downloadcsv span   { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }
-a.button_getembedcode       { width: 186px; height: 22px; }
-a.button_getembedcode span  { width: 186px; height: 22px; background-image: url(/images/partner/button_getembedcode_ro.gif); }
+a.button_save               { width: 207px; height: 36px; }
+a.button_save span          { width: 207px; height: 36px; background-image: url(/images/partner/button_save_ro.gif); }
 a.button_deletelogo         { width: 137px; height: 22px; }
 a.button_deletelogo span    { width: 137px; height: 22px; background-image: url(/images/partner/button_deletelogo_ro.gif); }
 a.button_uploadlogo         { width: 137px; height: 22px; }
