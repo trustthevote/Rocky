@@ -358,6 +358,30 @@ form li {
   font-weight: bold;
 }
 
+/*** embed code ***/
+
+#main .copy_html div {
+  margin: 10px 0;
+  border: 1px solid #aaaaaa;
+  padding: 5px 10px;
+  background-color: #cccccc;
+}
+
+#main .copy_html h2,
+#main .copy_html p {
+  margin: 5px 0;
+}
+
+#main .copy_html object {
+  position: relative;
+  top: 2px;
+  left: 4px;
+}
+
+#main .copy_html p {
+  text-align: center;;
+}
+
 /*** statistics page ***/
 
 #statistics {

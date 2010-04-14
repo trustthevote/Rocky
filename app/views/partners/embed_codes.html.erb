@@ -7,15 +7,15 @@
   <p>Copy and paste the HTML below into your web page to show a registration tool option.</p>
   <form class="copy_html" action="#" method="get" accept-charset="utf-8">
     <div>
-      <h2><label for="text_link_html">Show a text link:</label> <%= clippy(h(@text_link_html)) %></h2>
+      <h2><label for="text_link_html">Show a text link:</label> <%= clippy(h(@text_link_html), '#cccccc') %></h2>
       <p><textarea name="text_link_html" readonly="readonly" rows="3" cols="80"><%= h @text_link_html %></textarea></p>
     </div>
     <div>
-      <h2><label for="image_link_html">Show an image link widget:</label> <%= clippy(h(@image_link_html)) %></h2>
+      <h2><label for="image_link_html">Show an image link widget:</label> <%= clippy(h(@image_link_html), '#cccccc') %></h2>
       <p><textarea name="image_link_html" readonly="readonly" rows="5" cols="80"><%= h @image_link_html %></textarea></p>
     </div>
     <div>
-      <h2><label for="image_overlay_html">Show an overlay launcher widget:</label> <%= clippy(h(@image_overlay_html)) %></h2>
+      <h2><label for="image_overlay_html">Show an overlay launcher widget:</label> <%= clippy(h(@image_overlay_html), '#cccccc') %></h2>
       <p><textarea name="image_overlay_html" readonly="readonly" rows="6" cols="80"><%= h @image_overlay_html %></textarea></p>
     </div>
   </form>
