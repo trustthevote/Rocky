@@ -2,21 +2,23 @@
   <% @nav_class[:customize] = :current; @nav_class[:embed] = :current -%>
   <%= render :partial => "layouts/customize_nav" %>
 <% end -%>
-<h1>Grab Your Embed Code</h1>
-<p>Copy and paste the HTML below into your web page to show a registration tool option.</p>
-<form class="copy_html" action="#" method="get" accept-charset="utf-8">
-  <div>
-    <h2><label for="text_link_html">Show a text link:</label> <%= clippy(h(@text_link_html)) %></h2>
-    <p><textarea name="text_link_html" readonly="readonly" rows="3" cols="80"><%= h @text_link_html %></textarea></p>
-  </div>
-  <div>
-    <h2><label for="image_link_html">Show an image link widget:</label> <%= clippy(h(@image_link_html)) %></h2>
-    <p><textarea name="image_link_html" readonly="readonly" rows="5" cols="80"><%= h @image_link_html %></textarea></p>
-  </div>
-  <div>
-    <h2><label for="image_overlay_html">Show an overlay launcher widget:</label> <%= clippy(h(@image_overlay_html)) %></h2>
-    <p><textarea name="image_overlay_html" readonly="readonly" rows="6" cols="80"><%= h @image_overlay_html %></textarea></p>
-  </div>
-</form>
-<p>Not going on a website or have something custom in mind? Here is your unique url:</p>
-<p><%= link_to "https://#{request.host}#{new_registrant_path(:partner => @partner.id)}" %></p>
+<div class="customize">
+  <h1>Grab Your Embed Code</h1>
+  <p>Copy and paste the HTML below into your web page to show a registration tool option.</p>
+  <form class="copy_html" action="#" method="get" accept-charset="utf-8">
+    <div>
+      <h2><label for="text_link_html">Show a text link:</label> <%= clippy(h(@text_link_html)) %></h2>
+      <p><textarea name="text_link_html" readonly="readonly" rows="3" cols="80"><%= h @text_link_html %></textarea></p>
+    </div>
+    <div>
+      <h2><label for="image_link_html">Show an image link widget:</label> <%= clippy(h(@image_link_html)) %></h2>
+      <p><textarea name="image_link_html" readonly="readonly" rows="5" cols="80"><%= h @image_link_html %></textarea></p>
+    </div>
+    <div>
+      <h2><label for="image_overlay_html">Show an overlay launcher widget:</label> <%= clippy(h(@image_overlay_html)) %></h2>
+      <p><textarea name="image_overlay_html" readonly="readonly" rows="6" cols="80"><%= h @image_overlay_html %></textarea></p>
+    </div>
+  </form>
+  <p>Not going on a website or have something custom in mind? Here is your unique url:</p>
+  <p><%= link_to "https://#{request.host}#{new_registrant_path(:partner => @partner.id)}" %></p>
+</div>

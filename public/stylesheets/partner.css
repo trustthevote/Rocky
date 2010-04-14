@@ -251,6 +251,16 @@ form li {
   position: relative;
 }
 
+/* all subnav customize pages */
+
+.customize {
+  overflow: hidden;
+}
+
+/* survey questions */
+
+/* upload partner logo */
+
 #upload_logo {
   overflow: hidden;
 }
