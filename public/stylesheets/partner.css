@@ -131,10 +131,17 @@ h2, h3 {
 p {
   font-size: 14px;
 }
+
+#main p.extra_leading {
+  margin-top: 1.5em;
+}
+#main p {
+  line-height: 1.4em;
+}
+
 .text p {
   margin: 1em 0;
   font-size: 13px;
-  line-height: 1.5em;
 }
 
 .text {
@@ -158,13 +165,13 @@ p {
   float: right;
 }
 
-#customize li {
+#customizations li {
   font-size: 13px;
   margin: 0.7em 1.5em;
 }
 
-#customize a       { color: #000000; }
-#customize a:hover { color: #B42225; }
+#customizations a       { color: #000000; }
+#customizations a:hover { color: #B42225; }
 
 #dash_left, #dash_right {
   position: relative;
@@ -258,6 +265,14 @@ form li {
 }
 
 /* survey questions */
+
+#survey_questions fieldset {
+  margin-top: 20px;
+}
+
+#survey_questions fieldset p {
+  margin-left: 10px;
+}
 
 /* upload partner logo */
 
