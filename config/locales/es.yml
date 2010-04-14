@@ -2,11 +2,11 @@ es:
   activerecord:
     attributes:
       registrant:
-        date_of_birth: fecha de cac
-        email_address: correo electrónico
-        first_registration: Me estoy registrando por primera vez para votar
-        home_zip_code: Código postal
-        us_citizen: Soy ciudadano americano
+        date_of_birth: Fecha de Cac
+        email_address: Correo Electrónico
+        first_registration: Me estoy registrando por primera vez para votar.
+        home_zip_code: Código Postal
+        us_citizen: Soy ciudadano americano.
         name_title: Titulo
         first_name: Nombre
         middle_name: Segundo Nombre
@@ -16,7 +16,7 @@ es:
         home_unit: No.
         home_city: Ciudad
         home_state_name: Estado
-        has_mailing_address: Recibo mi correo en una dirección diferente a la provista anteriormente
+        has_mailing_address: Recibo mi correo en una dirección diferente a la provista anteriormente.
         mailing_address: Dirección Alterna
         mailing_unit: No.
         mailing_city: Ciudad
@@ -123,7 +123,7 @@ es:
       mailing_address: Dirección correo
       previous_name: Nombre Anterior
       previous_address: Dirección Anterior
-      opt_in_sms: Enviarme recordatorios para votar vía txt.
+      opt_in_sms: Deseo recibir mensajes de texto de Rock the Vote.
       opt_in_email: "Recibir emails en {{email_address}}"
       volunteer: "Me gustaría voluntariar para {{organization}}"
       not_given: none
@@ -161,7 +161,7 @@ es:
         download_2: No serás registrado si no imprimes, firmas y mandas tu forma vía correo! 
       ineligible:
         age: Debes ser mayor a 18 años para la fecha de la elección.
-        non_citizen: Debes ser ciudadano de EU para registrarte a votar
+        non_citizen: Su registro no se puede completar porque no marcó la casilla que indica que usted es un ciudadano de Estados Unidos. Usted debe ser ciudadano de los Estados Unidos para inscribirse para votar. Si usted es un ciudadano, por favor, vuelva a la página anterior y marque la casilla de ciudadanía.
         attest: Debes confirmar que eres elegible para votar
       tooltips:
         email_address: Te enviaremos una copia de tu forma de registro para votar vía correo electronico.

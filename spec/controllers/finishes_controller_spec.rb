@@ -48,7 +48,7 @@ describe FinishesController do
 
     it "sets default content for message body" do
       get :show, :registrant_id => @registrant.to_param
-      assert_match %r(Are you registered to vote\?  I may not be old enough to vote), assigns[:registrant].tell_message
+      assert_match %r(Are you registered to vote\? I may not be old enough to vote), assigns[:registrant].tell_message
       assert_match Regexp.compile(Regexp.escape(root_url(:source => "email"))), assigns[:registrant].tell_message
     end
 
