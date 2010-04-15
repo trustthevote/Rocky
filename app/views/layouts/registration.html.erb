@@ -16,24 +16,19 @@
   <%= yield :head %>
 </head>
 <body>
-  <div id="container">
-    <div id="main-scroller">
-      <div id="main">
-        <%= flash_messages %>
-        <%= yield %>
-      </div>
-    </div>
-  </div>
 
-  <div id="header-fixed">
-<% if @partner.custom_logo? -%>
+
+
+  <div id="container">
+
+  <% if @partner.custom_logo? -%>
     <div id="header" class="partner">
       <div id="partner-logo">
         <%= image_tag @partner.logo.url(:header) %>
       </div>
-<% else -%>
+  <% else -%>
     <div id="header">
-<% end -%>
+  <% end -%>
       <div id="progress-bar">
         <ol>
           <li class="progress-title"><%= t('txt.registration.progress_indicator') %></li>
@@ -41,11 +36,16 @@
         </ol>
       </div>
     </div>
+
+    <div id="main">
+      <%= flash_messages %>
+      <%= yield %>
+    </div>
+
+    <%= render :partial => 'layouts/footer' %>
+
   </div>
 
-  <div id="footer-fixed">
-    <%= render :partial => 'layouts/footer' %>
-  </div>
 <% if ENV['RAILS_ENV'] == 'production' %>
   <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." :

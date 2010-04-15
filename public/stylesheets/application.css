@@ -282,9 +282,14 @@ form div.button {
   background-position: right top;
 }
 
+#container {
+  overflow: hidden;
+}
+
 #footer {
   zoom: 1;
   height: 40px;
+  width: 100%;
   margin: 0 auto;
   color: #666;
   background-color: #dddddd;
@@ -302,7 +307,7 @@ form div.button {
 #footer p {
   margin: 0;
   font-size: 1.15em;
-  line-height: 40px;
+  line-height: 38px;
   text-align: center;
 }
 
