@@ -286,9 +286,17 @@ form div.button {
   zoom: 1;
   height: 40px;
   margin: 0 auto;
-  color: #d0d0d0;
-  background-color: black;
+  color: #666;
+  background-color: #dddddd;
   font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+}
+
+#footer hr {
+  color: #999;
+  background-color: #999;
+  height: 1px;
+  margin: 0 10px;
+  border: none;
 }
 
 #footer p {
@@ -302,19 +310,14 @@ form div.button {
   margin: 0 0.5em;
 }
 
-#footer a:link    { color: #D0D0D0; }
-#footer a:visited { color: #D0D0D0; }
-#footer a:hover   { color: #FFFFFF; }
-#footer a:active  { color: #FFFFFF; }
-
-
-#footer a:hover {
-  color: white;
-}
+#footer a:link    { color: #666; }
+#footer a:visited { color: #666; }
+#footer a:hover   { color: #B2272C; }
+#footer a:active  { color: #B2272C; }
 
 .copyright {
   font-family: "Times New Roman", Times, serif;
   font-size: 1em;
   font-style: oblique;
-  color: #CCCCCC;
+  color: #666;
 }
