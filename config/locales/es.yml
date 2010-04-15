@@ -42,6 +42,11 @@ es:
         opt_in_email: Recibir correo electronico
         opt_in_sms: Recibir mensajes de texto
         attest_true: He revisado la información detalladamente, es fidedigna y veraz dentro de mi conocimiento.
+        tell_from: De
+        tell_email: Su correo electrónico
+        tell_recipients: Destinatarios
+        tell_subject: línea de asunto
+        tell_message: Mensaje
     errors:
       models:
         registrant:
@@ -102,9 +107,15 @@ es:
       back: "Paso Anterior"
       download: "Descargar PDF"
       ineligible_try_again: Regresar
+      keep_going: Keep Going
+      remind_me_later: Remind Me Later
       help: Ayuda
       prepare: Preparar Formato
       review: Revisar Aplicación
+      sendmail: Enviar Correo Electrónico
+      share_facebook: Compartir en Facebook!
+      share_twitter: Compartir en Twitter!
+      share_googlebuzz: Compartir en Buzz!
     registration:
       powered_by: "accionado por:"
       progress_indicator: "Paso"
@@ -116,6 +127,9 @@ es:
       step_5_header: Revisar y Confirmar
       survey_title: Preguntas para ti
       download_header: Imprimir Formato
+      finish_header: Pasen la voz!
+      finish_under_18_header: "Estás en la lista!"
+      tell_a_friend_title: "Dile a tu amigo a través de un correo electronicó."
       ineligible_header: "Una disculpa, no eres elegilbe para registrarte para votar por las siguientes razones:"
       name: Nombre
       select_none: (none)
@@ -125,12 +139,14 @@ es:
       previous_address: Dirección Anterior
       opt_in_sms: Deseo recibir mensajes de texto de Rock the Vote.
       opt_in_email: "Recibir emails en {{email_address}}"
+      remind_when_18: Envíenme un recordatorio cuando cumpla 18 años.
+      get_updates: Mantente actualizado con Rock the Vote.
       volunteer: "Me gustaría voluntariar para {{organization}}"
       not_given: none
       titles:
       - Sr.
       - Sra.
-      - Srta. 
+      - Srta.
       - Ms
       suffixes:
       - Jr.
@@ -153,36 +169,46 @@ es:
       - Trabajo
       - Otro
       instructions:
-        opt_in_sms: Enviarme recordatorios para votar vía txt.
         opt_in_email: Le enviaremos recordatorios de la elección, información del recinto electoral asignado, y información oportuna sobre música y temas información.
+        under_18: "Parece que aún no tienes 18 años. Está bien. En {{state_name}} puedes registrarte para votar {{state_rule}}.  Visite nuestro <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">centro de votación</a> para saber cuándo es la próxima elección."
+        under_18_2: "Para confirmar has clic en el botón para continuar con la aplicación."
+        under_18_3: "Si no, te enviaremos un recordatorio para que te registres en tu cumpleaños."
+        remind_when_18: "Envíenme un recordatorio cuando cumpla 18 años en {{email_address}}"
         review: Porfavor revisar la siguiente información y confirmar su autenticidad.
-        download: No has acabado aún.  Da click en el boton para imprimir tu forma de registro para votar.  
+        download: No has acabado aún.  Da click en el boton para imprimir tu forma de registro para votar.
           Firma y envíalo vía correo a la dirección provista en tu forma.
-        download_2: No serás registrado si no imprimes, firmas y mandas tu forma vía correo! 
+        download_2: No serás registrado si no imprimes, firmas y mandas tu forma vía correo!
+        finish: "No se olviden de avisar a amigos y parientes lo facil que es registrarse!  Aqui se incluyen algunos instrumentos para pasar la voz sobre como registrar el voto:"
+        finish_2: "Consiga esta harramienta para inscriber a votantes por su pagína web. Alista te gratís en"
+        finish_under_18: "Te enviaremos un recordatorio para que te registres en tu cumpleaños."
+        finish_under_18_2: "No se olviden de avisar a amigos y parientes lo facil que es registrarse!  Aqui se incluyen algunos instrumentos para pasar la voz sobre como registrar el voto."
+        finish_tell_recipients: "(separados por comas)"
+        finish_email_sent: "correo Electronicó enviado"
+        finish_update_status: "No se olviden actualizar su estatus por Facebook y Twitter."
       ineligible:
         age: Debes ser mayor a 18 años para la fecha de la elección.
-        non_citizen: Su registro no se puede completar porque no marcó la casilla que indica que usted es un ciudadano de Estados Unidos. Usted debe ser ciudadano de los Estados Unidos para inscribirse para votar. Si usted es un ciudadano, por favor, vuelva a la página anterior y marque la casilla de ciudadanía.
+        non_citizen: Su registro no se puede completar porque no marca la casilla que indica que usted es un ciudadano de Estados Unidos. Usted debe ser ciudadano de los Estados Unidos para inscribirse para votar. Si usted es un ciudadano, por favor, vuelva a la pagina anterior y marque la casilla de ciudadana.
         attest: Debes confirmar que eres elegible para votar
       tooltips:
         email_address: Te enviaremos una copia de tu forma de registro para votar vía correo electronico.
         home_zip_code: "Entra el código postal y la direcciones donde vives, aunque no recibas correo ahí."
-        date_of_birth: "Debes ser mayor a 18 años para el día de la elección."
-        registrant_name: Poner tu nombre completo en estos espacios.  Porfavor no usar apodos o iniciales.  Si esta aplicación es para el cambio de nombre se te preguntará tu nombre anterior registrado.  Y no olvidar poner tu título (Sr. Sra.,Srta, Ms).
+        date_of_birth: "En su solicitud de registro del votante, se le requiere que indique si va a ser mayor de 18 años de edad en o antes del día de las elecciones. Sin embargo, muchos estados permiten que usted se registre antes de su cumpleaños número 18, así que haga <a href=\"http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html\">clic aquí</a> para ver el estado de su estado."
+        registrant_name: Poner tu nombre completo en estos espacios.  Porfavor no usar apodos o iniciales.  Si esta aplicación es para el cambio de nombre se te preguntará tu nombre anterior registrado.  Y no olvidar poner tu título (Sr., Sra., Srta., Ms.).
         home_address: Poner tu dirección en estos espacios.  No poner tu dirección de correo aquí si es diferente a la dirección de tu casa.  No usar Post office Box o rural route sin un número de box.  Si vives en un area rural y no tienes calle o si no tienes dirección, favor mostrar donde vives en el mapa anexo a la forma.
         mailing_address: Poner tu dirección de correo si recibes tu correo en una dirección distinta a la de tu casa.  Si no recibes correo en tu casa, debes llenar esta parte para indicarnos donde localizarte vía correo.
         phone: Muchos estados piden tu número de teléfono en caso de que tengan preguntas sobre tu aplicación.  No estás obligado a proveer to número de teléfono.
         previous_name: Si has cambiado tu nombre desde tu ultimo registro, poner tu nombre anterior.
         previous_address: Si te has cambiado de dirección desde tu ultimo registro, favor de proveer la dirección anterior.
     status_text:
-      message: ""
-      under_18_message: ""
+      message: "I just registered to vote and you can too!"
+      under_18_message: "Make sure you register to vote. It's easy!"
   email:
     confirmation:
       subject: "Reminder: Mail your voter registration form"
-      # body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
+      body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
     reminder:
       subject: "Reminder: Mail your voter registration form"
-      # body: "This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
+      body: "This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
     tell_friend:
       subject: "I just registered to vote and you should too"
       body: "Hey, I just registered to vote at {{rtv_url}} and you can too.  It is really easy.  Just fill out the online form here: {{rtv_url}}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: {{rtv_url}}. Already registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at {{rtv_url}}.  Happy voting!"
