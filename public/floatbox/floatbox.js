@@ -29,7 +29,7 @@ roundCorners:     'none'     ,// 'all'|'top'|'none'
 cornerRadius:      0       ,// 8|12|20
 roundBorder:       0        ,// 0|1
 outerBorder:       0        ,// pixels
-innerBorder:       0        ,// pixels
+innerBorder:       2        ,// pixels
 autoFitImages:     true     ,// true|false
 resizeImages:      true     ,// true|false
 autoFitOther:      false    ,// true|false

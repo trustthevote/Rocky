@@ -1,9 +1,52 @@
-html {
+/* begin sticky footer */
+html, body, #container {
   height: 100%;
+  overflow-x: hidden;
 }
 
+body > #container {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+#main {
+  overflow-y: auto;
+  padding-bottom: 40px;   /* same as footer height */
+}
+
+#sticky-footer {
+  position: relative;
+  margin: -40px auto 0 auto;      /* negative value of footer height */
+  height: 40px;
+  width: 600px;
+  clear: both;
+  overflow-x: hidden;
+}
+
+/* end sticky footer*/
+
+
+#container {
+  zoom: 1;
+  position: relative;
+  height: auto;
+  width: 600px;
+  margin: 0 auto;
+  background: #dcdcdc url(/images/reg/content_bg_repeat_x.gif) repeat-x left top;
+}
+
+#main {
+  zoom: 1;
+  position: relative;
+  width: 560px;
+  padding: 20px 0 60px 20px;   /* bottom is 40px for footer + 20px whitespace */
+  background: none;
+}
+
+
+
 body {
-  height: 100%;
   background-color: #2a2a2a;
 }
 
@@ -79,35 +122,6 @@ body {
 /*added larger font size for tooltips*/
 .qtip-content {
 font-size: 1.15em;
-}
-
-#container {
-  zoom: 1;
-  position: relative;
-  height: auto;
-  width: 600px;
-  margin: 0 auto;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #444;
-  background: #dcdcdc url(/images/reg/content_bg_repeat_x.gif) repeat-x left top;
-}
-
-#main-scroller {
-  zoom: 1;
-  position: absolute;
-  width: 100%;
-  top: 97px;
-  bottom: 42px;
-  overflow-y: auto;
-}
-
-#main {
-  zoom: 1;
-  position: relative;
-  width: 560px;
-  padding: 20px 0 20px 20px;
-  background: none;
 }
 
 #other_language_link {
