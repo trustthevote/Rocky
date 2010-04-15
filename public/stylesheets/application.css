@@ -52,7 +52,38 @@ body {
   font-size: 10px;
 }
 
+/* begin sticky footer */
+html, body, #container {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body > #container {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+#main {
+  overflow-y: auto;
+  padding-bottom: 40px;   /* same as footer height */
+}
+
+#sticky-footer {
+  position: relative;
+  margin: -40px auto 0 auto;      /* negative value of footer height */
+  height: 40px;
+  clear: both;
+  overflow-x: hidden;
+}
+
+/* end sticky footer*/
+
 /* base */
+
+body {
+  background-color: #2a2a2a;
+}
 
 h1, h2, h3, h4, h5, h6, legend {
   font-family: Helvetica, Arial, sans-serif;

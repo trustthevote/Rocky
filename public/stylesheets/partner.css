@@ -1,9 +1,5 @@
-html, body {
-  height: 100%;
-}
-
-body {
-  background-color: #2a2a2a;
+#sticky-footer {
+  width: 720px;
 }
 
 strong {
@@ -43,9 +39,6 @@ ul.flash {
   width: 720px;
   margin: 0 auto;
   background: #ddd url(../images/partner/content_bg.gif) repeat-x top left;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #444;
 }
 
 #main p {
@@ -106,7 +99,7 @@ ul.flash {
 #main {
   background-color: transparent;
   position: relative;
-  padding: 10px 20px;
+  padding: 10px 20px 60px 20px;   /* 60 = footer + 20 */
 }
 
 #header a:link.current,
