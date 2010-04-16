@@ -546,6 +546,12 @@ describe Registrant do
         end
       end
 
+      it "sets pdf_ready if file exists or is generated" do
+        assert !@registrant.pdf_ready?
+        @registrant.generate_pdf
+        assert @registrant.pdf_ready?
+      end
+
       after do
         `rm #{@registrant.pdf_file_path}`
         `rmdir #{File.dirname(@registrant.pdf_file_path)}`

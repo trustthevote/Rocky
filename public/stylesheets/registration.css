@@ -262,6 +262,7 @@ p.centered {
 }
 
 .download {
+  position: relative;
   border: 3px solid #333;
   background-color: #ddd;
   width: 85%;
@@ -275,6 +276,24 @@ p.centered {
 
 .download h2 {
   margin: 15px;
+}
+
+.download h2.spaced_out {
+  visibility: hidden;
+}
+
+.download h2.preparing {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.download p.preparing {
+  height: 80px;
+  text-align: center;
+}
+.download p.preparing img {
+  vertical-align: middle;
 }
 
 .reason {

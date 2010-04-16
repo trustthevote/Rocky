@@ -1,0 +1,12 @@
+<% content_for :head do -%>
+  <meta http-equiv="refresh" content="2" />
+<% end -%>
+<h1><%= I18n.t('txt.registration.download_header') %></h1>
+<div class="download" style="position:relative">
+  <div>
+    <h2 class="spaced_out"><%= I18n.t('txt.registration.instructions.download') %></h2>
+    <h2 class="preparing"><br/><%= I18n.t('txt.registration.preparing_header') %></h2>
+  </div>
+  <p class="preparing"><%= image_tag "reg/spinner.gif" %></p>
+  <p><%= I18n.t('txt.registration.instructions.download_2') %></p>
+</div>

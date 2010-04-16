@@ -3,6 +3,7 @@ class DownloadsController < RegistrationStep
 
   def show
     find_registrant(:download)
+    render "preparing" unless @registrant.pdf_ready?
   end
 
 end

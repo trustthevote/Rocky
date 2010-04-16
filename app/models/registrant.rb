@@ -487,6 +487,7 @@ class Registrant < ActiveRecord::Base
         merge_pdf(f)
       end
     end
+    self.pdf_ready = true
   end
 
   def deliver_confirmation_email

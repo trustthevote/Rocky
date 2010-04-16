@@ -5,7 +5,9 @@ describe DownloadsController do
 
   before(:each) do
     @registrant = Factory.create(:step_5_registrant)
-    `touch #{@registrant.pdf_file_path}`
+    stub(@registrant).merge_pdf { `touch #{@registrant.pdf_file_path}` }
+    @registrant.generate_pdf
+    @registrant.save!
   end
 
   it "provides a link to download the PDF" do

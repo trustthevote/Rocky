@@ -22,7 +22,7 @@ Given /^my phone number is not blank$/ do
 end
 
 Given /^I have not downloaded the PDF before$/ do
-  `rm #{@registrant.pdf_file_path}`
+  `rm -f #{@registrant.pdf_file_path}`
 end
 
 Given /there is localized state data/ do
