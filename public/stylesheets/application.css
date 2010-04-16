@@ -315,28 +315,21 @@ form div.button {
 }
 
 #footer {
-  zoom: 1;
-  height: 40px;
-  width: 100%;
+  position: relative;
+  height: 39px;
   margin: 0 auto;
+  border-top: 1px solid #999;
   color: #444;
   background-color: #dddddd;
   font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
 }
 
-#footer hr {
-  color: #999;
-  background-color: #999;
-  height: 1px;
-  margin: 0 10px;
-  padding: 0;
-  border: none;
-}
-
 #footer p {
-  margin: 0;
-  font-size: 1.15em;
-  line-height: 38px;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  margin: -0.5em 0 0 0;
+  font-size: 115%;
   text-align: center;
 }
 

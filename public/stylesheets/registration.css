@@ -1,6 +1,5 @@
-#sticky-footer {
-  width: 600px;
-}
+#sticky-footer { width: 600px; }
+#footer { width: 580px; }
 
 #container {
   zoom: 1;

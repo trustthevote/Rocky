@@ -1,6 +1,5 @@
-#sticky-footer {
-  width: 720px;
-}
+#sticky-footer { width: 720px; }
+#footer { width: 700px; }
 
 strong {
   font-weight: bold;
