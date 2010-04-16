@@ -1,6 +1,19 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RegistrantsController do
+  describe "widget loader" do
+    integrate_views
+
+    it "generates bootstrap javascript targeted to server host" do
+      stub(request).protocol { "http://" }
+      stub(request).host_with_port { "example.com:3000" }
+      get :widget_loader, :format => "js"
+      assert_response :success
+      assert_template "widget_loader.js.erb"
+      assert_match %r{createElement}, response.body
+    end
+  end
+
   describe "landing" do
     it "redirects to /new" do
       get :landing

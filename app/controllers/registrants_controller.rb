@@ -1,6 +1,11 @@
 class RegistrantsController < RegistrationStep
   CURRENT_STEP = 1
 
+  # GET /widget_loader.js
+  def widget_loader
+    @host = host_url
+  end
+
   # GET /registrants
   def landing
     options = {}
@@ -44,4 +49,9 @@ class RegistrantsController < RegistrationStep
   def next_url
     registrant_step_2_url(@registrant)
   end
+
+  def host_url
+    "#{request.protocol}#{request.host_with_port}"
+  end
+
 end

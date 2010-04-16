@@ -2,19 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PartnersController do
 
-  describe "widget loader" do
-    integrate_views
-
-    it "generates bootstrap javascript targeted to server host" do
-      stub(request).protocol { "http://" }
-      stub(request).host_with_port { "example.com:3000" }
-      get :widget_loader, :id => "2", :format => "js"
-      assert_response :success
-      assert_template "widget_loader.js.erb"
-      assert_match %r{createElement}, response.body
-    end
-  end
-
   describe "registering" do
     it "creates a new partner" do
       assert_difference("Partner.count") do
@@ -32,9 +19,22 @@ describe PartnersController do
   end
 
   describe "when not logged in" do
-    it "prevents access to authenticated pages" do
-      get :show
-      assert_redirected_to login_url
+    before(:each) do
+      @no_login_actions = %w[new create]
+    end
+
+    it "requires login for partner-only actions" do
+      (PartnersController.public_instance_methods(false) - @no_login_actions).each do |act|
+        get act
+        assert_redirected_to login_url, "did not prevent no-login access to #{act}"
+      end
+    end
+
+    it "allows public access to some actions" do
+      @no_login_actions.each do |act|
+        get act
+        assert_response :success, "did not allow no-login access to #{act}"
+      end
     end
   end
 
@@ -84,7 +84,7 @@ describe PartnersController do
         assert_select html, "a[href=https://example.com/?partner=5&source=embed-rtv100x100v1][class=floatbox][data-fb-options='width:604 height:max scrolling:no']"
         assert_match %r{<img src=.*/images/widget/rtv-100x100-v1.gif}, assigns(:image_overlay_html)
         html = HTML::Node.parse(nil, 0, 0, assigns(:image_overlay_html).split("\n").last)
-        assert_select html, "script[type=text/javascript][src=https://example.com/partner/5/widget_loader.js]"
+        assert_select html, "script[type=text/javascript][src=https://example.com/widget_loader.js]"
       end
     end
 

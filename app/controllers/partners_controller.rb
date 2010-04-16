@@ -1,5 +1,7 @@
 class PartnersController < PartnerBase
-  before_filter :require_partner, :only => [:show, :edit, :update]
+  before_filter :require_partner, :except => [:new, :create]
+
+  ### public access
 
   def new
     if current_partner
@@ -19,6 +21,8 @@ class PartnersController < PartnerBase
       render "new"
     end
   end
+
+  ### require login
 
   def edit
     @partner = current_partner
@@ -55,7 +59,7 @@ HTML
 <a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="width:604 height:max scrolling:no">
   <img src="http://#{request.host}/images/widget/#{@partner.widget_image}" />
 </a>
-<script type="text/javascript" src="https://#{request.host}#{widget_loader_path(:id => partner_id, :format => 'js')}"></script>
+<script type="text/javascript" src="https://#{request.host}#{widget_loader_path}"></script>
 HTML
 
   end
@@ -74,17 +78,8 @@ HTML
     send_data(current_partner.generate_registrants_csv, :filename => "registrations.csv", :type => :csv)
   end
 
-  def widget_loader
-    @partner_id = params[:id]
-    @host = host_url
-  end
-
   protected
 
-  def host_url
-    "#{request.protocol}#{request.host_with_port}"
-  end
-  
   def partner_id
     current_partner && current_partner.to_param
   end

@@ -23,6 +23,6 @@ ActionController::Routing::Routes.draw do |map|
     partner.resource "widget_image",  :only => [:show, :update]
     partner.resource "logo",          :only => [:show, :update, :destroy]
   end
-  map.widget_loader "partner/:id/widget_loader.js", :format => "js", :controller => "partners", :action => "widget_loader"
+  map.widget_loader "/widget_loader.js", :format => "js", :controller => "registrants", :action => "widget_loader"
   map.resources "password_resets", :only => [:new, :create, :edit, :update]
 end
