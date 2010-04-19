@@ -127,7 +127,7 @@ es:
       step_5_header: Revisar y Confirmar
       survey_title: Preguntas para ti
       download_header: Imprimir Formato
-      preparing_header: SPANISH Preparing Registration Form...
+      preparing_header: Preparando el Formulario...
       finish_header: Pasen la voz!
       finish_under_18_header: "Estás en la lista!"
       tell_a_friend_title: "Dile a tu amigo a través de un correo electronicó."
@@ -206,13 +206,17 @@ es:
   email:
     confirmation:
       subject: "Reminder: Mail your voter registration form"
-      body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
+      body: "Congratulations, you've almost finished registering to vote.  Print the form you downloaded (or if you don't have 
+        it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state
+        registrar at {{registrar_phone}}."
     reminder:
       subject: "Reminder: Mail your voter registration form"
-      body: "This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state registrar at {{registrar_phone}}."
+      body: "This is a reminder to mail your voter registration form.  Print the form you downloaded (or if you don't have 
+        it you can get it here: {{url}}) and mail it to {{registrar_address}}.  If you have questions, call your state
+        registrar at {{registrar_phone}}."
     tell_friend:
       subject: "I just registered to vote and you should too"
-      body: "Hey, I just registered to vote at {{rtv_url}} and you can too.  It is really easy.  Just fill out the online form here: {{rtv_url}}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: {{rtv_url}}. Already registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at {{rtv_url}}.  Happy voting!"
+      body: "Hey, I just registered to vote at {{rtv_url}} and you can too.  It is really easy.\n\nJust fill out the online form here: {{rtv_url}}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: {{rtv_url}}.\n\nAlready registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at {{rtv_url}}.\n\nHappy voting!"
     tell_friend_under_18:
       subject: "Register to vote!"
-      body: "Are you registered to vote?  I may not be old enough to vote yet, but you are.  You can't vote unless you are registered.  You can fill out a voter registration form only at {{rtv_url}}.  It is super easy.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  Go to {{rtv_url}}.  Already registered to vote or not old enough to vote yet?  Help others get registered to vote by sending an email to your friends and family asking them to register at {{rtv_url}}.  Happy voting!"
+      body: "Are you registered to vote? I may not be old enough to vote yet, but you are.  You can't vote unless you are registered.\n\nYou can fill out a voter registration form only at {{rtv_url}}. It is super easy.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  Go to {{rtv_url}}.\n\nAlready registered to vote or not old enough to vote yet?  Help others get registered to vote by sending an email to your friends and family asking them to register at {{rtv_url}}.\n\nHappy voting!"
