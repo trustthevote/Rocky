@@ -3,6 +3,33 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 include ActionView::Helpers::UrlHelper
 
 describe Registrant do
+  describe "backfill data" do
+    it "backfills the age even when redacted" do
+      assert_equal 0, Registrant.find(:all, :conditions => "age IS NOT NULL").size
+      5.times { Factory.create(:step_5_registrant, :date_of_birth => 241.months.ago.to_date.to_s(:db)) }
+      4.times { Factory.create(:step_5_registrant, :date_of_birth => 239.months.ago.to_date.to_s(:db)) }
+      Registrant.update_all("age = NULL")
+      Registrant.update_all("state_id_number = NULL")
+      Registrant.backfill_data
+      assert_equal 5, Registrant.find_all_by_age(20).size
+      assert_equal 4, Registrant.find_all_by_age(19).size
+    end
+
+    it "backfills the official_party_name even when redacted" do
+      assert_equal 0, Registrant.find(:all, :conditions => "party IS NOT NULL").size
+      5.times { Factory.create(:step_5_registrant, :home_zip_code => "94103", :party => "Green") }
+      5.times { Factory.create(:step_5_registrant, :home_zip_code => "94103", :party => "Verde", :locale => "es") }
+      4.times { Factory.create(:step_5_registrant, :home_zip_code => "94103", :party => "Decline to State") }
+      4.times { Factory.create(:step_5_registrant, :home_zip_code => "94103", :party => "Se niega a declarar", :locale => "es") }
+      assert_equal 18, Registrant.find(:all, :conditions => "party IS NOT NULL").size
+      Registrant.update_all("official_party_name = NULL")
+      Registrant.update_all("state_id_number = NULL")
+      Registrant.backfill_data
+      assert_equal 10, Registrant.find_all_by_official_party_name("Green").size
+      assert_equal 8, Registrant.find_all_by_official_party_name("None").size
+    end
+  end
+
   describe "to_param hides id" do
     it "should be nil for new records" do
       reg = Registrant.new

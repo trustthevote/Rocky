@@ -6,14 +6,14 @@ class AddAgeToRegistrant < ActiveRecord::Migration
       if (date_of_birth.month > now.month) || (date_of_birth.month == now.month && date_of_birth.day > now.day)
         years -= 1
       end
-      self.update_attributes!(:age => years)
+      self.update_attribute(:age, years)
     end
   end
 
   def self.up
     add_column "registrants", "age", :integer
 
-    Registrant.find_each { |r| r.calculate_age! }
+    Registrant.find(:all, :conditions => "created_at > '#{60.minutes.ago.to_s(:db)}'").each { |r| r.calculate_age! }
   end
 
   def self.down

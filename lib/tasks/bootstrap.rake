@@ -35,4 +35,9 @@ namespace :db do
   
   desc "migrate:reset and then bootstrap"
   task :reboot => %w[db:migrate:reset db:bootstrap]
+
+  desc "backfill registrant data (age, official_party_name)"
+  task :backfill_data => :environment do
+    Registrant.backfill_data
+  end
 end
