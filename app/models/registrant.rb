@@ -667,11 +667,10 @@ class Registrant < ActiveRecord::Base
   def self.backfill_data
     counter = 0
     self.find_each do |r|
-      putc "." if (counter += 1) % 1000 == 0
-      $stdout.flush
       r.calculate_age
       r.set_official_party_name
       r.save(false)
+      putc "." if (counter += 1) % 1000 == 0; $stdout.flush
     end
     puts " done!"
   end

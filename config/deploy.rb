@@ -33,6 +33,8 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 set :group_writable, false
 set :use_sudo, false
 
+
+before "deploy", "deploy:stop_workers"
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
 after "deploy:symlink_configs", "deploy:geminstaller"
 after "deploy:restart", "deploy:import_states_csv"
@@ -97,6 +99,14 @@ namespace :deploy do
     sleep 5 
     run "cd #{latest_release} && ruby script/rocky_pdf_runner start"
     run "cd #{latest_release} && ruby script/rocky_runner start"
+  end
+
+  desc "Stop worker processes on util server"
+  task :stop_workers, :roles => :util do
+    run "cd #{latest_release} && ruby script/rocky_runner stop"
+    run "cd #{latest_release} && ruby script/rocky_pdf_runner stop"
+    # nasty hack to make sure it stops
+    run "pkill -f com.pivotallabs.rocky.PdfServer" rescue nil
   end
 end
 
