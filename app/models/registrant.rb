@@ -670,9 +670,11 @@ class Registrant < ActiveRecord::Base
       r.calculate_age
       r.set_official_party_name
       r.save(false)
-      putc "." if (counter += 1) % 1000 == 0; $stdout.flush
+      unless Rails.env.test?
+        putc "." if (counter += 1) % 1000 == 0; $stdout.flush
+      end
     end
-    puts " done!"
+    puts " done!" unless Rails.env.test?
   end
 
   private ###
