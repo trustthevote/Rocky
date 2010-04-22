@@ -38,6 +38,7 @@ class Notifier < ActionMailer::Base
                               :locale => registrant.locale.to_sym,
                               :registrar_phone => registrant.home_state.registrar_phone,
                               :registrar_address => registrant.home_state.registrar_address,
+                              :registrar_url => registrant.home_state.registrar_url,
                               :registrant => registrant)
       p.transfer_encoding = "quoted-printable"
     end

@@ -28,6 +28,20 @@ describe Notifier do
       assert_equal "utf-8", email.parts[0].charset
       assert_equal "quoted-printable", email.parts[0].encoding
     end
+
+    it "includes state data" do
+      registrant = Factory.create(:maximal_registrant)
+      registrant.home_state.registrar_phone = "this-is-the-phone"
+      registrant.home_state.registrar_address = "this-is-the-address"
+      registrant.home_state.registrar_url = "this-is-the-url"
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.deliver_confirmation(registrant)
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("this-is-the-phone")
+      email.body.should include("this-is-the-address")
+      email.body.should include("this-is-the-url")
+    end
   end
 
   describe "#reminder" do
@@ -42,6 +56,20 @@ describe Notifier do
       assert_equal 1, email.parts.length
       assert_equal "utf-8", email.parts[0].charset
       assert_equal "quoted-printable", email.parts[0].encoding
+    end
+
+    it "includes state data" do
+      registrant = Factory.create(:maximal_registrant, :reminders_left  => 1)
+      registrant.home_state.registrar_phone = "this-is-the-phone"
+      registrant.home_state.registrar_address = "this-is-the-address"
+      registrant.home_state.registrar_url = "this-is-the-url"
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.deliver_reminder(registrant)
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("this-is-the-phone")
+      email.body.should include("this-is-the-address")
+      email.body.should include("this-is-the-url")
     end
 
     it "delivers the expected email in a different locale" do
