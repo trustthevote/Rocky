@@ -24,6 +24,9 @@ describe Notifier do
       email = ActionMailer::Base.deliveries.last
       email.body.should include("http")
       email.body.should include(registrant.pdf_path)
+      assert_equal 1, email.parts.length
+      assert_equal "utf-8", email.parts[0].charset
+      assert_equal "quoted-printable", email.parts[0].encoding
     end
   end
 
@@ -36,6 +39,9 @@ describe Notifier do
       email = ActionMailer::Base.deliveries.last
       email.body.should include("http")
       email.body.should include(registrant.pdf_path)
+      assert_equal 1, email.parts.length
+      assert_equal "utf-8", email.parts[0].charset
+      assert_equal "quoted-printable", email.parts[0].encoding
     end
 
     it "delivers the expected email in a different locale" do

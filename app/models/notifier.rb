@@ -25,17 +25,22 @@ class Notifier < ActionMailer::Base
 
   protected
 
-  def setup_registrant_email(registrant, type)
-    subject I18n.t("email.#{type}.subject", :locale => registrant.locale.to_sym)
+  def setup_registrant_email(registrant, kind)
+    subject I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym)
     from FROM_ADDRESS
     recipients registrant.email_address
     sent_on Time.now.to_s(:db)
-    content_type "text/html"
-    body :pdf_url => "http://#{default_url_options[:host]}#{registrant.pdf_path}?source=email",
-         :locale => registrant.locale.to_sym,
-         # TODO: strip HTML from address when rendering in plain text
-         :registrar_phone => registrant.home_state.registrar_phone,
-         :registrar_address => registrant.home_state.registrar_address,
-         :registrant => registrant
+    # content_type "text/html"
+    content_type    "multipart/alternative"
+
+    part "text/html" do |p|
+      p.body = render_message("#{kind}.#{registrant.locale}.html.erb",
+                              :pdf_url => "http://#{default_url_options[:host]}#{registrant.pdf_path}?source=email",
+                              :locale => registrant.locale.to_sym,
+                              :registrar_phone => registrant.home_state.registrar_phone,
+                              :registrar_address => registrant.home_state.registrar_address,
+                              :registrant => registrant)
+      p.transfer_encoding = "quoted-printable"
+    end
   end
 end
