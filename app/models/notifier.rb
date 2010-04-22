@@ -30,8 +30,7 @@ class Notifier < ActionMailer::Base
     from FROM_ADDRESS
     recipients registrant.email_address
     sent_on Time.now.to_s(:db)
-    # content_type "text/html"
-    content_type    "multipart/alternative"
+    content_type "multipart/alternative"
 
     part "text/html" do |p|
       p.body = render_message("#{kind}.#{registrant.locale}.html.erb",
