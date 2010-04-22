@@ -1,6 +1,34 @@
 class Partner < ActiveRecord::Base
   acts_as_authentic
 
+  WIDGET_GIFS = [
+    "rtv-234x60-v1.gif",
+    "rtv-234x60-v1-sp.gif",
+    "rtv-234x60-v2.gif",
+    "rtv-234x60-v3.gif",
+    "rtv-100x100-v1.gif",
+    "rtv-100x100-v2.gif",
+    "rtv-100x100-v3.gif",
+    "rtv-180x150-v1.gif",
+    "rtv-180x150-v2.gif",
+    "rtv-200x165-v1.gif",
+    "rtv-200x165-v2.gif",
+    "rtv-300x100-v1.gif",
+    "rtv-300x100-v2.gif",
+    "rtv-300x100-v3.gif",
+    "rtv-468x60-v1.gif",
+    "rtv-468x60-v1-sp.gif",
+    "rtv-468x60-v2.gif",
+    "rtv-468x60-v3.gif"
+  ]
+
+  WIDGET_IMAGES = WIDGET_GIFS.collect do |widget|
+    widget =~ /-(\d+)x(\d+)-/
+    size = "#{$1} x #{$2}"
+    [widget, widget.gsub(/-|\.gif/,''), size]
+  end
+  DEFAULT_WIDGET_IMAGE_NAME = "rtv234x60v1"
+
   belongs_to :state, :class_name => "GeoState"
   has_many :registrants
 
@@ -204,22 +232,12 @@ class Partner < ActiveRecord::Base
     end
   end
 
-  WIDGET_IMAGES = {
-    "rtv100x100v1"  => "rtv-100x100-v1.gif",
-    "rtv200x165v1"  => "rtv-200x165-v1.gif",
-    "rtv234x60v1"   => "rtv-234x60-v1.gif",
-    "rtv300x100v1"  => "rtv-300x100-v1.gif",
-    "rtv468x60v1"   => "rtv-468x60-v1.gif",
-    "rtv468x60v1sp" => "rtv-468x60-v1-sp.gif"
-  }
-  DEFAULT_WIDGET_IMAGE_NAME = "rtv234x60v1"
-
   def widget_image_name
-    WIDGET_IMAGES.index(widget_image)
+    WIDGET_IMAGES.detect { |widget| widget[0] == self.widget_image }[1]
   end
 
   def widget_image_name=(name)
-    self.widget_image = WIDGET_IMAGES[name]
+    self.widget_image = WIDGET_IMAGES.detect { |widget| widget[1] == name }[0]
   end
 
   def set_default_widget_image

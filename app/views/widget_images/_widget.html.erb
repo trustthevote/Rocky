@@ -1,0 +1,5 @@
+<tr>
+  <th><%= form.radio_button :widget_image_name, widget[1] %></th>
+  <td><%= form.label :widget_image_name, image_tag("widget/#{widget[0]}"),
+                     :for => "partner_widget_image_name_#{widget[1]}" %> <em><%= widget[2] %></em></td>
+</tr>

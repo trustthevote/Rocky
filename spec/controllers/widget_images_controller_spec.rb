@@ -16,6 +16,7 @@ describe WidgetImagesController do
         assert_response :success
         assert_template "show"
         assert_not_nil assigns[:partner]
+        assert_equal Partner::WIDGET_IMAGES.length, response.body.scan(%r{/images/widget/rtv-[^.]+\.gif}).length
       end
     end
 

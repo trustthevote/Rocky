@@ -18,36 +18,7 @@
     <legend>Select Widget Banner</legend>
       <table>
         <tbody>
-          <tr>
-            <th><%= form.radio_button :widget_image_name, "rtv234x60v1" %></th>
-            <td><%= form.label :widget_image_name, image_tag("widget/rtv-234x60-v1.gif"),
-                               :for => "partner_widget_image_name_rtv234x60v1" %> <em>234 x 60</em></td>
-          </tr>
-          <tr>
-            <th><%= form.radio_button :widget_image_name, "rtv100x100v1" %></th>
-            <td><%= form.label :widget_image_name, image_tag("widget/rtv-100x100-v1.gif"),
-                               :for => "partner_widget_image_name_rtv100x100v1" %> <em>100 x 100</em></td>
-          </tr>
-          <tr>
-            <th><%= form.radio_button :widget_image_name, "rtv300x100v1" %></th>
-            <td><%= form.label :widget_image_name, image_tag("widget/rtv-300x100-v1.gif"),
-                               :for => "partner_widget_image_name_rtv300x100v1" %> <em>300 x 100</em></td>
-          </tr>
-          <tr>
-            <th><%= form.radio_button :widget_image_name, "rtv200x165v1" %></th>
-            <td><%= form.label :widget_image_name, image_tag("widget/rtv-200x165-v1.gif"),
-                               :for => "partner_widget_image_name_rtv200x165v1" %> <em>200 x 165</em></td>
-          </tr>
-          <tr>
-            <th><%= form.radio_button :widget_image_name, "rtv468x60v1" %></th>
-            <td><%= form.label :widget_image_name, image_tag("widget/rtv-468x60-v1.gif"),
-                               :for => "partner_widget_image_name_rtv468x60v1" %> <em>468 x 60</em></td>
-          </tr>
-          <tr>
-            <th><%= form.radio_button :widget_image_name, "rtv468x60v1sp" %></th>
-            <td><%= form.label :widget_image_name, image_tag("widget/rtv-468x60-v1-sp.gif"),
-                               :for => "partner_widget_image_name_rtv468x60v1sp" %> <em>468 x 60</em></td>
-          </tr>
+          <%= render :partial => "widget", :collection => Partner::WIDGET_IMAGES, :locals => {:form => form} %>
         </tbody>
       </table>
     </fieldset>
