@@ -9,7 +9,7 @@ class WidgetImagesController < PartnerBase
     @partner = current_partner
     if @partner.update_attributes(:widget_image_name => params[:partner][:widget_image_name])
       flash[:success] = "You have updated your banner image."
-      redirect_to embed_codes_partner_url
+      redirect_to partner_url
     else
       render "show"
     end
