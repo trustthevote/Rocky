@@ -42,6 +42,15 @@ describe Notifier do
       email.body.should include("this-is-the-address")
       email.body.should include("this-is-the-url")
     end
+
+    it "includes cancel reminders link" do
+      registrant = Factory.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.deliver_confirmation(registrant)
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/reminder})
+    end
   end
 
   describe "#reminder" do
@@ -77,6 +86,15 @@ describe Notifier do
       Notifier.deliver_reminder(registrant)
       email = ActionMailer::Base.deliveries.last
       email.subject.should include(I18n.t("email.reminder.subject", :locale => :es))
+    end
+
+    it "includes cancel reminders link" do
+      registrant = Factory.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.deliver_reminder(registrant)
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/reminder})
     end
   end
 

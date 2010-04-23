@@ -185,20 +185,31 @@ describe RegistrantsController do
     end
   end
 
-  describe "completed registration" do
-    it "should not be visible" do
-      reg = Factory.create(:completed_registrant)
-      assert_raise ActiveRecord::RecordNotFound do
-        get :show, :id => reg.to_param
+  describe "registration step" do
+    describe "missing registration" do
+      it "should show 404" do
+        assert_nil Registrant.find_by_uid("987654321")
+        assert_raise ActiveRecord::RecordNotFound do
+          get :show, :id => "987654321"
+        end
       end
     end
-  end
 
-  describe "under-18 finished registration" do
-    it "should not be visible" do
-      reg = Factory.create(:under_18_finished_registrant)
-      assert_raise ActiveRecord::RecordNotFound do
-        get :show, :id => reg.to_param
+    describe "completed registration" do
+      it "should not be visible" do
+        reg = Factory.create(:completed_registrant)
+        assert_raise ActiveRecord::RecordNotFound do
+          get :show, :id => reg.to_param
+        end
+      end
+    end
+
+    describe "under-18 finished registration" do
+      it "should not be visible" do
+        reg = Factory.create(:under_18_finished_registrant)
+        assert_raise ActiveRecord::RecordNotFound do
+          get :show, :id => reg.to_param
+        end
       end
     end
   end
