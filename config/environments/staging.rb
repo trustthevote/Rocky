@@ -28,6 +28,7 @@ config.action_mailer.default_url_options = { :host => "rtvstaging.osuosl.org" }
 FROM_ADDRESS = "register@rockthevote.com"
 GOOGLE_ANALYTICS = "UA-1913089-11"
 
+DELAYED_WRAP_UP = true
 INTERVAL_BETWEEN_REMINDER_EMAILS = 2.minutes # 5.days everywhere else
 
 
@@ -36,8 +37,3 @@ INTERVAL_BETWEEN_REMINDER_EMAILS = 2.minutes # 5.days everywhere else
 
 USE_HTTPS = true
 PAPERCLIP_OPTIONS = {}
-
-config.after_initialize do
-  I18n.reload!
-  Registrant.handle_asynchronously :wrap_up
-end

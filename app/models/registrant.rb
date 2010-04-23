@@ -19,6 +19,8 @@ class Registrant < ActiveRecord::Base
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
   REMINDER_EMAILS_TO_SEND = 2
   STALE_TIMEOUT = 30.minutes
+  REMINDER_EMAIL_PRIORITY = 0
+  WRAP_UP_PRIORITY = REMINDER_EMAIL_PRIORITY + 1
 
   CSV_HEADER = [
     "Status",
@@ -474,7 +476,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def wrap_up
-    complete!
+    if DELAYED_WRAP_UP
+      action = Delayed::PerformableMethod.new(self, :complete!, [])
+      Delayed::Job.enqueue(action, WRAP_UP_PRIORITY, Time.now)
+    else
+      complete!
+    end
   end
 
   def complete_registration
@@ -507,7 +514,7 @@ class Registrant < ActiveRecord::Base
 
   def enqueue_reminder_email
     action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [])
-    Delayed::Job.enqueue(action, 0, INTERVAL_BETWEEN_REMINDER_EMAILS.from_now)
+    Delayed::Job.enqueue(action, REMINDER_EMAIL_PRIORITY, INTERVAL_BETWEEN_REMINDER_EMAILS.from_now)
   end
 
   def deliver_reminder_email

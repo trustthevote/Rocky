@@ -709,6 +709,51 @@ describe Registrant do
       reg.complete_registration
       assert_equal :es, I18n.locale
     end
+
+    describe "background processing" do
+      describe "when there is a job queue (production, staging)" do
+        before(:all) do
+          @old_delayed = DELAYED_WRAP_UP
+          silence_warnings { Object.const_set :DELAYED_WRAP_UP, true }
+        end
+        after(:all) do
+          silence_warnings { Object.const_set :DELAYED_WRAP_UP, @old_delayed }
+        end
+
+        it "should delay processing" do
+          reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+          dont_allow(reg).complete!
+          reg.wrap_up
+          assert_match /#{reg.id}.*complete!/m, Delayed::Job.last.handler
+        end
+
+        it "should be higher priority than email jobs" do
+          reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+          reg.wrap_up
+          wrap_up_priority = Delayed::Job.last.priority
+          reg.enqueue_reminder_email
+          reminder_email_priority = Delayed::Job.last.priority
+          assert wrap_up_priority > reminder_email_priority
+        end
+      end
+
+      describe "when there is no job queue (production, staging)" do
+        before(:all) do
+          @old_delayed = DELAYED_WRAP_UP
+          silence_warnings { Object.const_set :DELAYED_WRAP_UP, false }
+        end
+        after(:all) do
+          silence_warnings { Object.const_set :DELAYED_WRAP_UP, @old_delayed }
+        end
+
+        it "should run immediately" do
+          reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+          mock(reg).generate_pdf
+          reg.wrap_up
+          assert_match /#{reg.id}.*deliver_reminder_email/m, Delayed::Job.last.handler
+        end
+      end
+    end
   end
 
   describe "deliver_confirmation_email" do

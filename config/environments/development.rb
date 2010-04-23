@@ -21,6 +21,7 @@ FROM_ADDRESS = "rocky-dev@example.com"
 USE_HTTPS = false
 PAPERCLIP_OPTIONS = {}
 
+DELAYED_WRAP_UP = false
 INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
 
 ### uncomment to use DelayedJob in development.

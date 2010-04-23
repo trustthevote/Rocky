@@ -34,9 +34,5 @@ GOOGLE_ANALYTICS = "UA-1913089-11"
 USE_HTTPS = true
 PAPERCLIP_OPTIONS = {}
 
+DELAYED_WRAP_UP = true
 INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
-
-config.after_initialize do
-  I18n.reload!
-  Registrant.handle_asynchronously :wrap_up
-end
