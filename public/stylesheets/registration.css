@@ -296,6 +296,10 @@ p.centered {
   vertical-align: middle;
 }
 
+#download_no_js {
+  padding: 30px;
+}
+
 .reason {
   margin: 25px auto;
   width: 65%;
