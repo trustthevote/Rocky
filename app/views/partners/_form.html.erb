@@ -22,7 +22,7 @@
     </li>
     <li class="width_b">
       <h3><%= form.label :state_abbrev, "State" %></h3>
-      <div><%= form.select :state_abbrev, GeoState.collection_for_select %></div>
+      <div><%= form.select :state_abbrev, GeoState.collection_for_select, :include_blank => "select a state" %></div>
       <span class="error"><%= form.object.errors.on :state_abbrev %></span>
     </li>
     <li class="width_c">

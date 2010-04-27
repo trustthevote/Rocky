@@ -42,6 +42,7 @@ class Partner < ActiveRecord::Base
   validates_presence_of :address
   validates_presence_of :city
   validates_presence_of :state_id
+  validates_presence_of :state_abbrev, :message => "State can't be blank."
   validates_presence_of :zip_code
   validates_format_of :zip_code, :with => /^\d{5}(-\d{4})?$/, :allow_blank => true
   validates_presence_of :phone
