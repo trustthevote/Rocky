@@ -10,7 +10,7 @@ class RegistrantsController < RegistrationStep
   def landing
     find_partner
     options = {}
-    options[:partner] = @partner.id
+    options[:partner] = @partner.to_param if params[:partner]
     options[:locale] = params[:locale] if params[:locale]
     options[:source] = params[:source] if params[:source]
     options.merge!(:protocol => "https") unless Rails.env.development?

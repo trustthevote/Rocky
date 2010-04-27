@@ -60,11 +60,7 @@ class RegistrationStep < ApplicationController
   end
 
   def find_partner
-    if partner = Partner.find_by_id(params[:partner])
-      @partner = partner
-    else
-      @partner = Partner.find(Partner.default_id)
-    end
+    @partner = Partner.find_by_id(params[:partner]) || Partner.find(Partner.default_id)
     @partner_id = @partner.id
     @source = params[:source]
   end

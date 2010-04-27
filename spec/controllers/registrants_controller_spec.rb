@@ -15,18 +15,18 @@ describe RegistrantsController do
   end
 
   describe "landing" do
-    it "redirects to /new" do
+    it "redirects to /new, and leaves out partner when none given" do
       get :landing
-      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "1")
+      assert_redirected_to new_registrant_url(:protocol => "https")
     end
 
     it "keeps partner, locale and source params when redirecting" do
       get :landing, :partner => "2"
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2")
       get :landing, :locale => "es"
-      assert_redirected_to new_registrant_url(:protocol => "https", :locale => "es", :partner => "1")
+      assert_redirected_to new_registrant_url(:protocol => "https", :locale => "es")
       get :landing, :source => "email"
-      assert_redirected_to new_registrant_url(:protocol => "https", :source => "email", :partner => "1")
+      assert_redirected_to new_registrant_url(:protocol => "https", :source => "email")
       get :landing, :partner => "2", :locale => "es"
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es")
       get :landing, :partner => "2", :locale => "es", :source => "email"
