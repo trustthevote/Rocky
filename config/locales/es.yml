@@ -173,7 +173,7 @@ es:
       - Otro
       instructions:
         opt_in_email: Le enviaremos recordatorios de la elección, información del recinto electoral asignado, y información oportuna sobre música y temas información.
-        under_18: "Parece que aún no tienes 18 años. Está bien. En {{state_name}} puedes registrarte para votar {{state_rule}}.  Visite nuestro <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Centro de Votación</a> para saber cuándo es la próxima elección."
+        under_18: "Parece que aún no tienes 18 años. Está bien. En {{state_name}} puedes registrarte para votar {{state_rule}}.  Visite nuestro <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Centro Electoral</a> para saber cuándo es la próxima elección."
         under_18_2: "Para confirmar has clic en el botón para continuar con la aplicación."
         under_18_3: "Si no, te enviaremos un recordatorio para que te registres en tu cumpleaños."
         remind_when_18: "Envíenme un recordatorio cuando cumpla 18 años en {{email_address}}"
