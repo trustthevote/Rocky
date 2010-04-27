@@ -589,6 +589,9 @@ describe Registrant do
   describe "CSV" do
     it "renders minimal CSV" do
       reg = Factory.build(:step_1_registrant)
+      partner = reg.partner
+      partner.survey_question_1_en = "survey_question_1_en"
+      partner.survey_question_2_en = "survey_question_2_en"
       assert_equal [ "Step 1",
                      "English",
                      reg.date_of_birth.to_s(:month_day_year),
@@ -617,7 +620,9 @@ describe Registrant do
                      nil,
                      "Yes",
                      "Yes",
+                     "survey_question_1_en",
                      nil,
+                     "survey_question_2_en",
                      nil,
                      "No",  # volunteer
                      nil,
@@ -625,8 +630,11 @@ describe Registrant do
                   reg.to_csv_array
     end
 
-    it "renders maximal CSCV" do
+    it "renders maximal CSV" do
       reg = Factory.create(:maximal_registrant)
+      partner = reg.partner
+      partner.survey_question_1_en = "survey_question_1_en"
+      partner.survey_question_2_en = "survey_question_2_en"
       reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
       assert_equal [ "Complete",
                      "English",
@@ -656,7 +664,9 @@ describe Registrant do
                      "Mobile",
                      "Yes",
                      "Yes",
+                     "survey_question_1_en",
                      "blue",
+                     "survey_question_2_en",
                      "fido",
                      "Yes",
                      nil,
@@ -664,7 +674,52 @@ describe Registrant do
                      ],
                  reg.to_csv_array
     end
-    
+
+    it "renders maximal CSV with es questions for es locale" do
+      reg = Factory.create(:maximal_registrant, :locale => "es")
+      partner = reg.partner
+      partner.survey_question_1_es = "survey_question_1_es"
+      partner.survey_question_2_es = "survey_question_2_es"
+      reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
+      assert_equal [ "Complete",
+                     "Spanish",
+                     reg.date_of_birth.to_s(:month_day_year),
+                     "citizen@example.com",
+                     "No",
+                     "Yes",
+                     "Mrs.",
+                     "Susan",
+                     "Brownell",
+                     "Anthony",
+                     "III",
+                     "123 Civil Rights Way",
+                     "Apt 2",
+                     "West Grove",
+                     "CA",
+                     "94110",
+                     "Yes",
+                     "10 Main St",
+                     "Box 5",
+                     "Adams",
+                     "AL",
+                     "02135",
+                     "Democratic",
+                     "White (not Hispanic)",
+                     "123-456-7890",
+                     "Mobile",
+                     "Yes",
+                     "Yes",
+                     "survey_question_1_es",
+                     "blue",
+                     "survey_question_2_es",
+                     "fido",
+                     "Yes",
+                     nil,
+                     reg.created_at && reg.created_at.to_s(:month_day_year)
+                     ],
+                 reg.to_csv_array
+    end
+
     it "renders ineligible CSV" do
       reg = Factory.create(:step_1_registrant, :us_citizen => false)
       assert_equal "Not a US citizen", reg.to_csv_array[-2]

@@ -51,7 +51,9 @@ class Registrant < ActiveRecord::Base
     "Phone type",
     "Opt-in to email?",
     "Opt-in to sms?",
+    "Survey question 1",
     "Survey answer 1",
+    "Survey question 2",
     "Survey answer 2",
     "Volunteer",
     "Ineligible reason",
@@ -581,6 +583,14 @@ class Registrant < ActiveRecord::Base
     !ineligible?
   end
 
+  def survey_question_1
+    partner.send("survey_question_1_#{locale}")
+  end
+
+  def survey_question_2
+    partner.send("survey_question_2_#{locale}")
+  end
+
   def to_csv_array
     [
       status.humanize,
@@ -611,7 +621,9 @@ class Registrant < ActiveRecord::Base
       phone_type,
       yes_no(opt_in_email?),
       yes_no(opt_in_sms?),
+      survey_question_1,
       survey_answer_1,
+      survey_question_2,
       survey_answer_2,
       yes_no(volunteer?),
       ineligible_reason,
