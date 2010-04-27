@@ -125,9 +125,13 @@ describe PartnersController do
 
     describe "download registration data" do
       it "triggers download" do
+        this_moment = Time.now
+        stub(Time).now { this_moment }
+        now = this_moment.to_s(:db).gsub(/\D/,'')
         get :registrations, :format => 'csv'
         assert_response :success
         assert_equal "text/csv", response.headers["Content-Type"]
+        assert_equal %Q(attachment; filename="registrations-#{now}.csv"), response.headers["Content-Disposition"]
       end
     end
   end

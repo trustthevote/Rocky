@@ -75,7 +75,8 @@ HTML
   end
 
   def registrations
-    send_data(current_partner.generate_registrants_csv, :filename => "registrations.csv", :type => :csv)
+    now = Time.now.to_s(:db).gsub(/\D/,'')
+    send_data(current_partner.generate_registrants_csv, :filename => "registrations-#{now}.csv", :type => :csv)
   end
 
   protected
