@@ -3,6 +3,10 @@ class FinishesController < RegistrationStep
 
   def show
     find_registrant(:tell_friend)
+    if params[:reminders]
+      @registrant.update_attributes(:reminders_left => 0)
+      @stop_reminders = true
+    end
     @root_url_escaped = CGI::escape(root_url)
     @registrant.tell_message ||=
       case @registrant.status.to_sym

@@ -134,6 +134,8 @@ en:
       finish_header: Spread the word!
       finish_under_18_header: "You're on the list!"
       tell_a_friend_title: "Tell a Friend by Email"
+      finish_reminder: "Thank you, {{first_name}}, for sending in your voter registration application! You should receive confirmation of your registration from your state's election officials. Sometimes processing can take several weeks."
+      finish_reminder_2: "If you want to check on the status of your voter registration form, you can find contact information for your Secretary of State at our <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Election Center</a>."
       ineligible_header: "Sorry, you are not eligible to register to vote for the following reason(s):"
       name: Name
       select_none: (none)
@@ -174,7 +176,7 @@ en:
       - Other
       instructions:
         opt_in_email: "We will send you timely election reminders, polling place information, and information about music and issues."
-        under_18: "Hey, it looks like you aren't 18 yet. That's cool. In {{state_name}}, you can register to vote {{state_rule}}. Visit our <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">election center</a> to find out when the next election is."
+        under_18: "Hey, it looks like you aren't 18 yet. That's cool. In {{state_name}}, you can register to vote {{state_rule}}. Visit our <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Election Center</a> to find out when the next election is."
         under_18_2: "If you fit the bill, click the button to continue your application."
         under_18_3: "If not, we'll send you a reminder to register on your 18th birthday."
         remind_when_18: "We'll email you at {{email_address}}"

@@ -35,7 +35,7 @@ class Notifier < ActionMailer::Base
     part "text/html" do |p|
       p.body = render_message("#{kind}.#{registrant.locale}.html.erb",
                               :pdf_url => "http://#{default_url_options[:host]}#{registrant.pdf_path}?source=email",
-                              :cancel_reminders_url => registrant_reminder_url(registrant, :protocol => "https"),
+                              :cancel_reminders_url => registrant_finish_url(registrant, :protocol => "https", :reminders => "stop"),
                               :locale => registrant.locale.to_sym,
                               :registrar_phone => registrant.home_state.registrar_phone,
                               :registrar_address => registrant.home_state.registrar_address,

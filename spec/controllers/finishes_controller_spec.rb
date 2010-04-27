@@ -80,4 +80,23 @@ describe FinishesController do
     href << "&amp;title=#{CGI.escape(share_text)}"
     assert_select "a[class=button_share_googlebuzz_en][href=#{href}]"
   end
+
+  describe "stop reminders" do
+    it "stops remaining emails from coming" do
+      reg = Factory.create(:completed_registrant, :reminders_left => 2)
+      get :show, :registrant_id => reg.to_param, :reminders => "stop"
+      reg.reload
+      assert_equal 0, reg.reminders_left
+    end
+
+    describe "feedback page" do
+      integrate_views
+      it "should show thank you message" do
+        reg = Factory.create(:completed_registrant, :reminders_left => 2)
+        get :show, :registrant_id => reg.to_param, :reminders => "stop"
+        assert_select "h1", "Thanks for Registering!"
+      end
+    end
+  end
+
 end

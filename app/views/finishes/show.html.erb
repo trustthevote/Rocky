@@ -1,8 +1,16 @@
+<% if @stop_reminders -%>
+  <h1>Thanks for Registering!</h1>
+  <div class="fulltext">
+    <p><%= I18n.t('txt.registration.finish_reminder', :first_name => @registrant.first_name) %></p>
+    <p><%= I18n.t('txt.registration.finish_reminder_2') %></p>
+  </div>
+<% end -%>
+
 <%= case @registrant.status.to_sym
     when :complete, :step_5 ; render :partial => "finishes/complete"
     when :under_18          ; render :partial => "finishes/under_18"
     end
-  %>
+  -%>
 
 <div class="share">
   <div><%= rollover_image_link( :share_facebook,

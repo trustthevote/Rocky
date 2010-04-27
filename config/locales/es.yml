@@ -131,6 +131,8 @@ es:
       finish_header: Pasen la voz!
       finish_under_18_header: "Estás en la lista!"
       tell_a_friend_title: "Dile a tu amigo a través de un correo electronicó."
+      finish_reminder: "Gracias, {{first_name}}, para el envío de su solicitud de registro de votantes! Debe recibir la confirmación de su inscripción de los funcionarios electorales de su estado. A veces, el procesamiento puede tardar varias semanas."
+      finish_reminder_2: "Si desea comprobar el estado de su formulario de inscripción de votantes, se puede encontrar información de contacto de su Secretario de Estado en nuestro enlace <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Centro Electoral</a>."
       ineligible_header: "Una disculpa, no eres elegilbe para registrarte para votar por las siguientes razones:"
       name: Nombre
       select_none: (none)
@@ -171,7 +173,7 @@ es:
       - Otro
       instructions:
         opt_in_email: Le enviaremos recordatorios de la elección, información del recinto electoral asignado, y información oportuna sobre música y temas información.
-        under_18: "Parece que aún no tienes 18 años. Está bien. En {{state_name}} puedes registrarte para votar {{state_rule}}.  Visite nuestro <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">centro de votación</a> para saber cuándo es la próxima elección."
+        under_18: "Parece que aún no tienes 18 años. Está bien. En {{state_name}} puedes registrarte para votar {{state_rule}}.  Visite nuestro <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Centro de Votación</a> para saber cuándo es la próxima elección."
         under_18_2: "Para confirmar has clic en el botón para continuar con la aplicación."
         under_18_3: "Si no, te enviaremos un recordatorio para que te registres en tu cumpleaños."
         remind_when_18: "Envíenme un recordatorio cuando cumpla 18 años en {{email_address}}"

@@ -49,7 +49,7 @@ describe Notifier do
         Notifier.deliver_confirmation(registrant)
       end
       email = ActionMailer::Base.deliveries.last
-      email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/reminder})
+      email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
     end
   end
 
@@ -94,7 +94,7 @@ describe Notifier do
         Notifier.deliver_reminder(registrant)
       end
       email = ActionMailer::Base.deliveries.last
-      email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/reminder})
+      email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
     end
   end
 
