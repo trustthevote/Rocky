@@ -123,6 +123,7 @@ p {
 #main p.extra_leading {
   margin-top: 1.5em;
 }
+
 #main p {
   line-height: 1.4em;
 }
@@ -140,13 +141,13 @@ p {
 /*** dashboard ***/
 
 #dashboard {
-  width: 600px;
+  width: 625px;
   margin: 40px auto;
   overflow: hidden;
 }
 
 #dashboard .stats {
-  width: 285px;
+  width: 100%;
 }
 
 #dashboard #dash_right {
@@ -163,8 +164,8 @@ p {
 
 #dash_left, #dash_right {
   position: relative;
-  height: 190px;
-  width: 285px;
+  height: 187px;
+  width: 295px;
 }
 
 #link_viewreport { position: absolute; left: 0; bottom: 0; }
@@ -197,6 +198,10 @@ div.login {
 
 #main .login p {
   margin: 10px 0 10px 18px;
+}
+
+.profile {
+  margin-top: 25px;
 }
 
 .profile form {
@@ -372,8 +377,12 @@ form li {
 
 /*** statistics page ***/
 
+#main .top_leading {
+  margin-top: 20px;
+}
+
 #statistics {
-  margin: 10px auto;
+  margin: 0 auto;
 }
 
 #statistics div {
