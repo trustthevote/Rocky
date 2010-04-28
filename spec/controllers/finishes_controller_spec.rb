@@ -99,4 +99,13 @@ describe FinishesController do
     end
   end
 
+  describe "PDF not ready" do
+    integrate_views
+    it "includes text about pending PDF" do
+      reg = Factory.create(:step_5_registrant, :pdf_ready => false)
+      get :show, :registrant_id => reg.to_param
+      assert_select "h1", "Check Your Email"
+    end
+  end
+
 end

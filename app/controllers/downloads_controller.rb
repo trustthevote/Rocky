@@ -3,7 +3,13 @@ class DownloadsController < RegistrationStep
 
   def show
     find_registrant(:download)
-    render "preparing" unless @registrant.pdf_ready?
+    if @registrant.pdf_ready?
+      render "show"
+    elsif @registrant.updated_at < 30.seconds.ago
+      redirect_to registrant_finish_url(@registrant)
+    else
+      render "preparing"
+    end
   end
 
 end
