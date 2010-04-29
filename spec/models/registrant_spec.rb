@@ -256,6 +256,14 @@ describe Registrant do
       stub(reg).requires_race? {false}
       assert reg.valid?
     end
+
+    it "generates barcode when entering Step 2" do
+      reg = Factory.create(:step_1_registrant)
+      stub(reg).valid? { true }
+      stub(reg).pdf_barcode { "*RTV-00ROFL*" }
+      reg.advance_to_step_2
+      assert_equal "*RTV-00ROFL*", reg.barcode
+    end
   end
 
   describe "step 3" do

@@ -64,7 +64,12 @@ class Registrant < ActiveRecord::Base
 
   aasm_column :status
   aasm_initial_state :initial
-  STEPS.each { |step| aasm_state step }
+  aasm_state :initial
+  aasm_state :step_1
+  aasm_state :step_2, :enter => :generate_barcode
+  aasm_state :step_3
+  aasm_state :step_4
+  aasm_state :step_5
   aasm_state :complete, :enter => :complete_registration
   aasm_state :under_18
   aasm_state :rejected
@@ -489,9 +494,13 @@ class Registrant < ActiveRecord::Base
   def complete_registration
     I18n.locale = self.locale.to_sym
     generate_pdf
+    redact_sensitive_data
     deliver_confirmation_email
     enqueue_reminder_emails
-    redact_sensitive_data
+  end
+
+  def generate_barcode
+    self.barcode = self.pdf_barcode
   end
 
   def generate_pdf

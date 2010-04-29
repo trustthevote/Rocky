@@ -12,9 +12,8 @@ module Mergable
   end
 
   def pdf_barcode
-    user_code = id.to_s(36)
-    padding = "0" * (6 - user_code.length) rescue ""
-    "*#{BARCODE_PREFIX}-#{padding}#{user_code}*".upcase
+    user_code = id.to_s(36).rjust(6, "0")
+    "*#{BARCODE_PREFIX}-#{user_code}*".upcase
   end
 
   def to_xfdf
