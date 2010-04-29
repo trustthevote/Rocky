@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100429184119) do
+ActiveRecord::Schema.define(:version => 20100429230815) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -135,7 +135,14 @@ ActiveRecord::Schema.define(:version => 20100429184119) do
     t.string   "barcode",                            :limit => 12
   end
 
+  add_index "registrants", ["age"], :name => "index_registrants_on_age"
+  add_index "registrants", ["created_at"], :name => "index_registrants_on_created_at"
+  add_index "registrants", ["home_state_id"], :name => "index_registrants_on_home_state_id"
+  add_index "registrants", ["name_title"], :name => "index_registrants_on_name_title"
   add_index "registrants", ["official_party_name"], :name => "index_registrants_on_official_party_name"
+  add_index "registrants", ["partner_id"], :name => "index_registrants_on_partner_id"
+  add_index "registrants", ["race"], :name => "index_registrants_on_race"
+  add_index "registrants", ["status"], :name => "index_registrants_on_status"
   add_index "registrants", ["uid"], :name => "index_registrants_on_uid"
 
   create_table "state_localizations", :force => true do |t|
