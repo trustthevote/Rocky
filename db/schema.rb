@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(:version => 20100429184119) do
     t.integer  "age"
     t.string   "official_party_name"
     t.boolean  "pdf_ready"
-    t.string   "barcode"
+    t.string   "barcode",                            :limit => 12
   end
 
   add_index "registrants", ["official_party_name"], :name => "index_registrants_on_official_party_name"

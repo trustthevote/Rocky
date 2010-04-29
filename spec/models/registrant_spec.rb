@@ -28,6 +28,16 @@ describe Registrant do
       assert_equal 10, Registrant.find_all_by_official_party_name("Green").size
       assert_equal 8, Registrant.find_all_by_official_party_name("None").size
     end
+
+    it "backfills barcode" do
+      assert_equal 0, Registrant.find(:all, :conditions => "barcode IS NOT NULL").size
+      5.times { Factory.create(:step_1_registrant) }
+      Registrant.update_all("barcode = NULL")
+      Registrant.backfill_data
+      regs = Registrant.find(:all, :conditions => "barcode IS NOT NULL")
+      assert_equal 5, regs.size
+      regs.each { |r| assert_match /\*RTV-[0-9A-Z]{6}\*/, r.barcode }
+    end
   end
 
   describe "to_param hides id" do

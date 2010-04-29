@@ -697,6 +697,7 @@ class Registrant < ActiveRecord::Base
     self.find_each do |r|
       r.calculate_age
       r.set_official_party_name
+      r.generate_barcode
       r.save(false)
       unless Rails.env.test?
         putc "." if (counter += 1) % 1000 == 0; $stdout.flush
