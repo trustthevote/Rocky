@@ -10,10 +10,10 @@ class FinishesController < RegistrationStep
     @root_url_escaped = CGI::escape(root_url)
     @registrant.tell_message ||=
       case @registrant.status.to_sym
-      when :complete
-        I18n.t('email.tell_friend.body', :rtv_url => root_url(:source => "email"))
       when :under_18
         I18n.t('email.tell_friend_under_18.body', :rtv_url => root_url(:source => "email"))
+      else
+        I18n.t('email.tell_friend.body', :rtv_url => root_url(:source => "email"))
       end
   end
 

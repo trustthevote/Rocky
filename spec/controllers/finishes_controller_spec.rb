@@ -95,6 +95,7 @@ describe FinishesController do
         reg = Factory.create(:completed_registrant, :reminders_left => 2)
         get :show, :registrant_id => reg.to_param, :reminders => "stop"
         assert_select "h1", "Thanks for Registering!"
+        assert_match /Hey, I just registered to vote/, assigns[:registrant].tell_message
       end
     end
   end
@@ -105,6 +106,7 @@ describe FinishesController do
       reg = Factory.create(:step_5_registrant, :pdf_ready => false)
       get :show, :registrant_id => reg.to_param
       assert_select "h1", "Check Your Email"
+      assert_match /Hey, I just registered to vote/, assigns[:registrant].tell_message
     end
   end
 
