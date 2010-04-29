@@ -50,14 +50,14 @@ class PartnersController < PartnerBase
     @image_link_html =
 <<-HTML
 <a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}">
-  <img src="http://#{request.host}/images/widget/#{@partner.widget_image}" />
+  <img src="#{partner_widget_url}" />
 </a>
 HTML
 
     @image_overlay_html =
 <<-HTML
 <a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="width:604 height:max scrolling:no">
-  <img src="http://#{request.host}/images/widget/#{@partner.widget_image}" />
+  <img src="#{partner_widget_url}" />
 </a>
 <script type="text/javascript" src="https://#{request.host}#{widget_loader_path}"></script>
 HTML
@@ -84,4 +84,9 @@ HTML
   def partner_id
     current_partner && current_partner.to_param
   end
+
+  def partner_widget_url
+    "http://#{request.host}/images/widget/#{@partner.widget_image}"
+  end
+  helper_method :partner_widget_url
 end

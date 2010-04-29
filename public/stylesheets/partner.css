@@ -34,6 +34,10 @@ ul.flash {
   background-color: #fdd;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 #container {
   width: 720px;
   margin: 0 auto;
@@ -241,6 +245,13 @@ form li {
   margin: 0 5px 0 0;
 }
 
+.copy_html h3 {
+  font-weight: normal;
+  text-align: left;
+  line-height: 125%;
+  margin: 10px;
+}
+
 .copy_html textarea {
   padding: 1em;
   font-family: Menlo, Courier, "Courier New", monospace;
@@ -354,7 +365,7 @@ form li {
 /*** embed code ***/
 
 #main .copy_html div {
-  margin: 10px 0;
+  margin: 20px 0;
   border: 1px solid #aaaaaa;
   padding: 5px 10px;
   background-color: #cccccc;
