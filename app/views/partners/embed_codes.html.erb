@@ -11,17 +11,17 @@
 
   <form class="copy_html" action="#" method="get" accept-charset="utf-8">
     <div>
-      <h2><label for="text_link_html">Text link:</label> <%= clippy(h(@text_link_html), '#cccccc') %></h2>
+      <h2><label for="text_link_html">Text link:</label></h2>
       <h3>Just paste this HTML code into a page on your site and you will create a link to your unique voter registration tool.</h3>
       <p><textarea name="text_link_html" readonly="readonly" rows="3" cols="80"><%= h @text_link_html %></textarea></p>
     </div>
     <div>
-      <h2><label for="image_link_html">Add a button:</label> <%= clippy(h(@image_link_html), '#cccccc') %></h2>
+      <h2><label for="image_link_html">Add a button:</label></h2>
       <h3>This is similar to the first option. The code will create a graphical button or banner on your site that links to your unique voter registration tool. There are several graphics to choose from. You can <%= link_to "view your current choice", partner_widget_url, :target => "_blank" %> or <%= link_to "change it", partner_widget_image_path %>.</h3>
       <p><textarea name="image_link_html" readonly="readonly" rows="5" cols="80"><%= h @image_link_html %></textarea></p>
     </div>
     <div>
-      <h2><label for="image_overlay_html">Add a widget button:</label> <%= clippy(h(@image_overlay_html), '#cccccc') %></h2>
+      <h2><label for="image_overlay_html">Add a widget button:</label></h2>
       <h3>Best option! Like the second option, this code will create a button or banner on a web page. But instead of taking your users to a separate website or page, the link will result in your voter registration tool being displayed on top of the page users were viewing. That's right, users will not leave your site. To see what it looks like, check out
         <a href="/?partner=2&amp;source=embed-rtv468x60v3" class="floatbox" data-fb-options="width:604 height:max scrolling:no">this example</a>.
       </h3>
