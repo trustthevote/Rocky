@@ -23,7 +23,7 @@ The cap task will upload and import the data, then restart the app server so tha
 There are two cron jobs running on the utility server. One redacts sensitive data from abandoned registrations and the other removes old pdfs from the file system after 15 days.
 
     */10 * * * * cd /var/www/register.rockthevote.com/rocky/current && rake -s utility:timeout_stale_registrations RAILS_ENV=production
-    */5  * * * * /var/www/register.rockthevote.com/rocky/current/script/remove_old_pdfs
+    */5  * * * * rocky RAILS_ENV=production /var/www/register.rockthevote.com/rocky/current/lib/bucket_remover.rb
 
 ## Utility Daemons
 

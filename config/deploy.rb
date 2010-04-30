@@ -37,7 +37,7 @@ set :use_sudo, false
 # before "deploy", "deploy:stop_workers"
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
 after "deploy:symlink_configs", "deploy:geminstaller"
-after "deploy:restart", "deploy:import_states_csv"
+before "deploy:restart", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
