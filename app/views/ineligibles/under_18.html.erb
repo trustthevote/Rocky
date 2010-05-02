@@ -5,7 +5,7 @@
 
 <% form_for(@registrant) do |form| %>
   <%= form.hidden_field :under_18_ok, :value => true %>
-  <%= rollover_button(:keepgoing, I18n.t('txt.button.keep_going')) %>
+  <%= rollover_button(:keep_going, I18n.t('txt.button.keep_going')) %>
 <% end %>
 
 <div class="text"><p><%= t('txt.registration.instructions.under_18_3') %></p></div>
@@ -33,7 +33,7 @@
   <div class="checkbox-explanation">
     <p><%= t('txt.registration.instructions.opt_in_email') %></p>
   </div>
-  <%= rollover_button(:remindmelater, I18n.t('txt.button.remind_me_later')) %>
+  <%= rollover_button(:remind_me_later, I18n.t('txt.button.remind_me_later')) %>
 <% end %>
 
 <div class="back"><%= link_to t('txt.button.ineligible_try_again'), registrant_path(@registrant) %></div>

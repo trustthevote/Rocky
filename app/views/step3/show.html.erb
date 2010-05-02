@@ -42,6 +42,6 @@
 
   <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
 
-  <%= rollover_button(:nextstep, I18n.t('txt.button.submit')) %>  
+  <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_2_path(@registrant) %></div>
 <% end %>

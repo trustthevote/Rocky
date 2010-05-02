@@ -115,7 +115,7 @@ es:
       sendmail: Enviar Correo Electrónico
       share_facebook: Compartir en Facebook!
       share_twitter: Compartir en Twitter!
-      share_googlebuzz: Compartir en Buzz!
+      share_google_buzz: Compartir en Buzz!
     registration:
       powered_by: "accionado por:"
       progress_indicator: "Paso"

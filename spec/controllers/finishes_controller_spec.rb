@@ -37,7 +37,7 @@ describe FinishesController do
 
       assert_share_links "I just registered to vote and you can too!"
 
-      assert_select "form div.button a.button_sendemail_en"
+      assert_select "form div.button a.button_send_email_en"
     end
   end
 
@@ -59,7 +59,7 @@ describe FinishesController do
 
       assert_share_links "Make sure you register to vote. It's easy!"
 
-      assert_select "form div.button a.button_sendemail_en"
+      assert_select "form div.button a.button_send_email_en"
     end
   end
 
@@ -78,7 +78,7 @@ describe FinishesController do
     href << "&amp;srcURL=#{CGI.escape(root_url)}"
     href << "&amp;srcTitle=Rock%20the%20Vote"
     href << "&amp;title=#{CGI.escape(share_text)}"
-    assert_select "a[class=button_share_googlebuzz_en][href=#{href}]"
+    assert_select "a[class=button_share_google_buzz_en][href=#{href}]"
   end
 
   describe "stop reminders" do
