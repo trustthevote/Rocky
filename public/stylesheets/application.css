@@ -242,20 +242,6 @@ span.error, span.example {
   margin-left: 5px;
 }
 
-div.section {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.section span.button {
-  display: block;
-  position: absolute;
-  top: 0;
-  _top: 5px;
-  right: 10px;
-  _left: 505px;
-}
-
 input, select, textarea {
   font-family: Tahoma, sans-serif;
   font-size: 12px;

@@ -101,6 +101,26 @@ font-size: 1.15em;
   font-weight: bold;
 }
 
+/* step 5 */
+
+div.section {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.section span.button {
+  display: block;
+  position: absolute;
+  width: 45px;  /* need for IE */
+  top: -2px;
+  _top: 8px;
+  right: 10px;
+  _left: 505px;
+}
+
+.section span.button a {
+  width: 45px;  /* need for IE */
+}
 
 .tell_friend {
   width: 520px;
