@@ -154,11 +154,12 @@ div.section {
 }
 
 .tell_friend div.tall {
-  height: inherit;
+  height: 240px;
 }
 
 .tell_friend textarea {
-  height: 240px;
+  height: 230px;
+  width: 480px !important;
 }
 
 .tell_friend form p {
