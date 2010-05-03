@@ -4,8 +4,13 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
   <title>Online Voter Registration</title>
   <meta name = "viewport" content = "width = 600">
+<!--[if !IE]><!-->
   <%= stylesheet_link_tag "iphone",      :media => "all and (max-device-width: 480px)" %>
   <%= stylesheet_link_tag "application", :media => "all and (min-device-width: 481px)" %>
+<!--<![endif]-->
+<!--[if IE]>
+  <%= stylesheet_link_tag "application" %>
+<![endif]-->
   <%= stylesheet_link_tag "registration" %>
   <%= javascript_include_tag  Rails.env.production? ? 'https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' : 'jquery-1.3.2',
                               Rails.env.production? ? 'qtip/jquery.qtip-1.0.0-rc3.min.js' : 'qtip/jquery.qtip-1.0.0-rc3.js',
