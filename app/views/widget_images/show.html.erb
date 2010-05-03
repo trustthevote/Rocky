@@ -16,7 +16,7 @@
   <% form_for @partner, :url => partner_widget_image_path, :method => :put do |form| %>
     <fieldset>
     <legend>Select Widget Banner</legend>
-      <table>
+      <table cellspacing="0">
         <tbody>
           <%= render :partial => "widget", :collection => Partner::WIDGET_IMAGES, :locals => {:form => form} %>
         </tbody>
