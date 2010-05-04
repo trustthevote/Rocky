@@ -172,11 +172,11 @@ p {
   width: 295px;
 }
 
-#link_viewreport { position: absolute; left: 0; bottom: 0; }
-#link_downloaddata { position: absolute; right: 0; bottom: 0; }
+#link_viewreport    { position: absolute; left: 0;  bottom: 0; width: 137px; }
+#link_downloaddata  { position: absolute; right: 0; bottom: 0; width: 145px; }
 
-#link_customizetool { position: absolute; left: 0; bottom: 0; }
-#link_editprofile { position: absolute; right: 0; bottom: 0; }
+#link_customizetool { position: absolute; left: 0;  bottom: 0; width: 156px; }
+#link_editprofile   { position: absolute; right: 0; bottom: 0; width: 127px; }
 
 /*** forms ***/
 
