@@ -1,20 +1,19 @@
-#sticky-footer { width: 600px; }
+#container, #bg div {
+  width: 600px;
+  background: #dcdcdc url(/images/reg/content_bg_repeat_x.gif) repeat-x left top;
+}
 #footer { width: 580px; }
 
 #container {
   zoom: 1;
   position: relative;
-  height: auto;
-  width: 600px;
-  margin: 0 auto;
-  background: #dcdcdc url(/images/reg/content_bg_repeat_x.gif) repeat-x left top;
 }
 
 #main {
   zoom: 1;
   position: relative;
   width: 560px;
-  padding: 20px 0 60px 20px;   /* bottom is 40px for footer + 20px whitespace */
+  padding: 20px 0 20px 20px;
   background: none;
 }
 
@@ -89,7 +88,7 @@
 
 /*added larger font size for tooltips*/
 .qtip-content {
-font-size: 1.15em;
+  font-size: 1.15em;
 }
 
 #other_language_link {

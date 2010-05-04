@@ -19,7 +19,11 @@ module ApplicationHelper
     keys.each do |key|
       messages << content_tag(:li, flash[key], :class => "flash-#{key}") if flash[key]
     end
-    content_tag(:ul, messages.join("\n"), :class => "flash")
+    if messages.empty?
+       content_tag(:div, "", :class => "flash")
+    else
+      content_tag(:ul, messages.join("\n"), :class => "flash")
+    end
   end
 
   def partner_locale_options(partner, locale, source)
