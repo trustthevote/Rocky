@@ -253,6 +253,7 @@ form li {
   padding: 1em;
   font-family: Menlo, Courier, "Courier New", monospace;
   font-size: 11px;
+  *width: 95%;
 }
 
 .wrapper {
