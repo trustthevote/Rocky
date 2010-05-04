@@ -412,6 +412,10 @@ form li {
   width: 100%;
 }
 
+td#left_column, td#right_column {
+  vertical-align: top;
+}
+
 .stats thead th, .stats thead td {
   padding-top: 6px;
   padding-bottom: 6px;
