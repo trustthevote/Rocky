@@ -56,7 +56,7 @@ HTML
 
     @image_overlay_html =
 <<-HTML
-<a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="width:604 height:max scrolling:no">
+<a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="width:618 height:max scrolling:yes">
   <img src="#{partner_widget_url}" />
 </a>
 <script type="text/javascript" src="https://#{request.host}#{widget_loader_path}"></script>

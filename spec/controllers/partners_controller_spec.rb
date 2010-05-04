@@ -81,7 +81,7 @@ describe PartnersController do
       it "shows widget html for image overlay widget" do
         assert_select 'textarea[name=image_overlay_html][readonly]', 1
         html = HTML::Node.parse(nil, 0, 0, assigns(:image_overlay_html))
-        assert_select html, "a[href=https://example.com/?partner=5&source=embed-rtv100x100v1][class=floatbox][data-fb-options='width:604 height:max scrolling:no']"
+        assert_select html, "a[href=https://example.com/?partner=5&source=embed-rtv100x100v1][class=floatbox][data-fb-options='width:618 height:max scrolling:yes']"
         assert_match %r{<img src=.*/images/widget/rtv-100x100-v1.gif}, assigns(:image_overlay_html)
         html = HTML::Node.parse(nil, 0, 0, assigns(:image_overlay_html).split("\n").last)
         assert_select html, "script[type=text/javascript][src=https://example.com/widget_loader.js]"
