@@ -277,6 +277,37 @@ describe Registrant do
   end
 
   describe "step 3" do
+
+    describe "#forwardable_to_electronic_registration?" do
+      describe "when registrant lives in colorado" do
+        before(:each) do
+          colorado_zip = "80202"
+          @reg = Factory.build(:step_3_registrant, :home_zip_code => colorado_zip, :change_of_name => false)
+        end
+        describe "and has no name change" do
+          it "is true" do
+            assert @reg.forwardable_to_electronic_registration?
+          end
+        end
+        describe "and has a name change" do
+          it "is false" do
+            @reg.change_of_name = true
+            assert !@reg.forwardable_to_electronic_registration?
+          end
+        end
+      end
+
+      describe "when registrant does not live in colorado" do
+        before(:each) do
+          pennsylvania_zip = "15215"
+          @reg = Factory.build(:step_3_registrant, :home_zip_code => pennsylvania_zip, :change_of_name => false)
+        end
+        it "is false" do
+          assert !@reg.forwardable_to_electronic_registration?
+        end
+      end
+    end
+
     it "should require valid state id" do
       assert_attribute_invalid_with(:step_3_registrant, :state_id_number => nil)
 

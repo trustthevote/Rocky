@@ -706,6 +706,10 @@ class Registrant < ActiveRecord::Base
     puts " done!" unless Rails.env.test?
   end
 
+  def forwardable_to_electronic_registration?
+    home_state.abbreviation == "CO" && !change_of_name
+  end
+
   private ###
 
   def at_least_step?(step)
