@@ -54,9 +54,10 @@ class PartnersController < PartnerBase
 </a>
 HTML
 
+    @floatbox_options = "width:618 height:max scrolling:yes"
     @image_overlay_html =
 <<-HTML
-<a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="width:618 height:max scrolling:yes">
+<a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="#{@floatbox_options}">
   <img src="#{partner_widget_url}" />
 </a>
 <script type="text/javascript" src="https://#{request.host}#{widget_loader_path}"></script>

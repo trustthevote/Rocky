@@ -23,7 +23,7 @@
     <div>
       <h2><label for="image_overlay_html">Add a widget button:</label></h2>
       <h3>Best option! Like the second option, this code will create a button or banner on a web page. But instead of taking your users to a separate website or page, the link will result in your voter registration tool being displayed on top of the page users were viewing. That's right, users will not leave your site. To see what it looks like, check out
-        <a href="/?partner=2&amp;source=embed-rtv468x60v3" class="floatbox" data-fb-options="width:604 height:max scrolling:no">this example</a>.
+        <a href="/?partner=<%= @partner.id %>" class="floatbox" data-fb-options="<%= @floatbox_options %>">this example</a>.
       </h3>
       <script type="text/javascript" src="/widget_loader.js"></script>
       <p><textarea name="image_overlay_html" readonly="readonly" rows="8" cols="78"><%= h @image_overlay_html %></textarea></p>

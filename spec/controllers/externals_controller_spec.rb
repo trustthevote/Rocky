@@ -21,24 +21,26 @@ describe ExternalsController do
   end
 
   describe "#go" do
-    describe "when user data is valid in Colorado" do
-      it "blah" do
-        pending
-        registrant = Factory.create(:step_3_registrant)
-        unless ENV['INTEGRATE_COLORADO']
-          # mock stuff out
-          stub(fake_site = Object.new).transfer(registrant) { "https://www.sos.state.co.us/Voter/secuEdit" } # FIXME
-          stub(StateRegistrationSite).new(registrant) { fake_site }
-        end
-        get :go, :registrant_id => @registrant.to_param
-        # then a miracle occurs...
-        assert_response :found
-        assert_match %r{www\.sos\.state\.co\.us(?::443)?/Voter}, response.env['Location']
+    it "when user data is valid in Colorado" do
+      unless ENV['INTEGRATE_COLORADO']
+        stub(fake_site = Object.new).transfer { "https://www.sos.state.co.us/Voter/editVoterDetails.do" }
+        stub(StateRegistrationSite).new(@registrant) { fake_site }
       end
+      get :go, :registrant_id => @registrant.to_param
+
+      assert_response :found
+      assert_match %r{www\.sos\.state\.co\.us(?::443)?/Voter/editVoterDetails\.do}, response.headers['Location']
     end
 
-    describe "when user data is not valid in Colorado" do
-      
+    it "when user data is not valid in Colorado" do
+      unless ENV['INTEGRATE_COLORADO']
+        stub(fake_site = Object.new).transfer { nil }
+        stub(StateRegistrationSite).new(@registrant) { fake_site }
+      end
+      get :go, :registrant_id => @registrant.to_param
+
+      assert_response :success
+      assert_template "go"
     end
   end
 end
