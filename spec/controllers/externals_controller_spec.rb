@@ -1,46 +1,61 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ExternalsController do
-  before(:each) do
-    @registrant = Factory.create(:step_3_registrant)
-    stub(GeoState).online_registrars { [@registrant.home_state.abbreviation] }
-  end
-
-  describe "#show" do
+  describe "when forwardable" do
     integrate_views
-    it "shows the choice page" do
-      get :show, :registrant_id => @registrant.to_param
-      assert_not_nil assigns[:registrant]
-      assert_response :success
-      assert_select "h1", /\w+ Registrant/
+
+    before(:each) do
+      @registrant = Factory.create(:step_3_registrant)
+      stub(GeoState).online_registrars { [@registrant.home_state.abbreviation] }
     end
 
-    it "shows Not Found page when not eligible for external online registration" do
-      pending
+    describe "#show" do
+      it "shows the choice page" do
+        get :show, :registrant_id => @registrant.to_param
+        assert_not_nil assigns[:registrant]
+        assert_response :success
+        assert_select "h1", /\w+ Registrant/
+      end
+    end
+
+    describe "#go" do
+      it "when user data is valid in Colorado" do
+        unless ENV['INTEGRATE_COLORADO']
+          stub(fake_site = Object.new).transfer { "https://www.sos.state.co.us/Voter/editVoterDetails.do" }
+          stub(StateRegistrationSite).new(@registrant) { fake_site }
+        end
+        get :go, :registrant_id => @registrant.to_param
+
+        assert_response :found
+        assert_match %r{www\.sos\.state\.co\.us(?::443)?/Voter/editVoterDetails\.do}, response.headers['Location']
+      end
+
+      it "when user data is not valid in Colorado" do
+        unless ENV['INTEGRATE_COLORADO']
+          stub(fake_site = Object.new).transfer { nil }
+          stub(StateRegistrationSite).new(@registrant) { fake_site }
+        end
+        get :go, :registrant_id => @registrant.to_param
+
+        assert_response :success
+        assert_select "li div", @registrant.state_id_number
+      end
     end
   end
 
-  describe "#go" do
-    it "when user data is valid in Colorado" do
-      unless ENV['INTEGRATE_COLORADO']
-        stub(fake_site = Object.new).transfer { "https://www.sos.state.co.us/Voter/editVoterDetails.do" }
-        stub(StateRegistrationSite).new(@registrant) { fake_site }
-      end
-      get :go, :registrant_id => @registrant.to_param
-
-      assert_response :found
-      assert_match %r{www\.sos\.state\.co\.us(?::443)?/Voter/editVoterDetails\.do}, response.headers['Location']
+  describe "when not forwardable" do
+    before(:each) do
+      @registrant = Factory.create(:step_3_registrant)
     end
 
-    it "when user data is not valid in Colorado" do
-      unless ENV['INTEGRATE_COLORADO']
-        stub(fake_site = Object.new).transfer { nil }
-        stub(StateRegistrationSite).new(@registrant) { fake_site }
+    describe "#show" do
+      it "shows Not Found page when not eligible for external online registration" do
+        @registrant[:change_of_name] = true
+        @registrant.save(false)
+        assert !@registrant.reload.forwardable_to_electronic_registration?
+        get :show, :registrant_id => @registrant.to_param
+        assert_response :not_found
       end
-      get :go, :registrant_id => @registrant.to_param
-
-      assert_response :success
-      assert_template "go"
     end
   end
 end

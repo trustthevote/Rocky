@@ -1,7 +1,10 @@
 class ExternalsController < RegistrationStep
   CURRENT_STEP = 3
 
-  # show is in superclass
+  def show
+    super
+    head :not_found unless @registrant.forwardable_to_electronic_registration?
+  end
 
   def go
     find_registrant
