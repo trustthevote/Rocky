@@ -16,7 +16,7 @@ class GeoState < ActiveRecord::Base
     init_all_states
     @@all_states_by_abbrev.map { |abbrev, state| [state.name, abbrev] }.sort
   end
-  
+
   def self.init_all_states
     @@all_states_by_id ||= all.inject([]) { |arr,state| arr[state.id] = state; arr }
     @@all_states_by_abbrev ||= @@all_states_by_id[1..-1].index_by(&:abbreviation)
@@ -48,5 +48,12 @@ class GeoState < ActiveRecord::Base
 
   def self.valid_zip_code?(zip)
     !for_zip_code(zip).nil?
+  end
+
+  def self.online_registrars
+    %w[CO]
+  end
+  def supports_online_registration?
+    self.class.online_registrars.include?(self.abbreviation)
   end
 end

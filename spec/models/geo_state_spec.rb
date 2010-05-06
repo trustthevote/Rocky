@@ -43,4 +43,9 @@ describe GeoState do
       assert GeoState.zip3map.keys.all? {|zip| GeoState.for_zip_code(zip) }
     end
   end
+
+  it "knows if it supports electronic registration" do
+    assert GeoState["CO"].supports_online_registration?
+    assert !GeoState["PA"].supports_online_registration?
+  end
 end

@@ -707,7 +707,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def forwardable_to_electronic_registration?
-    home_state.abbreviation == "CO" && !change_of_name
+    home_state && home_state.supports_online_registration? && !change_of_name
   end
 
   private ###

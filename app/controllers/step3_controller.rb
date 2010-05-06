@@ -17,7 +17,11 @@ class Step3Controller < RegistrationStep
   end
 
   def next_url
-    registrant_step_4_url(@registrant)
+    if @registrant.forwardable_to_electronic_registration?
+      registrant_external_url(@registrant)
+    else
+      registrant_step_4_url(@registrant)
+    end
   end
 
   def set_up_view_variables

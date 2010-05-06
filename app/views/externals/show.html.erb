@@ -1,0 +1,27 @@
+<h1><%= t('txt.registration.external_header', :state => @registrant.home_state_name) %></h1>
+
+<div id="external">
+
+  <p>Hey, it looks like you can finish your voter registration entirely online, without having to print, sign, and mail an application form.</p>
+
+  <p>That's because you have a valid Colorado driver's license, and you can either change the address of your existing Colorado voter
+    registration, or register in Colorado for the first time if you're eligible. If you fit the bill, you can finish your registration
+    at the Colorado State Secretary's website.</p>
+
+  <p><%= link_to "GO COLORADO", go_registrant_external_path(@registrant) %></p>
+
+  <p>Otherwise, you can continue here to get your voter registration form to print, sign, and mail to the Colorado State Secretary's office.</p>
+
+  <p><%= link_to "Finish Registration With Rock the Vote", registrant_step_4_path(@registrant) %></p>
+
+  <p>Either is cool - it's up to you.</p>
+
+  <hr>
+
+  <p>[ ] Get updates from Rock the Vote</p>
+
+  <p>We will send you timely election reminders, polling place information, and information about music and issues.</p>
+
+  <p>[Return]</p>
+
+</div>

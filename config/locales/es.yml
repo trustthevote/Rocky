@@ -134,6 +134,7 @@ es:
       finish_reminder: "Gracias, {{first_name}}, para el envío de su solicitud de registro de votantes! Debe recibir la confirmación de su inscripción de los funcionarios electorales de su estado. A veces, el procesamiento puede tardar varias semanas."
       finish_reminder_2: "Si desea comprobar el estado de su formulario de inscripción de votantes, se puede encontrar información de contacto de su Secretario de Estado en nuestro enlace <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Centro Electoral</a>."
       ineligible_header: "Una disculpa, no eres elegilbe para registrarte para votar por las siguientes razones:"
+      external_header: "SPANISH {{state}} Registrant"
       name: Nombre
       select_none: (none)
       home_address: Dirección casa

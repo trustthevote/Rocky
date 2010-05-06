@@ -137,6 +137,7 @@ en:
       finish_reminder: "Thank you, {{first_name}}, for sending in your voter registration application! You should receive confirmation of your registration from your state's election officials. Sometimes processing can take several weeks."
       finish_reminder_2: "If you want to check on the status of your voter registration form, you can find contact information for your Secretary of State at our <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Election Center</a>."
       ineligible_header: "Sorry, you are not eligible to register to vote for the following reason(s):"
+      external_header: "{{state}} Registrant"
       name: Name
       select_none: (none)
       home_address: Home Address
