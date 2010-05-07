@@ -1,34 +1,47 @@
 <h1>Colorado Registration Error</h1>
 
-<p>It looks like there might be a problem with your Colorado registration
-information. No worries, though! You can choose from two ways to find
-out if you made a typo, and correct it. The issue is that you provided
-the information below&hellip;</p>
+<div id="external">
 
-<div class="review">
-  <div class="section">
-    <fieldset>
-      <legend>Blah blah personal info</legend>
-      <ul>
-        <li>
-          <span><%= I18n.t('txt.registration.name') %></span>
-          <div><%=h @registrant.full_name %></div>
-        </li>
-        <li>
-          <span><%= I18n.t('activerecord.attributes.registrant.date_of_birth') %></span>
-          <div><%=h @registrant.date_of_birth.strftime("%B %e, %Y") %></div>
-        </li>
-        <li>
-          <span>Colorado ID Number</span>
-          <div><%=h @registrant.state_id_number %></div>
-        </li>
-      </ul>
-    </fieldset>
+  <div class="text">
+    <p>
+      It looks like there might be a problem with your Colorado registration
+      information. No worries, though! You can choose from two ways to find
+      out if you made a typo, and correct it. The issue is that you provided
+      the information below, but it doesn't seem to match Colorado's records.
+    </p>
+  </div>
+
+  <div class="review">
+    <div class="section">
+      <fieldset>
+        <legend>Identifying Information</legend>
+        <ul>
+          <li>
+            <span><%= I18n.t('txt.registration.name') %></span>
+            <div><%=h @registrant.full_name %></div>
+          </li>
+          <li>
+            <span><%= I18n.t('activerecord.attributes.registrant.date_of_birth') %></span>
+            <div><%=h @registrant.date_of_birth.strftime("%B %e, %Y") %></div>
+          </li>
+          <li>
+            <span>Colorado ID Number</span>
+            <div><%=h @registrant.state_id_number %></div>
+          </li>
+        </ul>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="text">
+    <p>
+      One option is for you to go to <a href="http://www.sos.state.co.us/Voter/regVoterIntro.do">the Colorado State Secretary's web site</a>,
+      re-enter the corrected information, and complete your registration there.
+    </p>
+
+    <p>
+      Your other option is to continue the process with RockTheVote&mdash;just close this window and use the other one to move ahead
+      to where you can review your info and make any needed changes. Either is cool&mdash;it's up to you.
+    </p>
   </div>
 </div>
-
-<p>&hellip; but this doesn't seem to match Colorado's records.</p>
-
-<p>One option is for you to go to <a href="http://www.sos.state.co.us/Voter/regVoterIntro.do">the Colorado State Secretary's web site</a>, re-enter the corrected information, and complete your registration there.</p>
-
-<p>Your other option is to continue the process with RockTheVote&mdash;just close this window and use the other one to move ahead to where you can review your info and make any needed changes. Either is cool&mdash;it's up to you.</p>

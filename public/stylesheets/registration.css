@@ -227,6 +227,9 @@ div.back {
   font-size: 12px;
 }
 
+#external .review {
+  padding: 0 20px;
+}
 
 .review ul {
   margin-top: 5px;
@@ -258,6 +261,9 @@ div.back {
   letter-spacing: 0.08em;
 }
 
+#external .review li span { width: 175px; }
+#external .review li div  { left: 185px; }
+
 .instructions p {
   margin: -5px 75px 10px 135px;
   color: #434343;
@@ -269,6 +275,7 @@ div.back {
   margin: 20px;
   color: #434343;
   font-size: 15px;
+  line-height: 1.4;
 }
 
 .checkbox-explanation p {
