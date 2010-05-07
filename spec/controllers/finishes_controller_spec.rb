@@ -66,7 +66,7 @@ describe FinishesController do
   def assert_share_links(share_text)
     assert_select "div.share div", 3
 
-    assert_select "a[class=button_share_facebook_en][href=http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.rockthevote.com%2Fregister%2Ffb&t=#{CGI.escape(share_text)}]"
+    assert_select "a[class=button_share_facebook_en][href=http://www.facebook.com/sharer.php?u=#{FACEBOOK_CALLBACK_URL}&t=#{CGI.escape(share_text)}]"
 
     escaped = CGI.escape(share_text + " " + root_url)
     href = "http://twitter.com/home"
@@ -76,7 +76,7 @@ describe FinishesController do
     href = "http://www.google.com/reader/link"
     href << "?url=#{CGI.escape(root_url)}"
     href << "&amp;srcURL=#{CGI.escape(root_url)}"
-    href << "&amp;srcTitle=Rock%20the%20Vote"
+    href << "&amp;srcTitle=#{SPONSOR_NAME_CGI_ESCAPED}"
     href << "&amp;title=#{CGI.escape(share_text)}"
     assert_select "a[class=button_share_google_buzz_en][href=#{href}]"
   end

@@ -95,10 +95,4 @@ module ApplicationHelper
       </div>
     HTML
   end
-
-  def rtv_partner_url(partner)
-    url = "https://register.rockthevote.com/registrants/new"
-    url << "?partner=#{partner.id}" unless partner.id == Partner.default_id
-    CGI.escape(url)
-  end
 end

@@ -1,4 +1,4 @@
-rockthevote:
+sponsor:
   id: 1
   username: rtv
   email: rocky@example.com
@@ -17,7 +17,7 @@ rockthevote:
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
 # TODO: remove partner 2 in production
-bullwinkle:
+partner:
   id: 2
   username: bull_winkle
   email: bull_winkle@example.com
