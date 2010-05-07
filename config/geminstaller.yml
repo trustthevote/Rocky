@@ -36,6 +36,8 @@ gems:
   version: = 1.2.1
 - name: nokogiri
   version: = 1.3.2
+- name: mechanize
+  version: = 1.0.0
 - name: pivotal-webrat
   version: = 0.4.4
   install_options: --source=http://gems.pivotallabs.com
