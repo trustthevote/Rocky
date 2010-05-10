@@ -3,6 +3,7 @@
 config/database.yml
 config/newrelic.yml
 config/initializers/hoptoad.rb
+config/initializers/session_store.rb
 log/*.log
 tmp/*
 public/pdf/*
