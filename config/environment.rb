@@ -42,4 +42,10 @@ Rails::Initializer.run do |config|
 
   # Disable request forgery protection in all environments
   config.action_controller.allow_forgery_protection = false
+
+  # set up default session secret. override in initializers for production, etc.
+  config.action_controller.session = {
+    :key         => '_rocky_session',
+    :secret      => 'OverrideWithYourOwnSecretInPublicEnvironments'
+  }
 end
