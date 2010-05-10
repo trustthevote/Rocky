@@ -4,6 +4,7 @@ config/database.yml
 config/newrelic.yml
 config/initializers/hoptoad.rb
 config/initializers/session_store.rb
+db/bootstrap/partners.yml
 log/*.log
 tmp/*
 public/pdf/*
