@@ -1,0 +1,18 @@
+sponsor:
+  id: 1
+  username: sponsor
+  email: sponsor@example.com
+  # password is "password"
+  crypted_password: "c8e5b51b237344fe0e72539af0cac7197f094a5e933ffacf6e7fa612363c5933f520710c6427ac31fc4c68a2d7bb48eae601c74b96e7838f9ca1a0740b67576a"
+  password_salt: "Y4PPzYx2ert3vC0OhEMo"
+  name: The Boss
+  organization: Sponsor Organization
+  url: http://example.com
+  address: 123 Wherever
+  city: Washington
+  state_id: 9
+  zip_code: 20001
+  phone: 555-555-1234
+  widget_image: rtv-234x60-v1.gif
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
