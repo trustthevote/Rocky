@@ -10,3 +10,17 @@ tmp/*
 public/pdf/*
 public/system/*
 reg_colorado.yml
+# files symlinked to rocky_branding gem
+app/views/layouts/_urchin.html.erb
+app/views/notifier/confirmation.en.html.erb
+app/views/notifier/confirmation.es.html.erb
+app/views/notifier/reminder.en.html.erb
+app/views/notifier/reminder.es.html.erb
+config/initializers/sponsor_customizations.rb
+config/locales/
+data/nvra_templates
+db/bootstrap/import/
+public/images
+public/stylesheets/application.css
+public/stylesheets/partner.css
+public/stylesheets/registration.css
