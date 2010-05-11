@@ -37,7 +37,7 @@ set :use_sudo, false
 # before "deploy", "deploy:stop_workers"
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
 after "deploy:symlink_configs", "deploy:geminstaller"
-before "deploy:restart", "deploy:import_states_csv"   # runs after migrations when migrating
+before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
@@ -69,6 +69,11 @@ namespace :deploy do
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/initializers/hoptoad.rb #{latest_release}/config/initializers/hoptoad.rb
     CMD
+  end
+
+  desc "Link the files/directories in the branding gem into the app directory structure"
+  task :symlink_branding, :roles => [:app, :util], :except => {:no_release => true} do
+    run "cd #{latest_release} && rake branding:symlink"
   end
 
   desc "Link the pdf dir to /data/rocky/pdf"
