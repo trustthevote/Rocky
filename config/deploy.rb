@@ -71,6 +71,18 @@ namespace :deploy do
     CMD
   end
 
+  desc "Install the branding gem from a local .gem file onto all servers"
+  task :install_branding, :roles => [:app, :util] do
+    local_path = ENV['GEM_FILE']
+    unless local_path
+      puts "You must provide a gem to upload and install in GEM_FILE env var."
+      exit 1
+    end
+    remote_path = File.join("/tmp", File.basename(local_path))
+    top.upload local_path, remote_path, :via => :scp
+    sudo "gem install #{remote_path}"
+  end
+
   desc "Link the files/directories in the branding gem into the app directory structure"
   task :symlink_branding, :roles => [:app, :util], :except => {:no_release => true} do
     run "cd #{latest_release} && rake branding:symlink"
@@ -124,7 +136,7 @@ namespace :import do
     remote_dir = File.join(shared_path, "uploads")
     remote_path = File.join(remote_dir, File.basename(local_path))
     run "mkdir -p #{remote_dir}"
-    upload local_path, remote_path, :via => :scp
+    top.upload local_path, remote_path, :via => :scp
     run "cd #{current_path} && rake import:states CSV_FILE=#{remote_path}"
     find_and_execute_task "deploy:restart"
   end
