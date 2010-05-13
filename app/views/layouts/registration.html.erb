@@ -4,8 +4,12 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <title>Online Voter Registration</title>
   <meta name = "viewport" content = "width = 600" />
-  <%= stylesheet_link_tag "application" %>
-  <%= stylesheet_link_tag "registration" %>
+  <%= stylesheet_link_tag "application", "registration" %>
+  <!--[if !IE 7]>
+    <style type="text/css">
+      #container { display:table; height:100% }
+    </style>
+  <![endif]-->
   <%= javascript_include_tag  Rails.env.production? ? 'https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' : 'jquery-1.3.2',
                               Rails.env.production? ? 'qtip/jquery.qtip-1.0.0-rc3.min.js' : 'qtip/jquery.qtip-1.0.0-rc3.js',
                               'application', 'registration' %>
@@ -15,8 +19,6 @@
   <%= yield :head %>
 </head>
 <body>
-  <div id="bg"><div></div></div>
-
   <div id="container">
 
   <% if @partner.custom_logo? -%>
@@ -36,12 +38,17 @@
     </div>
 
     <div id="main">
-      <%= flash_messages %>
-      <%= yield %>
+      <div id="main_inner">
+        <%= yield %>
+      </div>
     </div>
 
+  </div>
+  <div id="sticky_footer">
     <%= render :partial => 'layouts/footer' %>
   </div>
+
+
 <%= render :partial => 'layouts/urchin' %>
 </body>
 </html>
