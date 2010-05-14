@@ -21,6 +21,7 @@ config/locales/
 data/nvra_templates
 db/bootstrap/import/
 public/images
+public/floatbox
 public/stylesheets/application.css
 public/stylesheets/partner.css
 public/stylesheets/registration.css
