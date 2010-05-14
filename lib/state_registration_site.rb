@@ -11,6 +11,7 @@ class StateRegistrationSite
     verify_path = '/Voter/verifyExist.do'
     success_path_re = %r{/Voter/editVoterDetails\.do}
     agent = Mechanize.new
+    agent.read_timeout = 30
 
     # secure intro
     page = agent.get("https://#{host}#{secure_intro_path}")

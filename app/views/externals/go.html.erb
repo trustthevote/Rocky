@@ -2,6 +2,14 @@
 
 <div id="external">
 
+<% if @timeout -%>
+  <div class="text">
+    <p>
+      It looks like the Colorado web site is taking a while to respond and may not be available at this time.
+      No worries, though!  You have a couple options for how to continue your voter registration.
+    </p>
+  </div>
+<% else -%>
   <div class="text">
     <p>
       It looks like there might be a problem with your Colorado registration
@@ -32,6 +40,7 @@
       </fieldset>
     </div>
   </div>
+<% end -%>
 
   <div class="text">
     <p>

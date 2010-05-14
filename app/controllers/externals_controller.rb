@@ -8,7 +8,11 @@ class ExternalsController < RegistrationStep
 
   def go
     find_registrant
-    url = StateRegistrationSite.new(@registrant).transfer
-    redirect_to url if url
+    begin
+      url = StateRegistrationSite.new(@registrant).transfer
+      redirect_to url if url
+    rescue Timeout::Error
+      @timeout = true
+    end
   end
 end
