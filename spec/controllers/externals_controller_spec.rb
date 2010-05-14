@@ -33,6 +33,7 @@ describe ExternalsController do
         get :go, :registrant_id => @registrant.to_param
 
         assert_response :success
+        assert_template "go"
         assert_select "li div", @registrant.state_id_number
       end
 
@@ -42,6 +43,7 @@ describe ExternalsController do
         get :go, :registrant_id => @registrant.to_param
 
         assert_response :success
+        assert_template "timeout"
         assert_select ".text p", /may not be available at this time/
       end
     end

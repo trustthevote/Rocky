@@ -13,6 +13,7 @@ class ExternalsController < RegistrationStep
       redirect_to url if url
     rescue Timeout::Error
       @timeout = true
+      render "timeout"
     end
   end
 end

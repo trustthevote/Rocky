@@ -2,18 +2,15 @@
 
 <div id="external">
   <div class="text">
-    <p>Hey, it looks like you can finish your voter registration entirely online, without having to print, sign, and mail an application form.</p>
+    <p><%= t('txt.registration.external.colorado.show.p1') %></p>
+    <p><%= t('txt.registration.external.colorado.show.p2') %></p>
 
-    <p>That's because you have a valid Colorado driver's license, and you can either change the address of your existing Colorado voter
-      registration, or register in Colorado for the first time if you're eligible. If you fit the bill, you can finish your registration
-      at the Colorado State Secretary's website.</p>
+    <p class="centered"><%= link_to t('txt.registration.external.colorado.register_link'), go_registrant_external_path(@registrant), :target => '_blank' %></p>
 
-    <p class="centered"><%= link_to "Finish Registration Online with Colorado", go_registrant_external_path(@registrant), :target => '_blank' %></p>
+    <p><%= t('txt.registration.external.colorado.show.p3') %></p>
 
-    <p>Otherwise, you can continue here to get your voter registration form to print, sign, and mail to the Colorado State Secretary's office.</p>
+    <p class="centered"><%= link_to t('txt.registration.external.colorado.continue_link'), registrant_step_4_path(@registrant) %></p>
 
-    <p class="centered"><%= link_to "Continue Registration with Rock The Vote", registrant_step_4_path(@registrant) %></p>
-
-    <p>Either is cool - it's up to you.</p>
+    <p><%= t('txt.registration.external.colorado.show.p4') %></p>
   </div>
 </div>
