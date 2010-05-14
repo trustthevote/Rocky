@@ -4,8 +4,9 @@ class Step2Controller < RegistrationStep
   def update
     if params[:javascript_disabled] == "1" && params[:registrant]
       reg = params[:registrant]
-      reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
-      # TODO: reg[:has_mailing_address] = reg.slice(:mailing_address, :mailing_unit, :mailing_city, :mailing_zip_code).any? {|p| !p.blank?}
+      if reg[:has_mailing_address] == "0"
+        reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
+      end
     end
     super
   end

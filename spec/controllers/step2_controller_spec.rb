@@ -36,5 +36,13 @@ describe Step2Controller do
       assert assigns[:registrant].invalid?
       assert_template "show"
     end
+
+    it "should respect when has_mailing_address is checked and javascript disabled" do
+      put :update, :registrant_id => @registrant.to_param,
+                   :registrant => Factory.attributes_for(:step_2_registrant, :mailing_address => "", :has_mailing_address => "1"),
+                   :javascript_disabled => "1"
+      assert assigns[:registrant].invalid?
+      assert_template "show"
+    end
   end
 end
