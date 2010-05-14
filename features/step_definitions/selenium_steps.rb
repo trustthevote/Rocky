@@ -12,25 +12,6 @@ When /^I ignore the new blank window$/ do
   selenium.select_window nil
 end
 
-# overlay steps
-
-When /^I click the register button/ do
-  sleep 1
-  click_link "overlay-link"
-  sleep 2
-end
-
-Then /^I should see the overlay$/ do
-  selenium.select_frame "fbContent"
-  selenium.select_frame "relative=top"
-end
-
-Then /^I should see "(.*)" in the overlay$/ do |text|
-  selenium.select_frame "fbContent"
-  response.should contain(text)
-  selenium.select_frame "relative=top"
-end
-
 When /^I click the close link and confirm with (OK|Cancel)/ do |choice|
   case choice
   when "OK"     ; selenium.choose_ok_on_next_confirmation
