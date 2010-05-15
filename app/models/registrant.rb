@@ -211,7 +211,7 @@ class Registrant < ActiveRecord::Base
   end
 
   aasm_event :request_reminder do
-    transitions :to => :under_18, :from => [:rejected]
+    transitions :to => :under_18, :from => [:rejected, :step_1]
   end
 
   def self.find_by_param(param)
