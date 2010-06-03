@@ -687,9 +687,10 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.deliver_tell_friends_emails(tell_params)
-    tell_params[:tell_recipients].split(",").each do |recipient|
-      Notifier.deliver_tell_friends(tell_params.merge(:tell_recipients => recipient))
-    end
+    # disabled until spammers can be stopped
+    #tell_params[:tell_recipients].split(",").each do |recipient|
+    #  Notifier.deliver_tell_friends(tell_params.merge(:tell_recipients => recipient))
+    #end
   end
 
   def self.backfill_data
