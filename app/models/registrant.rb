@@ -229,7 +229,7 @@ class Registrant < ActiveRecord::Base
     stale = self.find(:all, :conditions => ["(NOT abandoned) AND (status != 'complete') AND (updated_at < ?)", STALE_TIMEOUT.seconds.ago])
     stale.each do |reg|
       if reg.home_state_id == state_id && reg.status == "step_3"
-        reg.status = complete
+        reg.status = "complete"
       end
       reg.abandon!
       Rails.logger.info "Registrant #{reg.id} abandoned at #{Time.now}"
