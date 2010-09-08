@@ -1,5 +1,5 @@
 set :application, "rocky"
-set :repository,  "git@git.osuosl.org:/var/git/rocky.git"
+set :repository,  "git@git.osuosl.org:rocky"
 
 # If you have previously been relying upon the code to start, stop 
 # and restart your mongrel application, or if you rely on the database
