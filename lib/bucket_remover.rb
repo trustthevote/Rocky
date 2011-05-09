@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 #***** BEGIN LICENSE BLOCK *****
 #
 #Version: RTV Public License 1.0
@@ -22,7 +24,6 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-#!/usr/bin/env ruby
 require 'time'
 require 'fileutils'
 class BucketRemover
