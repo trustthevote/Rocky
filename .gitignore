@@ -1,5 +1,6 @@
 .DS_Store
 .idea
+.rvmrc
 config/database.yml
 config/newrelic.yml
 config/initializers/hoptoad.rb
@@ -16,6 +17,8 @@ app/views/notifier/confirmation.en.html.erb
 app/views/notifier/confirmation.es.html.erb
 app/views/notifier/reminder.en.html.erb
 app/views/notifier/reminder.es.html.erb
+app/views/finishes/_adwords.html.erb
+app/views/registrants/_overseas.html.erb
 config/initializers/sponsor_customizations.rb
 config/locales/
 data/nvra_templates
@@ -25,3 +28,4 @@ public/floatbox
 public/stylesheets/application.css
 public/stylesheets/partner.css
 public/stylesheets/registration.css
+rocky_development
