@@ -91,3 +91,17 @@ Run all the non-selenium stuff:
     $ rake default features
 
 To get set up for development, run `sudo geminstaller`, which will install all the ruby gems needed by the application.
+
+## Additional Notes
+
+You can find a version of the branding gem's sources specifically customized for Rock The Vote here: git@git.osuosl.org:rocky_branding
+
+It looks like life is better with Rake 0.8.7. I changed the Gemgile accordingly
+
+It looks like gem "hpricot", "0.8.6" is missing. I added it
+
+Added db/&.sqlite3 to .gitignore
+
+
+
+
