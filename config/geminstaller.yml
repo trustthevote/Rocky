@@ -40,7 +40,7 @@ gems:
   version: = 1.0.0
 - name: pivotal-webrat
   version: = 0.4.4
-  install_options: --source=http://packages.osuosl.org/gems/
+  install_options: --source=http://ftp.osuosl.org/pub/osl/rtv-gems/
 #  install_options: --source=http://gems.pivotallabs.com
 - name: cucumber
   version: = 0.3.11
