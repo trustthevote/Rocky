@@ -60,22 +60,26 @@ set :use_sudo, false
 
 # before "deploy", "deploy:stop_workers"
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
-after "deploy:symlink_configs", "deploy:geminstaller"
+
+#No more geminstaller - bundler [AMM]
+#after "deploy:symlink_configs", "deploy:geminstaller"
 before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
 namespace :deploy do
-  desc "run GemInstaller"
-  task :geminstaller, :roles => [:app, :util] do
-    sudo "geminstaller -c #{current_release}/config/geminstaller.yml"
-  end
+  # no more geminstaller - bundler [AMM]
+  # desc "run GemInstaller"
+  # task :geminstaller, :roles => [:app, :util] do
+  #   sudo "geminstaller -c #{current_release}/config/geminstaller.yml"
+  # end
 
+  # try doing all rakes with bundle exec ? [AMM]
   desc "import states.csv data"
   task :import_states_csv, :roles => [:app] do
     run <<-CMD
       cd #{latest_release} &&
-      rake import:states CSV_FILE=db/bootstrap/import/states.csv
+      bundle exec rake import:states CSV_FILE=db/bootstrap/import/states.csv
     CMD
   end
 
