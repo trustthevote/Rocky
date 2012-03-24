@@ -4,6 +4,7 @@ sponsor:
   email: rocky@example.com
   crypted_password: "c8e5b51b237344fe0e72539af0cac7197f094a5e933ffacf6e7fa612363c5933f520710c6427ac31fc4c68a2d7bb48eae601c74b96e7838f9ca1a0740b67576a"
   password_salt: "Y4PPzYx2ert3vC0OhEMo"
+  persistence_token: "c2228990a84a83618e4fee26c34c4532968582feb03a23ddae2e0ab221aa30f3493de2f2c3630433030e6403ca731aca3e0ca5a53e33b88f69273d4db13ddb51"
   name: Rocky
   organization: Rock The Vote
   url: http://rockthevote.com
@@ -23,6 +24,7 @@ partner:
   email: bull_winkle@example.com
   crypted_password: "c8e5b51b237344fe0e72539af0cac7197f094a5e933ffacf6e7fa612363c5933f520710c6427ac31fc4c68a2d7bb48eae601c74b96e7838f9ca1a0740b67576a"
   password_salt: "Y4PPzYx2ert3vC0OhEMo"
+  persistence_token: "c2228990a84a83618e4fee26c34c4532968582feb03a23ddae2e0ab221aa30f3493de2f2c3630433030e6403ca731aca3e0ca5a53e33b88f69273d4db13ddb51"
   name: Bullwinkle
   organization: Bullwinkle, Inc.
   url: http://example.com

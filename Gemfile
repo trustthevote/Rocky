@@ -22,6 +22,8 @@ group :development, :text do
   #gem "pivotal-webrat-rspec-rails", "= 0.4.4"
   gem "cucumber", "= 0.3.11"
   gem "selenium-client", "= 1.2.16"
+  gem "hpricot"
+  gem "mongrel", "= 1.1.5"
 end
 
 gem "nokogiri", "= 1.3.2"
