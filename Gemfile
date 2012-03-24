@@ -12,7 +12,8 @@ gem "paperclip", "= 2.3.1.1"
 gem "sqlite3"
 
 #gem "rocky_branding", "= 12.3.5"
-gem "rocky_branding"
+#gem "rocky_branding"
+gem "rocky_branding", "= 1.0.14"
 
 group :development, :text do
   gem "rspec", "= 1.2.7"
