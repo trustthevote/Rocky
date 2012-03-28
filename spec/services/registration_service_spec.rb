@@ -13,7 +13,7 @@ describe RegistrationService do
         fail 'ValidationError is expected'
       rescue RegistrationService::ValidationError => e
         e.field.should    == 'date_of_birth'
-        e.message.should  == "can't be blank"
+        e.message.should  == "Required"
       end
     end
 
