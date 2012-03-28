@@ -23,7 +23,7 @@
 #
 #***** END LICENSE BLOCK *****
 set :application, "rocky"
-set :repository,  "git@git.osuosl.org:rocky"
+set :repository,  "git@github.com:trustthevote/Rocky.git"
 
 # If you have previously been relying upon the code to start, stop 
 # and restart your mongrel application, or if you rely on the database
