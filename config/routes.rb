@@ -50,4 +50,9 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.widget_loader "/widget_loader.js", :format => "js", :controller => "registrants", :action => "widget_loader"
   map.resources "password_resets", :only => [:new, :create, :edit, :update]
+
+
+  map.namespace :api do |api|
+    api.map '/vi/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => 'post' }
+  end
 end

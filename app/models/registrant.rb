@@ -114,7 +114,7 @@ class Registrant < ActiveRecord::Base
 
     validates_each(attr_names, configuration) do |record, attr_name, value|
       if record.errors.on(attr_name).nil? && !GeoState.valid_zip_code?(record.send(attr_name))
-        record.errors.add(attr_name, :invalid_zip, :default => configuration[:message], :value => value) 
+        record.errors.add(attr_name, :invalid_zip, :default => configuration[:message], :value => value)
       end
     end
   end
@@ -213,7 +213,7 @@ class Registrant < ActiveRecord::Base
   aasm_event :advance_to_step_1 do
     transitions :to => :step_1, :from => [:initial, :step_1, :step_2, :step_3, :step_4, :rejected]
   end
-  
+
   aasm_event :advance_to_step_2 do
     transitions :to => :step_2, :from => [:step_1, :step_2, :step_3, :step_4, :rejected]
   end
@@ -236,6 +236,17 @@ class Registrant < ActiveRecord::Base
 
   aasm_event :request_reminder do
     transitions :to => :under_18, :from => [:rejected, :step_1]
+  end
+
+  # Builds the record from the API data and sets the correct state
+  def self.build_from_api_data(data)
+    r = Registrant.new(data)
+
+    # As if the user went through all steps and filled all fields
+    # manually.
+    r.status = STEPS.last.to_s
+
+    r
   end
 
   def self.find_by_param(param)
@@ -352,7 +363,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def calculate_age
-    if errors.on(:date_of_birth).blank?
+    if errors.on(:date_of_birth).blank? && !date_of_birth.blank?
       now = (created_at || Time.now).to_date
       years = now.year - date_of_birth.year
       if (date_of_birth.month > now.month) || (date_of_birth.month == now.month && date_of_birth.day > now.day)
@@ -568,7 +579,7 @@ class Registrant < ActiveRecord::Base
       :error_message => "DelayedJob Worker Error(#{error.class.name}): #{error.message}",
       :request => { :params => {:worker => "deliver_reminder_email", :registrant_id => self.id} })
   end
-  
+
   def redact_sensitive_data
     self.state_id_number = nil
   end
@@ -745,11 +756,11 @@ class Registrant < ActiveRecord::Base
     current_step = STEPS.index(aasm_current_state)
     current_step && (current_step >= step)
   end
-  
+
   def has_phone?
     !phone.blank?
   end
-  
+
   def generate_uid
     self.uid = Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)} -- #{email_address} -- #{home_zip_code}" )
   end
