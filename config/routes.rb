@@ -53,6 +53,6 @@ ActionController::Routing::Routes.draw do |map|
 
 
   map.namespace :api do |api|
-    api.map '/vi/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => 'post' }
+    api.map '/v1/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
   end
 end
