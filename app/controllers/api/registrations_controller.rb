@@ -24,6 +24,13 @@
 #***** END LICENSE BLOCK *****
 class Api::RegistrationsController < ApplicationController
 
+  # Lists registrations
+  def index
+    render :json => { :registrations => RegistrationService.find_records(params[:query]) }
+  rescue ArgumentError => e
+    render :json => { :message => e.message }, :status => 400
+  end
+
   # Creates the record and returns the URL to the PDF file or
   # the error message with optional invalid field name.
   def create

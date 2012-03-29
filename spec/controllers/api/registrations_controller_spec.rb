@@ -37,7 +37,20 @@ describe Api::RegistrationsController do
       be_json_error 'Unsupported language' }
   end
 
+  describe 'index' do
+    specify { registrations_response { raise ArgumentError.new('error') }.should be_json_error('error') }
+
+    specify { registrations_response { [ :reg1, :reg2 ] }.should be_json_data({ :registrations => [ :reg1, :reg2 ] }) }
+  end
+
   private
+
+  def registrations_response(&block)
+    query = {}
+    mock(RegistrationService).find_records(query, &block)
+    get :index, :format => 'json', :query => query
+    response
+  end
 
   def new_registration_response(&block)
     data = {}

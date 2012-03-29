@@ -24,6 +24,8 @@
 #***** END LICENSE BLOCK *****
 class RegistrationService
 
+  INVALID_PARTNER_OR_PASSWORD = "Invalid partner ID or password"
+
   # Validation error
   class ValidationError < StandardError
     attr_reader :field
@@ -49,6 +51,55 @@ class RegistrationService
     reg
   end
 
+  # Lists records for the given partner
+  def self.find_records(query)
+    query ||= {}
+    partner = find_partner(query[:partner_id], query[:partner_password])
+
+    regs = partner.registrants
+
+    if since = query[:since]
+      regs = regs.all(:conditions => [ "created_at >= ?", Time.parse(since) ])
+    end
+
+    regs.map do |reg|
+      { :status               => reg.complete? ? 'complete' : 'incomplete',
+        :create_time          => reg.created_at.to_s,
+        :complete_time        => reg.updated_at.to_s,
+        :lang                 => reg.locale,
+        :first_reg            => reg.first_registration?,
+        :home_zip_code        => reg.home_zip_code,
+        :us_citizen           => reg.us_citizen?,
+        :name_title           => reg.name_title,
+        :first_name           => reg.first_name,
+        :middle_name          => reg.middle_name,
+        :last_name            => reg.last_name,
+        :name_suffix          => reg.name_suffix,
+        :home_address         => reg.home_address,
+        :home_unit            => reg.home_unit,
+        :home_city            => reg.home_city,
+        :home_state_id        => reg.home_state_id,
+        :has_mailing_address  => reg.has_mailing_address,
+        :mailing_address      => reg.mailing_address,
+        :mailing_unit         => reg.mailing_unit,
+        :mailing_city         => reg.mailing_city,
+        :mailing_state_id     => reg.mailing_state_id,
+        :mailing_zip_code     => reg.mailing_zip_code,
+        :race                 => reg.race,
+        :party                => reg.party,
+        :phone                => reg.phone,
+        :phone_type           => reg.phone_type,
+        :email_address        => reg.email_address,
+        :opt_in_email         => reg.opt_in_email,
+        :opt_in_sms           => reg.opt_in_sms,
+        :survey_question_1    => partner.send("survey_question_1_#{reg.locale}"),
+        :survey_answer_1      => reg.survey_answer_1,
+        :survey_question_2    => partner.send("survey_question_1_#{reg.locale}"),
+        :survey_answer_2      => reg.survey_answer_2,
+        :volunteer            => reg.volunteer? }
+    end
+  end
+
   private
 
   def self.validate_language(reg)
@@ -66,4 +117,13 @@ class RegistrationService
     attrs
   end
 
+  def self.find_partner(partner_id, password)
+    partner = Partner.first(:conditions => { :id => partner_id })
+
+    if !partner || !partner.valid_password?(password)
+      raise ArgumentError.new(INVALID_PARTNER_OR_PASSWORD)
+    end
+
+    partner
+  end
 end
