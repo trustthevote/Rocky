@@ -35,15 +35,4 @@ class Api::RegistrationsController < ApplicationController
     render :json => { :message => e.message }, :status => 400
   end
 
-  private
-
-  # Converts the parameters into the record data
-  def params_to_record(p)
-    r = p.clone
-    r.delete(:controller)
-    r.delete(:action)
-    r.delete(:format)
-    r
-  end
-
 end

@@ -56,7 +56,8 @@ class StateRequirements
 
   # Finds the state by either ID or zip code
   def self.find_state(query)
-    state_id = query[:home_state_id]
+    query  ||= {}
+    state_id = query[:home_state_id].to_s.upcase
     zip_code = query[:home_zip_code]
 
     if !state_id.blank?
@@ -80,7 +81,7 @@ class StateRequirements
   end
 
   def self.get_locale(state, lang)
-    state.localizations.find_by_locale(lang) || raise(UnsupportedLanguageError)
+    state.localizations.find_by_locale(lang.downcase) || raise(UnsupportedLanguageError)
   end
 
   def self.validate_age(state, dob, locale)
