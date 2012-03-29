@@ -51,7 +51,7 @@ require 'capistrano/ext/multistage'
 
 set :scm, "git"
 set :user, "rocky"
-set :deploy_via, :remote_cache
+set :deploy_via, :copy
 set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 
 set :group_writable, false
@@ -113,7 +113,7 @@ namespace :deploy do
 
   desc "Link the files/directories in the branding gem into the app directory structure"
   task :symlink_branding, :roles => [:app, :util], :except => {:no_release => true} do
-    run "cd #{latest_release} && rake branding:symlink"
+    run "cd #{latest_release} && bundle exec rake branding:symlink"
   end
 
   desc "Link the pdf dir to /data/rocky/pdf"
@@ -165,7 +165,7 @@ namespace :import do
     remote_path = File.join(remote_dir, File.basename(local_path))
     run "mkdir -p #{remote_dir}"
     top.upload local_path, remote_path, :via => :scp
-    run "cd #{current_path} && rake import:states CSV_FILE=#{remote_path}"
+    run "cd #{current_path} && bundle exec rake import:states CSV_FILE=#{remote_path}"
     find_and_execute_task "deploy:restart"
   end
 end
