@@ -35,7 +35,7 @@ describe Api::StateRequirementsController do
   private
 
   def state_requirements_response(&block)
-    query = {}
+    query = { :lang => nil, :home_state_id => nil, :home_zip_code => nil, :date_of_birth => nil }
     mock(StateRequirements).find(query, &block)
     get :show, :format => 'json', :query => query
     response

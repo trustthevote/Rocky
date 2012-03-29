@@ -26,7 +26,13 @@ class Api::RegistrationsController < ApplicationController
 
   # Lists registrations
   def index
-    render :json => { :registrations => RegistrationService.find_records(params[:query]) }
+    query = {
+      :partner_id       => params[:partner_id],
+      :partner_password => params[:partner_password],
+      :since            => params[:since]
+    }
+
+    render :json => { :registrations => RegistrationService.find_records(query) }
   rescue ArgumentError => e
     render :json => { :message => e.message }, :status => 400
   end

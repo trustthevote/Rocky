@@ -25,7 +25,14 @@
 class Api::StateRequirementsController < ApplicationController
 
   def show
-    render :json => StateRequirements.find(params[:query])
+    query = {
+      :lang => params[:lang],
+      :home_state_id => params[:home_state_id],
+      :home_zip_code => params[:home_zip_code],
+      :date_of_birth => params[:date_of_birth]
+    }
+
+    render :json => StateRequirements.find(query)
   rescue ArgumentError => e
     render :json => { :message => e.message }, :status => 400
   end
