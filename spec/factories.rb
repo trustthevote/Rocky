@@ -135,3 +135,4 @@ Factory.define :partner do |partner|
   partner.survey_question_1_en  "Hello?"
   partner.survey_question_2_en  "Outta here?"
 end
+

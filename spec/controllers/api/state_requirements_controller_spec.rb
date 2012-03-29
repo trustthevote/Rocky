@@ -22,33 +22,23 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe RegistrationService do
+describe Api::StateRequirementsController do
 
-  it 'should raise an error if the language is unknown' do
-    lambda { RegistrationService.create_record(:lang => 'unknown') }.should raise_error UnsupportedLanguageError
+  describe 'show' do
+    specify { state_requirements_response { raise UnsupportedLanguageError }.should be_json_error 'Unsupported language' }
+    specify { state_requirements_response { raise ArgumentError.new('Invalid state ID') }.should be_json_error 'Invalid state ID' }
+    specify { state_requirements_response { :result }.should be_json_data :result }
   end
 
-  it 'should raise validation errors when the record is invalid' do
-    begin
-      RegistrationService.create_record(:lang => 'en')
-      fail 'ValidationError is expected'
-    rescue RegistrationService::ValidationError => e
-      e.field.should    == 'date_of_birth'
-      e.message.should  == "Required"
-    end
-  end
+  private
 
-  context 'complete record' do
-    before { @reg = mock(Registrant) }
-    before { mock(Registrant).build_from_api_data({ :locale => nil }) { @reg } }
-
-    it 'should save the record and generate PDF' do
-      @reg.save { true }
-      @reg.generate_pdf { true }
-      RegistrationService.create_record({}).should
-    end
+  def state_requirements_response(&block)
+    query = {}
+    mock(StateRequirements).find(query, &block)
+    get :show, :format => 'json', :query => query
+    response
   end
 
 end
