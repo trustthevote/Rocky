@@ -81,7 +81,7 @@ class StateRequirements
   end
 
   def self.get_locale(state, lang)
-    state.localizations.find_by_locale(lang.downcase) || raise(UnsupportedLanguageError)
+    state.localizations.find_by_locale(lang.to_s.downcase) || raise(UnsupportedLanguageError)
   end
 
   def self.validate_age(state, dob, locale)
