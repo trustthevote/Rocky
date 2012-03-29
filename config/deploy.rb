@@ -23,7 +23,7 @@
 #
 #***** END LICENSE BLOCK *****
 set :application, "rocky"
-set :repository,  "git@git.osuosl.org:rocky"
+set :repository,  "git@github.com:trustthevote/Rocky.git"
 
 # If you have previously been relying upon the code to start, stop 
 # and restart your mongrel application, or if you rely on the database
@@ -62,6 +62,8 @@ set :use_sudo, false
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
 
 #No more geminstaller - bundler [AMM]
+set :rake, 'bundle exec rake'
+
 #after "deploy:symlink_configs", "deploy:geminstaller"
 before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
@@ -74,12 +76,11 @@ namespace :deploy do
   #   sudo "geminstaller -c #{current_release}/config/geminstaller.yml"
   # end
 
-  # try doing all rakes with bundle exec ? [AMM]
   desc "import states.csv data"
   task :import_states_csv, :roles => [:app] do
     run <<-CMD
       cd #{latest_release} &&
-      bundle exec rake import:states CSV_FILE=db/bootstrap/import/states.csv
+      rake import:states CSV_FILE=db/bootstrap/import/states.csv
     CMD
   end
 
