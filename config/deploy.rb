@@ -51,7 +51,7 @@ require 'capistrano/ext/multistage'
 
 set :scm, "git"
 set :user, "rocky"
-set :deploy_via, :copy
+set :deploy_via, :remote_cache
 set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 
 set :group_writable, false
