@@ -27,6 +27,6 @@ role :app,  "rtvstaging2-web.osuosl.org"
 role :util, "rtvstaging2-util.osuosl.org"
 role :db,   "rtvstaging2-web.osuosl.org", :primary => true
 
-set :rails_env,    "staging2"
+set :rails_env,    "staging"
 
 set :branch, "api"
