@@ -63,9 +63,9 @@ class RegistrationService
     end
 
     regs.map do |reg|
-      { :status               => reg.complete? ? 'complete' : 'incomplete',
+      { :status               => reg.extended_status,
         :create_time          => reg.created_at.to_s,
-        :complete_time        => reg.updated_at.to_s,
+        :complete_time        => reg.completed_at.to_s,
         :lang                 => reg.locale,
         :first_reg            => reg.first_registration?,
         :home_zip_code        => reg.home_zip_code,

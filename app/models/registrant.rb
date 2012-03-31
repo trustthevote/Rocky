@@ -750,6 +750,20 @@ class Registrant < ActiveRecord::Base
     home_state && home_state.supports_online_registration? && !change_of_name
   end
 
+  def completed_at
+    complete? && updated_at || nil
+  end
+
+  def extended_status
+    if complete?
+      'complete'
+    elsif /step/ =~ status.to_s
+      "abandoned after #{status}".gsub('_', ' ')
+    else
+      'abandoned'
+    end
+  end
+
   private ###
 
   def at_least_step?(step)

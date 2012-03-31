@@ -1047,6 +1047,32 @@ describe Registrant do
     end
   end
 
+  describe 'completed_at' do
+    it 'should return the last modification date for completed_at when completed' do
+      reg = Factory(:maximal_registrant)
+      reg.completed_at.should == reg.updated_at
+    end
+
+    specify { Factory(:step_1_registrant).completed_at.should be_nil }
+  end
+
+  describe 'extended_status' do
+    it 'should be complete when complete' do
+      reg = Factory.build(:maximal_registrant)
+      reg.extended_status.should == 'complete'
+    end
+
+    it 'should be marked as abandoned if incomplete' do
+      reg = Factory.build(:step_1_registrant)
+      reg.extended_status.should == 'abandoned after step 1'
+    end
+
+    it 'should report just abandoned otherwise' do
+      reg = Registrant.new
+      reg.extended_status.should == 'abandoned'
+    end
+  end
+
   def assert_attribute_invalid_with(model, attributes)
     reg = Factory.build(model, attributes)
     reg.invalid?
