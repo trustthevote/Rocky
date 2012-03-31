@@ -41,6 +41,12 @@ describe RegistrationService do
       end
     end
 
+    it 'should raise an error if the language is unknown even if everything else is bad' do
+      lambda {
+        RegistrationService.create_record(:lang => 'ex', :home_state_id => 1)
+      }.should raise_error UnsupportedLanguageError
+    end
+
     context 'complete record' do
       before { @reg = mock(Registrant) }
       before { mock(Registrant).build_from_api_data({ :locale => nil }) { @reg } }

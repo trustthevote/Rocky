@@ -441,12 +441,12 @@ describe Registrant do
       reg.phone = "555-1234"
       assert !reg.valid?
     end
-    
+
     it "should not require phone type when registrant does not provide phone" do
       reg = Factory.build(:step_3_registrant, :phone_type => "")
       assert reg.valid?
     end
-    
+
     it "should require phone type when registrant provides phone" do
       reg = Factory.build(:step_3_registrant, :phone_type => "", :phone => "123-456-7890")
       assert !reg.valid?
@@ -499,6 +499,13 @@ describe Registrant do
     it "gets no parties when not required" do
       reg = Factory.build(:step_2_registrant, :home_state => GeoState["PA"])
       assert_equal nil, reg.state_parties
+    end
+
+    it "gets no parties when no locale" do
+      reg = Factory.build(:step_2_registrant)
+      stub(reg).requires_party? { true }
+      stub(reg).localization { nil }
+      reg.state_parties.should == []
     end
 
     it "included in validations when required by state" do
@@ -595,7 +602,7 @@ describe Registrant do
       reg.abandon!
       assert reg.abandoned?
     end
-    
+
     it "should clear sensitive data" do
       reg = Factory.create(:step_4_registrant)
       assert_not_nil reg.state_id_number
@@ -609,9 +616,9 @@ describe Registrant do
       stale_rec = Factory.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
       fresh_rec = Factory.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT - 10).seconds.ago)
       complete_rec = Factory.create(:maximal_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
-      
+
       Registrant.abandon_stale_records
-      
+
       assert stale_rec.reload.abandoned?
       assert !fresh_rec.reload.abandoned?
       assert !complete_rec.reload.abandoned?
@@ -699,7 +706,7 @@ describe Registrant do
                      nil,
                      "No",  # volunteer
                      nil,
-                     nil], 
+                     nil],
                   reg.to_csv_array
     end
 
@@ -797,7 +804,7 @@ describe Registrant do
       reg = Factory.create(:step_1_registrant, :us_citizen => false)
       assert_equal "Not a US citizen", reg.to_csv_array[-2]
     end
-    
+
     it "has a CSV header" do
       assert_not_nil Registrant::CSV_HEADER
 

@@ -387,7 +387,7 @@ class Registrant < ActiveRecord::Base
 
   def state_parties
     if requires_party?
-      localization.parties + [localization.no_party]
+      localization && (localization.parties + [ localization.no_party ]) || []
     else
       nil
     end
