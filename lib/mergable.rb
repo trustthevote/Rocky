@@ -81,7 +81,7 @@ module Mergable
       <value><%= home_city %></value>
     </field>
     <field name="home_address.state">
-      <value><%= home_state.abbreviation %></value>
+      <value><%= home_state.try(:abbreviation) %></value>
     </field>
     <field name="home_address.zip_code">
       <value><%= home_zip_code %></value>
