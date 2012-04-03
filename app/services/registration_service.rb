@@ -113,7 +113,15 @@ class RegistrationService
 
   def self.data_to_attrs(data)
     attrs = data.clone
-    attrs[:locale] = attrs.delete(:lang)
+
+    if l = attrs.delete(:lang)
+      attrs[:locale] = l
+    end
+
+    if l = attrs.delete(:partner_tracking_id)
+      attrs[:tracking_source] = l
+    end
+
     attrs
   end
 

@@ -49,7 +49,7 @@ describe RegistrationService do
 
     context 'complete record' do
       before { @reg = mock(Registrant) }
-      before { mock(Registrant).build_from_api_data({ :locale => nil }) { @reg } }
+      before { mock(Registrant).build_from_api_data({}) { @reg } }
 
       it 'should save the record and generate PDF' do
         @reg.save { true }
@@ -59,6 +59,11 @@ describe RegistrationService do
     end
   end
 
+  describe 'data_to_attrs' do
+    specify { RegistrationService.send(:data_to_attrs, {}).should == {} }
+    specify { RegistrationService.send(:data_to_attrs, { :lang  => 'ex' }).should == { :locale => 'ex' } }
+    specify { RegistrationService.send(:data_to_attrs, { :partner_tracking_id => 'id' }).should == { :tracking_source => 'id' } }
+  end
 
   describe 'find_records' do
     it 'should return an error for invalid partner ID' do
