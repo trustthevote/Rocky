@@ -43,6 +43,9 @@ class RegistrationService
 
     if reg.save
       reg.generate_pdf
+      reg.redact_sensitive_data
+      reg.status = 'complete'
+      reg.save
     else
       validate_language(reg)
       raise_validation_error(reg)

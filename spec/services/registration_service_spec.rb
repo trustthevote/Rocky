@@ -57,13 +57,13 @@ describe RegistrationService do
     end
 
     context 'complete record' do
-      before { @reg = mock(Registrant) }
+      before { @reg = Factory(:maximal_registrant, :status => 'step_5') }
       before { mock(Registrant).build_from_api_data({}) { @reg } }
 
       it 'should save the record and generate PDF' do
-        @reg.save { true }
-        @reg.generate_pdf { true }
+        mock(@reg).generate_pdf { true }
         RegistrationService.create_record({}).should
+        @reg.reload.should be_complete
       end
     end
   end
