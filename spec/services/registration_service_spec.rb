@@ -32,9 +32,12 @@ describe RegistrationService do
     end
 
     it 'should raise an error if the field is unknown' do
-      lambda {
+      begin
         RegistrationService.create_record(:lang => 'en', :unknown => 'field')
-      }.should raise_error ActiveRecord::UnknownAttributeError.new('unknown attribute: unknown')
+        fail "UnknownAttributeError expected"
+      rescue ActiveRecord::UnknownAttributeError => e
+        e.message.should == 'unknown attribute: unknown'
+      end
     end
 
     it 'should raise validation errors when the record is invalid' do
