@@ -122,6 +122,17 @@ class RegistrationService
       attrs[:tracking_source] = l
     end
 
+    attrs = state_convert(attrs, :home_state_id)
+    attrs = state_convert(attrs, :mailing_state_id)
+    attrs = state_convert(attrs, :prev_state_id)
+
+    attrs
+  end
+
+  def self.state_convert(attrs, field)
+    if l = attrs.delete(field)
+      attrs[field] = GeoState[l.to_s.upcase].try(:id)
+    end
     attrs
   end
 

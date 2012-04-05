@@ -72,6 +72,7 @@ describe RegistrationService do
     specify { RegistrationService.send(:data_to_attrs, {}).should == {} }
     specify { RegistrationService.send(:data_to_attrs, { :lang  => 'ex' }).should == { :locale => 'ex' } }
     specify { RegistrationService.send(:data_to_attrs, { :partner_tracking_id => 'id' }).should == { :tracking_source => 'id' } }
+    specify { RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state_id => 'ca', :prev_state_id => 'Nj' }).should == { :home_state_id => 33, :mailing_state_id => 5, :prev_state_id => 31 } } # See geo_states.csv
   end
 
   describe 'find_records' do
