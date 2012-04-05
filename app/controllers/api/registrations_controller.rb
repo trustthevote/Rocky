@@ -46,6 +46,9 @@ class Api::RegistrationsController < ApplicationController
     render :json => { :field_name => e.field, :message => e.message }, :status => 400
   rescue UnsupportedLanguageError => e
     render :json => { :message => e.message }, :status => 400
+  rescue ActiveRecord::UnknownAttributeError => e
+    name = e.message.split(': ')[1]
+    render :json => { :field_name => name, :message => "Invalid field type" }, :status => 400
   end
 
 end

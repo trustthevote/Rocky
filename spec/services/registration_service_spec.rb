@@ -31,6 +31,12 @@ describe RegistrationService do
       lambda { RegistrationService.create_record(:lang => 'unknown') }.should raise_error UnsupportedLanguageError
     end
 
+    it 'should raise an error if the field is unknown' do
+      lambda {
+        RegistrationService.create_record(:lang => 'en', :unknown => 'field')
+      }.should raise_error ActiveRecord::UnknownAttributeError.new('unknown attribute: unknown')
+    end
+
     it 'should raise validation errors when the record is invalid' do
       begin
         RegistrationService.create_record(:lang => 'en')

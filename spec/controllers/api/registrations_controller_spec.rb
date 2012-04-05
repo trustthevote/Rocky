@@ -35,6 +35,9 @@ describe Api::RegistrationsController do
 
     specify { new_registration_response { raise UnsupportedLanguageError }.should
       be_json_error 'Unsupported language' }
+
+    specify { new_registration_response { raise(ActiveRecord::UnknownAttributeError, 'unknown attribute: attr') }.should
+      be_json_validation_error('attr', 'Invalid parameter type') }
   end
 
   describe 'index' do
