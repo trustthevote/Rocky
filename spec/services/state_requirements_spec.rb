@@ -39,6 +39,12 @@ describe StateRequirements do
       }.should raise_error StateRequirements::INVALID_ZIP
     end
 
+    it 'if the zip code has invalid format' do
+      lambda {
+        StateRequirements.find(:home_zip_code => '06390abc')
+      }.should raise_error StateRequirements::INVALID_ZIP
+    end
+
     it 'if the zip does not match the state' do
       lambda {
         StateRequirements.find(:home_state_id => 'AK', :home_zip_code => '06390')
