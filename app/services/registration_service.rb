@@ -125,6 +125,10 @@ class RegistrationService
       attrs[:tracking_source] = l
     end
 
+    if l = attrs.delete(:id_number)
+      attrs[:state_id_number] = l
+    end
+
     attrs = state_convert(attrs, :home_state_id)
     attrs = state_convert(attrs, :mailing_state_id)
     attrs = state_convert(attrs, :prev_state_id)
