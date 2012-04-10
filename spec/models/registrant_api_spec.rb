@@ -24,6 +24,13 @@ describe Registrant do
       specify { registrant_email_address('alex+2@smith.com', false) }
       specify { registrant_email_address('invalid', true) }
     end
+
+    it 'should validate presence of opt_in_xyz' do
+      r = Registrant.build_from_api_data({})
+      r.valid?
+      r.should have(1).error_on(:opt_in_sms)
+      r.should have(1).error_on(:opt_in_email)
+    end
   end
 
   private

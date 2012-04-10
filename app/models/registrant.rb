@@ -191,6 +191,12 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :tell_message
   end
 
+  attr_accessor :building_through_api_call
+  with_options :if => :building_through_api_call do |reg|
+    reg.validates_presence_of :opt_in_email
+    reg.validates_presence_of :opt_in_sms
+  end
+
   def needs_mailing_address?
     at_least_step_2? && has_mailing_address?
   end
@@ -246,6 +252,7 @@ class Registrant < ActiveRecord::Base
     data.delete(:us_citizen) if !usc || (usc != true && usc.to_i == 0)
 
     r = Registrant.new(data)
+    r.building_through_api_call = true
 
     # As if the user went through all steps and filled all fields
     # manually.
