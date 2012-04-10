@@ -56,6 +56,12 @@ describe RegistrationService do
       }.should raise_error UnsupportedLanguageError
     end
 
+    it 'should raise an error if the language is not given' do
+      lambda {
+        RegistrationService.create_record(:home_state_id => 'NY')
+      }.should raise_error UnsupportedLanguageError
+    end
+
     context 'complete record' do
       before { @reg = Factory(:maximal_registrant, :status => 'step_5') }
       before { mock(Registrant).build_from_api_data({}) { @reg } }

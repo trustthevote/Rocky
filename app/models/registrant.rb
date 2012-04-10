@@ -240,6 +240,11 @@ class Registrant < ActiveRecord::Base
 
   # Builds the record from the API data and sets the correct state
   def self.build_from_api_data(data)
+    # We intentionally remove the key to trigger a validation error
+    # if the person isn't a citizen of US.
+    usc = data[:us_citizen]
+    data.delete(:us_citizen) if !usc || (usc != true && usc.to_i == 0)
+
     r = Registrant.new(data)
 
     # As if the user went through all steps and filled all fields
