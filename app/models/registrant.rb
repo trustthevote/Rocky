@@ -105,6 +105,16 @@ class Registrant < ActiveRecord::Base
 
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
+  # Validates the person is a US citizen
+  def self.validates_being_us_citizen(*args)
+    configuration = {}
+    configuration.update(args.extract_options!)
+
+    validates_each(:us_citizen, configuration) do |record, attr_name, value|
+      record.errors.add(:us_citizen, :non_citizen, :default => configuration[:message]) unless record.us_citizen.nil? || record.us_citizen?
+    end
+  end
+
   def self.validates_zip_code(*attr_names)
     configuration = { }
     configuration.update(attr_names.extract_options!)
@@ -195,6 +205,7 @@ class Registrant < ActiveRecord::Base
   with_options :if => :building_through_api_call do |reg|
     reg.validates_presence_of :opt_in_email
     reg.validates_presence_of :opt_in_sms
+    reg.validates_being_us_citizen
   end
 
   def needs_mailing_address?
@@ -246,11 +257,6 @@ class Registrant < ActiveRecord::Base
 
   # Builds the record from the API data and sets the correct state
   def self.build_from_api_data(data)
-    # We intentionally remove the key to trigger a validation error
-    # if the person isn't a citizen of US.
-    usc = data[:us_citizen]
-    data.delete(:us_citizen) if !usc || (usc != true && usc.to_i == 0)
-
     r = Registrant.new(data)
     r.building_through_api_call = true
 
