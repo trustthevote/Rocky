@@ -42,10 +42,7 @@ class RegistrationService
     reg = Registrant.build_from_api_data(attrs)
 
     if reg.save
-      reg.generate_pdf
-      reg.redact_sensitive_data
-      reg.status = 'complete'
-      reg.save
+      reg.enqueue_complete_registration_via_api
     else
       validate_language(reg)
       raise_validation_error(reg)

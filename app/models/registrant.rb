@@ -546,6 +546,20 @@ class Registrant < ActiveRecord::Base
     enqueue_reminder_emails
   end
 
+  # Enqueues final registration actions for API calls
+  def enqueue_complete_registration_via_api
+    action = Delayed::PerformableMethod.new(self, :complete_registration_via_api, [])
+    Delayed::Job.enqueue(action, WRAP_UP_PRIORITY, Time.now)
+  end
+
+  # Called from the worker queue to generate PDFs on the 'util' server
+  def complete_registration_via_api
+    generate_pdf
+    redact_sensitive_data
+    self.status = 'complete'
+    self.save
+  end
+
   def generate_barcode
     self.barcode = self.pdf_barcode
   end

@@ -58,3 +58,9 @@ INTERVAL_BETWEEN_REMINDER_EMAILS = 2.minutes # 5.days everywhere else
 
 USE_HTTPS = true
 PAPERCLIP_OPTIONS = {}
+
+# Host names of the servers.
+HOST_NAMES = {
+  :app  => 'rtvstaging2-web.osuosl.org',
+  :util => 'rtvstaging2-util.osuosl.org'
+}

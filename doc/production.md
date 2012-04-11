@@ -2,6 +2,8 @@
 
 The application runs on two roles of server: :app and :util.  :app (hood) is the web front end, and :util (rainier) is the back end which runs daemons.  :util is also the place PDFs are generated and served from.  Both servers .bashrc sets RAILS_ENV to production so scripts run in the right environment by default.
 
+The host names of the servers are configured in config/environments/<environment>.rb
+
 ## Clean Start
 
 The application includes a set of bootstrap data that will let it get going.  WARNING: running the bootstrap process will reset the partners and state data in the application.  To bootstrap, run:
@@ -33,7 +35,7 @@ There are two worker daemons running on the utility server.  They can be managed
     $ script/rocky_runner stop
     $ script/rocky_pdf_runner start
     $ script/rocky_pdf_runner stop
-    
+
     $ cap deploy:run_workers    # start/restart both workers
 
 ### `rocky_worker`
@@ -101,7 +103,4 @@ It looks like life is better with Rake 0.8.7. I changed the Gemgile accordingly
 It looks like gem "hpricot", "0.8.6" is missing. I added it
 
 Added db/&.sqlite3 to .gitignore
-
-
-
 

@@ -41,7 +41,7 @@ class Api::RegistrationsController < ApplicationController
   # the error message with optional invalid field name.
   def create
     pdf_path = RegistrationService.create_record(params[:registration]).pdf_path
-    render :json => { :pdfurl => "https://#{request.host}#{pdf_path}" }
+    render :json => { :pdfurl => "https://#{HOST_NAMES[:util]}#{pdf_path}" }
   rescue RegistrationService::ValidationError => e
     render :json => { :field_name => e.field, :message => e.message }, :status => 400
   rescue UnsupportedLanguageError => e

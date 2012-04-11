@@ -28,7 +28,7 @@ describe Api::RegistrationsController do
 
   describe 'create' do
     specify { new_registration_response { mock(Registrant).pdf_path { '/123.pdf' } }.should \
-      be_json_data({ :pdfurl => "https://test.host/123.pdf" }) }
+      be_json_data({ :pdfurl => "https://example-util.com/123.pdf" }) }
 
     specify { new_registration_response { raise RegistrationService::ValidationError.new('invalid_field', 'Error message') }.should \
       be_json_validation_error('invalid_field', 'Error message') }

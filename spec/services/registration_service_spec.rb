@@ -71,9 +71,8 @@ describe RegistrationService do
       before { mock(Registrant).build_from_api_data({}) { @reg } }
 
       it 'should save the record and generate PDF' do
-        mock(@reg).generate_pdf { true }
+        mock(@reg).enqueue_complete_registration_via_api
         RegistrationService.create_record({}).should
-        @reg.reload.should be_complete
       end
     end
   end

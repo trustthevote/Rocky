@@ -54,3 +54,9 @@ INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
   #   I18n.reload!
   #   Registrant.handle_asynchronously :wrap_up
   # end
+
+# Host names of the servers.
+HOST_NAMES = {
+  :app  => 'localhost:3000',
+  :util => 'localhost:3000'
+}
