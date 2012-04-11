@@ -61,6 +61,6 @@ PAPERCLIP_OPTIONS = {}
 
 # Host names of the servers.
 HOST_NAMES = {
-  :app  => 'rtvstaging-web.osuosl.org',
+  :app  => 'rtvstaging.osuosl.org',
   :util => 'rtvstaging-util.osuosl.org'
 }
