@@ -34,6 +34,11 @@ describe Registrant do
 
       r.should have(0).errors_on(:party)
     end
+
+    it 'should not require the first name' do
+      r = build_and_validate
+      r.should have(0).errors_on(:first_name)
+    end
   end
 
   private

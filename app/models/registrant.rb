@@ -144,7 +144,7 @@ class Registrant < ActiveRecord::Base
   with_options :if => :at_least_step_2? do |reg|
     reg.validates_presence_of :name_title
     reg.validates_inclusion_of :name_title, :in => TITLES, :allow_blank => true
-    reg.validates_presence_of :first_name
+    reg.validates_presence_of :first_name, :unless => :building_via_api_call
     reg.validates_presence_of :last_name
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
     reg.validates_presence_of :home_address
