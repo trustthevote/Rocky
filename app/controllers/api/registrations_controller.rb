@@ -41,14 +41,14 @@ class Api::RegistrationsController < ApplicationController
   # the error message with optional invalid field name.
   def create
     pdf_path = RegistrationService.create_record(params[:registration]).pdf_path
-    render :json => { :pdfurl => "http://#{request.host}#{pdf_path}" }
+    render :json => { :pdfurl => "https://#{request.host}#{pdf_path}" }
   rescue RegistrationService::ValidationError => e
     render :json => { :field_name => e.field, :message => e.message }, :status => 400
   rescue UnsupportedLanguageError => e
     render :json => { :message => e.message }, :status => 400
   rescue ActiveRecord::UnknownAttributeError => e
     name = e.message.split(': ')[1]
-    render :json => { :field_name => name, :message => "Invalid field type" }, :status => 400
+    render :json => { :field_name => name, :message => "Invalid parameter type" }, :status => 400
   end
 
 end

@@ -27,16 +27,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Api::RegistrationsController do
 
   describe 'create' do
-    specify { new_registration_response { mock(Registrant).pdf_path { '/123.pdf' } }.should
-      be_json_data({ :pdfurl => "http://test.host/123.pdf" }) }
+    specify { new_registration_response { mock(Registrant).pdf_path { '/123.pdf' } }.should \
+      be_json_data({ :pdfurl => "https://test.host/123.pdf" }) }
 
-    specify { new_registration_response { raise RegistrationService::ValidationError.new('invalid_field', 'Error message') }.should
+    specify { new_registration_response { raise RegistrationService::ValidationError.new('invalid_field', 'Error message') }.should \
       be_json_validation_error('invalid_field', 'Error message') }
 
-    specify { new_registration_response { raise UnsupportedLanguageError }.should
+    specify { new_registration_response { raise UnsupportedLanguageError }.should \
       be_json_error 'Unsupported language' }
 
-    specify { new_registration_response { raise(ActiveRecord::UnknownAttributeError, 'unknown attribute: attr') }.should
+    specify { new_registration_response { raise(ActiveRecord::UnknownAttributeError, 'unknown attribute: attr') }.should \
       be_json_validation_error('attr', 'Invalid parameter type') }
   end
 
