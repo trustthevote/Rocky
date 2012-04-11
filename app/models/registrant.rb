@@ -201,8 +201,8 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :tell_message
   end
 
-  attr_accessor :building_through_api_call
-  with_options :if => :building_through_api_call do |reg|
+  attr_accessor :building_via_api_call
+  with_options :if => :building_via_api_call do |reg|
     reg.validates_inclusion_of :opt_in_email, :in => [ true, false ]
     reg.validates_inclusion_of :opt_in_sms,   :in => [ true, false ]
     reg.validates_being_us_citizen
@@ -258,7 +258,7 @@ class Registrant < ActiveRecord::Base
   # Builds the record from the API data and sets the correct state
   def self.build_from_api_data(data)
     r = Registrant.new(data)
-    r.building_through_api_call = true
+    r.building_via_api_call = true
 
     # As if the user went through all steps and filled all fields
     # manually.
