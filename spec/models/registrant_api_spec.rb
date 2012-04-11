@@ -3,13 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Registrant do
 
   describe 'build_from_api_data' do
-    context 'passing attributes' do
-      before  { @r = Registrant.build_from_api_data({ :first_name => 'Jack' }) }
-      specify { @r.first_name.should == 'Jack' }
-      specify { @r.status.should == Registrant::STEPS.last.to_s }
-      specify { @r.should_not be_valid }
-    end
-
     context 'validating us_citizen' do
       specify { registrant_citizen(1, false) }
       specify { registrant_citizen('1', false) }
@@ -33,25 +26,36 @@ describe Registrant do
       specify { registrant_opt_in_xyz(true, false) }
       specify { registrant_opt_in_xyz(false, false) }
     end
+
+    it 'should not require a party' do
+      r = Registrant.build_from_api_data({})
+      stub(r).requires_party? { true }
+      r.valid?
+
+      r.should have(0).errors_on(:party)
+    end
   end
 
   private
 
-  def registrant_citizen(us_citizen, error)
-    r = Registrant.build_from_api_data({ :us_citizen => us_citizen })
+  def build_and_validate(data = {})
+    r = Registrant.build_from_api_data(data)
     r.valid?
+    r
+  end
+
+  def registrant_citizen(us_citizen, error)
+    r = build_and_validate :us_citizen => us_citizen
     r.should have(error ? 1 : 0).errors_on(:us_citizen)
   end
 
   def registrant_email_address(addr, error)
-    r = Registrant.build_from_api_data({ :email_address => addr })
-    r.valid?
+    r = build_and_validate :email_address => addr
     r.should have(error ? 1 : 0).errors_on(:email_address)
   end
 
   def registrant_opt_in_xyz(v, error)
-    r = Registrant.build_from_api_data({ :opt_in_sms => v, :opt_in_email => v })
-    r.valid?
+    r = build_and_validate :opt_in_sms => v, :opt_in_email => v
     r.should have(error ? 1 : 0).error_on(:opt_in_sms)
     r.should have(error ? 1 : 0).error_on(:opt_in_email)
   end

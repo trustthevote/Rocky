@@ -160,7 +160,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
     reg.validate :validate_race
-    reg.validate :validate_party
+    reg.validate :validate_party, :unless => :building_via_api_call
   end
   with_options :if => :needs_mailing_address? do |reg|
     reg.validates_presence_of :mailing_address
