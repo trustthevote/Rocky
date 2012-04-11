@@ -25,11 +25,13 @@ describe Registrant do
       specify { registrant_email_address('invalid', true) }
     end
 
-    it 'should validate presence of opt_in_xyz' do
-      r = Registrant.build_from_api_data({})
-      r.valid?
-      r.should have(1).error_on(:opt_in_sms)
-      r.should have(1).error_on(:opt_in_email)
+    context 'validating opt_in_xyz' do
+      specify { registrant_opt_in_xyz(nil, true) }
+      specify { registrant_opt_in_xyz(0, false) }
+      specify { registrant_opt_in_xyz(1, false) }
+      specify { registrant_opt_in_xyz('1', false) }
+      specify { registrant_opt_in_xyz(true, false) }
+      specify { registrant_opt_in_xyz(false, false) }
     end
   end
 
@@ -46,4 +48,12 @@ describe Registrant do
     r.valid?
     r.should have(error ? 1 : 0).errors_on(:email_address)
   end
+
+  def registrant_opt_in_xyz(v, error)
+    r = Registrant.build_from_api_data({ :opt_in_sms => v, :opt_in_email => v })
+    r.valid?
+    r.should have(error ? 1 : 0).error_on(:opt_in_sms)
+    r.should have(error ? 1 : 0).error_on(:opt_in_email)
+  end
+
 end
