@@ -55,8 +55,5 @@ INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
   #   Registrant.handle_asynchronously :wrap_up
   # end
 
-# Host names of the servers.
-HOST_NAMES = {
-  :app  => 'localhost:3000',
-  :util => 'localhost:3000'
-}
+# The name of the host where generated PDF files can be reached.
+PDF_HOST_NAME = 'localhost:3000'

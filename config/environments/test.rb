@@ -59,8 +59,5 @@ PAPERCLIP_OPTIONS = {:path => ":rails_root/tmp/system/:attachment/:id/:style/:fi
 DELAYED_WRAP_UP = false
 INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
 
-# Host names of the servers.
-HOST_NAMES = {
-  :app  => 'example.com',
-  :util => 'example-util.com'
-}
+# The name of the host where generated PDF files can be reached.
+PDF_HOST_NAME = 'example-pdf.com'

@@ -2,8 +2,6 @@
 
 The application runs on two roles of server: :app and :util.  :app (hood) is the web front end, and :util (rainier) is the back end which runs daemons.  :util is also the place PDFs are generated and served from.  Both servers .bashrc sets RAILS_ENV to production so scripts run in the right environment by default.
 
-The host names of the servers are configured in config/environments/<environment>.rb
-
 ## Clean Start
 
 The application includes a set of bootstrap data that will let it get going.  WARNING: running the bootstrap process will reset the partners and state data in the application.  To bootstrap, run:
@@ -45,6 +43,10 @@ The `rocky_worker` daemon pulls jobs out of the delayed job queue and runs them.
 ### `rocky_pdf_worker`
 
 It would be nice to have both daemons merged into one process, but it was faster to set things up this way.  In the future, using JRuby would let someone do that.  For now, we use the second daemon to avoid paying the cost of launching a Java VM for every PDF merger.
+
+## API configuration
+
+For API registration call to work correctly PDF_HOST_NAME constant (see config/environments/<env>.rb) should be set to the host name of the server that has to be put in the PDF URLs.
 
 ## Email
 

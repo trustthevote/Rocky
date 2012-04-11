@@ -58,8 +58,5 @@ PAPERCLIP_OPTIONS = {}
 DELAYED_WRAP_UP = true
 INTERVAL_BETWEEN_REMINDER_EMAILS = 5.days
 
-# Host names of the servers.
-HOST_NAMES = {
-  :app  => 'register.rockthevote.com',
-  :util => 'rtvprod-util.osuosl.org'
-}
+# The name of the host where generated PDF files can be reached.
+PDF_HOST_NAME = 'register.rockthevote.com'
