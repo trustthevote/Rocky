@@ -106,11 +106,16 @@ class RegistrationService
   private
 
   def self.validate_language(reg)
+    if reg.locale.nil?
+      reg.errors.clear
+      reg.errors.add(:lang, :blank)
+      raise_validation_error(reg)
+    end
+
     raise UnsupportedLanguageError if reg.errors.on(:locale)
   end
 
-  def self.raise_validation_error(reg)
-    error = reg.errors.sort.first
+  def self.raise_validation_error(reg, error = reg.errors.sort.first)
     raise ValidationError.new(error.first, error.last)
   end
 

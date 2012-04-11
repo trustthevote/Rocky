@@ -57,9 +57,13 @@ describe RegistrationService do
     end
 
     it 'should raise an error if the language is not given' do
-      lambda {
+      begin
         RegistrationService.create_record(:home_state_id => 'NY')
-      }.should raise_error UnsupportedLanguageError
+        fail 'ValidationError is expected'
+      rescue RegistrationService::ValidationError => e
+        e.field.should    == 'lang'
+        e.message.should  == 'Required'
+      end
     end
 
     context 'complete record' do
