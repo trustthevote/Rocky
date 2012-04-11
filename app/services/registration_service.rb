@@ -38,6 +38,8 @@ class RegistrationService
 
   # Creates a record and returns it.
   def self.create_record(data)
+    block_protected_attributes(data)
+
     attrs = data_to_attrs(data || {})
     reg = Registrant.build_from_api_data(attrs)
 
@@ -101,6 +103,10 @@ class RegistrationService
   end
 
   private
+
+  def self.block_protected_attributes(attrs)
+    raise ActiveRecord::UnknownAttributeError.new('unknown attribute: state_id_number') if attrs[:state_id_number].present?
+  end
 
   def self.validate_language(reg)
     if reg.locale.nil?

@@ -40,6 +40,15 @@ describe RegistrationService do
       end
     end
 
+    it 'should not know state_id_number field' do
+      begin
+        RegistrationService.create_record(:lang => 'en', :state_id_number => '1234')
+        fail "UnknownAttributeError expected"
+      rescue ActiveRecord::UnknownAttributeError => e
+        e.message.should == 'unknown attribute: state_id_number'
+      end
+    end
+
     it 'should raise validation errors when the record is invalid' do
       begin
         RegistrationService.create_record(:lang => 'en')
