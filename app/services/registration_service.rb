@@ -119,7 +119,12 @@ class RegistrationService
   end
 
   def self.raise_validation_error(reg, error = reg.errors.sort.first)
-    raise ValidationError.new(error.first, error.last)
+    field = error.first
+
+    # convert state_id_number into id_number
+    field = 'id_number' if field == 'state_id_number'
+
+    raise ValidationError.new(field, error.last)
   end
 
   def self.data_to_attrs(data)
