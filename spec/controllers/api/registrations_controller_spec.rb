@@ -27,39 +27,51 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Api::RegistrationsController do
 
   describe 'create' do
-    specify { new_registration_response { mock(Registrant).pdf_path { '/123.pdf' } }.should \
-      be_json_data({ :pdfurl => "https://example-util.com/123.pdf" }) }
+    it 'should return URL of PDF to be generated' do
+      expect_api_response :pdfurl => "https://example-util.com/123.pdf"
+      new_registration { mock(Registrant).pdf_path { '/123.pdf' } }
+    end
 
-    specify { new_registration_response { raise RegistrationService::ValidationError.new('invalid_field', 'Error message') }.should \
-      be_json_validation_error('invalid_field', 'Error message') }
+    it 'should catch invalid fields' do
+      expect_api_error :message => "Error message", :field_name => "invalid_field"
+      new_registration { raise RegistrationService::ValidationError.new('invalid_field', 'Error message') }
+    end
 
-    specify { new_registration_response { raise UnsupportedLanguageError }.should \
-      be_json_error 'Unsupported language' }
+    it 'should report unsupported language' do
+      expect_api_error :message => 'Unsupported language'
+      new_registration { raise UnsupportedLanguageError }
+    end
 
-    specify { new_registration_response { raise(ActiveRecord::UnknownAttributeError, 'unknown attribute: attr') }.should \
-      be_json_validation_error('attr', 'Invalid parameter type') }
+    it 'should report invalid parameter type' do
+      expect_api_error :message => "Invalid parameter type", :field_name => "attr"
+      new_registration { raise(ActiveRecord::UnknownAttributeError, 'unknown attribute: attr') }
+    end
   end
 
   describe 'index' do
-    specify { registrations_response { raise ArgumentError.new('error') }.should be_json_error('error') }
+    it 'should catch errors' do
+      expect_api_error :message => 'error'
+      registrations { raise ArgumentError.new('error') }
+    end
 
-    specify { registrations_response { [ :reg1, :reg2 ] }.should be_json_data({ :registrations => [ :reg1, :reg2 ] }) }
+    it 'should return registrations' do
+      expect_api_response :registrations => [ :reg1, :reg2 ]
+      registrations { [ :reg1, :reg2 ] }
+    end
   end
 
   private
 
-  def registrations_response(&block)
+  def registrations(&block)
     query = { :partner_id => nil, :partner_password => nil, :since => nil }
     mock(RegistrationService).find_records(query, &block)
     get :index, :format => 'json'
-    response
   end
 
-  def new_registration_response(&block)
+  def new_registration(&block)
     data = {}
     mock(RegistrationService).create_record(data, &block)
     post :create, :format => 'json', :registration => data
-    response
   end
 
 end

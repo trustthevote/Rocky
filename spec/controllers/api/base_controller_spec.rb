@@ -24,31 +24,23 @@
 #***** END LICENSE BLOCK *****
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Api::StateRequirementsController do
+describe Api::BaseController do
 
-  describe 'show' do
-    it 'should report unsupported language' do
-      expect_api_error :message => 'Unsupported language'
-      state_requirements { raise UnsupportedLanguageError }
+  describe 'jsonp' do
+    before { @c = Api::BaseController.new }
+
+    it 'should render plain JSON' do
+      stub(@c).params { {} }
+      mock(@c).render(:json => { :data => 'field' }, :status => 400)
+      @c.send(:jsonp, { :data => 'field' }, :status => 400)
     end
 
-    it 'should report invalid state' do
-      expect_api_error :message => 'Invalid state ID'
-      state_requirements { raise ArgumentError.new('Invalid state ID') }
+    it 'should render JSONP callback' do
+      stub(@c).params { { :callback => 'cb' } }
+      mock(@c).render_to_string(:json => :data) { 'json_value' }
+      mock(@c).render(:text => 'cb(json_value);', :status => 400)
+      @c.send(:jsonp, :data, :status => 400)
     end
-
-    it 'should return data' do
-      expect_api_response :result
-      state_requirements { :result }
-    end
-  end
-
-  private
-
-  def state_requirements(&block)
-    query = { :lang => nil, :home_state_id => nil, :home_zip_code => nil, :date_of_birth => nil }
-    mock(StateRequirements).find(query, &block)
-    get :show, :format => 'json', :query => query
   end
 
 end

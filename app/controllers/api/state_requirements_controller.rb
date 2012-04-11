@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Api::StateRequirementsController < ApplicationController
+class Api::StateRequirementsController < Api::BaseController
 
   def show
     query = {
@@ -32,9 +32,9 @@ class Api::StateRequirementsController < ApplicationController
       :date_of_birth => params[:date_of_birth]
     }
 
-    render :json => StateRequirements.find(query)
+    jsonp StateRequirements.find(query)
   rescue ArgumentError => e
-    render :json => { :message => e.message }, :status => 400
+    jsonp({ :message => e.message }, :status => 400)
   end
 
 end

@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Api::RegistrationsController < ApplicationController
+class Api::RegistrationsController < Api::BaseController
 
   # Lists registrations
   def index
@@ -32,23 +32,23 @@ class Api::RegistrationsController < ApplicationController
       :since            => params[:since]
     }
 
-    render :json => { :registrations => RegistrationService.find_records(query) }
+    jsonp :registrations => RegistrationService.find_records(query)
   rescue ArgumentError => e
-    render :json => { :message => e.message }, :status => 400
+    jsonp({ :message => e.message }, :status => 400)
   end
 
   # Creates the record and returns the URL to the PDF file or
   # the error message with optional invalid field name.
   def create
     pdf_path = RegistrationService.create_record(params[:registration]).pdf_path
-    render :json => { :pdfurl => "https://#{HOST_NAMES[:util]}#{pdf_path}" }
+    jsonp :pdfurl => "https://#{HOST_NAMES[:util]}#{pdf_path}"
   rescue RegistrationService::ValidationError => e
-    render :json => { :field_name => e.field, :message => e.message }, :status => 400
+    jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
   rescue UnsupportedLanguageError => e
-    render :json => { :message => e.message }, :status => 400
+    jsonp({ :message => e.message }, :status => 400)
   rescue ActiveRecord::UnknownAttributeError => e
     name = e.message.split(': ')[1]
-    render :json => { :field_name => name, :message => "Invalid parameter type" }, :status => 400
+    jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
   end
 
 end

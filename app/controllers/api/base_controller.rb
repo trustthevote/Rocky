@@ -22,33 +22,18 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+class Api::BaseController < ApplicationController
 
-describe Api::StateRequirementsController do
+  protected
 
-  describe 'show' do
-    it 'should report unsupported language' do
-      expect_api_error :message => 'Unsupported language'
-      state_requirements { raise UnsupportedLanguageError }
+  # Renders the data as JSON and wraps into the <callback>(...); if
+  # there is a 'callback' parameter with the name of the function.
+  def jsonp(data, options = {})
+    if params[:callback].present?
+      render options.merge(:text => "#{params[:callback]}(#{render_to_string :json => data});")
+    else
+      render options.merge(:json => data)
     end
-
-    it 'should report invalid state' do
-      expect_api_error :message => 'Invalid state ID'
-      state_requirements { raise ArgumentError.new('Invalid state ID') }
-    end
-
-    it 'should return data' do
-      expect_api_response :result
-      state_requirements { :result }
-    end
-  end
-
-  private
-
-  def state_requirements(&block)
-    query = { :lang => nil, :home_state_id => nil, :home_zip_code => nil, :date_of_birth => nil }
-    mock(StateRequirements).find(query, &block)
-    get :show, :format => 'json', :query => query
   end
 
 end
