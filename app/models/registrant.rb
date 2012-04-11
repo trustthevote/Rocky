@@ -105,16 +105,6 @@ class Registrant < ActiveRecord::Base
 
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
-  # Validates the person is a US citizen
-  def self.validates_being_us_citizen(*args)
-    configuration = {}
-    configuration.update(args.extract_options!)
-
-    validates_each(:us_citizen, configuration) do |record, attr_name, value|
-      record.errors.add(:us_citizen, :non_citizen, :default => configuration[:message]) unless record.us_citizen.nil? || record.us_citizen?
-    end
-  end
-
   def self.validates_zip_code(*attr_names)
     configuration = { }
     configuration.update(attr_names.extract_options!)
@@ -148,7 +138,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_zip_code    :home_zip_code
     reg.validates_presence_of :home_state_id
     reg.validate :validate_date_of_birth
-    reg.validates_inclusion_of :us_citizen, :in => [false, true]
+    reg.validates_inclusion_of :us_citizen, :in => [ false, true ], :unless => :building_via_api_call
   end
 
   with_options :if => :at_least_step_2? do |reg|
@@ -205,7 +195,7 @@ class Registrant < ActiveRecord::Base
   with_options :if => :building_via_api_call do |reg|
     reg.validates_inclusion_of :opt_in_email, :in => [ true, false ]
     reg.validates_inclusion_of :opt_in_sms,   :in => [ true, false ]
-    reg.validates_being_us_citizen
+    reg.validates_presence_of  :us_citizen
   end
 
   def needs_mailing_address?
