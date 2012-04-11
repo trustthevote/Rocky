@@ -65,7 +65,7 @@ class StateRequirements
     end
 
     if !zip_code.blank?
-      raise INVALID_ZIP unless zip_code.strip =~ /^\d{5}([\-]?\d{4})?$/
+      raise ArgumentError.new(INVALID_ZIP) unless zip_code.strip =~ /^\d{5}([\-]?\d{4})?$/
       zip_state = GeoState.for_zip_code(zip_code) || raise(ArgumentError.new(INVALID_ZIP))
     end
 
