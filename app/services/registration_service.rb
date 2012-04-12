@@ -38,9 +38,10 @@ class RegistrationService
 
   # Creates a record and returns it.
   def self.create_record(data)
+    data ||= {}
     block_protected_attributes(data)
 
-    attrs = data_to_attrs(data || {})
+    attrs = data_to_attrs(data)
     reg = Registrant.build_from_api_data(attrs)
 
     if reg.save
