@@ -143,16 +143,19 @@ class RegistrationService
       attrs[:state_id_number] = l
     end
 
-    attrs = state_convert(attrs, :home_state_id)
-    attrs = state_convert(attrs, :mailing_state_id)
-    attrs = state_convert(attrs, :prev_state_id)
+    attrs = state_convert(attrs, :home_state)
+    attrs = state_convert(attrs, :mailing_state)
+    attrs = state_convert(attrs, :prev_state)
 
     attrs
   end
 
   def self.state_convert(attrs, field)
-    if l = attrs.delete(field)
-      attrs[field] = GeoState[l.to_s.upcase].try(:id)
+    l1 = attrs.delete(field)
+    l2 = attrs.delete("#{field}_id".to_sym)
+    l  = l2 || l1
+    if l
+      attrs["#{field}_id"] = GeoState[l.to_s.upcase].try(:id)
     end
     attrs
   end

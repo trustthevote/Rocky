@@ -75,6 +75,12 @@ describe RegistrationService do
       end
     end
 
+    it 'should deal with states passed as strings' do
+      lambda {
+        RegistrationService.create_record(:mailing_state => "", :home_state => "1", :prev_state => "");
+      }.should_not raise_error ActiveRecord::AssociationTypeMismatch
+    end
+
     context 'complete record' do
       before { @reg = Factory(:maximal_registrant, :status => 'step_5') }
       before { mock(Registrant).build_from_api_data({}) { @reg } }
@@ -90,7 +96,7 @@ describe RegistrationService do
     specify { RegistrationService.send(:data_to_attrs, {}).should == {} }
     specify { RegistrationService.send(:data_to_attrs, { :lang  => 'ex' }).should == { :locale => 'ex' } }
     specify { RegistrationService.send(:data_to_attrs, { :partner_tracking_id => 'id' }).should == { :tracking_source => 'id' } }
-    specify { RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state_id => 'ca', :prev_state_id => 'Nj' }).should == { :home_state_id => 33, :mailing_state_id => 5, :prev_state_id => 31 } } # See geo_states.csv
+    specify { RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state => 'ca', :prev_state_id => 'Nj' }).should == { "home_state_id" => 33, "mailing_state_id" => 5, "prev_state_id" => 31 } } # See geo_states.csv
     specify { RegistrationService.send(:data_to_attrs, { :id_number => 'id' }).should == { :state_id_number => 'id' } }
   end
 
