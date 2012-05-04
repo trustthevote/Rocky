@@ -28,4 +28,5 @@ role :util, "rtvprod-util.osuosl.org"
 role :db,   "rtvprod-util.osuosl.org", :primary => true
 # role :db,   "rtv-db.osuosl.org", :primary => true
 #set :branch, (rev rescue "production")
-set :branch, "api"
+
+set :branch, "production"
