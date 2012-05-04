@@ -58,6 +58,9 @@ module NavigationHelpers
     when /the partner dashboard/
       partner_path
 
+    when /the registration page for that partner/
+      "#{new_registrant_path}?partner=#{@partner.id}"
+
 
     # Add more mappings here.
     # Here is a more fancy example:

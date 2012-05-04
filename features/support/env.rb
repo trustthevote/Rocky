@@ -46,8 +46,16 @@ Webrat.configure do |config|
   config.mode = :rails
 end
 
+require 'spec/rails'
+require 'rr'
+
+Cucumber::Rails::World.send(:include, RR::Adapters::RRMethods)
+
 require 'cucumber/rails/rspec'
 require 'webrat/core/matchers'
 require 'factory_girl'
+
+
+
 Factory.find_definitions
 

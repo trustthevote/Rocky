@@ -57,6 +57,11 @@ describe ApplicationHelper do
       assert !opts.has_key?(:source)
     end
   end
+  
+  describe "partner_css" do
+    it "is pending"
+  end
+  
 
   describe "form helpers" do
     attr_accessor :form

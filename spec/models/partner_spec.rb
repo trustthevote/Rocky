@@ -102,6 +102,56 @@ describe Partner do
     end
   end
 
+  context "whitelabeling" do
+    describe "#custom_css?" do
+      it "is always false for primary partner" do
+        partner = Partner.find(Partner.default_id)
+        partner.whitelabeled = true
+        stub(partner).css_present?.returns(true)
+        partner.custom_css?.should be_false
+      end
+      it "is false for partners without whitelabeled configured" do
+        partner = Factory.build(:partner)
+        partner.custom_css?.should be_false
+      end
+      it "is false for partners without a css file present" do
+        partner = Factory.build(:partner)
+        partner.whitelabeled = true
+        stub(partner).css_present?.returns(false)
+        partner.custom_css?.should be_false
+      end
+      it "is true for partners configured as whitelabeled that have a css file present" do
+        partner = Factory.build(:partner)
+        partner.whitelabeled = true
+        stub(partner).css_present?.returns(true)
+        partner.custom_css?.should be_true
+      end
+    end
+    describe "#absolute_css_path" do
+      it "returns the path RAILS_ROOT/public/partners/PARTNER_ID/style.css" do
+        partner = Factory(:partner)
+        partner.absolute_css_path.should == "#{RAILS_ROOT}/public/partners/#{partner.id}/style.css"
+      end
+    end
+    describe "#css_present?" do
+      it "returns true if the custom css file is present" do
+        partner = Factory.build(:partner)
+        stub(File).exists?(partner.absolute_css_path).returns(true)
+        partner.css_present?.should be_true
+        File.should have_received(:exists?).with(partner.absolute_css_path)        
+      end
+      it "returns false if the custom css file is not present" do
+        partner = Factory.build(:partner)
+        stub(File).exists?(partner.absolute_css_path).returns(false)
+        partner.css_present?.should be_false        
+      end
+    end
+    describe "#css_url" do
+      it "is pending"
+    end
+  end
+
+
   describe "CSV" do
     it "can generate CSV of all registrants" do
       partner = Factory.create(:partner)

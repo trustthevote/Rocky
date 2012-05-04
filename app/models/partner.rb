@@ -96,6 +96,25 @@ class Partner < ActiveRecord::Base
     !primary? && logo.file?
   end
 
+  def custom_css?
+    !primary? && !!whitelabeled && css_present?
+  end
+  
+  def css_present?
+    File.exists?(self.absolute_css_path)
+  end
+
+
+  def css_url
+    "/partners/#{self.id}/style.css"
+  end
+  
+  def absolute_css_path
+    "#{RAILS_ROOT}/public#{css_url}"
+  end
+
+
+
   def registration_stats_state
     counts = Registrant.connection.select_all(<<-"SQL")
       SELECT count(*) as registrations_count, home_state_id FROM `registrants`
@@ -275,4 +294,7 @@ class Partner < ActiveRecord::Base
       errors.add(:logo, "logo must be an image file")
     end
   end
+  
+  
+  
 end

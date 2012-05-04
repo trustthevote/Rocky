@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100429230815) do
+ActiveRecord::Schema.define(:version => 20120504183424) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -65,12 +65,14 @@ ActiveRecord::Schema.define(:version => 20100429230815) do
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
+    t.boolean  "whitelabeled"
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email"
   add_index "partners", ["perishable_token"], :name => "index_partners_on_perishable_token"
   add_index "partners", ["persistence_token"], :name => "index_partners_on_persistence_token"
   add_index "partners", ["username"], :name => "index_partners_on_username"
+  add_index "partners", ["whitelabeled"], :name => "index_partners_on_whitelabeled"
 
   create_table "registrants", :force => true do |t|
     t.string   "status"
