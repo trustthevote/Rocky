@@ -11,6 +11,11 @@ Given /^that partner's css file exists$/ do
   stub(File).exists?.returns(true)
 end
 
+Given /^that partner's css file does not exist$/ do
+  stub(File).exists?.returns(false)
+end
+
+
 
 Then /^I should see a link to the standard CSS$/ do
   response.body.should include("link href=\"/stylesheets/application.css")

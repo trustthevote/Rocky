@@ -103,6 +103,18 @@ describe Partner do
   end
 
   context "whitelabeling" do
+    describe "#assets_url" do
+      it "returns the url for the partner directory" do
+        partner = Factory(:partner)
+        partner.assets_url.should == "/partners/#{partner.id}"
+      end
+    end
+    describe "#assets_path" do
+      it "returns the absolute path to the partner directory" do
+        partner = Factory(:partner)
+        partner.assets_path.should == "#{RAILS_ROOT}/public/partners/#{partner.id}"
+      end
+    end
     describe "#custom_css?" do
       it "is always false for primary partner" do
         partner = Partner.find(Partner.default_id)
@@ -127,27 +139,57 @@ describe Partner do
         partner.custom_css?.should be_true
       end
     end
-    describe "#absolute_css_path" do
+    describe "#absolute_application_css_path" do
       it "returns the path RAILS_ROOT/public/partners/PARTNER_ID/style.css" do
         partner = Factory(:partner)
-        partner.absolute_css_path.should == "#{RAILS_ROOT}/public/partners/#{partner.id}/style.css"
+        partner.absolute_application_css_path.should == "#{RAILS_ROOT}/public/partners/#{partner.id}/application.css"
+      end
+    end
+    describe "#absolute_registration_css_path" do
+      it "returns the path RAILS_ROOT/public/partners/PARTNER_ID/style.css" do
+        partner = Factory(:partner)
+        partner.absolute_registration_css_path.should == "#{RAILS_ROOT}/public/partners/#{partner.id}/registration.css"
       end
     end
     describe "#css_present?" do
-      it "returns true if the custom css file is present" do
+      it "returns true if the both custom css files are present" do
         partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_css_path).returns(true)
+        stub(File).exists?(partner.absolute_application_css_path).returns(true)
+        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
         partner.css_present?.should be_true
-        File.should have_received(:exists?).with(partner.absolute_css_path)        
+        File.should have_received(:exists?).with(partner.absolute_application_css_path)        
+        File.should have_received(:exists?).with(partner.absolute_registration_css_path)        
       end
-      it "returns false if the custom css file is not present" do
+      it "returns false if the custom application css file is not present" do
         partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_css_path).returns(false)
+        stub(File).exists?(partner.absolute_application_css_path).returns(false)
+        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        partner.css_present?.should be_false        
+      end
+      it "returns false if the custom registration css file is not present" do
+        partner = Factory.build(:partner)
+        stub(File).exists?(partner.absolute_application_css_path).returns(true)
+        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        partner.css_present?.should be_false        
+      end
+      it "returns false if the both custom css files are not present" do
+        partner = Factory.build(:partner)
+        stub(File).exists?(partner.absolute_application_css_path).returns(false)
+        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
         partner.css_present?.should be_false        
       end
     end
-    describe "#css_url" do
-      it "is pending"
+    describe "#application_css_url" do
+      it "is returns the URL for the custom application css" do
+        partner = Factory.build(:partner)
+        partner.application_css_url.should == "/partners/#{partner.id}/application.css"
+      end
+    end
+    describe "#registration_css_url" do
+      it "is returns the URL for the custom registration css" do
+        partner = Factory.build(:partner)
+        partner.registration_css_url.should == "/partners/#{partner.id}/registration.css"
+      end
     end
   end
 

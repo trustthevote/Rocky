@@ -60,7 +60,7 @@ module ApplicationHelper
   
   def partner_css
     if @partner && @partner.custom_css?
-      stylesheet_link_tag @partner.css_url
+      stylesheet_link_tag @partner.application_css_url, @partner.registration_css_url
     else
       stylesheet_link_tag "application", "registration" 
     end
