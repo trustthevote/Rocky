@@ -15,7 +15,7 @@ gem "sqlite3"
 #gem "rocky_branding"
 gem "rocky_branding", "= 1.0.15"
 
-group :development, :text do
+group :development, :test do
   gem "rspec", "= 1.2.7"
   gem "rr", "= 0.10.11"
   gem "rspec-rails", "= 1.2.7"
@@ -25,6 +25,7 @@ group :development, :text do
   #gem "pivotal-webrat-rspec-rails", "= 0.4.4"
   gem "cucumber", "= 0.3.11"
   gem "selenium-client", "= 1.2.16"
+  gem "capistrano", "= 2.11.2"
   # Pito:
   gem "hpricot", "0.8.6"
   gem "mongrel", "= 1.1.5"
