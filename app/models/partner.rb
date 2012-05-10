@@ -104,6 +104,10 @@ class Partner < ActiveRecord::Base
     File.exists?(self.absolute_application_css_path) && File.exists?(self.absolute_registration_css_path)
   end
   
+  def any_css_present?
+    File.exists?(self.absolute_application_css_path) || File.exists?(self.absolute_registration_css_path)
+  end
+  
   def assets_url
     "/partners/#{self.id}"
   end
@@ -311,5 +315,56 @@ class Partner < ActiveRecord::Base
   end
   
   
+  def self.add_whitelabel(partner_id, app_css, reg_css)
+    app_css = File.expand_path(app_css)
+    reg_css = File.expand_path(reg_css)
+    
+    partner = nil
+    begin
+      partner = Partner.find(partner_id)
+    rescue
+    end
+
+    raise "Partner with id '#{partner_id}' was not found." unless partner
+
+    if partner.primary?
+      raise "You can't whitelabel the primary partner."
+    end
+
+    if partner.whitelabeled
+      raise "Partner '#{partner_id}' is already whitelabeled. Try running 'rake partner:upload_assets #{partner_id} #{app_css} #{reg_css}'"
+    end
+
+    if !File.exists?(app_css)
+      raise "File '#{app_css}' not found"
+    end
+    if !File.exists?(reg_css)
+      raise "File '#{reg_css}' not found"
+    end
+    
+    if partner.any_css_present?
+      raise "Partner '#{partner_id}' has assets. Try running 'rake partner:enable_whitelabel #{partner_id}'"
+    end
+    
+    
+    unless File.directory?(partner.assets_path)
+      unless Dir.mkdir(partner.assets_path)
+        raise "Asset directory #{partner.assets_path} could not be created."
+      end
+    end
+
+    FileUtils.cp(app_css, partner.absolute_application_css_path)
+    FileUtils.cp(reg_css, partner.absolute_registration_css_path)
+    
+    copy_success = partner.css_present?
+    raise "Error copying css to partner directory '#{partner.assets_path}'" unless copy_success
+    
+    if copy_success
+      partner.whitelabeled= true
+      partner.save!
+      return "Partner '#{partner_id}' has been whitelabeled. Place all asset files in\n#{partner.assets_path}"
+    end
+    
+  end
   
 end

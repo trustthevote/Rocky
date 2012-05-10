@@ -25,6 +25,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Partner do
+  
+  
   describe "#primary?" do
     it "is true for primary partner" do
       assert Partner.find(Partner.default_id).primary?
@@ -103,6 +105,99 @@ describe Partner do
   end
 
   context "whitelabeling" do
+    describe "Class Methods" do
+      describe "#add_whitelabel(partner_id, app_css, reg_css)" do
+        before(:each) do
+          @partner = Factory(:partner)
+          stub(File).expand_path("app.css").returns("app.css")
+          stub(File).expand_path("reg.css").returns("reg.css")
+          
+          stub(Partner).find.returns(@partner)
+          stub(File).exists?("app.css").returns(true)
+          stub(File).exists?("reg.css").returns(true)
+          stub(@partner).any_css_present?.returns(false)
+          stub(@partner).css_present?.returns(true)
+          
+          stub(File).directory?(@partner.assets_path).returns(true)
+          stub(FileUtils).cp("app.css", @partner.absolute_application_css_path).returns(true)
+          stub(FileUtils).cp("reg.css", @partner.absolute_registration_css_path).returns(true)
+        end
+        it "finds the partner by id" do
+          Partner.add_whitelabel("123", "app.css", "reg.css")
+          Partner.should have_received(:find).with("123")   
+        end
+        it "raises an error message if the partner is the primary one" do
+          stub(@partner).primary?.returns(true)
+          expect {
+            Partner.add_whitelabel("123", "app.css", "reg.css")
+          }.to raise_error("You can't whitelabel the primary partner.")
+        end
+        it "raises an error message if the partner is not found" do
+          stub(Partner).find.returns(nil)
+          expect {
+            Partner.add_whitelabel("123", "app.css", "reg.css")
+          }.to raise_error("Partner with id '123' was not found.")
+        end
+        it "raises an error message with what to do if the partner is already whitelabeled" do
+          stub(@partner).whitelabeled.returns(true)
+          expect {
+            Partner.add_whitelabel("123", "app.css", "reg.css")
+          }.to raise_error("Partner '123' is already whitelabeled. Try running 'rake partner:upload_assets 123 app.css reg.css'")
+        end
+        it "raises an error message with what to do if the partner already has assets" do
+          stub(@partner).any_css_present?.returns(true)
+          expect {
+            Partner.add_whitelabel("123", "app.css", "reg.css")
+          }.to raise_error("Partner '123' has assets. Try running 'rake partner:enable_whitelabel 123'")
+        end
+        it "raises an error if the two css files aren't found" do
+          stub(File).exists?("app.css").returns(false)
+          stub(File).exists?("reg.css").returns(false)
+          expect {
+            Partner.add_whitelabel("123", "app.css", "reg.css")
+          }.to raise_error("File 'app.css' not found")
+
+          stub(File).exists?("app.css").returns(true)
+          expect {
+            Partner.add_whitelabel("123", "app.css", "reg.css")
+          }.to raise_error("File 'reg.css' not found")
+        end
+        it "sets the partner as whitelabeled if not already" do
+          Partner.add_whitelabel("123", "app.css", "reg.css")
+          Partner.find(@partner.id).should be_whitelabeled
+        end
+        
+        it "creates the partner path if not already there" do
+          stub(File).directory?(@partner.assets_path).returns(false)
+          stub(Dir).mkdir(@partner.assets_path).returns(true)
+          Partner.add_whitelabel("123", "app.css", "reg.css")
+          Dir.should have_received(:mkdir).with(@partner.assets_path)  
+        end
+        it "copies the CSS to the partner path (with the correct names) from the filesystem" do
+          Partner.add_whitelabel("123", "app.css", "reg.css")
+          FileUtils.should have_received(:cp).with("app.css", @partner.absolute_application_css_path)
+          FileUtils.should have_received(:cp).with("reg.css", @partner.absolute_registration_css_path)
+        end
+        it "copies the CSS files to the partner path (with the correct names) from URLs" do
+          pending "Don't need URL designation of assets yet"
+        end
+        it "does not set the partner as whitelabeled if the path functions fail" do
+          stub(FileUtils).cp("app.css", @partner.absolute_application_css_path)
+          stub(@partner).css_present?.returns(false)
+          begin
+            Partner.add_whitelabel("123", "app.css", "reg.css")
+          rescue
+          end
+          Partner.find(@partner.id).should_not be_whitelabeled
+        end
+        it "outputs the partner path on success" do
+          output = Partner.add_whitelabel("123", "app.css", "reg.css")
+          output.should == "Partner '123' has been whitelabeled. Place all asset files in\n#{@partner.assets_path}"
+        end
+      end
+    end
+    
+    
     describe "#assets_url" do
       it "returns the url for the partner directory" do
         partner = Factory(:partner)
@@ -179,6 +274,30 @@ describe Partner do
         partner.css_present?.should be_false        
       end
     end
+    
+    describe "#any_css_present?" do
+      it "returns true if the either custom css files is present" do
+        partner = Factory.build(:partner)
+        stub(File).exists?(partner.absolute_application_css_path).returns(true)
+        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        partner.any_css_present?.should be_true
+
+        stub(File).exists?(partner.absolute_application_css_path).returns(false)
+        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        partner.any_css_present?.should be_true
+
+        stub(File).exists?(partner.absolute_application_css_path).returns(true)
+        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        partner.any_css_present?.should be_true
+      end
+      it "returns false if both css files are missing" do
+        partner = Factory.build(:partner)
+        stub(File).exists?(partner.absolute_application_css_path).returns(false)
+        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        partner.any_css_present?.should be_false
+      end
+    end
+    
     describe "#application_css_url" do
       it "is returns the URL for the custom application css" do
         partner = Factory.build(:partner)
