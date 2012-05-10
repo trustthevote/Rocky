@@ -59,7 +59,7 @@ set :use_sudo, false
 
 
 # before "deploy", "deploy:stop_workers"
-after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf"
+after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "deploy:symlink_partners"
 
 #No more geminstaller - bundler [AMM]
 set :rake, 'bundle exec rake'
@@ -123,6 +123,15 @@ namespace :deploy do
       cd #{latest_release} &&
       rm -rf pdf &&
       ln -nfs /data/rocky/html pdf
+    CMD
+  end
+  
+  desc "Link the public/partners dir to the shared path"
+  task :symlink_partners, :roles=>[:app], :except => {:no_release => true} do
+    run <<-CMD
+      mkdir -p #{shared_path}/partner_assets &&
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/partner_assets #{latest_release}/public/partners
     CMD
   end
 
