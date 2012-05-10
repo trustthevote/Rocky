@@ -13,7 +13,7 @@ gem "sqlite3"
 
 #gem "rocky_branding", "= 12.3.5"
 #gem "rocky_branding"
-gem "rocky_branding", "= 1.0.15"
+gem "rocky_branding", "= 1.0.16"
 
 group :development, :text do
   gem "rspec", "= 1.2.7"
