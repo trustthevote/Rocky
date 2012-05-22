@@ -69,6 +69,16 @@ Then /^I should see "([^\"]*)" in select box "([^\"]*)"$/ do |select_value, sele
   assert_equal select_value, current_dom.css("##{select_box} option[selected]").text
 end
 
+
+Then /^I should be signed up for "([^\"]*)"$/ do |flag|
+  @registrant.send(flag).should be_true
+end
+
+Then /^I should not be signed up for "([^\"]*)"$/ do |flag|
+  @registrant.send(flag).should be_false
+end
+
+
 When /^I enter valid data for step 1$/ do
   When %Q{I fill in "email address" with "john.public@example.com"}
   And %Q{I fill in "zip code" with "94113"}
