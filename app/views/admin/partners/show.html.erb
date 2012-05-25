@@ -1,0 +1,33 @@
+<%- pd = PartnerDetails.new(@partner) %>
+
+<h1>Partner: <%= h pd.name %></h1>
+
+<table class='properties'>
+  <tr>
+    <td class='label'>Name:</td>
+    <td><%= h pd.name %></td>
+  </tr>
+  <tr>
+    <td class='label'>Organization:</td>
+    <td><%= h pd.organization %></td>
+  </tr>
+  <tr>
+    <td class='label'>Email:</td>
+    <td><%= h pd.email %></td>
+  </tr>
+  <tr>
+    <td class='label'>Whitelabeled:</td>
+    <td><%= pd.whitelabel_status %></td>
+  </tr>
+
+  <%- if @partner.whitelabeled? %>
+    <tr>
+      <td class='label'>Assets:</td>
+      <td><%= pd.assets_status %></td>
+    </tr>
+  <%- end %>
+</table>
+
+<div class='actions'>
+  <%= link_to "Edit Partner", edit_admin_partner_path(@partner) %>
+</div>

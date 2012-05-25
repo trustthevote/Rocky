@@ -1,0 +1,20 @@
+<h1>Partners</h1>
+
+<table id="partners">
+  <thead>
+    <tr>
+      <th>Partner ID</th>
+      <th>Partner Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @partners.each do |p| %>
+      <tr>
+        <td><%= p.id %></td>
+        <td><%= h p.name %></td>
+        <td><%= link_to "Show", admin_partner_path(p) %></td>
+      </tr>
+    <%- end %>
+  </tbody>
+</table>

@@ -1,0 +1,7 @@
+table { font-size: 13px; }
+th, td { padding: 2px 5px; }
+th { font-weight: bold; }
+
+.actions { margin-top: 20px; }
+
+.properties .label { font-weight: bold; text-align: right; }

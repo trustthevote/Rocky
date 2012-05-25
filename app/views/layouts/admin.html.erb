@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>Admin Console</title>
+  <%= stylesheet_link_tag "application", "partner", "admin" %>
+  <!--[if !IE 7]>
+    <style type="text/css">
+      #container { display:table; height:100% }
+    </style>
+  <![endif]-->
+  <%= javascript_include_tag Rails.env.production? ? 'https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' : 'jquery-1.3.2',
+                             'application' %>
+  <%= yield :head %>
+</head>
+<body>
+  <div id="bg"><div></div></div>
+  <div id="container">
+    <div id="header">
+      <p>
+        <%= link_to "Dashboard", admin_partners_path %>
+      </p>
+    </div>
+
+    <div id="main">
+      <div id="main_inner">
+        <%= yield :subnav %>
+        <%= flash_messages %>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  <div id="sticky_footer">
+    <%= render :partial => 'layouts/footer' %>
+  </div>
+</body>
+</html>
