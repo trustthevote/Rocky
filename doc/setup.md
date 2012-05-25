@@ -6,7 +6,7 @@ Two things you need to do to set up your application after installing the projec
 
 ## 1. Create real versions of the .example files
 
-In the `rocky` application replace all the *.example files with real ones.  These files contain sensitive data like passwords so we don't commit them to version control.  You'll of course need to fill in the actual useful data in the real files.
+In the `rocky` application replace all the `*.example` files with real ones.  These files contain sensitive data like passwords so we don't commit them to version control.  You'll of course need to fill in the actual useful data in the real files.
 
   * `config/database.yml`
   * `config/newrelic.yml`
