@@ -13,7 +13,7 @@ gem "sqlite3"
 
 #gem "rocky_branding", "= 12.3.5"
 #gem "rocky_branding"
-gem "rocky_branding", "= 1.0.15"
+gem "rocky_branding", "= 1.0.16"
 
 group :development, :test do
   gem "rspec", "= 1.2.7"
@@ -37,3 +37,7 @@ gem "mechanize", "= 1.0.0"
 gem "newrelic_rpm", "= 2.11.1"
 gem "hoptoad_notifier", "= 2.2.2"
 
+group :test do
+  gem "guard"
+  gem "guard-rspec"
+end
