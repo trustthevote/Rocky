@@ -3,8 +3,9 @@
 <table id="partners">
   <thead>
     <tr>
-      <th>Partner ID</th>
-      <th>Partner Name</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Whitelabeled</th>
       <th></th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
       <tr>
         <td><%= p.id %></td>
         <td><%= h p.name %></td>
+        <td><%= p.whitelabeled? ? 'Yes' : 'No' %></td>
         <td><%= link_to "Show", admin_partner_path(p) %></td>
       </tr>
     <%- end %>
