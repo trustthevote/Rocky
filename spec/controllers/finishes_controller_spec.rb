@@ -61,7 +61,8 @@ describe FinishesController do
 
       assert_share_links "I just registered to vote and you can too!"
 
-      assert_select "form div.button a.button_send_email_en"
+      # Disabled until spammers can be stopped
+      # assert_select "form div.button a.button_send_email_en"
     end
   end
 
@@ -80,10 +81,10 @@ describe FinishesController do
       get :show, :registrant_id => @registrant.to_param
 
       assert_select "h1", "You're on the list!"
-
       assert_share_links "Make sure you register to vote. It's easy!"
 
-      assert_select "form div.button a.button_send_email_en"
+      # Disabled until spammers can be stopped
+      # assert_select "form div.button a.button_send_email_en"
     end
   end
 
