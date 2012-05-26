@@ -1040,10 +1040,11 @@ describe Registrant do
         end
       end
 
-      it "sends one email per recipient" do
-        mock(Notifier).deliver_tell_friends(anything).times(3)
-        Registrant.deliver_tell_friends_emails(@tell_params)
-      end
+      # Disabled until spammers can be stopped
+      # it "sends one email per recipient" do
+      #   mock(Notifier).deliver_tell_friends(anything).times(3)
+      #   Registrant.deliver_tell_friends_emails(@tell_params)
+      # end
     end
   end
 
