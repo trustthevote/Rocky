@@ -114,9 +114,9 @@ CSV
     it "checks sanity of actual states.csv file" do
       headers = File.open(Rails.root.join("db/bootstrap/import/states.csv")) do |csv_file|
         csv_file.gets.chomp.split(",").sort
-      end
+      end.map { |h| h.gsub('"', '') }
 
-      assert_equal headers, @csv_basic.split("\n").first.split(",").sort
+      assert_equal @csv_basic.split("\n").first.split(",").sort, headers
     end
   end
 
