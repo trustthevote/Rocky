@@ -75,6 +75,16 @@ describe Notifier do
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
     end
+
+    it "uses partner template" do
+      partner    = Factory(:partner, :whitelabeled => true)
+      registrant = Factory(:maximal_registrant, :partner => partner, :locale => 'en')
+      EmailTemplate.set(partner, 'confirmation.en', 'PDF: <%= @pdf_url %>')
+
+      Notifier.deliver_confirmation(registrant)
+      email = ActionMailer::Base.deliveries.last
+      email.body.should match(%r{PDF: http://.*source=email})
+    end
   end
 
   describe "#reminder" do

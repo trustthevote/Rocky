@@ -57,15 +57,44 @@ class Notifier < ActionMailer::Base
     content_type "multipart/alternative"
 
     part "text/html" do |p|
-      p.body = render_message("#{kind}.#{registrant.locale}.html.erb",
-                              :pdf_url => "http://#{default_url_options[:host]}#{registrant.pdf_path}?source=email",
-                              :cancel_reminders_url => registrant_finish_url(registrant, :protocol => "https", :reminders => "stop"),
-                              :locale => registrant.locale.to_sym,
-                              :registrar_phone => registrant.home_state.registrar_phone,
-                              :registrar_address => registrant.home_state.registrar_address,
-                              :registrar_url => registrant.home_state.registrar_url,
-                              :registrant => registrant)
+      p.body = message_body(registrant, kind)
       p.transfer_encoding = "quoted-printable"
     end
   end
+
+  def message_body(registrant, kind)
+    vars = {
+      :pdf_url              => "http://#{default_url_options[:host]}#{registrant.pdf_path}?source=email",
+      :cancel_reminders_url => registrant_finish_url(registrant, :protocol => "https", :reminders => "stop"),
+      :locale               => registrant.locale.to_sym,
+      :registrar_phone      => registrant.home_state.registrar_phone,
+      :registrar_address    => registrant.home_state.registrar_address,
+      :registrar_url        => registrant.home_state.registrar_url,
+      :registrant           => registrant }
+
+    partner = registrant.partner
+    custom_template = partner && partner.whitelabeled? && EmailTemplate.get(partner, "#{kind}.#{registrant.locale}")
+
+    if custom_template
+      render :file => Template.new(custom_template), :body => vars
+    else
+      render_message("#{kind}.#{registrant.locale}.html.erb", vars)
+    end
+  end
+
+  # Wrapper for the custom template
+  class Template
+    def initialize(body)
+      @body = body
+    end
+
+    # Need to keep this method to satisfy internal checks of ActionMailer
+    def render(*args)
+    end
+
+    def render_template(view, *args)
+      view.render :inline => @body
+    end
+  end
+
 end
