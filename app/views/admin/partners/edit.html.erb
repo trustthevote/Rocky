@@ -1,0 +1,64 @@
+<h1>Edit Partner</h1>
+
+<% form_for [ :admin, @partner ], :html => { :multipart => true } do |f| %>
+  <fieldset>
+    <legend>General</legend>
+    <ul class="stacked">
+      <li class="width_b">
+        <h3><%= f.label :name %></h3>
+        <%= field_div f, :name %>
+        <span class="error"><%= @partner.errors.on :name %></span>
+      </li>
+      <li class="width_a">
+        <h3><%= f.label :organization %></h3>
+        <%= field_div f, :organization %>
+        <span class="error"><%= @partner.errors.on :organization %></span>
+      </li>
+      <li class="width_a">
+        <h3><%= f.label :email %></h3>
+        <%= field_div f, :email %>
+        <span class="error"><%= @partner.errors.on :email %></span>
+      </li>
+    </ul>
+  </fieldset>
+
+  <fieldset>
+    <legend>Whitelabeling</legend>
+    <ul class="stacked">
+      <li>
+        <h3>
+          <%= f.check_box :whitelabeled %>
+          <%= f.label :whitelabeled, 'Enabled' %>
+        </h3>
+      </li>
+    </ul>
+
+    <div class="whitelabeled">
+      <ul class="stacked">
+        <li class="width_a">
+          <h3>application.css</h3>
+          <div>
+            <%= file_field_tag 'application_css' %>
+          </div>
+        </li>
+        <li class="width_a">
+          <h3>registration.css</h3>
+          <div>
+            <%= file_field_tag 'registration_css' %>
+          </div>
+        </li>
+      </ul>
+
+      <% [ [ 'confirmation.en', 'Confirmation EN' ], [ 'confirmation.es', 'Confirmation ES' ],
+           [ 'reminder.en', 'Reminder EN' ], [ 'reminder.es', 'Reminder ES' ] ].each do |name, label| %>
+        <ul class="stacked">
+          <li class="width_h">
+            <h3><label><%= label %></label></h3>
+            <%= text_area_tag "template[#{name}]", EmailTemplate.get(@partner, name), :rows => 5 %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </fieldset>
+  <%= partner_rollover_button 'update', 'Update' %>
+<% end %>

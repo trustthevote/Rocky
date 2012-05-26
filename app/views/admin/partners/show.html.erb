@@ -20,10 +20,14 @@
     <td><%= pd.whitelabel_status %></td>
   </tr>
 
-  <%- if @partner.whitelabeled? %>
+  <%- if !@partner.whitelabeled? %>
     <tr>
       <td class='label'>Assets:</td>
-      <td><%= pd.assets_status %></td>
+      <td>
+        <%- pd.assets_status.each do |asset, status| %>
+          <%= h asset %> - <%= status %><br/>
+        <% end %>
+      </td>
     </tr>
   <%- end %>
 </table>

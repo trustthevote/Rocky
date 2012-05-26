@@ -22,32 +22,29 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Admin::PartnersController < Admin::BaseController
+require File.dirname(__FILE__) + '/../spec_helper'
 
-  def index
-    @partners = Partner.all
+describe EmailTemplate do
+
+  before { @p = Factory(:partner) }
+  before { EmailTemplate.set(@p, 'confirmation.en', 'body') }
+
+  it 'should set a template for the partner' do
+    EmailTemplate.get(@p, 'confirmation.en').should == 'body'
   end
 
-  def show
-    @partner = Partner.find(params[:id])
+  it 'should update a template for the partner' do
+    EmailTemplate.set(@p, 'confirmation.en', 'new body')
+    EmailTemplate.get(@p, 'confirmation.en').should == 'new body'
   end
 
-  def edit
-    @partner = Partner.find(params[:id])
+  it 'should not return a missing template for the partner' do
+    EmailTemplate.get(@p, 'missing').should be_nil
   end
 
-  def update
-    @partner = Partner.find(params[:id])
-
-    if @partner.update_attributes(params[:partner])
-      (params[:template] || {}).each do |name, body|
-        EmailTemplate.set(@partner, name, body)
-      end
-
-      redirect_to [ :admin, @partner ]
-    else
-      render :edit
-    end
+  it 'should check if template is present' do
+    EmailTemplate.present?(@p, 'confirmation.en').should be_true
+    EmailTemplate.present?(@p, 'missing').should be_false
   end
 
 end

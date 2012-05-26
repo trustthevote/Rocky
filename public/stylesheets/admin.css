@@ -5,3 +5,5 @@ th { font-weight: bold; }
 .actions { margin-top: 20px; }
 
 .properties .label { font-weight: bold; text-align: right; }
+
+.whitelabeled { display: none; }

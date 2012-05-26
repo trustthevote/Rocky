@@ -22,25 +22,31 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class PartnerEmailTemplates
+class EmailTemplate < ActiveRecord::Base
 
-  def initialize(partner)
-    @p = partner
+  belongs_to :partner
+
+  validates_presence_of   :partner
+  validates_presence_of   :name
+  validates_uniqueness_of :name, :scope => :partner_id
+
+  # Sets the template body (creates or updates as necessary)
+  def self.set(partner, name, body)
+    return unless partner
+    tmpl = EmailTemplate.find_or_initialize_by_partner_id_and_name(partner.id, name)
+    tmpl.body = body
+    tmpl.save!
   end
 
-  # Returns TRUE if the template is present
-  def present?(kind, locale)
-    # TBI
+  # Returns the template body
+  def self.get(partner, name)
+    return nil unless partner
+    EmailTemplate.find_by_partner_id_and_name(partner.id, name).try(:body)
   end
 
-  # Returns the template
-  def get(kind, locale)
-    # TBI
-  end
-
-  # Sets the template
-  def set(kind, locale, template)
-    # TBI
+  # Returns TRUE if the partner email template with this name is non-empty
+  def self.present?(partner, name)
+    get(partner, name).present?
   end
 
 end

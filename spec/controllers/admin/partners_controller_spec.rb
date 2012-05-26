@@ -43,5 +43,33 @@ describe Admin::PartnersController do
     end
   end
 
+  describe 'edit' do
+    it 'should display edit form' do
+      partner = Factory.create(:partner)
+      get :edit, :id => partner.id
+      assigns(:partner).should == partner
+      response.should render_template :edit
+    end
+  end
+
+  describe 'update' do
+    before  { @partner = Factory(:partner) }
+
+    context 'valid data' do
+      before  { put :update, :id => @partner, :partner => { :name => 'new_name' } }
+      it      { should redirect_to admin_partner_path(@partner) }
+      specify { @partner.reload.name.should == 'new_name' }
+    end
+
+    context 'template updates' do
+      before  { put :update, :id => @partner, :template => { 'confirmation.en' => 'body' } }
+      specify { EmailTemplate.get(@partner, 'confirmation.en').should == 'body' }
+    end
+
+    context 'invalid data' do
+      before  { put :update, :id => @partner, :partner => { :name => '' } }
+      it      { should render_template :edit }
+    end
+  end
 
 end

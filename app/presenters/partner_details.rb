@@ -45,16 +45,14 @@ class PartnerDetails
   end
 
   def assets_status
-    @pt ||= PartnerEmailTemplates.new(@p)
     @pa ||= PartnerAssets.new(@p)
 
-    [ "application.css - #{pm(@pa.present?('application.css'))}",
-      "registration.css - #{pm(@pa.present?('registration.css'))}",
-      "confirmation.en.html.erb - #{pm(@pt.present?('confirmation', 'en'))}",
-      "confirmation.es.html.erb - #{pm(@pt.present?('confirmation', 'es'))}",
-      "reminder.en.html.erb - #{pm(@pt.present?('reminder', 'en'))}",
-      "reminder.es.html.erb - #{pm(@pt.present?('reminder', 'es'))}"
-    ].join("<br/>")
+    [ [ "application.css",          pm(@pa.present?('application.css')) ],
+      [ "registration.css",         pm(@pa.present?('registration.css')) ],
+      [ "confirmation.en.html.erb", pm(EmailTemplate.present?(@p, 'confirmation.en')) ],
+      [ "confirmation.es.html.erb", pm(EmailTemplate.present?(@p, 'confirmation.es')) ],
+      [ "reminder.en.html.erb",     pm(EmailTemplate.present?(@p, 'reminder.en')) ],
+      [ "reminder.es.html.erb",     pm(EmailTemplate.present?(@p, 'reminder.es')) ] ]
   end
 
   private
