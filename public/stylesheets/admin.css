@@ -7,3 +7,16 @@ th { font-weight: bold; }
 .properties .label { font-weight: bold; text-align: right; }
 
 .whitelabeled { display: none; }
+
+.actions {
+  margin: 20px 0;
+}
+.actions a { padding-right: 20px; }
+
+table.assets {
+  margin-top: 50px;
+}
+
+table.assets .name {
+  width: 200px;
+}

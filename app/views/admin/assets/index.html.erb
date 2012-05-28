@@ -1,0 +1,43 @@
+<%- pd = PartnerDetails.new(@partner) %>
+
+<h1>Assets of <%= pd.name %></h1>
+<div class='actions'>
+  <%= link_to "Back to partner", [ :admin, @partner ] %>
+</div>
+
+<%- form_for :asset, :html => { :multipart => true } do |f| %>
+  <fieldset>
+    <legend>Upload</legend>
+    <ul class="stacked">
+      <li class="width_h">
+        <h3>New asset</h3>
+        <div>
+          <%= f.file_field :file %>
+        </div>
+      </li>
+    </ul>
+  </fieldset>
+
+  <%= f.submit 'Upload' %>
+<% end %>
+
+<table class='assets'>
+  <thead>
+    <tr>
+      <th class="name">Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <%- if @assets.empty? %>
+    <tr>
+      <td colspan="2">There are no assets yet.</td>
+    </tr>
+  <% else %>
+    <%- @assets.each do |asset| %>
+      <tr>
+        <td class='name'><%= h asset %></td>
+        <td><%= link_to "Delete", admin_partner_asset_path(@partner.id, 0, :name => asset), :method => :delete, :confirm => "Are you sure?" %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

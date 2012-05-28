@@ -28,11 +28,25 @@ class PartnerAssetsFolder
     @partner = partner
   end
 
+  # Updates the css
   def update_css(name, file)
-    path = css_path(name)
+    update_path(css_path(name), file)
+  end
 
-    create_version(path)
-    update_file(path, file)
+  # Updates asset
+  def update_asset(name, file)
+    path = File.join(@partner.assets_path, File.basename(name))
+    update_path(path, file)
+  end
+
+  # Returns the list of all assets in the folder
+  def list_assets
+    Dir.glob(File.join(@partner.assets_path, '*.*')).map { |n| File.basename(n) }
+  end
+
+  # Deletes the asset
+  def delete_asset(name)
+    FileUtils.rm_f File.join(@partner.assets_path, File.basename(name))
   end
 
   private
@@ -48,6 +62,11 @@ class PartnerAssetsFolder
   def update_file(path, file)
     ensure_dir(path)
     File.open(path, 'wb') { |f| f.write(file.read) }
+  end
+
+  def update_path(path, file)
+    create_version(path)
+    update_file(path, file)
   end
 
   def create_version(path)

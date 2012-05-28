@@ -1,6 +1,11 @@
 <%- pd = PartnerDetails.new(@partner) %>
 
 <h1>Partner: <%= h pd.name %></h1>
+<div class='actions'>
+  <%= link_to "Edit", [ :edit_admin, @partner ] %>
+  <%= link_to "Assets", [ :admin, @partner, :assets ] %>
+  <%= link_to "Back to partners", :admin_partners %>
+</div>
 
 <table class='properties'>
   <tr>
@@ -32,6 +37,3 @@
   <%- end %>
 </table>
 
-<div class='actions'>
-  <%= link_to "Edit Partner", edit_admin_partner_path(@partner) %>
-</div>

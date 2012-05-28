@@ -57,8 +57,48 @@ describe PartnerAssetsFolder do
         css_files.first.should match /\/application-#{Time.now.strftime("%Y%m%d%H")}\d{4}\.css$/
       end
     end
-
-    it 'should error out for unknown stylesheet name'
   end
 
+  describe 'list_assets' do
+    before do
+      ap = @partner.assets_path
+
+      # Create assets folder and old
+      FileUtils.mkdir_p File.join(ap, 'old')
+
+      # Place a couple of assets
+      FileUtils.touch File.join(ap, 'application.css')
+      FileUtils.touch File.join(ap, 'bg.png')
+    end
+
+    it 'should list assets only' do
+      @paf.list_assets.should == [ 'application.css', 'bg.png' ]
+    end
+  end
+
+  describe 'delete_asset' do
+    before do
+      ap = @partner.assets_path
+      FileUtils.mkdir_p ap
+      FileUtils.touch File.join(ap, 'application.css')
+    end
+
+    it 'should delete asset' do
+      @paf.delete_asset('../../../application.css')
+      @paf.list_assets.should == []
+    end
+
+    it 'should not error on removing unknown asset' do
+      @paf.delete_asset('unknown')
+      @paf.list_assets.should == [ 'application.css' ]
+    end
+  end
+
+  describe 'upload_asset' do
+    it 'should upload an asset' do
+      @file = File.new("#{fixture_path}/files/sample.css")
+      @paf.update_asset('../sample.css', @file)
+      @paf.list_assets.should == [ 'sample.css' ]
+    end
+  end
 end

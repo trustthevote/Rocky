@@ -60,7 +60,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
     admin.root :controller => 'partners', :action => 'index'
-    admin.resources :partners
+    admin.resources :partners do |p|
+      p.resources :assets, :only => [ :index, :create, :destroy ]
+    end
   end
 
 end

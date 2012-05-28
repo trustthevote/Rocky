@@ -1,4 +1,7 @@
 <h1>Edit Partner</h1>
+<div class='actions'>
+  <%= link_to "Back to partner", [ :admin, @partner ] %>
+</div>
 
 <% form_for [ :admin, @partner ], :html => { :multipart => true } do |f| %>
   <fieldset>
