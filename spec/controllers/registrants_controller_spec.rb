@@ -146,7 +146,6 @@ describe RegistrantsController do
     it "should set partner_id, locale and tracking_source" do
       @reg_attributes.delete(:locale)
       post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email"
-      puts assigns[:partner_id].inspect
       assert_equal @partner.id, assigns[:registrant].partner_id
       assert_equal "es", assigns[:registrant].locale
       assert_equal "email", assigns[:registrant].tracking_source
