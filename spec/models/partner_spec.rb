@@ -206,30 +206,6 @@ describe Partner do
         partner.assets_path.should == "#{RAILS_ROOT}/public/partners/#{partner.id}"
       end
     end
-    describe "#custom_css?" do
-      it "is always false for primary partner" do
-        partner = Partner.find(Partner::DEFAULT_ID)
-        partner.whitelabeled = true
-        stub(partner).css_present?.returns(true)
-        partner.custom_css?.should be_false
-      end
-      it "is false for partners without whitelabeled configured" do
-        partner = Factory.build(:partner)
-        partner.custom_css?.should be_false
-      end
-      it "is false for partners without a css file present" do
-        partner = Factory.build(:partner)
-        partner.whitelabeled = true
-        stub(partner).css_present?.returns(false)
-        partner.custom_css?.should be_false
-      end
-      it "is true for partners configured as whitelabeled that have a css file present" do
-        partner = Factory.build(:partner)
-        partner.whitelabeled = true
-        stub(partner).css_present?.returns(true)
-        partner.custom_css?.should be_true
-      end
-    end
     describe "#absolute_application_css_path" do
       it "returns the path RAILS_ROOT/public/partners/PARTNER_ID/style.css" do
         partner = Factory(:partner)

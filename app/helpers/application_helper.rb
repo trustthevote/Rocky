@@ -59,8 +59,9 @@ module ApplicationHelper
   end
 
   def partner_css
-    if @partner && @partner.custom_css?
-      stylesheet_link_tag @partner.application_css_url, @partner.registration_css_url
+    if @partner && @partner.whitelabeled?
+      stylesheet_link_tag @partner.application_css_present? ? @partner.application_css_url : "application"
+      stylesheet_link_tag @partner.registration_css_present? ? @partner.registration_css_url : "registration"
     else
       stylesheet_link_tag "application", "registration"
     end

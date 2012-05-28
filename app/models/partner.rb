@@ -99,10 +99,6 @@ class Partner < ActiveRecord::Base
     !primary? && logo.file?
   end
 
-  def custom_css?
-    !primary? && !!whitelabeled && css_present?
-  end
-
 
   def registration_stats_state
     counts = Registrant.connection.select_all(<<-"SQL")
