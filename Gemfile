@@ -38,7 +38,7 @@ gem "newrelic_rpm", "= 2.11.1"
 gem "hoptoad_notifier", "= 2.2.2"
 gem "ledermann-rails-settings", :require => "rails-settings"
 
-group :test do
-  gem "guard"
-  gem "guard-rspec"
-end
+# group :test do
+#   gem "guard"
+#   gem "guard-rspec"
+# end
