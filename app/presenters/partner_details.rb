@@ -45,10 +45,8 @@ class PartnerDetails
   end
 
   def assets_status
-    @pa ||= PartnerAssets.new(@p)
-
-    [ [ "application.css",          pm(@pa.present?('application.css')) ],
-      [ "registration.css",         pm(@pa.present?('registration.css')) ],
+    [ [ "application.css",          pm(@p.application_css_present?) ],
+      [ "registration.css",         pm(@p.registration_css_present?) ],
       [ "confirmation.en.html.erb", pm(EmailTemplate.present?(@p, 'confirmation.en')) ],
       [ "confirmation.es.html.erb", pm(EmailTemplate.present?(@p, 'confirmation.es')) ],
       [ "reminder.en.html.erb",     pm(EmailTemplate.present?(@p, 'reminder.en')) ],

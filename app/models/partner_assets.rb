@@ -22,15 +22,46 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class PartnerAssets
+module PartnerAssets
 
-  def initialize(partner)
-    @p = partner
+  def css_present?
+    application_css_present? && registration_css_present?
   end
 
-  # Returns TRUE if the asset is present
-  def present?(asset)
-    # TBI
+  def any_css_present?
+    application_css_present? || registration_css_present?
+  end
+
+  def application_css_present?
+    File.exists?(self.absolute_application_css_path)
+  end
+
+  def registration_css_present?
+    File.exists?(self.absolute_registration_css_path)
+  end
+
+  def assets_url
+    "/partners/#{self.id}"
+  end
+
+  def assets_path
+    "#{RAILS_ROOT}/public#{assets_url}"
+  end
+
+  def application_css_url
+    "#{assets_url}/application.css"
+  end
+
+  def registration_css_url
+    "#{assets_url}/registration.css"
+  end
+
+  def absolute_application_css_path
+    "#{RAILS_ROOT}/public#{application_css_url}"
+  end
+
+  def absolute_registration_css_path
+    "#{RAILS_ROOT}/public#{registration_css_url}"
   end
 
 end

@@ -79,6 +79,7 @@ class Partner < ActiveRecord::Base
 
   after_validation :make_paperclip_errors_readable
 
+  include PartnerAssets
 
   def self.find_by_login(login)
     find_by_username(login) || find_by_email(login)
@@ -99,39 +100,6 @@ class Partner < ActiveRecord::Base
   def custom_css?
     !primary? && !!whitelabeled && css_present?
   end
-  
-  def css_present?
-    File.exists?(self.absolute_application_css_path) && File.exists?(self.absolute_registration_css_path)
-  end
-  
-  def any_css_present?
-    File.exists?(self.absolute_application_css_path) || File.exists?(self.absolute_registration_css_path)
-  end
-  
-  def assets_url
-    "/partners/#{self.id}"
-  end
-  
-  def assets_path
-    "#{RAILS_ROOT}/public#{assets_url}"
-  end
-
-  def application_css_url
-    "#{assets_url}/application.css"
-  end
-
-  def registration_css_url
-    "#{assets_url}/registration.css"
-  end
-  
-  def absolute_application_css_path
-    "#{RAILS_ROOT}/public#{application_css_url}"
-  end
-
-  def absolute_registration_css_path
-    "#{RAILS_ROOT}/public#{registration_css_url}"
-  end
-
 
 
   def registration_stats_state
@@ -313,12 +281,12 @@ class Partner < ActiveRecord::Base
       errors.add(:logo, "logo must be an image file")
     end
   end
-  
-  
+
+
   def self.add_whitelabel(partner_id, app_css, reg_css)
     app_css = File.expand_path(app_css)
     reg_css = File.expand_path(reg_css)
-    
+
     partner = nil
     begin
       partner = Partner.find(partner_id)
@@ -341,12 +309,12 @@ class Partner < ActiveRecord::Base
     if !File.exists?(reg_css)
       raise "File '#{reg_css}' not found"
     end
-    
+
     if partner.any_css_present?
       raise "Partner '#{partner_id}' has assets. Try running 'rake partner:enable_whitelabel #{partner_id}'"
     end
-    
-    
+
+
     unless File.directory?(partner.assets_path)
       unless Dir.mkdir(partner.assets_path)
         raise "Asset directory #{partner.assets_path} could not be created."
@@ -355,16 +323,16 @@ class Partner < ActiveRecord::Base
 
     FileUtils.cp(app_css, partner.absolute_application_css_path)
     FileUtils.cp(reg_css, partner.absolute_registration_css_path)
-    
+
     copy_success = partner.css_present?
     raise "Error copying css to partner directory '#{partner.assets_path}'" unless copy_success
-    
+
     if copy_success
       partner.whitelabeled= true
       partner.save!
       return "Partner '#{partner_id}' has been whitelabeled. Place all asset files in\n#{partner.assets_path}"
     end
-    
+
   end
-  
+
 end

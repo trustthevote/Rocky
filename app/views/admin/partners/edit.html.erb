@@ -34,16 +34,15 @@
     </ul>
 
     <div class="whitelabeled">
-      <%- pa = PartnerAssets.new(@partner) %>
       <ul class="stacked">
         <li class="width_a">
-          <h3>application.css <%= '(missing)' unless pa.present?('application.css') %></h3>
+          <h3>application.css <%= '(missing)' unless @partner.application_css_present? %></h3>
           <div>
             <%= file_field_tag 'application_css' %>
           </div>
         </li>
         <li class="width_a">
-          <h3>registration.css <%= '(missing)' unless pa.present?('registration.css') %></h3>
+          <h3>registration.css <%= '(missing)' unless @partner.registration_css_present? %></h3>
           <div>
             <%= file_field_tag 'registration_css' %>
           </div>
