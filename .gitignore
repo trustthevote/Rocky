@@ -2,6 +2,9 @@
 .idea
 .rvmrc
 .vimrc
+.bundle
+.bundle/*
+Gemfile.lock
 config/database.yml
 config/newrelic.yml
 config/initializers/hoptoad.rb

@@ -62,7 +62,7 @@ set :use_sudo, false
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "deploy:symlink_partners"
 
 #No more geminstaller - bundler [AMM]
-set :rake, 'bundle exec rake'
+set :rake, 'sudo bundle exec rake'
 
 #after "deploy:symlink_configs", "deploy:geminstaller"
 before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
@@ -80,7 +80,7 @@ namespace :deploy do
   task :import_states_csv, :roles => [:app] do
     run <<-CMD
       cd #{latest_release} &&
-      rake import:states CSV_FILE=db/bootstrap/import/states.csv
+      sudo bundle exec rake import:states CSV_FILE=db/bootstrap/import/states.csv
     CMD
   end
 
@@ -114,7 +114,7 @@ namespace :deploy do
 
   desc "Link the files/directories in the branding gem into the app directory structure"
   task :symlink_branding, :roles => [:app, :util], :except => {:no_release => true} do
-    run "cd #{latest_release} && rake branding:symlink"
+    run "cd #{latest_release} && sudo bundle exec rake branding:symlink"
   end
 
   desc "Link the pdf dir to /data/rocky/pdf"
@@ -175,7 +175,7 @@ namespace :import do
     remote_path = File.join(remote_dir, File.basename(local_path))
     run "mkdir -p #{remote_dir}"
     top.upload local_path, remote_path, :via => :scp
-    run "cd #{current_path} && rake import:states CSV_FILE=#{remote_path}"
+    run "cd #{current_path} && sudo bundle exec rake import:states CSV_FILE=#{remote_path}"
     find_and_execute_task "deploy:restart"
   end
 end
