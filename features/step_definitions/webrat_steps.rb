@@ -142,6 +142,11 @@ Then /^I should see a checkbox for "([^\"]*)"$/ do |label|
   field_labeled(label).should be_a(Webrat::CheckboxField)
 end
 
+Then /^I should not see a checkbox for "([^\"]*)"$/ do |label|
+  field_labeled(label).should_not be
+end
+
+
 Then /^I should be on (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
 end

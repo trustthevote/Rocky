@@ -26,6 +26,11 @@ Given /^I have completed step (\d+)$/ do |step_num|
   @registrant = Factory.create("step_#{step_num}_registrant")
 end
 
+Given /^I have completed step (\d+) from that partner$/ do |step_num|
+  @registrant = Factory.create("step_#{step_num}_registrant")
+  @registrant.partner = @partner
+end
+
 When /^I am (\d+) years old$/ do |age|
   fill_in("registrant_date_of_birth", :with => age.to_i.years.ago.to_date.strftime("%m/%d/%Y"))
 end
@@ -77,6 +82,8 @@ end
 Then /^I should not be signed up for "([^\"]*)"$/ do |flag|
   @registrant.send(flag).should be_false
 end
+
+
 
 
 When /^I enter valid data for step 1$/ do

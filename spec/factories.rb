@@ -24,7 +24,8 @@
 #***** END LICENSE BLOCK *****
 Factory.define :step_1_registrant, :class => "registrant" do |f|
   f.status          "step_1"
-  f.association     :partner, :factory => :partner
+  #f.association     :partner, :factory => :primary_partner
+  f.partner_id      "1"
   f.locale          "en"
   f.sequence(:email_address) { |n| "registrant_#{n}@example.com" }
   f.date_of_birth   20.years.ago.to_date.strftime("%m/%d/%Y")

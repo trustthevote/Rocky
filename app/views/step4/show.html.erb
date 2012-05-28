@@ -5,7 +5,8 @@
     <li>
       <h3>
         <%= form.check_box :opt_in_email %>
-        <%= form.label :opt_in_email, t('txt.registration.opt_in_email', :email_address => h(@registrant.email_address)) %>
+        <%= form.label :opt_in_email, t('txt.registration.opt_in_email', :email_address => h(@registrant.email_address), :organization => h("Rock the Vote")) %>
+        <%-#= form.label :opt_in_email, t('txt.registration.opt_in_email', :email_address => h(@registrant.email_address)), :organization => h(@registrant.partner.organization)) %>
       </h3>
     </li>
   </ul>
@@ -13,7 +14,8 @@
     <p><%= t('txt.registration.instructions.opt_in_email') %></p>
   </div>
 
-<% unless @question_1.blank? && @question_2.blank? && !@registrant.partner.ask_for_volunteers? %>
+
+<% unless @question_1.blank? && @question_2.blank? && !@registrant.partner.ask_for_volunteers? && !@registrant.partner.primary? %>
   <fieldset class="questions">
     <legend><%= t('txt.registration.survey_title') %></legend>
     <% unless @question_1.blank? %>
@@ -32,7 +34,17 @@
         </li>
       </ul>
     <% end %>
-    <% if @registrant.partner.ask_for_volunteers? %>
+    <% if @registrant.partner.ask_for_volunteers? || @registrant.partner.primary? %>
+      <ul class="checkbox">
+        <li>
+          <h3>
+            <%= form.check_box :volunteer %>
+            <%= form.label :volunteer, t('txt.registration.volunteer', :organization => h("Rock the Vote")) %>
+          </h3>
+        </li>
+      </ul>
+    <% end %>
+    <% if @registrant.partner.ask_for_volunteers? && false %>
       <ul class="checkbox">
         <li>
           <h3>

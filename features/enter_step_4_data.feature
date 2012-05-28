@@ -25,89 +25,76 @@ Feature: Step 4
 
 
     # Step 3 is SMS, Step 4 is email and volunteer
-    @wip
+    #rtv_opt_in
+    #ask_for_volunteer ? rtv_opt_in
     Scenario: User sees RTV opt-in options for partner 1
       Given I have completed step 3
       When I go to the step 4 page
       Then I should see a checkbox for "Receive emails"
-      And I should see a checkbox for "I'd like to volunteer"
+      And I should see a checkbox for "I would like to volunteer with Rock the Vote"
       When I check "Receive emails"
       And I press "registrant_submit"
-      Then I should be signed up for "opt_in_email" #rtv_opt_in
-      And I should not be signed up for "volunteer" #ask_for_volunteer ? rtv_opt_in
+      Then I should be signed up for "opt_in_email" 
+      And I should not be signed up for "volunteer" 
     
-    @wip-l
-    Scenario: User sees RTV and partner opt-in options for partner configured to have rtv and partner opt-ins, and checks rtv-volunteer and partner-email
+    @wip
+    Scenario Outline: User sees RTV and partner opt-in options as configured for the partner
       Given the following partner exists:
-        | name           | rtv_opt_in | partner_opt_in |
-        | Opt-in Partner | true       | true           |        
+        | name           | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteer |
+        | Opt-in Partner | <rtv_email>      | <rtv_volunteer>    | <partner_email>      | <partner_volunteer>       |        
       And I have completed step 3 from that partner
       When I go to the step 4 page
-      Then I should see a checkbox for "Receive emails from Rock the Vote"
-      And I should see a checkbox for "Receive emails from Opt-in Partner"
-      And I should see a checkbox for "I'd like to volunteer for Rock the Vote"
-      And I should see a checkbox for "I'd like to volunteer for Opt-in Partner"
+      Then I <see_rtv_email_checkbox> see a checkbox for "Receive emails from Rock the Vote"
+      And I <see_partner_email_checkbox> see a checkbox for "Receive emails from Opt-in Partner"
+      And I <see_rtv_volunteer_checkbox> see a checkbox for "I would like to volunteer with Rock the Vote"
+      And I <see_parnter_volunteer_checkbox> see a checkbox for "I would like to volunteer with Opt-in Partner"
+      
+      Examples:
+        | rtv_email | rtv_volunteer | partner_email | partner_volunteer | see_rtv_email_checkbox | see_rtv_volunteer_checkbox | see_partner_email_checkbox | see_parnter_volunteer_checkbox |
+        | true      | true          | true          | true              | should                 | should                     | should                     | should                         |
+        | true      | true          | true          | false             | should                 | should                     | should                     | should not                     |
+        | true      | true          | false         | true              | should                 | should                     | should not                 | should                         |
+        | true      | true          | false         | false             | should                 | should                     | should not                 | should not                     |
+        | true      | false         | true          | true              | should                 | should not                 | should                     | should                         |
+        | false     | true          | true          | true              | should not             | should                     | should                     | should                         |
+        | false     | true          | true          | false             | should not             | should                     | should                     | should not                     |
+        | false     | false         | true          | true              | should not             | should not                 | should                     | should                         |
+        | true      | false         | false         | true              | should                 | should not                 | should not                 | should                         |
+        | false     | false         | false         | true              | should not             | should not                 | should not                 | should                         |
+        | true      | false         | false         | false             | should                 | should not                 | should not                 | should not                     |
+        | false     | false         | false         | false             | should not             | should not                 | should not                 | should not                     |
+      
+      
+      
+    @wip-l
+    Scenario: User signs up for everything
+      Given the following partner exists:
+        | name           | rtv_email_opt_in | ask_for_volunteer | partner_email_opt_in | partner_ask_for_volunteer |
+        | Opt-in Partner | true             | true              | true                 | true                      |        
+      And I have completed step 3 from that partner
+      When I go to the step 4 page
       When I check "Receive emails from Opt-in Partner"
+      And I check "I'd like to volunteer for Opt-in Partner"
+      And I check "Receive emails from Rock the Vote"
       And I check "I'd like to volunteer for Rock the Vote"
       And I press "registrant_submit"
-      Then I should be signed up for "partner_opt_in_email"
+      Then I should be signed up for "rtv_opt_in_email"
+      And I should be signed up for "partner_opt_in_email"
       And I should be signed up for "rtv_volunteer"
-      And I should not be signed up for "rtv_opt_in_email"
+      And I should be signed up for "partner_volunteer"
+        
+    @wip-l
+    Scenario: User signs up for nothing
+      Given the following partner exists:
+        | name           | rtv_email_opt_in | ask_for_volunteer | partner_email_opt_in | partner_ask_for_volunteer |
+        | Opt-in Partner | true             | true              | true                 | true                      |        
+      And I have completed step 3 from that partner
+      When I go to the step 4 page
+      And I press "registrant_submit"
+      Then I should not be signed up for "rtv_opt_in_email"
+      And I should not be signed up for "partner_opt_in_email"
+      And I should not be signed up for "rtv_volunteer"
       And I should not be signed up for "partner_volunteer"
       
-    
-    @wip-l
-    Scenario: User sees only RTV opt-in options for partner configured to have rtv opt-ins and checks rtv-email
-      Given the following partner exists:
-        | name           | rtv_opt_in | partner_opt_in  |
-        | Opt-in Partner | true       | false           |        
-      And I have completed step 3 from that partner
-      When I go to the step 4 page
-      Then I should see a checkbox for "Receive emails from Rock the Vote"
-      And I should see a checkbox for "Receive emails from Opt-in Partner"
-      And I should not see a checkbox for "I'd like to volunteer for Rock the Vote"
-      And I should not see a checkbox for "I'd like to volunteer for Opt-in Partner"
-      When I check "Receive emails from Rock the Vote"
-      And I press "registrant_submit"
-      Then I should not be signed up for "partner_opt_in_email"
-      And I should not be signed up for "rtv_volunteer"
-      And I should be signed up for "rtv_opt_in_email"
-      And I should not be signed up for "partner_volunteer"
-    
-    
-    @wip-l
-    Scenario: User sees only partner opt-in options for partner configured to have partner opt-ins and checks and partner-volunteer
-      Given the following partner exists:
-        | name           | rtv_opt_in | partner_opt_in  |
-        | Opt-in Partner | false      | true            |        
-      And I have completed step 3 from that partner
-      When I go to the step 4 page
-      Then I should not see a checkbox for "Receive emails from Rock the Vote"
-      And I should not see a checkbox for "Receive emails from Opt-in Partner"
-      And I should see a checkbox for "I'd like to volunteer for Rock the Vote"
-      And I should see a checkbox for "I'd like to volunteer for Opt-in Partner"
-      When I check "I'd like to volunteer for Opt-in Partner"
-      And I press "registrant_submit"
-      Then I should not be signed up for "partner_opt_in_email"
-      And I should not be signed up for "rtv_volunteer"
-      And I should not be signed up for "rtv_opt_in_email"
-      And I should be signed up for "partner_volunteer"
-    
-    @wip-l
-    Scenario: User sees no opt-in options for partner configured without opt-ins
-      Given the following partner exists:
-        | name           | rtv_opt_in | partner_opt_in  |
-        | Opt-in Partner | false      | false           |        
-      And I have completed step 3 from that partner
-      When I go to the step 4 page
-      Then I should see a checkbox for "Receive emails from Rock the Vote"
-      And I should see a checkbox for "Receive emails from Opt-in Partner"
-      And I should not see a checkbox for "I'd like to volunteer for Rock the Vote"
-      And I should not see a checkbox for "I'd like to volunteer for Opt-in Partner"
-      And I press "registrant_submit"
-      Then I should not be signed up for "partner_opt_in_email"
-      And I should not be signed up for "rtv_volunteer"
-      And I should not be signed up for "rtv_opt_in_email"
-      And I should not be signed up for "partner_volunteer"
     
     
