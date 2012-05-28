@@ -22,43 +22,46 @@
     </ul>
   </fieldset>
 
-  <fieldset>
-    <legend>Whitelabeling</legend>
-    <ul class="stacked">
-      <li>
-        <h3>
-          <%= f.check_box :whitelabeled %>
-          <%= f.label :whitelabeled, 'Enabled' %>
-        </h3>
-      </li>
-    </ul>
-
-    <div class="whitelabeled">
+  <%- if @partner.can_be_whitelabeled? %>
+    <fieldset>
+      <legend>Whitelabeling</legend>
       <ul class="stacked">
-        <li class="width_a">
-          <h3>application.css <%= '(missing)' unless @partner.application_css_present? %></h3>
-          <div>
-            <%= file_field_tag 'application_css' %>
-          </div>
-        </li>
-        <li class="width_a">
-          <h3>registration.css <%= '(missing)' unless @partner.registration_css_present? %></h3>
-          <div>
-            <%= file_field_tag 'registration_css' %>
-          </div>
+        <li>
+          <h3>
+            <%= f.check_box :whitelabeled %>
+            <%= f.label :whitelabeled, 'Enabled' %>
+          </h3>
         </li>
       </ul>
 
-      <% [ [ 'confirmation.en', 'Confirmation EN' ], [ 'confirmation.es', 'Confirmation ES' ],
-           [ 'reminder.en', 'Reminder EN' ], [ 'reminder.es', 'Reminder ES' ] ].each do |name, label| %>
+      <div class="whitelabeled">
         <ul class="stacked">
-          <li class="width_h">
-            <h3><label><%= label %></label></h3>
-            <%= text_area_tag "template[#{name}]", EmailTemplate.get(@partner, name), :rows => 5 %>
+          <li class="width_a">
+            <h3>application.css <%= '(missing)' unless @partner.application_css_present? %></h3>
+            <div>
+              <%= file_field_tag 'application_css' %>
+            </div>
+          </li>
+          <li class="width_a">
+            <h3>registration.css <%= '(missing)' unless @partner.registration_css_present? %></h3>
+            <div>
+              <%= file_field_tag 'registration_css' %>
+            </div>
           </li>
         </ul>
-      <% end %>
-    </div>
-  </fieldset>
+
+        <% [ [ 'confirmation.en', 'Confirmation EN' ], [ 'confirmation.es', 'Confirmation ES' ],
+             [ 'reminder.en', 'Reminder EN' ], [ 'reminder.es', 'Reminder ES' ] ].each do |name, label| %>
+          <ul class="stacked">
+            <li class="width_h">
+              <h3><label><%= label %></label></h3>
+              <%= text_area_tag "template[#{name}]", EmailTemplate.get(@partner, name), :rows => 5 %>
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    </fieldset>
+  <% end %>
+
   <%= partner_rollover_button 'update', 'Update' %>
 <% end %>

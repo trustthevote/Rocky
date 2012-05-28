@@ -61,7 +61,7 @@ describe RegistrantsController do
       non_existent_partner_id = 43243243
       assert Partner.find_by_id(non_existent_partner_id).nil?
       get :landing, :partner => non_existent_partner_id.to_s
-      assert_redirected_to new_registrant_url(:protocol => "https", :partner => Partner.default_id)
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => Partner::DEFAULT_ID)
     end
   end
 
@@ -83,7 +83,7 @@ describe RegistrantsController do
     it "should default partner id to RTV" do
       get :new
       reg = assigns[:registrant]
-      assert_equal Partner.default_id, reg.partner_id
+      assert_equal Partner::DEFAULT_ID, reg.partner_id
     end
 
     it "should default locale to English" do
@@ -110,7 +110,7 @@ describe RegistrantsController do
       integrate_views
 
       it "should not show partner banner or logo for primary partner" do
-        get :new, :partner => Partner.default_id.to_s
+        get :new, :partner => Partner::DEFAULT_ID.to_s
         assert_select "#header.partner", 0
         assert_select "#partner-logo", 0
       end
@@ -145,8 +145,9 @@ describe RegistrantsController do
 
     it "should set partner_id, locale and tracking_source" do
       @reg_attributes.delete(:locale)
-      post :create, :registrant => @reg_attributes, :partner => "2", :locale => "es", :source => "email"
-      assert_equal 2, assigns[:registrant].partner_id
+      post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email"
+      puts assigns[:partner_id].inspect
+      assert_equal @partner.id, assigns[:registrant].partner_id
       assert_equal "es", assigns[:registrant].locale
       assert_equal "email", assigns[:registrant].tracking_source
     end

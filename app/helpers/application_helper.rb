@@ -52,20 +52,20 @@ module ApplicationHelper
 
   def partner_locale_options(partner, locale, source)
     opts = {}
-    opts[:partner] = partner unless partner == Partner.default_id
+    opts[:partner] = partner unless partner == Partner::DEFAULT_ID
     opts[:locale]  = locale  unless locale == "en"
     opts[:source]  = source  unless source.blank?
     opts
   end
-  
+
   def partner_css
     if @partner && @partner.custom_css?
       stylesheet_link_tag @partner.application_css_url, @partner.registration_css_url
     else
-      stylesheet_link_tag "application", "registration" 
+      stylesheet_link_tag "application", "registration"
     end
   end
-  
+
   def yes_no_options
     [['', nil], ['Yes', true], ['No', false]]
   end

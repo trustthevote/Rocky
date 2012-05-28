@@ -25,6 +25,8 @@
 class Partner < ActiveRecord::Base
   acts_as_authentic
 
+  DEFAULT_ID = 1
+
   WIDGET_GIFS = [
     "rtv-234x60-v1.gif",
     "rtv-234x60-v1-sp.gif",
@@ -85,12 +87,8 @@ class Partner < ActiveRecord::Base
     find_by_username(login) || find_by_email(login)
   end
 
-  def self.default_id
-    1
-  end
-
   def primary?
-    self.id == self.class.default_id
+    self.id == DEFAULT_ID
   end
 
   def custom_logo?
