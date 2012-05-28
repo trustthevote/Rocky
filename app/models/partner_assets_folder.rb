@@ -22,54 +22,44 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-module PartnerAssets
+class PartnerAssetsFolder
 
-  def css_present?
-    application_css_present? && registration_css_present?
+  def initialize(partner)
+    @partner = partner
   end
 
-  def any_css_present?
-    application_css_present? || registration_css_present?
+  def update_css(name, file)
+    path = css_path(name)
+
+    create_version(path)
+    update_file(path, file)
   end
 
-  def application_css_present?
-    File.exists?(self.absolute_application_css_path)
+  private
+
+  def css_path(name)
+    @partner.send("absolute_#{name}_css_path")
   end
 
-  def registration_css_present?
-    File.exists?(self.absolute_registration_css_path)
+  def ensure_dir(path)
+    FileUtils.mkdir_p File.dirname(path)
   end
 
-  def assets_root
-    "#{RAILS_ROOT}/public"
+  def update_file(path, file)
+    ensure_dir(path)
+    File.open(path, 'wb') { |f| f.write(file.read) }
   end
 
-  def assets_url
-    "/partners/#{self.id}"
-  end
+  def create_version(path)
+    return unless File.exists?(path)
 
-  def assets_path
-    "#{assets_root}#{assets_url}"
-  end
+    ext  = File.extname(path)
+    name = File.basename(path, ext)
+    ts   = Time.now.strftime("%Y%m%d%H%M%S")
 
-  def application_css_url
-    "#{assets_url}/application.css"
-  end
-
-  def registration_css_url
-    "#{assets_url}/registration.css"
-  end
-
-  def absolute_old_assets_path
-    "#{assets_path}/old"
-  end
-
-  def absolute_application_css_path
-    "#{assets_root}#{application_css_url}"
-  end
-
-  def absolute_registration_css_path
-    "#{assets_root}#{registration_css_url}"
+    archive_path = File.join(@partner.absolute_old_assets_path, "#{name}-#{ts}#{ext}")
+    ensure_dir(archive_path)
+    FileUtils.cp path, archive_path
   end
 
 end

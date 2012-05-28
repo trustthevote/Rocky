@@ -66,6 +66,14 @@ describe Admin::PartnersController do
       specify { EmailTemplate.get(@partner, 'confirmation.en').should == 'body' }
     end
 
+    context 'css updates' do
+      before  { @sample_css = fixture_file_upload('/files/sample.css') }
+      before  { @paf = PartnerAssetsFolder.new(nil) }
+      before  { mock(PartnerAssetsFolder).new(@partner) { @paf } }
+      before  { mock(@paf).update_css('application', @sample_css) }
+      specify { put :update, :id => @partner, :css_files => { 'application' => @sample_css } }
+    end
+
     context 'invalid data' do
       before  { put :update, :id => @partner, :partner => { :name => '' } }
       it      { should render_template :edit }

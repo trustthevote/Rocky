@@ -39,13 +39,13 @@
           <li class="width_a">
             <h3>application.css <%= '(missing)' unless @partner.application_css_present? %></h3>
             <div>
-              <%= file_field_tag 'application_css' %>
+              <%= file_field_tag 'css_files[application]' %>
             </div>
           </li>
           <li class="width_a">
             <h3>registration.css <%= '(missing)' unless @partner.registration_css_present? %></h3>
             <div>
-              <%= file_field_tag 'registration_css' %>
+              <%= file_field_tag 'css_files[registration]' %>
             </div>
           </li>
         </ul>
