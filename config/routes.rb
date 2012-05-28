@@ -59,6 +59,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.namespace :admin do |admin|
+    admin.root :controller => 'partners', :action => 'index'
     admin.resources :partners
   end
 
