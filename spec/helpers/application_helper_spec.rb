@@ -57,11 +57,32 @@ describe ApplicationHelper do
       assert !opts.has_key?(:source)
     end
   end
-  
+
   describe "partner_css" do
-    it "is pending"
+    it "should return default stylesheets" do
+      helper.partner_css(nil).should == [ 'application', 'registration' ]
+    end
+
+    it "should return default stylesheets for non-whitelabled partner" do
+      partner = Factory.build(:partner, :whitelabeled => false)
+      helper.partner_css(partner).should == [ 'application', 'registration' ]
+    end
+
+    it "should return custom application css" do
+      partner = Factory.build(:partner, :whitelabeled => true)
+      mock(partner).application_css_present? { true }
+      stub(partner).application_css_url { 'app.css' }
+      helper.partner_css(partner).should == [ 'app.css', 'registration' ]
+    end
+
+    it "should return custom registration css" do
+      partner = Factory.build(:partner, :whitelabeled => true)
+      mock(partner).registration_css_present? { true }
+      stub(partner).registration_css_url { 'reg.css' }
+      helper.partner_css(partner).should == [ 'application', 'reg.css' ]
+    end
   end
-  
+
 
   describe "form helpers" do
     attr_accessor :form

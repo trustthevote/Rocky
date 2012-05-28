@@ -58,13 +58,13 @@ module ApplicationHelper
     opts
   end
 
-  def partner_css
-    if @partner && @partner.whitelabeled?
-      stylesheet_link_tag @partner.application_css_present? ? @partner.application_css_url : "application"
-      stylesheet_link_tag @partner.registration_css_present? ? @partner.registration_css_url : "registration"
-    else
-      stylesheet_link_tag "application", "registration"
-    end
+  def partner_css(partner = @partner)
+    wl = partner && partner.whitelabeled?
+
+    stylesheets = []
+    stylesheets << (wl && partner.application_css_present? ? partner.application_css_url : "application")
+    stylesheets << (wl && partner.registration_css_present? ? partner.registration_css_url : "registration")
+    stylesheets
   end
 
   def yes_no_options
