@@ -37,10 +37,9 @@ Feature: Step 4
       Then I should be signed up for "opt_in_email" 
       And I should not be signed up for "volunteer" 
     
-    @wip
     Scenario Outline: User sees RTV and partner opt-in options as configured for the partner
       Given the following partner exists:
-        | name           | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteer |
+        | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |
         | Opt-in Partner | <rtv_email>      | <rtv_volunteer>    | <partner_email>      | <partner_volunteer>       |        
       And I have completed step 3 from that partner
       When I go to the step 4 page
@@ -65,35 +64,36 @@ Feature: Step 4
         | false     | false         | false         | false             | should not             | should not                 | should not                 | should not                     |
       
       
-      
-    @wip-l
     Scenario: User signs up for everything
       Given the following partner exists:
-        | name           | rtv_email_opt_in | ask_for_volunteer | partner_email_opt_in | partner_ask_for_volunteer |
+        | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |
         | Opt-in Partner | true             | true              | true                 | true                      |        
       And I have completed step 3 from that partner
       When I go to the step 4 page
-      When I check "Receive emails from Opt-in Partner"
-      And I check "I'd like to volunteer for Opt-in Partner"
+      And I check "Receive emails from Opt-in Partner"
+      And I check "I would like to volunteer with Opt-in Partner"
       And I check "Receive emails from Rock the Vote"
-      And I check "I'd like to volunteer for Rock the Vote"
+      And I check "I would like to volunteer with Rock the Vote"
       And I press "registrant_submit"
-      Then I should be signed up for "rtv_opt_in_email"
+      Then I should be signed up for "opt_in_email"
       And I should be signed up for "partner_opt_in_email"
-      And I should be signed up for "rtv_volunteer"
+      And I should be signed up for "volunteer"
       And I should be signed up for "partner_volunteer"
         
-    @wip-l
     Scenario: User signs up for nothing
       Given the following partner exists:
-        | name           | rtv_email_opt_in | ask_for_volunteer | partner_email_opt_in | partner_ask_for_volunteer |
+        | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |
         | Opt-in Partner | true             | true              | true                 | true                      |        
       And I have completed step 3 from that partner
       When I go to the step 4 page
+      And I uncheck "Receive emails from Opt-in Partner"
+      And I uncheck "I would like to volunteer with Opt-in Partner"
+      And I uncheck "Receive emails from Rock the Vote"
+      And I uncheck "I would like to volunteer with Rock the Vote"
       And I press "registrant_submit"
-      Then I should not be signed up for "rtv_opt_in_email"
+      Then I should not be signed up for "opt_in_email"
       And I should not be signed up for "partner_opt_in_email"
-      And I should not be signed up for "rtv_volunteer"
+      And I should not be signed up for "volunteer"
       And I should not be signed up for "partner_volunteer"
       
     

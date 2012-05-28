@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120527203128) do
+ActiveRecord::Schema.define(:version => 20120528023732) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -50,19 +50,19 @@ ActiveRecord::Schema.define(:version => 20120527203128) do
   end
 
   create_table "partners", :force => true do |t|
-    t.string   "username",                                                   :null => false
-    t.string   "email",                                                      :null => false
-    t.string   "crypted_password",                                           :null => false
-    t.string   "password_salt",                                              :null => false
-    t.string   "persistence_token",                                          :null => false
-    t.string   "perishable_token",                        :default => "",    :null => false
+    t.string   "username",                                                    :null => false
+    t.string   "email",                                                       :null => false
+    t.string   "crypted_password",                                            :null => false
+    t.string   "password_salt",                                               :null => false
+    t.string   "persistence_token",                                           :null => false
+    t.string   "perishable_token",                         :default => "",    :null => false
     t.string   "name"
     t.string   "organization"
     t.string   "url"
     t.string   "address"
     t.string   "city"
     t.integer  "state_id"
-    t.string   "zip_code",                  :limit => 10
+    t.string   "zip_code",                   :limit => 10
     t.string   "phone"
     t.string   "survey_question_1_en"
     t.string   "survey_question_1_es"
@@ -76,11 +76,11 @@ ActiveRecord::Schema.define(:version => 20120527203128) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.boolean  "whitelabeled"
-    t.boolean  "partner_ask_for_volunteer",               :default => true
-    t.boolean  "rtv_email_opt_in",                        :default => true
-    t.boolean  "partner_email_opt_in",                    :default => true
-    t.boolean  "rtv_sms_opt_in",                          :default => true
-    t.boolean  "partner_sms_opt_in",                      :default => false
+    t.boolean  "partner_ask_for_volunteers",               :default => true
+    t.boolean  "rtv_email_opt_in",                         :default => true
+    t.boolean  "partner_email_opt_in",                     :default => true
+    t.boolean  "rtv_sms_opt_in",                           :default => true
+    t.boolean  "partner_sms_opt_in",                       :default => false
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(:version => 20120527203128) do
     t.integer  "prev_state_id"
     t.string   "prev_zip_code",                      :limit => 10
     t.boolean  "opt_in_email",                                     :default => false
-    t.boolean  "opt_in_sms"
+    t.boolean  "opt_in_sms",                                       :default => false
     t.string   "survey_answer_1"
     t.string   "survey_answer_2"
     t.boolean  "ineligible_non_participating_state"
@@ -150,6 +150,9 @@ ActiveRecord::Schema.define(:version => 20120527203128) do
     t.string   "official_party_name"
     t.boolean  "pdf_ready"
     t.string   "barcode",                            :limit => 12
+    t.boolean  "partner_opt_in_email",                             :default => false
+    t.boolean  "partner_opt_in_sms",                               :default => false
+    t.boolean  "partner_volunteer",                                :default => false
   end
 
   add_index "registrants", ["age"], :name => "index_registrants_on_age"

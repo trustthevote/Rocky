@@ -1,6 +1,6 @@
 class AddOptInFieldsToPartner < ActiveRecord::Migration
   def self.up
-    add_column :partners, :partner_ask_for_volunteer, :boolean, :default=>true
+    add_column :partners, :partner_ask_for_volunteers, :boolean, :default=>true
     add_column :partners, :rtv_email_opt_in, :boolean, :default=>true
     add_column :partners, :partner_email_opt_in, :boolean, :default=>true
     add_column :partners, :rtv_sms_opt_in, :boolean, :default=>true
@@ -8,7 +8,7 @@ class AddOptInFieldsToPartner < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :partners, :partner_ask_for_volunteer
+    remove_column :partners, :partner_ask_for_volunteers
     remove_column :partners, :rtv_email_opt_in
     remove_column :partners, :partner_email_opt_in
     remove_column :partners, :rtv_sms_opt_in
