@@ -74,3 +74,6 @@ Rails::Initializer.run do |config|
     :secret      => 'OverrideWithYourOwnSecretInPublicEnvironments'
   }
 end
+
+ADMIN_USERNAME = 'admin'
+

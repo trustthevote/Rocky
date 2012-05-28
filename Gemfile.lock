@@ -43,6 +43,8 @@ GEM
     hoptoad_notifier (2.2.2)
       activesupport
     hpricot (0.8.6)
+    ledermann-rails-settings (1.0.1)
+      activerecord (>= 2.3)
     mechanize (1.0.0)
       nokogiri (>= 1.2.1)
     mongrel (1.1.5)
@@ -102,6 +104,7 @@ DEPENDENCIES
   guard-rspec
   hoptoad_notifier (= 2.2.2)
   hpricot (= 0.8.6)
+  ledermann-rails-settings
   mechanize (= 1.0.0)
   mongrel (= 1.1.5)
   mysql

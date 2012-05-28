@@ -26,13 +26,14 @@ class Admin::BaseController < ApplicationController
 
   layout 'admin'
 
-  before_filter :authenticate, :if => lambda { !%w{ development test }.include?(RAILS_ENV) }
+  before_filter :authenticate #, :if => lambda { !%w{ development test }.include?(RAILS_ENV) }
 
   private
 
   def authenticate
     authenticate_or_request_with_http_basic("RTV Admin Console") do |user, password|
-      user == 'admin' && password == 'rtv' # Change to DB storage
+      pass = Settings.admin_password
+      pass.present? && user == ADMIN_USERNAME && password == pass
     end
   end
 

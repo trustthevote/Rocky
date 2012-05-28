@@ -36,6 +36,7 @@ gem "nokogiri", "= 1.3.2"
 gem "mechanize", "= 1.0.0"
 gem "newrelic_rpm", "= 2.11.1"
 gem "hoptoad_notifier", "= 2.2.2"
+gem "ledermann-rails-settings", :require => "rails-settings"
 
 group :test do
   gem "guard"
