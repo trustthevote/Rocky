@@ -26,7 +26,7 @@ class Admin::BaseController < ApplicationController
 
   layout 'admin'
 
-  before_filter :authenticate #, :if => lambda { !%w{ development test }.include?(RAILS_ENV) }
+  before_filter :authenticate, :if => lambda { !%w{ development test }.include?(RAILS_ENV) }
 
   private
 
