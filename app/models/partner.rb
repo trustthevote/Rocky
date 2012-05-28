@@ -91,6 +91,10 @@ class Partner < ActiveRecord::Base
     self.id == DEFAULT_ID
   end
 
+  def can_be_whitelabeled?
+    !primary?
+  end
+
   def custom_logo?
     !primary? && logo.file?
   end
