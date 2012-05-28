@@ -30,15 +30,29 @@
       </div>
     </li>
   </ul>
-  <ul class="checkbox">
-    <li class="spacer">&nbsp;</li>
-    <li>
-      <h3>
-        <%= form.check_box :opt_in_sms %>
-        <%= form.label :opt_in_sms, t('txt.registration.opt_in_sms') %>
-      </h3>
-    </li>
-  </ul>
+  <%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.partner_sms_opt_in || @registrant.partner.primary? %>
+    <ul class="checkbox">
+      <%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.primary? %>
+        <li class="spacer">&nbsp;</li>
+        <li>
+          <h3>
+            <%= form.check_box :opt_in_sms %>
+            <%= form.label :opt_in_sms, t('txt.registration.opt_in_sms', :organization=>h("Rock the Vote")) %>
+  
+          </h3>
+        </li>
+      <%- end %>
+      <%- if @registrant.partner.partner_sms_opt_in && !@registrant.partner.primary? %>
+        <li class="spacer">&nbsp;</li>
+        <li>
+          <h3>
+            <%= form.check_box :partner_opt_in_sms %>
+            <%= form.label :partner_opt_in_sms, t('txt.registration.opt_in_sms', :organization=>h(@registrant.partner.organization)) %>
+          </h3>
+        </li>
+      <%- end %>
+    </ul>
+  <%- end %>
 
   <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
 

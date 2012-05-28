@@ -31,8 +31,8 @@ Factory.define :step_1_registrant, :class => "registrant" do |f|
   f.date_of_birth   20.years.ago.to_date.strftime("%m/%d/%Y")
   f.home_zip_code   "15215"  # == Pennsylvania
   f.us_citizen      true
-  f.opt_in_email    true
-  f.opt_in_sms      true
+  #f.opt_in_email    true
+  #f.opt_in_sms      true
 end
 
 Factory.define :under_18_finished_registrant, :parent => :step_1_registrant do |f|

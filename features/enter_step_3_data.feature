@@ -56,11 +56,11 @@ Feature: Step 3
       When I go to the step 3 page
       And I should see a checkbox for "Send me txt messages from Rock the Vote"
       When I check "Send me txt messages from Rock the Vote"
+      And I fill in "ID Number" with "NONE"
       And I press "registrant_submit"
       Then I should be signed up for "opt_in_sms"
       And I should not be signed up for "partner_opt_in_sms"
 
-    @wip
     Scenario: User sees RTV and partner SMS opt-in options for partner configured to have rtv and partner opt-ins, and checks partner-sms
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in |
@@ -69,13 +69,14 @@ Feature: Step 3
       When I go to the step 3 page
       Then I should see a checkbox for "Send me txt messages from Rock the Vote"
       And I should see a checkbox for "Send me txt messages from Opt-in Partner"
-      When I check "Receive SMS from Opt-in Partner"
+      When I check "Send me txt messages from Opt-in Partner"
+      When I uncheck "Send me txt messages from Rock the Vote"
+      And I fill in "ID Number" with "NONE"
       And I press "registrant_submit"
       Then I should be signed up for "partner_opt_in_sms"
-      And I should not be signed up for "rtv_opt_in_sms"
+      And I should not be signed up for "opt_in_sms"
     
 
-    @wip-l
     Scenario: User sees only RTV opt-in options for partner configured to have rtv opt-ins and checks rtv-sms
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in  |
@@ -84,38 +85,39 @@ Feature: Step 3
       When I go to the step 3 page
       Then I should see a checkbox for "Send me txt messages from Rock the Vote"
       And I should not see a checkbox for "Send me txt messages from Opt-in Partner"
-      When I check "Receive SMS from Rock the Vote"
+      When I check "Send me txt messages from Rock the Vote"
+      And I fill in "ID Number" with "NONE"
       And I press "registrant_submit"
       Then I should not be signed up for "partner_opt_in_sms"
-      And I should be signed up for "rtv_opt_in_sms"
+      And I should be signed up for "opt_in_sms"
 
 
-    @wip-l
     Scenario: User sees only partner opt-in options for partner configured to have partner opt-ins and checks and partner-volunteer
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in  |
         | Opt-in Partner | false          | true                |        
-      And I have completed step 3 from that partner
-      When I go to the step 4 page
+      And I have completed step 2 from that partner
+      When I go to the step 3 page
       Then I should not see a checkbox for "Send me txt messages from Rock the Vote"
       And I should see a checkbox for "Send me txt messages from Opt-in Partner"
-      When I check "I'd like to volunteer for Opt-in Partner"
+      When I check "Send me txt messages from Opt-in Partner"
+      And I fill in "ID Number" with "NONE"
       And I press "registrant_submit"
       Then I should be signed up for "partner_opt_in_sms"
-      And I should not be signed up for "rtv_opt_in_sms"
+      And I should not be signed up for "opt_in_sms"
 
-    @wip-l
     Scenario: User sees no opt-in options for partner configured without opt-ins
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in  |
         | Opt-in Partner | false          | false               |        
-      And I have completed step 3 from that partner
-      When I go to the step 4 page
-      Then I should not see a checkbox for "Receive SMS from Rock the Vote"
-      And I should not see a checkbox for "Receive SMS from Opt-in Partner"
+      And I have completed step 2 from that partner
+      When I go to the step 3 page
+      Then I should not see a checkbox for "Send me txt messages from Rock the Vote"
+      And I should not see a checkbox for "Send me txt messages from Opt-in Partner"
+      When I fill in "ID Number" with "NONE"
       And I press "registrant_submit"
       Then I should not be signed up for "partner_opt_in_sms"
-      And I should not be signed up for "rtv_opt_in_sms"
+      And I should not be signed up for "opt_in_sms"
   
   
     

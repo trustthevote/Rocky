@@ -37,6 +37,7 @@ Feature: Step 4
       Then I should be signed up for "opt_in_email" 
       And I should not be signed up for "volunteer" 
     
+
     Scenario Outline: User sees RTV and partner opt-in options as configured for the partner
       Given the following partner exists:
         | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |
@@ -63,7 +64,6 @@ Feature: Step 4
         | true      | false         | false         | false             | should                 | should not                 | should not                 | should not                     |
         | false     | false         | false         | false             | should not             | should not                 | should not                 | should not                     |
       
-      
     Scenario: User signs up for everything
       Given the following partner exists:
         | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |
@@ -79,7 +79,8 @@ Feature: Step 4
       And I should be signed up for "partner_opt_in_email"
       And I should be signed up for "volunteer"
       And I should be signed up for "partner_volunteer"
-        
+
+
     Scenario: User signs up for nothing
       Given the following partner exists:
         | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |

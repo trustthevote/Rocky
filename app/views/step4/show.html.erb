@@ -11,7 +11,7 @@
           </h3>
         </li>
       <%- end %>
-      <%- if @registrant.partner.partner_email_opt_in %>
+      <%- if @registrant.partner.partner_email_opt_in && !@registrant.partner.primary? %>
         <li>
           <h3>
             <%= form.check_box :partner_opt_in_email %>
@@ -55,7 +55,7 @@
         </li>
       </ul>
     <% end %>
-    <% if @registrant.partner.partner_ask_for_volunteers %>
+    <% if @registrant.partner.partner_ask_for_volunteers && !@registrant.partner.primary? %>
       <ul class="checkbox">
         <li>
           <h3>
