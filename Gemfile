@@ -9,7 +9,7 @@ gem "authlogic", "= 2.1.1"
 gem "fastercsv", "= 1.5.0"
 gem "daemons", "= 1.0.10"
 gem "paperclip", "= 2.3.1.1"
-gem "sqlite3"
+gem "mysql"
 
 #gem "rocky_branding", "= 12.3.5"
 #gem "rocky_branding"
@@ -29,7 +29,7 @@ group :development, :test do
   # Pito:
   gem "hpricot", "0.8.6"
   gem "mongrel", "= 1.1.5"
-  gem "mysql"
+	gem "sqlite3"
 end
 
 gem "nokogiri", "= 1.3.2"
