@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120528135437) do
+ActiveRecord::Schema.define(:version => 20120529004142) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -70,15 +70,15 @@ ActiveRecord::Schema.define(:version => 20120528135437) do
     t.string   "survey_question_2_es"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "ask_for_volunteers"
+    t.boolean  "ask_for_volunteers",                       :default => true
     t.string   "widget_image"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
-    t.boolean  "whitelabeled"
-    t.boolean  "partner_ask_for_volunteers",               :default => true
+    t.boolean  "whitelabeled",                             :default => false
+    t.boolean  "partner_ask_for_volunteers",               :default => false
     t.boolean  "rtv_email_opt_in",                         :default => true
-    t.boolean  "partner_email_opt_in",                     :default => true
+    t.boolean  "partner_email_opt_in",                     :default => false
     t.boolean  "rtv_sms_opt_in",                           :default => true
     t.boolean  "partner_sms_opt_in",                       :default => false
   end

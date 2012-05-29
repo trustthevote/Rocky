@@ -27,6 +27,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 include ActionView::Helpers::UrlHelper
 
 describe Registrant do
+  
+  describe "default opt-in flags" do
+    it "should be false for new records" do
+      r = Registrant.new
+      r.opt_in_email.should be_false
+      r.opt_in_sms.should be_false
+      r.volunteer.should be_false
+      r.partner_opt_in_email.should be_false
+      r.partner_opt_in_sms.should be_false
+      r.partner_volunteer.should be_false
+    end
+  end
+  
   describe "backfill data" do
     it "backfills the age even when redacted" do
       assert_equal 0, Registrant.find(:all, :conditions => "age IS NOT NULL").size

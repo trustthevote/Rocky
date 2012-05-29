@@ -34,6 +34,16 @@ describe PartnersController do
       assert_not_nil assigns[:partner]
     end
 
+    it "creates a new partner with correct opt-in defaults (true for RTV, false for partner settings)" do
+      post :create, :partner => Factory.attributes_for(:partner)
+      assigns[:partner].rtv_email_opt_in.should be_true
+      assigns[:partner].partner_email_opt_in.should be_false
+      assigns[:partner].rtv_sms_opt_in.should be_true
+      assigns[:partner].partner_sms_opt_in.should be_false
+      assigns[:partner].ask_for_volunteers.should be_true
+      assigns[:partner].partner_ask_for_volunteers.should be_false
+    end
+
     it "requires login, email and password for new partner" do
       assert_no_difference("Partner.count") do
         post :create, :partner => Factory.attributes_for(:partner, :username => nil)

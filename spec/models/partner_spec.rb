@@ -284,6 +284,17 @@ describe Partner do
     end
   end
 
+  describe "default opt-in sets" do
+    it "should be true for RTV and false for partners" do
+      partner = Partner.new
+      partner.rtv_email_opt_in.should be_true
+      partner.partner_email_opt_in.should be_false
+      partner.rtv_sms_opt_in.should be_true
+      partner.partner_sms_opt_in.should be_false
+      partner.ask_for_volunteers.should be_true
+      partner.partner_ask_for_volunteers.should be_false
+    end
+  end
 
   describe "CSV" do
     it "can generate CSV of all registrants" do
