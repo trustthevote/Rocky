@@ -55,6 +55,8 @@ class Partner < ActiveRecord::Base
   end
   DEFAULT_WIDGET_IMAGE_NAME = "rtv234x60v1"
 
+  attr_accessor :tmp_asset_directory
+
   belongs_to :state, :class_name => "GeoState"
   has_many :registrants
 

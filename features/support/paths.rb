@@ -57,10 +57,15 @@ module NavigationHelpers
     #   new_partner_password_path
     when /the partner dashboard/
       partner_path
-
+    when /the admin dashboard/
+      admin_partners_path
     when /the registration page for that partner/
       "#{new_registrant_path}?partner=#{@partner.id}"
 
+    when /the partner edit page for that partner/
+      edit_admin_partner_path(Partner.last)
+    when /the partner edit page for the first partner/
+      edit_admin_partner_path(Partner.first)
 
     # Add more mappings here.
     # Here is a more fancy example:

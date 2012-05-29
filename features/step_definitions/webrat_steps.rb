@@ -138,6 +138,18 @@ Then /^the "([^\"]*)" checkbox should not be checked$/ do |label|
   field_labeled(label).should_not be_checked
 end
 
+
+Then /^I should see a field for "([^\"]*)"$/ do |label|
+  field_labeled(label).should be_a(Webrat::Field)
+end
+
+Then /^I should not see a field for "([^\"]*)"$/ do |label|
+  expect {
+    field_labeled(label)
+  }.to raise_error(Webrat::NotFoundError)
+end
+
+
 Then /^I should see a checkbox for "([^\"]*)"$/ do |label|
   field_labeled(label).should be_a(Webrat::CheckboxField)
 end

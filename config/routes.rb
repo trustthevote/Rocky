@@ -63,6 +63,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :partners do |p|
       p.resources :assets, :only => [ :index, :create, :destroy ]
     end
+    admin.resource :partner_zips, :only=>[:create]
   end
 
 end

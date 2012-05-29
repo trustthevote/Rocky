@@ -22,47 +22,12 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Admin::PartnersController < Admin::BaseController
+class Admin::PartnerZipsController < Admin::BaseController
 
-  def index
-    @partners = Partner.all
-    @partner_zip = PartnerZip.new(nil)
+  def create
+    pz = PartnerZip.new(params[:partner_zip][:zip_file])
+    pz.create
+    redirect_to admin_partners_path
   end
-
-  def show
-    @partner = Partner.find(params[:id])
-  end
-
-  def edit
-    @partner = Partner.find(params[:id])
-  end
-
-  def update
-    @partner = Partner.find(params[:id])
-
-    if @partner.update_attributes(params[:partner])
-      update_email_templates(@partner, params[:template])
-      update_custom_css(@partner, params[:css_files])
-
-      redirect_to [ :admin, @partner ]
-    else
-      render :edit
-    end
-  end
-
-  private
-
-  def update_email_templates(partner, templates)
-    (templates || {}).each do |name, body|
-      EmailTemplate.set(partner, name, body)
-    end
-  end
-
-  def update_custom_css(partner, css_files)
-    paf = PartnerAssetsFolder.new(partner)
-    (css_files || {}).each do |name, data|
-      paf.update_css(name, data)
-    end
-  end
-
+  
 end

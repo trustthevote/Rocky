@@ -28,15 +28,64 @@
   <%- if @partner.can_be_whitelabeled? %>
     <fieldset>
       <legend>Whitelabeling</legend>
-      <ul class="stacked">
+      
+      <ul class="checkbox">
         <li>
           <h3>
-            <%= f.check_box :whitelabeled %>
-            <%= f.label :whitelabeled, 'Enabled' %>
+            <%= f.check_box :rtv_email_opt_in %>
+            <%= f.label :rtv_email_opt_in, 'Ask for RTV email opt-in' %>
           </h3>
         </li>
       </ul>
-
+      <ul class="checkbox">
+        <li>
+          <h3>
+            <%= f.check_box :rtv_sms_opt_in %>
+            <%= f.label :rtv_sms_opt_in, 'Ask for RTV SMS opt-in' %>
+          </h3>
+        </li>
+      </ul>
+      <ul class="checkbox">
+        <li>
+          <h3>
+            <%= f.check_box :ask_for_volunteers %>
+            <%= f.label :ask_for_volunteers, 'Ask for RTV Volunteers' %>
+          </h3>
+        </li>
+      </ul>
+      <ul class="checkbox">
+        <li>
+          <h3>
+            <%= f.check_box :partner_email_opt_in %>
+            <%= f.label :partner_email_opt_in, 'Ask for partner email opt-in' %>
+          </h3>
+        </li>
+      </ul>
+      <ul class="checkbox">
+        <li>
+          <h3>
+            <%= f.check_box :partner_sms_opt_in %>
+            <%= f.label :partner_sms_opt_in, 'Ask for partner SMS opt-in' %>
+          </h3>
+        </li>
+      </ul>
+      <ul class="checkbox">
+        <li>
+          <h3>
+            <%= f.check_box :partner_ask_for_volunteers %>
+            <%= f.label :partner_ask_for_volunteers, 'Ask for partner Volunteers' %>
+          </h3>
+        </li>
+      </ul>
+      <ul class="checkbox">
+        <li>
+          <h3>
+            <%= f.check_box :whitelabeled %>
+            <%= f.label :whitelabeled, 'Whitelabeled CSS' %>
+          </h3>
+        </li>
+      </ul>
+      
       <div class="whitelabeled">
         <ul class="stacked">
           <li class="width_a">

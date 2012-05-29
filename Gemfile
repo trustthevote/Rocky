@@ -10,6 +10,7 @@ gem "fastercsv", "= 1.5.0"
 gem "daemons", "= 1.0.10"
 gem "paperclip", "= 2.3.1.1"
 gem "mysql"
+gem "rubyzip"
 
 #gem "rocky_branding", "= 12.3.5"
 #gem "rocky_branding"

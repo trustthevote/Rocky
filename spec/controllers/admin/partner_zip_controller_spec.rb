@@ -22,47 +22,30 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Admin::PartnersController < Admin::BaseController
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-  def index
-    @partners = Partner.all
-    @partner_zip = PartnerZip.new(nil)
-  end
-
-  def show
-    @partner = Partner.find(params[:id])
-  end
-
-  def edit
-    @partner = Partner.find(params[:id])
-  end
-
-  def update
-    @partner = Partner.find(params[:id])
-
-    if @partner.update_attributes(params[:partner])
-      update_email_templates(@partner, params[:template])
-      update_custom_css(@partner, params[:css_files])
-
-      redirect_to [ :admin, @partner ]
-    else
-      render :edit
+describe Admin::PartnerZipsController do
+  describe "create" do
+    before(:each) do
+      @file = fixture_file_upload('files/four_good_partners.zip')
+      @pz = PartnerZip.new(nil)
+    end
+    context "results" do
+      before(:each) do
+        post :create, :partner_zip => {:zip_file=>@file}
+      end
+      it { should redirect_to(admin_partners_path) }      
+    end
+    it "extracts the zip file to a tmp directory" do
+      mock(PartnerZip).new(@file) { @pz }
+      post :create, :partner_zip => {:zip_file=>@file}
+      PartnerZip.should have_received(:new).with(@file)
+    end
+    it "creates partners in bulk from the extracted directory" do
+      mock(PartnerZip).new(@file) { @pz }
+      mock(@pz).create { true }
+      post :create, :partner_zip => {:zip_file=>@file}
+      @pz.should have_received(:create)
     end
   end
-
-  private
-
-  def update_email_templates(partner, templates)
-    (templates || {}).each do |name, body|
-      EmailTemplate.set(partner, name, body)
-    end
-  end
-
-  def update_custom_css(partner, css_files)
-    paf = PartnerAssetsFolder.new(partner)
-    (css_files || {}).each do |name, data|
-      paf.update_css(name, data)
-    end
-  end
-
 end

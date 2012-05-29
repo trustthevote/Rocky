@@ -36,30 +36,6 @@ Feature: White labeling
       When I go to the registration page for that partner
       Then I should see a link to that partner's CSS
     
-    @wip-l
-    Scenario: Uploading a zip to create new partners
     
-    @wip-l
-    Scenario: Uploading a zip with missing required assets
-    
-    @wip-l
-    Scenario: Uploading a zip with an invalid partner record
-    
-    @wip-l
-    Scenario: Uploading a zip with a duplicate email/login for a partner record
-    
-    
-    # TODO:
-    # write email scenarios
-    # 
-    # MODELING:
-    # 
-    # * set up default values for existing fields (true for rtv-opt, false for partner-opt, false for registrants)
-    # 
-    # * whitelabeled partner has methods for checking if email templates are there
-    # * partners can be configured to use special email templates 
-    # Q: only if whitelabeled in general?
-    # 
-    # * if configured, make emails to users use partner-specific email templates
     
     

@@ -1,5 +1,12 @@
 <h1>Partners</h1>
 
+<% form_for [ :admin, @partner_zip], :url=>admin_partner_zips_path, :html => { :multipart => true }  do |f| %>
+  <%= f.file_field 'zip_file' %>
+  <%= f.label 'zip_file', 'Upload partner-creation zip file' %>
+  <%= f.submit 'Upload' %>
+<%- end %>
+  
+
 <table id="partners">
   <thead>
     <tr>
