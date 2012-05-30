@@ -25,7 +25,7 @@
 set :application, "rocky"
 set :repository,  "git@github.com:trustthevote/Rocky.git"
 
-# If you have previously been relying upon the code to start, stop 
+# If you have previously been relying upon the code to start, stop
 # and restart your mongrel application, or if you rely on the database
 # migration code, please uncomment the lines you require below
 
@@ -34,7 +34,7 @@ set :repository,  "git@github.com:trustthevote/Rocky.git"
 # load 'ext/rails-database-migrations.rb'
 # load 'ext/rails-shared-directories.rb'
 
-# There are also new utility libaries shipped with the core these 
+# There are also new utility libaries shipped with the core these
 # include the following, please see individual files for more
 # documentation, or run `cap -vT` with the following lines commented
 # out to see what they make available.
@@ -68,6 +68,16 @@ set :rake, 'bundle exec rake'
 before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
+
+namespace :admin do
+  desc "reset admin password and display"
+  task :reset_password, :roles => [:app] do
+    run <<-CMD
+      cd #{latest_release} &&
+      bundle exec rake admin:reset_password
+    CMD
+  end
+end
 
 namespace :deploy do
   # no more geminstaller - bundler [AMM]
@@ -125,7 +135,7 @@ namespace :deploy do
       ln -nfs /data/rocky/html pdf
     CMD
   end
-  
+
   desc "Link the public/partners dir to the shared path"
   task :symlink_partners, :roles=>[:app], :except => {:no_release => true} do
     run <<-CMD
@@ -151,7 +161,7 @@ namespace :deploy do
     run "cd #{latest_release} && ruby script/rocky_pdf_runner stop"
     # nasty hack to make sure it stops
     run "pkill -f com.pivotallabs.rocky.PdfServer" rescue nil
-    sleep 5 
+    sleep 5
     run "cd #{latest_release} && ruby script/rocky_pdf_runner start"
     run "cd #{latest_release} && ruby script/rocky_runner start"
     unset(:latest_release)
