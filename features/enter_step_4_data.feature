@@ -30,9 +30,9 @@ Feature: Step 4
     Scenario: User sees RTV opt-in options for partner 1
       Given I have completed step 3
       When I go to the step 4 page
-      Then I should see a checkbox for "Receive emails"
+      Then I should see a checkbox for "Receive emails from Rock the Vote"
       And I should see a checkbox for "I would like to volunteer with Rock the Vote"
-      When I check "Receive emails"
+      When I check "Receive emails from Rock the Vote"
       And I press "registrant_submit"
       Then I should be signed up for "opt_in_email" 
       And I should not be signed up for "volunteer" 
