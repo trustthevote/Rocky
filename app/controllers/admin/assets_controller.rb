@@ -31,10 +31,13 @@ class Admin::AssetsController < Admin::BaseController
 
   # Uploads new asset
   def create
-    asset_file = params[:asset][:file]
-    name = asset_file.original_filename
+    asset_file = params[:asset].try(:[], :file)
 
-    assets_folder.update_asset(name, asset_file)
+    if asset_file
+      name = asset_file.original_filename
+      assets_folder.update_asset(name, asset_file)
+    end
+
     redirect_to [ :admin, partner, :assets ]
   end
 

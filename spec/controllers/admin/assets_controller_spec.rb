@@ -49,4 +49,9 @@ describe Admin::AssetsController do
     before  { post :create, :partner_id => @partner, :asset => { :file => @file } }
     it      { should redirect_to admin_partner_assets_path(@partner) }
   end
+
+  describe 'create without a file' do
+    before  { post :create, :partner_id => @partner }
+    it      { should redirect_to admin_partner_assets_path(@partner) }
+  end
 end
