@@ -115,9 +115,12 @@ Factory.define :maximal_registrant, :parent => :completed_registrant do |f|
   f.prev_zip_code       "15215"
   f.opt_in_email        true
   f.opt_in_sms          true
+  f.partner_opt_in_email        true
+  f.partner_opt_in_sms          true
   f.survey_answer_1     "blue"
   f.survey_answer_2     "fido"
   f.volunteer           true
+  f.partner_volunteer   true
 end
 
 Factory.define :partner do |partner|
