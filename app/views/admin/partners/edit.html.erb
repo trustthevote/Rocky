@@ -102,8 +102,7 @@
           </li>
         </ul>
 
-        <% [ [ 'confirmation.en', 'Confirmation EN' ], [ 'confirmation.es', 'Confirmation ES' ],
-             [ 'reminder.en', 'Reminder EN' ], [ 'reminder.es', 'Reminder ES' ] ].each do |name, label| %>
+        <% EmailTemplate::TEMPLATE_NAMES.each do |name, label| %>
           <ul class="stacked">
             <li class="width_h">
               <h3><label><%= label %></label></h3>

@@ -46,11 +46,22 @@ Feature: Admin UI
       And I should see "CSV Partner 3"
       And I should see "CSV Partner 4"
     
-    @wip-l
+    
     Scenario: Uploading a zip with missing required assets
+     When I go to the admin dashboard
+     And I upload the "missing_csv.zip" zip file
+     And I press "Upload"
+     Then I should be on the admin dashboard
+     And I should see "The CSV file is missing"
     
-    @wip-l
+
     Scenario: Uploading a zip with an invalid partner record
-    
-    @wip-l
-    Scenario: Uploading a zip with a duplicate email/login for a partner record
+      When I go to the admin dashboard
+      And I upload the "invalid_partners.zip" zip file
+      And I press "Upload"
+      Then I should be on the admin dashboard
+      And I should see "Row 1 is invalid"
+      And I should see "Row 2 is invalid"
+      And I should see "Row 3 is invalid"
+      And I should see "Row 4 is whitelabeled and missing application.css in /partner_4"
+      And I should see "Row 4 is whitelabeled and missing registration.css in /partner_4"    

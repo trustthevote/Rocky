@@ -47,5 +47,12 @@ describe Admin::PartnerZipsController do
       post :create, :partner_zip => {:zip_file=>@file}
       @pz.should have_received(:create)
     end
+    it "sets a flash message when there are errors" do
+      mock(PartnerZip).new(@file) { @pz }
+      mock(@pz).create { false }
+      mock(@pz).error_messages {"An error message"}
+      post :create, :partner_zip => {:zip_file=>@file}
+      flash[:warning].should == "An error message"
+    end
   end
 end

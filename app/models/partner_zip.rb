@@ -5,14 +5,18 @@ class PartnerZip
   attr_accessor :tmp_file, :destination
   attr_reader :errors
   
-  def self.tmp_path
-    File.join(RAILS_ROOT, 'tmp', 'partner_uploads', DateTime.now.strftime("%Y_%m_%d_%H_%M_%S"))
+  def self.tmp_root
+    File.join(RAILS_ROOT, 'tmp', 'partner_uploads')
+  end
+  
+  def self.get_tmp_path
+    File.join(self.tmp_root, DateTime.now.strftime("%Y_%m_%d_%H_%M_%S_%L"))
   end
   
   
   def initialize(tmp_file)
     @tmp_file = tmp_file
-    @destination = PartnerZip.tmp_path
+    @destination = PartnerZip.get_tmp_path
     @errors = []
     if @tmp_file
       Zip::ZipFile.open(@tmp_file.path) { |zip_file|
@@ -74,18 +78,31 @@ class PartnerZip
     return false unless all_valid
     new_partners.each do |p|
       p.save!
-      if p.whitelabeled
-        paf = PartnerAssetsFolder.new(p)
-        paf.update_css('application', File.open(File.join(@destination, p.tmp_asset_directory, 'application.css')))
-        paf.update_css('registration', File.open(File.join(@destination, p.tmp_asset_directory, 'registration.css')))
-        Dir.entries(File.join(@destination, p.tmp_asset_directory)).each do |fname|
-          if !File.directory?(fname) && fname != "application.css" && fname != "registration.css"
-            paf.update_asset(fname, File.open(File.join(@destination, p.tmp_asset_directory, fname)))
+      if !p.tmp_asset_directory.blank?
+        if p.whitelabeled
+          paf = PartnerAssetsFolder.new(p)
+          paf.update_css('application', File.open(File.join(@destination, p.tmp_asset_directory, 'application.css')))
+          paf.update_css('registration', File.open(File.join(@destination, p.tmp_asset_directory, 'registration.css')))
+          Dir.entries(File.join(@destination, p.tmp_asset_directory)).each do |fname|
+            if !File.directory?(fname) && fname != "application.css" && fname != "registration.css" && !(fname =~ /e[ns]$/)
+              paf.update_asset(fname, File.open(File.join(@destination, p.tmp_asset_directory, fname)))
+            end
           end
         end
-      end
+        EmailTemplate::TEMPLATE_NAMES.each do |name,label|
+          if File.exists?(File.join(@destination, p.tmp_asset_directory, name))
+            File.open(File.join(@destination, p.tmp_asset_directory, name)) do |template_file|
+              EmailTemplate.set(p,name,template_file.read)
+            end
+          end
+        end
+      end      
     end
     return true
+  ensure
+    if File.exists?(@destination)
+      FileUtils.remove_entry_secure(@destination, true)
+    end  
   end
   
   def columns
@@ -98,6 +115,15 @@ class PartnerZip
       :tmp_asset_directory]    
   end
   
+  def error_messages
+    @errors.collect {|err|
+      if err.is_a?(Array)
+        "#{err[0]} <ul><li>#{err[1].full_messages.join("</li><li>")}</li></ul>"
+      else
+        err
+      end
+    }.join("<br/>")
+  end
   
   def new_record?
     true

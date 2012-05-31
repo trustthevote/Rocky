@@ -24,6 +24,9 @@
 #***** END LICENSE BLOCK *****
 class EmailTemplate < ActiveRecord::Base
 
+  TEMPLATE_NAMES = [ [ 'confirmation.en', 'Confirmation EN' ], [ 'confirmation.es', 'Confirmation ES' ],
+       [ 'reminder.en', 'Reminder EN' ], [ 'reminder.es', 'Reminder ES' ] ]
+
   belongs_to :partner
 
   validates_presence_of   :partner

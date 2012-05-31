@@ -26,7 +26,9 @@ class Admin::PartnerZipsController < Admin::BaseController
 
   def create
     pz = PartnerZip.new(params[:partner_zip][:zip_file])
-    pz.create
+    unless pz.create
+      flash[:warning] = pz.error_messages
+    end
     redirect_to admin_partners_path
   end
   
