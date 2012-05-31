@@ -32,12 +32,6 @@
                                 "http://twitter.com/home?status=#{@registrant.status_text}+#{@root_url_escaped}",
                                 :target => "_blank") %>
   </div>
-  <div><%= rollover_image_link( :share_google_buzz,
-                                I18n.t('txt.button.share_google_buzz'),
-                                "http://www.google.com/reader/link?url=#{@root_url_escaped}&amp;srcURL=#{@root_url_escaped}" +
-                                "&amp;srcTitle=#{SPONSOR_NAME_CGI_ESCAPED}&amp;title=#{@registrant.status_text}",
-                                :target => "_blank") %>
-  </div>
 </div>
 
 <!-- Disabling form until spammers can be stopped  div class="tell_friend">
