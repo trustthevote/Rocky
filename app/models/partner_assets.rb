@@ -24,6 +24,9 @@
 #***** END LICENSE BLOCK *****
 module PartnerAssets
 
+  APP_CSS = "application.css"
+  REG_CSS = "registration.css"
+
   def css_present?
     application_css_present? && registration_css_present?
   end
@@ -53,11 +56,11 @@ module PartnerAssets
   end
 
   def application_css_url
-    "#{assets_url}/application.css"
+    "#{assets_url}/#{APP_CSS}"
   end
 
   def registration_css_url
-    "#{assets_url}/registration.css"
+    "#{assets_url}/#{REG_CSS}"
   end
 
   def absolute_old_assets_path
