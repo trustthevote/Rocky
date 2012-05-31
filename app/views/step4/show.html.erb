@@ -2,24 +2,26 @@
 
 <% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
   <%- if @registrant.partner.rtv_email_opt_in || @registrant.partner.primary? || @registrant.partner.partner_email_opt_in %>
-    <ul class="checkbox">
-      <%- if @registrant.partner.partner_email_opt_in && !@registrant.partner.primary? %>
+    <%- if @registrant.partner.partner_email_opt_in && !@registrant.partner.primary? %>
+      <ul class="checkbox">
         <li>
           <h3>
             <%= form.check_box :partner_opt_in_email %>
             <%= form.label :partner_opt_in_email, t('txt.registration.opt_in_email', :organization => h(@registrant.partner.organization)) %>
           </h3>
         </li>
-      <%- end %>
-      <%- if @registrant.partner.rtv_email_opt_in || @registrant.partner.primary? %>
+      </ul>
+    <%- end %>
+    <%- if @registrant.partner.rtv_email_opt_in || @registrant.partner.primary? %>
+      <ul class="checkbox">
         <li>
           <h3>
             <%= form.check_box :opt_in_email %>
             <%= form.label :opt_in_email, t('txt.registration.opt_in_email', :organization => h("Rock the Vote")) %>
           </h3>
         </li>
-      <%- end %>
-    </ul>
+      </ul>
+    <%- end %>
   <%- end %>
   <div class="checkbox-explanation">
     <p><%= t('txt.registration.instructions.opt_in_email') %></p>
