@@ -76,12 +76,17 @@ class RegistrationStep < ApplicationController
     redirect_to next_url
   end
 
-  def find_registrant(special_case=nil)
-    @registrant = Registrant.find_by_param!(params[:registrant_id] || params[:id])
+  def find_registrant(special_case = nil, p = params)
+    @registrant = Registrant.find_by_param!(p[:registrant_id] || p[:id])
     if (@registrant.complete? || @registrant.under_18?) && special_case.nil?
       raise ActiveRecord::RecordNotFound
     end
     I18n.locale = @registrant.locale
+
+    if @registrant.partner
+      @partner    = @registrant.partner
+      @partner_id = @partner.id
+    end
   end
 
   def find_partner
