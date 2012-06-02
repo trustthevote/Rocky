@@ -31,8 +31,8 @@
     </li>
   </ul>
   <%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.partner_sms_opt_in || @registrant.partner.primary? %>
-    <ul class="checkbox">
-      <%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.primary? %>
+    <%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.primary? %>
+      <ul class="checkbox">
         <li class="spacer">&nbsp;</li>
         <li>
           <h3>
@@ -41,8 +41,10 @@
   
           </h3>
         </li>
-      <%- end %>
-      <%- if @registrant.partner.partner_sms_opt_in && !@registrant.partner.primary? %>
+      </ul>
+    <%- end %>
+    <%- if @registrant.partner.partner_sms_opt_in && !@registrant.partner.primary? %>
+      <ul class="checkbox">
         <li class="spacer">&nbsp;</li>
         <li>
           <h3>
@@ -50,8 +52,8 @@
             <%= form.label :partner_opt_in_sms, t('txt.registration.opt_in_sms', :organization=>h(@registrant.partner.organization)) %>
           </h3>
         </li>
-      <%- end %>
-    </ul>
+      </ul>
+    <%- end %>
   <%- end %>
 
   <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
