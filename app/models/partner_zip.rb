@@ -26,7 +26,7 @@ require 'zip/zip'
 
 class PartnerZip
   
-  attr_accessor :tmp_file, :destination, :there_are_errors
+  attr_accessor :tmp_file, :destination, :original_destination, :there_are_errors
   attr_reader :errors
   
   def self.tmp_root
@@ -41,6 +41,7 @@ class PartnerZip
   def initialize(tmp_file)
     @tmp_file = tmp_file
     @destination = PartnerZip.get_tmp_path
+    @original_destination = @destination
     @errors = []
     @there_are_errors = false
     if @tmp_file
@@ -107,10 +108,21 @@ private
 
   def detect_csv
     csv_file = nil
+    directories = []
     Dir.entries(self.destination).each do |entry|
-      if entry =~ /\.csv$/
+      if entry =~ /\.csv$/i
         csv_file = File.join(self.destination, entry)
-        break;
+        break
+      elsif File.directory?(File.join(self.destination, entry)) && !(entry =~ /^[\._]/)
+        directories << entry
+      end
+    end
+    if !csv_file
+      prev_destination = destination
+      directories.each do |sub_dir|
+        @destination = File.join(prev_destination, sub_dir)
+        csv_file = detect_csv
+        break if csv_file
       end
     end
     return csv_file
@@ -193,8 +205,8 @@ private
   end
   
   def remove_tmp_directory
-    if File.exists?(self.destination)
-      FileUtils.remove_entry_secure(self.destination, true)
+    if File.exists?(self.original_destination)
+      FileUtils.remove_entry_secure(self.original_destination, true)
     end  
   end
   

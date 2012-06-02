@@ -39,6 +39,16 @@ describe PartnerZip do
       pz = PartnerZip.new(@file)
       pz.create.should be_false
     end
+    it "looks in folder when the zip file unzips to a subdirectory" do
+      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'ejs_good_partners1.zip'))
+      pz = PartnerZip.new(@file)
+      pz.create.should be_true      
+    end
+    it "looks into nested folders when the zip file unzips to a subdirectory" do
+      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'ejs_good_partners2.zip'))
+      pz = PartnerZip.new(@file)
+      pz.create.should be_true      
+    end
     it "creates and checks validity of each partner in the CSV" do
       @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
       pz = PartnerZip.new(@file)
@@ -72,6 +82,10 @@ describe PartnerZip do
       pz.create
       Dir.entries(PartnerZip.tmp_root).size.should == 2
       @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
+      pz = PartnerZip.new(@file)
+      pz.create.should
+      Dir.entries(PartnerZip.tmp_root).size.should == 2      
+      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'ejs_good_partners2.zip'))
       pz = PartnerZip.new(@file)
       pz.create.should
       Dir.entries(PartnerZip.tmp_root).size.should == 2      
