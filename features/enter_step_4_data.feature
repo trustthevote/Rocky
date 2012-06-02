@@ -37,7 +37,7 @@ Feature: Step 4
       Then I should be signed up for "opt_in_email" 
       And I should not be signed up for "volunteer" 
     
-
+    @wip
     Scenario Outline: User sees RTV and partner opt-in options as configured for the partner
       Given the following partner exists:
         | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |
@@ -48,21 +48,22 @@ Feature: Step 4
       And I <see_partner_email_checkbox> see a checkbox for "Receive emails from Opt-in Partner"
       And I <see_rtv_volunteer_checkbox> see a checkbox for "I would like to volunteer with Rock the Vote"
       And I <see_parnter_volunteer_checkbox> see a checkbox for "I would like to volunteer with Opt-in Partner"
+      And I <see_rtv_instructions> see "We will send you timely election reminders, polling place information, and information about music and issues."
       
       Examples:
-        | rtv_email | rtv_volunteer | partner_email | partner_volunteer | see_rtv_email_checkbox | see_rtv_volunteer_checkbox | see_partner_email_checkbox | see_parnter_volunteer_checkbox |
-        | true      | true          | true          | true              | should                 | should                     | should                     | should                         |
-        | true      | true          | true          | false             | should                 | should                     | should                     | should not                     |
-        | true      | true          | false         | true              | should                 | should                     | should not                 | should                         |
-        | true      | true          | false         | false             | should                 | should                     | should not                 | should not                     |
-        | true      | false         | true          | true              | should                 | should not                 | should                     | should                         |
-        | false     | true          | true          | true              | should not             | should                     | should                     | should                         |
-        | false     | true          | true          | false             | should not             | should                     | should                     | should not                     |
-        | false     | false         | true          | true              | should not             | should not                 | should                     | should                         |
-        | true      | false         | false         | true              | should                 | should not                 | should not                 | should                         |
-        | false     | false         | false         | true              | should not             | should not                 | should not                 | should                         |
-        | true      | false         | false         | false             | should                 | should not                 | should not                 | should not                     |
-        | false     | false         | false         | false             | should not             | should not                 | should not                 | should not                     |
+        | rtv_email | rtv_volunteer | partner_email | partner_volunteer | see_rtv_email_checkbox | see_rtv_volunteer_checkbox | see_partner_email_checkbox | see_parnter_volunteer_checkbox | see_rtv_instructions |
+        | true      | true          | true          | true              | should                 | should                     | should                     | should                         | should               |
+        | true      | true          | true          | false             | should                 | should                     | should                     | should not                     | should               |
+        | true      | true          | false         | true              | should                 | should                     | should not                 | should                         | should               |
+        | true      | true          | false         | false             | should                 | should                     | should not                 | should not                     | should               |
+        | true      | false         | true          | true              | should                 | should not                 | should                     | should                         | should               |
+        | false     | true          | true          | true              | should not             | should                     | should                     | should                         | should not           |
+        | false     | true          | true          | false             | should not             | should                     | should                     | should not                     | should not           |
+        | false     | false         | true          | true              | should not             | should not                 | should                     | should                         | should not           |
+        | true      | false         | false         | true              | should                 | should not                 | should not                 | should                         | should               |
+        | false     | false         | false         | true              | should not             | should not                 | should not                 | should                         | should not           |
+        | true      | false         | false         | false             | should                 | should not                 | should not                 | should not                     | should               |
+        | false     | false         | false         | false             | should not             | should not                 | should not                 | should not                     | should not           |
       
     Scenario: User signs up for everything
       Given the following partner exists:
