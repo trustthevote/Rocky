@@ -34,5 +34,6 @@ public/partners
 public/stylesheets/application.css
 public/stylesheets/partner.css
 public/stylesheets/registration.css
+public/stylesheets/example_whitelabel_application.css
 # Pito
 db/*.sqlite3
