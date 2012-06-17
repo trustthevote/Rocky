@@ -18,3 +18,11 @@ Feature: Step 2
       Given I have completed step 1
       When I go to the step 2 page
       Then I should see "Pennsylvania" in select box "registrant_mailing_state_abbrev"
+
+    @wip
+    Scenario: fields for a washington state resident
+      Given I have completed step 1 as a resident of "Washington" state
+      When I go to the step 2 page
+      Then I should see a field for "Phone"
+      And I should see a field for "Type"
+      And I should see a field for "Yes, I have a WA state issued drivers license"

@@ -480,6 +480,31 @@ describe Registrant do
       assert_equal new_york.name, reg.home_state_name
     end
   end
+  
+  describe "custom_step_2?" do
+    it "returns true if the state has a custom step 2" do
+      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { true }
+      reg = Factory.build(:step_1_registrant)
+      reg.custom_step_2?.should be_true
+    end
+    it "returns false if the state has a custom step 2" do
+      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { false }
+      reg = Factory.build(:step_1_registrant)
+      reg.custom_step_2?.should be_false
+    end    
+    it "returns false if the state is missing" do
+      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { true }
+      reg = Factory.build(:step_1_registrant)
+      reg.home_state = nil
+      reg.custom_step_2?.should be_false
+    end
+  end
+  describe "custom_step_2_partial" do
+    it "returns a filename of a view partial based on the state abbreviation" do
+      reg = Factory.build(:step_2_registrant)
+      reg.custom_step_2_partial.should == "pa.html.erb"
+    end
+  end
 
   describe "states by abbreviation" do
     it "sets state by abbreviation" do

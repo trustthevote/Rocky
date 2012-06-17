@@ -32,6 +32,13 @@ Given /^I have completed step (\d+) from that partner$/ do |step_num|
   @registrant.save!
 end
 
+Given /^I have completed step (\d+) as a resident of "([^\"]*)" state$/ do |step_num,state_name|
+  geo_state = GeoState.find_by_name(state_name)
+  zip = GeoState.zip5map.invert[geo_state.abbreviation] || GeoState.zip3map.invert[geo_state.abbreviation]
+  @registrant = Factory.create("step_#{step_num}_registrant", :home_zip_code=>zip+'00')
+end
+
+
 When /^I am (\d+) years old$/ do |age|
   fill_in("registrant_date_of_birth", :with => age.to_i.years.ago.to_date.strftime("%m/%d/%Y"))
 end

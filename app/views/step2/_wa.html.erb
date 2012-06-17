@@ -1,0 +1,21 @@
+<ul class="flat">
+  <li class="width_b">
+    <h3><%= form.label :phone %></h3>
+    <div class="flat-stack">
+      <%= field_div form, :phone %>
+      <% if form.object.errors.on :phone %>
+        <span class="error"><%= form.object.errors.on :phone %></span>
+      <% else %>
+        <span class="example">###-###-####</span>
+      <% end %>
+    </div>
+    <%= tooltip_tag :phone %>
+  </li>
+  <li class="secondary">
+    <h3><%= form.label :phone_type %></h3>
+    <div class="flat-stack">
+      <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
+      <span class="error"><%= form.object.errors.on :phone_type %></span>
+    </div>
+  </li>
+</ul>

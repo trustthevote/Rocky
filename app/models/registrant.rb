@@ -502,6 +502,14 @@ class Registrant < ActiveRecord::Base
     prev_state && prev_state.abbreviation
   end
 
+  def custom_step_2?
+    !home_state.nil? && File.exists?(File.join(RAILS_ROOT, 'app/views/step2/', "_#{custom_step_2_partial}"))
+  end
+
+  def custom_step_2_partial
+    "#{home_state.abbreviation.downcase}.html.erb"
+  end
+
   def will_be_18_by_election?
     true
   end
