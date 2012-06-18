@@ -160,6 +160,20 @@ Then /^I should not see a checkbox for "([^\"]*)"$/ do |label|
   }.to raise_error(Webrat::NotFoundError)
 end
 
+Then /^I should see a button for "([^\"]*)"$/ do |label|
+  find_button(label).should be_a(Webrat::ButtonField)
+end
+
+Then /^I should see a disabled button for "([^\"]*)"$/ do |label|
+  find_link(label)
+end
+
+Then /^I should see an enabled button for "([^\"]*)"$/ do |label|
+  find_button(label).should_not be_disabled
+end
+
+
+
 
 Then /^I should be on (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)

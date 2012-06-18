@@ -1,31 +1,7 @@
 <h1><%= t('txt.registration.step_4_header') %></h1>
 
 <% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
-  <%- if @registrant.partner.rtv_email_opt_in || @registrant.partner.primary? || @registrant.partner.partner_email_opt_in %>
-    <%- if @registrant.partner.partner_email_opt_in && !@registrant.partner.primary? %>
-      <ul class="checkbox">
-        <li>
-          <h3>
-            <%= form.check_box :partner_opt_in_email %>
-            <%= form.label :partner_opt_in_email, t('txt.registration.opt_in_email', :organization => h(@registrant.partner.organization)) %>
-          </h3>
-        </li>
-      </ul>
-    <%- end %>
-    <%- if @registrant.partner.rtv_email_opt_in || @registrant.partner.primary? %>
-      <ul class="checkbox">
-        <li>
-          <h3>
-            <%= form.check_box :opt_in_email %>
-            <%= form.label :opt_in_email, t('txt.registration.opt_in_email', :organization => h("Rock the Vote")) %>
-          </h3>
-        </li>
-      </ul>
-      <div class="checkbox-explanation">
-        <p><%= t('txt.registration.instructions.opt_in_email') %></p>
-      </div>
-    <%- end %>
-  <%- end %>
+  <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
 
 <% unless @question_1.blank? && @question_2.blank? && !@registrant.partner.ask_for_volunteers? && !@registrant.partner.primary? && !@registrant.partner.partner_ask_for_volunteers? %>
   <fieldset class="questions">

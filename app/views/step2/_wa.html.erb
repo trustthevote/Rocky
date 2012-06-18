@@ -19,3 +19,26 @@
     </div>
   </li>
 </ul>
+
+<%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
+<%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form} %>
+
+
+<ul class="checkbox">
+  <li class="spacer">&nbsp;</li>
+  <li>
+    <h3>
+      <%= form.radio_button :has_state_license, true %>
+      <%= form.label :has_state_license_true, t('txt.registration.has_state_license', :state=>h(@registrant.home_state.abbreviation)) %>
+    </h3>
+  </li>
+</ul>
+<ul class="checkbox">
+  <li class="spacer">&nbsp;</li>
+  <li>
+    <h3>
+      <%= form.radio_button :has_state_license, false %>
+      <%= form.label :has_state_license_false, t('txt.registration.has_no_state_license', :state=>h(@registrant.home_state.abbreviation)) %>
+    </h3>
+  </li>
+</ul>
