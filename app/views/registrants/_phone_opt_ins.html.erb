@@ -1,0 +1,25 @@
+<%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.partner_sms_opt_in || @registrant.partner.primary? %>
+  <%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.primary? %>
+    <ul class="checkbox">
+      <li class="spacer">&nbsp;</li>
+      <li>
+        <h3>
+          <%= form.check_box :opt_in_sms %>
+          <%= form.label :opt_in_sms, t('txt.registration.opt_in_sms', :organization=>h("Rock the Vote")) %>
+
+        </h3>
+      </li>
+    </ul>
+  <%- end %>
+  <%- if @registrant.partner.partner_sms_opt_in && !@registrant.partner.primary? %>
+    <ul class="checkbox">
+      <li class="spacer">&nbsp;</li>
+      <li>
+        <h3>
+          <%= form.check_box :partner_opt_in_sms %>
+          <%= form.label :partner_opt_in_sms, t('txt.registration.opt_in_sms', :organization=>h(@registrant.partner.organization)) %>
+        </h3>
+      </li>
+    </ul>
+  <%- end %>
+<%- end %>
