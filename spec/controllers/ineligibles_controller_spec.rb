@@ -54,7 +54,7 @@ describe IneligiblesController do
     end
 
     it "shows state localized sub_18 message" do
-      @registrant = Factory.create(:step_1_registrant, :date_of_birth => 16.years.ago.to_date.strftime("%m/%d/%Y"))
+      @registrant = Factory.create(:step_1_registrant, :date_of_birth => 16.years.ago.to_date.strftime("%m/%d/%Y"), :opt_in_email=>true)
       assert @registrant.ineligible_age?
       get :show, :registrant_id => @registrant.to_param
       assert_not_nil assigns[:registrant]
