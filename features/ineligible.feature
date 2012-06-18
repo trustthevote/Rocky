@@ -55,4 +55,4 @@ Feature: Ineligible
       When I press "registrant_submit"
       Then I should see "you aren't 18 yet"
       When I press "Remind Me Later"
-      Then I should see "Tell a Friend by Email"
+      Then I should see "You're on the list!"
