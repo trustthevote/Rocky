@@ -89,7 +89,7 @@ describe FinishesController do
   end
 
   def assert_share_links(share_text)
-    assert_select "div.share div", 3
+    assert_select "div.share div", 2
 
     assert_select "a[class=button_share_facebook_en][href=http://www.facebook.com/sharer.php?u=#{FACEBOOK_CALLBACK_URL}&t=#{CGI.escape(share_text)}]"
 
@@ -98,12 +98,7 @@ describe FinishesController do
     href << "?status=#{escaped}"
     assert_select "a[class=button_share_twitter_en][href=#{href}]"
 
-    href = "http://www.google.com/reader/link"
-    href << "?url=#{CGI.escape(root_url)}"
-    href << "&amp;srcURL=#{CGI.escape(root_url)}"
-    href << "&amp;srcTitle=#{SPONSOR_NAME_CGI_ESCAPED}"
-    href << "&amp;title=#{CGI.escape(share_text)}"
-    assert_select "a[class=button_share_google_buzz_en][href=#{href}]"
+    
   end
 
   describe "stop reminders" do
