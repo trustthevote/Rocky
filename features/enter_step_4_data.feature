@@ -3,11 +3,6 @@ Feature: Step 4
   As a registrant
   I want to opt in and speak out
 
-    Scenario: see form
-     Given I have completed step 3
-      When I go to the step 4 page
-      Then I should see "Hello?"
-
     Scenario: enter data
      Given I have completed step 3
        And my phone number is not blank
