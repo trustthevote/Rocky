@@ -243,7 +243,7 @@ describe RegistrantsController do
     integrate_views
 
     it "should show a timeout page" do
-      reg = Factory.create(:step_1_registrant, :abandoned => true, :locale => "es")
+      reg = Factory.create(:step_1_registrant, :abandoned => true, :locale => "es", :partner_id=>2)
       get :show, :id => reg.to_param
       assert_redirected_to registrants_timeout_url(:partner => reg.partner.id, :locale => reg.locale)
     end
