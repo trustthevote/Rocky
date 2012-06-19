@@ -132,8 +132,8 @@ $(document).ready(function() {
         </li>
       </ul>
     <% end %>
+    <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
   <%- end %>
   
-  <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
   <div class="back"><%= link_to t('txt.button.back'), registrant_path(@registrant) %></div>
 <% end %>

@@ -117,6 +117,8 @@ When /^I live in (.*)$/ do |state_name|
   When %Q{I fill in "zip code" with "#{zip_prefix}01"}
 end
 
+
+
 After('@cleanup_pdf') do
   `rm #{@registrant.pdf_file_path}`
 end

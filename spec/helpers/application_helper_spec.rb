@@ -84,6 +84,10 @@ describe ApplicationHelper do
   end
 
 
+  describe "rollover_button" do
+    pending
+  end
+
   describe "form helpers" do
     attr_accessor :form
     before(:each) do

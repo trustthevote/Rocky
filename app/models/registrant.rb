@@ -150,10 +150,11 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :first_name, :unless => :building_via_api_call
     reg.validates_presence_of :last_name
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
-    reg.validates_presence_of :home_address
-    reg.validates_presence_of :home_city
+    reg.validates_presence_of :home_address, :unless => :custom_step_2?
+    reg.validates_presence_of :home_city, :unless => :custom_step_2?
     reg.validate :validate_race
-    reg.validate :validate_party, :unless => :building_via_api_call
+    reg.validate :validate_party, :unless => [:building_via_api_call, :custom_step_2?]
+    reg.validates_inclusion_of :has_state_license, :in=>[true,false], :if => :custom_step_2?
   end
   with_options :if => :needs_mailing_address? do |reg|
     reg.validates_presence_of :mailing_address

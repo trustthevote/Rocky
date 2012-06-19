@@ -255,6 +255,24 @@ describe Registrant do
       assert_attribute_invalid_with(:step_2_registrant, :home_address => nil)
       assert_attribute_invalid_with(:step_2_registrant, :home_city => nil)
     end
+    
+    it "does not require address or city when state has custom step 2" do
+      reg = Factory.build(:step_2_registrant, :home_address=>nil)
+      stub(reg).custom_step_2? { true }
+      reg.invalid?
+      assert reg.errors.on(:home_address).nil?
+      reg = Factory.build(:step_2_registrant, :home_city=>nil)
+      stub(reg).custom_step_2? { true }
+      reg.invalid?
+      assert reg.errors.on(:home_city).nil?
+    end
+    
+    it "should require has_state_license when state has custom step 2" do
+      reg = Factory.build(:step_2_registrant, :has_state_license=>nil)
+      stub(reg).custom_step_2? { true }
+      reg.invalid?
+      assert reg.errors.on(:has_state_license)
+    end
 
     it "should not require state id" do
       assert_attribute_valid_with(:step_2_registrant, :state_id_number => nil)
@@ -303,6 +321,16 @@ describe Registrant do
       stub(reg).requires_race? {false}
       assert reg.valid?
     end
+    
+    it "does not require party when state has custom step 2" do
+      reg = Factory.build(:step_2_registrant, :party=>nil)
+      stub(reg).custom_step_2? { true }
+      stub(reg).requires_party? {true}
+      reg.invalid?
+      assert reg.errors.on(:party).nil?
+    end
+    
+    
 
     it "generates barcode when entering Step 2" do
       reg = Factory.create(:step_1_registrant)
