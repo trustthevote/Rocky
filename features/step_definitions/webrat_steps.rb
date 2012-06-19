@@ -175,6 +175,9 @@ Then /^I should see an enabled button for "([^\"]*)"$/ do |label|
   button.should_not be_disabled
 end
 
+Then /^I should see a link for "([^\"]*)"$/ do |text|
+  field_by_xpath("//a[text()='#{text}']").should be
+end
 
 
 

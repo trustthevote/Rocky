@@ -68,5 +68,19 @@ describe Step2Controller do
       assert assigns[:registrant].invalid?
       assert_template "show"
     end
+    
+    it "should show the state-specific system when registrant_state_online_registration button is pressed" do
+      put :update, :registrant_id => @registrant.to_param, 
+                   :registrant => Factory.attributes_for(:step_2_registrant, :has_state_license=>true),
+                   :registrant_state_online_registration => ""
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].step_2?
+      assert assigns[:registrant].using_state_online_registration?
+      assert_redirected_to registrant_state_online_registration_url(assigns[:registrant])
+      
+    end
+    
+    
+    
   end
 end

@@ -534,6 +534,7 @@ describe Registrant do
     end
   end
 
+
   describe "states by abbreviation" do
     it "sets state by abbreviation" do
       new_york = GeoState['NY']

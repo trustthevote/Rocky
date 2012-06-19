@@ -36,6 +36,7 @@ ActionController::Routing::Routes.draw do |map|
     reg.resource "finish", :only => :show
     reg.resource "ineligible", :only => [:show, :update]
     reg.resources "tell_friends", :only => :create
+    reg.resource "state_online_registration", :only=>:show
   end
 
   map.resource  "partner_session"

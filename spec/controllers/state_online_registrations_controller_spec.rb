@@ -22,40 +22,24 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Step2Controller < RegistrationStep
-  CURRENT_STEP = 2
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-  def update
-    if params[:javascript_disabled] == "1" && params[:registrant]
-      reg = params[:registrant]
-      if reg[:has_mailing_address] == "0"
-        reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
-      end
+describe StateOnlineRegistrationsController do
+  describe "#show" do
+    it "assigns the current registrant" do
+      reg = Factory.create(:step_1_registrant)
+      get :show, :registrant_id => reg.to_param
+      assert assigns[:registrant]
     end
-    if !params[:registrant_state_online_registration].nil?
-      params[:registrant][:using_state_online_registration] = true
+    it "assigns the iFrame url" do
+      reg = Factory.create(:step_1_registrant, :home_zip_code=>"99400")
+      get :show, :registrant_id => reg.to_param
+      assert assigns[:online_registration_iframe_url]
     end
-    super
-  end
-
-  protected
-  
-  def advance_to_next_step
-    @registrant.advance_to_step_2
-  end
-
-  def next_url
-    if @registrant.using_state_online_registration?
-      registrant_state_online_registration_url(@registrant)
-    else
-      registrant_step_3_url(@registrant)
+    it "renders the show template" do
+      reg = Factory.create(:step_1_registrant)
+      get :show, :registrant_id => reg.to_param
+      assert_template "show"
     end
-  end
-
-  def set_up_view_variables
-    @registrant.mailing_state ||= @registrant.home_state
-    @state_parties = @registrant.state_parties
-    @race_tooltip = @registrant.race_tooltip
-    @party_tooltip = @registrant.party_tooltip
   end
 end

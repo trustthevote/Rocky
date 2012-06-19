@@ -39,15 +39,11 @@ Feature: Step 2
       And I should see a button for "Let me finish my paperless registration with the state of Washington." 
       And I should see a button for "Finish my registration with Rock the Vote."
       
-    @wip
     Scenario: has_license field is required
-    Given I have completed step 1
+      Given I have completed step 1 as a resident of "Washington" state
       When I go to the step 2 page
-       And I select "Mr." from "title"
-       And I fill in "first" with "John"
-       And I fill in "last" with "Public"
-       And I press "registrant_submit"
-      Then I should see "Please indicate whether you have a valid Washington State license"
+      And I press "registrant_submit"
+      Then I should see "Please indicate whether you have a valid state license"
     
     
     # @wip-l @javascript
@@ -62,8 +58,21 @@ Feature: Step 2
     #   And I should see a button for "Let me finish my paperless registration with the state of Washington." 
     #   And I should see a button for "Finish my registration with Rock the Vote."
       
-    @wip-l
+    @wip
     Scenario: WA resident selects to finish paperless registration with the state of Washington
+      Given I have completed step 1 as a resident of "Washington" state
+      When I go to the step 2 page
+      And I select "Mr." from "title"
+      And I fill in "first" with "John"
+      And I fill in "last" with "Public"
+      And I choose "I have a valid WA state ID or driver's license"
+      And I press "registrant_state_online_registration"
+      Then I should see "You can complete a paperless registration using the form below. If your driver's license is invalid or there is some other issue with the form, you can also finish your registration with X"
+      And I should see a link for "finish your registration with X"
+      And I should see an iFrame for the Washington State online system
+
+
+      
     
     @wip-l
     Scenario: WA resident selects to finish registration with Rock the Vote

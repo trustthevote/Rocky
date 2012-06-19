@@ -33,9 +33,9 @@ Given /^I have completed step (\d+) from that partner$/ do |step_num|
 end
 
 Given /^I have completed step (\d+) as a resident of "([^\"]*)" state$/ do |step_num,state_name|
-  geo_state = GeoState.find_by_name(state_name)
-  zip = GeoState.zip5map.invert[geo_state.abbreviation] || GeoState.zip3map.invert[geo_state.abbreviation]
-  @registrant = Factory.create("step_#{step_num}_registrant", :home_zip_code=>zip+'00')
+  state = GeoState.find_by_name(state_name)
+  zip_prefix = GeoState.zip3map.index(state.abbreviation)
+  @registrant = Factory.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
 end
 
 
@@ -115,6 +115,19 @@ When /^I live in (.*)$/ do |state_name|
   state = GeoState.find_by_name(state_name)
   zip_prefix = GeoState.zip3map.index(state.abbreviation)
   When %Q{I fill in "zip code" with "#{zip_prefix}01"}
+end
+
+
+Then /^I should see an iFrame for the Washington State online system$/ do
+  @registrant ||= Registrant.last
+  fn = CGI.escape @registrant.first_name.to_s
+  ln = CGI.escape @registrant.last_name.to_s
+  dob= CGI.escape @registrant.form_date_of_birth.to_s
+  wa_state_url="http://198.238.204.92/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
+  
+  
+  field_by_xpath("//iframe[src='#{wa_sate_url}']").should be
+  
 end
 
 
