@@ -1,0 +1,3 @@
+<h1><%= t('txt.registration.instructions.leave_state_online_registration',:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), registrant_step_3_url(@registrant))) %></h1>
+
+<iframe src="<%=@online_registration_iframe_url%>"></iframe>

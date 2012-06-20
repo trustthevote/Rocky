@@ -119,14 +119,12 @@ end
 
 
 Then /^I should see an iFrame for the Washington State online system$/ do
-  @registrant ||= Registrant.last
+  @registrant = Registrant.last #need to reload @registrant because data has been submitted
   fn = CGI.escape @registrant.first_name.to_s
   ln = CGI.escape @registrant.last_name.to_s
-  dob= CGI.escape @registrant.form_date_of_birth.to_s
+  dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
   wa_state_url="http://198.238.204.92/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
-  
-  
-  field_by_xpath("//iframe[src='#{wa_sate_url}']").should be
+  response.body.should have_xpath("//iframe[@src='#{wa_state_url}']")
   
 end
 

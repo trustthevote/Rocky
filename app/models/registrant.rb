@@ -667,6 +667,14 @@ class Registrant < ActiveRecord::Base
     !ineligible?
   end
 
+  def rtv_and_partner_name
+    if partner && !partner.primary?
+      I18n.t('txt.rtv_and_partner', :partner_name=>partner.name)
+    else
+      "Rock the Vote"
+    end
+  end
+
   def survey_question_1
     partner.send("survey_question_1_#{locale}")
   end

@@ -67,10 +67,26 @@ Feature: Step 2
       And I fill in "last" with "Public"
       And I choose "I have a valid WA state ID or driver's license"
       And I press "registrant_state_online_registration"
-      Then I should see "You can complete a paperless registration using the form below. If your driver's license is invalid or there is some other issue with the form, you can also finish your registration with X"
-      And I should see a link for "finish your registration with X"
+      Then I should see "You can complete a paperless registration using the form below. If your driver's license is invalid or there is some other issue with the form, you can also finish your registration with Rock the Vote"
+      And I should see a link for "finish your registration with Rock the Vote"
       And I should see an iFrame for the Washington State online system
 
+    @wip-l
+    Scenario: fields for a washington state resident
+      Given the following partner exists:
+        | organization   | rtv_sms_opt_in | partner_sms_opt_in | rtv_email_opt_in | partner_email_opt_in |
+        | Opt-in Partner | true           | true               | true             | true                 |  
+      And I have completed step 1 as a resident of "Washington" state from that partner
+      When I go to the step 2 page
+      And I select "Mr." from "title"
+      And I fill in "first" with "John"
+      And I fill in "last" with "Public"
+      And I choose "I have a valid WA state ID or driver's license"
+      And I press "registrant_state_online_registration"
+      Then I should see "You can complete a paperless registration using the form below. If your driver's license is invalid or there is some other issue with the form, you can also finish your registration with Rock the Vote and Opt-in Partner"
+      And I should see a link for "finish your registration with Rock the Vote and Opt-in Partner"
+      And I should see an iFrame for the Washington State online system
+      
 
       
     

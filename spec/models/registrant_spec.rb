@@ -40,6 +40,22 @@ describe Registrant do
     end
   end
   
+  describe "rtv_and_partner_name" do
+    it "returns Rock the Vote when there's no partner" do
+      r = Registrant.new
+      stub(r).partner { nil }
+      r.rtv_and_partner_name.should == "Rock the Vote"
+      stub(r.partner).primary? { true }
+      r.rtv_and_partner_name.should == "Rock the Vote"
+    end
+    it "returns both names when there is a partner" do
+      r = Registrant.new
+      p = Factory.create(:partner)
+      stub(r).partner { p }
+      r.rtv_and_partner_name.should == "Rock the Vote and #{p.name}"
+    end
+  end
+  
   describe "backfill data" do
     it "backfills the age even when redacted" do
       assert_equal 0, Registrant.find(:all, :conditions => "age IS NOT NULL").size
