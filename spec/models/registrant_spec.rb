@@ -272,23 +272,7 @@ describe Registrant do
       assert_attribute_invalid_with(:step_2_registrant, :home_city => nil)
     end
     
-    it "does not require address or city when state has custom step 2" do
-      reg = Factory.build(:step_2_registrant, :home_address=>nil)
-      stub(reg).custom_step_2? { true }
-      reg.invalid?
-      assert reg.errors.on(:home_address).nil?
-      reg = Factory.build(:step_2_registrant, :home_city=>nil)
-      stub(reg).custom_step_2? { true }
-      reg.invalid?
-      assert reg.errors.on(:home_city).nil?
-    end
     
-    it "should require has_state_license when state has custom step 2" do
-      reg = Factory.build(:step_2_registrant, :has_state_license=>nil)
-      stub(reg).custom_step_2? { true }
-      reg.invalid?
-      assert reg.errors.on(:has_state_license)
-    end
 
     it "should not require state id" do
       assert_attribute_valid_with(:step_2_registrant, :state_id_number => nil)
@@ -338,12 +322,85 @@ describe Registrant do
       assert reg.valid?
     end
     
-    it "does not require party when state has custom step 2" do
-      reg = Factory.build(:step_2_registrant, :party=>nil)
-      stub(reg).custom_step_2? { true }
-      stub(reg).requires_party? {true}
-      reg.invalid?
-      assert reg.errors.on(:party).nil?
+    it "party included in validations when required by state" do
+      reg = Factory.build(:step_2_registrant, :party => "bogus")
+      stub(reg).requires_party? { true }
+      stub(reg).state_parties { %w[Democratic Republican] }
+      assert reg.invalid?
+      assert reg.errors.on(:party)
+    end
+
+    it "party not included in validations when not required by state" do
+      reg = Factory.build(:step_2_registrant, :party => nil)
+      stub(reg).requires_party? { false }
+      assert reg.valid?
+    end
+    
+    context "with a custom step 2" do
+      before(:each) do
+        @reg = Factory.build(:step_2_registrant, :home_address=>nil)
+        stub(@reg).custom_step_2? { true }        
+      end
+      it "does not require home_address" do
+        @reg.home_address = nil
+        @reg.invalid?
+        assert @reg.errors.on(:home_address).nil?
+      end
+      it "does not require home_city" do
+        @reg.home_city = nil
+        @reg.invalid?
+        assert @reg.errors.on(:home_city).nil?
+      end
+    
+      it "should require has_state_license" do
+        reg = Factory.build(:step_2_registrant, :has_state_license=>nil)
+        stub(reg).custom_step_2? { true }
+        reg.invalid?
+        assert reg.errors.on(:has_state_license)
+      end
+      it "should format phone as ###-###-####" do
+        reg = Factory.build(:step_2_registrant, :phone => "1234567890", :phone_type => "mobile")
+        stub(reg).custom_step_2? { true }
+        assert reg.valid?
+        assert_equal "123-456-7890", reg.phone
+      end
+      it "should require a valid phone number" do
+        reg = Factory.build(:step_3_registrant, :phone_type => "Mobile")
+        stub(reg).custom_step_2? { true }
+        
+        reg.phone = "1234567890"
+        assert reg.valid?
+
+        reg.phone = "123-456-7890"
+        assert reg.valid?, reg.errors.full_messages
+
+        reg.phone = "(123) 456 7890x123"
+        assert reg.valid?
+
+        reg.phone = "123.456.7890 ext 123"
+        assert reg.valid?
+
+        reg.phone = "asdfg"
+        assert !reg.valid?
+
+        reg.phone = "555-1234"
+        assert !reg.valid?
+      end
+
+      it "does not require party when state has custom step 2" do
+        @reg.party=nil
+        stub(@reg).requires_party? {true}
+        assert @reg.valid?
+        assert @reg.errors.on(:party).nil?
+      end
+      
+      it "should not require race for any state" do
+        @reg.race = nil
+        stub(@reg).requires_race? {true}
+        #assert @reg.valid?
+        @reg.invalid?
+        assert @reg.errors.on(:race).nil?
+      end
     end
     
     
@@ -387,6 +444,55 @@ describe Registrant do
           assert !@reg.forwardable_to_electronic_registration?
         end
       end
+    end
+
+
+    context "when registrant uses a custom step 2" do
+      before(:each) do
+        @reg =  Factory(:step_3_registrant) 
+        stub(@reg).custom_step_2? { true }
+      end
+      it "should require home address" do
+        @reg.home_address=nil
+        assert @reg.invalid?
+        assert @reg.errors.on(:home_address)
+      end
+      it "should require home city" do
+        @reg.home_city=nil
+        assert @reg.invalid?
+        assert @reg.errors_on(:home_city)
+      end
+      
+      it "should require race but only for certain states" do
+        reg = Factory.build(:step_3_registrant, :race => nil)
+        stub(reg).custom_step_2? { true }
+        stub(reg).requires_race? {true}
+        assert reg.invalid?
+        assert reg.errors.on(:race)
+      end
+
+      it "should not require race for some states" do
+        reg = Factory.build(:step_3_registrant, :race => nil)
+        stub(reg).requires_race? {false}
+        stub(reg).custom_step_2? { true }
+        assert reg.valid?
+      end
+
+      it "party included in validations when required by state" do
+        reg = Factory.build(:step_3_registrant, :party => "bogus")
+        stub(reg).requires_party? { true }
+        stub(reg).custom_step_2? { true }
+        stub(reg).state_parties { %w[Democratic Republican] }
+        assert reg.invalid?
+        assert reg.errors.on(:party)
+      end
+
+      it "party not included in validations when not required by state" do
+        reg = Factory.build(:step_3_registrant, :party => nil)
+        stub(reg).requires_party? { false }
+        assert reg.valid?
+      end
+      
     end
 
     it "should require valid state id" do
@@ -596,19 +702,6 @@ describe Registrant do
       reg.state_parties.should == []
     end
 
-    it "included in validations when required by state" do
-      reg = Factory.build(:step_2_registrant, :party => "bogus")
-      stub(reg).requires_party? { true }
-      stub(reg).state_parties { %w[Democratic Republican] }
-      assert reg.invalid?
-      assert reg.errors.on(:party)
-    end
-
-    it "not included in validations when not required by state" do
-      reg = Factory.build(:step_2_registrant, :party => nil)
-      stub(reg).requires_party? { false }
-      assert reg.valid?
-    end
   end
 
   describe "calculate age" do

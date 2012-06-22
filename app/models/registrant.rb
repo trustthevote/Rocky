@@ -150,7 +150,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :first_name, :unless => :building_via_api_call
     reg.validates_presence_of :last_name
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
-    reg.validate :validate_race
+    reg.validate :validate_race, :unless=>:custom_step_2?
     reg.validates_presence_of :home_address, :unless => :custom_step_2?
     reg.validates_presence_of :home_city, :unless => :custom_step_2?
     reg.validate :validate_party, :unless => [:building_via_api_call, :custom_step_2?]
@@ -179,6 +179,7 @@ class Registrant < ActiveRecord::Base
   with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
+    reg.validate :validate_race
     reg.validate :validate_party, :unless => [:building_via_api_call]
   end
   

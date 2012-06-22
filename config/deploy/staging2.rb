@@ -29,4 +29,4 @@ role :db,   "rtvstaging2-web.osuosl.org", :primary => true
 
 set :rails_env,    "staging2"
 
-set :branch, "whitelabeling"
+set :branch, "washington_state"

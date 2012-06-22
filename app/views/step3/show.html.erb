@@ -40,7 +40,13 @@
   <%- end %>
 
   <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
-
-  <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
+  
+  <%- if @registrant.custom_step_2? %>
+    <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
+    
+    <%= rollover_button(:review, I18n.t('txt.button.review')) %>
+  <%- else %>
+    <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
+  <%- end %>
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_2_path(@registrant) %></div>
 <% end %>

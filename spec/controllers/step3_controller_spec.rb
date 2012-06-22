@@ -32,7 +32,7 @@ describe Step3Controller do
       assert assigns[:registrant].step_2?
       assert_template "show"
     end
-    it "sets up tooltip and party variables" do
+    it "sets up tooltip, party and question variables" do
       reg = Factory.create(:step_2_registrant)
       stub(reg).state_parties { true } 
       stub(reg).race_tooltip { true } 
@@ -42,6 +42,9 @@ describe Step3Controller do
       assert assigns[:state_parties]
       assert assigns[:race_tooltip]
       assert assigns[:party_tooltip]
+      assert_not_nil assigns[:question_1]
+      assert_not_nil assigns[:question_2]
+      
     end
   end
 
@@ -84,6 +87,17 @@ describe Step3Controller do
                                                                                                     :change_of_name => "0")
         assert assigns[:registrant].step_3?
         assert_redirected_to registrant_external_url(assigns[:registrant])
+      end
+    end
+    
+    context "for a WA state registrant" do
+      it "skips step 4" do
+        stub(@registrant).custom_step_2? { true }
+        stub(Registrant).find_by_param! { @registrant }
+        put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_3_registrant)
+        assert_not_nil assigns[:registrant]
+        assert assigns[:registrant].step_4?
+        assert_redirected_to registrant_step_5_url(assigns[:registrant])
       end
     end
   end

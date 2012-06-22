@@ -3,47 +3,7 @@
 <% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
   <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
 
-<% unless @question_1.blank? && @question_2.blank? && !@registrant.partner.ask_for_volunteers? && !@registrant.partner.primary? && !@registrant.partner.partner_ask_for_volunteers? %>
-  <fieldset class="questions">
-    <legend><%= t('txt.registration.survey_title') %></legend>
-    <% unless @question_1.blank? %>
-      <ul class="question">
-        <li class="width_e">
-          <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>
-          <%= field_div form, :survey_answer_1, :maxlength => 60 %>
-        </li>
-      </ul>
-    <% end %>
-    <% unless @question_2.blank? %>
-      <ul class="question">
-        <li class="width_e">
-          <h3><%= form.label :survey_answer_2, h(@question_2) %></h3>
-          <%= field_div form, :survey_answer_2, :maxlength => 60 %>
-        </li>
-      </ul>
-    <% end %>
-    <% if @registrant.partner.ask_for_volunteers || @registrant.partner.primary? %>
-      <ul class="checkbox">
-        <li>
-          <h3>
-            <%= form.check_box :volunteer %>
-            <%= form.label :volunteer, t('txt.registration.volunteer', :organization => h("Rock the Vote")) %>
-          </h3>
-        </li>
-      </ul>
-    <% end %>
-    <% if @registrant.partner.partner_ask_for_volunteers && !@registrant.partner.primary? %>
-      <ul class="checkbox">
-        <li>
-          <h3>
-            <%= form.check_box :partner_volunteer %>
-            <%= form.label :partner_volunteer, t('txt.registration.volunteer', :organization => h(@registrant.partner.organization)) %>
-          </h3>
-        </li>
-      </ul>
-    <% end %>
-  </fieldset>
-<% end %>
+  <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
 
   <%= rollover_button(:review, I18n.t('txt.button.review')) %>
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_3_path(@registrant) %></div>

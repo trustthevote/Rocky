@@ -48,6 +48,7 @@ Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
   f.home_address    "123 Market St."
   f.home_city       "San Francisco"
   # f.home_state      { GeoState['CA'] }
+  f.has_state_license false
   f.race            "Hispanic"
   f.party           "None"
 end
