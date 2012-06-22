@@ -9,28 +9,35 @@
     </li>
   </ul>
   <div class="instructions"><p><%= @state_id_tooltip %></p></div>
-  <ul class="flat">
-    <li class="width_b">
-      <h3><%= form.label :phone %></h3>
-      <div class="flat-stack">
-        <%= field_div form, :phone %>
-        <% if form.object.errors.on :phone %>
-          <span class="error"><%= form.object.errors.on :phone %></span>
-        <% else %>
-          <span class="example">###-###-####</span>
-        <% end %>
-      </div>
-      <%= tooltip_tag :phone %>
-    </li>
-    <li class="secondary">
-      <h3><%= form.label :phone_type %></h3>
-      <div class="flat-stack">
-        <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
-        <span class="error"><%= form.object.errors.on :phone_type %></span>
-      </div>
-    </li>
-  </ul>
-  <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form} %>
+
+  <%- if @registrant.custom_step_2? %>
+    <%= render :partial=> "registrants/home_address", :locals=>{:form=>form} %>
+    <%= render :partial=> "registrants/race_and_state", :locals=>{:form=>form} %>
+    
+  <%- else %>
+    <ul class="flat">
+      <li class="width_b">
+        <h3><%= form.label :phone %></h3>
+        <div class="flat-stack">
+          <%= field_div form, :phone %>
+          <% if form.object.errors.on :phone %>
+            <span class="error"><%= form.object.errors.on :phone %></span>
+          <% else %>
+            <span class="example">###-###-####</span>
+          <% end %>
+        </div>
+        <%= tooltip_tag :phone %>
+      </li>
+      <li class="secondary">
+        <h3><%= form.label :phone_type %></h3>
+        <div class="flat-stack">
+          <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
+          <span class="error"><%= form.object.errors.on :phone_type %></span>
+        </div>
+      </li>
+    </ul>
+    <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form} %>
+  <%- end %>
 
   <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
 

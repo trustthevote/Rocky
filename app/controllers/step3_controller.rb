@@ -51,5 +51,12 @@ class Step3Controller < RegistrationStep
   def set_up_view_variables
     @registrant.prev_state ||= @registrant.home_state
     @state_id_tooltip = @registrant.state_id_tooltip
+    
+    @registrant.mailing_state ||= @registrant.home_state
+    @state_parties = @registrant.state_parties
+    @race_tooltip = @registrant.race_tooltip
+    @party_tooltip = @registrant.party_tooltip
+    
+    
   end
 end

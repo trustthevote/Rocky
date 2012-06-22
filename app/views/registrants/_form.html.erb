@@ -2,6 +2,8 @@
 <%= hidden_field_tag "locale", @locale %>
 <%= hidden_field_tag "source", @source %>
 <%= form.hidden_field :under_18_ok, :value => 0 %>
+<%= form.hidden_field :javascript_disabled, "1"  %>
+
 <ul class="flat">
   <li class="width_f">
     <h3><%= form.label :email_address %></h3>

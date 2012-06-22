@@ -32,6 +32,17 @@ describe Step3Controller do
       assert assigns[:registrant].step_2?
       assert_template "show"
     end
+    it "sets up tooltip and party variables" do
+      reg = Factory.create(:step_2_registrant)
+      stub(reg).state_parties { true } 
+      stub(reg).race_tooltip { true } 
+      stub(reg).party_tooltip { true } 
+      stub(Registrant).find_by_param! { reg }
+      get :show, :registrant_id => reg.to_param
+      assert assigns[:state_parties]
+      assert assigns[:race_tooltip]
+      assert assigns[:party_tooltip]
+    end
   end
 
   describe "#update" do

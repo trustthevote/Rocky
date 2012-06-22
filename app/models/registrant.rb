@@ -504,7 +504,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def custom_step_2?
-    !home_state.nil? && File.exists?(File.join(RAILS_ROOT, 'app/views/step2/', "_#{custom_step_2_partial}"))
+    !javascript_disabled && !home_state.nil? && File.exists?(File.join(RAILS_ROOT, 'app/views/step2/', "_#{custom_step_2_partial}"))
   end
 
   def custom_step_2_partial

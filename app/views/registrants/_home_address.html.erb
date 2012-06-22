@@ -1,0 +1,81 @@
+<% content_for :head do %>
+<script>
+$(document).ready(function() {
+  checkboxTogglesSet($('#registrant_has_mailing_address'), $('#mailing_address_set'), $('#mailing_address_rule'));
+  $('#javascript_disabled').remove();
+});
+</script>
+<% end %>
+
+
+<fieldset>
+  <legend><%= I18n.t('txt.registration.home_address') %><%= tooltip_tag :home_address %></legend>
+  <ul class="stacked">
+    <li class="width_a">
+      <h3><%= form.label :home_address %></h3>
+      <%= field_div form, :home_address %>
+      <span class="error"><%= form.object.errors.on :home_address %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :home_unit %></h3>
+      <%= field_div form, :home_unit %>
+    </li>
+  </ul>
+  <ul class="stacked">
+    <li class="width_a">
+      <h3><%= form.label :home_city %></h3>
+      <%= field_div form, :home_city %>
+      <span class="error"><%= form.object.errors.on :home_city %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :home_state_name %></h3>
+      <%= field_div form, :home_state_name, :disabled => true %>
+      <span class="error"><%= form.object.errors.on :home_state_name %></span>
+    </li>
+    <li class="width_c">
+      <h3><%= form.label :home_zip_code %></h3>
+      <%= field_div form, :home_zip_code, :size => 8, :disabled => true %>
+      <span class="error"><%= form.object.errors.on :home_zip_code %></span>
+    </li>
+  </ul>
+</fieldset>
+
+<ul class="checkbox">
+  <li>
+    <h3><%= form.check_box :has_mailing_address %> <%= form.label :has_mailing_address %></h3>
+  </li>
+</ul>
+
+<fieldset id="mailing_address_set">
+  <%= hidden_field_tag "javascript_disabled", "1"  %>
+  <legend><%= I18n.t('txt.registration.mailing_address') %><%= tooltip_tag :mailing_address %></legend>
+  <ul class="stacked">
+    <li class="width_a">
+      <h3><%= form.label :mailing_address %></h3>
+      <%= field_div form, :mailing_address %>
+      <span class="error"><%= form.object.errors.on :mailing_address %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :mailing_unit %></h3>
+      <%= field_div form, :mailing_unit, :size => 15 %>
+    </li>
+  </ul>
+  <ul class="stacked">
+    <li class="width_a">
+      <h3><%= form.label :mailing_city %></h3>
+      <%= field_div form, :mailing_city %>
+      <span class="error"><%= form.object.errors.on :mailing_city %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :mailing_state_abbrev %></h3>
+      <div><%= form.select :mailing_state_abbrev, GeoState.collection_for_select %></div>
+      <span class="error"><%= form.object.errors.on :mailing_state_id %></span>
+    </li>
+    <li class="width_c">
+      <h3><%= form.label :mailing_zip_code %></h3>
+      <%= field_div form, :mailing_zip_code, :size => 10, :maxlength => 10 %>
+      <span class="error"><%= form.object.errors.on :mailing_zip_code %></span>
+    </li>
+  </ul>
+</fieldset>
+<hr id="mailing_address_rule" style="display:none;" />

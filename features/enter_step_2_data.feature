@@ -13,12 +13,19 @@ Feature: Step 2
        And I fill in "city" with "Pittsburgh"
        And I press "registrant_submit"
       Then I should see "Additional Registration Information"
-
+    
+      
     Scenario: default mailing state to home state
       Given I have completed step 1
       When I go to the step 2 page
       Then I should see "Pennsylvania" in select box "registrant_mailing_state_abbrev"
-
+  
+    Scenario: fields for a washington state resident with no javascript
+      Given I have completed step 1 as a resident of "Washington" state without javascript
+      When I go to the step 2 page
+      Then I should not see a field for "Phone"
+      And I should see a field for "Address"
+      And I should see a field for "Race"
     
     Scenario: fields for a washington state resident
       Given the following partner exists:
@@ -58,7 +65,7 @@ Feature: Step 2
     #   And I should see a button for "Let me finish my paperless registration with the state of Washington." 
     #   And I should see a button for "Finish my registration with Rock the Vote."
       
-    @wip
+
     Scenario: WA resident selects to finish paperless registration with the state of Washington
       Given I have completed step 1 as a resident of "Washington" state
       When I go to the step 2 page
@@ -71,14 +78,15 @@ Feature: Step 2
       And I should see a link for "finish your registration with Rock the Vote"
       And I should see an iFrame for the Washington State online system
 
-    @wip-l
-    Scenario: fields for a washington state resident
+    @wip
+    Scenario: fields for a washington state resident with a partner
       Given the following partner exists:
-        | organization   | rtv_sms_opt_in | partner_sms_opt_in | rtv_email_opt_in | partner_email_opt_in |
+        | name           | rtv_sms_opt_in | partner_sms_opt_in | rtv_email_opt_in | partner_email_opt_in |
         | Opt-in Partner | true           | true               | true             | true                 |  
       And I have completed step 1 as a resident of "Washington" state from that partner
       When I go to the step 2 page
-      And I select "Mr." from "title"
+      Then I should see a button for "Finish my registration with Rock the Vote and Opt-in Partner."
+      When I select "Mr." from "title"
       And I fill in "first" with "John"
       And I fill in "last" with "Public"
       And I choose "I have a valid WA state ID or driver's license"
@@ -87,9 +95,22 @@ Feature: Step 2
       And I should see a link for "finish your registration with Rock the Vote and Opt-in Partner"
       And I should see an iFrame for the Washington State online system
       
-
-      
-    
-    @wip-l
     Scenario: WA resident selects to finish registration with Rock the Vote
-    
+      Given I have completed step 1 as a resident of "Washington" state
+      When I go to the step 2 page
+      And I select "Mr." from "title"
+      And I fill in "first" with "John"
+      And I fill in "last" with "Public"
+      And I choose "I have a valid WA state ID or driver's license"
+      And I press "registrant_skip_state_online_registration"
+      Then I should see "Additional Registration Information"
+      And I should see a field for "Address"
+      And I should see a field for "registrant_home_unit"
+      And I should see a field for "City"
+      And I should see a field for "State"
+      And I should see a field for "ZIP code"
+      And I should see a checkbox for "registrant_has_mailing_address"
+      And I should see a field for "Race"
+      And I should not see a field for "Phone"
+      And I should not see a field for "Type"
+      And I should not see a field for "Send me txt messages from Rock the Vote"

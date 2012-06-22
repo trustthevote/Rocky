@@ -140,7 +140,13 @@ end
 
 
 Then /^I should see a field for "([^\"]*)"$/ do |label|
-  field_labeled(label).should be_a(Webrat::Field)
+  field = nil
+  begin
+   field = field_labeled(label)
+  rescue
+   field = field_with_id(label)
+  end
+  field.should be_a(Webrat::Field)
 end
 
 Then /^I should not see a field for "([^\"]*)"$/ do |label|
@@ -151,7 +157,13 @@ end
 
 
 Then /^I should see a checkbox for "([^\"]*)"$/ do |label|
-  field_labeled(label).should be_a(Webrat::CheckboxField)
+  field = nil
+  begin
+   field = field_labeled(label)
+  rescue
+   field = field_with_id(label)
+  end
+  field.should be_a(Webrat::CheckboxField)
 end
 
 Then /^I should not see a checkbox for "([^\"]*)"$/ do |label|

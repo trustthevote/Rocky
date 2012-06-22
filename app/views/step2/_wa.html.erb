@@ -80,7 +80,7 @@ $(document).ready(function() {
   <div class="instructions"><p><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_name)%></p></div>
   
   <%= rollover_button(:state_online_registration, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_name), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
-  <%= rollover_button(:skip_state_online_registration, I18n.t('txt.button.skip_state_online_registration', :state=>@registrant.home_state_name), {:id=>'registrant_skip_state_online_registration',:name=>'registrant_skip_state_online_registration',:value=>'registrant_skip_state_online_registration'}) %>  
+  <%= rollover_button(:skip_state_online_registration, I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), {:id=>'registrant_skip_state_online_registration',:name=>'registrant_skip_state_online_registration',:value=>'registrant_skip_state_online_registration'}) %>  
   
 </div>
 

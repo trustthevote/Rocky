@@ -85,7 +85,9 @@ describe ApplicationHelper do
 
 
   describe "rollover_button" do
-    pending
+    it "is pending" do
+      pending
+    end
   end
 
   describe "form helpers" do

@@ -531,6 +531,11 @@ describe Registrant do
       reg = Factory.build(:step_1_registrant)
       reg.custom_step_2?.should be_true
     end
+    it "returns false if javascript is disabled" do
+      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { true }
+      reg = Factory.build(:step_1_registrant, :javascript_disabled=>true)
+      reg.custom_step_2?.should be_false
+    end
     it "returns false if the state has a custom step 2" do
       stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { false }
       reg = Factory.build(:step_1_registrant)
