@@ -36,7 +36,7 @@
     <%= render :partial=> @registrant.custom_step_2_partial, :locals=>{:form=>form} %>
   <%- else %>
     <%= render :partial=> "registrants/home_address", :locals=>{:form=>form} %>
-    <%= render :partial=> "registrants/race_and_state", :locals=>{:form=>form} %>
+    <%= render :partial=> "registrants/race_and_party", :locals=>{:form=>form} %>
 
     <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
   <%- end %>

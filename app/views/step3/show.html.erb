@@ -12,7 +12,7 @@
 
   <%- if @registrant.custom_step_2? %>
     <%= render :partial=> "registrants/home_address", :locals=>{:form=>form} %>
-    <%= render :partial=> "registrants/race_and_state", :locals=>{:form=>form} %>
+    <%= render :partial=> "registrants/race_and_party", :locals=>{:form=>form} %>
     
   <%- else %>
     <ul class="flat">

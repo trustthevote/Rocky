@@ -32,9 +32,7 @@ class Step2Controller < RegistrationStep
         reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
       end
     end
-    if !params[:registrant_state_online_registration].nil?
-      params[:registrant][:using_state_online_registration] = true
-    end
+    params[:registrant][:using_state_online_registration] = !params[:registrant_state_online_registration].nil?
     super
   end
 

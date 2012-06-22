@@ -150,12 +150,18 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :first_name, :unless => :building_via_api_call
     reg.validates_presence_of :last_name
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
+    reg.validate :validate_race
     reg.validates_presence_of :home_address, :unless => :custom_step_2?
     reg.validates_presence_of :home_city, :unless => :custom_step_2?
-    reg.validate :validate_race
     reg.validate :validate_party, :unless => [:building_via_api_call, :custom_step_2?]
-    reg.validates_inclusion_of :has_state_license, :in=>[true,false], :if => [:at_least_step_2?, :custom_step_2?]
   end
+    
+  with_options :if=> [:at_least_step_2?, :custom_step_2?] do |reg|
+    reg.validates_inclusion_of :has_state_license, :in=>[true,false]
+    reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
+    reg.validates_presence_of :phone_type, :if => :has_phone?
+  end
+  
   with_options :if => :needs_mailing_address? do |reg|
     reg.validates_presence_of :mailing_address
     reg.validates_presence_of :mailing_city
@@ -169,6 +175,13 @@ class Registrant < ActiveRecord::Base
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
   end
+  
+  with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
+    reg.validates_presence_of :home_address
+    reg.validates_presence_of :home_city
+    reg.validate :validate_party, :unless => [:building_via_api_call]
+  end
+  
   with_options :if => :needs_prev_name? do |reg|
     reg.validates_presence_of :prev_name_title
     reg.validates_presence_of :prev_first_name
