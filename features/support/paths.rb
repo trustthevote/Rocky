@@ -34,7 +34,8 @@ module NavigationHelpers
     
     when /the homepage/i
       root_path
-
+    when /a new registration page for that partner/
+      new_registrant_path(:partner=>Partner.last.id)
     when /a new registration page/, /a new step 1 page/
       new_registrant_path
     when /new Spanish registration page/

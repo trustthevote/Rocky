@@ -138,6 +138,10 @@ Then /^I should see an iFrame for the Washington State online system$/ do
   
 end
 
+Then /^my value for "([^\"]*)" should be "([^\"]*)"$/ do |method, value|
+  @registrant = Registrant.last
+  @registrant.send(method).to_s.should == value.to_s
+end
 
 
 After('@cleanup_pdf') do

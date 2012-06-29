@@ -54,8 +54,25 @@ class RegistrantsController < RegistrationStep
     @registrant = Registrant.new(params[:registrant].reverse_merge(
                                     :locale => @locale,
                                     :partner_id => @partner_id,
-                                    :tracking_source => @source,
-                                    :opt_in_sms => true, :opt_in_email => true))
+                                    :tracking_source => @source))
+                                    
+    if @registrant.partner.primary?
+      @registrant.opt_in_email = true
+      @registrant.opt_in_sms = true
+    else
+      if @registrant.partner.rtv_email_opt_in
+        @registrant.opt_in_email = true
+      end
+      if @registrant.partner.rtv_sms_opt_in
+        @registrant.opt_in_sms = true
+      end 
+      if @registrant.partner.partner_email_opt_in
+        @registrant.partner_opt_in_email = true
+      end
+      if @registrant.partner.partner_sms_opt_in
+        @registrant.partner_opt_in_sms = true
+      end
+    end
     attempt_to_advance
   end
 

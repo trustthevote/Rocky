@@ -67,8 +67,8 @@ Feature: Step 3
         | Opt-in Partner | true           | true               |        
       And I have completed step 2 from that partner
       When I go to the step 3 page
-      Then I should see a checkbox for "Send me txt messages from Rock the Vote"
-      And I should see a checkbox for "Send me txt messages from Opt-in Partner"
+      Then I should see a checkbox for "Send me txt messages from Rock the Vote" which is checked
+      And I should see a checkbox for "Send me txt messages from Opt-in Partner" which is checked
       When I check "Send me txt messages from Opt-in Partner"
       When I uncheck "Send me txt messages from Rock the Vote"
       And I fill in "ID Number" with "NONE"
