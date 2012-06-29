@@ -158,12 +158,6 @@ private
       if !p.valid?
         add_error("Row #{row_idx} is invalid", p)
       end
-      if p.whitelabeled && !File.exists?(tmp_application_css_path(p))
-        add_error("Row #{row_idx} is whitelabeled and missing application.css in /#{p.tmp_asset_directory}", p)
-      end
-      if p.whitelabeled && !File.exists?(tmp_registration_css_path(p))
-        add_error("Row #{row_idx} is whitelabeled and missing registration.css in /#{p.tmp_asset_directory}", p)
-      end
       row_idx +=1
     end
 
@@ -174,8 +168,9 @@ private
   def load_tmp_assets(p)
     if p.whitelabeled
       paf = PartnerAssetsFolder.new(p)
-      paf.update_css('application', File.open(tmp_application_css_path(p)))
-      paf.update_css('registration', File.open(tmp_registration_css_path(p)))
+      paf.update_css('application', File.open(tmp_application_css_path(p))) if File.exists?(tmp_application_css_path(p))
+      paf.update_css('registration', File.open(tmp_registration_css_path(p))) if File.exists?(tmp_registration_css_path(p))
+      paf.update_css('partner', File.open(tmp_partner_css_path(p))) if File.exists?(tmp_partner_css_path(p))
       Dir.entries(tmp_asset_path(p)).each do |fname|
         # only copy asset if not specifically dealt with above and not an email template file
         if not_expected_file(fname)
@@ -202,6 +197,9 @@ private
   end
   def tmp_registration_css_path(p)
     File.join(tmp_asset_path(p), PartnerAssets::REG_CSS)
+  end
+  def tmp_partner_css_path(p)
+    File.join(tmp_asset_path(p), PartnerAssets::PART_CSS)
   end
   
   def remove_tmp_directory

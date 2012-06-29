@@ -283,9 +283,10 @@ class Partner < ActiveRecord::Base
   end
 
 
-  def self.add_whitelabel(partner_id, app_css, reg_css)
+  def self.add_whitelabel(partner_id, app_css, reg_css, part_css)
     app_css = File.expand_path(app_css)
     reg_css = File.expand_path(reg_css)
+    part_css = File.expand_path(part_css)
 
     partner = nil
     begin
@@ -303,12 +304,12 @@ class Partner < ActiveRecord::Base
       raise "Partner '#{partner_id}' is already whitelabeled. Try running 'rake partner:upload_assets #{partner_id} #{app_css} #{reg_css}'"
     end
 
-    if !File.exists?(app_css)
-      raise "File '#{app_css}' not found"
-    end
-    if !File.exists?(reg_css)
-      raise "File '#{reg_css}' not found"
-    end
+    # if !File.exists?(app_css)
+    #   raise "File '#{app_css}' not found"
+    # end
+    # if !File.exists?(reg_css)
+    #   raise "File '#{reg_css}' not found"
+    # end
 
     if partner.any_css_present?
       raise "Partner '#{partner_id}' has assets. Try running 'rake partner:enable_whitelabel #{partner_id}'"
@@ -321,10 +322,14 @@ class Partner < ActiveRecord::Base
       end
     end
 
-    FileUtils.cp(app_css, partner.absolute_application_css_path)
-    FileUtils.cp(reg_css, partner.absolute_registration_css_path)
+    FileUtils.cp(app_css, partner.absolute_application_css_path) if File.exists?(app_css)
+    FileUtils.cp(reg_css, partner.absolute_registration_css_path) if File.exists?(reg_css)
+    FileUtils.cp(part_css, partner.absolute_partner_css_path) if File.exists?(part_css)
 
-    copy_success = partner.css_present?
+    copy_success = partner.application_css_present? == File.exists?(app_css)
+    copy_success = copy_success && partner.registration_css_present? == File.exists?(reg_css)
+    copy_success = copy_success && partner.partner_css_present? == File.exists?(part_css)
+    
     raise "Error copying css to partner directory '#{partner.assets_path}'" unless copy_success
 
     if copy_success

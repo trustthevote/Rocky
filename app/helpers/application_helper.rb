@@ -64,6 +64,7 @@ module ApplicationHelper
     stylesheets = []
     stylesheets << (wl && partner.application_css_present? ? partner.application_css_url : "application")
     stylesheets << (wl && partner.registration_css_present? ? partner.registration_css_url : "registration")
+    stylesheets << partner.partner_css_url if wl && partner.partner_css_present?
     stylesheets
   end
 

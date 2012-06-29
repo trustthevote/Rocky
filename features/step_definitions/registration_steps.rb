@@ -133,10 +133,16 @@ Then /^I should see an iFrame for the Washington State online system$/ do
   fn = CGI.escape @registrant.first_name.to_s
   ln = CGI.escape @registrant.last_name.to_s
   dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
-  wa_state_url="http://198.238.204.92/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
-  response.body.should have_xpath("//iframe[@src='#{wa_state_url}']")
-  
+  state_url="http://198.238.204.92/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
+  response.body.should have_xpath("//iframe[@src='#{state_url}']")
 end
+
+
+Then /^I should see an iFrame for the Arizona State online system$/ do
+  state_url = "https://servicearizona.com/webapp/evoter/register?execution=e2s2"
+  response.body.should have_xpath("//iframe[@src='#{state_url}']")  
+end
+
 
 Then /^my value for "([^\"]*)" should be "([^\"]*)"$/ do |method, value|
   @registrant = Registrant.last
