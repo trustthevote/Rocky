@@ -12,6 +12,8 @@ class StateOnlineRegistrationsController < RegistrationStep
       "http://198.238.204.92/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
     when "Arizona"
       "https://servicearizona.com/webapp/evoter/register?execution=e2s2"
+    when "California"
+      "http://www.ca.gov/"
     else
       ""
     end    

@@ -143,6 +143,11 @@ Then /^I should see an iFrame for the Arizona State online system$/ do
   response.body.should have_xpath("//iframe[@src='#{state_url}']")  
 end
 
+Then /^I should see an iFrame for the California State online system$/ do
+  state_url = "http://www.ca.gov/"
+  response.body.should have_xpath("//iframe[@src='#{state_url}']")  
+end
+
 
 Then /^my value for "([^\"]*)" should be "([^\"]*)"$/ do |method, value|
   @registrant = Registrant.last

@@ -13,6 +13,7 @@ config/deploy/staging2.rb
 db/bootstrap/partners.yml
 log/*.log
 tmp/*
+public/TEST
 public/pdf/*
 public/system/*
 reg_colorado.yml

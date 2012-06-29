@@ -32,6 +32,7 @@ Feature: Step 2
         | state      |
         | Washington |
         | Arizona    |
+        | California |
     
     
     Scenario Outline: fields for a <state> state resident
@@ -52,7 +53,7 @@ Feature: Step 2
         | state      | state_abbr |
         | Washington | WA         |
         | Arizona    | AZ         |
-      
+        | California | CA         |
     
     Scenario Outline: fields for a <state> state resident with a partner
       Given the following partner exists:
@@ -78,7 +79,7 @@ Feature: Step 2
         | state      | state_abbr |
         | Washington | WA         |
         | Arizona    | AZ         |
-    
+        | California | CA         |
     
     Scenario Outline: has_license field is required
       Given I have completed step 1 as a resident of "<state>" state
@@ -90,7 +91,7 @@ Feature: Step 2
         | state      |
         | Washington |
         | Arizona    |
-    
+        | California |
     
     Scenario Outline: <state> resident selects to finish paperless registration with the state of <state>
       Given I have completed step 1 as a resident of "<state>" state
@@ -108,6 +109,7 @@ Feature: Step 2
         | state      | state_abbr |
         | Washington | WA         |
         | Arizona    | AZ         |
+        | California | CA         |
 
     
     Scenario Outline: <state> resident selects to finish registration with Rock the Vote
@@ -134,4 +136,4 @@ Feature: Step 2
         | state      | state_abbr |
         | Washington | WA         |
         | Arizona    | AZ         |
-      
+        | California | CA         |

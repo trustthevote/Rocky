@@ -138,3 +138,5 @@ Feature: Step 3
         | state      | optional_party_field | optional_party_value |
         | Washington | Other                | registrant_race      |
         | Arizona    | Steel                | registrant_party     |
+        | California | Green                | registrant_party     |
+        
