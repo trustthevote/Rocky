@@ -111,12 +111,10 @@ namespace :deploy do
   
   desc "Link the states_with_online_registration.yml into the current release path. Create from the example if it doesn't exist"
   task :symlink_state_configs, :roles=>[:app, :util], :except => {:no_release => true} do
-    unless File.exists?(File.join(shared_path, "config/states_with_online_registration.yml"))
-      run <<-CMD
-        cd #{latest_release} &&
-        cp #{latest_release}/config/states_with_online_registration.yml.example #{shared_path}/config/states_with_online_registration.yml
-      CMD
-    end
+    run <<-CMD
+      cd #{latest_release} &&
+      cp -n #{latest_release}/config/states_with_online_registration.yml.example #{shared_path}/config/states_with_online_registration.yml
+    CMD
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/states_with_online_registration.yml #{latest_release}/config/states_with_online_registration.yml
