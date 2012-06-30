@@ -77,7 +77,27 @@ class GeoState < ActiveRecord::Base
   def self.online_registrars
     %w[CO]
   end
+  
   def supports_online_registration?
     self.class.online_registrars.include?(self.abbreviation)
   end
+  
+  def self.state_online_reg_file_name
+    "config/states_with_online_registration.yml"
+  end
+  
+  def self.states_with_online_registration
+    @@states_with_online_registration ||= nil
+    if @@states_with_online_registration.nil?
+      File.open(File.join(RAILS_ROOT, state_online_reg_file_name), "r") do |f|
+        @@states_with_online_registration = YAML.load(f)
+      end
+    end
+    @@states_with_online_registration
+  end
+  
+  def online_reg_enabled?
+    GeoState.states_with_online_registration.include?(self.abbreviation)
+  end
+  
 end

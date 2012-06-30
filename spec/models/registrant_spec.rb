@@ -633,8 +633,9 @@ describe Registrant do
   
   describe "custom_step_2?" do
     it "returns true if the state has a custom step 2" do
-      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { true }
       reg = Factory.build(:step_1_registrant)
+      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { true }
+      stub(GeoState).states_with_online_registration { ["PA"] }
       reg.custom_step_2?.should be_true
     end
     it "returns false if javascript is disabled" do
