@@ -1,52 +1,25 @@
 <h1><%= t('txt.registration.step_3_header') %></h1>
 
 <% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
-  <ul class="flat">
-    <li>
-      <h3><%= form.label :state_id_number %></h3>
-      <%= field_div form, :state_id_number, :size => 20 %>
-      <span class="error"><%= form.object.errors.on :state_id_number %></span>
-    </li>
-  </ul>
-  <div class="instructions"><p><%= @state_id_tooltip %></p></div>
-
   <%- if @registrant.custom_step_2? %>
     <%= render :partial=> "registrants/home_address", :locals=>{:form=>form} %>
+    <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
+    <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form} %>
     <%= render :partial=> "registrants/race_and_party", :locals=>{:form=>form} %>
     
-  <%- else %>
-    <ul class="flat">
-      <li class="width_b">
-        <h3><%= form.label :phone %></h3>
-        <div class="flat-stack">
-          <%= field_div form, :phone %>
-          <% if form.object.errors.on :phone %>
-            <span class="error"><%= form.object.errors.on :phone %></span>
-          <% else %>
-            <span class="example">###-###-####</span>
-          <% end %>
-        </div>
-        <%= tooltip_tag :phone %>
-      </li>
-      <li class="secondary">
-        <h3><%= form.label :phone_type %></h3>
-        <div class="flat-stack">
-          <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
-          <span class="error"><%= form.object.errors.on :phone_type %></span>
-        </div>
-      </li>
-    </ul>
-    <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form} %>
-  <%- end %>
-
-  <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
-  
-  <%- if @registrant.custom_step_2? %>
     <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
     
     <%= rollover_button(:review, I18n.t('txt.button.review')) %>
   <%- else %>
+    <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form} %>
+  
+    <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
+    <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
+    <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
+
     <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
   <%- end %>
+
+  
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_2_path(@registrant) %></div>
 <% end %>

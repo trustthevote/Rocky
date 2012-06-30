@@ -11,9 +11,9 @@ class StateOnlineRegistrationsController < RegistrationStep
       dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
       "http://198.238.204.92/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
     when "Arizona"
-      "https://servicearizona.com/webapp/evoter/register?execution=e2s2"
+      "https://servicearizona.com/webapp/evoter/selectLanguage"
     when "California"
-      "http://www.ca.gov/"
+      "https://www.sos.ca.gov/elections/register-to-vote/"
     else
       ""
     end    

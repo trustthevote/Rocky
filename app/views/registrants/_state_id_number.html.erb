@@ -1,0 +1,10 @@
+<ul class="flat">
+  <li>
+    <h3><%= form.label :state_id_number %></h3>
+    <%= field_div form, :state_id_number, :size => 20 %>
+    <span class="error"><%= form.object.errors.on :state_id_number %></span>
+  </li>
+</ul>
+<div class="instructions"><p><%= @state_id_tooltip %></p></div>
+
+<hr/>

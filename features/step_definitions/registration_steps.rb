@@ -139,12 +139,12 @@ end
 
 
 Then /^I should see an iFrame for the Arizona State online system$/ do
-  state_url = "https://servicearizona.com/webapp/evoter/register?execution=e2s2"
+  state_url = "https://servicearizona.com/webapp/evoter/selectLanguage"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")  
 end
 
 Then /^I should see an iFrame for the California State online system$/ do
-  state_url = "http://www.ca.gov/"
+  state_url = "https://www.sos.ca.gov/elections/register-to-vote/"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")  
 end
 
