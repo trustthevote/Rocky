@@ -80,15 +80,6 @@ describe Step3Controller do
       assert_template "show"
     end
 
-    describe "when user is forwardable to external reg page" do
-      it "should show user choice page" do
-        stub(GeoState).online_registrars { [@registrant.home_state.abbreviation] }
-        put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_3_registrant,
-                                                                                                    :change_of_name => "0")
-        assert assigns[:registrant].step_3?
-        assert_redirected_to registrant_external_url(assigns[:registrant])
-      end
-    end
     
     context "for a WA state registrant" do
       it "skips step 4" do

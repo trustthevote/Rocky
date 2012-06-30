@@ -809,11 +809,7 @@ class Registrant < ActiveRecord::Base
     end
     puts " done!" unless Rails.env.test?
   end
-
-  def forwardable_to_electronic_registration?
-    home_state && home_state.supports_online_registration? && !change_of_name
-  end
-
+  
   def completed_at
     complete? && updated_at || nil
   end

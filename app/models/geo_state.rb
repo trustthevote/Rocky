@@ -73,14 +73,6 @@ class GeoState < ActiveRecord::Base
   def self.valid_zip_code?(zip)
     !for_zip_code(zip).nil?
   end
-
-  def self.online_registrars
-    %w[CO]
-  end
-  
-  def supports_online_registration?
-    self.class.online_registrars.include?(self.abbreviation)
-  end
   
   def self.state_online_reg_file_name
     "config/states_with_online_registration.yml"
