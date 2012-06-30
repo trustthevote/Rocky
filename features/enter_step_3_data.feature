@@ -139,4 +139,4 @@ Feature: Step 3
         | Washington | Other                | registrant_race      |
         | Arizona    | Steel                | registrant_party     |
         | California | Green                | registrant_party     |
-        
+        | Colorado   | Green                | registrant_party     |

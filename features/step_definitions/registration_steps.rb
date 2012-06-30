@@ -147,6 +147,10 @@ Then /^I should see an iFrame for the California State online system$/ do
   state_url = "https://www.sos.ca.gov/elections/register-to-vote/"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")  
 end
+Then /^I should see an iFrame for the Colorado State online system$/ do
+  state_url = "https://www.sos.state.co.us/Voter/secuVerifyExist.do"
+  response.body.should have_xpath("//iframe[@src='#{state_url}']")  
+end
 
 
 Then /^my value for "([^\"]*)" should be "([^\"]*)"$/ do |method, value|
