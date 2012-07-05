@@ -133,7 +133,7 @@ Then /^I should see an iFrame for the Washington State online system$/ do
   fn = CGI.escape @registrant.first_name.to_s
   ln = CGI.escape @registrant.last_name.to_s
   dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
-  state_url="http://198.238.204.92/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
+  state_url="https://weiapplets.sos.wa.gov/myvote/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")
 end
 
