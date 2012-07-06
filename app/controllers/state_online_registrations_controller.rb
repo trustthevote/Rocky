@@ -17,7 +17,8 @@ protected
       fn = CGI.escape @registrant.first_name.to_s
       ln = CGI.escape @registrant.last_name.to_s
       dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
-      "https://weiapplets.sos.wa.gov/myvote/myvote?Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
+      lang= @registrant.locale
+      "https://weiapplets.sos.wa.gov/myvote/myvote?language=#{lang}&Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
     else
       ""
     end    

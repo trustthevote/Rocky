@@ -157,7 +157,7 @@ class Registrant < ActiveRecord::Base
   end
     
   with_options :if=> [:at_least_step_2?, :custom_step_2?] do |reg|
-    reg.validates_inclusion_of :has_state_license, :in=>[true,false]
+    reg.validates_inclusion_of :has_state_license, :in=>[true,false], :unless=>[:building_via_api_call]
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
   end

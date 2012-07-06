@@ -35,8 +35,10 @@ $(document).ready(function() {
     </h3>
   </li>
 </ul>
-<div class="checkbox-explanation has_license" >
-<p><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_name)%></p>
+<div class='has_license'>
+  <div class="checkbox-explanation" >
+  <p><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_name)%></p>
+  </div>
 </div>
 <ul class="checkbox">
   <li class="spacer">&nbsp;</li>
