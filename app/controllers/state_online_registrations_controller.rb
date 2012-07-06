@@ -1,9 +1,11 @@
 class StateOnlineRegistrationsController < RegistrationStep
-  
 
-  protected
+protected
   
   def set_up_view_variables
+    set_up_share_variables
+    
+    
     @online_registration_iframe_url = case @registrant.home_state_name
     when "Arizona"
       "https://servicearizona.com/webapp/evoter/selectLanguage"

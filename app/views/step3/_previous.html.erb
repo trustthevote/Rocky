@@ -9,52 +9,15 @@
 <% end %>
 
 
-<ul class="checkbox">
-  <li class="spacer">&nbsp;</li>
-  <li>
-    <h3><%= form.check_box :change_of_name %> <%= form.label :change_of_name, I18n.t('activerecord.attributes.registrant.change_of_name') + ' ' + tooltip_tag(:previous_name) %></h3>
-  </li>
-</ul>
 
-<fieldset id="prev_name_set">
-  <%= hidden_field_tag "javascript_disabled", "1"  %>
-  <legend><%= I18n.t('txt.registration.previous_name') %></legend>
-  <ul class="stacked">
-    <li class="width_d">
-      <h3><%= form.label :prev_name_title %></h3>
-      <%= select_div form, :prev_name_title, I18n.t('txt.registration.titles'), :include_blank => true %>
-      <span class="error"><%= form.object.errors.on :prev_name_title %></span>
-    </li>
-    <li class="width_b">
-      <h3><%= form.label :prev_first_name %></h3>
-      <%= field_div form, :prev_first_name, :size => 15 %>
-      <span class="error"><%= form.object.errors.on :prev_first_name %></span>
-    </li>
-    <li class="width_c">
-      <h3><%= form.label :prev_middle_name %></h3>
-      <%= field_div form, :prev_middle_name, :size => 10 %>
-      <span class="error"><%= form.object.errors.on :prev_middle_name %></span>
-    </li>
-    <li class="width_b">
-      <h3><%= form.label :prev_last_name %></h3>
-      <%= field_div form, :prev_last_name, :size => 15 %>
-      <span class="error"><%= form.object.errors.on :prev_last_name %></span>
-    </li>
-    <li class="width_d">
-      <h3><%= form.label :prev_name_suffix %></h3>
-      <div><%= form.select :prev_name_suffix, t('txt.registration.suffixes'), :include_blank => t('txt.registration.select_none') %></div>
-      <span class="error"><%= form.object.errors.on :prev_name_suffix %></span>
+<fieldset class='no_border'>
+  <ul class="checkbox">
+    <li class="spacer">&nbsp;</li>
+    <li>
+      <h3><%= form.check_box :change_of_address %> <%= form.label :change_of_address, I18n.t('activerecord.attributes.registrant.change_of_address') + ' ' + tooltip_tag(:previous_address) %></h3>
     </li>
   </ul>
 </fieldset>
-<hr id="prev_name_rule" style="display:none;" />
-
-<ul class="checkbox">
-  <li class="spacer">&nbsp;</li>
-  <li>
-    <h3><%= form.check_box :change_of_address %> <%= form.label :change_of_address, I18n.t('activerecord.attributes.registrant.change_of_address') + ' ' + tooltip_tag(:previous_address) %></h3>
-  </li>
-</ul>
 
 <fieldset id="prev_address_set">
   <legend><%= I18n.t('txt.registration.previous_address') %></legend>
@@ -90,3 +53,49 @@
 </fieldset>
 
 <hr id="prev_address_rule" style="display:none;" />
+
+<fieldset class='no_border'>
+  <ul class="checkbox">
+    <li class="spacer">&nbsp;</li>
+    <li>
+      <h3><%= form.check_box :change_of_name %> <%= form.label :change_of_name, I18n.t('activerecord.attributes.registrant.change_of_name') + ' ' + tooltip_tag(:previous_name) %></h3>
+    </li>
+  </ul>
+</fieldset>
+
+<fieldset id="prev_name_set">
+  <%= hidden_field_tag "javascript_disabled", "1"  %>
+  <legend><%= I18n.t('txt.registration.previous_name') %></legend>
+  <ul class="stacked">
+    <li class="width_d">
+      <h3><%= form.label :prev_name_title %></h3>
+      <%= select_div form, :prev_name_title, I18n.t('txt.registration.titles'), :include_blank => true %>
+      <span class="error"><%= form.object.errors.on :prev_name_title %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :prev_first_name %></h3>
+      <%= field_div form, :prev_first_name, :size => 15 %>
+      <span class="error"><%= form.object.errors.on :prev_first_name %></span>
+    </li>
+    <li class="width_c">
+      <h3><%= form.label :prev_middle_name %></h3>
+      <%= field_div form, :prev_middle_name, :size => 10 %>
+      <span class="error"><%= form.object.errors.on :prev_middle_name %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :prev_last_name %></h3>
+      <%= field_div form, :prev_last_name, :size => 15 %>
+      <span class="error"><%= form.object.errors.on :prev_last_name %></span>
+    </li>
+    <li class="width_d">
+      <h3><%= form.label :prev_name_suffix %></h3>
+      <div><%= form.select :prev_name_suffix, t('txt.registration.suffixes'), :include_blank => t('txt.registration.select_none') %></div>
+      <span class="error"><%= form.object.errors.on :prev_name_suffix %></span>
+    </li>
+  </ul>
+</fieldset>
+<%- show_hr = show_hr.nil? ? true : show_hr %>
+<%- if show_hr %>
+  <hr id="prev_name_rule" style="display:none;" />
+<%- end %>
+

@@ -2,10 +2,9 @@
 
 <% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
   <%- if @registrant.custom_step_2? %>
-    <%= render :partial=> "registrants/home_address", :locals=>{:form=>form} %>
-    <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
-    <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form} %>
-    <%= render :partial=> "registrants/race_and_party", :locals=>{:form=>form} %>
+    <%= render :partial=> "registrants/home_address", :locals=>{:form=>form, :show_hr=>false} %>
+    <%= render(:partial => 'previous', :locals => {:form => form, :show_hr=>false}) unless @registrant.first_registration? %>
+    <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form, :include_race_and_party=>true} %>
     
     <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
     

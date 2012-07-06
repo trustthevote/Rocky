@@ -40,12 +40,14 @@ $(document).ready(function() {
   </ul>
 </fieldset>
 
-<ul class="checkbox">
-  <li class="spacer">&nbsp;</li>
-  <li>
-    <h3><%= form.check_box :has_mailing_address %> <%= form.label :has_mailing_address %></h3>
-  </li>
-</ul>
+<fieldset class='no_border'>
+  <ul class="checkbox">
+    <li class="spacer">&nbsp;</li>
+    <li>
+      <h3><%= form.check_box :has_mailing_address %> <%= form.label :has_mailing_address %></h3>
+    </li>
+  </ul>
+</fieldset>
 
 <fieldset id="mailing_address_set">
   <%= hidden_field_tag "javascript_disabled", "1"  %>
@@ -79,4 +81,7 @@ $(document).ready(function() {
     </li>
   </ul>
 </fieldset>
-<hr id="mailing_address_rule" style="display:none;" />
+<%- show_hr = show_hr.nil? ? true : show_hr %>
+<%- if show_hr %>
+  <hr id="mailing_address_rule" style="display:none;" />
+<%- end %>

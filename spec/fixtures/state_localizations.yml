@@ -6,6 +6,7 @@ california_en:
   - Green
   - Libertarian
   - Republican
+  - None
   no_party: Decline to State
   sub_18: if you will turn 18 by the next election
 california_es:
@@ -16,6 +17,7 @@ california_es:
   - Verde
   - Libertariano
   - Republicano
+  - None
   no_party: Se niega a declarar
   sub_18: si va a cumplir 18 años de las próximas elecciones
 florida_en:
@@ -88,6 +90,7 @@ colorado_en:
   - Green
   - Libertarian
   - Republican
+  - None
   no_party: Decline to State
   sub_18: if you will turn 18 by the next election
 colorado_es:
@@ -106,6 +109,7 @@ washington_en:
   parties: 
   - Steel
   - Coal
+  - None
   no_party: Decline to State
   sub_18: if you will turn 18 by the next election
 washington_es:
@@ -122,6 +126,7 @@ arizona_en:
   parties: 
   - Steel
   - Coal
+  - None
   no_party: Decline to State
   sub_18: if you will turn 18 by the next election
 arizona_es:

@@ -1,4 +1,4 @@
-<ul class="flat">
+<ul class="flat race-dropdown">
   <li>
     <h3><%= form.label :race %></h3>
     <div><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></div>
@@ -7,7 +7,7 @@
   </li>
 </ul>
 <% if @state_parties %>
-  <ul class="flat">
+  <ul class="flat party-dropdown">
     <li>
       <h3><%= form.label :party %></h3>
       <%= select_div form, :party, @state_parties, :include_blank => true %>

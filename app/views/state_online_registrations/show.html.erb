@@ -1,3 +1,15 @@
-<h2><%= t('txt.registration.instructions.leave_state_online_registration',:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), registrant_step_3_url(@registrant))) %></h2>
+<div class="state_online_registrations_instructions">
+  <p>
+    <%= t('txt.registration.instructions.leave_state_online_registration', :state=>@registrant.home_state_name,:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), registrant_step_3_url(@registrant))) %>
+  </p>
+</div>
 
 <iframe src="<%=@online_registration_iframe_url%>" width="560" height="725"></iframe>
+
+
+<div class="state_online_registration">
+  <div class="text">
+    <%= render :partial => "finishes/complete" %>
+  </div>
+  <%= render :partial=>'finishes/share' %>
+</div>
