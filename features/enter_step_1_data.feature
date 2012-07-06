@@ -39,7 +39,6 @@ Feature: Step 1
       Then I should see my email
        And I should see my date of birth
        
-    @wip
     Scenario: Step1 creation default for primary partner
       When I go to a new registration page
       And I fill in "email address" with "john.public@example.com"

@@ -173,17 +173,17 @@ Then /^I should not see a checkbox for "([^\"]*)"$/ do |label|
 end
 
 Then /^I should see a button for "([^\"]*)"$/ do |label|
-  button= field_by_xpath("//button[span[text()='#{label}']]")
+  button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
   button.should be_a(Webrat::ButtonField)
 end
 
 Then /^I should see a disabled button for "([^\"]*)"$/ do |label|
-  button= field_by_xpath("//button[span[text()='#{label}']]")
+  button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
   button.should be_disabled
 end
 
 Then /^I should see an enabled button for "([^\"]*)"$/ do |label|
-  button= field_by_xpath("//button[span[text()='#{label}']]")
+  button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
   button.should_not be_disabled
 end
 

@@ -95,7 +95,7 @@ describe StateRequirements do
       :sos_address        => nil,
       :no_party_msg       => "Decline to State",
       :sos_phone          => nil,
-      :party_list         => [ "Democratic", "Green", "Libertarian", "Republican" ],
+      :party_list         => [ "Democratic", "Green", "Libertarian", "Republican", "None" ],
       :sos_url            => nil,
       :requires_race      => true,
       :id_length_min      => nil,
