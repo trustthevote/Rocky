@@ -49,10 +49,13 @@ end
 require 'spec/rails'
 require 'rr'
 
+
 Cucumber::Rails::World.send(:include, RR::Adapters::RRMethods)
 
 require 'cucumber/rails/rspec'
-require 'webrat/core/matchers'
+#require 'webrat/core/matchers'
+# require 'webrat/core/locators'
+# require "webrat/core/locators/link_locator"
 require 'factory_girl'
 
 

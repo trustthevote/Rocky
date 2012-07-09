@@ -1,63 +1,24 @@
 <h1><%= t('txt.registration.step_3_header') %></h1>
 
 <% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
-  <ul class="flat">
-    <li>
-      <h3><%= form.label :state_id_number %></h3>
-      <%= field_div form, :state_id_number, :size => 20 %>
-      <span class="error"><%= form.object.errors.on :state_id_number %></span>
-    </li>
-  </ul>
-  <div class="instructions"><p><%= @state_id_tooltip %></p></div>
-  <ul class="flat">
-    <li class="width_b">
-      <h3><%= form.label :phone %></h3>
-      <div class="flat-stack">
-        <%= field_div form, :phone %>
-        <% if form.object.errors.on :phone %>
-          <span class="error"><%= form.object.errors.on :phone %></span>
-        <% else %>
-          <span class="example">###-###-####</span>
-        <% end %>
-      </div>
-      <%= tooltip_tag :phone %>
-    </li>
-    <li class="secondary">
-      <h3><%= form.label :phone_type %></h3>
-      <div class="flat-stack">
-        <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
-        <span class="error"><%= form.object.errors.on :phone_type %></span>
-      </div>
-    </li>
-  </ul>
-  <%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.partner_sms_opt_in || @registrant.partner.primary? %>
-    <%- if @registrant.partner.rtv_sms_opt_in || @registrant.partner.primary? %>
-      <ul class="checkbox">
-        <li class="spacer">&nbsp;</li>
-        <li>
-          <h3>
-            <%= form.check_box :opt_in_sms %>
-            <%= form.label :opt_in_sms, t('txt.registration.opt_in_sms', :organization=>h("Rock the Vote")) %>
+  <%- if @registrant.custom_step_2? %>
+    <%= render :partial=> "registrants/home_address", :locals=>{:form=>form, :show_hr=>false} %>
+    <%= render(:partial => 'previous', :locals => {:form => form, :show_hr=>false}) unless @registrant.first_registration? %>
+    <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form, :include_race_and_party=>true} %>
+    
+    <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
+    
+    <%= rollover_button(:review, I18n.t('txt.button.review')) %>
+  <%- else %>
+    <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form} %>
   
-          </h3>
-        </li>
-      </ul>
-    <%- end %>
-    <%- if @registrant.partner.partner_sms_opt_in && !@registrant.partner.primary? %>
-      <ul class="checkbox">
-        <li class="spacer">&nbsp;</li>
-        <li>
-          <h3>
-            <%= form.check_box :partner_opt_in_sms %>
-            <%= form.label :partner_opt_in_sms, t('txt.registration.opt_in_sms', :organization=>h(@registrant.partner.organization)) %>
-          </h3>
-        </li>
-      </ul>
-    <%- end %>
+    <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
+    <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
+    <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
+
+    <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
   <%- end %>
 
-  <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
-
-  <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
+  
   <div class="back"><%= link_to t('txt.button.back'), registrant_step_2_path(@registrant) %></div>
 <% end %>

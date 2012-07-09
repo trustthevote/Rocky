@@ -2,6 +2,7 @@
 .idea
 .rvmrc
 .vimrc
+config/states_with_online_registration.yml
 config/database.yml
 config/newrelic.yml
 config/initializers/hoptoad.rb
@@ -13,6 +14,7 @@ config/deploy/staging2.rb
 db/bootstrap/partners.yml
 log/*.log
 tmp/*
+public/TEST
 public/pdf/*
 public/system/*
 reg_colorado.yml

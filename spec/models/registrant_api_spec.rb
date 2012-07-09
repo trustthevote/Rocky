@@ -39,6 +39,14 @@ describe Registrant do
       r = build_and_validate
       r.should have(0).errors_on(:first_name)
     end
+    
+    it 'should not require has_state_license' do
+      r = Registrant.build_from_api_data(:has_state_license=>nil)
+      stub(r).at_least_step_2? { true }
+      stub(r).custom_step_2? { true }
+      r.valid?
+      r.should have(0).errors_on(:has_state_license)
+    end
   end
 
   private

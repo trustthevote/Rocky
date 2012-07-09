@@ -81,8 +81,23 @@ describe ApplicationHelper do
       stub(partner).registration_css_url { 'reg.css' }
       helper.partner_css(partner).should == [ 'application', 'reg.css' ]
     end
+    
+    it "should return custom partner css" do
+      partner = Factory.build(:partner, :whitelabeled => true)
+      mock(partner).application_css_present? { true }
+      mock(partner).partner_css_present? { true }
+      stub(partner).application_css_url { 'app.css' }
+      stub(partner).partner_css_url { 'partner.css' }
+      helper.partner_css(partner).should == ['app.css', 'registration', 'partner.css']
+    end
   end
 
+
+  describe "rollover_button" do
+    it "is pending" do
+      pending
+    end
+  end
 
   describe "form helpers" do
     attr_accessor :form

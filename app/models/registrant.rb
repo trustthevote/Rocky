@@ -150,11 +150,18 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :first_name, :unless => :building_via_api_call
     reg.validates_presence_of :last_name
     reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
-    reg.validates_presence_of :home_address
-    reg.validates_presence_of :home_city
-    reg.validate :validate_race
-    reg.validate :validate_party, :unless => :building_via_api_call
+    reg.validate :validate_race, :unless=>:custom_step_2?
+    reg.validates_presence_of :home_address, :unless => :custom_step_2?
+    reg.validates_presence_of :home_city, :unless => :custom_step_2?
+    reg.validate :validate_party, :unless => [:building_via_api_call, :custom_step_2?]
   end
+    
+  with_options :if=> [:at_least_step_2?, :custom_step_2?] do |reg|
+    reg.validates_inclusion_of :has_state_license, :in=>[true,false], :unless=>[:building_via_api_call]
+    reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
+    reg.validates_presence_of :phone_type, :if => :has_phone?
+  end
+  
   with_options :if => :needs_mailing_address? do |reg|
     reg.validates_presence_of :mailing_address
     reg.validates_presence_of :mailing_city
@@ -168,6 +175,14 @@ class Registrant < ActiveRecord::Base
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
   end
+  
+  with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
+    reg.validates_presence_of :home_address
+    reg.validates_presence_of :home_city
+    reg.validate :validate_race
+    reg.validate :validate_party, :unless => [:building_via_api_call]
+  end
+  
   with_options :if => :needs_prev_name? do |reg|
     reg.validates_presence_of :prev_name_title
     reg.validates_presence_of :prev_first_name
@@ -502,6 +517,19 @@ class Registrant < ActiveRecord::Base
     prev_state && prev_state.abbreviation
   end
 
+  def custom_step_2?
+    !javascript_disabled && 
+      !home_state.nil? &&
+      home_state.online_reg_enabled? &&
+      File.exists?(File.join(RAILS_ROOT, 'app/views/step2/', "_#{custom_step_2_partial}"))
+  end
+
+  def custom_step_2_partial
+    "#{home_state.abbreviation.downcase}.html.erb"
+  end
+
+
+
   def will_be_18_by_election?
     true
   end
@@ -656,6 +684,14 @@ class Registrant < ActiveRecord::Base
     !ineligible?
   end
 
+  def rtv_and_partner_name
+    if partner && !partner.primary?
+      I18n.t('txt.rtv_and_partner', :partner_name=>partner.name)
+    else
+      "Rock the Vote"
+    end
+  end
+
   def survey_question_1
     partner.send("survey_question_1_#{locale}")
   end
@@ -773,11 +809,7 @@ class Registrant < ActiveRecord::Base
     end
     puts " done!" unless Rails.env.test?
   end
-
-  def forwardable_to_electronic_registration?
-    home_state && home_state.supports_online_registration? && !change_of_name
-  end
-
+  
   def completed_at
     complete? && updated_at || nil
   end

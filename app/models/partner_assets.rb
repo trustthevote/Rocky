@@ -26,13 +26,14 @@ module PartnerAssets
 
   APP_CSS = "application.css"
   REG_CSS = "registration.css"
+  PART_CSS = "partner.css"
 
   def css_present?
     application_css_present? && registration_css_present?
   end
 
   def any_css_present?
-    application_css_present? || registration_css_present?
+    application_css_present? || registration_css_present? || partner_css_present?
   end
 
   def application_css_present?
@@ -43,8 +44,16 @@ module PartnerAssets
     File.exists?(self.absolute_registration_css_path)
   end
 
+  def partner_css_present?
+    File.exists?(self.absolute_partner_css_path)
+  end
+
   def assets_root
-    "#{RAILS_ROOT}/public"
+    if RAILS_ENV == "test"
+      "#{RAILS_ROOT}/public/TEST"
+    else
+      "#{RAILS_ROOT}/public"
+    end
   end
 
   def assets_url
@@ -63,6 +72,10 @@ module PartnerAssets
     "#{assets_url}/#{REG_CSS}"
   end
 
+  def partner_css_url
+    "#{assets_url}/#{PART_CSS}"
+  end
+
   def absolute_old_assets_path
     "#{assets_path}/old"
   end
@@ -73,6 +86,10 @@ module PartnerAssets
 
   def absolute_registration_css_path
     "#{assets_root}#{registration_css_url}"
+  end
+  
+  def absolute_partner_css_path
+    "#{assets_root}#{partner_css_url}"
   end
 
 end

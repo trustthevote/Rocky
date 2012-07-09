@@ -1,0 +1,43 @@
+<% unless @question_1.blank? && @question_2.blank? && !@registrant.partner.ask_for_volunteers? && !@registrant.partner.primary? && !@registrant.partner.partner_ask_for_volunteers? %>
+  <fieldset class="questions">
+    <legend><%= t('txt.registration.survey_title') %></legend>
+    <% unless @question_1.blank? %>
+      <ul class="question">
+        <li class="width_e">
+          <h3><%= form.label :survey_answer_1, h(@question_1) %></h3>
+          <%= field_div form, :survey_answer_1, :maxlength => 60 %>
+        </li>
+      </ul>
+    <% end %>
+    <% unless @question_2.blank? %>
+      <ul class="question">
+        <li class="width_e">
+          <h3><%= form.label :survey_answer_2, h(@question_2) %></h3>
+          <%= field_div form, :survey_answer_2, :maxlength => 60 %>
+        </li>
+      </ul>
+    <% end %>
+    <% if @registrant.partner.ask_for_volunteers || @registrant.partner.primary? %>
+      <ul class="checkbox">
+        <li class="spacer">&nbsp;</li>
+        <li>
+          <h3>
+            <%= form.check_box :volunteer %>
+            <%= form.label :volunteer, t('txt.registration.volunteer', :organization => h("Rock the Vote")) %>
+          </h3>
+        </li>
+      </ul>
+    <% end %>
+    <% if @registrant.partner.partner_ask_for_volunteers && !@registrant.partner.primary? %>
+      <ul class="checkbox">
+        <li class="spacer">&nbsp;</li>
+        <li>
+          <h3>
+            <%= form.check_box :partner_volunteer %>
+            <%= form.label :partner_volunteer, t('txt.registration.volunteer', :organization => h(@registrant.partner.organization)) %>
+          </h3>
+        </li>
+      </ul>
+    <% end %>
+  </fieldset>
+<% end %>

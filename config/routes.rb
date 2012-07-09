@@ -31,11 +31,11 @@ ActionController::Routing::Routes.draw do |map|
     reg.resource "step_3", :controller => "step3", :only => [:show, :update]
     reg.resource "step_4", :controller => "step4", :only => [:show, :update]
     reg.resource "step_5", :controller => "step5", :only => [:show, :update]
-    reg.resource "external", :only => [:show], :member => {:go => :get}
     reg.resource "download", :only => :show
     reg.resource "finish", :only => :show
     reg.resource "ineligible", :only => [:show, :update]
     reg.resources "tell_friends", :only => :create
+    reg.resource "state_online_registration", :only=>:show
   end
 
   map.resource  "partner_session"

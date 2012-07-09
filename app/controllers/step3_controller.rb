@@ -37,12 +37,17 @@ class Step3Controller < RegistrationStep
   protected
 
   def advance_to_next_step
-    @registrant.advance_to_step_3
+    if @registrant.custom_step_2?
+      @registrant.advance_to_step_3
+      @registrant.advance_to_step_4
+    else
+      @registrant.advance_to_step_3
+    end
   end
 
   def next_url
-    if @registrant.forwardable_to_electronic_registration?
-      registrant_external_url(@registrant)
+    if @registrant.custom_step_2?
+      registrant_step_5_url(@registrant)
     else
       registrant_step_4_url(@registrant)
     end
@@ -51,5 +56,14 @@ class Step3Controller < RegistrationStep
   def set_up_view_variables
     @registrant.prev_state ||= @registrant.home_state
     @state_id_tooltip = @registrant.state_id_tooltip
+    
+    @registrant.mailing_state ||= @registrant.home_state
+    @state_parties = @registrant.state_parties
+    @race_tooltip = @registrant.race_tooltip
+    @party_tooltip = @registrant.party_tooltip
+    
+    @question_1 = @registrant.partner.send("survey_question_1_#{@registrant.locale}")
+    @question_2 = @registrant.partner.send("survey_question_2_#{@registrant.locale}")
+    
   end
 end

@@ -32,6 +32,7 @@ class Step2Controller < RegistrationStep
         reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
       end
     end
+    params[:registrant][:using_state_online_registration] = !params[:registrant_state_online_registration].nil?
     super
   end
 
@@ -42,7 +43,11 @@ class Step2Controller < RegistrationStep
   end
 
   def next_url
-    registrant_step_3_url(@registrant)
+    if @registrant.using_state_online_registration?
+      registrant_state_online_registration_url(@registrant)
+    else
+      registrant_step_3_url(@registrant)
+    end
   end
 
   def set_up_view_variables

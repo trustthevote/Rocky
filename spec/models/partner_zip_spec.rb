@@ -25,6 +25,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PartnerZip do
+  after(:each) do
+    if File.exists?("#{RAILS_ROOT}/public/TEST")
+      FileUtils.remove_entry_secure("#{RAILS_ROOT}/public/TEST", true)
+    end  
+  end
   describe "#new_record?" do
     it "returns true" do
       PartnerZip.new(nil).new_record?.should be_true
@@ -42,7 +47,7 @@ describe PartnerZip do
     it "looks in folder when the zip file unzips to a subdirectory" do
       @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'ejs_good_partners1.zip'))
       pz = PartnerZip.new(@file)
-      pz.create.should be_true      
+      pz.create.should be_true    
     end
     it "looks into nested folders when the zip file unzips to a subdirectory" do
       @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'ejs_good_partners2.zip'))
@@ -56,8 +61,6 @@ describe PartnerZip do
       pz.errors.collect{|a,b| a}.should include("Row 1 is invalid")
       pz.errors.collect{|a,b| a}.should include("Row 2 is invalid")
       pz.errors.collect{|a,b| a}.should include("Row 3 is invalid")
-      pz.errors.collect{|a,b| a}.should include("Row 4 is whitelabeled and missing application.css in /partner_4")
-      pz.errors.collect{|a,b| a}.should include("Row 4 is whitelabeled and missing registration.css in /partner_4")
     end
     it "creates partners when all is valid and attaches CSVs and email templates when whitelabeled" do
       @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'four_good_partners.zip'))
@@ -74,7 +77,23 @@ describe PartnerZip do
       p.should be_whitelabeled
       p.application_css_present?.should be_true
       p.registration_css_present?.should be_true
+    end
+    it "works when there's just a partner.css" do
+      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'just_partner_css.zip'))
+      pz = PartnerZip.new(@file)
+      assert_difference("Partner.count", 1) do
+        pz.create.should be_true
+      end
       
+      p = Partner.find_by_username("csv_partner_3")
+      EmailTemplate.get(p, "confirmation.en").should == "Custom confirmation email\n\nIn English"
+      EmailTemplate.get(p, "confirmation.es").should == "Custom confirmation email\n\nIn Spanish"
+      EmailTemplate.get(p, "reminder.en").should == "Custom reminder email\n\nIn English"
+      EmailTemplate.get(p, "reminder.es").should == "Custom reminder email\n\nIn Spanish"
+      p.should be_whitelabeled
+      p.application_css_present?.should be_false
+      p.registration_css_present?.should be_false
+      p.partner_css_present?.should be_true      
     end
     it "deletes the tmp directory when done regardless of result" do
       @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'four_good_partners.zip'))
@@ -99,8 +118,6 @@ describe PartnerZip do
       pz.error_messages.should include("Row 1 is invalid")
       pz.error_messages.should include("Row 2 is invalid")
       pz.error_messages.should include("Row 3 is invalid")
-      pz.error_messages.should include("Row 4 is whitelabeled and missing application.css in /partner_4")
-      pz.error_messages.should include("Row 4 is whitelabeled and missing registration.css in /partner_4")   
     end
   end
   

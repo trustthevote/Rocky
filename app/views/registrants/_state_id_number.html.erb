@@ -1,0 +1,21 @@
+<%- include_race_and_party ||= false %>
+<%- id_size = include_race_and_party ? 35 : 20 %>
+<%- if include_race_and_party %>
+  <fieldset>
+    <legend><%= I18n.t('txt.registration.identification_header') %></legend>
+<%- end %>
+    <ul class="flat">
+      <li>
+        <h3><%= form.label :state_id_number %></h3>
+        <%= field_div form, :state_id_number, :size => id_size %>
+        <span class="error"><%= form.object.errors.on :state_id_number %></span>
+      </li>
+    </ul>
+    <div class="instructions"><p><%= @state_id_tooltip %></p></div>
+
+<%- if include_race_and_party %>
+  <%= render :partial=> "registrants/race_and_party", :locals=>{:form=>form} %>
+  </fieldset>
+<%- else %>
+  <hr/>
+<%-end %>

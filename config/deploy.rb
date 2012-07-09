@@ -61,10 +61,9 @@ set :use_sudo, false
 # before "deploy", "deploy:stop_workers"
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "deploy:symlink_partners"
 
-#No more geminstaller - bundler [AMM]
 set :rake, 'bundle exec rake'
 
-#after "deploy:symlink_configs", "deploy:geminstaller"
+after "deploy:symlink_configs", "deploy:symlink_state_configs"
 before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
@@ -107,6 +106,18 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/initializers/hoptoad.rb #{latest_release}/config/initializers/hoptoad.rb
+    CMD
+  end
+  
+  desc "Link the states_with_online_registration.yml into the current release path. Create from the example if it doesn't exist"
+  task :symlink_state_configs, :roles=>[:app, :util], :except => {:no_release => true} do
+    run <<-CMD
+      cd #{latest_release} &&
+      cp -n #{latest_release}/config/states_with_online_registration.yml.example #{shared_path}/config/states_with_online_registration.yml
+    CMD
+    run <<-CMD
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/config/states_with_online_registration.yml #{latest_release}/config/states_with_online_registration.yml
     CMD
   end
 

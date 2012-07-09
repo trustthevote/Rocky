@@ -22,22 +22,24 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class ExternalsController < RegistrationStep
-  CURRENT_STEP = 3
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-  def show
-    super
-    head :not_found unless @registrant.forwardable_to_electronic_registration?
-  end
-
-  def go
-    find_registrant
-    begin
-      url = StateRegistrationSite.new(@registrant).transfer
-      redirect_to url if url
-    rescue Timeout::Error
-      @timeout = true
-      render "timeout"
+describe StateOnlineRegistrationsController do
+  describe "#show" do
+    it "assigns the current registrant" do
+      reg = Factory.create(:step_1_registrant)
+      get :show, :registrant_id => reg.to_param
+      assert assigns[:registrant]
+    end
+    it "assigns the iFrame url" do
+      reg = Factory.create(:step_1_registrant, :home_zip_code=>"99400")
+      get :show, :registrant_id => reg.to_param
+      assert assigns[:online_registration_iframe_url]
+    end
+    it "renders the show template" do
+      reg = Factory.create(:step_1_registrant)
+      get :show, :registrant_id => reg.to_param
+      assert_template "show"
     end
   end
 end

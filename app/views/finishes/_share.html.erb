@@ -1,0 +1,12 @@
+<div class="share">
+  <div><%= rollover_image_link( :share_facebook,
+                                I18n.t('txt.button.share_facebook'),
+                                "http://www.facebook.com/sharer.php?u=#{FACEBOOK_CALLBACK_URL}&t=#{@registrant.status_text}",
+                                :target => "_blank" ) %>
+  </div>
+  <div><%= rollover_image_link( :share_twitter,
+                                I18n.t('txt.button.share_twitter'),
+                                "http://twitter.com/home?status=#{@registrant.status_text}+#{@root_url_escaped}",
+                                :target => "_blank") %>
+  </div>
+</div>

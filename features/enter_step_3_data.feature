@@ -119,5 +119,24 @@ Feature: Step 3
       Then I should not be signed up for "partner_opt_in_sms"
       And I should not be signed up for "opt_in_sms"
   
-  
-    
+    Scenario Outline: enter basic data for <state> registrant
+      Given I have completed step 2 as a resident of "<state>" state     
+      When I go to the step 3 page
+      Then I should not see a checkbox for "Send me txt messages from Rock the Vote"
+      And I should see a button for "Review Application"
+      When I fill in "ID Number" with "1234"
+      And I fill in "address" with "123 Market St."
+      And I fill in "city" with "Pittsburgh"
+      And I fill in "registrant_survey_answer_1" with "o hai"
+      And I fill in "registrant_survey_answer_2" with "kthxbye"
+      And I select "Other" from "registrant_race"
+      And I select "<optional_party_field>" from "<optional_party_value>"
+      And I press "registrant_submit"
+      Then I should see "Confirm"
+
+      Examples:
+        | state      | optional_party_field | optional_party_value |
+        | Washington | Other                | registrant_race      |
+        | Arizona    | Steel                | registrant_party     |
+        | California | Green                | registrant_party     |
+        | Colorado   | Green                | registrant_party     |

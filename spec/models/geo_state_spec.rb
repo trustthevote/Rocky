@@ -68,8 +68,17 @@ describe GeoState do
     end
   end
 
-  it "knows if it supports electronic registration" do
-    assert GeoState["CO"].supports_online_registration?
-    assert !GeoState["PA"].supports_online_registration?
+  describe "#online_reg_enabled?" do
+    it "returns true if the state is in the config list" do
+      stub(GeoState).state_online_reg_file_name { "spec/fixtures/files/states_with_online_registration.yml" }
+      s = GeoState.new(:abbreviation=>"AZ")
+      s.online_reg_enabled?.should be_true
+    end
+    it "returns false if the state is not in the config list" do
+      stub(GeoState).state_online_reg_file_name { "spec/fixtures/files/states_with_online_registration.yml" }
+      s = GeoState.new(:abbreviation=>"MD")
+      s.online_reg_enabled?.should be_false      
+    end
   end
+
 end

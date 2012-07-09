@@ -29,8 +29,18 @@ describe Step2Controller do
     it "should show the step 2 input form" do
       reg = Factory.create(:step_1_registrant)
       get :show, :registrant_id => reg.to_param
-      assert assigns[:registrant].step_1?
       assert_template "show"
+    end
+    it "sets up tooltip and party variables" do
+      reg = Factory.create(:step_1_registrant)
+      stub(reg).state_parties { true } 
+      stub(reg).race_tooltip { true } 
+      stub(reg).party_tooltip { true } 
+      stub(Registrant).find_by_param! { reg }
+      get :show, :registrant_id => reg.to_param
+      assert assigns[:state_parties]
+      assert assigns[:race_tooltip]
+      assert assigns[:party_tooltip]
     end
   end
 
@@ -68,5 +78,19 @@ describe Step2Controller do
       assert assigns[:registrant].invalid?
       assert_template "show"
     end
+    
+    it "should show the state-specific system when registrant_state_online_registration button is pressed" do
+      put :update, :registrant_id => @registrant.to_param, 
+                   :registrant => Factory.attributes_for(:step_2_registrant, :has_state_license=>true),
+                   :registrant_state_online_registration => ""
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].step_2?
+      assert assigns[:registrant].using_state_online_registration?
+      assert_redirected_to registrant_state_online_registration_url(assigns[:registrant])
+      
+    end
+    
+    
+    
   end
 end

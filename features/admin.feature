@@ -63,5 +63,3 @@ Feature: Admin UI
       And I should see "Row 1 is invalid"
       And I should see "Row 2 is invalid"
       And I should see "Row 3 is invalid"
-      And I should see "Row 4 is whitelabeled and missing application.css in /partner_4"
-      And I should see "Row 4 is whitelabeled and missing registration.css in /partner_4"    

@@ -140,7 +140,13 @@ end
 
 
 Then /^I should see a field for "([^\"]*)"$/ do |label|
-  field_labeled(label).should be_a(Webrat::Field)
+  field = nil
+  begin
+   field = field_labeled(label)
+  rescue
+   field = field_with_id(label)
+  end
+  field.should be_a(Webrat::Field)
 end
 
 Then /^I should not see a field for "([^\"]*)"$/ do |label|
@@ -151,7 +157,13 @@ end
 
 
 Then /^I should see a checkbox for "([^\"]*)"$/ do |label|
-  field_labeled(label).should be_a(Webrat::CheckboxField)
+  field = nil
+  begin
+   field = field_labeled(label)
+  rescue
+   field = field_with_id(label)
+  end
+  field.should be_a(Webrat::CheckboxField)
 end
 
 Then /^I should not see a checkbox for "([^\"]*)"$/ do |label|
@@ -159,6 +171,26 @@ Then /^I should not see a checkbox for "([^\"]*)"$/ do |label|
     field_labeled(label)
   }.to raise_error(Webrat::NotFoundError)
 end
+
+Then /^I should see a button for "([^\"]*)"$/ do |label|
+  button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
+  button.should be_a(Webrat::ButtonField)
+end
+
+Then /^I should see a disabled button for "([^\"]*)"$/ do |label|
+  button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
+  button.should be_disabled
+end
+
+Then /^I should see an enabled button for "([^\"]*)"$/ do |label|
+  button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
+  button.should_not be_disabled
+end
+
+Then /^I should see a link for "([^\"]*)"$/ do |text|
+  field_by_xpath("//a[text()='#{text}']").should be
+end
+
 
 
 Then /^I should be on (.+)$/ do |page_name|

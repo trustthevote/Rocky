@@ -64,6 +64,7 @@ module ApplicationHelper
     stylesheets = []
     stylesheets << (wl && partner.application_css_present? ? partner.application_css_url : "application")
     stylesheets << (wl && partner.registration_css_present? ? partner.registration_css_url : "registration")
+    stylesheets << partner.partner_css_url if wl && partner.partner_css_present?
     stylesheets
   end
 
@@ -104,10 +105,15 @@ module ApplicationHelper
     content_tag(:div, form.select(field, contents, options), :class => has_error)
   end
 
-  def rollover_button(name, text)
+  def rollover_button(name, text, button_options={})
+    button_options[:id] ||= "registrant_submit"
     <<-HTML
       <div class="button">
-        <a class="button_#{name}_#{I18n.locale}" href="#"><button type="submit" id="registrant_submit"><span>#{text}</span></button></a>
+        <a class="button_#{name}_#{I18n.locale}" href="#">
+          <button type="submit" id="#{button_options.delete(:id)}" #{button_options.collect{|k,v| "#{k}=\"#{v}\"" }.join(" ")}>
+            <span>#{text}</span>
+          </button>
+        </a>
       </div>
     HTML
   end

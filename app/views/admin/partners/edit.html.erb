@@ -88,19 +88,29 @@
       
       <div class="whitelabeled">
         <ul class="stacked">
-          <li class="width_a">
+          <li class="width_e">
+            <br/>
             <h3>application.css <%= '(missing)' unless @partner.application_css_present? %></h3>
             <div>
               <%= file_field_tag 'css_files[application]' %>
             </div>
           </li>
-          <li class="width_a">
+          <li class="width_e">
+            <br/>
             <h3>registration.css <%= '(missing)' unless @partner.registration_css_present? %></h3>
             <div>
               <%= file_field_tag 'css_files[registration]' %>
             </div>
           </li>
+          <li class="width_e">
+            <br/>
+            <h3>partner.css <%= '(missing)' unless @partner.partner_css_present? %></h3>
+            <div>
+              <%= file_field_tag 'css_files[partner]' %>
+            </div>
+          </li>
         </ul>
+        
 
         <% EmailTemplate::TEMPLATE_NAMES.each do |name, label| %>
           <ul class="stacked">

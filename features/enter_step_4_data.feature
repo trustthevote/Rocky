@@ -3,11 +3,6 @@ Feature: Step 4
   As a registrant
   I want to opt in and speak out
 
-    Scenario: see form
-     Given I have completed step 3
-      When I go to the step 4 page
-      Then I should see "Hello?"
-
     Scenario: enter data
      Given I have completed step 3
        And my phone number is not blank
@@ -37,7 +32,6 @@ Feature: Step 4
       Then I should be signed up for "opt_in_email" 
       And I should not be signed up for "volunteer" 
     
-    @wip
     Scenario Outline: User sees RTV and partner opt-in options as configured for the partner
       Given the following partner exists:
         | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |
