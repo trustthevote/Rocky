@@ -14,7 +14,7 @@ gem "rubyzip"
 
 #gem "rocky_branding", "= 12.3.5"
 #gem "rocky_branding"
-gem "rocky_branding", "= 1.0.19"
+gem "rocky_branding", "= 1.0.20"
 
 group :development, :test do
   gem "rspec", "= 1.2.7"
