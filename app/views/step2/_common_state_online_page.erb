@@ -31,7 +31,7 @@ $(document).ready(function() {
   <li>
     <h3>
       <%= form.radio_button :has_state_license, 1, :checked=>@registrant.has_state_license==true %>
-      <%= form.label :has_state_license_1, t('txt.registration.has_state_license', :state=>h(@registrant.home_state.abbreviation)) %>
+      <%= form.label :has_state_license_1, t('txt.registration.has_state_license', :state=>h(@registrant.home_state_name)) %>
     </h3>
   </li>
 </ul>
@@ -45,7 +45,7 @@ $(document).ready(function() {
   <li>
     <h3>
       <%= form.radio_button :has_state_license, 0, :checked=>@registrant.has_state_license==false %>
-      <%= form.label :has_state_license_0, t('txt.registration.has_no_state_license', :state=>h(@registrant.home_state.abbreviation)) %>
+      <%= form.label :has_state_license_0, t('txt.registration.has_no_state_license', :state=>h(@registrant.home_state_name)) %>
     </h3>
     
   </li>
