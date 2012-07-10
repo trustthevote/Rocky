@@ -52,7 +52,7 @@ describe Registrant do
       r = Registrant.new
       p = Factory.create(:partner)
       stub(r).partner { p }
-      r.rtv_and_partner_name.should == "Rock the Vote and #{p.name}"
+      r.rtv_and_partner_name.should == "Rock the Vote and #{p.organization}"
     end
   end
   

@@ -686,7 +686,7 @@ class Registrant < ActiveRecord::Base
 
   def rtv_and_partner_name
     if partner && !partner.primary?
-      I18n.t('txt.rtv_and_partner', :partner_name=>partner.name)
+      I18n.t('txt.rtv_and_partner', :partner_name=>partner.organization)
     else
       "Rock the Vote"
     end
