@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Api::BaseController < ApplicationController
+class Api::V1::BaseController < ApplicationController
 
   protected
 

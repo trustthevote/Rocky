@@ -22,9 +22,9 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe Api::RegistrationsController do
+describe Api::V1::RegistrationsController do
 
   describe 'create' do
     it 'should return URL of PDF to be generated' do
@@ -34,12 +34,12 @@ describe Api::RegistrationsController do
 
     it 'should catch invalid fields' do
       expect_api_error :message => "Error message", :field_name => "invalid_field"
-      new_registration { raise RegistrationService::ValidationError.new('invalid_field', 'Error message') }
+      new_registration { raise V1::RegistrationService::ValidationError.new('invalid_field', 'Error message') }
     end
 
     it 'should report unsupported language' do
       expect_api_error :message => 'Unsupported language'
-      new_registration { raise UnsupportedLanguageError }
+      new_registration { raise V1::UnsupportedLanguageError }
     end
 
     it 'should report invalid parameter type' do
@@ -64,13 +64,13 @@ describe Api::RegistrationsController do
 
   def registrations(&block)
     query = { :partner_id => nil, :partner_password => nil, :since => nil }
-    mock(RegistrationService).find_records(query, &block)
+    mock(V1::RegistrationService).find_records(query, &block)
     get :index, :format => 'json'
   end
 
   def new_registration(&block)
     data = {}
-    mock(RegistrationService).create_record(data, &block)
+    mock(V1::RegistrationService).create_record(data, &block)
     post :create, :format => 'json', :registration => data
   end
 

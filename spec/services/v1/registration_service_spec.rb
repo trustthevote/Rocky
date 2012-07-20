@@ -22,18 +22,18 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe RegistrationService do
+describe V1::RegistrationService do
 
   describe 'create_record' do
     it 'should raise an error if the language is unknown' do
-      lambda { RegistrationService.create_record(:lang => 'unknown') }.should raise_error UnsupportedLanguageError
+      lambda { V1::RegistrationService.create_record(:lang => 'unknown') }.should raise_error V1::UnsupportedLanguageError
     end
 
     it 'should raise an error if the field is unknown' do
       begin
-        RegistrationService.create_record(:lang => 'en', :unknown => 'field')
+        V1::RegistrationService.create_record(:lang => 'en', :unknown => 'field')
         fail "UnknownAttributeError expected"
       rescue ActiveRecord::UnknownAttributeError => e
         e.message.should == 'unknown attribute: unknown'
@@ -42,7 +42,7 @@ describe RegistrationService do
 
     it 'should not know state_id_number field' do
       begin
-        RegistrationService.create_record(:lang => 'en', :state_id_number => '1234')
+        V1::RegistrationService.create_record(:lang => 'en', :state_id_number => '1234')
         fail "UnknownAttributeError expected"
       rescue ActiveRecord::UnknownAttributeError => e
         e.message.should == 'unknown attribute: state_id_number'
@@ -51,9 +51,9 @@ describe RegistrationService do
 
     it 'should raise validation errors when the record is invalid' do
       begin
-        RegistrationService.create_record(:lang => 'en')
+        V1::RegistrationService.create_record(:lang => 'en')
         fail 'ValidationError is expected'
-      rescue RegistrationService::ValidationError => e
+      rescue V1::RegistrationService::ValidationError => e
         e.field.should    == 'date_of_birth'
         e.message.should  == "Required"
       end
@@ -61,15 +61,15 @@ describe RegistrationService do
 
     it 'should raise an error if the language is unknown even if everything else is bad' do
       lambda {
-        RegistrationService.create_record(:lang => 'ex', :home_state_id => 1)
-      }.should raise_error UnsupportedLanguageError
+        V1::RegistrationService.create_record(:lang => 'ex', :home_state_id => 1)
+      }.should raise_error V1::UnsupportedLanguageError
     end
 
     it 'should raise an error if the language is not given' do
       begin
-        RegistrationService.create_record(:home_state_id => 'NY')
+        V1::RegistrationService.create_record(:home_state_id => 'NY')
         fail 'ValidationError is expected'
-      rescue RegistrationService::ValidationError => e
+      rescue V1::RegistrationService::ValidationError => e
         e.field.should    == 'lang'
         e.message.should  == 'Required'
       end
@@ -77,7 +77,7 @@ describe RegistrationService do
 
     it 'should deal with states passed as strings' do
       lambda {
-        RegistrationService.create_record(:mailing_state => "", :home_state => "1", :prev_state => "");
+        V1::RegistrationService.create_record(:mailing_state => "", :home_state => "1", :prev_state => "");
       }.should_not raise_error ActiveRecord::AssociationTypeMismatch
     end
 
@@ -87,37 +87,37 @@ describe RegistrationService do
 
       it 'should save the record and generate PDF' do
         mock(@reg).enqueue_complete_registration_via_api
-        RegistrationService.create_record({}).should
+        V1::RegistrationService.create_record({}).should
       end
     end
   end
 
   describe 'data_to_attrs' do
-    specify { RegistrationService.send(:data_to_attrs, {}).should == {} }
-    specify { RegistrationService.send(:data_to_attrs, { :lang  => 'ex' }).should == { :locale => 'ex' } }
-    specify { RegistrationService.send(:data_to_attrs, { :partner_tracking_id => 'id' }).should == { :tracking_source => 'id' } }
-    specify { RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state => 'ca', :prev_state_id => 'Nj' }).should == { "home_state_id" => 33, "mailing_state_id" => 5, "prev_state_id" => 31 } } # See geo_states.csv
-    specify { RegistrationService.send(:data_to_attrs, { :id_number => 'id' }).should == { :state_id_number => 'id' } }
+    specify { V1::RegistrationService.send(:data_to_attrs, {}).should == {} }
+    specify { V1::RegistrationService.send(:data_to_attrs, { :lang  => 'ex' }).should == { :locale => 'ex' } }
+    specify { V1::RegistrationService.send(:data_to_attrs, { :partner_tracking_id => 'id' }).should == { :tracking_source => 'id' } }
+    specify { V1::RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state => 'ca', :prev_state_id => 'Nj' }).should == { "home_state_id" => 33, "mailing_state_id" => 5, "prev_state_id" => 31 } } # See geo_states.csv
+    specify { V1::RegistrationService.send(:data_to_attrs, { :id_number => 'id' }).should == { :state_id_number => 'id' } }
   end
 
   describe 'find_records' do
     it 'should return an error for invalid partner ID' do
       lambda {
-        RegistrationService.find_records(:partner_id => 0, :partner_password => 'password')
-      }.should raise_error RegistrationService::INVALID_PARTNER_OR_PASSWORD
+        V1::RegistrationService.find_records(:partner_id => 0, :partner_password => 'password')
+      }.should raise_error V1::RegistrationService::INVALID_PARTNER_OR_PASSWORD
     end
 
     it 'should return an error for invalid password' do
       lambda {
-        RegistrationService.find_records(:partner_id => Partner.first.id, :partner_password => 'invalid_password')
-      }.should raise_error RegistrationService::INVALID_PARTNER_OR_PASSWORD
+        V1::RegistrationService.find_records(:partner_id => Partner.first.id, :partner_password => 'invalid_password')
+      }.should raise_error V1::RegistrationService::INVALID_PARTNER_OR_PASSWORD
     end
 
     it 'should return the list of registrants' do
       partner = Partner.first
       reg = Factory(:maximal_registrant, :partner => partner)
 
-      RegistrationService.find_records(:partner_id => partner.id, :partner_password => 'password').should == [
+      V1::RegistrationService.find_records(:partner_id => partner.id, :partner_password => 'password').should == [
         { :status               => 'complete',
           :create_time          => reg.created_at.to_s,
           :complete_time        => reg.updated_at.to_s,
@@ -159,7 +159,7 @@ describe RegistrationService do
       partner = Partner.first
       reg = Factory(:maximal_registrant, :partner => partner)
 
-      RegistrationService.find_records(:partner_id => partner.id, :partner_password => 'password', :since => 1.minute.from_now.to_s).should == []
+      V1::RegistrationService.find_records(:partner_id => partner.id, :partner_password => 'password', :since => 1.minute.from_now.to_s).should == []
     end
   end
 

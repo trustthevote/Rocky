@@ -22,33 +22,25 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Api::RegistrationsController < Api::BaseController
+require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-  # Lists registrations
-  def index
-    query = {
-      :partner_id       => params[:partner_id],
-      :partner_password => params[:partner_password],
-      :since            => params[:since]
-    }
+describe Api::V1::BaseController do
 
-    jsonp :registrations => RegistrationService.find_records(query)
-  rescue ArgumentError => e
-    jsonp({ :message => e.message }, :status => 400)
-  end
+  describe 'jsonp' do
+    before { @c = Api::V1::BaseController.new }
 
-  # Creates the record and returns the URL to the PDF file or
-  # the error message with optional invalid field name.
-  def create
-    pdf_path = RegistrationService.create_record(params[:registration]).pdf_path
-    jsonp :pdfurl => "https://#{PDF_HOST_NAME}#{pdf_path}"
-  rescue RegistrationService::ValidationError => e
-    jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
-  rescue UnsupportedLanguageError => e
-    jsonp({ :message => e.message }, :status => 400)
-  rescue ActiveRecord::UnknownAttributeError => e
-    name = e.message.split(': ')[1]
-    jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
+    it 'should render plain JSON' do
+      stub(@c).params { {} }
+      mock(@c).render(:json => { :data => 'field' }, :status => 400)
+      @c.send(:jsonp, { :data => 'field' }, :status => 400)
+    end
+
+    it 'should render JSONP callback' do
+      stub(@c).params { { :callback => 'cb' } }
+      mock(@c).render_to_string(:json => :data) { 'json_value' }
+      mock(@c).render(:text => 'cb(json_value);', :status => 400)
+      @c.send(:jsonp, :data, :status => 400)
+    end
   end
 
 end

@@ -53,9 +53,11 @@ ActionController::Routing::Routes.draw do |map|
 
 
   map.namespace :api do |api|
-    api.map '/v1/registrations.json', :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
-    api.map '/v1/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
-    api.map '/v1/state_requirements.json', :format => 'json', :controller => 'state_requirements', :action => 'show'
+    api.namespace :v1 do |v1|
+      v1.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
+      v1.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
+      v1.map '/state_requirements.json', :format => 'json', :controller => 'state_requirements', :action => 'show'
+    end
   end
 
   map.namespace :admin do |admin|

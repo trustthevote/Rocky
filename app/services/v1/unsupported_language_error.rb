@@ -22,10 +22,11 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class UnsupportedLanguageError < ArgumentError
+module V1
+  class UnsupportedLanguageError < ArgumentError
 
-  def initialize
-    super 'Unsupported language'
+    def initialize
+      super 'Unsupported language'
+    end
   end
-
 end

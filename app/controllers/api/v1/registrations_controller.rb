@@ -22,33 +22,33 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+class Api::V1::RegistrationsController < Api::V1::BaseController
 
-describe Api::StateRequirementsController do
+  # Lists registrations
+  def index
+    query = {
+      :partner_id       => params[:partner_id],
+      :partner_password => params[:partner_password],
+      :since            => params[:since]
+    }
 
-  describe 'show' do
-    it 'should report unsupported language' do
-      expect_api_error :message => 'Unsupported language'
-      state_requirements { raise UnsupportedLanguageError }
-    end
-
-    it 'should report invalid state' do
-      expect_api_error :message => 'Invalid state ID'
-      state_requirements { raise ArgumentError.new('Invalid state ID') }
-    end
-
-    it 'should return data' do
-      expect_api_response :result
-      state_requirements { :result }
-    end
+    jsonp :registrations => V1::RegistrationService.find_records(query)
+  rescue ArgumentError => e
+    jsonp({ :message => e.message }, :status => 400)
   end
 
-  private
-
-  def state_requirements(&block)
-    query = { :lang => nil, :home_state_id => nil, :home_zip_code => nil, :date_of_birth => nil }
-    mock(StateRequirements).find(query, &block)
-    get :show, :format => 'json', :query => query
+  # Creates the record and returns the URL to the PDF file or
+  # the error message with optional invalid field name.
+  def create
+    pdf_path = V1::RegistrationService.create_record(params[:registration]).pdf_path
+    jsonp :pdfurl => "https://#{PDF_HOST_NAME}#{pdf_path}"
+  rescue V1::RegistrationService::ValidationError => e
+    jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
+  rescue V1::UnsupportedLanguageError => e
+    jsonp({ :message => e.message }, :status => 400)
+  rescue ActiveRecord::UnknownAttributeError => e
+    name = e.message.split(': ')[1]
+    jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
   end
 
 end

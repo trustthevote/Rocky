@@ -22,55 +22,55 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe StateRequirements do
+describe V1::StateRequirements do
 
   context 'error' do
     it 'if the state is not found' do
       lambda {
-        StateRequirements.find(:home_state_id => 'ZZ')
-      }.should raise_error StateRequirements::INVALID_STATE_ID
+        V1::StateRequirements.find(:home_state_id => 'ZZ')
+      }.should raise_error V1::StateRequirements::INVALID_STATE_ID
     end
 
     it 'if the zip code is invalid' do
       lambda {
-        StateRequirements.find(:home_zip_code => '00000')
-      }.should raise_error StateRequirements::INVALID_ZIP
+        V1::StateRequirements.find(:home_zip_code => '00000')
+      }.should raise_error V1::StateRequirements::INVALID_ZIP
     end
 
     it 'if the zip code has invalid format' do
       lambda {
-        StateRequirements.find(:home_zip_code => '06390abc')
-      }.should raise_error StateRequirements::INVALID_ZIP
+        V1::StateRequirements.find(:home_zip_code => '06390abc')
+      }.should raise_error V1::StateRequirements::INVALID_ZIP
     end
 
     it 'if the zip does not match the state' do
       lambda {
-        StateRequirements.find(:home_state_id => 'AK', :home_zip_code => '06390')
-      }.should raise_error StateRequirements::NO_ZIP_MATCH
+        V1::StateRequirements.find(:home_state_id => 'AK', :home_zip_code => '06390')
+      }.should raise_error V1::StateRequirements::NO_ZIP_MATCH
     end
 
     it 'if neither state ID nor ZIP code are given' do
-      lambda { StateRequirements.find({}) }.should raise_error StateRequirements::MISSING_ID_OR_ZIP
+      lambda { V1::StateRequirements.find({}) }.should raise_error V1::StateRequirements::MISSING_ID_OR_ZIP
     end
 
     it 'if birth date has invalid format' do
       lambda {
-        StateRequirements.find(:home_state_id => 'CA', :lang => 'en', :date_of_birth => 'invalid_format')
-      }.should raise_error StateRequirements::BAD_DOB_FORMAT
+        V1::StateRequirements.find(:home_state_id => 'CA', :lang => 'en', :date_of_birth => 'invalid_format')
+      }.should raise_error V1::StateRequirements::BAD_DOB_FORMAT
     end
 
     it 'if age is invalid' do
       lambda {
-        StateRequirements.find(:home_state_id => 'CA', :lang => 'en', :date_of_birth => 5.days.ago.strftime('%Y-%m-%d'))
+        V1::StateRequirements.find(:home_state_id => 'CA', :lang => 'en', :date_of_birth => 5.days.ago.strftime('%Y-%m-%d'))
       }.should raise_error 'if you will turn 18 by the next election' # see the message in fixtures state_localizations.yml
     end
 
     it 'if the language is unsupported' do
       lambda {
-        StateRequirements.find(:home_state_id => 'AK', :lang => 'ru')
-      }.should raise_error UnsupportedLanguageError
+        V1::StateRequirements.find(:home_state_id => 'AK', :lang => 'ru')
+      }.should raise_error V1::UnsupportedLanguageError
     end
 
     it 'if state is not participating' do
@@ -78,17 +78,17 @@ describe StateRequirements do
       state = GeoState.new(:participating => false)
       locale = mock(StateLocalization.new).not_participating_tooltip { 'not participating' }
 
-      mock(StateRequirements).find_state(query) { state }
-      mock(StateRequirements).get_locale(state, 'en') { locale }
+      mock(V1::StateRequirements).find_state(query) { state }
+      mock(V1::StateRequirements).get_locale(state, 'en') { locale }
 
       lambda {
-        StateRequirements.find(query)
+        V1::StateRequirements.find(query)
       }.should raise_error 'not participating'
     end
   end
 
   it 'should return data' do
-    StateRequirements.find(:home_state_id => 'CA', :lang => 'en').should == {
+    V1::StateRequirements.find(:home_state_id => 'CA', :lang => 'en').should == {
       :requires_party     => true,
       :id_number_msg      => nil,
       :requires_party_msg => nil,
