@@ -22,55 +22,33 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Admin::PartnersController < Admin::BaseController
+class Api::V2::RegistrationsController < Api::V2::BaseController
 
+  # Lists registrations
   def index
-    @partners = Partner.all
-    @partner_zip = PartnerZip.new(nil)
+    query = {
+      :partner_id       => params[:partner_id],
+      :partner_password => params[:partner_password],
+      :since            => params[:since]
+    }
+
+    jsonp :registrations => V2::RegistrationService.find_records(query)
+  rescue ArgumentError => e
+    jsonp({ :message => e.message }, :status => 400)
   end
 
-  def show
-    @partner = Partner.find(params[:id])
-  end
-
-  def edit
-    @partner = Partner.find(params[:id])
-  end
-
-  def update
-    @partner = Partner.find(params[:id])
-
-    if @partner.update_attributes(params[:partner])
-      update_email_templates(@partner, params[:template])
-      update_custom_css(@partner, params[:css_files])
-
-      redirect_to [ :admin, @partner ]
-    else
-      render :edit
-    end
-  end
-  
-  def regen_api_key
-    @partner = Partner.find(params[:id])
-    @partner.generate_api_key!
-    redirect_to admin_partner_path(@partner)
-  end
-  
-  
-
-  private
-
-  def update_email_templates(partner, templates)
-    (templates || {}).each do |name, body|
-      EmailTemplate.set(partner, name, body)
-    end
-  end
-
-  def update_custom_css(partner, css_files)
-    paf = PartnerAssetsFolder.new(partner)
-    (css_files || {}).each do |name, data|
-      paf.update_css(name, data)
-    end
+  # Creates the record and returns the URL to the PDF file or
+  # the error message with optional invalid field name.
+  def create
+    pdf_path = V2::RegistrationService.create_record(params[:registration]).pdf_path
+    jsonp :pdfurl => "https://#{PDF_HOST_NAME}#{pdf_path}"
+  rescue V2::RegistrationService::ValidationError => e
+    jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
+  rescue V2::UnsupportedLanguageError => e
+    jsonp({ :message => e.message }, :status => 400)
+  rescue ActiveRecord::UnknownAttributeError => e
+    name = e.message.split(': ')[1]
+    jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
   end
 
 end

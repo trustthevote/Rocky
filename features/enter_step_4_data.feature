@@ -42,7 +42,7 @@ Feature: Step 4
       And I <see_partner_email_checkbox> see a checkbox for "Receive emails from Opt-in Partner"
       And I <see_rtv_volunteer_checkbox> see a checkbox for "I would like to volunteer with Rock the Vote"
       And I <see_parnter_volunteer_checkbox> see a checkbox for "I would like to volunteer with Opt-in Partner"
-      And I <see_rtv_instructions> see "We will send you timely election reminders, polling place information, and information about music and issues."
+      And I <see_rtv_instructions> see "We will send you timely election reminders, your polling place location, and information about music and issues."
       
       Examples:
         | rtv_email | rtv_volunteer | partner_email | partner_volunteer | see_rtv_email_checkbox | see_rtv_volunteer_checkbox | see_partner_email_checkbox | see_parnter_volunteer_checkbox | see_rtv_instructions |

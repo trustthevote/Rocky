@@ -79,5 +79,17 @@ describe Admin::PartnersController do
       it      { should render_template :edit }
     end
   end
+  
+  describe "GET regen_api_key" do
+    before(:each) do
+      @partner = Factory(:partner)
+      stub(@partner).generate_api_key! { true }
+      stub(Partner).find("1") { @partner }
+      get :regen_api_key, :id=>"1"
+    end
+    it { 
+      should redirect_to admin_partner_path(@partner)
+    }
+  end
 
 end

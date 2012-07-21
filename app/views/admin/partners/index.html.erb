@@ -12,6 +12,8 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>Organization</th>
+      <th>API Key</th>
       <th>Whitelabeled</th>
       <th></th>
     </tr>
@@ -21,6 +23,8 @@
       <tr>
         <td><%= p.id %></td>
         <td><%= h p.name %></td>
+        <td><%= h p.organization %></td>
+        <td><%= h p.api_key %></td>
         <td><%= p.whitelabeled? ? 'Yes' : 'No' %></td>
         <td><%= link_to "Show", admin_partner_path(p) %></td>
       </tr>

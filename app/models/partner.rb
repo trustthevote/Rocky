@@ -65,6 +65,10 @@ class Partner < ActiveRecord::Base
   before_validation :reformat_phone
   before_validation :set_default_widget_image
 
+
+  before_create :generate_api_key
+  
+
   validates_presence_of :name
   validates_presence_of :url
   validates_presence_of :address
@@ -91,6 +95,10 @@ class Partner < ActiveRecord::Base
 
   def primary?
     self.id == DEFAULT_ID
+  end
+  
+  def valid_api_key?(key)
+    !key.blank? && !self.api_key.blank? && key == self.api_key
   end
 
   def can_be_whitelabeled?
@@ -238,6 +246,15 @@ class Partner < ActiveRecord::Base
 
   def state_abbrev
     state && state.abbreviation
+  end
+
+  def generate_api_key!
+    generate_api_key
+    save!
+  end
+
+  def generate_api_key
+    self.api_key = Digest::SHA1.hexdigest([Time.now, (1..10).map { rand.to_s}].join('--'))
   end
 
   def reformat_phone

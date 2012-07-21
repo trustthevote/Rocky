@@ -1,6 +1,30 @@
 Feature: Admin UI
+  
+  So that admins can set partner info
+  As an admin
+  I want to manage partner data
 
-
+    
+    Scenario: List partners
+      Given the following partner exists:
+        | name         | organization      |
+        | Partner Name | Organization Name |
+      When I go to the admin dashboard
+      Then I should see "Organization Name"
+      And I should see that partner's api key
+        
+      
+    Scenario: Regenerate partner api_key
+      Given the following partner exists:
+        | name         | organization      |
+        | Partner Name | Organization Name |
+      And that partner's api key is "abc123"
+      When I go to the partner page for that partner
+      Then I should see "abc123"
+      When I follow "regenerate API key"
+      Then I should be on the partner page for that partner
+      And that partner's api key should not be "abc123"
+    
     Scenario: Partner edit form for partner 1
       Given the following partner exists:
         | id | name                |

@@ -26,10 +26,40 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Partner do
 
+  describe "creation" do
+    it "sets an API key on creation" do
+      p = Factory(:partner, :api_key=>'')
+      p.api_key.should_not be_blank
+    end
+  end
 
   describe "#primary?" do
     it "is false for non-primary partner" do
       assert !Factory.build(:partner).primary?
+    end
+  end
+  
+  describe "#generate_api_key!" do
+    it "should change the api key" do
+      p = Factory(:partner)
+      p.api_key.should_not be_blank
+      old_key = p.api_key
+      p.generate_api_key!
+      p.reload
+      p.api_key.should_not == old_key
+    end
+  end
+  
+  describe "#valid_api_key?(key)" do
+    it "returns false when blank or not matching" do
+      partner = Factory.build(:partner, :api_key=>"")
+      partner.valid_api_key?("").should be_false
+      partner.api_key="abc"
+      partner.valid_api_key?("bca").should be_false
+    end
+    it "return true when matching" do
+      partner = Factory.build(:partner, :api_key=>"abcdef")
+      partner.valid_api_key?("abcdef").should be_true
     end
   end
 

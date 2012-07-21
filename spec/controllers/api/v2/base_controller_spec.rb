@@ -22,12 +22,25 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require 'test_helper'
-require 'performance_test_help'
+require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-# Profiling results for each test method are written to tmp/performance.
-class BrowsingTest < ActionController::PerformanceTest
-  def test_homepage
-    get '/'
+describe Api::V2::BaseController do
+
+  describe 'jsonp' do
+    before { @c = Api::V2::BaseController.new }
+
+    it 'should render plain JSON' do
+      stub(@c).params { {} }
+      mock(@c).render(:json => { :data => 'field' }, :status => 400)
+      @c.send(:jsonp, { :data => 'field' }, :status => 400)
+    end
+
+    it 'should render JSONP callback' do
+      stub(@c).params { { :callback => 'cb' } }
+      mock(@c).render_to_string(:json => :data) { 'json_value' }
+      mock(@c).render(:text => 'cb(json_value);', :status => 400)
+      @c.send(:jsonp, :data, :status => 400)
+    end
   end
+
 end

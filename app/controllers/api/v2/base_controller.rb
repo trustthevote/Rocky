@@ -22,54 +22,17 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Admin::PartnersController < Admin::BaseController
+class Api::V2::BaseController < ApplicationController
 
-  def index
-    @partners = Partner.all
-    @partner_zip = PartnerZip.new(nil)
-  end
+  protected
 
-  def show
-    @partner = Partner.find(params[:id])
-  end
-
-  def edit
-    @partner = Partner.find(params[:id])
-  end
-
-  def update
-    @partner = Partner.find(params[:id])
-
-    if @partner.update_attributes(params[:partner])
-      update_email_templates(@partner, params[:template])
-      update_custom_css(@partner, params[:css_files])
-
-      redirect_to [ :admin, @partner ]
+  # Renders the data as JSON and wraps into the <callback>(...); if
+  # there is a 'callback' parameter with the name of the function.
+  def jsonp(data, options = {})
+    if params[:callback].present?
+      render options.merge(:text => "#{params[:callback]}(#{render_to_string :json => data});")
     else
-      render :edit
-    end
-  end
-  
-  def regen_api_key
-    @partner = Partner.find(params[:id])
-    @partner.generate_api_key!
-    redirect_to admin_partner_path(@partner)
-  end
-  
-  
-
-  private
-
-  def update_email_templates(partner, templates)
-    (templates || {}).each do |name, body|
-      EmailTemplate.set(partner, name, body)
-    end
-  end
-
-  def update_custom_css(partner, css_files)
-    paf = PartnerAssetsFolder.new(partner)
-    (css_files || {}).each do |name, data|
-      paf.update_css(name, data)
+      render options.merge(:json => data)
     end
   end
 

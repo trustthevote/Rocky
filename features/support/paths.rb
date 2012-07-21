@@ -62,7 +62,8 @@ module NavigationHelpers
       admin_partners_path
     when /the registration page for that partner/
       "#{new_registrant_path}?partner=#{@partner.id}"
-
+    when /the partner page for that partner/
+      admin_partner_path(@partner || Partner.last)
     when /the partner edit page for that partner/
       edit_admin_partner_path(Partner.last)
     when /the partner edit page for the first partner/

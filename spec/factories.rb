@@ -124,6 +124,15 @@ Factory.define :maximal_registrant, :parent => :completed_registrant do |f|
   f.partner_volunteer   true
 end
 
+Factory.define :api_v2_maximal_registrant, :parent => :completed_registrant do |f|
+  f.partner_opt_in_email        true
+  f.partner_opt_in_sms          true
+  f.volunteer           true
+  f.partner_volunteer   true
+  #f.tracking_source "any string"
+  #f.tracking_id "any string"  
+end
+
 Factory.define :partner do |partner|
   partner.sequence(:username)   { |n| "partner_#{n}" }
   partner.email                 { |p| "#{p.username}@example.com" }
@@ -140,4 +149,21 @@ Factory.define :partner do |partner|
   partner.survey_question_1_en  "Hello?"
   partner.survey_question_2_en  "Outta here?"
 end
+
+Factory.define :whitelabel_partner, :parent=>:partner do |partner|
+  partner.api_key               "abc123"
+  partner.survey_question_1_en  "Q1 En"
+  partner.survey_question_1_es  "Q1 Es"
+  partner.survey_question_2_en  "Q2 En"
+  partner.survey_question_2_es  "Q2 Es"
+  partner.ask_for_volunteers          true
+  partner.partner_ask_for_volunteers  true
+  partner.whitelabeled                true
+  partner.rtv_email_opt_in            true
+  partner.partner_email_opt_in        true
+  partner.rtv_sms_opt_in              true
+  partner.partner_sms_opt_in          true
+end
+
+
 

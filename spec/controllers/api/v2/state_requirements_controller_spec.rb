@@ -22,55 +22,33 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Admin::PartnersController < Admin::BaseController
+require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-  def index
-    @partners = Partner.all
-    @partner_zip = PartnerZip.new(nil)
-  end
+describe Api::V2::StateRequirementsController do
 
-  def show
-    @partner = Partner.find(params[:id])
-  end
+  describe 'show' do
+    it 'should report unsupported language' do
+      expect_api_error :message => 'Unsupported language'
+      state_requirements { raise V2::UnsupportedLanguageError }
+    end
 
-  def edit
-    @partner = Partner.find(params[:id])
-  end
+    it 'should report invalid state' do
+      expect_api_error :message => 'Invalid state ID'
+      state_requirements { raise ArgumentError.new('Invalid state ID') }
+    end
 
-  def update
-    @partner = Partner.find(params[:id])
-
-    if @partner.update_attributes(params[:partner])
-      update_email_templates(@partner, params[:template])
-      update_custom_css(@partner, params[:css_files])
-
-      redirect_to [ :admin, @partner ]
-    else
-      render :edit
+    it 'should return data' do
+      expect_api_response :result
+      state_requirements { :result }
     end
   end
-  
-  def regen_api_key
-    @partner = Partner.find(params[:id])
-    @partner.generate_api_key!
-    redirect_to admin_partner_path(@partner)
-  end
-  
-  
 
   private
 
-  def update_email_templates(partner, templates)
-    (templates || {}).each do |name, body|
-      EmailTemplate.set(partner, name, body)
-    end
-  end
-
-  def update_custom_css(partner, css_files)
-    paf = PartnerAssetsFolder.new(partner)
-    (css_files || {}).each do |name, data|
-      paf.update_css(name, data)
-    end
+  def state_requirements(&block)
+    query = { :lang => nil, :home_state_id => nil, :home_zip_code => nil, :date_of_birth => nil }
+    mock(V2::StateRequirements).find(query, &block)
+    get :show, :format => 'json', :query => query
   end
 
 end

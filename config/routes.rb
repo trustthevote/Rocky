@@ -58,11 +58,17 @@ ActionController::Routing::Routes.draw do |map|
       v1.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
       v1.map '/state_requirements.json', :format => 'json', :controller => 'state_requirements', :action => 'show'
     end
+    api.namespace :v2 do |v2|
+      v2.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
+      v2.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
+      v2.map '/state_requirements.json', :format => 'json', :controller => 'state_requirements', :action => 'show'
+      v2.map '/partner_profile.json', :format => 'json', :controller => 'partners', :action => 'show'
+    end
   end
 
   map.namespace :admin do |admin|
     admin.root :controller => 'partners', :action => 'index'
-    admin.resources :partners do |p|
+    admin.resources :partners, :member => { :regen_api_key => :get } do |p|
       p.resources :assets, :only => [ :index, :create, :destroy ]
     end
     admin.resource :partner_zips, :only=>[:create]

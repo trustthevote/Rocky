@@ -17,6 +17,14 @@
     <td><%= h pd.organization %></td>
   </tr>
   <tr>
+    <td class='label'>
+      API Key:
+    </td>
+    <td><%= h @partner.api_key %></td>
+  </tr>
+  <tr>
+    <td colspan='2'><%=link_to "regenerate API key", regen_api_key_admin_partner_path(@partner) %></td>
+  <tr>
     <td class='label'>Email:</td>
     <td><%= h pd.email %></td>
   </tr>

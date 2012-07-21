@@ -22,55 +22,19 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Admin::PartnersController < Admin::BaseController
-
-  def index
-    @partners = Partner.all
-    @partner_zip = PartnerZip.new(nil)
-  end
+class Api::V2::StateRequirementsController < Api::V2::BaseController
 
   def show
-    @partner = Partner.find(params[:id])
-  end
+    query = {
+      :lang => params[:lang],
+      :home_state_id => params[:home_state_id],
+      :home_zip_code => params[:home_zip_code],
+      :date_of_birth => params[:date_of_birth]
+    }
 
-  def edit
-    @partner = Partner.find(params[:id])
-  end
-
-  def update
-    @partner = Partner.find(params[:id])
-
-    if @partner.update_attributes(params[:partner])
-      update_email_templates(@partner, params[:template])
-      update_custom_css(@partner, params[:css_files])
-
-      redirect_to [ :admin, @partner ]
-    else
-      render :edit
-    end
-  end
-  
-  def regen_api_key
-    @partner = Partner.find(params[:id])
-    @partner.generate_api_key!
-    redirect_to admin_partner_path(@partner)
-  end
-  
-  
-
-  private
-
-  def update_email_templates(partner, templates)
-    (templates || {}).each do |name, body|
-      EmailTemplate.set(partner, name, body)
-    end
-  end
-
-  def update_custom_css(partner, css_files)
-    paf = PartnerAssetsFolder.new(partner)
-    (css_files || {}).each do |name, data|
-      paf.update_css(name, data)
-    end
+    jsonp V2::StateRequirements.find(query)
+  rescue ArgumentError => e
+    jsonp({ :message => e.message }, :status => 400)
   end
 
 end
