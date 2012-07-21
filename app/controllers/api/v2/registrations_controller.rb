@@ -22,13 +22,14 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
+require 'services/v2'
 class Api::V2::RegistrationsController < Api::V2::BaseController
 
   # Lists registrations
   def index
     query = {
       :partner_id       => params[:partner_id],
-      :partner_password => params[:partner_password],
+      :partner_api_key => params[:partner_api_key],
       :since            => params[:since]
     }
 

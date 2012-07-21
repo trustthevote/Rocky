@@ -1,4 +1,5 @@
-class Api::V2::PartnersController < ApplicationController
+require 'services/v2'
+class Api::V2::PartnersController < Api::V2::BaseController
   def show
     query = {
       :partner_id       => params[:partner_id],
