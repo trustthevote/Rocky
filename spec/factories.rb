@@ -124,7 +124,7 @@ Factory.define :maximal_registrant, :parent => :completed_registrant do |f|
   f.partner_volunteer   true
 end
 
-Factory.define :api_v2_maximal_registrant, :parent => :completed_registrant do |f|
+Factory.define :api_v2_maximal_registrant, :parent => :maximal_registrant do |f|
   f.partner_opt_in_email        true
   f.partner_opt_in_sms          true
   f.volunteer           true

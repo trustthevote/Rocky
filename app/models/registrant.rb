@@ -48,6 +48,8 @@ class Registrant < ActiveRecord::Base
 
   CSV_HEADER = [
     "Status",
+    "Tracking Source",
+    "Tracking ID",
     "Language",
     "Date of birth",
     "Email address",
@@ -703,6 +705,8 @@ class Registrant < ActiveRecord::Base
   def to_csv_array
     [
       status.humanize,
+      self.tracking_source,
+      self.tracking_id,
       locale == 'en' ? "English" : "Spanish",
       pdf_date_of_birth,
       email_address,

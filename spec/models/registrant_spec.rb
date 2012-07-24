@@ -824,6 +824,8 @@ describe Registrant do
       partner.survey_question_1_en = "survey_question_1_en"
       partner.survey_question_2_en = "survey_question_2_en"
       assert_equal [ "Step 1",
+                      nil,
+                      nil,
                      "English",
                      reg.date_of_birth.to_s(:month_day_year),
                      reg.email_address,
@@ -865,12 +867,14 @@ describe Registrant do
     end
 
     it "renders maximal CSV" do
-      reg = Factory.create(:maximal_registrant)
+      reg = Factory.create(:api_v2_maximal_registrant)
       partner = reg.partner
       partner.survey_question_1_en = "survey_question_1_en"
       partner.survey_question_2_en = "survey_question_2_en"
       reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
       assert_equal [ "Complete",
+                     "tracking_source",
+                     "part_tracking_id",
                      "English",
                      reg.date_of_birth.to_s(:month_day_year),
                      "citizen@example.com",
@@ -913,12 +917,14 @@ describe Registrant do
     end
 
     it "renders maximal CSV with es questions for es locale" do
-      reg = Factory.create(:maximal_registrant, :locale => "es")
+      reg = Factory.create(:api_v2_maximal_registrant, :locale => "es")
       partner = reg.partner
       partner.survey_question_1_es = "survey_question_1_es"
       partner.survey_question_2_es = "survey_question_2_es"
       reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
-      assert_equal [ "Complete",
+      reg.to_csv_array.should == [ "Complete",
+                     "tracking_source",
+                     "part_tracking_id",
                      "Spanish",
                      reg.date_of_birth.to_s(:month_day_year),
                      "citizen@example.com",
@@ -956,8 +962,8 @@ describe Registrant do
                      "Yes",
                      nil,
                      reg.created_at && reg.created_at.to_s(:month_day_year)
-                     ],
-                 reg.to_csv_array
+                     ]
+                 
     end
 
     it "renders ineligible CSV" do
