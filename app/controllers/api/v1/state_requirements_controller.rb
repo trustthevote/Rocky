@@ -22,6 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
+require 'services/v1'
 class Api::V1::StateRequirementsController < Api::V1::BaseController
 
   def show
