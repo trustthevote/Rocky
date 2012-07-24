@@ -29,7 +29,7 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
   def index
     query = {
       :partner_id       => params[:partner_id],
-      :partner_api_key => params[:partner_api_key],
+      :partner_api_key => params[:partner_API_key],
       :since            => params[:since]
     }
 

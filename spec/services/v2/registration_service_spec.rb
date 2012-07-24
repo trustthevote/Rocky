@@ -95,7 +95,10 @@ describe V2::RegistrationService do
   describe 'data_to_attrs' do
     specify { V2::RegistrationService.send(:data_to_attrs, {}).should == {} }
     specify { V2::RegistrationService.send(:data_to_attrs, { :lang  => 'ex' }).should == { :locale => 'ex' } }
-    specify { V2::RegistrationService.send(:data_to_attrs, { :partner_tracking_id => 'id' }).should == { :tracking_source => 'id' } }
+    specify { V2::RegistrationService.send(:data_to_attrs, { :source_tracking_id => 'sourceid' }).should == { :tracking_source => 'sourceid' } }
+    specify { V2::RegistrationService.send(:data_to_attrs, { :partner_tracking_id => 'partnertrackid' }).should == { :partner_tracking_id => 'partnertrackid' } }
+    specify { V2::RegistrationService.send(:data_to_attrs, { :opt_in_volunteer => true }).should == { :volunteer => true } }
+    specify { V2::RegistrationService.send(:data_to_attrs, { :partner_opt_in_volunteer => true }).should == { :partner_volunteer => true } }
     specify { V2::RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state => 'ca', :prev_state_id => 'Nj' }).should == { "home_state_id" => 33, "mailing_state_id" => 5, "prev_state_id" => 31 } } # See geo_states.csv
     specify { V2::RegistrationService.send(:data_to_attrs, { :id_number => 'id' }).should == { :state_id_number => 'id' } }
   end
@@ -149,14 +152,14 @@ describe V2::RegistrationService do
           :email_address        => reg.email_address,
           :opt_in_email         => reg.opt_in_email,
           :opt_in_sms           => reg.opt_in_sms,
+          :opt_in_volunteer     => reg.volunteer?,
           :partner_opt_in_email => reg.partner_opt_in_email,
           :partner_opt_in_sms   => reg.partner_opt_in_sms,
+          :partner_opt_in_volunteer    => reg.partner_volunteer,
           :survey_question_1    => partner.send("survey_question_1_#{reg.locale}"),
           :survey_answer_1      => reg.survey_answer_1,
           :survey_question_2    => partner.send("survey_question_1_#{reg.locale}"),
-          :survey_answer_2      => reg.survey_answer_2,
-          :volunteer            => reg.volunteer?,
-          :partner_volunteer    => reg.partner_volunteer }
+          :survey_answer_2      => reg.survey_answer_2 }
       ]
     end
 

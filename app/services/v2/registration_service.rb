@@ -96,14 +96,14 @@ module V2
           :email_address        => reg.email_address,
           :opt_in_email         => reg.opt_in_email,
           :opt_in_sms           => reg.opt_in_sms,
+          :opt_in_volunteer            => reg.volunteer?,
           :partner_opt_in_email => reg.partner_opt_in_email,
           :partner_opt_in_sms   => reg.partner_opt_in_sms,
+          :partner_opt_in_volunteer    => reg.partner_volunteer?,
           :survey_question_1    => partner.send("survey_question_1_#{reg.locale}"),
           :survey_answer_1      => reg.survey_answer_1,
           :survey_question_2    => partner.send("survey_question_1_#{reg.locale}"),
-          :survey_answer_2      => reg.survey_answer_2,
-          :volunteer            => reg.volunteer?,
-          :partner_volunteer    => reg.partner_volunteer? }
+          :survey_answer_2      => reg.survey_answer_2 }
       end
     end
 
@@ -139,8 +139,15 @@ module V2
         attrs[:locale] = l
       end
 
-      if l = attrs.delete(:partner_tracking_id)
+      if l = attrs.delete(:source_tracking_id)
         attrs[:tracking_source] = l
+      end
+
+      if l = attrs.delete(:opt_in_volunteer)
+        attrs[:volunteer] = l
+      end
+      if l = attrs.delete(:partner_opt_in_volunteer)
+        attrs[:partner_volunteer] = l
       end
 
       if l = attrs.delete(:id_number)

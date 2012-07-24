@@ -3,7 +3,7 @@ class Api::V2::PartnersController < Api::V2::BaseController
   def show
     query = {
       :partner_id       => params[:partner_id],
-      :partner_api_key => params[:partner_api_key],
+      :partner_api_key => params[:partner_API_key],
     }
 
     jsonp V2::PartnerService.find(query)

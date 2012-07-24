@@ -129,8 +129,8 @@ Factory.define :api_v2_maximal_registrant, :parent => :completed_registrant do |
   f.partner_opt_in_sms          true
   f.volunteer           true
   f.partner_volunteer   true
-  #f.tracking_source "any string"
-  #f.tracking_id "any string"  
+  f.tracking_source       "tracking_source"
+  f.tracking_id   "part_tracking_id"
 end
 
 Factory.define :partner do |partner|
