@@ -274,7 +274,7 @@ class Partner < ActiveRecord::Base
   def generate_registrants_csv
     FasterCSV.generate do |csv|
       csv << Registrant::CSV_HEADER
-      registrants.all(:include => [:home_state, :mailing_state, :partner]).each do |reg|
+      registrants.find_each(:batch_size=>500, :include => [:home_state, :mailing_state, :partner]) do |reg|
         csv << reg.to_csv_array
       end
     end
