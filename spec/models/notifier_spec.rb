@@ -87,6 +87,32 @@ describe Notifier do
     end
   end
 
+
+  describe "#thank_you_external" do
+    it "delivers the expected email" do
+      registrant = Factory.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.deliver_thank_you_external(registrant)
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.to.should include(registrant.email_address)
+      email.subject.should include("Thank You")
+      assert_equal 1, email.parts.length
+      assert_equal "utf-8", email.parts[0].charset
+      assert_equal "quoted-printable", email.parts[0].encoding
+    end
+    it "uses partner template" do
+      partner    = Factory(:partner, :whitelabeled => true)
+      registrant = Factory(:step_2_registrant, :partner => partner, :locale => 'en', :last_name=>"test the template")
+      EmailTemplate.set(partner, 'thank_you_external.en', 'HI: <%= @registrant.last_name %>')
+
+      Notifier.deliver_thank_you_external(registrant)
+      email = ActionMailer::Base.deliveries.last
+      email.body.should match(%r{HI: test the template})
+    end
+    
+  end
+
   describe "#reminder" do
     it "delivers the expected email" do
       registrant = Factory.create(:maximal_registrant, :reminders_left  => 1)

@@ -38,6 +38,11 @@ Given /^I have completed step (\d+) as a resident of "([^\"]*)" state$/ do |step
   @registrant = Factory.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
 end
 
+Given /^I have been to the state online registration page$/ do
+  Given 'I have completed step 4 as a resident of "Washington" state'
+  @registrant.update_attributes!(:finish_with_state=>true)
+end
+
 
 Given /^I have completed step (\d+) as a resident of "([^\"]*)" state from that partner$/ do |step_num,state_name|
   geo_state = GeoState.find_by_name(state_name)
@@ -54,6 +59,40 @@ Given /^I have completed step (\d+) as a resident of "([^\"]*)" state without ja
   @registrant.partner = Partner.last
   @registrant.javascript_disabled = true
   @registrant.save!
+end
+
+
+When /^my session expires$/ do
+  @registrant.reload
+  Registrant.record_timestamps = false
+  @registrant.update_attributes!(:updated_at=>(2*Registrant::STALE_TIMEOUT).seconds.ago)
+  Registrant.record_timestamps = true
+end
+
+
+When /^the timeout_stale_registrations task has run$/ do
+  Registrant.abandon_stale_records
+end
+
+Then /^I should be sent a thank\-you email$/ do
+  email = ActionMailer::Base.deliveries.last
+  email.to.should include(@registrant.email_address)
+  email.subject.should == "Thank You TBD"
+end
+
+Then /^I should not be sent a thank\-you email$/ do
+  ActionMailer::Base.deliveries.count.should == 0
+end
+
+
+Then /^my status should be "([^\"]*)"$/ do |status|
+  @registrant.reload
+  @registrant.status.should == status
+end
+
+Then /^my status should not be "([^\"]*)"$/ do |status|
+  @registrant.reload
+  @registrant.status.should_not == status
 end
 
 
@@ -111,6 +150,15 @@ Then /^I should not be signed up for "([^\"]*)"$/ do |flag|
   @registrant.send(flag).should be_false
 end
 
+Then /^I should be recorded as having selected to finish with the state$/ do
+  @registrant.reload
+  @registrant.finish_with_state.should be_true
+end
+
+Then /^I should not be recorded as having selected to finish with the state$/ do
+  @registrant.reload
+  @registrant.finish_with_state.should be_false
+end
 
 
 

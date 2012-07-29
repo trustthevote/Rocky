@@ -99,6 +99,9 @@ class RegistrationStep < ApplicationController
       @partner    = @registrant.partner
       @partner_id = @partner.id
     end
+    if @registrant.finish_with_state?
+      @registrant.update_attributes(:finish_with_state=>false)
+    end
   end
 
   def find_partner

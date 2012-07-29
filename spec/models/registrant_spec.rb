@@ -774,6 +774,30 @@ describe Registrant do
       assert !fresh_rec.reload.abandoned?
       assert !complete_rec.reload.abandoned?
     end
+    it "should send an email if registrant chose to finish online with state" do
+      stale_state_online_reg = Factory.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      stale_reg = Factory.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
+      
+      expect {
+        Registrant.abandon_stale_records
+      }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      
+    end
+    it "should not send an email to registrants that have been thanked" do
+      stale_state_online_reg = Factory.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      
+      Registrant.abandon_stale_records
+      
+      stale_state_online_reg_2 = Factory.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      expect {
+        Registrant.abandon_stale_records
+      }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      
+      expect {
+        Registrant.abandon_stale_records
+      }.to change { ActionMailer::Base.deliveries.count }.by(0)
+      
+    end
   end
 
   describe "PDF" do

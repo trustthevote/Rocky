@@ -288,11 +288,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.abandon_stale_records
-    state_id = 6 #Colorado
     stale = self.find(:all, :conditions => ["(NOT abandoned) AND (status != 'complete') AND (updated_at < ?)", STALE_TIMEOUT.seconds.ago])
     stale.each do |reg|
-      if reg.home_state_id == state_id && reg.status == "step_3"
+      if reg.finish_with_state?
         reg.status = "complete"
+        reg.deliver_thank_you_for_state_online_registration_email
       end
       reg.abandon!
       Rails.logger.info "Registrant #{reg.id} abandoned at #{Time.now}"
@@ -610,6 +610,10 @@ class Registrant < ActiveRecord::Base
 
   def deliver_confirmation_email
     Notifier.deliver_confirmation(self)
+  end
+  
+  def deliver_thank_you_for_state_online_registration_email
+    Notifier.deliver_thank_you_external(self)
   end
 
   def enqueue_reminder_emails

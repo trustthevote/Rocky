@@ -34,6 +34,10 @@ class Notifier < ActionMailer::Base
   def confirmation(registrant)
     setup_registrant_email(registrant, 'confirmation')
   end
+  
+  def thank_you_external(registrant)
+    setup_registrant_email(registrant, 'thank_you_external')
+  end
 
   def reminder(registrant)
     setup_registrant_email(registrant, 'reminder')

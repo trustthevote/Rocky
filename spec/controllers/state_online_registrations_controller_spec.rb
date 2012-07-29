@@ -31,6 +31,12 @@ describe StateOnlineRegistrationsController do
       get :show, :registrant_id => reg.to_param
       assert assigns[:registrant]
     end
+    it "sets the finish_with_state flag for the registrant to true" do
+      reg = Factory.create(:step_1_registrant)
+      reg.finish_with_state.should be_false
+      get :show, :registrant_id => reg.to_param
+      assigns[:registrant].finish_with_state.should be_true
+    end
     it "assigns the iFrame url" do
       reg = Factory.create(:step_1_registrant, :home_zip_code=>"99400")
       get :show, :registrant_id => reg.to_param

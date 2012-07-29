@@ -24,6 +24,8 @@ app/views/notifier/confirmation.en.html.erb
 app/views/notifier/confirmation.es.html.erb
 app/views/notifier/reminder.en.html.erb
 app/views/notifier/reminder.es.html.erb
+app/views/notifier/thank_you_external.en.html.erb
+app/views/notifier/thank_you_external.es.html.erb
 app/views/finishes/_adwords.html.erb
 app/views/registrants/_overseas.html.erb
 config/initializers/sponsor_customizations.rb

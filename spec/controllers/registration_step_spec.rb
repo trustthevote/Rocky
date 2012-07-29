@@ -42,5 +42,13 @@ describe RegistrationStep do
     @rs.send(:find_registrant, nil, { :id => @reg.to_param })
     @rs.instance_variable_get("@registrant").should == @reg
   end
-
+  
+  it "should set the registrant's finish_with_state flag to false if it was true" do
+    @reg.update_attributes(:finish_with_state=>true)
+    @reg.finish_with_state.should be_true
+    @rs.send(:find_registrant, nil, { :id => @reg.to_param })
+    @reg.reload
+    @reg.finish_with_state.should be_false
+  end
+  
 end
