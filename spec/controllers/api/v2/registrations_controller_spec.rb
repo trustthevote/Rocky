@@ -46,6 +46,12 @@ describe Api::V2::RegistrationsController do
       expect_api_error :message => "Invalid parameter type", :field_name => "attr"
       new_registration { raise(ActiveRecord::UnknownAttributeError, 'unknown attribute: attr') }
     end
+    [1, 2].each do |qnum|
+      it "should report error when an answer is provided without a question" do
+        expect_api_error :message =>"Question #{qnum} required when Answer #{qnum} provided"
+        new_registration { raise(V2::RegistrationService::SurveyQuestionError.new("Question #{qnum} required when Answer #{qnum} provided")) }
+      end
+    end
   end
 
   describe 'index' do

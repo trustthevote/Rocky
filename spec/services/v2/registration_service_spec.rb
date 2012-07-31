@@ -75,6 +75,20 @@ describe V2::RegistrationService do
       end
     end
 
+    [1,2].each do |qnum|
+      it "should raise an error if answer #{qnum} is provided without question #{qnum}" do
+        # lambda {
+        #           V2::RegistrationService.create_record("survey_answer_#{qnum}" => 'An Answer')          
+        #         }.should raise_error(V2::RegistrationService::SurveyQuestionError)
+        begin
+          V2::RegistrationService.create_record("survey_answer_#{qnum}" => 'An Answer')
+          fail 'SurveyQuestionError is expected'
+        rescue V2::RegistrationService::SurveyQuestionError => e
+          e.message.should == "Question #{qnum} required when Answer #{qnum} provided"
+        end
+      end
+    end
+
     it 'should deal with states passed as strings' do
       lambda {
         V2::RegistrationService.create_record(:mailing_state => "", :home_state => "1", :prev_state => "");
@@ -95,11 +109,13 @@ describe V2::RegistrationService do
   describe 'data_to_attrs' do
     specify { V2::RegistrationService.send(:data_to_attrs, {}).should == {} }
     specify { V2::RegistrationService.send(:data_to_attrs, { :lang  => 'ex' }).should == { :locale => 'ex' } }
+    specify { V2::RegistrationService.send(:data_to_attrs, { :survey_question_1 => 'q1' }).should == { :original_survey_question_1 => 'q1' } }
+    specify { V2::RegistrationService.send(:data_to_attrs, { :survey_question_2 => 'q2' }).should == { :original_survey_question_2 => 'q2' } }
     specify { V2::RegistrationService.send(:data_to_attrs, { :source_tracking_id => 'sourceid' }).should == { :tracking_source => 'sourceid' } }
     specify { V2::RegistrationService.send(:data_to_attrs, { :partner_tracking_id => 'partnertrackid' }).should == { :partner_tracking_id => 'partnertrackid' } }
     specify { V2::RegistrationService.send(:data_to_attrs, { :opt_in_volunteer => true }).should == { :volunteer => true } }
     specify { V2::RegistrationService.send(:data_to_attrs, { :partner_opt_in_volunteer => true }).should == { :partner_volunteer => true } }
-    specify { V2::RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state => 'ca', :prev_state_id => 'Nj' }).should == { "home_state_id" => 33, "mailing_state_id" => 5, "prev_state_id" => 31 } } # See geo_states.csv
+    specify { V2::RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state => 'ca', :prev_state_id => 'Nj' }).should == { :home_state_id => 33, :mailing_state_id => 5, :prev_state_id => 31 } } # See geo_states.csv
     specify { V2::RegistrationService.send(:data_to_attrs, { :id_number => 'id' }).should == { :state_id_number => 'id' } }
   end
 

@@ -949,9 +949,6 @@ describe Registrant do
 
     it "renders maximal CSV" do
       partner = Factory.create(:whitelabel_partner)
-      partner.survey_question_1_en = "survey_question_1_en"
-      partner.survey_question_2_en = "survey_question_2_en"
-      partner.save!
       reg = Factory.create(:api_v2_maximal_registrant, :partner=>partner)
       reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
       assert_equal [ "Complete",
@@ -986,9 +983,9 @@ describe Registrant do
                      "Yes",
                      "Yes",
                      "Yes",
-                     "survey_question_1_en",
+                     "color?",
                      "blue",
-                     "survey_question_2_en",
+                     "dog name?",
                      "fido",
                      "Yes",
                      "Yes",
@@ -1036,9 +1033,9 @@ describe Registrant do
                      "Yes",
                      "Yes",
                      "Yes",
-                     "survey_question_1_es",
+                     "color?",
                      "blue",
-                     "survey_question_2_es",
+                     "dog name?",
                      "fido",
                      "Yes",
                      "Yes",

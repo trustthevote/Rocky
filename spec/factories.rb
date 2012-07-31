@@ -131,6 +131,11 @@ Factory.define :api_v2_maximal_registrant, :parent => :maximal_registrant do |f|
   f.partner_volunteer   true
   f.tracking_source       "tracking_source"
   f.tracking_id   "part_tracking_id"
+  f.original_survey_question_1     "color?"
+  f.original_survey_question_2     "dog name?"
+  f.survey_answer_1     "blue"
+  f.survey_answer_2     "fido"
+  
 end
 
 Factory.define :partner do |partner|

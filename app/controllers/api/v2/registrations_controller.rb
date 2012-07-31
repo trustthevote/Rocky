@@ -45,6 +45,8 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
     jsonp :pdfurl => "https://#{PDF_HOST_NAME}#{pdf_path}"
   rescue V2::RegistrationService::ValidationError => e
     jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
+  rescue V2::RegistrationService::SurveyQuestionError => e
+    jsonp({ :message => e.message }, :status=>400)
   rescue V2::UnsupportedLanguageError => e
     jsonp({ :message => e.message }, :status => 400)
   rescue ActiveRecord::UnknownAttributeError => e

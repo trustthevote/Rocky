@@ -36,6 +36,9 @@ module V2
         @field = field
       end
     end
+    
+    class SurveyQuestionError < StandardError
+    end
 
     # Creates a record and returns it.
     def self.create_record(data)
@@ -43,6 +46,8 @@ module V2
       block_protected_attributes(data)
 
       attrs = data_to_attrs(data)
+      validate_survey_questions(attrs)
+      
       reg = Registrant.build_from_api_data(attrs)
 
       if reg.save
@@ -132,8 +137,16 @@ module V2
       raise ValidationError.new(field, error.last)
     end
 
+    def self.validate_survey_questions(attrs)
+      [1,2].each do |qnum|
+        raise SurveyQuestionError.new("Question #{qnum} required when Answer #{qnum} provided") if attrs["survey_question_#{qnum}".to_sym].blank? && !attrs["survey_answer_#{qnum}".to_sym].blank?
+      end
+    end
+
+
     def self.data_to_attrs(data)
       attrs = data.clone
+      attrs.symbolize_keys!
 
       if l = attrs.delete(:lang)
         attrs[:locale] = l
@@ -153,6 +166,14 @@ module V2
       if l = attrs.delete(:id_number)
         attrs[:state_id_number] = l
       end
+      
+      if l = attrs.delete(:survey_question_1)
+        attrs[:original_survey_question_1] = l
+      end
+      if l = attrs.delete(:survey_question_2)
+        attrs[:original_survey_question_2] = l
+      end
+      
 
       attrs = state_convert(attrs, :home_state)
       attrs = state_convert(attrs, :mailing_state)
@@ -166,7 +187,7 @@ module V2
       l2 = attrs.delete("#{field}_id".to_sym)
       l  = l2 || l1
       if l
-        attrs["#{field}_id"] = GeoState[l.to_s.upcase].try(:id)
+        attrs["#{field}_id".to_sym] = GeoState[l.to_s.upcase].try(:id)
       end
       attrs
     end
