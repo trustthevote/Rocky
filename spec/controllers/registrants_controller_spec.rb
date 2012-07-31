@@ -44,17 +44,23 @@ describe RegistrantsController do
       assert_redirected_to new_registrant_url(:protocol => "https")
     end
 
-    it "keeps partner, locale and source params when redirecting" do
+    it "keeps partner, locale and source and tracking params when redirecting" do
       get :landing, :partner => "2"
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2")
       get :landing, :locale => "es"
       assert_redirected_to new_registrant_url(:protocol => "https", :locale => "es")
       get :landing, :source => "email"
       assert_redirected_to new_registrant_url(:protocol => "https", :source => "email")
+      get :landing, :tracking => "trackid"
+      assert_redirected_to new_registrant_url(:protocol => "https", :tracking => "trackid")
+      get :landing, :source => "email", :tracking=>"trackid"
+      assert_redirected_to new_registrant_url(:protocol => "https", :source => "email", :tracking=>"trackid")
       get :landing, :partner => "2", :locale => "es"
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es")
       get :landing, :partner => "2", :locale => "es", :source => "email"
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es", :source => "email")
+      get :landing, :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid"
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid")
     end
 
     it "assumes default partner when partner given doesn't exist" do
@@ -72,12 +78,13 @@ describe RegistrantsController do
       assert_template "show"
     end
 
-    it "should start with partner id, locale and tracking source" do
-      get :new, :locale => 'es', :partner => '2', :source => 'email'
+    it "should start with partner id, locale, tracking source and partner tracking id" do
+      get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>"trackid"
       reg = assigns[:registrant]
       assert_equal 'es', reg.locale
       assert_equal 2, reg.partner_id
       assert_equal 'email', reg.tracking_source
+      assert_equal 'trackid', reg.tracking_id
     end
 
     it "should default partner id to RTV" do
@@ -95,14 +102,16 @@ describe RegistrantsController do
     describe "keep initial params in hidden fields" do
       integrate_views
 
-      it "should keep partner, locale and tracking source" do
-        get :new, :locale => 'es', :partner => '2', :source => 'email'
+      it "should keep partner, locale, tracking source and tracking id" do
+        get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>'trackid'
         assert_equal '2', assigns[:partner_id].to_s
         assert_equal 'es', assigns[:locale]
         assert_equal 'email', assigns[:source]
+        assert_equal 'trackid', assigns[:tracking]
         assert_select "input[name=partner][value=2]"
         assert_select "input[name=locale][value=es]"
         assert_select "input[name=source][value=email]"
+        assert_select "input[name=tracking][value=trackid]"
       end
     end
 
@@ -143,13 +152,14 @@ describe RegistrantsController do
       assert_redirected_to registrant_step_2_url(assigns[:registrant])
     end
 
-    it "should set partner_id, locale and tracking_source" do
+    it "should set partner_id, locale, tracking_source and tracking_id" do
       @reg_attributes.delete(:locale)
       @reg_attributes.delete(:partner_id)
-      post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email"
+      post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email", :tracking=>"trackid"
       assert_equal @partner.id, assigns[:registrant].partner_id
       assert_equal "es", assigns[:registrant].locale
       assert_equal "email", assigns[:registrant].tracking_source
+      assert_equal "trackid", assigns[:registrant].tracking_id
     end
 
     it "should reject invalid input and show form again" do
@@ -159,14 +169,15 @@ describe RegistrantsController do
       assert_template "show"
     end
 
-    it "should keep partner and locale for next attempt" do
-      post :create, :registrant => @reg_attributes.merge(:home_zip_code => ""), :partner => "2", :locale => "es", :source => "email"
+    it "should keep partner, locale, source and tracking for next attempt" do
+      post :create, :registrant => @reg_attributes.merge(:home_zip_code => ""), :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid"
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].new_record?, assigns[:registrant].inspect
       assert_template "show"
       assert_select "input[name=partner][value=2]"
       assert_select "input[name=locale][value=es]"
       assert_select "input[name=source][value=email]"
+      assert_select "input[name=tracking][value=trackid]"
     end
 
     it "should reject ineligible registrants" do

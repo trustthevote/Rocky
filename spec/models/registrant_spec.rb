@@ -600,6 +600,63 @@ describe Registrant do
     end
   end
   
+  [1, 2].each do |qnum|
+    describe "#survey_question_#{qnum}" do
+      context "when original_survey_question_#{qnum} is blank" do
+        it "returns the partner question" do
+          p = Factory(:whitelabel_partner)
+          r = Factory(:maximal_registrant, :partner=>p)
+          r2 = Factory(:maximal_registrant, :partner=>p, :locale=>"es")
+          r.send("original_survey_question_#{qnum}=", '')
+          r2.send("original_survey_question_#{qnum}=", '')
+          r.send("survey_question_#{qnum}").should == p.send("survey_question_#{qnum}_en")
+          r2.send("survey_question_#{qnum}").should == p.send("survey_question_#{qnum}_es")
+        
+          p.update_attributes("survey_question_#{qnum}_en"=>"new en #{qnum}", "survey_question_#{qnum}_es"=>"new es #{qnum}")
+          r.reload
+          r2.reload
+          r.send("original_survey_question_#{qnum}=", '')
+          r2.send("original_survey_question_#{qnum}=", '')
+          r.send("survey_question_#{qnum}").should == "new en #{qnum}"
+          r2.send("survey_question_#{qnum}").should == "new es #{qnum}"
+        end
+      end
+      context "when original_survey_question_#{qnum} has been filled" do
+        it "returns the original value" do
+          p = Factory(:whitelabel_partner)
+          orig_en = p.send("survey_question_#{qnum}_en")
+          orig_es = p.send("survey_question_#{qnum}_es")
+          r = Factory(:maximal_registrant, :partner=>p)
+          r2 = Factory(:maximal_registrant, :partner=>p, :locale=>"es")
+          r.send("survey_question_#{qnum}").should == orig_en
+          r2.send("survey_question_#{qnum}").should == orig_es
+      
+          p.update_attributes("survey_question_#{qnum}_en"=>"new en #{qnum}", "survey_question_#{qnum}_es"=>"new es #{qnum}")
+          r.reload
+          r2.reload
+          r.send("survey_question_#{qnum}").should == orig_en
+          r2.send("survey_question_#{qnum}").should == orig_es
+        end
+      end
+    end
+    describe "original_survey_question_#{qnum}" do
+      it "gets set on save when the question is answered" do
+        p = Factory(:whitelabel_partner)
+        r = Factory(:step_3_registrant, :partner=>p)
+        r2 = Factory(:step_3_registrant, :partner=>p, :locale=>"es")
+        r.send("survey_answer_#{qnum}").should be_blank
+        r2.send("survey_answer_#{qnum}").should be_blank
+        r.update_attributes("survey_answer_#{qnum}"=>"My Answer")
+        r2.update_attributes("survey_answer_#{qnum}"=>"My Answer")
+        r.reload
+        r2.reload
+        r.send("original_survey_question_#{qnum}").should == p.send("survey_question_#{qnum}_en")
+        r2.send("original_survey_question_#{qnum}").should == p.send("survey_question_#{qnum}_es")
+      end
+    end
+  end
+  
+  
   describe "custom_step_2?" do
     it "returns true if the state has a custom step 2" do
       reg = Factory.build(:step_1_registrant)
@@ -891,10 +948,11 @@ describe Registrant do
     end
 
     it "renders maximal CSV" do
-      reg = Factory.create(:api_v2_maximal_registrant)
-      partner = reg.partner
+      partner = Factory.create(:whitelabel_partner)
       partner.survey_question_1_en = "survey_question_1_en"
       partner.survey_question_2_en = "survey_question_2_en"
+      partner.save!
+      reg = Factory.create(:api_v2_maximal_registrant, :partner=>partner)
       reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
       assert_equal [ "Complete",
                      "tracking_source",

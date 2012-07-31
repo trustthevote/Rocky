@@ -12,11 +12,53 @@ Feature: Step 4
        And I fill in "registrant_survey_answer_2" with "kthxbye"
        And I press "registrant_submit"
       Then I should see "Confirm"
+        
 
     Scenario: enter data
      Given I have completed step 3
       When I go to the step 4 page
       Then I should not see "Receive txt messages"
+
+    @passing
+    Scenario: Answer questions
+      Given the following partner exists:
+        | organization        | survey_question_1_en | survey_question_2_en |
+        | Partner w/questions | Who?                 | What?                |      
+      And I have completed step 3 from that partner
+      And my phone number is not blank
+      When I go to the step 4 page
+      And I check "Receive emails"
+      And I fill in "registrant_survey_answer_1" with "me"
+      And I fill in "registrant_survey_answer_2" with "register"
+      And I press "registrant_submit"
+      Then I should see "Confirm"
+      And my value for "survey_question_1" should be "Who?"
+      And my value for "survey_question_2" should be "What?"
+      When the partner changes "survey_question_1_en" to "Something Else"
+      And the partner changes "survey_question_2_en" to "Something Else"
+      Then my value for "survey_question_1" should be "Who?"
+      And my value for "survey_question_2" should be "What?"
+        
+    @passing
+    Scenario: Answer questions
+      Given the following partner exists:
+        | organization        | survey_question_1_es   | survey_question_2_es |
+        | Partner w/questions | Quien?                 | Que?                 |      
+      And I have completed step 3 from that partner
+      And my locale is "es"
+      And my phone number is not blank
+      When I go to the step 4 page
+      And I fill in "registrant_survey_answer_1" with "me"
+      And I fill in "registrant_survey_answer_2" with "register"
+      And I press "registrant_submit"
+      Then I should see "Confirm"
+      And my value for "survey_question_1" should be "Quien?"
+      And my value for "survey_question_2" should be "Que?"
+      When the partner changes "survey_question_1_es" to "Something Else"
+      And the partner changes "survey_question_2_es" to "Something Else"
+      Then my value for "survey_question_1" should be "Quien?"
+      And my value for "survey_question_2" should be "Que?"
+
 
 
     # Step 3 is SMS, Step 4 is email and volunteer

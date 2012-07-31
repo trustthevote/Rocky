@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120729173949) do
+ActiveRecord::Schema.define(:version => 20120731020636) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -159,6 +159,8 @@ ActiveRecord::Schema.define(:version => 20120729173949) do
     t.boolean  "javascript_disabled",                              :default => false
     t.string   "tracking_id"
     t.boolean  "finish_with_state",                                :default => false
+    t.string   "original_survey_question_1"
+    t.string   "original_survey_question_2"
   end
 
   add_index "registrants", ["age"], :name => "index_registrants_on_age"

@@ -134,6 +134,8 @@ class Registrant < ActiveRecord::Base
   after_validation :enqueue_tell_friends_emails
 
   before_create :generate_uid
+  
+  before_save :set_questions
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of :partner_id
@@ -699,11 +701,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def survey_question_1
-    partner.send("survey_question_1_#{locale}")
+    original_survey_question_1.blank? ? partner_survey_question_1 : original_survey_question_1
   end
 
   def survey_question_2
-    partner.send("survey_question_2_#{locale}")
+    original_survey_question_2.blank? ? partner_survey_question_2 : original_survey_question_2
   end
 
   def to_csv_array
@@ -858,5 +860,23 @@ class Registrant < ActiveRecord::Base
     when ineligible_age? then "Not old enough to register"
     else nil
     end
+  end
+  
+  def partner_survey_question_1
+    partner.send("survey_question_1_#{locale}")
+  end
+  
+  def partner_survey_question_2
+    partner.send("survey_question_2_#{locale}")
+  end
+  
+  def set_questions
+    if self.survey_answer_1_changed? && !self.original_survey_question_1_changed?
+      self.original_survey_question_1 = partner_survey_question_1
+    end
+    if self.survey_answer_2_changed? && !self.original_survey_question_2_changed?
+      self.original_survey_question_2 = partner_survey_question_2
+    end
+    true
   end
 end

@@ -104,6 +104,13 @@ Given /^I have not set a locale$/ do
   I18n.locale = nil
 end
 
+Given /^my locale is "([^\"]*)"$/ do |arg1|
+  I18n.locale = "es"
+  @registrant.locale = "es"
+  @registrant.save!
+end
+
+
 Given /^I am a first time registrant$/ do
   @registrant.first_registration = true
   @registrant.save
@@ -205,6 +212,13 @@ end
 Then /^my value for "([^\"]*)" should be "([^\"]*)"$/ do |method, value|
   @registrant = Registrant.last
   @registrant.send(method).to_s.should == value.to_s
+end
+
+When /^the partner changes "([^\"]*)" to "([^\"]*)"$/ do |method, value|
+  @partner ||= Partner.last
+  @partner.reload
+  @partner.send("#{method}=", value)
+  @partner.save!
 end
 
 
