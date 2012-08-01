@@ -597,6 +597,18 @@ describe Registrant do
       new_york = GeoState['NY']
       reg = Factory.build(:step_1_registrant, :home_zip_code => "00501")
       assert_equal new_york.name, reg.home_state_name
+      reg.home_state = nil
+      reg.home_state_name.should be_nil
+      
+    end
+  end
+  describe "home state abbr" do
+    it "gets abbr for state" do
+      new_york = GeoState['NY']
+      reg = Factory.build(:step_1_registrant, :home_zip_code => "00501")
+      assert_equal new_york.abbreviation, reg.home_state_abbrev
+      reg.home_state = nil
+      reg.home_state_abbrev.should be_nil
     end
   end
   

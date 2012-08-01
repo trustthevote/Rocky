@@ -504,6 +504,9 @@ class Registrant < ActiveRecord::Base
   def home_state_name
     home_state && home_state.name
   end
+  def home_state_abbrev
+    home_state && home_state.abbreviation
+  end
 
   def mailing_state_abbrev=(abbrev)
     self.mailing_state = GeoState[abbrev]
