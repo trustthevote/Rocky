@@ -155,6 +155,9 @@ module V2
       if l = attrs.delete(:source_tracking_id)
         attrs[:tracking_source] = l
       end
+      if l = attrs.delete(:partner_tracking_id)
+        attrs[:tracking_id] = l
+      end
 
       if l = attrs.delete(:opt_in_volunteer)
         attrs[:volunteer] = l
