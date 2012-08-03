@@ -35,4 +35,15 @@ class Api::V2::PartnersController < Api::V2::BaseController
     jsonp({ :message => e.message }, :status => 400)
   end
   
+  
+  def create
+    partner = V2::PartnerService.create_record(params[:partner])
+    jsonp :partner_id => partner.id.to_s
+  rescue V2::RegistrationService::ValidationError => e
+    jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
+  rescue ActiveRecord::UnknownAttributeError => e
+    name = e.message.split(': ')[1]
+    jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
+  end
+  
 end

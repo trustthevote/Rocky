@@ -70,4 +70,71 @@ describe V2::PartnerService do
       
     end
   end
+  
+  describe '#data_to_attrs' do
+    specify { V2::PartnerService.send(:data_to_attrs, {:org_name=>"Name"}).should == {:organization=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:org_URL=>"Name"}).should == {:url=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:org_privacy_url=>"Name"}).should == {:privacy_url=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:contact_name=>"Name"}).should == {:name=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:contact_address=>"Name"}).should == {:address=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:contact_city=>"Name"}).should == {:city=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:contact_state=>"nJ"}).should == {:state_id=>31} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:contact_ZIP=>"Name"}).should == {:zip_code=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:partner_ask_volunteer=>true}).should == {:partner_ask_for_volunteers=>true} }
+    #logo_image_URL
+    #banner_image_URL    
+  end
+  
+  
+  
+  describe "#create" do
+    it 'should raise an error if the field is unknown' do
+      begin
+        V2::PartnerService.create_record(:unknown_field => 'fieldval')
+        fail "UnknownAttributeError expected"
+      rescue ActiveRecord::UnknownAttributeError => e
+        e.message.should == 'unknown attribute: unknown_field'
+      end
+    end
+    
+    
+    
+    
+    it 'should raise validation errors when the record is invalid' do
+      begin
+        V2::PartnerService.create_record({})
+        fail 'ValidationError is expected'
+      rescue V2::RegistrationService::ValidationError => e
+        e.field.should    == 'address'
+        e.message.should  == "Address can't be blank."
+      end
+    end
+    
+    it 'raises a validation error when the widget image is invalid'
+    
+    it 'does not allow paramters except the expected ones to be set' do
+      begin
+        V2::PartnerService.create_record({:whitelabeled=>true})
+        fail 'UnknownAttributeError expected'
+      rescue ActiveRecord::UnknownAttributeError => e
+        e.message.should == 'unknown attribute: whitelabeled'
+      end
+    end
+    
+    
+    
+    
+    context 'complete record' do
+      before { @partner = Factory(:api_created_partner) }
+      before { mock(Partner).new({}) { @partner } }
+
+      it 'should save the record' do
+        V2::RegistrationService.create_record({}).should
+      end
+    end
+    
+    
+    
+  end
+  
 end

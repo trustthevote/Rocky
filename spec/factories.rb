@@ -138,6 +138,25 @@ Factory.define :api_v2_maximal_registrant, :parent => :maximal_registrant do |f|
   
 end
 
+Factory.define :api_created_partner, :class=>'partner' do |p|
+  p.organization "Org Name"
+  p.url "http://www.google.com"
+  p.privacy_url "http://www.google.com/privacy"
+  p.name "Contact Name"
+  p.email "contact_email@rtv.org"
+  p.phone "123 234 3456"
+  p.address "123 Main St"
+  p.city "Boston"
+  p.state_id {GeoState["MA"]}
+  p.zip_code "02110"
+  p.widget_image "rtv-234x60-v1.gif"
+  p.survey_question_1_en  "One?"
+  p.survey_question_2_en  "Two?"
+  p.survey_question_1_es  "Uno?"
+  p.survey_question_2_es  "Dos?"
+  p.partner_ask_for_volunteers true
+end
+
 Factory.define :partner do |partner|
   partner.sequence(:username)   { |n| "partner_#{n}" }
   partner.email                 { |p| "#{p.username}@example.com" }

@@ -26,6 +26,23 @@ module V2
   class PartnerService
     INVALID_PARTNER_OR_API_KEY = "Invalid partner ID or api key"
     
+    ALLOWED_ATTRS = [:organization,
+        :url,
+        :privacy_url,
+        :name,
+        :email,
+        :phone,
+        :address,
+        :city,
+        :state_id,
+        :zip_code,
+        :widget_image,
+        :survey_question_1_en,
+        :survey_question_2_en,
+        :survey_question_1_es,
+        :survey_question_2_es,
+        :partner_ask_for_volunteers]
+    
     def self.find(query)
       
       partner = find_partner(query[:partner_id], query[:partner_api_key])
@@ -65,5 +82,69 @@ module V2
       
       return partner
     end
+    
+    def self.create_record(data)
+      data ||= {}
+      
+      attrs = data_to_attrs(data)
+      
+      block_protected_attributes(attrs)
+      
+      
+      p = Partner.new(attrs)
+
+      if !p.save
+        raise_validation_error(p)
+      end
+
+      p
+    end
+    
+  private
+    def self.data_to_attrs(data)
+      attrs = data.clone
+      attrs.symbolize_keys!
+
+      [[:org_name, :organization],
+      [:org_URL, :url],
+      [:org_privacy_url, :privacy_url],
+      [:contact_name, :name],
+      [:contact_address, :address],
+      [:contact_city, :city],
+      [:contact_ZIP, :zip_code],
+      [:partner_ask_volunteer, :partner_ask_for_volunteers]].each do |data_key, attr_key|
+        val = attrs.delete(data_key)
+        if !val.nil?
+          attrs[attr_key] = val
+        end
+      end
+
+      attrs = state_convert(attrs,[:contact_state, :state_id])
+
+      attrs
+    end
+    
+    def self.state_convert(attrs, field_keys)
+      l = attrs.delete(field_keys[0])
+      if l
+        attrs[field_keys[1]] = GeoState[l.to_s.upcase].try(:id)
+      end
+      attrs
+    end
+    
+    def self.raise_validation_error(p, error = p.errors.sort.first)
+      field = error.first
+      raise V2::RegistrationService::ValidationError.new(field, error.last)
+    end
+    
+    def self.block_protected_attributes(attrs)
+      attrs.each do |key,val|
+        if !ALLOWED_ATTRS.include?(key)  
+          raise ActiveRecord::UnknownAttributeError.new("unknown attribute: #{key.to_s}") 
+        end
+      end 
+    end
+    
+    
   end
 end
