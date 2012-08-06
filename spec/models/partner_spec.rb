@@ -50,6 +50,56 @@ describe Partner do
     end
   end
   
+  describe "#generate_random_password" do
+    it "sets the password and password confirmation" do
+      p = Factory.build(:api_created_partner)
+      p.generate_random_password
+      p.password.should_not be_blank
+      p.password_confirmation.should_not be_blank
+    end
+  end
+  describe "#generate_username" do
+    it "should set a valid username from email address" do
+      p = Factory.build(:partner)
+      p.should be_valid
+      p.email.should_not be_blank
+      p.username = ''
+      p.generate_username
+      p.username.should_not be_blank
+      p.should be_valid
+    end
+  end
+  describe "#logo_url=(URL)" do
+    it "opens the file from the URL" do
+      url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
+      p = Partner.new
+      mock(p).open(url) {""}
+      p.logo_url = url
+      p.should have_received(:open).with(url)
+    end
+    it "attaches the URL file as the logo" do
+      url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
+      p = Factory.build(:partner)
+      p.logo_url = url
+      p.save!
+      p.logo.url.should_not == "/logos/original/missing.png"
+    end
+    it "adds a validation error if the url is not http" do
+      bad_url = "home_rtv_logo_wrong.png"
+      p = Factory.build(:partner)
+      p.logo_url = bad_url
+      p.should_not be_valid
+      p.errors.on(:logo_image_URL).should == "Pleave provide an HTTP url"
+    end
+    it "adds a validation error if the file can not be downloaded" do
+      bad_url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo_wrong.png"
+      p = Factory.build(:partner)
+      p.logo_url = bad_url
+      p.should_not be_valid
+      p.errors.on(:logo_image_URL).should == "Could not download #{bad_url} for logo"
+    end
+  end
+  
   describe "#valid_api_key?(key)" do
     it "returns false when blank or not matching" do
       partner = Factory.build(:partner, :api_key=>"")

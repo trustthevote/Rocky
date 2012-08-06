@@ -77,7 +77,13 @@ end
 Then /^I should be sent a thank\-you email$/ do
   email = ActionMailer::Base.deliveries.last
   email.to.should include(@registrant.email_address)
-  email.subject.should == "Thank You TBD"
+  email.subject.should == "Thank you for using the online voter registration tool"
+end
+
+Then /^I should be sent a thank\-you email in spanish$/ do
+  email = ActionMailer::Base.deliveries.last
+  email.to.should include(@registrant.email_address)
+  email.subject.should == "Gracias por usar el instrumento de registración de votantes en línea"
 end
 
 Then /^I should not be sent a thank\-you email$/ do
@@ -104,9 +110,9 @@ Given /^I have not set a locale$/ do
   I18n.locale = nil
 end
 
-Given /^my locale is "([^\"]*)"$/ do |arg1|
-  I18n.locale = "es"
-  @registrant.locale = "es"
+Given /^my locale is "([^\"]*)"$/ do |local|
+  I18n.locale = local
+  @registrant.locale = local
   @registrant.save!
 end
 

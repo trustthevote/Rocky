@@ -66,9 +66,22 @@ module V2
       partner = V2::PartnerService.find_partner(query[:partner_id], query[:partner_api_key])
 
       regs = partner.registrants
-
+      
+      cond_str = []
+      cond_vars = []
+      
       if since = query[:since]
-        regs = regs.all(:conditions => [ "created_at >= ?", Time.parse(since) ])
+        cond_str << "created_at >= ?"
+        cond_vars << Time.parse(since)        
+      end
+      
+      if email = query[:email]
+        cond_str << "email_address = ?"
+        cond_vars << email
+      end
+
+      if cond_vars.size > 0 && cond_vars.size == cond_str.size
+        regs = regs.all(:conditions=>[cond_str.join(" AND ")]+cond_vars)
       end
 
       regs.map do |reg|
@@ -139,7 +152,7 @@ module V2
 
     def self.validate_survey_questions(attrs)
       [1,2].each do |qnum|
-        raise SurveyQuestionError.new("Question #{qnum} required when Answer #{qnum} provided") if attrs["survey_question_#{qnum}".to_sym].blank? && !attrs["survey_answer_#{qnum}".to_sym].blank?
+        raise SurveyQuestionError.new("Question #{qnum} required when Answer #{qnum} provided") if attrs["original_survey_question_#{qnum}".to_sym].blank? && !attrs["survey_answer_#{qnum}".to_sym].blank?
       end
     end
 

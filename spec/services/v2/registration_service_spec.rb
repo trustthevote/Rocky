@@ -77,14 +77,21 @@ describe V2::RegistrationService do
 
     [1,2].each do |qnum|
       it "should raise an error if answer #{qnum} is provided without question #{qnum}" do
-        # lambda {
-        #           V2::RegistrationService.create_record("survey_answer_#{qnum}" => 'An Answer')          
-        #         }.should raise_error(V2::RegistrationService::SurveyQuestionError)
         begin
           V2::RegistrationService.create_record("survey_answer_#{qnum}" => 'An Answer')
           fail 'SurveyQuestionError is expected'
         rescue V2::RegistrationService::SurveyQuestionError => e
           e.message.should == "Question #{qnum} required when Answer #{qnum} provided"
+        end
+      end
+    end
+    [1,2].each do |qnum|
+      it "should not raise an error if answer #{qnum} is provided with question #{qnum}" do
+        begin
+          V2::RegistrationService.create_record("survey_answer_#{qnum}" => 'An Answer', "survey_question_#{qnum}"=>"A Question")
+        rescue V2::RegistrationService::SurveyQuestionError => e
+          fail 'SurveyQuestionError is not expected'
+        rescue
         end
       end
     end
@@ -185,6 +192,44 @@ describe V2::RegistrationService do
 
       V2::RegistrationService.find_records(:partner_id => partner.id, :partner_api_key => partner.api_key, :since => 1.minute.from_now.to_s).should == []
     end
+    
+    it 'should filter by email address' do
+      partner = Factory(:partner, :api_key=>"key")
+      reg = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test@osdv.org")
+      reg2 = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test2@osdv.org")
+
+      res = V2::RegistrationService.find_records(:partner_id => partner.id, 
+        :partner_api_key => partner.api_key, 
+        :email => "test@osdv.org")
+      res.first[:email_address].should == reg.email_address
+      res.should have(1).registrant
+      res2 = V2::RegistrationService.find_records(:partner_id => partner.id, 
+        :partner_api_key => partner.api_key, 
+        :email => "test2@osdv.org")
+      res2.first[:email_address].should == reg2.email_address
+      res2.should have(1).registrant
+    end
+
+
+    it 'should filter by email address and since date' do
+      partner = Factory(:partner, :api_key=>"key")
+      reg = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test@osdv.org")
+      reg2 = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test2@osdv.org")
+
+      V2::RegistrationService.find_records(:partner_id => partner.id, 
+        :partner_api_key => partner.api_key, 
+        :email => "test@osdv.org",
+        :since => 1.minute.from_now.to_s).should == []
+        
+      res = V2::RegistrationService.find_records(:partner_id => partner.id, 
+          :partner_api_key => partner.api_key, 
+          :email => "test@osdv.org",
+          :since => 1.day.ago.to_s)
+      res.first[:email_address].should == reg.email_address
+      res.should have(1).registrant
+    end
+
+
   end
 
 end

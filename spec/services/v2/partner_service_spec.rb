@@ -32,7 +32,7 @@ describe V2::PartnerService do
           V2::PartnerService.find(:partner_id => 0)
         }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
       end
-      it 'raises an error if the partner is not found' do
+      it 'raises an error if the api key is invalid' do
         partner = Factory(:partner)
         stub(Partner).find_by_id { partner }
         stub(partner).valid_api_key? { false }
@@ -64,7 +64,7 @@ describe V2::PartnerService do
         :partner_ask_email_opt_in => partner.partner_email_opt_in?,
         :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
         :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
-        :ask_volunteer   => partner.ask_for_volunteers?,
+        :rtv_ask_volunteer   => partner.ask_for_volunteers?,
         :partner_ask_volunteer => partner.partner_ask_for_volunteers?
       }
       
@@ -75,13 +75,13 @@ describe V2::PartnerService do
     specify { V2::PartnerService.send(:data_to_attrs, {:org_name=>"Name"}).should == {:organization=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:org_URL=>"Name"}).should == {:url=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:org_privacy_url=>"Name"}).should == {:privacy_url=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:logo_image_URL=>"Name"}).should == {:logo_url=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_name=>"Name"}).should == {:name=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_address=>"Name"}).should == {:address=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_city=>"Name"}).should == {:city=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_state=>"nJ"}).should == {:state_id=>31} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_ZIP=>"Name"}).should == {:zip_code=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:partner_ask_volunteer=>true}).should == {:partner_ask_for_volunteers=>true} }
-    #logo_image_URL
     #banner_image_URL    
   end
   
@@ -110,9 +110,30 @@ describe V2::PartnerService do
       end
     end
     
-    it 'raises a validation error when the widget image is invalid'
+    it "raise validation errors if the logo URL is not a URI" do
+      begin
+        partner = Factory.build(:api_created_partner, :logo_url=>"no_url")
+        mock(Partner).new({}) { partner }
+        V2::PartnerService.create_record({})
+        fail 'ValidationError is expected'
+      rescue V2::RegistrationService::ValidationError => e
+        e.field.should    == 'logo_image_URL'
+        e.message.should  == "Pleave provide an HTTP url"
+      end        
+    end
+    it "raise validation errors if the logo URL can not be downloaded" do
+      begin
+        partner = Factory.build(:api_created_partner, :logo_url=>"http://no_url")
+        mock(Partner).new({}) { partner }
+        V2::PartnerService.create_record({})
+        fail 'ValidationError is expected'
+      rescue V2::RegistrationService::ValidationError => e
+        e.field.should    == 'logo_image_URL'
+        e.message.should  == "Could not download http://no_url for logo"
+      end        
+    end
     
-    it 'does not allow paramters except the expected ones to be set' do
+    it 'does not allow parameters except the expected ones to be set' do
       begin
         V2::PartnerService.create_record({:whitelabeled=>true})
         fail 'UnknownAttributeError expected'
@@ -125,11 +146,11 @@ describe V2::PartnerService do
     
     
     context 'complete record' do
-      before { @partner = Factory(:api_created_partner) }
+      before { @partner = Factory.build(:api_created_partner) }
       before { mock(Partner).new({}) { @partner } }
 
       it 'should save the record' do
-        V2::RegistrationService.create_record({}).should
+        V2::PartnerService.create_record({}).should
       end
     end
     

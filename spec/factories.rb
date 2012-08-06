@@ -142,6 +142,7 @@ Factory.define :api_created_partner, :class=>'partner' do |p|
   p.organization "Org Name"
   p.url "http://www.google.com"
   p.privacy_url "http://www.google.com/privacy"
+  p.logo_url "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
   p.name "Contact Name"
   p.email "contact_email@rtv.org"
   p.phone "123 234 3456"

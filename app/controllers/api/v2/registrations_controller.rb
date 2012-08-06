@@ -29,8 +29,9 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
   def index
     query = {
       :partner_id       => params[:partner_id],
-      :partner_api_key => params[:partner_API_key],
-      :since            => params[:since]
+      :partner_api_key  => params[:partner_API_key],
+      :since            => params[:since],
+      :email            => params[:email]
     }
 
     jsonp :registrations => V2::RegistrationService.find_records(query)

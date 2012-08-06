@@ -69,7 +69,7 @@ describe Api::V2::RegistrationsController do
   private
 
   def registrations(&block)
-    query = { :partner_id => nil, :partner_api_key => nil, :since => nil }
+    query = { :partner_id => nil, :partner_api_key => nil, :since => nil, :email=>nil }
     mock(V2::RegistrationService).find_records(query, &block)
     get :index, :format => 'json'
   end

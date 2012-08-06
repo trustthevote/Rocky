@@ -29,6 +29,7 @@ module V2
     ALLOWED_ATTRS = [:organization,
         :url,
         :privacy_url,
+        :logo_image_URL,
         :name,
         :email,
         :phone,
@@ -68,7 +69,7 @@ module V2
         :partner_ask_email_opt_in => partner.partner_email_opt_in?,
         :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
         :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
-        :ask_volunteer   => partner.ask_for_volunteers?,
+        :rtv_ask_volunteer   => partner.ask_for_volunteers?,
         :partner_ask_volunteer => partner.partner_ask_for_volunteers?
       }
     end
@@ -92,12 +93,15 @@ module V2
       
       
       p = Partner.new(attrs)
+      
+      p.generate_username
+      p.generate_random_password
 
+      
       if !p.save
         raise_validation_error(p)
       end
 
-      p
     end
     
   private
@@ -108,6 +112,7 @@ module V2
       [[:org_name, :organization],
       [:org_URL, :url],
       [:org_privacy_url, :privacy_url],
+      [:logo_image_URL, :logo_url],
       [:contact_name, :name],
       [:contact_address, :address],
       [:contact_city, :city],

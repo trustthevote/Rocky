@@ -22,6 +22,8 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
+require 'open-uri'
+
 class Partner < ActiveRecord::Base
   acts_as_authentic
 
@@ -68,6 +70,7 @@ class Partner < ActiveRecord::Base
 
   before_create :generate_api_key
   
+  validate :check_valid_logo_url
 
   validates_presence_of :name
   validates_presence_of :url
@@ -248,13 +251,43 @@ class Partner < ActiveRecord::Base
     state && state.abbreviation
   end
 
+  def logo_url
+    @logo_url
+  end
+  
+  def logo_url_errors
+    @logo_url_errors ||= []
+  end
+  
+  def logo_url=(url)
+    @logo_url=url
+    if !(url=~/^http:\/\//)
+      logo_url_errors << "Pleave provide an HTTP url"
+    else
+      begin
+        self.logo = open(url)
+      rescue
+        logo_url_errors << "Could not download #{url} for logo"        
+      end
+    end
+  end
+
+  def generate_random_password
+    self.password = random_key
+    self.password_confirmation = self.password
+  end
+
+  def generate_username
+    self.username = self.email
+  end
+
   def generate_api_key!
     generate_api_key
     save!
   end
 
   def generate_api_key
-    self.api_key = Digest::SHA1.hexdigest([Time.now, (1..10).map { rand.to_s}].join('--'))
+    self.api_key = random_key
   end
 
   def reformat_phone
@@ -299,6 +332,7 @@ class Partner < ActiveRecord::Base
     end
   end
 
+    
 
   def self.add_whitelabel(partner_id, app_css, reg_css, part_css)
     app_css = File.expand_path(app_css)
@@ -355,6 +389,18 @@ class Partner < ActiveRecord::Base
       return "Partner '#{partner_id}' has been whitelabeled. Place all asset files in\n#{partner.assets_path}"
     end
 
+  end
+  
+  
+protected
+  def check_valid_logo_url
+    logo_url_errors.each do |message|
+      self.errors.add(:logo_image_URL, message)
+    end
+  end
+
+  def random_key
+    Digest::SHA1.hexdigest([Time.now, (1..10).map { rand.to_s}].join('--'))
   end
 
 end

@@ -96,7 +96,7 @@ describe Notifier do
       end
       email = ActionMailer::Base.deliveries.last
       email.to.should include(registrant.email_address)
-      email.subject.should include("Thank You")
+      email.subject.should include("Thank you for using the online voter registration tool")
       assert_equal 1, email.parts.length
       assert_equal "utf-8", email.parts[0].charset
       assert_equal "quoted-printable", email.parts[0].encoding
