@@ -70,11 +70,12 @@ describe Partner do
     end
   end
   describe "#logo_url=(URL)" do
-    it "opens the file from the URL" do
+    it "opens the file from the URL when saved" do
       url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
-      p = Partner.new
+      p = Factory.build(:partner)
       mock(p).open(url) {""}
       p.logo_url = url
+      p.save!
       p.should have_received(:open).with(url)
     end
     it "attaches the URL file as the logo" do

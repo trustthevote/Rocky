@@ -29,7 +29,7 @@ module V2
     ALLOWED_ATTRS = [:organization,
         :url,
         :privacy_url,
-        :logo_image_URL,
+        :logo_url,
         :name,
         :email,
         :phone,
@@ -101,7 +101,7 @@ module V2
       if !p.save
         raise_validation_error(p)
       end
-
+      p
     end
     
   private
@@ -114,7 +114,9 @@ module V2
       [:org_privacy_url, :privacy_url],
       [:logo_image_URL, :logo_url],
       [:contact_name, :name],
+      [:contact_email, :email],
       [:contact_address, :address],
+      [:contact_phone, :phone],
       [:contact_city, :city],
       [:contact_ZIP, :zip_code],
       [:partner_ask_volunteer, :partner_ask_for_volunteers]].each do |data_key, attr_key|
@@ -144,7 +146,7 @@ module V2
     
     def self.block_protected_attributes(attrs)
       attrs.each do |key,val|
-        if !ALLOWED_ATTRS.include?(key)  
+        if !ALLOWED_ATTRS.include?(key.to_sym)  
           raise ActiveRecord::UnknownAttributeError.new("unknown attribute: #{key.to_s}") 
         end
       end 

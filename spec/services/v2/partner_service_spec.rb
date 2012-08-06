@@ -76,9 +76,11 @@ describe V2::PartnerService do
     specify { V2::PartnerService.send(:data_to_attrs, {:org_URL=>"Name"}).should == {:url=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:org_privacy_url=>"Name"}).should == {:privacy_url=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:logo_image_URL=>"Name"}).should == {:logo_url=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:contact_email=>"Name"}).should == {:email=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_name=>"Name"}).should == {:name=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_address=>"Name"}).should == {:address=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_city=>"Name"}).should == {:city=>"Name"} }
+    specify { V2::PartnerService.send(:data_to_attrs, {:contact_phone=>"Name"}).should == {:phone=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_state=>"nJ"}).should == {:state_id=>31} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_ZIP=>"Name"}).should == {:zip_code=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:partner_ask_volunteer=>true}).should == {:partner_ask_for_volunteers=>true} }
