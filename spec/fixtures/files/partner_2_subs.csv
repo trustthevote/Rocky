@@ -1,0 +1,2 @@
+username, email, name, organization, url, address, city, state, zip_code, phone, survey_question_1_en, survey_question_1_es, survey_question_2_en, survey_question_2_es, whitelabeled, rtv_email_opt_in, rtv_sms_opt_in, ask_for_volunteers, partner_email_opt_in, partner_sms_opt_in, partner_ask_for_volunteers, asset_directory
+csv_partner_2_subs, alexmek+2@gmail.com, CSV Partner 2, CSV Partner 2, www.google.com, 1 Main St, Boston, MA, 02113, 123-456-7890, , , , , true, false, false, false, true, true, true, partner_2_subs
