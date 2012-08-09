@@ -54,7 +54,6 @@ describe V2::PartnerService do
         :contact_state        => partner.state_abbrev,
         :contact_ZIP     => partner.zip_code,
         :logo_image_URL     => partner.logo.url,
-        :banner_image_URL   => "#{PDF_HOST_NAME}/images/widget/#{partner.widget_image}",
         :survey_question_1_en => partner.survey_question_1_en,
         :survey_question_2_en => partner.survey_question_2_en,
         :survey_question_1_es => partner.survey_question_1_es,

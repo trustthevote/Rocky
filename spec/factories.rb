@@ -135,7 +135,7 @@ Factory.define :api_v2_maximal_registrant, :parent => :maximal_registrant do |f|
   f.original_survey_question_2     "dog name?"
   f.survey_answer_1     "blue"
   f.survey_answer_2     "fido"
-  
+  f.send_confirmation_reminder_emails false
 end
 
 Factory.define :api_created_partner, :class=>'partner' do |p|

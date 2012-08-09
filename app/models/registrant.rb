@@ -594,6 +594,10 @@ class Registrant < ActiveRecord::Base
   def complete_registration_via_api
     generate_pdf
     redact_sensitive_data
+    if self.send_confirmation_reminder_emails?
+      deliver_confirmation_email
+      enqueue_reminder_emails
+    end
     self.status = 'complete'
     self.save
   end

@@ -49,6 +49,61 @@ describe Registrant do
     end
   end
 
+
+
+  describe "#enqueue_complete_registration_via_api" do
+    it "should queue up complete_registration_via_api" do
+      reg = Registrant.new
+
+      mock(Time).now {"now"}
+      mock(Delayed::PerformableMethod).new(reg,:complete_registration_via_api,[]) { "Action" }
+      mock(Delayed::Job).enqueue("Action", Registrant::WRAP_UP_PRIORITY, "now")
+      
+      reg.enqueue_complete_registration_via_api
+    end
+  end
+  
+  describe "#complete_registration_via_api" do
+    context "when send_confirmation_reminder_emails is true" do
+      it "generates pdf, redacts sensitif data, sets the status to complete, deliver_confirmation_email, enqueue_reminder_emails and saves" do
+        reg = Registrant.new(:send_confirmation_reminder_emails=>true)
+        mock(reg).generate_pdf
+        mock(reg).redact_sensitive_data
+        mock(reg).deliver_confirmation_email
+        mock(reg).enqueue_reminder_emails
+        mock(reg).save
+        
+        
+        reg.complete_registration_via_api
+        reg.status.should == 'complete'
+        reg.should have_received(:generate_pdf)        
+        reg.should have_received(:redact_sensitive_data)        
+        reg.should have_received(:deliver_confirmation_email)        
+        reg.should have_received(:enqueue_reminder_emails)        
+        reg.should have_received(:save)        
+      end
+    end
+    context "when send_confirmation_reminder_emails is false" do
+      it "generates pdf, redacts sensitif data, sets the status to complete and saves" do
+        reg = Registrant.new(:send_confirmation_reminder_emails=>false)
+        mock(reg).generate_pdf
+        mock(reg).redact_sensitive_data
+        mock(reg).save
+        
+        reg.complete_registration_via_api
+        
+        reg.status.should == 'complete'
+        reg.should_not have_received(:deliver_confirmation_email)
+        reg.should_not have_received(:enqueue_reminder_emails)        
+        
+        reg.should have_received(:generate_pdf)        
+        reg.should have_received(:redact_sensitive_data)        
+        reg.should have_received(:save)        
+      end
+      
+    end
+  end
+
   private
 
   def build_and_validate(data = {})
