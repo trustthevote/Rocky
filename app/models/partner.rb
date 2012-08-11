@@ -265,7 +265,10 @@ class Partner < ActiveRecord::Base
       logo_url_errors << "Pleave provide an HTTP url"
     else
       begin
-        self.logo = open(url)
+        io = open(url)
+        def io.original_filename; base_uri.path.split('/').last; end
+        raise 'No Filename' if io.original_filename.blank?
+        self.logo = io
       rescue
         logo_url_errors << "Could not download #{url} for logo"        
       end

@@ -73,7 +73,11 @@ describe Partner do
     it "opens the file from the URL when saved" do
       url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
       p = Factory.build(:partner)
-      mock(p).open(url) {""}
+      mock_io = mock(StringIO)
+      mock_uri = mock(URI)
+      mock_uri.path { url }
+      mock_io.base_uri { mock_uri }
+      mock(p).open(url) { mock_io }
       p.logo_url = url
       p.save!
       p.should have_received(:open).with(url)
