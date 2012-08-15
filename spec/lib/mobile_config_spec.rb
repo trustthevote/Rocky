@@ -25,18 +25,46 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe MobileConfig do
+  before(:each) do
+    MobileConfig.redirect_url = nil
+    MobileConfig.browsers = nil
+    stub(MobileConfig).config_file_path { File.join(RAILS_ROOT,"spec/fixtures/files/mobile.yml") }
+  end
   describe "#redirect_url" do
     it "returns the value from the config" do
-      stub(MobileConfig).config_file_path { File.join(RAILS_ROOT,"spec/fixtures/files/mobile.yml") }
-      MobileConfig.redirect_url.should == "http://mob.rtv.com"
+      MobileConfig.redirect_url.should == "http://mob.rtv.com?partner=1"
+    end
+    it "appends query string from parameters" do
+      MobileConfig.redirect_url(:partner=>'a').should == "http://mob.rtv.com?partner=a"
+      MobileConfig.redirect_url(:partner=>'a', :source=>'b').should == "http://mob.rtv.com?partner=a&source=b"
+      MobileConfig.redirect_url(:partner=>'', :source=>'b').should == "http://mob.rtv.com?partner=1&source=b"
+      MobileConfig.redirect_url(:partner=>'2', :source=>'').should == "http://mob.rtv.com?partner=2"
     end
   end
   describe "#browsers" do
     it "returns an array of mobile browser names" do
-      stub(MobileConfig).config_file_path { File.join(RAILS_ROOT,"spec/fixtures/files/mobile.yml") }
       MobileConfig.browsers.should == ["android", "iphone"]
     end
-    
+  end
+  describe "#is_mobile_request?(request)" do
+    it "returns true when the request.user_agent matches one of the configured browsers" do
+      req = ''
+      stub(req).user_agent { "Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30" }
+      MobileConfig.is_mobile_request?(req).should be_true
+      
+      stub(req).user_agent { "Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5" }
+      MobileConfig.is_mobile_request?(req).should be_true      
+    end
+    it "returns false when the request.user_agent doesn't match one of the configured browsers" do
+      req = ''
+      stub(req).user_agent { "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-HK) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5" }
+      MobileConfig.is_mobile_request?(req).should be_false
+      
+      stub(req).user_agent { "" }
+      MobileConfig.is_mobile_request?(req).should be_false         
+      stub(req).user_agent { nil }
+      MobileConfig.is_mobile_request?(req).should be_false         
+    end
   end
   
   

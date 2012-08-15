@@ -7,21 +7,31 @@ Feature: Step 1
       When I go to a new registration page
       Then I should see "New Registrant"
 
-    @wip
+    @passing
     Scenario: Start from a mobile agent
       Given I am using a mobile browser
       When I go to a new registration page
       Then I should be redirected to the mobile url with partner="1"
       
-    @wip
+    @passing
     Scenario: Start from a mobile agent and partner setting
       Given I am using a mobile browser
+      And the following partner exists:
+        | organization |
+        | one          |
+        | two          |
+        | th3          |
       When I go to a new registration page for partner="3"
       Then I should be redirected to the mobile url with partner="3"
 
-    @wip
+    @passing
     Scenario: Start from a mobile agent and partner, source and tracking setting
       Given I am using a mobile browser
+      And the following partner exists:
+        | organization |
+        | one          |
+        | two          |
+        | th3          |
       When I go to a new registration page for partner="3", source="abc" and tracking="def"
       Then I should be redirected to the mobile url with partner="3", source="abc" and tracking="def"
 

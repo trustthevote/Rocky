@@ -56,6 +56,17 @@ describe Registrant do
     end
   end
   
+  describe "finish_iframe_url" do
+    it "should be the default url with email address and partner ID passed in" do
+      r = Factory.create(:step_5_registrant)
+      r.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=en&email=#{r.email_address}&partner_id=#{r.partner.id}"
+    end
+    it "should specify the locale and include tracking and source when present" do
+      r = Factory.create(:step_5_registrant, :locale=>'es', :tracking_source=>'sourceval', :tracking_id=>'trackingval')
+      r.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=es&email=#{r.email_address}&partner_id=#{r.partner.id}&source=sourceval&tracking=trackingval"
+    end
+  end
+  
   describe "#email_address_to_send_from" do
     before(:each) do
       @p = Partner.new

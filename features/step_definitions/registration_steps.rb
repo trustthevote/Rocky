@@ -23,8 +23,12 @@
 #
 #***** END LICENSE BLOCK *****
 
+Before do
+  stub(MobileConfig).is_mobile_request? {false}
+end
+
 Given /^I am using a mobile browser$/ do
-  stub(request).user_agent { MobileConfig.browsers.first }
+  stub(MobileConfig).is_mobile_request? {true}
 end
 
 

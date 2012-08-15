@@ -2,6 +2,7 @@
 .idea
 .rvmrc
 .vimrc
+config/mobile.yml
 config/states_with_online_registration.yml
 config/database.yml
 config/newrelic.yml

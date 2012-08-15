@@ -36,6 +36,10 @@ module NavigationHelpers
       root_path
     when /a new registration page for that partner/
       new_registrant_path(:partner=>Partner.last.id)
+    when /a new registration page for partner="(\d)", source="(.+)" and tracking="(.+)"/
+      new_registrant_path(:partner=>$1, :source=>$2, :tracking=>$3).to_s
+    when /a new registration page for partner="(\d)"/
+      new_registrant_path(:partner=>$1)
     when /a new registration page/, /a new step 1 page/
       new_registrant_path
     when /new Spanish registration page/

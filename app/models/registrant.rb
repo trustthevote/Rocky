@@ -46,6 +46,8 @@ class Registrant < ActiveRecord::Base
   REMINDER_EMAIL_PRIORITY = 0
   WRAP_UP_PRIORITY = REMINDER_EMAIL_PRIORITY + 1
 
+  FINISH_IFRAME_URL = "https://s3.rockthevote.com/rocky/rtv-ovr-share.php"
+
   CSV_HEADER = [
     "Status",
     "Tracking Source",
@@ -705,6 +707,14 @@ class Registrant < ActiveRecord::Base
     else
       "Rock the Vote"
     end
+  end
+  
+  def finish_iframe_url
+    url = "#{FINISH_IFRAME_URL}?locale=#{self.locale}&email=#{self.email_address}"
+    url += "&partner_id=#{self.partner.id}" if !self.partner.nil?
+    url += "&source=#{self.tracking_source}" if !self.tracking_source.blank?
+    url += "&tracking=#{self.tracking_id}" if !self.tracking_id.blank?
+    url
   end
   
   def email_address_to_send_from
