@@ -35,6 +35,12 @@
           <span class="error"><%= @partner.errors.on :from_email %></span>
           <span class="instructions">* Email address to send confirmation, reminder and thank-you emails from for whitelabeled partners</span>
         </li>
+        <li class="width_a">
+          <h3><%= f.label :finish_iframe_url %></h3>
+          <%= field_div f, :finish_iframe_url %>
+          <span class="error"><%= @partner.errors.on :finish_iframe_url %></span>
+          <span class="instructions">* URL for iFrame to show registrants on the thank you page</span>
+        </li>        
       </ul>
       <br/>
       <ul class="checkbox">

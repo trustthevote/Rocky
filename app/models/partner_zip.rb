@@ -85,7 +85,7 @@ class PartnerZip
       :address, :city, :state_id, :zip_code, :phone, 
       :survey_question_1_en, :survey_question_1_es, 
       :survey_question_2_en, :survey_question_2_es, 
-      :whitelabeled, :from_email,
+      :whitelabeled, :from_email, :finish_iframe_url,
       :rtv_email_opt_in, :rtv_sms_opt_in, :ask_for_volunteers, 
       :partner_email_opt_in, :partner_sms_opt_in, :partner_ask_for_volunteers, 
       :tmp_asset_directory]    

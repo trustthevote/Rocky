@@ -65,6 +65,25 @@ describe Registrant do
       r = Factory.create(:step_5_registrant, :locale=>'es', :tracking_source=>'sourceval', :tracking_id=>'trackingval')
       r.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=es&email=#{r.email_address}&partner_id=#{r.partner.id}&source=sourceval&tracking=trackingval"
     end
+    it "uses a partner's iframe url as base for whitelabeled partners with non-blank values" do
+      p1 = Factory.create(:partner, :whitelabeled=>false, :finish_iframe_url=>"https://www.google.com")
+      p2 = Factory.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"")
+      p3 = Factory.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"https://www.google.com")
+      stub(p3).primary? { true }
+      p4 = Factory.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"https://www.google.com")
+
+      r1 = Factory.create(:step_5_registrant, :partner=>p1)
+      r2 = Factory.create(:step_5_registrant, :partner=>p2)
+      r3 = Factory.create(:step_5_registrant, :partner=>p3)
+      r4 = Factory.create(:step_5_registrant, :partner=>p4)
+      
+      r1.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=en&email=#{r1.email_address}&partner_id=#{r1.partner.id}"
+      r2.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=en&email=#{r2.email_address}&partner_id=#{r2.partner.id}"
+      r3.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=en&email=#{r3.email_address}&partner_id=#{r3.partner.id}"
+      
+      r4.finish_iframe_url.should == "#{r4.partner.finish_iframe_url}?locale=en&email=#{r4.email_address}&partner_id=#{r4.partner.id}"
+      
+    end
   end
   
   describe "#email_address_to_send_from" do

@@ -710,7 +710,11 @@ class Registrant < ActiveRecord::Base
   end
   
   def finish_iframe_url
-    url = "#{FINISH_IFRAME_URL}?locale=#{self.locale}&email=#{self.email_address}"
+    base_url = FINISH_IFRAME_URL
+    if self.partner && !self.partner.primary? && self.partner.whitelabeled? && !self.partner.finish_iframe_url.blank?
+      base_url = self.partner.finish_iframe_url
+    end
+    url = "#{base_url}?locale=#{self.locale}&email=#{self.email_address}"
     url += "&partner_id=#{self.partner.id}" if !self.partner.nil?
     url += "&source=#{self.tracking_source}" if !self.tracking_source.blank?
     url += "&tracking=#{self.tracking_id}" if !self.tracking_id.blank?
