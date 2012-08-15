@@ -23,10 +23,15 @@
     <td><%= h @partner.api_key %></td>
   </tr>
   <tr>
-    <td colspan='2'><%=link_to "regenerate API key", regen_api_key_admin_partner_path(@partner) %></td>
+    <td></td>
+    <td><%=link_to "regenerate API key", regen_api_key_admin_partner_path(@partner) %></td>
   <tr>
-    <td class='label'>Email:</td>
-    <td><%= h pd.email %></td>
+    <td class='label'>Contact Email:</td>
+    <td valign='bottom'><%= h pd.email %></td>
+  </tr>
+  <tr>
+    <td class='label'>From Address <br/>for Notifications:</td>
+    <td><br/><%= h @partner.from_email %></td>
   </tr>
   <tr>
     <td class='label'>Whitelabeled:</td>

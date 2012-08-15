@@ -80,6 +80,21 @@ Then /^I should be sent a thank\-you email$/ do
   email.subject.should == "Thank you for using the online voter registration tool"
 end
 
+Then /^I should be sent a thank\-you email from that partner$/ do
+  @partner ||= Partner.last
+  email = ActionMailer::Base.deliveries.last
+  email.to.should include(@registrant.email_address)
+  email.from.should include(@partner.from_email)
+  email.subject.should == "Thank you for using the online voter registration tool"
+end
+
+Then /^I should be sent a thank\-you email from RTV$/ do
+  email = ActionMailer::Base.deliveries.last
+  email.to.should include(@registrant.email_address)
+  email.from.should include(FROM_ADDRESS)
+  email.subject.should == "Thank you for using the online voter registration tool"
+end
+
 Then /^I should be sent a thank\-you email in spanish$/ do
   email = ActionMailer::Base.deliveries.last
   email.to.should include(@registrant.email_address)

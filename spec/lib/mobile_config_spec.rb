@@ -22,11 +22,22 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-role :web,  "rtvstaging2-web.osuosl.org"
-role :app,  "rtvstaging2-web.osuosl.org"
-role :util, "rtvstaging2-util.osuosl.org"
-role :db,   "rtvstaging2-web.osuosl.org", :primary => true
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-set :rails_env,    "staging2"
-
-set :branch, "mobile"
+describe MobileConfig do
+  describe "#redirect_url" do
+    it "returns the value from the config" do
+      stub(MobileConfig).config_file_path { File.join(RAILS_ROOT,"spec/fixtures/files/mobile.yml") }
+      MobileConfig.redirect_url.should == "http://mob.rtv.com"
+    end
+  end
+  describe "#browsers" do
+    it "returns an array of mobile browser names" do
+      stub(MobileConfig).config_file_path { File.join(RAILS_ROOT,"spec/fixtures/files/mobile.yml") }
+      MobileConfig.browsers.should == ["android", "iphone"]
+    end
+    
+  end
+  
+  
+end

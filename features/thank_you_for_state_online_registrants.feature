@@ -42,6 +42,41 @@ Feature: Thank you email for registrants who choose to register online with a st
     And my status should be "complete"
 
   @passing
+  Scenario: Registrant from a whitelabeled partner who finished online gets sent a thank-you email from that partner
+    Given the following partner exists:
+      | organization   | rtv_sms_opt_in | partner_sms_opt_in | from_email                      | whitelabeled |
+      | Opt-in Partner | true           | true               | alexmek+partner-email@gmail.com | true         |
+    Given I have completed step 1 as a resident of "Washington" state from that partner
+    When I go to the step 2 page
+    And I select "Mr." from "title"
+    And I fill in "first" with "John"
+    And I fill in "last" with "Public"
+    And I choose "I have a current WA state identification card or driver's license"
+    And I press "registrant_state_online_registration"
+    And my session expires
+    And the timeout_stale_registrations task has run
+    Then I should be sent a thank-you email from that partner
+    And my status should be "complete"
+    
+  @passing
+  Scenario: Registrant from a non-whitelabeled partner who finished online gets sent a thank-you email from RTV
+    Given the following partner exists:
+      | organization   | rtv_sms_opt_in | partner_sms_opt_in | from_email                      | whitelabeled |
+      | Opt-in Partner | true           | true               | alexmek+partner-email@gmail.com | false        |
+    Given I have completed step 1 as a resident of "Washington" state from that partner
+    When I go to the step 2 page
+    And I select "Mr." from "title"
+    And I fill in "first" with "John"
+    And I fill in "last" with "Public"
+    And I choose "I have a current WA state identification card or driver's license"
+    And I press "registrant_state_online_registration"
+    And my session expires
+    And the timeout_stale_registrations task has run
+    Then I should be sent a thank-you email from RTV
+    And my status should be "complete"
+
+
+  @passing
   Scenario: Registrant who finished online and selected spanish gets sent a thank-you email
     Given I have completed step 1 as a resident of "Washington" state
     And my locale is "es"

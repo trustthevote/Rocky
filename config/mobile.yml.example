@@ -1,0 +1,6 @@
+mobile_redirect_url: https://mobile.rockthevote.com/
+mobile_browsers:
+  - mobile
+  - webos
+  - blackberry
+  - iphone

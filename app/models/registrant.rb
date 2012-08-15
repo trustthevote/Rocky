@@ -706,6 +706,14 @@ class Registrant < ActiveRecord::Base
       "Rock the Vote"
     end
   end
+  
+  def email_address_to_send_from
+    if partner && !partner.primary? && partner.whitelabeled? && !partner.from_email.blank?
+      partner.from_email
+    else
+      FROM_ADDRESS
+    end
+  end
 
   def survey_question_1
     original_survey_question_1.blank? ? partner_survey_question_1 : original_survey_question_1

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120809200502) do
+ActiveRecord::Schema.define(:version => 20120815003450) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20120809200502) do
     t.boolean  "partner_sms_opt_in",                       :default => false
     t.string   "api_key",                    :limit => 40, :default => ""
     t.string   "privacy_url"
+    t.string   "from_email"
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email"

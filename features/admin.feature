@@ -41,7 +41,7 @@ Feature: Admin UI
       And I should not see a field for "Ask for partner SMS opt-in"
       And I should not see a field for "Ask for partner Volunteers"
   
-
+    @passing
     Scenario: Partner edit form for partner != 1
       Given the following partner exists:
         | id | name                |
@@ -50,6 +50,7 @@ Feature: Admin UI
       Then I should see a field for "Name"
       And I should see a field for "Organization"
       And I should see a field for "Email"
+      And I should see a field for "From Email"
       And I should see a field for "Whitelabeled CSS"
       And I should see a field for "Ask for RTV email opt-in"
       And I should see a field for "Ask for RTV SMS opt-in"

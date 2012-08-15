@@ -56,6 +56,34 @@ describe Registrant do
     end
   end
   
+  describe "#email_address_to_send_from" do
+    before(:each) do
+      @p = Partner.new
+      @p.whitelabeled = true
+      @p.from_email = "custom-from@rtv.org"
+      stub(@p).primary? { false }
+    end
+    it "returns FROM_ADDRESS when partner is primary" do
+      stub(@p).primary? { true }
+      r = Registrant.new(:partner=>@p)
+      r.email_address_to_send_from.should == FROM_ADDRESS
+    end
+    it "returns FROM_ADDRESS when partner is not whitelabeled and from is configured" do
+      @p.whitelabeled = false
+      r = Registrant.new(:partner=>@p)
+      r.email_address_to_send_from.should == FROM_ADDRESS
+    end
+    it "returns FROM_ADDRESS when partner email is not configured" do
+      @p.from_email = ''
+      r = Registrant.new(:partner=>@p)
+      r.email_address_to_send_from.should == FROM_ADDRESS
+    end
+    it "returns the parter from_email when the parter is whitelabled and address is set" do
+      r = Registrant.new(:partner=>@p)
+      r.email_address_to_send_from.should == "custom-from@rtv.org"
+    end
+  end
+  
   describe "backfill data" do
     it "backfills the age even when redacted" do
       assert_equal 0, Registrant.find(:all, :conditions => "age IS NOT NULL").size

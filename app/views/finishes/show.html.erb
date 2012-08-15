@@ -23,53 +23,6 @@
 
 <%= render :partial=>'share' %>
 
-<!-- Disabling form until spammers can be stopped  div class="tell_friend">
-  <% form_for(:tell_friend, @registrant, :url => registrant_tell_friends_path(@registrant), :class => "tell_friend") do |form| %>
-    <fieldset>
-      <legend><%= I18n.t('txt.registration.tell_a_friend_title') %></legend>
-      <% if @email_sent %>
-        <p><%= I18n.t('txt.registration.instructions.finish_email_sent') %></p>
-        <p><%= I18n.t('txt.registration.instructions.finish_update_status') %></p>
-      <% else %>
-        <ul class="stacked">
-          <li class="width_g">
-            <h3><%= form.label :tell_from %></h3>
-            <%= field_div form, :tell_from %>
-            <span class="error"><%= form.object.errors.on :tell_from %></span>
-          </li>
-          <li class="width_x">&nbsp;</li>
-          <li class="width_g">
-            <h3><%= form.label :tell_email %></h3>
-            <%= field_div form, :tell_email %>
-            <span class="error"><%= form.object.errors.on :tell_email %></span>
-          </li>
-        </ul>
-        <ul class="stacked">
-          <li class="width_h">
-            <h3><%= form.label :tell_recipients %> <%= I18n.t('txt.registration.instructions.finish_tell_recipients') %></h3>
-            <%= field_div form, :tell_recipients %>
-            <span class="error"><%= form.object.errors.on :tell_recipients %></span>
-          </li>
-        </ul>
-        <ul class="stacked">
-          <li class="width_h">
-            <h3><%= form.label :tell_subject %></h3>
-            <%= field_div form, :tell_subject %>
-            <span class="error"><%= form.object.errors.on :tell_subject %></span>
-          </li>
-        </ul>
-        <ul class="stacked">
-          <li class="width_h">
-            <h3><%= form.label :tell_message %></h3>
-            <div class="tall"><%= form.text_area :tell_message %></div>
-          </li>
-        </ul>
-        <%= rollover_button(:send_email, I18n.t('txt.button.submit')) %>
-      <% end %>
-    </fieldset>
-  <% end %>
-</div-->
-
 <div class="fulltext">
   <p class="bold">
     <%= I18n.t('txt.registration.instructions.finish_2') %>

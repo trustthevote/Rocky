@@ -55,7 +55,7 @@ class Notifier < ActionMailer::Base
 
   def setup_registrant_email(registrant, kind)
     subject I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym)
-    from FROM_ADDRESS
+    from registrant.email_address_to_send_from
     recipients registrant.email_address
     sent_on Time.now.to_s(:db)
     content_type "multipart/alternative"

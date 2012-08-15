@@ -63,7 +63,7 @@ after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "dep
 
 set :rake, 'bundle exec rake'
 
-after "deploy:symlink_configs", "deploy:symlink_state_configs"
+after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs"
 before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
@@ -120,6 +120,19 @@ namespace :deploy do
       ln -nfs #{shared_path}/config/states_with_online_registration.yml #{latest_release}/config/states_with_online_registration.yml
     CMD
   end
+  
+  desc "Link the mobile.yml configuration into the current release path. Create from the example if it doesn't exist"
+  task :symlink_mobile_configs, :roles=>[:app, :util], :except => {:no_release => true} do
+    run <<-CMD
+      cd #{latest_release} &&
+      cp -n #{latest_release}/config/mobile.yml.example #{shared_path}/config/mobile.yml
+    CMD
+    run <<-CMD
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/config/mobile.yml #{latest_release}/config/mobile.yml
+    CMD
+  end
+
 
   desc "Install the branding gem from a local .gem file onto all servers"
   task :install_branding, :roles => [:app, :util] do

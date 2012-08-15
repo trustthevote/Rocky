@@ -46,6 +46,8 @@ describe Notifier do
         Notifier.deliver_confirmation(registrant)
       end
       email = ActionMailer::Base.deliveries.last
+      email.from.should include(FROM_ADDRESS)
+      
       email.body.should include("http")
       email.body.should include(registrant.pdf_path)
       assert_equal 1, email.parts.length
@@ -62,6 +64,8 @@ describe Notifier do
         Notifier.deliver_confirmation(registrant)
       end
       email = ActionMailer::Base.deliveries.last
+      email.from.should include(FROM_ADDRESS)
+      
       email.body.should include("this-is-the-phone")
       email.body.should include("this-is-the-address")
       email.body.should include("this-is-the-url")
@@ -74,6 +78,8 @@ describe Notifier do
       end
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
+      email.from.should include(FROM_ADDRESS)
+      
     end
 
     it "uses partner template" do
@@ -84,6 +90,16 @@ describe Notifier do
       Notifier.deliver_confirmation(registrant)
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{PDF: http://.*source=email})
+      email.from.should include(FROM_ADDRESS)
+      
+    end
+    
+    it "sends from partner email when configured" do
+      partner    = Factory(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
+      registrant = Factory(:maximal_registrant, :partner => partner, :locale => 'en')
+      Notifier.deliver_confirmation(registrant)
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include("custom@partner.org")      
     end
   end
 
@@ -96,6 +112,7 @@ describe Notifier do
       end
       email = ActionMailer::Base.deliveries.last
       email.to.should include(registrant.email_address)
+      email.from.should include(FROM_ADDRESS)
       email.subject.should include("Thank you for using the online voter registration tool")
       assert_equal 1, email.parts.length
       assert_equal "utf-8", email.parts[0].charset
@@ -109,6 +126,14 @@ describe Notifier do
       Notifier.deliver_thank_you_external(registrant)
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{HI: test the template})
+      email.from.should include(FROM_ADDRESS)
+    end
+    it "sends from partner email when configured" do
+      partner    = Factory(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
+      registrant = Factory(:maximal_registrant, :partner => partner, :locale => 'en')
+      Notifier.deliver_thank_you_external(registrant)
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include("custom@partner.org")      
     end
     
   end
@@ -120,6 +145,8 @@ describe Notifier do
         Notifier.deliver_reminder(registrant)
       end
       email = ActionMailer::Base.deliveries.last
+      email.from.should include(FROM_ADDRESS)
+      
       email.body.should include("http")
       email.body.should include(registrant.pdf_path)
       assert_equal 1, email.parts.length
@@ -136,6 +163,8 @@ describe Notifier do
         Notifier.deliver_reminder(registrant)
       end
       email = ActionMailer::Base.deliveries.last
+      email.from.should include(FROM_ADDRESS)
+      
       email.body.should include("this-is-the-phone")
       email.body.should include("this-is-the-address")
       email.body.should include("this-is-the-url")
@@ -145,6 +174,8 @@ describe Notifier do
       registrant = Factory.create(:maximal_registrant, :locale => 'es')
       Notifier.deliver_reminder(registrant)
       email = ActionMailer::Base.deliveries.last
+      email.from.should include(FROM_ADDRESS)
+      
       email.subject.should include(I18n.t("email.reminder.subject", :locale => :es))
     end
 
@@ -154,8 +185,18 @@ describe Notifier do
         Notifier.deliver_reminder(registrant)
       end
       email = ActionMailer::Base.deliveries.last
+      email.from.should include(FROM_ADDRESS)
+      
       email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
     end
+    it "sends from partner email when configured" do
+      partner    = Factory(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
+      registrant = Factory(:maximal_registrant, :partner => partner, :locale => 'en')
+      Notifier.deliver_reminder(registrant)
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include("custom@partner.org")      
+    end
+    
   end
 
   describe "#tell_friends" do
