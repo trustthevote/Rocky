@@ -22,6 +22,12 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
+
+Given /^I am using a mobile browser$/ do
+  stub(request).user_agent { MobileConfig.browsers.first }
+end
+
+
 Given /^I have completed step (\d+)$/ do |step_num|
   @registrant = Factory.create("step_#{step_num}_registrant")
 end
@@ -72,6 +78,14 @@ end
 
 When /^the timeout_stale_registrations task has run$/ do
   Registrant.abandon_stale_records
+end
+
+Then /^I should be redirected to the mobile url with partner="([^\"]*)"$/ do |partner|
+  response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en'))
+end
+
+Then /^I should be redirected to the mobile url with partner="([^\"]*)", source="([^\"]*)" and tracking="([^\"]*)"$/ do |partner,source,tracking|
+  response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en', :source=>source, :tracking=>tracking))
 end
 
 Then /^I should be sent a thank\-you email$/ do
