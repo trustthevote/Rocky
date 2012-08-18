@@ -1,1 +1,23 @@
-<iframe width='100%' height='100%' border='0' style='border:none; margin:0; padding:0' src='<%=@registrant.finish_iframe_url %>' />
+<% if @stop_reminders -%>
+  <h1>Thanks for Registering!</h1>
+  <div class="fulltext">
+    <p><%= I18n.t('txt.registration.finish_reminder', :first_name => @registrant.first_name) %></p>
+    <p><%= I18n.t('txt.registration.finish_reminder_2') %></p>
+  </div>
+<% elsif !@registrant.pdf_ready? -%>
+  <h1>Check Your Email</h1>
+  <div class="fulltext">
+    <p>
+      It's taking a while to create your registration form to download, but don't worry.
+      We'll send you an email when it's ready. In the mean time, you can let your friends know
+      how they can register to vote too.
+    </p>
+  </div>
+<% end -%>
+
+<%= render(:partial => "finishes/under_18") if (@registrant.status.to_sym ==:under_18) -%>
+
+
+<iframe  border='0' style='border:none; margin:0; padding:0; width:100%; height:100%;' src='<%=@registrant.finish_iframe_url %>'></iframe>
+
+<%= render :partial => 'finishes/adwords' %>

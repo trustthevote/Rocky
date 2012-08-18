@@ -33,10 +33,10 @@ describe FinishesController do
     before(:each) do
       @registrant = Factory.create(:step_5_registrant)
     end
-    it "renders :complete partial when still in step_5" do
+    it "does not render :complete partial when still in step_5" do
       get :show, :registrant_id => @registrant.to_param
       assert_response :success
-      assert_select "h1", "Spread the word!"
+      assert_select "h1", :text=>"Spread the word!", :count=>0
     end
   end
 
@@ -51,15 +51,15 @@ describe FinishesController do
       assert_match Regexp.compile(Regexp.escape(root_url(:source => "email"))), assigns[:registrant].tell_message
     end
 
-    it "shows share links and tell-a-friend email form" do
+    it "shows no share links instead has the iframe" do
       get :show, :registrant_id => @registrant.to_param
       assert_not_nil assigns[:registrant]
       assert_response :success
       assert_template "finish"
 
-      assert_select "h1", "Spread the word!"
+      assert_select "iframe"
 
-      assert_share_links "I just registered to vote and you can too!"
+      assert_no_share_links "I just registered to vote and you can too!"
 
       # Disabled until spammers can be stopped
       # assert_select "form div.button a.button_send_email_en"
@@ -77,14 +77,11 @@ describe FinishesController do
       assert_match Regexp.compile(Regexp.escape(root_url(:source => "email"))), assigns[:registrant].tell_message
     end
 
-    it "shows share links and tell-a-friend email form" do
+    it "does not show share links" do
       get :show, :registrant_id => @registrant.to_param
 
       assert_select "h1", "You're on the list!"
-      assert_share_links "Make sure you register to vote. It's easy!"
-
-      # Disabled until spammers can be stopped
-      # assert_select "form div.button a.button_send_email_en"
+      assert_no_share_links "Make sure you register to vote. It's easy!"
     end
   end
 
@@ -99,6 +96,9 @@ describe FinishesController do
     assert_select "a[class=button_share_twitter_en][href=#{href}]"
 
     
+  end
+  def assert_no_share_links(share_text)
+    assert_select "div.share div", 0
   end
 
   describe "stop reminders" do
