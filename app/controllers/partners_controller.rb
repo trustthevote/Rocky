@@ -70,10 +70,17 @@ class PartnersController < PartnerBase
   def embed_codes
     @partner = current_partner
     @text_link_html = %Q[<a href="https://#{request.host}#{root_path(:partner => partner_id)}">Register to Vote Here</a>]
+    @text_link_html_b = %Q[<a href="https://register2.rockthevote.com#{root_path(:partner => partner_id)}">Register to Vote Here</a>]
 
     @image_link_html =
 <<-HTML
 <a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}">
+  <img src="#{partner_widget_url}" />
+</a>
+HTML
+    @image_link_html_b =
+<<-HTML
+<a href="https://register2.rockthevote.com#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}">
   <img src="#{partner_widget_url}" />
 </a>
 HTML
@@ -85,6 +92,13 @@ HTML
   <img src="#{partner_widget_url}" />
 </a>
 <script type="text/javascript" src="https://#{request.host}#{widget_loader_path}"></script>
+HTML
+    @image_overlay_html_b =
+<<-HTML
+<a href="https://register2.rockthevote.com#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="#{@floatbox_options}">
+  <img src="#{partner_widget_url}" />
+</a>
+<script type="text/javascript" src="https://register2.rockthevote.com#{widget_loader_path}"></script>
 HTML
 
   end
