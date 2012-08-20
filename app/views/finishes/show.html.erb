@@ -15,9 +15,10 @@
   </div>
 <% end -%>
 
-<%= render(:partial => "finishes/under_18") if (@registrant.status.to_sym ==:under_18) -%>
+<div id="finish_page_iframe">
+  <%= render(:partial => "finishes/under_18") if (@registrant.status.to_sym ==:under_18) -%>
+</div>
 
-
-<iframe  border='0' style='border:none; margin:0; padding:0; width:100%; height:100%;' src='<%=@registrant.finish_iframe_url %>'></iframe>
+<iframe  border='0' height="550px" ALLOWTRANSPARENCY="true" style='border:none; margin:0; padding:0; width:100%;' src='<%=@registrant.finish_iframe_url %>'></iframe>
 
 <%= render :partial => 'finishes/adwords' %>
