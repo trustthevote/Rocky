@@ -51,7 +51,7 @@
       <p class="plain_text">
         Best option! This code will create a button or banner on a web page. But instead of taking your users to a separate website or page, the link will result in your voter registration tool being displayed on top of the page users were viewing. That's right, users will not leave your site. To see what it looks like, check out these examples: <span class="floatbox" data-fb-options="<%= @floatbox_options %>"><a href="/?partner=<%= @partner.id %>">Version A</a> | <a href="//register2.rockthevote.com/?partner=<%= @partner.id %>">Version B</a></span>
       </p>  
-      <script type="text/javascript" src="/widget_loader.js"></script>
+      
       <div class="columns">
         <div class="column">
           <h3><strong>Version A</strong></h3>
@@ -107,9 +107,9 @@
     </p>
   <p>
     <br/>
-    <strong>Version A</strong> &mdash; <%= link_to "https://#{request.host}#{new_registrant_path(:partner => @partner.id)}" %>
+    <strong>Version A</strong> &mdash; <%= link_to "https://#{request.host}#{new_registrant_path(:partner => @partner.id)}", "https://#{request.host}#{new_registrant_path(:partner => @partner.id)}" %>
     <br/>
-    <strong>Version B</strong> &mdash; <%= link_to "https://register2.rockthevote.com#{new_registrant_path(:partner => @partner.id)}" %>
+    <strong>Version B</strong> &mdash; <%= link_to "https://register2.rockthevote.com#{new_registrant_path(:partner => @partner.id)}",    "https://register2.rockthevote.com#{new_registrant_path(:partner => @partner.id)}" %>
     </p>
     <br/>
     <p>Use them in emails, in your Facebook or Twitter status updates, or in other custom ways. <br/>

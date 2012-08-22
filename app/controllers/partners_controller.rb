@@ -91,7 +91,7 @@ HTML
 <a href="https://#{request.host}#{root_path(:partner => partner_id, :source => "embed-#{@partner.widget_image_name}")}" class="floatbox" data-fb-options="#{@floatbox_options}">
   <img src="#{partner_widget_url}" />
 </a>
-<script type="text/javascript" src="https://#{request.host}#{widget_loader_path}"></script>
+<script type="text/javascript" src="#{AppConfig.widget_loader_url}"></script>
 HTML
     @image_overlay_html_b =
 <<-HTML

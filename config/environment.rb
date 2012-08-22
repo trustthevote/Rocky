@@ -77,3 +77,4 @@ end
 
 ADMIN_USERNAME = 'admin'
 
+WIDGET_JS_URL = 'https://s3.amazonaws.com/ovr/widget_loader.js'
