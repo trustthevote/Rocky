@@ -51,7 +51,7 @@
       <p class="plain_text">
         Best option! This code will create a button or banner on a web page. But instead of taking your users to a separate website or page, the link will result in your voter registration tool being displayed on top of the page users were viewing. That's right, users will not leave your site. To see what it looks like, check out these examples: <span class="floatbox" data-fb-options="<%= @floatbox_options %>"><a href="/?partner=<%= @partner.id %>">Version A</a> | <a href="//register2.rockthevote.com/?partner=<%= @partner.id %>">Version B</a></span>
       </p>  
-      
+      <script type="text/javascript" src="<%= AppConfig.widget_loader_url %>"></script>
       <div class="columns">
         <div class="column">
           <h3><strong>Version A</strong></h3>
