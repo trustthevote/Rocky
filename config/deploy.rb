@@ -63,7 +63,7 @@ after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "dep
 
 set :rake, 'bundle exec rake'
 
-after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs"
+after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs", "deploy:symlink_app_configs"
 before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
@@ -130,6 +130,18 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/mobile.yml #{latest_release}/config/mobile.yml
+    CMD
+  end
+
+  desc "Link the app_config.yml configuration into the current release path. Create from the example if it doesn't exist"
+  task :symlink_app_configs, :roles=>[:app, :util], :except => {:no_release => true} do
+    run <<-CMD
+      cd #{latest_release} &&
+      cp -n #{latest_release}/config/app_config.yml.example #{shared_path}/config/app_config.yml
+    CMD
+    run <<-CMD
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/config/app_config.yml #{latest_release}/config/app_config.yml
     CMD
   end
 
