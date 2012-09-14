@@ -43,6 +43,14 @@ protected
       dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
       lang= @registrant.locale
       "https://weiapplets.sos.wa.gov/myvote/myvote?language=#{lang}&Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
+    when "Nevada"
+      fn = CGI.escape @registrant.first_name.to_s
+      mn = CGI.escape @registrant.middle_name.to_s
+      ln = CGI.escape @registrant.last_name.to_s
+      sf = CGI.escape @registrant.name_suffix.to_s
+      zip = CGI.escape @registrant.home_zip_code.to_s
+      lang = @registrant.locale.to_s
+      "https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&fn=#{fn}&mn=#{mn}&ln=#{ln}&lang=#{lang}&zip=#{zip}&sf=#{sf}"
     else
       ""
     end    

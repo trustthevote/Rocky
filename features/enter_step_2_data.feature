@@ -34,6 +34,7 @@ Feature: Step 2
         | Arizona    |
         | California |
         | Colorado   |
+        | Nevada     |
     
     Scenario Outline: fields for a <state> state resident
       Given I have completed step 1 as a resident of "<state>" state
@@ -55,8 +56,10 @@ Feature: Step 2
         | Arizona    | AZ         |
         | California | CA         |
         | Colorado   | CO         |
+        | Nevada     | NV         |
     
     
+    @wip
     Scenario Outline: fields for a <state> state resident with a partner
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in | rtv_email_opt_in | partner_email_opt_in |
@@ -77,6 +80,7 @@ Feature: Step 2
       And I should see "you can also finish your registration with Rock the Vote and Opt-in Partner. You will just have to print, sign, and mail it in."
       And I should see a link for "finish your registration with Rock the Vote and Opt-in Partner"
       And I should see an iFrame for the <state> State online system
+      And when it's nevada the text should be different
     
       Examples:
         | state      | state_abbr |
@@ -84,6 +88,7 @@ Feature: Step 2
         | Arizona    | AZ         |
         | California | CA         |
         | Colorado   | CO         |
+        | Nevada     | NV         |
     
     Scenario Outline: has_license field is required
       Given I have completed step 1 as a resident of "<state>" state
@@ -97,8 +102,9 @@ Feature: Step 2
         | Arizona    |
         | California |
         | Colorado   |
+        | Nevada     |
     
-    
+    @wip
     Scenario Outline: <state> resident selects to finish paperless registration with the state of <state>
       Given I have completed step 1 as a resident of "<state>" state
       When I go to the step 2 page
@@ -111,6 +117,8 @@ Feature: Step 2
       And I should see "you can also finish your registration with Rock the Vote. You will just have to print, sign, and mail it in."
       And I should see a link for "finish your registration with Rock the Vote"
       And I should see an iFrame for the <state> State online system
+      And when it's nevada the text should be different
+      
 
       Examples:
         | state      | state_abbr |
@@ -118,6 +126,7 @@ Feature: Step 2
         | Arizona    | AZ         |
         | California | CA         |
         | Colorado   | CO         |
+        | Nevada     | NV         |
 
     
     Scenario Outline: <state> resident selects to finish registration with Rock the Vote
@@ -146,3 +155,4 @@ Feature: Step 2
         | Arizona    | AZ         |
         | California | CA         |
         | Colorado   | CO         |
+        | Nevada     | NV         |

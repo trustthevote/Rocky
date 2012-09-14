@@ -140,3 +140,4 @@ Feature: Step 3
         | Arizona    | Steel                | registrant_party     |
         | California | Green                | registrant_party     |
         | Colorado   | Green                | registrant_party     |
+        | Nevada     | Other                | registrant_race      |

@@ -137,3 +137,20 @@ arizona_es:
   - Coal
   no_party: Se niega a declarar
   sub_18: si va a cumplir 18 años de las próximas elecciones
+nevada_en:
+  state_id: 29
+  locale: en
+  parties: 
+  - Steel
+  - Coal
+  - None
+  no_party: Decline to State
+  sub_18: if you will turn 18 by the next election
+nevada_es:
+  state_id: 29
+  locale: es
+  parties: 
+  - Steel
+  - Coal
+  no_party: Se niega a declarar
+  sub_18: si va a cumplir 18 años de las próximas elecciones
