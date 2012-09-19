@@ -25,7 +25,7 @@
 module V2
   class PartnerService
     INVALID_PARTNER_OR_API_KEY = "Invalid partner ID or api key"
-    
+
     ALLOWED_ATTRS = [:organization,
         :url,
         :privacy_url,
@@ -43,66 +43,77 @@ module V2
         :survey_question_1_es,
         :survey_question_2_es,
         :partner_ask_for_volunteers]
-    
-    def self.find(query)
-      
+
+    def self.find(query, only_public = false)
+
       partner = find_partner(query[:partner_id], query[:partner_api_key])
-      
-      return {
-        :org_name     => partner.organization,
-        :org_URL          => partner.url,
-        :contact_name         => partner.name,
-        :contact_email        => partner.email,
-        :contact_phone        => partner.phone,
-        :contact_address      => partner.address,
-        :contact_city         => partner.city,
-        :contact_state        => partner.state_abbrev,
-        :contact_ZIP     => partner.zip_code,
-        :logo_image_URL     => partner.logo.url,
-        :survey_question_1_en => partner.survey_question_1_en,
-        :survey_question_2_en => partner.survey_question_2_en,
-        :survey_question_1_es => partner.survey_question_1_es,
-        :survey_question_2_es => partner.survey_question_2_es,
-        :whitelabeled         => partner.whitelabeled?,
+
+      data = {
+        :org_name                 => partner.organization,
+        :org_URL                  => partner.url,
+        :logo_image_URL           => partner.logo.url,
+        :survey_question_1_en     => partner.survey_question_1_en,
+        :survey_question_2_en     => partner.survey_question_2_en,
+        :survey_question_1_es     => partner.survey_question_1_es,
+        :survey_question_2_es     => partner.survey_question_2_es,
+        :whitelabeled             => partner.whitelabeled?,
         :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
         :partner_ask_email_opt_in => partner.partner_email_opt_in?,
         :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
         :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
-        :rtv_ask_volunteer   => partner.ask_for_volunteers?,
-        :partner_ask_volunteer => partner.partner_ask_for_volunteers?
+        :rtv_ask_volunteer        => partner.ask_for_volunteers?,
+        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
       }
+
+      if only_public
+        data.merge!({
+          :org_privacy_url        => partner.privacy_url
+        })
+      else
+        data.merge!({
+          :contact_name           => partner.name,
+          :contact_email          => partner.email,
+          :contact_phone          => partner.phone,
+          :contact_address        => partner.address,
+          :contact_city           => partner.city,
+          :contact_state          => partner.state_abbrev,
+          :contact_ZIP            => partner.zip_code
+        })
+      end
+
+      return data
     end
-    
-    
+
+
     def self.find_partner(partner_id, partner_api_key)
       partner = Partner.find_by_id(partner_id)
       if partner.nil? || !partner.valid_api_key?(partner_api_key)
         raise(ArgumentError.new(V2::PartnerService::INVALID_PARTNER_OR_API_KEY))
       end
-      
+
       return partner
     end
-    
+
     def self.create_record(data)
       data ||= {}
-      
+
       attrs = data_to_attrs(data)
-      
+
       block_protected_attributes(attrs)
-      
-      
+
+
       p = Partner.new(attrs)
-      
+
       p.generate_username
       p.generate_random_password
 
-      
+
       if !p.save
         raise_validation_error(p)
       end
       p
     end
-    
+
   private
     def self.data_to_attrs(data)
       attrs = data.clone
@@ -129,7 +140,7 @@ module V2
 
       attrs
     end
-    
+
     def self.state_convert(attrs, field_keys)
       l = attrs.delete(field_keys[0])
       if l
@@ -137,20 +148,20 @@ module V2
       end
       attrs
     end
-    
+
     def self.raise_validation_error(p, error = p.errors.sort.first)
       field = error.first
       raise V2::RegistrationService::ValidationError.new(field, error.last)
     end
-    
+
     def self.block_protected_attributes(attrs)
       attrs.each do |key,val|
-        if !ALLOWED_ATTRS.include?(key.to_sym)  
-          raise ActiveRecord::UnknownAttributeError.new("unknown attribute: #{key.to_s}") 
+        if !ALLOWED_ATTRS.include?(key.to_sym)
+          raise ActiveRecord::UnknownAttributeError.new("unknown attribute: #{key.to_s}")
         end
-      end 
+      end
     end
-    
-    
+
+
   end
 end

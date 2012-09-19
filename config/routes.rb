@@ -65,6 +65,8 @@ ActionController::Routing::Routes.draw do |map|
       v2.map '/partners/partner.json',    :format => 'json', :controller => 'partners', :action => 'show',  :conditions => { :method => :get }
       v2.map '/partners.json',            :format => 'json', :controller => 'partners', :action => 'create', :conditions => { :method => :post }
       v2.map '/gregistrationstates.json', :format => 'json', :controller => 'registration_states', :action => 'index'
+      v2.map '/partnerpublicprofiles/partner.json',
+                                          :format => 'json', :controller => 'partners', :action => 'show_public', :conditions => { :method => :get }
     end
   end
 

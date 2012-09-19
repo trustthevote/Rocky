@@ -33,17 +33,24 @@ describe Api::V2::PartnersController do
     end
 
     it 'should return partner details' do
-      expect_api_response :response 
+      expect_api_response :response
       partner { :response }
     end
   end
-  
+
+  describe 'show public' do
+    it 'should return only public data' do
+      expect_api_response :response
+      public_partner { :response }
+    end
+  end
+
   describe "#create" do
     it "should return the ID of the created partner" do
       expect_api_response :partner_id => "2342"
       new_partner { mock(Partner).id { 2342 } }
     end
-    
+
     it 'should catch invalid fields' do
       expect_api_error :message => "Error message", :field_name => "invalid_field"
       new_partner { raise V2::RegistrationService::ValidationError.new('invalid_field', 'Error message') }
@@ -52,23 +59,29 @@ describe Api::V2::PartnersController do
       expect_api_error :message => "Invalid parameter type", :field_name => "attr"
       new_partner { raise(ActiveRecord::UnknownAttributeError, 'unknown attribute: attr') }
     end
-    
+
   end
-  
-  
+
+
   private
-  
+
   def partner(&block)
     query = { :partner_id => nil, :partner_api_key => nil }
-    mock(V2::PartnerService).find(query, &block)
+    mock(V2::PartnerService).find(query, false, &block)
     get :show, :format => 'json'
   end
-  
+
+  def public_partner(&block)
+    query = { :partner_id => nil, :partner_api_key => nil }
+    mock(V2::PartnerService).find(query, true, &block)
+    get :show_public, :format => 'json'
+  end
+
   def new_partner(&block)
     data = {}
     mock(V2::PartnerService).create_record(data, &block)
     post :create, :format => 'json', :partner => data
   end
-  
-  
+
+
 end

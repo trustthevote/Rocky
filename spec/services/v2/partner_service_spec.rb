@@ -41,35 +41,55 @@ describe V2::PartnerService do
         }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
       end
     end
-    it 'should return data' do
+    it 'should return all data' do
       partner = Factory(:whitelabel_partner)
-      V2::PartnerService.find(:partner_id=>partner.id, :partner_api_key=>partner.api_key).should == {
-        :org_name     => partner.organization,
-        :org_URL          => partner.url,
-        :contact_name         => partner.name,
-        :contact_email        => partner.email,
-        :contact_phone        => partner.phone,
-        :contact_address      => partner.address,
-        :contact_city         => partner.city,
-        :contact_state        => partner.state_abbrev,
-        :contact_ZIP     => partner.zip_code,
-        :logo_image_URL     => partner.logo.url,
-        :survey_question_1_en => partner.survey_question_1_en,
-        :survey_question_2_en => partner.survey_question_2_en,
-        :survey_question_1_es => partner.survey_question_1_es,
-        :survey_question_2_es => partner.survey_question_2_es,
-        :whitelabeled         => partner.whitelabeled?,
+      V2::PartnerService.find(:partner_id => partner.id, :partner_api_key => partner.api_key).should == {
+        :org_name                 => partner.organization,
+        :org_URL                  => partner.url,
+        :contact_name             => partner.name,
+        :contact_email            => partner.email,
+        :contact_phone            => partner.phone,
+        :contact_address          => partner.address,
+        :contact_city             => partner.city,
+        :contact_state            => partner.state_abbrev,
+        :contact_ZIP              => partner.zip_code,
+        :logo_image_URL           => partner.logo.url,
+        :survey_question_1_en     => partner.survey_question_1_en,
+        :survey_question_2_en     => partner.survey_question_2_en,
+        :survey_question_1_es     => partner.survey_question_1_es,
+        :survey_question_2_es     => partner.survey_question_2_es,
+        :whitelabeled             => partner.whitelabeled?,
         :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
         :partner_ask_email_opt_in => partner.partner_email_opt_in?,
         :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
         :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
-        :rtv_ask_volunteer   => partner.ask_for_volunteers?,
-        :partner_ask_volunteer => partner.partner_ask_for_volunteers?
+        :rtv_ask_volunteer        => partner.ask_for_volunteers?,
+        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
       }
-      
+    end
+
+    it 'should return only public data' do
+      partner = Factory(:whitelabel_partner)
+      V2::PartnerService.find({ :partner_id => partner.id, :partner_api_key => partner.api_key }, true).should == {
+        :org_name                 => partner.organization,
+        :org_URL                  => partner.url,
+        :org_privacy_url          => partner.privacy_url,
+        :logo_image_URL           => partner.logo.url,
+        :survey_question_1_en     => partner.survey_question_1_en,
+        :survey_question_2_en     => partner.survey_question_2_en,
+        :survey_question_1_es     => partner.survey_question_1_es,
+        :survey_question_2_es     => partner.survey_question_2_es,
+        :whitelabeled             => partner.whitelabeled?,
+        :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
+        :partner_ask_email_opt_in => partner.partner_email_opt_in?,
+        :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
+        :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
+        :rtv_ask_volunteer        => partner.ask_for_volunteers?,
+        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
+      }
     end
   end
-  
+
   describe '#data_to_attrs' do
     specify { V2::PartnerService.send(:data_to_attrs, {:org_name=>"Name"}).should == {:organization=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:org_URL=>"Name"}).should == {:url=>"Name"} }
@@ -83,11 +103,11 @@ describe V2::PartnerService do
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_state=>"nJ"}).should == {:state_id=>31} }
     specify { V2::PartnerService.send(:data_to_attrs, {:contact_ZIP=>"Name"}).should == {:zip_code=>"Name"} }
     specify { V2::PartnerService.send(:data_to_attrs, {:partner_ask_volunteer=>true}).should == {:partner_ask_for_volunteers=>true} }
-    #banner_image_URL    
+    #banner_image_URL
   end
-  
-  
-  
+
+
+
   describe "#create" do
     it 'should raise an error if the field is unknown' do
       begin
@@ -97,10 +117,10 @@ describe V2::PartnerService do
         e.message.should == 'unknown attribute: unknown_field'
       end
     end
-    
-    
-    
-    
+
+
+
+
     it 'should raise validation errors when the record is invalid' do
       begin
         V2::PartnerService.create_record({})
@@ -110,7 +130,7 @@ describe V2::PartnerService do
         e.message.should  == "Address can't be blank."
       end
     end
-    
+
     it "raise validation errors if the logo URL is not a URI" do
       begin
         partner = Factory.build(:api_created_partner, :logo_url=>"no_url")
@@ -120,7 +140,7 @@ describe V2::PartnerService do
       rescue V2::RegistrationService::ValidationError => e
         e.field.should    == 'logo_image_URL'
         e.message.should  == "Pleave provide an HTTP url"
-      end        
+      end
     end
     it "raise validation errors if the logo URL can not be downloaded" do
       begin
@@ -131,9 +151,9 @@ describe V2::PartnerService do
       rescue V2::RegistrationService::ValidationError => e
         e.field.should    == 'logo_image_URL'
         e.message.should  == "Could not download http://no_url for logo"
-      end        
+      end
     end
-    
+
     it 'does not allow parameters except the expected ones to be set' do
       begin
         V2::PartnerService.create_record({:whitelabeled=>true})
@@ -142,10 +162,10 @@ describe V2::PartnerService do
         e.message.should == 'unknown attribute: whitelabeled'
       end
     end
-    
-    
-    
-    
+
+
+
+
     context 'complete record' do
       before { @partner = Factory.build(:api_created_partner) }
       before { mock(Partner).new({}) { @partner } }
@@ -154,9 +174,9 @@ describe V2::PartnerService do
         V2::PartnerService.create_record({}).should
       end
     end
-    
-    
-    
+
+
+
   end
-  
+
 end

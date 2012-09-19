@@ -24,18 +24,21 @@
 #***** END LICENSE BLOCK *****
 require 'services/v2'
 class Api::V2::PartnersController < Api::V2::BaseController
-  def show
-    query = {
-      :partner_id       => params[:partner_id],
-      :partner_api_key => params[:partner_API_key],
-    }
 
-    jsonp V2::PartnerService.find(query)
+  def show(only_public = false)
+    query = {
+      :partner_id      => params[:partner_id],
+      :partner_api_key => params[:partner_API_key] }
+
+    jsonp V2::PartnerService.find(query, only_public)
   rescue ArgumentError => e
     jsonp({ :message => e.message }, :status => 400)
   end
-  
-  
+
+  def show_public
+    show(true)
+  end
+
   def create
     partner = V2::PartnerService.create_record(params[:partner])
     jsonp :partner_id => partner.id.to_s
@@ -45,5 +48,5 @@ class Api::V2::PartnersController < Api::V2::BaseController
     name = e.message.split(': ')[1]
     jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
   end
-  
+
 end
