@@ -89,7 +89,7 @@ describe Api::V2::RegistrationsController do
   end
 
   def new_incomplete_registration(&block)
-    data = { 'lang' => Registrant::INCOMPLETE_LANG, 'partner_id' => Registrant::INCOMPLETE_PARTNER_ID }
+    data = { 'lang' => 'en', 'partner_id' => Partner.first.id }
     mock(V2::RegistrationService).create_record(data, true, &block)
     post :create_incomplete, :format => 'json', :registration => data
   end

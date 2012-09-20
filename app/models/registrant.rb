@@ -31,10 +31,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  # defaults for incomplete records
-  INCOMPLETE_LANG       = 'en'
-  INCOMPLETE_PARTNER_ID = 0
-
   include AASM
   include Mergable
   include Lolrus

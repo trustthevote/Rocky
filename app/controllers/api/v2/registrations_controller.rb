@@ -57,11 +57,7 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
 
   # Creates the record
   def create_incomplete
-    data = (params[:registration] || {}).merge({
-      :lang       => Registrant::INCOMPLETE_LANG,
-      :partner_id => Registrant::INCOMPLETE_PARTNER_ID })
-
-    V2::RegistrationService.create_record(data, true)
+    V2::RegistrationService.create_record(params[:registration], true)
     jsonp ''
   rescue V2::RegistrationService::ValidationError => e
     jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
