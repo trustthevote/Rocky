@@ -36,24 +36,24 @@ module V2
         @field = field
       end
     end
-    
+
     class SurveyQuestionError < StandardError
     end
 
     # Creates a record and returns it.
-    def self.create_record(data)
+    def self.create_record(data, incomplete = false)
       data ||= {}
       block_protected_attributes(data)
 
       attrs = data_to_attrs(data)
-      validate_survey_questions(attrs)
-      
-      reg = Registrant.build_from_api_data(attrs)
+      validate_survey_questions(attrs) unless incomplete
+
+      reg = Registrant.build_from_api_data(attrs, incomplete ? :step_2 : :step_5)
 
       if reg.save
-        reg.enqueue_complete_registration_via_api
+        reg.enqueue_complete_registration_via_api(incomplete)
       else
-        validate_language(reg)
+        validate_language(reg) unless incomplete
         raise_validation_error(reg)
       end
 
@@ -66,15 +66,15 @@ module V2
       partner = V2::PartnerService.find_partner(query[:partner_id], query[:partner_api_key])
 
       regs = partner.registrants
-      
+
       cond_str = []
       cond_vars = []
-      
+
       if since = query[:since]
         cond_str << "created_at >= ?"
-        cond_vars << Time.parse(since)        
+        cond_vars << Time.parse(since)
       end
-      
+
       if email = query[:email]
         cond_str << "email_address = ?"
         cond_vars << email
@@ -182,14 +182,14 @@ module V2
       if l = attrs.delete(:id_number)
         attrs[:state_id_number] = l
       end
-      
+
       if l = attrs.delete(:survey_question_1)
         attrs[:original_survey_question_1] = l
       end
       if l = attrs.delete(:survey_question_2)
         attrs[:original_survey_question_2] = l
       end
-      
+
 
       attrs = state_convert(attrs, :home_state)
       attrs = state_convert(attrs, :mailing_state)

@@ -46,11 +46,19 @@ describe Api::V2::RegistrationsController do
       expect_api_error :message => "Invalid parameter type", :field_name => "attr"
       new_registration { raise(ActiveRecord::UnknownAttributeError, 'unknown attribute: attr') }
     end
-    [1, 2].each do |qnum|
+
+    [ 1, 2 ].each do |qnum|
       it "should report error when an answer is provided without a question" do
         expect_api_error :message =>"Question #{qnum} required when Answer #{qnum} provided"
         new_registration { raise(V2::RegistrationService::SurveyQuestionError.new("Question #{qnum} required when Answer #{qnum} provided")) }
       end
+    end
+  end
+
+  describe 'create_incomplete' do
+    it 'should render nothing when success' do
+      expect_api_response ''
+      new_incomplete_registration {}
     end
   end
 
@@ -78,6 +86,12 @@ describe Api::V2::RegistrationsController do
     data = {}
     mock(V2::RegistrationService).create_record(data, &block)
     post :create, :format => 'json', :registration => data
+  end
+
+  def new_incomplete_registration(&block)
+    data = { 'lang' => 'en', 'partner_id' => Partner.first.id }
+    mock(V2::RegistrationService).create_record(data, true, &block)
+    post :create_incomplete, :format => 'json', :registration => data
   end
 
 end

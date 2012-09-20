@@ -54,16 +54,20 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :api do |api|
     api.namespace :v1 do |v1|
-      v1.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
-      v1.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
-      v1.map '/state_requirements.json', :format => 'json', :controller => 'state_requirements', :action => 'show'
+      v1.map '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
+      v1.map '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
+      v1.map '/state_requirements.json',  :format => 'json', :controller => 'state_requirements', :action => 'show'
     end
     api.namespace :v2 do |v2|
-      v2.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
-      v2.map '/registrations.json', :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
-      v2.map '/state_requirements.json', :format => 'json', :controller => 'state_requirements', :action => 'show'
-      v2.map '/partners/partner.json', :format => 'json', :controller => 'partners', :action => 'show',  :conditions => { :method => :get }
-      v2.map '/partners.json', :format => 'json', :controller => 'partners', :action => 'create', :conditions => { :method => :post }
+      v2.map '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
+      v2.map '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
+      v2.map '/state_requirements.json',  :format => 'json', :controller => 'state_requirements', :action => 'show'
+      v2.map '/partners/partner.json',    :format => 'json', :controller => 'partners', :action => 'show',  :conditions => { :method => :get }
+      v2.map '/partners.json',            :format => 'json', :controller => 'partners', :action => 'create', :conditions => { :method => :post }
+      v2.map '/gregistrationstates.json', :format => 'json', :controller => 'registration_states', :action => 'index'
+      v2.map '/partnerpublicprofiles/partner.json',
+                                          :format => 'json', :controller => 'partners', :action => 'show_public', :conditions => { :method => :get }
+      v2.map '/gregistrations.json',      :format => 'json', :controller => 'registrations', :action => 'create_incomplete', :conditions => { :method => :post }
     end
   end
 
