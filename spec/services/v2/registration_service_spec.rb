@@ -104,16 +104,16 @@ describe V2::RegistrationService do
 
     context 'complete record' do
       before { @reg = Factory(:api_v2_maximal_registrant, :status => 'step_5') }
-      before { mock(Registrant).build_from_api_data({}, :step_5) { @reg } }
+      before { mock(Registrant).build_from_api_data({}, false) { @reg } }
 
       it 'should save the record and generate PDF' do
-        mock(@reg).enqueue_complete_registration_via_api(false)
+        mock(@reg).enqueue_complete_registration_via_api()
         V2::RegistrationService.create_record({}).should
       end
     end
   end
 
-  describe 'create_incomplete' do
+  describe 'create_record_finish_with_state' do
     it 'should save the record' do
       reg = V2::RegistrationService.create_record({
         # Lang is supposed to be required?

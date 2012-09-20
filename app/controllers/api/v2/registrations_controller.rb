@@ -56,7 +56,7 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
   end
 
   # Creates the record
-  def create_incomplete
+  def create_finish_with_state
     V2::RegistrationService.create_record(params[:registration], true)
     jsonp ''
   rescue V2::RegistrationService::ValidationError => e

@@ -41,19 +41,19 @@ module V2
     end
 
     # Creates a record and returns it.
-    def self.create_record(data, incomplete = false)
+    def self.create_record(data, finish_with_state = false)
       data ||= {}
       block_protected_attributes(data)
 
       attrs = data_to_attrs(data)
-      validate_survey_questions(attrs) unless incomplete
+      validate_survey_questions(attrs) unless finish_with_state
 
-      reg = Registrant.build_from_api_data(attrs, incomplete ? :step_2 : :step_5)
+      reg = Registrant.build_from_api_data(attrs, finish_with_state)
 
       if reg.save
-        reg.enqueue_complete_registration_via_api(incomplete)
+        reg.enqueue_complete_registration_via_api unless finish_with_state
       else
-        validate_language(reg) unless incomplete
+        validate_language(reg)
         raise_validation_error(reg)
       end
 

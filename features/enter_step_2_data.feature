@@ -59,7 +59,7 @@ Feature: Step 2
         | Nevada     | NV         |
     
     
-    @wip
+    
     Scenario Outline: fields for a <state> state resident with a partner
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in | rtv_email_opt_in | partner_email_opt_in |
@@ -76,11 +76,11 @@ Feature: Step 2
       And I fill in "last" with "Public"
       And I choose "I have a current <state_abbr> state identification card or driver's license"
       And I press "registrant_state_online_registration"
-      Then I should see "You can complete your voter registration online with <state> using the form below. If your driver's license or state identification card is invalid or the state can't find or confirm your DMV record, don't worry"
-      And I should see "you can also finish your registration with Rock the Vote and Opt-in Partner. You will just have to print, sign, and mail it in."
+      Then I should see "You can complete your voter registration online with <state> using the form below. If your driver's license or state identification card is invalid or the state can't find or confirm your DMV record, don't worry" unless the state is "NV"
+      And I should see "you can also finish your registration with Rock the Vote and Opt-in Partner. You will just have to print, sign, and mail it in." unless the state is "NV"
       And I should see a link for "finish your registration with Rock the Vote and Opt-in Partner"
       And I should see an iFrame for the <state> State online system
-      And when it's nevada the text should be different
+      And when the state is "NV" the text should include "The Nevada Online Voter Application (NOVA) is provided by Nevada Secretary of State"
     
       Examples:
         | state      | state_abbr |
@@ -104,7 +104,7 @@ Feature: Step 2
         | Colorado   |
         | Nevada     |
     
-    @wip
+    
     Scenario Outline: <state> resident selects to finish paperless registration with the state of <state>
       Given I have completed step 1 as a resident of "<state>" state
       When I go to the step 2 page
@@ -113,11 +113,11 @@ Feature: Step 2
       And I fill in "last" with "Public"
       And I choose "I have a current <state_abbr> state identification card or driver's license"
       And I press "registrant_state_online_registration"
-      Then I should see "You can complete your voter registration online with <state> using the form below. If your driver's license or state identification card is invalid or the state can't find or confirm your DMV record, don't worry"
-      And I should see "you can also finish your registration with Rock the Vote. You will just have to print, sign, and mail it in."
+      Then I should see "You can complete your voter registration online with <state> using the form below. If your driver's license or state identification card is invalid or the state can't find or confirm your DMV record, don't worry" unless the state is "NV"
+      And I should see "you can also finish your registration with Rock the Vote. You will just have to print, sign, and mail it in." unless the state is "NV"
       And I should see a link for "finish your registration with Rock the Vote"
       And I should see an iFrame for the <state> State online system
-      And when it's nevada the text should be different
+      And when the state is "NV" the text should include "The Nevada Online Voter Application (NOVA) is provided by Nevada Secretary of State"
       
 
       Examples:

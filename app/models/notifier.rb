@@ -31,8 +31,7 @@ class Notifier < ActionMailer::Base
     body :url => edit_password_reset_url(:id => partner.perishable_token)
   end
 
-  def confirmation(registrant, incomplete = false)
-    # TODO use #incomplete flag to pick the right email template
+  def confirmation(registrant)
     setup_registrant_email(registrant, 'confirmation')
   end
 
@@ -40,8 +39,7 @@ class Notifier < ActionMailer::Base
     setup_registrant_email(registrant, 'thank_you_external')
   end
 
-  def reminder(registrant, incomplete = false)
-    # TODO use #incomplete flag to pick the right email template
+  def reminder(registrant)
     setup_registrant_email(registrant, 'reminder')
   end
 

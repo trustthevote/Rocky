@@ -261,6 +261,21 @@ Then /^I should see an iFrame for the Nevada State online system$/ do
   
 end
 
+Then /^I should see "([^\"]*)" unless the state is "([^\"]*)"$/ do |content, abbr|
+  if @registrant.home_state_abbrev.downcase != abbr.downcase
+    response.should contain(content)
+  end
+end
+
+
+Then /^when the state is "([^\"]*)" the text should include "([^\"]*)"$/ do |abbr, content|
+  if @registrant.home_state_abbrev.downcase == abbr.downcase
+    response.should contain(content)
+  end
+end
+
+
+
 Then /^my value for "([^\"]*)" should be "([^\"]*)"$/ do |method, value|
   @registrant = Registrant.last
   @registrant.send(method).to_s.should == value.to_s

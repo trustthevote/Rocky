@@ -55,10 +55,10 @@ describe Api::V2::RegistrationsController do
     end
   end
 
-  describe 'create_incomplete' do
+  describe 'create_finish_with_state' do
     it 'should render nothing when success' do
       expect_api_response ''
-      new_incomplete_registration {}
+      new_finish_with_state_registration {}
     end
   end
 
@@ -88,10 +88,10 @@ describe Api::V2::RegistrationsController do
     post :create, :format => 'json', :registration => data
   end
 
-  def new_incomplete_registration(&block)
+  def new_finish_with_state_registration(&block)
     data = { 'lang' => 'en', 'partner_id' => Partner.first.id }
     mock(V2::RegistrationService).create_record(data, true, &block)
-    post :create_incomplete, :format => 'json', :registration => data
+    post :create_finish_with_state, :format => 'json', :registration => data
   end
 
 end

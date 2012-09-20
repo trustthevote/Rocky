@@ -1,7 +1,11 @@
 <div class="state_online_registrations_instructions">
-  <p>
-    <%= t('txt.registration.instructions.leave_state_online_registration', :state=>@registrant.home_state_name,:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), registrant_step_3_url(@registrant))) %>
-  </p>
+  <%- if @registrant.has_home_state_online_registration_instructions? %>
+    <%= render :partial=>@registrant.home_state_abbrev.to_s.downcase %>
+  <%- else %>
+    <p>
+      <%= t('txt.registration.instructions.leave_state_online_registration', :state=>@registrant.home_state_name,:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), registrant_step_3_url(@registrant))) %>
+    </p>
+  <%- end %>
 </div>
 
 <iframe src="<%=@online_registration_iframe_url%>" width="560" height="725"></iframe>
