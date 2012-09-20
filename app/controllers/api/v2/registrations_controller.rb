@@ -55,4 +55,21 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
     jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
   end
 
+  # Creates the record
+  def create_incomplete
+    data = (params[:registration] || {}).merge({
+      :lang       => Registrant::INCOMPLETE_LANG,
+      :partner_id => Registrant::INCOMPLETE_PARTNER_ID })
+
+    V2::RegistrationService.create_record(data, true)
+    jsonp ''
+  rescue V2::RegistrationService::ValidationError => e
+    jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
+  rescue V2::UnsupportedLanguageError => e
+    jsonp({ :message => e.message }, :status => 400)
+  rescue ActiveRecord::UnknownAttributeError => e
+    name = e.message.split(': ')[1]
+    jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
+  end
+
 end
