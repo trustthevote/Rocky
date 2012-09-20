@@ -22,31 +22,18 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require 'services/v2'
-class Api::V2::PartnersController < Api::V2::BaseController
+require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-  def show(only_public = false)
-    query = {
-      :partner_id      => params[:partner_id],
-      :partner_api_key => params[:partner_API_key] }
+describe Api::V2::RegistrationStatesController, :focus do
 
-    jsonp V2::PartnerService.find(query, only_public)
-  rescue ArgumentError => e
-    jsonp({ :message => e.message }, :status => 400)
-  end
+  describe 'index' do
+    it 'should return data' do
+      GeoState.delete_all
+      GeoState.create({ :abbreviation => 'NY', :registrar_url => 'http://ny.com' })
 
-  def show_public
-    show(true)
-  end
-
-  def create
-    partner = V2::PartnerService.create_record(params[:partner])
-    jsonp :partner_id => partner.id.to_s
-  rescue V2::RegistrationService::ValidationError => e
-    jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
-  rescue ActiveRecord::UnknownAttributeError => e
-    name = e.message.split(': ')[1]
-    jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
+      get :index, :format => 'json'
+      assigns(:data).should == { :states => [ { :name => 'NY', :url => 'http://ny.com' } ] }
+    end
   end
 
 end

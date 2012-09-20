@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(:version => 20120815205556) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.boolean  "whitelabeled",                             :default => false
-    t.boolean  "partner_ask_for_volunteers",               :default => false
+    t.boolean  "partner_ask_for_volunteers",               :default => true
     t.boolean  "rtv_email_opt_in",                         :default => true
-    t.boolean  "partner_email_opt_in",                     :default => false
+    t.boolean  "partner_email_opt_in",                     :default => true
     t.boolean  "rtv_sms_opt_in",                           :default => true
     t.boolean  "partner_sms_opt_in",                       :default => false
     t.string   "api_key",                    :limit => 40, :default => ""

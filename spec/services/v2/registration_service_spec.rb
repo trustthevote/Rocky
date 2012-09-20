@@ -104,12 +104,31 @@ describe V2::RegistrationService do
 
     context 'complete record' do
       before { @reg = Factory(:api_v2_maximal_registrant, :status => 'step_5') }
-      before { mock(Registrant).build_from_api_data({}) { @reg } }
+      before { mock(Registrant).build_from_api_data({}, :step_5) { @reg } }
 
       it 'should save the record and generate PDF' do
-        mock(@reg).enqueue_complete_registration_via_api
+        mock(@reg).enqueue_complete_registration_via_api(false)
         V2::RegistrationService.create_record({}).should
       end
+    end
+  end
+
+  describe 'create_incomplete' do
+    it 'should save the record' do
+      reg = V2::RegistrationService.create_record({
+        # Lang is supposed to be required?
+        :lang                              => 'en',
+        :partner_id                        => 0,
+        :send_confirmation_reminder_emails => '1',
+        :date_of_birth                     => '10-24-1975',
+        :email_address                     => 'my@address.com',
+        :home_zip_code                     => '02110',
+        :us_citizen                        => '1',
+        :name_title                        => 'Mr.',
+        :last_name                         => 'Smith'
+      }, true)
+
+      reg.id.should be
     end
   end
 
@@ -192,19 +211,19 @@ describe V2::RegistrationService do
 
       V2::RegistrationService.find_records(:partner_id => partner.id, :partner_api_key => partner.api_key, :since => 1.minute.from_now.to_s).should == []
     end
-    
+
     it 'should filter by email address' do
       partner = Factory(:partner, :api_key=>"key")
       reg = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test@osdv.org")
       reg2 = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test2@osdv.org")
 
-      res = V2::RegistrationService.find_records(:partner_id => partner.id, 
-        :partner_api_key => partner.api_key, 
+      res = V2::RegistrationService.find_records(:partner_id => partner.id,
+        :partner_api_key => partner.api_key,
         :email => "test@osdv.org")
       res.first[:email_address].should == reg.email_address
       res.should have(1).registrant
-      res2 = V2::RegistrationService.find_records(:partner_id => partner.id, 
-        :partner_api_key => partner.api_key, 
+      res2 = V2::RegistrationService.find_records(:partner_id => partner.id,
+        :partner_api_key => partner.api_key,
         :email => "test2@osdv.org")
       res2.first[:email_address].should == reg2.email_address
       res2.should have(1).registrant
@@ -216,13 +235,13 @@ describe V2::RegistrationService do
       reg = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test@osdv.org")
       reg2 = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test2@osdv.org")
 
-      V2::RegistrationService.find_records(:partner_id => partner.id, 
-        :partner_api_key => partner.api_key, 
+      V2::RegistrationService.find_records(:partner_id => partner.id,
+        :partner_api_key => partner.api_key,
         :email => "test@osdv.org",
         :since => 1.minute.from_now.to_s).should == []
-        
-      res = V2::RegistrationService.find_records(:partner_id => partner.id, 
-          :partner_api_key => partner.api_key, 
+
+      res = V2::RegistrationService.find_records(:partner_id => partner.id,
+          :partner_api_key => partner.api_key,
           :email => "test@osdv.org",
           :since => 1.day.ago.to_s)
       res.first[:email_address].should == reg.email_address

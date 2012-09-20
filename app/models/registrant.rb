@@ -31,7 +31,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-
   include AASM
   include Mergable
   include Lolrus
@@ -136,38 +135,38 @@ class Registrant < ActiveRecord::Base
   after_validation :enqueue_tell_friends_emails
 
   before_create :generate_uid
-  
+
   before_save :set_questions
 
   with_options :if => :at_least_step_1? do |reg|
-    reg.validates_presence_of :partner_id
-    reg.validates_inclusion_of :locale, :in => %w(en es)
-    reg.validates_presence_of :email_address
-    reg.validates_format_of :email_address, :with => Authlogic::Regex.email, :allow_blank => true
-    reg.validates_zip_code    :home_zip_code
-    reg.validates_presence_of :home_state_id
-    reg.validate :validate_date_of_birth
-    reg.validates_inclusion_of :us_citizen, :in => [ false, true ], :unless => :building_via_api_call
+    reg.validates_presence_of   :partner_id
+    reg.validates_inclusion_of  :locale, :in => %w(en es)
+    reg.validates_presence_of   :email_address
+    reg.validates_format_of     :email_address, :with => Authlogic::Regex.email, :allow_blank => true
+    reg.validates_zip_code      :home_zip_code
+    reg.validates_presence_of   :home_state_id
+    reg.validate                :validate_date_of_birth
+    reg.validates_inclusion_of  :us_citizen, :in => [ false, true ], :unless => :building_via_api_call
   end
 
   with_options :if => :at_least_step_2? do |reg|
-    reg.validates_presence_of :name_title
-    reg.validates_inclusion_of :name_title, :in => TITLES, :allow_blank => true
-    reg.validates_presence_of :first_name, :unless => :building_via_api_call
-    reg.validates_presence_of :last_name
-    reg.validates_inclusion_of :name_suffix, :in => SUFFIXES, :allow_blank => true
-    reg.validate :validate_race, :unless=>:custom_step_2?
-    reg.validates_presence_of :home_address, :unless => :custom_step_2?
-    reg.validates_presence_of :home_city, :unless => :custom_step_2?
-    reg.validate :validate_party, :unless => [:building_via_api_call, :custom_step_2?]
+    reg.validates_presence_of   :name_title
+    reg.validates_inclusion_of  :name_title, :in => TITLES, :allow_blank => true
+    reg.validates_presence_of   :first_name, :unless => :building_via_api_call
+    reg.validates_presence_of   :last_name
+    reg.validates_inclusion_of  :name_suffix, :in => SUFFIXES, :allow_blank => true
+    reg.validate                :validate_race,   :unless => [ :incomplete_via_api_call, :custom_step_2? ]
+    reg.validates_presence_of   :home_address,    :unless => [ :incomplete_via_api_call, :custom_step_2? ]
+    reg.validates_presence_of   :home_city,       :unless => [ :incomplete_via_api_call, :custom_step_2? ]
+    reg.validate                :validate_party,  :unless => [ :building_via_api_call, :custom_step_2? ]
   end
-    
+
   with_options :if=> [:at_least_step_2?, :custom_step_2?] do |reg|
     reg.validates_inclusion_of :has_state_license, :in=>[true,false], :unless=>[:building_via_api_call]
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
   end
-  
+
   with_options :if => :needs_mailing_address? do |reg|
     reg.validates_presence_of :mailing_address
     reg.validates_presence_of :mailing_city
@@ -181,14 +180,14 @@ class Registrant < ActiveRecord::Base
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
   end
-  
+
   with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
     reg.validate :validate_race
     reg.validate :validate_party, :unless => [:building_via_api_call]
   end
-  
+
   with_options :if => :needs_prev_name? do |reg|
     reg.validates_presence_of :prev_name_title
     reg.validates_presence_of :prev_first_name
@@ -216,6 +215,8 @@ class Registrant < ActiveRecord::Base
   end
 
   attr_accessor :building_via_api_call
+  attr_accessor :incomplete_via_api_call
+
   with_options :if => :building_via_api_call do |reg|
     reg.validates_inclusion_of :opt_in_email, :in => [ true, false ]
     reg.validates_inclusion_of :opt_in_sms,   :in => [ true, false ]
@@ -270,14 +271,11 @@ class Registrant < ActiveRecord::Base
   end
 
   # Builds the record from the API data and sets the correct state
-  def self.build_from_api_data(data)
+  def self.build_from_api_data(data, incomplete = false)
     r = Registrant.new(data)
-    r.building_via_api_call = true
-
-    # As if the user went through all steps and filled all fields
-    # manually.
-    r.status = STEPS.last.to_s
-
+    r.building_via_api_call   = true
+    r.incomplete_via_api_call = incomplete
+    r.status                  = incomplete ? :step_2 : :step_5
     r
   end
 
@@ -527,7 +525,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def custom_step_2?
-    !javascript_disabled && 
+    !javascript_disabled &&
       !home_state.nil? &&
       home_state.online_reg_enabled? &&
       File.exists?(File.join(RAILS_ROOT, 'app/views/step2/', "_#{custom_step_2_partial}"))
@@ -587,19 +585,22 @@ class Registrant < ActiveRecord::Base
   end
 
   # Enqueues final registration actions for API calls
-  def enqueue_complete_registration_via_api
-    action = Delayed::PerformableMethod.new(self, :complete_registration_via_api, [])
+  def enqueue_complete_registration_via_api(incomplete = false)
+    action = Delayed::PerformableMethod.new(self, :complete_registration_via_api, [ incomplete ])
     Delayed::Job.enqueue(action, WRAP_UP_PRIORITY, Time.now)
   end
 
   # Called from the worker queue to generate PDFs on the 'util' server
-  def complete_registration_via_api
-    generate_pdf
+  def complete_registration_via_api(incomplete = false)
+    generate_pdf unless incomplete
+
     redact_sensitive_data
+
     if self.send_confirmation_reminder_emails?
-      deliver_confirmation_email
-      enqueue_reminder_emails
+      deliver_confirmation_email(incomplete)
+      enqueue_reminder_emails(incomplete)
     end
+
     self.status = 'complete'
     self.save
   end
@@ -619,29 +620,29 @@ class Registrant < ActiveRecord::Base
     self.pdf_ready = true
   end
 
-  def deliver_confirmation_email
-    Notifier.deliver_confirmation(self)
+  def deliver_confirmation_email(incomplete = false)
+    Notifier.deliver_confirmation(self, incomplete)
   end
-  
+
   def deliver_thank_you_for_state_online_registration_email
     Notifier.deliver_thank_you_external(self)
   end
 
-  def enqueue_reminder_emails
+  def enqueue_reminder_emails(incomplete = false)
     update_attributes(:reminders_left => REMINDER_EMAILS_TO_SEND)
-    enqueue_reminder_email
+    enqueue_reminder_email(incomplete)
   end
 
-  def enqueue_reminder_email
-    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [])
+  def enqueue_reminder_email(incomplete = false)
+    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ incomplete ])
     Delayed::Job.enqueue(action, REMINDER_EMAIL_PRIORITY, INTERVAL_BETWEEN_REMINDER_EMAILS.from_now)
   end
 
-  def deliver_reminder_email
+  def deliver_reminder_email(incomplete = false)
     if reminders_left > 0
-      Notifier.deliver_reminder(self)
+      Notifier.deliver_reminder(self, incomplete)
       update_attributes!(:reminders_left => reminders_left - 1)
-      enqueue_reminder_email if reminders_left > 0
+      enqueue_reminder_email(incomplete) if reminders_left > 0
     end
   rescue StandardError => error
     HoptoadNotifier.notify(
@@ -708,7 +709,7 @@ class Registrant < ActiveRecord::Base
       "Rock the Vote"
     end
   end
-  
+
   def finish_iframe_url
     base_url = FINISH_IFRAME_URL
     if self.partner && !self.partner.primary? && self.partner.whitelabeled? && !self.partner.finish_iframe_url.blank?
@@ -720,7 +721,7 @@ class Registrant < ActiveRecord::Base
     url += "&tracking=#{self.tracking_id}" if !self.tracking_id.blank?
     url
   end
-  
+
   def email_address_to_send_from
     if partner && !partner.primary? && partner.whitelabeled? && !partner.from_email.blank?
       partner.from_email
@@ -848,7 +849,7 @@ class Registrant < ActiveRecord::Base
     end
     puts " done!" unless Rails.env.test?
   end
-  
+
   def completed_at
     complete? && updated_at || nil
   end
@@ -890,15 +891,15 @@ class Registrant < ActiveRecord::Base
     else nil
     end
   end
-  
+
   def partner_survey_question_1
     partner.send("survey_question_1_#{locale}")
   end
-  
+
   def partner_survey_question_2
     partner.send("survey_question_2_#{locale}")
   end
-  
+
   def set_questions
     if self.survey_answer_1_changed? && !self.original_survey_question_1_changed?
       self.original_survey_question_1 = partner_survey_question_1
