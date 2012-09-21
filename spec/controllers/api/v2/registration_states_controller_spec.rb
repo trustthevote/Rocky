@@ -28,11 +28,12 @@ describe Api::V2::RegistrationStatesController, :focus do
 
   describe 'index' do
     it 'should return data' do
-      GeoState.delete_all
-      GeoState.create({ :abbreviation => 'NY', :registrar_url => 'http://ny.com' })
-
+      
       get :index, :format => 'json'
-      assigns(:data).should == { :states => [ { :name => 'NY', :url => 'http://ny.com' } ] }
+      GeoState.states_with_online_registration.each do |state_abbr|
+        state = GeoState[state_abbr]
+        assigns(:data)[:states].should include(:name=>state.abbreviation, :url=>state.online_reg_url(nil))
+      end
     end
   end
 

@@ -56,8 +56,7 @@ module V2
         validate_language(reg)
         raise_validation_error(reg)
       end
-
-      reg
+      return reg
     end
 
     # Lists records for the given partner

@@ -57,8 +57,8 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
 
   # Creates the record
   def create_finish_with_state
-    V2::RegistrationService.create_record(params[:registration], true)
-    jsonp ''
+    result = V2::RegistrationService.create_record(params[:registration], true)
+    jsonp :registrations => result.to_finish_with_state_array
   rescue V2::RegistrationService::ValidationError => e
     jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
   rescue V2::UnsupportedLanguageError => e

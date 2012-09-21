@@ -256,7 +256,7 @@ Then /^I should see an iFrame for the Nevada State online system$/ do
   zip = CGI.escape @registrant.home_zip_code.to_s
   lang = @registrant.locale.to_s
   
-  state_url="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&fn=#{fn}&mn=#{mn}&ln=#{ln}&lang=#{lang}&zip=#{zip}&sf=#{sf}"
+  state_url="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&utm_source=rtv&utm_medium=rtv&utm_campaign=rtv&fn=#{fn}&mn=#{mn}&ln=#{ln}&lang=#{lang}&zip=#{zip}&sf=#{sf}"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")
   
 end

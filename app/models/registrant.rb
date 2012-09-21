@@ -506,6 +506,10 @@ class Registrant < ActiveRecord::Base
   def home_state_abbrev
     home_state && home_state.abbreviation
   end
+  
+  def home_state_online_reg_url
+    home_state && home_state.online_reg_url(self)
+  end
 
   def mailing_state_abbrev=(abbrev)
     self.mailing_state = GeoState[abbrev]
@@ -626,6 +630,39 @@ class Registrant < ActiveRecord::Base
     end
     self.pdf_ready = true
   end
+  
+  def to_finish_with_state_array
+    [{:status               => self.extended_status,
+    :create_time          => self.created_at.to_s,
+    :complete_time        => self.completed_at.to_s,
+    :lang                 => self.locale,
+    :first_reg            => self.first_registration?,
+    :home_zip_code        => self.home_zip_code,
+    :us_citizen           => self.us_citizen?,
+    :name_title           => self.name_title,
+    :first_name           => self.first_name,
+    :middle_name          => self.middle_name,
+    :last_name            => self.last_name,
+    :name_suffix          => self.name_suffix,
+    :home_address         => self.home_address,
+    :home_unit            => self.home_unit,
+    :home_city            => self.home_city,
+    :home_state_id        => self.home_state_id,
+    :has_mailing_address  => self.has_mailing_address,
+    :mailing_address      => self.mailing_address,
+    :mailing_unit         => self.mailing_unit,
+    :mailing_city         => self.mailing_city,
+    :mailing_state_id     => self.mailing_state_id,
+    :mailing_zip_code     => self.mailing_zip_code,
+    :race                 => self.race,
+    :party                => self.party,
+    :phone                => self.phone,
+    :phone_type           => self.phone_type,
+    :email_address        => self.email_address,
+    :source_tracking_id   => self.tracking_source,
+    :partner_tracking_id  => self.tracking_id}]
+  end
+  
 
   def deliver_confirmation_email
     Notifier.deliver_confirmation(self)
