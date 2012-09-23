@@ -47,6 +47,25 @@ describe Registrant do
       r.valid?
       r.should have(0).errors_on(:has_state_license)
     end
+    
+    it "sets the finish_with_state_flag if passed in as true" do
+      r = Registrant.build_from_api_data(:email_address=>"test@example.com")
+      r.finish_with_state.should be_false
+       
+      r = Registrant.build_from_api_data({:email_address=>"test@example.com"}, false)
+      r.finish_with_state.should be_false
+      
+      r = Registrant.build_from_api_data({:email_address=>"test@example.com"}, true)
+      r.finish_with_state.should be_true
+    end
+    
+    it 'should require send_confirmation_reminder_emails if finish_with_state is true' do
+      r = Registrant.build_from_api_data({:send_confirmation_reminder_emails=>nil}, true)
+      r.valid?
+      r.should have(1).error_on(:send_confirmation_reminder_emails)
+    end
+    
+  
   end
 
 
@@ -115,6 +134,9 @@ describe Registrant do
   def registrant_citizen(us_citizen, error)
     r = build_and_validate :us_citizen => us_citizen
     r.should have(error ? 1 : 0).errors_on(:us_citizen)
+    if error
+      r.errors_on(:us_citizen).should include("Required value is '1' or 'true'")
+    end
   end
 
   def registrant_email_address(addr, error)

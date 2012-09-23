@@ -217,9 +217,10 @@ class Registrant < ActiveRecord::Base
   attr_accessor :building_via_api_call
 
   with_options :if => :building_via_api_call do |reg|
-    reg.validates_inclusion_of :opt_in_email, :in => [ true, false ]
-    reg.validates_inclusion_of :opt_in_sms,   :in => [ true, false ]
-    reg.validates_presence_of  :us_citizen
+    reg.validates_inclusion_of :opt_in_email,                      :in => [ true, false ]
+    reg.validates_inclusion_of :opt_in_sms,                        :in => [ true, false ]
+    reg.validates_inclusion_of :us_citizen,                        :in => [ true ], :message=>"Required value is '1' or 'true'"
+    reg.validates_presence_of  :send_confirmation_reminder_emails, :in => [ true, false ], :if=>:finish_with_state?
   end
 
   def needs_mailing_address?
