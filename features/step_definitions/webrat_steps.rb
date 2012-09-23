@@ -182,6 +182,11 @@ Then /^I should see a button for "([^\"]*)"$/ do |label|
   button.should be_a(Webrat::ButtonField)
 end
 
+Then /^I should not see a button for "([^\"]*)"$/ do |label|
+  field_by_xpath("//button[span[text()=\"#{label}\"]]").should be_nil
+end
+
+
 Then /^I should see a disabled button for "([^\"]*)"$/ do |label|
   button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
   button.should be_disabled
