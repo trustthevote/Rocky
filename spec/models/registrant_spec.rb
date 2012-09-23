@@ -761,14 +761,29 @@ describe Registrant do
   describe "has_home_state_online_registration_instructions?" do
     it "returns true if the state has a partial based on the state abbreviation" do
       reg = Factory.build(:step_1_registrant)
-      stub(File).exists?(File.join(RAILS_ROOT,'app/views/state_online_registrations/_pa.html.erb')) { true }
+      stub(File).exists?(File.join(RAILS_ROOT,'app/views/state_online_registrations/_pa_instructions.html.erb')) { true }
       reg.has_home_state_online_registration_instructions?.should be_true
     end    
   end
   describe "home_state_online_registration_instructions_partial" do
     it "returns a filename of a view partial based on the state abbreviation" do
       reg = Factory.build(:step_2_registrant)
-      reg.home_state_online_registration_instructions_partial.should == "pa.html.erb"
+      reg.home_state_online_registration_instructions_partial.should == "pa_instructions"
+    end
+  end
+
+
+  describe "has_home_state_online_registration_view?" do
+    it "returns true if the state has a partial based on the state abbreviation" do
+      reg = Factory.build(:step_1_registrant)
+      stub(File).exists?(File.join(RAILS_ROOT,'app/views/state_online_registrations/pa.html.erb')) { true }
+      reg.has_home_state_online_registration_view?.should be_true
+    end    
+  end
+  describe "home_state_online_registration_view" do
+    it "returns a filename of a view partial based on the state abbreviation" do
+      reg = Factory.build(:step_2_registrant)
+      reg.home_state_online_registration_view.should == "pa"
     end
   end
 

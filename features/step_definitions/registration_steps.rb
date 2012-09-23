@@ -239,7 +239,7 @@ Then /^I should see an iFrame for the Arizona State online system$/ do
 end
 
 Then /^I should see an iFrame for the California State online system$/ do
-  state_url = "https://www.sos.ca.gov/elections/register-to-vote/"
+  state_url = "https://rtv.sos.ca.gov/elections/register-to-vote"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")  
 end
 Then /^I should see an iFrame for the Colorado State online system$/ do

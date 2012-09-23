@@ -539,11 +539,19 @@ class Registrant < ActiveRecord::Base
   end
   
   def has_home_state_online_registration_instructions?
-    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "_#{home_state_online_registration_instructions_partial}"))
+    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "_#{home_state_online_registration_instructions_partial}.html.erb"))
   end
   
   def home_state_online_registration_instructions_partial
-    "#{home_state.abbreviation.downcase}.html.erb"
+    "#{home_state.abbreviation.downcase}_instructions"
+  end
+
+  def has_home_state_online_registration_view?
+    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "#{home_state_online_registration_view}.html.erb"))
+  end
+  
+  def home_state_online_registration_view
+    "#{home_state.abbreviation.downcase}"
   end
 
 

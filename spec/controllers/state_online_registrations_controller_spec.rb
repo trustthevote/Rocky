@@ -47,5 +47,11 @@ describe StateOnlineRegistrationsController do
       get :show, :registrant_id => reg.to_param
       assert_template "show"
     end
+    it "renders a state template if it exists" do
+      reg = Factory.create(:step_1_registrant)
+      stub(File).exists?(File.join(RAILS_ROOT,"app/views/state_online_registrations/#{reg.home_state_abbrev.downcase}.html.erb")) { true }
+      get :show, :registrant_id => reg.to_param
+      assert_template "#{reg.home_state_abbrev.downcase}"
+    end
   end
 end

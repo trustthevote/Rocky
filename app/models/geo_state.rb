@@ -98,7 +98,7 @@ class GeoState < ActiveRecord::Base
       when "Arizona"
         "https://servicearizona.com/webapp/evoter/selectLanguage"
       when "California"
-        "https://www.sos.ca.gov/elections/register-to-vote/"
+        "https://rtv.sos.ca.gov/elections/register-to-vote"
       when "Colorado"
         "https://www.sos.state.co.us/Voter/secuVerifyExist.do"
       when "Washington"

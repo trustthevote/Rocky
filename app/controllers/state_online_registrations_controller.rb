@@ -24,6 +24,15 @@
 #***** END LICENSE BLOCK *****
 class StateOnlineRegistrationsController < RegistrationStep
 
+  def show
+    super
+    if @registrant.has_home_state_online_registration_view?
+      render :action=> @registrant.home_state_online_registration_view
+    else
+      render :action => :show
+    end
+  end
+
 protected
   
   def set_up_view_variables
@@ -38,5 +47,6 @@ protected
     super
     @registrant.update_attributes(:finish_with_state=>true)
   end
+  
   
 end
