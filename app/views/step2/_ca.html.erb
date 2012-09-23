@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 
 <%- checkbox_text = @registrant.locale.to_s.downcase == 'es' ? 'ES TBD' : 'I am a resident of California, living in the United States' %>
-
+<%- instruction_text = @registrant.locale.to_s.downcase == 'es' ? 'ES TBD' : "You are eligible to finish your registration using the state's online voter registration system." %>
 <span class="error"><%= form.object.errors.on :has_state_license %></span>
 <ul class="checkbox">
   <li class="spacer">&nbsp;</li>
@@ -39,7 +39,7 @@ $(document).ready(function() {
 </ul>
 <div class='has_license'>
   <div class="checkbox-explanation" >
-  <p><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_name)%></p>
+  <p><%= instruction_text %></p>
   </div>
 </div>
 
