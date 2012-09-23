@@ -239,7 +239,7 @@ Then /^I should see an iFrame for the Arizona State online system$/ do
 end
 
 Then /^I should see an iFrame for the California State online system$/ do
-  state_url = "https://www.sos.ca.gov/elections/register-to-vote/"
+  state_url = "https://rtv.sos.ca.gov/elections/register-to-vote"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")  
 end
 Then /^I should see an iFrame for the Colorado State online system$/ do
@@ -256,10 +256,25 @@ Then /^I should see an iFrame for the Nevada State online system$/ do
   zip = CGI.escape @registrant.home_zip_code.to_s
   lang = @registrant.locale.to_s
   
-  state_url="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&fn=#{fn}&mn=#{mn}&ln=#{ln}&lang=#{lang}&zip=#{zip}&sf=#{sf}"
+  state_url="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&utm_source=rtv&utm_medium=rtv&utm_campaign=rtv&fn=#{fn}&mn=#{mn}&ln=#{ln}&lang=#{lang}&zip=#{zip}&sf=#{sf}"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")
   
 end
+
+Then /^I should see "([^\"]*)" unless the state is "([^\"]*)"$/ do |content, abbr|
+  if @registrant.home_state_abbrev.downcase != abbr.downcase
+    response.should contain(content)
+  end
+end
+
+
+Then /^when the state is "([^\"]*)" the text should include "([^\"]*)"$/ do |abbr, content|
+  if @registrant.home_state_abbrev.downcase == abbr.downcase
+    response.should contain(content)
+  end
+end
+
+
 
 Then /^my value for "([^\"]*)" should be "([^\"]*)"$/ do |method, value|
   @registrant = Registrant.last

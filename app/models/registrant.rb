@@ -155,9 +155,9 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of   :first_name, :unless => :building_via_api_call
     reg.validates_presence_of   :last_name
     reg.validates_inclusion_of  :name_suffix, :in => SUFFIXES, :allow_blank => true
-    reg.validate                :validate_race,   :unless => [ :incomplete_via_api_call, :custom_step_2? ]
-    reg.validates_presence_of   :home_address,    :unless => [ :incomplete_via_api_call, :custom_step_2? ]
-    reg.validates_presence_of   :home_city,       :unless => [ :incomplete_via_api_call, :custom_step_2? ]
+    reg.validate                :validate_race,   :unless => [ :finish_with_state?, :custom_step_2? ]
+    reg.validates_presence_of   :home_address,    :unless => [ :finish_with_state?, :custom_step_2? ]
+    reg.validates_presence_of   :home_city,       :unless => [ :finish_with_state?, :custom_step_2? ]
     reg.validate                :validate_party,  :unless => [ :building_via_api_call, :custom_step_2? ]
   end
 
@@ -215,7 +215,6 @@ class Registrant < ActiveRecord::Base
   end
 
   attr_accessor :building_via_api_call
-  attr_accessor :incomplete_via_api_call
 
   with_options :if => :building_via_api_call do |reg|
     reg.validates_inclusion_of :opt_in_email, :in => [ true, false ]
@@ -271,11 +270,11 @@ class Registrant < ActiveRecord::Base
   end
 
   # Builds the record from the API data and sets the correct state
-  def self.build_from_api_data(data, incomplete = false)
+  def self.build_from_api_data(data, api_finish_with_state = false)
     r = Registrant.new(data)
     r.building_via_api_call   = true
-    r.incomplete_via_api_call = incomplete
-    r.status                  = incomplete ? :step_2 : :step_5
+    r.finish_with_state       = api_finish_with_state
+    r.status                  = api_finish_with_state ? :step_2 : :step_5
     r
   end
 
@@ -507,6 +506,10 @@ class Registrant < ActiveRecord::Base
   def home_state_abbrev
     home_state && home_state.abbreviation
   end
+  
+  def home_state_online_reg_url
+    home_state && home_state.online_reg_url(self)
+  end
 
   def mailing_state_abbrev=(abbrev)
     self.mailing_state = GeoState[abbrev]
@@ -533,6 +536,22 @@ class Registrant < ActiveRecord::Base
 
   def custom_step_2_partial
     "#{home_state.abbreviation.downcase}.html.erb"
+  end
+  
+  def has_home_state_online_registration_instructions?
+    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "_#{home_state_online_registration_instructions_partial}.html.erb"))
+  end
+  
+  def home_state_online_registration_instructions_partial
+    "#{home_state.abbreviation.downcase}_instructions"
+  end
+
+  def has_home_state_online_registration_view?
+    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "#{home_state_online_registration_view}.html.erb"))
+  end
+  
+  def home_state_online_registration_view
+    "#{home_state.abbreviation.downcase}"
   end
 
 
@@ -585,20 +604,20 @@ class Registrant < ActiveRecord::Base
   end
 
   # Enqueues final registration actions for API calls
-  def enqueue_complete_registration_via_api(incomplete = false)
-    action = Delayed::PerformableMethod.new(self, :complete_registration_via_api, [ incomplete ])
+  def enqueue_complete_registration_via_api
+    action = Delayed::PerformableMethod.new(self, :complete_registration_via_api, [])
     Delayed::Job.enqueue(action, WRAP_UP_PRIORITY, Time.now)
   end
 
   # Called from the worker queue to generate PDFs on the 'util' server
-  def complete_registration_via_api(incomplete = false)
-    generate_pdf unless incomplete
+  def complete_registration_via_api
+    generate_pdf unless self.finish_with_state?
 
     redact_sensitive_data
 
     if self.send_confirmation_reminder_emails?
-      deliver_confirmation_email(incomplete)
-      enqueue_reminder_emails(incomplete)
+      deliver_confirmation_email
+      enqueue_reminder_emails
     end
 
     self.status = 'complete'
@@ -619,30 +638,63 @@ class Registrant < ActiveRecord::Base
     end
     self.pdf_ready = true
   end
+  
+  def to_finish_with_state_array
+    [{:status               => self.extended_status,
+    :create_time          => self.created_at.to_s,
+    :complete_time        => self.completed_at.to_s,
+    :lang                 => self.locale,
+    :first_reg            => self.first_registration?,
+    :home_zip_code        => self.home_zip_code,
+    :us_citizen           => self.us_citizen?,
+    :name_title           => self.name_title,
+    :first_name           => self.first_name,
+    :middle_name          => self.middle_name,
+    :last_name            => self.last_name,
+    :name_suffix          => self.name_suffix,
+    :home_address         => self.home_address,
+    :home_unit            => self.home_unit,
+    :home_city            => self.home_city,
+    :home_state_id        => self.home_state_id,
+    :has_mailing_address  => self.has_mailing_address,
+    :mailing_address      => self.mailing_address,
+    :mailing_unit         => self.mailing_unit,
+    :mailing_city         => self.mailing_city,
+    :mailing_state_id     => self.mailing_state_id,
+    :mailing_zip_code     => self.mailing_zip_code,
+    :race                 => self.race,
+    :party                => self.party,
+    :phone                => self.phone,
+    :phone_type           => self.phone_type,
+    :email_address        => self.email_address,
+    :source_tracking_id   => self.tracking_source,
+    :partner_tracking_id  => self.tracking_id}]
+  end
+  
 
-  def deliver_confirmation_email(incomplete = false)
-    Notifier.deliver_confirmation(self, incomplete)
+  def deliver_confirmation_email
+    Notifier.deliver_confirmation(self)
   end
 
   def deliver_thank_you_for_state_online_registration_email
     Notifier.deliver_thank_you_external(self)
   end
 
-  def enqueue_reminder_emails(incomplete = false)
+  def enqueue_reminder_emails
     update_attributes(:reminders_left => REMINDER_EMAILS_TO_SEND)
-    enqueue_reminder_email(incomplete)
+    enqueue_reminder_email
   end
 
-  def enqueue_reminder_email(incomplete = false)
-    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ incomplete ])
+  def enqueue_reminder_email
+    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ ])
     Delayed::Job.enqueue(action, REMINDER_EMAIL_PRIORITY, INTERVAL_BETWEEN_REMINDER_EMAILS.from_now)
   end
 
-  def deliver_reminder_email(incomplete = false)
+  def deliver_reminder_email
     if reminders_left > 0
-      Notifier.deliver_reminder(self, incomplete)
+      Notifier.deliver_reminder(self)
       update_attributes!(:reminders_left => reminders_left - 1)
-      enqueue_reminder_email(incomplete) if reminders_left > 0
+      enqueue_reminder_email if reminders_left > 0
     end
   rescue StandardError => error
     HoptoadNotifier.notify(

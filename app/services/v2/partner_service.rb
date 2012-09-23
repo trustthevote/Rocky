@@ -46,7 +46,7 @@ module V2
 
     def self.find(query, only_public = false)
 
-      partner = find_partner(query[:partner_id], query[:partner_api_key])
+      partner = find_partner(query[:partner_id], query[:partner_api_key], only_public)
 
       data = {
         :org_name                 => partner.organization,
@@ -85,9 +85,9 @@ module V2
     end
 
 
-    def self.find_partner(partner_id, partner_api_key)
+    def self.find_partner(partner_id, partner_api_key, only_public=false)
       partner = Partner.find_by_id(partner_id)
-      if partner.nil? || !partner.valid_api_key?(partner_api_key)
+      if partner.nil? || (!partner.valid_api_key?(partner_api_key) && !only_public)
         raise(ArgumentError.new(V2::PartnerService::INVALID_PARTNER_OR_API_KEY))
       end
 

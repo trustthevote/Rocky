@@ -14,7 +14,7 @@ class MobileConfig
     if opts[:partner].blank?
       opts[:partner] = Partner::DEFAULT_ID
     end
-    "#{@@redirect_url}?#{opts.collect{|k,v| v.blank? ? nil : "#{k}=#{v}"}.compact.join('&')}"
+    "#{@@redirect_url}?#{opts.collect{|k,v| v.blank? ? nil : "#{k}=#{v}"}.compact.sort.join('&')}"
   end
   
   def self.browsers

@@ -24,41 +24,29 @@
 #***** END LICENSE BLOCK *****
 class StateOnlineRegistrationsController < RegistrationStep
 
+  def show
+    super
+    if @registrant.has_home_state_online_registration_view?
+      render :action=> @registrant.home_state_online_registration_view
+    else
+      render :action => :show
+    end
+  end
+
 protected
   
   def set_up_view_variables
     set_up_share_variables
     
     
-    @online_registration_iframe_url = case @registrant.home_state_name
-    when "Arizona"
-      "https://servicearizona.com/webapp/evoter/selectLanguage"
-    when "California"
-      "https://www.sos.ca.gov/elections/register-to-vote/"
-    when "Colorado"
-      "https://www.sos.state.co.us/Voter/secuVerifyExist.do"
-    when "Washington"
-      fn = CGI.escape @registrant.first_name.to_s
-      ln = CGI.escape @registrant.last_name.to_s
-      dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
-      lang= @registrant.locale
-      "https://weiapplets.sos.wa.gov/myvote/myvote?language=#{lang}&Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
-    when "Nevada"
-      fn = CGI.escape @registrant.first_name.to_s
-      mn = CGI.escape @registrant.middle_name.to_s
-      ln = CGI.escape @registrant.last_name.to_s
-      sf = CGI.escape @registrant.name_suffix.to_s
-      zip = CGI.escape @registrant.home_zip_code.to_s
-      lang = @registrant.locale.to_s
-      "https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&fn=#{fn}&mn=#{mn}&ln=#{ln}&lang=#{lang}&zip=#{zip}&sf=#{sf}"
-    else
-      ""
-    end    
+    @online_registration_iframe_url = @registrant.home_state_online_reg_url
+        
   end
   
   def find_registrant
     super
     @registrant.update_attributes(:finish_with_state=>true)
   end
+  
   
 end
