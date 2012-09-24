@@ -25,8 +25,9 @@ $(document).ready(function() {
 <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
 
 
-<%- checkbox_text = @registrant.locale.to_s.downcase == 'es' ? 'ES TBD' : 'I am a resident of California, living in the United States' %>
-<%- instruction_text = @registrant.locale.to_s.downcase == 'es' ? 'ES TBD' : "You are eligible to finish your registration using the state's online voter registration system." %>
+<%- checkbox_text = @registrant.locale.to_s.downcase == 'es' ? 'Soy residente de California y vivo en los Estados Unidos.
+' : 'I am a resident of California, living in the United States' %>
+<%- instruction_text = @registrant.locale.to_s.downcase == 'es' ? 'Tú eres elegible para terminar su registro usando el sistema de registración de votantes vía internet del estado.' : "You are eligible to finish your registration using the state's online voter registration system." %>
 <span class="error"><%= form.object.errors.on :has_state_license %></span>
 <ul class="checkbox">
   <li class="spacer">&nbsp;</li>
