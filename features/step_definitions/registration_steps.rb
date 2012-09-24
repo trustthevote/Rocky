@@ -240,8 +240,14 @@ end
 
 Then /^I should see an iFrame for the California State online system$/ do
   state_url = "https://rtv.sos.ca.gov/elections/register-to-vote"
-  response.body.should have_xpath("//iframe[@src='#{state_url}']")  
 end
+
+Then /^I should see a link to the CA online registration system$/ do
+  state_url = "http://www.registertovote.ca.gov/"
+  response.body.should have_xpath("//a[@href='#{state_url}']")  
+end
+
+
 Then /^I should see an iFrame for the Colorado State online system$/ do
   state_url = "https://www.sos.state.co.us/Voter/secuVerifyExist.do"
   response.body.should have_xpath("//iframe[@src='#{state_url}']")  

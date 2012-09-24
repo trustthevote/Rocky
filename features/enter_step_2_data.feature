@@ -117,11 +117,10 @@ Feature: Step 2
       And I fill in "last" with "Public"
       And I check "I am a resident of California, living in the United States"
       And I press "registrant_state_online_registration"
-      Then I should see "You can complete your voter registration online with California using the form below. If your driver's license or state identification card is invalid or the state can't find or confirm your DMV record, don't worry" unless the state is "NV"
-      And I should see "you can also finish your registration with Rock the Vote and Opt-in Partner. You will just have to print, sign, and mail it in." unless the state is "NV"
+      Then I should see "You can complete your voter registration online with the state right now - using the application provided by Secretary of State Debra Bowen."
+      And I should see "finish your registration with Rock the Vote and Opt-in Partner. You will just have to print, sign, and mail in the form by October 22nd."
       And I should see a link for "finish your registration with Rock the Vote and Opt-in Partner"
-      And I should see an iFrame for the California State online system
-
+      And I should see a link to the CA online registration system
     
     
     
