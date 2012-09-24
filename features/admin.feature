@@ -41,7 +41,7 @@ Feature: Admin UI
       And I should not see a field for "Ask for partner SMS opt-in"
       And I should not see a field for "Ask for partner Volunteers"
   
-    @wip
+    
     Scenario: Partner edit form for partner != 1
       Given the following partner exists:
         | id | name                |
