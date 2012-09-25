@@ -3,11 +3,11 @@
 
 <%- if @registrant.locale.to_s.downcase == 'es' %>
   <p>
-    Ahora, se puede completar su formulario de inscripción de votante en linea con el estado - usando el formulario de la Secretaria del Estado Debra Bowen.  Si no sabe su numero de seguro social, su licensia de manejar no es valido, o el estado no puede confirmar sus datos del DMV - no se preocupe - tambien, se puede <a href="<%= next_url%>">completar su inscripción de votante con <%= rtv_and_partner_name %></a>.  Tiene que imprimir el formulario y firmar y enviar por correo hasta del 22 de octubre.    
+    Ahora, se puede completar su formulario de inscripción de votante en linea con el estado - usando el formulario de la Secretaria del Estado Debra Bowen.  
   </p>
 <%- else %>
   <p>
-    You can complete your voter registration online with the state right now - using the application provided by Secretary of State Debra Bowen.  If you don't know your social security number, your driver's license or identification card is invalid, or the state can't find or confirm your DMV record - don't worry - you can also <a href="<%= next_url%>">finish your registration with <%= rtv_and_partner_name %></a>. You will just have to print, sign, and mail in the form by October 22nd.
+    You can complete your voter registration online with the state right now - using the application provided by Secretary of State Debra Bowen.
   </p>
 <%- end %>
 
