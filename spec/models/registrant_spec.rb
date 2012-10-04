@@ -1044,6 +1044,7 @@ describe Registrant do
                      "No",
                      nil,
                      nil,
+                     "No",
                      "No"],
                   reg.to_csv_array
     end
@@ -1092,7 +1093,8 @@ describe Registrant do
                      "Yes",
                      nil,
                      reg.created_at && reg.created_at.to_s(:month_day_year),
-                     "No"
+                     "No",
+                     "Yes"
                      ],
                  reg.to_csv_array
     end
@@ -1143,14 +1145,15 @@ describe Registrant do
                      "Yes",
                      nil,
                      reg.created_at && reg.created_at.to_s(:month_day_year),
-                     "No"
+                     "No",
+                     "Yes"
                      ]
                  
     end
 
     it "renders ineligible CSV" do
       reg = Factory.create(:step_1_registrant, :us_citizen => false)
-      assert_equal "Not a US citizen", reg.to_csv_array[-3]
+      assert_equal "Not a US citizen", reg.to_csv_array[-4]
     end
 
     it "has a CSV header" do

@@ -88,7 +88,8 @@ class Registrant < ActiveRecord::Base
     "Volunteer for partner",
     "Ineligible reason",
     "Started registration",
-    "Finish with State"
+    "Finish with State",
+    "Built via API"
   ]
 
   attr_protected :status
@@ -214,8 +215,6 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :tell_subject
     reg.validates_presence_of :tell_message
   end
-
-  attr_accessor :building_via_api_call
 
   with_options :if => :building_via_api_call do |reg|
     reg.validates_inclusion_of :opt_in_email,                      :in => [ true, false ]
@@ -836,7 +835,8 @@ class Registrant < ActiveRecord::Base
       yes_no(partner_volunteer?),
       ineligible_reason,
       created_at && created_at.to_s(:month_day_year),
-      yes_no(finish_with_state?)
+      yes_no(finish_with_state?),
+      yes_no(building_via_api_call?)
     ]
   end
 
