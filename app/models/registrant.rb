@@ -292,7 +292,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.abandon_stale_records
-    stale = self.find(:all, :conditions => ["(NOT abandoned) AND (status != 'complete') AND (updated_at < ?)", STALE_TIMEOUT.seconds.ago])
+    stale = self.find(:all, :conditions => ["(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago])
     stale.each do |reg|
       if reg.finish_with_state?
         reg.status = "complete"
