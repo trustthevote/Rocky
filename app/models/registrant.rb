@@ -87,7 +87,8 @@ class Registrant < ActiveRecord::Base
     "Volunteer for RTV",
     "Volunteer for partner",
     "Ineligible reason",
-    "Started registration"
+    "Started registration",
+    "Finish with State"
   ]
 
   attr_protected :status
@@ -834,7 +835,8 @@ class Registrant < ActiveRecord::Base
       yes_no(volunteer?),
       yes_no(partner_volunteer?),
       ineligible_reason,
-      created_at && created_at.to_s(:month_day_year)
+      created_at && created_at.to_s(:month_day_year),
+      yes_no(finish_with_state?)
     ]
   end
 
