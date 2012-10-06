@@ -490,7 +490,7 @@ describe Partner do
         assert_equal 0.4, stats[1][:registrations_percentage]
       end
 
-      it "only uses completed/step_5 registrations for stats" do
+      it "only uses completed/step_5 registrations without finish-with-state for stats" do
         partner = Factory.create(:partner)
         3.times do
           reg = Factory.create(:maximal_registrant, :partner => partner)
@@ -503,6 +503,10 @@ describe Partner do
         2.times do
           reg = Factory.create(:step_5_registrant, :partner => partner)
           reg.update_attributes(:home_zip_code => "94101", :party => "Decline to State")
+        end
+        2.times do 
+          reg = Factory.create(:step_5_registrant, :partner=>partner, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         stats = partner.registration_stats_state
         assert_equal 2, stats.length
@@ -724,9 +728,10 @@ describe Partner do
         assert_equal 20, stats[:total_count]
       end
 
-      it "only uses completed/step_5 registrations for stats" do
+      it "only uses completed/step_5 registrations without finish_with_state for stats" do
         partner = Factory.create(:partner)
         8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
         8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         8.times { Factory.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         stats = partner.registration_stats_completion_date
@@ -762,6 +767,64 @@ describe Partner do
         assert_equal 0.5, stats[:percent_complete]
       end
     end
+
+    describe "finish-with-state by registration date & state" do
+      it "should tally registrants by state and date bucket" do
+        partner = Factory.create(:partner)
+        8.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
+        end
+        5.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")
+        end
+        4.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
+        end
+        2.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")          
+        end
+        1.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.years.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")          
+        end
+        stats = partner.registration_stats_finish_with_state_completion_date
+        assert_equal "California", stats[0][:state_name]
+        assert_equal  8, stats[1][:day_count]
+        assert_equal 5, stats[0][:week_count]
+        assert_equal 12, stats[1][:month_count]
+        assert_equal 7, stats[0][:year_count]
+        assert_equal 13, stats[1][:total_count]
+      end
+
+      it "only uses completed registrations with finish_with_state for stats" do
+        partner = Factory.create(:partner)
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        8.times { Factory.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        stats = partner.registration_stats_finish_with_state_completion_date
+        assert_equal  "Massachusetts", stats[0][:state_name]
+        assert_equal  8, stats[0][:day_count]
+        assert_equal  1, stats.size
+      end
+
+      it "should only include data for this partner" do
+        partner = Factory.create(:partner)
+        other_partner = Factory.create(:partner)
+        Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        Factory.create(:maximal_registrant, :partner => other_partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        stats = partner.registration_stats_finish_with_state_completion_date
+        assert_equal  "Massachusetts", stats[0][:state_name]
+        assert_equal   1, stats[0][:week_count]
+        assert_equal  1, stats.size
+      end
+    end
+
 
     describe "by age" do
       it "should tally registrants count and percentage by age bracket on updated_at date" do

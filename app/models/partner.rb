@@ -114,11 +114,16 @@ class Partner < ActiveRecord::Base
 
 
   def registration_stats_state
-    counts = Registrant.connection.select_all(<<-"SQL")
+    sql =<<-"SQL"
       SELECT count(*) as registrations_count, home_state_id FROM `registrants`
-      WHERE (status = 'complete' OR status = 'step_5') AND partner_id = #{self.id}
+      WHERE (status = 'complete' OR status = 'step_5') 
+        AND finish_with_state = ?
+        AND partner_id = #{self.id}
       GROUP BY home_state_id
     SQL
+    
+    counts = Registrant.connection.select_all(Registrant.send(:sanitize_sql_for_conditions, [sql, false]))
+    
     sum = counts.sum {|row| row["registrations_count"].to_i}
     named_counts = counts.collect do |row|
       { :state_name => GeoState[row["home_state_id"].to_i].name,
@@ -232,15 +237,42 @@ class Partner < ActiveRecord::Base
   end
 
   def registration_stats_completion_date
-    conditions = "partner_id = ? AND (status = 'complete' OR status = 'step_5') AND created_at >= ?"
+    conditions = "finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5') AND created_at >= ?"
     stats = {}
-    stats[:day_count] =   Registrant.count(:conditions => [conditions, self, 1.day.ago])
-    stats[:week_count] =  Registrant.count(:conditions => [conditions, self, 1.week.ago])
-    stats[:month_count] = Registrant.count(:conditions => [conditions, self, 1.month.ago])
-    stats[:year_count] =  Registrant.count(:conditions => [conditions, self, 1.year.ago])
-    stats[:total_count] = Registrant.count(:conditions => ["partner_id = ? AND (status = 'complete' OR status = 'step_5')", self])
-    stats[:percent_complete] = stats[:total_count].to_f / Registrant.count(:conditions => ["partner_id = ? AND (status != 'initial')", self])
+    stats[:day_count] =   Registrant.count(:conditions => [conditions, false, self, 1.day.ago])
+    stats[:week_count] =  Registrant.count(:conditions => [conditions, false, self, 1.week.ago])
+    stats[:month_count] = Registrant.count(:conditions => [conditions, false, self, 1.month.ago])
+    stats[:year_count] =  Registrant.count(:conditions => [conditions, false, self, 1.year.ago])
+    stats[:total_count] = Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5')", false, self])
+    stats[:percent_complete] = stats[:total_count].to_f / Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status != 'initial')", false, self])
     stats
+  end
+  def registration_stats_finish_with_state_completion_date
+    #conditions = "finish_with_state = ? AND partner_id = ? AND status = 'complete' AND created_at >= ?"
+    sql =<<-"SQL"
+      SELECT count(*) as registrations_count, home_state_id FROM `registrants`
+      WHERE status = 'complete'
+        AND finish_with_state = ?
+        AND partner_id = ?
+        AND created_at >= ?
+      GROUP BY home_state_id
+    SQL
+    
+    stats = {}
+    
+    [[:day_count, 1.day.ago],
+     [:week_count, 1.week.ago],
+     [:month_count, 1.month.ago],
+     [:year_count, 1.year.ago],
+     [:total_count, 1000.years.ago]].each do |range,time|
+      counts = Registrant.connection.select_all(Registrant.send(:sanitize_sql_for_conditions, [sql, true, self, time]))
+      counts.each do |row|
+        state_name = GeoState[row["home_state_id"].to_i].name
+        stats[state_name] ||= {:state_name=>state_name}
+        stats[state_name][range] = row["registrations_count"].to_i
+      end
+    end
+    stats.to_a.sort {|a,b| a[0]<=>b[0] }.collect{|a| a[1]}
   end
 
   def state_abbrev=(abbrev)
