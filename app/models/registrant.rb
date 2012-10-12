@@ -140,6 +140,7 @@ class Registrant < ActiveRecord::Base
 
   before_save :set_questions
 
+
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of   :partner_id
     reg.validates_inclusion_of  :locale, :in => %w(en es)
@@ -167,6 +168,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_inclusion_of :has_state_license, :in=>[true,false], :unless=>[:building_via_api_call]
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
+    reg.validate :validate_phone_present_if_opt_in_sms
   end
 
   with_options :if => :needs_mailing_address? do |reg|
@@ -181,6 +183,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
+    reg.validate :validate_phone_present_if_opt_in_sms
   end
 
   with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
@@ -368,6 +371,12 @@ class Registrant < ActiveRecord::Base
       if digits.length == 10
         self.phone = [digits[0..2], digits[3..5], digits[6..9]].join('-')
       end
+    end
+  end
+
+  def validate_phone_present_if_opt_in_sms
+    if (self.opt_in_sms? || self.partner_opt_in_sms?) && phone.blank?
+      errors.add(:phone, :required_if_opt_in)
     end
   end
 

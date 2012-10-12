@@ -212,7 +212,7 @@ describe Registrant do
       assert reg.valid?, reg.errors.full_messages
       assert_nil reg.party
     end
-
+        
     it "parses date of birth before validation" do
       reg = Factory.build(:step_1_registrant)
       reg.date_of_birth = "08/27/1978"
@@ -319,6 +319,16 @@ describe Registrant do
       assert reg.eligible?
       assert !reg.ineligible_non_citizen?
     end
+    
+    it "does not validate phone is present if rtv or partner mobile opt-in is true" do
+      reg = Factory.build(:step_1_registrant, :phone => "")
+      reg.opt_in_sms = true
+      reg.should be_valid
+      reg.partner_opt_in_sms = true
+      reg.should be_valid
+    end
+    
+    
   end
 
   describe "step 2" do
@@ -423,7 +433,7 @@ describe Registrant do
         assert_equal "123-456-7890", reg.phone
       end
       it "should require a valid phone number" do
-        reg = Factory.build(:step_3_registrant, :phone_type => "Mobile")
+        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
         stub(reg).custom_step_2? { true }
         
         reg.phone = "1234567890"
@@ -444,6 +454,27 @@ describe Registrant do
         reg.phone = "555-1234"
         assert !reg.valid?
       end
+      
+      it "validates phone is present if rtv mobile opt-in is true" do
+        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
+        stub(reg).custom_step_2? { true }
+        reg.phone = ''
+        
+        reg.opt_in_sms = true
+        reg.valid?.should be_false
+        assert reg.errors.on(:phone)
+      end
+
+      it "validates phone is present if partner mobile opt-in is true" do
+        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
+        stub(reg).custom_step_2? { true }
+        reg.phone = ''
+
+        reg.partner_opt_in_sms = true
+        reg.valid?.should be_false
+        assert reg.errors.on(:phone)
+      end
+      
 
       it "does not require party when state has custom step 2" do
         @reg.party=nil
@@ -631,6 +662,24 @@ describe Registrant do
       reg.phone = "555-1234"
       assert !reg.valid?
     end
+    
+    it "validates phone is present if rtv mobile opt-in is true" do
+      reg = Factory.build(:step_3_registrant, :phone => "")
+      
+      reg.opt_in_sms = true
+      reg.valid?.should be_false
+      assert reg.errors.on(:phone)
+    end
+
+    it "validates phone is present if partner mobile opt-in is true" do
+      reg = Factory.build(:step_3_registrant, :phone => "")
+
+      reg.partner_opt_in_sms = true
+      reg.valid?.should be_false
+      assert reg.errors.on(:phone)
+    end
+    
+    
 
     it "should not require phone type when registrant does not provide phone" do
       reg = Factory.build(:step_3_registrant, :phone_type => "")

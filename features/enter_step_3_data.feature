@@ -57,10 +57,12 @@ Feature: Step 3
       And I should see a checkbox for "Send me txt messages from Rock the Vote"
       When I check "Send me txt messages from Rock the Vote"
       And I fill in "ID Number" with "NONE"
+      And I fill in "Phone" with "415-555-4254"
       And I press "registrant_submit"
       Then I should be signed up for "opt_in_sms"
       And I should not be signed up for "partner_opt_in_sms"
 
+    @passing
     Scenario: User sees RTV and partner SMS opt-in options for partner configured to have rtv and partner opt-ins, and checks partner-sms
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in |
@@ -72,11 +74,12 @@ Feature: Step 3
       When I check "Send me txt messages from Opt-in Partner"
       When I uncheck "Send me txt messages from Rock the Vote"
       And I fill in "ID Number" with "NONE"
+      And I fill in "Phone" with "415-555-4254"
       And I press "registrant_submit"
       Then I should be signed up for "partner_opt_in_sms"
       And I should not be signed up for "opt_in_sms"
     
-
+    @passing
     Scenario: User sees only RTV opt-in options for partner configured to have rtv opt-ins and checks rtv-sms
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in  |
@@ -87,9 +90,26 @@ Feature: Step 3
       And I should not see a checkbox for "Send me txt messages from Opt-in Partner"
       When I check "Send me txt messages from Rock the Vote"
       And I fill in "ID Number" with "NONE"
+      And I fill in "Phone" with "415-555-4254"
       And I press "registrant_submit"
       Then I should not be signed up for "partner_opt_in_sms"
       And I should be signed up for "opt_in_sms"
+
+    @passing
+    Scenario: User cannot sign up for opt_in_sms if phone isn't provided
+      Given the following partner exists:
+        | organization   | rtv_sms_opt_in | partner_sms_opt_in  |
+        | Opt-in Partner | true           | false               |        
+      And I have completed step 2 from that partner
+      When I go to the step 3 page
+      Then I should see a checkbox for "Send me txt messages from Rock the Vote"
+      And I should not see a checkbox for "Send me txt messages from Opt-in Partner"
+      When I check "Send me txt messages from Rock the Vote"
+      And I fill in "ID Number" with "NONE"
+      And I fill in "Phone" with ""
+      And I press "registrant_submit"
+      Then I should see "Additional Registration Information"
+      And I should see "Required if receiving SMS messages"
 
 
     Scenario: User sees only partner opt-in options for partner configured to have partner opt-ins and checks and partner-volunteer
@@ -102,6 +122,7 @@ Feature: Step 3
       And I should see a checkbox for "Send me txt messages from Opt-in Partner"
       When I check "Send me txt messages from Opt-in Partner"
       And I fill in "ID Number" with "NONE"
+      And I fill in "Phone" with "415-555-4254"
       And I press "registrant_submit"
       Then I should be signed up for "partner_opt_in_sms"
       And I should not be signed up for "opt_in_sms"
