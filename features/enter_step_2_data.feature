@@ -118,8 +118,6 @@ Feature: Step 2
       And I check "I am a resident of California, living in the United States"
       And I press "registrant_state_online_registration"
       Then I should see "You can complete your voter registration online with the state right now - using the application provided by Secretary of State Debra Bowen."
-      And I should see "finish your registration with Rock the Vote and Opt-in Partner. You will just have to print, sign, and mail in the form by October 22nd."
-      And I should see a link for "finish your registration with Rock the Vote and Opt-in Partner"
       And I should see a link to the CA online registration system
     
     

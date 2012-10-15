@@ -201,7 +201,9 @@ describe V2::RegistrationService do
           :survey_question_1    => partner.send("survey_question_1_#{reg.locale}"),
           :survey_answer_1      => reg.survey_answer_1,
           :survey_question_2    => partner.send("survey_question_1_#{reg.locale}"),
-          :survey_answer_2      => reg.survey_answer_2 }
+          :survey_answer_2      => reg.survey_answer_2,
+          :finish_with_state    => reg.finish_with_state?,
+          :created_via_api      => reg.building_via_api_call? }
       ]
     end
 

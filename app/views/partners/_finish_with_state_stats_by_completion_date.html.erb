@@ -1,0 +1,35 @@
+<% reset_cycle %>
+<%- cycle('even', 'odd') %>
+<div class="stats" id="stats_by_completion_date">
+  <table cellspacing="0">
+    <thead><tr><th colspan="3">Continued on with State System</th></tr></thead>
+    <tbody>
+      <%- @stats_by_completion_date_finish_with_state.each do |state_completions| %>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <th><strong><%= state_completions[:state_name] %></strong></th>
+          <td> <img src="/admin/downArrow.png" /> </td>
+        </tr>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <th>Today</th>
+          <td><%= state_completions[:day_count] %></td>
+        </tr>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <th>This Week</th>
+          <td><%= state_completions[:week_count] %></td>
+        </tr>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <th>This Month</th>
+          <td><%= state_completions[:month_count] %></td>
+        </tr>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <th>This Year</th>
+          <td><%= state_completions[:year_count] %></td>
+        </tr>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <th>Total</th>
+          <td><%= state_completions[:total_count] %></td>
+        </tr>
+      <%- end %>
+    </tbody>
+  </table>
+</div>

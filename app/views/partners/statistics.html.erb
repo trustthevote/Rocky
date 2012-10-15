@@ -18,7 +18,7 @@
     <td id="left_column">
       <div class="stats" id="stats_by_state">
         <table cellspacing="0">
-          <thead><tr><th colspan="3">Applications by State</th></tr></thead>
+          <thead><tr><th colspan="3">Applications by State *</th></tr></thead>
           <tbody>
             <% @stats_by_state.each do |stat| %>
               <tr class="<%= cycle('even', 'odd') %>">
@@ -30,10 +30,19 @@
           </tbody>
         </table>
       </div>
+      <div>
+        <p>
+          <strong>
+            * These numbers don't include those that continued on through the state system.
+          </strong>
+        </p>
+      </div>
     </td>
 
     <td id="right_column">
       <%= render :partial => 'stats_by_completion_date' %>
+
+      <%= render :partial => 'finish_with_state_stats_by_completion_date' %>
 
       <% reset_cycle %>
       <div class="stats" id="stats_by_race">
