@@ -109,6 +109,7 @@ class RegistrationStep < ApplicationController
     @partner_id = @partner.id
     @source = params[:source]
     @tracking = params[:tracking]
+    @short_form = params[:short_form]
   end
   
   

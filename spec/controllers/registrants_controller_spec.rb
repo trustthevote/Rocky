@@ -44,7 +44,7 @@ describe RegistrantsController do
       assert_redirected_to new_registrant_url(:protocol => "https")
     end
 
-    it "keeps partner, locale and source and tracking params when redirecting" do
+    it "keeps partner, locale, source, tracking and short_form params when redirecting" do
       get :landing, :partner => "2"
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2")
       get :landing, :locale => "es"
@@ -61,6 +61,10 @@ describe RegistrantsController do
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es", :source => "email")
       get :landing, :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid"
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid")
+      get :landing, :partner => "2", :locale => "es", :source => "email", :short_form=>"1"
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es", :source => "email", :short_form=>"1")
+      get :landing, :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid", :short_form=>"0"
+      assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid", :short_form=>"0")
     end
 
     it "assumes default partner when partner given doesn't exist" do
@@ -102,16 +106,18 @@ describe RegistrantsController do
     describe "keep initial params in hidden fields" do
       integrate_views
 
-      it "should keep partner, locale, tracking source and tracking id" do
-        get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>'trackid'
+      it "should keep partner, locale, tracking source, tracking id and short_form" do
+        get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>'trackid', :short_form=>'1'
         assert_equal '2', assigns[:partner_id].to_s
         assert_equal 'es', assigns[:locale]
         assert_equal 'email', assigns[:source]
         assert_equal 'trackid', assigns[:tracking]
+        assert_equal '1', assigns[:short_form]
         assert_select "input[name=partner][value=2]"
         assert_select "input[name=locale][value=es]"
         assert_select "input[name=source][value=email]"
         assert_select "input[name=tracking][value=trackid]"
+        assert_select "input[name=short_form][value=1]"
       end
     end
 
@@ -152,14 +158,15 @@ describe RegistrantsController do
       assert_redirected_to registrant_step_2_url(assigns[:registrant])
     end
 
-    it "should set partner_id, locale, tracking_source and tracking_id" do
+    it "should set partner_id, locale, tracking_source, tracking_id and short_form" do
       @reg_attributes.delete(:locale)
       @reg_attributes.delete(:partner_id)
-      post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email", :tracking=>"trackid"
+      post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email", :tracking=>"trackid", :short_form=>"1"
       assert_equal @partner.id, assigns[:registrant].partner_id
       assert_equal "es", assigns[:registrant].locale
       assert_equal "email", assigns[:registrant].tracking_source
       assert_equal "trackid", assigns[:registrant].tracking_id
+      assert_equal true, assigns[:registrant].short_form?
     end
 
     it "should reject invalid input and show form again" do

@@ -36,6 +36,16 @@ Given /^I have completed step (\d+)$/ do |step_num|
   @registrant = Factory.create("step_#{step_num}_registrant")
 end
 
+Given /^I have completed step (\d+) for a short form$/ do |step_num|
+  @registrant = Factory.create("step_#{step_num}_registrant", :short_form=>true)
+end
+
+Given /^I have completed step (\d+) for a short form as a resident of "([^\"]*)"$/ do |step_num, state_name|
+  state = GeoState.find_by_name(state_name)
+  zip_prefix = GeoState.zip3map.index(state.abbreviation)
+  @registrant = Factory.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01', :short_form=>true)
+end
+
 Given /^I have completed step (\d+) from that partner$/ do |step_num|
   @registrant = Factory.create("step_#{step_num}_registrant")
   @registrant.partner = Partner.last

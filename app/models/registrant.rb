@@ -185,6 +185,14 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of :phone_type, :if => :has_phone?
     reg.validate :validate_phone_present_if_opt_in_sms
   end
+  
+  with_options :if => [:at_least_step_2?, :use_short_form?] do |reg|
+    reg.validates_presence_of :state_id_number
+    reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
+    reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
+    reg.validates_presence_of :phone_type, :if => :has_phone?
+    reg.validate :validate_phone_present_if_opt_in_sms
+  end
 
   with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
     reg.validates_presence_of :home_address
@@ -233,11 +241,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def needs_prev_name?
-    at_least_step_3? && change_of_name?
+    (at_least_step_3? || (at_least_step_2? && use_short_form?)) && change_of_name?
   end
 
   def needs_prev_address?
-    at_least_step_3? && change_of_address?
+    (at_least_step_3? || (at_least_step_2? && use_short_form?)) && change_of_address?
   end
 
   aasm_event :save_or_reject do
@@ -539,6 +547,7 @@ class Registrant < ActiveRecord::Base
     prev_state && prev_state.abbreviation
   end
 
+
   def custom_step_2?
     !javascript_disabled &&
       !home_state.nil? &&
@@ -566,7 +575,11 @@ class Registrant < ActiveRecord::Base
     "#{home_state.abbreviation.downcase}"
   end
 
-
+  def use_short_form?
+    short_form? && !custom_step_2?
+  end
+    
+    
 
   def will_be_18_by_election?
     true

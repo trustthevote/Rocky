@@ -87,10 +87,16 @@ describe Step2Controller do
       assert assigns[:registrant].step_2?
       assert assigns[:registrant].using_state_online_registration?
       assert_redirected_to registrant_state_online_registration_url(assigns[:registrant])
-      
     end
     
-    
+    it "should go to the confirmation page if using a short_form" do
+      stub(@registrant).use_short_form? { true }      
+      stub(Registrant).find_by_param! { @registrant }
+      put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:maximal_registrant)
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].complete?
+      assert_redirected_to registrant_download_url(assigns[:registrant])
+    end
     
   end
 end
