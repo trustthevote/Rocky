@@ -109,7 +109,7 @@ Feature: Step 3
       And I fill in "Phone" with ""
       And I press "registrant_submit"
       Then I should see "Additional Registration Information"
-      And I should see "Required if receiving SMS messages"
+      And I should see "Required if receiving TXT"
 
 
     Scenario: User sees only partner opt-in options for partner configured to have partner opt-ins and checks and partner-volunteer
