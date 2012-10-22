@@ -25,7 +25,7 @@
 class Admin::PartnersController < Admin::BaseController
 
   def index
-    @partners = Partner.all
+    @partners = Partner.standard
     @partner_zip = PartnerZip.new(nil)
   end
 

@@ -176,6 +176,10 @@ Factory.define :partner do |partner|
   partner.survey_question_2_en  "Outta here?"
 end
 
+Factory.define :government_partner, :parent=>:partner do |partner|
+  partner.is_government_partner true
+end
+
 Factory.define :whitelabel_partner, :parent=>:partner do |partner|
   partner.api_key               "abc123"
   partner.survey_question_1_en  "Q1 En"

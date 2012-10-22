@@ -26,6 +26,7 @@ require 'open-uri'
 
 class Partner < ActiveRecord::Base
   acts_as_authentic
+  
 
   DEFAULT_ID = 1
 
@@ -97,9 +98,13 @@ class Partner < ActiveRecord::Base
   after_validation :make_paperclip_errors_readable
 
   include PartnerAssets
+  
+  named_scope :government, :conditions=>{:is_government_partner=>true}
+  named_scope :standard, :conditions=>{:is_government_partner=>false}
 
   def self.find_by_login(login)
-    find_by_username(login) || find_by_email(login)
+    p = find_by_username(login) || find_by_email(login)
+    return (p && p.is_government_partner? ? nil : p)
   end
 
   def primary?

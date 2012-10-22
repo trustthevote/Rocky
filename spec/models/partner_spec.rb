@@ -58,6 +58,7 @@ describe Partner do
       p.password_confirmation.should_not be_blank
     end
   end
+  
   describe "#generate_username" do
     it "should set a valid username from email address" do
       p = Factory.build(:partner)
@@ -185,7 +186,7 @@ describe Partner do
     end
   end
 
-  context "whitelabeling" do
+  describe "whitelabeling" do
     describe "Class Methods" do
       describe "#add_whitelabel(partner_id, app_css, reg_css)" do
         before(:each) do
@@ -948,5 +949,55 @@ describe Partner do
       end
     end
   end
+
+  describe "Government Partners" do
+    describe "Class Methods" do
+      describe ".find_by_login(login)" do
+        it "returns nil if the found partner is a government partner" do
+          Factory.create(:partner, :is_government_partner=>false, :username=>"partner")
+          Factory.create(:partner, :is_government_partner=>true, :username=>"gov_partner")
+          
+          Partner.find_by_login("partner").should be_a(Partner)
+          Partner.find_by_login("gov_partner").should be_nil
+          
+        end
+      end
+      describe ".government" do
+        it "returns all government partners" do
+          3.times do
+            Factory.create(:partner)
+          end
+          gps = []
+          3.times do
+            gps << Factory.create(:government_partner, :is_government_partner=>true)
+          end
+          results = Partner.government
+          results.should have(3).partners
+          gps.each do |gp|
+            results.should include(gp)
+          end
+        end
+      end
+      describe ".standard" do
+        it "returns all standard partners" do
+          ngps = []
+          existing_partner_count = Partner.count
+          3.times do
+            ngps << Factory.create(:partner)
+          end
+          gps = []
+          3.times do
+            gps << Factory.create(:government_partner, :is_government_partner=>true)
+          end
+          results = Partner.standard
+          results.should have(3 + existing_partner_count).partners
+          ngps.each do |gp|
+            results.should include(gp)
+          end
+        end
+      end
+    end
+  end
+
 end
 

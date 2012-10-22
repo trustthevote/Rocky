@@ -76,6 +76,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :partners, :member => { :regen_api_key => :get } do |p|
       p.resources :assets, :only => [ :index, :create, :destroy ]
     end
+    admin.resources :government_partners
     admin.resource :partner_zips, :only=>[:create]
   end
 

@@ -29,7 +29,7 @@ describe Admin::PartnersController do
   describe 'index' do
     it 'should render the index' do
       get :index
-      assigns(:partners).should == Partner.all
+      assigns(:partners).should == Partner.standard
       response.should render_template :index
     end
   end

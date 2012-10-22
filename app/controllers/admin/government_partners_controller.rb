@@ -22,12 +22,22 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class AddShortFormToRegistrants < ActiveRecord::Migration
-  def self.up
-    add_column :registrants, :short_form, :boolean, :default=>false
+class Admin::GovernmentPartnersController < Admin::BaseController
+  def index
+    @partners = Partner.government
   end
-
-  def self.down
-    remove_column :registrants, :short_form
+  def new
+    @partner = Partner.new
+  end
+  
+  def create
+    @partner = Partner.new(params[:partner].merge(:is_government_partner=>true))
+    @partner.generate_username
+    @partner.generate_random_password
+    if @partner.save
+      redirect_to :action=>:index
+    else
+      render :action=>:new
+    end
   end
 end

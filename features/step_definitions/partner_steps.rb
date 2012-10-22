@@ -23,13 +23,6 @@
 #
 #***** END LICENSE BLOCK *****
 
-Given /^the following partner exists:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  if (table.hashes.first["id"])
-    @partner = Partner.find(table.hashes.first["id"])
-  end
-  @partner = Factory(:partner, table.hashes.first) unless @partner
-end
 
 
 Given /^that partner's css file exists$/ do
