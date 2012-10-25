@@ -997,6 +997,48 @@ describe Partner do
         end
       end
     end
+    
+    describe "#government_partner_state_abbrev" do
+      it "returns the abbreviation for the government_partner_state" do
+        p = Partner.new
+        p.government_partner_state = GeoState['MA']
+        p.government_partner_state_abbrev.should == 'MA'
+      end
+    end
+    describe "#government_partner_state_abbrev=" do
+      it "sets the government_partner_state by abbreviation" do
+        p = Partner.new
+        p.government_partner_state_abbrev= 'MA'        
+        p.government_partner_state.should == GeoState['MA']
+      end
+    end
+    describe "#government_partner_zip_code_list" do
+      it "returns a new-line separated version of government_partner_zip_codes" do
+        p= Partner.new
+        p.government_partner_zip_codes = ["12345", "23413-4422", "23415"]
+        p.government_partner_zip_code_list.should == ["12345", "23413-4422", "23415"].join("\n")
+      end
+      it "returns nil when the government_partner_zip_codes is nil" do
+        p= Partner.new
+        p.government_partner_zip_code_list.should be_nil        
+      end
+    end
+    describe "#government_partner_zip_code_list=" do
+      it "cleans a string and sets the government_partner_zip_code_list array" do
+        p= Partner.new
+        [
+          ["242 23423, 23111-342, 23123-1234 4 afe3 235sgsg a3425\n34533 . \\ \n  ef 34335, 34555-1551", ["23423", "23123-1234", "34533", "34335", "34555-1551"]],
+          ["12345\n23456\n34567", ["12345", "23456", "34567"]],
+          ["22345,23456, 34567", ["22345", "23456", "34567"]],
+          ["32345 23456 34567", ["32345", "23456", "34567"]]
+        ].each do |string, arr|
+            p.government_partner_zip_code_list = string
+            p.government_partner_zip_codes.should == arr
+            # p.government_partner_zip_code_list = "242 23423, 23111-342, 23123-1234 4 afe3 235sgsg a3425\n34533 . \\ \n  ef 34335, 34555-1551"
+            # p.government_partner_zip_codes.should == ["23423", "23123-1234", "34533", "34335", "34555-1551"]
+          end
+      end
+    end
   end
 
 end

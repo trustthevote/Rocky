@@ -1,0 +1,56 @@
+<%- pd = PartnerDetails.new(@partner) %>
+
+<h1>Partner: <%= h pd.name %></h1>
+<div class='actions'>
+  <%= link_to "Edit", edit_path %>
+  <%= link_to "Assets", [ :admin, @partner, :assets ] %>
+  <%= link_to "Back to partners", list_path %>
+</div>
+
+<table class='properties'>
+  <tr>
+    <td class='label'>Name:</td>
+    <td><%= h pd.name %></td>
+  </tr>
+  <tr>
+    <td class='label'>Organization:</td>
+    <td><%= h pd.organization %></td>
+  </tr>
+  <tr>
+    <td class='label'>
+      API Key:
+    </td>
+    <td><%= h @partner.api_key %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><%=link_to "regenerate API key", regen_api_key_admin_partner_path(@partner) %></td>
+  <tr>
+    <td class='label'>Contact Email:</td>
+    <td valign='bottom'><%= h pd.email %></td>
+  </tr>
+  <tr>
+    <td class='label'>From Address <br/>for Notifications:</td>
+    <td><br/><%= h @partner.from_email %></td>
+  </tr>
+  <tr>
+    <td class='label'>iFrame URL <br/>for Thank You page:</td>
+    <td><br/><%= h @partner.finish_iframe_url %></td>
+  </tr>
+  <tr>
+    <td class='label'>Whitelabeled:</td>
+    <td><%= pd.whitelabel_status %></td>
+  </tr>
+
+  <%- if !@partner.whitelabeled? %>
+    <tr>
+      <td class='label'>Assets:</td>
+      <td>
+        <%- pd.assets_status.each do |asset, status| %>
+          <%= h asset %> - <%= status %><br/>
+        <% end %>
+      </td>
+    </tr>
+  <%- end %>
+</table>
+

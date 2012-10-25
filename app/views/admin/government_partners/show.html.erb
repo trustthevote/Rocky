@@ -1,0 +1,6 @@
+<%= render :partial=>"admin/shared/admin_nav" %>
+
+
+<%- edit_path = edit_admin_government_partner_path(@partner) %>
+<%- list_path = admin_government_partners_path %>
+<%= render :partial=>'admin/shared/partner_properties', :locals=>{:edit_path=>edit_path, :list_path=>list_path} %>

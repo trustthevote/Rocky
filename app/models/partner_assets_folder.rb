@@ -65,8 +65,10 @@ class PartnerAssetsFolder
   end
 
   def update_path(path, file)
-    create_version(path)
-    update_file(path, file)
+    if file.respond_to?(:read)
+      create_version(path)
+      update_file(path, file)
+    end
   end
 
   def create_version(path)

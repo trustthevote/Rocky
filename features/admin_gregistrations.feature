@@ -13,7 +13,7 @@ Feature: Admin gregistrations
       Then I should see "Government Organization Name"
       And I should see a link for "Standard Partners"
 
-
+    @wip
     Scenario: Create a new government partner
       When I go to the admin government partners page
       And I follow "Create New Government Partner"
@@ -41,3 +41,29 @@ Feature: Admin gregistrations
       And I press "Save"
       Then I should be on the admin government partners page
       And I should see "Government Partner Organization Name"
+      And that partner's API code should not be blank
+
+    Scenario: Define government partner zip codes by state
+      Given the following government partner exists:
+        | organization                 |
+        | Government Organization Name |
+      When I go to the admin government partners page
+      And I follow "Government Organization Name"
+      And I follow "edit"
+      And I select "Massachusetts" from "State for Zip Codes"
+      And I press "Save"
+      Then that partner's government_partner_state should be "MA"
+    
+    Scenario: Define government partner zip codes via list
+      Given the following government partner exists:
+        | organization                 |
+        | Government Organization Name |
+      When I go to the admin government partners page
+      And I follow "Government Organization Name"
+      And I follow "edit"
+      And I fill in "Zip Code List" with "02113, 123, 1a222, 12345-5325, 24242\n  32344 23424-2332 we34 333, 23411"
+      And I press "Save"
+      Then that partner's zip code list should be "02113, 12345-5325, 24242, 32344, 23424-2332, 23411"
+      
+      
+      

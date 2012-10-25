@@ -8,7 +8,6 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Name</th>
       <th>Organization</th>
       <th>API Key</th>
       <th>Whitelabeled</th>
@@ -19,11 +18,10 @@
     <%- @partners.each do |p| %>
       <tr>
         <td><%= p.id %></td>
-        <td><%= h p.name %></td>
-        <td><%= h p.organization %></td>
+        <td><%= link_to p.organization, admin_government_partner_path(p) %></td>
         <td><%= h p.api_key %></td>
         <td><%= p.whitelabeled? ? 'Yes' : 'No' %></td>
-        <td><%= link_to "Show", admin_partner_path(p) %></td>
+        <td><%= link_to "Edit", edit_admin_government_partner_path(p) %></td>
       </tr>
     <%- end %>
   </tbody>

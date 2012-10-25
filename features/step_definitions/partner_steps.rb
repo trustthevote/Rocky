@@ -45,3 +45,22 @@ Then /^I should see a link to that partner's CSS$/ do
   response.body.should include("link href=\"/partners/#{@partner.id}/application.css")
   response.body.should include("link href=\"/partners/#{@partner.id}/registration.css")
 end
+
+
+Then /^that partner's API code should not be blank$/ do
+  @partner ||= Partner.last
+  @partner.reload
+  @partner.api_key.should_not be_blank
+end
+
+Then /^that partner's government_partner_state should be "([^\"]*)"$/ do |state_abbr|
+  @partner ||= Partner.last
+  @partner.reload
+  @partner.government_partner_state_abbrev.should == state_abbr
+end
+
+Then /^that partner's zip code list should be "([^\"]*)"$/ do |comma_separated_list|
+  @partner ||= Partner.last
+  @partner.reload
+  @partner.government_partner_zip_codes.join(", ").should == comma_separated_list.to_s
+end

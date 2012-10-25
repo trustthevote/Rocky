@@ -33,6 +33,14 @@ describe Admin::GovernmentPartnersController do
       response.should render_template :index
     end
   end
+  describe "GET #show" do
+    it 'should render the show template' do
+      partner = Factory.create(:partner)
+      get :show, :id => partner.id
+      assigns(:partner).should == partner
+      response.should render_template :show
+    end      
+  end
   describe "GET #new" do
     it 'should render the new page' do
       get :new
@@ -77,4 +85,43 @@ describe Admin::GovernmentPartnersController do
     end
     
   end
+
+  describe 'GET #edit' do
+    it 'should display edit form' do
+      partner = Factory.create(:partner)
+      get :edit, :id => partner.id
+      assigns(:partner).should == partner
+      response.should render_template :edit
+    end
+  end
+  
+  describe 'PUT #update' do
+    before(:each) do
+      @partner = Factory.create(:partner)
+    end
+    context 'valid data' do
+      before  { put :update, :id => @partner, :partner => { :name => 'new_name' } }
+      it      { should redirect_to admin_government_partner_path(@partner) }
+      specify { @partner.reload.name.should == 'new_name' }
+    end
+
+    context 'template updates' do
+      before  { put :update, :id => @partner, :template => { 'confirmation.en' => 'body' } }
+      specify { EmailTemplate.get(@partner, 'confirmation.en').should == 'body' }
+    end
+
+    context 'css updates' do
+      before  { @sample_css = fixture_file_upload('/files/sample.css') }
+      before  { @paf = PartnerAssetsFolder.new(nil) }
+      before  { mock(PartnerAssetsFolder).new(@partner) { @paf } }
+      before  { mock(@paf).update_css('application', @sample_css) }
+      specify { put :update, :id => @partner, :css_files => { 'application' => @sample_css } }
+    end
+
+    context 'invalid data' do
+      before  { put :update, :id => @partner, :partner => { :name => '' } }
+      it      { should render_template :edit }
+    end
+  end
+
 end

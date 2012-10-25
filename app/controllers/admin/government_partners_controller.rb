@@ -22,10 +22,11 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-class Admin::GovernmentPartnersController < Admin::BaseController
+class Admin::GovernmentPartnersController < Admin::PartnersController
   def index
     @partners = Partner.government
   end
+  
   def new
     @partner = Partner.new
   end
@@ -40,4 +41,19 @@ class Admin::GovernmentPartnersController < Admin::BaseController
       render :action=>:new
     end
   end
+  
+  def update
+    @partner = Partner.find(params[:id])
+
+    if @partner.update_attributes(params[:partner])
+      update_email_templates(@partner, params[:template])
+      update_custom_css(@partner, params[:css_files])
+
+      redirect_to :action=>:show, :id=>@partner
+    else
+      render :edit
+    end
+  end
+  
+  
 end

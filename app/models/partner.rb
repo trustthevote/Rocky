@@ -67,9 +67,12 @@ class Partner < ActiveRecord::Base
   attr_accessor :tmp_asset_directory
 
   belongs_to :state, :class_name => "GeoState"
+  belongs_to :government_partner_state, :class_name=> "GeoState"
   has_many :registrants
 
   has_attached_file :logo, PAPERCLIP_OPTIONS.merge(:styles => { :header => "75x45" })
+
+  serialize :government_partner_zip_codes
 
   before_validation :reformat_phone
   before_validation :set_default_widget_image
@@ -293,6 +296,28 @@ class Partner < ActiveRecord::Base
   def state_abbrev
     state && state.abbreviation
   end
+  
+  def government_partner_state_abbrev=(abbrev)
+    self.government_partner_state = GeoState[abbrev]
+  end
+  
+  def government_partner_state_abbrev
+    government_partner_state && government_partner_state.abbreviation
+  end
+
+  def government_partner_zip_code_list=(string_list)
+    zips = []
+    string_list.split(/[^-\d]/).each do |item|
+      zip = item.strip.match(/^(\d{5}(-\d{4})?)$/).to_s
+      zips << zip unless zip.blank?
+    end
+    self.government_partner_zip_codes = zips
+  end
+  
+  def government_partner_zip_code_list
+    government_partner_zip_codes ? government_partner_zip_codes.join("\n") : nil
+  end
+
 
   def logo_url
     @logo_url
