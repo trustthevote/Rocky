@@ -29,4 +29,4 @@ role :db,   "rtvstaging2-web.osuosl.org", :primary => true
 
 set :rails_env,    "staging2"
 
-set :branch, "3.8"
+set :branch, "3.9"
