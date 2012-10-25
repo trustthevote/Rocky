@@ -96,7 +96,7 @@ describe Api::V2::RegistrationsController do
   def gregistrations(&block)
     query = { :gpartner_id => nil, :gpartner_api_key => nil, :since => nil, :email=>nil }
     mock(V2::RegistrationService).find_records(query, &block)
-    get :index, :format => 'json'
+    get :index_gpartner, :format => 'json'
   end
 
   def new_registration(&block)

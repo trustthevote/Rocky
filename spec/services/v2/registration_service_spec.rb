@@ -159,6 +159,10 @@ describe V2::RegistrationService do
         V2::RegistrationService.find_records(:partner_id => Partner.first.id, :partner_api_key => 'not_the_key')
       }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
     end
+    
+    it "should return an error for invlaid 'since' value" do
+      raise 'implement this'
+    end
 
     it 'should return the list of registrants' do
       partner = Factory(:partner, :api_key=>"key")
@@ -250,7 +254,58 @@ describe V2::RegistrationService do
       res.should have(1).registrant
     end
 
+    context "when a gpartner_id is passed in" do
+      before(:each) do
+        @partner = Factory.create(:government_partner, :api_key=>"key")
+        @ma_reg = Factory.create(:maximal_registrant, :home_zip_code=>"02110")
+        @ca_reg = Factory.create(:maximal_registrant, :home_zip_code=>"90000")
+      end
+      context "when the gpartner ID is invalid" do
+        it "should return an error" do
+          lambda {
+            V2::RegistrationService.find_records(:gpartner_id => 0, :gpartner_api_key => @partner.api_key)
+          }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
+        end
+      end
+      context "when the API key doesn't match" do
+        it "should return an error" do
+          lambda {
+            V2::RegistrationService.find_records(:gpartner_id => @partner.id, :gpartner_api_key => 'not_the_key')
+          }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY          
+        end
+      end
+      context "when the gpartner zips aren't set" do
+        it "should return no registrants" do
+          raise 'or should this return an error?'
+          V2::RegistrationService.find_records(:gpartner_id => @partner.id, :gpartner_api_key => @partner.api_key).should have(0).registrants
+        end
+      end
+      context "when the gpartner zips are set by state" do
+        before(:each) do
+          @partner.government_partner_state_abbrev = "MA"
+          @partner.save!
+        end
+        it "should return registrants for that state" do
+          results = V2::RegistrationService.find_records(:gpartner_id => @partner.id, :gpartner_api_key => @partner.api_key)
+          results.should have(1).registrants
+          results.first[:email_address].should == @ma_reg.email_address
+        end
+      end
+      context "when the gpartner zips are set by zip-code list" do
+        it "should return registrants for those zip codes only (regardless of state)" do
+          @partner.government_partner_zip_code_list = "02113, 90000"
+          @partner.save!
+          results = V2::RegistrationService.find_records(:gpartner_id => @partner.id, :gpartner_api_key => @partner.api_key)
+          results.should have(1).registrants
+          results.first[:email_address].should == @ca_reg.email_address
 
+          @partner.government_partner_zip_code_list = "02110, 90000"
+          @partner.save!
+          results = V2::RegistrationService.find_records(:gpartner_id => @partner.id, :gpartner_api_key => @partner.api_key)
+          results.should have(2).registrants
+        end        
+      end
+    end
   end
 
 end

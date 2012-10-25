@@ -62,12 +62,27 @@ module V2
     # Lists records for the given partner
     def self.find_records(query)
       query ||= {}
-      partner = V2::PartnerService.find_partner(query[:partner_id], query[:partner_api_key])
-
-      regs = partner.registrants
 
       cond_str = []
       cond_vars = []
+
+      if query[:gpartner_id]
+        partner = V2::PartnerService.find_partner(query[:gpartner_id], query[:gpartner_api_key])
+        regs = Registrant
+        if partner.is_government_partner? && !partner.government_partner_state.nil?
+          cond_str << "home_state_id = ?"
+          cond_vars << partner.government_partner_state_id
+        elsif partner.is_government_partner? && !partner.government_partner_zip_codes.blank?
+          cond_str << "home_zip_code in (?)"
+          cond_vars << partner.government_partner_zip_codes
+        else
+          return []
+        end
+      else
+        partner = V2::PartnerService.find_partner(query[:partner_id], query[:partner_api_key])
+        regs = partner.registrants
+      end
+      
 
       if since = query[:since]
         cond_str << "created_at >= ?"
