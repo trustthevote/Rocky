@@ -955,7 +955,7 @@ describe Partner do
       describe ".find_by_login(login)" do
         it "returns nil if the found partner is a government partner" do
           Factory.create(:partner, :is_government_partner=>false, :username=>"partner")
-          Factory.create(:partner, :is_government_partner=>true, :username=>"gov_partner")
+          Factory.create(:partner, :is_government_partner=>true, :username=>"gov_partner", :government_partner_zip_code_list=>"90000")
           
           Partner.find_by_login("partner").should be_a(Partner)
           Partner.find_by_login("gov_partner").should be_nil
@@ -995,6 +995,25 @@ describe Partner do
             results.should include(gp)
           end
         end
+      end
+    end
+    
+    describe "Validations" do
+      it "adds an error to government_partner_state_abbrev and government_partner_zip_code_list when both are blank" do
+        p = Factory.create(:government_partner)
+        p.government_partner_zip_codes = nil
+        p.government_partner_state_id = nil
+        p.valid?.should be_false
+        p.errors.on(:government_partner_state_abbrev).should_not be_nil
+        p.errors.on(:government_partner_zip_code_list).should_not be_nil
+      end
+      it "ads an error to government_partner_state_abbrev and government_partner_zip_code_list when both are present" do
+        p = Factory.create(:government_partner)
+        p.government_partner_state_abbrev="MA"
+        p.government_partner_zip_code_list="90000"
+        p.valid?.should be_false
+        p.errors.on(:government_partner_state_abbrev).should_not be_nil
+        p.errors.on(:government_partner_zip_code_list).should_not be_nil
       end
     end
     

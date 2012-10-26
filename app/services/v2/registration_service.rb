@@ -39,7 +39,18 @@ module V2
 
     class SurveyQuestionError < StandardError
     end
-
+    
+    class InvalidParameterValue < ValidationError
+      def initialize(field)
+        super(field, "Invalid Parameter Value")
+      end
+    end
+    class InvalidParameterType < ValidationError
+      def initialize(field)
+        super(field, "Invalid Parameter Type")
+      end
+    end
+    
     # Creates a record and returns it.
     def self.create_record(data, finish_with_state = false)
       data ||= {}
@@ -60,11 +71,18 @@ module V2
     end
 
     # Lists records for the given partner
+    ALLOWED_PARAMETERS = [:partner_id, :gpartner_id, :partner_api_key, :gpartner_api_key, :since, :email, :callback]
     def self.find_records(query)
       query ||= {}
 
       cond_str = []
       cond_vars = []
+      
+      query.each do |k,v|
+        if !ALLOWED_PARAMETERS.include?(k.to_s.downcase.to_sym)
+          raise InvalidParameterType.new(k)
+        end
+      end
 
       if query[:gpartner_id]
         partner = V2::PartnerService.find_partner(query[:gpartner_id], query[:gpartner_api_key])
@@ -85,8 +103,12 @@ module V2
       
 
       if since = query[:since]
-        cond_str << "created_at >= ?"
-        cond_vars << Time.parse(since)
+        if !(query[:since] =~ /^\d\d\d\d-\d\d-\d\d([T\s]\d\d:\d\d(:\d\d(\+\d\d:\d\d|\s...)?)?)?$/)
+          raise InvalidParameterValue.new(:since)          
+        else
+          cond_str << "created_at >= ?"
+          cond_vars << Time.parse(since)
+        end
       end
 
       if email = query[:email]

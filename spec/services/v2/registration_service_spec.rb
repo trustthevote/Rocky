@@ -161,8 +161,18 @@ describe V2::RegistrationService do
     end
     
     it "should return an error for invlaid 'since' value" do
-      raise 'implement this'
+      partner = Factory(:partner, :api_key=>"key")
+      lambda {
+        V2::RegistrationService.find_records(:partner_id => partner.id, :partner_api_key=>partner.api_key, :since => "abcdef")
+      }.should raise_error V2::RegistrationService::InvalidParameterValue
     end
+    it "should return an error for unsupported parameters" do
+      partner = Factory(:partner, :api_key=>"key")
+      lambda {
+        V2::RegistrationService.find_records(:partner_id => Partner.first.id, :some_field => "abcdef")
+      }.should raise_error V2::RegistrationService::InvalidParameterType
+    end
+
 
     it 'should return the list of registrants' do
       partner = Factory(:partner, :api_key=>"key")
@@ -274,15 +284,10 @@ describe V2::RegistrationService do
           }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY          
         end
       end
-      context "when the gpartner zips aren't set" do
-        it "should return no registrants" do
-          raise 'or should this return an error?'
-          V2::RegistrationService.find_records(:gpartner_id => @partner.id, :gpartner_api_key => @partner.api_key).should have(0).registrants
-        end
-      end
       context "when the gpartner zips are set by state" do
         before(:each) do
           @partner.government_partner_state_abbrev = "MA"
+          @partner.government_partner_zip_code_list = nil
           @partner.save!
         end
         it "should return registrants for that state" do

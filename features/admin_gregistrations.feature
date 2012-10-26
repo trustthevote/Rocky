@@ -13,7 +13,6 @@ Feature: Admin gregistrations
       Then I should see "Government Organization Name"
       And I should see a link for "Standard Partners"
 
-    @wip
     Scenario: Create a new government partner
       When I go to the admin government partners page
       And I follow "Create New Government Partner"
@@ -38,6 +37,7 @@ Feature: Admin gregistrations
       And I fill in "URL" with "http://www.google.com"
       And I fill in "Phone" with "1234567890"
       And I fill in "Email" with "email@example.com"
+      And I fill in "Zip Code List" with "12345"
       And I press "Save"
       Then I should be on the admin government partners page
       And I should see "Government Partner Organization Name"
@@ -51,6 +51,7 @@ Feature: Admin gregistrations
       And I follow "Government Organization Name"
       And I follow "edit"
       And I select "Massachusetts" from "State for Zip Codes"
+      And I fill in "Zip Code List" with ""
       And I press "Save"
       Then that partner's government_partner_state should be "MA"
     

@@ -81,6 +81,7 @@ class Partner < ActiveRecord::Base
   before_create :generate_api_key
   
   validate :check_valid_logo_url
+  validate :government_partner_zip_specification
 
   validates_presence_of :name
   validates_presence_of :url
@@ -307,7 +308,7 @@ class Partner < ActiveRecord::Base
 
   def government_partner_zip_code_list=(string_list)
     zips = []
-    string_list.split(/[^-\d]/).each do |item|
+    string_list.to_s.split(/[^-\d]/).each do |item|
       zip = item.strip.match(/^(\d{5}(-\d{4})?)$/).to_s
       zips << zip unless zip.blank?
     end
@@ -467,6 +468,21 @@ protected
   def check_valid_logo_url
     logo_url_errors.each do |message|
       self.errors.add(:logo_image_URL, message)
+    end
+  end
+  
+  def government_partner_zip_specification
+    if self.is_government_partner? 
+      [[self.government_partner_state.nil? && self.government_partner_zip_codes.blank?, 
+            "Either a State or a list of zip codes must be specified for a government partner"],
+       [!self.government_partner_state.nil? && !self.government_partner_zip_codes.blank?, 
+            "Only one of State or zip code list can be specified for a government partner"]].each do |causes_error, message|
+        if causes_error
+          [:government_partner_state_abbrev, :government_partner_zip_code_list].each do |field|
+            errors.add(field, message)
+          end
+        end         
+      end
     end
   end
 

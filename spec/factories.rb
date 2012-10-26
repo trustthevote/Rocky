@@ -178,6 +178,7 @@ end
 
 Factory.define :government_partner, :parent=>:partner do |partner|
   partner.is_government_partner true
+  partner.government_partner_zip_codes ["90000"]
 end
 
 Factory.define :whitelabel_partner, :parent=>:partner do |partner|
