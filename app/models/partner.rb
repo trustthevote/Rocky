@@ -65,7 +65,7 @@ class Partner < ActiveRecord::Base
   DEFAULT_WIDGET_IMAGE_NAME = "rtv234x60v1"
 
   CSV_GENERATION_PRIORITY = Registrant::REMINDER_EMAIL_PRIORITY
-  CSV_DELETION_DELAY = 2.minutes
+  CSV_DELETION_DELAY = 30.minutes
 
   attr_accessor :tmp_asset_directory
 
