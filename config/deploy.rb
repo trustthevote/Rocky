@@ -171,6 +171,16 @@ namespace :deploy do
       ln -nfs /data/rocky/html pdf
     CMD
   end
+  
+  desc "Link the csv dir to /data/rocky/csv"
+  task :symlink_csv, :roles => [:util], :except => {:no_release => true} do
+    run <<-CMD
+      cd #{latest_release} &&
+      rm -rf csv &&
+      ln -nfs /data/csv/html csv
+    CMD
+  end
+
 
   desc "Link the public/partners dir to the shared path"
   task :symlink_partners, :roles=>[:app], :except => {:no_release => true} do

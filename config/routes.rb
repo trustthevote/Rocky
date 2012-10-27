@@ -43,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout "logout", :controller => "partner_sessions", :action => "destroy"
 
   map.resource "partner", :path_names => {:new => "register", :edit => "profile"},
-                          :member => {:statistics => :get, :registrations => :get, :embed_codes => :get} do |partner|
+                          :member => {:statistics => :get, :registrations => :get, :download_csv=>:get, :embed_codes => :get} do |partner|
     partner.resource "questions",     :only => [:edit, :update]
     partner.resource "widget_image",  :only => [:show, :update]
     partner.resource "logo",          :only => [:show, :update, :destroy]

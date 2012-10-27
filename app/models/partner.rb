@@ -57,6 +57,9 @@ class Partner < ActiveRecord::Base
   end
   DEFAULT_WIDGET_IMAGE_NAME = "rtv234x60v1"
 
+  CSV_GENERATION_PRIORITY = Registrant::REMINDER_EMAIL_PRIORITY
+  CSV_DELETION_DELAY = 30.minutes
+
   attr_accessor :tmp_asset_directory
 
   belongs_to :state, :class_name => "GeoState"
@@ -315,6 +318,46 @@ class Partner < ActiveRecord::Base
       end
     end
   end
+  
+  def generate_registrants_csv_async
+    self.update_attributes!(:csv_ready=>false)
+    action = Delayed::PerformableMethod.new(self, :generate_registrants_csv_file, [])
+    Delayed::Job.enqueue(action, CSV_GENERATION_PRIORITY, Time.now)
+  end
+  
+  def generate_registrants_csv_file
+    time_stamp = Time.now
+    self.csv_file_name = self.generate_csv_file_name(time_stamp)
+    file = File.open(csv_file_path, "w")
+    file.write generate_registrants_csv
+    file.close
+    self.csv_ready = true
+    self.save!
+
+    action = Delayed::PerformableMethod.new(self, :delete_registrants_csv_file, [])
+    Delayed::Job.enqueue(action, CSV_GENERATION_PRIORITY, CSV_DELETION_DELAY)
+  end
+  
+  def delete_registrants_csv_file
+    if File.exists?(csv_file_path)
+      File.delete(csv_file_path)
+    end
+  end
+  
+  def generate_csv_file_name(date_time)
+    obfuscate = Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)}" )
+    "csv-#{obfuscate}-#{date_time.strftime('%Y%m%d-%H:%M:%S')}.csv"
+  end
+  
+  def csv_file_path
+    File.join(csv_path, csv_file_name)
+  end
+  def csv_path
+    path = File.join(Rails.root, "csv", self.id.to_s)
+    FileUtils.mkdir_p(path)
+    path
+  end
+  
 
   def widget_image_name
     WIDGET_IMAGES.detect { |widget| widget[0] == self.widget_image }[1]

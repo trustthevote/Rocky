@@ -466,6 +466,97 @@ describe Partner do
       assert_equal registrants[2].to_csv_array, csv[3]
       assert_equal registrants[3].to_csv_array, csv[4]
     end
+    describe "#generate_registrants_csv_async" do
+      before(:each) do
+        @partner= Factory.create(:partner, :csv_ready=>true)
+        @t = Time.now
+        stub(Time).now { @t }
+        stub(Delayed::PerformableMethod).new { "action" }
+        stub(Delayed::Job).enqueue
+      end
+      it "sets the csv_ready for the partner to false" do
+        @partner.csv_ready.should be_true
+        @partner.generate_registrants_csv_async
+        @partner.reload
+        @partner.csv_ready.should be_false
+      end
+      it "sets up a delayed job to generate the csv" do
+        @partner.generate_registrants_csv_async
+        Delayed::PerformableMethod.should have_received(:new).with(@partner, :generate_registrants_csv_file, [])
+        Delayed::Job.should have_received(:enqueue).with("action", Partner::CSV_GENERATION_PRIORITY, @t)
+      end
+    end
+    describe "#generate_csv_file_name" do
+      it "generates obfuscated file name" do
+        stub(Digest::SHA1).hexdigest { "obfuscate" }
+        d = DateTime.now
+        Partner.new.generate_csv_file_name(d).should == "csv-obfuscate-#{d.strftime('%Y%m%d-%H:%M:%S')}.csv"
+        #Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)} -- #{email_address} -- #{home_zip_code}" )
+      end
+    end
+    describe "#csv_file_path" do
+      it "returns the path to the file name in the record" do
+        @partner = Factory.create(:partner)        
+        stub(@partner).csv_file_name { "a_file_name.ext" }
+        stub(@partner).csv_path { "/some/path" }
+        stub(FileUtils).mkdir_p
+        @partner.csv_file_path.should == "/some/path/a_file_name.ext"
+      end
+    end
+    describe "#csv_path" do
+      it "creates the path to the partner csv directory" do
+        @partner = Factory.create(:partner)
+        stub(FileUtils).mkdir_p
+        @partner.csv_path
+        FileUtils.should have_received(:mkdir_p).with(File.join(Rails.root, "csv", @partner.id.to_s))
+      end
+      it "returns the path to the partner csv directory" do
+        @partner = Factory.create(:partner)
+        stub(FileUtils).mkdir_p
+        @partner.csv_path.should == File.join(Rails.root, "csv", @partner.id.to_s)
+      end
+    end
+    describe "#generate_registrants_csv_file" do
+      before(:each) do
+        @partner = Factory.create(:partner)        
+        @t = Time.now
+        @file = "mock_object"
+        stub(Time).now { @t }
+        stub(@partner).generate_csv_file_name { "fn.csv" }
+        stub(@partner).generate_registrants_csv { "generated_csv" }
+        stub(@partner).csv_ready=
+        stub(@partner).save!
+        stub(File).open { @file }
+        stub(@file).write { true }
+        stub(@file).close { true }
+        
+        stub(Delayed::PerformableMethod).new { "action" }
+        stub(Delayed::Job).enqueue
+      end
+      it "generates obfuscated file names in partner directories with date/time stamp" do
+        @partner.generate_registrants_csv_file
+        @partner.should have_received(:generate_csv_file_name).with(@t)
+      end
+      it "saves newest export into csv/[partner_id] directory" do
+        @partner.generate_registrants_csv_file
+        File.should have_received(:open).with(@partner.csv_file_path, "w")
+        @file.should have_received(:write).with("generated_csv")
+      end
+      it "sets csv_ready to true" do
+        @partner.generate_registrants_csv_file
+        @partner.should have_received(:csv_ready=).with(true)
+      end
+      it "saves the obfuscated file name in the partner record" do
+        @partner.generate_registrants_csv_file
+        @partner.csv_file_name.should == "fn.csv"
+        @partner.should have_received(:save!)
+      end
+      it "sets a delayed job to delete the file" do
+        @partner.generate_registrants_csv_file
+        Delayed::PerformableMethod.should have_received(:new).with(@partner, :delete_registrants_csv_file, [])
+        Delayed::Job.should have_received(:enqueue).with("action", Partner::CSV_GENERATION_PRIORITY, Partner::CSV_DELETION_DELAY)        
+      end
+    end
   end
 
   describe "registration statistics" do

@@ -157,16 +157,27 @@ describe PartnersController do
       end
     end
 
-    describe "download registration data" do
-      it "triggers download" do
-        this_moment = Time.now
-        stub(Time).now { this_moment }
-        now = this_moment.to_s(:db).gsub(/\D/,'')
-        get :registrations, :format => 'csv'
-        assert_response :success
-        assert_equal "text/csv", response.headers["Content-Type"]
-        assert_equal %Q(attachment; filename="registrations-#{now}.csv"), response.headers["Content-Disposition"]
+    describe "GET #registrations" do
+      it "triggers a CSV generation" do
+        stub(controller.current_partner).generate_registrants_csv_async
+        get :registrations
+        controller.current_partner.should have_received(:generate_registrants_csv_async)
       end
+      it "redirects to the download_csv action" do
+        stub(controller.current_partner).generate_registrants_csv_async
+        get :registrations
+        assert_redirected_to download_csv_partner_url
+      end
+      
+      # it "triggers download" do
+      #   this_moment = Time.now
+      #   stub(Time).now { this_moment }
+      #   now = this_moment.to_s(:db).gsub(/\D/,'')
+      #   get :registrations, :format => 'csv'
+      #   assert_response :success
+      #   assert_equal "text/csv", response.headers["Content-Type"]
+      #   assert_equal %Q(attachment; filename="registrations-#{now}.csv"), response.headers["Content-Disposition"]
+      # end        
     end
   end
 end

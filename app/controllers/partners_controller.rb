@@ -114,8 +114,8 @@ HTML
   end
 
   def registrations
-    now = Time.now.to_s(:db).gsub(/\D/,'')
-    send_data(current_partner.generate_registrants_csv, :filename => "registrations-#{now}.csv", :type => :csv)
+    current_partner.generate_registrants_csv_async
+    redirect_to download_csv_partner_url
   end
 
   protected

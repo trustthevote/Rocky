@@ -29,16 +29,16 @@ class PartnerBase < ApplicationController
   before_filter :init_nav_class
 
 
+  def current_partner
+    return @current_partner if defined?(@current_partner)
+    @current_partner = current_partner_session && current_partner_session.record
+  end
+
   protected
 
   def current_partner_session
     return @current_partner_session if defined?(@current_partner_session)
     @current_partner_session = PartnerSession.find
-  end
-
-  def current_partner
-    return @current_partner if defined?(@current_partner)
-    @current_partner = current_partner_session && current_partner_session.record
   end
 
   def require_partner
