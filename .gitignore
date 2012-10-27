@@ -16,6 +16,7 @@ db/bootstrap/partners.yml
 log/*.log
 tmp/*
 public/TEST
+public/csv
 public/csv/*
 public/pdf/*
 public/system/*
