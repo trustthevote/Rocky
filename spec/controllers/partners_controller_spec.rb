@@ -168,17 +168,31 @@ describe PartnersController do
         stub(controller.current_partner).generate_registrants_csv_async
         get :registrations
         assert_redirected_to download_csv_partner_url
+      end      
+    end
+    describe "GET #download_csv" do
+      context "when csv_ready is true" do
+        before(:each) do
+          stub(controller.current_partner).csv_ready { true }
+          stub(controller.current_partner).id { "123" }
+          stub(controller.current_partner).csv_file_name { "fn.csv" }
+        end
+        it "redirects to the CSV url" do
+          get :download_csv
+          response.should redirect_to "/csv/#{controller.current_partner.id}/#{controller.current_partner.csv_file_name}"
+        end
       end
-      
-      # it "triggers download" do
-      #   this_moment = Time.now
-      #   stub(Time).now { this_moment }
-      #   now = this_moment.to_s(:db).gsub(/\D/,'')
-      #   get :registrations, :format => 'csv'
-      #   assert_response :success
-      #   assert_equal "text/csv", response.headers["Content-Type"]
-      #   assert_equal %Q(attachment; filename="registrations-#{now}.csv"), response.headers["Content-Disposition"]
-      # end        
+      context "when csv_ready is false" do
+        integrate_views
+        before(:each) do
+          stub(controller.current_partner).csv_ready { false }
+        end
+        it "renders the template with a redirect-to-self and a delay of 10 seconds" do
+          get :download_csv
+          assert_select "meta[content=5]"
+          assert_select "meta[http-equiv=refresh]"
+        end
+      end
     end
   end
 end

@@ -118,6 +118,12 @@ HTML
     current_partner.generate_registrants_csv_async
     redirect_to download_csv_partner_url
   end
+  
+  def download_csv
+    if current_partner.csv_ready
+      redirect_to "/csv/#{current_partner.id}/#{current_partner.csv_file_name}"
+    end
+  end
 
   protected
 

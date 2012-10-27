@@ -491,7 +491,7 @@ describe Partner do
       it "generates obfuscated file name" do
         stub(Digest::SHA1).hexdigest { "obfuscate" }
         d = DateTime.now
-        Partner.new.generate_csv_file_name(d).should == "csv-obfuscate-#{d.strftime('%Y%m%d-%H:%M:%S')}.csv"
+        Partner.new.generate_csv_file_name(d).should == "csv-obfuscate-#{d.strftime('%Y%m%d-%H%M%S')}.csv"
         #Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)} -- #{email_address} -- #{home_zip_code}" )
       end
     end
@@ -555,7 +555,7 @@ describe Partner do
       it "sets a delayed job to delete the file" do
         @partner.generate_registrants_csv_file
         Delayed::PerformableMethod.should have_received(:new).with(@partner, :delete_registrants_csv_file, [])
-        Delayed::Job.should have_received(:enqueue).with("action", Partner::CSV_GENERATION_PRIORITY, Partner::CSV_DELETION_DELAY)        
+        Delayed::Job.should have_received(:enqueue).with("action", Partner::CSV_GENERATION_PRIORITY, Partner::CSV_DELETION_DELAY.from_now)        
       end
     end
   end

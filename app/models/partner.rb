@@ -65,7 +65,7 @@ class Partner < ActiveRecord::Base
   DEFAULT_WIDGET_IMAGE_NAME = "rtv234x60v1"
 
   CSV_GENERATION_PRIORITY = Registrant::REMINDER_EMAIL_PRIORITY
-  CSV_DELETION_DELAY = 30.minutes
+  CSV_DELETION_DELAY = 2.minutes
 
   attr_accessor :tmp_asset_directory
 
@@ -404,7 +404,7 @@ class Partner < ActiveRecord::Base
     self.save!
 
     action = Delayed::PerformableMethod.new(self, :delete_registrants_csv_file, [])
-    Delayed::Job.enqueue(action, CSV_GENERATION_PRIORITY, CSV_DELETION_DELAY)
+    Delayed::Job.enqueue(action, CSV_GENERATION_PRIORITY, CSV_DELETION_DELAY.from_now)
   end
   
   def delete_registrants_csv_file
@@ -415,7 +415,7 @@ class Partner < ActiveRecord::Base
   
   def generate_csv_file_name(date_time)
     obfuscate = Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)}" )
-    "csv-#{obfuscate}-#{date_time.strftime('%Y%m%d-%H:%M:%S')}.csv"
+    "csv-#{obfuscate}-#{date_time.strftime('%Y%m%d-%H%M%S')}.csv"
   end
   
   def csv_file_path
