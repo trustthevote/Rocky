@@ -74,6 +74,17 @@ describe Api::V2::RegistrationsController do
       registrations { [ :reg1, :reg2 ] }
     end
   end
+  
+  describe "index_gpartner" do
+    it 'should catch errors' do
+      expect_api_error :message => 'error'
+      gregistrations { raise ArgumentError.new('error') }
+    end
+    it 'should return registrations' do
+      expect_api_response :registrations => [ :reg1, :reg2 ]
+      gregistrations { [ :reg1, :reg2 ] }
+    end    
+  end
 
   private
 
@@ -81,6 +92,11 @@ describe Api::V2::RegistrationsController do
     query = { :partner_id => nil, :partner_api_key => nil, :since => nil, :email=>nil }
     mock(V2::RegistrationService).find_records(query, &block)
     get :index, :format => 'json'
+  end
+  def gregistrations(&block)
+    query = { :gpartner_id => nil, :gpartner_api_key => nil, :since => nil, :email=>nil }
+    mock(V2::RegistrationService).find_records(query, &block)
+    get :index_gpartner, :format => 'json'
   end
 
   def new_registration(&block)

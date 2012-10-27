@@ -26,6 +26,7 @@ require 'open-uri'
 
 class Partner < ActiveRecord::Base
   acts_as_authentic
+  
 
   DEFAULT_ID = 1
 
@@ -34,19 +35,25 @@ class Partner < ActiveRecord::Base
     "rtv-234x60-v1-sp.gif",
     "rtv-234x60-v2.gif",
     "rtv-234x60-v3.gif",
+    "rtv-234x60-v3_es.gif",
     "rtv-100x100-v1.gif",
     "rtv-100x100-v2.gif",
+    "rtv-100x100-v2_es.gif",
     "rtv-100x100-v3.gif",
+    "rtv-100x100-v3_es.gif",
     "rtv-180x150-v1.gif",
+    "rtv-180x150-v1_es.gif",
     "rtv-180x150-v2.gif",
     "rtv-200x165-v1.gif",
     "rtv-200x165-v2.gif",
+    "rtv-200x165-v2_es.gif",
     "rtv-300x100-v1.gif",
     "rtv-300x100-v2.gif",
     "rtv-300x100-v3.gif",
     "rtv-468x60-v1.gif",
     "rtv-468x60-v1-sp.gif",
     "rtv-468x60-v2.gif",
+    "rtv-468x60-v2_es.gif",
     "rtv-468x60-v3.gif"
   ]
 
@@ -63,9 +70,12 @@ class Partner < ActiveRecord::Base
   attr_accessor :tmp_asset_directory
 
   belongs_to :state, :class_name => "GeoState"
+  belongs_to :government_partner_state, :class_name=> "GeoState"
   has_many :registrants
 
   has_attached_file :logo, PAPERCLIP_OPTIONS.merge(:styles => { :header => "75x45" })
+
+  serialize :government_partner_zip_codes
 
   before_validation :reformat_phone
   before_validation :set_default_widget_image
@@ -74,6 +84,7 @@ class Partner < ActiveRecord::Base
   before_create :generate_api_key
   
   validate :check_valid_logo_url
+  validate :government_partner_zip_specification
 
   validates_presence_of :name
   validates_presence_of :url
@@ -94,9 +105,13 @@ class Partner < ActiveRecord::Base
   after_validation :make_paperclip_errors_readable
 
   include PartnerAssets
+  
+  named_scope :government, :conditions=>{:is_government_partner=>true}
+  named_scope :standard, :conditions=>{:is_government_partner=>false}
 
   def self.find_by_login(login)
-    find_by_username(login) || find_by_email(login)
+    p = find_by_username(login) || find_by_email(login)
+    return (p && p.is_government_partner? ? nil : p)
   end
 
   def primary?
@@ -117,11 +132,16 @@ class Partner < ActiveRecord::Base
 
 
   def registration_stats_state
-    counts = Registrant.connection.select_all(<<-"SQL")
+    sql =<<-"SQL"
       SELECT count(*) as registrations_count, home_state_id FROM `registrants`
-      WHERE (status = 'complete' OR status = 'step_5') AND partner_id = #{self.id}
+      WHERE (status = 'complete' OR status = 'step_5') 
+        AND finish_with_state = ?
+        AND partner_id = #{self.id}
       GROUP BY home_state_id
     SQL
+    
+    counts = Registrant.connection.select_all(Registrant.send(:sanitize_sql_for_conditions, [sql, false]))
+    
     sum = counts.sum {|row| row["registrations_count"].to_i}
     named_counts = counts.collect do |row|
       { :state_name => GeoState[row["home_state_id"].to_i].name,
@@ -235,15 +255,42 @@ class Partner < ActiveRecord::Base
   end
 
   def registration_stats_completion_date
-    conditions = "partner_id = ? AND (status = 'complete' OR status = 'step_5') AND created_at >= ?"
+    conditions = "finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5') AND created_at >= ?"
     stats = {}
-    stats[:day_count] =   Registrant.count(:conditions => [conditions, self, 1.day.ago])
-    stats[:week_count] =  Registrant.count(:conditions => [conditions, self, 1.week.ago])
-    stats[:month_count] = Registrant.count(:conditions => [conditions, self, 1.month.ago])
-    stats[:year_count] =  Registrant.count(:conditions => [conditions, self, 1.year.ago])
-    stats[:total_count] = Registrant.count(:conditions => ["partner_id = ? AND (status = 'complete' OR status = 'step_5')", self])
-    stats[:percent_complete] = stats[:total_count].to_f / Registrant.count(:conditions => ["partner_id = ? AND (status != 'initial')", self])
+    stats[:day_count] =   Registrant.count(:conditions => [conditions, false, self, 1.day.ago])
+    stats[:week_count] =  Registrant.count(:conditions => [conditions, false, self, 1.week.ago])
+    stats[:month_count] = Registrant.count(:conditions => [conditions, false, self, 1.month.ago])
+    stats[:year_count] =  Registrant.count(:conditions => [conditions, false, self, 1.year.ago])
+    stats[:total_count] = Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5')", false, self])
+    stats[:percent_complete] = stats[:total_count].to_f / Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status != 'initial')", false, self])
     stats
+  end
+  def registration_stats_finish_with_state_completion_date
+    #conditions = "finish_with_state = ? AND partner_id = ? AND status = 'complete' AND created_at >= ?"
+    sql =<<-"SQL"
+      SELECT count(*) as registrations_count, home_state_id FROM `registrants`
+      WHERE status = 'complete'
+        AND finish_with_state = ?
+        AND partner_id = ?
+        AND created_at >= ?
+      GROUP BY home_state_id
+    SQL
+    
+    stats = {}
+    
+    [[:day_count, 1.day.ago],
+     [:week_count, 1.week.ago],
+     [:month_count, 1.month.ago],
+     [:year_count, 1.year.ago],
+     [:total_count, 1000.years.ago]].each do |range,time|
+      counts = Registrant.connection.select_all(Registrant.send(:sanitize_sql_for_conditions, [sql, true, self, time]))
+      counts.each do |row|
+        state_name = GeoState[row["home_state_id"].to_i].name
+        stats[state_name] ||= {:state_name=>state_name}
+        stats[state_name][range] = row["registrations_count"].to_i
+      end
+    end
+    stats.to_a.sort {|a,b| a[0]<=>b[0] }.collect{|a| a[1]}
   end
 
   def state_abbrev=(abbrev)
@@ -253,6 +300,28 @@ class Partner < ActiveRecord::Base
   def state_abbrev
     state && state.abbreviation
   end
+  
+  def government_partner_state_abbrev=(abbrev)
+    self.government_partner_state = GeoState[abbrev]
+  end
+  
+  def government_partner_state_abbrev
+    government_partner_state && government_partner_state.abbreviation
+  end
+
+  def government_partner_zip_code_list=(string_list)
+    zips = []
+    string_list.to_s.split(/[^-\d]/).each do |item|
+      zip = item.strip.match(/^(\d{5}(-\d{4})?)$/).to_s
+      zips << zip unless zip.blank?
+    end
+    self.government_partner_zip_codes = zips
+  end
+  
+  def government_partner_zip_code_list
+    government_partner_zip_codes ? government_partner_zip_codes.join("\n") : nil
+  end
+
 
   def logo_url
     @logo_url
@@ -442,6 +511,21 @@ protected
   def check_valid_logo_url
     logo_url_errors.each do |message|
       self.errors.add(:logo_image_URL, message)
+    end
+  end
+  
+  def government_partner_zip_specification
+    if self.is_government_partner? 
+      [[self.government_partner_state.nil? && self.government_partner_zip_codes.blank?, 
+            "Either a State or a list of zip codes must be specified for a government partner"],
+       [!self.government_partner_state.nil? && !self.government_partner_zip_codes.blank?, 
+            "Only one of State or zip code list can be specified for a government partner"]].each do |causes_error, message|
+        if causes_error
+          [:government_partner_state_abbrev, :government_partner_zip_code_list].each do |field|
+            errors.add(field, message)
+          end
+        end         
+      end
     end
   end
 

@@ -212,7 +212,7 @@ describe Registrant do
       assert reg.valid?, reg.errors.full_messages
       assert_nil reg.party
     end
-
+        
     it "parses date of birth before validation" do
       reg = Factory.build(:step_1_registrant)
       reg.date_of_birth = "08/27/1978"
@@ -319,6 +319,16 @@ describe Registrant do
       assert reg.eligible?
       assert !reg.ineligible_non_citizen?
     end
+    
+    it "does not validate phone is present if rtv or partner mobile opt-in is true" do
+      reg = Factory.build(:step_1_registrant, :phone => "")
+      reg.opt_in_sms = true
+      reg.should be_valid
+      reg.partner_opt_in_sms = true
+      reg.should be_valid
+    end
+    
+    
   end
 
   describe "step 2" do
@@ -423,7 +433,7 @@ describe Registrant do
         assert_equal "123-456-7890", reg.phone
       end
       it "should require a valid phone number" do
-        reg = Factory.build(:step_3_registrant, :phone_type => "Mobile")
+        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
         stub(reg).custom_step_2? { true }
         
         reg.phone = "1234567890"
@@ -444,6 +454,27 @@ describe Registrant do
         reg.phone = "555-1234"
         assert !reg.valid?
       end
+      
+      it "validates phone is present if rtv mobile opt-in is true" do
+        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
+        stub(reg).custom_step_2? { true }
+        reg.phone = ''
+        
+        reg.opt_in_sms = true
+        reg.valid?.should be_false
+        assert reg.errors.on(:phone)
+      end
+
+      it "validates phone is present if partner mobile opt-in is true" do
+        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
+        stub(reg).custom_step_2? { true }
+        reg.phone = ''
+
+        reg.partner_opt_in_sms = true
+        reg.valid?.should be_false
+        assert reg.errors.on(:phone)
+      end
+      
 
       it "does not require party when state has custom step 2" do
         @reg.party=nil
@@ -461,7 +492,118 @@ describe Registrant do
       end
     end
     
-    
+    context "with a short form" do
+      before(:each) do
+        @reg = Factory.build(:step_2_registrant, :state_id_number=>"1234", :opt_in_sms=>false)
+        stub(@reg).use_short_form? { true }        
+      end
+      it "should format phone as ###-###-####" do
+        @reg.phone = "1234567890"
+        @reg.phone_type = "mobile"
+        assert @reg.valid?
+        assert_equal "123-456-7890", @reg.phone
+      end
+      it "should require a valid phone number" do
+        @reg.phone_type = "Mobile"
+        
+        @reg.phone = "1234567890"
+        assert @reg.valid?
+
+        @reg.phone = "123-456-7890"
+        assert @reg.valid?, @reg.errors.full_messages
+
+        @reg.phone = "(123) 456 7890x123"
+        assert @reg.valid?
+
+        @reg.phone = "123.456.7890 ext 123"
+        assert @reg.valid?
+
+        @reg.phone = "asdfg"
+        assert !@reg.valid?
+
+        @reg.phone = "555-1234"
+        assert !@reg.valid?
+      end
+      
+      it "validates phone is present if rtv mobile opt-in is true" do
+        @reg.phone_type = "Mobile"
+        @reg.phone = ''
+        
+        @reg.opt_in_sms = true
+        @reg.valid?.should be_false
+        assert @reg.errors.on(:phone)
+      end
+
+      it "validates phone is present if partner mobile opt-in is true" do
+        @reg.phone_type = "Mobile"
+        @reg.phone = ''
+
+        @reg.partner_opt_in_sms = true
+        @reg.valid?.should be_false
+        assert @reg.errors.on(:phone)
+      end
+      it "should require valid state id" do
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => nil)
+
+        assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "NONE")
+        assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "none")
+
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => "123")
+        assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "1234")
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => "12345")
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => "123456")
+        assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "1234567")
+        assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "1"*42)
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => "1"*43)
+
+        assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "A234567")
+        assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "1-234567")
+        assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "*234567")
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => "$234567")
+      end
+      it "should upcase state id" do
+        reg = Factory.build(:step_2_registrant, :short_form=>true, :state_id_number => "abc12345")
+        assert reg.valid?
+        assert_equal "ABC12345", reg.state_id_number
+      end
+      it "should require previous name fields if change_of_name" do
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_name => true, :prev_name_title => nil)
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_name => true, :prev_first_name => nil)
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_name => true, :prev_last_name => nil)
+      end
+
+      it "requires previous address fields if change_of_address" do
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_address => nil)
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_city => nil)
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_state_id => nil)
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => nil)
+        assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => '00000')
+      end
+
+      it "should not require attestations" do
+        assert_attribute_valid_with(:step_2_registrant, :short_form=>true, :attest_true => nil, :state_id_number=>"1234")
+      end
+
+      it "should check format of prev_zip_code" do
+        reg = Factory.build(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => 'ABCDE')
+        reg.invalid?
+
+        assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:prev_zip_code)].flatten
+      end
+
+      it "should limit number of simultaneous errors on prev_zip_code" do
+        reg = Factory.build(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => nil)
+        reg.invalid?
+
+        assert_equal ["Required"], [reg.errors.on(:prev_zip_code)].flatten
+      end
+
+
+      it "should not require phone number" do
+        reg = Factory.build(:step_2_registrant, :short_form=>true, :phone => "", :state_id_number=>"1234")
+        assert reg.valid?
+      end
+    end
 
     it "generates barcode when entering Step 2" do
       reg = Factory.create(:step_1_registrant)
@@ -631,6 +773,24 @@ describe Registrant do
       reg.phone = "555-1234"
       assert !reg.valid?
     end
+    
+    it "validates phone is present if rtv mobile opt-in is true" do
+      reg = Factory.build(:step_3_registrant, :phone => "")
+      
+      reg.opt_in_sms = true
+      reg.valid?.should be_false
+      assert reg.errors.on(:phone)
+    end
+
+    it "validates phone is present if partner mobile opt-in is true" do
+      reg = Factory.build(:step_3_registrant, :phone => "")
+
+      reg.partner_opt_in_sms = true
+      reg.valid?.should be_false
+      assert reg.errors.on(:phone)
+    end
+    
+    
 
     it "should not require phone type when registrant does not provide phone" do
       reg = Factory.build(:step_3_registrant, :phone_type => "")
@@ -787,6 +947,22 @@ describe Registrant do
     end
   end
 
+  describe "use_short_form?" do
+    it "returns false if short_form is false" do
+      r = Registrant.new(:short_form=>false)
+      r.use_short_form?.should be_false
+    end
+    it "returns false if short_form is true and custom_step_2 is true" do
+      r = Registrant.new(:short_form=>true)
+      stub(r).custom_step_2? { true }
+      r.use_short_form?.should be_false
+    end
+    it "return true if short_form is true and custom_step_2 is false" do
+      r = Registrant.new(:short_form=>true)
+      stub(r).custom_step_2? { false }
+      r.use_short_form?.should be_true
+    end
+  end
 
 
   describe "states by abbreviation" do
@@ -1043,7 +1219,9 @@ describe Registrant do
                      "No",  # volunteer
                      "No",
                      nil,
-                     nil],
+                     nil,
+                     "No",
+                     "No"],
                   reg.to_csv_array
     end
 
@@ -1090,7 +1268,9 @@ describe Registrant do
                      "Yes",
                      "Yes",
                      nil,
-                     reg.created_at && reg.created_at.to_s(:month_day_year)
+                     reg.created_at && reg.created_at.to_s(:month_day_year),
+                     "No",
+                     "Yes"
                      ],
                  reg.to_csv_array
     end
@@ -1140,14 +1320,16 @@ describe Registrant do
                      "Yes",
                      "Yes",
                      nil,
-                     reg.created_at && reg.created_at.to_s(:month_day_year)
+                     reg.created_at && reg.created_at.to_s(:month_day_year),
+                     "No",
+                     "Yes"
                      ]
                  
     end
 
     it "renders ineligible CSV" do
       reg = Factory.create(:step_1_registrant, :us_citizen => false)
-      assert_equal "Not a US citizen", reg.to_csv_array[-2]
+      assert_equal "Not a US citizen", reg.to_csv_array[-4]
     end
 
     it "has a CSV header" do

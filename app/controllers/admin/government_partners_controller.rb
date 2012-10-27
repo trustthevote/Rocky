@@ -22,11 +22,38 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-role :web,  "rtvstaging2-web.osuosl.org"
-role :app,  "rtvstaging2-web.osuosl.org"
-role :util, "rtvstaging2-util.osuosl.org"
-role :db,   "rtvstaging2-web.osuosl.org", :primary => true
+class Admin::GovernmentPartnersController < Admin::PartnersController
+  def index
+    @partners = Partner.government
+  end
+  
+  def new
+    @partner = Partner.new
+  end
+  
+  def create
+    @partner = Partner.new(params[:partner].merge(:is_government_partner=>true))
+    @partner.generate_username
+    @partner.generate_random_password
+    if @partner.save
+      redirect_to :action=>:index
+    else
+      render :action=>:new
+    end
+  end
+  
+  def update
+    @partner = Partner.find(params[:id])
 
-set :rails_env,    "staging2"
+    if @partner.update_attributes(params[:partner])
+      update_email_templates(@partner, params[:template])
+      update_custom_css(@partner, params[:css_files])
 
-set :branch, "3.9"
+      redirect_to :action=>:show, :id=>@partner
+    else
+      render :edit
+    end
+  end
+  
+  
+end

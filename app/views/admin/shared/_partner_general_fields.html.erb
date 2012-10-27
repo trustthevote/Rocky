@@ -1,0 +1,59 @@
+<fieldset>
+  <legend>General</legend>
+  <ul class="stacked">
+    <li class="width_b">
+      <h3><%= f.label :name %></h3>
+      <%= field_div f, :name %>
+      <span class="error"><%= @partner.errors.on :name %></span>
+    </li>
+    <li class="width_a">
+      <h3><%= f.label :organization %></h3>
+      <%= field_div f, :organization %>
+      <span class="error"><%= @partner.errors.on :organization %></span>
+    </li>
+    <li class="width_a">
+      <h3><%= f.label :url %></h3>
+      <%= field_div f, :url %>
+      <span class="error"><%= f.object.errors.on :url %></span>
+    </li>
+    
+    <li class="width_a">
+      <h3><%= f.label :email %></h3>
+      <%= field_div f, :email %>
+      <span class="error"><%= @partner.errors.on :email %></span>
+    </li>     
+    <li class="width_a">
+      <h3><%= f.label :phone %></h3>
+      <%= field_div f, :phone %>
+      <span class="error"><%= f.object.errors.on :phone %></span>
+    </li>
+     
+  </ul>
+  
+  <ul class="stacked">
+    <li class="width_a">
+      <h3><%= f.label :address %></h3>
+      <%= field_div f, :address %>
+      <span class="error"><%= f.object.errors.on :address %></span>
+    </li>
+  </ul>
+  <ul class="stacked">
+    <li class="width_a">
+      <h3><%= f.label :city %></h3>
+      <%= field_div f, :city %>
+      <span class="error"><%= f.object.errors.on :city %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= f.label :state_abbrev, "State" %></h3>
+      <div><%= f.select :state_abbrev, GeoState.collection_for_select, :include_blank => "select a state" %></div>
+      <span class="error"><%= f.object.errors.on :state_abbrev %></span>
+    </li>
+    <li class="width_c">
+      <h3><%= f.label :zip_code %></h3>
+      <%= field_div f, :zip_code %>
+      <span class="error"><%= f.object.errors.on :zip_code %></span>
+    </li>
+  </ul>
+  
+  
+</fieldset>

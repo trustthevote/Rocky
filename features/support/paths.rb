@@ -64,6 +64,8 @@ module NavigationHelpers
       partner_path
     when /the admin dashboard/
       admin_partners_path
+    when /the admin government partners page/
+      admin_government_partners_path
     when /the registration page for that partner/
       "#{new_registrant_path}?partner=#{@partner.id}"
     when /the partner page for that partner/

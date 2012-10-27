@@ -118,8 +118,6 @@ Feature: Step 2
       And I check "I am a resident of California, living in the United States"
       And I press "registrant_state_online_registration"
       Then I should see "You can complete your voter registration online with the state right now - using the application provided by Secretary of State Debra Bowen."
-      And I should see "finish your registration with Rock the Vote and Opt-in Partner. You will just have to print, sign, and mail in the form by October 22nd."
-      And I should see a link for "finish your registration with Rock the Vote and Opt-in Partner"
       And I should see a link to the CA online registration system
     
     
@@ -169,14 +167,14 @@ Feature: Step 2
         
         
         
-        
-    Scenario Outline: California resident selects to finish registration with Rock the Vote
-      Given I have completed step 1 as a resident of "<state>" state
+    @passing  
+    Scenario: California resident selects to finish registration with Rock the Vote
+      Given I have completed step 1 as a resident of "California" state
       When I go to the step 2 page
       And I select "Mr." from "title"
       And I fill in "first" with "John"
       And I fill in "last" with "Public"
-      And I press "registrant_skip_state_online_registration"
+      And I press "registrant_submit"
       Then I should see "Additional Registration Information"
       And I should see a field for "Address"
       And I should see a field for "registrant_home_unit"
@@ -189,3 +187,70 @@ Feature: Step 2
       And I should not see a field for "Type"
       And I should not see a field for "Send me txt messages from Rock the Vote"
     
+    @passing
+    Scenario: User arrives with short_form=1
+      Given I have completed step 1 for a short form
+      When I go to the step 2 page
+      And I should see a field for "Title"
+      And I should see a field for "First"
+      And I should see a field for "Middle"
+      And I should see a field for "Last"
+      And I should see a field for "Suffix"
+      And I should see a field for "Address"
+      And I should see a field for "registrant_home_unit"
+      And I should see a field for "City"
+      And I should see a field for "State"
+      And I should see a field for "ZIP code"
+      And I should see a checkbox for "registrant_has_mailing_address"
+      And I should see a field for "I have changed my name"
+      And I should see a field for "I have changed my address"      
+      And I should see a field for "registrant_state_id_number"
+      And I should see a field for "Race"
+      And I should see a field for "Phone"
+      And I should see a field for "Type"
+      And I should see a field for "Send me txt messages from Rock the Vote"
+      And I should see a field for "Send me txt messages from Rock the Vote"
+      
+      
+    @passing
+    Scenario: User arrives with short_form=1 for a state with an online system
+      Given I have completed step 1 for a short form as a resident of "California"
+      When I go to the step 2 page
+      And I select "Mr." from "title"
+      And I fill in "first" with "John"
+      And I fill in "last" with "Public"
+      And I press "registrant_submit"
+      Then I should see "Additional Registration Information"
+      And I should see a field for "Address"
+      And I should see a field for "registrant_home_unit"
+      And I should see a field for "City"
+      And I should see a field for "State"
+      And I should see a field for "ZIP code"
+      And I should see a checkbox for "registrant_has_mailing_address"
+      And I should see a field for "Race"
+      And I should not see a field for "Phone"
+      And I should not see a field for "Type"
+      And I should not see a field for "Send me txt messages from Rock the Vote"
+      
+    @passing
+    Scenario: User arrives with short_form=1 and leaves fields blank
+      Given I have completed step 1 for a short form
+      When I go to the step 2 page
+      And I press "registrant_submit"
+      Then I should see "Personal Information"
+      And I should see "Required"
+      
+    @passing
+    Scenario: User arrives with short_form=1 and fills all required fields
+      Given I have completed step 1 for a short form
+      When I go to the step 2 page
+      And I select "Mr." from "title"
+      And I fill in "first" with "John"
+      And I fill in "last" with "Public"
+      And I fill in "address" with "123 Market St."
+      And I fill in "city" with "Pittsburgh"
+      And I fill in "ID Number" with "1234"
+      And I press "registrant_submit"
+      Then I should see "Print Your Form"
+
+      

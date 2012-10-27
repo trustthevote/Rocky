@@ -22,11 +22,12 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-role :web,  "rtvstaging2-web.osuosl.org"
-role :app,  "rtvstaging2-web.osuosl.org"
-role :util, "rtvstaging2-util.osuosl.org"
-role :db,   "rtvstaging2-web.osuosl.org", :primary => true
+class AddBuildingViaApiCallToRegistrants < ActiveRecord::Migration
+  def self.up
+    add_column :registrants, :building_via_api_call, :boolean, :default=>false
+  end
 
-set :rails_env,    "staging2"
-
-set :branch, "3.9"
+  def self.down
+    remove_column :registrants, :building_via_api_call
+  end
+end

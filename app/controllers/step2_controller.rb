@@ -40,15 +40,31 @@ class Step2Controller < RegistrationStep
   
   def advance_to_next_step
     @registrant.advance_to_step_2
+    if @registrant.use_short_form?
+      @registrant.advance_to_step_3
+      @registrant.advance_to_step_4
+      @registrant.advance_to_step_5
+    end
   end
 
   def next_url
     if @registrant.using_state_online_registration?
       registrant_state_online_registration_url(@registrant)
+    elsif @registrant.use_short_form?
+      registrant_download_url(@registrant)
     else
       registrant_step_3_url(@registrant)
     end
   end
+
+  def redirect_when_eligible
+    if @registrant.use_short_form?
+      @registrant.wrap_up
+    end
+    super
+  end
+
+
 
   def set_up_view_variables
     @registrant.mailing_state ||= @registrant.home_state

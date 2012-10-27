@@ -58,6 +58,7 @@ describe Partner do
       p.password_confirmation.should_not be_blank
     end
   end
+  
   describe "#generate_username" do
     it "should set a valid username from email address" do
       p = Factory.build(:partner)
@@ -185,7 +186,7 @@ describe Partner do
     end
   end
 
-  context "whitelabeling" do
+  describe "whitelabeling" do
     describe "Class Methods" do
       describe "#add_whitelabel(partner_id, app_css, reg_css)" do
         before(:each) do
@@ -581,7 +582,7 @@ describe Partner do
         assert_equal 0.4, stats[1][:registrations_percentage]
       end
 
-      it "only uses completed/step_5 registrations for stats" do
+      it "only uses completed/step_5 registrations without finish-with-state for stats" do
         partner = Factory.create(:partner)
         3.times do
           reg = Factory.create(:maximal_registrant, :partner => partner)
@@ -594,6 +595,10 @@ describe Partner do
         2.times do
           reg = Factory.create(:step_5_registrant, :partner => partner)
           reg.update_attributes(:home_zip_code => "94101", :party => "Decline to State")
+        end
+        2.times do 
+          reg = Factory.create(:step_5_registrant, :partner=>partner, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         stats = partner.registration_stats_state
         assert_equal 2, stats.length
@@ -815,9 +820,10 @@ describe Partner do
         assert_equal 20, stats[:total_count]
       end
 
-      it "only uses completed/step_5 registrations for stats" do
+      it "only uses completed/step_5 registrations without finish_with_state for stats" do
         partner = Factory.create(:partner)
         8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
         8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         8.times { Factory.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         stats = partner.registration_stats_completion_date
@@ -853,6 +859,64 @@ describe Partner do
         assert_equal 0.5, stats[:percent_complete]
       end
     end
+
+    describe "finish-with-state by registration date & state" do
+      it "should tally registrants by state and date bucket" do
+        partner = Factory.create(:partner)
+        8.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
+        end
+        5.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")
+        end
+        4.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
+        end
+        2.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")          
+        end
+        1.times do
+          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.years.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")          
+        end
+        stats = partner.registration_stats_finish_with_state_completion_date
+        assert_equal "California", stats[0][:state_name]
+        assert_equal  8, stats[1][:day_count]
+        assert_equal 5, stats[0][:week_count]
+        assert_equal 12, stats[1][:month_count]
+        assert_equal 7, stats[0][:year_count]
+        assert_equal 13, stats[1][:total_count]
+      end
+
+      it "only uses completed registrations with finish_with_state for stats" do
+        partner = Factory.create(:partner)
+        2.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        8.times { Factory.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        stats = partner.registration_stats_finish_with_state_completion_date
+        assert_equal  "Massachusetts", stats[0][:state_name]
+        assert_equal  8, stats[0][:day_count]
+        assert_equal  1, stats.size
+      end
+
+      it "should only include data for this partner" do
+        partner = Factory.create(:partner)
+        other_partner = Factory.create(:partner)
+        Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        Factory.create(:maximal_registrant, :partner => other_partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        stats = partner.registration_stats_finish_with_state_completion_date
+        assert_equal  "Massachusetts", stats[0][:state_name]
+        assert_equal   1, stats[0][:week_count]
+        assert_equal  1, stats.size
+      end
+    end
+
 
     describe "by age" do
       it "should tally registrants count and percentage by age bracket on updated_at date" do
@@ -976,5 +1040,116 @@ describe Partner do
       end
     end
   end
+
+  describe "Government Partners" do
+    describe "Class Methods" do
+      describe ".find_by_login(login)" do
+        it "returns nil if the found partner is a government partner" do
+          Factory.create(:partner, :is_government_partner=>false, :username=>"partner")
+          Factory.create(:partner, :is_government_partner=>true, :username=>"gov_partner", :government_partner_zip_code_list=>"90000")
+          
+          Partner.find_by_login("partner").should be_a(Partner)
+          Partner.find_by_login("gov_partner").should be_nil
+          
+        end
+      end
+      describe ".government" do
+        it "returns all government partners" do
+          3.times do
+            Factory.create(:partner)
+          end
+          gps = []
+          3.times do
+            gps << Factory.create(:government_partner, :is_government_partner=>true)
+          end
+          results = Partner.government
+          results.should have(3).partners
+          gps.each do |gp|
+            results.should include(gp)
+          end
+        end
+      end
+      describe ".standard" do
+        it "returns all standard partners" do
+          ngps = []
+          existing_partner_count = Partner.count
+          3.times do
+            ngps << Factory.create(:partner)
+          end
+          gps = []
+          3.times do
+            gps << Factory.create(:government_partner, :is_government_partner=>true)
+          end
+          results = Partner.standard
+          results.should have(3 + existing_partner_count).partners
+          ngps.each do |gp|
+            results.should include(gp)
+          end
+        end
+      end
+    end
+    
+    describe "Validations" do
+      it "adds an error to government_partner_state_abbrev and government_partner_zip_code_list when both are blank" do
+        p = Factory.create(:government_partner)
+        p.government_partner_zip_codes = nil
+        p.government_partner_state_id = nil
+        p.valid?.should be_false
+        p.errors.on(:government_partner_state_abbrev).should_not be_nil
+        p.errors.on(:government_partner_zip_code_list).should_not be_nil
+      end
+      it "ads an error to government_partner_state_abbrev and government_partner_zip_code_list when both are present" do
+        p = Factory.create(:government_partner)
+        p.government_partner_state_abbrev="MA"
+        p.government_partner_zip_code_list="90000"
+        p.valid?.should be_false
+        p.errors.on(:government_partner_state_abbrev).should_not be_nil
+        p.errors.on(:government_partner_zip_code_list).should_not be_nil
+      end
+    end
+    
+    describe "#government_partner_state_abbrev" do
+      it "returns the abbreviation for the government_partner_state" do
+        p = Partner.new
+        p.government_partner_state = GeoState['MA']
+        p.government_partner_state_abbrev.should == 'MA'
+      end
+    end
+    describe "#government_partner_state_abbrev=" do
+      it "sets the government_partner_state by abbreviation" do
+        p = Partner.new
+        p.government_partner_state_abbrev= 'MA'        
+        p.government_partner_state.should == GeoState['MA']
+      end
+    end
+    describe "#government_partner_zip_code_list" do
+      it "returns a new-line separated version of government_partner_zip_codes" do
+        p= Partner.new
+        p.government_partner_zip_codes = ["12345", "23413-4422", "23415"]
+        p.government_partner_zip_code_list.should == ["12345", "23413-4422", "23415"].join("\n")
+      end
+      it "returns nil when the government_partner_zip_codes is nil" do
+        p= Partner.new
+        p.government_partner_zip_code_list.should be_nil        
+      end
+    end
+    describe "#government_partner_zip_code_list=" do
+      it "cleans a string and sets the government_partner_zip_code_list array" do
+        p= Partner.new
+        [
+          ["242 23423, 23111-342, 23123-1234 4 afe3 235sgsg a3425\n34533 . \\ \n  ef 34335, 34555-1551", ["23423", "23123-1234", "34533", "34335", "34555-1551"]],
+          ["12345\n23456\n34567", ["12345", "23456", "34567"]],
+          ["22345,23456, 34567", ["22345", "23456", "34567"]],
+          ["32345 23456 34567", ["32345", "23456", "34567"]]
+        ].each do |string, arr|
+            p.government_partner_zip_code_list = string
+            p.government_partner_zip_codes.should == arr
+            # p.government_partner_zip_code_list = "242 23423, 23111-342, 23123-1234 4 afe3 235sgsg a3425\n34533 . \\ \n  ef 34335, 34555-1551"
+            # p.government_partner_zip_codes.should == ["23423", "23123-1234", "34533", "34335", "34555-1551"]
+          end
+      end
+    end
+  end
+
 end
 

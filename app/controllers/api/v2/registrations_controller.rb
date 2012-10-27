@@ -38,7 +38,21 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
   rescue ArgumentError => e
     jsonp({ :message => e.message }, :status => 400)
   end
+  
+  def index_gpartner
+    query = {
+      :gpartner_id       => params[:gpartner_id],
+      :gpartner_api_key  => params[:gpartner_API_key],
+      :since            => params[:since],
+      :email            => params[:email]
+    }
 
+    jsonp :registrations => V2::RegistrationService.find_records(query)
+  rescue ArgumentError => e
+    jsonp({ :message => e.message }, :status => 400)
+  end
+  
+  
   # Creates the record and returns the URL to the PDF file or
   # the error message with optional invalid field name.
   def create

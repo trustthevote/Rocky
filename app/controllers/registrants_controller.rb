@@ -38,6 +38,7 @@ class RegistrantsController < RegistrationStep
     options[:locale] = params[:locale] if params[:locale]
     options[:source] = params[:source] if params[:source]
     options[:tracking] = params[:tracking] if params[:tracking]
+    options[:short_form] = params[:short_form] if params[:short_form]
     options.merge!(:protocol => "https") unless Rails.env.development?
     redirect_to new_registrant_url(options)
   end
@@ -48,7 +49,7 @@ class RegistrantsController < RegistrationStep
     if MobileConfig.is_mobile_request?(request)
       redirect_to MobileConfig.redirect_url(:partner=>@partner_id, :locale=>@locale, :source=>@source, :tracking=>@tracking)
     else
-      @registrant = Registrant.new(:partner_id => @partner_id, :locale => @locale, :tracking_source => @source, :tracking_id=>@tracking)
+      @registrant = Registrant.new(:partner_id => @partner_id, :locale => @locale, :tracking_source => @source, :tracking_id=>@tracking, :short_form=>@short_form)
       render "show"
     end
   end
@@ -60,7 +61,8 @@ class RegistrantsController < RegistrationStep
                                     :locale => @locale,
                                     :partner_id => @partner_id,
                                     :tracking_source => @source,
-                                    :tracking_id => @tracking))
+                                    :tracking_id => @tracking,
+                                    :short_form => @short_form))
                                     
     if @registrant.partner.primary?
       @registrant.opt_in_email = true

@@ -136,6 +136,7 @@ Factory.define :api_v2_maximal_registrant, :parent => :maximal_registrant do |f|
   f.survey_answer_1     "blue"
   f.survey_answer_2     "fido"
   f.send_confirmation_reminder_emails false
+  f.building_via_api_call true
 end
 
 Factory.define :api_created_partner, :class=>'partner' do |p|
@@ -173,6 +174,11 @@ Factory.define :partner do |partner|
   partner.organization          "Consolidated Amalgamated, Inc."
   partner.survey_question_1_en  "Hello?"
   partner.survey_question_2_en  "Outta here?"
+end
+
+Factory.define :government_partner, :parent=>:partner do |partner|
+  partner.is_government_partner true
+  partner.government_partner_zip_codes ["90000"]
 end
 
 Factory.define :whitelabel_partner, :parent=>:partner do |partner|

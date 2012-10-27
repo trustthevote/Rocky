@@ -1,0 +1,112 @@
+<%- if @partner.can_be_whitelabeled? %>
+  <fieldset>
+    <legend>Whitelabeling</legend>
+    <ul class="stacked">
+      <li class="width_a">
+        <h3><%= f.label :from_email %></h3>
+        <%= field_div f, :from_email %>
+        <span class="error"><%= @partner.errors.on :from_email %></span>
+        <span class="instructions">* Email address to send confirmation, reminder and thank-you emails from for whitelabeled partners</span>
+      </li>
+      <li class="width_a">
+        <h3><%= f.label :finish_iframe_url %></h3>
+        <%= field_div f, :finish_iframe_url %>
+        <span class="error"><%= @partner.errors.on :finish_iframe_url %></span>
+        <span class="instructions">* URL for iFrame to show registrants on the thank you page</span>
+      </li>        
+    </ul>
+    <br/>
+    <ul class="checkbox">
+      <li>
+        <h3>
+          <%= f.check_box :rtv_email_opt_in %>
+          <%= f.label :rtv_email_opt_in, 'Ask for RTV email opt-in' %>
+        </h3>
+      </li>
+    </ul>
+    <ul class="checkbox">
+      <li>
+        <h3>
+          <%= f.check_box :rtv_sms_opt_in %>
+          <%= f.label :rtv_sms_opt_in, 'Ask for RTV SMS opt-in' %>
+        </h3>
+      </li>
+    </ul>
+    <ul class="checkbox">
+      <li>
+        <h3>
+          <%= f.check_box :ask_for_volunteers %>
+          <%= f.label :ask_for_volunteers, 'Ask for RTV Volunteers' %>
+        </h3>
+      </li>
+    </ul>
+    <ul class="checkbox">
+      <li>
+        <h3>
+          <%= f.check_box :partner_email_opt_in %>
+          <%= f.label :partner_email_opt_in, 'Ask for partner email opt-in' %>
+        </h3>
+      </li>
+    </ul>
+    <ul class="checkbox">
+      <li>
+        <h3>
+          <%= f.check_box :partner_sms_opt_in %>
+          <%= f.label :partner_sms_opt_in, 'Ask for partner SMS opt-in' %>
+        </h3>
+      </li>
+    </ul>
+    <ul class="checkbox">
+      <li>
+        <h3>
+          <%= f.check_box :partner_ask_for_volunteers %>
+          <%= f.label :partner_ask_for_volunteers, 'Ask for partner Volunteers' %>
+        </h3>
+      </li>
+    </ul>
+    <ul class="checkbox">
+      <li>
+        <h3>
+          <%= f.check_box :whitelabeled %>
+          <%= f.label :whitelabeled, 'Whitelabeled CSS' %>
+        </h3>
+      </li>
+    </ul>
+    
+    <div class="whitelabeled">
+      <ul class="stacked">
+        <li class="width_e">
+          <br/>
+          <h3>application.css <%= '(missing)' unless @partner.application_css_present? %></h3>
+          <div>
+            <%= file_field_tag 'css_files[application]' %>
+          </div>
+        </li>
+        <li class="width_e">
+          <br/>
+          <h3>registration.css <%= '(missing)' unless @partner.registration_css_present? %></h3>
+          <div>
+            <%= file_field_tag 'css_files[registration]' %>
+          </div>
+        </li>
+        <li class="width_e">
+          <br/>
+          <h3>partner.css <%= '(missing)' unless @partner.partner_css_present? %></h3>
+          <div>
+            <%= file_field_tag 'css_files[partner]' %>
+          </div>
+        </li>
+      </ul>
+      
+
+      <% EmailTemplate::TEMPLATE_NAMES.each do |name, label| %>
+        <ul class="stacked">
+          <li class="width_h">
+            <h3><label><%= label %></label></h3>
+            <%= text_area_tag "template[#{name}]", EmailTemplate.get(@partner, name), :rows => 5 %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </fieldset>
+<% end %>

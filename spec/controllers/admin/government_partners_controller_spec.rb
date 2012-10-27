@@ -24,26 +24,69 @@
 #***** END LICENSE BLOCK *****
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Admin::PartnersController do
+describe Admin::GovernmentPartnersController do
 
-  describe 'index' do
+  describe 'GET #index' do
     it 'should render the index' do
       get :index
-      assigns(:partners).should == Partner.standard
+      assigns(:partners).should == Partner.government
       response.should render_template :index
     end
   end
-
-  describe 'show' do
-    it 'should display partner record' do
+  describe "GET #show" do
+    it 'should render the show template' do
       partner = Factory.create(:partner)
       get :show, :id => partner.id
       assigns(:partner).should == partner
       response.should render_template :show
+    end      
+  end
+  describe "GET #new" do
+    it 'should render the new page' do
+      get :new
+      assigns(:partner).should be_a(Partner)
+      assigns(:partner).should be_new_record
+      response.should render_template :new
     end
   end
+  describe "POST #create" do
+    context 'valid data' do
+      before(:each) do
+        @partner = Factory.create(:partner)
+        stub(@partner).save { true }
+        stub(Partner).new.with({"name"=>"new_name", "is_government_partner"=>true})  { @partner }
+      end
+      it "redirects to the partner page" do
+        post :create, :partner => { :name => 'new_name' }
+        response.should redirect_to admin_government_partners_path
+      end
+      it "sets is_government_partner to true" do
+        post :create, :partner => { :name => 'new_name' }
+        Partner.should have_received(:new).with({"name"=>"new_name", "is_government_partner"=>true})
+      end
+      it "generates username and password" do
+        stub(@partner).generate_username
+        stub(@partner).generate_random_password
+        post :create, :partner => { :name => 'new_name' }
+      end
+    end
+    context "invalid data" do
+      before(:each) do
+        @partner = Factory.create(:partner)
+        stub(@partner).save { false }
+        stub(Partner).new.with({"name"=>"new_name", "is_government_partner"=>true})  { @partner }
+        post :create, :partner => { :name => 'new_name' }
+      end
+      
+      it { should render_template(:new) }
+      it "assigns to partner" do
+        assigns(:partner).should == @partner
+      end
+    end
+    
+  end
 
-  describe 'edit' do
+  describe 'GET #edit' do
     it 'should display edit form' do
       partner = Factory.create(:partner)
       get :edit, :id => partner.id
@@ -51,13 +94,14 @@ describe Admin::PartnersController do
       response.should render_template :edit
     end
   end
-
-  describe 'update' do
-    before  { @partner = Factory(:partner) }
-
+  
+  describe 'PUT #update' do
+    before(:each) do
+      @partner = Factory.create(:partner)
+    end
     context 'valid data' do
       before  { put :update, :id => @partner, :partner => { :name => 'new_name' } }
-      it      { should redirect_to admin_partner_path(@partner) }
+      it      { should redirect_to admin_government_partner_path(@partner) }
       specify { @partner.reload.name.should == 'new_name' }
     end
 
@@ -78,18 +122,6 @@ describe Admin::PartnersController do
       before  { put :update, :id => @partner, :partner => { :name => '' } }
       it      { should render_template :edit }
     end
-  end
-  
-  describe "GET regen_api_key" do
-    before(:each) do
-      @partner = Factory(:partner)
-      stub(@partner).generate_api_key! { true }
-      stub(Partner).find("1") { @partner }
-      get :regen_api_key, :id=>"1"
-    end
-    it { 
-      should redirect_to admin_partner_path(@partner)
-    }
   end
 
 end

@@ -1,19 +1,13 @@
 <%= render :partial=>"admin/shared/admin_nav" %>
 
-<h1>Partners</h1>
+<h1>Government Partners</h1>
 
-<% form_for [ :admin, @partner_zip], :url=>admin_partner_zips_path, :html => { :multipart => true }  do |f| %>
-  <%= f.file_field 'zip_file' %>
-  <%= f.label 'zip_file', 'Upload partner-creation zip file' %>
-  <%= f.submit 'Upload' %>
-<%- end %>
-  
+<%= link_to "Create New Government Partner", new_admin_government_partner_path %>
 
 <table id="partners">
   <thead>
     <tr>
       <th>ID</th>
-      <th>Name</th>
       <th>Organization</th>
       <th>API Key</th>
       <th>Whitelabeled</th>
@@ -24,11 +18,10 @@
     <%- @partners.each do |p| %>
       <tr>
         <td><%= p.id %></td>
-        <td><%= h p.name %></td>
-        <td><%= h p.organization %></td>
+        <td><%= link_to p.organization, admin_government_partner_path(p) %></td>
         <td><%= h p.api_key %></td>
         <td><%= p.whitelabeled? ? 'Yes' : 'No' %></td>
-        <td><%= link_to "Show", admin_partner_path(p) %></td>
+        <td><%= link_to "Edit", edit_admin_government_partner_path(p) %></td>
       </tr>
     <%- end %>
   </tbody>

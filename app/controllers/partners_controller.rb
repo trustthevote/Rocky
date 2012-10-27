@@ -107,6 +107,7 @@ HTML
     @partner = current_partner
     @stats_by_state = @partner.registration_stats_state
     @stats_by_completion_date = @partner.registration_stats_completion_date
+    @stats_by_completion_date_finish_with_state = @partner.registration_stats_finish_with_state_completion_date
     @stats_by_race = @partner.registration_stats_race
     @stats_by_gender = @partner.registration_stats_gender
     @stats_by_age = @partner.registration_stats_age
