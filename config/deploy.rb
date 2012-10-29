@@ -177,7 +177,7 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       rm -rf csv &&
-      ln -nfs /data/rocky/csv csv
+      ln -nfs /data/rocky/html/partner_csv csv
     CMD
   end
 
