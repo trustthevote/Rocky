@@ -555,7 +555,7 @@ describe Partner do
       it "sets a delayed job to delete the file" do
         @partner.generate_registrants_csv_file
         Delayed::PerformableMethod.should have_received(:new).with(@partner, :delete_registrants_csv_file, [])
-        Delayed::Job.should have_received(:enqueue).with("action", Partner::CSV_GENERATION_PRIORITY, Partner::CSV_DELETION_DELAY.from_now)        
+        Delayed::Job.should have_received(:enqueue).with("action", Partner::CSV_GENERATION_PRIORITY, AppConfig.partner_csv_expiration_minutes.from_now)        
       end
     end
   end

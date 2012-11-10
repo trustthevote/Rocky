@@ -56,7 +56,6 @@ USE_HTTPS = true
 PAPERCLIP_OPTIONS = {}
 
 DELAYED_WRAP_UP = true
-INTERVAL_BETWEEN_REMINDER_EMAILS = 1.days
 
 # The name of the host where generated PDF files can be reached.
 PDF_HOST_NAME = 'register.rockthevote.com'

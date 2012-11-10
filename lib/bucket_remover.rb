@@ -36,11 +36,7 @@ class BucketRemover
   end
 
   def expiration_period
-    if ENV['RAILS_ENV'] == "staging"
-      360       # 6.minutes
-    else
-      1_209_600 # 14.days
-    end
+    AppConfig.pdf_expiration_days.to_i
   end
 
   def expired_time

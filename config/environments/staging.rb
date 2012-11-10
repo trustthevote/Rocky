@@ -50,7 +50,6 @@ config.action_view.cache_template_loading            = true
 config.action_mailer.delivery_method = :smtp
 
 DELAYED_WRAP_UP = true
-INTERVAL_BETWEEN_REMINDER_EMAILS = 2.minutes # 5.days everywhere else
 
 
 # Enable threaded mode

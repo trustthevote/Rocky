@@ -712,7 +712,8 @@ class Registrant < ActiveRecord::Base
 
   def enqueue_reminder_email
     action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ ])
-    Delayed::Job.enqueue(action, REMINDER_EMAIL_PRIORITY, INTERVAL_BETWEEN_REMINDER_EMAILS.from_now)
+    interval = reminders_left == 2 ? AppConfig.hours_before_first_reminder : AppConfig.hours_between_first_and_second_reminder
+    Delayed::Job.enqueue(action, REMINDER_EMAIL_PRIORITY, interval.from_now)
   end
 
   def deliver_reminder_email
