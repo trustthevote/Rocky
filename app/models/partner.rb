@@ -143,7 +143,8 @@ class Partner < ActiveRecord::Base
     
     sum = counts.sum {|row| row["registrations_count"].to_i}
     named_counts = counts.collect do |row|
-      { :state_name => GeoState[row["home_state_id"].to_i].name,
+      state = GeoState[row["home_state_id"].to_i]
+      { :state_name => state.nil? ? '' : state.name,
         :registrations_count => (c = row["registrations_count"].to_i),
         :registrations_percentage => c.to_f / sum
       }
