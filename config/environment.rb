@@ -31,6 +31,7 @@
 require 'thread'
 require File.join(File.dirname(__FILE__), 'boot')
 
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -38,6 +39,7 @@ Rails::Initializer.run do |config|
 
   # Add additional load paths for your own custom dirs
   config.load_paths += %W( #{RAILS_ROOT}/app/services #{RAILS_ROOT}/app/presenters )
+
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
@@ -78,3 +80,5 @@ end
 ADMIN_USERNAME = 'admin'
 
 WIDGET_JS_URL = 'https://s3.amazonaws.com/ovr/widget_loader.js'
+
+require File.join(File.dirname(__FILE__), 'initializers/rails_security_patch')
