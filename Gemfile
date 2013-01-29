@@ -3,7 +3,7 @@ source 'http://gems.rubyforge.org'
 
 #gem "rake", "= 0.9.2"
 gem "rake", "0.8.7"
-gem "rails", "= 2.3.2"
+gem "rails", "= 2.3.3"
 gem "aasm", "= 2.0.5"
 gem "authlogic", "= 2.1.1"
 gem "fastercsv", "= 1.5.0"
@@ -25,6 +25,7 @@ group :development, :test do
   gem "webrat", "= 0.4.4"
   #gem "pivotal-webrat-rspec-rails", "= 0.4.4"
   gem "cucumber", "= 0.3.11"
+  gem "treetop", "= 1.4.10"
   gem "selenium-client", "= 1.2.16"
   gem "capistrano", "= 2.11.2"
   # Pito:
@@ -38,6 +39,8 @@ gem "mechanize", "= 1.0.0"
 gem "newrelic_rpm", "= 2.11.1"
 gem "hoptoad_notifier", "= 2.2.2"
 gem "ledermann-rails-settings", :require => "rails-settings"
+
+gem 'json'
 
 # group :test do
 #   gem "guard"
