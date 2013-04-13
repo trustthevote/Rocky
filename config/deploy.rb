@@ -64,7 +64,7 @@ after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "dep
 set :rake, 'bundle exec rake'
 
 after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs", "deploy:symlink_app_configs"
-before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
+before "deploy:restart", "deploy:import_states_csv"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
@@ -145,23 +145,6 @@ namespace :deploy do
     CMD
   end
 
-
-  desc "Install the branding gem from a local .gem file onto all servers"
-  task :install_branding, :roles => [:app, :util] do
-    local_path = ENV['GEM_FILE']
-    unless local_path
-      puts "You must provide a gem to upload and install in GEM_FILE env var."
-      exit 1
-    end
-    remote_path = File.join("/tmp", File.basename(local_path))
-    top.upload local_path, remote_path, :via => :scp
-    sudo "gem install #{remote_path}"
-  end
-
-  desc "Link the files/directories in the branding gem into the app directory structure"
-  task :symlink_branding, :roles => [:app, :util], :except => {:no_release => true} do
-    run "cd #{latest_release} && bundle exec rake branding:symlink"
-  end
 
   desc "Link the pdf dir to /data/rocky/pdf"
   task :symlink_pdf, :roles => [:util], :except => {:no_release => true} do
