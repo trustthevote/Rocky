@@ -21,27 +21,4 @@ public/csv/*
 public/pdf/*
 public/system/*
 reg_colorado.yml
-
-# files symlinked to rocky_branding gem
-# app/views/layouts/_urchin.html.erb
-# app/views/notifier/confirmation.en.html.erb
-# app/views/notifier/confirmation.es.html.erb
-# app/views/notifier/reminder.en.html.erb
-# app/views/notifier/reminder.es.html.erb
-# app/views/notifier/thank_you_external.en.html.erb
-# app/views/notifier/thank_you_external.es.html.erb
-# app/views/finishes/_adwords.html.erb
-# app/views/registrants/_overseas.html.erb
-# config/initializers/sponsor_customizations.rb
-# config/locales/
-# data/nvra_templates
-# db/bootstrap/import/
-# public/images
-# public/floatbox
-# public/partners
-# public/stylesheets/application.css
-# public/stylesheets/partner.css
-# public/stylesheets/registration.css
-# public/stylesheets/example_whitelabel_application.css
-
 db/*.sqlite3
