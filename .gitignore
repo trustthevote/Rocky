@@ -22,3 +22,4 @@ public/pdf/*
 public/system/*
 reg_colorado.yml
 db/*.sqlite3
+rocky_test
