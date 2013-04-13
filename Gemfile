@@ -1,7 +1,6 @@
 source 'http://gems.github.com'
 source 'http://gems.rubyforge.org'
 
-#gem "rake", "= 0.9.2"
 gem "rake", "0.8.7"
 gem "rails", "= 2.3.3"
 gem "aasm", "= 2.0.5"
@@ -12,9 +11,6 @@ gem "paperclip", "= 2.3.1.1"
 gem "mysql"
 gem "rubyzip"
 
-#gem "rocky_branding", "= 12.3.5"
-#gem "rocky_branding"
-#gem "rocky_branding", "= 1.0.28"
 
 group :development, :test do
   gem "rspec", "= 1.2.7"
@@ -42,7 +38,3 @@ gem "ledermann-rails-settings", :require => "rails-settings"
 
 gem 'json'
 
-# group :test do
-#   gem "guard"
-#   gem "guard-rspec"
-# end
