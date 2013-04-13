@@ -1,0 +1,451 @@
+/* Floatbox v4.01 */
+
+div#fbPathChecker {
+	background-image: url(graphics/blank.gif);  /* required for detection of graphics folder path */
+}
+
+div#fbOverlay {
+	position: fixed;
+	_position: absolute;  /* ie6 can't do fixed */
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-width: 0;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+	filter: Alpha(Opacity=0);
+}
+
+div#fbBox {
+	position: absolute;
+	border-style: solid;
+	border-width: 0;
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: content-box;  /* in case "* box-sizing:border-box" is set */
+}
+
+#fbBox div.fb, #fbBox a.fb, #fbBox img.fb, #fbBox iframe.fb, #fbBox #fbIndexLinks a, div#fbZoomDiv img#fbZoomImg {
+	border-width: 0;
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: content-box;
+}
+#fbBox a.fb {
+	background-image: url(graphics/blank.gif);
+	background-color: transparent;
+	_zoom: 1;  /* gives layout for ie6 */
+}
+#fbBox div.fb {
+	background-color: transparent;
+}
+
+#fbBox #fbContentWrapper {
+	overflow: hidden;
+}
+
+div#fbZoomDiv, a.fbPopup img, a.fbPopdown img, a.fbPopleft img, a.fbPopright img, a.fbPoppip img, #fbContentWrapper img.fbPoppip {
+	position: absolute;
+	left: 0;
+	top: -9999px;
+	border-style: solid;
+	border-color: black;
+	/* zoomer and popup border-widths are set in js code (sorry) */
+	margin: 0;
+	padding: 0;
+}
+
+#fbBox #fbBoxLoader, #fbZoomDiv #fbZoomLoader, #fbContentWrapper #fbMainLoader, #fbContentWrapper #fbIframeHider {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#fbZoomDiv #fbZoomLoader, #fbContentWrapper #fbMainLoader {
+	background-image: url(graphics/loader_black.gif);
+}
+
+div.fbCycler {
+	position: relative;
+}
+div.fbCycler a, div.fbCycler div {
+	position: absolute;
+	display: block;
+	text-decoration: none;
+}
+div.fbCycler span {  /* wrap text under the thumbnail/image */
+	display: block;
+	text-align: center;
+}
+div.fbCycler a span {
+	text-decoration: underline;
+}
+
+#fbBox #fbShadows, #fbBox #fbShadowTop, #fbBox #fbShadowRight, #fbBox #fbShadowBottom, #fbBox #fbShadowLeft, #fbBox #fbShadowCorner,
+#fbBox #fbCorners, #fbBox #fbCornerTop, #fbBox #fbCornerRight, #fbBox #fbCornerBottom, #fbBox #fbCornerLeft, #fbBox #fbCorners2 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+#fbBox #fbShadows, #fbBox #fbShadowTop, #fbBox #fbShadowRight, #fbBox #fbShadowBottom, #fbBox #fbShadowLeft, #fbBox #fbShadowCorner {
+	top: 0;
+	left: 0;
+}
+#fbBox #fbShadows, #fbBox #fbCorners {
+	overflow: visible;
+	border-style: solid;
+}
+#fbBox #fbShadowRight {
+	background-position: right top;
+}
+#fbBox #fbShadowCorner {
+	background-position: right bottom;
+}
+#fbBox #fbShadowBottom {
+	background-position: left bottom;
+}
+v\:roundrect {  /* IE VML round corners */
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+}
+
+#fbBox #fbBoxLiner {
+	position: relative;  /* images won't fade in/out in ie6 if absolute */
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#fbBox #fbContent {
+	height: 100%;
+}
+
+#fbBox #fbContentWrapper, #fbBox #fbtlPanel, #fbBox #fbtrPanel, #fbBox #fbblPanel, #fbBox #fbbrPanel {
+	position: absolute;
+	border-style: solid;
+	overflow: hidden;
+}
+
+#fbBox #fbContentWrapper, div#fbZoomDiv {
+	background-color: #fff;  /* can override with per-item backgroundColor option */
+}
+
+#fbBox #fbInfoLink, #fbBox #fbPrintLink {  /* "Info...", "Print..." */
+	font-weight: bold;
+}
+
+#fbBox #fbResizer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 25px;  /* resizer widget in the top-left corner */
+	height: 25px;
+}
+
+#fbBox #fbDragger {
+	position: absolute;
+	cursor: nw-resize;
+	background-position: right bottom;  /* 'cause ie6 makes it taller than actual size */
+	background-repeat: no-repeat;
+	width: 12px;  /* dragger widget in the bottom-right corner */
+	height: 12px;
+}
+
+#fbBox #fbLeftNav, #fbBox #fbRightNav {
+	position: absolute;
+	height: 100%;
+}
+#fbBox #fbLeftNav, #fbBox #fbOverlayPrev {
+	left: 0;
+}
+#fbBox #fbRightNav, #fbBox #fbOverlayNext {
+	right: 0;
+}
+
+#fbBox #fbOverlayPrev, #fbBox #fbOverlayNext {
+	position: absolute;
+	background-repeat: no-repeat;
+	width: 49px;  /* popup prev and next that overlays images */
+	height: 23px;
+}
+
+#fbBox #fbtlPanel, #fbBox #fbtrPanel, #fbBox #fbblPanel, #fbBox #fbbrPanel {
+	line-height: 1.25em;
+	/* caption etc. text */
+  	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+#fbBox #fbCaption, #fbBox #fbCaption2 {
+	cursor: default;
+}
+
+#fbBox #fbItemNumber {
+	font-size: 10px;  /* 'image x of y' text */
+	white-space: nowrap;
+	cursor: default;
+}
+
+#fbBox #fbControls {
+	font-size: 1px;
+	height: 14px;  /* all the controls (prev|next, play|pause, close) should be the same height */
+}
+
+#fbBox #fbNavControls {
+	width: 88px;  /* sum of prev and next widths */
+	height: 14px;
+}
+
+#fbBox #fbPrev {
+	float: left;
+	background-repeat: no-repeat;
+	width: 44px;  /* prev nav control */
+	height: 14px;
+}
+
+#fbBox #fbNext {
+	float: right;
+	background-repeat: no-repeat;
+	width: 44px; /* next nav control */
+	height: 14px;
+}
+
+#fbBox #fbPlay, #fbBox #fbPause {
+	position: absolute;
+	background-repeat: no-repeat;
+}
+
+#fbBox #fbPlayPause, #fbBox #fbPlay, #fbBox #fbPause {
+	text-align: justify;
+	width: 46px;  /* slideshow controls - play and pause need to be the same size */
+	height: 14px;
+}
+
+#fbBox #fbClose {
+	background-repeat: no-repeat;
+	width: 46px;  /* the close button */
+	height: 14px;
+}
+
+#fbBox #fbIndexLinks, #fbBox #fbNewWindowLink {
+	clear: both;
+	font-size: 12px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+#fbBox #fbNewWindowLink a {
+	font-size: 12px;
+	padding-left: 19px;  /* for the bg image */
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+/* posLeft, posCenter & posRight are dynamically assigned classes that allow layout of the panels depending on which side they're on */
+#fbBox #fbtlPanel.posCenter, #fbBox #fbtrPanel.posCenter,
+#fbBox #fbblPanel.posCenter, #fbBox #fbbrPanel.posCenter,
+#fbBox #fbtlWidgetDiv.posCenter, #fbBox #fbtrWidgetDiv.posCenter,
+#fbBox #fbblWidgetDiv.posCenter, #fbBox #fbbrWidgetDiv.posCenter,
+#fbBox #fbIndexLinks.posCenter, #fbBox #fbNewWindowLink.posCenter {
+	margin: 0 auto;
+}
+#fbBox #fbtlPanel.posRight, #fbBox #fbtrPanel.posRight,
+#fbBox #fbblPanel.posRight, #fbBox #fbbrPanel.posRight,
+#fbBox #fbtlWidgetDiv.posRight, #fbBox #fbtrWidgetDiv.posRight,
+#fbBox #fbblWidgetDiv.posRight, #fbBox #fbbrWidgetDiv.posRight,
+#fbBox #fbIndexLinks.posRight, #fbBox #fbNewWindowLink.posRight,
+#fbBox #fbControls.posRight, #fbBox #fbClose.posRight,
+#fbBox #fbSubControls.posRight, #fbBox #fbNavControls.posLeft,
+#fbBox #fbPlayPause.posLeft {
+	float: right;
+}
+#fbBox #fbtlPanel.posLeft, #fbBox #fbtrPanel.posLeft,
+#fbBox #fbblPanel.posLeft, #fbBox #fbbrPanel.posLeft,
+#fbBox #fbtlWidgetDiv.posLeft, #fbBox #fbtrWidgetDiv.posLeft,
+#fbBox #fbblWidgetDiv.posLeft, #fbBox #fbbrWidgetDiv.posLeft,
+#fbBox #fbIndexLinks.posLeft, #fbBox #fbNewWindowLink.posLeft,
+#fbBox #fbControls.posLeft, #fbBox #fbClose.posLeft,
+#fbBox #fbSubControls.posLeft, #fbBox #fbNavControls.posRight,
+#fbBox #fbPlayPause.posRight {
+	float: left;
+}
+/* IE6 wants these, maybe for layout? */
+#fbSubControls, #fbClose, #fbIndexLinks, #fbNewWindowLink, #fbPlayPause, #fbNavControls {
+	float: left;
+}
+
+/* firefox/flash outline and wmode-scroll-click bug fixes */
+object.fbFlashObject {
+	outline: none;
+}
+object.fbFlashObject:hover {
+	border: 0 solid;
+}
+
+/****************/
+/***  Colors  ***/
+
+/* overlay color */
+#fbOverlay.fb_black {
+	background-color: #000;
+}
+#fbOverlay.fb_white {
+	background-color: #000;
+}
+
+/* main floatbox color */
+div#fbBox.fb_black, #fbBox #fbCorners.fb_black, #fbBox #fbBoxLiner.fb_black, div#fbZoomDiv.fb_black {
+	background-color: transparent; /* rocky */
+}
+div#fbBox.fb_white, #fbBox #fbCorners.fb_white, #fbBox #fbBoxLiner.fb_white, div#fbZoomDiv.fb_white {
+	background-color: #fff;
+}
+
+/* outerBorder color */
+#fbBox #fbCorners.fb_black {
+	border-color: #888;
+}
+#fbBox #fbCorners.fb_white {
+	border-color: #555;
+}
+
+/* innerBorder color */
+#fbBox #fbContentWrapper.fb_black {
+	border-color: #444; /* rocky */
+}
+#fbBox #fbContentWrapper.fb_white {
+	border-color: #000;
+}
+
+/* animated 'loading' graphic */
+#fbBox #fbBoxLoader.fb_black {
+	background-image: url(graphics/loader_black.gif);
+}
+#fbBox #fbBoxLoader.fb_white {
+	background-image: url(graphics/loader_white.gif);
+}
+
+/* resize button graphic in the top left corner */
+#fbBox #fbResizer.fb_black {
+	background-image: url(graphics/resizer_black.gif);
+}
+#fbBox #fbResizer.fb_white {
+	background-image: url(graphics/resizer_white.gif);
+}
+
+/* resize dragger in the lower right corner */
+#fbBox #fbDragger.fb_black {
+	background-image: url(graphics/dragger_black.gif);
+}
+#fbBox #fbDragger.fb_white {
+	background-image: url(graphics/dragger_white.gif);
+}
+
+/* overlay nav graphics */
+#fbBox #fbOverlayPrev.fb_black {
+	background-image: url(graphics/overlayPrev_black.gif);
+}
+#fbBox #fbOverlayNext.fb_black {
+	background-image: url(graphics/overlayNext_black.gif);
+}
+#fbBox #fbOverlayPrev.fb_white {
+	background-image: url(graphics/overlayPrev_white.gif);
+}
+#fbBox #fbOverlayNext.fb_white {
+	background-image: url(graphics/overlayNext_white.gif);
+}
+
+/* newWindowLink image */
+#fbBox #fbNewWindowLink.fb_black a {
+	background-image: url(graphics/newWindow_black_off.png);
+}
+#fbBox #fbNewWindowLink.fb_black a:hover {
+	background-image: url(graphics/newWindow_black_on.png);
+}
+#fbBox #fbNewWindowLink.fb_white a {
+	background-image: url(graphics/newWindow_white_off.png);
+}
+#fbBox #fbNewWindowLink.fb_white a:hover {
+	background-image: url(graphics/newWindow_white_on.png);
+}
+
+/* 'image x of y', indexLinks & newWindowLink text color */
+#fbBox #fbIndexLinks.fb_black, #fbBox #fbIndexLinks.fb_black a:link, #fbBox #fbIndexLinks.fb_black a:visited,
+#fbBox #fbNewWindowLink.fb_black a:link, #fbBox #fbNewWindowLink.fb_black a:visited,
+#fbBox #fbItemNumber.fb_black {
+	color: #aaa;
+}
+#fbBox #fbIndexLinks.fb_white, #fbBox #fbIndexLinks.fb_white a:link, #fbBox #fbIndexLinks.fb_white a:visited,
+#fbBox #fbNewWindowLink.fb_white a:link, #fbBox #fbNewWindowLink.fb_white a:visited,
+#fbBox #fbItemNumber.fb_white {
+	color: #666;
+}
+
+/* captions, infoLink, printLink, indexLinks:hover & newWindowLink:hover text color */
+#fbBox #fbCaption.fb_black, #fbBox #fbCaption2.fb_black,
+#fbBox #fbtlWidgetDiv.fb_black a:link, #fbBox #fbtlWidgetDiv.fb_black a:visited,
+#fbBox #fbtrWidgetDiv.fb_black a:link, #fbBox #fbtrWidgetDiv.fb_black a:visited,
+#fbBox #fbblWidgetDiv.fb_black a:link, #fbBox #fbblWidgetDiv.fb_black a:visited,
+#fbBox #fbbrWidgetDiv.fb_black a:link, #fbBox #fbbrWidgetDiv.fb_black a:visited,
+#fbBox #fbIndexLinks.fb_black a:hover, #fbBox #fbNewWindowLink.fb_black a:hover {
+	color: #d7d7d7;
+}
+#fbBox #fbCaption.fb_white, #fbBox #fbCaption2.fb_white,
+#fbBox #fbtlWidgetDiv.fb_white a:link, #fbBox #fbtlWidgetDiv.fb_white a:visited,
+#fbBox #fbtrWidgetDiv.fb_white a:link, #fbBox #fbtrWidgetDiv.fb_white a:visited,
+#fbBox #fbblWidgetDiv.fb_white a:link, #fbBox #fbblWidgetDiv.fb_white a:visited,
+#fbBox #fbbrWidgetDiv.fb_white a:link, #fbBox #fbbrWidgetDiv.fb_white a:visited,
+#fbBox #fbIndexLinks.fb_white a:hover, #fbBox #fbNewWindowLink.fb_white a:hover {
+	color: #000;
+}
+
+/* 'prev' and 'next' nav graphics */
+#fbBox #fbPrev.fb_black {
+	background-image: url(graphics/prev_black.gif);
+}
+#fbBox #fbNext.fb_black {
+	background-image: url(graphics/next_black.gif);
+}
+#fbBox #fbPrev.fb_white {
+	background-image: url(graphics/prev_white.gif);
+}
+#fbBox #fbNext.fb_white {
+	background-image: url(graphics/next_white.gif);
+}
+
+/* 'play' and 'pause' graphics */
+#fbBox #fbPlay.fb_black {
+	background-image: url(graphics/play_black.gif);
+}
+#fbBox #fbPause.fb_black {
+	background-image: url(graphics/pause_black.gif);
+}
+#fbBox #fbPlay.fb_white {
+	background-image: url(graphics/play_white.gif);
+}
+#fbBox #fbPause.fb_white {
+	background-image: url(graphics/pause_white.gif);
+}
+
+/* 'close' graphic */
+#fbBox #fbClose.fb_black {
+	background-image: url(graphics/close_black.gif);
+}
+#fbBox #fbClose.fb_white {
+	background-image: url(graphics/close_white.gif);
+}

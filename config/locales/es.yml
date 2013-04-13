@@ -1,0 +1,253 @@
+es:
+  activerecord:
+    attributes:
+      registrant:
+        date_of_birth: Fecha de Nac
+        email_address: Correo Electrónico
+        first_registration: Me estoy registrando por primera vez para votar.
+        home_zip_code: Código Postal
+        us_citizen: Soy ciudadano americano.
+        name_title: Titulo
+        first_name: Nombre
+        middle_name: Segundo Nombre
+        last_name: Apellido
+        name_suffix: Sufijo
+        home_address: Dirección Casa
+        home_unit: No.
+        home_city: Ciudad
+        home_state_name: Estado
+        has_mailing_address: Recibo mi correo en una dirección diferente a la provista anteriormente.
+        mailing_address: Dirección Alterna
+        mailing_unit: No.
+        mailing_city: Ciudad
+        mailing_state_abbrev: Estado
+        mailing_zip_code: Código Postal
+        party: Partido
+        race: Raza
+        state_id_number: Número ID
+        phone: Teléfono
+        phone_type: Tipo
+        change_of_name: He cambiado mi nombre
+        prev_name_title: Titulo
+        prev_first_name: Nombre
+        prev_middle_name: Segundo Nombre
+        prev_last_name: Apellido
+        prev_name_suffix: Sufijo
+        change_of_address: He cambiado mi dirección
+        prev_address: Dirección
+        prev_unit: No.
+        prev_city: Ciudad
+        prev_state_abbrev: Estado
+        prev_zip_code: Código Postal
+        opt_in_email: Recibir correo electronico
+        opt_in_sms: Recibir mensajes de texto
+        attest_true: He revisado la información detalladamente, es fidedigna y veraz dentro de mi conocimiento.
+        tell_from: De
+        tell_email: Su correo electrónico
+        tell_recipients: Destinatarios
+        tell_subject: línea de asunto
+        tell_message: Mensaje
+    errors:
+      models:
+        registrant:
+          blank: "Requerido"
+          invalid_zip: "Código Postal Invalido"
+          attributes:
+            home_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            mailing_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            prev_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            email_address:
+              invalid: "Dirección no válida"
+            date_of_birth:
+              format: "Debe ser MM-DD-AAAA"
+            phone:
+              invalid: "Deber ser ***-***-****"
+              required_if_opt_in: Si necesita recibir TXT
+            attest_true:
+              accepted: "Debe indicar si la información arriba es correcta"
+            has_state_license:
+              inclusion: Requerido
+      messages:
+        inclusion: "{{attribute}} no esta incluida en la lista"
+        exclusion: "{{attribute}} esta reservado"
+        invalid: "{{attribute}} es inválido"
+        confirmation: "{{attribute}} no concuerda con la confirmación"
+        accepted: "{{attribute}} debe ser aceptada"
+        empty: "{{attribute}} no puede estar vacio"
+        blank: "{{attribute}} no puede estar en blanco"
+        too_long: "{{attribute}} es muy largo (máximo {{count}} caracteres)"
+        too_short: "{{attribute}} es muy corto (mínimo {{count}} caracteres)"
+        wrong_length: "{{attribute}} tamaño incorrecto (deber ser {{count}} caracteres)"
+        taken: "{{attribute}} ya fue tomado"
+        not_a_number: "{{attribute}} no es un número"
+        greater_than: "{{attribute}} debe ser mayor a {{count}}"
+        greater_than_or_equal_to: "{{attribute}} deber ser mayor a o igual a {{count}}"
+        equal_to: "{{attribute}} debe ser igual a {{count}}"
+        less_than: "{{attribute}} debe ser menor a {{count}}"
+        less_than_or_equal_to: "{{attribute}} debe ser menor a o igual a {{count}}"
+        odd: "{{attribute}} debe ser impar"
+        even: "{{attribute}} debe ser par"
+  authlogic:
+    error_messages:
+      login_blank: "Login no puede estar en blanco."
+      login_not_found: "Combinación de Login/Password no es válida."
+      login_invalid: "Usuario solo puede ser letras, números, espacios, y .-_@ porfavor."
+      consecutive_failed_logins_limit_exceeded: "Login consecutivo incorrecto límite excedido, la cuenta ha sido desactivada."
+      email_invalid: "Correo electronico no es una dirección válida."
+      password_blank: "Password no puede estar en blanco."
+      password_invalid: "Login/Password no es un combinación válida."
+      not_active: "Tu cuenta no está activada."
+      not_confirmed: "Tu cuenta no está confirmada."
+      not_approved: "Tu cuenta no ha sido aprobada."
+      no_authentication_details: "Faltan detalles de autentificación."
+  txt:
+    rtv_and_partner: "Rock the Vote y {{partner_name}}"
+    button:
+      submit: "Siguientes pasos"
+      edit: Editar
+      back: "Paso Anterior"
+      download: "Descargar PDF"
+      ineligible_try_again: Regresar
+      keep_going: Keep Going
+      remind_me_later: Remind Me Later
+      help: Ayuda
+      prepare: Preparar Formato
+      review: Revisar Aplicación
+      sendmail: Enviar Correo Electrónico
+      share_facebook: Compartir en Facebook!
+      share_twitter: Compartir en Twitter!
+      share_google_buzz: Compartir en Buzz!
+      state_online_registration: "Me gustaría someter mi solicitud vía internet con el estado ahora."
+      skip_state_online_registration: "No gracias, continuaré con Rock the Vote y enviaré mi solicitud más tarde."
+    registration:
+      powered_by: "accionado por:"
+      progress_indicator: "Paso"
+      other_language: "In English"
+      step_1_header: Nuevo Registro
+      step_2_header: Información Personal
+      step_3_header: Información adicional para registro
+      step_4_header: Mantente informado y toma acción
+      step_5_header: Revisar y Confirmar
+      stay_informed_header: Para más información
+      identification_header: Información sobre identificación
+      survey_title: Preguntas para ti
+      download_header: Imprimir Formato
+      preparing_header: Preparando el Formulario...
+      finish_header: Pasen la voz!
+      finish_under_18_header: "Estás en la lista!"
+      tell_a_friend_title: "Dile a tu amigo a través de un correo electronicó."
+      finish_reminder: "Gracias, {{first_name}}, para el envío de su solicitud de registro de votantes! Debe recibir la confirmación de su inscripción de los funcionarios electorales de su estado. A veces, el procesamiento puede tardar varias semanas."
+      finish_reminder_2: "Si desea comprobar el estado de su formulario de inscripción de votantes, se puede encontrar información de contacto de su Secretario de Estado en nuestro enlace <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Centro Electoral</a>."
+      ineligible_header: "Una disculpa, no eres elegilbe para registrarte para votar por las siguientes razones:"
+      external_header: "SPANISH {{state}} Registrant"
+      name: Nombre
+      select_none: (none)
+      home_address: Dirección casa
+      mailing_address: Dirección correo
+      previous_name: Nombre Anterior
+      previous_address: Dirección Anterior
+      opt_in_sms: "Deseo recibir mensajes de texto de {{organization}}."
+      opt_in_email: "Recibir emails de {{organization}}"
+      remind_when_18: Envíenme un recordatorio cuando cumpla 18 años.
+      get_updates: Mantente actualizado con Rock the Vote.
+      volunteer: "Me gustaría voluntariar para {{organization}}"
+      not_given: none
+      has_state_license: "Tengo un carnet de identificación expedida por el estado o licencia de conducir que es válida."
+      has_no_state_license: "No tengo ni carnet de identificación expedida por el estado ni licencia de conducir que es válida."
+      titles:
+      - Sr.
+      - Sra.
+      - Srta.
+      - Ms
+      suffixes:
+      - Jr.
+      - Sr.
+      - II
+      - III
+      - IV
+      races:
+      - Indio Americano / Nativo de Alaska
+      - Asiático / Islas del Pacífico
+      - Negra (No hispano)
+      - Hispano
+      - Multi-racial
+      - Blanca (no hispano)
+      - Otra
+      - Declino comentar
+      phone_types:
+      - Móvil
+      - Casa
+      - Trabajo
+      - Otro
+      instructions:
+        opt_in_email: Le enviaremos recordatorios de la elección, información del recinto electoral asignado, y información oportuna sobre música y temas información.
+        under_18: "Parece que aún no tienes 18 años. Está bien. En {{state_name}} puedes registrarte para votar {{state_rule}}.  Visite nuestro <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Centro Electoral</a> para saber cuándo es la próxima elección."
+        under_18_2: "Para confirmar has clic en el botón para continuar con la aplicación."
+        under_18_3: "Si no, te enviaremos un recordatorio para que te registres en tu cumpleaños."
+        remind_when_18: "Envíenme un recordatorio cuando cumpla 18 años en {{email_address}}"
+        review: Porfavor revisar la siguiente información y confirmar su autenticidad.
+        download: No has acabado aún.  Da click en el boton para imprimir tu forma de registro para votar.
+          Firma y envíalo vía correo a la dirección provista en tu forma.
+        download_2: No serás registrado si no imprimes, firmas y mandas tu forma vía correo!
+        finish: "No se olviden de avisar a amigos y parientes lo facil que es registrarse!  Aqui se incluyen algunos instrumentos para pasar la voz sobre como registrar el voto:"
+        finish_2: "Consiga esta harramienta para inscriber a votantes por su pagína web. Alista te gratís en"
+        finish_under_18: "Te enviaremos un recordatorio para que te registres en tu cumpleaños."
+        finish_under_18_2: "No se olviden de avisar a amigos y parientes lo facil que es registrarse!  Aqui se incluyen algunos instrumentos para pasar la voz sobre como registrar el voto."
+        finish_tell_recipients: "(separados por comas)"
+        finish_email_sent: "correo Electronicó enviado"
+        finish_update_status: "No se olviden actualizar su estatus por Facebook y Twitter."
+        state_online_registration: "Tú eres elegible para terminar su registro usando el sistema de registración de votantes vía internet del estado"
+        leave_state_online_registration: "Tú puedes completar su registración de votantes vía internet con el estado  usando la solicitud de abajo. Si tu ni licencia de conducir ni tu carnet de identificación expedida por el estado está vigente o el estado no puede encontrar o confirmar tu registro de DMV, no te preocupes&mdash;también puedes {{link}}. Solo tendrás que imprimir, firmar y enviar la solicitud por correo."
+        leave_state_online_registration_link: "terminar tu registro con {{rtv_and_partner_name}}"
+      ineligible:
+        age: Debes ser mayor a 18 años para la fecha de la elección.
+        non_citizen: Su registro no se puede completar porque no marca la casilla que indica que usted es un ciudadano de Estados Unidos. Usted debe ser ciudadano de los Estados Unidos para inscribirse para votar. Si usted es un ciudadano, por favor, vuelva a la pagina anterior y marque la casilla de ciudadana.
+        attest: Debes confirmar que eres elegible para votar
+      external:
+        colorado:
+          register_link: Finish Registration Online with Colorado Secretary of State
+          continue_link: Continue Registration with Rock the Vote
+          show:
+            p1: "Good news! If you have a valid Colorado driver's license, you can finish your voter registration application with the Colorado Secretary of State."
+            p2: "If you provided your driver's license number and are registering to vote for the first time or changing the address of your existing Colorado voter registration, just click the link below. The information you have already provided will appear on the Secretary of State's online voter registration portal and you can finish your application there."
+            p3: "Otherwise, if you are unable to complete your application at the Secretary of State's website, you can click the link below and continue filling out your form here. You will get your voter registration form to print, sign, and mail to the Secretary of State's office."
+            p4: ""
+          go:
+            title: Colorado Registration Error
+            timeout: "It looks like the Colorado web site is taking a while to respond and may not be available at this time. No worries, though!  You have a couple options for how to continue your voter registration."
+            timeout_2: "To finish your voter registration application, you have three options:</p><p>(1) Close this window and use the back button on your browser to correct the information on your voter registration application. You will be able to re-submit your information to the Secretary of State's website.</p><p>(2) Close this window and click on the \"Continue Registration with Rock the Vote\" link on the page you just came from. You will be able to finish your application and get your voter registration form to print, sign, and mail to the Secretary of State's office.</p><p>(3) You can also go directly to <a href={{co_url}}>the Secretary of State's website</a> to re-enter the correct information."
+            timeout_3: ""
+            p1: "It looks like the information you provided doesn't match the Secretary of State's records. Three common problems: (1) the name you provided doesn't exactly match the name on your ID (for example, you entered \"Steve\" but your first name on your ID is actually \"Stephen\"), (2) you included dashes in your ID number, or (3) you did not provide a driver's license number, but used another form of accepted identification. Please review the information you provided:"
+            section: Identifying Information
+            colorado_id_number: Colorado ID Number
+            p2: "To finish your voter registration application, you have three options:</p><p>(1) Close this window and use the back button on your browser to correct the information on your voter registration application. You will be able to re-submit your information to the Secretary of State's website.</p><p>(2) Close this window and click on the \"Continue Registration with Rock the Vote\" link on the page you just came from. You will be able to finish your application and get your voter registration form to print, sign, and mail to the Secretary of State's office.</p><p>(3) You can also go directly to <a href={{co_url}}>the Secretary of State's website</a> to re-enter the correct information."
+            p3: ""
+      tooltips:
+        email_address: Te enviaremos una copia de tu forma de registro para votar vía correo electronico.
+        home_zip_code: "Entra el código postal y la direcciones donde vives, aunque no recibas correo ahí."
+        date_of_birth: "En su solicitud de registro del votante, se le requiere que indique si va a ser mayor de 18 años de edad en o antes del día de las elecciones. Sin embargo, muchos estados permiten que usted se registre antes de su cumpleaños número 18, así que haga <a href=\"http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html\">clic aquí</a> para ver el estado de su estado."
+        registrant_name: Poner tu nombre completo en estos espacios.  Porfavor no usar apodos o iniciales.  Si esta aplicación es para el cambio de nombre se te preguntará tu nombre anterior registrado.  Y no olvidar poner tu título (Sr., Sra., Srta., Ms.).
+        home_address: Poner tu dirección en estos espacios.  No poner tu dirección de correo aquí si es diferente a la dirección de tu casa.  No usar Post office Box o rural route sin un número de box.  Si vives en un area rural y no tienes calle o si no tienes dirección, favor mostrar donde vives en el mapa anexo a la forma.
+        mailing_address: Poner tu dirección de correo si recibes tu correo en una dirección distinta a la de tu casa.  Si no recibes correo en tu casa, debes llenar esta parte para indicarnos donde localizarte vía correo.
+        phone: Muchos estados piden tu número de teléfono en caso de que tengan preguntas sobre tu aplicación.  No estás obligado a proveer to número de teléfono.
+        previous_name: Si has cambiado tu nombre desde tu ultimo registro, poner tu nombre anterior.
+        previous_address: Si te has cambiado de dirección desde tu ultimo registro, favor de proveer la dirección anterior.
+    status_text:
+      message: "I just registered to vote and you can too!"
+      under_18_message: "Make sure you register to vote. It's easy!"
+  email:
+    confirmation:
+      subject: "Reminder: Mail your voter registration form"
+    reminder:
+      subject: "Reminder: Mail your voter registration form"
+    thank_you_external:
+      subject: "Gracias por usar el instrumento de registración de votantes en línea"  
+    tell_friend:
+      subject: "I just registered to vote and you should too"
+      body: "Hey, I just registered to vote at {{rtv_url}} and you can too.  It is really easy.\n\nJust fill out the online form here: {{rtv_url}}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: {{rtv_url}}.\n\nAlready registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at {{rtv_url}}.\n\nHappy voting!"
+    tell_friend_under_18:
+      subject: "Register to vote!"
+      body: "Are you registered to vote? I may not be old enough to vote yet, but you are.  You can't vote unless you are registered.\n\nYou can fill out a voter registration form only at {{rtv_url}}. It is super easy.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  Go to {{rtv_url}}.\n\nAlready registered to vote or not old enough to vote yet?  Help others get registered to vote by sending an email to your friends and family asking them to register at {{rtv_url}}.\n\nHappy voting!"
