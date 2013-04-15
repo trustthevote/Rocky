@@ -50,7 +50,7 @@ describe Registrant do
     end
     it "returns both names when there is a partner" do
       r = Registrant.new
-      p = Factory.create(:partner)
+      p = FactoryGirl.create(:partner)
       stub(r).partner { p }
       r.rtv_and_partner_name.should == "Rock the Vote and #{p.organization}"
     end
@@ -58,24 +58,24 @@ describe Registrant do
   
   describe "finish_iframe_url" do
     it "should be the default url with email address and partner ID passed in" do
-      r = Factory.create(:step_5_registrant)
+      r = FactoryGirl.create(:step_5_registrant)
       r.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=en&email=#{r.email_address}&partner_id=#{r.partner.id}"
     end
     it "should specify the locale and include tracking and source when present" do
-      r = Factory.create(:step_5_registrant, :locale=>'es', :tracking_source=>'sourceval', :tracking_id=>'trackingval')
+      r = FactoryGirl.create(:step_5_registrant, :locale=>'es', :tracking_source=>'sourceval', :tracking_id=>'trackingval')
       r.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=es&email=#{r.email_address}&partner_id=#{r.partner.id}&source=sourceval&tracking=trackingval"
     end
     it "uses a partner's iframe url as base for whitelabeled partners with non-blank values" do
-      p1 = Factory.create(:partner, :whitelabeled=>false, :finish_iframe_url=>"https://www.google.com")
-      p2 = Factory.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"")
-      p3 = Factory.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"https://www.google.com")
+      p1 = FactoryGirl.create(:partner, :whitelabeled=>false, :finish_iframe_url=>"https://www.google.com")
+      p2 = FactoryGirl.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"")
+      p3 = FactoryGirl.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"https://www.google.com")
       stub(p3).primary? { true }
-      p4 = Factory.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"https://www.google.com")
+      p4 = FactoryGirl.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"https://www.google.com")
 
-      r1 = Factory.create(:step_5_registrant, :partner=>p1)
-      r2 = Factory.create(:step_5_registrant, :partner=>p2)
-      r3 = Factory.create(:step_5_registrant, :partner=>p3)
-      r4 = Factory.create(:step_5_registrant, :partner=>p4)
+      r1 = FactoryGirl.create(:step_5_registrant, :partner=>p1)
+      r2 = FactoryGirl.create(:step_5_registrant, :partner=>p2)
+      r3 = FactoryGirl.create(:step_5_registrant, :partner=>p3)
+      r4 = FactoryGirl.create(:step_5_registrant, :partner=>p4)
       
       r1.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=en&email=#{r1.email_address}&partner_id=#{r1.partner.id}"
       r2.finish_iframe_url.should == "#{Registrant::FINISH_IFRAME_URL}?locale=en&email=#{r2.email_address}&partner_id=#{r2.partner.id}"
@@ -117,8 +117,8 @@ describe Registrant do
   describe "backfill data" do
     it "backfills the age even when redacted" do
       assert_equal 0, Registrant.find(:all, :conditions => "age IS NOT NULL").size
-      5.times { Factory.create(:step_5_registrant, :date_of_birth => 241.months.ago.to_date.to_s(:db)) }
-      4.times { Factory.create(:step_5_registrant, :date_of_birth => 239.months.ago.to_date.to_s(:db)) }
+      5.times { FactoryGirl.create(:step_5_registrant, :date_of_birth => 241.months.ago.to_date.to_s(:db)) }
+      4.times { FactoryGirl.create(:step_5_registrant, :date_of_birth => 239.months.ago.to_date.to_s(:db)) }
       Registrant.update_all("age = NULL")
       Registrant.update_all("state_id_number = NULL")
       Registrant.backfill_data
@@ -128,10 +128,10 @@ describe Registrant do
 
     it "backfills the official_party_name even when redacted" do
       assert_equal 0, Registrant.find(:all, :conditions => "party IS NOT NULL").size
-      5.times { Factory.create(:step_5_registrant, :home_zip_code => "94103", :party => "Green") }
-      5.times { Factory.create(:step_5_registrant, :home_zip_code => "94103", :party => "Verde", :locale => "es") }
-      4.times { Factory.create(:step_5_registrant, :home_zip_code => "94103", :party => "Decline to State") }
-      4.times { Factory.create(:step_5_registrant, :home_zip_code => "94103", :party => "Se niega a declarar", :locale => "es") }
+      5.times { FactoryGirl.create(:step_5_registrant, :home_zip_code => "94103", :party => "Green") }
+      5.times { FactoryGirl.create(:step_5_registrant, :home_zip_code => "94103", :party => "Verde", :locale => "es") }
+      4.times { FactoryGirl.create(:step_5_registrant, :home_zip_code => "94103", :party => "Decline to State") }
+      4.times { FactoryGirl.create(:step_5_registrant, :home_zip_code => "94103", :party => "Se niega a declarar", :locale => "es") }
       assert_equal 18, Registrant.find(:all, :conditions => "party IS NOT NULL").size
       Registrant.update_all("official_party_name = NULL")
       Registrant.update_all("state_id_number = NULL")
@@ -142,7 +142,7 @@ describe Registrant do
 
     it "backfills barcode" do
       assert_equal 0, Registrant.find(:all, :conditions => "barcode IS NOT NULL").size
-      5.times { Factory.create(:step_1_registrant) }
+      5.times { FactoryGirl.create(:step_1_registrant) }
       Registrant.update_all("barcode = NULL")
       Registrant.backfill_data
       regs = Registrant.find(:all, :conditions => "barcode IS NOT NULL")
@@ -158,31 +158,31 @@ describe Registrant do
     end
 
     it "should be non nil for saved records" do
-      reg = Factory.create(:step_1_registrant)
+      reg = FactoryGirl.create(:step_1_registrant)
       assert_not_nil reg.to_param
     end
 
     it "should not be the record id" do
-      reg = Factory.create(:step_1_registrant)
+      reg = FactoryGirl.create(:step_1_registrant)
       assert_not_equal reg.id.to_s, reg.to_param
     end
   end
 
   describe "find_by_param" do
     it "should find record by url param" do
-      reg = Factory.create(:step_1_registrant)
+      reg = FactoryGirl.create(:step_1_registrant)
       assert_equal reg, Registrant.find_by_param(reg.to_param)
     end
 
     it "should raise AbandonedRecord when registrant is abandoned" do
-      reg = Factory.create(:step_1_registrant, :abandoned => true)
+      reg = FactoryGirl.create(:step_1_registrant, :abandoned => true)
       assert_raise Registrant::AbandonedRecord do
         Registrant.find_by_param(reg.to_param)
       end
     end
 
     it "should attach registrant to AbandonedRecord exception" do
-      reg = Factory.create(:step_1_registrant, :abandoned => true)
+      reg = FactoryGirl.create(:step_1_registrant, :abandoned => true)
       begin
         Registrant.find_by_param(reg.to_param)
       rescue Registrant::AbandonedRecord => exception
@@ -193,7 +193,7 @@ describe Registrant do
 
   describe "localization" do
     it "finds the state localization" do
-      reg = Factory.create(:step_5_registrant)
+      reg = FactoryGirl.create(:step_5_registrant)
       loc = StateLocalization.find(:first, :conditions => {:state_id => reg.home_state_id, :locale => reg.locale})
       assert_equal loc, reg.localization
     end
@@ -207,14 +207,14 @@ describe Registrant do
 
   describe "any step" do
     it "blanks party unless requires party" do
-      reg = Factory.build(:maximal_registrant)
+      reg = FactoryGirl.build(:maximal_registrant)
       stub(reg).requires_party? { false }
       assert reg.valid?, reg.errors.full_messages
       assert_nil reg.party
     end
         
     it "parses date of birth before validation" do
-      reg = Factory.build(:step_1_registrant)
+      reg = FactoryGirl.build(:step_1_registrant)
       reg.date_of_birth = "08/27/1978"
       assert reg.valid?
       assert_equal Date.parse("Aug 27, 1978"), reg.date_of_birth
@@ -259,14 +259,14 @@ describe Registrant do
     end
 
     it "should limit number of simultaneous errors on home_zip_code" do
-      reg = Factory.build(:step_1_registrant, :home_zip_code => nil)
+      reg = FactoryGirl.build(:step_1_registrant, :home_zip_code => nil)
       reg.invalid?
 
       assert_equal ["Required"], [reg.errors.on(:home_zip_code)].flatten
     end
 
     it "should check format of home_zip_code" do
-      reg = Factory.build(:step_1_registrant, :home_zip_code => 'ABCDE')
+      reg = FactoryGirl.build(:step_1_registrant, :home_zip_code => 'ABCDE')
       reg.invalid?
 
       assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:home_zip_code)].flatten
@@ -288,40 +288,40 @@ describe Registrant do
     end
 
     it "should be ineligible when in state that doesn't participate" do
-      reg = Factory.build(:step_1_registrant, :home_zip_code => '58001')  # North Dakota
+      reg = FactoryGirl.build(:step_1_registrant, :home_zip_code => '58001')  # North Dakota
       assert reg.valid?
       assert reg.ineligible?
       assert reg.ineligible_non_participating_state?
-      reg = Factory.build(:step_1_registrant, :home_zip_code => '94101')  # California
+      reg = FactoryGirl.build(:step_1_registrant, :home_zip_code => '94101')  # California
       assert reg.valid?
       assert reg.eligible?
       assert !reg.ineligible_non_participating_state?
     end
 
     it "should be ineligible when too young" do
-      reg = Factory.build(:step_1_registrant, :date_of_birth => 10.years.ago.to_date.to_s(:db))
+      reg = FactoryGirl.build(:step_1_registrant, :date_of_birth => 10.years.ago.to_date.to_s(:db))
       assert reg.valid?
       assert reg.ineligible?
       assert reg.ineligible_age?
-      reg = Factory.build(:step_1_registrant, :date_of_birth => 20.years.ago.to_date.to_s(:db))
+      reg = FactoryGirl.build(:step_1_registrant, :date_of_birth => 20.years.ago.to_date.to_s(:db))
       assert reg.valid?
       assert reg.eligible?
       assert !reg.ineligible_age?
     end
 
     it "should be ineligible when not a citizen" do
-      reg = Factory.build(:step_1_registrant, :us_citizen => false)
+      reg = FactoryGirl.build(:step_1_registrant, :us_citizen => false)
       assert reg.valid?
       assert reg.ineligible?
       assert reg.ineligible_non_citizen?
-      reg = Factory.build(:step_1_registrant, :us_citizen => true)
+      reg = FactoryGirl.build(:step_1_registrant, :us_citizen => true)
       assert reg.valid?
       assert reg.eligible?
       assert !reg.ineligible_non_citizen?
     end
     
     it "does not validate phone is present if rtv or partner mobile opt-in is true" do
-      reg = Factory.build(:step_1_registrant, :phone => "")
+      reg = FactoryGirl.build(:step_1_registrant, :phone => "")
       reg.opt_in_sms = true
       reg.should be_valid
       reg.partner_opt_in_sms = true
@@ -354,21 +354,21 @@ describe Registrant do
     end
 
     it "should check format of mailing_zip_code" do
-      reg = Factory.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => 'ABCDE')
+      reg = FactoryGirl.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => 'ABCDE')
       reg.invalid?
 
       assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:mailing_zip_code)].flatten
     end
 
     it "should limit number of simultaneous errors on mailing_zip_code" do
-      reg = Factory.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => nil)
+      reg = FactoryGirl.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => nil)
       reg.invalid?
 
       assert_equal ["Required"], [reg.errors.on(:mailing_zip_code)].flatten
     end
 
     it "blanks mailing address fields unless has_mailing_address" do
-      reg = Factory.build(:maximal_registrant, :has_mailing_address => false)
+      reg = FactoryGirl.build(:maximal_registrant, :has_mailing_address => false)
       assert reg.valid?, reg.errors.full_messages
       assert_nil reg.mailing_address
       assert_nil reg.mailing_unit
@@ -378,20 +378,20 @@ describe Registrant do
     end
 
     it "should require race but only for certain states" do
-      reg = Factory.build(:step_2_registrant, :race => nil)
+      reg = FactoryGirl.build(:step_2_registrant, :race => nil)
       stub(reg).requires_race? {true}
       assert reg.invalid?
       assert reg.errors.on(:race)
     end
 
     it "should not require race for some states" do
-      reg = Factory.build(:step_2_registrant, :race => nil)
+      reg = FactoryGirl.build(:step_2_registrant, :race => nil)
       stub(reg).requires_race? {false}
       assert reg.valid?
     end
     
     it "party included in validations when required by state" do
-      reg = Factory.build(:step_2_registrant, :party => "bogus")
+      reg = FactoryGirl.build(:step_2_registrant, :party => "bogus")
       stub(reg).requires_party? { true }
       stub(reg).state_parties { %w[Democratic Republican] }
       assert reg.invalid?
@@ -399,14 +399,14 @@ describe Registrant do
     end
 
     it "party not included in validations when not required by state" do
-      reg = Factory.build(:step_2_registrant, :party => nil)
+      reg = FactoryGirl.build(:step_2_registrant, :party => nil)
       stub(reg).requires_party? { false }
       assert reg.valid?
     end
     
     context "with a custom step 2" do
       before(:each) do
-        @reg = Factory.build(:step_2_registrant, :home_address=>nil)
+        @reg = FactoryGirl.build(:step_2_registrant, :home_address=>nil)
         stub(@reg).custom_step_2? { true }        
       end
       it "does not require home_address" do
@@ -421,19 +421,19 @@ describe Registrant do
       end
     
       it "should require has_state_license" do
-        reg = Factory.build(:step_2_registrant, :has_state_license=>nil)
+        reg = FactoryGirl.build(:step_2_registrant, :has_state_license=>nil)
         stub(reg).custom_step_2? { true }
         reg.invalid?
         assert reg.errors.on(:has_state_license)
       end
       it "should format phone as ###-###-####" do
-        reg = Factory.build(:step_2_registrant, :phone => "1234567890", :phone_type => "mobile")
+        reg = FactoryGirl.build(:step_2_registrant, :phone => "1234567890", :phone_type => "mobile")
         stub(reg).custom_step_2? { true }
         assert reg.valid?
         assert_equal "123-456-7890", reg.phone
       end
       it "should require a valid phone number" do
-        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
+        reg = FactoryGirl.build(:step_2_registrant, :phone_type => "Mobile")
         stub(reg).custom_step_2? { true }
         
         reg.phone = "1234567890"
@@ -456,7 +456,7 @@ describe Registrant do
       end
       
       it "validates phone is present if rtv mobile opt-in is true" do
-        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
+        reg = FactoryGirl.build(:step_2_registrant, :phone_type => "Mobile")
         stub(reg).custom_step_2? { true }
         reg.phone = ''
         
@@ -466,7 +466,7 @@ describe Registrant do
       end
 
       it "validates phone is present if partner mobile opt-in is true" do
-        reg = Factory.build(:step_2_registrant, :phone_type => "Mobile")
+        reg = FactoryGirl.build(:step_2_registrant, :phone_type => "Mobile")
         stub(reg).custom_step_2? { true }
         reg.phone = ''
 
@@ -494,7 +494,7 @@ describe Registrant do
     
     context "with a short form" do
       before(:each) do
-        @reg = Factory.build(:step_2_registrant, :state_id_number=>"1234", :opt_in_sms=>false)
+        @reg = FactoryGirl.build(:step_2_registrant, :state_id_number=>"1234", :opt_in_sms=>false)
         stub(@reg).use_short_form? { true }        
       end
       it "should format phone as ###-###-####" do
@@ -562,7 +562,7 @@ describe Registrant do
         assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => "$234567")
       end
       it "should upcase state id" do
-        reg = Factory.build(:step_2_registrant, :short_form=>true, :state_id_number => "abc12345")
+        reg = FactoryGirl.build(:step_2_registrant, :short_form=>true, :state_id_number => "abc12345")
         assert reg.valid?
         assert_equal "ABC12345", reg.state_id_number
       end
@@ -585,14 +585,14 @@ describe Registrant do
       end
 
       it "should check format of prev_zip_code" do
-        reg = Factory.build(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => 'ABCDE')
+        reg = FactoryGirl.build(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => 'ABCDE')
         reg.invalid?
 
         assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:prev_zip_code)].flatten
       end
 
       it "should limit number of simultaneous errors on prev_zip_code" do
-        reg = Factory.build(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => nil)
+        reg = FactoryGirl.build(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => nil)
         reg.invalid?
 
         assert_equal ["Required"], [reg.errors.on(:prev_zip_code)].flatten
@@ -600,13 +600,13 @@ describe Registrant do
 
 
       it "should not require phone number" do
-        reg = Factory.build(:step_2_registrant, :short_form=>true, :phone => "", :state_id_number=>"1234")
+        reg = FactoryGirl.build(:step_2_registrant, :short_form=>true, :phone => "", :state_id_number=>"1234")
         assert reg.valid?
       end
     end
 
     it "generates barcode when entering Step 2" do
-      reg = Factory.create(:step_1_registrant)
+      reg = FactoryGirl.create(:step_1_registrant)
       stub(reg).valid? { true }
       stub(reg).pdf_barcode { "*RTV-00ROFL*" }
       reg.advance_to_step_2
@@ -618,7 +618,7 @@ describe Registrant do
 
     context "when registrant uses a custom step 2" do
       before(:each) do
-        @reg =  Factory(:step_3_registrant) 
+        @reg =  FactoryGirl.create(:step_3_registrant) 
         stub(@reg).custom_step_2? { true }
       end
       it "should require home address" do
@@ -633,7 +633,7 @@ describe Registrant do
       end
       
       it "should require race but only for certain states" do
-        reg = Factory.build(:step_3_registrant, :race => nil)
+        reg = FactoryGirl.build(:step_3_registrant, :race => nil)
         stub(reg).custom_step_2? { true }
         stub(reg).requires_race? {true}
         assert reg.invalid?
@@ -641,14 +641,14 @@ describe Registrant do
       end
 
       it "should not require race for some states" do
-        reg = Factory.build(:step_3_registrant, :race => nil)
+        reg = FactoryGirl.build(:step_3_registrant, :race => nil)
         stub(reg).requires_race? {false}
         stub(reg).custom_step_2? { true }
         assert reg.valid?
       end
 
       it "party included in validations when required by state" do
-        reg = Factory.build(:step_3_registrant, :party => "bogus")
+        reg = FactoryGirl.build(:step_3_registrant, :party => "bogus")
         stub(reg).requires_party? { true }
         stub(reg).custom_step_2? { true }
         stub(reg).state_parties { %w[Democratic Republican] }
@@ -657,7 +657,7 @@ describe Registrant do
       end
 
       it "party not included in validations when not required by state" do
-        reg = Factory.build(:step_3_registrant, :party => nil)
+        reg = FactoryGirl.build(:step_3_registrant, :party => nil)
         stub(reg).requires_party? { false }
         assert reg.valid?
       end
@@ -685,13 +685,13 @@ describe Registrant do
     end
 
     it "should upcase state id" do
-      reg = Factory.build(:step_3_registrant, :state_id_number => "abc12345")
+      reg = FactoryGirl.build(:step_3_registrant, :state_id_number => "abc12345")
       assert reg.valid?
       assert_equal "ABC12345", reg.state_id_number
     end
 
     it "should format phone as ###-###-####" do
-      reg = Factory.build(:step_3_registrant, :phone => "1234567890", :phone_type => "mobile")
+      reg = FactoryGirl.build(:step_3_registrant, :phone => "1234567890", :phone_type => "mobile")
       assert reg.valid?
       assert_equal "123-456-7890", reg.phone
     end
@@ -715,21 +715,21 @@ describe Registrant do
     end
 
     it "should check format of prev_zip_code" do
-      reg = Factory.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => 'ABCDE')
+      reg = FactoryGirl.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => 'ABCDE')
       reg.invalid?
 
       assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:prev_zip_code)].flatten
     end
 
     it "should limit number of simultaneous errors on prev_zip_code" do
-      reg = Factory.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
+      reg = FactoryGirl.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
       reg.invalid?
 
       assert_equal ["Required"], [reg.errors.on(:prev_zip_code)].flatten
     end
 
     it "blanks previous name fields unless change_of_name" do
-      reg = Factory.build(:maximal_registrant, :change_of_name => false)
+      reg = FactoryGirl.build(:maximal_registrant, :change_of_name => false)
       assert reg.valid?
       assert_nil reg.prev_name_title
       assert_nil reg.prev_first_name
@@ -739,7 +739,7 @@ describe Registrant do
     end
 
     it "blanks previous address fields unless change_of_address" do
-      reg = Factory.build(:maximal_registrant, :change_of_address => false)
+      reg = FactoryGirl.build(:maximal_registrant, :change_of_address => false)
       assert reg.valid?
       assert_nil reg.prev_address
       assert_nil reg.prev_unit
@@ -749,12 +749,12 @@ describe Registrant do
     end
 
     it "should not require phone number" do
-      reg = Factory.build(:step_3_registrant, :phone => "")
+      reg = FactoryGirl.build(:step_3_registrant, :phone => "")
       assert reg.valid?
     end
 
     it "should require a valid phone number" do
-      reg = Factory.build(:step_3_registrant, :phone_type => "Mobile")
+      reg = FactoryGirl.build(:step_3_registrant, :phone_type => "Mobile")
       reg.phone = "1234567890"
       assert reg.valid?
 
@@ -775,7 +775,7 @@ describe Registrant do
     end
     
     it "validates phone is present if rtv mobile opt-in is true" do
-      reg = Factory.build(:step_3_registrant, :phone => "")
+      reg = FactoryGirl.build(:step_3_registrant, :phone => "")
       
       reg.opt_in_sms = true
       reg.valid?.should be_false
@@ -783,7 +783,7 @@ describe Registrant do
     end
 
     it "validates phone is present if partner mobile opt-in is true" do
-      reg = Factory.build(:step_3_registrant, :phone => "")
+      reg = FactoryGirl.build(:step_3_registrant, :phone => "")
 
       reg.partner_opt_in_sms = true
       reg.valid?.should be_false
@@ -793,12 +793,12 @@ describe Registrant do
     
 
     it "should not require phone type when registrant does not provide phone" do
-      reg = Factory.build(:step_3_registrant, :phone_type => "")
+      reg = FactoryGirl.build(:step_3_registrant, :phone_type => "")
       assert reg.valid?
     end
 
     it "should require phone type when registrant provides phone" do
-      reg = Factory.build(:step_3_registrant, :phone_type => "", :phone => "123-456-7890")
+      reg = FactoryGirl.build(:step_3_registrant, :phone_type => "", :phone => "123-456-7890")
       assert !reg.valid?
     end
   end
@@ -813,7 +813,7 @@ describe Registrant do
   describe "home state name" do
     it "gets name for state" do
       new_york = GeoState['NY']
-      reg = Factory.build(:step_1_registrant, :home_zip_code => "00501")
+      reg = FactoryGirl.build(:step_1_registrant, :home_zip_code => "00501")
       assert_equal new_york.name, reg.home_state_name
       reg.home_state = nil
       reg.home_state_name.should be_nil
@@ -823,7 +823,7 @@ describe Registrant do
   describe "home state abbr" do
     it "gets abbr for state" do
       new_york = GeoState['NY']
-      reg = Factory.build(:step_1_registrant, :home_zip_code => "00501")
+      reg = FactoryGirl.build(:step_1_registrant, :home_zip_code => "00501")
       assert_equal new_york.abbreviation, reg.home_state_abbrev
       reg.home_state = nil
       reg.home_state_abbrev.should be_nil
@@ -834,9 +834,9 @@ describe Registrant do
     describe "#survey_question_#{qnum}" do
       context "when original_survey_question_#{qnum} is blank" do
         it "returns the partner question" do
-          p = Factory(:whitelabel_partner)
-          r = Factory(:maximal_registrant, :partner=>p)
-          r2 = Factory(:maximal_registrant, :partner=>p, :locale=>"es")
+          p = FactoryGirl.create(:whitelabel_partner)
+          r = FactoryGirl.create(:maximal_registrant, :partner=>p)
+          r2 = FactoryGirl.create(:maximal_registrant, :partner=>p, :locale=>"es")
           r.send("original_survey_question_#{qnum}=", '')
           r2.send("original_survey_question_#{qnum}=", '')
           r.send("survey_question_#{qnum}").should == p.send("survey_question_#{qnum}_en")
@@ -853,11 +853,11 @@ describe Registrant do
       end
       context "when original_survey_question_#{qnum} has been filled" do
         it "returns the original value" do
-          p = Factory(:whitelabel_partner)
+          p = FactoryGirl.create(:whitelabel_partner)
           orig_en = p.send("survey_question_#{qnum}_en")
           orig_es = p.send("survey_question_#{qnum}_es")
-          r = Factory(:maximal_registrant, :partner=>p)
-          r2 = Factory(:maximal_registrant, :partner=>p, :locale=>"es")
+          r = FactoryGirl.create(:maximal_registrant, :partner=>p)
+          r2 = FactoryGirl.create(:maximal_registrant, :partner=>p, :locale=>"es")
           r.send("survey_question_#{qnum}").should == orig_en
           r2.send("survey_question_#{qnum}").should == orig_es
       
@@ -871,9 +871,9 @@ describe Registrant do
     end
     describe "original_survey_question_#{qnum}" do
       it "gets set on save when the question is answered" do
-        p = Factory(:whitelabel_partner)
-        r = Factory(:step_3_registrant, :partner=>p)
-        r2 = Factory(:step_3_registrant, :partner=>p, :locale=>"es")
+        p = FactoryGirl.create(:whitelabel_partner)
+        r = FactoryGirl.create(:step_3_registrant, :partner=>p)
+        r2 = FactoryGirl.create(:step_3_registrant, :partner=>p, :locale=>"es")
         r.send("survey_answer_#{qnum}").should be_blank
         r2.send("survey_answer_#{qnum}").should be_blank
         r.update_attributes("survey_answer_#{qnum}"=>"My Answer")
@@ -889,45 +889,45 @@ describe Registrant do
   
   describe "custom_step_2?" do
     it "returns true if the state has a custom step 2" do
-      reg = Factory.build(:step_1_registrant)
-      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { true }
+      reg = FactoryGirl.build(:step_1_registrant)
+      stub(File).exists?(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
       stub(GeoState).states_with_online_registration { ["PA"] }
       reg.custom_step_2?.should be_true
     end
     it "returns false if javascript is disabled" do
-      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { true }
-      reg = Factory.build(:step_1_registrant, :javascript_disabled=>true)
+      stub(File).exists?(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
+      reg = FactoryGirl.build(:step_1_registrant, :javascript_disabled=>true)
       reg.custom_step_2?.should be_false
     end
     it "returns false if the state has a custom step 2" do
-      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { false }
-      reg = Factory.build(:step_1_registrant)
+      stub(File).exists?(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { false }
+      reg = FactoryGirl.build(:step_1_registrant)
       reg.custom_step_2?.should be_false
     end    
     it "returns false if the state is missing" do
-      stub(File).exists?(File.join(RAILS_ROOT,'app/views/step2/_pa.html.erb')) { true }
-      reg = Factory.build(:step_1_registrant)
+      stub(File).exists?(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
+      reg = FactoryGirl.build(:step_1_registrant)
       reg.home_state = nil
       reg.custom_step_2?.should be_false
     end
   end
   describe "custom_step_2_partial" do
     it "returns a filename of a view partial based on the state abbreviation" do
-      reg = Factory.build(:step_2_registrant)
+      reg = FactoryGirl.build(:step_2_registrant)
       reg.custom_step_2_partial.should == "pa.html.erb"
     end
   end
   
   describe "has_home_state_online_registration_instructions?" do
     it "returns true if the state has a partial based on the state abbreviation" do
-      reg = Factory.build(:step_1_registrant)
-      stub(File).exists?(File.join(RAILS_ROOT,'app/views/state_online_registrations/_pa_instructions.html.erb')) { true }
+      reg = FactoryGirl.build(:step_1_registrant)
+      stub(File).exists?(File.join(Rails.root,'app/views/state_online_registrations/_pa_instructions.html.erb')) { true }
       reg.has_home_state_online_registration_instructions?.should be_true
     end    
   end
   describe "home_state_online_registration_instructions_partial" do
     it "returns a filename of a view partial based on the state abbreviation" do
-      reg = Factory.build(:step_2_registrant)
+      reg = FactoryGirl.build(:step_2_registrant)
       reg.home_state_online_registration_instructions_partial.should == "pa_instructions"
     end
   end
@@ -935,14 +935,14 @@ describe Registrant do
 
   describe "has_home_state_online_registration_view?" do
     it "returns true if the state has a partial based on the state abbreviation" do
-      reg = Factory.build(:step_1_registrant)
-      stub(File).exists?(File.join(RAILS_ROOT,'app/views/state_online_registrations/pa.html.erb')) { true }
+      reg = FactoryGirl.build(:step_1_registrant)
+      stub(File).exists?(File.join(Rails.root,'app/views/state_online_registrations/pa.html.erb')) { true }
       reg.has_home_state_online_registration_view?.should be_true
     end    
   end
   describe "home_state_online_registration_view" do
     it "returns a filename of a view partial based on the state abbreviation" do
-      reg = Factory.build(:step_2_registrant)
+      reg = FactoryGirl.build(:step_2_registrant)
       reg.home_state_online_registration_view.should == "pa"
     end
   end
@@ -968,14 +968,14 @@ describe Registrant do
   describe "states by abbreviation" do
     it "sets state by abbreviation" do
       new_york = GeoState['NY']
-      reg = Factory.build(:step_1_registrant, :mailing_state_abbrev => "NY", :prev_state_abbrev => "NY")
+      reg = FactoryGirl.build(:step_1_registrant, :mailing_state_abbrev => "NY", :prev_state_abbrev => "NY")
       assert_equal new_york.id, reg.mailing_state_id
       assert_equal new_york.id, reg.prev_state_id
     end
 
     it "gets abbrev for state" do
       new_york = GeoState['NY']
-      reg = Factory.build(:step_1_registrant, :mailing_state => new_york, :prev_state => new_york)
+      reg = FactoryGirl.build(:step_1_registrant, :mailing_state => new_york, :prev_state => new_york)
       assert_equal new_york.abbreviation, reg.mailing_state_abbrev
       assert_equal new_york.abbreviation, reg.prev_state_abbrev
     end
@@ -983,7 +983,7 @@ describe Registrant do
 
   describe "state parties" do
     it "gets parties by locale when required" do
-      reg = Factory.build(:step_2_registrant, :locale => 'en', :home_zip_code => '94101')
+      reg = FactoryGirl.build(:step_2_registrant, :locale => 'en', :home_zip_code => '94101')
       state = reg.home_state
       reg.localization.update_attributes(:parties => %w(red green blue), :no_party => "black")
       assert_equal %w(red green blue black), reg.state_parties
@@ -994,12 +994,12 @@ describe Registrant do
     end
 
     it "gets no parties when not required" do
-      reg = Factory.build(:step_2_registrant, :home_state => GeoState["PA"])
+      reg = FactoryGirl.build(:step_2_registrant, :home_state => GeoState["PA"])
       assert_equal nil, reg.state_parties
     end
 
     it "gets no parties when no locale" do
-      reg = Factory.build(:step_2_registrant)
+      reg = FactoryGirl.build(:step_2_registrant)
       stub(reg).requires_party? { true }
       stub(reg).localization { nil }
       reg.state_parties.should == []
@@ -1015,13 +1015,13 @@ describe Registrant do
     end
 
     it "sets age when record is saved" do
-      reg = Factory.create(:step_1_registrant, :date_of_birth => (18.years + 1.day).ago.to_date.strftime("%m/%d/%Y"))
+      reg = FactoryGirl.create(:step_1_registrant, :date_of_birth => (18.years + 1.day).ago.to_date.strftime("%m/%d/%Y"))
       assert_equal 18, reg.age
     end
   end
 
   def assert_age(years, born_on)
-    reg = Factory.build(:step_1_registrant, :date_of_birth => born_on.ago.to_date.strftime("%m/%d/%Y"))
+    reg = FactoryGirl.build(:step_1_registrant, :date_of_birth => born_on.ago.to_date.strftime("%m/%d/%Y"))
     reg.created_at = Time.now.utc   # TODO: change to a US time zone
     reg.calculate_age
     assert_equal years, reg.age
@@ -1029,31 +1029,31 @@ describe Registrant do
 
   describe "set official party name" do
     it "uses party attribute when in English locale" do
-      reg = Factory.build(:step_5_registrant, :locale => "en", :home_zip_code => "94103", :party => "Green")
+      reg = FactoryGirl.build(:step_5_registrant, :locale => "en", :home_zip_code => "94103", :party => "Green")
       assert reg.valid?
       assert_equal "Green", reg.official_party_name
     end
 
     it "maps Spanish party name to English" do
-      reg = Factory.build(:step_5_registrant, :locale => "es", :home_zip_code => "94103", :party => "Verde")
+      reg = FactoryGirl.build(:step_5_registrant, :locale => "es", :home_zip_code => "94103", :party => "Verde")
       assert reg.valid?
       assert_equal "Green", reg.official_party_name
     end
 
     it "handles Decline to State" do
-      reg = Factory.build(:step_5_registrant, :locale => "en", :home_zip_code => "94103", :party => "Decline to State")
+      reg = FactoryGirl.build(:step_5_registrant, :locale => "en", :home_zip_code => "94103", :party => "Decline to State")
       assert reg.valid?
       assert_equal "None", reg.official_party_name
     end
 
     it "handles Decline to State in Spanish" do
-      reg = Factory.build(:step_5_registrant, :locale => "es", :home_zip_code => "94103", :party => "Se niega a declarar")
+      reg = FactoryGirl.build(:step_5_registrant, :locale => "es", :home_zip_code => "94103", :party => "Se niega a declarar")
       assert reg.valid?
       assert_equal "None", reg.official_party_name
     end
 
     it "sets to None for states which do not require party" do
-      reg = Factory.build(:maximal_registrant, :locale => "en", :home_zip_code => "02134", :party => nil)
+      reg = FactoryGirl.build(:maximal_registrant, :locale => "en", :home_zip_code => "02134", :party => nil)
       assert !reg.home_state.requires_party?
       assert reg.valid?
       assert_equal "None", reg.official_party_name
@@ -1062,7 +1062,7 @@ describe Registrant do
 
   describe "under_18_instructions_for_home_state" do
     it "shows instructions with state name and localized rule" do
-      reg = Factory.build(:step_1_registrant)
+      reg = FactoryGirl.build(:step_1_registrant)
       text = reg.under_18_instructions_for_home_state
       assert_match Regexp.compile(reg.home_state.name), text
       assert_match Regexp.compile(reg.localization.sub_18), text
@@ -1071,7 +1071,7 @@ describe Registrant do
 
   describe "at least step N" do
     it "should say whether step is at least N" do
-      reg = Factory.build(:step_2_registrant)
+      reg = FactoryGirl.build(:step_2_registrant)
       assert reg.at_least_step_1?
       assert reg.at_least_step_2?
       assert !reg.at_least_step_3?
@@ -1081,14 +1081,14 @@ describe Registrant do
 
   describe "#abandon!" do
     it "should mark as abandoned" do
-      reg = Factory.create(:step_1_registrant)
+      reg = FactoryGirl.create(:step_1_registrant)
       assert !reg.abandoned?
       reg.abandon!
       assert reg.abandoned?
     end
 
     it "should clear sensitive data" do
-      reg = Factory.create(:step_4_registrant)
+      reg = FactoryGirl.create(:step_4_registrant)
       assert_not_nil reg.state_id_number
       reg.abandon!
       assert_nil reg.state_id_number
@@ -1097,9 +1097,9 @@ describe Registrant do
 
   describe "stale records" do
     it "should become abandoned" do
-      stale_rec = Factory.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
-      fresh_rec = Factory.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT - 10).seconds.ago)
-      complete_rec = Factory.create(:maximal_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
+      stale_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
+      fresh_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT - 10).seconds.ago)
+      complete_rec = FactoryGirl.create(:maximal_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
 
       Registrant.abandon_stale_records
 
@@ -1108,8 +1108,8 @@ describe Registrant do
       assert !complete_rec.reload.abandoned?
     end
     it "should send an email if registrant chose to finish online with state" do
-      stale_state_online_reg = Factory.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
-      stale_reg = Factory.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
+      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
       
       expect {
         Registrant.abandon_stale_records
@@ -1117,11 +1117,11 @@ describe Registrant do
       
     end
     it "should not send an email to registrants that have been thanked" do
-      stale_state_online_reg = Factory.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
       
       Registrant.abandon_stale_records
       
-      stale_state_online_reg_2 = Factory.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      stale_state_online_reg_2 = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
       expect {
         Registrant.abandon_stale_records
       }.to change { ActionMailer::Base.deliveries.count }.by(1)
@@ -1136,27 +1136,27 @@ describe Registrant do
   describe "PDF" do
     describe "template path" do
       it "determined by state and locale" do
-        registrant = Factory.build(:maximal_registrant, :home_zip_code => "00501", :locale => 'es')
+        registrant = FactoryGirl.build(:maximal_registrant, :home_zip_code => "00501", :locale => 'es')
         assert_match(/_es_ny\.pdf/, registrant.nvra_template_path)
       end
     end
 
     describe "merge" do
       before(:each) do
-        @registrant = Factory.create(:maximal_registrant)
+        @registrant = FactoryGirl.create(:maximal_registrant)
         stub(@registrant).merge_pdf { `touch #{@registrant.pdf_file_path}` }
       end
 
       it "generates PDF with merged data" do
         `rm -f #{@registrant.pdf_file_path}`
-        assert_difference(%Q{Dir[File.join(RAILS_ROOT, "pdf/#{@registrant.bucket_code}/*")].length}) do
+        assert_difference(%Q{Dir[File.join(Rails.root, "pdf/#{@registrant.bucket_code}/*")].length}) do
           @registrant.generate_pdf
         end
       end
 
       it "returns PDF if already exists" do
         `touch #{@registrant.pdf_file_path}`
-        assert_no_difference(%Q{Dir[File.join(RAILS_ROOT, "pdf/#{@registrant.bucket_code}/*")].length}) do
+        assert_no_difference(%Q{Dir[File.join(Rails.root, "pdf/#{@registrant.bucket_code}/*")].length}) do
           @registrant.generate_pdf
         end
       end
@@ -1176,7 +1176,7 @@ describe Registrant do
 
   describe "CSV" do
     it "renders minimal CSV" do
-      reg = Factory.build(:step_1_registrant)
+      reg = FactoryGirl.build(:step_1_registrant)
       partner = reg.partner
       partner.survey_question_1_en = "survey_question_1_en"
       partner.survey_question_2_en = "survey_question_2_en"
@@ -1226,8 +1226,8 @@ describe Registrant do
     end
 
     it "renders maximal CSV" do
-      partner = Factory.create(:whitelabel_partner)
-      reg = Factory.create(:api_v2_maximal_registrant, :partner=>partner)
+      partner = FactoryGirl.create(:whitelabel_partner)
+      reg = FactoryGirl.create(:api_v2_maximal_registrant, :partner=>partner)
       reg.update_attributes :home_zip_code => "94110", :party => "Democratic"
       assert_equal [ "Complete",
                      "tracking_source",
@@ -1276,7 +1276,7 @@ describe Registrant do
     end
 
     it "renders maximal CSV with es questions for es locale" do
-      reg = Factory.create(:api_v2_maximal_registrant, :locale => "es")
+      reg = FactoryGirl.create(:api_v2_maximal_registrant, :locale => "es")
       partner = reg.partner
       partner.survey_question_1_es = "survey_question_1_es"
       partner.survey_question_2_es = "survey_question_2_es"
@@ -1328,28 +1328,28 @@ describe Registrant do
     end
 
     it "renders ineligible CSV" do
-      reg = Factory.create(:step_1_registrant, :us_citizen => false)
+      reg = FactoryGirl.create(:step_1_registrant, :us_citizen => false)
       assert_equal "Not a US citizen", reg.to_csv_array[-4]
     end
 
     it "has a CSV header" do
       assert_not_nil Registrant::CSV_HEADER
 
-      reg = Factory.build(:maximal_registrant)
+      reg = FactoryGirl.build(:maximal_registrant)
       assert_equal Registrant::CSV_HEADER.size, reg.to_csv_array.size
     end
   end
 
   describe "wrapping up" do
     it "should transition to complete state" do
-      reg = Factory.create(:step_5_registrant)
+      reg = FactoryGirl.create(:step_5_registrant)
       mock(reg).complete_registration
       reg.wrap_up
       assert reg.reload.complete?
     end
 
     it "clears out sensitive data" do
-      reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+      reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
       stub(reg).generate_pdf                  # avoid messy out-of-band action in tests
       stub(reg).deliver_confirmation_email    # avoid messy out-of-band action in tests
       stub(reg).enqueue_reminder_emails       # avoid messy out-of-band action in tests
@@ -1358,7 +1358,7 @@ describe Registrant do
     end
 
     it "sets system locale using registrant's locale" do
-      reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+      reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
       stub(reg).generate_pdf                  # avoid messy out-of-band action in tests
       stub(reg).deliver_confirmation_email    # avoid messy out-of-band action in tests
       stub(reg).enqueue_reminder_emails       # avoid messy out-of-band action in tests
@@ -1383,14 +1383,14 @@ describe Registrant do
         end
 
         it "should delay processing" do
-          reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+          reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
           dont_allow(reg).complete!
           reg.wrap_up
           assert_match /#{reg.id}.*complete!/m, Delayed::Job.last.handler
         end
 
         it "should be higher priority than email jobs" do
-          reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+          reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
           reg.wrap_up
           wrap_up_priority = Delayed::Job.last.priority
           reg.enqueue_reminder_email
@@ -1409,7 +1409,7 @@ describe Registrant do
         end
 
         it "should run immediately" do
-          reg = Factory.create(:step_5_registrant, :state_id_number => "1234567890")
+          reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
           mock(reg).generate_pdf
           reg.wrap_up
           assert_match /#{reg.id}.*deliver_reminder_email/m, Delayed::Job.last.handler
@@ -1421,22 +1421,22 @@ describe Registrant do
   describe "deliver_confirmation_email" do
     it "should deliver an email" do
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
-        Factory.create(:maximal_registrant).deliver_confirmation_email
+        FactoryGirl.create(:maximal_registrant).deliver_confirmation_email
       end
     end
   end
 
   describe "reminder emails" do
     it "on incomplete registrant, it should be 0" do
-      assert_equal 0, Factory.build(:step_4_registrant).reminders_left
+      assert_equal 0, FactoryGirl.build(:step_4_registrant).reminders_left
     end
 
     it "should know how many reminder emails are left" do
-      assert_equal Registrant::REMINDER_EMAILS_TO_SEND, Factory.build(:maximal_registrant, :reminders_left => Registrant::REMINDER_EMAILS_TO_SEND).reminders_left
+      assert_equal Registrant::REMINDER_EMAILS_TO_SEND, FactoryGirl.build(:maximal_registrant, :reminders_left => Registrant::REMINDER_EMAILS_TO_SEND).reminders_left
     end
 
     it "should queue series of reminder emails" do
-      reg = Factory.create(:maximal_registrant, :reminders_left => 0)
+      reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 0)
       assert_difference('Delayed::Job.count', 1) do
         reg.enqueue_reminder_emails
         assert_equal Registrant::REMINDER_EMAILS_TO_SEND, reg.reload.reminders_left
@@ -1446,40 +1446,40 @@ describe Registrant do
     describe "delivery" do
       it "should send an email" do
         assert_difference('ActionMailer::Base.deliveries.size', 1) do
-          reg = Factory.create(:maximal_registrant, :reminders_left => 1)
+          reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
           reg.deliver_reminder_email
         end
       end
 
       it "should not send an email if no reminders left" do
         assert_no_difference('ActionMailer::Base.deliveries.size') do
-          reg = Factory.create(:maximal_registrant, :reminders_left => 0)
+          reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 0)
           reg.deliver_reminder_email
         end
       end
 
       it "should decrement reminders left" do
-        reg = Factory.create(:maximal_registrant, :reminders_left => 3)
+        reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 3)
         reg.deliver_reminder_email
         assert_equal 2, reg.reload.reminders_left
       end
 
       it "should enqueue another reminder email" do
         assert_difference('Delayed::Job.count', 1) do
-          reg = Factory.create(:maximal_registrant, :reminders_left => 3)
+          reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 3)
           reg.deliver_reminder_email
         end
       end
 
       it "should not enqueue another reminder email if on last email" do
         assert_no_difference('Delayed::Job.count') do
-          reg = Factory.create(:maximal_registrant, :reminders_left => 1)
+          reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
           reg.deliver_reminder_email
         end
       end
 
       it "should log an error to HopToad if something blows up" do
-        reg = Factory.create(:maximal_registrant, :reminders_left => 1)
+        reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
         stub(reg).valid? { false }
 
         stub(HoptoadNotifier).notify
@@ -1492,13 +1492,13 @@ describe Registrant do
   describe "shared_text" do
     describe "when complete" do
       it "says I voted" do
-        reg = Factory.build(:completed_registrant)
+        reg = FactoryGirl.build(:completed_registrant)
         assert_match Regexp.new(Regexp.escape("I+just+registered+to+vote+and+you+can+too")), reg.status_text
       end
     end
     describe "when under 18" do
       it "says registering is easy" do
-        reg = Factory.build(:under_18_finished_registrant)
+        reg = FactoryGirl.build(:under_18_finished_registrant)
         assert_match Regexp.new(Regexp.escape("Make+sure+you+register+to+vote")), reg.status_text
       end
     end
@@ -1507,7 +1507,7 @@ describe Registrant do
   describe "tell-a-friend emails" do
     attr_accessor :reg
     before(:each) do
-      @reg = Factory.build( :completed_registrant,
+      @reg = FactoryGirl.build( :completed_registrant,
                             :name_title => "Mr.",
                             :first_name => "John", :middle_name => "Queue", :last_name => "Public",
                             :name_suffix => "Jr.",
@@ -1534,7 +1534,7 @@ describe Registrant do
       end
 
       it "has tell_subject default for under 18" do
-        reg = Factory.build(:under_18_finished_registrant)
+        reg = FactoryGirl.build(:under_18_finished_registrant)
         assert_equal "Register to vote!", reg.tell_subject
         reg.tell_subject = "This is super cool"
         assert_equal "This is super cool", reg.tell_subject
@@ -1577,21 +1577,21 @@ describe Registrant do
 
   describe 'completed_at' do
     it 'should return the last modification date for completed_at when completed' do
-      reg = Factory(:maximal_registrant)
+      reg = FactoryGirl.create(:maximal_registrant)
       reg.completed_at.should == reg.updated_at
     end
 
-    specify { Factory(:step_1_registrant).completed_at.should be_nil }
+    specify { FactoryGirl.create(:step_1_registrant).completed_at.should be_nil }
   end
 
   describe 'extended_status' do
     it 'should be complete when complete' do
-      reg = Factory.build(:maximal_registrant)
+      reg = FactoryGirl.build(:maximal_registrant)
       reg.extended_status.should == 'complete'
     end
 
     it 'should be marked as abandoned if incomplete' do
-      reg = Factory.build(:step_1_registrant)
+      reg = FactoryGirl.build(:step_1_registrant)
       reg.extended_status.should == 'abandoned after step 1'
     end
 
@@ -1602,13 +1602,13 @@ describe Registrant do
   end
 
   def assert_attribute_invalid_with(model, attributes)
-    reg = Factory.build(model, attributes)
+    reg = FactoryGirl.build(model, attributes)
     reg.invalid?
     assert attributes.keys.any? { |attr_name| reg.errors.on(attr_name) }
   end
 
   def assert_attribute_valid_with(model, attributes)
-    reg = Factory.build(model, attributes)
+    reg = FactoryGirl.build(model, attributes)
     assert reg.valid?
   end
 end

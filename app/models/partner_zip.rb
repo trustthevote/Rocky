@@ -30,7 +30,7 @@ class PartnerZip
   attr_reader :errors
   
   def self.tmp_root
-    File.join(RAILS_ROOT, 'tmp', 'partner_uploads')
+    File.join(Rails.root, 'tmp', 'partner_uploads')
   end
   
   def self.get_tmp_path

@@ -8,7 +8,7 @@ class AppConfig
     "app_config.yml"
   end
   def self.config_file_path
-    File.join(RAILS_ROOT, "config", config_file_name)
+    File.join(Rails.root, "config", config_file_name)
   end
   
   def self.widget_loader_url

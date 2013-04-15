@@ -26,7 +26,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe EmailTemplate do
 
-  before { @p = Factory(:partner) }
+  before { @p = FactoryGirl.create(:partner) }
   before { EmailTemplate.set(@p, 'confirmation.en', 'body') }
 
   it 'should set a template for the partner' do

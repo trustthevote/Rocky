@@ -3,7 +3,7 @@
 
 namespace :partner do
   desc "Set a partner as whitelabeled and copy in asset files"
-  task :add_whitelabel, :partner_id, :app_css, :reg_css, :needs => :environment do |t, args|
+  task [:add_whitelabel, :partner_id, :app_css, :reg_css, :needs] => :environment do |t, args|
     if args.count != 3
       raise "Please specify all arguments: rake partner:add_whitelabel[partner_id,app_css_path,reg_css_path]"
     end

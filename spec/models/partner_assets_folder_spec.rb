@@ -26,11 +26,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PartnerAssetsFolder do
 
-  before { @partner = Factory(:partner) }
-  before { stub(@partner).assets_root { "#{RAILS_ROOT}/tmp/test_assets" } }
+  before { @partner = FactoryGirl.create(:partner) }
+  before { stub(@partner).assets_root { "#{Rails.root}/tmp/test_assets" } }
   before { @paf = PartnerAssetsFolder.new(@partner) }
 
-  after  { FileUtils.rm_r("#{RAILS_ROOT}/tmp/test_assets") }
+  after  { FileUtils.rm_r("#{Rails.root}/tmp/test_assets") }
 
   describe 'update_css' do
     it 'should save asset file' do

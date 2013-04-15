@@ -28,8 +28,8 @@ describe RegistrationStep do
 
   before do
     @rs = RegistrationStep.new
-    @partner = Factory(:partner)
-    @reg = Factory(:step_5_registrant, :partner => @partner)
+    @partner = FactoryGirl.create(:partner)
+    @reg = FactoryGirl.create(:step_5_registrant, :partner => @partner)
   end
 
   it 'should set partner fields' do

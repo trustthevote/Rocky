@@ -37,7 +37,7 @@ describe PasswordResetsController do
     context "with a valid perishable token" do
       attr_reader :partner
       before do
-        @partner = Factory.create(:partner)
+        @partner = FactoryGirl.create(:partner)
         mock(Partner).find_using_perishable_token(anything) { partner }
       end
       it "should work" do
@@ -80,7 +80,7 @@ describe PasswordResetsController do
 
     attr_reader :partner
     before do
-      @partner = Factory.create(:partner)
+      @partner = FactoryGirl.create(:partner)
       mock(Partner).find_using_perishable_token(anything) { partner }
     end
 

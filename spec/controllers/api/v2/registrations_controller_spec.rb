@@ -57,7 +57,7 @@ describe Api::V2::RegistrationsController do
 
   describe 'create_finish_with_state' do
     it 'should render nothing when success' do
-      reg = Factory.create(:step_2_registrant)
+      reg = FactoryGirl.create(:step_2_registrant)
       expect_api_response :registrations => reg.to_finish_with_state_array
       new_finish_with_state_registration  { reg }
     end

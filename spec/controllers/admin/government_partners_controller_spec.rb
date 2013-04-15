@@ -35,7 +35,7 @@ describe Admin::GovernmentPartnersController do
   end
   describe "GET #show" do
     it 'should render the show template' do
-      partner = Factory.create(:partner)
+      partner = FactoryGirl.create(:partner)
       get :show, :id => partner.id
       assigns(:partner).should == partner
       response.should render_template :show
@@ -52,7 +52,7 @@ describe Admin::GovernmentPartnersController do
   describe "POST #create" do
     context 'valid data' do
       before(:each) do
-        @partner = Factory.create(:partner)
+        @partner = FactoryGirl.create(:partner)
         stub(@partner).save { true }
         stub(Partner).new.with({"name"=>"new_name", "is_government_partner"=>true})  { @partner }
       end
@@ -72,7 +72,7 @@ describe Admin::GovernmentPartnersController do
     end
     context "invalid data" do
       before(:each) do
-        @partner = Factory.create(:partner)
+        @partner = FactoryGirl.create(:partner)
         stub(@partner).save { false }
         stub(Partner).new.with({"name"=>"new_name", "is_government_partner"=>true})  { @partner }
         post :create, :partner => { :name => 'new_name' }
@@ -88,7 +88,7 @@ describe Admin::GovernmentPartnersController do
 
   describe 'GET #edit' do
     it 'should display edit form' do
-      partner = Factory.create(:partner)
+      partner = FactoryGirl.create(:partner)
       get :edit, :id => partner.id
       assigns(:partner).should == partner
       response.should render_template :edit
@@ -97,7 +97,7 @@ describe Admin::GovernmentPartnersController do
   
   describe 'PUT #update' do
     before(:each) do
-      @partner = Factory.create(:partner)
+      @partner = FactoryGirl.create(:partner)
     end
     context 'valid data' do
       before  { put :update, :id => @partner, :partner => { :name => 'new_name' } }

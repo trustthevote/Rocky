@@ -28,7 +28,7 @@ describe MobileConfig do
   before(:each) do
     MobileConfig.redirect_url = nil
     MobileConfig.browsers = nil
-    stub(MobileConfig).config_file_path { File.join(RAILS_ROOT,"spec/fixtures/files/mobile.yml") }
+    stub(MobileConfig).config_file_path { File.join(Rails.root,"spec/fixtures/files/mobile.yml") }
   end
   describe "#redirect_url" do
     it "returns the value from the config" do

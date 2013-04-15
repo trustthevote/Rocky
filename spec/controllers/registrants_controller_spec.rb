@@ -131,7 +131,7 @@ describe RegistrantsController do
       end
 
       it "should show partner banner and logo for non-primary partner with custom logo" do
-        partner = Factory.create(:partner)
+        partner = FactoryGirl.create(:partner)
         File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
           partner.update_attributes(:logo => logo)
           assert partner.custom_logo?
@@ -148,8 +148,8 @@ describe RegistrantsController do
     integrate_views
 
     before(:each) do
-      @partner = Factory.create(:partner)
-      @reg_attributes = Factory.attributes_for(:step_1_registrant)
+      @partner = FactoryGirl.create(:partner)
+      @reg_attributes = FactoryGirl.attributes_for(:step_1_registrant)
     end
 
     it "should create a new registrant and complete step 1" do
@@ -200,7 +200,7 @@ describe RegistrantsController do
 
   describe "#update" do
     before(:each) do
-      @registrant = Factory.create(:step_4_registrant)
+      @registrant = FactoryGirl.create(:step_4_registrant)
     end
 
     it "should update registrant and complete step 1" do
@@ -240,7 +240,7 @@ describe RegistrantsController do
 
     describe "completed registration" do
       it "should not be visible" do
-        reg = Factory.create(:completed_registrant)
+        reg = FactoryGirl.create(:completed_registrant)
         assert_raise ActiveRecord::RecordNotFound do
           get :show, :id => reg.to_param
         end
@@ -249,7 +249,7 @@ describe RegistrantsController do
 
     describe "under-18 finished registration" do
       it "should not be visible" do
-        reg = Factory.create(:under_18_finished_registrant)
+        reg = FactoryGirl.create(:under_18_finished_registrant)
         assert_raise ActiveRecord::RecordNotFound do
           get :show, :id => reg.to_param
         end
@@ -261,7 +261,7 @@ describe RegistrantsController do
     integrate_views
 
     it "should show a timeout page" do
-      reg = Factory.create(:step_1_registrant, :abandoned => true, :locale => "es", :partner_id=>2)
+      reg = FactoryGirl.create(:step_1_registrant, :abandoned => true, :locale => "es", :partner_id=>2)
       get :show, :id => reg.to_param
       assert_redirected_to registrants_timeout_url(:partner => reg.partner.id, :locale => reg.locale)
     end

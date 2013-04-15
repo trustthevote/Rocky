@@ -17,22 +17,26 @@ gem "rubyzip"
 
 
 group :development, :test do
-  gem "rspec", "= 1.2.7"
+  gem "rspec-rails", "~> 2.10.1"
+  gem "rspec-spies",  "2.1.1"
+  
   gem "rr", "= 0.10.11"
-  gem "rspec-rails", "= 1.2.7"
-  #gem "thoughtbot-factory_girl", "= 1.2.1"
-  gem "factory_girl_rails" #, :require=>false
+  
+  gem "cucumber-rails", "1.1.0", :require=>false
+  gem "capybara-webkit", "~> 0.7.1"
   gem "webrat", "= 0.4.4"
-  gem "cucumber", "= 0.3.11"
+  gem "factory_girl_rails", :require=>false
+  
+  
   gem "treetop", "= 1.4.10"
-  gem "selenium-client", "= 1.2.16"
+  # gem "selenium-client", "= 1.2.16"
   gem "capistrano", "= 2.11.2"
   # Pito:
   gem "hpricot", "0.8.6"
 	gem "sqlite3"
 end
 
-gem "nokogiri", "= 1.3.2"
+gem "nokogiri", "= 1.5.9"
 gem "mechanize", "= 1.0.0"
 gem "newrelic_rpm", "= 3.6.0.83"
 gem "hoptoad_notifier", "= 2.2.2"

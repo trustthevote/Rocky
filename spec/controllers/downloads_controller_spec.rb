@@ -29,7 +29,7 @@ describe DownloadsController do
 
   describe "when PDF is ready" do
     before(:each) do
-      @registrant = Factory.create(:step_5_registrant)
+      @registrant = FactoryGirl.create(:step_5_registrant)
       stub(@registrant).merge_pdf { `touch #{@registrant.pdf_file_path}` }
       @registrant.generate_pdf
       @registrant.save!
@@ -51,7 +51,7 @@ describe DownloadsController do
 
   describe "when PDF is not ready" do
     before(:each) do
-      @registrant = Factory.create(:step_5_registrant)
+      @registrant = FactoryGirl.create(:step_5_registrant)
     end
 
     it "provides a link to download the PDF" do

@@ -29,13 +29,13 @@ describe PartnersController do
   describe "registering" do
     it "creates a new partner" do
       assert_difference("Partner.count") do
-        post :create, :partner => Factory.attributes_for(:partner)
+        post :create, :partner => FactoryGirl.attributes_for(:partner)
       end
       assert_not_nil assigns[:partner]
     end
 
     it "creates a new partner with correct opt-in defaults (true for RTV, false for partner settings)" do
-      post :create, :partner => Factory.attributes_for(:partner)
+      post :create, :partner => FactoryGirl.attributes_for(:partner)
       assigns[:partner].rtv_email_opt_in.should be_true
       assigns[:partner].partner_email_opt_in.should be_false
       assigns[:partner].rtv_sms_opt_in.should be_true
@@ -46,7 +46,7 @@ describe PartnersController do
 
     it "requires login, email and password for new partner" do
       assert_no_difference("Partner.count") do
-        post :create, :partner => Factory.attributes_for(:partner, :username => nil)
+        post :create, :partner => FactoryGirl.attributes_for(:partner, :username => nil)
       end
       assert_template "new"
     end
@@ -75,7 +75,7 @@ describe PartnersController do
   describe "when logged in" do
     before(:each) do
       activate_authlogic
-      @partner = Factory.create(:partner, :id => 5)
+      @partner = FactoryGirl.create(:partner, :id => 5)
       PartnerSession.create(@partner)
     end
 

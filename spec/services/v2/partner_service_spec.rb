@@ -33,7 +33,7 @@ describe V2::PartnerService do
         }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
       end
       it 'raises an error if the api key is invalid' do
-        partner = Factory(:partner)
+        partner = FactoryGirl.create(:partner)
         stub(Partner).find_by_id { partner }
         stub(partner).valid_api_key? { false }
         lambda {
@@ -42,7 +42,7 @@ describe V2::PartnerService do
       end
     end
     it 'should return all data' do
-      partner = Factory(:whitelabel_partner)
+      partner = FactoryGirl.create(:whitelabel_partner)
       V2::PartnerService.find(:partner_id => partner.id, :partner_api_key => partner.api_key).should == {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
@@ -69,7 +69,7 @@ describe V2::PartnerService do
     end
 
     it 'should return only public data' do
-      partner = Factory(:whitelabel_partner)
+      partner = FactoryGirl.create(:whitelabel_partner)
       V2::PartnerService.find({ :partner_id => partner.id, :partner_api_key => partner.api_key }, true).should == {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
@@ -133,7 +133,7 @@ describe V2::PartnerService do
 
     it "raise validation errors if the logo URL is not a URI" do
       begin
-        partner = Factory.build(:api_created_partner, :logo_url=>"no_url")
+        partner = FactoryGirl.build(:api_created_partner, :logo_url=>"no_url")
         mock(Partner).new({}) { partner }
         V2::PartnerService.create_record({})
         fail 'ValidationError is expected'
@@ -144,7 +144,7 @@ describe V2::PartnerService do
     end
     it "raise validation errors if the logo URL can not be downloaded" do
       begin
-        partner = Factory.build(:api_created_partner, :logo_url=>"http://no_url")
+        partner = FactoryGirl.build(:api_created_partner, :logo_url=>"http://no_url")
         mock(Partner).new({}) { partner }
         V2::PartnerService.create_record({})
         fail 'ValidationError is expected'
@@ -167,7 +167,7 @@ describe V2::PartnerService do
 
 
     context 'complete record' do
-      before { @partner = Factory.build(:api_created_partner) }
+      before { @partner = FactoryGirl.build(:api_created_partner) }
       before { mock(Partner).new({}) { @partner } }
 
       it 'should save the record' do

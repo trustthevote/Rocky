@@ -29,7 +29,7 @@ describe Notifier do
 
   describe "#password_reset_instruction" do
     it "delivers the expected email" do
-      partner = Factory.create(:partner)
+      partner = FactoryGirl.create(:partner)
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
         Notifier.deliver_password_reset_instructions(partner)
       end
@@ -41,7 +41,7 @@ describe Notifier do
 
   describe "#confirmation" do
     it "delivers the expected email" do
-      registrant = Factory.create(:maximal_registrant)
+      registrant = FactoryGirl.create(:maximal_registrant)
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
         Notifier.deliver_confirmation(registrant)
       end
@@ -56,7 +56,7 @@ describe Notifier do
     end
 
     it "includes state data" do
-      registrant = Factory.create(:maximal_registrant)
+      registrant = FactoryGirl.create(:maximal_registrant)
       registrant.home_state.registrar_phone = "this-is-the-phone"
       registrant.home_state.registrar_address = "this-is-the-address"
       registrant.home_state.registrar_url = "this-is-the-url"
@@ -72,7 +72,7 @@ describe Notifier do
     end
 
     it "includes cancel reminders link" do
-      registrant = Factory.create(:maximal_registrant)
+      registrant = FactoryGirl.create(:maximal_registrant)
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
         Notifier.deliver_confirmation(registrant)
       end
@@ -83,8 +83,8 @@ describe Notifier do
     end
 
     it "uses partner template" do
-      partner    = Factory(:partner, :whitelabeled => true)
-      registrant = Factory(:maximal_registrant, :partner => partner, :locale => 'en')
+      partner    = FactoryGirl.create(:partner, :whitelabeled => true)
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
       EmailTemplate.set(partner, 'confirmation.en', 'PDF: <%= @pdf_url %>')
 
       Notifier.deliver_confirmation(registrant)
@@ -95,8 +95,8 @@ describe Notifier do
     end
     
     it "sends from partner email when configured" do
-      partner    = Factory(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
-      registrant = Factory(:maximal_registrant, :partner => partner, :locale => 'en')
+      partner    = FactoryGirl.create(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
       Notifier.deliver_confirmation(registrant)
       email = ActionMailer::Base.deliveries.last
       email.from.should include("custom@partner.org")      
@@ -106,7 +106,7 @@ describe Notifier do
 
   describe "#thank_you_external" do
     it "delivers the expected email" do
-      registrant = Factory.create(:maximal_registrant)
+      registrant = FactoryGirl.create(:maximal_registrant)
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
         Notifier.deliver_thank_you_external(registrant)
       end
@@ -119,8 +119,8 @@ describe Notifier do
       assert_equal "quoted-printable", email.parts[0].encoding
     end
     it "uses partner template" do
-      partner    = Factory(:partner, :whitelabeled => true)
-      registrant = Factory(:step_2_registrant, :partner => partner, :locale => 'en', :last_name=>"test the template")
+      partner    = FactoryGirl.create(:partner, :whitelabeled => true)
+      registrant = FactoryGirl.create(:step_2_registrant, :partner => partner, :locale => 'en', :last_name=>"test the template")
       EmailTemplate.set(partner, 'thank_you_external.en', 'HI: <%= @registrant.last_name %>')
 
       Notifier.deliver_thank_you_external(registrant)
@@ -129,8 +129,8 @@ describe Notifier do
       email.from.should include(FROM_ADDRESS)
     end
     it "sends from partner email when configured" do
-      partner    = Factory(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
-      registrant = Factory(:maximal_registrant, :partner => partner, :locale => 'en')
+      partner    = FactoryGirl.create(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
       Notifier.deliver_thank_you_external(registrant)
       email = ActionMailer::Base.deliveries.last
       email.from.should include("custom@partner.org")      
@@ -140,7 +140,7 @@ describe Notifier do
 
   describe "#reminder" do
     it "delivers the expected email" do
-      registrant = Factory.create(:maximal_registrant, :reminders_left  => 1)
+      registrant = FactoryGirl.create(:maximal_registrant, :reminders_left  => 1)
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
         Notifier.deliver_reminder(registrant)
       end
@@ -155,7 +155,7 @@ describe Notifier do
     end
 
     it "includes state data" do
-      registrant = Factory.create(:maximal_registrant, :reminders_left  => 1)
+      registrant = FactoryGirl.create(:maximal_registrant, :reminders_left  => 1)
       registrant.home_state.registrar_phone = "this-is-the-phone"
       registrant.home_state.registrar_address = "this-is-the-address"
       registrant.home_state.registrar_url = "this-is-the-url"
@@ -171,7 +171,7 @@ describe Notifier do
     end
 
     it "delivers the expected email in a different locale" do
-      registrant = Factory.create(:maximal_registrant, :locale => 'es')
+      registrant = FactoryGirl.create(:maximal_registrant, :locale => 'es')
       Notifier.deliver_reminder(registrant)
       email = ActionMailer::Base.deliveries.last
       email.from.should include(FROM_ADDRESS)
@@ -180,7 +180,7 @@ describe Notifier do
     end
 
     it "includes cancel reminders link" do
-      registrant = Factory.create(:maximal_registrant)
+      registrant = FactoryGirl.create(:maximal_registrant)
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
         Notifier.deliver_reminder(registrant)
       end
@@ -190,8 +190,8 @@ describe Notifier do
       email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
     end
     it "sends from partner email when configured" do
-      partner    = Factory(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
-      registrant = Factory(:maximal_registrant, :partner => partner, :locale => 'en')
+      partner    = FactoryGirl.create(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
       Notifier.deliver_reminder(registrant)
       email = ActionMailer::Base.deliveries.last
       email.from.should include("custom@partner.org")      

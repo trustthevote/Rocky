@@ -26,8 +26,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PartnerZip do
   after(:each) do
-    if File.exists?("#{RAILS_ROOT}/public/TEST")
-      FileUtils.remove_entry_secure("#{RAILS_ROOT}/public/TEST", true)
+    if File.exists?("#{Rails.root}/public/TEST")
+      FileUtils.remove_entry_secure("#{Rails.root}/public/TEST", true)
     end  
   end
   describe "#new_record?" do
@@ -40,22 +40,22 @@ describe PartnerZip do
       PartnerZip.new(nil).create.should be_false
     end
     it "returns false when the CSV file is missing" do
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'missing_csv.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'missing_csv.zip'))
       pz = PartnerZip.new(@file)
       pz.create.should be_false
     end
     it "looks in folder when the zip file unzips to a subdirectory" do
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'ejs_good_partners1.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'ejs_good_partners1.zip'))
       pz = PartnerZip.new(@file)
       pz.create.should be_true    
     end
     it "looks into nested folders when the zip file unzips to a subdirectory" do
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'ejs_good_partners2.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'ejs_good_partners2.zip'))
       pz = PartnerZip.new(@file)
       pz.create.should be_true      
     end
     it "creates and checks validity of each partner in the CSV" do
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
       pz = PartnerZip.new(@file)
       pz.create.should be_false
       pz.errors.collect{|a,b| a}.should include("Row 1 is invalid")
@@ -63,7 +63,7 @@ describe PartnerZip do
       pz.errors.collect{|a,b| a}.should include("Row 3 is invalid")
     end
     it "creates partners when all is valid and attaches CSVs and email templates when whitelabeled" do
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'four_good_partners.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'four_good_partners.zip'))
       pz = PartnerZip.new(@file)
       assert_difference("Partner.count", 4) do
         pz.create.should be_true
@@ -79,7 +79,7 @@ describe PartnerZip do
       p.registration_css_present?.should be_true
     end
     it "works when there's just a partner.css" do
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'just_partner_css.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'just_partner_css.zip'))
       pz = PartnerZip.new(@file)
       assert_difference("Partner.count", 1) do
         pz.create.should be_true
@@ -96,15 +96,15 @@ describe PartnerZip do
       p.partner_css_present?.should be_true      
     end
     it "deletes the tmp directory when done regardless of result" do
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'four_good_partners.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'four_good_partners.zip'))
       pz = PartnerZip.new(@file)
       pz.create
       Dir.entries(PartnerZip.tmp_root).size.should == 2
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
       pz = PartnerZip.new(@file)
       pz.create.should
       Dir.entries(PartnerZip.tmp_root).size.should == 2      
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'ejs_good_partners2.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'ejs_good_partners2.zip'))
       pz = PartnerZip.new(@file)
       pz.create.should
       Dir.entries(PartnerZip.tmp_root).size.should == 2      
@@ -112,7 +112,7 @@ describe PartnerZip do
   end
   describe "#error_messages" do
     it "displays the error messages from the upload" do
-      @file = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
       pz = PartnerZip.new(@file)
       pz.create.should be_false
       pz.error_messages.should include("Row 1 is invalid")

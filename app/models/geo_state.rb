@@ -81,7 +81,7 @@ class GeoState < ActiveRecord::Base
   def self.states_with_online_registration
     @@states_with_online_registration ||= nil
     if @@states_with_online_registration.nil?
-      File.open(File.join(RAILS_ROOT, state_online_reg_file_name), "r") do |f|
+      File.open(File.join(Rails.root, state_online_reg_file_name), "r") do |f|
         @@states_with_online_registration = YAML::load(f)
       end
     end

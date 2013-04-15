@@ -29,7 +29,7 @@ describe QuestionsController do
   describe "when logged in" do
     before(:each) do
       activate_authlogic
-      @partner = Factory.create(:partner, :id => 5)
+      @partner = FactoryGirl.create(:partner, :id => 5)
       PartnerSession.create(@partner)
     end
 

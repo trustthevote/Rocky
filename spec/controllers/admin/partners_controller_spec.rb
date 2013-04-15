@@ -36,7 +36,7 @@ describe Admin::PartnersController do
 
   describe 'show' do
     it 'should display partner record' do
-      partner = Factory.create(:partner)
+      partner = FactoryGirl.create(:partner)
       get :show, :id => partner.id
       assigns(:partner).should == partner
       response.should render_template :show
@@ -45,7 +45,7 @@ describe Admin::PartnersController do
 
   describe 'edit' do
     it 'should display edit form' do
-      partner = Factory.create(:partner)
+      partner = FactoryGirl.create(:partner)
       get :edit, :id => partner.id
       assigns(:partner).should == partner
       response.should render_template :edit
@@ -53,7 +53,7 @@ describe Admin::PartnersController do
   end
 
   describe 'update' do
-    before  { @partner = Factory(:partner) }
+    before  { @partner = FactoryGirl.create(:partner) }
 
     context 'valid data' do
       before  { put :update, :id => @partner, :partner => { :name => 'new_name' } }
@@ -82,7 +82,7 @@ describe Admin::PartnersController do
   
   describe "GET regen_api_key" do
     before(:each) do
-      @partner = Factory(:partner)
+      @partner = FactoryGirl.create(:partner)
       stub(@partner).generate_api_key! { true }
       stub(Partner).find("1") { @partner }
       get :regen_api_key, :id=>"1"

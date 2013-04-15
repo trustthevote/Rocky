@@ -24,7 +24,7 @@
 #***** END LICENSE BLOCK *****
 
 When /^I upload the "([^\"]*)" zip file$/ do |file_name|
-  attach_file(:partner_zip_zip_file, File.join(RAILS_ROOT, 'spec', 'fixtures', 'files', file_name))
+  attach_file(:partner_zip_zip_file, File.join(Rails.root, 'spec', 'fixtures', 'files', file_name))
 end
 
 Then /^I should see that partner's api key$/ do

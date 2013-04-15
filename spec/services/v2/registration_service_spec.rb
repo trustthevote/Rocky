@@ -103,7 +103,7 @@ describe V2::RegistrationService do
     end
 
     context 'complete record' do
-      before { @reg = Factory(:api_v2_maximal_registrant, :status => 'step_5') }
+      before { @reg = FactoryGirl.create(:api_v2_maximal_registrant, :status => 'step_5') }
       before { mock(Registrant).build_from_api_data({}, false) { @reg } }
 
       it 'should save the record and generate PDF' do
@@ -147,27 +147,27 @@ describe V2::RegistrationService do
 
   describe 'find_records' do
     it 'should return an error for invalid partner ID' do
-      partner = Factory(:partner, :api_key=>"key")
+      partner = FactoryGirl.create(:partner, :api_key=>"key")
       lambda {
         V2::RegistrationService.find_records(:partner_id => 0, :partner_api_key => partner.api_key)
       }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
     end
 
     it 'should return an error for invalid api_key' do
-      partner = Factory(:partner, :api_key=>"key")
+      partner = FactoryGirl.create(:partner, :api_key=>"key")
       lambda {
         V2::RegistrationService.find_records(:partner_id => Partner.first.id, :partner_api_key => 'not_the_key')
       }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
     end
     
     it "should return an error for invlaid 'since' value" do
-      partner = Factory(:partner, :api_key=>"key")
+      partner = FactoryGirl.create(:partner, :api_key=>"key")
       lambda {
         V2::RegistrationService.find_records(:partner_id => partner.id, :partner_api_key=>partner.api_key, :since => "abcdef")
       }.should raise_error V2::RegistrationService::InvalidParameterValue
     end
     it "should return an error for unsupported parameters" do
-      partner = Factory(:partner, :api_key=>"key")
+      partner = FactoryGirl.create(:partner, :api_key=>"key")
       lambda {
         V2::RegistrationService.find_records(:partner_id => Partner.first.id, :some_field => "abcdef")
       }.should raise_error V2::RegistrationService::InvalidParameterType
@@ -175,8 +175,8 @@ describe V2::RegistrationService do
 
 
     it 'should return the list of registrants' do
-      partner = Factory(:partner, :api_key=>"key")
-      reg = Factory(:api_v2_maximal_registrant, :partner => partner)
+      partner = FactoryGirl.create(:partner, :api_key=>"key")
+      reg = FactoryGirl.create(:api_v2_maximal_registrant, :partner => partner)
 
       V2::RegistrationService.find_records(:partner_id => partner.id, :partner_api_key => partner.api_key).should == [
         { :status               => 'complete',
@@ -222,16 +222,16 @@ describe V2::RegistrationService do
     end
 
     it 'should not list registrants before the since date' do
-      partner = Factory(:partner, :api_key=>"key")
-      reg = Factory(:api_v2_maximal_registrant, :partner => partner)
+      partner = FactoryGirl.create(:partner, :api_key=>"key")
+      reg = FactoryGirl.create(:api_v2_maximal_registrant, :partner => partner)
 
       V2::RegistrationService.find_records(:partner_id => partner.id, :partner_api_key => partner.api_key, :since => 1.minute.from_now.to_s).should == []
     end
 
     it 'should filter by email address' do
-      partner = Factory(:partner, :api_key=>"key")
-      reg = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test@osdv.org")
-      reg2 = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test2@osdv.org")
+      partner = FactoryGirl.create(:partner, :api_key=>"key")
+      reg = FactoryGirl.create(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test@osdv.org")
+      reg2 = FactoryGirl.create(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test2@osdv.org")
 
       res = V2::RegistrationService.find_records(:partner_id => partner.id,
         :partner_api_key => partner.api_key,
@@ -247,9 +247,9 @@ describe V2::RegistrationService do
 
 
     it 'should filter by email address and since date' do
-      partner = Factory(:partner, :api_key=>"key")
-      reg = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test@osdv.org")
-      reg2 = Factory(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test2@osdv.org")
+      partner = FactoryGirl.create(:partner, :api_key=>"key")
+      reg = FactoryGirl.create(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test@osdv.org")
+      reg2 = FactoryGirl.create(:api_v2_maximal_registrant, :partner => partner, :email_address=>"test2@osdv.org")
 
       V2::RegistrationService.find_records(:partner_id => partner.id,
         :partner_api_key => partner.api_key,
@@ -266,9 +266,9 @@ describe V2::RegistrationService do
 
     context "when a gpartner_id is passed in" do
       before(:each) do
-        @partner = Factory.create(:government_partner, :api_key=>"key")
-        @ma_reg = Factory.create(:maximal_registrant, :home_zip_code=>"02110")
-        @ca_reg = Factory.create(:maximal_registrant, :home_zip_code=>"90000")
+        @partner = FactoryGirl.create(:government_partner, :api_key=>"key")
+        @ma_reg = FactoryGirl.create(:maximal_registrant, :home_zip_code=>"02110")
+        @ca_reg = FactoryGirl.create(:maximal_registrant, :home_zip_code=>"90000")
       end
       context "when the gpartner ID is invalid" do
         it "should return an error" do

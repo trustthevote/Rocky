@@ -9,10 +9,10 @@ require 'active_record'
 require 'active_record/fixtures'
 
 def load_fixtures_in_dir(dir)
-  Dir.glob(File.join(RAILS_ROOT, dir, '*.{yml,csv}')).each do |fixture_file|
+  Dir.glob(File.join(Rails.root, dir, '*.{yml,csv}')).each do |fixture_file|
     Fixtures.create_fixtures(dir, File.basename(fixture_file, '.*'))
   end
-  Dir.glob(File.join(RAILS_ROOT, dir, '*.{rb}')).each do |ruby_file|
+  Dir.glob(File.join(Rails.root, dir, '*.{rb}')).each do |ruby_file|
     load ruby_file
   end
 end

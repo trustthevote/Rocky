@@ -35,7 +35,7 @@ describe LogosController do
 
   before(:each) do
     activate_authlogic
-    @partner = Factory.create(:partner)
+    @partner = FactoryGirl.create(:partner)
     PartnerSession.create(@partner)
   end
 

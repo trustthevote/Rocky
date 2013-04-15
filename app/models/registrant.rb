@@ -552,7 +552,7 @@ class Registrant < ActiveRecord::Base
     !javascript_disabled &&
       !home_state.nil? &&
       home_state.online_reg_enabled? &&
-      File.exists?(File.join(RAILS_ROOT, 'app/views/step2/', "_#{custom_step_2_partial}"))
+      File.exists?(File.join(Rails.root, 'app/views/step2/', "_#{custom_step_2_partial}"))
   end
 
   def custom_step_2_partial
@@ -560,7 +560,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def has_home_state_online_registration_instructions?
-    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "_#{home_state_online_registration_instructions_partial}.html.erb"))
+    File.exists?(File.join(Rails.root, 'app/views/state_online_registrations/', "_#{home_state_online_registration_instructions_partial}.html.erb"))
   end
   
   def home_state_online_registration_instructions_partial
@@ -568,7 +568,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_home_state_online_registration_view?
-    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "#{home_state_online_registration_view}.html.erb"))
+    File.exists?(File.join(Rails.root, 'app/views/state_online_registrations/', "#{home_state_online_registration_view}.html.erb"))
   end
   
   def home_state_online_registration_view

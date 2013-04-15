@@ -82,7 +82,7 @@ describe V1::RegistrationService do
     end
 
     context 'complete record' do
-      before { @reg = Factory(:maximal_registrant, :status => 'step_5') }
+      before { @reg = FactoryGirl.create(:maximal_registrant, :status => 'step_5') }
       before { mock(Registrant).build_from_api_data({}) { @reg } }
 
       it 'should save the record and generate PDF' do
@@ -115,7 +115,7 @@ describe V1::RegistrationService do
 
     it 'should return the list of registrants' do
       partner = Partner.first
-      reg = Factory(:maximal_registrant, :partner => partner)
+      reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
 
       V1::RegistrationService.find_records(:partner_id => partner.id, :partner_password => 'password').should == [
         { :status               => 'complete',
@@ -157,7 +157,7 @@ describe V1::RegistrationService do
 
     it 'should not list registrants before the since date' do
       partner = Partner.first
-      reg = Factory(:maximal_registrant, :partner => partner)
+      reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
 
       V1::RegistrationService.find_records(:partner_id => partner.id, :partner_password => 'password', :since => 1.minute.from_now.to_s).should == []
     end
