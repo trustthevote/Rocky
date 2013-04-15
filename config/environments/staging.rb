@@ -1,62 +1,84 @@
-#***** BEGIN LICENSE BLOCK *****
-#
-#Version: RTV Public License 1.0
-#
-#The contents of this file are subject to the RTV Public License Version 1.0 (the
-#"License"); you may not use this file except in compliance with the License. You
-#may obtain a copy of the License at: http://www.osdv.org/license12b/
-#
-#Software distributed under the License is distributed on an "AS IS" basis,
-#WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the
-#specific language governing rights and limitations under the License.
-#
-#The Original Code is the Online Voter Registration Assistant and Partner Portal.
-#
-#The Initial Developer of the Original Code is Rock The Vote. Portions created by
-#RockTheVote are Copyright (C) RockTheVote. All Rights Reserved. The Original
-#Code contains portions Copyright [2008] Open Source Digital Voting Foundation,
-#and such portions are licensed to you under this license by Rock the Vote under
-#permission of Open Source Digital Voting Foundation.  All Rights Reserved.
-#
-#Contributor(s): Open Source Digital Voting Foundation, RockTheVote,
-#                Pivotal Labs, Oregon State University Open Source Lab.
-#
-#***** END LICENSE BLOCK *****
-# Settings specified here will take precedence over those in config/environment.rb
+Rocky::Application.configure do
+  # Settings specified here will take precedence over those in config/application.rb
 
-# The production environment is meant for finished, "live" apps.
-# Code is not reloaded between requests
-config.cache_classes = true
+  # Code is not reloaded between requests
+  config.cache_classes = true
 
-# Full error reports are disabled and caching is turned on
-config.action_controller.consider_all_requests_local = false
-config.action_controller.perform_caching             = true
-config.action_view.cache_template_loading            = true
-
-# See everything in the log (default is :info)
-# config.log_level = :debug
-
-# Use a different logger for distributed setups
-# config.logger = SyslogLogger.new
-
-# Use a different cache store in production
-# config.cache_store = :mem_cache_store
-
-# Enable serving of images, stylesheets, and javascripts from an asset server
-# config.action_controller.asset_host = "http://assets.example.com"
-
-# Disable delivery errors, bad email addresses will be ignored
-# config.action_mailer.raise_delivery_errors = false
-config.action_mailer.delivery_method = :smtp
-
-DELAYED_WRAP_UP = true
+  # Full error reports are disabled and caching is turned on
+  config.consider_all_requests_local = false
+  config.action_controller.perform_caching             = true
+  config.action_view.cache_template_loading            = true
 
 
-# Enable threaded mode
-# config.threadsafe!
+  # Disable Rails's static asset server (Apache or nginx will already do this)
+  config.serve_static_assets = false
 
-USE_HTTPS = true
-PAPERCLIP_OPTIONS = {}
+  # Compress JavaScripts and CSS
+  config.assets.compress = true
 
-# The name of the host where generated PDF files can be reached.
-PDF_HOST_NAME = 'rtvstaging.osuosl.org'
+  # Don't fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = false
+
+  # Generate digests for assets URLs
+  config.assets.digest = true
+
+  # Defaults to nil and saved in location specified by config.assets.prefix
+  # config.assets.manifest = YOUR_PATH
+
+  # Specifies the header that your server uses for sending files
+  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
+  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # config.force_ssl = true
+
+  # See everything in the log (default is :info)
+  # config.log_level = :debug
+
+  # Prepend all log lines with the following tags
+  # config.log_tags = [ :subdomain, :uuid ]
+
+  # Use a different logger for distributed setups
+  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+
+  # Use a different cache store in production
+  # config.cache_store = :mem_cache_store
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server
+  # config.action_controller.asset_host = "http://assets.example.com"
+
+  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+  # config.assets.precompile += %w( search.js )
+
+  # Disable delivery errors, bad email addresses will be ignored
+  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+
+  # Enable threaded mode
+  # config.threadsafe!
+
+  USE_HTTPS = true
+  PAPERCLIP_OPTIONS = {}
+
+  DELAYED_WRAP_UP = true
+
+  # The name of the host where generated PDF files can be reached.
+  PDF_HOST_NAME = 'rtvstaging.osuosl.org'
+  
+  
+  
+  
+  # Enable threaded mode
+  # config.threadsafe!
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation can not be found)
+  config.i18n.fallbacks = true
+
+  # Send deprecation notices to registered listeners
+  config.active_support.deprecation = :notify
+
+  # Log the query plan for queries taking more than this (works
+  # with SQLite, MySQL, and PostgreSQL)
+  # config.active_record.auto_explain_threshold_in_seconds = 0.5
+end

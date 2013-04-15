@@ -71,25 +71,25 @@ en:
             has_state_license:
               inclusion: Please indicate whether you have a valid state license
       messages:
-        inclusion: "{{attribute}} is not included in the list."
-        exclusion: "{{attribute}} is reserved."
-        invalid: "{{attribute}} is invalid."
-        confirmation: "{{attribute}} doesn't match confirmation."
-        accepted: "{{attribute}} must be accepted."
-        empty: "{{attribute}} can't be empty."
-        blank: "{{attribute}} can't be blank."
-        too_long: "{{attribute}} is too long (maximum is {{count}} characters)."
-        too_short: "{{attribute}} is too short (minimum is {{count}} characters)."
-        wrong_length: "{{attribute}} is the wrong length (should be {{count}} characters)."
-        taken: "{{attribute}} has already been taken."
-        not_a_number: "{{attribute}} is not a number."
-        greater_than: "{{attribute}} must be greater than {{count}}."
-        greater_than_or_equal_to: "{{attribute}} must be greater than or equal to {{count}}."
-        equal_to: "{{attribute}} must be equal to {{count}}."
-        less_than: "{{attribute}} must be less than {{count}}."
-        less_than_or_equal_to: "{{attribute}} must be less than or equal to {{count}}."
-        odd: "{{attribute}} must be odd."
-        even: "{{attribute}} must be even."
+        inclusion: "%{attribute} is not included in the list."
+        exclusion: "%{attribute} is reserved."
+        invalid: "%{attribute} is invalid."
+        confirmation: "%{attribute} doesn't match confirmation."
+        accepted: "%{attribute} must be accepted."
+        empty: "%{attribute} can't be empty."
+        blank: "%{attribute} can't be blank."
+        too_long: "%{attribute} is too long (maximum is %{count} characters)."
+        too_short: "%{attribute} is too short (minimum is %{count} characters)."
+        wrong_length: "%{attribute} is the wrong length (should be %{count} characters)."
+        taken: "%{attribute} has already been taken."
+        not_a_number: "%{attribute} is not a number."
+        greater_than: "%{attribute} must be greater than %{count}."
+        greater_than_or_equal_to: "%{attribute} must be greater than or equal to %{count}."
+        equal_to: "%{attribute} must be equal to %{count}."
+        less_than: "%{attribute} must be less than %{count}."
+        less_than_or_equal_to: "%{attribute} must be less than or equal to %{count}."
+        odd: "%{attribute} must be odd."
+        even: "%{attribute} must be even."
   authlogic:
     error_messages:
       login_blank: "Login cannot be blank."
@@ -104,7 +104,7 @@ en:
       not_approved: "Your account is not approved."
       no_authentication_details: "You did not provide any details for authentication."
   txt:
-    rtv_and_partner: "Rock the Vote and {{partner_name}}"
+    rtv_and_partner: "Rock the Vote and %{partner_name}"
     button:
       submit: "Next Step &gt;"
       edit: Edit
@@ -120,8 +120,8 @@ en:
       share_facebook: Share on Facebook!
       share_twitter: Share on Twitter!
       share_google_buzz: Share on Google!
-      state_online_registration: "I'd like to submit my form online with {{state}} now."
-      skip_state_online_registration: "&gt; No Thanks, I'll continue with {{rtv_and_partner_name}} and send in my form later."
+      state_online_registration: "I'd like to submit my form online with %{state} now."
+      skip_state_online_registration: "&gt; No Thanks, I'll continue with %{rtv_and_partner_name} and send in my form later."
     registration:
       powered_by: "powered by:"
       progress_indicator: "Step:"
@@ -139,24 +139,24 @@ en:
       finish_header: Spread the word!
       finish_under_18_header: "You're on the list!"
       tell_a_friend_title: "Tell a Friend by Email"
-      finish_reminder: "Thank you, {{first_name}}, for sending in your voter registration application! You should receive confirmation of your registration from your state's election officials. Sometimes processing can take several weeks."
+      finish_reminder: "Thank you, %{first_name}, for sending in your voter registration application! You should receive confirmation of your registration from your state's election officials. Sometimes processing can take several weeks."
       finish_reminder_2: "If you want to check on the status of your voter registration form, you can find contact information for your Secretary of State at our <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Election Center</a>."
       ineligible_header: "Sorry, you are not eligible to register to vote for the following reason(s):"
-      external_header: "{{state}} Registrant"
+      external_header: "%{state} Registrant"
       name: Name
       select_none: (none)
       home_address: Home Address
       mailing_address: Mailing Address
       previous_name: Previous Name
       previous_address: Previous Address
-      opt_in_sms: "Send me txt messages from {{organization}}."
-      opt_in_email: "Receive emails from {{organization}}."
+      opt_in_sms: "Send me txt messages from %{organization}."
+      opt_in_email: "Receive emails from %{organization}."
       remind_when_18: Send me a reminder on my 18th birthday.
       get_updates: Get updates from Rock the Vote
-      volunteer: "I would like to volunteer with {{organization}}."
+      volunteer: "I would like to volunteer with %{organization}."
       not_given: none
-      has_state_license: "I have a current {{state}} state identification card or driver's license"
-      has_no_state_license: "I do not have a current {{state}} state identification card or driver's license"
+      has_state_license: "I have a current %{state} state identification card or driver's license"
+      has_no_state_license: "I do not have a current %{state} state identification card or driver's license"
       titles:
       - Mr.
       - Mrs.
@@ -184,10 +184,10 @@ en:
       - Other
       instructions:
         opt_in_email: "We will send you timely election reminders, your polling place location, and information about music and issues."
-        under_18: "Hey, it looks like you aren't 18 yet. That's cool. In {{state_name}}, you can register to vote {{state_rule}}. Visit our <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Election Center</a> to find out when the next election is."
+        under_18: "Hey, it looks like you aren't 18 yet. That's cool. In %{state_name}, you can register to vote %{state_rule}. Visit our <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Election Center</a> to find out when the next election is."
         under_18_2: "If you fit the bill, click the button to continue your application."
         under_18_3: "If not, we'll send you a reminder to register on your 18th birthday."
-        remind_when_18: "We'll email you at {{email_address}}"
+        remind_when_18: "We'll email you at %{email_address}"
         review: Please review the following information and confirm its accuracy.
         download: You are not done. Click on the print form button to print out your voter registration form.
           Sign it and mail to the address located on the form.
@@ -199,9 +199,9 @@ en:
         finish_tell_recipients: "(separated by commas)"
         finish_email_sent: "Email sent!"
         finish_update_status: "Don't forget to update your status on Facebook and Twitter!"
-        state_online_registration: "You may be eligible to finish your voter registration using the {{state}} online voter registration system."
-        leave_state_online_registration: "You can complete your voter registration online with {{state}} using the form below. If your driver's license or state identification card is invalid or the state can't find or confirm your DMV record, don't worry&mdash;you can also {{link}}. You will just have to print, sign, and mail it in."
-        leave_state_online_registration_link: "finish your registration with {{rtv_and_partner_name}}"
+        state_online_registration: "You may be eligible to finish your voter registration using the %{state} online voter registration system."
+        leave_state_online_registration: "You can complete your voter registration online with %{state} using the form below. If your driver's license or state identification card is invalid or the state can't find or confirm your DMV record, don't worry&mdash;you can also %{link}. You will just have to print, sign, and mail it in."
+        leave_state_online_registration_link: "finish your registration with %{rtv_and_partner_name}"
       ineligible:
         age: You must be 18 years old by the date of the next election.
         non_citizen: "Your registration cannot be completed because you did not check the box indicating that you are a U.S. citizen. You must be a U.S. citizen to register to vote. If you are a citizen, please return to the previous page and check the citizenship box."
@@ -218,12 +218,12 @@ en:
           go:
             title: Colorado Registration Error
             timeout: "It looks like the Colorado web site is taking a while to respond and may not be available at this time. No worries, though!  You have a couple options for how to continue your voter registration."
-            timeout_2: "To finish your voter registration application, you have three options:</p><p>(1) Close this window and use the back button on your browser to correct the information on your voter registration application. You will be able to re-submit your information to the Secretary of State's website.</p><p>(2) Close this window and click on the \"Continue Registration with Rock the Vote\" link on the page you just came from. You will be able to finish your application and get your voter registration form to print, sign, and mail to the Secretary of State's office.</p><p>(3) You can also go directly to <a href={{co_url}}>the Secretary of State's website</a> to re-enter the correct information."
+            timeout_2: "To finish your voter registration application, you have three options:</p><p>(1) Close this window and use the back button on your browser to correct the information on your voter registration application. You will be able to re-submit your information to the Secretary of State's website.</p><p>(2) Close this window and click on the \"Continue Registration with Rock the Vote\" link on the page you just came from. You will be able to finish your application and get your voter registration form to print, sign, and mail to the Secretary of State's office.</p><p>(3) You can also go directly to <a href=%{co_url}>the Secretary of State's website</a> to re-enter the correct information."
             timeout_3: ""
             p1: "It looks like the information you provided doesn't match the Secretary of State's records. Three common problems: (1) the name you provided doesn't exactly match the name on your ID (for example, you entered \"Steve\" but your first name on your ID is actually \"Stephen\"), (2) you included dashes in your ID number, or (3) you did not provide a driver's license number, but used another form of accepted identification. Please review the information you provided:"
             section: Identifying Information
             colorado_id_number: Colorado ID Number
-            p2: "To finish your voter registration application, you have three options:</p><p>(1) Close this window and use the back button on your browser to correct the information on your voter registration application. You will be able to re-submit your information to the Secretary of State's website.</p><p>(2) Close this window and click on the \"Continue Registration with Rock the Vote\" link on the page you just came from. You will be able to finish your application and get your voter registration form to print, sign, and mail to the Secretary of State's office.</p><p>(3) You can also go directly to <a href={{co_url}}>the Secretary of State's website</a> to re-enter the correct information."
+            p2: "To finish your voter registration application, you have three options:</p><p>(1) Close this window and use the back button on your browser to correct the information on your voter registration application. You will be able to re-submit your information to the Secretary of State's website.</p><p>(2) Close this window and click on the \"Continue Registration with Rock the Vote\" link on the page you just came from. You will be able to finish your application and get your voter registration form to print, sign, and mail to the Secretary of State's office.</p><p>(3) You can also go directly to <a href=%{co_url}>the Secretary of State's website</a> to re-enter the correct information."
             p3: ""
       tooltips:
         email_address: We will email you a copy of your voter registration form.
@@ -247,7 +247,7 @@ en:
       subject: "Thank you for using the online voter registration tool"
     tell_friend:
       subject: "I just registered to vote and you should too"
-      body: "Hey, I just registered to vote at {{rtv_url}} and you can too.  It is really easy.\n\nJust fill out the online form here: {{rtv_url}}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: {{rtv_url}}.\n\nAlready registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at {{rtv_url}}.\n\nHappy voting!"
+      body: "Hey, I just registered to vote at %{rtv_url} and you can too.  It is really easy.\n\nJust fill out the online form here: %{rtv_url}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: %{rtv_url}.\n\nAlready registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at %{rtv_url}.\n\nHappy voting!"
     tell_friend_under_18:
       subject: "Register to vote!"
-      body: "Are you registered to vote? I may not be old enough to vote yet, but you are.  You can't vote unless you are registered.\n\nYou can fill out a voter registration form only at {{rtv_url}}. It is super easy.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  Go to {{rtv_url}}.\n\nAlready registered to vote or not old enough to vote yet?  Help others get registered to vote by sending an email to your friends and family asking them to register at {{rtv_url}}.\n\nHappy voting!"
+      body: "Are you registered to vote? I may not be old enough to vote yet, but you are.  You can't vote unless you are registered.\n\nYou can fill out a voter registration form only at %{rtv_url}. It is super easy.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  Go to %{rtv_url}.\n\nAlready registered to vote or not old enough to vote yet?  Help others get registered to vote by sending an email to your friends and family asking them to register at %{rtv_url}.\n\nHappy voting!"

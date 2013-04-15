@@ -22,179 +22,179 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-Factory.define :step_1_registrant, :class => "registrant" do |f|
-  f.status          "step_1"
-  #f.association     :partner, :factory => :primary_partner
-  f.partner_id      "1"
-  f.locale          "en"
-  f.sequence(:email_address) { |n| "registrant_#{n}@example.com" }
-  f.date_of_birth   20.years.ago.to_date.strftime("%m/%d/%Y")
-  f.home_zip_code   "15215"  # == Pennsylvania
-  f.us_citizen      true
-  #f.opt_in_email    true
-  #f.opt_in_sms      true
-end
+FactoryGirl.define do
+  factory :step_1_registrant, :class => "registrant" do
+    status          "step_1"
+    partner_id      "1"
+    locale          "en"
+    sequence(:email_address) { |n| "registrant_#{n}@example.com" }
+    date_of_birth   20.years.ago.to_date.strftime("%m/%d/%Y")
+    home_zip_code   "15215"  # == Pennsylvania
+    us_citizen      true
+    #opt_in_email    true
+    #opt_in_sms      true
+  end
 
-Factory.define :under_18_finished_registrant, :parent => :step_1_registrant do |f|
-  f.date_of_birth   17.years.ago.to_date.strftime("%m/%d/%Y")
-  f.status          "under_18"
-end
+  factory :under_18_finished_registrant, :parent => :step_1_registrant do 
+    date_of_birth   17.years.ago.to_date.strftime("%m/%d/%Y")
+    status          "under_18"
+  end
 
-Factory.define :step_2_registrant, :parent => :step_1_registrant do |f|
-  f.status          "step_2"
-  f.name_title      "Mr."
-  f.first_name      "John"
-  f.last_name       "Public"
-  f.home_address    "123 Market St."
-  f.home_city       "San Francisco"
-  # f.home_state      { GeoState['CA'] }
-  f.has_state_license false
-  f.race            "Hispanic"
-  f.party           "None"
-end
+  factory :step_2_registrant, :parent => :step_1_registrant do 
+    status          "step_2"
+    name_title      "Mr."
+    first_name      "John"
+    last_name       "Public"
+    home_address    "123 Market St."
+    home_city       "San Francisco"
+    # home_state      { GeoState['CA'] }
+    has_state_license false
+    race            "Hispanic"
+    party           "None"
+  end
 
-Factory.define :step_3_registrant, :parent => :step_2_registrant do |f|
-  f.status          "step_3"
-  f.state_id_number "2345"
-  f.opt_in_sms      false
-end
+  factory :step_3_registrant, :parent => :step_2_registrant do 
+    status          "step_3"
+    state_id_number "2345"
+    opt_in_sms      false
+  end
 
-Factory.define :step_4_registrant, :parent => :step_3_registrant do |f|
-  f.status          "step_4"
-  f.opt_in_email    false
-end
+  factory :step_4_registrant, :parent => :step_3_registrant do 
+    status          "step_4"
+    opt_in_email    false
+  end
 
-Factory.define :step_5_registrant, :parent => :step_4_registrant do |f|
-  f.status          "step_5"
-end
+  factory :step_5_registrant, :parent => :step_4_registrant do 
+    status          "step_5"
+  end
 
-Factory.define :completed_registrant, :parent => :step_5_registrant do |f|
-  f.status          "complete"
-end
+  factory :completed_registrant, :parent => :step_5_registrant do 
+    status          "complete"
+  end
 
-Factory.define :maximal_registrant, :parent => :completed_registrant do |f|
-  f.status              "complete"
-  f.locale              "en"
-  f.partner_id          "1"
-  f.reminders_left      "3"
-  f.date_of_birth       20.years.ago.to_date.strftime("%m/%d/%Y")
-  f.email_address       "citizen@example.com"
-  f.first_registration  false
-  f.home_zip_code       "02134"
-  f.us_citizen          true
-  f.name_title          "Mrs."
-  f.first_name          "Susan"
-  f.middle_name         "Brownell"
-  f.last_name           "Anthony"
-  f.name_suffix         "III"
-  f.home_address        "123 Civil Rights Way"
-  f.home_unit           "Apt 2"
-  f.home_city           "West Grove"
-  # f.home_state          { GeoState['MA'] }
-  f.has_mailing_address true
-  f.mailing_address     "10 Main St"
-  f.mailing_unit        "Box 5"
-  f.mailing_city        "Adams"
-  f.mailing_state_id    { GeoState['MA'] }
-  f.mailing_zip_code    "02135"
-  f.party               "Decline to State"
-  f.race                "White (not Hispanic)"
-  f.state_id_number     "5678"
-  f.phone               "123-456-7890"
-  f.phone_type          "Mobile"
-  f.change_of_name      true
-  f.prev_name_title     "Ms."
-  f.prev_first_name     "Susana"
-  f.prev_middle_name    "B."
-  f.prev_last_name      "Antonia"
-  f.prev_name_suffix    "Jr."
-  f.change_of_address   true
-  f.prev_address        "321 Civil Wrongs Way"
-  f.prev_unit           "#9"
-  f.prev_city           "Pittsburgh"
-  f.prev_state          { GeoState["PA"] }
-  f.prev_zip_code       "15215"
-  f.opt_in_email        true
-  f.opt_in_sms          true
-  f.partner_opt_in_email        true
-  f.partner_opt_in_sms          true
-  f.survey_answer_1     "blue"
-  f.survey_answer_2     "fido"
-  f.volunteer           true
-  f.partner_volunteer   true
-end
+  factory :maximal_registrant, :parent => :completed_registrant do 
+    status              "complete"
+    locale              "en"
+    partner_id          "1"
+    reminders_left      "3"
+    date_of_birth       20.years.ago.to_date.strftime("%m/%d/%Y")
+    email_address       "citizen@example.com"
+    first_registration  false
+    home_zip_code       "02134"
+    us_citizen          true
+    name_title          "Mrs."
+    first_name          "Susan"
+    middle_name         "Brownell"
+    last_name           "Anthony"
+    name_suffix         "III"
+    home_address        "123 Civil Rights Way"
+    home_unit           "Apt 2"
+    home_city           "West Grove"
+    # home_state          { GeoState['MA'] }
+    has_mailing_address true
+    mailing_address     "10 Main St"
+    mailing_unit        "Box 5"
+    mailing_city        "Adams"
+    mailing_state_id    { GeoState['MA'] }
+    mailing_zip_code    "02135"
+    party               "Decline to State"
+    race                "White (not Hispanic)"
+    state_id_number     "5678"
+    phone               "123-456-7890"
+    phone_type          "Mobile"
+    change_of_name      true
+    prev_name_title     "Ms."
+    prev_first_name     "Susana"
+    prev_middle_name    "B."
+    prev_last_name      "Antonia"
+    prev_name_suffix    "Jr."
+    change_of_address   true
+    prev_address        "321 Civil Wrongs Way"
+    prev_unit           "#9"
+    prev_city           "Pittsburgh"
+    prev_state          { GeoState["PA"] }
+    prev_zip_code       "15215"
+    opt_in_email        true
+    opt_in_sms          true
+    partner_opt_in_email        true
+    partner_opt_in_sms          true
+    survey_answer_1     "blue"
+    survey_answer_2     "fido"
+    volunteer           true
+    partner_volunteer   true
+  end
 
-Factory.define :api_v2_maximal_registrant, :parent => :maximal_registrant do |f|
-  f.partner_opt_in_email        true
-  f.partner_opt_in_sms          true
-  f.volunteer           true
-  f.partner_volunteer   true
-  f.tracking_source       "tracking_source"
-  f.tracking_id   "part_tracking_id"
-  f.original_survey_question_1     "color?"
-  f.original_survey_question_2     "dog name?"
-  f.survey_answer_1     "blue"
-  f.survey_answer_2     "fido"
-  f.send_confirmation_reminder_emails false
-  f.building_via_api_call true
-end
+  factory :api_v2_maximal_registrant, :parent => :maximal_registrant do 
+    partner_opt_in_email        true
+    partner_opt_in_sms          true
+    volunteer           true
+    partner_volunteer   true
+    tracking_source       "tracking_source"
+    tracking_id   "part_tracking_id"
+    original_survey_question_1     "color?"
+    original_survey_question_2     "dog name?"
+    survey_answer_1     "blue"
+    survey_answer_2     "fido"
+    send_confirmation_reminder_emails false
+    building_via_api_call true
+  end
 
-Factory.define :api_created_partner, :class=>'partner' do |p|
-  p.organization "Org Name"
-  p.url "http://www.google.com"
-  p.privacy_url "http://www.google.com/privacy"
-  p.logo_url "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
-  p.name "Contact Name"
-  p.email "contact_email@rtv.org"
-  p.phone "123 234 3456"
-  p.address "123 Main St"
-  p.city "Boston"
-  p.state_id {GeoState["MA"]}
-  p.zip_code "02110"
-  p.widget_image "rtv-234x60-v1.gif"
-  p.survey_question_1_en  "One?"
-  p.survey_question_2_en  "Two?"
-  p.survey_question_1_es  "Uno?"
-  p.survey_question_2_es  "Dos?"
-  p.partner_ask_for_volunteers true
-end
+  factory :api_created_partner, :class=>'partner' do
+    organization "Org Name"
+    url "http://www.google.com"
+    privacy_url "http://www.google.com/privacy"
+    logo_url "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
+    name "Contact Name"
+    email "contact_email@rtv.org"
+    phone "123 234 3456"
+    address "123 Main St"
+    city "Boston"
+    state_id {GeoState["MA"]}
+    zip_code "02110"
+    widget_image "rtv-234x60-v1.gif"
+    survey_question_1_en  "One?"
+    survey_question_2_en  "Two?"
+    survey_question_1_es  "Uno?"
+    survey_question_2_es  "Dos?"
+    partner_ask_for_volunteers true
+  end
 
-Factory.define :partner do |partner|
-  partner.sequence(:username)   { |n| "partner_#{n}" }
-  partner.email                 { |p| "#{p.username}@example.com" }
-  partner.password              "password"
-  partner.password_confirmation "password"
-  partner.name                  { |p| p.username && p.username.humanize }
-  partner.url                   { |p| "#{p.username}.example.com" }
-  partner.address               "123 Liberty Ave."
-  partner.city                  "Pittsburgh"
-  partner.state                 { GeoState['PA'] }
-  partner.zip_code              "15215"
-  partner.phone                 "412-555-1234"
-  partner.organization          "Consolidated Amalgamated, Inc."
-  partner.survey_question_1_en  "Hello?"
-  partner.survey_question_2_en  "Outta here?"
-end
+  factory :partner do
+    sequence(:username)   { |n| "partner_#{n}" }
+    email                 { |p| "#{p.username}@example.com" }
+    password              "password"
+    password_confirmation "password"
+    name                  { |p| p.username && p.username.humanize }
+    url                   { |p| "#{p.username}.example.com" }
+    address               "123 Liberty Ave."
+    city                  "Pittsburgh"
+    state                 { GeoState['PA'] }
+    zip_code              "15215"
+    phone                 "412-555-1234"
+    organization          "Consolidated Amalgamated, Inc."
+    survey_question_1_en  "Hello?"
+    survey_question_2_en  "Outta here?"
+  end
 
-Factory.define :government_partner, :parent=>:partner do |partner|
-  partner.is_government_partner true
-  partner.government_partner_zip_codes ["90000"]
-end
+  factory :government_partner, :parent=>:partner do
+    is_government_partner true
+    government_partner_zip_codes ["90000"]
+  end
 
-Factory.define :whitelabel_partner, :parent=>:partner do |partner|
-  partner.api_key               "abc123"
-  partner.survey_question_1_en  "Q1 En"
-  partner.survey_question_1_es  "Q1 Es"
-  partner.survey_question_2_en  "Q2 En"
-  partner.survey_question_2_es  "Q2 Es"
-  partner.ask_for_volunteers          true
-  partner.partner_ask_for_volunteers  true
-  partner.whitelabeled                true
-  partner.rtv_email_opt_in            true
-  partner.partner_email_opt_in        true
-  partner.rtv_sms_opt_in              true
-  partner.partner_sms_opt_in          true
+  factory :whitelabel_partner, :parent=>:partner do
+    api_key               "abc123"
+    survey_question_1_en  "Q1 En"
+    survey_question_1_es  "Q1 Es"
+    survey_question_2_en  "Q2 En"
+    survey_question_2_es  "Q2 Es"
+    ask_for_volunteers          true
+    partner_ask_for_volunteers  true
+    whitelabeled                true
+    rtv_email_opt_in            true
+    partner_email_opt_in        true
+    rtv_sms_opt_in              true
+    partner_sms_opt_in          true
+  end
 end
-
 
 

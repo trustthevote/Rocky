@@ -39,7 +39,7 @@ Given /^no partner exists with a login of "(.*)"$/ do |login|
 end
 
 Given /^I registered with "(.*)\/(.*)"$/ do |login, password|
-  partner = Factory :partner,
+  partner = FactoryGirl.create :partner,
     :username              => login,
     :password              => password,
     :password_confirmation => password
@@ -66,7 +66,7 @@ Then /^I should be forbidden$/ do
 end
 
 Given /^I am logged in as a valid partner$/ do
-  partner = Factory.create(:partner)
+  partner = FactoryGirl.create(:partner)
   And %Q{I log in as "#{partner.username}/password"}
 end
 

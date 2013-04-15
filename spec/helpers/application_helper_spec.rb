@@ -64,26 +64,26 @@ describe ApplicationHelper do
     end
 
     it "should return default stylesheets for non-whitelabled partner" do
-      partner = Factory.build(:partner, :whitelabeled => false)
+      partner = FactoryGirl.build(:partner, :whitelabeled => false)
       helper.partner_css(partner).should == [ 'application', 'registration' ]
     end
 
     it "should return custom application css" do
-      partner = Factory.build(:partner, :whitelabeled => true)
+      partner = FactoryGirl.build(:partner, :whitelabeled => true)
       mock(partner).application_css_present? { true }
       stub(partner).application_css_url { 'app.css' }
       helper.partner_css(partner).should == [ 'app.css', 'registration' ]
     end
 
     it "should return custom registration css" do
-      partner = Factory.build(:partner, :whitelabeled => true)
+      partner = FactoryGirl.build(:partner, :whitelabeled => true)
       mock(partner).registration_css_present? { true }
       stub(partner).registration_css_url { 'reg.css' }
       helper.partner_css(partner).should == [ 'application', 'reg.css' ]
     end
     
     it "should return custom partner css" do
-      partner = Factory.build(:partner, :whitelabeled => true)
+      partner = FactoryGirl.build(:partner, :whitelabeled => true)
       mock(partner).application_css_present? { true }
       mock(partner).partner_css_present? { true }
       stub(partner).application_css_url { 'app.css' }

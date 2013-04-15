@@ -49,7 +49,7 @@ module PartnerAssets
   end
 
   def assets_root
-    if RAILS_ENV == "test"
+    if Rails.env.test?
       "#{RAILS_ROOT}/public/TEST"
     else
       "#{RAILS_ROOT}/public"

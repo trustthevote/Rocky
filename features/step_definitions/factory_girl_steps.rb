@@ -22,9 +22,9 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-Factory.factories.each do |name, factory|
+FactoryGirl.factories.each do |name, factory|
   Given /^an? #{name} exists with an? (.*) of "([^"]*)"$/ do |attr, value|
-    Factory(name, attr.gsub(' ', '_') => value)
+    FactoryGirl.create(name, attr.gsub(' ', '_') => value)
   end
 end
 
@@ -33,7 +33,7 @@ Given /^the following partner exists:$/ do |table|
   if (table.hashes.first["id"])
     @partner = Partner.find(table.hashes.first["id"])
   end
-  @partner = Factory(:partner, table.hashes.first) unless @partner
+  @partner = FactoryGirl.create(:partner, table.hashes.first) unless @partner
 end
 
 
@@ -42,5 +42,5 @@ Given /^the following government partner exists:$/ do |table|
   if (table.hashes.first["id"])
     @partner = Partner.find(table.hashes.first["id"])
   end
-  @partner = Factory(:government_partner, table.hashes.first) unless @partner
+  @partner = FactoryGirl.create(:government_partner, table.hashes.first) unless @partner
 end

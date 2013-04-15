@@ -1,0 +1,158 @@
+Thanks for installing the Rails upgrade plugin.  This is a set of generators and analysis tools to help you upgrade your application to Rails 3.  It consists of three tasks...
+
+To get a feel for what you'll need to change to get your app running, run the application analysis:
+
+    rake rails:upgrade:check
+    
+This should give you an idea of the manual changes that need to be done, but you'll probably want to upgrade some of those automatically.  The fastest way to do this is to run 'rails .', which will simply generate a new app on top of your existing code.  But this generation also has the effect of replacing some existing files, some of which you might not want to replace.  To back those up, first run:
+
+    rake rails:upgrade:backup
+    
+That will backup files you've probably edited that will be replaced in the upgrade; if you finish the upgrade and find that you don't need the old copies, just delete them.  Otherwise, copy their contents back into the new files or run one of the following upgraders...
+
+Routes upgrader
+===============
+
+To generate a new routes file from your existing routes file, simply run the following Rake task:
+
+    rake rails:upgrade:routes
+    
+This will output a new routes file that you can copy and paste or pipe into a new, Rails 3 compatible config/routes.rb.
+
+Gemfile generator
+=================  
+
+Creating a new Gemfile is as simple as running:
+
+    rake rails:upgrade:gems
+    
+This task will extract your config.gem calls and generate code you can put into a bundler compatible Gemfile.
+
+Configuration generator
+=======================
+
+Much of the configuration information that lived in environment.rb now belongs in a new file named config/application.rb; use the following task to generate code you can put into config/application.rb from your existing config/environment.rb:
+
+    rake rails:upgrade:configuration
+
+===========================================================================================================================
+rake rails:upgrade:check
+
+(in /Volumes/MacHD2/work/dev/osdv/rocky)
+Please install RDoc 2.4.2+ to generate documentation.
+DEPRECATION WARNING: Rake tasks in vendor/plugins/delayed_job/tasks are deprecated. Use lib/tasks instead. (called from /Users/alexmek/.rvm/gems/ruby-1.8.7-p352@rocky/gems/rails-2.3.18/lib/tasks/rails.rb:10)
+Old router API
+The router API has totally changed.
+More information: http://yehudakatz.com/2009/12/26/the-rails-3-router-rack-it-up/
+
+The culprits: 
+	- config/routes.rb
+
+Deprecated ActionMailer attribute :sent_on
+Using the new mailer API, you can specify :date to the mail method.
+More information: http://stackoverflow.com/questions/7367185/weird-error-when-delivering-mail-undefined-method-index-for-2011-09-09-2215
+
+The culprits: 
+	- app/models/notifier.rb
+
+Deprecated filter_parameter_logging calls
+The list of filtered parameters are now stored in /config/application.rb. For example: config.filter_parameters += [:password]
+More information: http://asciicasts.com/episodes/224-controllers-in-rails-3
+
+The culprits: 
+	- app/controllers/partner_base.rb
+	- app/controllers/registration_step.rb
+
+New file needed: config/application.rb
+You need to add a config/application.rb.
+More information: http://omgbloglol.com/post/353978923/the-path-to-rails-3-approaching-the-upgrade
+
+The culprits: 
+	- config/application.rb
+
+Deprecated ERb helper calls
+Block helpers that use concat (e.g., form_for) should use <%= instead of <%.  The current form will continue to work for now, but you will get deprecation warnings since this form will go away in the future.
+More information: http://weblog.rubyonrails.org/
+
+The culprits: 
+	- app/views/admin/government_partners/edit.html.erb
+	- app/views/admin/government_partners/new.html.erb
+	- app/views/admin/partners/edit.html.erb
+	- app/views/admin/partners/index.html.erb
+	- app/views/ineligibles/under_18.html.erb
+	- app/views/logos/show.html.erb
+	- app/views/partner_sessions/new.html.erb
+	- app/views/partners/edit.html.erb
+	- app/views/partners/new.html.erb
+	- app/views/password_resets/edit.html.erb
+	- app/views/questions/edit.html.erb
+	- app/views/registrants/show.html.erb
+	- app/views/step2/show.html.erb
+	- app/views/step3/show.html.erb
+	- app/views/step4/show.html.erb
+	- app/views/step5/show.html.erb
+	- app/views/widget_images/show.html.erb
+	- app/views/password_resets/new.html.erb
+
+Deprecated constant(s)
+Constants like RAILS_ENV, RAILS_ROOT, and RAILS_DEFAULT_LOGGER are now deprecated.
+More information: http://litanyagainstfear.com/blog/2010/02/03/the-rails-module/
+
+The culprits: 
+	- app/controllers/admin/base_controller.rb
+	- app/models/partner_assets.rb
+	- app/views/finishes/_adwords.html.erb
+	- app/views/layouts/_urchin.html.erb
+	- lib/tasks/bootstrap.rake
+	- app/models/geo_state.rb
+	- app/models/partner_zip.rb
+	- app/models/registrant.rb
+	- lib/app_config.rb
+	- lib/mobile_config.rb
+	- lib/tasks/cucumber.rake
+	- lib/tasks/hoptoad_notifier_tasks.rake
+	- lib/tasks/rspec.rake
+
+Soon-to-be-deprecated ActiveRecord calls
+Methods such as find(:all), find(:first), finds with conditions, and the :joins option will soon be deprecated.
+More information: http://m.onkey.org/2010/1/22/active-record-query-interface
+
+The culprits: 
+	- app/models/registrant.rb
+	- app/models/registrant.rb
+	- app/models/registrant.rb
+
+named_scope is now just scope
+The named_scope method has been renamed to just scope.
+More information: http://github.com/rails/rails/commit/d60bb0a9e4be2ac0a9de9a69041a4ddc2e0cc914
+
+The culprits: 
+	- app/models/partner.rb
+
+Deprecated ActionMailer API
+You're using the old ActionMailer API to send e-mails in a controller, model, or observer.
+More information: http://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3
+
+The culprits: 
+	- app/models/partner.rb
+	- app/models/registrant.rb
+
+Old ActionMailer class API
+You're using the old API in a mailer class.
+More information: http://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3
+
+The culprits: 
+	- app/models/notifier.rb
+	- app/models/registrant.rb
+	- app/models/notifier.rb
+
+Deprecated session secret setting
+Previously, session secret was set directly on ActionController::Base; it's now config.secret_token.
+More information: http://lindsaar.net/2010/4/7/rails_3_session_secret_and_session_store
+
+The culprits: 
+	- config/initializers/session_store.rb
+	- config/initializers/session_store.rb.example
+
+
+===========================================================================================================================

@@ -27,7 +27,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Admin::AssetsController do
 
   before { @paf = stub }
-  before { @partner = Factory(:partner) }
+  before { @partner = FactoryGirl.create(:partner) }
   before { stub(controller).assets_folder { @paf } }
 
   describe 'index' do
