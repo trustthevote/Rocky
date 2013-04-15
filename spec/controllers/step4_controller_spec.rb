@@ -38,14 +38,14 @@ describe Step4Controller do
     it "gets the questions for the current locale" do
       reg = FactoryGirl.create(:step_3_registrant)
       reg.partner.survey_question_1_en = "In English?"
-      reg.partner.survey_question_1_es = "En Español?"
+      reg.partner.survey_question_1_es = "En Espanol?"
       reg.partner.save
       get :show, :registrant_id => reg.to_param
       assert_equal "In English?", assigns[:question_1]
       reg.locale = "es"
       reg.save(false)
       get :show, :registrant_id => reg.to_param
-      assert_equal "En Español?", assigns[:question_1]
+      assert_equal "En Espanol?", assigns[:question_1]
     end
 
     describe "when partner wants volunteers" do

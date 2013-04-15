@@ -11,7 +11,7 @@ gem "aasm", "= 3.0.16"
 gem "authlogic", "= 3.3.0"
 #gem "fastercsv", "= 1.5.0"
 gem "daemons", "= 1.0.10"
-gem "paperclip", "= 2.3.1.1"
+gem "paperclip", "~> 3.0"
 gem "mysql"
 gem "rubyzip"
 

@@ -17,7 +17,7 @@ module Rocky
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W( #{Rails.root}/app/services #{Rails.root}/app/presenters )
+    config.autoload_paths += %W( #{Rails.root}/app/services #{Rails.root}/app/presenters #{Rails.root}/lib)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -40,7 +40,7 @@ module Rocky
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :state_id_number, :password_confirmation]
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true

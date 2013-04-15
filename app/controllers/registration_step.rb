@@ -28,7 +28,6 @@ class RegistrationStep < ApplicationController
 
   layout "registration"
   before_filter :find_partner
-  filter_parameter_logging :state_id_number
 
   rescue_from Registrant::AbandonedRecord do |exception|
     reg = exception.registrant

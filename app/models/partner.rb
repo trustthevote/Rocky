@@ -105,8 +105,8 @@ class Partner < ActiveRecord::Base
 
   include PartnerAssets
   
-  named_scope :government, :conditions=>{:is_government_partner=>true}
-  named_scope :standard, :conditions=>{:is_government_partner=>false}
+  scope :government, where(:is_government_partner=>true)
+  scope :standard, where(:is_government_partner=>false)
 
   def self.find_by_login(login)
     p = find_by_username(login) || find_by_email(login)

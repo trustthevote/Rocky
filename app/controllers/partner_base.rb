@@ -25,7 +25,6 @@
 class PartnerBase < ApplicationController
   layout "partners"
   helper_method :current_partner_session, :current_partner
-  filter_parameter_logging :password, :password_confirmation
   before_filter :init_nav_class
 
 

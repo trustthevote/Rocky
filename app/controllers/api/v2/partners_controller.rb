@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require 'services/v2'
+require "#{Rails.root}/app/services/v2"
 class Api::V2::PartnersController < Api::V2::BaseController
 
   def show(only_public = false)
