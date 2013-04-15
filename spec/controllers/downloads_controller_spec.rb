@@ -25,7 +25,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe DownloadsController do
-  integrate_views
+  render_views
 
   describe "when PDF is ready" do
     before(:each) do

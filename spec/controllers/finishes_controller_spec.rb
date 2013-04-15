@@ -27,7 +27,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 include ActionView::Helpers::UrlHelper
 
 describe FinishesController do
-  integrate_views
+  render_views
 
   describe "waiting for delayed job to complete registration" do
     before(:each) do
@@ -110,7 +110,7 @@ describe FinishesController do
     end
 
     describe "feedback page" do
-      integrate_views
+      render_views
       it "should show thank you message" do
         reg = FactoryGirl.create(:completed_registrant, :reminders_left => 2)
         get :show, :registrant_id => reg.to_param, :reminders => "stop"
@@ -121,7 +121,7 @@ describe FinishesController do
   end
 
   describe "PDF not ready" do
-    integrate_views
+    render_views
     it "includes text about pending PDF" do
       reg = FactoryGirl.create(:step_5_registrant, :pdf_ready => false)
       get :show, :registrant_id => reg.to_param

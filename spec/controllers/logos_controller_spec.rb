@@ -31,7 +31,7 @@ class Paperclip::Attachment
 end
 
 describe LogosController do
-  integrate_views
+  render_views
 
   before(:each) do
     activate_authlogic

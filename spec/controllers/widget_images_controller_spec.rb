@@ -34,7 +34,7 @@ describe WidgetImagesController do
     end
 
     describe "show" do
-      integrate_views
+      render_views
       it "shows image selection page" do
         get :show
         assert_response :success

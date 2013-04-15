@@ -34,6 +34,9 @@ group :development, :test do
   # Pito:
   gem "hpricot", "0.8.6"
 	gem "sqlite3"
+	
+	gem "assert_difference"
+	
 end
 
 gem "nokogiri", "= 1.5.9"

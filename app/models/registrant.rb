@@ -698,11 +698,11 @@ class Registrant < ActiveRecord::Base
   
 
   def deliver_confirmation_email
-    Notifier.deliver_confirmation(self)
+    Notifier.confirmation(self).deliver
   end
 
   def deliver_thank_you_for_state_online_registration_email
-    Notifier.deliver_thank_you_external(self)
+    Notifier.thank_you_external(self).deliver
   end
 
   def enqueue_reminder_emails
@@ -718,7 +718,7 @@ class Registrant < ActiveRecord::Base
 
   def deliver_reminder_email
     if reminders_left > 0
-      Notifier.deliver_reminder(self)
+      Notifier.reminder(self).deliver
       update_attributes!(:reminders_left => reminders_left - 1)
       enqueue_reminder_email if reminders_left > 0
     end

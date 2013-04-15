@@ -25,7 +25,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe IneligiblesController do
-  integrate_views
+  render_views
 
   describe "when 18 or over" do
     it "shows not-a-citizen message" do

@@ -49,7 +49,7 @@ describe Step4Controller do
     end
 
     describe "when partner wants volunteers" do
-      integrate_views
+      render_views
       it "should show volunteer checkbox" do
         partner = FactoryGirl.create(:partner, :ask_for_volunteers => true)
 
@@ -61,7 +61,7 @@ describe Step4Controller do
     end
 
     describe "when partner does not want volunteers" do
-      integrate_views
+      render_views
       it "should show volunteer checkbox" do
         partner = FactoryGirl.create(:partner, :ask_for_volunteers => false)
 

@@ -26,7 +26,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RegistrantsController do
   describe "widget loader" do
-    integrate_views
+    render_views
 
     it "generates bootstrap javascript targeted to server host" do
       stub(request).protocol { "http://" }
@@ -104,7 +104,7 @@ describe RegistrantsController do
     end
 
     describe "keep initial params in hidden fields" do
-      integrate_views
+      render_views
 
       it "should keep partner, locale, tracking source, tracking id and short_form" do
         get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>'trackid', :short_form=>'1'
@@ -122,7 +122,7 @@ describe RegistrantsController do
     end
 
     describe "partner logo" do
-      integrate_views
+      render_views
 
       it "should not show partner banner or logo for primary partner" do
         get :new, :partner => Partner::DEFAULT_ID.to_s
@@ -145,7 +145,7 @@ describe RegistrantsController do
   end
 
   describe "#create" do
-    integrate_views
+    render_views
 
     before(:each) do
       @partner = FactoryGirl.create(:partner)
@@ -258,7 +258,7 @@ describe RegistrantsController do
   end
 
   describe "abandoned registration" do
-    integrate_views
+    render_views
 
     it "should show a timeout page" do
       reg = FactoryGirl.create(:step_1_registrant, :abandoned => true, :locale => "es", :partner_id=>2)

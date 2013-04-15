@@ -80,7 +80,7 @@ describe PartnersController do
     end
 
     describe "dashboard" do
-      integrate_views
+      render_views
 
       it "highlights dashboard nav link as current" do
         get :show
@@ -89,7 +89,7 @@ describe PartnersController do
     end
 
     describe "embed codes" do
-      integrate_views
+      render_views
 
       before do
         stub(request).host { "example.com" }
@@ -137,7 +137,7 @@ describe PartnersController do
     end
 
     describe "profile" do
-      integrate_views
+      render_views
 
       it "shows profile edit form" do
         get :edit
@@ -183,7 +183,7 @@ describe PartnersController do
         end
       end
       context "when csv_ready is false" do
-        integrate_views
+        render_views
         before(:each) do
           stub(controller.current_partner).csv_ready { false }
         end

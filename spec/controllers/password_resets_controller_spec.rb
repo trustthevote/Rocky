@@ -76,7 +76,7 @@ describe PasswordResetsController do
   end
 
   describe "PUT #update" do
-    integrate_views
+    render_views
 
     attr_reader :partner
     before do
