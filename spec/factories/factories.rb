@@ -95,7 +95,7 @@ FactoryGirl.define do
     mailing_address     "10 Main St"
     mailing_unit        "Box 5"
     mailing_city        "Adams"
-    mailing_state_id    { GeoState['MA'] }
+    mailing_state_id    { GeoState['MA'].id }
     mailing_zip_code    "02135"
     party               "Decline to State"
     race                "White (not Hispanic)"

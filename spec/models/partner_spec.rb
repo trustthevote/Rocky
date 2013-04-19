@@ -74,11 +74,12 @@ describe Partner do
     it "opens the file from the URL when saved" do
       url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
       p = FactoryGirl.build(:partner)
-      mock_io = mock(StringIO)
-      mock_uri = mock(URI)
-      mock_uri.path { url }
-      mock_io.base_uri { mock_uri }
-      mock(p).open(url) { mock_io }
+      mock_io = mock("StringIO")
+      mock_uri = mock("URI")
+      mock_uri.stub(:path).and_return(url)
+      mock_io.stub(:base_uri).and_return(mock_uri)
+      p.stub(:open).with(url).and_return(mock_io)
+      p.stub(:logo=).with(mock_io)
       p.logo_url = url
       p.save!
       p.should have_received(:open).with(url)
@@ -95,14 +96,14 @@ describe Partner do
       p = FactoryGirl.build(:partner)
       p.logo_url = bad_url
       p.should_not be_valid
-      p.errors.on(:logo_image_URL).should == "Pleave provide an HTTP url"
+      p.errors[:logo_image_URL].should include("Pleave provide an HTTP url")
     end
     it "adds a validation error if the file can not be downloaded" do
       bad_url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo_wrong.png"
       p = FactoryGirl.build(:partner)
       p.logo_url = bad_url
       p.should_not be_valid
-      p.errors.on(:logo_image_URL).should == "Could not download #{bad_url} for logo"
+      p.errors[:logo_image_URL].should include("Could not download #{bad_url} for logo")
     end
   end
   
@@ -148,14 +149,10 @@ describe Partner do
       assert_equal Paperclip::Attachment, partner.logo.class
     end
 
-    it "has an error when the logo is not an image type" do
-      File.open(File.join(fixture_path, "files/crazy.txt"), "r") do |crazy|
-        partner = FactoryGirl.create(:partner)
-        partner.update_attributes(:logo => crazy)
-        assert !partner.valid?
-        assert_match /must be a JPG, GIF, or PNG/, partner.errors.on(:logo)
-      end
-    end
+    it { should validate_attachment_content_type(:logo).
+                    allowing('image/png', 'image/gif', 'image/jpg', 'image/jpeg', 'image/x-png').
+                    rejecting('text/plain', 'text/xml') }
+
   end
 
   describe "custom_logo?" do
@@ -191,48 +188,48 @@ describe Partner do
       describe "#add_whitelabel(partner_id, app_css, reg_css)" do
         before(:each) do
           @partner = FactoryGirl.create(:partner)
-          stub(File).expand_path("app.css").returns("app.css")
-          stub(File).expand_path("reg.css").returns("reg.css")
-          stub(File).expand_path("part.css").returns("part.css")
+          File.stub(:expand_path).with("app.css").and_return("app.css")
+          File.stub(:expand_path).with("reg.css").and_return("reg.css")
+          File.stub(:expand_path).with("part.css").and_return("part.css")
 
-          stub(Partner).find.returns(@partner)
-          stub(File).exists?("app.css").returns(true)
-          stub(File).exists?("reg.css").returns(true)
-          stub(File).exists?("part.css").returns(true)
-          stub(@partner).any_css_present?.returns(false)
-          stub(@partner).application_css_present?.returns(true)
-          stub(@partner).registration_css_present?.returns(true)
-          stub(@partner).partner_css_present?.returns(true)
+          Partner.stub(:find).and_return(@partner)
+          File.stub(:exists?).with("app.css").and_return(true)
+          File.stub(:exists?).with("reg.css").and_return(true)
+          File.stub(:exists?).with("part.css").and_return(true)
+          @partner.stub(:any_css_present?).and_return(false)
+          @partner.stub(:application_css_present?).and_return(true)
+          @partner.stub(:registration_css_present?).and_return(true)
+          @partner.stub(:partner_css_present?).and_return(true)
 
-          stub(File).directory?(@partner.assets_path).returns(true)
-          stub(FileUtils).cp("app.css", @partner.absolute_application_css_path).returns(true)
-          stub(FileUtils).cp("reg.css", @partner.absolute_registration_css_path).returns(true)
-          stub(FileUtils).cp("part.css", @partner.absolute_partner_css_path).returns(true)
+          File.stub(:directory?).with(@partner.assets_path).and_return(true)
+          FileUtils.stub(:cp).with("app.css", @partner.absolute_application_css_path).and_return(true)
+          FileUtils.stub(:cp).with("reg.css", @partner.absolute_registration_css_path).and_return(true)
+          FileUtils.stub(:cp).with("part.css", @partner.absolute_partner_css_path).and_return(true)
         end
         it "finds the partner by id" do
           Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           Partner.should have_received(:find).with("123")
         end
         it "raises an error message if the partner is the primary one" do
-          stub(@partner).primary?.returns(true)
+          @partner.stub(:primary?).and_return(true)
           expect {
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           }.to raise_error("You can't whitelabel the primary partner.")
         end
         it "raises an error message if the partner is not found" do
-          stub(Partner).find.returns(nil)
+          Partner.stub(:find).and_return(nil)
           expect {
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           }.to raise_error("Partner with id '123' was not found.")
         end
         it "raises an error message with what to do if the partner is already whitelabeled" do
-          stub(@partner).whitelabeled.returns(true)
+          @partner.stub(:whitelabeled).and_return(true)
           expect {
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           }.to raise_error("Partner '123' is already whitelabeled. Try running 'rake partner:upload_assets 123 app.css reg.css'")
         end
         it "raises an error message with what to do if the partner already has assets" do
-          stub(@partner).any_css_present?.returns(true)
+          @partner.stub(:any_css_present?).and_return(true)
           expect {
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           }.to raise_error("Partner '123' has assets. Try running 'rake partner:enable_whitelabel 123'")
@@ -255,8 +252,8 @@ describe Partner do
         end
 
         it "creates the partner path if not already there" do
-          stub(File).directory?(@partner.assets_path).returns(false)
-          stub(Dir).mkdir(@partner.assets_path).returns(true)
+          File.stub(:directory?).with(@partner.assets_path).and_return(false)
+          Dir.stub(:mkdir).with(@partner.assets_path).and_return(true)
           Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           Dir.should have_received(:mkdir).with(@partner.assets_path)
         end
@@ -270,8 +267,8 @@ describe Partner do
           pending "Don't need URL designation of assets yet"
         end
         it "does not set the partner as whitelabeled if the path functions fail" do
-          stub(FileUtils).cp("app.css", @partner.absolute_application_css_path)
-          stub(@partner).application_css_present?.returns(false)
+          FileUtils.stub(:cp).with("app.css", @partner.absolute_application_css_path)
+          @partner.stub(:application_css_present?).and_return(false)
           begin
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           rescue
@@ -319,28 +316,28 @@ describe Partner do
     describe "#css_present?" do
       it "returns true if the both custom css files are present" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
         partner.css_present?.should be_true
         File.should have_received(:exists?).with(partner.absolute_application_css_path)
         File.should have_received(:exists?).with(partner.absolute_registration_css_path)
       end
       it "returns false if the custom application css file is not present" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
         partner.css_present?.should be_false
       end
       it "returns false if the custom registration css file is not present" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
         partner.css_present?.should be_false
       end
       it "returns false if the both custom css files are not present" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
         partner.css_present?.should be_false
       end
     end
@@ -348,31 +345,31 @@ describe Partner do
     describe "#any_css_present?" do
       it "returns true if the either custom css files is present" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
         partner.any_css_present?.should be_true
 
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
         partner.any_css_present?.should be_true
 
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
         partner.any_css_present?.should be_true
 
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
         partner.any_css_present?.should be_true
       end
       it "returns false if both css files are missing" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
         partner.any_css_present?.should be_false
       end
     end
@@ -380,36 +377,36 @@ describe Partner do
     describe "#application_css_present?" do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
         partner.application_css_present?.should be_true
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
         partner.application_css_present?.should be_false
       end
     end
     describe "#registration_css_present?" do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
         partner.registration_css_present?.should be_true
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
         partner.registration_css_present?.should be_false
       end
     end
     describe "#partner_css_present?" do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
         partner.partner_css_present?.should be_true
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
         partner.partner_css_present?.should be_false
       end
     end
@@ -459,7 +456,7 @@ describe Partner do
       other_partner = FactoryGirl.create(:partner)
       registrants << FactoryGirl.create(:maximal_registrant, :partner => other_partner)
 
-      csv = FasterCSV.parse(partner.generate_registrants_csv)
+      csv = CSV.parse(partner.generate_registrants_csv)
       assert_equal 5, csv.length # including header
       assert_equal Registrant::CSV_HEADER, csv[0]
       assert_equal registrants[0].to_csv_array, csv[1]
@@ -471,9 +468,9 @@ describe Partner do
       before(:each) do
         @partner= FactoryGirl.create(:partner, :csv_ready=>true)
         @t = Time.now
-        stub(Time).now { @t }
-        stub(Delayed::PerformableMethod).new { "action" }
-        stub(Delayed::Job).enqueue
+        Time.stub(:now).and_return(@t)
+        Delayed::PerformableMethod.stub(:new).and_return("action")
+        Delayed::Job.stub(:enqueue)
       end
       it "sets the csv_ready for the partner to false" do
         @partner.csv_ready.should be_true
@@ -489,7 +486,7 @@ describe Partner do
     end
     describe "#generate_csv_file_name" do
       it "generates obfuscated file name" do
-        stub(Digest::SHA1).hexdigest { "obfuscate" }
+        Digest::SHA1.stub(:hexdigest).and_return("obfuscate")
         d = DateTime.now
         Partner.new.generate_csv_file_name(d).should == "csv-obfuscate-#{d.strftime('%Y%m%d-%H%M%S')}.csv"
         #Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)} -- #{email_address} -- #{home_zip_code}" )
@@ -498,22 +495,22 @@ describe Partner do
     describe "#csv_file_path" do
       it "returns the path to the file name in the record" do
         @partner = FactoryGirl.create(:partner)        
-        stub(@partner).csv_file_name { "a_file_name.ext" }
-        stub(@partner).csv_path { "/some/path" }
-        stub(FileUtils).mkdir_p
+        @partner.stub(:csv_file_name) { "a_file_name.ext" }
+        @partner.stub(:csv_path) { "/some/path" }
+        FileUtils.stub(:mkdir_p)
         @partner.csv_file_path.should == "/some/path/a_file_name.ext"
       end
     end
     describe "#csv_path" do
       it "creates the path to the partner csv directory" do
         @partner = FactoryGirl.create(:partner)
-        stub(FileUtils).mkdir_p
+        FileUtils.stub(:mkdir_p)
         @partner.csv_path
         FileUtils.should have_received(:mkdir_p).with(File.join(Rails.root, "csv", @partner.id.to_s))
       end
       it "returns the path to the partner csv directory" do
         @partner = FactoryGirl.create(:partner)
-        stub(FileUtils).mkdir_p
+        FileUtils.stub(:mkdir_p)
         @partner.csv_path.should == File.join(Rails.root, "csv", @partner.id.to_s)
       end
     end
@@ -522,17 +519,17 @@ describe Partner do
         @partner = FactoryGirl.create(:partner)        
         @t = Time.now
         @file = "mock_object"
-        stub(Time).now { @t }
-        stub(@partner).generate_csv_file_name { "fn.csv" }
-        stub(@partner).generate_registrants_csv { "generated_csv" }
-        stub(@partner).csv_ready=
-        stub(@partner).save!
-        stub(File).open { @file }
-        stub(@file).write { true }
-        stub(@file).close { true }
+        Time.stub(:now) { @t }
+        @partner.stub(:generate_csv_file_name) { "fn.csv" }
+        @partner.stub(:generate_registrants_csv) { "generated_csv" }
+        @partner.stub(:csv_ready=)
+        @partner.stub(:save!)
+        File.stub(:open) { @file }
+        @file.stub(:write) { true }
+        @file.stub(:close) { true }
         
-        stub(Delayed::PerformableMethod).new { "action" }
-        stub(Delayed::Job).enqueue
+        Delayed::PerformableMethod.stub(:new) { "action" }
+        Delayed::Job.stub(:enqueue)
       end
       it "generates obfuscated file names in partner directories with date/time stamp" do
         @partner.generate_registrants_csv_file
@@ -1095,16 +1092,16 @@ describe Partner do
         p.government_partner_zip_codes = nil
         p.government_partner_state_id = nil
         p.valid?.should be_false
-        p.errors.on(:government_partner_state_abbrev).should_not be_nil
-        p.errors.on(:government_partner_zip_code_list).should_not be_nil
+        p.errors[:government_partner_state_abbrev].should_not be_empty
+        p.errors[:government_partner_zip_code_list].should_not be_empty
       end
       it "ads an error to government_partner_state_abbrev and government_partner_zip_code_list when both are present" do
         p = FactoryGirl.create(:government_partner)
         p.government_partner_state_abbrev="MA"
         p.government_partner_zip_code_list="90000"
         p.valid?.should be_false
-        p.errors.on(:government_partner_state_abbrev).should_not be_nil
-        p.errors.on(:government_partner_zip_code_list).should_not be_nil
+        p.errors[:government_partner_state_abbrev].should_not be_empty
+        p.errors[:government_partner_zip_code_list].should_not be_empty
       end
     end
     

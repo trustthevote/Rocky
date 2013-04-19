@@ -36,7 +36,7 @@ class Registrant < ActiveRecord::Base
   include Lolrus
   include ActionView::Helpers::UrlHelper
 
-  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5]
+  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
   # TODO: add :es to get full set for validation
   TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
   SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
@@ -121,7 +121,7 @@ class Registrant < ActiveRecord::Base
     validates_format_of(attr_names, configuration.merge(:with => /^\d{5}(-\d{4})?$/, :allow_blank => true));
 
     validates_each(attr_names, configuration) do |record, attr_name, value|
-      if record.errors.on(attr_name).nil? && !GeoState.valid_zip_code?(record.send(attr_name))
+      if record.errors[attr_name].nil? && !GeoState.valid_zip_code?(record.send(attr_name))
         record.errors.add(attr_name, :invalid_zip, :default => configuration[:message], :value => value)
       end
     end
@@ -412,7 +412,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def calculate_age
-    if errors.on(:date_of_birth).blank? && !date_of_birth.blank?
+    if errors[:date_of_birth].blank? && !date_of_birth.blank?
       now = (created_at || Time.now).to_date
       years = now.year - date_of_birth.year
       if (date_of_birth.month > now.month) || (date_of_birth.month == now.month && date_of_birth.day > now.day)
@@ -948,7 +948,7 @@ class Registrant < ActiveRecord::Base
 
   def at_least_step?(step)
     current_step = STEPS.index(aasm_current_state)
-    current_step && (current_step >= step)
+    !current_step.nil? && (current_step >= step)
   end
 
   def has_phone?

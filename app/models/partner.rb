@@ -97,9 +97,10 @@ class Partner < ActiveRecord::Base
   validates_format_of :phone, :with => /^\d{3}-\d{3}-\d{4}$/, :message => 'Phone must look like ###-###-####', :allow_blank => true
   validates_presence_of :organization
 
-  validates_attachment_size :logo, :less_than => 1.megabyte, :message => "Logo must not be bigger than 1 megabyte"
-  validates_attachment_content_type :logo, :message => "Logo must be a JPG, GIF, or PNG file",
-                                    :content_type => ['image/jpeg', 'image/jpg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif']
+  validates_attachment :logo, 
+    :size=>{:less_than => 1.megabyte, :message => "Logo must not be bigger than 1 megabyte"},
+    :content_type=> { :message => "Logo must be a JPG, GIF, or PNG file",
+                      :content_type => ['image/jpeg', 'image/jpg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif'] }
 
   after_validation :make_paperclip_errors_readable
 
@@ -220,7 +221,7 @@ class Partner < ActiveRecord::Base
   def registration_stats_age
     conditions = "partner_id = ? AND (status = 'complete' OR status = 'step_5') AND (age BETWEEN ? AND ?)"
     stats = {}
-    stats[:age_under_18]  = { :count => Registrant.count(:conditions => [conditions, self, 0, 17]) }
+    stats[:age_under_18]  = { :count => Registrant.where([conditions, self, 0 , 17]).count }
     stats[:age_18_to_29]  = { :count => Registrant.count(:conditions => [conditions, self, 18, 29]) }
     stats[:age_30_to_39]  = { :count => Registrant.count(:conditions => [conditions, self, 30, 39]) }
     stats[:age_40_to_64]  = { :count => Registrant.count(:conditions => [conditions, self, 40, 64]) }
@@ -265,6 +266,7 @@ class Partner < ActiveRecord::Base
     stats[:percent_complete] = stats[:total_count].to_f / Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status != 'initial')", false, self])
     stats
   end
+  
   def registration_stats_finish_with_state_completion_date
     #conditions = "finish_with_state = ? AND partner_id = ? AND status = 'complete' AND created_at >= ?"
     sql =<<-"SQL"
@@ -341,7 +343,8 @@ class Partner < ActiveRecord::Base
         def io.original_filename; base_uri.path.split('/').last; end
         raise 'No Filename' if io.original_filename.blank?
         self.logo = io
-      rescue
+      rescue Exception=>e
+        puts e.message
         logo_url_errors << "Could not download #{url} for logo"        
       end
     end
@@ -380,7 +383,7 @@ class Partner < ActiveRecord::Base
   end
 
   def generate_registrants_csv
-    FasterCSV.generate do |csv|
+    CSV.generate do |csv|
       csv << Registrant::CSV_HEADER
       registrants.find_each(:batch_size=>500, :include => [:home_state, :mailing_state, :partner]) do |reg|
         csv << reg.to_csv_array

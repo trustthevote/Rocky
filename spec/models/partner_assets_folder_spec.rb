@@ -26,9 +26,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PartnerAssetsFolder do
 
-  before { @partner = FactoryGirl.create(:partner) }
-  before { stub(@partner).assets_root { "#{Rails.root}/tmp/test_assets" } }
-  before { @paf = PartnerAssetsFolder.new(@partner) }
+  before(:each) do 
+    @partner = FactoryGirl.create(:partner)
+    @partner.stub(:assets_root) { "#{Rails.root}/tmp/test_assets" }
+    @paf = PartnerAssetsFolder.new(@partner)
+  end
 
   after  { FileUtils.rm_r("#{Rails.root}/tmp/test_assets") }
 

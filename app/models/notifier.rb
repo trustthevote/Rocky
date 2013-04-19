@@ -45,45 +45,48 @@ class Notifier < ActionMailer::Base
   end
 
   def tell_friends(tell_params)
-    subject tell_params[:tell_subject]
-    from "#{tell_params[:tell_from]} <#{tell_params[:tell_email]}>"
-    recipients tell_params[:tell_recipients]
-    date Time.now.to_s(:db)
-    body :message => tell_params[:tell_message]
+    @message = tell_params[:tell_message]
+    mail(:subject => tell_params[:tell_subject],
+      :from => "#{tell_params[:tell_from]} <#{tell_params[:tell_email]}>",
+      :to => tell_params[:tell_recipients],
+      :date => Time.now.to_s(:db))
+    
   end
 
   protected
 
   def setup_registrant_email(registrant, kind)
-    subject I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym)
-    from registrant.email_address_to_send_from
-    recipients registrant.email_address
-    date Time.now.to_s(:db)
-    content_type "multipart/alternative"
-
-    part "text/html" do |p|
-      p.body = message_body(registrant, kind)
-      p.transfer_encoding = "quoted-printable"
+    
+    m = mail(:subject=> I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym),
+      :from=>registrant.email_address_to_send_from,
+      :to=>registrant.email_address,
+      :date=> Time.now.to_s(:db),
+      :content_type=> "multipart/alternative") do |format|
+        format.html { message_body(registrant, kind) }
     end
+
+    m.transport_encoding = "quoted-printable"
+    
+    m
+
   end
 
   def message_body(registrant, kind)
-    vars = {
-      :pdf_url              => "http://#{default_url_options[:host]}#{registrant.pdf_path}?source=email",
-      :cancel_reminders_url => registrant_finish_url(registrant, :protocol => "https", :reminders => "stop"),
-      :locale               => registrant.locale.to_sym,
-      :registrar_phone      => registrant.home_state.registrar_phone,
-      :registrar_address    => registrant.home_state.registrar_address,
-      :registrar_url        => registrant.home_state.registrar_url,
-      :registrant           => registrant }
+    @pdf_url = "http://#{default_url_options[:host]}#{registrant.pdf_path}?source=email"
+    @cancel_reminders_url = registrant_finish_url(registrant, :protocol => "https", :reminders => "stop")
+    @locale               = registrant.locale.to_sym
+    @registrar_phone      = registrant.home_state.registrar_phone
+    @registrar_address    = registrant.home_state.registrar_address
+    @registrar_url        = registrant.home_state.registrar_url
+    @registrant           = registrant
 
     partner = registrant.partner
     custom_template = partner && partner.whitelabeled? && EmailTemplate.get(partner, "#{kind}.#{registrant.locale}")
 
     if custom_template
-      render :file => Template.new(custom_template), :body => vars
+      render :inline => custom_template
     else
-      render_message("#{kind}.#{registrant.locale}.html.erb", vars)
+      render :file=>"notifier/#{kind}.#{registrant.locale}"
     end
   end
 

@@ -47,12 +47,11 @@ describe Notifier do
       end
       email = ActionMailer::Base.deliveries.last
       email.from.should include(FROM_ADDRESS)
-      
       email.body.should include("http")
       email.body.should include(registrant.pdf_path)
-      assert_equal 1, email.parts.length
-      assert_equal "utf-8", email.parts[0].charset
-      assert_equal "quoted-printable", email.parts[0].encoding
+
+      assert_equal "UTF-8", email.charset
+      assert_equal "quoted-printable", email.header['Content-Transfer-Encoding'].to_s
     end
 
     it "includes state data" do
@@ -114,9 +113,8 @@ describe Notifier do
       email.to.should include(registrant.email_address)
       email.from.should include(FROM_ADDRESS)
       email.subject.should include("Thank you for using the online voter registration tool")
-      assert_equal 1, email.parts.length
-      assert_equal "utf-8", email.parts[0].charset
-      assert_equal "quoted-printable", email.parts[0].encoding
+      assert_equal "UTF-8", email.charset
+      assert_equal "quoted-printable", email.header['Content-Transfer-Encoding'].to_s
     end
     it "uses partner template" do
       partner    = FactoryGirl.create(:partner, :whitelabeled => true)
@@ -149,9 +147,8 @@ describe Notifier do
       
       email.body.should include("http")
       email.body.should include(registrant.pdf_path)
-      assert_equal 1, email.parts.length
-      assert_equal "utf-8", email.parts[0].charset
-      assert_equal "quoted-printable", email.parts[0].encoding
+      assert_equal "UTF-8", email.charset
+      assert_equal "quoted-printable", email.header['Content-Transfer-Encoding'].to_s
     end
 
     it "includes state data" do
