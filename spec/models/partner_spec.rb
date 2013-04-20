@@ -1027,13 +1027,14 @@ describe Partner do
         4.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Republican") }
         5.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Other") }
         8.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Decline to State") }
+        puts Registrant.all.collect {|r| r.party }.join("\n")
         stats = partner.registration_stats_party
         assert_equal 5, stats.length
-        assert_equal({:count => 8, :percentage => 0.40, :party => "None"},        stats[0])
-        assert_equal({:count => 5, :percentage => 0.25, :party => "Other"},       stats[1])
-        assert_equal({:count => 4, :percentage => 0.20, :party => "Republican"},  stats[2])
-        assert_equal({:count => 2, :percentage => 0.10, :party => "Green"},       stats[3])
-        assert_equal({:count => 1, :percentage => 0.05, :party => "Democratic"},  stats[4])
+        stats.should include({:count => 8, :percentage => 0.4, :party => "None"})
+        stats.should include({:count => 5, :percentage => 0.25, :party => "Other"})
+        stats.should include({:count => 4, :percentage => 0.20, :party => "Republican"})
+        stats.should include({:count => 2, :percentage => 0.10, :party => "Green"})
+        stats.should include({:count => 1, :percentage => 0.05, :party => "Democratic"})
       end
     end
   end

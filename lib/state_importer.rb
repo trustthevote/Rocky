@@ -24,7 +24,7 @@
 #***** END LICENSE BLOCK *****
 class StateImporter
   def self.import(file)
-    FasterCSV.new(file, :headers => true).each do |row|
+    CSV.new(file, :headers => true).each do |row|
       begin
         print "#{row['name']}... "
         import_state(row)

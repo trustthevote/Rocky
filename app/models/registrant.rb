@@ -322,9 +322,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def localization
-    @localization ||=
-      home_state_id && locale &&
-        StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => locale})
+    home_state_id && locale ?
+        StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => locale}) : nil
   end
 
   def at_least_step_1?
@@ -366,7 +365,7 @@ class Registrant < ActiveRecord::Base
       self.prev_zip_code = nil
     end
     # self.race = nil unless requires_race?
-    self.party = nil unless requires_party?
+    # self.party = nil unless requires_party?
   end
 
   def reformat_state_id_number
@@ -436,7 +435,8 @@ class Registrant < ActiveRecord::Base
 
   def state_parties
     if requires_party?
-      localization && (localization.parties + [ localization.no_party ]) || []
+      puts localization.state.parties
+      localization ? localization.parties + [ localization.no_party ] : []
     else
       nil
     end
@@ -496,6 +496,9 @@ class Registrant < ActiveRecord::Base
       if party.blank?
         errors.add(:party, :blank)
       else
+        puts party
+        puts state_parties.to_s
+        puts home_state.name.to_s
         errors.add(:party, :inclusion) unless state_parties.include?(party)
       end
     end
@@ -517,7 +520,7 @@ class Registrant < ActiveRecord::Base
   def home_zip_code=(zip)
     self[:home_zip_code] = zip
     self.home_state = nil
-    self[:home_state_id] = zip && (s = GeoState.for_zip_code(zip.strip)) && s.id
+    self.home_state_id = zip && (s = GeoState.for_zip_code(zip.strip)) ? s.id : self.home_state_id
   end
 
   def home_state_name

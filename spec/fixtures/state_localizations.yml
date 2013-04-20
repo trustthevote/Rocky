@@ -6,6 +6,7 @@ california_en:
   - Green
   - Libertarian
   - Republican
+  - Other
   - None
   no_party: Decline to State
   sub_18: if you will turn 18 by the next election
@@ -17,6 +18,7 @@ california_es:
   - Verde
   - Libertariano
   - Republicano
+  - Otro
   - None
   no_party: Se niega a declarar
   sub_18: si va a cumplir 18 años de las próximas elecciones

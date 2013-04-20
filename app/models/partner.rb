@@ -242,6 +242,7 @@ class Partner < ActiveRecord::Base
     SQL
 
     stats = self.class.connection.select_all(sql)
+    puts stats
     total_count = stats.inject(0) { |sum, row| sum + row['registrants_count'].to_i }
     stats.collect do |row|
       { :party => row['official_party_name'],
