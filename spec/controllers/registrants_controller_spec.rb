@@ -132,7 +132,7 @@ describe RegistrantsController do
 
       it "should show partner banner and logo for non-primary partner with custom logo" do
         partner = FactoryGirl.create(:partner)
-        File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+        File.open(File.join(fixture_files_path, "partner_logo.jpg"), "r") do |logo|
           partner.update_attributes(:logo => logo)
           assert partner.custom_logo?
         end

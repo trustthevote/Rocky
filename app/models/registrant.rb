@@ -365,7 +365,7 @@ class Registrant < ActiveRecord::Base
       self.prev_zip_code = nil
     end
     # self.race = nil unless requires_race?
-    # self.party = nil unless requires_party?
+    self.party = nil unless requires_party?
   end
 
   def reformat_state_id_number
@@ -435,7 +435,6 @@ class Registrant < ActiveRecord::Base
 
   def state_parties
     if requires_party?
-      puts localization.state.parties
       localization ? localization.parties + [ localization.no_party ] : []
     else
       nil
@@ -496,9 +495,6 @@ class Registrant < ActiveRecord::Base
       if party.blank?
         errors.add(:party, :blank)
       else
-        puts party
-        puts state_parties.to_s
-        puts home_state.name.to_s
         errors.add(:party, :inclusion) unless state_parties.include?(party)
       end
     end

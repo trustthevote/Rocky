@@ -18,6 +18,9 @@ RSpec.configure do |config|
   
   config.include AssertDifference
   config.include Paperclip::Shoulda::Matchers
+  config.include SpecHelperMethods
+  config.include ApiHelperMethods
+  
   
   # ## Mock Framework
   #
@@ -32,9 +35,9 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
+  config.fixture_path =  "#{::Rails.root}/db/fixtures"
   config.use_transactional_fixtures = true
-  config.use_instantiated_fixtures  = false
-  config.fixture_path = Rails.root + '/spec/fixtures/'
+  #config.use_instantiated_fixtures  = false
   
   config.global_fixtures = :all
   

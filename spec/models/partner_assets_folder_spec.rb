@@ -36,15 +36,15 @@ describe PartnerAssetsFolder do
 
   describe 'update_css' do
     it 'should save asset file' do
-      @file = File.new("#{fixture_path}/files/sample.css")
+      @file = File.new("#{fixture_files_path}/sample.css")
       @paf.update_css('application', @file)
       @partner.application_css_present?.should be_true
     end
 
     context 'updating' do
       before do
-        @file = File.new("#{fixture_path}/files/sample.css")
-        @alt  = File.new("#{fixture_path}/files/alt.css")
+        @file = File.new("#{fixture_files_path}/sample.css")
+        @alt  = File.new("#{fixture_files_path}/alt.css")
         @paf.update_css('application', @file)
         @paf.update_css('application', @alt)
       end
@@ -98,7 +98,7 @@ describe PartnerAssetsFolder do
 
   describe 'upload_asset' do
     it 'should upload an asset' do
-      @file = File.new("#{fixture_path}/files/sample.css")
+      @file = File.new("#{fixture_files_path}/sample.css")
       @paf.update_asset('../sample.css', @file)
       @paf.list_assets.should == [ 'sample.css' ]
     end

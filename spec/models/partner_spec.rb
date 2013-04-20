@@ -163,7 +163,7 @@ describe Partner do
     it "is always false for primary partner" do
       partner = Partner.find(Partner::DEFAULT_ID)
       assert !partner.custom_logo?
-      File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+      File.open(File.join(fixture_files_path, "partner_logo.jpg"), "r") do |logo|
         partner.update_attributes(:logo => logo)
         assert !partner.custom_logo?
       end
@@ -171,7 +171,7 @@ describe Partner do
 
     it "is true for partners with logos" do
       partner = FactoryGirl.build(:partner)
-      File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+      File.open(File.join(fixture_files_path, "partner_logo.jpg"), "r") do |logo|
         partner.update_attributes(:logo => logo)
         assert partner.custom_logo?
       end
@@ -999,7 +999,7 @@ describe Partner do
         assert_equal({:count => 1, :percentage => 0.05, :party => "Democratic"},  stats[4])
       end
 
-      it "counts states that do not require party as None" do
+      it "counts states that do not require party as 'None'" do
         partner = FactoryGirl.create(:partner)
         1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Democratic") }
         2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Green") }
@@ -1027,7 +1027,6 @@ describe Partner do
         4.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Republican") }
         5.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Other") }
         8.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Decline to State") }
-        puts Registrant.all.collect {|r| r.party }.join("\n")
         stats = partner.registration_stats_party
         assert_equal 5, stats.length
         stats.should include({:count => 8, :percentage => 0.4, :party => "None"})

@@ -240,9 +240,8 @@ class Partner < ActiveRecord::Base
       GROUP BY official_party_name
       ORDER BY registrants_count DESC, official_party_name
     SQL
-
+    
     stats = self.class.connection.select_all(sql)
-    puts stats
     total_count = stats.inject(0) { |sum, row| sum + row['registrants_count'].to_i }
     stats.collect do |row|
       { :party => row['official_party_name'],
@@ -345,7 +344,7 @@ class Partner < ActiveRecord::Base
         raise 'No Filename' if io.original_filename.blank?
         self.logo = io
       rescue Exception=>e
-        puts e.message
+        # puts e.message
         logo_url_errors << "Could not download #{url} for logo"        
       end
     end

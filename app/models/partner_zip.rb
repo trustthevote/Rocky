@@ -132,7 +132,7 @@ private
   def get_partners_from_csv
     new_partners = []
     row_idx = 1
-    FasterCSV.foreach(@csv_file, {:headers=>true}) do |row|
+    CSV.foreach(@csv_file, {:headers=>true}) do |row|
       if row.size != columns.size
         add_error("Row #{row_idx} column count is #{row.size} and should be #{columns.size}")
       end
