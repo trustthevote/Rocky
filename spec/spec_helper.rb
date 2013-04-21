@@ -3,10 +3,12 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'csv'
+
 
 require 'paperclip/matchers'
 
-require 'csv'
+require 'authlogic/test_case'
 
 require 'factory_girl_rails'
 
@@ -18,7 +20,7 @@ RSpec.configure do |config|
   
   config.include AssertDifference
   config.include Paperclip::Shoulda::Matchers
-  
+  config.include Authlogic::TestCase
   
   config.include Capybara::RSpecMatchers, :type => :view
   config.include Capybara::RSpecMatchers, :type => :helper

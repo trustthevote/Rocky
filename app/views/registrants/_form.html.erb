@@ -20,7 +20,7 @@ $(document).ready(function() {
     <h3><%= form.label :email_address %></h3>
     <%= field_div form, :email_address %>
     <div class="tooltip"><%= tooltip_tag :email_address %></div>
-    <span class="error"><%= form.object.errors.on :email_address %></span>
+    <span class="error"><%= form.object.errors[:email_address] %></span>
   </li>
 </ul>
 <ul class="flat">
@@ -28,7 +28,7 @@ $(document).ready(function() {
     <h3><%= form.label :home_zip_code %></h3>
     <%= field_div form, :home_zip_code %>
     <div class="tooltip"><%= tooltip_tag :home_zip_code %></div>
-    <span class="error"><%= form.object.errors.on :home_zip_code %></span>
+    <span class="error"><%= form.object.errors[:home_zip_code] %></span>
   </li>
 </ul>
 <ul class="flat">
@@ -36,8 +36,8 @@ $(document).ready(function() {
     <h3><%= form.label :date_of_birth %></h3>
     <%= field_div form, :date_of_birth, :value => form.object.form_date_of_birth %>
     <div class="tooltip"><%= tooltip_tag :date_of_birth %></div>
-    <% if form.object.errors.on :date_of_birth %>
-      <span class="error"><%= form.object.errors.on :date_of_birth %></span>
+    <% if !form.object.errors[:date_of_birth].empty? %>
+      <span class="error"><%= form.object.errors[:date_of_birth] %></span>
     <% else %>
       <span class="example">MM-DD-YYYY</span>
     <% end %>
@@ -49,7 +49,7 @@ $(document).ready(function() {
   <li>
     <h3>
       <%= form.check_box :us_citizen %> <%= form.label :us_citizen %>
-      <span class="error"><%= form.object.errors.on :us_citizen %></span>
+      <span class="error"><%= form.object.errors[:us_citizen] %></span>
     </h3>
   </li>
 </ul>
@@ -59,7 +59,7 @@ $(document).ready(function() {
   <li>
     <h3>
       <%= form.check_box :first_registration %> <%= form.label :first_registration %>
-      <span class="error"><%= form.object.errors.on :first_registration %></span>
+      <span class="error"><%= form.object.errors[:first_registration] %></span>
     </h3>
   </li>
 </ul>

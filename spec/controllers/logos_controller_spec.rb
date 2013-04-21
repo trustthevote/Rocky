@@ -51,32 +51,32 @@ describe LogosController do
   end
 
   it "can upload a logo" do
-    logo_fixture = fixture_file_upload('/files/partner_logo.jpg','image/jpeg')
+    logo_fixture = fixture_files_file_upload('/partner_logo.jpg','image/jpeg')
     put :update, :partner => { :logo => logo_fixture }
     assert_redirected_to partner_logo_url
     @partner.reload
-    assert_match %r{logos/\d+/header/partner_logo.jpg}, @partner.logo.url(:header)
+    assert_match %r{logos/[\d\/]+/header/partner_logo.jpg}, @partner.logo.url(:header)
     assert 0 < @partner.logo_file_size
   end
 
   it "shows an error message when you upload something crazy" do
-    logo_fixture = fixture_file_upload('/files/crazy.txt','text/plain')
+    logo_fixture = fixture_files_file_upload('/crazy.txt','text/plain')
     put :update, :partner => { :logo => logo_fixture }
     assert_response :success
-    assert_match /JPG, GIF, or PNG/, assigns[:partner].errors.on(:logo)
+    assert_match /JPG, GIF, or PNG/, assigns[:partner].errors[:logo_content_type].to_s
   end
 
   describe "shows an error message when you upload nothing" do
     it "no partner params" do
       put :update, :partner => {}
       assert_response :success
-      assert_match /You must select an image file to upload/, assigns[:partner].errors.on(:logo)
+      assert_match /You must select an image file to upload/, assigns[:partner].errors[:logo].to_s
     end
 
     it "no partner[logo] param" do
       put :update, :partner => { :logo => "" }
       assert_response :success
-      assert_match /You must select an image file to upload/, assigns[:partner].errors.on(:logo)
+      assert_match /You must select an image file to upload/, assigns[:partner].errors[:logo].to_s
     end
   end
 
@@ -86,11 +86,15 @@ describe LogosController do
         big_file.puts "1234567890\n" * 100_000
       end
     end
-    File.open("/tmp/over_a_megabyte.jpg") do |big_file|
-      put :update, :partner => { :logo => big_file }
-    end
+    
+    file = Rack::Test::UploadedFile.new("/tmp/over_a_megabyte.jpg", "image/jpeg")
+    put :update, :partner => { :logo => file }
+    
+    # File.open("/tmp/over_a_megabyte.jpg") do |big_file|
+    #   put :update, :partner => { :logo => big_file }
+    # end
     assert_response :success
-    assert_match /megabyte/, assigns[:partner].errors.on(:logo)
+    assert_match /megabyte/, assigns[:partner].errors[:logo_file_size].to_s
   end
 
   it "destroys logo when there is a logo" do

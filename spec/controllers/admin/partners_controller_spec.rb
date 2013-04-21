@@ -67,10 +67,10 @@ describe Admin::PartnersController do
     end
 
     context 'css updates' do
-      before  { @sample_css = fixture_file_upload('/files/sample.css') }
+      before  { @sample_css = fixture_files_file_upload('/sample.css') }
       before  { @paf = PartnerAssetsFolder.new(nil) }
-      before  { mock(PartnerAssetsFolder).new(@partner) { @paf } }
-      before  { mock(@paf).update_css('application', @sample_css) }
+      before  { PartnerAssetsFolder.stub(:new).with(@partner) { @paf } }
+      before  { @paf.stub(:update_css).with('application', @sample_css) }
       specify { put :update, :id => @partner, :css_files => { 'application' => @sample_css } }
     end
 
@@ -83,8 +83,8 @@ describe Admin::PartnersController do
   describe "GET regen_api_key" do
     before(:each) do
       @partner = FactoryGirl.create(:partner)
-      stub(@partner).generate_api_key! { true }
-      stub(Partner).find("1") { @partner }
+      @partner.stub(:generate_api_key!) { true }
+      Partner.stub(:find).with("1") { @partner }
       get :regen_api_key, :id=>"1"
     end
     it { 

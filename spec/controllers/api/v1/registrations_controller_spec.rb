@@ -29,7 +29,9 @@ describe Api::V1::RegistrationsController do
   describe 'create' do
     it 'should return URL of PDF to be generated' do
       expect_api_response :pdfurl => "https://example-pdf.com/123.pdf"
-      new_registration { mock(Registrant).pdf_path { '/123.pdf' } }
+      registrant = mock_model(Registrant)
+      registrant.stub(:pdf_path) { '/123.pdf' }
+      new_registration { registrant }
     end
 
     it 'should catch invalid fields' do
@@ -64,13 +66,13 @@ describe Api::V1::RegistrationsController do
 
   def registrations(&block)
     query = { :partner_id => nil, :partner_password => nil, :since => nil }
-    mock(V1::RegistrationService).find_records(query, &block)
+    V1::RegistrationService.stub(:find_records).with(query, &block)
     get :index, :format => 'json'
   end
 
   def new_registration(&block)
     data = {}
-    mock(V1::RegistrationService).create_record(data, &block)
+    V1::RegistrationService.stub(:create_record).with(data, &block)
     post :create, :format => 'json', :registration => data
   end
 

@@ -54,7 +54,7 @@ describe V1::RegistrationService do
         V1::RegistrationService.create_record(:lang => 'en')
         fail 'ValidationError is expected'
       rescue V1::RegistrationService::ValidationError => e
-        e.field.should    == 'date_of_birth'
+        e.field.to_s.should    == 'date_of_birth'
         e.message.should  == "Required"
       end
     end
@@ -70,7 +70,7 @@ describe V1::RegistrationService do
         V1::RegistrationService.create_record(:home_state_id => 'NY')
         fail 'ValidationError is expected'
       rescue V1::RegistrationService::ValidationError => e
-        e.field.should    == 'lang'
+        e.field.should.to_s    == 'lang'
         e.message.should  == 'Required'
       end
     end
@@ -83,10 +83,10 @@ describe V1::RegistrationService do
 
     context 'complete record' do
       before { @reg = FactoryGirl.create(:maximal_registrant, :status => 'step_5') }
-      before { mock(Registrant).build_from_api_data({}) { @reg } }
+      before { Registrant.stub(:build_from_api_data).with({}) { @reg } }
 
       it 'should save the record and generate PDF' do
-        mock(@reg).enqueue_complete_registration_via_api
+        @reg.stub(:enqueue_complete_registration_via_api)
         V1::RegistrationService.create_record({}).should
       end
     end

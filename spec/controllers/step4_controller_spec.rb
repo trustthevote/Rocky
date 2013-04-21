@@ -79,14 +79,14 @@ describe Step4Controller do
     end
 
     it "should update registrant and complete step 4" do
-      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_4_registrant)
+      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_4_registrant).reject {|k,v| k == :status }
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].step_4?
       assert_redirected_to registrant_step_5_url(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do
-      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_4_registrant, :state_id_number => nil)
+      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_4_registrant, :state_id_number => nil).reject {|k,v| k == :status }
       assert assigns[:registrant].step_4?
       assert assigns[:registrant].reload.step_3?
       assert_template "show"

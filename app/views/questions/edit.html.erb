@@ -29,7 +29,7 @@
   </p>
 
   <div id="survey_questions">
-    <% form_for @partner, :url => partner_questions_path, :method => :put do |form| %>
+    <%= form_for @partner, :url => partner_questions_path, :method => :put do |form| %>
       <%= form.error_messages %>
       <fieldset>
         <legend>Questions in English</legend>

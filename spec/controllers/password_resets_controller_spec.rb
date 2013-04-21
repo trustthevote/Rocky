@@ -38,7 +38,7 @@ describe PasswordResetsController do
       attr_reader :partner
       before do
         @partner = FactoryGirl.create(:partner)
-        mock(Partner).find_using_perishable_token(anything) { partner }
+        Partner.stub(:find_using_perishable_token).with(anything) { partner }
       end
       it "should work" do
         get :edit, :id => partner.perishable_token
@@ -58,8 +58,9 @@ describe PasswordResetsController do
   describe "POST #create" do
     context "with a valid email" do
       before do
-        mock(fake_partner = Object.new).deliver_password_reset_instructions!
-        mock(Partner).find_by_login.with(anything) { fake_partner }
+        fake_partner = Object.new
+        fake_partner.stub(:deliver_password_reset_instructions!)
+        Partner.stub(:find_by_login).with(anything) { fake_partner }
       end
       it "sends a notification to the Partner's email to reset password" do
         post :create, :login => "mocked@example.com"
@@ -81,7 +82,7 @@ describe PasswordResetsController do
     attr_reader :partner
     before do
       @partner = FactoryGirl.create(:partner)
-      mock(Partner).find_using_perishable_token(anything) { partner }
+      Partner.stub(:find_using_perishable_token).with(anything) { partner }
     end
 
     it "should work" do

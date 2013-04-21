@@ -1,6 +1,6 @@
 <h1><%= t('txt.registration.step_3_header') %></h1>
 
-<% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
+<%= form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
   <%- if @registrant.custom_step_2? %>
     <%= render :partial=> "registrants/home_address", :locals=>{:form=>form, :show_hr=>false} %>
     <%= render(:partial => 'previous', :locals => {:form => form, :show_hr=>false}) unless @registrant.first_registration? %>

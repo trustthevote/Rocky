@@ -76,10 +76,11 @@ describe V1::StateRequirements do
     it 'if state is not participating' do
       query = { :lang => 'en' }
       state = GeoState.new(:participating => false)
-      locale = mock(StateLocalization.new).not_participating_tooltip { 'not participating' }
+      locale = mock(StateLocalization)
+      locale.stub(:not_participating_tooltip) { 'not participating' }
 
-      mock(V1::StateRequirements).find_state(query) { state }
-      mock(V1::StateRequirements).get_locale(state, 'en') { locale }
+      V1::StateRequirements.stub(:find_state).with(query) { state }
+      V1::StateRequirements.stub(:get_locale).with(state, 'en') { locale }
 
       lambda {
         V1::StateRequirements.find(query)
@@ -88,19 +89,19 @@ describe V1::StateRequirements do
   end
 
   it 'should return data' do
-    V1::StateRequirements.find(:home_state_id => 'CA', :lang => 'en').should == {
+    V1::StateRequirements.find(:home_state_id => 'CA', :lang => 'en').sort.should == {
       :requires_party     => true,
       :id_number_msg      => nil,
       :requires_party_msg => nil,
       :sos_address        => nil,
       :no_party_msg       => "Decline to State",
       :sos_phone          => nil,
-      :party_list         => [ "Democratic", "Green", "Libertarian", "Republican", "None" ],
+      :party_list         => [ "Democratic", "Green", "Libertarian", "Republican", "Other", "None" ],
       :sos_url            => nil,
       :requires_race      => true,
       :id_length_min      => nil,
       :sub_18_msg         => "if you will turn 18 by the next election",
       :requires_race_msg  => nil,
-      :id_length_max      => nil }
+      :id_length_max      => nil }.sort
   end
 end

@@ -19,8 +19,13 @@ Rocky::Application.routes.draw do
   match  "login",  :to => "partner_sessions#new", :as=>'login'
   match "logout", :to => "partner_sessions#destroy", :as=>'logout'
 
-  resource "partner", :path_names => {:new => "register", :edit => "profile"},
-                          :member => {:statistics => :get, :registrations => :get, :download_csv=>:get, :embed_codes => :get} do |partner|
+  resource "partner", :path_names => {:new => "register", :edit => "profile"} do
+    member do
+      get "statistics"
+      get "registrations"
+      get "download_csv"
+      get "embed_codes"
+    end
     resource "questions",     :only => [:edit, :update]
     resource "widget_image",  :only => [:show, :update]
     resource "logo",          :only => [:show, :update, :destroy]
@@ -33,27 +38,37 @@ Rocky::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      match '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
-      match '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
-      match '/state_requirements.json',  :format => 'json', :controller => 'state_requirements', :action => 'show'
+      resources :registrations, :only=>[:index, :create], :format=>'json'
+      resource :state_requirements, :only=>:show, :format=>'json'
     end
     namespace :v2 do
-      match '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
-      match '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
-      match '/state_requirements.json',  :format => 'json', :controller => 'state_requirements', :action => 'show'
-      match '/partners/partner.json',    :format => 'json', :controller => 'partners', :action => 'show',  :conditions => { :method => :get }
-      match '/partners.json',            :format => 'json', :controller => 'partners', :action => 'create', :conditions => { :method => :post }
-      match '/gregistrationstates.json', :format => 'json', :controller => 'registration_states', :action => 'index'
-      match '/partnerpublicprofiles/partner.json',
-                                       :format => 'json', :controller => 'partners', :action => 'show_public', :conditions => { :method => :get }
-      match '/gregistrations.json',      :format => 'json', :controller => 'registrations', :action => 'index_gpartner', :conditions => { :method => :get }
-      match '/gregistrations.json',      :format => 'json', :controller => 'registrations', :action => 'create_finish_with_state', :conditions => { :method => :post }
+      resources :registrations, :only=>[:index, :create], :format=>'json'
+      resource :state_requirements, :only=>:show, :format=>'json'
+
+      resources :partners, :only=>[:create], :format=>'json' do
+        collection do
+          get "partner", :action=>"show"
+        end
+      end
+      
+      resources :registration_states, :as=>:gregistrationstates, :format=>'json', :only=>'index'      
+      
+      resources :partners, :path=>'partnerpublicprofiles', :only=>[], :format=>'json' do
+        collection do
+          get "partner", :action=>"show_public"
+        end
+      end
+      match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'index_gpartner', :via => :get
+      match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'create_finish_with_state', :via => :post
     end
   end
 
   namespace :admin do
     root :controller => 'partners', :action => 'index'
-    resources :partners, :member => { :regen_api_key => :get } do
+    resources :partners do
+      member do
+        get :regen_api_key
+      end
       resources :assets, :only => [ :index, :create, :destroy ]
     end
     resources :government_partners

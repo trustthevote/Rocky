@@ -72,18 +72,18 @@ module ApplicationHelper
   def field_div(form, field, options={})
     kind = options.delete(:kind) || "text"
     selector = "#{kind}_field"
-    has_error = form.object.errors.on(field) ? "has_error" : nil
-    content_tag(:div, form.send( selector, field, {:size => nil}.merge(options) ), :class => has_error)
+    has_error = !form.object.errors[field].empty? ? "has_error" : nil
+    content_tag(:div, form.send( selector, field, {:size => nil}.merge(options) ).html_safe, :class => has_error).html_safe
   end
 
   def select_div(form, field, contents, options={})
-    has_error = form.object.errors.on(field) ? "has_error" : nil
+    has_error = !form.object.errors[field].empty? ? "has_error" : nil
     content_tag(:div, form.select(field, contents, options), :class => has_error)
   end
 
   def rollover_button(name, text, button_options={})
     button_options[:id] ||= "registrant_submit"
-    <<-HTML
+    html =<<-HTML
       <div class="button">
         <a class="button_#{name}_#{I18n.locale}" href="#">
           <button type="submit" id="#{button_options.delete(:id)}" #{button_options.collect{|k,v| "#{k}=\"#{v}\"" }.join(" ")}>
@@ -92,22 +92,25 @@ module ApplicationHelper
         </a>
       </div>
     HTML
+    html.html_safe
   end
 
   def rollover_image_link(name, text, url, options={})
     optional_attrs = options.inject("") {|s,(k,v)| s << %Q[ #{k}="#{v}"] }
-    <<-HTML
+    html =<<-HTML
       <span class="button">
         <a class="button_#{name}_#{I18n.locale}" href="#{url}"#{optional_attrs}><span>#{text}</span></a>
       </span>
     HTML
+    html.html_safe
   end
 
   def partner_rollover_button(name, text)
-    <<-HTML
+    html =<<-HTML
       <div class="button">
         <a class="button_#{name}" href="#"><button type="submit" id="partner_submit"><span>#{text}</span></button></a>
       </div>
     HTML
+    html.html_safe
   end
 end

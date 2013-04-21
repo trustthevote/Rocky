@@ -44,7 +44,7 @@ describe Admin::AssetsController do
   end
 
   describe 'create' do
-    before  { @file = fixture_file_upload('/files/sample.css') }
+    before  { @file = fixture_files_file_upload('/sample.css') }
     before  { @paf.stub(:update_asset).with('sample.css', @file) }
     before  { post :create, :partner_id => @partner, :asset => { :file => @file } }
     it      { should redirect_to admin_partner_assets_path(@partner) }

@@ -28,7 +28,7 @@ describe MobileConfig do
   before(:each) do
     MobileConfig.redirect_url = nil
     MobileConfig.browsers = nil
-    stub(MobileConfig).config_file_path { File.join(Rails.root,"spec/fixtures/files/mobile.yml") }
+    MobileConfig.stub(:config_file_path) { File.join(Rails.root,"spec/fixtures/files/mobile.yml") }
   end
   describe "#redirect_url" do
     it "returns the value from the config" do
@@ -49,20 +49,20 @@ describe MobileConfig do
   describe "#is_mobile_request?(request)" do
     it "returns true when the request.user_agent matches one of the configured browsers" do
       req = ''
-      stub(req).user_agent { "Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30" }
+      req.stub(:user_agent) { "Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30" }
       MobileConfig.is_mobile_request?(req).should be_true
       
-      stub(req).user_agent { "Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5" }
+      req.stub(:user_agent) { "Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5" }
       MobileConfig.is_mobile_request?(req).should be_true      
     end
     it "returns false when the request.user_agent doesn't match one of the configured browsers" do
       req = ''
-      stub(req).user_agent { "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-HK) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5" }
+      req.stub(:user_agent) { "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-HK) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5" }
       MobileConfig.is_mobile_request?(req).should be_false
       
-      stub(req).user_agent { "" }
+      req.stub(:user_agent) { "" }
       MobileConfig.is_mobile_request?(req).should be_false         
-      stub(req).user_agent { nil }
+      req.stub(:user_agent) { nil }
       MobileConfig.is_mobile_request?(req).should be_false         
     end
   end

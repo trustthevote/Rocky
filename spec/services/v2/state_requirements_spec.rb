@@ -76,10 +76,11 @@ describe V2::StateRequirements do
     it 'if state is not participating' do
       query = { :lang => 'en' }
       state = GeoState.new(:participating => false)
-      locale = mock(StateLocalization.new).not_participating_tooltip { 'not participating' }
+      locale = mock(StateLocalization)
+      locale.stub(:not_participating_tooltip) { 'not participating' }
 
-      mock(V2::StateRequirements).find_state(query) { state }
-      mock(V2::StateRequirements).get_locale(state, 'en') { locale }
+      V2::StateRequirements.stub(:find_state).with(query) { state }
+      V2::StateRequirements.stub(:get_locale).with(state, 'en') { locale }
 
       lambda {
         V2::StateRequirements.find(query)
@@ -95,7 +96,7 @@ describe V2::StateRequirements do
       :sos_address        => nil,
       :no_party_msg       => "Decline to State",
       :sos_phone          => nil,
-      :party_list         => [ "Democratic", "Green", "Libertarian", "Republican", "None" ],
+      :party_list         => [ "Democratic", "Green", "Libertarian", "Republican", "Other", "None" ],
       :sos_url            => nil,
       :requires_race      => true,
       :id_length_min      => nil,

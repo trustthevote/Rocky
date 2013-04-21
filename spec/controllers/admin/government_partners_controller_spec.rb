@@ -53,8 +53,8 @@ describe Admin::GovernmentPartnersController do
     context 'valid data' do
       before(:each) do
         @partner = FactoryGirl.create(:partner)
-        stub(@partner).save { true }
-        stub(Partner).new.with({"name"=>"new_name", "is_government_partner"=>true})  { @partner }
+        @partner.stub(:save) { true }
+        Partner.stub(:new).with({"name"=>"new_name", "is_government_partner"=>true})  { @partner }
       end
       it "redirects to the partner page" do
         post :create, :partner => { :name => 'new_name' }
@@ -65,16 +65,16 @@ describe Admin::GovernmentPartnersController do
         Partner.should have_received(:new).with({"name"=>"new_name", "is_government_partner"=>true})
       end
       it "generates username and password" do
-        stub(@partner).generate_username
-        stub(@partner).generate_random_password
+        @partner.stub(:generate_username)
+        @partner.stub(:generate_random_password)
         post :create, :partner => { :name => 'new_name' }
       end
     end
     context "invalid data" do
       before(:each) do
         @partner = FactoryGirl.create(:partner)
-        stub(@partner).save { false }
-        stub(Partner).new.with({"name"=>"new_name", "is_government_partner"=>true})  { @partner }
+        @partner.stub(:save) { false }
+        Partner.stub(:new).with({"name"=>"new_name", "is_government_partner"=>true})  { @partner }
         post :create, :partner => { :name => 'new_name' }
       end
       
@@ -111,10 +111,10 @@ describe Admin::GovernmentPartnersController do
     end
 
     context 'css updates' do
-      before  { @sample_css = fixture_file_upload('/files/sample.css') }
+      before  { @sample_css = fixture_files_file_upload('/sample.css') }
       before  { @paf = PartnerAssetsFolder.new(nil) }
-      before  { mock(PartnerAssetsFolder).new(@partner) { @paf } }
-      before  { mock(@paf).update_css('application', @sample_css) }
+      before  { PartnerAssetsFolder.stub(:new).with(@partner) { @paf } }
+      before  { @paf.stub(:update_css).with('application', @sample_css) }
       specify { put :update, :id => @partner, :css_files => { 'application' => @sample_css } }
     end
 

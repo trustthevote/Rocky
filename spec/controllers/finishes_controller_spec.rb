@@ -48,7 +48,7 @@ describe FinishesController do
     it "sets default content for message body" do
       get :show, :registrant_id => @registrant.to_param
       assert_match %r(Hey, I just registered to vote), assigns[:registrant].tell_message
-      assert_match Regexp.compile(Regexp.escape(root_url(:source => "email"))), assigns[:registrant].tell_message
+      assert_match Regexp.compile(Regexp.escape(root_path(:source => "email"))), assigns[:registrant].tell_message
     end
 
     it "shows no share links instead has the iframe" do
@@ -74,13 +74,16 @@ describe FinishesController do
     it "sets default content for message body" do
       get :show, :registrant_id => @registrant.to_param
       assert_match %r(Are you registered to vote\? I may not be old enough to vote), assigns[:registrant].tell_message
-      assert_match Regexp.compile(Regexp.escape(root_url(:source => "email"))), assigns[:registrant].tell_message
+      assert_match Regexp.compile(Regexp.escape(root_path(:source => "email"))), assigns[:registrant].tell_message
     end
 
     it "does not show share links" do
       get :show, :registrant_id => @registrant.to_param
-
-      assert_select "h1", "You're on the list!"
+      
+      response.should have_selector("h1") do |headers|
+        headers.should have_content("You're on the list")
+      end
+      #assert_select "h1", "You're on the list!"
       assert_no_share_links "Make sure you register to vote. It's easy!"
     end
   end
@@ -90,7 +93,7 @@ describe FinishesController do
 
     assert_select "a[class=button_share_facebook_en][href=http://www.facebook.com/sharer.php?u=#{FACEBOOK_CALLBACK_URL}&t=#{CGI.escape(share_text)}]"
 
-    escaped = CGI.escape(share_text + " " + root_url)
+    escaped = CGI.escape(share_text + " " + root_path)
     href = "http://twitter.com/home"
     href << "?status=#{escaped}"
     assert_select "a[class=button_share_twitter_en][href=#{href}]"

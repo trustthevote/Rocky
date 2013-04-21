@@ -13,7 +13,7 @@
     <div class="logo">
       <%= image_tag @partner.logo.url(:header) %>
     </div>
-    <% form_for @partner, :url => partner_logo_path, :html => {:method => :delete} do |form| %>
+    <%= form_for @partner, :url => partner_logo_path, :html => {:method => :delete} do |form| %>
     <%= partner_rollover_button("deletelogo", "Delete Logo") %>
     <% end %>
   <% else %>
@@ -33,7 +33,7 @@
       <li><%= Array(@partner.errors[:logo]).first %></li>
     </ul>
   <% end %>
-  <% form_for @partner, :url => partner_logo_path, :html => { :multipart => true } do |form| %>
+  <%= form_for @partner, :url => partner_logo_path, :html => { :multipart => true } do |form| %>
     <%= field_div form, :logo, :kind => "file", :size => 40 %>
     <%= partner_rollover_button("uploadlogo", "Upload Logo") %>
   <% end %>

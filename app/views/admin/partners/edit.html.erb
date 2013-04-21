@@ -3,7 +3,7 @@
   <%= link_to "Back to partner", [ :admin, @partner ] %>
 </div>
 
-<% form_for [ :admin, @partner ], :html => { :multipart => true } do |f| %>
+<%= form_for [ :admin, @partner ], :html => { :multipart => true } do |f| %>
   <%= render :partial=>'admin/shared/partner_general_fields', :locals=>{:f=>f} %>
 
   <%= render :partial=>'admin/shared/partner_whitelabel_fields', :locals=>{:f=>f} %>

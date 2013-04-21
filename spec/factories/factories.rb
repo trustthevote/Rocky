@@ -55,7 +55,7 @@ FactoryGirl.define do
 
   factory :step_3_registrant, :parent => :step_2_registrant do 
     status          "step_3"
-    state_id_number "2345"
+    state_id_number "NONE"
     opt_in_sms      false
   end
 
@@ -99,7 +99,7 @@ FactoryGirl.define do
     mailing_zip_code    "02135"
     party               "Decline to State"
     race                "White (not Hispanic)"
-    state_id_number     "5678"
+    state_id_number     "NONE"
     phone               "123-456-7890"
     phone_type          "Mobile"
     change_of_name      true
@@ -112,7 +112,7 @@ FactoryGirl.define do
     prev_address        "321 Civil Wrongs Way"
     prev_unit           "#9"
     prev_city           "Pittsburgh"
-    prev_state          { GeoState["PA"] }
+    prev_state_id          { GeoState["PA"].id }
     prev_zip_code       "15215"
     opt_in_email        true
     opt_in_sms          true
@@ -149,7 +149,7 @@ FactoryGirl.define do
     phone "123 234 3456"
     address "123 Main St"
     city "Boston"
-    state_id {GeoState["MA"]}
+    state_id { GeoState["MA"].id }
     zip_code "02110"
     widget_image "rtv-234x60-v1.gif"
     survey_question_1_en  "One?"
@@ -168,7 +168,7 @@ FactoryGirl.define do
     url                   { |p| "#{p.username}.example.com" }
     address               "123 Liberty Ave."
     city                  "Pittsburgh"
-    state                 { GeoState['PA'] }
+    state_id                 { GeoState['PA'].id }
     zip_code              "15215"
     phone                 "412-555-1234"
     organization          "Consolidated Amalgamated, Inc."

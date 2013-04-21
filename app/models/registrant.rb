@@ -180,7 +180,7 @@ class Registrant < ActiveRecord::Base
   end
 
   with_options :if => :at_least_step_3? do |reg|
-    reg.validates_presence_of :state_id_number
+    reg.validates_presence_of :state_id_number, :unless=>:complete?
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
@@ -188,7 +188,7 @@ class Registrant < ActiveRecord::Base
   end
   
   with_options :if => [:at_least_step_2?, :use_short_form?] do |reg|
-    reg.validates_presence_of :state_id_number
+    reg.validates_presence_of :state_id_number, :unless=>:complete?
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
@@ -658,7 +658,8 @@ class Registrant < ActiveRecord::Base
       action = Delayed::PerformableMethod.new(self, :complete!, [])
       Delayed::Job.enqueue(action, {:priority=>WRAP_UP_PRIORITY, :run_at=>Time.now})
     else
-      complete!
+      complete
+      save!
     end
   end
 
@@ -667,7 +668,7 @@ class Registrant < ActiveRecord::Base
     generate_pdf
     redact_sensitive_data
     deliver_confirmation_email
-    enqueue_reminder_emails
+    enqueue_reminder_emails    
   end
 
   # Enqueues final registration actions for API calls
@@ -704,6 +705,10 @@ class Registrant < ActiveRecord::Base
       end
     end
     self.pdf_ready = true
+  end
+  
+  def lang
+    locale
   end
   
   def to_finish_with_state_array

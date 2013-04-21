@@ -160,21 +160,21 @@ describe Mergable do
   describe "race" do
     it "should output race" do
       @registrant = FactoryGirl.create(:maximal_registrant)
-      stub(@registrant).requires_race? { true }
+      @registrant.stub(:requires_race?) { true }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  @registrant.race,
                     @doc.css('xfdf fields field[name="race"] value').text
     end
     it "should not output race as decline to state" do
       @registrant = FactoryGirl.create(:maximal_registrant, :race => "Decline to State")
-      stub(@registrant).requires_race? { true }
+      @registrant.stub(:requires_race?) { true }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  "",
                     @doc.css('xfdf fields field[name="race"] value').text
     end
     it "should not output race if it is not required" do
       @registrant = FactoryGirl.create(:maximal_registrant, :race => "Multi-racial")
-      stub(@registrant).requires_race? { false }
+      @registrant.stub(:requires_race?) { false }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  "",
                     @doc.css('xfdf fields field[name="race"] value').text

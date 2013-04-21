@@ -29,7 +29,9 @@ describe Api::V2::RegistrationsController do
   describe 'create' do
     it 'should return URL of PDF to be generated' do
       expect_api_response :pdfurl => "https://example-pdf.com/123.pdf"
-      new_registration { mock(Registrant).pdf_path { '/123.pdf' } }
+      registrant= mock(Registrant)
+      registrant.stub(:pdf_path) { '/123.pdf' }
+      new_registration { registrant  }
     end
 
     it 'should catch invalid fields' do
@@ -90,24 +92,24 @@ describe Api::V2::RegistrationsController do
 
   def registrations(&block)
     query = { :partner_id => nil, :partner_api_key => nil, :since => nil, :email=>nil }
-    mock(V2::RegistrationService).find_records(query, &block)
+    V2::RegistrationService.stub(:find_records).with(query, &block)
     get :index, :format => 'json'
   end
   def gregistrations(&block)
     query = { :gpartner_id => nil, :gpartner_api_key => nil, :since => nil, :email=>nil }
-    mock(V2::RegistrationService).find_records(query, &block)
+    V2::RegistrationService.stub(:find_records).with(query, &block)
     get :index_gpartner, :format => 'json'
   end
 
   def new_registration(&block)
     data = {}
-    mock(V2::RegistrationService).create_record(data, &block)
+    V2::RegistrationService.stub(:create_record).with(data, &block)
     post :create, :format => 'json', :registration => data
   end
 
   def new_finish_with_state_registration(&block)
     data = { 'lang' => 'en', 'partner_id' => Partner.first.id }
-    mock(V2::RegistrationService).create_record(data, true, &block)
+    V2::RegistrationService.stub(:create_record).with(data, true, &block)
     post :create_finish_with_state, :format => 'json', :registration => data
   end
 

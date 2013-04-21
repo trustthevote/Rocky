@@ -29,11 +29,11 @@ describe RegistrantsController do
     render_views
 
     it "generates bootstrap javascript targeted to server host" do
-      stub(request).protocol { "http://" }
-      stub(request).host_with_port { "example.com:3000" }
+      request.stub(:protocol) { "http://" }
+      request.stub(:host_with_port) { "example.com:3000" }
       get :widget_loader, :format => "js"
       assert_response :success
-      assert_template "widget_loader.js.erb"
+      assert_template "widget_loader"
       assert_match %r{createElement}, response.body
     end
   end
@@ -150,6 +150,7 @@ describe RegistrantsController do
     before(:each) do
       @partner = FactoryGirl.create(:partner)
       @reg_attributes = FactoryGirl.attributes_for(:step_1_registrant)
+      @reg_attributes.delete(:status)
     end
 
     it "should create a new registrant and complete step 1" do

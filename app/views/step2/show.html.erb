@@ -2,7 +2,7 @@
 
 <h1><%= t('txt.registration.step_2_header') %></h1>
 
-<% form_for(@registrant, :url => registrant_step_2_path(@registrant)) do |form| %>
+<%= form_for(@registrant, :url => registrant_step_2_path(@registrant)) do |form| %>
   <fieldset>
     <legend><%= I18n.t('txt.registration.name') %><%= tooltip_tag :registrant_name %></legend>
     <ul class="stacked">

@@ -6,7 +6,7 @@
                 :id => 'other_language_link' %>
 <% end %>
 
-<% form_for(@registrant) do |form| %>
+<%= form_for(@registrant) do |form| %>
   <%= render :partial => 'form', :object => form %>
   <%= render :partial => 'overseas' %>
   <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>

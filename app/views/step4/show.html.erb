@@ -1,6 +1,6 @@
 <h1><%= t('txt.registration.step_4_header') %></h1>
 
-<% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
+<%= form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
   <div class="step-4">
     <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
   </div>

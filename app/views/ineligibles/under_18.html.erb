@@ -3,14 +3,14 @@
 <div class="text"><p><%= @registrant.under_18_instructions_for_home_state %></p></div>
 <div class="text"><p><%= t('txt.registration.instructions.under_18_2') %></p></div>
 
-<% form_for(@registrant) do |form| %>
+<%= form_for(@registrant) do |form| %>
   <%= form.hidden_field :under_18_ok, :value => true %>
   <%= rollover_button(:keep_going, I18n.t('txt.button.keep_going')) %>
 <% end %>
 
 <div class="text"><p><%= t('txt.registration.instructions.under_18_3') %></p></div>
 
-<% form_for(@registrant, :url => registrant_ineligible_path(@registrant), :id => "edit_ineligible_registrant") do |form| %>
+<%= form_for(@registrant, :url => registrant_ineligible_path(@registrant), :id => "edit_ineligible_registrant") do |form| %>
   <ul class="checkbox">
     <li>
       <h3>

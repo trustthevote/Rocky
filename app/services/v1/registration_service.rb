@@ -117,7 +117,7 @@ module V1
         raise_validation_error(reg)
       end
 
-      raise UnsupportedLanguageError if reg.errors.on(:locale)
+      raise UnsupportedLanguageError if !reg.errors[:locale].empty?
     end
 
     def self.raise_validation_error(reg, error = reg.errors.sort.first)

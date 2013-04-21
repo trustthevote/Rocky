@@ -14,7 +14,7 @@
 </div>
 
 <div class="profile">
-  <% form_for @partner, :url => partner_path do |form| %>
+  <%= form_for @partner, :url => partner_path do |form| %>
     <%= render :partial => form %>
     <%= partner_rollover_button("signup", "Register") %>
   <% end %>

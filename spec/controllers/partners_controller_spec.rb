@@ -45,7 +45,7 @@ describe PartnersController do
     end
 
     it "requires login, email and password for new partner" do
-      assert_no_difference("Partner.count") do
+      assert_difference("Partner.count"=>0) do
         post :create, :partner => FactoryGirl.attributes_for(:partner, :username => nil)
       end
       assert_template "new"
@@ -58,9 +58,11 @@ describe PartnersController do
     end
 
     it "requires login for partner-only actions" do
-      (PartnersController.public_instance_methods(false) - @no_login_actions).each do |act|
-        get act
-        assert_redirected_to login_url, "did not prevent no-login access to #{act}"
+      PartnersController.public_instance_methods(false).each do |act|
+        if !(act.to_s =~ /^_/) && !@no_login_actions.include?(act.to_s)
+          get act
+          assert_redirected_to login_url, "did not prevent no-login access to #{act}"
+        end
       end
     end
 
@@ -92,7 +94,7 @@ describe PartnersController do
       render_views
 
       before do
-        stub(request).host { "example.com" }
+        request.stub(:host) { "example.com" }
         @partner.update_attributes :widget_image_name => "rtv100x100v1"
         get :embed_codes
         assert_response :success
@@ -160,12 +162,12 @@ describe PartnersController do
 
     describe "GET #registrations" do
       it "triggers a CSV generation" do
-        stub(controller.current_partner).generate_registrants_csv_async
+        controller.current_partner.stub(:generate_registrants_csv_async)
         get :registrations
         controller.current_partner.should have_received(:generate_registrants_csv_async)
       end
       it "redirects to the download_csv action" do
-        stub(controller.current_partner).generate_registrants_csv_async
+        controller.current_partner.stub(:generate_registrants_csv_async)
         get :registrations
         assert_redirected_to download_csv_partner_url
       end      
@@ -173,9 +175,9 @@ describe PartnersController do
     describe "GET #download_csv" do
       context "when csv_ready is true" do
         before(:each) do
-          stub(controller.current_partner).csv_ready { true }
-          stub(controller.current_partner).id { "123" }
-          stub(controller.current_partner).csv_file_name { "fn.csv" }
+          controller.current_partner.stub(:csv_ready) { true }
+          controller.current_partner.stub(:id) { "123" }
+          controller.current_partner.stub(:csv_file_name) { "fn.csv" }
         end
         it "redirects to the CSV url" do
           get :download_csv
@@ -185,7 +187,7 @@ describe PartnersController do
       context "when csv_ready is false" do
         render_views
         before(:each) do
-          stub(controller.current_partner).csv_ready { false }
+          controller.current_partner.stub(:csv_ready) { false }
         end
         it "renders the template with a redirect-to-self and a delay of 10 seconds" do
           get :download_csv

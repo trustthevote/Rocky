@@ -34,10 +34,10 @@ describe Step3Controller do
     end
     it "sets up tooltip, party and question variables" do
       reg = FactoryGirl.create(:step_2_registrant)
-      stub(reg).state_parties { true } 
-      stub(reg).race_tooltip { true } 
-      stub(reg).party_tooltip { true } 
-      stub(Registrant).find_by_param! { reg }
+      reg.stub(:state_parties) { true } 
+      reg.stub(:race_tooltip) { true } 
+      reg.stub(:party_tooltip) { true } 
+      Registrant.stub(:find_by_param!) { reg }
       get :show, :registrant_id => reg.to_param
       assert assigns[:state_parties]
       assert assigns[:race_tooltip]
@@ -54,14 +54,14 @@ describe Step3Controller do
     end
 
     it "should update registrant and complete step 3" do
-      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant)
+      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant).reject {|k,v| k == :status }
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].step_3?
       assert_redirected_to registrant_step_4_url(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do
-      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant, :state_id_number => nil)
+      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant, :state_id_number => nil).reject {|k,v| k == :status }
       assert assigns[:registrant].step_3?
       assert assigns[:registrant].reload.step_2?
       assert_template "show"
@@ -69,12 +69,12 @@ describe Step3Controller do
 
     it "should notice disabled javascript and override has_mailing_address" do
       put :update, :registrant_id => @registrant.to_param,
-                   :registrant => FactoryGirl.attributes_for(:step_3_registrant, :prev_address => "submitted", :change_of_address => "0"),
+                   :registrant => FactoryGirl.attributes_for(:step_3_registrant, :prev_address => "submitted", :change_of_address => "0").reject {|k,v| k == :status },
                    :javascript_disabled => "1"
       assert assigns[:registrant].invalid?
       assert_template "show"
       put :update, :registrant_id => @registrant.to_param,
-                   :registrant => FactoryGirl.attributes_for(:step_3_registrant, :prev_first_name => "submitted", :change_of_name => "0"),
+                   :registrant => FactoryGirl.attributes_for(:step_3_registrant, :prev_first_name => "submitted", :change_of_name => "0").reject {|k,v| k == :status },
                    :javascript_disabled => "1"
       assert assigns[:registrant].invalid?
       assert_template "show"
@@ -83,9 +83,9 @@ describe Step3Controller do
     
     context "for a WA state registrant" do
       it "skips step 4" do
-        stub(@registrant).custom_step_2? { true }
-        stub(Registrant).find_by_param! { @registrant }
-        put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant)
+        @registrant.stub(:custom_step_2?) { true }
+        Registrant.stub(:find_by_param!) { @registrant }
+        put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant).reject {|k,v| k == :status }
         assert_not_nil assigns[:registrant]
         assert assigns[:registrant].step_4?
         assert_redirected_to registrant_step_5_url(assigns[:registrant])
