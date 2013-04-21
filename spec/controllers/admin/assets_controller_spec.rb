@@ -28,24 +28,24 @@ describe Admin::AssetsController do
 
   before { @paf = stub }
   before { @partner = FactoryGirl.create(:partner) }
-  before { stub(controller).assets_folder { @paf } }
+  before { controller.stub(:assets_folder) { @paf } }
 
   describe 'index' do
-    before  { mock(@paf).list_assets { [] } }
+    before  { @paf.stub(:list_assets) { [] } }
     before  { get :index, :partner_id => @partner }
     specify { assigns(:assets).should be }
     it      { should render_template :index }
   end
 
   describe 'destroy' do
-    before  { mock(@paf).delete_asset('application.css') }
+    before  { @paf.stub(:delete_asset).with('application.css') }
     before  { delete :destroy, :partner_id => @partner, :id => 0, :name => 'application.css' }
     it      { should redirect_to admin_partner_assets_path(@partner) }
   end
 
   describe 'create' do
     before  { @file = fixture_file_upload('/files/sample.css') }
-    before  { mock(@paf).update_asset('sample.css', @file) }
+    before  { @paf.stub(:update_asset).with('sample.css', @file) }
     before  { post :create, :partner_id => @partner, :asset => { :file => @file } }
     it      { should redirect_to admin_partner_assets_path(@partner) }
   end

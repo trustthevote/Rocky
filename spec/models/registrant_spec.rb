@@ -24,9 +24,8 @@
 #***** END LICENSE BLOCK *****
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-include ActionView::Helpers::UrlHelper
-
 describe Registrant do
+  include Rails.application.routes.url_helpers
   
   describe "default opt-in flags" do
     it "should be false for new records" do
@@ -43,15 +42,15 @@ describe Registrant do
   describe "rtv_and_partner_name" do
     it "returns Rock the Vote when there's no partner" do
       r = Registrant.new
-      stub(r).partner { nil }
+      r.stub(:partner) { nil }
       r.rtv_and_partner_name.should == "Rock the Vote"
-      stub(r.partner).primary? { true }
+      r.partner.stub(:primary?) { true }
       r.rtv_and_partner_name.should == "Rock the Vote"
     end
     it "returns both names when there is a partner" do
       r = Registrant.new
       p = FactoryGirl.create(:partner)
-      stub(r).partner { p }
+      r.stub(:partner) { p }
       r.rtv_and_partner_name.should == "Rock the Vote and #{p.organization}"
     end
   end
@@ -69,7 +68,7 @@ describe Registrant do
       p1 = FactoryGirl.create(:partner, :whitelabeled=>false, :finish_iframe_url=>"https://www.google.com")
       p2 = FactoryGirl.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"")
       p3 = FactoryGirl.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"https://www.google.com")
-      stub(p3).primary? { true }
+      p3.stub(:primary?) { true }
       p4 = FactoryGirl.create(:partner, :whitelabeled=>true, :finish_iframe_url=>"https://www.google.com")
 
       r1 = FactoryGirl.create(:step_5_registrant, :partner=>p1)
@@ -91,10 +90,10 @@ describe Registrant do
       @p = Partner.new
       @p.whitelabeled = true
       @p.from_email = "custom-from@rtv.org"
-      stub(@p).primary? { false }
+      @p.stub(:primary?) { false }
     end
     it "returns FROM_ADDRESS when partner is primary" do
-      stub(@p).primary? { true }
+      @p.stub(:primary?) { true }
       r = Registrant.new(:partner=>@p)
       r.email_address_to_send_from.should == FROM_ADDRESS
     end
@@ -208,8 +207,9 @@ describe Registrant do
   describe "any step" do
     it "blanks party unless requires party" do
       reg = FactoryGirl.build(:maximal_registrant)
-      stub(reg).requires_party? { false }
-      assert reg.valid?, reg.errors.full_messages
+      reg.stub(:requires_party?) { false }
+      assert reg.valid?
+      assert reg.errors.full_messages
       assert_nil reg.party
     end
         
@@ -234,15 +234,15 @@ describe Registrant do
 
       reg.date_of_birth = "2/30/1978"
       assert reg.invalid?
-      assert reg.errors.on(:date_of_birth)
+      assert !reg.errors[:date_of_birth].empty?
       assert_equal "2/30/1978", reg.date_of_birth_before_type_cast
       reg.date_of_birth = "5-3-78"
       assert reg.invalid?
-      assert reg.errors.on(:date_of_birth)
+      assert !reg.errors[:date_of_birth].empty?
       assert_equal "5-3-78", reg.date_of_birth_before_type_cast
       reg.date_of_birth = "May 3, 1978"
       assert reg.invalid?
-      assert reg.errors.on(:date_of_birth)
+      assert !reg.errors[:date_of_birth].empty?
       assert_equal "May 3, 1978", reg.date_of_birth_before_type_cast
     end
   end
@@ -262,14 +262,14 @@ describe Registrant do
       reg = FactoryGirl.build(:step_1_registrant, :home_zip_code => nil)
       reg.invalid?
 
-      assert_equal ["Required"], [reg.errors.on(:home_zip_code)].flatten
+      assert_equal ["Required"], [reg.errors[:home_zip_code]].flatten
     end
 
     it "should check format of home_zip_code" do
       reg = FactoryGirl.build(:step_1_registrant, :home_zip_code => 'ABCDE')
       reg.invalid?
 
-      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:home_zip_code)].flatten
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors[:home_zip_code]].flatten
     end
 
     it "should not require contact information" do
@@ -357,19 +357,20 @@ describe Registrant do
       reg = FactoryGirl.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => 'ABCDE')
       reg.invalid?
 
-      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:mailing_zip_code)].flatten
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors[:mailing_zip_code]].flatten
     end
 
     it "should limit number of simultaneous errors on mailing_zip_code" do
       reg = FactoryGirl.build(:step_2_registrant, :has_mailing_address => true, :mailing_zip_code => nil)
       reg.invalid?
 
-      assert_equal ["Required"], [reg.errors.on(:mailing_zip_code)].flatten
+      assert_equal ["Required"], [reg.errors[:mailing_zip_code]].flatten
     end
 
     it "blanks mailing address fields unless has_mailing_address" do
       reg = FactoryGirl.build(:maximal_registrant, :has_mailing_address => false)
-      assert reg.valid?, reg.errors.full_messages
+      assert reg.valid?
+      assert reg.errors.full_messages
       assert_nil reg.mailing_address
       assert_nil reg.mailing_unit
       assert_nil reg.mailing_city
@@ -379,68 +380,69 @@ describe Registrant do
 
     it "should require race but only for certain states" do
       reg = FactoryGirl.build(:step_2_registrant, :race => nil)
-      stub(reg).requires_race? {true}
+      reg.stub(:requires_race?) {true}
       assert reg.invalid?
-      assert reg.errors.on(:race)
+      assert reg.errors[:race]
     end
 
     it "should not require race for some states" do
       reg = FactoryGirl.build(:step_2_registrant, :race => nil)
-      stub(reg).requires_race? {false}
+      reg.stub(:requires_race?) {false}
       assert reg.valid?
     end
     
     it "party included in validations when required by state" do
       reg = FactoryGirl.build(:step_2_registrant, :party => "bogus")
-      stub(reg).requires_party? { true }
-      stub(reg).state_parties { %w[Democratic Republican] }
+      reg.stub(:requires_party?) { true }
+      reg.stub(:state_parties) { %w[Democratic Republican] }
       assert reg.invalid?
-      assert reg.errors.on(:party)
+      assert reg.errors[:party]
     end
 
     it "party not included in validations when not required by state" do
       reg = FactoryGirl.build(:step_2_registrant, :party => nil)
-      stub(reg).requires_party? { false }
+      reg.stub(:requires_party?) { false }
       assert reg.valid?
     end
     
     context "with a custom step 2" do
       before(:each) do
         @reg = FactoryGirl.build(:step_2_registrant, :home_address=>nil)
-        stub(@reg).custom_step_2? { true }        
+        @reg.stub(:custom_step_2?) { true }        
       end
       it "does not require home_address" do
         @reg.home_address = nil
         @reg.invalid?
-        assert @reg.errors.on(:home_address).nil?
+        assert @reg.errors[:home_address].empty?
       end
       it "does not require home_city" do
         @reg.home_city = nil
         @reg.invalid?
-        assert @reg.errors.on(:home_city).nil?
+        assert @reg.errors[:home_city].empty?
       end
     
       it "should require has_state_license" do
         reg = FactoryGirl.build(:step_2_registrant, :has_state_license=>nil)
-        stub(reg).custom_step_2? { true }
+        reg.stub(:custom_step_2?) { true }
         reg.invalid?
-        assert reg.errors.on(:has_state_license)
+        assert reg.errors[:has_state_license]
       end
       it "should format phone as ###-###-####" do
         reg = FactoryGirl.build(:step_2_registrant, :phone => "1234567890", :phone_type => "mobile")
-        stub(reg).custom_step_2? { true }
+        reg.stub(:custom_step_2?) { true }
         assert reg.valid?
         assert_equal "123-456-7890", reg.phone
       end
       it "should require a valid phone number" do
         reg = FactoryGirl.build(:step_2_registrant, :phone_type => "Mobile")
-        stub(reg).custom_step_2? { true }
+        reg.stub(:custom_step_2?) { true }
         
         reg.phone = "1234567890"
         assert reg.valid?
 
         reg.phone = "123-456-7890"
-        assert reg.valid?, reg.errors.full_messages
+        assert reg.valid?
+        assert reg.errors.full_messages
 
         reg.phone = "(123) 456 7890x123"
         assert reg.valid?
@@ -457,45 +459,45 @@ describe Registrant do
       
       it "validates phone is present if rtv mobile opt-in is true" do
         reg = FactoryGirl.build(:step_2_registrant, :phone_type => "Mobile")
-        stub(reg).custom_step_2? { true }
+        reg.stub(:custom_step_2?) { true }
         reg.phone = ''
         
         reg.opt_in_sms = true
         reg.valid?.should be_false
-        assert reg.errors.on(:phone)
+        assert reg.errors[:phone]
       end
 
       it "validates phone is present if partner mobile opt-in is true" do
         reg = FactoryGirl.build(:step_2_registrant, :phone_type => "Mobile")
-        stub(reg).custom_step_2? { true }
+        reg.stub(:custom_step_2?) { true }
         reg.phone = ''
 
         reg.partner_opt_in_sms = true
         reg.valid?.should be_false
-        assert reg.errors.on(:phone)
+        assert reg.errors[:phone]
       end
       
 
       it "does not require party when state has custom step 2" do
         @reg.party=nil
-        stub(@reg).requires_party? {true}
+        @reg.stub(:requires_party?) {true}
         assert @reg.valid?
-        assert @reg.errors.on(:party).nil?
+        assert @reg.errors[:party].empty?
       end
       
       it "should not require race for any state" do
         @reg.race = nil
-        stub(@reg).requires_race? {true}
+        @reg.stub(:requires_race?) {true}
         #assert @reg.valid?
         @reg.invalid?
-        assert @reg.errors.on(:race).nil?
+        assert @reg.errors[:race].empty?
       end
     end
     
     context "with a short form" do
       before(:each) do
         @reg = FactoryGirl.build(:step_2_registrant, :state_id_number=>"1234", :opt_in_sms=>false)
-        stub(@reg).use_short_form? { true }        
+        @reg.stub(:use_short_form?) { true }        
       end
       it "should format phone as ###-###-####" do
         @reg.phone = "1234567890"
@@ -510,7 +512,8 @@ describe Registrant do
         assert @reg.valid?
 
         @reg.phone = "123-456-7890"
-        assert @reg.valid?, @reg.errors.full_messages
+        assert @reg.valid?
+        assert @reg.errors.full_messages
 
         @reg.phone = "(123) 456 7890x123"
         assert @reg.valid?
@@ -531,7 +534,7 @@ describe Registrant do
         
         @reg.opt_in_sms = true
         @reg.valid?.should be_false
-        assert @reg.errors.on(:phone)
+        assert @reg.errors[:phone]
       end
 
       it "validates phone is present if partner mobile opt-in is true" do
@@ -540,7 +543,7 @@ describe Registrant do
 
         @reg.partner_opt_in_sms = true
         @reg.valid?.should be_false
-        assert @reg.errors.on(:phone)
+        assert @reg.errors[:phone]
       end
       it "should require valid state id" do
         assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => nil)
@@ -588,14 +591,14 @@ describe Registrant do
         reg = FactoryGirl.build(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => 'ABCDE')
         reg.invalid?
 
-        assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:prev_zip_code)].flatten
+        assert_equal ["Use ZIP or ZIP+4"], [reg.errors[:prev_zip_code]].flatten
       end
 
       it "should limit number of simultaneous errors on prev_zip_code" do
         reg = FactoryGirl.build(:step_2_registrant, :short_form=>true, :change_of_address => true, :prev_zip_code => nil)
         reg.invalid?
 
-        assert_equal ["Required"], [reg.errors.on(:prev_zip_code)].flatten
+        assert_equal ["Required"], [reg.errors[:prev_zip_code]].flatten
       end
 
 
@@ -607,8 +610,8 @@ describe Registrant do
 
     it "generates barcode when entering Step 2" do
       reg = FactoryGirl.create(:step_1_registrant)
-      stub(reg).valid? { true }
-      stub(reg).pdf_barcode { "*RTV-00ROFL*" }
+      reg.stub(:valid?) { true }
+      reg.stub(:pdf_barcode) { "*RTV-00ROFL*" }
       reg.advance_to_step_2
       assert_equal "*RTV-00ROFL*", reg.barcode
     end
@@ -619,12 +622,12 @@ describe Registrant do
     context "when registrant uses a custom step 2" do
       before(:each) do
         @reg =  FactoryGirl.create(:step_3_registrant) 
-        stub(@reg).custom_step_2? { true }
+        @reg.stub(:custom_step_2?) { true }
       end
       it "should require home address" do
         @reg.home_address=nil
         assert @reg.invalid?
-        assert @reg.errors.on(:home_address)
+        assert @reg.errors[:home_address]
       end
       it "should require home city" do
         @reg.home_city=nil
@@ -634,31 +637,31 @@ describe Registrant do
       
       it "should require race but only for certain states" do
         reg = FactoryGirl.build(:step_3_registrant, :race => nil)
-        stub(reg).custom_step_2? { true }
-        stub(reg).requires_race? {true}
+        reg.stub(:custom_step_2?) { true }
+        reg.stub(:requires_race?) {true}
         assert reg.invalid?
-        assert reg.errors.on(:race)
+        assert reg.errors[:race]
       end
 
       it "should not require race for some states" do
         reg = FactoryGirl.build(:step_3_registrant, :race => nil)
-        stub(reg).requires_race? {false}
-        stub(reg).custom_step_2? { true }
+        reg.stub(:requires_race?) {false}
+        reg.stub(:custom_step_2?) { true }
         assert reg.valid?
       end
 
       it "party included in validations when required by state" do
         reg = FactoryGirl.build(:step_3_registrant, :party => "bogus")
-        stub(reg).requires_party? { true }
-        stub(reg).custom_step_2? { true }
-        stub(reg).state_parties { %w[Democratic Republican] }
+        reg.stub(:requires_party?) { true }
+        reg.stub(:custom_step_2?) { true }
+        reg.stub(:state_parties) { %w[Democratic Republican] }
         assert reg.invalid?
-        assert reg.errors.on(:party)
+        assert reg.errors[:party]
       end
 
       it "party not included in validations when not required by state" do
         reg = FactoryGirl.build(:step_3_registrant, :party => nil)
-        stub(reg).requires_party? { false }
+        reg.stub(:requires_party?) { false }
         assert reg.valid?
       end
       
@@ -718,14 +721,14 @@ describe Registrant do
       reg = FactoryGirl.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => 'ABCDE')
       reg.invalid?
 
-      assert_equal ["Use ZIP or ZIP+4"], [reg.errors.on(:prev_zip_code)].flatten
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors[:prev_zip_code]].flatten
     end
 
     it "should limit number of simultaneous errors on prev_zip_code" do
       reg = FactoryGirl.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
       reg.invalid?
 
-      assert_equal ["Required"], [reg.errors.on(:prev_zip_code)].flatten
+      assert_equal ["Required"], [reg.errors[:prev_zip_code]].flatten
     end
 
     it "blanks previous name fields unless change_of_name" do
@@ -759,7 +762,8 @@ describe Registrant do
       assert reg.valid?
 
       reg.phone = "123-456-7890"
-      assert reg.valid?, reg.errors.full_messages
+      assert reg.valid?
+      assert reg.errors.full_messages
 
       reg.phone = "(123) 456 7890x123"
       assert reg.valid?
@@ -779,7 +783,7 @@ describe Registrant do
       
       reg.opt_in_sms = true
       reg.valid?.should be_false
-      assert reg.errors.on(:phone)
+      assert reg.errors[:phone]
     end
 
     it "validates phone is present if partner mobile opt-in is true" do
@@ -787,7 +791,7 @@ describe Registrant do
 
       reg.partner_opt_in_sms = true
       reg.valid?.should be_false
-      assert reg.errors.on(:phone)
+      assert reg.errors[:phone]
     end
     
     
@@ -890,22 +894,22 @@ describe Registrant do
   describe "custom_step_2?" do
     it "returns true if the state has a custom step 2" do
       reg = FactoryGirl.build(:step_1_registrant)
-      stub(File).exists?(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
-      stub(GeoState).states_with_online_registration { ["PA"] }
+      File.stub(:exists?).with(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
+      GeoState.stub(:states_with_online_registration) { ["PA"] }
       reg.custom_step_2?.should be_true
     end
     it "returns false if javascript is disabled" do
-      stub(File).exists?(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
+      File.stub(:exists?).with(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
       reg = FactoryGirl.build(:step_1_registrant, :javascript_disabled=>true)
       reg.custom_step_2?.should be_false
     end
     it "returns false if the state has a custom step 2" do
-      stub(File).exists?(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { false }
+      File.stub(:exists?).with(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { false }
       reg = FactoryGirl.build(:step_1_registrant)
       reg.custom_step_2?.should be_false
     end    
     it "returns false if the state is missing" do
-      stub(File).exists?(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
+      File.stub(:exists?).with(File.join(Rails.root,'app/views/step2/_pa.html.erb')) { true }
       reg = FactoryGirl.build(:step_1_registrant)
       reg.home_state = nil
       reg.custom_step_2?.should be_false
@@ -921,7 +925,7 @@ describe Registrant do
   describe "has_home_state_online_registration_instructions?" do
     it "returns true if the state has a partial based on the state abbreviation" do
       reg = FactoryGirl.build(:step_1_registrant)
-      stub(File).exists?(File.join(Rails.root,'app/views/state_online_registrations/_pa_instructions.html.erb')) { true }
+      File.stub(:exists?).with(File.join(Rails.root,'app/views/state_online_registrations/_pa_instructions.html.erb')) { true }
       reg.has_home_state_online_registration_instructions?.should be_true
     end    
   end
@@ -936,7 +940,7 @@ describe Registrant do
   describe "has_home_state_online_registration_view?" do
     it "returns true if the state has a partial based on the state abbreviation" do
       reg = FactoryGirl.build(:step_1_registrant)
-      stub(File).exists?(File.join(Rails.root,'app/views/state_online_registrations/pa.html.erb')) { true }
+      File.stub(:exists?).with(File.join(Rails.root,'app/views/state_online_registrations/pa.html.erb')) { true }
       reg.has_home_state_online_registration_view?.should be_true
     end    
   end
@@ -954,12 +958,12 @@ describe Registrant do
     end
     it "returns false if short_form is true and custom_step_2 is true" do
       r = Registrant.new(:short_form=>true)
-      stub(r).custom_step_2? { true }
+      r.stub(:custom_step_2?) { true }
       r.use_short_form?.should be_false
     end
     it "return true if short_form is true and custom_step_2 is false" do
       r = Registrant.new(:short_form=>true)
-      stub(r).custom_step_2? { false }
+      r.stub(:custom_step_2?) { false }
       r.use_short_form?.should be_true
     end
   end
@@ -1000,8 +1004,8 @@ describe Registrant do
 
     it "gets no parties when no locale" do
       reg = FactoryGirl.build(:step_2_registrant)
-      stub(reg).requires_party? { true }
-      stub(reg).localization { nil }
+      reg.stub(:requires_party?) { true }
+      reg.stub(:localization) { nil }
       reg.state_parties.should == []
     end
 
@@ -1144,7 +1148,7 @@ describe Registrant do
     describe "merge" do
       before(:each) do
         @registrant = FactoryGirl.create(:maximal_registrant)
-        stub(@registrant).merge_pdf { `touch #{@registrant.pdf_file_path}` }
+        @registrant.stub(:merge_pdf) { `touch #{@registrant.pdf_file_path}` }
       end
 
       it "generates PDF with merged data" do
@@ -1156,7 +1160,7 @@ describe Registrant do
 
       it "returns PDF if already exists" do
         `touch #{@registrant.pdf_file_path}`
-        assert_no_difference(%Q{Dir[File.join(Rails.root, "pdf/#{@registrant.bucket_code}/*")].length}) do
+        assert_difference(%Q{Dir[File.join(Rails.root, "pdf/#{@registrant.bucket_code}/*")].length} => 0) do
           @registrant.generate_pdf
         end
       end
@@ -1251,7 +1255,7 @@ describe Registrant do
                      "10 Main St",
                      "Box 5",
                      "Adams",
-                     "AL",
+                     "MA",
                      "02135",
                      "Democratic",
                      "White (not Hispanic)",
@@ -1303,7 +1307,7 @@ describe Registrant do
                      "10 Main St",
                      "Box 5",
                      "Adams",
-                     "AL",
+                     "MA",
                      "02135",
                      "Democratic",
                      "White (not Hispanic)",
@@ -1343,25 +1347,25 @@ describe Registrant do
   describe "wrapping up" do
     it "should transition to complete state" do
       reg = FactoryGirl.create(:step_5_registrant)
-      mock(reg).complete_registration
+      reg.stub(:complete_registration)
       reg.wrap_up
       assert reg.reload.complete?
     end
 
     it "clears out sensitive data" do
       reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-      stub(reg).generate_pdf                  # avoid messy out-of-band action in tests
-      stub(reg).deliver_confirmation_email    # avoid messy out-of-band action in tests
-      stub(reg).enqueue_reminder_emails       # avoid messy out-of-band action in tests
+      reg.stub(:generate_pdf)                  # avoid messy out-of-band action in tests
+      reg.stub(:deliver_confirmation_email)    # avoid messy out-of-band action in tests
+      reg.stub(:enqueue_reminder_emails)       # avoid messy out-of-band action in tests
       reg.complete_registration
       assert_nil reg.state_id_number
     end
 
     it "sets system locale using registrant's locale" do
       reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-      stub(reg).generate_pdf                  # avoid messy out-of-band action in tests
-      stub(reg).deliver_confirmation_email    # avoid messy out-of-band action in tests
-      stub(reg).enqueue_reminder_emails       # avoid messy out-of-band action in tests
+      reg.stub(:generate_pdf)                  # avoid messy out-of-band action in tests
+      reg.stub(:deliver_confirmation_email)    # avoid messy out-of-band action in tests
+      reg.stub(:enqueue_reminder_emails)       # avoid messy out-of-band action in tests
 
       reg.locale = 'en'
       reg.complete_registration
@@ -1384,7 +1388,7 @@ describe Registrant do
 
         it "should delay processing" do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-          dont_allow(reg).complete!
+          reg.should_not_receive(:complete!)
           reg.wrap_up
           assert_match /#{reg.id}.*complete!/m, Delayed::Job.last.handler
         end
@@ -1410,7 +1414,7 @@ describe Registrant do
 
         it "should run immediately" do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-          mock(reg).generate_pdf
+          reg.stub(:generate_pdf)
           reg.wrap_up
           assert_match /#{reg.id}.*deliver_reminder_email/m, Delayed::Job.last.handler
         end
@@ -1452,7 +1456,7 @@ describe Registrant do
       end
 
       it "should not send an email if no reminders left" do
-        assert_no_difference('ActionMailer::Base.deliveries.size') do
+        assert_difference('ActionMailer::Base.deliveries.size'=>0) do
           reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 0)
           reg.deliver_reminder_email
         end
@@ -1472,7 +1476,7 @@ describe Registrant do
       end
 
       it "should not enqueue another reminder email if on last email" do
-        assert_no_difference('Delayed::Job.count') do
+        assert_difference('Delayed::Job.count'=>0) do
           reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
           reg.deliver_reminder_email
         end
@@ -1480,11 +1484,10 @@ describe Registrant do
 
       it "should log an error to HopToad if something blows up" do
         reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
-        stub(reg).valid? { false }
+        reg.stub(:valid?) { false }
 
-        stub(HoptoadNotifier).notify
+        HoptoadNotifier.should_receive(:notify).with(kind_of(Hash))
         reg.deliver_reminder_email
-        HoptoadNotifier.should have_received.notify(is_a(Hash))
       end
     end
   end
@@ -1604,7 +1607,7 @@ describe Registrant do
   def assert_attribute_invalid_with(model, attributes)
     reg = FactoryGirl.build(model, attributes)
     reg.invalid?
-    assert attributes.keys.any? { |attr_name| reg.errors.on(attr_name) }
+    assert attributes.keys.any? { |attr_name| reg.errors[attr_name] }
   end
 
   def assert_attribute_valid_with(model, attributes)

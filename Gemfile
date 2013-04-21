@@ -24,7 +24,7 @@ group :development, :test do
   
   gem "cucumber-rails", "1.1.0", :require=>false
   gem "capybara-webkit", "~> 0.7.1"
-  gem "webrat", "= 0.4.4"
+  gem "webrat"
   gem "factory_girl_rails", :require=>false
   
   

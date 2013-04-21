@@ -29,7 +29,7 @@ describe Registrant do
 
     it 'should not require a party' do
       r = Registrant.build_from_api_data({})
-      stub(r).requires_party? { true }
+      r.stub(:requires_party?) { true }
       r.valid?
 
       r.should have(0).errors_on(:party)
@@ -42,8 +42,8 @@ describe Registrant do
     
     it 'should not require has_state_license' do
       r = Registrant.build_from_api_data(:has_state_license=>nil)
-      stub(r).at_least_step_2? { true }
-      stub(r).custom_step_2? { true }
+      r.stub(:at_least_step_2?) { true }
+      r.stub(:custom_step_2?) { true }
       r.valid?
       r.should have(0).errors_on(:has_state_license)
     end
@@ -74,9 +74,9 @@ describe Registrant do
     it "should queue up complete_registration_via_api" do
       reg = Registrant.new
 
-      mock(Time).now {"now"}
-      mock(Delayed::PerformableMethod).new(reg,:complete_registration_via_api,[]) { "Action" }
-      mock(Delayed::Job).enqueue("Action", Registrant::WRAP_UP_PRIORITY, "now")
+      Time.stub(:now) {"now"}
+      Delayed::PerformableMethod.stub(:new).with(reg,:complete_registration_via_api,[]) { "Action" }
+      Delayed::Job.stub(:enqueue).with("Action", {:priority=>Registrant::WRAP_UP_PRIORITY, :run_at=>"now"})
       
       reg.enqueue_complete_registration_via_api
     end
@@ -86,11 +86,11 @@ describe Registrant do
     context "when send_confirmation_reminder_emails is true" do
       it "generates pdf, redacts sensitif data, sets the status to complete, deliver_confirmation_email, enqueue_reminder_emails and saves" do
         reg = Registrant.new(:send_confirmation_reminder_emails=>true)
-        mock(reg).generate_pdf
-        mock(reg).redact_sensitive_data
-        mock(reg).deliver_confirmation_email
-        mock(reg).enqueue_reminder_emails
-        mock(reg).save
+        reg.stub(:generate_pdf)
+        reg.stub(:redact_sensitive_data)
+        reg.stub(:deliver_confirmation_email)
+        reg.stub(:enqueue_reminder_emails)
+        reg.stub(:save)
         
         
         reg.complete_registration_via_api
@@ -105,9 +105,9 @@ describe Registrant do
     context "when send_confirmation_reminder_emails is false" do
       it "generates pdf, redacts sensitif data, sets the status to complete and saves" do
         reg = Registrant.new(:send_confirmation_reminder_emails=>false)
-        mock(reg).generate_pdf
-        mock(reg).redact_sensitive_data
-        mock(reg).save
+        reg.stub(:generate_pdf)
+        reg.stub(:redact_sensitive_data)
+        reg.stub(:save)
         
         reg.complete_registration_via_api
         

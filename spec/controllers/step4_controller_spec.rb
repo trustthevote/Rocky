@@ -43,7 +43,7 @@ describe Step4Controller do
       get :show, :registrant_id => reg.to_param
       assert_equal "In English?", assigns[:question_1]
       reg.locale = "es"
-      reg.save(false)
+      reg.save(:validate=>false)
       get :show, :registrant_id => reg.to_param
       assert_equal "En Espanol?", assigns[:question_1]
     end

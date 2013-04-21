@@ -34,7 +34,8 @@ class Registrant < ActiveRecord::Base
   include AASM
   include Mergable
   include Lolrus
-  include ActionView::Helpers::UrlHelper
+  include Rails.application.routes.url_helpers
+  
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
   # TODO: add :es to get full set for validation
@@ -140,7 +141,6 @@ class Registrant < ActiveRecord::Base
 
   before_save :set_questions
 
-
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of   :partner_id
     reg.validates_inclusion_of  :locale, :in => %w(en es)
@@ -158,17 +158,18 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of   :first_name, :unless => :building_via_api_call
     reg.validates_presence_of   :last_name
     reg.validates_inclusion_of  :name_suffix, :in => SUFFIXES, :allow_blank => true
-    reg.validate                :validate_race,   :unless => [ :finish_with_state?, :custom_step_2? ]
+    reg.validate                :validate_race_at_least_step_2,   :unless => [ :finish_with_state?, :custom_step_2? ]
     reg.validates_presence_of   :home_address,    :unless => [ :finish_with_state?, :custom_step_2? ]
     reg.validates_presence_of   :home_city,       :unless => [ :finish_with_state?, :custom_step_2? ]
-    reg.validate                :validate_party,  :unless => [ :building_via_api_call, :custom_step_2? ]
+    reg.validate                :validate_party_at_least_step_2,  :unless => [ :building_via_api_call, :custom_step_2? ]
   end
+  
 
   with_options :if=> [:at_least_step_2?, :custom_step_2?] do |reg|
     reg.validates_inclusion_of :has_state_license, :in=>[true,false], :unless=>[:building_via_api_call]
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
-    reg.validate :validate_phone_present_if_opt_in_sms
+    reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_2
   end
 
   with_options :if => :needs_mailing_address? do |reg|
@@ -183,7 +184,7 @@ class Registrant < ActiveRecord::Base
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
-    reg.validate :validate_phone_present_if_opt_in_sms
+    reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_3
   end
   
   with_options :if => [:at_least_step_2?, :use_short_form?] do |reg|
@@ -191,14 +192,14 @@ class Registrant < ActiveRecord::Base
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
-    reg.validate :validate_phone_present_if_opt_in_sms
+    reg.validate :validate_phone_present_if_opt_in_sms_use_short_form
   end
 
   with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
-    reg.validate :validate_race
-    reg.validate :validate_party, :unless => [:building_via_api_call]
+    reg.validate :validate_race_at_least_step_3
+    reg.validate :validate_party_at_least_step_3, :unless => [:building_via_api_call]
   end
 
   with_options :if => :needs_prev_name? do |reg|
@@ -381,10 +382,38 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def validate_phone_present_if_opt_in_sms_at_least_step_2
+    validate_phone_present_if_opt_in_sms
+  end
+  def validate_phone_present_if_opt_in_sms_at_least_step_3
+    validate_phone_present_if_opt_in_sms
+  end
+  def validate_phone_present_if_opt_in_sms_use_short_form
+    validate_phone_present_if_opt_in_sms
+  end
+
   def validate_phone_present_if_opt_in_sms
     if (self.opt_in_sms? || self.partner_opt_in_sms?) && phone.blank?
       errors.add(:phone, :required_if_opt_in)
     end
+  end
+
+  def date_of_birth=(string_value)
+    dob = nil
+    if string_value.is_a?(String)
+      if matches = string_value.match(/^(\d{1,2})\D+(\d{1,2})\D+(\d{4})$/)
+        m,d,y = matches.captures
+        dob = Date.civil(y.to_i, m.to_i, d.to_i) rescue string_value
+      elsif matches = string_value.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})$/)
+        y,m,d = matches.captures
+        dob = Date.civil(y.to_i, m.to_i, d.to_i) rescue string_value
+      else
+        dob = string_value
+      end
+    else
+      dob = string_value
+    end
+    write_attribute(:date_of_birth, dob)
   end
 
   def validate_date_of_birth
@@ -411,7 +440,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def calculate_age
-    if errors[:date_of_birth].blank? && !date_of_birth.blank?
+    if errors[:date_of_birth].empty? && !date_of_birth.blank?
       now = (created_at || Time.now).to_date
       years = now.year - date_of_birth.year
       if (date_of_birth.month > now.month) || (date_of_birth.month == now.month && date_of_birth.day > now.day)
@@ -423,6 +452,13 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def validate_race_at_least_step_2
+    validate_race
+  end
+  def validate_race_at_least_step_3
+    validate_race
+  end
+  
   def validate_race
     if requires_race?
       if race.blank?
@@ -490,6 +526,13 @@ class Registrant < ActiveRecord::Base
             :state_rule => localization.sub_18)
   end
 
+  def validate_party_at_least_step_2
+    validate_party
+  end
+  def validate_party_at_least_step_3
+    validate_party
+  end
+
   def validate_party
     if requires_party?
       if party.blank?
@@ -502,7 +545,7 @@ class Registrant < ActiveRecord::Base
 
   def abandon!
     self.attributes = {:abandoned => true, :state_id_number => nil}
-    self.save(false)
+    self.save(:validate=>false)
   end
 
   # def advance_to!(next_step, new_attributes = {})
@@ -613,7 +656,7 @@ class Registrant < ActiveRecord::Base
   def wrap_up
     if DELAYED_WRAP_UP
       action = Delayed::PerformableMethod.new(self, :complete!, [])
-      Delayed::Job.enqueue(action, WRAP_UP_PRIORITY, Time.now)
+      Delayed::Job.enqueue(action, {:priority=>WRAP_UP_PRIORITY, :run_at=>Time.now})
     else
       complete!
     end
@@ -630,7 +673,7 @@ class Registrant < ActiveRecord::Base
   # Enqueues final registration actions for API calls
   def enqueue_complete_registration_via_api
     action = Delayed::PerformableMethod.new(self, :complete_registration_via_api, [])
-    Delayed::Job.enqueue(action, WRAP_UP_PRIORITY, Time.now)
+    Delayed::Job.enqueue(action, {:priority=>WRAP_UP_PRIORITY, :run_at=>Time.now})
   end
 
   # Called from the worker queue to generate PDFs on the 'util' server
@@ -712,7 +755,7 @@ class Registrant < ActiveRecord::Base
   def enqueue_reminder_email
     action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ ])
     interval = reminders_left == 2 ? AppConfig.hours_before_first_reminder : AppConfig.hours_between_first_and_second_reminder
-    Delayed::Job.enqueue(action, REMINDER_EMAIL_PRIORITY, interval.from_now)
+    Delayed::Job.enqueue(action, {:priority=>REMINDER_EMAIL_PRIORITY, :run_at=>interval.from_now})
   end
 
   def deliver_reminder_email
@@ -921,7 +964,7 @@ class Registrant < ActiveRecord::Base
       r.calculate_age
       r.set_official_party_name
       r.generate_barcode
-      r.save(false)
+      r.save(:validate=>false)
       unless Rails.env.test?
         putc "." if (counter += 1) % 1000 == 0; $stdout.flush
       end

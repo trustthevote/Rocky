@@ -24,9 +24,9 @@
 #***** END LICENSE BLOCK *****
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-include ActionView::Helpers::UrlHelper
 
 describe FinishesController do
+  include Rails.application.routes.url_helpers
   render_views
 
   describe "waiting for delayed job to complete registration" do

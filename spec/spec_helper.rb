@@ -18,9 +18,21 @@ RSpec.configure do |config|
   
   config.include AssertDifference
   config.include Paperclip::Shoulda::Matchers
+  
+  
+  config.include Capybara::RSpecMatchers, :type => :view
+  config.include Capybara::RSpecMatchers, :type => :helper
+  
+  config.include Rails.application.routes.url_helpers, :type=>:helper
+  
+  config.include Capybara::RSpecMatchers, :type => :mailer
+  config.include Capybara::RSpecMatchers, :type => :controller
+  config.include Capybara::DSL, :type => :controller
+  config.include Capybara::DSL, :type => :request
+  
+  
   config.include SpecHelperMethods
   config.include ApiHelperMethods
-  
   
   # ## Mock Framework
   #
@@ -45,5 +57,5 @@ RSpec.configure do |config|
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
-  config.infer_base_class_for_anonymous_controllers = false
+  config.infer_base_class_for_anonymous_controllers = true
 end
