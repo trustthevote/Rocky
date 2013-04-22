@@ -304,7 +304,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.abandon_stale_records
-    stale = self.find(:all, :conditions => ["(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago])
+    stale = self.where(["(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago])
     stale.each do |reg|
       if reg.finish_with_state?
         reg.status = "complete"
@@ -324,7 +324,7 @@ class Registrant < ActiveRecord::Base
 
   def localization
     home_state_id && locale ?
-        StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => locale}) : nil
+        StateLocalization.where({:state_id  => home_state_id, :locale => locale}).first : nil
   end
 
   def at_least_step_1?
@@ -483,12 +483,12 @@ class Registrant < ActiveRecord::Base
       if party.blank?
         "None"
       else
-        en_loc = StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => "en"})
+        en_loc = StateLocalization.where({:state_id  => home_state_id, :locale => "en"}).first
         case self.locale
           when "en"
             party == en_loc.no_party ? "None" : party
           when "es"
-            es_loc = StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => "es"})
+            es_loc = StateLocalization.where({:state_id  => home_state_id, :locale => "es"}).first
             if party == es_loc.no_party
               "None"
             else

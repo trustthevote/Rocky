@@ -21,7 +21,7 @@ namespace :db do
   desc "Seed db with initial data."
   task :bootstrap => :environment do
 
-    env = ENV["RAILS_ENV"] || "development"
+    env = Rails.env || "development"
 
     env_dir = File.join('db', 'bootstrap', env)
 

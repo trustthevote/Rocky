@@ -25,6 +25,7 @@ config/database.yml
 config/newrelic.yml
 config/initializers/hoptoad.rb
 config/initializers/session_store.rb
+config/initializers/cookie_verification_secret.rb
 config/deploy.rb
 config/deploy/production.rb
 config/deploy/staging.rb
