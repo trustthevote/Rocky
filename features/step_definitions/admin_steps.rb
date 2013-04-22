@@ -30,7 +30,7 @@ end
 Then /^I should see that partner's api key$/ do
   @partner ||= Partner.last
   @partner.api_key.should_not be_blank
-  response.should contain(@partner.api_key)
+  page.should have_content(@partner.api_key)
 end
 
 

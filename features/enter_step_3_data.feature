@@ -22,26 +22,28 @@ Feature: Step 3
       Then I should not see "I have changed my name"
        And I should not see "I have changed my address"
 
+    @passing
     Scenario: changing name
      Given I have completed step 2
       When I go to the step 3 page
        And I fill in "ID Number" with "1234"
        And I check "I have changed my name"
-       And I select "Mr." from "title"
-       And I fill in "first" with "John"
-       And I fill in "last" with "Public"
+       And I select "Mr." from "Title"
+       And I fill in "First" with "John"
+       And I fill in "Last" with "Public"
        And I press "registrant_submit"
       Then I should see "Stay Informed and Take Action"
 
+    @passing
     Scenario: changing address
      Given I have completed step 2
       When I go to the step 3 page
        And I fill in "ID Number" with "1234"
        And I check "I have changed my address"
-       And I fill in "address" with "123 Market St."
-       And I fill in "city" with "Pittsburgh"
-       And I select "Pennsylvania" from "state"
-       And I fill in "zip code" with "15215"
+       And I fill in "Address" with "123 Market St."
+       And I fill in "City" with "Pittsburgh"
+       And I select "Pennsylvania" from "State"
+       And I fill in "ZIP Code" with "15215"
        And I press "registrant_submit"
       Then I should see "Stay Informed and Take Action"
 
@@ -139,15 +141,16 @@ Feature: Step 3
       And I press "registrant_submit"
       Then I should not be signed up for "partner_opt_in_sms"
       And I should not be signed up for "opt_in_sms"
-  
+
+    @passing
     Scenario Outline: enter basic data for <state> registrant
       Given I have completed step 2 as a resident of "<state>" state     
       When I go to the step 3 page
       Then I should not see a checkbox for "Send me txt messages from Rock the Vote"
       And I should see a button for "Review Application"
       When I fill in "ID Number" with "1234"
-      And I fill in "address" with "123 Market St."
-      And I fill in "city" with "Pittsburgh"
+      And I fill in "Address" with "123 Market St."
+      And I fill in "City" with "Pittsburgh"
       And I fill in "registrant_survey_answer_1" with "o hai"
       And I fill in "registrant_survey_answer_2" with "kthxbye"
       And I select "Other" from "registrant_race"

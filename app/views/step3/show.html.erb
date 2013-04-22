@@ -16,9 +16,9 @@
     <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
     <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
 
-    <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
+    <%= rollover_button(:next_step, I18n.t('txt.button.submit').html_safe) %>
   <%- end %>
 
   
-  <div class="back"><%= link_to t('txt.button.back'), registrant_step_2_path(@registrant) %></div>
+  <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_2_path(@registrant) %></div>
 <% end %>

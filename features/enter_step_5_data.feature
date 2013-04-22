@@ -15,6 +15,7 @@ Feature: Step 5
        And I press "registrant_submit"
       Then I should see "Review"
 
+    @passing
     Scenario Outline: Go back as a <state> resident
       Given I have completed step 3 as a resident of "<state>" state
       When I go to the step 5 page

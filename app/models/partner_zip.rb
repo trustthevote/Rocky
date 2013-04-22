@@ -25,6 +25,8 @@
 require 'zip/zip'
 
 class PartnerZip
+  extend ActiveModel::Naming
+  include ActiveModel::Conversion
   
   attr_accessor :tmp_file, :destination, :original_destination, :there_are_errors
   attr_reader :errors
@@ -103,6 +105,10 @@ class PartnerZip
   
   def new_record?
     true
+  end
+  
+  def persisted?
+    false
   end
   
 private

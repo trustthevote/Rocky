@@ -49,7 +49,7 @@ Feature: Admin gregistrations
         | Government Organization Name |
       When I go to the admin government partners page
       And I follow "Government Organization Name"
-      And I follow "edit"
+      And I follow "Edit"
       And I select "Massachusetts" from "State for Zip Codes"
       And I fill in "Zip Code List" with ""
       And I press "Save"
@@ -61,7 +61,7 @@ Feature: Admin gregistrations
         | Government Organization Name |
       When I go to the admin government partners page
       And I follow "Government Organization Name"
-      And I follow "edit"
+      And I follow "Edit"
       And I fill in "Zip Code List" with "02113, 123, 1a222, 12345-5325, 24242\n  32344 23424-2332 we34 333, 23411"
       And I press "Save"
       Then that partner's zip code list should be "02113, 12345-5325, 24242, 32344, 23424-2332, 23411"

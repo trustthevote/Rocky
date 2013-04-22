@@ -7,34 +7,6 @@ Feature: Step 1
       When I go to a new registration page
       Then I should see "New Registrant"
 
-    @passing
-    Scenario: Start from a mobile agent
-      Given I am using a mobile browser
-      When I go to a new registration page
-      Then I should be redirected to the mobile url with partner="1"
-      
-    @passing
-    Scenario: Start from a mobile agent and partner setting
-      Given I am using a mobile browser
-      And the following partner exists:
-        | organization |
-        | one          |
-        | two          |
-        | th3          |
-      When I go to a new registration page for partner="3"
-      Then I should be redirected to the mobile url with partner="3"
-
-    @passing
-    Scenario: Start from a mobile agent and partner, source and tracking setting
-      Given I am using a mobile browser
-      And the following partner exists:
-        | organization |
-        | one          |
-        | two          |
-        | th3          |
-      When I go to a new registration page for partner="3", source="abc" and tracking="def"
-      Then I should be redirected to the mobile url with partner="3", source="abc" and tracking="def"
-
     Scenario: start in Spanish
       When I go to a new Spanish registration page
       Then I should not see "^New Registrant"
@@ -43,8 +15,8 @@ Feature: Step 1
     Scenario: completing step 1
       When I go to a new registration page
        And I have not set a locale
-       And I fill in "email address" with "john.public@example.com"
-       And I fill in "zip code" with "94113"
+       And I fill in "Email Address" with "john.public@example.com"
+       And I fill in "ZIP Code" with "94113"
        And I am 20 years old
        And I check "I am a U.S. citizen"
        And I press "registrant_submit"
@@ -69,8 +41,8 @@ Feature: Step 1
        
     Scenario: Step1 creation default for primary partner
       When I go to a new registration page
-      And I fill in "email address" with "john.public@example.com"
-      And I fill in "zip code" with "94113"
+      And I fill in "Email Address" with "john.public@example.com"
+      And I fill in "ZIP Code" with "94113"
       And I am 20 years old
       And I check "I am a U.S. citizen"
       And I press "registrant_submit"
@@ -86,8 +58,8 @@ Feature: Step 1
          | organization   | rtv_email_opt_in | rtv_sms_opt_in | ask_for_volunteers | partner_email_opt_in | partner_sms_opt_in | partner_ask_for_volunteers   |  
          | Opt-in Partner | <rtv_email>      | <rtv_sms>      | <rtv_volunteer>    | <partner_email>      | <partner_sms>      | <partner_ask_for_volunteers> |        
       When I go to a new registration page for that partner
-      And I fill in "email address" with "john.public@example.com"
-      And I fill in "zip code" with "94113"
+      And I fill in "Email Address" with "john.public@example.com"
+      And I fill in "ZIP Code" with "94113"
       And I am 20 years old
       And I check "I am a U.S. citizen"
       And I press "registrant_submit"

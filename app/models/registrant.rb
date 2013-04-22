@@ -594,11 +594,11 @@ class Registrant < ActiveRecord::Base
     !javascript_disabled &&
       !home_state.nil? &&
       home_state.online_reg_enabled? &&
-      File.exists?(File.join(Rails.root, 'app/views/step2/', "_#{custom_step_2_partial}"))
+      File.exists?(File.join(Rails.root, 'app/views/step2/', "_#{custom_step_2_partial}.html.erb"))
   end
 
   def custom_step_2_partial
-    "#{home_state.abbreviation.downcase}.html.erb"
+    "#{home_state.abbreviation.downcase}"
   end
   
   def has_home_state_online_registration_instructions?

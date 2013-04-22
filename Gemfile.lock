@@ -66,6 +66,7 @@ GEM
       cucumber (>= 1.1.0)
       nokogiri (>= 1.5.0)
     daemons (1.0.10)
+    database_cleaner (0.9.1)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
     delayed_job_active_record (0.4.4)
@@ -195,6 +196,7 @@ DEPENDENCIES
   capybara-webkit (~> 0.7.1)
   cucumber-rails (= 1.1.0)
   daemons (= 1.0.10)
+  database_cleaner
   delayed_job_active_record
   factory_girl_rails
   hoptoad_notifier (= 2.2.2)

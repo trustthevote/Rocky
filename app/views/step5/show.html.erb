@@ -110,15 +110,15 @@
       </h3>
     </li>
     <li>
-      <span class="error"><%= form.object.errors.on :attest_true %></span>
+      <span class="error"><%= form.object.errors[:attest_true] %></span>
     </li>
   </ul>
 
   <%= rollover_button(:prepare, I18n.t('txt.button.prepare')) %>
   <%- if @registrant.custom_step_2? %>
-    <div class="back"><%= link_to t('txt.button.back'), registrant_step_3_path(@registrant) %></div>
+    <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_3_path(@registrant) %></div>
   <%- else %>
-    <div class="back"><%= link_to t('txt.button.back'), registrant_step_4_path(@registrant) %></div>
+    <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_4_path(@registrant) %></div>
   <%- end %>
   
 <% end %>

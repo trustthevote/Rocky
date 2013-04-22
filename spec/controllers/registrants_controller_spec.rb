@@ -142,6 +142,60 @@ describe RegistrantsController do
         assert_select "#partner-logo img[src=#{partner.logo.url(:header).split('?').first}]"
       end
     end
+      
+      # moving redirect scenarios into contorller specs instead of features
+      # Scenario: Start from a mobile agent
+      #   Given I am using a mobile browser
+      #   When I go to a new registration page
+      #   Then I should be redirected to the mobile url with partner="1"
+      # 
+      # Scenario: Start from a mobile agent and partner setting
+      #   Given I am using a mobile browser
+      #   And the following partner exists:
+      #     | organization |
+      #     | one          |
+      #     | two          |
+      #     | th3          |
+      #   When I go to a new registration page for partner="3"
+      #   Then I should be redirected to the mobile url with partner="3"
+      # 
+      # Scenario: Start from a mobile agent and partner, source and tracking setting
+      #   Given I am using a mobile browser
+      #   And the following partner exists:
+      #     | organization |
+      #     | one          |
+      #     | two          |
+      #     | th3          |
+      #   When I go to a new registration page for partner="3", source="abc" and tracking="def"
+      #   Then I should be redirected to the mobile url with partner="3", source="abc" and tracking="def"
+    
+      # Then /^I should be redirected to the mobile url with partner="([^\"]*)"$/ do |partner|
+      #   response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en'))
+      # end
+      # 
+      # Then /^I should be redirected to the mobile url with partner="([^\"]*)", source="([^\"]*)" and tracking="([^\"]*)"$/ do |partner,source,tracking|
+      #   response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en', :source=>source, :tracking=>tracking))
+      # end
+    
+    context "from a mobile browser" do  
+      before(:each) do
+        MobileConfig.stub(:is_mobile_request?).and_return(true)
+      end
+      it "redirects to the url with partner='1' when no other parameters are given" do
+        get :new
+        response.should redirect_to(MobileConfig.redirect_url(:partner=>'1',:locale=>'en'))
+      end
+      it "redirects for another partner" do
+        partner = FactoryGirl.create(:partner)
+        get :new, :partner=>partner.to_param
+        response.should redirect_to(MobileConfig.redirect_url(:partner=>partner.id,:locale=>'en'))
+      end
+      it "includes source and tracking setting" do
+        partner = FactoryGirl.create(:partner)
+        get :new, :partner=>partner.to_param, :source=>"abc", :tracking=>"def"
+        response.should redirect_to(MobileConfig.redirect_url(:partner=>partner.id,:locale=>'en', :source=>"abc", :tracking=>"def"))        
+      end
+    end
   end
 
   describe "#create" do

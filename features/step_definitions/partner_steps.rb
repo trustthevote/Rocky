@@ -26,24 +26,24 @@
 
 
 Given /^that partner's css file exists$/ do
-  stub(File).exists?.returns(true)
+  File.stub(:exists?).and_return(true)
 end
 
 Given /^that partner's css file does not exist$/ do
-  stub(File).exists?.returns(false)
+  File.stub(:exists?).and_return(false)
 end
 
 
 
 Then /^I should see a link to the standard CSS$/ do
-  response.body.should include("link href=\"/stylesheets/application.css")
-  response.body.should include("link href=\"/stylesheets/registration.css")
+  page.body.should include("link href=\"/assets/application.css")
+  page.body.should include("link href=\"/assets/registration.css")
 end
 
 
 Then /^I should see a link to that partner's CSS$/ do
-  response.body.should include("link href=\"/partners/#{@partner.id}/application.css")
-  response.body.should include("link href=\"/partners/#{@partner.id}/registration.css")
+  page.body.should include("link href=\"/partners/#{@partner.id}/application.css")
+  page.body.should include("link href=\"/partners/#{@partner.id}/registration.css")
 end
 
 

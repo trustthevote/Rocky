@@ -120,11 +120,13 @@ When /^I attach the file at "([^\"]*)" to "([^\"]*)"$/ do |path, field|
 end
 
 Then /^I should see "([^\"]*)"$/ do |text|
-  response.should contain(text)
+  page.should have_content(text)
 end
 
+
+
 Then /^I should not see "([^\"]*)"$/ do |text|
-  response.should_not contain(text)
+  page.should_not have_content(text)
 end
 
 Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
@@ -145,45 +147,31 @@ end
 
 
 Then /^I should see a field for "([^\"]*)"$/ do |label|
-  field = nil
-  begin
-   field = field_labeled(label)
-  rescue
-   field = field_with_id(label)
-  end
-  field.should be_a(Webrat::Field)
+  page.should have_field(label)
 end
 
 Then /^I should not see a field for "([^\"]*)"$/ do |label|
-  expect {
-    field_labeled(label)
-  }.to raise_error(Webrat::NotFoundError)
+  page.should_not have_field(label)
 end
 
 
 Then /^I should see a checkbox for "([^\"]*)"$/ do |label|
-  field = nil
-  begin
-   field = field_labeled(label)
-  rescue
-   field = field_with_id(label)
-  end
-  field.should be_a(Webrat::CheckboxField)
+  page.should have_checkbox(label)
 end
 
 Then /^I should not see a checkbox for "([^\"]*)"$/ do |label|
-  expect {
-    field_labeled(label)
-  }.to raise_error(Webrat::NotFoundError)
+  page.should_not have_checkbox(label)
 end
 
 Then /^I should see a button for "([^\"]*)"$/ do |label|
-  button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
-  button.should be_a(Webrat::ButtonField)
+  page.should have_button(label)  
+  # button= field_by_xpath("//button[span[text()=\"#{label}\"]]")
+  # button.should be_a(Webrat::ButtonField)
 end
 
 Then /^I should not see a button for "([^\"]*)"$/ do |label|
-  field_by_xpath("//button[span[text()=\"#{label}\"]]").should be_nil
+  page.should_not have_button(label)  
+  #field_by_xpath("//button[span[text()=\"#{label}\"]]").should be_nil
 end
 
 
@@ -198,7 +186,8 @@ Then /^I should see an enabled button for "([^\"]*)"$/ do |label|
 end
 
 Then /^I should see a link for "([^\"]*)"$/ do |text|
-  field_by_xpath("//a[text()='#{text}']").should be
+  page.should have_link(text)
+  #field_by_xpath("//a[text()='#{text}']").should be
 end
 
 

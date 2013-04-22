@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 #***** BEGIN LICENSE BLOCK *****
 #
 #Version: RTV Public License 1.0
@@ -24,12 +26,13 @@
 #***** END LICENSE BLOCK *****
 
 Before do
-  stub(MobileConfig).is_mobile_request? {false}
+  MobileConfig.stub(:is_mobile_request?) {false}
 end
 
-Given /^I am using a mobile browser$/ do
-  stub(MobileConfig).is_mobile_request? {true}
-end
+# Given /^I am using a mobile browser$/ do
+#   MobileConfig.stub(:is_mobile_request?) { true }
+#   puts MobileConfig.redirect_url
+# end
 
 
 Given /^I have completed step (\d+)$/ do |step_num|
@@ -42,7 +45,7 @@ end
 
 Given /^I have completed step (\d+) for a short form as a resident of "([^\"]*)"$/ do |step_num, state_name|
   state = GeoState.find_by_name(state_name)
-  zip_prefix = GeoState.zip3map.index(state.abbreviation)
+  zip_prefix = GeoState.zip3map.key(state.abbreviation)
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01', :short_form=>true)
 end
 
@@ -54,12 +57,12 @@ end
 
 Given /^I have completed step (\d+) as a resident of "([^\"]*)" state$/ do |step_num,state_name|
   state = GeoState.find_by_name(state_name)
-  zip_prefix = GeoState.zip3map.index(state.abbreviation)
+  zip_prefix = GeoState.zip3map.key(state.abbreviation)
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
 end
 
 Given /^I have been to the state online registration page$/ do
-  Given 'I have completed step 4 as a resident of "Washington" state'
+  step 'I have completed step 4 as a resident of "Washington" state'
   @registrant.update_attributes!(:finish_with_state=>true)
 end
 
@@ -94,13 +97,13 @@ When /^the timeout_stale_registrations task has run$/ do
   Registrant.abandon_stale_records
 end
 
-Then /^I should be redirected to the mobile url with partner="([^\"]*)"$/ do |partner|
-  response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en'))
-end
-
-Then /^I should be redirected to the mobile url with partner="([^\"]*)", source="([^\"]*)" and tracking="([^\"]*)"$/ do |partner,source,tracking|
-  response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en', :source=>source, :tracking=>tracking))
-end
+# Then /^I should be redirected to the mobile url with partner="([^\"]*)"$/ do |partner|
+#   response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en'))
+# end
+# 
+# Then /^I should be redirected to the mobile url with partner="([^\"]*)", source="([^\"]*)" and tracking="([^\"]*)"$/ do |partner,source,tracking|
+#   response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en', :source=>source, :tracking=>tracking))
+# end
 
 Then /^I should be sent a thank\-you email$/ do
   email = ActionMailer::Base.deliveries.last
@@ -184,15 +187,15 @@ Then /^I should see a new download$/ do
 end
 
 Then /^I should see my email$/ do
-  Then %Q{the "Email" field should contain "#{@registrant.email_address}"}
+  step %Q{the "Email" field should contain "#{@registrant.email_address}"}
 end
 
 Then /^I should see my date of birth$/ do
-  Then %Q{the "Date of Birth" field should contain "#{@registrant.date_of_birth.year}"}
+  step %Q{the "Date of Birth" field should contain "#{@registrant.date_of_birth.year}"}
 end
 
 Then /^I should see "([^\"]*)" in select box "([^\"]*)"$/ do |select_value, select_box|
-  assert_equal select_value, current_dom.css("##{select_box} option[selected]").text
+  assert_equal select_value, page.all("##{select_box} option[selected]").first.text
 end
 
 
@@ -219,16 +222,16 @@ end
 
 
 When /^I enter valid data for step 1$/ do
-  When %Q{I fill in "email address" with "john.public@example.com"}
-  And %Q{I fill in "zip code" with "94113"}
-  And %Q{I am 20 years old}
-  And %Q{I check "I am a U.S. citizen"}
+  step %Q{I fill in "Email Address" with "john.public@example.com"}
+  step %Q{I fill in "ZIP Code" with "94113"}
+  step %Q{I am 20 years old}
+  step %Q{I check "I am a U.S. citizen"}
 end
 
 When /^I live in (.*)$/ do |state_name|
   state = GeoState.find_by_name(state_name)
-  zip_prefix = GeoState.zip3map.index(state.abbreviation)
-  When %Q{I fill in "zip code" with "#{zip_prefix}01"}
+  zip_prefix = GeoState.zip3map.key(state.abbreviation)
+  step %Q{I fill in "ZIP Code" with "#{zip_prefix}01"}
 end
 
 
@@ -239,13 +242,13 @@ Then /^I should see an iFrame for the Washington State online system$/ do
   dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
   lang = @registrant.locale.to_s
   state_url="https://weiapplets.sos.wa.gov/myvote/myvote?language=#{lang}&Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
-  response.body.should have_xpath("//iframe[@src='#{state_url}']")
+  page.should have_xpath("//iframe[@src='#{state_url}']")
 end
 
 
 Then /^I should see an iFrame for the Arizona State online system$/ do
   state_url = "https://servicearizona.com/webapp/evoter/selectLanguage"
-  response.body.should have_xpath("//iframe[@src='#{state_url}']")  
+  page.should have_xpath("//iframe[@src='#{state_url}']")  
 end
 
 Then /^I should see an iFrame for the California State online system$/ do
@@ -254,13 +257,13 @@ end
 
 Then /^I should see a link to the CA online registration system$/ do
   state_url = "http://www.registertovote.ca.gov/"
-  response.body.should have_xpath("//a[@href='#{state_url}']")  
+  page.should have_xpath("//a[@href='#{state_url}']")  
 end
 
 
 Then /^I should see an iFrame for the Colorado State online system$/ do
   state_url = "https://www.sos.state.co.us/Voter/secuVerifyExist.do"
-  response.body.should have_xpath("//iframe[@src='#{state_url}']")  
+  page.should have_xpath("//iframe[@src='#{state_url}']")  
 end
 
 Then /^I should see an iFrame for the Nevada State online system$/ do
@@ -273,20 +276,27 @@ Then /^I should see an iFrame for the Nevada State online system$/ do
   lang = @registrant.locale.to_s
   
   state_url="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&utm_source=rtv&utm_medium=rtv&utm_campaign=rtv&fn=#{fn}&mn=#{mn}&ln=#{ln}&lang=#{lang}&zip=#{zip}&sf=#{sf}"
-  response.body.should have_xpath("//iframe[@src='#{state_url}']")
+  page.should have_xpath("//iframe[@src='#{state_url}']")
   
 end
 
 Then /^I should see "([^\"]*)" unless the state is "([^\"]*)"$/ do |content, abbr|
   if @registrant.home_state_abbrev.downcase != abbr.downcase
-    response.should contain(content)
+    page.should have_content(content)
+  end
+end
+
+
+Then /^I should see the text "([^\"]*)" unless the state is "([^\"]*)"$/ do |content, abbr|
+  if @registrant.home_state_abbrev.downcase != abbr.downcase
+    page.should have_content(content)
   end
 end
 
 
 Then /^when the state is "([^\"]*)" the text should include "([^\"]*)"$/ do |abbr, content|
   if @registrant.home_state_abbrev.downcase == abbr.downcase
-    response.should contain(content)
+    page.should have_content(content)
   end
 end
 

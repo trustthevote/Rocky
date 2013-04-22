@@ -1,6 +1,9 @@
 en:
   activerecord:
     attributes:
+      partner:
+        from_email: From Email
+        url: URL
       registrant:
         date_of_birth: Date of Birth
         email_address: Email Address

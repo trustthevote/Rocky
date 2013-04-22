@@ -26,6 +26,7 @@ group :development, :test do
   gem "capybara-webkit", "~> 0.7.1"
   gem "webrat"
   gem "factory_girl_rails", :require=>false
+  gem "database_cleaner"
   
   
   gem "treetop", "= 1.4.10"

@@ -25,19 +25,19 @@ $(document).ready(function() {
 <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
 
 
-<span class="error"><%= form.object.errors.on :has_state_license %></span>
+<span class="error"><%= form.object.errors[:has_state_license] %></span>
 <ul class="checkbox">
   <li class="spacer">&nbsp;</li>
   <li>
     <h3>
       <%= form.radio_button :has_state_license, 1, :checked=>@registrant.has_state_license==true %>
-      <%= form.label :has_state_license_1, t('txt.registration.has_state_license', :state=>h(@registrant.home_state.abbreviation)) %>
+      <%= form.label :has_state_license_1, t('txt.registration.has_state_license', :state=>h(@registrant.home_state.abbreviation)).html_safe %>
     </h3>
   </li>
 </ul>
 <div class='has_license'>
   <div class="checkbox-explanation" >
-  <p><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_name)%></p>
+  <p><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_name).html_safe %></p>
   </div>
 </div>
 <ul class="checkbox">
@@ -45,14 +45,14 @@ $(document).ready(function() {
   <li>
     <h3>
       <%= form.radio_button :has_state_license, 0, :checked=>@registrant.has_state_license==false %>
-      <%= form.label :has_state_license_0, t('txt.registration.has_no_state_license', :state=>h(@registrant.home_state.abbreviation)) %>
+      <%= form.label :has_state_license_0, t('txt.registration.has_no_state_license', :state=>h(@registrant.home_state.abbreviation)).html_safe %>
     </h3>
     
   </li>
 </ul>
 
 <fieldset>
-  <legend><%= I18n.t('txt.registration.stay_informed_header') %></legend>
+  <legend><%= I18n.t('txt.registration.stay_informed_header').html_safe %></legend>
 
   <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
   <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form} %>
@@ -61,13 +61,13 @@ $(document).ready(function() {
 
 
 <div class='has_no_license'>
-  <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
+  <%= rollover_button(:next_step, I18n.t('txt.button.submit').html_safe) %>
 </div>
 
 <div class='has_license' style="display:none;">
   
-  <%= rollover_button(:state_online_registration, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_name), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
-  <%= rollover_button(:skip_state_online_registration, I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), {:id=>'registrant_skip_state_online_registration',:name=>'registrant_skip_state_online_registration',:value=>'registrant_skip_state_online_registration'}) %>  
+  <%= rollover_button(:state_online_registration, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_name).html_safe, {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
+  <%= rollover_button(:skip_state_online_registration, I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe, {:id=>'registrant_skip_state_online_registration',:name=>'registrant_skip_state_online_registration',:value=>'registrant_skip_state_online_registration'}) %>  
   
 </div>
 

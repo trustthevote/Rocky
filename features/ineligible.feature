@@ -3,6 +3,7 @@ Feature: Ineligible
   I want to be denied when I am ineligible
   In order to move on
 
+    @passing
     Scenario: state doesn't register
      Given I go to a new registration page
        And I enter valid data for step 1
@@ -15,6 +16,7 @@ Feature: Ineligible
        And I press "registrant_submit"
       Then I should see "Personal Information"
 
+    @passing
     Scenario: not citizen
      Given I go to a new registration page
        And I enter valid data for step 1
@@ -27,6 +29,7 @@ Feature: Ineligible
        And I press "registrant_submit"
       Then I should see "Personal Information"
 
+    @passing
     Scenario: multiple reasons on same page
      Given I go to a new registration page
        And I enter valid data for step 1
@@ -39,6 +42,7 @@ Feature: Ineligible
        And I press "registrant_submit"
       Then I should see "Personal Information"
 
+    @passing
     Scenario: under 18 but old enough
      Given I go to a new registration page
        And I enter valid data for step 1
@@ -48,6 +52,7 @@ Feature: Ineligible
       When I press "Keep Going"
       Then I should see "Personal Information"
 
+    @passing
     Scenario: under 18 and wants reminder
      Given I go to a new registration page
        And I enter valid data for step 1
