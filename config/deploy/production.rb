@@ -22,11 +22,9 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-role :web, "register.rockthevote.com" #  "rtvprod-web1.osuosl.org"
-role :app, "register.rockthevote.com" #  "rtvprod-web1.osuosl.org"
-role :util, "rtvprod-util.osuosl.org"
-role :db,   "rtvprod-util.osuosl.org", :primary => true
-# role :db,   "rtv-db.osuosl.org", :primary => true
-#set :branch, (rev rescue "production")
+role :web, ENV['PRODUCTION_WEB']
+role :app, ENV['PRODUCTION_APP']
+role :util, ENV['PRODUCTION_UTIL']
+role :db,   ENV['PRODUCTION_DB'], :primary => true
 
 set :branch, "production"

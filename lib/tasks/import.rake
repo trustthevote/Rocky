@@ -2,9 +2,9 @@
 # task: rake import:states
 
 namespace :import do
-  desc "Import state and state localization data from CSV_FILE"
+  desc "Import state and state localization data from the standard file"
   task :states => :environment do
-    path = ENV["CSV_FILE"] || "states.csv"
+    path = Rails.root.join('db/bootstrap/import/states.yml')
     puts path
     File.open(path) do |file|
       StateImporter.import(file)

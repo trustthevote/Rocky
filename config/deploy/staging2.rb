@@ -22,10 +22,10 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-role :web,  "rtvstaging2-web.osuosl.org"
-role :app,  "rtvstaging2-web.osuosl.org"
-role :util, "rtvstaging2-util.osuosl.org"
-role :db,   "rtvstaging2-web.osuosl.org", :primary => true
+role :web,  ENV['STAGING2_WEB']
+role :app,  ENV['STAGING2_APP']
+role :util, ENV['STAGING2_UTIL']
+role :db,   ENV['STAGING2_DB'], :primary => true
 
 set :rails_env,    "staging2"
 

@@ -26,10 +26,6 @@ config/newrelic.yml
 config/initializers/hoptoad.rb
 config/initializers/session_store.rb
 config/initializers/cookie_verification_secret.rb
-config/deploy.rb
-config/deploy/production.rb
-config/deploy/staging.rb
-config/deploy/staging2.rb
 db/bootstrap/partners.yml
 log/*.log
 tmp/*
@@ -42,3 +38,5 @@ reg_colorado.yml
 db/*.sqlite3
 rocky_test
 *.rails2
+# Ignore application configuration
+/config/application.yml

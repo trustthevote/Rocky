@@ -24,7 +24,7 @@
 #***** END LICENSE BLOCK *****
 class StateImporter
   def self.import(file)
-    CSV.new(file, :headers => true).each do |row|
+    YAML.load(file).each do |key, row|
       begin
         print "#{row['name']}... "
         import_state(row)

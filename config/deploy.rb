@@ -43,9 +43,9 @@ set :repository,  "git@github.com:trustthevote/Rocky.git"
 # load 'ext/passenger-mod-rails.rb'  # Restart task for use with mod_rails
 # load 'ext/web-disable-enable.rb'   # Gives you web:disable and web:enable
 
-set :deploy_to, "/var/www/register.rockthevote.com/rocky"
+set :deploy_to, ENV['DEPLOY_TO']
 
-set :stages, Dir["config/deploy/*"].map {|stage|File.basename(stage, '.rb')}
+set :stages, Dir["config/deploy/*"].map {|stage| File.basename(stage, '.rb')}
 set :default_stage, "production"
 require 'capistrano/ext/multistage'
 
@@ -58,13 +58,12 @@ set :group_writable, false
 set :use_sudo, false
 
 
-# before "deploy", "deploy:stop_workers"
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "deploy:symlink_csv", "deploy:symlink_partners"
 
 set :rake, 'bundle exec rake'
 
 after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs", "deploy:symlink_app_configs"
-before "deploy:restart", "deploy:import_states_csv"   # runs after migrations when migrating
+before "deploy:restart", "deploy:import_states_yml"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
@@ -79,21 +78,15 @@ namespace :admin do
 end
 
 namespace :deploy do
-  # no more geminstaller - bundler [AMM]
-  # desc "run GemInstaller"
-  # task :geminstaller, :roles => [:app, :util] do
-  #   sudo "geminstaller -c #{current_release}/config/geminstaller.yml"
-  # end
-
-  desc "import states.csv data"
-  task :import_states_csv, :roles => [:app] do
+  desc "import states.yml data"
+  task :import_states_yml, :roles => [:app] do
     run <<-CMD
       cd #{latest_release} &&
-      bundle exec rake import:states CSV_FILE=db/bootstrap/import/states.csv
+      bundle exec rake import:states
     CMD
   end
 
-  desc "Link the database.yml and mongrel_cluster.yml files into the current release path."
+  desc "Link the database.yml, application.yml, newrelic.yml and hoptoad files into the current release path."
   task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
@@ -102,6 +95,10 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/newrelic.yml #{latest_release}/config/newrelic.yml
+    CMD
+    run <<-CMD
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/config/application.yml #{latest_release}/config/application.yml
     CMD
     run <<-CMD
       cd #{latest_release} &&
@@ -151,7 +148,7 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       rm -rf pdf &&
-      ln -nfs /data/rocky/html pdf
+      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html pdf
     CMD
   end
   
@@ -160,7 +157,7 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       rm -rf csv &&
-      ln -nfs /data/rocky/html/partner_csv csv
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv csv
     CMD
   end
 
@@ -206,22 +203,23 @@ namespace :deploy do
   end
 end
 
-namespace :import do
-  desc "Upload state data from CSV_FILE and restart server"
-  task :states, :roles => :app do
-    local_path = ENV['CSV_FILE'] || 'states.csv'
-    remote_dir = File.join(shared_path, "uploads")
-    remote_path = File.join(remote_dir, File.basename(local_path))
-    run "mkdir -p #{remote_dir}"
-    top.upload local_path, remote_path, :via => :scp
-    run "cd #{current_path} && bundle exec rake import:states CSV_FILE=#{remote_path}"
-    find_and_execute_task "deploy:restart"
-  end
-end
+# TODO: Is this ever used ?
+# namespace :import do
+#   desc "Upload state data from CSV_FILE and restart server"
+#   task :states, :roles => :app do
+#     local_path = ENV['CSV_FILE'] || 'states.csv'
+#     remote_dir = File.join(shared_path, "uploads")
+#     remote_path = File.join(remote_dir, File.basename(local_path))
+#     run "mkdir -p #{remote_dir}"
+#     top.upload local_path, remote_path, :via => :scp
+#     run "cd #{current_path} && bundle exec rake import:states CSV_FILE=#{remote_path}"
+#     find_and_execute_task "deploy:restart"
+#   end
+# end
 
-
-Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
-  $: << File.join(vendored_notifier, 'lib')
-end
+# TODO: This doesn't seem to have anything
+# Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
+#   $: << File.join(vendored_notifier, 'lib')
+# end
 
 require 'hoptoad_notifier/capistrano'
