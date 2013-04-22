@@ -64,8 +64,6 @@ module Rocky
     
     config.action_controller.allow_forgery_protection = false
     
-    ActionMailer::Base.default_url_options = { :host => Settings.default_url_host }
-    
     
   end
 end

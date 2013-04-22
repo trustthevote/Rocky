@@ -918,7 +918,7 @@ describe Registrant do
   describe "custom_step_2_partial" do
     it "returns a filename of a view partial based on the state abbreviation" do
       reg = FactoryGirl.build(:step_2_registrant)
-      reg.custom_step_2_partial.should == "pa.html.erb"
+      reg.custom_step_2_partial.should == "pa"
     end
   end
   

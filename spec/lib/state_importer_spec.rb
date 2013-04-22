@@ -27,13 +27,84 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe StateImporter do
   attr_accessor :csv_basic, :file_basic
   before(:each) do
-    @csv_basic = <<CSV
-abbreviation,name,participating,not_participating_tooltip_en,not_participating_tooltip_es,requires_race,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,requires_party,parties_en,parties_es,no_party_en,no_party_es,id_length_min,id_length_max,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
-AL,Alabama,1,dead_end_en,dead_end_es,1,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
-AK,Alaska,0,dead_end_en,dead_end_es,1,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,10,13,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
-AZ,Arizona,1,dead_end_en,dead_end_es,0,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,0,,,,,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
-CSV
-    @file_basic = StringIO.new(@csv_basic)
+    @yml_basic = <<YML
+    record_0: 
+      abbreviation: AL
+      name: Alabama
+      participating: "1"
+      not_participating_tooltip_en: dead_end_en
+      not_participating_tooltip_es: dead_end_es
+      requires_race: "1"
+      party_tooltip_en: party_tooltip_en
+      party_tooltip_es: party_tooltip_es
+      race_tooltip_en: race_tooltip_en
+      race_tooltip_es: race_tooltip_es
+      requires_party: "1"
+      parties_en: Red, Green, Blue
+      parties_es: Rojo, Verde, Azul
+      no_party_en: no_party_en
+      no_party_es: no_party_es
+      id_length_min: "8"
+      id_length_max: "12"
+      id_number_tooltip_en: id_number_tooltip_en
+      id_number_tooltip_es: id_number_tooltip_es
+      sos_address: sos_address
+      sos_phone: sos_phone
+      sos_url: sos_url
+      sub_18_en: sub_18_en
+      sub_18_es: sub_18_es
+    record_1: 
+      abbreviation: AK
+      name: Alaska
+      participating: "0"
+      not_participating_tooltip_en: dead_end_en
+      not_participating_tooltip_es: dead_end_es
+      requires_race: "1"
+      party_tooltip_en: party_tooltip_en
+      party_tooltip_es: party_tooltip_es
+      race_tooltip_en: race_tooltip_en
+      race_tooltip_es: race_tooltip_es
+      requires_party: "1"
+      parties_en: Red, Green, Blue
+      parties_es: Rojo, Verde, Azul
+      no_party_en: no_party_en
+      no_party_es: no_party_es
+      id_length_min: "10"
+      id_length_max: "13"
+      id_number_tooltip_en: id_number_tooltip_en
+      id_number_tooltip_es: id_number_tooltip_es
+      sos_address: sos_address
+      sos_phone: sos_phone
+      sos_url: sos_url
+      sub_18_en: sub_18_en
+      sub_18_es: sub_18_es
+    record_2: 
+      abbreviation: AZ
+      name: Arizona
+      participating: "1"
+      not_participating_tooltip_en: dead_end_en
+      not_participating_tooltip_es: dead_end_es
+      requires_race: "0"
+      party_tooltip_en: party_tooltip_en
+      party_tooltip_es: party_tooltip_es
+      race_tooltip_en: race_tooltip_en
+      race_tooltip_es: race_tooltip_es
+      requires_party: "0"
+      parties_en: 
+      parties_es: 
+      no_party_en: 
+      no_party_es: 
+      id_length_min: "8"
+      id_length_max: "12"
+      id_number_tooltip_en: id_number_tooltip_en
+      id_number_tooltip_es: id_number_tooltip_es
+      sos_address: sos_address
+      sos_phone: sos_phone
+      sos_url: sos_url
+      sub_18_en: sub_18_en
+      sub_18_es: sub_18_es
+YML
+    @file_basic = StringIO.new(@yml_basic)
   end
 
   describe "populate GeoState" do
@@ -111,25 +182,23 @@ CSV
       assert_equal [], en.parties
     end
 
-    it "checks sanity of actual states.csv file" do
-      headers = File.open(Rails.root.join("db/bootstrap/import/states.csv")) do |csv_file|
-        csv_file.gets.chomp.split(",").sort
-      end.map { |h| h.gsub('"', '') }
-
-      assert_equal @csv_basic.split("\n").first.split(",").sort, headers
-    end
   end
 
   describe "reports errors" do
     attr_accessor :csv_bad, :file_bad
     before(:each) do
-      @csv_bad = <<CSV
-abbreviation,name
-A,Aa
-B,Bb
-C,Cc
-CSV
-      @file_bad = StringIO.new(@csv_bad)
+      @yml_bad = <<YML
+one:
+  abbreviation: a
+  name: Aa
+two:
+  abbreviation: b
+  name: Bb
+three:
+  abbreviation: c
+  name: Cc
+YML
+      @file_bad = StringIO.new(@yml_bad)
     end
     it "catches errors to report them" do
       old_stderr = $stderr
