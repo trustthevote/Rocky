@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_https
-    if USE_HTTPS && require_https? && !request.ssl?
+    if Settings.use_https && require_https? && !request.ssl?
       flash.keep
       url = URI.parse(request.url)
       url.scheme = "https"

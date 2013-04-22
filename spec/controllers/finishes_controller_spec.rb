@@ -91,7 +91,7 @@ describe FinishesController do
   def assert_share_links(share_text)
     assert_select "div.share div", 2
 
-    assert_select "a[class=button_share_facebook_en][href=http://www.facebook.com/sharer.php?u=#{FACEBOOK_CALLBACK_URL}&t=#{CGI.escape(share_text)}]"
+    assert_select "a[class=button_share_facebook_en][href=http://www.facebook.com/sharer.php?u=#{Settings.sponsor.facebook_callback_url}&t=#{CGI.escape(share_text)}]"
 
     escaped = CGI.escape(share_text + " " + root_path)
     href = "http://twitter.com/home"

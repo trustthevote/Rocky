@@ -122,7 +122,7 @@ end
 Then /^I should be sent a thank\-you email from RTV$/ do
   email = ActionMailer::Base.deliveries.last
   email.to.should include(@registrant.email_address)
-  email.from.should include(FROM_ADDRESS)
+  email.from.should include(Settings.from_address)
   email.subject.should == "Thank you for using the online voter registration tool"
 end
 

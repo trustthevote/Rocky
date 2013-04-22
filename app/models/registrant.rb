@@ -654,7 +654,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def wrap_up
-    if DELAYED_WRAP_UP
+    if Settings.delayed_wrap_up
       action = Delayed::PerformableMethod.new(self, :complete!, [])
       Delayed::Job.enqueue(action, {:priority=>WRAP_UP_PRIORITY, :run_at=>Time.now})
     else
@@ -851,7 +851,7 @@ class Registrant < ActiveRecord::Base
     if partner && !partner.primary? && partner.whitelabeled? && !partner.from_email.blank?
       partner.from_email
     else
-      FROM_ADDRESS
+      Settings.from_address
     end
   end
 

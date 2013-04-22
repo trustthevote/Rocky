@@ -4,5 +4,7 @@ rerun_opts = rerun.to_s.strip.empty? ? "--format #{ENV['CUCUMBER_FORMAT'] || 'pr
 std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} --strict --tags ~@wip"
 %>
 default: <%= std_opts %> features
-wip: --tags @wip:3 --wip features
+js: <%= std_opts %> --tags @javascript  --tags ~@pending features
+wip: --tags @wip:50 --wip features
 rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip
+pending: --tags @pending --tags @pending-ui features

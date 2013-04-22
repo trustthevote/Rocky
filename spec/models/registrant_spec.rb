@@ -95,17 +95,17 @@ describe Registrant do
     it "returns FROM_ADDRESS when partner is primary" do
       @p.stub(:primary?) { true }
       r = Registrant.new(:partner=>@p)
-      r.email_address_to_send_from.should == FROM_ADDRESS
+      r.email_address_to_send_from.should == Settings.from_address
     end
     it "returns FROM_ADDRESS when partner is not whitelabeled and from is configured" do
       @p.whitelabeled = false
       r = Registrant.new(:partner=>@p)
-      r.email_address_to_send_from.should == FROM_ADDRESS
+      r.email_address_to_send_from.should == Settings.from_address
     end
     it "returns FROM_ADDRESS when partner email is not configured" do
       @p.from_email = ''
       r = Registrant.new(:partner=>@p)
-      r.email_address_to_send_from.should == FROM_ADDRESS
+      r.email_address_to_send_from.should == Settings.from_address
     end
     it "returns the parter from_email when the parter is whitelabled and address is set" do
       r = Registrant.new(:partner=>@p)
@@ -1378,12 +1378,8 @@ describe Registrant do
 
     describe "background processing" do
       describe "when there is a job queue (production, staging)" do
-        before(:all) do
-          @old_delayed = DELAYED_WRAP_UP
-          silence_warnings { Object.const_set :DELAYED_WRAP_UP, true }
-        end
-        after(:all) do
-          silence_warnings { Object.const_set :DELAYED_WRAP_UP, @old_delayed }
+        before(:each) do
+          Settings.stub(:delayed_wrap_up) { true }
         end
 
         it "should delay processing" do
@@ -1404,14 +1400,9 @@ describe Registrant do
       end
 
       describe "when there is no job queue (production, staging)" do
-        before(:all) do
-          @old_delayed = DELAYED_WRAP_UP
-          silence_warnings { Object.const_set :DELAYED_WRAP_UP, false }
+        before(:each) do
+          Settings.stub(:delayed_wrap_up) { false }
         end
-        after(:all) do
-          silence_warnings { Object.const_set :DELAYED_WRAP_UP, @old_delayed }
-        end
-
         it "should run immediately" do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
           reg.stub(:generate_pdf)

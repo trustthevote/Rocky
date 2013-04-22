@@ -27,7 +27,7 @@ class Notifier < ActionMailer::Base
     @url = edit_password_reset_url(:id => partner.perishable_token)
     
     mail(:subject=> "Password Reset Instructions",
-         :from => FROM_ADDRESS,
+         :from => Settings.from_address,
          :to => partner.email,
          :date => Time.now.to_s(:db))
   end

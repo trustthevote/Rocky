@@ -56,14 +56,6 @@ Rocky::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
-
-  USE_HTTPS = true
-  PAPERCLIP_OPTIONS = {}
-
-  DELAYED_WRAP_UP = true
-
-  # The name of the host where generated PDF files can be reached.
-  PDF_HOST_NAME = 'rtvstaging2.osuosl.org'
   
   
   

@@ -64,10 +64,8 @@ module Rocky
     
     config.action_controller.allow_forgery_protection = false
     
+    ActionMailer::Base.default_url_options = { :host => Settings.default_url_host }
+    
+    
   end
 end
-
-ADMIN_USERNAME = 'admin'
-
-WIDGET_JS_URL = 'https://s3.amazonaws.com/ovr/widget_loader.js'
-

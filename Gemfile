@@ -4,6 +4,7 @@ source 'http://rubygems.org'
 gem "rake", "10.0.3"
 
 gem "figaro"
+gem "rails_config"
 
 gem "rails", "= 3.2.13"
 gem "aasm", "= 3.0.16"

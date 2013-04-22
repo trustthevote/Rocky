@@ -72,7 +72,7 @@ class Partner < ActiveRecord::Base
   belongs_to :government_partner_state, :class_name=> "GeoState"
   has_many :registrants
 
-  has_attached_file :logo, PAPERCLIP_OPTIONS.merge(:styles => { :header => "75x45" })
+  has_attached_file :logo, Settings.paperclip_options.symbolize_keys.merge(:styles => { :header => "75x45" })
 
   serialize :government_partner_zip_codes
 

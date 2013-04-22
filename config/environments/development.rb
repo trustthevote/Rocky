@@ -20,11 +20,6 @@ Rocky::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
-  USE_HTTPS = false
-  PAPERCLIP_OPTIONS = {}
-
-  DELAYED_WRAP_UP = false
-
 
   ### uncomment to use DelayedJob in development.
   ### you must set config.cache_classes = true
@@ -35,8 +30,6 @@ Rocky::Application.configure do
     #   Registrant.handle_asynchronously :wrap_up
     # end
 
-
-  PDF_HOST_NAME = 'localhost:3000'
 
 
 

@@ -57,18 +57,6 @@ Rocky::Application.configure do
   # Enable threaded mode
   # config.threadsafe!
 
-  USE_HTTPS = true
-  PAPERCLIP_OPTIONS = {}
-
-  DELAYED_WRAP_UP = true
-
-  # The name of the host where generated PDF files can be reached.
-  PDF_HOST_NAME = 'register.rockthevote.com'
-  
-  
-  
-  # Enable threaded mode
-  # config.threadsafe!
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)

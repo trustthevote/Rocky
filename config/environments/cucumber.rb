@@ -44,14 +44,4 @@ Rocky::Application.configure do
   config.active_support.deprecation = :stderr
   
   
-  require 'factory_girl'
-
-  USE_HTTPS = false
-  PAPERCLIP_OPTIONS = {:path => ":rails_root/tmp/system/:attachment/:id/:style/:filename"}
-
-  DELAYED_WRAP_UP = false
-
-  # The name of the host where generated PDF files can be reached.
-  PDF_HOST_NAME = 'example-pdf.com'
-  
 end
