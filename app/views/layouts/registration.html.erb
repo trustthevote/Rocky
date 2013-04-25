@@ -10,9 +10,7 @@
       #container { display:table; height:100% }
     </style>
   <![endif]-->
-  <%= javascript_include_tag  Rails.env.production? ? 'https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' : 'jquery-1.3.2',
-                              Rails.env.production? ? 'qtip/jquery.qtip-1.0.0-rc3.min.js' : 'qtip/jquery.qtip-1.0.0-rc3.js',
-                              'application', 'registration' %>
+  <%= javascript_include_tag 'application', 'registration' %>
   <script type="text/javascript" charset="utf-8">
     $(document).ready(function() { hideErrors(); setTimeout('revealErrors();', 400); });
   </script>
@@ -31,8 +29,8 @@
   <% end -%>
       <div id="progress-bar">
         <ol>
-          <li class="progress-title"><%= t('txt.registration.progress_indicator') %></li>
-          <%= progress_indicator %>
+          <li class="progress-title"><%= t('txt.registration.progress_indicator').html_safe %></li>
+          <%= progress_indicator.html_safe %>
         </ol>
       </div>
     </div>

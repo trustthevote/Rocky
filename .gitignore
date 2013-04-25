@@ -34,6 +34,7 @@ public/csv
 public/csv/*
 public/pdf/*
 public/system/*
+public/partners
 reg_colorado.yml
 db/*.sqlite3
 rocky_test

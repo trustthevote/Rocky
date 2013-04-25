@@ -25,7 +25,7 @@ $(document).ready(function() {
 <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
 
 
-<span class="error"><%= form.object.errors[:has_state_license] %></span>
+<span class="error"><%= form.object.errors[:has_state_license].join("\n") %></span>
 <ul class="checkbox">
   <li class="spacer">&nbsp;</li>
   <li>

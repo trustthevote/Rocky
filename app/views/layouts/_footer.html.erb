@@ -9,6 +9,6 @@
     <span><a href="<%= Settings.sponsor.footer_link_base_url %>/privacy.html" target="_blank" title="Privacy &amp; Security">Privacy &amp; Security</a></span>
     <span><a href="<%= Settings.sponsor.footer_link_base_url %>/contact.html" target="_blank" title="Contact Us">Contact Us</a></span>
     <span><a href="<%= Settings.sponsor.footer_link_base_url %>/about.html" target="_blank" title="About">About</a></span>
-    <span class="copyright"><%= Settings.sponsor.footer_copyright % Date.today.year %></span>
+    <span class="copyright"><%= (Settings.sponsor.footer_copyright % Date.today.year).html_safe %></span>
   </p>
 </div>

@@ -30,7 +30,16 @@
 
   <div id="survey_questions">
     <%= form_for @partner, :url => partner_questions_path, :method => :put do |form| %>
-      <%= form.error_messages %>
+      <%- if @partner.errors.count > 0 %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@partner.errors.count, "error") %> prohibited this post from being saved:</h2>
+          <ul>
+            <% @partner.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <%- end %>
       <fieldset>
         <legend>Questions in English</legend>
         <p><%= form.label :survey_question_1_en, "Question 1" %></p>
@@ -49,7 +58,7 @@
         <legend>Volunteering</legend>
         <p>
           <%= form.check_box :ask_for_volunteers %>
-          <%= form.label :ask_for_volunteers, "Ask for volunteers for <strong>#{@partner.organization}</strong>" %>
+          <%= form.label :ask_for_volunteers, "Ask for volunteers for <strong>#{@partner.organization}</strong>".html_safe %>
           <% if @partner.organization.blank? %>
             &hellip; (you should fill in your organization name in your <%= link_to "profile", edit_partner_path %>)
           <% end %>

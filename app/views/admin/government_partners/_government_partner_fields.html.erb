@@ -5,12 +5,12 @@
     <li class="width_a">
       <h3><%= f.label :government_partner_state_abbrev, "State for Zip Codes" %></h3>
       <div><%= f.select :government_partner_state_abbrev, GeoState.collection_for_select, :include_blank => "select a state" %></div>
-      <span class="error"><%= f.object.errors[:government_partner_state_abbrev] %></span>
+      <span class="error"><%= f.object.errors[:government_partner_state_abbrev].join("\n") %></span>
     </li>
     <li class="width_a">
       <h3><%= f.label :government_partner_zip_code_list, "Zip Code List" %></h3>
       <div><%= f.text_area :government_partner_zip_code_list %></div>
-      <span class="error"><%= f.object.errors[:government_partner_zip_code_list] %></span>
+      <span class="error"><%= f.object.errors[:government_partner_zip_code_list].join("\n") %></span>
     </li>  
   </ul>
 </fieldset>

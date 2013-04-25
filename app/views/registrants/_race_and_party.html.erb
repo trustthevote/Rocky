@@ -3,7 +3,7 @@
     <h3><%= form.label :race %></h3>
     <div><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></div>
     <div class="tooltip"><%= tooltip_tag :race, @race_tooltip %></div>
-    <span class="error"><%= form.object.errors[:race] %></span>
+    <span class="error"><%= form.object.errors[:race].join("\n") %></span>
   </li>
 </ul>
 <% if @state_parties %>
@@ -12,7 +12,7 @@
       <h3><%= form.label :party %></h3>
       <%= select_div form, :party, @state_parties, :include_blank => true %>
       <div class="tooltip"><%= tooltip_tag :party, @party_tooltip %></div>
-      <span class="error"><%= form.object.errors[:party] %></span>
+      <span class="error"><%= form.object.errors[:party].join("\n") %></span>
     </li>
   </ul>
 <% end %>

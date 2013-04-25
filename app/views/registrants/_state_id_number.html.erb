@@ -8,7 +8,7 @@
       <li>
         <h3><%= form.label :state_id_number %></h3>
         <%= field_div form, :state_id_number, :size => id_size %>
-        <span class="error"><%= form.object.errors[:state_id_number] %></span>
+        <span class="error"><%= form.object.errors[:state_id_number].join("\n") %></span>
       </li>
     </ul>
     <div class="instructions"><p><%= @state_id_tooltip %></p></div>

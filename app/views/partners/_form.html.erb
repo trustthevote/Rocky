@@ -4,55 +4,55 @@
     <li class="width_a">
       <h3><%= form.label :name %></h3>
       <%= field_div form, :name %>
-      <span class="error"><%= form.object.errors[:name] %></span>
+      <span class="error"><%= form.object.errors[:name].join("\n") %></span>
     </li>
   </ul>
   <ul class="stacked">
     <li class="width_a">
       <h3><%= form.label :address %></h3>
       <%= field_div form, :address %>
-      <span class="error"><%= form.object.errors[:address] %></span>
+      <span class="error"><%= form.object.errors[:address].join("\n") %></span>
     </li>
   </ul>
   <ul class="stacked">
     <li class="width_a">
       <h3><%= form.label :city %></h3>
       <%= field_div form, :city %>
-      <span class="error"><%= form.object.errors[:city] %></span>
+      <span class="error"><%= form.object.errors[:city].join("\n") %></span>
     </li>
     <li class="width_b">
       <h3><%= form.label :state_abbrev, "State" %></h3>
       <div><%= form.select :state_abbrev, GeoState.collection_for_select, :include_blank => "select a state" %></div>
-      <span class="error"><%= form.object.errors[:state_abbrev] %></span>
+      <span class="error"><%= form.object.errors[:state_abbrev].join("\n") %></span>
     </li>
     <li class="width_c">
       <h3><%= form.label :zip_code %></h3>
       <%= field_div form, :zip_code %>
-      <span class="error"><%= form.object.errors[:zip_code] %></span>
+      <span class="error"><%= form.object.errors[:zip_code].join("\n") %></span>
     </li>
   </ul>
   <ul class="stacked">
     <li class="width_a">
       <h3><%= form.label :organization, "Organization" %></h3>
       <%= field_div form, :organization %>
-      <span class="error"><%= form.object.errors[:organization] %></span>
+      <span class="error"><%= form.object.errors[:organization].join("\n") %></span>
     </li>
     <li class="width_a">
       <h3><%= form.label :url %></h3>
       <%= field_div form, :url %>
-      <span class="error"><%= form.object.errors[:url] %></span>
+      <span class="error"><%= form.object.errors[:url].join("\n") %></span>
     </li>
   </ul>
   <ul class="stacked">
     <li class="width_a">
       <h3><%= form.label :phone %></h3>
       <%= field_div form, :phone %>
-      <span class="error"><%= form.object.errors[:phone] %></span>
+      <span class="error"><%= form.object.errors[:phone].join("\n") %></span>
     </li>
     <li class="width_a">
       <h3><%= form.label :email %></h3>
       <%= field_div form, :email %>
-      <span class="error"><%= form.object.errors[:email] %></span>
+      <span class="error"><%= form.object.errors[:email].join("\n") %></span>
     </li>
   </ul>
 </fieldset>
@@ -62,19 +62,19 @@
     <li class="width_a">
       <h3><%= form.label :username %></h3>
       <%= field_div form, :username, :disabled => !form.object.new_record? %>
-      <span class="error"><%= form.object.errors[:username] %></span>
+      <span class="error"><%= form.object.errors[:username].join("\n") %></span>
     </li>
   </ul>
   <ul class="stacked">
     <li class="width_a">
       <h3><%= form.label :password, form.object.new_record? ? nil : "Change password" %></h3>
       <%= field_div form, :password, :kind => "password" %>
-      <span class="error"><%= form.object.errors[:password] %></span>
+      <span class="error"><%= form.object.errors[:password].join("\n") %></span>
     </li>
     <li class="width_a">
       <h3><%= form.label :password_confirmation, "Confirm Password" %></h3>
       <%= field_div form, :password_confirmation, :kind => "password" %>
-      <span class="error"><%= form.object.errors[:password_confirmation] %></span>
+      <span class="error"><%= form.object.errors[:password_confirmation].join("\n") %></span>
     </li>
   </ul>
 </fieldset>

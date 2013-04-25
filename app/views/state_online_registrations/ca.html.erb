@@ -3,7 +3,7 @@
     <%= render :partial=>@registrant.home_state_online_registration_instructions_partial %>
   <%- else %>
     <p>
-      <%= t('txt.registration.instructions.leave_state_online_registration', :state=>@registrant.home_state_name,:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), registrant_step_3_url(@registrant))) %>
+      <%= t('txt.registration.instructions.leave_state_online_registration', :state=>@registrant.home_state_name,:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe, registrant_step_3_url(@registrant))).html_safe %>
     </p>
   <%- end %>
 </div>

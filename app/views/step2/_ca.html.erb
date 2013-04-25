@@ -32,7 +32,7 @@ $(document).ready(function() {
 <%- checkbox_text = @registrant.locale.to_s.downcase == 'es' ? 'Soy residente de California y vivo en los Estados Unidos.
 ' : 'I am a resident of California, living in the United States' %>
 <%- instruction_text = @registrant.locale.to_s.downcase == 'es' ? 'Ud. es eligible para terminar su formulario de inscripción de votante usando el sistema en linea del estado de California.' : "You are eligible to finish your registration using the state's online voter registration system." %>
-<span class="error"><%= form.object.errors[:has_state_license] %></span>
+<span class="error"><%= form.object.errors[:has_state_license].join("\n") %></span>
 <ul class="checkbox">
   <li class="spacer">&nbsp;</li>
   <li>
@@ -58,7 +58,7 @@ $(document).ready(function() {
 
 
 <div class='has_no_license'>
-  <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
+  <%= rollover_button(:next_step, I18n.t('txt.button.submit').html_safe) %>
 </div>
 
 <div class='has_license' style="display:none;">

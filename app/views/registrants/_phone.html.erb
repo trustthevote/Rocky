@@ -4,7 +4,7 @@
     <div class="flat-stack">
       <%= field_div form, :phone %>
       <% if form.object.errors[:phone].any? %>
-        <span class="error"><%= form.object.errors[:phone] %></span>
+        <span class="error"><%= form.object.errors[:phone].join("\n") %></span>
       <% else %>
         <span class="example">###-###-####</span>
       <% end %>
@@ -15,7 +15,7 @@
     <h3><%= form.label :phone_type %></h3>
     <div class="flat-stack">
       <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
-      <span class="error"><%= form.object.errors[:phone_type] %></span>
+      <span class="error"><%= form.object.errors[:phone_type].join("\n") %></span>
     </div>
   </li>
 </ul>

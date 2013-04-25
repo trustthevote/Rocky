@@ -9,10 +9,13 @@ sponsor:
   partner_comarketing_text: |
     Numbers not as high as you'd like?
     <a href="http://www.rockthevote.com/partner/how-to-get-it-out-there.html" target="_blank">Here are some ways to help market your tool.</a>
+
 from_address: "rocky@example.com"
 default_url_host: "register.example.com"
+
 admin_username: 'admin'
 widget_js_url:  'https://s3.amazonaws.com/ovr/widget_loader.js'
+
 use_https: true
 paperclip_options: {}
 delayed_wrap_up: true

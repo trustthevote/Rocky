@@ -17,12 +17,12 @@ module ApplicationHelper
     keys = [:success, :message, :warning] if keys.empty?
     messages = []
     keys.each do |key|
-      messages << content_tag(:li, flash[key], :class => "flash-#{key}") if flash[key]
+      messages << content_tag(:li, flash[key], :class => "flash-#{key}").html_safe if flash[key]
     end
     if messages.empty?
-       content_tag(:div, "", :class => "flash")
+       content_tag(:div, "", :class => "flash").html_safe
     else
-      content_tag(:ul, messages.join("\n"), :class => "flash")
+      content_tag(:ul, messages.join("\n").html_safe, :class => "flash").html_safe
     end
   end
 

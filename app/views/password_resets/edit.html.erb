@@ -7,7 +7,7 @@
       <ul class="stacked">
         <li class="width_a">
           <h3><%= form.label :password, "New password" %></h3>
-          <span class="error"><%= Array(form.object.errors[:password]).first %></span>
+          <span class="error"><%= Array(form.object.errors[:password].join("\n")).first %></span>
           <%= field_div form, :password, :kind => "password", :value => "" %>
         </li>
       </ul>
@@ -15,7 +15,7 @@
         <li class="width_a">
           <h3><%= form.label :password_confirmation, "Confirm Password" %></h3>
           <%= field_div form, :password_confirmation, :kind => "password", :value => "" %>
-          <span class="error"><%= form.object.errors[:password_confirmation] %></span>
+          <span class="error"><%= form.object.errors[:password_confirmation].join("\n") %></span>
         </li>
       </ul>
     </fieldset>

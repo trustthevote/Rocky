@@ -2,7 +2,7 @@
   <h1>Thanks for Registering!</h1>
   <div class="fulltext">
     <p><%= I18n.t('txt.registration.finish_reminder', :first_name => @registrant.first_name) %></p>
-    <p><%= I18n.t('txt.registration.finish_reminder_2') %></p>
+    <p><%= I18n.t('txt.registration.finish_reminder_2').html_safe %></p>
   </div>
 <% elsif !@registrant.pdf_ready? -%>
   <h1>Check Your Email</h1>

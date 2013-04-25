@@ -9,12 +9,12 @@
       <li class="width_d">
         <h3><%= form.label :name_title %></h3>
         <%= select_div form, :name_title, I18n.t('txt.registration.titles'), :include_blank => true %>
-        <span class="error"><%= form.object.errors[:name_title] %></span>
+        <span class="error"><%= form.object.errors[:name_title].join("\n") %></span>
       </li>
       <li class="width_b">
         <h3><%= form.label :first_name %></h3>
         <%= field_div form, :first_name %>
-        <span class="error"><%= form.object.errors[:first_name] %></span>
+        <span class="error"><%= form.object.errors[:first_name].join("\n") %></span>
       </li>
       <li class="width_c">
         <h3><%= form.label :middle_name %></h3>
@@ -23,7 +23,7 @@
       <li class="width_b">
         <h3><%= form.label :last_name %></h3>
         <%= field_div form, :last_name %>
-        <span class="error"><%= form.object.errors[:last_name] %></span>
+        <span class="error"><%= form.object.errors[:last_name].join("\n") %></span>
       </li>
       <li class="width_d">
         <h3><%= form.label :name_suffix %></h3>

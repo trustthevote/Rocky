@@ -523,7 +523,7 @@ class Registrant < ActiveRecord::Base
   def under_18_instructions_for_home_state
     I18n.t('txt.registration.instructions.under_18',
             :state_name => home_state.name,
-            :state_rule => localization.sub_18)
+            :state_rule => localization.sub_18).html_safe
   end
 
   def validate_party_at_least_step_2

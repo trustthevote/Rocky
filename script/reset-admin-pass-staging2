@@ -1,3 +1,2 @@
 #!/bin/sh
-
 ssh rocky@rtvstaging2-web.osuosl.org "cd /var/www/register.rockthevote.com/rocky/current && RAILS_ENV=staging2 bundle exec rake admin:reset_password" | grep "password"
