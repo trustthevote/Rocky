@@ -86,7 +86,7 @@ namespace :deploy do
     CMD
   end
 
-  desc "Link the database.yml, application.yml, newrelic.yml and hoptoad files into the current release path."
+  desc "Link the database.yml, application.yml, and newrelic.yml files into the current release path."
   task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
@@ -99,10 +99,6 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/application.yml #{latest_release}/config/application.yml
-    CMD
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/initializers/hoptoad.rb #{latest_release}/config/initializers/hoptoad.rb
     CMD
   end
   
@@ -217,9 +213,6 @@ end
 #   end
 # end
 
-# TODO: This doesn't seem to have anything
-# Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
-#   $: << File.join(vendored_notifier, 'lib')
-# end
 
-require 'hoptoad_notifier/capistrano'
+        require './config/boot'
+        require 'airbrake/capistrano'

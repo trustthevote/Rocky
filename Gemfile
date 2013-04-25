@@ -45,7 +45,7 @@ end
 gem "nokogiri", "= 1.5.9"
 gem "mechanize", "= 1.0.0"
 gem "newrelic_rpm", "= 3.6.0.83"
-gem "hoptoad_notifier", "= 2.2.2"
+gem "airbrake"
 gem "ledermann-rails-settings", :require => "rails-settings"
 
 gem 'json'

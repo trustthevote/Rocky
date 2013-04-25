@@ -24,6 +24,5 @@
 #***** END LICENSE BLOCK *****
 require 'aasm'
 require 'paperclip'
-require 'hoptoad_notifier'
 require 'newrelic_rpm'
 require 'csv'

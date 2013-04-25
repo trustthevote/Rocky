@@ -770,7 +770,7 @@ class Registrant < ActiveRecord::Base
       enqueue_reminder_email if reminders_left > 0
     end
   rescue StandardError => error
-    HoptoadNotifier.notify(
+    Airbrake.notify(
       :error_class => error.class.name,
       :error_message => "DelayedJob Worker Error(#{error.class.name}): #{error.message}",
       :request => { :params => {:worker => "deliver_reminder_email", :registrant_id => self.id} })
