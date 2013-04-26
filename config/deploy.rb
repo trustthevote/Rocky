@@ -22,6 +22,12 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
+
+require 'dotenv'
+Dotenv.load
+
+
+
 set :application, "rocky"
 set :repository,  "git@github.com:trustthevote/Rocky.git"
 
@@ -43,6 +49,7 @@ set :repository,  "git@github.com:trustthevote/Rocky.git"
 # load 'ext/passenger-mod-rails.rb'  # Restart task for use with mod_rails
 # load 'ext/web-disable-enable.rb'   # Gives you web:disable and web:enable
 
+
 set :deploy_to, ENV['DEPLOY_TO']
 
 set :stages, Dir["config/deploy/*"].map {|stage| File.basename(stage, '.rb')}
@@ -56,6 +63,16 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 
 set :group_writable, false
 set :use_sudo, false
+
+
+set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "packages"
+set :rvm_install_with_sudo, true 
+
+before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
+
+require "rvm/capistrano"
+
 
 
 after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "deploy:symlink_csv", "deploy:symlink_partners"
@@ -86,7 +103,7 @@ namespace :deploy do
     CMD
   end
 
-  desc "Link the database.yml, application.yml, and newrelic.yml files into the current release path."
+  desc "Link the database.yml, .env files, and newrelic.yml files into the current release path."
   task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
@@ -98,7 +115,11 @@ namespace :deploy do
     CMD
     run <<-CMD
       cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/application.yml #{latest_release}/config/application.yml
+      ln -nfs #{shared_path}/.env #{latest_release}/.env
+    CMD
+    run <<-CMD
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/.env.#{rails_env} #{latest_release}/.env.#{rails_env}
     CMD
   end
   
@@ -214,5 +235,8 @@ end
 # end
 
 
-        require './config/boot'
-        require 'airbrake/capistrano'
+require './config/boot'
+
+require 'airbrake/capistrano'
+
+require 'bundler/capistrano'

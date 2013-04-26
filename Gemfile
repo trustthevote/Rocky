@@ -17,6 +17,8 @@ gem "paperclip", "~> 3.0"
 gem "mysql"
 gem "rubyzip"
 
+gem "dotenv-rails"
+
 
 group :development, :test do
   gem "rspec-rails", "~> 2.10.1"
@@ -34,6 +36,8 @@ group :development, :test do
   gem "treetop", "= 1.4.10"
   # gem "selenium-client", "= 1.2.16"
   gem "capistrano", "= 2.11.2"
+  gem "rvm-capistrano"
+  
   # Pito:
   gem "hpricot", "0.8.6"
 	gem "sqlite3"
