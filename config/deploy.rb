@@ -66,8 +66,11 @@ set :use_sudo, false
 
 
 set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
-set :rvm_autolibs_flag, "packages"
+set :rvm_autolibs_flag, "enable"
 set :rvm_install_with_sudo, true 
+
+before 'deploy:setup', 'rvm:install_rvm'   # install RVM
+before 'deploy:setup', 'rvm:install_ruby' 
 
 before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
 
@@ -103,7 +106,7 @@ namespace :deploy do
     CMD
   end
 
-  desc "Link the database.yml, .env files, and newrelic.yml files into the current release path."
+  desc "Link the database.yml, .env.{environment} files, and newrelic.yml files into the current release path."
   task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
@@ -112,10 +115,6 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/newrelic.yml #{latest_release}/config/newrelic.yml
-    CMD
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/.env #{latest_release}/.env
     CMD
     run <<-CMD
       cd #{latest_release} &&
@@ -200,20 +199,20 @@ namespace :deploy do
 
   desc "Run (or restart) worker processes on util server"
   task :run_workers, :roles => :util do
-    run "cd #{latest_release} && ruby script/rocky_runner stop"
-    run "cd #{latest_release} && ruby script/rocky_pdf_runner stop"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_runner stop"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_pdf_runner stop"
     # nasty hack to make sure it stops
     run "pkill -f com.pivotallabs.rocky.PdfServer" rescue nil
     sleep 5
-    run "cd #{latest_release} && ruby script/rocky_pdf_runner start"
-    run "cd #{latest_release} && ruby script/rocky_runner start"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_pdf_runner start"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_runner start"
     unset(:latest_release)
   end
 
   desc "Stop worker processes on util server"
   task :stop_workers, :roles => :util do
-    run "cd #{latest_release} && ruby script/rocky_runner stop"
-    run "cd #{latest_release} && ruby script/rocky_pdf_runner stop"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_runner stop"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_pdf_runner stop"
     # nasty hack to make sure it stops
     run "pkill -f com.pivotallabs.rocky.PdfServer" rescue nil
     unset(:latest_release)
