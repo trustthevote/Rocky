@@ -69,6 +69,8 @@ module Rocky
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
+    config.assets.precompile += %w( admin.css partner.css registration.css rocky.css admin.js registration.js )
+    
     config.action_controller.allow_forgery_protection = false
     
     
