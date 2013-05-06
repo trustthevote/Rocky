@@ -45,6 +45,14 @@ group :development, :test do
 	
 end
 
+
+group :assets do
+  #gem 'therubyracer'
+  #gem 'sass-rails', "  ~> 3.1.0"
+  #gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+end
+
 gem "nokogiri", "= 1.5.9"
 gem "mechanize", "= 1.0.0"
 gem "newrelic_rpm", "= 3.6.0.83"
