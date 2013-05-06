@@ -28,6 +28,7 @@ Dotenv.load
 
 
 
+
 set :application, "rocky"
 set :repository,  "git@github.com:trustthevote/Rocky.git"
 
@@ -71,10 +72,15 @@ set :rvm_install_with_sudo, true
 
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby' 
+before 'deploy:setup', 'rvm:install_passenger' 
+# before 'deploy:setup', 'rvm:setup_passenger' 
+
 
 before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
 
 require "rvm/capistrano"
+
+load 'deploy/assets'
 
 
 
@@ -94,6 +100,19 @@ namespace :admin do
       cd #{latest_release} &&
       bundle exec rake admin:reset_password
     CMD
+  end
+end
+
+namespace :rvm do
+  
+  desc "Install passenger"
+  task :install_passenger, :roles => :app do
+    run "gem install passenger", :shell => fetch(:rvm_shell)
+  end
+  
+  desc "Install and setup RVM Passenger"
+  task :setup_passenger, :roles => :app do
+    run "passenger-install-apache2-module", :shell => fetch(:rvm_shell)    
   end
 end
 
@@ -219,23 +238,10 @@ namespace :deploy do
   end
 end
 
-# TODO: Is this ever used ?
-# namespace :import do
-#   desc "Upload state data from CSV_FILE and restart server"
-#   task :states, :roles => :app do
-#     local_path = ENV['CSV_FILE'] || 'states.csv'
-#     remote_dir = File.join(shared_path, "uploads")
-#     remote_path = File.join(remote_dir, File.basename(local_path))
-#     run "mkdir -p #{remote_dir}"
-#     top.upload local_path, remote_path, :via => :scp
-#     run "cd #{current_path} && bundle exec rake import:states CSV_FILE=#{remote_path}"
-#     find_and_execute_task "deploy:restart"
-#   end
-# end
-
 
 require './config/boot'
 
 require 'airbrake/capistrano'
 
 require 'bundler/capistrano'
+
