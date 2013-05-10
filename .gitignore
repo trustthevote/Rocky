@@ -19,7 +19,12 @@
 .idea
 .rvmrc*
 .vimrc
-.env*
+.env
+.env.staging2
+.env.staging
+.env.production
+.env.development
+.env.test
 config/mobile.yml
 config/states_with_online_registration.yml
 config/database.yml
