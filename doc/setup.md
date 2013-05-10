@@ -8,28 +8,26 @@ Talk about:
 If the gemset changes, needs to change the config paths. Stick with @rocky4 [major version] gemset
 
 
-# Setup Instructions
-
-Two things you need to do to set up your application after installing the project code.
+# Development Setup Instructions
 
 ## 1. Create real versions of the .example files
 TODO
 
-In the `rocky` application replace all the `*.example` files with real ones.  These files contain sensitive data like passwords so we don't commit them to version control.  You'll of course need to fill in the actual useful data in the real files.
+In the `rocky` application replace all the `*.example` files with real ones.  
+
+These files contain sensitive data like passwords so we don't commit them to version control.  You'll of course need to fill in the actual useful data in the real files.
 
   * `config/database.yml`
   * `config/newrelic.yml`
-  * `config/initializers/hoptoad.rb`
-  * `config/initializers/session_store.rb`
+  * `config/initializers/cookie_verification_secret.rb`
   * `db/bootstrap/partners.yml`
   
-TODO
-* the world of config files
-config/states_with_online_registration.yml
-config/app_config.yml
-config/mobile.yml
+These files contain configuration items that differ from environment to environment.
 
-config/newrelic.yml
+  * `config/states_with_online_registration.yml` - the list of states that have a separate workflow for redirection to their own online system.
+  * `config/app_config.yml` - general settings for app behavior (mostly email and cleanup timings)
+  * `config/mobile.yml` - 
+
 
 
 ## 2. Configure deploy scripts
@@ -46,3 +44,9 @@ root of project  along with .gitignore, app/, config/ etc.
 ## 4. Deploy
 
 * how to do a setup cap X deploy:setup, cap X deploy
+
+
+
+# Additional Notes
+
+* The set of files for config is likely to change

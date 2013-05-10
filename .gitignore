@@ -24,9 +24,6 @@ config/mobile.yml
 config/states_with_online_registration.yml
 config/database.yml
 config/newrelic.yml
-config/initializers/hoptoad.rb
-config/initializers/session_store.rb
-config/initializers/cookie_verification_secret.rb
 db/bootstrap/partners.yml
 log/*.log
 tmp/*
@@ -39,7 +36,6 @@ public/partners
 reg_colorado.yml
 db/*.sqlite3
 rocky_test
-*.rails2
 # Ignore application configuration
 /config/application.yml
 
