@@ -73,7 +73,7 @@ set :rvm_install_with_sudo, true
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby' 
 before 'deploy:setup', 'rvm:install_passenger' 
-# before 'deploy:setup', 'rvm:setup_passenger' 
+before 'deploy:setup', 'rvm:setup_passenger' 
 
 
 before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
@@ -110,12 +110,12 @@ namespace :rvm do
   
   desc "Install passenger"
   task :install_passenger, :roles => :app do
-    run "gem install passenger", :shell => fetch(:rvm_shell)
+    run "gem install passenger --version=3.0.19", :shell => fetch(:rvm_shell)
   end
   
   desc "Install and setup RVM Passenger"
   task :setup_passenger, :roles => :app do
-    run "passenger-install-apache2-module", :shell => fetch(:rvm_shell)    
+    run "passenger-install-apache2-module --auto", :shell => fetch(:rvm_shell)    
   end
 end
 
