@@ -48,4 +48,4 @@ class BucketRemover
   end
 end
 
-BucketRemover.new.remove_buckets! if $0 == __FILE__
+#BucketRemover.new.remove_buckets! if $0 == __FILE__
