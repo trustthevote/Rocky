@@ -251,3 +251,104 @@ es:
     tell_friend_under_18:
       subject: "Register to vote!"
       body: "Are you registered to vote? I may not be old enough to vote yet, but you are.  You can't vote unless you are registered.\n\nYou can fill out a voter registration form only at %{rtv_url}. It is super easy.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  Go to %{rtv_url}.\n\nAlready registered to vote or not old enough to vote yet?  Help others get registered to vote by sending an email to your friends and family asking them to register at %{rtv_url}.\n\nHappy voting!"
+  states:
+    parties:
+      democratic: Democrático
+      independent: Independiente
+      green: Verde
+      libertarian: Libertario
+      republican: Republicano
+      other: Otros
+    no_party_label:
+      none: Ninguno
+      decline_to_state: Se niega a declarar
+    tooltips:
+      not_participating:
+        blank: ''
+      race:
+        required_with_state_name:>
+          %{state_name} requiere información acerca de su raza u origen étnico. No rechazarán su solicitud si no incluye esta información.
+        not_required_but_appreciated_with_state_name:>  
+          %{state_name} no solicita información acerca de su raza u origen étnico.  Sin embargo, we apreciaría tu información para poder 
+          medir la efectividad de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma impresa de registro para votar.
+      party:
+        arizona:>
+          Arizona tiene una elección primaria cerrada. Si está registrado
+          en un partido político que reúne las condiciones para reconocimiento de boletas,
+          se le permitirá votar por esa boleta de elección primaria de ese partido. Si está
+          registrado como independiente, sin preferencia de partido o como miembro de un
+          partido que no reúne las condiciones para reconocimiento de boleta, puede seleccionar
+          y votar por una boleta de elección primaria y por uno de los partidos políticos reconocidos.
+        california:>
+          La ley de California permite que los votantes que se niegan a
+          declarar una afiliación con un partido político calificado o que están afiliados
+          a un partido político no calificado voten en la elección primaria de cualquier
+          partido político calificado que presente un aviso ante al Secretario de Estado,
+          por el cual les permita a los votantes proceder de esa manera. Puede llamar al
+          1-800-345-VOTE o visitar www.ss.ca.gov/elections/elections_d.htm para saber qué
+          partidos políticos les permiten participar en su elección primaria a los votantes
+          no afiliados.
+        not_required:>
+          No necesita registrarse con un partido si desea participar en la elección primaria, camarilla política o convención de ese partido.
+        not_required_can_choose_any:>
+          No necesita registrarse con un partido político si desea participar en la elección primaria, camarilla política o convención 
+          de ese partido, y puede elegir cualquier boleta presidencial primaria (pero no ambas), independientemente del registro.
+        closed_caucus_with_state_name:> 
+          %{state_name} tiene un sistema de elección primaria cerrada y camarilla política. Cada partido político reconocido tiene una 
+          boleta electoral separada, que enumera únicamente a los candidatos de ese partido político. Los votantes registrados como miembros 
+          de un partido político sólo pueden votar por la boleta electoral de ese partido. Los votantes registrados como no declarados pueden 
+          elegir una boleta de las que se encuentran disponibles."
+        required_for_primary:>
+          Debe registrarse con un partido si desea participar en la elección
+          primaria, camarilla política o convención de ese partido.
+        required_for_primary_2_months:>
+          Debe registrarse con un partido si desea participar en la elección
+          primaria, camarilla política o convención de ese partido.
+          
+      id_number:
+        arizona:>
+          Debe proporcionar el número de su licencia de conducir de
+          Arizona o un número de licencia de identificación no operativa. Si no tiene una
+          licencia de conducir o un número de identificación no operativa, debe proporcionar
+          los últimos cuatro dígitos de su número de Seguro Social. Si no posee ninguno
+          de estos tipos de identificación, ingrese "NINGUNO" y el Estado le asignará un
+          número de identificación único.
+        colorado:>
+          Debe proporcionar el número de su licencia de conducir de
+          Colorado o su número de identificación. No incluya los guiones. Si no tiene una
+          licencia de conducir o un número de identificación, debe proporcionar los últimos
+          cuatro dígitos de su número de seguro social. Si no posee ninguno de estos tipos
+          de identificación, ingrese "NINGUNO", y el Estado le asignará un número de identificación
+          único.
+        ssn_or_none: 'Indique su número de seguro social. Si no tiene número de seguro social, ingrese “NINGUNO”, y el estado le asignará un número.'
+        drivers_license_with_state_name:>
+          Debe indicar el número de su licencia de conducir de %{state_name}
+          o el número de tarjeta de identificación. Si no posee ninguno de los dos, debe
+          indicar los últimos cuatro dígitos de su número de seguro social. Si no posee
+          ninguno de estos números de identificación, ingrese “NINGUNO”, y el estado le
+          asignará un número único de identificación para fines de registro como votante.
+        drivers_license_required_at_voting_with_state_name:>
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name} o el número de su tarjeta de identificación de %{state_name}. Si no tiene
+          una licencia de conducir o una tarjeta de identificación, debe proporcionar los
+          últimos cuatro dígitos de su número de seguro social. Si no incluye esta información,
+          deberá proporcionar una identificación cuando vaya a votar.
+        drivers_license_non_operating_with_state_name:>   
+          Debe proporcionar el número de su licencia de conducir de
+          %{state} o un número de licencia de identificación no operativa. Si no tiene una
+          licencia de conducir o un número de identificación no operativa, debe proporcionar
+          los últimos cuatro dígitos de su número de seguro social. Si no posee ninguno
+          de estos tipos de identificación, ingrese "NINGUNO", y el Estado le asignará un
+          número de identificación único.
+        drivers_license_or_photo_id_and_other:>
+          Debe proporcionar el número de su licencia de conducir de
+          Connecticut. Si no tiene una licencia de conducir, debe proporcionar los últimos
+          cuatro dígitos de su número de seguro social. Si no posee licencia de conducir
+          ni número de seguro social, ingrese "NINGUNO", y el Estado le asignará un número
+          de identificación.
+      sub_18:
+        be_by_next_election: si vas a cumplir 18 años antes de la próxima elección
+        once_turned_17: una vez que cumples 17 años de edad
+        turn_by_next_election: si vas a cumplir 18 años antes de la próxima elección
+        turn_by_next_general_election_november: si vas a cumplir 18 años antes de las elecciones generales (que es generalmente en noviembre)
+        90_days_before: 90 dias antes de su cumpleaños de 18

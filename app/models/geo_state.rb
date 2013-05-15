@@ -74,18 +74,8 @@ class GeoState < ActiveRecord::Base
     !for_zip_code(zip).nil?
   end
   
-  def self.state_online_reg_file_name
-    "config/states_with_online_registration.yml"
-  end
-  
   def self.states_with_online_registration
-    @@states_with_online_registration ||= nil
-    if @@states_with_online_registration.nil?
-      File.open(File.join(Rails.root, state_online_reg_file_name), "r") do |f|
-        @@states_with_online_registration = YAML::load(f)
-      end
-    end
-    @@states_with_online_registration
+    Settings.states_with_online_registration
   end
   
   def online_reg_enabled?

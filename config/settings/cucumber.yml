@@ -3,3 +3,14 @@ use_https: false
 delayed_wrap_up: false
 paperclip_options:
   path: ":rails_root/tmp/system/:attachment/:id/:style/:filename"
+
+hours_before_first_reminder: 0.0333
+hours_between_first_and_second_reminder: 0.0333
+pdf_expiration_days: .25
+
+states_with_online_registration:
+  - AZ
+  - CA
+  - CO
+  - NV
+  - WA

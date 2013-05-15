@@ -2,24 +2,15 @@ class MobileConfig
   
   cattr_accessor :redirect_url, :browsers
   
-  def self.config_file_name
-    "mobile.yml"
-  end
-  def self.config_file_path
-    File.join(Rails.root, "config", config_file_name)
-  end
-  
   def self.redirect_url(opts={})
-    load_config if @@redirect_url.blank?
     if opts[:partner].blank?
       opts[:partner] = Partner::DEFAULT_ID
     end
-    "#{@@redirect_url}?#{opts.collect{|k,v| v.blank? ? nil : "#{k}=#{v}"}.compact.sort.join('&')}"
+    "#{Settings.mobile_redirect_url}?#{opts.collect{|k,v| v.blank? ? nil : "#{k}=#{v}"}.compact.sort.join('&')}"
   end
   
   def self.browsers
-    load_config if @@browsers.blank?
-    @@browsers
+    Settings.mobile_browsers
   end
   
   def self.is_mobile_request?(req)
@@ -30,14 +21,5 @@ class MobileConfig
     end
     return false
   end
-  
-protected
-  def self.load_config
-    File.open(config_file_path, "r") do |f|
-      config = YAML.load(f)
-      @@redirect_url = config["mobile_redirect_url"]
-      @@browsers = config["mobile_browsers"]
-    end
-  end
-  
+    
 end

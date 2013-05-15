@@ -2,334 +2,170 @@
 record_0:
   abbreviation: AL
   name: Alabama
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '1'
-  race_tooltip_en: The state of Alabama requires information about your race or ethnicity.  Your
-    application will not be rejected if you fail to provide this information.
-  race_tooltip_es: Alabama requiere información acerca de su raza u origen étnico.
-    No rechazarán su solicitud si no incluye esta información.
-  requires_party: '1'
-  party_tooltip_en: You do not have to register with a party if you want to take part
-    in that party's primary election, caucus, or convention, and can choose any presidential
-    primary ballot (but not both) regardless of registration.
-  party_tooltip_es: No necesita registrarse con un partido político si desea participar
-    en la elección primaria, camarilla política o convención de ese partido, y puede
-    elegir cualquier boleta presidencial primaria (pero no ambas), independientemente
-    del registro.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: true
+  race_tooltip: required_with_state_name 
+  requires_party: true
+  party_tooltip: not_required_can_choose_any
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: Please provide your Social Security number.  If you do not
-    have a Social Security number, please enter "NONE" and a number will be assigned
-    to you by the state.
-  id_number_tooltip_es: Indique su número de seguro social. Si no tiene número de
-    seguro social, ingrese “NINGUNO”, y el estado le asignará un número.
-  sos_address: Office of the Secretary of State<br>Elections Division<br>P.O. Box
-    5616<br>Montgomery, AL 36103-5616
-  sos_phone: (800) 274-VOTE
+  id_number_tooltip: ssn_or_none
+  sos_address: "Office of the Secretary of State<br>Elections Division<br>P.O. Box 5616<br>Montgomery, AL 36103-5616 sos_phone: (800) 274-VOTE"
   sos_url: http://www.sos.state.al.us/Elections/Default.aspx
-  sub_18_en: if you will be 18 by the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: be_by_next_election
 record_1:
   abbreviation: AK
   name: Alaska
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Alaska does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Alaska no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: Alaska has a closed primary election and a caucus system for president.
-    Each recognized political party may choose to have a separate ballot listing only
-    candidates from their political party, or recognized political parties may choose
-    to combine their candidates on one ballot. Recognized political parties may also
-    choose what political affiliations may participate in their primary election.
-    A voter's political affiliation 30 days prior to Election Day will determine which
-    ballot a voter may choose; however, a voter may only choose one ballot.
-  party_tooltip_es: Alaska tiene un sistema de elección primaria cerrada y camarilla
-    política. Cada partido político reconocido tiene una boleta electoral separada,
-    que enumera únicamente a los candidatos de ese partido político. Los votantes
-    registrados como miembros de un partido político sólo pueden votar por la boleta
-    electoral de ese partido. Los votantes registrados como no declarados pueden elegir
-    una boleta de las que se encuentran disponibles.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: closed_caucus_with_state_name
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Alaska driver's license number or state
-    identification card number.  If you do not have either of those, you must provide
-    the last four digits of your Social Security number.  If you do not have any of
-    these identification numbers, please enter "NONE" and a unique identification
-    number will be assigned to you by the state for voter registration purposes.
-  id_number_tooltip_es: Debe indicar el número de su licencia de conducir de Alaska
-    o el número de tarjeta de identificación. Si no posee ninguno de los dos, debe
-    indicar los últimos cuatro dígitos de su número de seguro social. Si no posee
-    ninguno de estos números de identificación, ingrese “NINGUNO”, y el estado le
-    asignará un número único de identificación para fines de registro como votante.
-  sos_address: State of Alaska<br>Division of Elections<br>PO Box 110017<br>Juneau,
-    AK 99811-0017
+  id_number_tooltip: drivers_license_with_state_name 
+  sos_address: "State of Alaska<br>Division of Elections<br>PO Box 110017<br>Juneau, AK 99811-0017"
   sos_phone: (907) 465-4611
   sos_url: http://www.elections.alaska.gov/
-  sub_18_en: 90 days before your 18th birthday
-  sub_18_es: 90 dias antes de su cumpleaños de 18
+  sub_18_en: 90_days_before
 record_2:
   abbreviation: AZ
   name: Arizona
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Arizona does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Arizona no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: For presidential preference elections, the registrant needs to
-    be registered under a recognized party. For all other primary elections, voters
-    registered as independent, no party preference or members of a party without ballot
-    recognition are allowed to vote in the partisan Primary Election of their choice
-    of one of the recognized political parties. Voters who are registered with a recognized
-    political party will receive their political party's early ballot. Only registered
-    members of the Arizona Libertarian Party may vote in the Libertarian Party Primary
-    Election.
-  party_tooltip_es: Arizona tiene una elección primaria cerrada. Si está registrado
-    en un partido político que reúne las condiciones para reconocimiento de boletas,
-    se le permitirá votar por esa boleta de elección primaria de ese partido. Si está
-    registrado como independiente, sin preferencia de partido o como miembro de un
-    partido que no reúne las condiciones para reconocimiento de boleta, puede seleccionar
-    y votar por una boleta de elección primaria y por uno de los partidos políticos
-    reconocidos.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: none
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: arizona
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: If you have an Arizona driver's license or non-operating identification
-    issued after October 1, 1996, write the number in box 6 on the NVRA form. This
-    will serve as proof of citizenship and no additional documents are needed. If
-    not, you must attach proof of citizenship to the form. Only one acceptable form
-    of proof is needed to register to vote.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Arizona o un número de licencia de identificación no operativa. Si no tiene una
-    licencia de conducir o un número de identificación no operativa, debe proporcionar
-    los últimos cuatro dígitos de su número de Seguro Social. Si no posee ninguno
-    de estos tipos de identificación, ingrese "NINGUNO" y el Estado le asignará un
-    número de identificación único.
-  sos_address: Secretary of State<br>Elections Department<br>1700 W. Washington, 7th
-    Floor<br>Phoenix, AZ 85007-2888
+  id_number_tooltip: arizona 
+  sos_address: "Secretary of State<br>Elections Department<br>1700 W. Washington, 7th Floor<br>Phoenix, AZ 85007-2888"
   sos_phone: (877) 843-8683
   sos_url: http://www.azsos.gov/election/
-  sub_18_en: if you will turn 18 before the next general election (which is usually
-    in November)
-  sub_18_es: si vas a cumplir 18 años antes de las elecciones generales (que es generalmente
-    en noviembre)
+  sub_18: turn_by_next_general_election_november
 record_3:
   abbreviation: AR
   name: Arkansas
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Arkansas does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Arkansas no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You do not have to register with a party if you want to take part
-    in that party's primary election, caucus, or convention.
-  party_tooltip_es: No necesita registrarse con un partido si desea participar en
-    la elección primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: none
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: not_required
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Arkansas driver's license number or
-    non-operating identification license number.  If you do not have a driver's license
-    or non-operating identification number, you must provide the last four digits
-    of your Social Security number.  If you do not have any of these forms of identification,
-    please enter "NONE" and a unique identifying number will be assigned by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Arkansas o un número de licencia de identificación no operativa. Si no tiene una
-    licencia de conducir o un número de identificación no operativa, debe proporcionar
-    los últimos cuatro dígitos de su número de seguro social. Si no posee ninguno
-    de estos tipos de identificación, ingrese "NINGUNO", y el Estado le asignará un
-    número de identificación único.
-  sos_address: ! 'Secretary of State<br>ATTN: Voter Registration<br>P.O. Box 8111<br>Little
-    Rock, AR 72203-8111'
+  id_number_tooltip: drivers_license_non_operating_with_state_name
+  sos_address: "Secretary of State<br>ATTN: Voter Registration<br>P.O. Box 8111<br>Little Rock, AR 72203-8111"
   sos_phone: (501) 682-3526
   sos_url: http://www.sosweb.state.ar.us/elections.html
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_4:
   abbreviation: CA
   name: California
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of California does not request information about your
-    race or ethnicity.  However, we would appreciate this information in order to
-    measure the effectiveness of our voter registration efforts.  This information
-    will NOT appear on your printed voter registration form.
-  race_tooltip_es: California no solicita información acerca de su raza u origen
-    étnico.  Sin embargo, we apreciaría tu información para poder medir la efectividad
-    de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ
-    en tu forma impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: California law allows voters who decline to state an affiliation
-    with a qualified political party or who affiliate with a nonqualified political
-    party to vote in the primary election of any qualified political party that files
-    a notice with the Secretary of State allowing them to do so.  You can call 1-800-345-VOTE
-    or visit www.ss.ca.gov/elections/elections_d.htm to learn which political parties
-    are allowing nonaffiliated voters to participate in their primary election.
-  party_tooltip_es: La ley de California permite que los votantes que se niegan a
-    declarar una afiliación con un partido político calificado o que están afiliados
-    a un partido político no calificado voten en la elección primaria de cualquier
-    partido político calificado que presente un aviso ante al Secretario de Estado,
-    por el cual les permita a los votantes proceder de esa manera. Puede llamar al
-    1-800-345-VOTE o visitar www.ss.ca.gov/elections/elections_d.htm para saber qué
-    partidos políticos les permiten participar en su elección primaria a los votantes
-    no afiliados.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: Decline to State
-  no_party_es: Se niega a declarar
+  participating: true
+  not_participating_tooltip: none
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: california 
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: decline_to_state 
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your California driver's license or California
-    identification card number.  If you do not have either a driver's license or ID
-    card, you must provide the last four digits of your Social Security number.  If
-    you do not include this information, you will be required to provide identification
-    when you vote.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    California o el número de su tarjeta de identificación de California. Si no tiene
-    una licencia de conducir o una tarjeta de identificación, debe proporcionar los
-    últimos cuatro dígitos de su número de seguro social. Si no incluye esta información,
-    deberá proporcionar una identificación cuando vaya a votar.
-  sos_address: Secretary of State<br>Elections Division<br>1500 11th Street 5th floor<br>Sacramento,
-    CA 95814
+  id_number_tooltip: drivers_license_required_at_voting_with_state_name
+  sos_address: "Secretary of State<br>Elections Division<br>1500 11th Street 5th floor<br>Sacramento, CA 95814"
   sos_phone: (800) 345-VOTE
   sos_url: http://www.sos.ca.gov/elections/
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_5:
   abbreviation: CO
   name: Colorado
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Colorado does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Colorado no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election, caucus, or convention. In order to vote in a party's
-    caucus, you must have been affiliated with the part for at least 2 months before
-    the caucus is held. To vote in a party's primary election, you may declare your
-    affiliation with the party at any time up to and including the day of the primary
-    election.
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: none
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: required_for_primary_2_months
+  parties:
+    - Democratic
+    - Independent
+    - Green
+    - Libertarian
+    - Republican
+    - Other
+  no_party_en: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Colorado driver's license number or
-    identification number (issued by the Colorado department of revenue).  If you
-    do not have a driver's license or identification number. If you do not have any
-    of these forms of identification, you must indicate this on the form via the appropriate
-    checkbox and provide the last four digits of your social security number. If you
-    do not have any of these forms of identification, the secretary of state will
-    assign you a unique identifying number.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Colorado o su número de identificación. No incluya los guiones. Si no tiene una
-    licencia de conducir o un número de identificación, debe proporcionar los últimos
-    cuatro dígitos de su número de seguro social. Si no posee ninguno de estos tipos
-    de identificación, ingrese "NINGUNO", y el Estado le asignará un número de identificación
-    único.
-  sos_address: Secretary of State<br>c/o Elections<br>1700 Broadway, Suite 200<br>Denver,
-    CO 80290-0301
+  id_number_tooltip: colorado 
+  sos_address: "Secretary of State<br>c/o Elections<br>1700 Broadway, Suite 200<br>Denver, CO 80290-0301"
   sos_phone: (303) 894-2200
   sos_url: http://www.sos.state.co.us/pubs/elections/
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18_en: turn_by_next_election
 record_6:
   abbreviation: CT
   name: Connecticut
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Connecticut does not request information about your
-    race or ethnicity.  However, we would appreciate this information in order to
-    measure the effectiveness of our voter registration efforts.  This information
-    will NOT appear on your printed voter registration form.
-  race_tooltip_es: Connecticut no solicita información acerca de su raza u origen
-    étnico.  Sin embargo, we apreciaría tu información para poder medir la efectividad
-    de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ
-    en tu forma impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election, caucus, or convention.
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip_en: none
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name 
+  requires_party: true
+  party_tooltip_en: required_for_primary
+  parties:
+    - Democratic
+    - Independent
+    - Green
+    - Libertarian
+    - Republican
+    - Other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Connecticut driver's license number.  If
-    you do not have a driver's license, please provide the last four digits of your
-    Social Security number.  If you have neither a driver's license nor a Social Security
-    number, please provide a copy of a current and valid photo I.D. or a copy of a
-    current utility bill, bank statement, government check, paycheck, or government
-    document that shows your name and address, in order to avoid additional ID requirements
-    the first time you vote.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Connecticut. Si no tiene una licencia de conducir, debe proporcionar los últimos
-    cuatro dígitos de su número de seguro social. Si no posee licencia de conducir
-    ni número de seguro social, ingrese "NINGUNO", y el Estado le asignará un número
-    de identificación.
-  sos_address: Secretary of State<br>Legislation and Election Adminstration<br>30
-    Trinity Street<br>Hartford, CT 06106
+  id_number_tooltip: drivers_license_or_photo_id_and_other
+  sos_address: "Secretary of State<br>Legislation and Election Adminstration<br>30 Trinity Street<br>Hartford, CT 06106"
   sos_phone: (800) 509-6100
-  sos_url: http://www.sots.ct.gov/sots/cwp/view.asp?a=3&Q=415810&sotsNav=|
-  sub_18_en: once you have turned 17 years old
-  sub_18_es: una vez que cumples 17 años de edad
+  sos_url: "http://www.sots.ct.gov/sots/cwp/view.asp?a=3&Q=415810&sotsNav=|"
+  sub_18: once_turned_17
 record_7:
   abbreviation: DE
   name: Delaware
