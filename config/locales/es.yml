@@ -313,6 +313,8 @@ es:
           No se requiere el registro en un partido ni la preferencia por
           otro para el registro de votantes. Sin embargo, cuando solicita un boleta primaria,
           debe indicar su preferencia de partido para esa elección.
+        party_not_required_2:>
+          No se requiere registro partidario para participar en ninguna elección.
         you_may_but_not_required:>
           Puede, pero no necesita registrarse con un partido por anticipado,
           si desea participar en la elección primaria, camarilla política o convención de

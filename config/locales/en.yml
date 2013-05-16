@@ -324,6 +324,8 @@ en:
           Party registration or preference is not required for voter registration.  However,
           when you apply for a primary ballot, you must indicate your party preference for
           that election.
+        party_not_required_2:>
+          Party registration is not required to participate in any election.
         you_may_but_not_required:>
           You may, but do not have to, register with a party in advance
           if you want to take part in that party's primary election.  To participate in

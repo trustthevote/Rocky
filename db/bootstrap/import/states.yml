@@ -613,42 +613,27 @@ record_25:
 record_26:
   abbreviation: MT
   name: Montana
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Montana does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Montana no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: Party registration is not required to participate in any election.
-  party_tooltip_es: No se requiere registro partidario para participar en ninguna
-    elección.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: party_not_required_2
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Montana driver's license number.  If
-    you do not have a driver's license number, please provide the last four digits
-    of your Social Security number.  If you have neither, please enter "NONE" and
-    a unique identifying number will be assigned to you.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Montana. Si no tiene un número de licencia de conducir, debe proporcionar los
-    últimos cuatro dígitos de su número de seguro social. Si no posee ninguno de estos
-    números, ingrese "NINGUNO", y le asignarán un número de identificación única.
-  sos_address: Secretary of State's Office<br><br>P.O. Box 202801 State Capitol<br>Helena,
-    MT 59620-2801
+  id_number_tooltip: drivers_license_or_other_with_state_name_2
+  sos_address: "Secretary of State's Office<br><br>P.O. Box 202801 State Capitol<br>Helena, MT 59620-2801"
   sos_phone: (406) 444-4732
   sos_url: http://sos.mt.gov/elections/index.asp
-  sub_18_en: if you will turn 18 by the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election  
 record_27:
   abbreviation: NE
   name: Nebraska
