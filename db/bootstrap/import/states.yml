@@ -1,36 +1,9 @@
 ---
-record_0:
-  abbreviation: AL
-  name: Alabama
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: true
-  race_tooltip: required_with_state_name 
-  requires_party: true
-  party_tooltip: not_required_can_choose_any
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
-  id_number_tooltip: ssn_or_none
-  sos_address: "Office of the Secretary of State<br>Elections Division<br>P.O. Box 5616<br>Montgomery, AL 36103-5616 sos_phone: (800) 274-VOTE"
-  sos_url: http://www.sos.state.al.us/Elections/Default.aspx
-  sub_18: be_by_next_election
-record_1:
-  abbreviation: AK
-  name: Alaska
+defaults:
   participating: true
   not_participating_tooltip: blank
   requires_race: false
   race_tooltip: not_required_but_appreciated_with_state_name
-  requires_party: true
-  party_tooltip: closed_caucus_with_state_name
   parties:
     - democratic
     - independent
@@ -41,653 +14,361 @@ record_1:
   no_party: none
   id_length_min: '6'
   id_length_max: '60'
+  sub_18: turn_by_next_election
+  
+record_0:
+  abbreviation: AL
+  name: Alabama
+  requires_race: true
+  race_tooltip: required_with_state_name 
+  requires_party: true
+  party_tooltip: not_required_can_choose_any
+  id_number_tooltip: ssn_or_none_5
+  sos_address: "Office of the Secretary of State<br>Elections Division<br>P.O. Box 5616<br>Montgomery, AL 36103-5616"
+  sos_phone: (800) 274-VOTE
+  sos_url: http://www.sos.state.al.us/Elections/Default.aspx
+  sub_18: be_by_next_election
+
+  
+record_1:
+  abbreviation: AK
+  name: Alaska
+  requires_party: true
+  party_tooltip: closed_caucus_with_state_name
   id_number_tooltip: drivers_license_with_state_name 
   sos_address: "State of Alaska<br>Division of Elections<br>PO Box 110017<br>Juneau, AK 99811-0017"
   sos_phone: (907) 465-4611
   sos_url: http://www.elections.alaska.gov/
   sub_18: 90_days_before
+
+  
 record_2:
   abbreviation: AZ
   name: Arizona
-  participating: true
-  not_participating_tooltip: none
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: arizona
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: arizona 
   sos_address: "Secretary of State<br>Elections Department<br>1700 W. Washington, 7th Floor<br>Phoenix, AZ 85007-2888"
   sos_phone: (877) 843-8683
   sos_url: http://www.azsos.gov/election/
   sub_18: turn_by_next_general_election_november
+
+  
 record_3:
   abbreviation: AR
   name: Arkansas
-  participating: true
-  not_participating_tooltip: none
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: not_required
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_non_operating_with_state_name
   sos_address: "Secretary of State<br>ATTN: Voter Registration<br>P.O. Box 8111<br>Little Rock, AR 72203-8111"
   sos_phone: (501) 682-3526
   sos_url: http://www.sosweb.state.ar.us/elections.html
-  sub_18: turn_by_next_election
+
+
 record_4:
   abbreviation: CA
   name: California
-  participating: true
-  not_participating_tooltip: none
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: california 
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
   no_party: decline_to_state 
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_required_at_voting_with_state_name
   sos_address: "Secretary of State<br>Elections Division<br>1500 11th Street 5th floor<br>Sacramento, CA 95814"
   sos_phone: (800) 345-VOTE
   sos_url: http://www.sos.ca.gov/elections/
-  sub_18: turn_by_next_election
+
+
 record_5:
   abbreviation: CO
   name: Colorado
-  participating: true
-  not_participating_tooltip: none
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary_2_months
-  parties:
-    - Democratic
-    - Independent
-    - Green
-    - Libertarian
-    - Republican
-    - Other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: colorado 
   sos_address: "Secretary of State<br>c/o Elections<br>1700 Broadway, Suite 200<br>Denver, CO 80290-0301"
   sos_phone: (303) 894-2200
   sos_url: http://www.sos.state.co.us/pubs/elections/
-  sub_18: turn_by_next_election
+
+
 record_6:
   abbreviation: CT
   name: Connecticut
-  participating: true
-  not_participating_tooltip: none
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name 
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - Democratic
-    - Independent
-    - Green
-    - Libertarian
-    - Republican
-    - Other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_photo_id_and_other
   sos_address: "Secretary of State<br>Legislation and Election Adminstration<br>30 Trinity Street<br>Hartford, CT 06106"
   sos_phone: (800) 509-6100
   sos_url: "http://www.sots.ct.gov/sots/cwp/view.asp?a=3&Q=415810&sotsNav=|"
   sub_18: once_turned_17
+
+
 record_7:
   abbreviation: DE
   name: Delaware
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - democracti
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_non_operating_with_state_name
   sos_address: "Office of the State Election Commissioner<br>905 S. Governors Ave, Suite 170<br>Dover, DE 19904"
   sos_phone: (302) 739-4277
   sos_url: http://elections.delaware.gov/
-  sub_18: turn_by_next_election
+
+
 record_8:
   abbreviation: DC
   name: District of Columbia
-  participating: true
-  not_participating_tooltip: none
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
+  race_tooltip: washington_dc
   requires_party: true
   party_tooltip: required_for_primary_no_change_30_days
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_ssn_or_none
   sos_address: "District of Columbia Board of Elections & Ethics<br>441 4th Street, NW, Suite 250 North<br>Washington, DC 20001-2745"
   sos_phone: (202) 727-2525
   sos_url: http://www.dcboee.org/
   sub_18: when_at_least_16
+
+
 record_9:
   abbreviation: FL
   name: Florida
-  participating: true
-  not_participating_tooltip: blank
   requires_race: true
   race_tooltip: requested_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_non_operating_with_state_name
   sos_address: "Florida Department of State, Division of Elections<br>The R.A. Gray Building<br>500 Bronough Street<br>Tallahassee, FL  32399-0250"
   sos_phone: (850) 245-6200
   sos_url: http://election.dos.state.fl.us/
   sub_18: when_is_16
+
+
 record_10:
   abbreviation: GA
   name: Georgia
-  participating: true
-  not_participating_tooltip: blank
   requires_race: true
-  race_tooltip: requested_with_state_name
+  race_tooltip: georgia
   requires_party: true
   party_tooltip: not_done_with_state_name
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: georgia
   sos_address: "Secretary of State<br>Elections Division<br>2 Martin Luther King Jr. Dr. Suite 802<br>Floyd West Tower<br>Atlanta, GA 30334-1505"
   sos_phone: (404) 656-2871
   sos_url: http://www.sos.state.ga.us/elections/
   sub_18: 6_months_before 
+
+
 record_11:
   abbreviation: HI
   name: Hawaii
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
+  race_tooltip: not_required_but_appreciated_with_state_name_2
   requires_party: true
   party_tooltip: not_required_to_vote
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: ssn_full 
   sos_address: "Office of Elections<br>State of Hawaii<br>802 Lehua Avenue<br>Pearl City, HI 96782"
   sos_phone: (808) 453-8683
   sos_url: http://www.hawaii.gov/elections/
   sub_18: once_turned_16 
+
+
 record_12:
   abbreviation: ID
   name: Idaho
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: idaho
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_other_with_state_name
   sos_address: 'Idaho Secretary of State''s Office<br>Attn: Elections Division<br>P.O. Box 83720<br>Boise, ID 83720-0080'
   sos_phone: (208) 334-2300
   sos_url: http://www.sos.idaho.gov/elect/eleindex.htm
-  sub_18: turn_by_next_election
+
+
 record_13:
   abbreviation: IL
   name: Illinois
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: party_not_required
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_ssn_or_none_2
   sos_address: "Illinois State Board of Elections<br>Voter Registration Department<br>2329 S. MacArthur Boulevard<br>Springfield, IL 62704"
   sos_phone: (217) 782-4141
   sos_url: http://www.elections.il.gov/
-  sub_18: turn_by_next_election
+
+
 record_14:
   abbreviation: IN
   name: Indiana
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: false
   party_tooltip: indiana
   parties: []
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: indiana
   sos_address: "Election Division<br>Office of the Secretary of State<br>302 West Washington Street, Room E-204<br>Indianapolis, IN 46204-2743"
   sos_phone: (317) 232-3939
   sos_url: http://www.state.in.us/sos/elections/
-  sub_18: turn_by_next_election
+
+
 record_15:
   abbreviation: IA
   name: Iowa
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: you_may_but_not_required 
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_non_driver_with_state_name
   sos_address: "Elections Division, Office of the Secretary of State<br>Lucas Building -1st Floor<br>321 E. 12th Street<br>Des Moines, IA 50319"
   sos_phone: (888) 767-8683
   sos_url: http://www.sos.state.ia.us/
   sub_18: 6_months_before
+
+
 record_16:
   abbreviation: KS
   name: Kansas
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_non_driver_2 
   sos_address: "Secretary of State<br>1st Floor, Memorial Hall<br>120 SW 10th Ave.<br>Topeka, KS 66612-1594"
   sos_phone: (785) 796-4564
-  sos_url: http://sos.ky.gov/elections/
+  sos_url: http://www.kssos.org/elections/elections.html
   sub_18: be_by_next_general_election_november
+
+
 record_17:
   abbreviation: KY
   name: Kentucky
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: ssn_full_not_required
   sos_address: "State Board of Elections<br>140 Walnut Street<br>Frankfort, KY 40601"
   sos_phone: (502) 573-7100
   sos_url: http://elect.ky.gov/
   sub_18: when_will_be_18 
+
+
 record_18:
   abbreviation: LA
   name: Louisiana
-  participating: true
-  not_participating_tooltip: blank
   requires_race: true
   race_tooltip: requested_with_state_name
   requires_party: true
   party_tooltip: required_for_presidential
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_if_issued_with_state_name 
   sos_address: 'Secretary of State<br>Attention: Voter Registration<br>P.O. Box 94125<br>Baton Rouge, LA 70804-9125'
   sos_phone: (225) 922-0900
   sos_url: http://www.sos.louisiana.gov/tabid/68/Default.aspx
   sub_18: once_turned_17
+
+
 record_19:
   abbreviation: ME
   name: Maine
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary_unless
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_other_with_state_name_2
   sos_address: "Bureau of Corporations, Elections and Commissions<br>101 State House Station<br>Augusta, ME 04333-0101"
   sos_phone: (207) 642-7736
   sos_url: http://www.state.me.us/sos/cec/elec/
   sub_18: once_turned_17_but
+
+
 record_20:
   abbreviation: MD
   name: Maryland
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary_2
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republic
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: maryland
   sos_address: "State Board of Elections<br>P.O. Box 6486<br>Annapolis, MD 21401-0486"
   sos_phone: (800) 222-VOTE
   sos_url: http://www.electionsmaryland.com
-  sub_18: turn_by_next_election
+
+
 record_21:
   abbreviation: MA
   name: Massachusetts
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: massachusetts
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_other_with_state_name_2
   sos_address: "Secretary of the Commonwealth<br>Elections Division<br>McCormack Building, Room 1705<br>One Ashburton Place<br>Boston, MA 02108"
   sos_phone: (800) 462-VOTE
   sos_url: http://www.sec.state.ma.us/ele
-  sub_18: turn_by_next_election
+
+
 record_22:
   abbreviation: MI
   name: Michigan
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: not_required_to_vote
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertariean
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_personal_identification_with_state_name
   sos_address: "Michigan Department of State<br>Bureau of Elections<br>P.O. Box 20126<br>Lansing, MI 48901-0726"
   sos_phone: (517) 373-2540
   sos_url: "http://www.michigan.gov/sos/0,1607,7-127-1633---,00.html"
-  sub_18: turn_by_next_election
+
+
 record_23:
   abbreviation: MN
   name: Minnesota
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: false
   party_tooltip: blank
   parties: []
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_state_id_with_state_name
   sos_address: "Secretary of State<br>60 Empire Drive, Suite 100<br>St. Paul, MN 55155-1299"
   sos_phone: (651) 215-1440
   sos_url: http://www.sos.state.mn.us/home/index.asp?page=134
-  sub_18: turn_by_next_election
+
+
 record_24:
   abbreviation: MS
   name: Mississippi
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: mississippi
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_current_and_valid
   sos_address: "Secretary of State<br>P.O. Box 136<br>Jackson, MS, 39205-0136"
   sos_phone: (800) 829-6786
   sos_url: http://www.sos.state.ms.us/elections/elections.asp
   sub_18: be_by_next_general_election_november
+
+
 record_25:
   abbreviation: MO
   name: Missouri
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: not_required
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: driver_license_state_issues_and_ssn
   sos_address: "Secretary of State<br>P.O. Box 1767<br>Jefferson City, MO 65102-1767"
   sos_phone: (573) 751-2301
   sos_url: http://www.sos.mo.gov/elections/
   sub_18: 6_months_before
+
+
 record_26:
   abbreviation: MT
   name: Montana
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: party_not_required_2
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_other_with_state_name_2
   sos_address: "Secretary of State's Office<br><br>P.O. Box 202801 State Capitol<br>Helena, MT 59620-2801"
   sos_phone: (406) 444-4732
   sos_url: http://sos.mt.gov/elections/index.asp
-  sub_18: turn_by_next_election  
+  sub_18: turn_by_next_election_2
+  
+
 record_27:
   abbreviation: NE
   name: Nebraska
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_other_with_state_name_3
   sos_address: "Office of the Secretary of State<br>Elections<br>P.O. Box 94608<br>Lincoln, NE 68509-4608"
   sos_phone: (402) 471-2555
   sos_url: http://www.sos.state.ne.us/elec/
   sub_18: be_by_next_general_election_november
+
+
 record_28:
   abbreviation: NV
   name: Nevada
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary_nonpartisan
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_ssn_county_clerk_with_state_name
   sos_address: "Secretary of State<br>Elections Division<br>101 North Carson Street Suite 3<br>Carson City, NV 89701-4786"
   sos_phone: (775) 684-5705
   sos_url: http://nvsos.gov/index.aspx?page=3
-  sub_18: turn_by_next_election
+
 record_29:
   abbreviation: NH
   name: New Hampshire
   participating: false
   not_participating_tooltip: new_hampshire 
-  requires_race: false
   race_tooltip: blank
   requires_party: false
   party_tooltip: blank
@@ -700,61 +381,33 @@ record_29:
   sos_phone: ''
   sos_url: ''
   sub_18: blank
+
+
 record_30:
   abbreviation: NJ
   name: New Jersey
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary_dem_rep_only
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_mvc
   sos_address: "New Jersey Department of State<br>Division of Elections<br>PO BOX 304<br>Trenton, NJ 08628-0304"
   sos_phone: (609) 292-3760
   sos_url: http://www.nj.gov/state/elections/
-  sub_18: turn_by_next_election
+
+
 record_31:
   abbreviation: NM
   name: New Mexico
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: ssn_full_2
   sos_address: "Bureau of Elections<br>325 Don Gaspar, Suite 300<br>Santa Fe, NM 87503"
   sos_phone: (800) 477-3632
   sos_url: http://www.sos.state.nm.us/
-  sub_18: turn_by_next_election
+
+
 record_32:
   abbreviation: NY
   name: New York
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
   parties:
@@ -765,44 +418,30 @@ record_32:
     - republican
     - working_families
     - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_other_with_state_name_4
   sos_address: "NYS Board of Elections<br>40 North Pearl Street, Suite 5<br>Albany, NY 12207-2108"
   sos_phone: (800) FOR-VOTE
   sos_url: http://www.elections.ny.gov
-  sub_18: turn_by_next_election
+
+
 record_33:
   abbreviation: NC
   name: North Carolina
-  participating: true
-  not_participating_tooltip: blank
   requires_race: true
   race_tooltip: not_required_with_state_name
   requires_party: true
   party_tooltip: north_carolina
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_dmv_with_state_name
   sos_address: "State Board of Elections<br>P.O. Box 27255<br>Raleigh, NC 27611-7255"
   sos_phone: (919) 733-7173
   sos_url: http://www.sboe.state.nc.us/
-  sub_18: turn_by_next_election
+
+
 record_34:
   abbreviation: ND
   name: North Dakota
   participating: false
   not_participating_tooltip: north_dakota
-  requires_race: false
   race_tooltip: blank
   requires_party: false
   party_tooltip: blank
@@ -815,372 +454,192 @@ record_34:
   sos_phone: ''
   sos_url: ''
   sub_18: blank
+
+
 record_35:
   abbreviation: OH
   name: Ohio
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: not_part_of_registration
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: ssn_requested
   sos_address: "Secretary of State of Ohio<br>Elections Division<br>180 E. Broad Street - 15th Floor<br>Columbus, OH 43215"
   sos_phone: (614) 466-2585
   sos_url: http://www.sos.state.oh.us/elections.aspx
-  sub_18: turn_by_next_election
+  sub_18: turn_by_next_general_election_november_2
+
+
 record_36:
   abbreviation: OK
   name: Oklahoma
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: oklahoma
   sos_address: "Oklahoma State Election Board<br>P.O. Box 528800<br>Oklahoma City, OK 73152-8800"
   sos_phone: (405) 521-2391
   sos_url: http://www.oklaosf.state.ok.us/~elections/
   sub_18: 60_days_before_election_novemeber
+
+
 record_37:
   abbreviation: OR
   name: Oregon
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary_2
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_other_with_state_name_4
   sos_address: "Secretary of State<br>Elections Division<br>255 Capitol St. NE, Suite 501<br>Salem, OR 97310-0722"
   sos_phone: (503) 986-1518
   sos_url: http://www.sos.state.or.us/elections/
   sub_18: once_turned_17
+
+
 record_38:
   abbreviation: PA
   name: Pennsylvania
-  participating: true
-  not_participating_tooltip: blank
   requires_race: true
   race_tooltip: requested_no_conditions_with_state_name
   requires_party: true
   party_tooltip: required_for_primary_2
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_ssn_or_none_3
   sos_address: "Pennsylvania Department of State<br>Bureau of Commissions, Elections & Legislation<br> Room 210 North Office Building<br>Harrisburg, PA 17120"
   sos_phone: (717) 787-5280
   sos_url: http://www.dos.state.pa.us/BCEL/site/default.asp
-  sub_18: turn_by_next_election
+
+
 record_39:
   abbreviation: RI
   name: Rhode Island
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: rhode_island
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_current_and_valid_with_state_name
   sos_address: "Rhode Island State Board of Elections<br>50 Branch Avenue<br>Providence, RI 02904"
   sos_phone: (401) 222-2345
   sos_url: http://www.elections.state.ri.us/
-  sub_18: turn_by_next_election
+
+
 record_40:
   abbreviation: SC
   name: South Carolina
-  participating: true
-  not_participating_tooltip: blank
   requires_race: true
   race_tooltip: required_no_conditions_with_state_name 
   requires_party: true
   party_tooltip: not_required
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: ssn_or_none_2
   sos_address: "State Election Commission<br>P.O. Box 5987<br>Columbia, SC 29250-5987"
   sos_phone: (803) 734-9060
   sos_url: http://www.scvotes.org/
-  sub_18: turn_by_next_election
+
+
 record_41:
   abbreviation: SD
   name: South Dakota
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: required_for_primary
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: south_dakota 
   sos_address: "Elections, Secretary of State<br>500 E. Capitol, Suite 204<br>Pierre, SD 57501-5070"
   sos_phone: (605) 773-3537
   sos_url: http://sdsos.gov/Elections/Default.aspx
-  sub_18: turn_by_next_election
+
+
 record_42:
   abbreviation: TN
   name: Tennessee
-  participating: true
-  not_participating_tooltip: blank
   requires_race: true
   race_tooltip: requested_not_required_with_state_name
   requires_party: true
   party_tooltip: tennessee
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
-  id_number_tooltip: ssn_or_none
+  id_number_tooltip: ssn_or_none_4
   sos_address: "Coordinator of Elections<br>Tennessee Tower, Ninth Floor<br>312 Rosa L. Parks Avenue<br>Nashville, TN 37243"
   sos_phone: (615) 741-7956
   sos_url: http://www.state.tn.us/sos/election/index.htm
-  sub_18: turn_by_next_election
+
+
 record_43:
   abbreviation: TX
   name: Texas
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: not_required
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_ssn_or_none_4
   sos_address: "Office of the Secretary of State<br>Elections Division<br>P.O. Box 12060<br>Austin, TX 78711-2060"
   sos_phone: (800) 252-VOTE
   sos_url: http://www.sos.state.tx.us/elections/index.shtml
   sub_18: 2_months_before
+
+
 record_44:
   abbreviation: UT
   name: Utah
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: utah
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_not_operating
   sos_address: "Office of the Lieutenant Governor<br>P.O. Box 142325<br>Salt Lake City, UT 84114"
   sos_phone: (800) 995-VOTE
   sos_url: http://elections.utah.gov/
   sub_18: blank
+
+
 record_45:
   abbreviation: VT
   name: Vermont
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: vermont
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_ssn_or_none_4
   sos_address: "Secretary of State<br>Elections Division<br>128 State Street<br>Montpelier, VT 05633-1101"
   sos_phone: (802) 828-2464
   sos_url: http://vermont-elections.org/
-  sub_18: turn_by_next_election
+
+
 record_46:
   abbreviation: VA
   name: Virginia
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
   race_tooltip: virginia
   requires_party: true
   party_tooltip: virginia
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: ssn_or_none_3
   sos_address: "State Board of Elections<br>Washington Building<br>1100 Bank Street<br>Richmond, VA 23219"
   sos_phone: (804) 786-6551
   sos_url: http://www.sbe.state.va.us/
-  sub_18: turn_by_next_election
+
+
 record_47:
   abbreviation: WA
   name: Washington
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: washington
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_with_state_name_2
   sos_address: "Secretary of State<br>Voter Registration by Mail<br>P.O. Box 40229<br>Olympia, WA 98504-0229"
   sos_phone: (360) 902-4180
   sos_url: http://www.secstate.wa.gov/elections/
   sub_18: turn_by_next_general_election_november
+
+
 record_48:
   abbreviation: WV
   name: West Virginia
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: west_virginia
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: drivers_license_or_non_driver_id
   sos_address: "Secretary of State<br>Building 1, Suite 157-K<br>1900 Kanawha Blvd. East<br>Charleston, WV 25305-0770"
   sos_phone: (304) 558-6000
   sos_url: http://www.sos.wv.gov/elections/Pages/default.aspx
-  sub_18: turn_by_next_election
+
+
 record_49:
   abbreviation: WI
   name: Wisconsin
-  participating: true
-  not_participating_tooltip: blank
-  requires_race: false
-  race_tooltip: not_required_but_appreciated_with_state_name
   requires_party: true
   party_tooltip: wisconsin
-  parties:
-    - democratic
-    - independent
-    - green
-    - libertarian
-    - republican
-    - other
-  no_party: none
-  id_length_min: '6'
-  id_length_max: '60'
   id_number_tooltip: wisconsin 
   sos_address: "Government Accountability Board<br>P.O. Box 7984<br>Madison, WI 53707-7984"
   sos_phone: (608) 266-8005
   sos_url: http://elections.state.wi.us/
   sub_18: 17_turn_18
+
+
 record_50:
   abbreviation: WY
   name: Wyoming
   participating: false
   not_participating_tooltip: wyoming
-  requires_race: false
   race_tooltip: blank
   requires_party: false
   party_tooltip: blank
