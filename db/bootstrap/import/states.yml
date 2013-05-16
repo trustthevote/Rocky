@@ -169,790 +169,447 @@ record_6:
 record_7:
   abbreviation: DE
   name: Delaware
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Delaware does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Delaware no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election, caucus, or convention.
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: required_for_primary
+  parties:
+    - democracti
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Delaware driver's license number or
-    non-operating identification license number.  If you do not have a driver's license
-    or non-operating identification number, you must provide the last four digits
-    of your Social Security number.  If you do not have any of these forms of identification,
-    please enter "NONE" and a unique identifying number will be assigned by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Delaware o un número de licencia de identificación no operativa. Si no tiene licencia
-    de conducir ni número de identificación no operativa, debe proporcionar los últimos
-    cuatro dígitos de su número de seguro social. Si no posee ninguno de estos tipos
-    de identificación, ingrese "NINGUNO", y el Estado le asignará un número de identificación
-    único.
-  sos_address: Office of the State Election Commissioner<br>905 S. Governors Ave,
-    Suite 170<br>Dover, DE 19904
+  id_number_tooltip: drivers_license_non_operating_with_state_name
+  sos_address: "Office of the State Election Commissioner<br>905 S. Governors Ave, Suite 170<br>Dover, DE 19904"
   sos_phone: (302) 739-4277
   sos_url: http://elections.delaware.gov/
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_8:
   abbreviation: DC
   name: District of Columbia
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The District of Columbia does not request information about your
-    race or ethnicity.  However, we would appreciate this information in order to
-    measure the effectiveness of our voter registration efforts.  This information
-    will NOT appear on your printed voter registration form.
-  race_tooltip_es: Washington, D.C. no solicita información acerca de su raza u origen
-    étnico.  Sin embargo, we apreciaría tu información para poder medir la efectividad
-    de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ
-    en tu forma impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election, caucus, or convention. You may not change your party
-    affiliation status within 30 days of a partisan primary election.
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: none
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: required_for_primary_no_change_30_days
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide either your driver's license number or the
-    last four digits of your Social Security number.  If you have neither a driver's
-    license nor a Social Security number, please enter "NONE" and an identification
-    number will be assigned to you by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir o los
-    últimos cuatro dígitos de su número de seguro social. Si no posee licencia de
-    conducir ni número de seguro social, ingrese "NINGUNO", y el Estado le asignará
-    un número de identificación.
-  sos_address: District of Columbia Board of Elections & Ethics<br>441 4th Street,
-    NW, Suite 250 North<br>Washington, DC 20001-2745
+  id_number_tooltip: drivers_license_or_ssn_or_none
+  sos_address: "District of Columbia Board of Elections & Ethics<br>441 4th Street, NW, Suite 250 North<br>Washington, DC 20001-2745"
   sos_phone: (202) 727-2525
   sos_url: http://www.dcboee.org/
-  sub_18_en: when the person is at least 16 years of age
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: when_at_least_16
 record_9:
   abbreviation: FL
   name: Florida
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '1'
-  race_tooltip_en: The state of Florida requests information about your race or ethnicity.  Your
-    application will not be rejected if you fail to provide this information.
-  race_tooltip_es: Florida solicita información acerca de su raza u origen étnico.
-    No rechazarán su solicitud si no incluye esta información.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election, caucus, or convention.
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: true
+  race_tooltip: requested_with_state_name
+  requires_party: true
+  party_tooltip: required_for_primary
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Florida driver's license number or non-operating
-    identification license number.  If you do not have a driver's license or non-operating
-    identification number, you must provide the last four digits of your Social Security
-    number.  If you do not have any of these forms of identification, please enter
-    "NONE" and a unique identifying number will be assigned by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Florida o el número de su tarjeta de identificación estatal. Si no tiene ninguno
-    de estos números, debe proporcionar los últimos cuatro dígitos de su número de
-    seguro social. Si no posee una licencia de conducir, una tarjeta de identificación
-    o un número de Seguro Social, ingrese "NINGUNO", y el Estado le asignará un número
-    de identificación.
-  sos_address: Florida Department of State, Division of Elections<br>The R.A. Gray
-    Building<br>500 Bronough Street<br>Tallahassee, FL  32399-0250
+  id_number_tooltip: drivers_license_non_operating_with_state_name
+  sos_address: "Florida Department of State, Division of Elections<br>The R.A. Gray Building<br>500 Bronough Street<br>Tallahassee, FL  32399-0250"
   sos_phone: (850) 245-6200
   sos_url: http://election.dos.state.fl.us/
-  sub_18_en: when the person is 16 years old
-  sub_18_es: una vez que hayas cumplido los 16 años de edad (pero no puedes votar
-    hasta que cumples los 18 anos)
+  sub_18: when_is_16
 record_10:
   abbreviation: GA
   name: Georgia
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '1'
-  race_tooltip_en: Your application will not be rejected if you fail to provide information
-    pertaining to gender and race/ethnicity.
-  race_tooltip_es: Georgia solicita información acerca de su raza u origen étnico.
-    No rechazarán su solicitud si no incluye esta información.
-  requires_party: '1'
-  party_tooltip_en: You do not register by political party in Georgia. However, in
-    order to vote in a primary, you must request one particular party's ballot.
-  party_tooltip_es: No necesita registrarse con un partido político para poder registrarse
-    para votar.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: true
+  race_tooltip: requested_with_state_name
+  requires_party: true
+  party_tooltip: not_done_with_state_name
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Georgia driver's license number or state-issued
-    identification number.  If you do not have either of those, you must provide the
-    last four digits of your Social Security number.  If you do not have any of the
-    requested identification numbers, please enter "NONE" and you will be assigned
-    a unique identification number by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Georgia o el número de identificación emitido por el Estado. Si no tiene ninguno
-    de estos números, debe proporcionar los últimos cuatro dígitos de su número de
-    seguro social. Si no posee ninguno de estos números de identificación solicitados,
-    ingrese "NINGUNO", y el Estado le asignará un número de identificación único.
-  sos_address: Secretary of State<br>Elections Division<br>2 Martin Luther King Jr.
-    Dr. Suite 802<br>Floyd West Tower<br>Atlanta, GA 30334-1505
+  id_number_tooltip: georgia
+  sos_address: "Secretary of State<br>Elections Division<br>2 Martin Luther King Jr. Dr. Suite 802<br>Floyd West Tower<br>Atlanta, GA 30334-1505"
   sos_phone: (404) 656-2871
   sos_url: http://www.sos.state.ga.us/elections/
-  sub_18_en: six months before your 18th birthday.
-  sub_18_es: seis meses antes que cumples 18 años
+  sub_18: 6_months_before 
 record_11:
   abbreviation: HI
   name: Hawaii
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Hawaii does not require information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Hawaii no requiere información acerca de su raza u origen étnico.
-    Sin embargo, we apreciaría tu información para poder medir la efectividad de
-    nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ en
-    tu forma impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You do not have to register with a political party to register
-    to vote.
-  party_tooltip_es: No necesita registrarse con un partido político para poder registrarse
-    para votar.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: not_required_to_vote
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: Your full social security number is required. It is used to
-    prevent fraudulent registration and voting. Failure to furnish this information
-    will prevent acceptance of this application.
-  id_number_tooltip_es: Debe proporcionar su número de seguro social completo. Si
-    no posee un número de seguro social, ingrese "NINGUNO", y el Estado le asignará
-    un número de identificación.
-  sos_address: Office of Elections<br>State of Hawaii<br>802 Lehua Avenue<br>Pearl
-    City, HI 96782
+  id_number_tooltip: ssn_full 
+  sos_address: "Office of Elections<br>State of Hawaii<br>802 Lehua Avenue<br>Pearl City, HI 96782"
   sos_phone: (808) 453-8683
   sos_url: http://www.hawaii.gov/elections/
-  sub_18_en: once you have turned 16 years old (but you cannot vote until you turn
-    18)
-  sub_18_es: una vez que hayas cumplido los 16 años de edad (pero no puedes votar
-    hasta que cumples los 18 anos)
+  sub_18: once_turned_16 
 record_12:
   abbreviation: ID
   name: Idaho
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Idaho does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Idaho no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: ! 'You must register with a party if you want to participate in
-    that party''s election. Enter your Political Party Preference. Options: Constitution,
-    Democratic, Libertarian, Republican or Unaffiliated (i.e. no party preference).
-    If this field is left blank, you will receive on only the Unaffiliated ballot.'
-  party_tooltip_es: No necesita registrarse con un partido político para poder registrarse
-    para votar.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: idaho
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Idaho driver's license number.  If you
-    do not have a driver's license, please enter the last four digits of your Social
-    Security number.  If you do not have a driver's license number or Social Security
-    number, please enter "NONE" and the state will assign you an identification number.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Idaho. Si no tiene licencia de conducir, debe ingresar los últimos cuatro dígitos
-    de su número de seguro social. Si no posee un número de licencia de conducir ni
-    un número de seguro social, ingrese "NINGUNO", y el Estado le asignará un número
-    de identificación.
-  sos_address: ! 'Idaho Secretary of State''s Office<br>Attn: Elections Division<br>P.O.
-    Box 83720<br>Boise, ID 83720-0080'
+  id_number_tooltip: drivers_license_or_other_with_state_name
+  sos_address: 'Idaho Secretary of State''s Office<br>Attn: Elections Division<br>P.O. Box 83720<br>Boise, ID 83720-0080'
   sos_phone: (208) 334-2300
   sos_url: http://www.sos.idaho.gov/elect/eleindex.htm
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_13:
   abbreviation: IL
   name: Illinois
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Illinois does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Illinois no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: Party registration or preference is not required for voter registration.  However,
-    when you apply for a primary ballot, you must indicate your party preference for
-    that election.
-  party_tooltip_es: No se requiere el registro en un partido ni la preferencia por
-    otro para el registro de votantes. Sin embargo, cuando solicita un boleta primaria,
-    debe indicar su preferencia de partido para esa elección.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: party_not_required
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your driver's license number.  If you do
-    not have a driver's license, please provide the last four digits of your Social
-    Security number.  If you have neither, please enter "NONE" and a unique identifier
-    will be assigned to you by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir. Si
-    no tiene licencia de conducir, debe proporcionar los últimos cuatro dígitos de
-    su número de seguro social. Si no posee ninguno de estos números, ingrese "NINGUNO",
-    y el Estado le asignará una identificación única.
-  sos_address: llinois State Board of Elections<br>Voter Registration Department<br>2329
-    S. MacArthur Boulevard<br>Springfield, IL 62704
+  id_number_tooltip: drivers_license_or_ssn_or_none_2
+  sos_address: "Illinois State Board of Elections<br>Voter Registration Department<br>2329 S. MacArthur Boulevard<br>Springfield, IL 62704"
   sos_phone: (217) 782-4141
   sos_url: http://www.elections.il.gov/
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_14:
   abbreviation: IN
   name: Indiana
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Indiana does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Indiana no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '0'
-  party_tooltip_en: Indiana law does not permit a person to indicate their party affiliation,
-    if any, as part of their registration record.  You will have to declare your party
-    affiliation prior to voting in a primary election.
-  party_tooltip_es: La ley de Indiana no les permite a las personas indicar su afiliación
-    partidaria, de existir alguna, como parte de su archivo de registro. Deberá declarar
-    afiliación partidaria antes de votar en una elección primaria.
-  parties_en: ''
-  parties_es: ''
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: false
+  party_tooltip: indiana
+  parties: []
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your ten-digit Indiana driver's license number
-    or Bureau of Motor Vehicles ID number.  If you do not have a driver's license
-    or State of Indiana BMV ID card, please enter the last four digits of your Social
-    Security number.  Please indicate which number was provided.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Indiana que consta de diez dígitos. Si no tiene licencia de conducir, debe ingresar
-    los últimos cuatro dígitos de su número de seguro social. Indique cuál número
-    proporcionó.
-  sos_address: Election Division<br>Office of the Secretary of State<br>302 West Washington
-    Street, Room E-204<br>Indianapolis, IN 46204-2743
+  id_number_tooltip: indiana
+  sos_address: "Election Division<br>Office of the Secretary of State<br>302 West Washington Street, Room E-204<br>Indianapolis, IN 46204-2743"
   sos_phone: (317) 232-3939
   sos_url: http://www.state.in.us/sos/elections/
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_15:
   abbreviation: IA
   name: Iowa
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Iowa does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Iowa no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You may, but do not have to, register with a party in advance
-    if you want to take part in that party's primary election.  To participate in
-    a primary election or caucus, you must be registered with a party.  You may change
-    or declare a party affiliation at the polls on primary election day or at the
-    caucus location.
-  party_tooltip_es: Puede, pero no necesita registrarse con un partido por anticipado,
-    si desea participar en la elección primaria, camarilla política o convención de
-    ese partido. Para participar en una elección primaria o camarilla política, debe
-    estar registrado con algún partido. Puede cambiar o declarar una afiliación partidaria
-    en las urnas el día de la elección primaria o en la ubicación de la camarilla
-    política.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip_en: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: you_may_but_not_required 
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Iowa driver's license number or non-driver
-    identification number.  If you do not have either of those, please provide the
-    last four digits of your Social Security number.  If you do not have a driver's
-    license, identification card, or Social Security number, please enter "NONE" and
-    an identification number will be assigned to you by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Iowa o su número de identificación. Si no tiene ninguno de estos números, debe
-    proporcionar los últimos cuatro dígitos de su número de seguro social. Si no posee
-    licencia de conducir, una tarjeta de identificación o un número de seguro social,
-    ingrese "NINGUNO", y el Estado le asignará un número de identificación.
-  sos_address: Elections Division, Office of the Secretary of State<br>Lucas Building
-    -1st Floor<br>321 E. 12th Street<br>Des Moines, IA 50319
+  id_number_tooltip: drivers_license_non_driver_with_state_name
+  sos_address: "Elections Division, Office of the Secretary of State<br>Lucas Building -1st Floor<br>321 E. 12th Street<br>Des Moines, IA 50319"
   sos_phone: (888) 767-8683
   sos_url: http://www.sos.state.ia.us/
-  sub_18_en: six months before your 18th birthday.
-  sub_18_es: seis meses antes que cumples 18 años
+  sub_18: 6_months_before
 record_16:
   abbreviation: KS
   name: Kansas
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Kansas does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Kansas no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election, caucus, or convention.
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: required_for_primary
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your state-issued driver's license number
-    or nondriver's identification card number.  If you do not have a driver's license
-    or nondriver's identification card, you must provide the last four digits of your
-    Social Security number.  If you do not have any of these, please enter "NONE"
-    and a unique identifying number will be assigned to you by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir emitido
-    por el Estado o el número de su tarjeta de identificación. Si no tiene licencia
-    de conducir o una tarjeta de identificación, debe proporcionar los últimos cuatro
-    dígitos de su número de seguro social. Si no posee ninguno de estos tipos de identificación,
-    ingrese "NINGUNO", y el Estado le asignará un número de identificación único.
-  sos_address: Secretary of State<br>1st Floor, Memorial Hall<br>120 SW 10th Ave.<br>Topeka,
-    KS 66612-1594
+  id_number_tooltip: drivers_license_non_driver_2 
+  sos_address: "Secretary of State<br>1st Floor, Memorial Hall<br>120 SW 10th Ave.<br>Topeka, KS 66612-1594"
   sos_phone: (785) 796-4564
   sos_url: http://sos.ky.gov/elections/
-  sub_18_en: if you will be 18 before the next general election (which is usually
-    in November)
-  sub_18_es: si cumples 18 años antes de la próxima elección (que es por lo general
-    en noviembre)
+  sub_18: be_by_next_general_election_november
 record_17:
   abbreviation: KY
   name: Kentucky
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Kentucky does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Kentucky no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election, caucus, or convention.
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: required_for_primary
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: Your full Social Security number is required.  No person shall
-    be denied the right to register because of failure to include Social Security
-    number.
-  id_number_tooltip_es: Debe proporcionar su número de seguro social completo. Si
-    no posee un número de seguro social, ingrese "NINGUNO" en el formulario.
-  sos_address: State Board of Elections<br>140 Walnut Street<br>Frankfort, KY 40601
+  id_number_tooltip: ssn_full_not_required
+  sos_address: "State Board of Elections<br>140 Walnut Street<br>Frankfort, KY 40601"
   sos_phone: (502) 573-7100
   sos_url: http://elect.ky.gov/
-  sub_18_en: when the person will be 18 on or before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: when_will_be_18 
 record_18:
   abbreviation: LA
   name: Louisiana
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '1'
-  race_tooltip_en: The state of Louisiana requests information about your race or
-    ethnicity.  Your application will not be rejected if you fail to provide this
-    information.
-  race_tooltip_es: Lousiana solicita información acerca de su raza u origen étnico.
-    No rechazarán su solicitud si no incluye esta información.
-  requires_party: '1'
-  party_tooltip_en: If you do not list a party affiliation, you cannot vote in the
-    Presidential Preference Primary and party committee elections.  Political party
-    affiliation is not required for any other election.
-  party_tooltip_es: Si no declara una afiliación partidaria, no puede votar en la
-    elección primaria sobre la preferencia presidencial ni en las elecciones de comité
-    del partido. No se requiere partido político para ninguna otra elección.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: true
+  race_tooltip: requested_with_state_name
+  requires_party: true
+  party_tooltip: required_for_presidential
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Louisiana driver's license number if
-    issued.  If not issued, you must provide at least the last four digits of your
-    Social Security number.  If you do not have a driver's license or a Social Security
-    number, please enter "NONE" and the state will assign you an identification number.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Louisiana. Si no posee una, debe proporcionar al menos los últimos cuatro dígitos
-    de su número de seguro social. Si no posee licencia de conducir o un número de
-    seguro social, ingrese "NINGUNO", y el Estado le asignará un número de identificación.
-  sos_address: ! 'Secretary of State<br>Attention: Voter Registration<br>P.O. Box
-    94125<br>Baton Rouge, LA 70804-9125'
+  id_number_tooltip: drivers_license_if_issued_with_state_name 
+  sos_address: 'Secretary of State<br>Attention: Voter Registration<br>P.O. Box 94125<br>Baton Rouge, LA 70804-9125'
   sos_phone: (225) 922-0900
   sos_url: http://www.sos.louisiana.gov/tabid/68/Default.aspx
-  sub_18_en: once you have turned 17 years old
-  sub_18_es: una vez que cumples 17 años de edad
+  sub_18: once_turned_17
 record_19:
   abbreviation: ME
   name: Maine
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Maine does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Maine no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election, caucus, or convention (unless otherwise permitted by
-    a political party).
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: required_for_primary_unless
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Maine driver's license number.  If you
-    do not have a driver's license number, please provide the last four digits of
-    your Social Security number.  If you have neither, please enter "NONE" and a unique
-    identifying number will be assigned to you.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Maine. Si no tiene un número de licencia de conducir, debe proporcionar los últimos
-    cuatro dígitos de su número de seguro social. Si no posee ninguno de estos números,
-    ingrese "NINGUNO", y le asignarán un número de identificación única.
-  sos_address: Bureau of Corporations, Elections and Commissions<br>101 State House
-    Station<br>Augusta, ME 04333-0101
+  id_number_tooltip: drivers_license_or_other_with_state_name_2
+  sos_address: "Bureau of Corporations, Elections and Commissions<br>101 State House Station<br>Augusta, ME 04333-0101"
   sos_phone: (207) 642-7736
   sos_url: http://www.state.me.us/sos/cec/elec/
-  sub_18_en: once you turned 17 years old (but you have to be 18 to vote)
-  sub_18_es: una vez que usted haya cumplido 17 años (pero hay que tener 18 años para
-    votar)
+  sub_18: once_turned_17_but
 record_20:
   abbreviation: MD
   name: Maryland
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Maryland does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Maryland no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You must register with a party if you want to take part in that
-    party's primary election.
-  party_tooltip_es: Debe registrarse con un partido si desea participar en la elección
-    primaria, camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: required_for_primary_2
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republic
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: If you have a current, valid Maryland driver's license or
-    a Motor Vehicle Administration identification card, you must enter the driver's
-    license or identification number.  If you have neither, you must enter the last
-    four digits of your Social Security number.  If you do not have any of these numbers,
-    please enter "NONE" and a unique identifying number will be assigned to you by
-    the state.
-  id_number_tooltip_es: Si posee una licencia de conducir de Maryland que sea actual
-    y válida ni una tarjeta de identificación de la Administración de Vehículos Automotores,
-    debe ingresar la licencia de conducir o el número de identificación. Si no posee
-    ninguna de estas identificaciones, debe ingresar los últimos cuatro dígitos de
-    su número de seguro social. Si no posee ninguno de estos números, ingrese "NINGUNO",
-    y el Estado le asignará un número de identificación único.
-  sos_address: State Board of Elections<br>P.O. Box 6486<br>Annapolis, MD 21401-0486
+  id_number_tooltip: maryland
+  sos_address: "State Board of Elections<br>P.O. Box 6486<br>Annapolis, MD 21401-0486"
   sos_phone: (800) 222-VOTE
   sos_url: http://www.electionsmaryland.com
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_21:
   abbreviation: MA
   name: Massachusetts
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Massachusetts does not request information about your
-    race or ethnicity.  However, we would appreciate this information in order to
-    measure the effectiveness of our voter registration efforts.  This information
-    will NOT appear on your printed voter registration form.
-  race_tooltip_es: Massachusetts no solicita información acerca de su raza u origen
-    étnico.  Sin embargo, we apreciaría tu información para poder medir la efectividad
-    de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ
-    en tu forma impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: If you do not designate a political party, you will be registered
-    as unenrolled (commonly referred to as independent).  Unenrolled voters may participate
-    in party primaries and general elections. There are currently three political
-    parties (Democrat, Republican, Green-Rainbow)
-  party_tooltip_es: ''
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: massachusetts
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Massachusetts driver's license number.  If
-    you do not have a driver's license number, please provide the last four digits
-    of your Social Security number.  If you have neither, please enter "NONE" and
-    a unique identifying number will be assigned to you.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Massachusetts. Si no tiene un número de licencia de conducir, debe proporcionar
-    los últimos cuatro dígitos de su número de seguro social. Si no posee ninguno
-    de estos números, ingrese "NINGUNO", y le asignarán un número de identificación
-    única.
-  sos_address: Secretary of the Commonwealth<br>Elections Division<br>McCormack Building,
-    Room 1705<br>One Ashburton Place<br>Boston, MA 02108
+  id_number_tooltip: drivers_license_or_other_with_state_name_2
+  sos_address: "Secretary of the Commonwealth<br>Elections Division<br>McCormack Building, Room 1705<br>One Ashburton Place<br>Boston, MA 02108"
   sos_phone: (800) 462-VOTE
   sos_url: http://www.sec.state.ma.us/ele
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_22:
   abbreviation: MI
   name: Michigan
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Michigan does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Michigan no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You do not have to register with a political party to register
-    to vote.
-  party_tooltip_es: No necesita registrarse con un partido político para poder registrarse
-    para votar.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: not_required_to_vote
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertariean
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Michigan driver's license number or
-    state-issued personal identification card number.  If you do not have a driver's
-    license or identification card number, you must provide the last four digits of
-    your Social Security number.  If you do not have any of these forms of identification,
-    please enter "NONE" and a unique identifying number will be assigned by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Michigan o el número de su tarjeta de identificación personal emitido por el Estado.
-    Si no tiene una licencia de conducir o un número de tarjeta de identificación,
-    debe proporcionar los últimos cuatro dígitos de su número de seguro social. Si
-    no posee ninguno de estos tipos de identificación, ingrese "NINGUNO", y el Estado
-    le asignará un número de identificación único.
-  sos_address: Michigan Department of State<br>Bureau of Elections<br>P.O. Box 20126<br>Lansing,
-    MI 48901-0726
+  id_number_tooltip: drivers_license_personal_identification_with_state_name
+  sos_address: "Michigan Department of State<br>Bureau of Elections<br>P.O. Box 20126<br>Lansing, MI 48901-0726"
   sos_phone: (517) 373-2540
-  sos_url: http://www.michigan.gov/sos/0,1607,7-127-1633---,00.html
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sos_url: "http://www.michigan.gov/sos/0,1607,7-127-1633---,00.html"
+  sub_18: turn_by_next_election
 record_23:
   abbreviation: MN
   name: Minnesota
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Minnesota does not request information about your
-    race or ethnicity.  However, we would appreciate this information in order to
-    measure the effectiveness of our voter registration efforts.  This information
-    will NOT appear on your printed voter registration form.
-  race_tooltip_es: Minnesota no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '0'
-  party_tooltip_en: ''
-  party_tooltip_es: ''
-  parties_en: ''
-  parties_es: ''
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: false
+  party_tooltip: blank
+  parties: []
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your Minnesota Driver's License number or
-    State ID number.  If you do not have a driver's license number, please provide
-    the last four digits of your Social Security number.  If you have neither, please
-    enter "NONE" and a unique identifying number will be assigned to you.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir de
-    Minnesota. Si no tiene un número de licencia de conducir, debe proporcionar los
-    últimos cuatro dígitos de su número de seguro social. Si no posee ninguno de estos
-    números, ingrese "NINGUNO", y le asignarán un número de identificación única.
-  sos_address: Secretary of State<br>60 Empire Drive, Suite 100<br>St. Paul, MN 55155-1299
+  id_number_tooltip: drivers_license_state_id_with_state_name
+  sos_address: "Secretary of State<br>60 Empire Drive, Suite 100<br>St. Paul, MN 55155-1299"
   sos_phone: (651) 215-1440
   sos_url: http://www.sos.state.mn.us/home/index.asp?page=134
-  sub_18_en: if you will turn 18 before the next election
-  sub_18_es: si vas a cumplir 18 años antes de la próxima elección
+  sub_18: turn_by_next_election
 record_24:
   abbreviation: MS
   name: Mississippi
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Mississippi does not request information about your
-    race or ethnicity.  However, we would appreciate this information in order to
-    measure the effectiveness of our voter registration efforts.  This information
-    will NOT appear on your printed voter registration form.
-  race_tooltip_es: Mississippi no solicita información acerca de su raza u origen
-    étnico.  Sin embargo, we apreciaría tu información para poder medir la efectividad
-    de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ
-    en tu forma impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: Mississippi does not have party registration.  Therefore, you
-    do not have to register with a party if you want to take part in that party's
-    primary election, caucus, or convention.
-  party_tooltip_es: Mississippi no tiene registro partidario. Por consiguiente, no
-    necesita registrarse con un partido si desea participar en la elección primaria,
-    camarilla política o convención de ese partido.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: mississippi
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide your current and valid driver's license number.  If
-    you do not have one, please provide the last four digits of your Social Security
-    number.  If you have neither a driver's license nor a Social Security number,
-    please enter "NONE" and an identification number will be assigned to you by the
-    state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir que
-    sea actual y válido. Si no posee uno, debe proporcionar los últimos cuatro dígitos
-    de su número de seguro social. Si no posee licencia de conducir ni número de seguro
-    social, ingrese "NINGUNO", y el Estado le asignará un número de identificación.
-  sos_address: Secretary of State<br>P.O. Box 136<br>Jackson, MS, 39205-0136
+  id_number_tooltip: drivers_license_current_and_valid
+  sos_address: "Secretary of State<br>P.O. Box 136<br>Jackson, MS, 39205-0136"
   sos_phone: (800) 829-6786
   sos_url: http://www.sos.state.ms.us/elections/elections.asp
-  sub_18_en: if you will be 18 before the next general election (which is usually
-    in November)
-  sub_18_es: si cumples 18 años antes de la próxima elección (que es por lo general
-    en noviembre)
+  sub_18: be_by_next_general_election_november
 record_25:
   abbreviation: MO
   name: Missouri
-  participating: '1'
-  not_participating_tooltip_en: ''
-  not_participating_tooltip_es: ''
-  requires_race: '0'
-  race_tooltip_en: The state of Missouri does not request information about your race
-    or ethnicity.  However, we would appreciate this information in order to measure
-    the effectiveness of our voter registration efforts.  This information will NOT
-    appear on your printed voter registration form.
-  race_tooltip_es: Missouri no solicita información acerca de su raza u origen étnico.  Sin
-    embargo, we apreciaría tu información para poder medir la efectividad de nuestros
-    esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
-    impresa de registro para votar.
-  requires_party: '1'
-  party_tooltip_en: You do not have to register with a party if you want to take part
-    in that party's primary election, caucus, or convention.
-  party_tooltip_es: No necesita registrarse con un partido político para poder registrarse
-    para votar.
-  parties_en: Democratic, Independent, Green, Libertarian, Republican, Other
-  parties_es: Democrático, Independiente, Verde, Libertario, Republicano, Otros
-  no_party_en: None
-  no_party_es: Ninguno
+  participating: true
+  not_participating_tooltip: blank
+  requires_race: false
+  race_tooltip: not_required_but_appreciated_with_state_name
+  requires_party: true
+  party_tooltip: not_required
+  parties:
+    - democratic
+    - independent
+    - green
+    - libertarian
+    - republican
+    - other
+  no_party: none
   id_length_min: '6'
   id_length_max: '60'
-  id_number_tooltip_en: You must provide you state-issued driver's license number
-    AND the last four digits of your Social Security number.  If you do not have a
-    driver's license or a Social Security number, please enter "NONE" and a unique
-    identifying number will be assigned by the state.
-  id_number_tooltip_es: Debe proporcionar el número de su licencia de conducir emitido
-    por el Estado Y los últimos cuatro dígitos de su número de seguro social. Si no
-    posee licencia de conducir ni un número de seguro social, ingrese "NINGUNO", y
-    el Estado le asignará un número de identificación único.
-  sos_address: Secretary of State<br>P.O. Box 1767<br>Jefferson City, MO 65102-1767
+  id_number_tooltip: driver_license_state_issues_and_ssn
+  sos_address: "Secretary of State<br>P.O. Box 1767<br>Jefferson City, MO 65102-1767"
   sos_phone: (573) 751-2301
   sos_url: http://www.sos.mo.gov/elections/
-  sub_18_en: six months before your 18th birthday.
-  sub_18_es: seis meses antes que cumples 18 años
+  sub_18: 6_months_before
 record_26:
   abbreviation: MT
   name: Montana

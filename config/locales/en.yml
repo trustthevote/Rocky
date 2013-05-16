@@ -272,6 +272,9 @@ en:
         required_with_state_name:>
           The state of %{state_name} requires information about your race or ethnicity.  
           Your application will not be rejected if you fail to provide this information.
+        requested_with_state_name:>
+          The state of %{state_name} requests information about your race or ethnicity.  Your
+          application will not be rejected if you fail to provide this information.
         not_required_but_appreciated_with_state_name:>
           The state of %{state_name} does not request information about your race or ethnicity.  However, we would appreciate this information in order 
           to measure the effectiveness of our voter registration efforts.  This information will NOT appear on your printed voter registration form.
@@ -291,18 +294,62 @@ en:
           a notice with the Secretary of State allowing them to do so.  You can call 1-800-345-VOTE
           or visit www.ss.ca.gov/elections/elections_d.htm to learn which political parties
           are allowing nonaffiliated voters to participate in their primary election.
+        idaho:>
+          You must register with a party if you want to participate in
+          that party's election. Enter your Political Party Preference. Options: Constitution,
+          Democratic, Libertarian, Republican or Unaffiliated (i.e. no party preference).
+          If this field is left blank, you will receive on only the Unaffiliated ballot.
+        indiana:>
+          Indiana law does not permit a person to indicate their party affiliation,
+          if any, as part of their registration record.  You will have to declare your party
+          affiliation prior to voting in a primary election.
+        massachusetts:>
+          If you do not designate a political party, you will be registered
+          as unenrolled (commonly referred to as independent).  Unenrolled voters may participate
+          in party primaries and general elections. There are currently three political
+          parties (Democrat, Republican, Green-Rainbow)
+        mississippi:>
+          Mississippi does not have party registration.  Therefore, you
+          do not have to register with a party if you want to take part in that party's
+          primary election, caucus, or convention.
+        not_required_to_vote: You do not have to register with a political party to register to vote.
         not_required:>
           You do not have to register with a party if you want to take part in that party's primary election, caucus, or convention.
         not_required_can_choose_any:>
           You do not have to register with a party if you want to take part in that party's primary election, caucus, or convention, and can choose 
           any presidential primary ballot (but not both) regardless of registration.
+        not_done_with_state_name:>
+          You do not register by political party in %{state_name}. However, in order to vote in a primary, you must request one particular party's ballot.
+        party_not_required:>
+          Party registration or preference is not required for voter registration.  However,
+          when you apply for a primary ballot, you must indicate your party preference for
+          that election.
+        you_may_but_not_required:>
+          You may, but do not have to, register with a party in advance
+          if you want to take part in that party's primary election.  To participate in
+          a primary election or caucus, you must be registered with a party.  You may change
+          or declare a party affiliation at the polls on primary election day or at the
+          caucus location.
         closed_caucus_with_state_name:>
           %{state_name} has a closed primary election and a caucus system for president. Each recognized political party may choose to have a separate
           ballot listing only candidates from their political party, or recognized political parties may choose to combine their candidates on one ballot. 
           Recognized political parties may also choose what political affiliations may participate in their primary election. A voter's political affiliation 
           30 days prior to Election Day will determine which ballot a voter may choose; however, a voter may only choose one ballot.
+        required_for_presidential:>
+          If you do not list a party affiliation, you cannot vote in the
+          Presidential Preference Primary and party committee elections.  Political party
+          affiliation is not required for any other election.
         required_for_primary:>
           You must register with a party if you want to take part in that party's primary election, caucus, or convention.
+        required_for_primary_2:>
+          You must register with a party if you want to take part in that party's primary election.
+        required_for_primary_unless:>
+          You must register with a party if you want to take part in that
+          party's primary election, caucus, or convention (unless otherwise permitted by a political party).
+        required_for_primary_no_change_30_days:>
+          You must register with a party if you want to take part in that
+          party's primary election, caucus, or convention. You may not change your party
+          affiliation status within 30 days of a partisan primary election.
         required_for_primary_2_months:>
           You must register with a party if you want to take part in that
           party's primary election, caucus, or convention. In order to vote in a party's
@@ -326,36 +373,126 @@ en:
           checkbox and provide the last four digits of your social security number. If you
           do not have any of these forms of identification, the secretary of state will
           assign you a unique identifying number.
+        georgia:>
+          You must provide your Georgia driver's license number or state-issued
+          identification number.  If you do not have either of those, you must provide the
+          last four digits of your Social Security number.  If you do not have any of the
+          requested identification numbers, please enter "NONE" and you will be assigned
+          a unique identification number by the state.
+        indiana:>
+          You must provide your ten-digit Indiana driver's license number
+          or Bureau of Motor Vehicles ID number.  If you do not have a driver's license
+          or State of Indiana BMV ID card, please enter the last four digits of your Social
+          Security number.  Please indicate which number was provided.
+        maryland:>
+          If you have a current, valid Maryland driver's license or
+          a Motor Vehicle Administration identification card, you must enter the driver's
+          license or identification number.  If you have neither, you must enter the last
+          four digits of your Social Security number.  If you do not have any of these numbers,
+          please enter "NONE" and a unique identifying number will be assigned to you by
+          the state.
         ssn_or_none:>
           Please provide your Social Security number. If you do not have a Social Security number, please enter "NONE" and 
           a number will be assigned to you by the state.
+        ssn_full:>
+          Your full social security number is required. It is used to
+          prevent fraudulent registration and voting. Failure to furnish this information
+          will prevent acceptance of this application.
+        ssn_full_not_required:>
+          Your full Social Security number is required.  No person shall
+          be denied the right to register because of failure to include Social Security number.
+        drivers_license_or_other_with_state_name:>
+          You must provide your %{state_name} driver's license number.  If you
+          do not have a driver's license, please enter the last four digits of your Social
+          Security number.  If you do not have a driver's license number or Social Security
+          number, please enter "NONE" and the state will assign you an identification number.
+        drivers_license_or_other_with_state_name_2:>
+          You must provide your %{state_name} driver's license number.  If you
+          do not have a driver's license number, please provide the last four digits of
+          your Social Security number.  If you have neither, please enter "NONE" and a unique
+          identifying number will be assigned to you.
+        drivers_license_or_ssn_or_none:>
+          You must provide either your driver's license number or the
+          last four digits of your Social Security number.  If you have neither a driver's
+          license nor a Social Security number, please enter "NONE" and an identification
+          number will be assigned to you by the state.
+        drivers_license_or_ssn_or_none_2:>
+          You must provide your driver's license number.  If you do
+          not have a driver's license, please provide the last four digits of your Social
+          Security number.  If you have neither, please enter "NONE" and a unique identifier
+          will be assigned to you by the state.
         drivers_license_with_state_name:>
-          You must provide your %{state} driver's license number or state identification card number.  If you do not have either of those, 
+          You must provide your %{state_name} driver's license number or state identification card number.  If you do not have either of those, 
           you must provide the last four digits of your Social Security number.  If you do not have any of these identification numbers, 
           please enter "NONE" and a unique identification number will be assigned to you by the state for voter registration purposes.
+        drivers_license_if_issued_with_state_name:>
+          You must provide your Louisiana driver's license number if
+          issued.  If not issued, you must provide at least the last four digits of your
+          Social Security number.  If you do not have a driver's license or a Social Security
+          number, please enter "NONE" and the state will assign you an identification number.
         drivers_license_required_at_voting_with_state_name:>
           You must provide your %{state_name} driver's license or %{state_name}
           identification card number.  If you do not have either a driver's license or ID
           card, you must provide the last four digits of your Social Security number.  If
           you do not include this information, you will be required to provide identification
           when you vote.
+        drivers_license_non_driver_with_state_name:>
+          You must provide your %{state_name} driver's license number or non-driver
+          identification number.  If you do not have either of those, please provide the
+          last four digits of your Social Security number.  If you do not have a driver's
+          license, identification card, or Social Security number, please enter "NONE" and
+          an identification number will be assigned to you by the state.
+        drivers_license_non_driver_2:>
+          You must provide your state-issued driver's license number
+          or nondriver's identification card number.  If you do not have a driver's license
+          or nondriver's identification card, you must provide the last four digits of your
+          Social Security number.  If you do not have any of these, please enter "NONE"
+          and a unique identifying number will be assigned to you by the state.
         drivers_license_non_operating_with_state_name:>
           You must provide your %{state} driver's license number or
           non-operating identification license number.  If you do not have a driver's license
           or non-operating identification number, you must provide the last four digits
           of your Social Security number.  If you do not have any of these forms of identification,
           please enter "NONE" and a unique identifying number will be assigned by the state.
+        drivers_license_personal_identification_with_state_name:>
+          You must provide your %{state_name} driver's license number or
+          state-issued personal identification card number.  If you do not have a driver's
+          license or identification card number, you must provide the last four digits of
+          your Social Security number.  If you do not have any of these forms of identification,
+          please enter "NONE" and a unique identifying number will be assigned by the state.
+        drivers_license_state_id_with_state_name:>
+          You must provide your %{state_name} Driver's License number or
+          State ID number.  If you do not have a driver's license number, please provide
+          the last four digits of your Social Security number.  If you have neither, please
+          enter "NONE" and a unique identifying number will be assigned to you.  
         drivers_license_or_photo_id_and_other:>
-          You must provide your Connecticut driver's license number.  If
+          You must provide your %{state_name} driver's license number.  If
           you do not have a driver's license, please provide the last four digits of your
           Social Security number.  If you have neither a driver's license nor a Social Security
           number, please provide a copy of a current and valid photo I.D. or a copy of a
           current utility bill, bank statement, government check, paycheck, or government
           document that shows your name and address, in order to avoid additional ID requirements
           the first time you vote.
+        drivers_license_current_and_valid:>
+          You must provide your current and valid driver's license number.  If
+          you do not have one, please provide the last four digits of your Social Security
+          number.  If you have neither a driver's license nor a Social Security number,
+          please enter "NONE" and an identification number will be assigned to you by the state.
+        driver_license_state_issues_and_ssn:>
+          You must provide you state-issued driver's license number
+          AND the last four digits of your Social Security number.  If you do not have a
+          driver's license or a Social Security number, please enter "NONE" and a unique
+          identifying number will be assigned by the state.
     sub_18:
       be_by_next_election: if you will be 18 by the next election
+      be_by_next_general_election_november:  if you will be 18 before the next general election (which is usually in November)
+      once_turned_16: once you have turned 16 years old (but you cannot vote until you turn 18)
       once_turned_17: once you have turned 17 years old
+      once_turned_17_but: once you turned 17 years old (but you have to be 18 to vote)
       turn_by_next_election: if you will turn 18 before the next election
       turn_by_next_general_election_november: if you will turn 18 before the next general election (which is usually in November)
+      when_at_least_16: when the person is at least 16 years of age
+      when_is_16: when the person is 16 years old
+      when_will_be_18: when the person will be 18 on or before the next election
       90_days_before: 90 days before your 18th birthday
+      6_months_before: six months before your 18th birthday.
