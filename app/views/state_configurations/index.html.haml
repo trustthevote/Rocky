@@ -1,0 +1,26 @@
+- @state_importer.states_hash.each do |state, values|
+  .setting
+    %h2.key= "#{values['name'] || state}"
+    %ul
+      - values.each do |key, value|
+        %li
+          - if StateImporter.is_localization?(key)
+            %span.method= key
+            %span.translation_key= value
+            %br
+            - I18n.available_locales.each do |locale|
+              .locale
+                %h4.locale_name= locale
+                .translation= StateImporter.translate_key(value, key, locale, "<span class='substitution'>#{values['name'] || 'STATE_NAME'}</span>").html_safe
+          - elsif StateImporter.is_localization_list?(key)
+            %span.method= key
+            %span.translation_key= value
+            %br
+            - I18n.available_locales.each do |locale|
+              .locale
+                %h4.locale_name= locale
+                .translation= value.collect{|item_key| StateImporter.translate_list_item(key, item_key, locale, '<STATE_NAME>')}
+            
+          - else
+            %span.method= key
+            %span.value= value

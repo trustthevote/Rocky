@@ -1,0 +1,47 @@
+// Place all the styles related to the state_configuration controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#state_configuration {
+  background: white;
+  padding:10px;
+  font-size: 13px;
+  line-height: 1.25em;
+  
+  h2 {
+    font-size:18px;
+  }
+  
+  .setting {
+    border:1px solid #000;
+    margin:15px 0;
+    padding:10px;
+  }
+  
+  ul {
+    li {
+      overflow:hidden;
+      padding-bottom:25px;
+      padding-top:5px;
+      border-top:1px solid #000;
+      .method {
+        font-weight: bold;
+      }
+      .locale {
+        float: left;
+        margin-top:5px;
+        padding:5px;
+        width:48%;
+        border: 1px solid #ccc;
+        .translation {
+          .substitution {
+            font-weight:bold;
+          }
+        }
+      }
+      
+    }
+  }
+  
+}

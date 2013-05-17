@@ -1,0 +1,3 @@
+%ul
+  - @localizations[:en].each do |key, value|
+    = render :partial=>'key_value', :locals=>{:key=>key, :value=>value}

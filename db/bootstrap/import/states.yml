@@ -52,6 +52,7 @@ record_2:
   sos_phone: (877) 843-8683
   sos_url: http://www.azsos.gov/election/
   sub_18: turn_by_next_general_election_november
+  online_registration_url: https://servicearizona.com/webapp/evoter/selectLanguage
 
   
 record_3:
@@ -75,6 +76,7 @@ record_4:
   sos_address: "Secretary of State<br>Elections Division<br>1500 11th Street 5th floor<br>Sacramento, CA 95814"
   sos_phone: (800) 345-VOTE
   sos_url: http://www.sos.ca.gov/elections/
+  online_registration_url: http://www.registertovote.ca.gov/
 
 
 record_5:
@@ -86,6 +88,7 @@ record_5:
   sos_address: "Secretary of State<br>c/o Elections<br>1700 Broadway, Suite 200<br>Denver, CO 80290-0301"
   sos_phone: (303) 894-2200
   sos_url: http://www.sos.state.co.us/pubs/elections/
+  online_registration_url: https://www.sos.state.co.us/Voter/secuVerifyExist.do
 
 
 record_6:

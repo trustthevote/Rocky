@@ -1,0 +1,23 @@
+%h1= @state.name
+%ul.settings
+  - StateImporter.state_settings.each do |method|
+    %li
+      %span.method= "#{method}:"
+      %span.value= "#{@state.send(method)}" 
+      %span.required= "#{StateImporter.state_uses_default?(@state, method)}"
+  - StateImporter.state_settings_aliased.each do |method, key|
+    %li
+      %span.method= "#{method}:"
+      %span.value= "#{@state.send(method)}" 
+      %span.required= "#{StateImporter.state_uses_default?(@state, method, key)}"
+
+%br
+%br
+%ul.translations
+  - StateImporter.state_localizations.each do |method|
+    %li
+      %span.method= "#{method}"
+      - I18n.available_locales.each do |locale|
+        .translaction
+          %span.language= locale
+          .value= @state.localizations.where(:locale=>locale.to_s).first.send(method)
