@@ -2,8 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-#state_configuration {
+#state_configuration, #translations {
   background: white;
   padding:10px;
   font-size: 13px;
@@ -20,28 +19,42 @@
   }
   
   ul {
+    padding-bottom:25px;
+    padding-top:5px;
+    margin-top:5px;
     li {
       overflow:hidden;
-      padding-bottom:25px;
-      padding-top:5px;
       border-top:1px solid #000;
+      padding-top:5px;
+      padding-left:5px;
+      ul {
+        margin-left:20px;
+      }
       .method {
         font-weight: bold;
+      }
+      .values {
+        display: none;
       }
       .locale {
         float: left;
         margin-top:5px;
         padding:5px;
-        width:48%;
+        width:300px;
         border: 1px solid #ccc;
         .translation {
+          textarea {
+            width:290px;
+            height:4em;
+          }
           .substitution {
             font-weight:bold;
           }
-        }
+        }  
       }
       
     }
   }
+  
   
 }

@@ -90,14 +90,47 @@ class StateImporter
     si.defaults[key || method].to_s == state.send(method).to_s
   end
   
-  def self.get_loc_part(key)
+  def self.get_loc_part_array(key)
+    parts = ["states"]
     if key =~ /tooltip/
-      "states.tooltips.#{key.gsub('_tooltip', '')}"
+      parts << "tooltips"
+      parts << key.gsub('_tooltip', '')
     elsif key == 'no_party'
-      "states.no_party_label"
+      parts << "no_party_label"
     else
-      "states.#{key}"
+      parts << key
     end
+    parts
+  end
+  
+  def self.get_loc_part(key)
+    get_loc_part_array(key).join('.')
+  end
+  
+  def self.translations_hash
+    @@translations_hash ||= nil
+    return @@translations_hash unless @@translations_hash.nil?
+    @@translations_hash = {}
+    I18n.available_locales.each do |lang|
+      @@translations_hash[lang] = I18n.backend.send(:translations)[lang]
+    end
+    @@translations_hash
+  end
+  
+  def self.config_options(key)
+    last_hash = translations_hash[:en].dup
+    
+    get_loc_part_array(key).each do |key_part|
+      last_hash = last_hash[key_part.to_sym]
+    end
+    new_hash = {}
+    last_hash.each do |k,v|
+      new_hash[k] = {}
+      I18n.available_locales.each do |lang|
+        new_hash[k][lang] = translate_key(k, key, lang)
+      end
+    end
+    new_hash
   end
   
   def self.is_localization?(key)
@@ -110,7 +143,7 @@ class StateImporter
   
   def self.translate_key(key_value, key, locale, state_name='')
     loc_key = "#{get_loc_part(key)}.#{key_value}"
-    I18n.t(loc_key, :locale=>locale, :state_name=>state_name).html_safe.strip  
+    I18n.t(loc_key, :locale=>locale, :state_name=>state_name).to_s.html_safe.strip  
   end
   
   def self.translate_from_row(row, key, locale, state_name='')
@@ -119,7 +152,7 @@ class StateImporter
   end
   
   def self.translate_list_item(list_key, item_key, locale, state_name='')
-    I18n.t("states.#{list_key}.#{item_key}", :locale=>locale, :state_name=>state_name).html_safe.strip
+    I18n.t("states.#{list_key}.#{item_key}", :locale=>locale, :state_name=>state_name).to_s.html_safe.strip
   end
   
   

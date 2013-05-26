@@ -1,0 +1,17 @@
+- if value.is_a?(Hash)
+  - value.each do |k,v|
+    %ul
+      %li
+        %span.translation_key_part= k
+        = render :partial=>'key_value', :locals=>{:key=>"#{key}.#{k}", :value=>v, :id_ct=>id_ct + 1}
+- else
+  %br
+  %span.translation_key= key
+  %br
+  - I18n.available_locales.each do |locale|
+    .locale
+      %h4.locale_name= locale
+      .translation
+        %textarea{:name=>"#{locale}[#{key}]"}
+          = I18n.t(key, :locale=>locale, :default=>'')
+    

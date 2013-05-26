@@ -1,0 +1,14 @@
+%h1= t('txt.registration.step_1_header')
+
+#other_language_links
+  - if @registrant.new_record?
+    - I18n.available_locales.each do |loc|
+      - unless loc == I18n.locale
+        = link_to t('language_name', :locale=>loc), new_registrant_path(params.dup.merge({:locale=>loc})), :class => 'other_language_link'
+        -# new_registrant_path(partner_locale_options(@partner_id, loc, @source)),
+
+= form_for(@registrant) do |form|
+  = render :partial => 'form', :object => form
+  = render :partial => 'overseas'
+  = rollover_button(:next_step, I18n.t('txt.button.submit').html_safe)
+

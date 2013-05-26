@@ -1,0 +1,411 @@
+es:
+  states:
+    parties:
+      democratic: Democrático
+      independent: Independiente
+      green: Verde
+      libertarian: Libertario
+      republican: Republicano
+      working_families: Familias Trabajadoras
+      other: Otros
+    no_party_label:
+      blank: ''
+      none: Ninguno
+      decline_to_state: Se niega a declarar
+    tooltips:
+      not_participating:
+        blank: ''
+        new_hampshire: >
+          La ley de New Hampshire no le permite utilizar este
+          formulario para registrarse para votar. Para obtener información acerca de cómo
+          registrarse para votar, comuníquese con su secretario municipal. La información
+          de contacto para comunicarse con secretarios municipales se encuentra en http://www.state.nh.us/sos/clerks.htm.
+          También puede comunicarse con el Secretario de Estado llamando al 603-271-3242
+          o visitar http://www.state.nh.us/sos/electionsnew.htm.
+        north_dakota: >
+          North Dakota no tiene registro de votantes. Para obtener
+          más información, comuníquese con su Secretario de Estado llamando al 701-328-3660
+          o visite http://www.nd.gov/sos.
+        wyoming: >
+          La ley de Wyoming no le permite utilizar este formulario
+          para registrarse para votar. Para obtener más información acerca de cómo registrarse
+          para votar en Wyoming, comuníquese con el secretario del condado donde vive. Encontrará
+          información de contacto en http://soswy.state.wy.us/election/clerks.htm o llamando
+          al 307-777-3573.
+      race:
+        blank: ''
+        required_with_state_name: >
+          %{state_name} requiere información acerca de su raza u origen étnico. No rechazarán su solicitud si no incluye esta información.
+        requested_with_state_name: >
+          %{state_name} solicita información acerca de su raza u origen étnico. No rechazarán su solicitud si no incluye esta información.
+        georgia: >
+          %{state_name} solicita información acerca de su raza u origen étnico. No rechazarán su solicitud si no incluye esta información.
+        requested_not_required_with_state_name: >
+          %{state_name} solicita información acerca de su raza u origen étnico. No rechazarán su solicitud si no incluye esta información.
+        required_no_conditions_with_state_name: >
+          %{state_name} requiere información acerca de su raza u origen étnico. No rechazarán su solicitud si no incluye esta información.
+        requested_no_conditions_with_state_name: >
+          %{state_name} solicita información acerca de su raza u origen étnico.
+        not_required_with_state_name: >
+          %{state_name} requiere información acerca de su raza u origen étnico. No rechazarán su solicitud si no incluye esta información.
+        not_required_but_appreciated_with_state_name: >  
+          %{state_name} no solicita información acerca de su raza u origen étnico.  Sin embargo, Rock the Vote apreciaría tu información para poder
+          medir la efectividad de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma impresa de registro para votar.
+        not_required_but_appreciated_with_state_name_2: >
+          %{state_name} no requiere información acerca de su raza u origen étnico.  Sin embargo, Rock the Vote apreciaría tu información para poder
+          medir la efectividad de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma impresa de registro para votar.
+        virginia: >
+          Virginia no solicita información acerca de su raza u origen étnico.  Sin
+          embargo, Rock the Vote apreciaría tu información para poder medir la efectividad de nuestros
+          esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
+          impresa de registro para votar.
+        washington_dc: >
+          Washington, D.C. no solicita información acerca de su raza u origen étnico.  Sin embargo, Rock the Vote apreciaría tu información
+          para poder medir la efectividad de nuestros esfuerzos para registrar votantes.  Esta información NO APARECERÁ en tu forma
+          impresa de registro para votar.
+      party:
+        blank: ''
+        arizona: >
+          Arizona tiene una elección primaria cerrada. Si está registrado
+          en un partido político que reúne las condiciones para reconocimiento de boletas,
+          se le permitirá votar por esa boleta de elección primaria de ese partido. Si está
+          registrado como independiente, sin preferencia de partido o como miembro de un
+          partido que no reúne las condiciones para reconocimiento de boleta, puede seleccionar
+          y votar por una boleta de elección primaria y por uno de los partidos políticos reconocidos.
+        california: >
+          La ley de California permite que los votantes que se niegan a
+          declarar una afiliación con un partido político calificado o que están afiliados
+          a un partido político no calificado voten en la elección primaria de cualquier
+          partido político calificado que presente un aviso ante al Secretario de Estado,
+          por el cual les permita a los votantes proceder de esa manera. Puede llamar al
+          1-800-345-VOTE o visitar www.ss.ca.gov/elections/elections_d.htm para saber qué
+          partidos políticos les permiten participar en su elección primaria a los votantes
+          no afiliados.
+        idaho: >
+          No necesita registrarse con un partido político para poder registrarse para votar.
+        indiana: >
+          La ley de Indiana no les permite a las personas indicar su afiliación
+          partidaria, de existir alguna, como parte de su archivo de registro. Deberá declarar
+          afiliación partidaria antes de votar en una elección primaria.
+        massachusetts: ''  
+        mississippi: >
+          Mississippi no tiene registro partidario. Por consiguiente, no
+          necesita registrarse con un partido si desea participar en la elección primaria,
+          camarilla política o convención de ese partido.        
+        north_carolina: >
+          Debe registrarse con un partido si desea participar en la elección primaria de ese partido.
+        rhode_island: >
+          Debe registrarse con un partido si desea participar en la elección primaria de ese partido.
+        tennessee: >
+          No necesita registrarse con un partido político para poder registrarse para votar.
+        utah: >
+          El derecho electoral de Utah permite que cada partido político
+          elija a quién le permitirá votar en sus elecciones primarias. Si no se afilia
+          a un partido, es probable que no le permitan votar en la elección primaria.
+        vermont: >
+          Vermont no requiere registro partidario para participar en una elección.
+        virginia: >
+          No necesita registrarse con un partido político para poder registrarse para votar.
+        washington: >
+          No necesita designar su afiliación partidaria para registrarse como votante en Washington.
+        west_virginia: >
+          Debe registrarse con un partido si desea participar en la elección
+          primaria, camarilla política o convención de ese partido (excepto que solicite
+          la boleta de un partido que permita que voten las personas independientes).
+        wisconsin: >
+          No necesita designar su afiliación partidaria para registrarse como votante en Wisconsin.
+        not_part_of_registration: >
+          No necesita registrarse con un partido si desea participar en
+          la elección primaria de ese partido. La afiliación partidaria se establece al
+          votar en una elección primaria.
+        not_required_to_vote: No necesita registrarse con un partido político para poder registrarse para votar.
+        not_required: >
+          No necesita registrarse con un partido si desea participar en la elección primaria, camarilla política o convención de ese partido.
+        not_required_can_choose_any: >
+          No necesita registrarse con un partido político si desea participar en la elección primaria, camarilla política o convención 
+          de ese partido, y puede elegir cualquier boleta presidencial primaria (pero no ambas), independientemente del registro.
+        not_done_with_state_name: >
+          No necesita registrarse con un partido político para poder registrarse para votar.
+        party_not_required: >
+          No se requiere el registro en un partido ni la preferencia por
+          otro para el registro de votantes. Sin embargo, cuando solicita un boleta primaria,
+          debe indicar su preferencia de partido para esa elección.
+        party_not_required_2: >
+          No se requiere registro partidario para participar en ninguna elección.
+        you_may_but_not_required: >
+          Puede, pero no necesita registrarse con un partido por anticipado,
+          si desea participar en la elección primaria, camarilla política o convención de
+          ese partido. Para participar en una elección primaria o camarilla política, debe
+          estar registrado con algún partido. Puede cambiar o declarar una afiliación partidaria
+          en las urnas el día de la elección primaria o en la ubicación de la camarilla política.
+        closed_caucus_with_state_name: > 
+          %{state_name} tiene un sistema de elección primaria cerrada y camarilla política. Cada partido político reconocido tiene una 
+          boleta electoral separada, que enumera únicamente a los candidatos de ese partido político. Los votantes registrados como miembros 
+          de un partido político sólo pueden votar por la boleta electoral de ese partido. Los votantes registrados como no declarados pueden 
+          elegir una boleta de las que se encuentran disponibles.
+        required_for_presidential: >
+          Si no declara una afiliación partidaria, no puede votar en la
+          elección primaria sobre la preferencia presidencial ni en las elecciones de comité
+          del partido. No se requiere partido político para ninguna otra elección.
+        required_for_primary: >
+          Debe registrarse con un partido si desea participar en la elección primaria, camarilla política o convención de ese partido.
+        required_for_primary_2: >
+          Debe registrarse con un partido si desea participar en la elección primaria de ese partido.
+        required_for_primary_dem_rep_only: >
+          Debe registrarse con un partido si desea participar en la elección primaria de ese partido.
+        required_for_primary_nonpartisan: >
+          Debe registrarse con un partido si desea participar en la elección primaria de ese partido.
+        required_for_primary_unless: >
+          Debe registrarse con un partido si desea participar en la elección primaria, camarilla política o convención de ese partido.
+        required_for_primary_no_change_30_days: >
+          Debe registrarse con un partido si desea participar en la elección primaria, camarilla política o convención de ese partido.
+        required_for_primary_2_months: >
+          Debe registrarse con un partido si desea participar en la elección primaria, camarilla política o convención de ese partido.
+          
+      id_number:
+        blank: ''
+        arizona: >
+          Debe proporcionar el número de su licencia de conducir de
+          Arizona o un número de licencia de identificación no operativa. Si no tiene una
+          licencia de conducir o un número de identificación no operativa, debe proporcionar
+          los últimos cuatro dígitos de su número de Seguro Social. Si no posee ninguno
+          de estos tipos de identificación, ingrese "NINGUNO" y el Estado le asignará un
+          número de identificación único.
+        colorado: >
+          Debe proporcionar el número de su licencia de conducir de
+          Colorado o su número de identificación. No incluya los guiones. Si no tiene una
+          licencia de conducir o un número de identificación, debe proporcionar los últimos
+          cuatro dígitos de su número de seguro social. Si no posee ninguno de estos tipos
+          de identificación, ingrese "NINGUNO", y el Estado le asignará un número de identificación
+          único.
+        georgia: >
+          Debe proporcionar el número de su licencia de conducir de
+          Georgia o el número de identificación emitido por el Estado. Si no tiene ninguno
+          de estos números, debe proporcionar los últimos cuatro dígitos de su número de
+          seguro social. Si no posee ninguno de estos números de identificación solicitados,
+          ingrese "NINGUNO", y el Estado le asignará un número de identificación único.
+        indiana: >
+          Debe proporcionar el número de su licencia de conducir de
+          Indiana que consta de diez dígitos. Si no tiene licencia de conducir, debe ingresar
+          los últimos cuatro dígitos de su número de seguro social. Indique cuál número
+          proporcionó.
+        maryland: >
+          Si posee una licencia de conducir de Maryland que sea actual
+          y válida ni una tarjeta de identificación de la Administración de Vehículos Automotores,
+          debe ingresar la licencia de conducir o el número de identificación. Si no posee
+          ninguna de estas identificaciones, debe ingresar los últimos cuatro dígitos de
+          su número de seguro social. Si no posee ninguno de estos números, ingrese "NINGUNO",
+          y el Estado le asignará un número de identificación único.
+        oklahoma: >
+          Debe proporcionar los últimos cuatro dígitos de su número
+          de seguro social. El Estado también solicita el número de su licencia de conducir
+          de Oklahoma. Si no posee ninguno de estos números, ingrese "NINGUNO", y el Estado
+          le asignará un número de identificación.
+        south_dakota: >
+          Debe proporcionar el número de su licencia de conducir. Si
+          no tiene una licencia de conducir válida, debe proporcionar los últimos cuatro
+          dígitos de su número de seguro social. (Si no posee licencia de conducir ni un
+          número de seguro social, ingrese "NINGUNO", y el Estado le asignará un número
+          de identificación).
+        wisconsin: >
+          Debe proporcionar el número de su licencia de conducir. Si
+          no posee una licencia de conducir que sea actual y válida, ingrese los últimos
+          cuatro dígitos de su número de seguro social o el número completo de la tarjeta
+          de identificación emitido por el Departamento de Transporte. (Si no posee ninguno
+          de estos números, ingrese "NINGUNO", y el Estado le asignará un número de identificación).
+        ssn_requested: >
+          Debe proporcionar su número de seguro social. No es obligatorio
+          proporcionar esta información. Si no proporciona su número de seguro social, debe
+          ingresar el número de su licencia de conducir o los últimos cuatro dígitos de
+          su número de seguro social. Si no posee ninguno de estos números, ingrese "NINGUNO",
+          y el Estado le asignará un número.  
+        ssn_or_none: 'Indique su número de seguro social. Si no tiene número de seguro social, ingrese “NINGUNO”, y el estado le asignará un número.'
+        ssn_or_none_2: >
+          Debe proporcionar su número de seguro social completo. (Si no posee un número de seguro social, ingrese "NINGUNO", y el Estado le asignará
+          un número de identificación).
+        ssn_or_none_3: >
+          Debe proporcionar su número de seguro social completo. (Si
+          no posee un número de seguro social, ingrese "NINGUNO", y el Estado le asignará
+          un número de identificación).
+        ssn_or_none_4: >
+          Debe proporcionar su número de seguro social completo. (Si no posee un número de seguro social, ingrese "NINGUNO", y el Estado le asignará un número de identificación).
+        ssn_or_none_5: >
+          Indique su número de seguro social. Si no tiene número de seguro social, ingrese “NINGUNO”, y el estado le asignará un número.
+        ssn_full: >
+          Debe proporcionar su número de seguro social completo. Si no posee un número de seguro social, ingrese "NINGUNO", 
+          y el Estado le asignará un número de identificación.
+        ssn_full_2: >
+          Debe proporcionar su número de seguro social. Si no posee un número de seguro social, ingrese "NINGUNO", 
+          y el Estado le asignará un número de identificación.
+        ssn_full_not_required: >
+          Debe proporcionar su número de seguro social completo. Si
+          no posee un número de seguro social, ingrese "NINGUNO" en el formulario.
+        drivers_license_or_mvc: >
+          Debe proporcionar los últimos cuatro dígitos de su número
+          de seguro social O el número de su licencia de conducir de Nueva Jersey. Si no
+          posee ninguno de estos números de identificación, ingrese "NINGUNO", y el Estado
+          le asignará un número para la inscripción en el censo electoral.
+        drivers_license_or_non_driver_id: >
+          Debe proporcionar el número de su licencia de conducir. Si
+          no tiene un número de licencia de conducir, entonces debe proporcionar los últimos
+          cuatro dígitos de su número de seguro social. Si no posee licencia de conducir
+          ni un número de seguro social, ingrese "NINGUNO", y el Estado le asignará un número
+          de identificación.
+        drivers_license_or_other_with_state_name: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name}. Si no tiene licencia de conducir, debe ingresar los últimos cuatro dígitos
+          de su número de seguro social. Si no posee un número de licencia de conducir ni
+          un número de seguro social, ingrese "NINGUNO", y el Estado le asignará un número
+          de identificación.
+        drivers_license_or_other_with_state_name_2: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name}. Si no tiene un número de licencia de conducir, debe proporcionar los últimos
+          cuatro dígitos de su número de seguro social. Si no posee ninguno de estos números,
+          ingrese "NINGUNO", y le asignarán un número de identificación única.
+        drivers_license_or_other_with_state_name_3: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name}. Si no tiene un número de licencia de conducir de %{state_name}, entonces
+          debe proporcionar los últimos cuatro dígitos de su número de seguro social. Si
+          no posee una licencia de conducir ni un número de seguro social, ingrese "NINGUNO",
+          y el Estado le asignará un número de identificación.
+        drivers_license_or_other_with_state_name_4: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name}. Si no tiene un número de licencia de conducir, entonces 
+          debe proporcionar los últimos cuatro dígitos de su número de seguro social. Si 
+          no posee licencia de conducir ni un número de seguro social, ingrese "NINGUNO", 
+          y el Estado le asignará un número de identificación.  
+        drivers_license_or_ssn_or_none: >
+          Debe proporcionar el número de su licencia de conducir o los
+          últimos cuatro dígitos de su número de seguro social. Si no posee licencia de
+          conducir ni número de seguro social, ingrese "NINGUNO", y el Estado le asignará
+          un número de identificación.
+        drivers_license_or_ssn_or_none_2: >
+          Debe proporcionar el número de su licencia de conducir. Si
+          no tiene licencia de conducir, debe proporcionar los últimos cuatro dígitos de
+          su número de seguro social. Si no posee ninguno de estos números, ingrese "NINGUNO",
+          y el Estado le asignará una identificación única.
+        drivers_license_or_ssn_or_none_3: >
+          Debe proporcionar el número de su licencia de conducir. Si
+          no tiene un número de licencia de conducir, debe proporcionar los últimos cuatro
+          dígitos de su número de seguro social. Si no posee ninguno de estos números, ingrese
+          "NINGUNO" en la casilla.
+        drivers_license_or_ssn_or_none_4: >
+          Debe proporcionar el número de su licencia de conducir. Si
+          no tiene un número de licencia de conducir, debe proporcionar los últimos cuatro
+          dígitos de su número de seguro social. Si no posee ninguno de estos números, ingrese
+          "NINGUNO", y el Estado le asignará un número de identificación único.
+        drivers_license_or_ssn_county_clerk_with_state_name: >
+          Debe proporcionar un número de licencia de conducir de 
+          %{state_name} si le han emitido uno. Si no tiene un número de licencia de conducir, debe proporcionar
+          los últimos cuatro dígitos de su número de seguro social. Si no tiene una licencia
+          de conducir ni un número de seguro social, comuníquese con el secretario del condado
+          para que le asignen una identificación única.
+        drivers_license_or_dmv_with_state_name: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name} o el número de identificación del Departamento de Vehículos
+          Automotores. Si no tiene licencia de conducir ni un número de identificación,
+          debe proporcionar los últimos cuatro dígitos de su número de seguro social. Si
+          no posee ninguna de estas identificaciones, ingrese "NINGUNO", y el Estado le
+          asignará un número de identificación.
+        drivers_license_with_state_name: >
+          Debe indicar el número de su licencia de conducir de %{state_name}
+          o el número de tarjeta de identificación. Si no posee ninguno de los dos, debe
+          indicar los últimos cuatro dígitos de su número de seguro social. Si no posee
+          ninguno de estos números de identificación, ingrese “NINGUNO”, y el estado le
+          asignará un número único de identificación para fines de registro como votante.
+        drivers_license_with_state_name_2: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name}. Si no tiene un número de licencia de conducir, entonces debe proporcionar
+          los últimos cuatro dígitos de su número de seguro social. (Si no posee licencia
+          de conducir ni un número de seguro social, ingrese "NINGUNO", y el Estado le asignará
+          un número de identificación).
+        drivers_license_if_issued_with_state_name: >
+          Debe proporcionar el número de su licencia de conducir de
+          Louisiana. Si no posee una, debe proporcionar al menos los últimos cuatro dígitos
+          de su número de seguro social. Si no posee licencia de conducir o un número de
+          seguro social, ingrese "NINGUNO", y el Estado le asignará un número de identificación.
+        drivers_license_required_at_voting_with_state_name: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name} o el número de su tarjeta de identificación de %{state_name}. Si no tiene
+          una licencia de conducir o una tarjeta de identificación, debe proporcionar los
+          últimos cuatro dígitos de su número de seguro social. Si no incluye esta información,
+          deberá proporcionar una identificación cuando vaya a votar.
+        drivers_license_non_driver_with_state_name: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name} o su número de identificación. Si no tiene ninguno de estos números, debe
+          proporcionar los últimos cuatro dígitos de su número de seguro social. Si no posee
+          licencia de conducir, una tarjeta de identificación o un número de seguro social,
+          ingrese "NINGUNO", y el Estado le asignará un número de identificación.
+        drivers_license_non_driver_2: >
+          Debe proporcionar el número de su licencia de conducir emitido
+          por el Estado o el número de su tarjeta de identificación. Si no tiene licencia
+          de conducir o una tarjeta de identificación, debe proporcionar los últimos cuatro
+          dígitos de su número de seguro social. Si no posee ninguno de estos tipos de identificación,
+          ingrese "NINGUNO", y el Estado le asignará un número de identificación único.
+        drivers_license_not_operating: >
+          Debe proporcionar el número de su licencia de conducir emitido
+          por el Estado o un número de licencia de identificación no operativa. Si no tiene
+          licencia de conducir ni un número de identificación no operativa, debe proporcionar
+          los últimos cuatro dígitos de su número de seguro social. Si no posee ninguno
+          de estos tipos de identificación, ingrese "NINGUNO", y el Estado le asignará un
+          número de identificación único.
+        drivers_license_non_operating_with_state_name: >   
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name} o un número de licencia de identificación no operativa. Si no tiene una
+          licencia de conducir o un número de identificación no operativa, debe proporcionar
+          los últimos cuatro dígitos de su número de seguro social. Si no posee ninguno
+          de estos tipos de identificación, ingrese "NINGUNO", y el Estado le asignará un
+          número de identificación único.
+        drivers_license_personal_identification_with_state_name: >
+          Debe proporcionar el número de su licencia de conducir de
+          Michigan o el número de su tarjeta de identificación personal emitido por el Estado.
+          Si no tiene una licencia de conducir o un número de tarjeta de identificación,
+          debe proporcionar los últimos cuatro dígitos de su número de seguro social. Si
+          no posee ninguno de estos tipos de identificación, ingrese "NINGUNO", y el Estado
+          le asignará un número de identificación único.
+        drivers_license_state_id_with_state_name: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name}. Si no tiene un número de licencia de conducir, debe proporcionar los
+          últimos cuatro dígitos de su número de seguro social. Si no posee ninguno de estos
+          números, ingrese "NINGUNO", y le asignarán un número de identificación única.
+        drivers_license_or_photo_id_and_other: >
+          Debe proporcionar el número de su licencia de conducir de
+          Connecticut. Si no tiene una licencia de conducir, debe proporcionar los últimos
+          cuatro dígitos de su número de seguro social. Si no posee licencia de conducir
+          ni número de seguro social, ingrese "NINGUNO", y el Estado le asignará un número
+          de identificación.
+        drivers_license_current_and_valid: >
+          Debe proporcionar el número de su licencia de conducir que
+          sea actual y válido. Si no posee uno, debe proporcionar los últimos cuatro dígitos
+          de su número de seguro social. Si no posee licencia de conducir ni número de seguro
+          social, ingrese "NINGUNO", y el Estado le asignará un número de identificación.
+        drivers_license_current_and_valid_with_state_name: >
+          Debe proporcionar el número de su licencia de conducir de
+          %{state_name} si le han emitido una licencia de conducir que sea actual y válida.
+          En caso contrario, debe proporcionar los últimos cuatro dígitos de su número de
+          seguro social. Si no posee licencia de conducir ni un número de seguro social,
+          ingrese "NINGUNO", y el Estado le asignará un número de identificación.
+        driver_license_state_issues_and_ssn: >
+          Debe proporcionar el número de su licencia de conducir emitido
+          por el Estado Y los últimos cuatro dígitos de su número de seguro social. Si no
+          posee licencia de conducir ni un número de seguro social, ingrese "NINGUNO", y
+          el Estado le asignará un número de identificación único.
+    sub_18:
+      blank: ''
+      be_by_next_election: si vas a cumplir 18 años antes de la próxima elección
+      be_by_next_general_election_november: si cumples 18 años antes de la próxima elección (que es por lo general en noviembre)
+      once_turned_16: una vez que hayas cumplido los 16 años de edad (pero no puedes votar hasta que cumples los 18 anos)
+      once_turned_17: una vez que cumples 17 años de edad
+      once_turned_17_but: una vez que usted haya cumplido 17 años (pero hay que tener 18 años para votar)
+      turn_by_next_election: si vas a cumplir 18 años antes de la próxima elección
+      turn_by_next_election_2: si vas a cumplir 18 años antes de la próxima elección
+      turn_by_next_general_election_november: si vas a cumplir 18 años antes de las elecciones generales (que es generalmente en noviembre)
+      turn_by_next_general_election_november_2: si vas a cumplir 18 años antes de las próximas elecciones en noviembre
+      when_at_least_16: si vas a cumplir 18 años antes de la próxima elección
+      when_is_16: una vez que hayas cumplido los 16 años de edad (pero no puedes votar hasta que cumples los 18 anos)
+      when_will_be_18: si vas a cumplir 18 años antes de la próxima elección
+      90_days_before: 90 dias antes de su cumpleaños de 18
+      6_months_before: seis meses antes que cumples 18 años
+      60_days_before_election_novemeber: si son 60 días antes de las próximas elecciones y tendrás 18 años en el dia de la elección (que es generalmente en noviembre)
+      2_months_before: dos meses antes que cumples 18 años
+      17_turn_18: Si tienes 17 anos y vas a cumplir 18 años antes de las próximas elecciones.

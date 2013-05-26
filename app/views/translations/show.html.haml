@@ -1,0 +1,4 @@
+.languages
+  - @translation.contents['en'].each do |k,v|
+    %ul= render :partial=>'key_value', :locals=>{:key=>k, :value=>v, :id_ct=>1}
+      

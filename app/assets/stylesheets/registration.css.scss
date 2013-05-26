@@ -102,13 +102,18 @@ iframe {
   font-size: 1.15em;
 }
 
-#other_language_link {
+#other_language_links {
+  position:absolute;
   zoom: 1;
   position: absolute;
   top: 20px;
   right: 20px;
   font-size: 14px;
   font-weight: bold;
+}
+
+.other_language_link {
+
 }
 
 /* step 5 */

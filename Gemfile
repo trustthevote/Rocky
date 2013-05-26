@@ -20,6 +20,8 @@ gem "dotenv-rails"
 
 gem "haml"
 
+gem "rails-i18n"
+
 
 group :development, :test do
   gem "rspec-rails", "~> 2.10.1"
