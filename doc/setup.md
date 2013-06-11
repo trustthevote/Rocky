@@ -17,11 +17,10 @@ These files contain sensitive data like passwords so we don't commit them to ver
 
   * `config/database.yml`
   * `config/newrelic.yml`
-  * `config/initializers/cookie_verification_secret.rb`
   * `db/bootstrap/partners.yml`
   * `.env.[environment_name]` for example, .env.staging or .env.production
   
-These files contain configuration items that differ from environment to environment. If you don't create your own version on the server a version of these files will be created automatically in the first deploy.
+These files contain configuration items that differ from environment to environment. If you don't create your own version on the server a version of these files will be created automatically in the first deploy. You will need to manually create your own version for the development environment.
 
   * `config/states_with_online_registration.yml` - the list of states that have a separate workflow for redirection to their own online system.
   * `config/app_config.yml` - general settings for app behavior (mostly email and cleanup timings)
@@ -33,7 +32,18 @@ For API registration calls to work correctly the value of pdf_hostname (see conf
 
 For a complete custom deployment, many of the files in `app/assets` and `config/locales` should be customized to your brand.
 
+## c. Getting the app to run locally
 
+Once RVM is installed (and the appropriate ruby version and gemset have been set up) and all of the example .yml and .env files have been turned into the real versions, run:
+
+  $ gem install bundler
+  $ bundle install
+  
+If the database hasn't been created yet, set that up by running
+  
+  $ bundle exec rake db:create
+  $ bundle exec rake db:migrate
+  $ bundle exec rake db:bootstrap
 
 ## 2. Configure deploy scripts
 
@@ -154,7 +164,7 @@ Run the features with cucumber:
 
 The application includes a set of bootstrap data that will let it get going.  WARNING: running the bootstrap process will reset the partners and state data in the application.  To bootstrap, run:
 
-    $ rake db:bootstrap
+    $ bundle exec rake db:bootstrap
 
 There is no rake task to reset the registrant data.  If you want to do that, drop into mysql and truncate the registrants table.  You probably want to do this before going live to clear out any bogus test data.
 
