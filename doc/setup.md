@@ -32,7 +32,7 @@ For API registration calls to work correctly the value of pdf_hostname (see conf
 
 For a complete custom deployment, many of the files in `app/assets` and `config/locales` should be customized to your brand.
 
-## c. Getting the app to run locally
+### c. Getting the app to run locally
 
 Once RVM is installed (and the appropriate ruby version and gemset have been set up) and all of the example .yml and .env files have been turned into the real versions, run:
 
