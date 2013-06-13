@@ -12,6 +12,7 @@
     cd Rocky
     gem install bundler
     bundle install
+    vim .env # add variable settings as needed (see below)
 
 ### App Deployment
 
