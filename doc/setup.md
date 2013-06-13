@@ -4,19 +4,19 @@
 
 ### Workstation Setup
 
-1. Core package deps: `sudo apt-get install curl libxml2-dev libxslt-dev libqt4-dev libmysqlclient-dev `
-1. Pull rocky repo: `git clone git@github.com:trustthevote/Rocky.git`
-1. Install [RVM](https://rvm.io/): `curl -L https://get.rvm.io | bash -s stable`
-1. Activate RVM: `. ~/.bash_profile`
-1. Install ruby 1.9: `rvm install ruby-1.9.3-p125`
-1. Cd into Rocky: `cd Rocky`
-1. Install bundler: `gem install bundler`
-1. Install app gems: `bundle install`
+    sudo apt-get install curl libxml2-dev libxslt-dev libqt4-dev libmysqlclient-dev
+    git clone git@github.com:trustthevote/Rocky.git
+    curl -L https://get.rvm.io | bash -s stable
+    source ~/.bash_profile
+    rvm install ruby-1.9.3-p125
+    cd Rocky
+    gem install bundler
+    bundle install
 
 ### App Deployment
 
-1. `cap <environment> deploy:setup`
-1. `cap <environment> deploy`
+    cap <environment> deploy:setup
+    cap <environment> deploy
 
 ## 1. Create real versions of the .example files
 
