@@ -53,16 +53,14 @@ For a complete custom deployment, many of the files in `app/assets` and `config/
 
 Once RVM is installed (and the appropriate ruby version and gemset have been set up) and all of the example .yml and .env files have been turned into the real versions, run:
 
-  $ gem install bundler
-  $ bundle install
+    $ gem install bundler
+    $ bundle install
   
-
 If the database hasn't been created yet, set that up by running
 
-  
-  $ bundle exec rake db:create
-  $ bundle exec rake db:migrate
-  $ bundle exec rake db:bootstrap
+    $ bundle exec rake db:create
+    $ bundle exec rake db:migrate
+    $ bundle exec rake db:bootstrap
 
 ## 2. Configure deploy scripts
 
@@ -83,19 +81,19 @@ be configured to allow ssh connections to github without needing a user to
 manually accept github as a known host. This can be done by adding the following
 into the deployment users' `~/.ssh/config` file on both the web and util servers.
 
-  Host github.com
-    User git
-    StrictHostKeyChecking no
-    BatchMode yes
-    IdentityFile /home/rocky/.ssh/id_rsa
+    Host github.com
+      User git
+      StrictHostKeyChecking no
+      BatchMode yes
+      IdentityFile /home/rocky/.ssh/id_rsa
 
 ### b. Installation requirements
 
 Install dependencies for CentOS/RHEL:
 
-  yum install apr-devel apr-util-devel gcc-c++ httpd-devel ImageMagick-devel \
-  libcurl-devel libxslt-devel libyaml-devel mysql-devel perl-DBD-MySQL \
-  perl-DBI perl-XML-Simple zlib-devel
+    yum install apr-devel apr-util-devel gcc-c++ httpd-devel ImageMagick-devel \
+      libcurl-devel libxslt-devel libyaml-devel mysql-devel perl-DBD-MySQL \
+      perl-DBI perl-XML-Simple zlib-devel
 
 ### c. Apache
 
