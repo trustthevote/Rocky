@@ -1,5 +1,22 @@
 # Development Setup Instructions
 
+## 0. Quick Summary
+
+### Workstation Setup
+
+1. Core package deps: `sudo apt-get install curl libxml2-dev libxslt-dev libqt4-dev libmysqlclient-dev `
+1. Pull rocky repo: `git clone git@github.com:trustthevote/Rocky.git`
+1. Install [RVM](https://rvm.io/): `curl -L https://get.rvm.io | bash -s stable`
+1. Activate RVM: `. ~/.bash_profile`
+1. Install ruby 1.9: `rvm install ruby-1.9.3-p125`
+1. Cd into Rocky: `cd Rocky`
+1. Install bundler: `gem install bundler`
+1. Install app gems: `bundle install`
+
+### App Deployment
+
+1. `cap <environment> deploy:setup`
+1. `cap <environment> deploy`
 
 ## 1. Create real versions of the .example files
 
@@ -28,7 +45,7 @@ These files contain configuration items that differ from environment to environm
 
 There are a number of files used by the `rails_config` - `config/settings.yml` and all the files under `config/settings/`. These are checked into source control and should be reviewed for accuracy. They don't contain sensitive information, but have values that are specific to the environment and instance of the `rocky` application being deployed.
 
-For API registration calls to work correctly the value of pdf_hostname (see config/settings.yml and config/settings/<env>.yml) should be set to the host name of the server that has to be put in the PDF URLs.
+For API registration calls to work correctly the value of `pdf_hostname` (see config/settings.yml and config/settings/<env>.yml) should be set to the host name of the server that has to be put in the PDF URLs.
 
 For a complete custom deployment, many of the files in `app/assets` and `config/locales` should be customized to your brand.
 
@@ -39,7 +56,9 @@ Once RVM is installed (and the appropriate ruby version and gemset have been set
   $ gem install bundler
   $ bundle install
   
+
 If the database hasn't been created yet, set that up by running
+
   
   $ bundle exec rake db:create
   $ bundle exec rake db:migrate
@@ -59,11 +78,24 @@ The apache setup on the webserver should pass through to the utility server for 
 
 ### a. ssh
 
-To simplify the initial deploy process, both the web and utility servers should be configured to allow ssh connections to github without needing a user to manually accept github as a known host.
+To simplify the initial deploy process, both the web and utility servers should
+be configured to allow ssh connections to github without needing a user to
+manually accept github as a known host. This can be done by adding the following
+into the deployment users' `~/.ssh/config` file on both the web and util servers.
 
-### b. Installation requirements?
+  Host github.com
+    User git
+    StrictHostKeyChecking no
+    BatchMode yes
+    IdentityFile /home/rocky/.ssh/id_rsa
 
-TODO (necessary here?)
+### b. Installation requirements
+
+Install dependencies for CentOS/RHEL:
+
+  yum install apr-devel apr-util-devel gcc-c++ httpd-devel ImageMagick-devel \
+  libcurl-devel libxslt-devel libyaml-devel mysql-devel perl-DBD-MySQL \
+  perl-DBI perl-XML-Simple zlib-devel
 
 ### c. Apache
 
@@ -127,7 +159,7 @@ There are two worker daemons running on the utility server.  They can be managed
 
     $ cap deploy:run_workers    # start/restart both workers
     
-The deploy:run_workers task also runs during a full deploy
+The `deploy:run_workers` task also runs during a full deploy
 
 #### `rocky_runner`
 
