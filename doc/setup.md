@@ -174,8 +174,10 @@ directory set up with the following files:
 * `shared/config/database.yml`
 * `shared/config/newrelic.yml`
 * `shared/.env.<env>`
-* `shared/config/states_with_online_registration.yml` (will be created from the default if not present)
-* `shared/config/app_config_.yml` (will be created from the default if not present)
+* `shared/config/states_with_online_registration.yml` (will be created from the
+   default if not present)
+* `shared/config/app_config_.yml` (will be created from the default if not
+   present)
 * `shared/config/mobile.yml` (will be created from the default if not present)
 
 When your code changes are pushed to git origin/master, run
