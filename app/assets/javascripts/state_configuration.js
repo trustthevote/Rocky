@@ -15,8 +15,15 @@ $(document).ready(function() {
     }
   });
   
+  $(".setting h2").click(function() {
+		$(this).parent().children("ul").toggle();
+	});
+	
+	$(".setting h2").click();
+
   $(".languages ul li span.translation_key_part").click(function() {
     $(this).parent().children("ul").toggle();
   });
+
   
 });
