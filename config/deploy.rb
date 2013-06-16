@@ -88,7 +88,6 @@ after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "dep
 
 set :rake, 'bundle exec rake'
 
-after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs", "deploy:symlink_app_configs"
 before "deploy:restart", "deploy:import_states_yml"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
@@ -162,42 +161,6 @@ namespace :deploy do
     CMD
   end
   
-  desc "Link the states_with_online_registration.yml into the current release path. Create from the example if it doesn't exist"
-  task :symlink_state_configs, :roles=>[:app, :util], :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      cp -n #{latest_release}/config/states_with_online_registration.yml.example #{shared_path}/config/states_with_online_registration.yml
-    CMD
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/states_with_online_registration.yml #{latest_release}/config/states_with_online_registration.yml
-    CMD
-  end
-  
-  desc "Link the mobile.yml configuration into the current release path. Create from the example if it doesn't exist"
-  task :symlink_mobile_configs, :roles=>[:app, :util], :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      cp -n #{latest_release}/config/mobile.yml.example #{shared_path}/config/mobile.yml
-    CMD
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/mobile.yml #{latest_release}/config/mobile.yml
-    CMD
-  end
-
-  desc "Link the app_config.yml configuration into the current release path. Create from the example if it doesn't exist"
-  task :symlink_app_configs, :roles=>[:app, :util], :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      cp -n #{latest_release}/config/app_config.yml.example #{shared_path}/config/app_config.yml
-    CMD
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/app_config.yml #{latest_release}/config/app_config.yml
-    CMD
-  end
-
 
   desc "Link the pdf dir to /data/rocky/pdf"
   task :symlink_pdf, :roles => [:util], :except => {:no_release => true} do
