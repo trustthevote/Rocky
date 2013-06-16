@@ -21,7 +21,8 @@ $(document).ready(function() {
 	
 	$(".setting h2").click();
 
-  $(".languages ul li span.translation_key_part").click(function() {
+  $(".languages ul li span.collapsable").click(function() {
+    $(this).toggleClass('collapsed')
     $(this).parent().children("ul").toggle();
   });
 

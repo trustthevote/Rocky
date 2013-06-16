@@ -1,0 +1,7 @@
+%ul.nav
+  - @types.each do |type|
+    %li
+      %span= "Translate '#{type.name}' in "
+      - I18n.available_locales.each do |lang|
+        - unless lang.to_s=='en'
+          = link_to Translation.language_name(lang), translation_path(type, :locale=>lang)

@@ -28,8 +28,12 @@ class Translation
     Rails.root.join('config','locales')
   end
   
-  def self.types
+  def self.type_names
     ['core', 'states', 'txt', 'email']
+  end
+  
+  def self.types
+    type_names.collect{|t| Translation.new(t) }
   end
   
   def self.directories
@@ -45,16 +49,40 @@ class Translation
   end
   
   def self.directory(type)
-    type == 'base' ? base_directory : base_directory.join(type)
+    type == 'core' ? base_directory : base_directory.join(type)
+  end
+  
+  def self.instructions_for(key)
+    instructions = []
+    en_value = I18n.t(key, :locale=>'en')
+    en_value.to_s.scan(/(\%\{[^\{]+\})/).each do |match|
+      instructions << "Please keep '#{match.first}' intact"
+    end
+    specific_instructions = I18n.t("#{key}_translation_instructions", :locale=>'en', :default=>'')
+    instructions << specific_instructions unless specific_instructions.blank?
+
+    instructions
+  end
+  
+  def self.language_name(locale)
+    I18n.t('language_name', :locale=>locale) + " (#{locale})"
   end
   
   attr_reader :directory
   attr_reader :type
   
   def initialize(type)
-    raise "Not Found" if !self.class.types.include?(type)
+    raise "Not Found" if !self.class.type_names.include?(type)
     @type = type
     @directory = self.class.directory(type)
+  end
+  
+  def name
+    @type.capitalize
+  end
+  
+  def to_param
+    @type
   end
   
   def file_path(fn)
@@ -76,6 +104,23 @@ class Translation
       end
     end
     @contents
+  end
+  
+  def generate_yml(locale, key_values)
+    full_hash = {locale=>{}}
+    key_values.each do |k,v|
+      last_hash = full_hash[locale]
+      key_chain = k.split('.')
+      key_chain.each_with_index do |key, i|
+        if (i+1 == key_chain.size)
+          last_hash[key] = v
+        else
+          last_hash[key] ||= {}
+          last_hash = last_hash[key]
+        end
+      end
+    end
+    full_hash.to_yaml
   end
   
   

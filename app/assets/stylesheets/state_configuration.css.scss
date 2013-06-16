@@ -1,12 +1,21 @@
 // Place all the styles related to the state_configuration controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 #state_configuration, #translations {
   background: white;
   padding:10px;
   font-size: 13px;
   line-height: 1.25em;
+  
+  form ul {
+    zoom: 1;
+    margin: 0;
+  }
+
+  form li {
+    float: none;
+    margin-right: 0;
+  }
   
   h2 {
     font-size:18px;
@@ -18,10 +27,36 @@
     padding:10px;
   }
   
+  ul.nav {
+    li {
+      overflow:hidden;
+      span {
+        width:150px;
+        float:left;
+        
+      }
+      a {
+        float:left;
+        width:150px;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  ul.translation_instructions {
+    padding:0;
+    li {
+      border:0;
+      list-style: disc inside none;
+      display:list-item;
+    }
+  }
+  
   ul {
     padding-bottom:25px;
     padding-top:5px;
     margin-top:5px;
+    overflow:hidden;
     li {
       overflow:hidden;
       border-top:1px solid #000;
@@ -36,11 +71,11 @@
       .values {
         display: none;
       }
-      .locale {
+      &.locale {
         float: left;
         margin-top:5px;
         padding:5px;
-        width:300px;
+        width:400px;
         border: 1px solid #ccc;
         .translation {
           textarea {
@@ -50,11 +85,43 @@
           .substitution {
             font-weight:bold;
           }
+          ul {
+            li {
+              height:30px;
+              input {
+                width:350px;
+              }
+            }
+          }
+          
         }  
       }
       
     }
   }
-  
-  
+  #submission {
+    padding:25px;
+    border:1px solid #aaa;
+    background: #ccc;
+    position: fixed;
+    top:0;
+    right:0;
+  }
 }
+
+#translations {
+  ul {
+    li {
+      .collapsable {
+        cursor: default;
+        padding-left:14px;
+        height:12px;
+        background:url('/admin/downArrow.png') no-repeat center left;
+      }
+      .collapsed {
+        background-image:url('/admin/collapsedArrow.png');
+      }
+    }
+  }
+}
+

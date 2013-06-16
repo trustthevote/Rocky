@@ -1,17 +1,35 @@
 - if value.is_a?(Hash)
   - value.each do |k,v|
-    %ul
-      %li
-        %span.translation_key_part= k
-        = render :partial=>'key_value', :locals=>{:key=>"#{key}.#{k}", :value=>v, :id_ct=>id_ct + 1}
+    - unless k =~ /_translation_instructions$/
+      %ul
+        %li
+          %span.translation_key_part{:class=>v.is_a?(Hash) ? 'collapsable' : ''}= k
+          = render :partial=>'key_value', :locals=>{:key=>"#{key}.#{k}", :value=>v, :id_ct=>id_ct + 1}
 - else
   %br
   %span.translation_key= key
-  %br
-  - I18n.available_locales.each do |locale|
-    .locale
-      %h4.locale_name= locale
+  %ul.translation_instructions
+    - Translation.instructions_for(key).each do |inst|
+      %li=inst
+      
+  %ul
+    %li.locale
+      %h4.locale_name en
       .translation
-        %textarea{:name=>"#{locale}[#{key}]"}
-          = I18n.t(key, :locale=>locale, :default=>'')
-    
+        - if value.is_a?(Array)
+          %ul
+            - value.each do |v|
+              %li= v
+        - else
+          = I18n.t(key, :locale=>'en', :default=>'')
+    %li.locale
+      %h4.locale_name= @locale
+      .translation
+        - if value.is_a?(Array)
+          %ul
+            - I18n.t(key, :locale=>@locale, :default=>'').each do |v|
+              %li
+                %input{:type=>'text', :name=>"#{@locale}[#{key}][]", :value=>v}
+        - else
+          %textarea{:name=>"#{@locale}[#{key}]"}
+            = I18n.t(key, :locale=>@locale, :default=>'')

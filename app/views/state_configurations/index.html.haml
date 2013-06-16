@@ -1,31 +1,32 @@
-= I18n.t('language_name')
-- @state_importer.states_hash.each do |state, values|
-  - state_id = 
-  .setting
-    %h2.key= "#{values['name'] || state}"
-    %ul
-      - values.each do |key, value|
-        %li
-          - if StateImporter.is_localization?(key) || StateImporter.is_localization_list?(key)
-            %span.method= key
-            %span.translation_key= value
-            .values{:id=>"#{state}_#{StateImporter.get_loc_part(key).to_s}"}
-              - options = []
-              - StateImporter.config_options(key).each do |k,v| [k.to_s,k.to_s]
-                - options << [k.to_s, k.to_s]
-                .option{:class=>k.to_s}= v.to_json
+#state_configuration
+  = I18n.t('language_name')
+  - @state_importer.states_hash.each do |state, values|
+    - state_id = 
+    .setting
+      %h2.key= "#{values['name'] || state}"
+      %ul
+        - values.each do |key, value|
+          %li
+            - if StateImporter.is_localization?(key) || StateImporter.is_localization_list?(key)
+              %span.method= key
+              %span.translation_key= value
+              .values{:id=>"#{state}_#{StateImporter.get_loc_part(key).to_s}"}
+                - options = []
+                - StateImporter.config_options(key).each do |k,v| [k.to_s,k.to_s]
+                  - options << [k.to_s, k.to_s]
+                  .option{:class=>k.to_s}= v.to_json
               
-            = select_tag(StateImporter.get_loc_part(key).to_s, options_for_select(options, value.to_s))
-            %br
-            - I18n.available_locales.each do |locale|
-              .locale{:class=>"locale_#{locale}"}
-                %h4.locale_name= locale
+              = select_tag(StateImporter.get_loc_part(key).to_s, options_for_select(options, value.to_s))
+              %br
+              - I18n.available_locales.each do |locale|
+                .locale{:class=>"locale_#{locale}"}
+                  %h4.locale_name= locale
                 
-                - if StateImporter.is_localization_list?(key)
-                  .translation= value.collect{|item_key| StateImporter.translate_list_item(key, item_key, locale, '<STATE_NAME>')}
-                - else
-                  .translation= StateImporter.translate_key(value, key, locale, "<span class='substitution'>#{values['name'] || 'STATE_NAME'}</span>").html_safe
+                  - if StateImporter.is_localization_list?(key)
+                    .translation= value.collect{|item_key| StateImporter.translate_list_item(key, item_key, locale, '<STATE_NAME>')}
+                  - else
+                    .translation= StateImporter.translate_key(value, key, locale, "<span class='substitution'>#{values['name'] || 'STATE_NAME'}</span>").html_safe
             
-          - else
-            %span.method= key
-            %span.value= value
+            - else
+              %span.method= key
+              %span.value= value

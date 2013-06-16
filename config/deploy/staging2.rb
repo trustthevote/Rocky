@@ -29,4 +29,4 @@ role :db,   ENV['STAGING2_DB'], :primary => true
 
 set :rails_env,    "staging2"
 
-set :branch, "rails3"
+set :branch, "config_refactor"

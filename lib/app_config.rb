@@ -19,7 +19,7 @@ class AppConfig
     setting_with_default(:partner_csv_expiration_minutes, 30).to_f.minutes
   end
 
-  def setting_with_default(setting_name, default_value)
+  def self.setting_with_default(setting_name, default_value)
     Settings.send(:setting_name).blank? ? default_value : Settings.send(:setting_name)
   end
     
