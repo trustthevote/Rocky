@@ -70,11 +70,13 @@ class Translation
   
   attr_reader :directory
   attr_reader :type
+  attr_reader :blanks
   
   def initialize(type)
     raise "Not Found" if !self.class.type_names.include?(type)
     @type = type
     @directory = self.class.directory(type)
+    @blanks = []
   end
   
   def name
@@ -106,6 +108,22 @@ class Translation
     @contents
   end
   
+  def get_from_contents(key, locale, group=nil)
+    hash_keys = key.split('.')
+    group ||= contents[locale]
+    if hash_keys.size == 1
+      return group[hash_keys.first]
+    else
+      group = group[hash_keys.shift]
+      
+      get_from_contents(hash_keys.join('.'), locale, group)
+    end
+  end
+  
+  def is_blank?(key)
+    blanks.include?(key)
+  end
+  
   def generate_yml(locale, key_values)
     full_hash = {locale=>{}}
     key_values.each do |k,v|
@@ -114,12 +132,15 @@ class Translation
       key_chain.each_with_index do |key, i|
         if (i+1 == key_chain.size)
           last_hash[key] = v
+          blanks << k if v.blank?
         else
           last_hash[key] ||= {}
           last_hash = last_hash[key]
         end
       end
     end
+    contents #load it
+    @contents[locale] = full_hash[locale]
     full_hash.to_yaml
   end
   

@@ -6,7 +6,7 @@
   padding:10px;
   font-size: 13px;
   line-height: 1.25em;
-  
+  padding-bottom:75px;
   form ul {
     zoom: 1;
     margin: 0;
@@ -43,12 +43,25 @@
     }
   }
   
-  ul.translation_instructions {
-    padding:0;
-    li {
-      border:0;
-      list-style: disc inside none;
-      display:list-item;
+  .translation_instructions {
+    font-size: 110%;
+    padding:10px;
+    margin-top:10px;
+    background:#fDD;
+    width:800px;
+    
+    h3 {
+      font-weight:bold;
+    }
+    ul {
+      padding:0;
+      margin:0;
+      font-weight: bold;
+      li {
+        border:0;
+        list-style: disc inside none;
+        display:list-item;
+      }
     }
   }
   
@@ -64,6 +77,9 @@
       padding-left:5px;
       ul {
         margin-left:20px;
+        &.locales {
+          margin-left:0;
+        }
       }
       .method {
         font-weight: bold;
@@ -71,15 +87,25 @@
       .values {
         display: none;
       }
+      &.translation_key_part_list {
+        border:0;
+        border-left:1px solid #aaa;
+        .translation_key_part {
+          font-weight:bold;
+        } 
+      }
       &.locale {
-        float: left;
         margin-top:5px;
         padding:5px;
-        width:400px;
-        border: 1px solid #ccc;
+        width:800px;
+        border: 0;
+        margin-bottom:10px;
+        h4.locale_name {
+          margin-bottom:5px;
+        }
         .translation {
           textarea {
-            width:290px;
+            width:750px;
             height:4em;
           }
           .substitution {
@@ -96,16 +122,34 @@
           
         }  
       }
+      &.translatable {
+        background: #ccf;
+      }
+      &.blank {
+        background: #f66;
+        span.error_message {
+          font-weight:bold;
+          margin:8px 10px;
+          font-size:110%;
+          display:block;
+        }
+      }
       
     }
   }
   #submission {
     padding:25px;
-    border:1px solid #aaa;
-    background: #ccc;
+    background: #ccf;
     position: fixed;
-    top:0;
+    bottom:0;
     right:0;
+    left:0;
+    input {
+      padding:15px 10px;
+      background-color:#fff;
+      font-size:110%;
+      font-weight:bold;
+    }
   }
 }
 

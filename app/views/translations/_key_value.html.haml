@@ -2,19 +2,23 @@
   - value.each do |k,v|
     - unless k =~ /_translation_instructions$/
       %ul
-        %li
-          %span.translation_key_part{:class=>v.is_a?(Hash) ? 'collapsable' : ''}= k
+        %li.translation_key_part_list
+          %span.translation_key_part= k
           = render :partial=>'key_value', :locals=>{:key=>"#{key}.#{k}", :value=>v, :id_ct=>id_ct + 1}
 - else
   %br
   %span.translation_key= key
-  %ul.translation_instructions
-    - Translation.instructions_for(key).each do |inst|
-      %li=inst
+  - instructions = Translation.instructions_for(key)
+  - if instructions.size > 0
+    .translation_instructions
+      %h3= "Instructions for Translator: "
+      %ul
+        - instructions.each do |inst|
+          %li=inst
       
-  %ul
+  %ul.locales
     %li.locale
-      %h4.locale_name en
+      %h4.locale_name English:
       .translation
         - if value.is_a?(Array)
           %ul
@@ -22,14 +26,17 @@
               %li= v
         - else
           = I18n.t(key, :locale=>'en', :default=>'')
-    %li.locale
-      %h4.locale_name= @locale
+    %li.locale.translatable{:class=>@translation.is_blank?(key) ? 'blank' : ''}
+      %h4.locale_name= "#{Translation.language_name(@locale)}:"
       .translation
+        - if @translation.is_blank?(key)
+          %span.error_message ** You must provide a translation **
         - if value.is_a?(Array)
           %ul
-            - I18n.t(key, :locale=>@locale, :default=>'').each do |v|
+            - @translation.get_from_contents(key, @locale).each do |v|
+              -# I18n.t(key, :locale=>@locale, :default=>'').each do |v|
               %li
                 %input{:type=>'text', :name=>"#{@locale}[#{key}][]", :value=>v}
         - else
           %textarea{:name=>"#{@locale}[#{key}]"}
-            = I18n.t(key, :locale=>@locale, :default=>'')
+            = @translation.get_from_contents(key, @locale)

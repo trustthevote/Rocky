@@ -4,7 +4,7 @@
   %h2= "Translate '#{@translation.name}' in #{Translation.language_name(@locale)}"
   = form_tag submit_translation_path(:locale=>@locale) do
     #submission
-      = submit_tag 'Submit'
+      = submit_tag 'Save and Email Translations'
     .languages
       - @translation.contents['en'].each do |k,v|
         %ul= render :partial=>'key_value', :locals=>{:key=>k, :value=>v, :id_ct=>1}

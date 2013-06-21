@@ -16,13 +16,9 @@
 </head>
 <body>
   <div id="container">
-    <div id="header">
-    </div>
     <div id="config_ui">
       <%= flash_messages.html_safe %>
       <%= yield %>
-    </div>
-    <div id="footer">
     </div>
   </div>
   <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
