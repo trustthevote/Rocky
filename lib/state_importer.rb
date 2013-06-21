@@ -147,7 +147,9 @@ class StateImporter
   end
   
   def self.translate_from_row(row, key, locale, state_name='')
-    key_value = row[key].nil? ? defaults[key] : row[key]
+    si = StateImporter.new
+    
+    key_value = row[key].nil? ? si.defaults[key] : row[key]
     translate_key(key_value, key, locale, state_name)
   end
   
