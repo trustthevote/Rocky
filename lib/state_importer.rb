@@ -68,6 +68,10 @@ class StateImporter
     commit_changes!
   end
   
+  def self.defaults
+    @@defaults ||= StateImporter.new.defaults
+  end
+  
   def self.state_settings
     %w(name participating requires_race requires_party id_length_min id_length_max online_registration_url)
   end
@@ -86,8 +90,7 @@ class StateImporter
   end
   
   def self.state_uses_default?(state, method, key=nil)
-    si = StateImporter.new
-    si.defaults[key || method].to_s == state.send(method).to_s
+    self.defaults[key || method].to_s == state.send(method).to_s
   end
   
   def self.get_loc_part_array(key)
@@ -147,9 +150,7 @@ class StateImporter
   end
   
   def self.translate_from_row(row, key, locale, state_name='')
-    si = StateImporter.new
-    
-    key_value = row[key].nil? ? si.defaults[key] : row[key]
+    key_value = row[key].nil? ? self.defaults[key] : row[key]
     translate_key(key_value, key, locale, state_name)
   end
   
