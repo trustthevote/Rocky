@@ -88,7 +88,7 @@ after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "dep
 
 set :rake, 'bundle exec rake'
 
-after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs", "deploy:symlink_app_configs"
+after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs", "deploy:symlink_app_configs", "deploy:migrate"
 before "deploy:restart", "deploy:import_states_yml"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
