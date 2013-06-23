@@ -423,10 +423,10 @@ class Registrant < ActiveRecord::Base
     else
       @raw_date_of_birth = date_of_birth_before_type_cast
       date = nil
-      if matches = date_of_birth_before_type_cast.match(/^(\d{1,2})\D+(\d{1,2})\D+(\d{4})$/)
+      if matches = date_of_birth_before_type_cast.to_s.match(/^(\d{1,2})\D+(\d{1,2})\D+(\d{4})$/)
         m,d,y = matches.captures
         date = Date.civil(y.to_i, m.to_i, d.to_i) rescue nil
-      elsif matches = date_of_birth_before_type_cast.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})$/)
+      elsif matches = date_of_birth_before_type_cast.to_s.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})$/)
         y,m,d = matches.captures
         date = Date.civil(y.to_i, m.to_i, d.to_i) rescue nil
       end
