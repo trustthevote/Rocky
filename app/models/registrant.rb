@@ -753,7 +753,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def enqueue_reminder_emails
-    update_attributes(:reminders_left => REMINDER_EMAILS_TO_SEND)
+    self.reminders_left = REMINDER_EMAILS_TO_SEND
     enqueue_reminder_email
   end
 
