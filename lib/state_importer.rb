@@ -234,6 +234,7 @@ protected
     if clean_for_changes(old_obj) != clean_for_changes(new_obj)
       full_string = "#{message}"
       full_string += "\n\tchange:\n\t> #{old_obj.to_s}\n\t> "
+      full_string.force_encoding 'utf-8'
       puts full_string.encoding
       puts new_obj.to_s.encoding
       full_string += "#{new_obj.to_s}"
