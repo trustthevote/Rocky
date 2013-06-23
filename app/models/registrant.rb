@@ -667,7 +667,6 @@ class Registrant < ActiveRecord::Base
     I18n.locale = self.locale.to_sym
     generate_pdf
     redact_sensitive_data
-    self.save
     deliver_confirmation_email
     enqueue_reminder_emails
   end
