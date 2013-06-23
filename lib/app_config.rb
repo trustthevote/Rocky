@@ -20,7 +20,7 @@ class AppConfig
   end
 
   def self.setting_with_default(setting_name, default_value)
-    Settings.send(:setting_name).blank? ? default_value : Settings.send(:setting_name)
+    Settings.send(setting_name).blank? ? default_value : Settings.send(:setting_name)
   end
     
 end
