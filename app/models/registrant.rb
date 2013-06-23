@@ -417,7 +417,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def validate_date_of_birth
-    return if date_of_birth_before_type_cast.is_a?(Date)
+    return if date_of_birth_before_type_cast.is_a?(Date) || date_of_birth_before_type_cast.is_a?(Mysql::Time)
     if date_of_birth_before_type_cast.blank?
       errors.add(:date_of_birth, :blank)
     else
