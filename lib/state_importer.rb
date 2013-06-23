@@ -232,7 +232,10 @@ protected
   
   def report_any_changes(old_obj, new_obj, message)
     if clean_for_changes(old_obj) != clean_for_changes(new_obj)
-      report("#{message}\n\tchange:\n\t> #{old_obj.to_s}\n\t> #{new_obj.to_s}")
+      full_string = "#{message}"
+      full_string += "\n\tchange:\n\t> #{old_obj.to_s}\n\t> "
+      full_string += "#{new_obj.to_s}"
+      report(full_string)
     end
   end
   
