@@ -60,8 +60,7 @@ class Notifier < ActionMailer::Base
     m = mail(:subject=> I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym),
       :from=>registrant.email_address_to_send_from,
       :to=>registrant.email_address,
-      :date=> Time.now.to_s(:db),
-      :content_type=> "multipart/alternative") do |format|
+      :date=> Time.now.to_s(:db)) do |format|
         format.html { message_body(registrant, kind) }
     end
 
@@ -86,7 +85,7 @@ class Notifier < ActionMailer::Base
     if custom_template
       render :inline => custom_template
     else
-      render :file=>"notifier/#{kind}.#{registrant.locale}"
+      render "notifier/#{kind}.#{registrant.locale}"
     end
   end
 
