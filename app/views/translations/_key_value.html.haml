@@ -17,26 +17,27 @@
           %li=inst
       
   %ul.locales
-    %li.locale
-      %h4.locale_name English:
-      .translation
-        - if value.is_a?(Array)
-          %ul
-            - value.each do |v|
-              %li= v
-        - else
-          = I18n.t(key, :locale=>'en', :default=>'')
-    %li.locale.translatable{:class=>@translation.is_blank?(key) ? 'blank' : ''}
-      %h4.locale_name= "#{Translation.language_name(@locale)}:"
-      .translation
-        - if @translation.is_blank?(key)
-          %span.error_message ** You must provide a translation **
-        - if value.is_a?(Array)
-          %ul
-            - @translation.get_from_contents(key, @locale).each do |v|
-              -# I18n.t(key, :locale=>@locale, :default=>'').each do |v|
-              %li
-                %input{:type=>'text', :name=>"#{@locale}[#{key}][]", :value=>v}
-        - else
+    - if value.is_a?(Array)
+      %li.locale
+        %ul.translation_list
+          %li
+            %h4.locale_name English
+          %li
+            %h4.locale_name= "#{Translation.language_name(@locale)}:"
+          - @translation.get_from_contents(key, @locale).to_a.each_with_index do |v,i|
+            %li= value[i]
+            %li.translatable{:class=>v.blank? && !value[1].blank? ? 'error' : ''}
+              %input{:type=>'text', :name=>"#{@locale}[#{key}][]", :value=>v}
+    - else
+      %li.locale
+        %h4.locale_name English:
+        .translation= I18n.t(key, :locale=>'en', :default=>'')
+      %li.locale.translatable{:class=>@translation.has_error?(key) ? 'error' : ''}
+        %h4.locale_name= "#{Translation.language_name(@locale)}:"
+        .translation
+          - if @translation.is_blank?(key)
+            %span.error_message ** You must provide a translation **
+          - elsif @translation.is_missing_variable?(key)
+            %span.error_message ** The %{VARIABLE} is missing ** 
           %textarea{:name=>"#{@locale}[#{key}]"}
             = @translation.get_from_contents(key, @locale)

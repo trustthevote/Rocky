@@ -2,6 +2,17 @@
   = render :partial=>'translations_nav'
   %hr
   %h2= "Translate '#{@translation.name}' in #{Translation.language_name(@locale)}"
+  - if @translation.has_errors?
+    .errors
+      - if !@translation.blanks.empty? 
+        %span.error_message The following items are missing translations:
+        - @translation.blanks.each do |blank_key|
+          %span.error_message= blank_key
+      - if !@translation.missing_variables.empty? 
+        %span.error_message The following items are missing %{VARIABLE} substitutions:
+        - @translation.missing_variables.each do |blank_key|
+          %span.error_message= blank_key
+      
   = form_tag submit_translation_path(:locale=>@locale) do
     #submission
       = submit_tag 'Save and Email Translations'

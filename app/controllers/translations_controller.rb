@@ -12,7 +12,7 @@ class TranslationsController < ApplicationController
   
   def submit
     file = @translation.generate_yml(params[:locale], params[params[:locale]])
-    if @translation.blanks.size > 0
+    if @translation.has_errors?
       render :action=>:show
     else
       submit_data(file, params[:id], params[:locale])

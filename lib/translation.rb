@@ -24,6 +24,13 @@
 #***** END LICENSE BLOCK *****
 class Translation
   
+  def self.var_expression
+    /(\%\{[^\{]+\})/
+  end
+  def var_expression
+    self.class.var_expression
+  end
+  
   def self.base_directory
     Rails.root.join('config','locales')
   end
@@ -55,7 +62,7 @@ class Translation
   def self.instructions_for(key)
     instructions = []
     en_value = I18n.t(key, :locale=>'en')
-    en_value.to_s.scan(/(\%\{[^\{]+\})/).each do |match|
+    en_value.to_s.scan(var_expression).each do |match|
       instructions << "Please keep '#{match.first}' intact"
     end
     specific_instructions = I18n.t("#{key}_translation_instructions", :locale=>'en', :default=>'')
@@ -71,12 +78,14 @@ class Translation
   attr_reader :directory
   attr_reader :type
   attr_reader :blanks
+  attr_reader :missing_variables
   
   def initialize(type)
     raise "Not Found" if !self.class.type_names.include?(type)
     @type = type
     @directory = self.class.directory(type)
     @blanks = []
+    @missing_variables = []
   end
   
   def name
@@ -124,6 +133,19 @@ class Translation
     blanks.include?(key)
   end
   
+  def is_missing_variable?(key)
+    missing_variables.include?(key)
+  end
+  
+  def has_error?(key)
+    is_blank?(key) || is_missing_variable?(key)
+  end
+  
+  def has_errors?
+    !blanks.empty? || !missing_variables.empty?
+  end
+  
+  
   def generate_yml(locale, key_values)
     full_hash = {locale=>{}}
     key_values.each do |k,v|
@@ -132,7 +154,12 @@ class Translation
       key_chain.each_with_index do |key, i|
         if (i+1 == key_chain.size)
           last_hash[key] = v
-          blanks << k if v.blank?
+          if value_is_blank(v, k)
+            blanks << k 
+          end
+          if value_is_missing_variable(v, k)
+            missing_variables << k
+          end
         else
           last_hash[key] ||= {}
           last_hash = last_hash[key]
@@ -144,5 +171,22 @@ class Translation
     full_hash.to_yaml
   end
   
+  def value_is_blank(v, k)
+     return true if v.blank? && !I18n.t(k, :locale=>:en).blank? 
+     if v.is_a?(Array)
+       new_vals = v.collect{|item| item.blank? ? nil : item }.compact
+       old_vals = I18n.t(k, :locale=>:en).collect{|item| item.blank? ? nil : item }.compact
+       return true if new_vals.size != old_vals.size
+     end
+     return false
+  end
+  
+  def value_is_missing_variable(v, k)
+    en_value = I18n.t(k, :locale=>:en)
+    if en_value =~ var_expression && !(v =~ var_expression)
+      return true
+    end
+    return false    
+  end
   
 end

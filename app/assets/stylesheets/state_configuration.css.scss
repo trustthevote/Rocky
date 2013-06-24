@@ -7,6 +7,7 @@
   font-size: 13px;
   line-height: 1.25em;
   padding-bottom:75px;
+  
   form ul {
     zoom: 1;
     margin: 0;
@@ -79,6 +80,7 @@
         margin-left:20px;
         &.locales {
           margin-left:0;
+          padding-bottom:0;
         }
       }
       .method {
@@ -111,29 +113,25 @@
           .substitution {
             font-weight:bold;
           }
-          ul {
-            li {
-              height:30px;
-              input {
-                width:350px;
-              }
+        }
+        ul.translation_list {
+          li {
+            height:30px;
+            width: 380px;
+            float: left;
+            input {
+              width:350px;
             }
           }
-          
+          &.translatable {
+            width:400px;
+          }
         }  
       }
       &.translatable {
         background: #ccf;
       }
-      &.blank {
-        background: #f66;
-        span.error_message {
-          font-weight:bold;
-          margin:8px 10px;
-          font-size:110%;
-          display:block;
-        }
-      }
+      
       
     }
   }
@@ -151,6 +149,18 @@
       font-weight:bold;
     }
   }
+  .errors, ul li.error {
+    color: #000;
+    background: #f66;
+    span.error_message {
+      font-weight:bold;
+      margin:8px 10px;
+      font-size:110%;
+      display:block;
+    }
+  }
+  
+  
 }
 
 #translations {
