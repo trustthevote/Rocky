@@ -141,12 +141,13 @@ config file will need to change. This should not be a common occurrence.
 
 ### c. cron
 
-There are two cron jobs running on the utility server. One redacts sensitive
-data from abandoned registrations and the other removes old pdfs from the file
-system after 15 days. (Or however many days is indicated in the configuration)
+There are two cron jobs running on the utility server that should be located in
+`/etc/cron.d`. One redacts sensitive data from abandoned registrations and the
+other removes old pdfs from the file system after 15 days. (Or however many days
+is indicated in the configuration)
 
-    */10 * * * * cd /var/www/register.rockthevote.com/rocky/current && rake -s utility:timeout_stale_registrations RAILS_ENV=[ENV]
-    */5  * * * * cd /var/www/register.rockthevote.com/rocky/current && rake -s utility:remove_buckets RAILS_ENV=[ENV]
+    */10 * * * * rocky cd /var/www/register.rockthevote.com/rocky/current && rake -s utility:timeout_stale_registrations RAILS_ENV=[ENV]
+    */5  * * * * rocky cd /var/www/register.rockthevote.com/rocky/current && rake -s utility:remove_buckets RAILS_ENV=[ENV]
 
 ### d. Email
 
