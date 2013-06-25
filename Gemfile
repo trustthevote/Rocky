@@ -58,7 +58,7 @@ group :assets do
 end
 
 gem "nokogiri", "= 1.5.9"
-gem "mechanize", "= 1.0.0"
+gem "mechanize", "= 2.7.1"
 gem "newrelic_rpm", "= 3.6.0.83"
 gem "airbrake"
 gem "ledermann-rails-settings", :require => "rails-settings"
