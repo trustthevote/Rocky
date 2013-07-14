@@ -117,7 +117,7 @@ module V2
   private
     def self.data_to_attrs(data)
       attrs = data.clone
-      attrs.symbolize_keys!
+      attrs.symbolize_keys! if attrs.respond_to?(:symbolize_keys!)
 
       [[:org_name, :organization],
       [:org_URL, :url],
