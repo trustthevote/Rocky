@@ -14,11 +14,11 @@
 
 Dear <%= @registrant.first_name %>,<br><br>
 
-Thank you for using <%= @registrant.rtv_and_partner_name %>'s online voter registration tool.<br><br>
+Thank you for using <%= @registrant.rtv_and_partner_name.html_safe %>'s online voter registration tool.<br><br>
 
-If you completed a voter registration application online, it was submitted to the  <%= @registrant.home_state_name %> Secretary of State Office for processing. Once approved, you'll receive a confirmation from the <%= @registrant.home_state_abbrev %> Secretary of State Office and your county elections department will put your new voter registration card in the mail.<br><br>
+If you completed a voter registration application online, it was submitted to the  <%= @registrant.home_state_name.html_safe %> Secretary of State Office for processing. Once approved, you'll receive a confirmation from the <%= @registrant.home_state_abbrev.html_safe %> Secretary of State Office and your county elections department will put your new voter registration card in the mail.<br><br>
 
-If you have questions or concerns, you can check the status of your voter registration by calling the <%= @registrant.home_state_abbrev %> Secretary of State Office at <%= @registrar_phone %>, or checking online at <%=@registrar_url %>. Please contact <%= @registrant.rtv_and_partner_name %> directly if you encountered any issues with the registration process.<br><br>
+If you have questions or concerns, you can check the status of your voter registration by calling the <%= @registrant.home_state_abbrev.html_safe %> Secretary of State Office at <%= @registrar_phone.html_safe %>, or checking online at <%=@registrar_url.html_safe %>. Please contact <%= @registrant.rtv_and_partner_name.html_safe %> directly if you encountered any issues with the registration process.<br><br>
 
 Now, we need your help getting others registered to vote too. There are big elections all over the country this year and 45 million eligible young voters - and we need to make sure everybody has their say. So, send an email to your family and friends or pass on the message below today.<br><br>
 
@@ -36,11 +36,11 @@ P.S. Visit <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a>
 
 Hey,<br><br>
 
-You can't vote if you're not registered. That's why Rock the Vote makes it easy to fill out a voter registration form online at <%=rtv_link %>. Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.<br><br>
+You can't vote if you're not registered. That's why Rock the Vote makes it easy to fill out a voter registration form online at <%=rtv_link.html_safe %>. Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.<br><br>
 
-To learn more, go to: <%= rtv_link %>.<br><br>
+To learn more, go to: <%= rtv_link.html_safe %>.<br><br>
 
-Already registered to vote? Rock the Vote needs your help getting others registered to vote. Send an email to your friends and family asking them to register to vote at <%= rtv_link %>. They even have a tool that lets you start your own voter registration campaign on your website or blog.<br><br>
+Already registered to vote? Rock the Vote needs your help getting others registered to vote. Send an email to your friends and family asking them to register to vote at <%= rtv_link.html_safe %>. They even have a tool that lets you start your own voter registration campaign on your website or blog.<br><br>
 
 Sincerely,<br>
 <%= @registrant.first_name %><br><br>
