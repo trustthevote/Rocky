@@ -30,10 +30,10 @@ manager other than RVM you'll need to make changes to the deploy process.
 
 ### b. Customizing files
 
-In the `rocky` application replace all the `*.example` files with real ones.  
+In the `rocky` application replace all the `*.example` files with real ones.
 
-These files contain sensitive data like passwords so we don't commit them to
-version control.  You'll of course need to fill in the actual useful data in the
+The following files contain sensitive data like passwords so we don't commit them to
+version control. You'll of course need to fill in the actual useful data in the
 real files. See the contents of the example files for details on how they're
 used.
 
@@ -42,18 +42,7 @@ used.
   * `db/bootstrap/partners.yml`
   * `.env.[environment_name]` for example, .env.staging or .env.production
   
-These files contain configuration items that differ from environment to
-environment. If you don't create your own version on the server a version of
-these files will be created automatically in the first deploy. You will need to
-manually create your own version for the development environment.
-
-  * `config/states_with_online_registration.yml` - the list of states that have
-     a separate workflow for redirection to their own online system.
-  * `config/app_config.yml` - general settings for app behavior (mostly email
-     and cleanup timings)
-  * `config/mobile.yml` - configuration items for mobile detection behavior
-
-There are a number of files used by the `rails_config` - `config/settings.yml`
+There are a number of files used by the `rails_config` gem - `config/settings.yml`
 and all the files under `config/settings/`. These are checked into source
 control and should be reviewed for accuracy. They don't contain sensitive
 information, but have values that are specific to the environment and instance
@@ -84,7 +73,7 @@ If the database hasn't been created yet, set that up by running
 ## 2. Configure deploy scripts
 
 The `rocky` application is set up to be deployed using capistrano with
-multistage.  The repository contains the generic `config/deploy.rb` file with
+multistage. The repository contains the generic `config/deploy.rb` file with
 the main set of procedures for a deployment and there are a number of
 environment-specific files in `config/deploy/`. These files just contain a few
 settings which reference environment variables. These variables need to be set
@@ -134,12 +123,12 @@ The parts of these paths depend on:
 
 * ruby version (currently 1.9.3-p125, specified in `.ruby-version`)
 * gemset name (currently rocky4, specified in `.ruby-gemset`)
-* passenger version (currently 3.0.19, specified in `config/deploy.rb`)
+* passenger version (currently 3.0.19, specified in `config/deploy.rb` in the :install_passenger task)
 
 If the gemset, ruby version or passenger version changes the paths in the apache
 config file will need to change. This should not be a common occurrence.
 
-### c. cron
+### d. cron
 
 There are two cron jobs running on the utility server that should be located in
 `/etc/cron.d`. One redacts sensitive data from abandoned registrations and the
@@ -150,7 +139,7 @@ is indicated in the configuration)
     */5  * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_remove_buckets staging2
     
 
-### d. Email
+### e. Email
 
 Email to registrants is sent by worker daemons running on the :util server.
 Email to partners for e.g. password reset is sent from the :app server.
@@ -177,11 +166,6 @@ directory set up with the following files:
 * `shared/config/database.yml`
 * `shared/config/newrelic.yml`
 * `shared/.env.<env>`
-* `shared/config/states_with_online_registration.yml` (will be created from the
-   default if not present)
-* `shared/config/app_config_.yml` (will be created from the default if not
-   present)
-* `shared/config/mobile.yml` (will be created from the default if not present)
 
 When your code changes are pushed to git origin/master, run
 
@@ -191,9 +175,9 @@ To deploy a specific tag or commit (highly recommended):
 
     $ cap <environment_name> deploy -Srev=<commit-hash|tag|branch>
 
-### d. Utility Daemons
+### c. Utility Daemons
 
-There are two worker daemons running on the utility server.  They can be managed
+There are two worker daemons running on the utility server. They can be managed
 locally with control scripts or remotely with capistrano.
 
     $ script/rocky_runner start
@@ -209,33 +193,33 @@ The `deploy:run_workers` task also runs during a full deploy
 
 The `rocky_runner` daemon pulls jobs out of the delayed job queue and runs them.
 There are two kinds of jobs: completing a registration and sending a reminder
-email.  Completing the registration includes generating the PDF, which uses the
+email. Completing the registration includes generating the PDF, which uses the
 second daemon to do that work.
 
 #### `rocky_pdf_runner`
 
 It would be nice to have both daemons merged into one process, but it was faster
-to set things up this way.  In the future, using JRuby would let someone do
-that.  For now, we use the second daemon to avoid paying the cost of launching a
+to set things up this way. In the future, using JRuby would let someone do
+that. For now, we use the second daemon to avoid paying the cost of launching a
 Java VM for every PDF merger.
 
-## Importing State Data
+## 5. Importing State Data
 
-The application is set up to import updates to state-specific data.  You'll want
-to do this once before launching, then whenever changes are necessary.  You can
+The application is set up to import updates to state-specific data. You'll want
+to do this once before launching, then whenever changes are necessary. You can
 do this by updating the states.yml file in your repository and by doing a full
 deploy.
 
-## Server Monitoring
+## 6. Server Monitoring
 
-The application is configured with basic monitoring.  NewRelic RPM for
-performance, and Airbrake for exception monitoring.  New developers can be added
+The application is configured with basic monitoring. NewRelic RPM for
+performance, and Airbrake for exception monitoring. New developers can be added
 to those accounts to get access and email updates.
 
 # Development and testing
 
 The cucumber feature that exercises the PDF Merge will run either in-process, or
-with the daemon.  If the daemon is running, it will use that.  If the daemon is
+with the daemon. If the daemon is running, it will use that. If the daemon is
 not running, it will shell out to java to run the merge directly.
 
 Run the rspec test suite:
@@ -250,12 +234,12 @@ Run the features with cucumber:
 
 The application includes a set of bootstrap data that will let it get going.
 WARNING: running the bootstrap process will reset the partners and state data in
-the application.  To bootstrap, run:
+the application. To bootstrap, run:
 
     $ bundle exec rake db:bootstrap
 
-There is no rake task to reset the registrant data.  If you want to do that,
-drop into mysql and truncate the registrants table.  You probably want to do
+There is no rake task to reset the registrant data. If you want to do that,
+drop into mysql and truncate the registrants table. You probably want to do
 this before going live to clear out any bogus test data.
 
 # Additional Notes
