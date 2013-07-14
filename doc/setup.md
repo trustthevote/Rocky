@@ -146,8 +146,9 @@ There are two cron jobs running on the utility server that should be located in
 other removes old pdfs from the file system after 15 days. (Or however many days
 is indicated in the configuration)
 
-    */10 * * * * rocky cd /var/www/register.rockthevote.com/rocky/current && rake -s utility:timeout_stale_registrations RAILS_ENV=[ENV]
-    */5  * * * * rocky cd /var/www/register.rockthevote.com/rocky/current && rake -s utility:remove_buckets RAILS_ENV=[ENV]
+    */10 * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_timeout_stale_registrations staging2
+    */5  * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_remove_buckets staging2
+    
 
 ### d. Email
 
