@@ -156,9 +156,9 @@ Given /^I have not set a locale$/ do
   I18n.locale = nil
 end
 
-Given /^my locale is "([^\"]*)"$/ do |local|
-  I18n.locale = local
-  @registrant.locale = local
+Given /^my locale is "([^\"]*)"$/ do |locale|
+  I18n.locale = locale
+  @registrant.locale = locale
   @registrant.save!
 end
 

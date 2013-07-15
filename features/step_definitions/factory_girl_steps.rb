@@ -31,7 +31,7 @@ end
 Given /^the following partner exists:$/ do |table|
   # table is a Cucumber::Ast::Table
   if (table.hashes.first["id"])
-    @partner = Partner.find(table.hashes.first["id"])
+    @partner = Partner.find_by_id(table.hashes.first["id"])
   end
   @partner = FactoryGirl.create(:partner, table.hashes.first) unless @partner
 end
@@ -40,7 +40,7 @@ end
 Given /^the following government partner exists:$/ do |table|
   # table is a Cucumber::Ast::Table
   if (table.hashes.first["id"])
-    @partner = Partner.find(table.hashes.first["id"])
+    @partner = Partner.find_by_id(table.hashes.first["id"])
   end
   @partner = FactoryGirl.create(:government_partner, table.hashes.first) unless @partner
 end

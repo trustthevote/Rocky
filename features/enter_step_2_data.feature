@@ -3,6 +3,7 @@ Feature: Step 2
   As a registrant
   I want to enter name, address
   
+    @passing
     Scenario: first visit
       Given I have completed step 1
       When I go to the step 2 page
@@ -11,6 +12,8 @@ Feature: Step 2
        And I fill in "Last" with "Public"
        And I fill in "Address" with "123 Market St."
        And I fill in "City" with "Pittsburgh"
+       And I select "Hispanic" from "Race"
+       And I select "Democratic" from "Party"
        And I press "registrant_submit"
       Then I should see "Additional Registration Information"
     
@@ -72,7 +75,7 @@ Feature: Step 2
       And I should not see a button for "> No Thanks, I'll continue with Rock the Vote and send in my form later."
 
     
-    @passing    
+    @passing
     Scenario Outline: fields for a <state> state resident with a partner
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in | rtv_email_opt_in | partner_email_opt_in |
@@ -103,6 +106,7 @@ Feature: Step 2
         | Nevada     | NV         |
     
 
+    @passing
     Scenario: fields for a CA state resident with a partner that chooses to register with the state
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in | rtv_email_opt_in | partner_email_opt_in |
@@ -251,6 +255,8 @@ Feature: Step 2
       And I fill in "Address" with "123 Market St."
       And I fill in "City" with "Pittsburgh"
       And I fill in "ID Number" with "1234"
+      And I select "Hispanic" from "Race"
+      And I select "Democratic" from "Party"
       And I press "registrant_submit"
       Then I should see "Print Your Form"
 

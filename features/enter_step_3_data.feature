@@ -161,7 +161,7 @@ Feature: Step 3
       Examples:
         | state      | optional_party_field | optional_party_value |
         | Washington | Other                | registrant_race      |
-        | Arizona    | Steel                | registrant_party     |
+        | Arizona    | Libertarian          | registrant_party     |
         | California | Green                | registrant_party     |
         | Colorado   | Green                | registrant_party     |
         | Nevada     | Other                | registrant_race      |

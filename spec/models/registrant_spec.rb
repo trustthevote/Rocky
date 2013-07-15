@@ -1434,7 +1434,7 @@ describe Registrant do
       reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 0)
       assert_difference('Delayed::Job.count', 1) do
         reg.enqueue_reminder_emails
-        assert_equal Registrant::REMINDER_EMAILS_TO_SEND, reg.reload.reminders_left
+        assert_equal Registrant::REMINDER_EMAILS_TO_SEND, reg.reminders_left
       end
     end
 

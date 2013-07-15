@@ -326,6 +326,11 @@ class Registrant < ActiveRecord::Base
     home_state_id && locale ?
         StateLocalization.where({:state_id  => home_state_id, :locale => locale}).first : nil
   end
+  
+  def en_localization
+    home_state_id ? StateLocalization.where({:state_id  => home_state_id, :locale => 'en'}).first : nil
+      
+  end
 
   def at_least_step_1?
     at_least_step?(1)
@@ -451,7 +456,23 @@ class Registrant < ActiveRecord::Base
       self.age = nil
     end
   end
+  
+  def english_races
+    I18n.t('txt.registration.races', :locale=>:en)
+  end
 
+  def english_race
+    if locale.to_s == 'en' || english_races.include?(race)
+      return race
+    else
+      if (race_idx = I18n.t('txt.registration.races').index(race))
+        return I18n.t('txt.registration.races', :locale=>:en)[race_idx]
+      else
+        return nil
+      end
+    end
+  end
+  
   def validate_race_at_least_step_2
     validate_race
   end
@@ -464,7 +485,7 @@ class Registrant < ActiveRecord::Base
       if race.blank?
         errors.add(:race, :blank)
       else
-        errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
+        errors.add(:race, :inclusion) unless english_races.include?(english_race)
       end
     end
   end
@@ -476,32 +497,54 @@ class Registrant < ActiveRecord::Base
       nil
     end
   end
-
+  
   def set_official_party_name
     return unless self.step_5? || self.complete?
-    self.official_party_name =
-      if party.blank?
-        "None"
+    self.official_party_name = detect_official_party_name
+  end
+  
+  
+  def detect_official_party_name
+    if party.blank?
+      I18n.t('states.no_party_label.none')
+    else
+      return party if en_localization[:parties].include?(party)
+      if locale.to_s == "en"
+        return party == en_localization.no_party ? I18n.t('states.no_party_label.none') : party
       else
-        en_loc = StateLocalization.where({:state_id  => home_state_id, :locale => "en"}).first
-        case self.locale
-          when "en"
-            party == en_loc.no_party ? "None" : party
-          when "es"
-            es_loc = StateLocalization.where({:state_id  => home_state_id, :locale => "es"}).first
-            if party == es_loc.no_party
-              "None"
-            else
-              # en_loc[:parties][ es_loc[:parties].index(party) ]
-              if (spanish_index = es_loc[:parties].index(party))
-                en_loc[:parties][spanish_index]
-              else
-                Rails.logger.warn "***** UNKNOWN PARTY:: registrant: #{id}, locale: #{locale}, party: #{party}"
-                nil
-              end
-            end
+        if party == localization.no_party
+          return I18n.t('states.no_party_label.none')
+        else
+          if (p_index = localization[:parties].index(party))
+            return en_localization[:parties][p_index]
+          else
+            Rails.logger.warn "***** UNKNOWN PARTY:: registrant: #{id}, locale: #{locale}, party: #{party}"
+            return nil
           end
+        end
       end
+    end
+  end
+  
+  def english_state_parties
+    if requires_party?
+      en_localization ? en_localization.parties + [ en_localization.no_party ] : []
+    else
+      nil
+    end    
+  end
+
+  
+  def english_party_name
+    if locale.to_s == 'en' || english_state_parties.include?(party)
+      return party
+    else
+      if (p_idx = state_parties.index(party))
+        return english_state_parties[p_idx]
+      else
+        return nil
+      end
+    end
   end
 
   def state_id_tooltip
@@ -538,7 +581,7 @@ class Registrant < ActiveRecord::Base
       if party.blank?
         errors.add(:party, :blank)
       else
-        errors.add(:party, :inclusion) unless state_parties.include?(party)
+        errors.add(:party, :inclusion) unless english_state_parties.include?(english_party_name)
       end
     end
   end

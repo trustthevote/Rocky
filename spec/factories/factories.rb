@@ -50,7 +50,7 @@ FactoryGirl.define do
     # home_state      { GeoState['CA'] }
     has_state_license false
     race            "Hispanic"
-    party           "None"
+    party           "Democratic"
   end
 
   factory :step_3_registrant, :parent => :step_2_registrant do 

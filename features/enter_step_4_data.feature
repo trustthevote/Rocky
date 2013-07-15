@@ -3,6 +3,7 @@ Feature: Step 4
   As a registrant
   I want to opt in and speak out
 
+    @passing
     Scenario: enter data
      Given I have completed step 3
        And my phone number is not blank

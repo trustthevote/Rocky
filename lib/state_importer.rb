@@ -26,16 +26,24 @@ class StateImporter
   
   attr_accessor :file, :defaults, :imported_states, :imported_locales, :messages, :states_hash
   
-  def initialize(file = nil)
-    @file = file || Rails.root.join('db/bootstrap/import/states.yml')
+  def initialize(file_or_filename = nil)
+    @file_name = file_or_filename || Rails.root.join('db/bootstrap/import/states.yml').to_s
+    @file = nil
+    if !@file_name.is_a?(String)
+      @file = @file_name
+    else
+      @file = File.open(@file_name)
+    end
     @imported_states = []
     @imported_locales = []
     @messages = []
     @defaults = {}
-    File.open(@file) do |file|
-      @states_hash = YAML.load(file)
-    end
+    @states_hash = YAML.load(@file)
     set_defaults(@states_hash)
+    begin
+      @file.close
+    rescue
+    end
   end
   
   def puts_report
@@ -48,6 +56,7 @@ class StateImporter
 
   
   def import
+    
     states_hash.each do |key, row|
       unless key == defaults_key
         begin
@@ -149,9 +158,9 @@ class StateImporter
     I18n.t(loc_key, :locale=>locale, :state_name=>state_name).to_s.html_safe.strip  
   end
   
-  def self.translate_from_row(row, key, locale, state_name='')
-    key_value = row[key].nil? ? self.defaults[key] : row[key]
-    translate_key(key_value, key, locale, state_name)
+  def translate_from_row(row, key, locale, state_name='')
+    key_value = row[key].nil? ? defaults[key] : row[key]
+    self.class.translate_key(key_value, key, locale, state_name)
   end
   
   def self.translate_list_item(list_key, item_key, locale, state_name='')
@@ -173,7 +182,7 @@ protected
   end
 
   def set_defaults(states_hash)
-    @defaults = states_hash[defaults_key]
+    @defaults = states_hash[defaults_key] || {}
   end
 
 
@@ -196,9 +205,9 @@ protected
     row[key].nil? ? self.defaults[key] : row[key]
   end
 
-  def translate_from_row(row, key, locale, state_name='')
-    self.class.translate_from_row(row, key, locale, state_name)
-  end
+  # def translate_from_row(row, key, locale, state_name='')
+  #   self.class.translate_from_row(row, key, locale, state_name)
+  # end
   
   def translate_list_item(list_key, item_key, locale, state_name='')
     self.class.translate_list_item(list_key, item_key, locale, state_name)
@@ -208,19 +217,23 @@ protected
   def import_localizations(row)
     state = GeoState[row["abbreviation"]]
     I18n.available_locales.each do |locale|
+      
       loc = state.localizations.find_or_initialize_by_locale(locale.to_s)
 
+      
       self.class.state_localization_lists.each do |method|
         new_val = get_from_row(row, method).collect {|item| translate_list_item(method, item, locale, state.name)}
         report_any_changes(loc.send(method), new_val, "in #{state.name} local #{loc.id} #{method} list:")
         loc.send("#{method}=", new_val)        
       end
       
+      
       self.class.state_localizations.each do |method|
         new_val = translate_from_row(row, method, locale, state.name)
         report_any_changes(loc.send(method), new_val, "in #{state.name} local #{loc.id} #{method}")
         loc.send("#{method}=", new_val)
       end
+      
       self.imported_locales << loc
     end
   end

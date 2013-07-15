@@ -28,81 +28,59 @@ describe StateImporter do
   attr_accessor :csv_basic, :file_basic
   before(:each) do
     @yml_basic = <<YML
+    defaults:
+      participating: true
+      not_participating_tooltip: blank
+      requires_race: false
+      race_tooltip: virginia
+      parties:
+        - democratic
+        - independent
+        - green
+        - libertarian
+        - republican
+        - other
+      no_party: none
+      id_length_min: '6'
+      id_length_max: '60'
+      sub_18: turn_by_next_election
     record_0: 
       abbreviation: AL
       name: Alabama
       participating: "1"
-      not_participating_tooltip_en: dead_end_en
-      not_participating_tooltip_es: dead_end_es
+      not_participating_tooltip: new_hampshire 
       requires_race: "1"
-      party_tooltip_en: party_tooltip_en
-      party_tooltip_es: party_tooltip_es
-      race_tooltip_en: race_tooltip_en
-      race_tooltip_es: race_tooltip_es
       requires_party: "1"
-      parties_en: Red, Green, Blue
-      parties_es: Rojo, Verde, Azul
-      no_party_en: no_party_en
-      no_party_es: no_party_es
+      parties:
+        - independent
+        - green
       id_length_min: "8"
       id_length_max: "12"
-      id_number_tooltip_en: id_number_tooltip_en
-      id_number_tooltip_es: id_number_tooltip_es
       sos_address: sos_address
       sos_phone: sos_phone
       sos_url: sos_url
-      sub_18_en: sub_18_en
-      sub_18_es: sub_18_es
     record_1: 
       abbreviation: AK
       name: Alaska
       participating: "0"
-      not_participating_tooltip_en: dead_end_en
-      not_participating_tooltip_es: dead_end_es
       requires_race: "1"
-      party_tooltip_en: party_tooltip_en
-      party_tooltip_es: party_tooltip_es
-      race_tooltip_en: race_tooltip_en
-      race_tooltip_es: race_tooltip_es
       requires_party: "1"
-      parties_en: Red, Green, Blue
-      parties_es: Rojo, Verde, Azul
-      no_party_en: no_party_en
-      no_party_es: no_party_es
       id_length_min: "10"
       id_length_max: "13"
-      id_number_tooltip_en: id_number_tooltip_en
-      id_number_tooltip_es: id_number_tooltip_es
       sos_address: sos_address
       sos_phone: sos_phone
       sos_url: sos_url
-      sub_18_en: sub_18_en
-      sub_18_es: sub_18_es
     record_2: 
       abbreviation: AZ
       name: Arizona
       participating: "1"
-      not_participating_tooltip_en: dead_end_en
-      not_participating_tooltip_es: dead_end_es
       requires_race: "0"
-      party_tooltip_en: party_tooltip_en
-      party_tooltip_es: party_tooltip_es
-      race_tooltip_en: race_tooltip_en
-      race_tooltip_es: race_tooltip_es
       requires_party: "0"
-      parties_en: 
-      parties_es: 
-      no_party_en: 
-      no_party_es: 
       id_length_min: "8"
       id_length_max: "12"
-      id_number_tooltip_en: id_number_tooltip_en
-      id_number_tooltip_es: id_number_tooltip_es
       sos_address: sos_address
       sos_phone: sos_phone
       sos_url: sos_url
-      sub_18_en: sub_18_en
-      sub_18_es: sub_18_es
 YML
     @file_basic = StringIO.new(@yml_basic)
   end
@@ -113,7 +91,9 @@ YML
     end
     it "sets fields in state record" do
       silence_output do
-        StateImporter.import(file_basic)
+        si = StateImporter.new(file_basic)
+        si.import
+        si.commit!
       end
 
       state = GeoState['AL']
@@ -143,8 +123,11 @@ YML
       alabama = GeoState['AL']
       alabama.update_attributes!(:name => "ALABAMA")
       silence_output do
-        StateImporter.import(file_basic)
+        si = StateImporter.new(file_basic)
+        si.import
+        si.commit!
       end
+      
       alabama.reload
       assert_equal "Alabama", alabama.name
     end
@@ -158,28 +141,23 @@ YML
 
     it "sets fields in each locale's record" do
       silence_output do
-        StateImporter.import(file_basic)
+        si = StateImporter.new(file_basic)
+        si.import
+        si.commit!
       end
+      
 
       state = GeoState['AL']
       en = state.localizations.find_by_locale!('en')
-      assert_equal "dead_end_en", en.not_participating_tooltip
-      assert_equal "race_tooltip_en", en.race_tooltip
-      assert_equal %w(Red Green Blue), en.parties
-      assert_equal "no_party_en", en.no_party
-      assert_equal "id_number_tooltip_en", en.id_number_tooltip
-      assert_equal "sub_18_en", en.sub_18
+      assert_equal I18n.t('states.tooltips.not_participating.new_hampshire').strip, en.not_participating_tooltip
+      assert_equal I18n.t('states.tooltips.race.virginia').strip, en.race_tooltip
+      assert_equal %w(Independent Green), en.parties
+      
       es = state.localizations.find_by_locale!('es')
-      assert_equal "dead_end_es", es.not_participating_tooltip
-      assert_equal "race_tooltip_es", es.race_tooltip
-      assert_equal %w(Rojo Verde Azul), es.parties
-      assert_equal "no_party_es", es.no_party
-      assert_equal "id_number_tooltip_es", es.id_number_tooltip
-      assert_equal "sub_18_es", es.sub_18
+      assert_equal I18n.t('states.tooltips.not_participating.new_hampshire', :locale=>:es).strip, es.not_participating_tooltip
+      assert_equal I18n.t('states.tooltips.race.virginia', :locale=>:es).strip, es.race_tooltip
+      assert_equal %w(Independiente Verde), es.parties
 
-      state = GeoState['AZ']
-      en = state.localizations.find_by_locale!('en')
-      assert_equal [], en.parties
     end
 
   end
@@ -206,8 +184,11 @@ YML
       $stderr = err_output
       assert_nothing_raised do
         silence_output do
-          StateImporter.import(file_bad)
+          si = StateImporter.new(file_bad)
+          si.import
+          si.commit!
         end
+        
       end
       $stderr = old_stderr
       assert_match /could not import state data/, err_output.string
