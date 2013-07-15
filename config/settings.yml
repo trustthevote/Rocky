@@ -38,3 +38,7 @@ states_with_online_registration:
   - CA
   - NV
   - WA
+  
+enabled_locales:
+  - en
+  - es
