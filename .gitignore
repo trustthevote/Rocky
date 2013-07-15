@@ -25,6 +25,7 @@
 .env.production
 .env.development
 .env.test
+.env.cucumber
 config/mobile.yml
 config/states_with_online_registration.yml
 config/database.yml
