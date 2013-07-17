@@ -401,7 +401,7 @@ class Partner < ActiveRecord::Base
     time_stamp = Time.now
     self.csv_file_name = self.generate_csv_file_name(time_stamp)
     file = File.open(csv_file_path, "w")
-    file.write generate_registrants_csv
+    file.write generate_registrants_csv.force_encoding 'utf-8'
     file.close
     self.csv_ready = true
     self.save!
