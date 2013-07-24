@@ -28,12 +28,12 @@ describe MobileConfig do
   before(:each) do
     MobileConfig.redirect_url = nil
     MobileConfig.browsers = nil
-    Settings.reload_from_files(
+    RockyConf.reload_from_files(
       Rails.root.join("spec/fixtures/files/mobile.yml").to_s
     )
   end
   after(:each) do
-    Settings.reload_from_files(
+    RockyConf.reload_from_files(
       Rails.root.join("config", "settings.yml").to_s,
       Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
     )

@@ -51,7 +51,7 @@ module V2
       data = {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
-        :logo_image_URL           => "https://#{Settings.pdf_host_name}#{partner.logo.url}",
+        :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
         :survey_question_1_en     => partner.survey_question_1_en,
         :survey_question_2_en     => partner.survey_question_2_en,
         :survey_question_1_es     => partner.survey_question_1_es,

@@ -46,7 +46,7 @@ describe Notifier do
         Notifier.confirmation(registrant).deliver
       end
       email = ActionMailer::Base.deliveries.last
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       email.body.should include("http")
       email.body.should include(registrant.pdf_path)
 
@@ -63,7 +63,7 @@ describe Notifier do
         Notifier.confirmation(registrant).deliver
       end
       email = ActionMailer::Base.deliveries.last
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       
       email.body.should include("this-is-the-phone")
       email.body.should include("this-is-the-address")
@@ -77,7 +77,7 @@ describe Notifier do
       end
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       
     end
 
@@ -89,7 +89,7 @@ describe Notifier do
       Notifier.confirmation(registrant).deliver
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{PDF: http://.*source=email})
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       
     end
     
@@ -111,7 +111,7 @@ describe Notifier do
       end
       email = ActionMailer::Base.deliveries.last
       email.to.should include(registrant.email_address)
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       email.subject.should include("Thank you for using the online voter registration tool")
       assert_equal "UTF-8", email.charset
       assert_equal "quoted-printable", email.header['Content-Transfer-Encoding'].to_s
@@ -124,7 +124,7 @@ describe Notifier do
       Notifier.thank_you_external(registrant).deliver
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{HI: test the template})
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
     end
     it "sends from partner email when configured" do
       partner    = FactoryGirl.create(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
@@ -143,7 +143,7 @@ describe Notifier do
         Notifier.reminder(registrant).deliver
       end
       email = ActionMailer::Base.deliveries.last
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       
       email.body.should include("http")
       email.body.should include(registrant.pdf_path)
@@ -160,7 +160,7 @@ describe Notifier do
         Notifier.reminder(registrant).deliver
       end
       email = ActionMailer::Base.deliveries.last
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       
       email.body.should include("this-is-the-phone")
       email.body.should include("this-is-the-address")
@@ -171,7 +171,7 @@ describe Notifier do
       registrant = FactoryGirl.create(:maximal_registrant, :locale => 'es')
       Notifier.reminder(registrant).deliver
       email = ActionMailer::Base.deliveries.last
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       
       email.subject.should include(I18n.t("email.reminder.subject", :locale => :es))
     end
@@ -182,7 +182,7 @@ describe Notifier do
         Notifier.reminder(registrant).deliver
       end
       email = ActionMailer::Base.deliveries.last
-      email.from.should include(Settings.from_address)
+      email.from.should include(RockyConf.from_address)
       
       email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
     end

@@ -37,7 +37,7 @@ module Mergable
 
   def pdf_barcode
     user_code = id.to_s(36).rjust(6, "0")
-    "*#{Settings.sponsor.barcode_prefix}-#{user_code}*".upcase
+    "*#{RockyConf.sponsor.barcode_prefix}-#{user_code}*".upcase
   end
 
   def to_xfdf

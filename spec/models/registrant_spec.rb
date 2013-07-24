@@ -95,17 +95,17 @@ describe Registrant do
     it "returns FROM_ADDRESS when partner is primary" do
       @p.stub(:primary?) { true }
       r = Registrant.new(:partner=>@p)
-      r.email_address_to_send_from.should == Settings.from_address
+      r.email_address_to_send_from.should == RockyConf.from_address
     end
     it "returns FROM_ADDRESS when partner is not whitelabeled and from is configured" do
       @p.whitelabeled = false
       r = Registrant.new(:partner=>@p)
-      r.email_address_to_send_from.should == Settings.from_address
+      r.email_address_to_send_from.should == RockyConf.from_address
     end
     it "returns FROM_ADDRESS when partner email is not configured" do
       @p.from_email = ''
       r = Registrant.new(:partner=>@p)
-      r.email_address_to_send_from.should == Settings.from_address
+      r.email_address_to_send_from.should == RockyConf.from_address
     end
     it "returns the parter from_email when the parter is whitelabled and address is set" do
       r = Registrant.new(:partner=>@p)
@@ -1379,7 +1379,7 @@ describe Registrant do
     describe "background processing" do
       describe "when there is a job queue (production, staging)" do
         before(:each) do
-          Settings.stub(:delayed_wrap_up) { true }
+          RockyConf.stub(:delayed_wrap_up) { true }
         end
 
         it "should delay processing" do
@@ -1401,7 +1401,7 @@ describe Registrant do
 
       describe "when there is no job queue (production, staging)" do
         before(:each) do
-          Settings.stub(:delayed_wrap_up) { false }
+          RockyConf.stub(:delayed_wrap_up) { false }
         end
         it "should run immediately" do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")

@@ -77,7 +77,7 @@ class GeoState < ActiveRecord::Base
   end
   
   def self.states_with_online_registration
-    Settings.states_with_online_registration
+    RockyConf.states_with_online_registration
   end
   
   def state_customization

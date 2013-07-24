@@ -33,7 +33,7 @@ class Admin::BaseController < ApplicationController
   def authenticate
     authenticate_or_request_with_http_basic("RTV Admin Console") do |user, password|
       pass = Settings.admin_password
-      pass.present? && user == Settings.admin_username && password == pass
+      pass.present? && user == RockyConf.admin_username && password == pass
     end
   end
 

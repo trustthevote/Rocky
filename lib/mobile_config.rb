@@ -6,11 +6,11 @@ class MobileConfig
     if opts[:partner].blank?
       opts[:partner] = Partner::DEFAULT_ID
     end
-    "#{Settings.mobile_redirect_url}?#{opts.collect{|k,v| v.blank? ? nil : "#{k}=#{v}"}.compact.sort.join('&')}"
+    "#{RockyConf.mobile_redirect_url}?#{opts.collect{|k,v| v.blank? ? nil : "#{k}=#{v}"}.compact.sort.join('&')}"
   end
   
   def self.browsers
-    Settings.mobile_browsers
+    RockyConf.mobile_browsers
   end
   
   def self.is_mobile_request?(req)

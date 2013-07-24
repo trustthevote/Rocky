@@ -1,7 +1,7 @@
 class AppConfig
   
   def self.widget_loader_url
-    Settings.widget_loader_url
+    RockyConf.widget_loader_url
   end
     
   def self.hours_before_first_reminder
@@ -20,7 +20,7 @@ class AppConfig
   end
 
   def self.setting_with_default(setting_name, default_value)
-    Settings.send(setting_name).blank? ? default_value : Settings.send(setting_name)
+    RockyConf.send(setting_name).blank? ? default_value : RockyConf.send(setting_name)
   end
     
 end
