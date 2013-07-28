@@ -2,7 +2,7 @@
 %span.method= key
 %span.value
   = value
-  - if key != 'abbreviation'
+  - if key != 'abbreviation' && key != 'name'
     %br
     = text_field_tag("config[#{state}.#{(key).to_s}]", value)
     - if key_has_default(key, state)
