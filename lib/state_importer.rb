@@ -95,7 +95,7 @@ class StateImporter
     %w(not_participating_tooltip race_tooltip party_tooltip no_party id_number_tooltip sub_18)
   end
   def self.state_localization_lists
-    %w( parties )
+    %w(parties)
   end
   
   def self.state_uses_default?(state, method, key=nil)
@@ -121,8 +121,9 @@ class StateImporter
   
   def self.translations_hash
     @@translations_hash ||= nil
-    return @@translations_hash unless @@translations_hash.nil?
+    return @@translations_hash unless @@translations_hash.nil? || @@translations_hash[:en].nil?
     @@translations_hash = {}
+    I18n.t('language_name') # Force initialize
     I18n.available_locales.each do |lang|
       @@translations_hash[lang] = I18n.backend.send(:translations)[lang]
     end
@@ -166,6 +167,34 @@ class StateImporter
   def self.translate_list_item(list_key, item_key, locale, state_name='')
     I18n.t("states.#{list_key}.#{item_key}", :locale=>locale, :state_name=>state_name).to_s.html_safe.strip
   end
+  
+  def has_errors?
+    false
+  end
+  
+  def generate_yml(params)
+    hash, errors = Translation.hash_from_form(params)
+    remove_defaults(hash)
+    hash.to_yaml
+  end
+  
+  def remove_defaults(hash)
+    hash.each do |k,v|
+      if v.is_a?(Hash)
+        remove_defaults(v)
+      elsif v.is_a?(String)
+        if v == "DEFAULT"
+          hash.delete(k)
+        end
+      elsif v.is_a?(Array)
+        if v.include?("DEFAULT")
+          hash.delete(k)
+        end
+      end
+    end
+  end
+  
+  
   
   
 protected

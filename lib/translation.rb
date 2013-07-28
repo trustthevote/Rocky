@@ -77,15 +77,27 @@ class Translation
   
   attr_reader :directory
   attr_reader :type
-  attr_reader :blanks
-  attr_reader :missing_variables
+  attr_reader :errors
   
   def initialize(type)
     raise "Not Found" if !self.class.type_names.include?(type)
     @type = type
     @directory = self.class.directory(type)
-    @blanks = []
-    @missing_variables = []
+    @errors = {:blanks=>[], :missing_variables=>[]}
+  end
+  
+  def blanks
+    errors[:blanks]
+  end
+  def blanks=(val)
+    errors[:blanks]=val
+  end
+  
+  def missing_variables
+    errors[:missing_variables]
+  end
+  def missing_variables=(val)
+    errors[:missing_variables]=val
   end
   
   def name
@@ -147,18 +159,29 @@ class Translation
   
   
   def generate_yml(locale, key_values)
-    full_hash = {locale=>{}}
+    keys_hash, @errors = self.class.hash_from_form(key_values, true, self.blanks, self.missing_variables)
+    full_hash = {locale=>keys_hash}
+    contents #load it
+    @contents[locale] = full_hash[locale]
+    full_hash.to_yaml
+  end
+  
+  def self.hash_from_form(key_values, check_translations=false, blanks=[], missing_variables=[])
+    starter_hash={}
+    
     key_values.each do |k,v|
-      last_hash = full_hash[locale]
+      last_hash = starter_hash
       key_chain = k.split('.')
       key_chain.each_with_index do |key, i|
         if (i+1 == key_chain.size)
           last_hash[key] = v
-          if value_is_blank(v, k)
-            blanks << k 
-          end
-          if value_is_missing_variable(v, k)
-            missing_variables << k
+          if check_translations
+            if value_is_blank(v, k)
+              blanks << k 
+            end
+            if value_is_missing_variable(v, k)
+              missing_variables << k
+            end
           end
         else
           last_hash[key] ||= {}
@@ -166,22 +189,29 @@ class Translation
         end
       end
     end
-    contents #load it
-    @contents[locale] = full_hash[locale]
-    full_hash.to_yaml
+    return [starter_hash, {:blanks=>blanks, :missing_variables=>missing_variables}]
   end
   
-  def value_is_blank(v, k)
+  def value_is_blank(k,v)
+    return self.class.value_is_blank(k,v)
+  end
+  def self.value_is_blank(v, k)
      return true if v.blank? && !I18n.t(k, :locale=>:en).blank? 
      if v.is_a?(Array)
        new_vals = v.collect{|item| item.blank? ? nil : item }.compact
-       old_vals = I18n.t(k, :locale=>:en).collect{|item| item.blank? ? nil : item }.compact
-       return true if new_vals.size != old_vals.size
+       old_vals = I18n.t(k, {:locale=>:en})
+       if old_vals.is_a?(Array)
+         old_vals = old_vals.collect{|item| item.blank? ? nil : item }.compact
+         return true if new_vals.size != old_vals.size
+       end
      end
      return false
   end
   
   def value_is_missing_variable(v, k)
+    return self.class.value_is_missing_variable(v, k)
+  end
+  def self.value_is_missing_variable(v, k)
     en_value = I18n.t(k, :locale=>:en)
     if en_value =~ var_expression && !(v =~ var_expression)
       return true

@@ -1,32 +1,28 @@
 #state_configuration
-  = I18n.t('language_name')
-  - @state_importer.states_hash.each do |state, values|
-    - state_id = 
-    .setting
-      %h2.key= "#{values['name'] || state}"
-      %ul
-        - values.each do |key, value|
-          %li
-            - if StateImporter.is_localization?(key) || StateImporter.is_localization_list?(key)
-              %span.method= key
-              %span.translation_key= value
-              .values{:id=>"#{state}_#{StateImporter.get_loc_part(key).to_s}"}
-                - options = []
-                - StateImporter.config_options(key).each do |k,v| [k.to_s,k.to_s]
-                  - options << [k.to_s, k.to_s]
-                  .option{:class=>k.to_s}= v.to_json
-              
-              = select_tag(StateImporter.get_loc_part(key).to_s, options_for_select(options, value.to_s))
-              %br
-              - I18n.available_locales.each do |locale|
-                .locale{:class=>"locale_#{locale}"}
-                  %h4.locale_name= locale
-                
-                  - if StateImporter.is_localization_list?(key)
-                    .translation= value.collect{|item_key| StateImporter.translate_list_item(key, item_key, locale, '<STATE_NAME>')}
-                  - else
-                    .translation= StateImporter.translate_key(value, key, locale, "<span class='substitution'>#{values['name'] || 'STATE_NAME'}</span>").html_safe
+  %a.expand_all expand all
+  = form_tag submit_state_configurations_path do
+    #submission
+      = submit_tag 'Save and Email Configurations'
+    - @defaults = @state_importer.states_hash['defaults']
+    - @state_importer.states_hash.each do |state, state_key_values|
+      .setting
+        %h2.key= "#{state_key_values['name'] || state}"
+        %ul
+          - state_key_values.each do |key, value|
+            %li
+              - if StateImporter.is_localization?(key) || StateImporter.is_localization_list?(key)
+                = render 'localized_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values
             
-            - else
-              %span.method= key
-              %span.value= value
+              - elsif ['true', 'false'].include?(value.to_s.downcase)
+                = render 'boolean_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values
+              - else
+                = render 'text_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values
+          - defaults_used_by_state(state_key_values) do |key, value|
+            %li.default
+              - if StateImporter.is_localization?(key) || StateImporter.is_localization_list?(key)
+                = render 'localized_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values, :using_default=>true
+          
+              - elsif ['true', 'false'].include?(value.to_s.downcase)
+                = render 'boolean_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values, :using_default=>true
+              - else
+                = render 'text_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values, :using_default=>true

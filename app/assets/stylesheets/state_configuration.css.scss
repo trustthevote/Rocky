@@ -26,6 +26,9 @@
     border:1px solid #000;
     margin:15px 0;
     padding:10px;
+		li.default {
+			background:#ccc;
+		}
   }
   
   ul.nav {
@@ -161,6 +164,30 @@
   }
   
   
+}
+
+#state_configuration {
+	.locale {
+		margin-left:200px;
+	}
+	span.method {
+		width:200px;
+		float: left;
+	}
+	.value {
+		select, input[type='checkbox'] {
+			margin-left:200px;
+		}
+		input[type='text'] {
+			margin-left:200px;
+			width:600px;
+		}
+	}
+	.translation {
+		.substitution {
+			font-weight: bold;
+		}
+	}
 }
 
 #translations {

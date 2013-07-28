@@ -35,7 +35,12 @@ Rocky::Application.routes.draw do
   
   resources "password_resets", :only => [:new, :create, :edit, :update]
 
-  resources "state_configurations", :only=>[:index, :show]
+  resources "state_configurations", :only=>[:index, :show] do
+    collection do
+      post :submit
+    end
+  end
+  
   resources "translations", :only=>[:index, :show] do
     member do
       post :submit
