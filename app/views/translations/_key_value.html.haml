@@ -30,10 +30,10 @@
               %input{:type=>'text', :name=>"#{@locale}[#{key}][]", :value=>v}
     - else
       %li.locale
-        %h4.locale_name English:
+        %h4.locale_name= "#{"Current " if @locale=='en'}English:"
         .translation= I18n.t(key, :locale=>'en', :default=>'')
       %li.locale.translatable{:class=>@translation.has_error?(key) ? 'error' : ''}
-        %h4.locale_name= "#{Translation.language_name(@locale)}:"
+        %h4.locale_name= "#{"New " if @locale=='en'}#{Translation.language_name(@locale)}:"
         .translation
           - if @translation.is_blank?(key)
             %span.error_message ** You must provide a translation **
