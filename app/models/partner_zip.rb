@@ -138,7 +138,7 @@ private
   def get_partners_from_csv
     new_partners = []
     row_idx = 1
-    CSV.foreach(@csv_file, {:headers=>true}) do |row|
+    CSV.foreach(@csv_file, {:headers=>true,  :encoding => 'windows-1251:utf-8'}) do |row|
       if row.size != columns.size
         add_error("Row #{row_idx} column count is #{row.size} and should be #{columns.size}")
       end
