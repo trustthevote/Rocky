@@ -153,6 +153,7 @@ class Partner < ActiveRecord::Base
     named_counts.sort_by {|r| [-r[:registrations_count], r[:state_name]]}
   end
 
+  #TODO: Fix for other languages
   def registration_stats_race
     counts = Registrant.connection.select_all(<<-"SQL")
       SELECT count(*) as registrations_count, race, locale FROM `registrants`
@@ -188,6 +189,7 @@ class Partner < ActiveRecord::Base
     named_counts.sort_by {|r| [-r[:registrations_count], r[:race]]}
   end
 
+  #TODO: Fix for new languages
   def registration_stats_gender
     counts = Registrant.connection.select_all(<<-"SQL")
       SELECT count(*) as registrations_count, name_title FROM `registrants`

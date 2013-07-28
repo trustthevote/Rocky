@@ -1,23 +1,7 @@
 <%- rtv_and_partner_name = @registrant.rtv_and_partner_name %>
 <%- next_url = registrant_step_3_url(@registrant) %>
 
-<%- if @registrant.locale.to_s.downcase == 'es' %>
-  <p>
-    Usted se puede cumplir su inscripción para votar en linea con el estado abajo.  La solicitud de inscripción en linea para votar (NOVA) es provista por el Sectetario del Estado, Ross Miller, para registrar los ciudadanos de Nevada a votar, o para cambiar su información actual de inscripción.  NOVA esta disponible <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">aquí</a>. 
-  </p>
-  <br/>
-  <p>
-    Si su licensia de manejar esta invalido o el estado no puede encontrar or confirmar su documento de DMV - no se preocupe - se puede <a href="<%= next_url%>">cumplir su inscripción con <%= rtv_and_partner_name %></a>.  Tiene que imprimir, firmar, y mandar la forma por correo.
-  </p>
-<%- else %>
-  <p>
-    You can complete your voter registration online with the state below. The Nevada Online Voter Application (NOVA) is provided by Nevada Secretary of State, Ross Miller, for registering Nevada citizens to vote, or to change their existing registration information.  NOVA is also available <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">here</a>. 
-  </p>
-  <br/>
-  <p>
-  If your driver's license is invalid or the state can't find or confirm your DMV record - don't worry - you can also <a href="<%= next_url%>">finish your registration with <%= rtv_and_partner_name.html_safe %></a>.  You will just have to print, sign, and mail in the form.
-  </p>
-<%- end %>
+<%= I18n.t('states.custom.nv.online_instructions', :next_url=>next_url, :rtv_and_partner_name=>rtv_and_partner_name.html_safe).html_safe %>
 
 
 

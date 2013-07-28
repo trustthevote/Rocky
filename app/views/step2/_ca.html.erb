@@ -29,22 +29,19 @@ $(document).ready(function() {
 <%- @registrant.has_state_license = true  if @registrant.has_state_license.nil? %>
 
 
-<%- checkbox_text = @registrant.locale.to_s.downcase == 'es' ? 'Soy residente de California y vivo en los Estados Unidos.
-' : 'I am a resident of California, living in the United States' %>
-<%- instruction_text = @registrant.locale.to_s.downcase == 'es' ? 'Ud. es eligible para terminar su formulario de inscripción de votante usando el sistema en linea del estado de California.' : "You are eligible to finish your registration using the state's online voter registration system." %>
 <span class="error"><%= form.object.errors[:has_state_license].join("\n") %></span>
 <ul class="checkbox">
   <li class="spacer">&nbsp;</li>
   <li>
     <h3>
       <%= form.check_box :has_state_license, :checked=>@registrant.has_state_license==true %>
-      <%= form.label :has_state_license, checkbox_text %>
+      <%= form.label :has_state_license, I18n.t('states.custom.ca.step_2.checkbox_text') %>
     </h3>
   </li>
 </ul>
 <div class='has_license'>
   <div class="checkbox-explanation" >
-  <p><%= instruction_text %></p>
+  <p><%= I18n.t('states.custom.ca.step_2.instruction_text') %></p>
   </div>
 </div>
 

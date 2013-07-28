@@ -38,9 +38,9 @@ class Registrant < ActiveRecord::Base
   
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
-  # TODO: add :es to get full set for validation
-  TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
-  SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
+
+  TITLES = RockyConf.enabled_locales.collect{|l| I18n.t('txt.registration.titles', :locale => l) }.flatten
+  SUFFIXES = RockyConf.enabled_locales.collect{|l| I18n.t('txt.registration.suffixes', :locale => l) }.flatten
   REMINDER_EMAILS_TO_SEND = 2
   STALE_TIMEOUT = 30.minutes
   REMINDER_EMAIL_PRIORITY = 0

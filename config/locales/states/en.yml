@@ -1,5 +1,17 @@
 en:
   states:
+    custom:
+      ca:
+        online_instructions: You can complete your voter registration online with the state right now - using the application provided by Secretary of State Debra Bowen.
+        step_2:
+          checkbox_text: I am a resident of California, living in the United States
+          instruction_text: You are eligible to finish your registration using the state's online voter registration system.
+      nv:
+        online_instructions: >
+          <p>You can complete your voter registration online with the state below. The Nevada Online Voter Application (NOVA) is provided by Nevada Secretary of State, Ross Miller, for registering Nevada citizens to vote, or to change their existing registration information.  NOVA is also available <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">here</a>.</p>
+          <br/>
+          <p>If your driver's license is invalid or the state can't find or confirm your DMV record - don't worry - you can also <a href="%{next_url}">finish your registration with %{rtv_and_partner_name}</a>.  You will just have to print, sign, and mail in the form.</p>
+        
     parties:
       democratic: Democratic
       independent: Independent

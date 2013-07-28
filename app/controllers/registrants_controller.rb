@@ -89,7 +89,6 @@ class RegistrantsController < RegistrationStep
   def set_up_locale
     @locale = params[:locale] || 'en'
     I18n.locale = @locale.to_sym
-    #@alt_locale = (@locale == 'en' ? 'es' : 'en')
   end
 
   def advance_to_next_step

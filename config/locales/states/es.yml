@@ -1,5 +1,16 @@
 es:
   states:
+    custom:
+      ca:
+        online_instructions: "Ahora, se puede completar su formulario de inscripción de votante en linea con el estado - usando el formulario de la Secretaria del Estado Debra Bowen."
+        step_2:
+          checkbox_text: "Soy residente de California y vivo en los Estados Unidos."
+          instruction_text: "Ud. es eligible para terminar su formulario de inscripción de votante usando el sistema en linea del estado de California."
+      nv:
+        online_instructions: >
+          <p>Usted se puede cumplir su inscripción para votar en linea con el estado abajo.  La solicitud de inscripción en linea para votar (NOVA) es provista por el Sectetario del Estado, Ross Miller, para registrar los ciudadanos de Nevada a votar, o para cambiar su información actual de inscripción.  NOVA esta disponible <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">aquí</a>. </p>
+          <br/>
+          <p>Si su licensia de manejar esta invalido o el estado no puede encontrar or confirmar su documento de DMV - no se preocupe - se puede <a href="%{next_url}">cumplir su inscripción con %{rtv_and_partner_name}</a>.  Tiene que imprimir, firmar, y mandar la forma por correo.</p>
     parties:
       democratic: Democrático
       independent: Independiente

@@ -1,15 +1,9 @@
 <%- rtv_and_partner_name = @registrant.rtv_and_partner_name %>
 <%- next_url = registrant_step_3_url(@registrant) %>
 
-<%- if @registrant.locale.to_s.downcase == 'es' %>
-  <p>
-    Ahora, se puede completar su formulario de inscripción de votante en linea con el estado - usando el formulario de la Secretaria del Estado Debra Bowen.  
-  </p>
-<%- else %>
-  <p>
-    You can complete your voter registration online with the state right now - using the application provided by Secretary of State Debra Bowen.
-  </p>
-<%- end %>
+<p>
+  <%= I18n.t('states.custom.ca.online_instructions') %>
+</p>
 
 
 
