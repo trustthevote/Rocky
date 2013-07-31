@@ -7,11 +7,11 @@
       - if !@translation.blanks.empty? 
         %span.error_message The following items are missing translations:
         - @translation.blanks.each do |blank_key|
-          %span.error_message= blank_key
+          %a.error_message{:href=>"##{blank_key}"}= blank_key
       - if !@translation.missing_variables.empty? 
         %span.error_message The following items are missing %{VARIABLE} substitutions:
         - @translation.missing_variables.each do |blank_key|
-          %span.error_message= blank_key
+          %a.error_message{:href=>"##{blank_key}"}= blank_key
       
   = form_tag submit_translation_path(:locale=>@locale) do
     #submission

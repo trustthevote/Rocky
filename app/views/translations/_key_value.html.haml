@@ -6,6 +6,7 @@
           %span.translation_key_part= k
           = render :partial=>'key_value', :locals=>{:key=>"#{key}.#{k}", :value=>v, :id_ct=>id_ct + 1}
 - else
+  %a{:name=>key}
   %br
   %span.translation_key= key
   - instructions = Translation.instructions_for(key)

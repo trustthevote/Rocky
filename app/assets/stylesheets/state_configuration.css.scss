@@ -155,12 +155,17 @@
   .errors, ul li.error {
     color: #000;
     background: #f66;
-    span.error_message {
+    span.error_message, a.error_message {
       font-weight:bold;
       margin:8px 10px;
       font-size:110%;
       display:block;
     }
+		a.error_message {
+			color: #333;
+			margin-left: 15px;
+			text-decoration:underline;
+		}
   }
   
   
