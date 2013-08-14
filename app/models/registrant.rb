@@ -307,7 +307,7 @@ class Registrant < ActiveRecord::Base
       if reg.finish_with_state?
         reg.status = "complete"
         begin
-          reg.deliver_thank_you_for_state_online_registration_email
+          #reg.deliver_thank_you_for_state_online_registration_email
         rescue
         end
       end
