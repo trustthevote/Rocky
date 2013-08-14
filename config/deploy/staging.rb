@@ -29,4 +29,4 @@ role :db,   "rtvstaging-web.osuosl.org", :primary => true
 
 set :rails_env,    "staging"
 
-set :branch, "master"
+set :branch, "staging_for_pdf_slow"

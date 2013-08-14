@@ -209,6 +209,8 @@ namespace :deploy do
     run "pkill -f com.pivotallabs.rocky.PdfServer" rescue nil
     sleep 5
     run "cd #{latest_release} && ruby script/rocky_pdf_runner start"
+    # two job runners?
+    run "cd #{latest_release} && ruby script/rocky_runner start"
     run "cd #{latest_release} && ruby script/rocky_runner start"
     unset(:latest_release)
   end
