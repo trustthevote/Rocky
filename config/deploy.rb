@@ -211,7 +211,7 @@ namespace :deploy do
     run "cd #{latest_release} && ruby script/rocky_pdf_runner start"
     # two job runners?
     run "cd #{latest_release} && ruby script/rocky_runner start"
-    run "cd #{latest_release} && ruby script/rocky_runner start"
+    #run "cd #{latest_release} && ruby script/rocky_runner start"
     unset(:latest_release)
   end
 
