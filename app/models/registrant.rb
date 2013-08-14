@@ -303,8 +303,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.abandon_stale_records
-    stale = self.find(:all, :conditions => ["(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago])
-    stale.each do |reg|
+    self.find_each(:batch_size=>500, :conditions => ["(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago]) do |reg|
       if reg.finish_with_state?
         reg.status = "complete"
         reg.deliver_thank_you_for_state_online_registration_email
