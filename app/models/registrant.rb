@@ -306,7 +306,10 @@ class Registrant < ActiveRecord::Base
     self.find_each(:batch_size=>500, :conditions => ["(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago]) do |reg|
       if reg.finish_with_state?
         reg.status = "complete"
-        reg.deliver_thank_you_for_state_online_registration_email
+        begin
+          reg.deliver_thank_you_for_state_online_registration_email
+        rescue
+        end
       end
       reg.abandon!
       Rails.logger.info "Registrant #{reg.id} abandoned at #{Time.now}"
