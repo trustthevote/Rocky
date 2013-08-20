@@ -80,6 +80,10 @@ class GeoState < ActiveRecord::Base
     RockyConf.states_with_online_registration
   end
   
+  def get_localization(locale)
+    localizations.find_or_initialize_by_locale(locale.to_s)
+  end
+  
   def state_customization
     @state_customization ||= StateCustomization.for(self)
   end  
