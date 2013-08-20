@@ -22,42 +22,35 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.dirname(__FILE__) + '/../spec_helper'
 
-describe EmailTemplate do
+require 'spec_helper'
 
-  describe "TEMPLATE_NAMES" do
-    it "includes confirmation and reminders for all locales" do
-      I18n.available_locales.each do |locale|
-        EmailTemplate::TEMPLATE_NAMES.should include(
-          ["confirmation.#{locale}", "Confirmation #{locale.to_s.upcase}"]
-        )
-        EmailTemplate::TEMPLATE_NAMES.should include(
-          ["reminder.#{locale}", "Reminder #{locale.to_s.upcase}"]
-        )
-      end      
+describe WA do
+  let(:root_url) { "https://weiapplets.sos.wa.gov/myvote/myvote" }
+  it "should inherit from StateCustomization" do
+    WA.superclass.should == StateCustomization
+  end
+  
+  describe "online_reg_url(registrant)" do
+    let(:wa) { WA.new(GeoState['WA']) }
+    let(:reg) { mock(Registrant) }
+    context "when registrant is nil" do
+      it "returns the root URL" do
+        wa.online_reg_url(nil).should == root_url
+      end
+    end
+    context "when registrant is not nill" do
+      before(:each) do
+        reg.stub(:first_name).and_return("First Name")
+        reg.stub(:last_name).and_return("Last Name")
+        reg.stub(:form_date_of_birth).and_return("01-01-1900")
+        reg.stub(:locale).and_return('aa')
+      end
+      it "includes an escaped registrant first name, last name, DOB with '/' separators and locale" do
+        wa.online_reg_url(reg).should ==
+          "#{root_url}?language=aa&Org=RocktheVote&firstname=First+Name&lastname=Last+Name&DOB=01%2F01%2F1900"
+      end
     end
   end
-
-  before { @p = FactoryGirl.create(:partner) }
-  before { EmailTemplate.set(@p, 'confirmation.en', 'body') }
-
-  it 'should set a template for the partner' do
-    EmailTemplate.get(@p, 'confirmation.en').should == 'body'
-  end
-
-  it 'should update a template for the partner' do
-    EmailTemplate.set(@p, 'confirmation.en', 'new body')
-    EmailTemplate.get(@p, 'confirmation.en').should == 'new body'
-  end
-
-  it 'should not return a missing template for the partner' do
-    EmailTemplate.get(@p, 'missing').should be_nil
-  end
-
-  it 'should check if template is present' do
-    EmailTemplate.present?(@p, 'confirmation.en').should be_true
-    EmailTemplate.present?(@p, 'missing').should be_false
-  end
-
+  
 end
