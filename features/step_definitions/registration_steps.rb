@@ -61,6 +61,19 @@ Given /^I have completed step (\d+) as a resident of "([^\"]*)" state$/ do |step
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
 end
 
+Given(/^I have completed step (\d+) without an email address$/) do |step_num|
+  @registrant = FactoryGirl.create("step_#{step_num}_registrant", :collect_email_address=>'no', :email_address=>nil)  
+end
+
+Given(/^I have completed step (\d+) as a resident of "(.*?)" state without an email address$/) do |step_num,state_name|
+  state = GeoState.find_by_name(state_name)
+  zip_prefix = GeoState.zip3map.key(state.abbreviation)
+  @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01', :collect_email_address=>'no', :email_address=>nil)  
+end
+
+
+
+
 Given /^I have been to the state online registration page$/ do
   step 'I have completed step 4 as a resident of "Washington" state'
   @registrant.update_attributes!(:finish_with_state=>true)
@@ -241,7 +254,7 @@ Then /^I should see an iFrame for the Washington State online system$/ do
   ln = CGI.escape @registrant.last_name.to_s
   dob= CGI.escape @registrant.form_date_of_birth.to_s.gsub('-','/')
   lang = @registrant.locale.to_s
-  state_url="https://weiapplets.sos.wa.gov/myvote/myvote?language=#{lang}&Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
+  state_url="https://weiapplets.sos.wa.gov/myvote/myvote?language=#{lang}&Org=RocktheVote&firstname=#{fn}&lastname=#{ln}&DOB=#{dob}"
   page.should have_xpath("//iframe[@src='#{state_url}']")
 end
 

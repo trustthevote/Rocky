@@ -74,6 +74,21 @@ Feature: Step 2
       And I should see a button for "I'd like to submit my form online with California now." 
       And I should not see a button for "> No Thanks, I'll continue with Rock the Vote and send in my form later."
 
+    @passing
+    Scenario: fields for a CA state resident without email address collection
+      Given I have completed step 1 as a resident of "California" state without an email address
+      When I go to the step 2 page
+      Then I should see a field for "Phone"
+      And I should see a field for "Type"
+      And I should see a checkbox for "Send me txt messages from Rock the Vote"
+      And I should not see a checkbox for "Receive emails from Rock the Vote"
+      And I should see a field for "I am a resident of California, living in the United States"
+      And I should see a button for "Next Step >"
+      And I should see "You are eligible to finish your registration using the state's online voter registration system."
+      And I should see a button for "I'd like to submit my form online with California now." 
+      And I should not see a button for "> No Thanks, I'll continue with Rock the Vote and send in my form later."
+      
+        
     
     @passing
     Scenario Outline: fields for a <state> state resident with a partner
@@ -162,6 +177,7 @@ Feature: Step 2
       And I should not see a field for "Phone"
       And I should not see a field for "Type"
       And I should not see a field for "Send me txt messages from Rock the Vote"
+      And I should not see a field for "Receive emails from Rock the Vote"
       
       Examples:
         | state      | state_abbr |
@@ -191,6 +207,7 @@ Feature: Step 2
       And I should not see a field for "Phone"
       And I should not see a field for "Type"
       And I should not see a field for "Send me txt messages from Rock the Vote"
+      And I should not see a field for "Receive emails from Rock the Vote"
     
     @passing
     Scenario: User arrives with short_form=1
@@ -214,7 +231,7 @@ Feature: Step 2
       And I should see a field for "Phone"
       And I should see a field for "Type"
       And I should see a field for "Send me txt messages from Rock the Vote"
-      And I should see a field for "Send me txt messages from Rock the Vote"
+      And I should see a field for "Receive emails from Rock the Vote"
       
       
     @passing
@@ -236,6 +253,7 @@ Feature: Step 2
       And I should not see a field for "Phone"
       And I should not see a field for "Type"
       And I should not see a field for "Send me txt messages from Rock the Vote"
+      And I should not see a field for "Receive emails from Rock the Vote"
       
     @passing
     Scenario: User arrives with short_form=1 and leaves fields blank

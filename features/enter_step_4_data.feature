@@ -75,6 +75,16 @@ Feature: Step 4
       Then I should be signed up for "opt_in_email" 
       And I should not be signed up for "volunteer" 
     
+    @passing
+    Scenario: User does not see email opt-ins if not collecting email
+      Given I have completed step 3 without an email address
+      When I go to the step 4 page
+      Then I should not see a checkbox for "Receive emails from Rock the Vote"
+      And I should see a checkbox for "I would like to volunteer with Rock the Vote"
+      And I press "registrant_submit"
+      Then I should not be signed up for "opt_in_email" 
+    
+    
     Scenario Outline: User sees RTV and partner opt-in options as configured for the partner
       Given the following partner exists:
         | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers |

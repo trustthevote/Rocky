@@ -1,5 +1,5 @@
 <%- show_hr ||= false %>
-<%- if @registrant.partner.rtv_email_opt_in || @registrant.partner.primary? || @registrant.partner.partner_email_opt_in %>
+<%- if @registrant.collect_email_address? && (@registrant.partner.rtv_email_opt_in || @registrant.partner.primary? || @registrant.partner.partner_email_opt_in) %>
   <%- if @registrant.partner.rtv_email_opt_in || @registrant.partner.primary? %>
     <ul class="checkbox">
       <li class="spacer">&nbsp;</li>

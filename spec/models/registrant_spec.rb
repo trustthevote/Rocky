@@ -252,10 +252,21 @@ describe Registrant do
       assert_attribute_invalid_with(:step_1_registrant, :partner_id => nil)
       assert_attribute_invalid_with(:step_1_registrant, :locale => nil)
       assert_attribute_invalid_with(:step_1_registrant, :email_address => nil)
+      assert_attribute_invalid_with(:step_1_registrant, :email_address => nil, :collect_email_address=>'yes')
+
+      #FOR NOW
+      assert_attribute_invalid_with(:step_1_registrant, :email_address => nil, :collect_email_address=>'optional')
+
+      assert_attribute_invalid_with(:step_1_registrant, :email_address => nil, :collect_email_address=>'abc')
+
       assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => nil, :home_state_id => nil)
       assert_attribute_invalid_with(:step_1_registrant, :home_zip_code => '00000')
       assert_attribute_invalid_with(:step_1_registrant, :date_of_birth => nil)
       assert_attribute_invalid_with(:step_1_registrant, :us_citizen => nil)
+    end
+    
+    it "should not require email address when collect_email_address is 'no'" do
+      assert_attribute_valid_with(:step_1_registrant, :email_address=>nil, :collect_email_address=>'no')
     end
 
     it "should limit number of simultaneous errors on home_zip_code" do
@@ -968,6 +979,48 @@ describe Registrant do
     end
   end
 
+  describe "#collect_email_address?" do
+    it "is false for capitalizations and spacings of 'no'" do
+      ['no', 'NO', 'No', 'nO', ' no', 'nO ', ' NO '].each do |v|
+        r = Registrant.new(:collect_email_address=>v)
+        r.collect_email_address?.should be_false
+      end
+    end
+    it "is true for all other values" do
+      ['n', '', nil, 'n-o', 'not', 'yes','optional'].each do |v|
+        r = Registrant.new(:collect_email_address=>v)
+        r.collect_email_address?.should be_true
+      end
+    end
+  end
+  describe "#require_email_address?" do
+    # it "is false for all capitalizations and spacing of 'optional'" do
+    #   ['optional', 'OPTIONAL', 'Optional', 'opTional', ' optionaL', 'OpTional ', ' optional '].each do |v|
+    #     r = Registrant.new(:collect_email_address=>v)
+    #     r.require_email_address?.should be_false
+    #   end
+    # end
+    # TODO: For now "optional" still means required
+    it "is TRUE for all capitalizations and spacing of 'optional'" do
+      ['optional', 'OPTIONAL', 'Optional', 'opTional', ' optionaL', 'OpTional ', ' optional '].each do |v|
+        r = Registrant.new(:collect_email_address=>v)
+        r.require_email_address?.should be_true
+      end
+    end
+    
+    it "is false for all capitalizations and spacings of 'no'" do
+      ['no', 'NO', 'No', 'nO', ' no', 'nO ', ' NO '].each do |v|
+        r = Registrant.new(:collect_email_address=>v)
+        r.require_email_address?.should be_false
+      end
+    end
+    it "is true for all other values" do
+      ['n', '', nil, 'n-o', 'not', 'yes','opional'].each do |v|
+        r = Registrant.new(:collect_email_address=>v)
+        r.require_email_address?.should be_true
+      end
+    end
+  end
 
   describe "states by abbreviation" do
     it "sets state by abbreviation" do
@@ -1119,6 +1172,18 @@ describe Registrant do
         Registrant.abandon_stale_records
       }.to change { ActionMailer::Base.deliveries.count }.by(1)
       
+    end
+    it "should not send an email if registrant email is blank" do
+      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, 
+        :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, 
+        :finish_with_state=>true, 
+        :collect_email_address=>'no',
+        :email_address=>nil)
+      stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
+      
+      expect {
+        Registrant.abandon_stale_records
+      }.to change { ActionMailer::Base.deliveries.count }.by(0)      
     end
     it "should not send an email to registrants that have been thanked" do
       stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
@@ -1419,13 +1484,27 @@ describe Registrant do
         FactoryGirl.create(:maximal_registrant).deliver_confirmation_email
       end
     end
+    it "does not send an email when address is blank" do
+      assert_difference('ActionMailer::Base.deliveries.size', 0) do
+        FactoryGirl.create(:maximal_registrant, :collect_email_address=>'no', :email_address=>'').deliver_confirmation_email
+      end
+    end
   end
+  
 
   describe "reminder emails" do
     it "on incomplete registrant, it should be 0" do
       assert_equal 0, FactoryGirl.build(:step_4_registrant).reminders_left
     end
 
+    it "is 0 for registrants without an email address" do
+      reg = FactoryGirl.build(:maximal_registrant, 
+        :collect_email_address=>'no',
+        :email_address=>nil)
+      reg.enqueue_reminder_emails 
+      assert_equal 0, reg.reminders_left
+      
+    end
     it "should know how many reminder emails are left" do
       assert_equal Registrant::REMINDER_EMAILS_TO_SEND, FactoryGirl.build(:maximal_registrant, :reminders_left => Registrant::REMINDER_EMAILS_TO_SEND).reminders_left
     end
@@ -1444,6 +1523,15 @@ describe Registrant do
           reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
           reg.deliver_reminder_email
         end
+      end
+      it "should not send an email if there is no email address" do
+        assert_difference('ActionMailer::Base.deliveries.size', 0) do
+          reg = FactoryGirl.create(:maximal_registrant, 
+            :reminders_left => 1,
+            :collect_email_address=>'no')
+          reg.deliver_reminder_email
+        end
+        
       end
 
       it "should not send an email if no reminders left" do
@@ -1469,6 +1557,14 @@ describe Registrant do
       it "should not enqueue another reminder email if on last email" do
         assert_difference('Delayed::Job.count'=>0) do
           reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
+          reg.deliver_reminder_email
+        end
+      end
+      it "should not enqueue another reminder email if no email address" do
+        assert_difference('Delayed::Job.count'=>0) do
+          reg = FactoryGirl.create(:maximal_registrant, 
+            :reminders_left => 3,
+            :collect_email_address=>'no')
           reg.deliver_reminder_email
         end
       end
@@ -1520,6 +1616,12 @@ describe Registrant do
         reg.tell_email = "jqp@gmail.com"
         assert_equal "jqp@gmail.com", reg.tell_email
       end
+      
+      it "sets tell_email to send_from if email is blank" do
+        reg.collect_email_address='no'
+        assert_equal reg.tell_email, reg.email_address_to_send_from
+      end
+      
 
       it "has tell_subject" do
         assert_equal "I just registered to vote and you should too", reg.tell_subject
@@ -1553,6 +1655,7 @@ describe Registrant do
           assert reg.valid?
         end
       end
+      
 
       it "does not enqueue when invalid" do
         reg.attributes = @tell_params.merge(:tell_recipients => "")

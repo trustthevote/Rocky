@@ -144,7 +144,7 @@ class Registrant < ActiveRecord::Base
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of   :partner_id
     reg.validates_inclusion_of  :locale, :in => %w(en es)
-    reg.validates_presence_of   :email_address
+    reg.validates_presence_of   :email_address, :unless=>:not_require_email_address?
     reg.validates_format_of     :email_address, :with => Authlogic::Regex.email, :allow_blank => true
     reg.validates_zip_code      :home_zip_code
     reg.validates_presence_of   :home_state_id
@@ -236,6 +236,19 @@ class Registrant < ActiveRecord::Base
 
   validates_presence_of  :send_confirmation_reminder_emails, :in => [ true, false ], :if=>[:building_via_api_call, :finish_with_state?]
 
+
+  def collect_email_address?
+    collect_email_address.to_s.downcase.strip != 'no'
+  end
+  
+  def not_require_email_address?
+    !require_email_address?
+  end
+  
+  def require_email_address?
+    #!%w(no optional)
+    !%w(no).include?(collect_email_address.to_s.downcase.strip)
+  end
 
   def needs_mailing_address?
     at_least_step_2? && has_mailing_address?
@@ -786,18 +799,29 @@ class Registrant < ActiveRecord::Base
     :partner_tracking_id  => self.tracking_id}]
   end
   
+  def send_emails?
+    !email_address.blank? && collect_email_address?
+  end
 
   def deliver_confirmation_email
-    Notifier.confirmation(self).deliver
+    if send_emails?
+      Notifier.confirmation(self).deliver
+    end
   end
 
   def deliver_thank_you_for_state_online_registration_email
-    Notifier.thank_you_external(self).deliver
+    if send_emails?
+      Notifier.thank_you_external(self).deliver
+    end
   end
 
   def enqueue_reminder_emails
-    self.reminders_left = REMINDER_EMAILS_TO_SEND
-    enqueue_reminder_email
+    if send_emails?
+      self.reminders_left = REMINDER_EMAILS_TO_SEND
+      enqueue_reminder_email
+    else
+      self.reminders_left = 0
+    end
   end
 
   def enqueue_reminder_email
@@ -807,7 +831,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def deliver_reminder_email
-    if reminders_left > 0
+    if reminders_left > 0 && send_emails?
       Notifier.reminder(self).deliver
       update_attributes!(:reminders_left => reminders_left - 1)
       enqueue_reminder_email if reminders_left > 0
@@ -975,7 +999,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def tell_email
-    @tell_email ||= email_address
+    @tell_email ||= send_emails? ? email_address : email_address_to_send_from
   end
 
   def tell_subject

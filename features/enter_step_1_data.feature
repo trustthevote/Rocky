@@ -12,6 +12,32 @@ Feature: Step 1
       Then I should not see "^New Registrant"
        And I should see "Nuevo Registro"
 
+    @passing
+    Scenario: Form includes email address
+      When I go to a new registration page
+      Then I should see a field for "Email Address"
+      
+    @passing
+    Scenario Outline: Form includes email address when collectemailaddress is <value>
+       When I go to a new registration page with collectemailaddress="<value>"
+       Then I <should_or_not> see a field for "Email Address"
+    
+       Examples:
+         | value     | should_or_not |
+         | yes       | should        |
+         | Yes       | should        |
+         | YES       | should        |
+         | optional  | should        |
+         | Optional  | should        |
+         | OPTIONAL  | should        |
+         | abc       | should        |
+         | no        | should not    |
+         | NO        | should not    |
+         | No        | should not    |
+         | nO        | should not    |
+         
+    
+
     Scenario: completing step 1
       When I go to a new registration page
        And I have not set a locale

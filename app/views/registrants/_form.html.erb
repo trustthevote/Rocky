@@ -3,6 +3,7 @@
 <%= hidden_field_tag "source", @source %>
 <%= hidden_field_tag "tracking", @tracking %>
 <%= hidden_field_tag "short_form", @short_form %>
+<%= hidden_field_tag "collectemailaddress", @collect_email_address %>
 <%= form.hidden_field :under_18_ok, :value => 0 %>
 
 
@@ -15,14 +16,16 @@ $(document).ready(function() {
 <% end %>
 <%= form.hidden_field :javascript_disabled %>
 
-<ul class="flat">
-  <li class="width_f">
-    <h3><%= form.label :email_address %></h3>
-    <%= field_div form, :email_address %>
-    <div class="tooltip"><%= tooltip_tag :email_address %></div>
-    <span class="error"><%= form.object.errors[:email_address].join("\n") %></span>
-  </li>
-</ul>
+<%- if @registrant.collect_email_address? %>
+  <ul class="flat">
+    <li class="width_f">
+      <h3><%= form.label :email_address %></h3>
+      <%= field_div form, :email_address %>
+      <div class="tooltip"><%= tooltip_tag :email_address %></div>
+      <span class="error"><%= form.object.errors[:email_address].join("\n") %></span>
+    </li>
+  </ul>
+<%- end %>
 <ul class="flat">
   <li class="width_f">
     <h3><%= form.label :home_zip_code %></h3>

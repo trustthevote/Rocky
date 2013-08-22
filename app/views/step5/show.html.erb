@@ -8,10 +8,12 @@
       <legend><%= t('txt.registration.step_1_header') %></legend>
 
       <ul>
-        <li>
-          <span><%= I18n.t('activerecord.attributes.registrant.email_address') %></span>
-          <div><%=h @registrant.email_address %></div>
-        </li>
+        <%- if @registrant.collect_email_address? %>
+          <li>
+            <span><%= I18n.t('activerecord.attributes.registrant.email_address') %></span>
+            <div><%=h @registrant.email_address %></div>
+          </li>
+        <%- end%>
         <li>
           <span><%= I18n.t('activerecord.attributes.registrant.home_zip_code') %></span>
           <div><%=h @registrant.home_zip_code %></div>

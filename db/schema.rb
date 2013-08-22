@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516223825) do
+ActiveRecord::Schema.define(:version => 20130822180236) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(:version => 20130516223825) do
     t.boolean  "send_confirmation_reminder_emails",                :default => false
     t.boolean  "building_via_api_call",                            :default => false
     t.boolean  "short_form",                                       :default => false
+    t.string   "collect_email_address"
   end
 
   add_index "registrants", ["age"], :name => "index_registrants_on_age"

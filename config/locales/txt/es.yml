@@ -78,6 +78,7 @@ es:
       - Trabajo
       - Otro
       instructions:
+        overseas: "Si Usted es un ciudadano americano viviendo afuera el país o Usted es un miembro de servicio, haga <a href='http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html' target='_blank'> clic aquí</a>  para registrarse a votar."
         opt_in_email: Le enviaremos recordatorios de la elección, información del recinto electoral asignado, y información oportuna sobre música y temas información.
         under_18: "Parece que aún no tienes 18 años. Está bien. En %{state_name} puedes registrarte para votar %{state_rule}.  Visite nuestro <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Centro Electoral</a> para saber cuándo es la próxima elección."
         under_18_2: "Para confirmar has clic en el botón para continuar con la aplicación."

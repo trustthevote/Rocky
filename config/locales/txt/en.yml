@@ -78,6 +78,7 @@ en:
       - Work
       - Other
       instructions:
+        overseas: "<b>Note</b>: If you are an American citizen living abroad or a uniformed military voter, <a href='http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html' target='_blank'>click here</a> to register to vote."
         opt_in_email: "We will send you timely election reminders, your polling place location, and information about music and issues."
         under_18: "Hey, it looks like you aren't 18 yet. That's cool. In %{state_name}, you can register to vote %{state_rule}. Visit our <a href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Election Center</a> to find out when the next election is."
         under_18_translation_instructions: "Please keep the &lt;a href=...&gt; and &lt;/a&gt; html tags intact"

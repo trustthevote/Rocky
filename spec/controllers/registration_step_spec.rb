@@ -43,6 +43,12 @@ describe RegistrationStep do
     @rs.instance_variable_get("@registrant").should == @reg
   end
   
+  it 'should set collect_email_address' do
+    @rs.stub(:params).and_return({:collectemailaddress=>"val"})
+    @rs.send(:find_partner)
+    @rs.instance_variable_get("@collect_email_address").should == "val"
+  end
+  
   it "should set the registrant's finish_with_state flag to false if it was true" do
     @reg.update_attributes(:finish_with_state=>true)
     @reg.finish_with_state.should be_true

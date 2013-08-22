@@ -7,6 +7,12 @@ Feature: Step 5
      Given I have completed step 4
       When I go to the step 5 page
       Then I should see "Review"
+      
+    @passing
+    Scenario: Don't see email address when not collected
+    Given I have completed step 4 without an email address
+     When I go to the step 5 page
+     Then I should not see "Email Address"
 
     Scenario: forced to make a selection
      Given I have completed step 4

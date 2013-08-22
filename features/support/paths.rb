@@ -40,6 +40,8 @@ module NavigationHelpers
       new_registrant_path(:partner=>$1, :source=>$2, :tracking=>$3).to_s
     when /a new registration page for partner="(\d)"/
       new_registrant_path(:partner=>$1)
+    when /a new registration page with collectemailaddress="(.+)"/
+      new_registrant_path(:collectemailaddress=>$1)
     when /a new registration page/, /a new step 1 page/
       new_registrant_path
     when /new Spanish registration page/

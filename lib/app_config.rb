@@ -15,6 +15,10 @@ class AppConfig
     setting_with_default(:pdf_expiration_days, 14).to_f.days
   end
 
+  def self.pdf_no_email_expiration_minutes
+    setting_with_default(:pdf_no_email_expiration_minutes, 10).to_f.minutes
+  end
+
   def self.partner_csv_expiration_minutes
     setting_with_default(:partner_csv_expiration_minutes, 30).to_f.minutes
   end
