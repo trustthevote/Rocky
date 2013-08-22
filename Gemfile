@@ -21,6 +21,7 @@ gem "dotenv-rails"
 gem "haml"
 
 gem "rails-i18n"
+gem 'jquery-rails', '~> 2.1'
 
 
 group :development, :test do

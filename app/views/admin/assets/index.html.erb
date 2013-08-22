@@ -36,7 +36,7 @@
     <%- @assets.each do |asset| %>
       <tr>
         <td class='name'><%= h asset %></td>
-        <td><%= link_to "Delete", admin_partner_asset_path(@partner.id, 0, :name => asset), :method => :delete, :confirm => "Are you sure?" %></td>
+        <td><%= link_to("Delete", admin_partner_asset_path(@partner.id, 0, :name => asset), {:method => :delete, :confirm => "Are you sure?"}) %></td>
       </tr>
     <% end %>
   <% end %>

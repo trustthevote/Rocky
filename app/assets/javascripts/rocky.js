@@ -7,7 +7,8 @@ function revealErrors() {
 };
 
 function toggleFieldSet(checkbox, set, rule, speed) {
-  if ( $(checkbox).attr('checked') ) {
+	console.log(checkbox, set, rule, speed)
+  if ( $(checkbox).is(':checked') ) {
     $(rule).hide(0);
     $(set).fadeIn(speed);
   } else {
@@ -25,16 +26,13 @@ function checkboxTogglesSet(checkbox, set, rule) {
 
 function addTooltips(selector, target_corner, tooltip_corner) {
   $(selector).qtip({
-    style: {
-      name: 'registrant',
-      tip: tooltip_corner
-    },
+		style: {
+			classes: 'qtip-blue qtip-rounded'
+		},
     position: {
-      corner: {
-        target: target_corner,
-        tooltip: tooltip_corner
-      },
-      adjust: { screen: true } // Change positioning if tooltip would be offscreen.
+      at: target_corner,
+      my: tooltip_corner,
+			viewport: $(window)
     },
     hide: { fixed: true, delay: 300, effect: { length: 50 } }, // Hovering over tooltip keeps them visible
     show: { delay: 50, effect: { length: 50 } }
