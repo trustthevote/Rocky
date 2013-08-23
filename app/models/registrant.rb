@@ -131,6 +131,7 @@ class Registrant < ActiveRecord::Base
   before_validation :clear_superfluous_fields
   before_validation :reformat_state_id_number
   before_validation :reformat_phone
+  before_validation :set_opt_in_email
 
   after_validation :calculate_age
   after_validation :set_official_party_name
@@ -398,6 +399,13 @@ class Registrant < ActiveRecord::Base
         self.phone = [digits[0..2], digits[3..5], digits[6..9]].join('-')
       end
     end
+  end
+  
+  def set_opt_in_email
+    if !require_email_address? && email_address.blank?
+      self.opt_in_email = false
+    end
+    return true
   end
 
   def validate_phone_present_if_opt_in_sms_at_least_step_2

@@ -39,6 +39,16 @@ describe Registrant do
     end
   end
   
+  describe "opt-in email flag" do
+    it "should be false if there is no email address" do
+      r= FactoryGirl.create(:maximal_registrant)
+      r.opt_in_email.should be_true
+      r.update_attributes(:email_address=>'', :collect_email_address=>'no')
+      r.save!
+      r.opt_in_email.should be_false
+    end
+  end
+  
   describe "rtv_and_partner_name" do
     it "returns Rock the Vote when there's no partner" do
       r = Registrant.new
