@@ -14,3 +14,8 @@ states_with_online_registration:
   - CO
   - NV
   - WA
+  
+enabled_locales:
+  - en
+  - es
+  - ko  

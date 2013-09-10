@@ -7,3 +7,7 @@ hours_between_first_and_second_reminder: 0.0333
 pdf_expiration_days: .25
 admin_password: abc123
 
+enabled_locales:
+  - en
+  - es
+  - ko  

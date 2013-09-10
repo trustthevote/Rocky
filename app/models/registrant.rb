@@ -144,7 +144,7 @@ class Registrant < ActiveRecord::Base
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of   :partner_id
-    reg.validates_inclusion_of  :locale, :in => %w(en es)
+    reg.validates_inclusion_of  :locale, :in => RockyConf.enabled_locales
     reg.validates_presence_of   :email_address, :unless=>:not_require_email_address?
     reg.validates_format_of     :email_address, :with => Authlogic::Regex.email, :allow_blank => true
     reg.validates_zip_code      :home_zip_code
