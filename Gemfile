@@ -13,7 +13,7 @@ gem "aasm", "= 3.0.16"
 gem "authlogic", "= 3.3.0"
 gem "daemons", "= 1.0.10"
 gem "paperclip", "~> 3.0"
-gem "mysql"
+gem "mysql2"
 gem "rubyzip"
 
 gem "dotenv-rails"
