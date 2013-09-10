@@ -12,7 +12,7 @@
 -->
 </style>
 
-<%= I18n.t('email.reminder.body.greeting').html_safe %><br><br>
+<%= I18n.t('email.reminder.body.greeting', :registrant_first_name=>@registrant.first_name).html_safe %><br><br>
 
 <table style="float: right; margin: 0 0 15px 15px; width: 275px; border: 8px solid #cc0000;color:black" width="275" cellspacing="0" cellpadding="10">
   <tr>
