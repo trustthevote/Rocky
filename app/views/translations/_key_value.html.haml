@@ -32,7 +32,7 @@
     - else
       %li.locale
         %h4.locale_name= "#{"Current " if @locale=='en'}English:"
-        .translation= I18n.t(key, :locale=>'en', :default=>'')
+        %pre.translation= I18n.t(key, :locale=>'en', :default=>'')
       %li.locale.translatable{:class=>@translation.has_error?(key) ? 'error' : ''}
         %h4.locale_name= "#{"New " if @locale=='en'}#{Translation.language_name(@locale)}:"
         .translation
@@ -40,5 +40,4 @@
             %span.error_message ** You must provide a translation **
           - elsif @translation.is_missing_variable?(key)
             %span.error_message ** The %{VARIABLE} is missing ** 
-          %textarea{:name=>"#{@locale}[#{key}]"}
-            = @translation.get_from_contents(key, @locale)
+          %textarea{:name=>"#{@locale}[#{key}]", :style=>"#{@translation.is_email? ? "height:10em;" : ""}"}= @translation.get_from_contents(key, @locale)

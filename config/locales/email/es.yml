@@ -2,10 +2,128 @@ es:
   email:
     confirmation:
       subject: "Reminder: Mail your voter registration form"
+      body:
+        greeting: "Estimado %{registrant_first_name},"
+        reminder: | 
+          No se te olvide!<br> Tienes que poner un sello, firmar y enviar tu forma por correo.
+        main: |
+          Gracias por completar tu aplicación para el registro del voto con Rock the Vote.  Si no lo has hecho aún, porfavor descarga <a href="%{pdf_url}">tu aplicación.</a>.<br><br>
+          
+          <strong>Tu registro aún no está completo.  No estás registrado hasta que entregues tu forma a los oficiales electorales de tu estado.</strong><br><br>
+          
+          Si no lo has hecho aún, <strong>porfavor asegúrate de imprimir, firmar, poner un sello y enviar vía correo a la dirección provista en tu forma y abajo indicada.</strong><br><br>
+          
+          %{registrar_address}<br><br>
+          
+          Si ya ha enviado por correo en el formulario, puede hacer <a href="%{cancel_reminders_url}">clic aquí</a> para dejar de recibir recordatorios sobre enviarlo pulg.  Debes recibir una confirmación de tu registro por parte de los oficiales electorales de tu estado.  Algunas veces, el proceso toma varias semanas.  Si quieres revisar el estatus de tu forma de registro del voto, llama a tu Sectretaría de Estado al {registrar_phone}, o cheque en línea en %{registrar_url}.<br><br>
+          
+          Necesitamos tu apoyo para registrar a otras personas.  Asegúrate de que se escuche la voz de todos: envía un email a tus familiares y amistades o simplemente pasa el mensaje abajo descrito.<br><br>
+          
+          Finalmente, no se te olvide votar el día que hayan elecciones.  Existene alrededor de 45 millones de jóvenes en edad de votar y si queremos que los politicos presten atención a los temas que nos interesan, tenemos que votar.<br><br>
+          
+          Atentamente,<br>
+          Heather Smith<br>
+          Presidente Ejecutivo, Rock the Vote<br><br>
+          
+          P.S. Visita <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong> para más información sobre el voto, las elecciones y los temas que más te interesan.  Encontrarás también todas las herramientas necesarias para crear tu propia campaña de registro de votos.<br><br>
+        send_to_friends: |
+          <em><strong>Copia y pega el siguiente mensaje y envíalo vía correo electronico a toda tu familia y amistades.</strong></em><br><br>
+          
+          Hola,<br><br>
+          
+          No puedes votar si no estás registrado.  Es por eso que Rock the Vote  facilita el registro de tu forma en línea en %{rtv_link}.  Ya sea que te vayas a registrar por primera vez para votar o simplemente actualizar tus datos como dirección y cambio de nombre, todo en tan solo unos minutos.<br><br>
+          
+          Para más información, visita: %{rtv_link}.<br><br>
+          
+          Ya estás registrado para votar? Rock the Vote necesita tu ayuda para registrar a más personas para votar.  Manda un correo electronico a tu familia y amistades pidiendoles que se registren para votar en %{rtv_link}. Aquí encontrarán una herramienta para iniciar tu propia campaña de registro para votar ya sea en tu página de internet o en tu blog.<br><br>
+          
+          Sinceramente,<br>
+          %{registrant_first_name}<br><br>
+        footer: |
+          Rock the vote está compretido a preservar tu privacidad y a salvaguardar toda tu información.  Porfavor leer el <strong><a href="http://register.rockthevote.com/privacy.html">manual de privacidad del registro de votos</a></strong> para más detalles.<br><br>
+          
+          Porfavor enviar preguntas o comentarios a: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>
+          
     reminder:
       subject: "Reminder: Mail your voter registration form"
+      body:
+        greeting: "Estimado %{registrant_first_name},"
+        reminder: | 
+          No se te olvide!<br>
+          Tienes que poner un sello, firmar y enviar tu forma por correo.
+        main: |
+          Gracias por completar tu aplicación de registro para votar en Rock the Vote.  Puedes descargar tu aplicación <a href="%{pdf_url}">dando click aquí</a>.<br><br>
+          
+          Recuerda, si no lo has hecho aún, <strong>asegúrate de imprimir, firmar y sellar tu forma y enviarla por correo a la dirección indicada en tu forma o a continuación.</strong><br><br>
+          
+          %{registrar_address}<br><br>
+          
+          Si ya ha enviado por correo en el formulario, puede hacer <a href="%{cancel_reminders_url}">clic aquí</a> para dejar de recibir recordatorios sobre enviarlo pulg.  Si quieres revisar el estatus de tu forma de registro del voto, llama a tu Sectretaría de Estado al %{registrar_phone}, o cheque en línea en %{registrar_url}.<br><br>
+          
+          Necesitamos tu apoyo para registrar a otras personas.  En este 2012, hay elecciones grande en todo el país.  Asegúrate de que se escuche la voz de todos: envía un email a tus familiares y amistades o simplemente pasa el mensaje abajo descrito.<br><br>
+          
+          Finalmente, no se te olvide votar el día que hayan elecciones.  Temas tales como salud, el medio ambiente y la economía afectan nuestras vidas de manera diaria y son discutidos por las personas que elegimos.  Existene alrededor de 45 millones de jóvenes en edad de votar y si queremos que los politicos presten atención a los temas que nos interesan, tenemos que votar.<br><br>
+          
+          Atentamente,<br>
+          Heather Smith<br>
+          Presidente Ejecutivo, Rock the Vote<br><br>
+          
+          P.S. Visita <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong> para más información sobre el voto, las elecciones y los temas que más te interesan.  Encontrarás también todas las herramientas necesarias para crear tu propia campaña de registro de votos.<br><br>
+        send_to_friends: |
+          <em><strong>Copia y pega el siguiente mensaje y enviálo vía correo electronico a toda tu familia y amistades.</strong></em><br><br>
+          
+          Hola,<br><br>
+          
+          No puedes votar si no estás registrado.  Es por eso que Rock the Vote  facilita el registro de tu forma en línea en  %{rtv_link}.  Ya sea que te vayas a registrar por primera vez para votar o simplemente actualizar tus datos como dirección y cambio de nombre, todo en tan solo unos minutos.<br><br>
+          
+          Para más información, visita: %{rtv_link}.<br><br>
+          
+          Ya estás registrado para votar? Rock the Vote necesita tu ayuda para registrar a más personas para votar.  Manda un correo electronico a tu familia y amistades pidiendoles que se registren para votar en %{rtv_link}. Aquí encontrarán una herramienta para iniciar tu propia campaña de registro para votar ya sea en tu página de internet o en tu blog.<br><br>
+          
+          Sinceramente,<br>
+          %{registrant_first_name}<br><br>
+        footer: |
+          Rock the vote está compretido a preservar tu privacidad y a salvaguardar toda tu información.  Porfavor leer el <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">manual de privacidad del registro de votos</a></strong> para más detalles.<br><br>
+          
+          Porfavor enviar preguntas o comentarios a: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>
     thank_you_external:
       subject: "Gracias por usar el instrumento de registración de votantes en línea"  
+      body:
+        main: |
+          Estimado %{registrant_first_name},<br><br>
+          
+          ¡Gracias por usar el instrumento de registración de votantes en línea de %{rtv_and_partner_name}>!
+          
+          Si usted completó una solicitud de registración de votantes en línea, fue sometido a la Oficina del Secretario de Estado de %{state_name} para ser procesada. Una vez aprobada, usted recibirá una confirmación de la Oficina del Secretario y su departamento de elecciones del condado pondrá su nueva tarjeta de registración de votantes en el correo.
+          
+          Si usted tiene preguntas o preocupaciones, usted puede comprobar el estado de su registración de votantes llamando a la Oficina del Secretario de Estado de %{state_abbr} al t %{registrar_phone}, o comprobando en línea en %{registrar_url}. Por favor contacte a %{rtv_and_partner_name} directamente si usted tuvo algún inconveniente con el proceso de registro.<br> <br>
+          
+          Ahora, necesitamos su ayuda para que otros también se registren para votar. Hay elecciones grandes en todo el país este año y 45 millones de votantes elegibles jóvenes - y tenemos que asegurarnos que cada uno tenga su voz. Así que, envíe un correo electrónico a su familia y amigos o pase el mensaje de abajo hoy.<br> <br>
+          
+          Y, finalmente, no olvide de votar cuando el Día de Elecciones llegue. Si queremos que los políticos presten atención a los temas de importancia para nosotros, tenemos que votar.<br> <br>
+          
+          Gracias,<br>
+          Heather Smith<br>
+          Presidenta, Rock the Vote<br><br>
+          
+          P.S. Visita <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong> para más información sobre el voto, las elecciones y los temas que más te interesan. Encontrarás también todas las herramientas necesarias para crear tu propia campaña de registro de votos.<br><br>
+        send_to_friends: |
+          <em><strong>Copia y pega el siguiente mensaje y envíalo vía correo electronico a toda tu familia y amistades.</strong></em><br><br>
+          
+          Hola,<br><br>
+          
+          No puedes votar si no estás registrado. Es por eso que Rock the Vote facilita el registro de tu forma en línea en %{rtv_link}. Ya sea que te vayas a registrar por primera vez para votar o simplemente actualizar tus datos como dirección y cambio de nombre, todo en tan solo unos minutos.<br><br>
+          
+          Para más información, visita: %{rtv_link}.<br><br>
+          
+          Ya estás registrado para votar? Rock the Vote necesita tu ayuda para registrar a más personas para votar. Manda un correo electronico a tu familia y amistades pidiendoles que se registren para votar en %{rtv_link}. Aquí encontrarán una herramienta para iniciar tu propia campaña de registro para votar ya sea en tu página de internet o en tu blog.<br><br>
+          
+          Sinceramente,<br>
+          %{registrant_first_name}<br><br>
+        footer: |
+          Rock the vote está compretido a preservar tu privacidad y a salvaguardar toda tu información. Porfavor leer el <strong><a href="http://register.rockthevote.com/privacy.html">manual de privacidad del registro de votos</a></strong> para más detalles.<br><br>
+          
+          Porfavor enviar preguntas o comentarios a: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>
     tell_friend:
       subject: "I just registered to vote and you should too"
       body: "Hey, I just registered to vote at %{rtv_url} and you can too.  It is really easy.\n\nJust fill out the online form here: %{rtv_url}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: %{rtv_url}.\n\nAlready registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at %{rtv_url}.\n\nHappy voting!"

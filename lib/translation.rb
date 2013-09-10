@@ -104,6 +104,10 @@ class Translation
     @type.capitalize
   end
   
+  def is_email?
+    self.type.to_s == 'email'
+  end
+  
   def to_param
     @type
   end

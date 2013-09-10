@@ -85,7 +85,7 @@ class Notifier < ActionMailer::Base
     if custom_template
       render :inline => custom_template
     else
-      render "notifier/#{kind}.#{registrant.locale}"
+      render "notifier/#{kind}"
     end
   end
 
