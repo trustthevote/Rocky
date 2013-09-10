@@ -22,7 +22,7 @@ class TranslationsController < ApplicationController
   
 private
   def disallow_production
-    if Rails.env.staging2?
+    if Rails.env.production?
       raise ActionController::RoutingError.new('Not Found')
     end
   end

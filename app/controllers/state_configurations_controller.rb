@@ -2,6 +2,7 @@ class StateConfigurationsController < ApplicationController
   layout 'state_configuration'
   
   before_filter :get_state_importer
+  before_filter :disallow_production
   
   def index
   end
@@ -20,6 +21,12 @@ class StateConfigurationsController < ApplicationController
   end
   
 protected
+  def disallow_production
+    if Rails.env.production?
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def get_state_importer
     @state_importer = StateImporter.new
   end
