@@ -1,6 +1,7 @@
 class TranslationsController < ApplicationController
   layout 'state_configuration'
   
+  before_filter :disallow_production
   before_filter :get_translations
   before_filter :get_locale_and_translation, :except=>:index
   
@@ -20,6 +21,12 @@ class TranslationsController < ApplicationController
   end
   
 private
+  def disallow_production
+    if Rails.env.staging2?
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+  
   def get_translations
     @types = Translation.types
   end
@@ -31,7 +38,9 @@ private
   
   def submit_data(file, group_name, locale)
     # later this will be 'email'
-    send_data file, :filename=>"#{group_name}-#{locale}.yml", :type=>"text"
+    #Send an email
+    ConfigMailer.translation_file(file, "#{group_name}-#{locale}.yml").deliver
+    #send_data file, :filename=>"#{group_name}-#{locale}.yml", :type=>"text"
   end
   
 end

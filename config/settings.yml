@@ -13,6 +13,10 @@ sponsor:
 from_address: "rocky@example.com"
 default_url_host: "register.example.com"
 
+admin:
+  from_address: "rtv-admins@osuosl.org"
+  translation_recipients: "david@rockthevote.com, alex.mekelburg@gmail.com"
+
 admin_username: 'admin'
 widget_js_url:  'https://s3.amazonaws.com/ovr/widget_loader.js'
 
