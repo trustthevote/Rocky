@@ -36,7 +36,7 @@ class Translation
   end
   
   def self.type_names
-    ['core', 'states', 'txt', 'email']
+    ['core', 'states', 'txt', 'email', 'pdf']
   end
   
   def self.types
