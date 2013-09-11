@@ -170,11 +170,7 @@ ko:
 
           Please send question or comments to: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
     thank_you_external:
-      subject: ! '[KO]
-
-
-
-        Thank you for using the online voter registration tool'
+      subject: ! '[KO] Thank you for using the online voter registration tool'
       body:
         main: ! '[KO]
 
