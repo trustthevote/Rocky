@@ -85,7 +85,7 @@ module ApplicationHelper
     button_options[:id] ||= "registrant_submit"
     html =<<-HTML
       <div class="button">
-        <a class="button_#{name}_#{I18n.locale}" href="#">
+        <a class="button_#{name}_#{I18n.locale} button_#{name}" href="#">
           <button type="submit" id="#{button_options.delete(:id)}" #{button_options.collect{|k,v| "#{k}=\"#{v}\"" }.join(" ")}>
             <span>#{text}</span>
           </button>
@@ -99,7 +99,7 @@ module ApplicationHelper
     optional_attrs = options.inject("") {|s,(k,v)| s << %Q[ #{k}="#{v}"] }
     html =<<-HTML
       <span class="button">
-        <a class="button_#{name}_#{I18n.locale}" href="#{url}"#{optional_attrs}><span>#{text}</span></a>
+        <a class="button_#{name}_#{I18n.locale} button_#{name}" href="#{url}"#{optional_attrs}><span>#{text}</span></a>
       </span>
     HTML
     html.html_safe
