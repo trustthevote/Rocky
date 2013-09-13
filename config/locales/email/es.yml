@@ -15,7 +15,7 @@ es:
           
           %{registrar_address}<br><br>
           
-          Si ya ha enviado por correo en el formulario, puede hacer <a href="%{cancel_reminders_url}">clic aquí</a> para dejar de recibir recordatorios sobre enviarlo pulg.  Debes recibir una confirmación de tu registro por parte de los oficiales electorales de tu estado.  Algunas veces, el proceso toma varias semanas.  Si quieres revisar el estatus de tu forma de registro del voto, llama a tu Sectretaría de Estado al {registrar_phone}, o cheque en línea en %{registrar_url}.<br><br>
+          Si ya ha enviado por correo en el formulario, puede hacer <a href="%{cancel_reminders_url}">clic aquí</a> para dejar de recibir recordatorios sobre enviarlo pulg.  Debes recibir una confirmación de tu registro por parte de los oficiales electorales de tu estado.  Algunas veces, el proceso toma varias semanas.  Si quieres revisar el estatus de tu forma de registro del voto, llama a tu Sectretaría de Estado al %{registrar_phone}, o cheque en línea en %{registrar_url}.<br><br>
           
           Necesitamos tu apoyo para registrar a otras personas.  Asegúrate de que se escuche la voz de todos: envía un email a tus familiares y amistades o simplemente pasa el mensaje abajo descrito.<br><br>
           

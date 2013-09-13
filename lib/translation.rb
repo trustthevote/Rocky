@@ -36,7 +36,7 @@ class Translation
   end
   
   def self.type_names
-    ['core', 'states', 'txt', 'email']
+    ['core', 'states', 'txt', 'email', 'pdf']
   end
   
   def self.types
@@ -178,7 +178,7 @@ class Translation
       key_chain = k.split('.')
       key_chain.each_with_index do |key, i|
         if (i+1 == key_chain.size)
-          last_hash[key] = v
+          last_hash[key] = v.gsub(/\r\n/,"\n")
           if check_translations
             if value_is_blank(v, k)
               blanks << k 

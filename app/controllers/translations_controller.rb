@@ -40,7 +40,7 @@ private
     # later this will be 'email'
     #Send an email
     ConfigMailer.translation_file(file, "#{group_name}-#{locale}.yml").deliver
-    #send_data file, :filename=>"#{group_name}-#{locale}.yml", :type=>"text"
+    #send_data file.to_s, :filename=>"#{group_name}-#{locale}.yml", :type=>"text"
   end
   
 end

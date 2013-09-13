@@ -47,3 +47,18 @@ states_with_online_registration:
 enabled_locales:
   - en
   - es
+  
+pdf:
+  nvra:
+    page1:
+      default_logo: rtvlogo.gif
+      other_block:
+        instructions_url: https://rockthevote.com/nvra-form-instructions/
+  page 2:
+    blockCD_image: block_c_d.gif
+  page 3:
+    forofficialuseonly_image: fouo.gif
+    stamp_image: stamp_necessary.gif
+    offical_election_mail_image: redwave.gif
+  
+  

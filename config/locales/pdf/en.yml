@@ -1,0 +1,100 @@
+en:
+  pdf:
+    nvra:
+      page1:
+        title: "Voter Registration"
+        subtitle: "powered by"
+        # intended to be followed by a logo that is a configuration item or partner customization item
+        top_paragraph: "You are not registered until you sign , stamp , and mail your completed form!"
+        instructions_block:
+          title: "Instructions"
+          subtitle: "Take these easy steps to complete your voter registration:"
+          step1: "Sign the form. You must sign the voter registration form before you mail it."
+          step2: "Make a mailer. Fold the form and address sheet in half. Make sure the address is visible on the outside. Tape or staple the folded form at the bottom to create the mailer. Alternately, place your form in an envelope and hand address it to the Secretary of State."
+          step3: "Stamp it. Place first class stamp on your envelope or folded mailer."
+          step4: "Mail it. Put your voter registration form in the mail."
+          step5: "Vote. On Election Day, go to the polls and vote."
+          howtoimage: mailer.gif
+        submit_block:
+          title: "SUBMIT YOUR COMPLETED, SIGNED FORM TO:"
+        deadline_block:
+          title: "REGISTRATION DEADLINE:"
+        other_block: "See %{instructions_url} for complete general and state-specific instructions for your voter registration application."
+        bottom_block: 
+          title: "FIRST TIME VOTERS WHO REGISTER BY MAIL"
+          paragraph1: "If you are registering to vote first time in your jurisdiction and are mailing this registration application, Federal law requires you to show proof of identification the first time you vote. Proof of identification includes: A current and valid photo identification or a current utility bill, bank statement, government check, paycheck, or government document that shows your name and address."
+          paragraph2: "Voters may be exempt from this requirement if they submit a copy of this identification with their mail in voter registration form."
+          paragraph3: "If you wish to submit a copy, please keep the following in mind: Your state may have additional identification requirements which may mandate you show identification at the polling place even if you meet the Federal proof of identification."
+          paragraph4: "Do not submit original documents with this application, only copies."
+      page2:
+        title: "Voter Registration Application"
+        subtitle: "Before completing this form, review the General, Application, and State specific instructions."
+        topblock:
+          item1: "Are you a citizen of the United State of America?"
+          item2: "Will you be 18 years old on or before election day?"
+          item3: 'If you checked "No" in response to either of these questions, do not complete form'
+          item4: "(Please see state-specific instructions for rule regarding eligibility to register prior to age 18.)"
+          fouo: "This space for office use only."
+        block1:
+          box1_label:  
+          box2_label: "Last Name"
+          box3_label: "First Name"
+          box3_label: "Middle Name(s)"
+        block2:
+          box1_label: "Home Address"
+          box2_label: "Apt. or Lot #"
+          box3_label: "City/Town"
+          box4_label: "State"
+          box5_label: "Zip Code"
+        block3:
+          box1_label: "Address Where You Get Your Mail If Different From Above"
+          box2_label: "City/Town"
+          box3_label: "State"
+          box4_label: "Zip Code"
+        block4:
+          box1_label: "Date of Birth"
+          item2: "Month"
+          item3: "Day"
+          item4: "Year"
+        block5: Telephone Number (optional)
+        block6:
+          box1_label: "ID Number"
+          box1_sublabel: "(See Item 6 in the instructions for your state)"
+        block7:
+          box1_label: "Choice of Party"
+          box1_sublabel: "(See Item 7 in the instructions for your state)"
+        block8:
+          box1_label: "Race or Ethic Group"
+          box1_sublabel: "(See Item 8 in the instructions for your state)"
+        block9:
+          affirmation_header: "I have reviewed my state's instructioons and I swear/affirm that:"
+          affirmation_1: "I am a United States Citizen"
+          affirmation_2: "I meet the eligibility requirements of my state and subscribe to any oath required."
+          affirmation_3: "The informatioon I provided is true to the best of my knowledge under penalty of perjury. If I have provided false infromation, I may be fined, imprisoned, or (if not a U.S. citizen) deported from or refused entry to the United States."
+          please_sign: "Please sign fiull name (or put mark)"
+          date: "Date"
+          month: "Month"
+          day: "Day"
+          year: "Year"
+        top_half_footer: "If you are registering to vote for the first time: please refer to the application instructions for information on submitting copes of valid identification documents with this form."
+        bottom_half_title: "Please fill out the sections below if they apply to you."
+        blockA:
+          title: "If this application is for a change or name, what was you name before you changed it?"
+          box1_label: "Last Name"
+          box2_label: "First Name"
+          box3_label: "Middle Name(s)"
+        blockB:
+          title: "If you were registered before but this is the first time you are registering from the address in Box, what was your address where you were registered before?"
+          box1_label: "Street (or route and box number)"
+          box2_label: "Apt. or Lot #"
+          box3_label: "City/Town/County"
+          box4_label: "State"
+          box5_label: "Zip Code"
+        blockC:
+          title: "If you live in a rural area but do not have a street number, or if you have no address, please show on the map where you live"
+        blockD:
+          title: "If the applicant is unable to sign, who helped the applicant fill out this application? Give name, address and phone number (phone number optional)."
+        bottom_half_footer: "Mail this application to the address provided for your State"
+        # block C and D are image file that is a config item
+
+
