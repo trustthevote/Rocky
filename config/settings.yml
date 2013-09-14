@@ -51,7 +51,7 @@ enabled_locales:
 pdf:
   nvra:
     page1:
-      default_logo: rtvlogo.gif
+      default_logo: 'pdf/rtvlogo.gif'
       other_block:
         instructions_url: https://rockthevote.com/nvra-form-instructions/
   page 2:

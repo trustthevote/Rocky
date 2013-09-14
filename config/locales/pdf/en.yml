@@ -5,7 +5,7 @@ en:
         title: "Voter Registration"
         subtitle: "powered by"
         # intended to be followed by a logo that is a configuration item or partner customization item
-        top_paragraph: "You are not registered until you sign , stamp , and mail your completed form!"
+        top_paragraph: "You are not registered until you<br/><b>sign</b> , <b>stamp</b> , and <b>mail</b> your completed form!"
         instructions_block:
           title: "Instructions"
           subtitle: "Take these easy steps to complete your voter registration:"

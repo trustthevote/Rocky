@@ -761,13 +761,23 @@ class Registrant < ActiveRecord::Base
   end
 
   def generate_pdf
-    unless File.exists?(pdf_file_path)
-      Tempfile.open("nvra-#{to_param}") do |f|
-        f.puts to_xfdf
-        f.close
-        merge_pdf(f)
-      end
+    pdf = WickedPdf.new.pdf_from_string(
+      PdfRenderer.new.render_to_string('registrants/registrant_pdf.html.haml', :layout => 'layouts/nvra', :locale=>self.locale)
+    )
+    
+    File.open("tmpPdfGen.pdf", "wb") do |f|
+      f << pdf
     end
+    
+    #File.open(pdf_file_path)...
+    
+    # unless File.exists?(pdf_file_path)
+    #   Tempfile.open("nvra-#{to_param}") do |f|
+    #     f.puts to_xfdf
+    #     f.close
+    #     merge_pdf(f)
+    #   end
+    # end
     self.pdf_ready = true
   end
   

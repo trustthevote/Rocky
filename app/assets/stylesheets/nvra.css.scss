@@ -1,0 +1,95 @@
+$border_color: #231f20;
+$fs: 46px;
+table {
+	border: 1px solid $border_color;
+	td {
+		border: 1px solid $border_color;		
+	}
+}
+
+	
+p {
+	padding-bottom: 1em;
+	font-size: $fs;
+	line-height:1.6em;
+}
+
+
+.page {
+	width: 2400px;
+	font-size:200%;
+	page-break-after:always;
+}
+
+#page_1 {
+	#logo {
+		float: right;
+		width: 20%;
+		img {
+			width: .2 * 2400px;
+		}
+	}
+	h1 {
+		width:75%;
+		padding-right:5%;
+		text-transform:uppercase;
+		font-size:5em;
+		padding-top:4%;
+		text-align:right;
+		font-weight:bold;
+	}
+	h2 {
+		width:75%;
+		padding-right:5%;
+		text-align: right;
+		font-size:2.5em;
+		font-weight: bold;
+	}
+	p.top_paragraph {
+		width:75%;
+		padding-top: 1em;
+		line-height:1.25em;
+		font-size: 2.5em;
+	}
+	table#instructions_table {
+		font-size: $fs;
+		line-height:1.4em;
+		border-left:0;
+		border-right:0;
+		p {
+			padding:.5em 0;
+		}
+		td.instructions_block {
+			width: 55%;
+			border-left:0;
+			ol {
+				li {
+					margin-left:5%;
+					list-style-position: outside;
+					list-style-type: decimal;
+					padding-bottom:1em;
+				}
+			}
+		}
+		td {
+			border-right:0;
+			h4 {
+				text-transform:uppercase;
+				font-size:.7em;
+			}
+			width:40%;
+			padding:2.5%;
+		}
+	}
+	
+	h3.bottom_title {
+		padding:1em 0;
+		font-size: 2.5em;
+		line-height:1em;
+		text-transform:uppercase;
+	}
+	
+}
+
+
+

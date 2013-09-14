@@ -1,0 +1,34 @@
+%div.page#page_1
+  #logo= wicked_pdf_image_tag RockyConf.pdf.nvra.page1.default_logo
+  %h1.title= I18n.t('pdf.nvra.page1.title', :locale=>@locale).html_safe
+  %h2.subtitle= I18n.t('pdf.nvra.page1.subtitle', :locale=>@locale).html_safe
+  %p.top_paragraph= I18n.t('pdf.nvra.page1.top_paragraph', :locale=>@locale).html_safe
+  %table#instructions_table
+    %tr
+      %td.instructions_block{:rowspan=>3}
+        %h4= I18n.t('pdf.nvra.page1.instructions_block.title', :locale=>@locale).html_safe
+        %p= I18n.t('pdf.nvra.page1.instructions_block.subtitle', :locale=>@locale).html_safe
+        %ol
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step1', :locale=>@locale).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step2', :locale=>@locale).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step3', :locale=>@locale).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step4', :locale=>@locale).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step5', :locale=>@locale).html_safe
+      %td.submit_block
+        %h4.title= I18n.t('pdf.nvra.page1.submit_block.title', :locale=>@locale).html_safe
+    %tr
+      %td.deadline_block
+        %h4.title= I18n.t('pdf.nvra.page1.deadline_block.title', :locale=>@locale).html_safe
+    %tr
+      %td.other_block
+        %h4.title= I18n.t('pdf.nvra.page1.other_block', :locale=>@locale).html_safe
+  %h3.bottom_title= I18n.t('pdf.nvra.page1.bottom_block.title', :locale=>@locale).html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph1', :locale=>@locale).html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph2', :locale=>@locale).html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph3', :locale=>@locale).html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph4', :locale=>@locale).html_safe
+  
+.page#page_2
+  %h1.title= I18n.t('pdf.nvra.page2.title', :locale=>@locale).html_safe
+  %h2.subtitle= I18n.t('pdf.nvra.page2.subtitle', :locale=>@locale).html_safe
+  
