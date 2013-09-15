@@ -32,3 +32,182 @@
   %h1.title= I18n.t('pdf.nvra.page2.title', :locale=>@locale).html_safe
   %h2.subtitle= I18n.t('pdf.nvra.page2.subtitle', :locale=>@locale).html_safe
   
+  %table.form
+    %tr#topblock
+      %td.items
+        .item1= I18n.t('pdf.nvra.page2.topblock.item1', :locale=>@locale).html_safe
+        .item2= I18n.t('pdf.nvra.page2.topblock.item2', :locale=>@locale).html_safe
+        .item3= I18n.t('pdf.nvra.page2.topblock.item3', :locale=>@locale).html_safe
+        .item4= I18n.t('pdf.nvra.page2.topblock.item4', :locale=>@locale).html_safe
+      %td.fouo= I18n.t('pdf.nvra.page2.topblock.fouo', :locale=>@locale).html_safe
+  %table.form
+    %tr#block1
+      %td.block_number 1
+      %td.box1
+        .label= I18n.t('pdf.nvra.page2.block1.box1_label', :locale=>@locale).html_safe
+        .value
+      %td.box2
+        .label= I18n.t('pdf.nvra.page2.block1.box2_label', :locale=>@locale).html_safe
+        .value
+      %td.box3
+        .label= I18n.t('pdf.nvra.page2.block1.box3_label', :locale=>@locale).html_safe
+        .value
+      %td.box4
+        .label= I18n.t('pdf.nvra.page2.block1.box4_label', :locale=>@locale).html_safe
+        .value
+      %td.box5
+        .label= I18n.t('pdf.nvra.page2.block1.box5_label', :locale=>@locale).html_safe
+        .value
+  %table.form
+    %tr#block2
+      %td.block_number 2
+      %td.box1
+        .label= I18n.t('pdf.nvra.page2.block2.box1_label', :locale=>@locale).html_safe
+        .value
+      %td.box2
+        .label= I18n.t('pdf.nvra.page2.block2.box2_label', :locale=>@locale).html_safe
+        .value
+      %td.box3
+        .label= I18n.t('pdf.nvra.page2.block2.box3_label', :locale=>@locale).html_safe
+        .value
+      %td.box4
+        .label= I18n.t('pdf.nvra.page2.block2.box4_label', :locale=>@locale).html_safe
+        .value
+      %td.box5
+        .label= I18n.t('pdf.nvra.page2.block2.box5_label', :locale=>@locale).html_safe
+        .value
+    %tr#block3
+      %td.block_number 3
+      %td.box1{:colspan=>2}
+        .label= I18n.t('pdf.nvra.page2.block3.box1_label', :locale=>@locale).html_safe
+        .value
+      %td.box2
+        .label= I18n.t('pdf.nvra.page2.block3.box2_label', :locale=>@locale).html_safe
+        .value
+      %td.box3
+        .label= I18n.t('pdf.nvra.page2.block3.box3_label', :locale=>@locale).html_safe
+        .value
+      %td.box4
+        .label= I18n.t('pdf.nvra.page2.block3.box4_label', :locale=>@locale).html_safe
+        .value
+  %table.form
+    %tr#block4
+      %td.block4.block_number 4
+      %td.block4.box1
+        %table.inner_form
+          %tr
+            %td.label= I18n.t('pdf.nvra.page2.block4.box1_label', :locale=>@locale).html_safe
+            %td.item2
+              .value
+              .label=I18n.t('pdf.nvra.page2.block4.item2', :locale=>@locale).html_safe
+            %td.item3
+              .value
+              .label=I18n.t('pdf.nvra.page2.block4.item3', :locale=>@locale).html_safe
+            %td.item4
+              .value
+              .label=I18n.t('pdf.nvra.page2.block4.item4', :locale=>@locale).html_safe
+      %td.block5.block_number 5
+      %td.block5.box1
+        .label= I18n.t('pdf.nvra.page2.block5', :locale=>@locale).html_safe
+        .value
+      %td.block6.block_number{:rowspan=>2} 6
+      %td.block6.box1{:rowspan=>2}
+        .label= I18n.t('pdf.nvra.page2.block6.box1_label', :locale=>@locale).html_safe
+        .sublabel= I18n.t('pdf.nvra.page2.block6.box1_sublabel', :locale=>@locale).html_safe
+        .value
+    %tr#block7
+      %td.block7.block_number 7
+      %td.block7.box1
+        .label= I18n.t('pdf.nvra.page2.block7.box1_label', :locale=>@locale).html_safe
+        .sublabel= I18n.t('pdf.nvra.page2.block7.box1_sublabel', :locale=>@locale).html_safe
+        .value
+      %td.block8.block_number 8
+      %td.block8.box2
+        .label= I18n.t('pdf.nvra.page2.block8.box1_label', :locale=>@locale).html_safe
+        .sublabel= I18n.t('pdf.nvra.page2.block8.box1_sublabel', :locale=>@locale).html_safe
+        .value
+  %table.form
+    %tr#block9
+      %td.block_number 9
+      %td.box1
+        .affirmation_header= I18n.t('pdf.nvra.page2.block9.affirmation_header', :locale=>@locale).html_safe
+        %ul.affirmations
+          %li.affirmation_1= I18n.t('pdf.nvra.page2.block9.affirmation_1', :locale=>@locale).html_safe
+          %li.affirmation_2= I18n.t('pdf.nvra.page2.block9.affirmation_2', :locale=>@locale).html_safe
+          %li.affirmation_3= I18n.t('pdf.nvra.page2.block9.affirmation_3', :locale=>@locale).html_safe
+      %td.box2
+        .signature_box= wicked_pdf_image_tag("pdf/signature_box.png")
+        .please_sign= I18n.t('pdf.nvra.page2.block9.please_sign', :locale=>@locale).html_safe
+        .signature_date
+          .date= I18n.t('pdf.nvra.page2.block9.date', :locale=>@locale).html_safe
+          .date_box= wicked_pdf_image_tag("pdf/date_box.png")
+          .month= I18n.t('pdf.nvra.page2.block9.month', :locale=>@locale).html_safe
+          .day= I18n.t('pdf.nvra.page2.block9.day', :locale=>@locale).html_safe
+          .year= I18n.t('pdf.nvra.page2.block9.year', :locale=>@locale).html_safe
+  %h4.top_half_footer
+    = I18n.t('pdf.nvra.page2.top_half_footer', :locale=>@locale).html_safe
+  .bottom_half
+    %h3.bottom_half_title
+      = I18n.t('pdf.nvra.page2.bottom_half_title', :locale=>@locale).html_safe
+    %p.block_title.blockA= I18n.t('pdf.nvra.page2.blockA.title', :locale=>@locale).html_safe
+    %table.form
+      %tr#blockA
+        %td.block_number A
+        %td.box1
+          .label= I18n.t('pdf.nvra.page2.blockA.box1_label', :locale=>@locale).html_safe
+          .value
+        %td.box2
+          .label= I18n.t('pdf.nvra.page2.blockA.box2_label', :locale=>@locale).html_safe
+          .value
+        %td.box3
+          .label= I18n.t('pdf.nvra.page2.blockA.box3_label', :locale=>@locale).html_safe
+          .value
+        %td.box4
+          .label= I18n.t('pdf.nvra.page2.blockA.box4_label', :locale=>@locale).html_safe
+          .value
+        %td.box5
+          .label= I18n.t('pdf.nvra.page2.blockA.box5_label', :locale=>@locale).html_safe
+          .value
+          
+    %p.block_title.blockB= I18n.t('pdf.nvra.page2.blockB.title', :locale=>@locale).html_safe
+    %table.form
+      %tr#blockB
+        %td.block_number B
+        %td.box1
+          .label= I18n.t('pdf.nvra.page2.blockB.box1_label', :locale=>@locale).html_safe
+          .value
+        %td.box2
+          .label= I18n.t('pdf.nvra.page2.blockB.box2_label', :locale=>@locale).html_safe
+          .value
+        %td.box3
+          .label= I18n.t('pdf.nvra.page2.blockB.box3_label', :locale=>@locale).html_safe
+          .value
+        %td.box4
+          .label= I18n.t('pdf.nvra.page2.blockB.box4_label', :locale=>@locale).html_safe
+          .value
+        %td.box5
+          .label= I18n.t('pdf.nvra.page2.blockB.box5_label', :locale=>@locale).html_safe
+          .value
+          
+    %p.block_title.blockC= I18n.t('pdf.nvra.page2.blockC.title', :locale=>@locale).html_safe
+    %table.form
+      %tr#blockC
+        %td.block_number C
+        %td.box1
+          .address_map_wrapper
+            .address_map= wicked_pdf_image_tag("pdf/address_map.png")
+            %ul.instructions 
+              %li TBD 
+              %li TBD 
+              %li TBD
+            .example_label TBDTBDTBD [Example]
+          
+    
+    %p.block_title.blockD= I18n.t('pdf.nvra.page2.blockD.title', :locale=>@locale).html_safe
+    %table.form
+      %tr#blockD
+        %td.block_number D
+        %td.box1
+          .value
+    %h4.bottom_half_footer
+      = I18n.t('pdf.nvra.page2.bottom_half_footer', :locale=>@locale).html_safe

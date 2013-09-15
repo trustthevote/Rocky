@@ -36,10 +36,11 @@ en:
           item4: "(Please see state-specific instructions for rule regarding eligibility to register prior to age 18.)"
           fouo: "This space for office use only."
         block1:
-          box1_label:  
+          box1_label:  ''
           box2_label: "Last Name"
           box3_label: "First Name"
-          box3_label: "Middle Name(s)"
+          box4_label: "Middle Name(s)"
+          box5_label: ''
         block2:
           box1_label: "Home Address"
           box2_label: "Apt. or Lot #"
@@ -59,7 +60,7 @@ en:
         block5: Telephone Number (optional)
         block6:
           box1_label: "ID Number"
-          box1_sublabel: "(See Item 6 in the instructions for your state)"
+          box1_sublabel: " - (See Item 6 in the instructions for your state)"
         block7:
           box1_label: "Choice of Party"
           box1_sublabel: "(See Item 7 in the instructions for your state)"
@@ -76,13 +77,15 @@ en:
           month: "Month"
           day: "Day"
           year: "Year"
-        top_half_footer: "If you are registering to vote for the first time: please refer to the application instructions for information on submitting copes of valid identification documents with this form."
+        top_half_footer: "<b>If you are registering to vote for the first time</b>: please refer to the application instructions for information on submitting copes of valid identification documents with this form."
         bottom_half_title: "Please fill out the sections below if they apply to you."
         blockA:
-          title: "If this application is for a change or name, what was you name before you changed it?"
-          box1_label: "Last Name"
-          box2_label: "First Name"
-          box3_label: "Middle Name(s)"
+          title: "If this application is for a <b>change or name</b>, what was your name before you changed it?"
+          box1_label: ''
+          box2_label: "Last Name"
+          box3_label: "First Name"
+          box4_label: "Middle Name(s)"
+          box5_label: ''
         blockB:
           title: "If you were registered before but this is the first time you are registering from the address in Box, what was your address where you were registered before?"
           box1_label: "Street (or route and box number)"

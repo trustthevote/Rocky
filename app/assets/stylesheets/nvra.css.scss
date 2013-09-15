@@ -1,5 +1,14 @@
-$border_color: #231f20;
 $fs: 46px;
+$table_label_fs: 0.75 * $fs;
+$table_sublabel_fs: 0.6 * $fs;
+
+$page_width: 2400px;
+
+$border_color: #231f20;
+$red: #e21a2b;
+$black: #000;
+$light_black: #333;
+
 table {
 	border: 1px solid $border_color;
 	td {
@@ -7,6 +16,9 @@ table {
 	}
 }
 
+b, strong {
+	font-weight: bold;
+}
 	
 p {
 	padding-bottom: 1em;
@@ -16,8 +28,8 @@ p {
 
 
 .page {
-	width: 2400px;
-	font-size:200%;
+	width: $page_width;
+	font-size:2*$fs;
 	page-break-after:always;
 }
 
@@ -33,7 +45,7 @@ p {
 		width:75%;
 		padding-right:5%;
 		text-transform:uppercase;
-		font-size:5em;
+		font-size:3.3*$fs;
 		padding-top:4%;
 		text-align:right;
 		font-weight:bold;
@@ -42,14 +54,14 @@ p {
 		width:75%;
 		padding-right:5%;
 		text-align: right;
-		font-size:2.5em;
+		font-size:2*$fs;
 		font-weight: bold;
 	}
 	p.top_paragraph {
 		width:75%;
 		padding-top: 1em;
 		line-height:1.25em;
-		font-size: 2.5em;
+		font-size: 1.8 *$fs;
 	}
 	table#instructions_table {
 		font-size: $fs;
@@ -75,7 +87,7 @@ p {
 			border-right:0;
 			h4 {
 				text-transform:uppercase;
-				font-size:.7em;
+				font-size:.7 * $fs;
 			}
 			width:40%;
 			padding:2.5%;
@@ -84,12 +96,299 @@ p {
 	
 	h3.bottom_title {
 		padding:1em 0;
-		font-size: 2.5em;
+		font-size: 2.5 * $fs;
 		line-height:1em;
 		text-transform:uppercase;
 	}
 	
 }
 
-
+#page_2 {
+	h1.title {
+		font-size:1.8 * $fs;
+		font-weight:bold;
+		color: $red;
+		text-align: center;
+	}
+	h2.subtitle {
+		font-size: $fs;
+		font-weight: bold;		
+		text-align: center;
+		padding-bottom: 1em;
+		color: $light_black;
+	}
+	table.form {
+		width: $page_width;
+		td {
+			vertical-align: top;
+			height: 98px;
+			padding:10px;
+			font-size: $table_label_fs;
+			color: $light_black;
+			.value {
+				color: $black;
+			}
+			.sublabel {
+				font-size: $table_sublabel_fs;
+			}
+		}
+		td.block_number {
+			width: 50px;
+			font-size:1.3 * $fs;
+			font-weight: bold;
+			vertical-align: middle;
+			text-align: center;
+		}
+		tr#topblock {
+			td {
+				height: 170px;
+			}
+			td.items {
+				div {
+					padding-bottom:.25em;
+					line-height: 1.4em;
+				}
+				.item3 {
+					font-weight: bold;
+					color: $red;
+				}
+				.item4 {
+					font-size: $table_sublabel_fs;
+				}
+			}
+		}
+		tr#block1 {
+			td.box1 {
+				width: 266px;
+			}
+			td.box2 {
+				width: 548px;
+			}
+			td.box3 {
+				width: 576px;
+			}
+			td.box4 {
+				width: 570px;
+			}
+		}
+		tr#block2 {
+			td.box1 {
+				width: 935px;
+			}
+			td.box2 {
+				width: 234px;
+			}
+			td.box3 {
+				width: 462px;
+			}
+			td.box4 {
+				width: 282px;
+			}
+		}
+		tr#block4, tr#block7 {
+			td {height: 128px;}
+		}
+		tr#block4 {
+			td.block4.box1 {
+				width: 580px;
+				table {
+					border: 0;
+					td {
+						padding: 0;
+						border: 0;
+					}
+				}
+				.label {
+					width:220px;
+				}
+				.item2, .item3, .item4 {
+					display:inline-block;
+					padding:0;
+					margin:0;
+					height: 128px;
+					.value {
+						height: 84px;
+						border-bottom:1px solid $border_color;
+						margin-bottom:10px;
+					}
+					.value, .label {
+						width: 100%;
+					}
+					.label {
+						height: 34px;
+						font-size: 34px;
+						line-height: 1em;
+					}
+				}
+				.item2 {
+					width:120px;
+					text-align: left;
+				}
+				.item3 {
+					width:110px;
+					text-align: center;
+				}
+				.item4 {
+					width:120px;
+					text-align: right;
+				}
+			}
+			td.block6.box1 { 
+				width: 945px;
+				.label, .sublabel {
+					display: inline-block;
+				}
+				.value {
+					height: 170px;
+					margin:0 10px;
+					border-bottom: 1px solid $border-color;
+				}
+			}
+		}
+		tr#block9 {
+			td.box1 {
+				height:402px;
+				width:1100px;
+				border-right: 0;
+				.affirmation_header {
+				}
+				ul {
+					li {
+							margin-left:40px;
+							list-style-position: outside;
+							list-style-type: square;
+							padding-bottom:.25em;	
+							line-height:1.25em;
+					}
+				}
+				
+			}
+			td.box2 {
+				border-left:0;
+				.please_sign {
+					text-align: right;
+					width: 785px;
+					margin-top: -1.2em;
+					margin-bottom: .5em;
+				}
+				.signature_date {
+					position: relative;
+					div {
+						position: absolute;
+					}
+					.date {
+						left: 30px;
+						top: 30px;
+					}
+					.date_box {
+						left: 140px;
+					}
+					.month, .day, .year {
+						top: 100px;
+					}
+					.month {
+						left: 210px;
+					}
+					.day {
+						left: 420px;
+					}
+					.year {
+						left:640px;
+					}
+				}
+        
+			}
+		}
+	}
+	h4.top_half_footer {
+		color: $red;
+		font-size:$fs;
+		line-height:1.25em;
+		padding: .5em 0 2em;
+	}
+	.bottom_half {
+		h3.bottom_half_title {
+			color: $red;
+			font-style: italic;
+			font-weight: bold;
+			font-size: 1.75 * $fs;
+		}
+		p.block_title {
+			padding-top:1.25em;
+			padding-bottom:.25em;
+			line-height: 1.25em;
+			font-size: $table_label_fs;
+			padding-left: 40px;
+			&.blockA {
+				padding-bottom: 1em;
+			}
+		}
+		table.form {
+			td {
+				height:105px;
+			}
+			tr#blockA {
+				td.box1 {
+					width:52px;
+				}
+				td.box2 {
+					width: 740px;
+				}
+				td.box3 {
+					width: 568px;
+				}
+				td.box4 {
+					width: 570px;
+				}
+			}
+			tr#blockB {
+				td.box1 {
+					width:890px;
+				}
+				td.box2 {
+					width: 258px;
+				}
+				td.box3 {
+					width: 456px;
+				}
+				td.box4 {
+					width: 286px;
+				}
+			}
+			tr#blockC {
+				td.box1 {
+					height: 570px;
+					.address_map_wrapper {
+						position: relative;
+						.instructions {
+							position: absolute;
+							top: 0;
+							left: 20px;
+							li {
+									margin-left:40px;
+									list-style-position: outside;
+									list-style-type: square;
+									padding-bottom:.25em;	
+									line-height:1.25em;
+							}
+						}
+						.example_label {
+							position: absolute;
+							left: 20px;
+							top: 2800px;
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+		}
+		h4.bottom_half_footer {
+			color: $red;
+			text-align: center;
+			font-weight: bold;
+			font-size: 1.75 * $fs;
+			padding-top: .5em;
+		}
+	}
+}
 
