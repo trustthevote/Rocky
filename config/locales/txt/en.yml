@@ -19,6 +19,7 @@ en:
       state_online_registration: "I'd like to submit my form online with %{state} now."
       skip_state_online_registration: "&gt; No Thanks, I'll continue with %{rtv_and_partner_name} and send in my form later."
     registration:
+      in_language_name: In English
       powered_by: "powered by:"
       progress_indicator: "Step:"
       step_1_header: New Registrant
