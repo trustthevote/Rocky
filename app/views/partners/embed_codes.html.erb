@@ -109,7 +109,7 @@
     <br/>
     <strong>Version A</strong> &mdash; <%= link_to "https://#{request.host}#{new_registrant_path(:partner => @partner.id)}", "https://#{request.host}#{new_registrant_path(:partner => @partner.id)}" %>
     <br/>
-    <strong>Version B</strong> &mdash; <%= link_to "https://register2.rockthevote.com#{new_registrant_path(:partner => @partner.id)}",    "https://register2.rockthevote.com#{new_registrant_path(:partner => @partner.id)}" %>
+    <strong>Version B</strong> &mdash; <%= link_to "https://register2.rockthevote.com#{root_path(:partner => @partner.id)}",    "https://register2.rockthevote.com#{root_path(:partner =>  @partner.id)}" %>
     </p>
     <br/>
     <p>Use them in emails, in your Facebook or Twitter status updates, or in other custom ways. <br/>
