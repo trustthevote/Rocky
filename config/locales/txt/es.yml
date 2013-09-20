@@ -19,6 +19,7 @@ es:
       state_online_registration: "Me gustaría someter mi solicitud vía internet con el estado ahora."
       skip_state_online_registration: "No gracias, continuaré con Rock the Vote y enviaré mi solicitud más tarde."
     registration:
+      in_language_name: En español
       powered_by: "accionado por:"
       progress_indicator: "Paso"
       step_1_header: Nuevo Registro
