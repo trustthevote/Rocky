@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require 'services/v2'
+require "#{Rails.root}/app/services/v2"
 class Api::V2::RegistrationsController < Api::V2::BaseController
 
   # Lists registrations
@@ -57,7 +57,7 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
   # the error message with optional invalid field name.
   def create
     pdf_path = V2::RegistrationService.create_record(params[:registration]).pdf_path
-    jsonp :pdfurl => "https://#{PDF_HOST_NAME}#{pdf_path}"
+    jsonp :pdfurl => "https://#{RockyConf.pdf_host_name}#{pdf_path}"
   rescue V2::RegistrationService::ValidationError => e
     jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
   rescue V2::RegistrationService::SurveyQuestionError => e

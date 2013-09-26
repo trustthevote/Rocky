@@ -25,11 +25,11 @@
 # General
 
 Then /^I should see error messages$/ do
-  assert_select "span.error"
+  page.should have_selector("span.error")
 end
 
 Then /^I should not see error messages$/ do
-  assert_select "span.error", false
+  page.should_not have_selector("span.error")
 end
 
 # Database
@@ -39,7 +39,7 @@ Given /^no partner exists with a login of "(.*)"$/ do |login|
 end
 
 Given /^I registered with "(.*)\/(.*)"$/ do |login, password|
-  partner = Factory :partner,
+  partner = FactoryGirl.create :partner,
     :username              => login,
     :password              => password,
     :password_confirmation => password
@@ -48,11 +48,11 @@ end
 # Session
 
 Then /^I should be logged in$/ do
-  assert_not_nil controller.send(:current_partner_session)
+  assert_not_nil PartnerSession.find #controller.send(:current_partner_session)
 end
 
 Then /^I should be logged out$/ do
-  assert_nil controller.send(:current_partner_session)
+  assert_nil PartnerSession.find #controller.send(:current_partner_session)
 end
 
 When /^session is cleared$/ do
@@ -66,17 +66,17 @@ Then /^I should be forbidden$/ do
 end
 
 Given /^I am logged in as a valid partner$/ do
-  partner = Factory.create(:partner)
-  And %Q{I log in as "#{partner.username}/password"}
+  partner = FactoryGirl.create(:partner)
+  step %Q{I log in as "#{partner.username}/password"}
 end
 
 # Actions
 
 When /^I log in as "(.*)\/(.*)"$/ do |login, password|
-  When %{I go to the login page}
-  And %{I fill in "Login" with "#{login}"}
-  And %{I fill in "Password" with "#{password}"}
-  And %{I press "Log In"}
+  step %{I go to the login page}
+  step %{I fill in "Login" with "#{login}"}
+  step %{I fill in "Password" with "#{password}"}
+  step %{I press "Log in"}
 end
 
 # When /^I request password reset link to be sent to "(.*)"$/ do |login|
@@ -86,9 +86,9 @@ end
 # end
 
 When /^I update my password with "(.*)\/(.*)"$/ do |password, confirmation|
-  And %{I fill in "Choose password" with "#{password}"}
-  And %{I fill in "Confirm password" with "#{confirmation}"}
-  And %{I press "Save this password"}
+  step %{I fill in "Choose password" with "#{password}"}
+  step %{I fill in "Confirm password" with "#{confirmation}"}
+  step %{I press "Save this password"}
 end
 
 When /^I return next time$/ do

@@ -29,7 +29,7 @@ describe QuestionsController do
   describe "when logged in" do
     before(:each) do
       activate_authlogic
-      @partner = Factory.create(:partner, :id => 5)
+      @partner = FactoryGirl.create(:partner, :id => 5)
       PartnerSession.create(@partner)
     end
 
@@ -46,7 +46,7 @@ describe QuestionsController do
       it "updates questions" do
         put :update, :partner => {
                         :survey_question_1_en => "What is your favorite color?",
-                        :survey_question_1_es => "¿Cuál es tu color favorito?",
+                        :survey_question_1_es => "Cual es tu color favorito?",
                         :survey_question_2_en => "What is the average airspeed velocity of an unladen swallow?",
                         :survey_question_2_es => ""
                       }

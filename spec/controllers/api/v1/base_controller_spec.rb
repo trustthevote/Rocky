@@ -30,15 +30,15 @@ describe Api::V1::BaseController do
     before { @c = Api::V1::BaseController.new }
 
     it 'should render plain JSON' do
-      stub(@c).params { {} }
-      mock(@c).render(:json => { :data => 'field' }, :status => 400)
+      @c.stub(:params) { {} }
+      @c.stub(:render).with(:json => { :data => 'field' }, :status => 400)
       @c.send(:jsonp, { :data => 'field' }, :status => 400)
     end
 
     it 'should render JSONP callback' do
-      stub(@c).params { { :callback => 'cb' } }
-      mock(@c).render_to_string(:json => :data) { 'json_value' }
-      mock(@c).render(:text => 'cb(json_value);', :status => 400)
+      @c.stub(:params) { { :callback => 'cb' } }
+      @c.stub(:render_to_string).with(:json => :data) { 'json_value' }
+      @c.stub(:render).with(:text => 'cb(json_value);', :status => 400)
       @c.send(:jsonp, :data, :status => 400)
     end
   end

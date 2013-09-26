@@ -36,7 +36,7 @@ describe Admin::PartnersController do
 
   describe 'show' do
     it 'should display partner record' do
-      partner = Factory.create(:partner)
+      partner = FactoryGirl.create(:partner)
       get :show, :id => partner.id
       assigns(:partner).should == partner
       response.should render_template :show
@@ -45,7 +45,7 @@ describe Admin::PartnersController do
 
   describe 'edit' do
     it 'should display edit form' do
-      partner = Factory.create(:partner)
+      partner = FactoryGirl.create(:partner)
       get :edit, :id => partner.id
       assigns(:partner).should == partner
       response.should render_template :edit
@@ -53,7 +53,7 @@ describe Admin::PartnersController do
   end
 
   describe 'update' do
-    before  { @partner = Factory(:partner) }
+    before  { @partner = FactoryGirl.create(:partner) }
 
     context 'valid data' do
       before  { put :update, :id => @partner, :partner => { :name => 'new_name' } }
@@ -67,10 +67,10 @@ describe Admin::PartnersController do
     end
 
     context 'css updates' do
-      before  { @sample_css = fixture_file_upload('/files/sample.css') }
+      before  { @sample_css = fixture_files_file_upload('/sample.css') }
       before  { @paf = PartnerAssetsFolder.new(nil) }
-      before  { mock(PartnerAssetsFolder).new(@partner) { @paf } }
-      before  { mock(@paf).update_css('application', @sample_css) }
+      before  { PartnerAssetsFolder.stub(:new).with(@partner) { @paf } }
+      before  { @paf.stub(:update_css).with('application', @sample_css) }
       specify { put :update, :id => @partner, :css_files => { 'application' => @sample_css } }
     end
 
@@ -82,9 +82,9 @@ describe Admin::PartnersController do
   
   describe "GET regen_api_key" do
     before(:each) do
-      @partner = Factory(:partner)
-      stub(@partner).generate_api_key! { true }
-      stub(Partner).find("1") { @partner }
+      @partner = FactoryGirl.create(:partner)
+      @partner.stub(:generate_api_key!) { true }
+      Partner.stub(:find).with("1") { @partner }
       get :regen_api_key, :id=>"1"
     end
     it { 

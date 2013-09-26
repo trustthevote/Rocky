@@ -27,7 +27,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Mergable do
   describe "attributes" do
     before(:each) do
-      @registrant = Factory.create(:maximal_registrant)
+      @registrant = FactoryGirl.create(:maximal_registrant)
       @doc = Nokogiri::XML(@registrant.to_xfdf)
     end
     it "should output us citizen" do
@@ -159,22 +159,22 @@ describe Mergable do
 
   describe "race" do
     it "should output race" do
-      @registrant = Factory.create(:maximal_registrant)
-      stub(@registrant).requires_race? { true }
+      @registrant = FactoryGirl.create(:maximal_registrant)
+      @registrant.stub(:requires_race?) { true }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  @registrant.race,
                     @doc.css('xfdf fields field[name="race"] value').text
     end
     it "should not output race as decline to state" do
-      @registrant = Factory.create(:maximal_registrant, :race => "Decline to State")
-      stub(@registrant).requires_race? { true }
+      @registrant = FactoryGirl.create(:maximal_registrant, :race => "Decline to State")
+      @registrant.stub(:requires_race?) { true }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  "",
                     @doc.css('xfdf fields field[name="race"] value').text
     end
     it "should not output race if it is not required" do
-      @registrant = Factory.create(:maximal_registrant, :race => "Multi-racial")
-      stub(@registrant).requires_race? { false }
+      @registrant = FactoryGirl.create(:maximal_registrant, :race => "Multi-racial")
+      @registrant.stub(:requires_race?) { false }
       @doc = Nokogiri::XML(@registrant.to_xfdf)
       assert_equal  "",
                     @doc.css('xfdf fields field[name="race"] value').text
@@ -183,7 +183,7 @@ describe Mergable do
 
   describe "barcode" do
     before(:each) do
-      @registrant = Factory.build(:maximal_registrant)
+      @registrant = FactoryGirl.build(:maximal_registrant)
       @registrant.id = 42_000_000
       @doc = Nokogiri::XML(@registrant.to_xfdf)
     end

@@ -1,56 +1,248 @@
-# Setup Instructions
+# Development Setup Instructions
 
-Rocky consists of two pieces: A base application (rocky), and a rubygem package that contains all the brand-specific content (rocky\_branding). This application will *not* run without first installing a `rocky_branding` gem.  See section 2 below.
+## 0. Quick Summary
 
-Two things you need to do to set up your application after installing the project code.
+### Workstation Setup
+
+    sudo apt-get install curl libxml2-dev libxslt-dev libqt4-dev libmysqlclient-dev
+    git clone git@github.com:trustthevote/Rocky.git
+    curl -L https://get.rvm.io | bash -s stable
+    source ~/.bash_profile
+    rvm install ruby-1.9.3-p125
+    cd Rocky
+    gem install bundler
+    bundle install
+    vim .env # add variable settings as needed (see below)
+
+### App Deployment
+
+    cap <environment> deploy:setup
+    cap <environment> deploy
 
 ## 1. Create real versions of the .example files
 
-In the `rocky` application replace all the `*.example` files with real ones.  These files contain sensitive data like passwords so we don't commit them to version control.  You'll of course need to fill in the actual useful data in the real files.
+### a. Ruby version management
+
+The `rocky` application is setup assuming you're using RVM. The ruby version and
+gemset name are stored in the `.ruby-version` and `.ruby-gemset` files which
+should set your RVM environment automatically. If you're using a ruby version
+manager other than RVM you'll need to make changes to the deploy process.
+
+### b. Customizing files
+
+In the `rocky` application replace all the `*.example` files with real ones.
+
+The following files contain sensitive data like passwords so we don't commit them to
+version control. You'll of course need to fill in the actual useful data in the
+real files. See the contents of the example files for details on how they're
+used.
 
   * `config/database.yml`
   * `config/newrelic.yml`
-  * `config/initializers/hoptoad.rb`
-  * `config/initializers/session_store.rb`
   * `db/bootstrap/partners.yml`
+  * `.env.[environment_name]` for example, .env.staging or .env.production
+  
+There are a number of files used by the `rails_config` gem - `config/settings.yml`
+and all the files under `config/settings/`. These are checked into source
+control and should be reviewed for accuracy. They don't contain sensitive
+information, but have values that are specific to the environment and instance
+of the `rocky` application being deployed.
 
-## 2. Install and use the branding package gem
+For API registration calls to work correctly the value of `pdf_hostname` (see
+config/settings.yml and config/settings/<env>.yml) should be set to the host
+name of the server that has to be put in the PDF URLs.
 
-You'll need to install a gem that has the branding package contents in it, then link it into the rocky app.
+For a complete custom deployment, many of the files in `app/assets` and
+`config/locales` should be customized to your brand.
 
-1. Install the branding gem.  You probably have a .gem file locally that you just built (see below), so run `[sudo] gem install rocky_branding-X.Y.Z.gem`
-2. cd to the rocky project and run `rake branding:symlink` to symlink the installed gem files into the rocky app.
+### c. Getting the app to run locally
 
-### About the branding gem
+Once RVM is installed (and the appropriate ruby version and gemset have been set
+up) and all of the example .yml and .env files have been turned into the real
+versions, run:
 
-All the brand-specific bits related to a particular sponsor organization have been removed from the main rocky code and moved into a separate rocky\_branding gem.  This makes it pretty easy to manage different brandings and install/deploy them on various servers.
+    $ gem install bundler
+    $ bundle install
+  
+If the database hasn't been created yet, set that up by running
 
-### How to make a new branding gem
+    $ bundle exec rake db:create
+    $ bundle exec rake db:migrate
+    $ bundle exec rake db:bootstrap
 
-1. Clone the rocky\_branding git project to a new project and rename it to something like `sponsor_org_name-rocky_branding`.
-2. Get a bunch of files from the sponsor org and put them in the project in their appropriate locations.  Ideally the sponsor org will own all the content and a developer only has to package up the files.
-3. Edit the `rocky_branding.gemspec` file to update the version number, description and any other metadata that needs changing.  Don't change the name attribute!  You shouldn't ever need to edit the list of files since they are generated dynamically from a directory glob.
-4. In a shell execute `gem build rocky_branding.gemspec`.  That should generate a gem file called `rocky_branding-X.Y.Z.gem`. You might want to rename the gem file to include the name of the sponsor org to avoid confusion, but it's not necessary.
-5. Run `[sudo] gem install rocky_branding-X.Y.Z.gem` to install the freshly built gem into your system.
-6. cd to the rocky project and run `rake branding:symlink` to symlink the installed gem files into the rocky app.
-7. Run the tests in rocky to make sure the new gem works.
+## 2. Configure deploy scripts
 
-NOTE: In an ideal world, the sponsor org will deliver a set of branding files you can dump into gem project.  The biggest pain is when you are doing development and need to change one of the files in the branding package.  You'll need to be careful to keep edits to those files in sync between the rocky\_branding git project and the installed gem files that are symlinked into the rocky app.  It's a bit tedious, but the best way is to edit them in the rocky\_branding project, build the gem, install it, then `rake branding:symlink` to link it in.
+The `rocky` application is set up to be deployed using capistrano with
+multistage. The repository contains the generic `config/deploy.rb` file with
+the main set of procedures for a deployment and there are a number of
+environment-specific files in `config/deploy/`. These files just contain a few
+settings which reference environment variables. These variables need to be set
+in your `.env` file (which only needs to exist on your development machine, or
+wherever you run your cap scripts from). See `.env.example` for a list of what
+values need to be specified.
 
-### Deploying the branding gem
+## 3. Configure servers
 
-The branding gem must be installed on the app and util servers for rocky to run at all. It's best to install the branding gem before deploying the app, even for the first time.  Once the app and branding gem are installed, updates are easy.
+The current deploy process for all environments assumes a separate web and
+utility server. The web server is configured to handle web requests and the
+utility server runs PDF generation, cron jobs (for cleanup tasks) and hosts the
+PDF files once generated.
 
-In the examples below, replace `INSTANCE` with `staging` or `production`.
+The apache setup on the webserver should pass through to the utility server for
+all requests for generated PDF files.
 
-To upload/install a gem to all the rocky servers, cd to the rocky project and run
+### a. ssh
 
-    cap INSTANCE deploy:install_branding
+To simplify the initial deploy process, both the web and utility servers should
+be configured to allow ssh connections to github without needing a user to
+manually accept github as a known host. This can be done by adding the following
+into the deployment users' `~/.ssh/config` file on both the web and util servers.
 
-That scp's the .gem file to the servers and runs gem install.  It might take a little while.
+    Host github.com
+      User git
+      StrictHostKeyChecking no
+      BatchMode yes
+      IdentityFile /home/rocky/.ssh/id_rsa
 
-The capistrano recipes automatically re-link the branding package when the server is redeployed.  If you upload/install a new branding gem, you should manually run
+### b. Installation requirements
 
-    cap INSTANCE deploy:symlink_branding
-    cap INSTANCE deploy:restart
+Install dependencies for CentOS/RHEL:
+
+    yum install apr-devel apr-util-devel gcc-c++ httpd-devel ImageMagick-devel \
+      libcurl-devel libxslt-devel libyaml-devel mysql-devel perl-DBD-MySQL \
+      perl-DBI perl-XML-Simple zlib-devel
+
+### c. Apache
+
+The capistrano deploy:setup task makes an assumption that the server will be
+using rvm, apache2 and passenger. The apache config file for the site should be
+created assuming certain path values for gems and modules installed by
+RVM/gem/passenger during the cap deploy tasks.
+
+The parts of these paths depend on:
+
+* ruby version (currently 1.9.3-p125, specified in `.ruby-version`)
+* gemset name (currently rocky4, specified in `.ruby-gemset`)
+* passenger version (currently 3.0.19, specified in `config/deploy.rb` in the :install_passenger task)
+
+If the gemset, ruby version or passenger version changes the paths in the apache
+config file will need to change. This should not be a common occurrence.
+
+### d. cron
+
+There are two cron jobs running on the utility server that should be located in
+`/etc/cron.d`. One redacts sensitive data from abandoned registrations and the
+other removes old pdfs from the file system after 15 days. (Or however many days
+is indicated in the configuration)
+
+    */10 * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_timeout_stale_registrations staging2
+    */5  * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_remove_buckets staging2
+    
+
+### e. Email
+
+Email to registrants is sent by worker daemons running on the :util server.
+Email to partners for e.g. password reset is sent from the :app server.
+
+## 4. Deploy
+
+### a. Setup (rvm/passenger)
+
+The servers should be configured with all the required software libraries before
+running this. They should also have their directory system set up according to
+the configuration in the local .env file.)
+
+Running the capistrano `deploy:setup` task will also invoke a number of custom
+tasks (see `config/deploy.rb`) that will install RVM, ruby (the version
+indicated in `.ruby-version`), set up a gemset (the gemset indicated in
+`.ruby-gemset`), install passenger into that gemset, and run the
+passenger-install-apache2-module script.
+
+### b. Deploy (various symlinks)
+
+Before running the first deploy, the deployment directory should have a shared/
+directory set up with the following files:
+
+* `shared/config/database.yml`
+* `shared/config/newrelic.yml`
+* `shared/.env.<env>`
+
+When your code changes are pushed to git origin/master, run
+
+    $ cap <environment_name> deploy
+
+To deploy a specific tag or commit (highly recommended):
+
+    $ cap <environment_name> deploy -Srev=<commit-hash|tag|branch>
+
+### c. Utility Daemons
+
+There are two worker daemons running on the utility server. They can be managed
+locally with control scripts or remotely with capistrano.
+
+    $ script/rocky_runner start
+    $ script/rocky_runner stop
+    $ script/rocky_pdf_runner start
+    $ script/rocky_pdf_runner stop
+
+    $ cap deploy:run_workers    # start/restart both workers
+    
+The `deploy:run_workers` task also runs during a full deploy
+
+#### `rocky_runner`
+
+The `rocky_runner` daemon pulls jobs out of the delayed job queue and runs them.
+There are two kinds of jobs: completing a registration and sending a reminder
+email. Completing the registration includes generating the PDF, which uses the
+second daemon to do that work.
+
+#### `rocky_pdf_runner`
+
+It would be nice to have both daemons merged into one process, but it was faster
+to set things up this way. In the future, using JRuby would let someone do
+that. For now, we use the second daemon to avoid paying the cost of launching a
+Java VM for every PDF merger.
+
+## 5. Importing State Data
+
+The application is set up to import updates to state-specific data. You'll want
+to do this once before launching, then whenever changes are necessary. You can
+do this by updating the states.yml file in your repository and by doing a full
+deploy.
+
+## 6. Server Monitoring
+
+The application is configured with basic monitoring. NewRelic RPM for
+performance, and Airbrake for exception monitoring. New developers can be added
+to those accounts to get access and email updates.
+
+# Development and testing
+
+The cucumber feature that exercises the PDF Merge will run either in-process, or
+with the daemon. If the daemon is running, it will use that. If the daemon is
+not running, it will shell out to java to run the merge directly.
+
+Run the rspec test suite:
+
+    $ bundle exec rspec spec/
+
+Run the features with cucumber:
+
+    $ bundle exec cucumber
+
+## Clean Start
+
+The application includes a set of bootstrap data that will let it get going.
+WARNING: running the bootstrap process will reset the partners and state data in
+the application. To bootstrap, run:
+
+    $ bundle exec rake db:bootstrap
+
+There is no rake task to reset the registrant data. If you want to do that,
+drop into mysql and truncate the registrants table. You probably want to do
+this before going live to clear out any bogus test data.
+
+# Additional Notes
+
+* The set of files for config is likely to change
 

@@ -1,0 +1,44 @@
+- if value.is_a?(Hash)
+  - value.each do |k,v|
+    - unless k =~ /_translation_instructions$/
+      %ul
+        %li.translation_key_part_list
+          %span.translation_key_part= k
+          = render :partial=>'key_value', :locals=>{:key=>"#{key}.#{k}", :value=>v, :id_ct=>id_ct + 1}
+- else
+  %a{:name=>key}
+  %br
+  %span.translation_key= key
+  - instructions = Translation.instructions_for(key)
+  - if instructions.size > 0
+    .translation_instructions
+      %h3= "Instructions for Translator: "
+      %ul
+        - instructions.each do |inst|
+          %li=inst
+      
+  %ul.locales
+    - if value.is_a?(Array)
+      %li.locale
+        %ul.translation_list
+          %li
+            %h4.locale_name English
+          %li
+            %h4.locale_name= "#{Translation.language_name(@locale)}:"
+          - @translation.get_from_contents(key, @locale).to_a.each_with_index do |v,i|
+            %li= value[i]
+            %li.translatable{:class=>v.blank? && !value[1].blank? ? 'error' : ''}
+              %input{:type=>'text', :name=>"#{@locale}[#{key}][]", :value=>v}
+    - else
+      %li.locale
+        %h4.locale_name= "#{"Current " if @locale=='en'}English:"
+        .translation= I18n.t(key, :locale=>'en', :default=>'')
+      %li.locale.translatable{:class=>@translation.has_error?(key) ? 'error' : ''}
+        %h4.locale_name= "#{"New " if @locale=='en'}#{Translation.language_name(@locale)}:"
+        .translation
+          - if @translation.is_blank?(key)
+            %span.error_message ** You must provide a translation **
+          - elsif @translation.is_missing_variable?(key)
+            %span.error_message ** The %{VARIABLE} is missing ** 
+          %textarea{:name=>"#{@locale}[#{key}]"}
+            = @translation.get_from_contents(key, @locale)

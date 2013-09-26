@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require 'services/v1'
+require "#{Rails.root}/app/services/v1"
 class Api::V1::RegistrationsController < Api::V1::BaseController
 
   # Lists registrations
@@ -42,7 +42,7 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
   # the error message with optional invalid field name.
   def create
     pdf_path = V1::RegistrationService.create_record(params[:registration]).pdf_path
-    jsonp :pdfurl => "https://#{PDF_HOST_NAME}#{pdf_path}"
+    jsonp :pdfurl => "https://#{RockyConf.pdf_host_name}#{pdf_path}"
   rescue V1::RegistrationService::ValidationError => e
     jsonp({ :field_name => e.field, :message => e.message }, :status => 400)
   rescue V1::UnsupportedLanguageError => e

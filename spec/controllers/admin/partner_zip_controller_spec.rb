@@ -27,7 +27,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Admin::PartnerZipsController do
   describe "create" do
     before(:each) do
-      @file = fixture_file_upload('files/four_good_partners.zip')
+      @file = fixture_files_file_upload('/four_good_partners.zip')
       @pz = PartnerZip.new(nil)
     end
     context "results" do
@@ -37,20 +37,20 @@ describe Admin::PartnerZipsController do
       it { should redirect_to(admin_partners_path) }      
     end
     it "extracts the zip file to a tmp directory" do
-      mock(PartnerZip).new(@file) { @pz }
+      PartnerZip.stub(:new).with(@file) { @pz }
       post :create, :partner_zip => {:zip_file=>@file}
       PartnerZip.should have_received(:new).with(@file)
     end
     it "creates partners in bulk from the extracted directory" do
-      mock(PartnerZip).new(@file) { @pz }
-      mock(@pz).create { true }
+      PartnerZip.stub(:new).with(@file) { @pz }
+      @pz.stub(:create) { true }
       post :create, :partner_zip => {:zip_file=>@file}
       @pz.should have_received(:create)
     end
     it "sets a flash message when there are errors" do
-      mock(PartnerZip).new(@file) { @pz }
-      mock(@pz).create { false }
-      mock(@pz).error_messages {"An error message"}
+      PartnerZip.stub(:new).with(@file) { @pz }
+      @pz.stub(:create) { false }
+      @pz.stub(:error_messages) {"An error message"}
       post :create, :partner_zip => {:zip_file=>@file}
       flash[:warning].should == "An error message"
     end

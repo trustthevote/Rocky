@@ -27,7 +27,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe TellFriendsController do
   describe "#create" do
     before(:each) do
-      @registrant = Factory.create(:step_5_registrant)
+      @registrant = FactoryGirl.create(:step_5_registrant)
     end
 
     it "should enqueue sending tell-a-friend email" do

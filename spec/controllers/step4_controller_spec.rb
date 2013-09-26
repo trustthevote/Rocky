@@ -27,7 +27,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Step4Controller do
   describe "#show" do
     it "should show the step 4 input form" do
-      reg = Factory.create(:step_3_registrant)
+      reg = FactoryGirl.create(:step_3_registrant)
       get :show, :registrant_id => reg.to_param
       assert assigns[:registrant].step_3?
       assert_not_nil assigns[:question_1]
@@ -36,24 +36,24 @@ describe Step4Controller do
     end
 
     it "gets the questions for the current locale" do
-      reg = Factory.create(:step_3_registrant)
+      reg = FactoryGirl.create(:step_3_registrant)
       reg.partner.survey_question_1_en = "In English?"
-      reg.partner.survey_question_1_es = "En Español?"
+      reg.partner.survey_question_1_es = "En Espanol?"
       reg.partner.save
       get :show, :registrant_id => reg.to_param
       assert_equal "In English?", assigns[:question_1]
       reg.locale = "es"
-      reg.save(false)
+      reg.save(:validate=>false)
       get :show, :registrant_id => reg.to_param
-      assert_equal "En Español?", assigns[:question_1]
+      assert_equal "En Espanol?", assigns[:question_1]
     end
 
     describe "when partner wants volunteers" do
-      integrate_views
+      render_views
       it "should show volunteer checkbox" do
-        partner = Factory.create(:partner, :ask_for_volunteers => true)
+        partner = FactoryGirl.create(:partner, :ask_for_volunteers => true)
 
-        reg = Factory.create(:step_3_registrant, :partner_id => partner.to_param)
+        reg = FactoryGirl.create(:step_3_registrant, :partner_id => partner.to_param)
         get :show, :registrant_id => reg.to_param
 
         assert_select "#registrant_volunteer"
@@ -61,11 +61,11 @@ describe Step4Controller do
     end
 
     describe "when partner does not want volunteers" do
-      integrate_views
+      render_views
       it "should show volunteer checkbox" do
-        partner = Factory.create(:partner, :ask_for_volunteers => false)
+        partner = FactoryGirl.create(:partner, :ask_for_volunteers => false)
 
-        reg = Factory.create(:step_3_registrant, :partner_id => partner.to_param)
+        reg = FactoryGirl.create(:step_3_registrant, :partner_id => partner.to_param)
         get :show, :registrant_id => reg.to_param
 
         assert_select "#registrant_volunteer", 0
@@ -75,18 +75,18 @@ describe Step4Controller do
 
   describe "#update" do
     before(:each) do
-      @registrant = Factory.create(:step_3_registrant)
+      @registrant = FactoryGirl.create(:step_3_registrant)
     end
 
     it "should update registrant and complete step 4" do
-      put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_4_registrant)
+      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_4_registrant).reject {|k,v| k == :status }
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].step_4?
       assert_redirected_to registrant_step_5_url(assigns[:registrant])
     end
 
     it "should reject invalid input and show form again" do
-      put :update, :registrant_id => @registrant.to_param, :registrant => Factory.attributes_for(:step_4_registrant, :state_id_number => nil)
+      put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_4_registrant, :state_id_number => nil).reject {|k,v| k == :status }
       assert assigns[:registrant].step_4?
       assert assigns[:registrant].reload.step_3?
       assert_template "show"

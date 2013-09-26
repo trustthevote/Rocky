@@ -26,7 +26,20 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe EmailTemplate do
 
-  before { @p = Factory(:partner) }
+  describe "TEMPLATE_NAMES" do
+    it "includes confirmation and reminders for all locales" do
+      I18n.available_locales.each do |locale|
+        EmailTemplate::TEMPLATE_NAMES.should include(
+          ["confirmation.#{locale}", "Confirmation #{locale.to_s.upcase}"]
+        )
+        EmailTemplate::TEMPLATE_NAMES.should include(
+          ["reminder.#{locale}", "Reminder #{locale.to_s.upcase}"]
+        )
+      end      
+    end
+  end
+
+  before { @p = FactoryGirl.create(:partner) }
   before { EmailTemplate.set(@p, 'confirmation.en', 'body') }
 
   it 'should set a template for the partner' do

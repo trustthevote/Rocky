@@ -24,8 +24,11 @@
 #***** END LICENSE BLOCK *****
 class EmailTemplate < ActiveRecord::Base
 
-  TEMPLATE_NAMES = [ [ 'confirmation.en', 'Confirmation EN' ], [ 'confirmation.es', 'Confirmation ES' ],
-       [ 'reminder.en', 'Reminder EN' ], [ 'reminder.es', 'Reminder ES' ] ]
+  TEMPLATE_NAMES = %w(confirmation reminder).inject([]){|result,t| result + I18n.available_locales.collect{|l| ["#{t}.#{l}", "#{t.capitalize} #{l.upcase}"]} }
+  
+  
+  # [ [ 'confirmation.en', 'Confirmation EN' ], [ 'confirmation.es', 'Confirmation ES' ],
+  #      [ 'reminder.en', 'Reminder EN' ], [ 'reminder.es', 'Reminder ES' ] ]
 
   belongs_to :partner
 

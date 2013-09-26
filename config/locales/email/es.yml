@@ -1,0 +1,14 @@
+es:
+  email:
+    confirmation:
+      subject: "Reminder: Mail your voter registration form"
+    reminder:
+      subject: "Reminder: Mail your voter registration form"
+    thank_you_external:
+      subject: "Gracias por usar el instrumento de registración de votantes en línea"  
+    tell_friend:
+      subject: "I just registered to vote and you should too"
+      body: "Hey, I just registered to vote at %{rtv_url} and you can too.  It is really easy.\n\nJust fill out the online form here: %{rtv_url}.  You can't vote if you're not registered.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  To learn more, go to: %{rtv_url}.\n\nAlready registered to vote? You can help get others registered to vote. Send an email to your friends and family asking them to register to vote at %{rtv_url}.\n\nHappy voting!"
+    tell_friend_under_18:
+      subject: "Register to vote!"
+      body: "Are you registered to vote? I may not be old enough to vote yet, but you are.  You can't vote unless you are registered.\n\nYou can fill out a voter registration form only at %{rtv_url}. It is super easy.  Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.  Go to %{rtv_url}.\n\nAlready registered to vote or not old enough to vote yet?  Help others get registered to vote by sending an email to your friends and family asking them to register at %{rtv_url}.\n\nHappy voting!"

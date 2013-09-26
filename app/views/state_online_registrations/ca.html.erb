@@ -3,14 +3,14 @@
     <%= render :partial=>@registrant.home_state_online_registration_instructions_partial %>
   <%- else %>
     <p>
-      <%= t('txt.registration.instructions.leave_state_online_registration', :state=>@registrant.home_state_name,:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name), registrant_step_3_url(@registrant))) %>
+      <%= t('txt.registration.instructions.leave_state_online_registration', :state=>@registrant.home_state_name,:link=>link_to(t('txt.registration.instructions.leave_state_online_registration_link', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe, registrant_step_3_url(@registrant))).html_safe %>
     </p>
   <%- end %>
 </div>
 
 
 <div class='button' style="margin:50px auto;">
-  <a class='button_state_online_registration<%= @registrant.locale.to_s.downcase=='es' ? '_es' : '_en' %>' href='<%= @online_registration_iframe_url %>' target='_NEW'>
+  <a class='button_state_online_registration_<%= @registrant.locale.to_s.downcase %>' href='<%= @online_registration_iframe_url %>' target='_NEW'>
     <span><%=  I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_name) %></span>
   </a>
 </div>

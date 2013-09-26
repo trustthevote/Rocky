@@ -44,3 +44,6 @@ ActiveSupport.escape_html_entities_in_json = false
 
 # No partial updates, we don't have logic to handle update failures
 ActiveRecord::Base.partial_updates = false
+
+ActionMailer::Base.default_url_options = { :host => RockyConf.default_url_host }
+

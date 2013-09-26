@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title> Rocky </title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <!--[if lt IE 7]>
+     <%#= stylesheet_link_tag "ie6" %>
+  <![endif]-->
+  
+  <%= javascript_include_tag  'application' %>
+  <%= javascript_include_tag  'state_configuration' %>
+  <%= csrf_meta_tags %>
+  
+  <%= yield :head %>
+</head>
+<body>
+  <div id="container">
+    <div id="config_ui">
+      <%= flash_messages.html_safe %>
+      <%= yield %>
+    </div>
+  </div>
+  <!-- port: <%= request.port %> | process: <%= $$ %> | <%= Time.now.to_s(:db) %> -->
+</body>
+</html>

@@ -176,7 +176,7 @@ module V2
         raise_validation_error(reg)
       end
 
-      raise UnsupportedLanguageError if reg.errors.on(:locale)
+      raise UnsupportedLanguageError if !reg.errors[:locale].empty?
     end
 
     def self.raise_validation_error(reg, error = reg.errors.sort.first)
@@ -197,7 +197,7 @@ module V2
 
     def self.data_to_attrs(data)
       attrs = data.clone
-      attrs.symbolize_keys!
+      attrs.symbolize_keys! if attrs.respond_to?(:symbolize_keys!)
 
       if l = attrs.delete(:lang)
         attrs[:locale] = l

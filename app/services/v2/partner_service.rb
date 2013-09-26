@@ -51,7 +51,7 @@ module V2
       data = {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
-        :logo_image_URL           => "https://#{PDF_HOST_NAME}#{partner.logo.url}",
+        :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
         :survey_question_1_en     => partner.survey_question_1_en,
         :survey_question_2_en     => partner.survey_question_2_en,
         :survey_question_1_es     => partner.survey_question_1_es,
@@ -117,7 +117,7 @@ module V2
   private
     def self.data_to_attrs(data)
       attrs = data.clone
-      attrs.symbolize_keys!
+      attrs.symbolize_keys! if attrs.respond_to?(:symbolize_keys!)
 
       [[:org_name, :organization],
       [:org_URL, :url],

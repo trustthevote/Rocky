@@ -34,12 +34,13 @@ class Registrant < ActiveRecord::Base
   include AASM
   include Mergable
   include Lolrus
-  include ActionView::Helpers::UrlHelper
+  include Rails.application.routes.url_helpers
+  
 
-  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5]
-  # TODO: add :es to get full set for validation
-  TITLES = I18n.t('txt.registration.titles', :locale => :en) + I18n.t('txt.registration.titles', :locale => :es)
-  SUFFIXES = I18n.t('txt.registration.suffixes', :locale => :en) + I18n.t('txt.registration.suffixes', :locale => :es)
+  STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
+
+  TITLES = RockyConf.enabled_locales.collect{|l| I18n.t('txt.registration.titles', :locale => l) }.flatten
+  SUFFIXES = RockyConf.enabled_locales.collect{|l| I18n.t('txt.registration.suffixes', :locale => l) }.flatten
   REMINDER_EMAILS_TO_SEND = 2
   STALE_TIMEOUT = 30.minutes
   REMINDER_EMAIL_PRIORITY = 0
@@ -121,7 +122,7 @@ class Registrant < ActiveRecord::Base
     validates_format_of(attr_names, configuration.merge(:with => /^\d{5}(-\d{4})?$/, :allow_blank => true));
 
     validates_each(attr_names, configuration) do |record, attr_name, value|
-      if record.errors.on(attr_name).nil? && !GeoState.valid_zip_code?(record.send(attr_name))
+      if record.errors[attr_name].nil? && !GeoState.valid_zip_code?(record.send(attr_name))
         record.errors.add(attr_name, :invalid_zip, :default => configuration[:message], :value => value)
       end
     end
@@ -130,6 +131,7 @@ class Registrant < ActiveRecord::Base
   before_validation :clear_superfluous_fields
   before_validation :reformat_state_id_number
   before_validation :reformat_phone
+  before_validation :set_opt_in_email
 
   after_validation :calculate_age
   after_validation :set_official_party_name
@@ -140,11 +142,10 @@ class Registrant < ActiveRecord::Base
 
   before_save :set_questions
 
-
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of   :partner_id
     reg.validates_inclusion_of  :locale, :in => %w(en es)
-    reg.validates_presence_of   :email_address
+    reg.validates_presence_of   :email_address, :unless=>:not_require_email_address?
     reg.validates_format_of     :email_address, :with => Authlogic::Regex.email, :allow_blank => true
     reg.validates_zip_code      :home_zip_code
     reg.validates_presence_of   :home_state_id
@@ -158,17 +159,18 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of   :first_name, :unless => :building_via_api_call
     reg.validates_presence_of   :last_name
     reg.validates_inclusion_of  :name_suffix, :in => SUFFIXES, :allow_blank => true
-    reg.validate                :validate_race,   :unless => [ :finish_with_state?, :custom_step_2? ]
+    reg.validate                :validate_race_at_least_step_2,   :unless => [ :finish_with_state?, :custom_step_2? ]
     reg.validates_presence_of   :home_address,    :unless => [ :finish_with_state?, :custom_step_2? ]
     reg.validates_presence_of   :home_city,       :unless => [ :finish_with_state?, :custom_step_2? ]
-    reg.validate                :validate_party,  :unless => [ :building_via_api_call, :custom_step_2? ]
+    reg.validate                :validate_party_at_least_step_2,  :unless => [ :building_via_api_call, :custom_step_2? ]
   end
+  
 
   with_options :if=> [:at_least_step_2?, :custom_step_2?] do |reg|
     reg.validates_inclusion_of :has_state_license, :in=>[true,false], :unless=>[:building_via_api_call]
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
-    reg.validate :validate_phone_present_if_opt_in_sms
+    reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_2
   end
 
   with_options :if => :needs_mailing_address? do |reg|
@@ -179,26 +181,26 @@ class Registrant < ActiveRecord::Base
   end
 
   with_options :if => :at_least_step_3? do |reg|
-    reg.validates_presence_of :state_id_number
+    reg.validates_presence_of :state_id_number, :unless=>:complete?
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
-    reg.validate :validate_phone_present_if_opt_in_sms
+    reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_3
   end
   
   with_options :if => [:at_least_step_2?, :use_short_form?] do |reg|
-    reg.validates_presence_of :state_id_number
+    reg.validates_presence_of :state_id_number, :unless=>:complete?
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
-    reg.validate :validate_phone_present_if_opt_in_sms
+    reg.validate :validate_phone_present_if_opt_in_sms_use_short_form
   end
 
   with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
     reg.validates_presence_of :home_address
     reg.validates_presence_of :home_city
-    reg.validate :validate_race
-    reg.validate :validate_party, :unless => [:building_via_api_call]
+    reg.validate :validate_race_at_least_step_3
+    reg.validate :validate_party_at_least_step_3, :unless => [:building_via_api_call]
   end
 
   with_options :if => :needs_prev_name? do |reg|
@@ -235,6 +237,19 @@ class Registrant < ActiveRecord::Base
 
   validates_presence_of  :send_confirmation_reminder_emails, :in => [ true, false ], :if=>[:building_via_api_call, :finish_with_state?]
 
+
+  def collect_email_address?
+    collect_email_address.to_s.downcase.strip != 'no'
+  end
+  
+  def not_require_email_address?
+    !require_email_address?
+  end
+  
+  def require_email_address?
+    #!%w(no optional)
+    !%w(no).include?(collect_email_address.to_s.downcase.strip)
+  end
 
   def needs_mailing_address?
     at_least_step_2? && has_mailing_address?
@@ -324,9 +339,13 @@ class Registrant < ActiveRecord::Base
   end
 
   def localization
-    @localization ||=
-      home_state_id && locale &&
-        StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => locale})
+    home_state_id && locale ?
+        StateLocalization.where({:state_id  => home_state_id, :locale => locale}).first : nil
+  end
+  
+  def en_localization
+    home_state_id ? StateLocalization.where({:state_id  => home_state_id, :locale => 'en'}).first : nil
+      
   end
 
   def at_least_step_1?
@@ -383,6 +402,23 @@ class Registrant < ActiveRecord::Base
       end
     end
   end
+  
+  def set_opt_in_email
+    if !require_email_address? && email_address.blank?
+      self.opt_in_email = false
+    end
+    return true
+  end
+
+  def validate_phone_present_if_opt_in_sms_at_least_step_2
+    validate_phone_present_if_opt_in_sms
+  end
+  def validate_phone_present_if_opt_in_sms_at_least_step_3
+    validate_phone_present_if_opt_in_sms
+  end
+  def validate_phone_present_if_opt_in_sms_use_short_form
+    validate_phone_present_if_opt_in_sms
+  end
 
   def validate_phone_present_if_opt_in_sms
     if (self.opt_in_sms? || self.partner_opt_in_sms?) && phone.blank?
@@ -390,17 +426,35 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def date_of_birth=(string_value)
+    dob = nil
+    if string_value.is_a?(String)
+      if matches = string_value.match(/^(\d{1,2})\D+(\d{1,2})\D+(\d{4})$/)
+        m,d,y = matches.captures
+        dob = Date.civil(y.to_i, m.to_i, d.to_i) rescue string_value
+      elsif matches = string_value.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})$/)
+        y,m,d = matches.captures
+        dob = Date.civil(y.to_i, m.to_i, d.to_i) rescue string_value
+      else
+        dob = string_value
+      end
+    else
+      dob = string_value
+    end
+    write_attribute(:date_of_birth, dob)
+  end
+
   def validate_date_of_birth
-    return if date_of_birth_before_type_cast.is_a?(Date)
+    return if date_of_birth_before_type_cast.is_a?(Date) || date_of_birth_before_type_cast.is_a?(Time)
     if date_of_birth_before_type_cast.blank?
       errors.add(:date_of_birth, :blank)
     else
       @raw_date_of_birth = date_of_birth_before_type_cast
       date = nil
-      if matches = date_of_birth_before_type_cast.match(/^(\d{1,2})\D+(\d{1,2})\D+(\d{4})$/)
+      if matches = date_of_birth_before_type_cast.to_s.match(/^(\d{1,2})\D+(\d{1,2})\D+(\d{4})$/)
         m,d,y = matches.captures
         date = Date.civil(y.to_i, m.to_i, d.to_i) rescue nil
-      elsif matches = date_of_birth_before_type_cast.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})$/)
+      elsif matches = date_of_birth_before_type_cast.to_s.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})$/)
         y,m,d = matches.captures
         date = Date.civil(y.to_i, m.to_i, d.to_i) rescue nil
       end
@@ -414,7 +468,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def calculate_age
-    if errors.on(:date_of_birth).blank? && !date_of_birth.blank?
+    if errors[:date_of_birth].empty? && !date_of_birth.blank?
       now = (created_at || Time.now).to_date
       years = now.year - date_of_birth.year
       if (date_of_birth.month > now.month) || (date_of_birth.month == now.month && date_of_birth.day > now.day)
@@ -425,50 +479,95 @@ class Registrant < ActiveRecord::Base
       self.age = nil
     end
   end
+  
+  def english_races
+    I18n.t('txt.registration.races', :locale=>:en)
+  end
 
+  def english_race
+    if locale.to_s == 'en' || english_races.include?(race)
+      return race
+    else
+      if (race_idx = I18n.t('txt.registration.races').index(race))
+        return I18n.t('txt.registration.races', :locale=>:en)[race_idx]
+      else
+        return nil
+      end
+    end
+  end
+  
+  def validate_race_at_least_step_2
+    validate_race
+  end
+  def validate_race_at_least_step_3
+    validate_race
+  end
+  
   def validate_race
     if requires_race?
       if race.blank?
         errors.add(:race, :blank)
       else
-        errors.add(:race, :inclusion) unless I18n.t('txt.registration.races').include?(race)
+        errors.add(:race, :inclusion) unless english_races.include?(english_race)
       end
     end
   end
 
   def state_parties
     if requires_party?
-      localization && (localization.parties + [ localization.no_party ]) || []
+      localization ? localization.parties + [ localization.no_party ] : []
     else
       nil
     end
   end
-
+  
   def set_official_party_name
     return unless self.step_5? || self.complete?
-    self.official_party_name =
-      if party.blank?
-        "None"
+    self.official_party_name = detect_official_party_name
+  end
+  
+  
+  def detect_official_party_name
+    if party.blank?
+      I18n.t('states.no_party_label.none')
+    else
+      return party if en_localization[:parties].include?(party)
+      if locale.to_s == "en"
+        return party == en_localization.no_party ? I18n.t('states.no_party_label.none') : party
       else
-        en_loc = StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => "en"})
-        case self.locale
-          when "en"
-            party == en_loc.no_party ? "None" : party
-          when "es"
-            es_loc = StateLocalization.find(:first, :conditions => {:state_id  => home_state_id, :locale => "es"})
-            if party == es_loc.no_party
-              "None"
-            else
-              # en_loc[:parties][ es_loc[:parties].index(party) ]
-              if (spanish_index = es_loc[:parties].index(party))
-                en_loc[:parties][spanish_index]
-              else
-                Rails.logger.warn "***** UNKNOWN PARTY:: registrant: #{id}, locale: #{locale}, party: #{party}"
-                nil
-              end
-            end
+        if party == localization.no_party
+          return I18n.t('states.no_party_label.none')
+        else
+          if (p_index = localization[:parties].index(party))
+            return en_localization[:parties][p_index]
+          else
+            Rails.logger.warn "***** UNKNOWN PARTY:: registrant: #{id}, locale: #{locale}, party: #{party}"
+            return nil
           end
+        end
       end
+    end
+  end
+  
+  def english_state_parties
+    if requires_party?
+      en_localization ? en_localization.parties + [ en_localization.no_party ] : []
+    else
+      nil
+    end    
+  end
+
+  
+  def english_party_name
+    if locale.to_s == 'en' || english_state_parties.include?(party)
+      return party
+    else
+      if (p_idx = state_parties.index(party))
+        return english_state_parties[p_idx]
+      else
+        return nil
+      end
+    end
   end
 
   def state_id_tooltip
@@ -490,7 +589,14 @@ class Registrant < ActiveRecord::Base
   def under_18_instructions_for_home_state
     I18n.t('txt.registration.instructions.under_18',
             :state_name => home_state.name,
-            :state_rule => localization.sub_18)
+            :state_rule => localization.sub_18).html_safe
+  end
+
+  def validate_party_at_least_step_2
+    validate_party
+  end
+  def validate_party_at_least_step_3
+    validate_party
   end
 
   def validate_party
@@ -498,14 +604,14 @@ class Registrant < ActiveRecord::Base
       if party.blank?
         errors.add(:party, :blank)
       else
-        errors.add(:party, :inclusion) unless state_parties.include?(party)
+        errors.add(:party, :inclusion) unless english_state_parties.include?(english_party_name)
       end
     end
   end
 
   def abandon!
     self.attributes = {:abandoned => true, :state_id_number => nil}
-    self.save(false)
+    self.save(:validate=>false)
   end
 
   # def advance_to!(next_step, new_attributes = {})
@@ -519,7 +625,7 @@ class Registrant < ActiveRecord::Base
   def home_zip_code=(zip)
     self[:home_zip_code] = zip
     self.home_state = nil
-    self[:home_state_id] = zip && (s = GeoState.for_zip_code(zip.strip)) && s.id
+    self.home_state_id = zip && (s = GeoState.for_zip_code(zip.strip)) ? s.id : self.home_state_id
   end
 
   def home_state_name
@@ -554,15 +660,15 @@ class Registrant < ActiveRecord::Base
     !javascript_disabled &&
       !home_state.nil? &&
       home_state.online_reg_enabled? &&
-      File.exists?(File.join(RAILS_ROOT, 'app/views/step2/', "_#{custom_step_2_partial}"))
+      File.exists?(File.join(Rails.root, 'app/views/step2/', "_#{custom_step_2_partial}.html.erb"))
   end
 
   def custom_step_2_partial
-    "#{home_state.abbreviation.downcase}.html.erb"
+    "#{home_state.abbreviation.downcase}"
   end
   
   def has_home_state_online_registration_instructions?
-    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "_#{home_state_online_registration_instructions_partial}.html.erb"))
+    File.exists?(File.join(Rails.root, 'app/views/state_online_registrations/', "_#{home_state_online_registration_instructions_partial}.html.erb"))
   end
   
   def home_state_online_registration_instructions_partial
@@ -570,7 +676,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_home_state_online_registration_view?
-    File.exists?(File.join(RAILS_ROOT, 'app/views/state_online_registrations/', "#{home_state_online_registration_view}.html.erb"))
+    File.exists?(File.join(Rails.root, 'app/views/state_online_registrations/', "#{home_state_online_registration_view}.html.erb"))
   end
   
   def home_state_online_registration_view
@@ -614,11 +720,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def wrap_up
-    if DELAYED_WRAP_UP
+    if RockyConf.delayed_wrap_up
       action = Delayed::PerformableMethod.new(self, :complete!, [])
-      Delayed::Job.enqueue(action, WRAP_UP_PRIORITY, Time.now)
+      Delayed::Job.enqueue(action, {:priority=>WRAP_UP_PRIORITY, :run_at=>Time.now})
     else
-      complete!
+      complete
+      save!
     end
   end
 
@@ -633,7 +740,7 @@ class Registrant < ActiveRecord::Base
   # Enqueues final registration actions for API calls
   def enqueue_complete_registration_via_api
     action = Delayed::PerformableMethod.new(self, :complete_registration_via_api, [])
-    Delayed::Job.enqueue(action, WRAP_UP_PRIORITY, Time.now)
+    Delayed::Job.enqueue(action, {:priority=>WRAP_UP_PRIORITY, :run_at=>Time.now})
   end
 
   # Called from the worker queue to generate PDFs on the 'util' server
@@ -664,6 +771,10 @@ class Registrant < ActiveRecord::Base
       end
     end
     self.pdf_ready = true
+  end
+  
+  def lang
+    locale
   end
   
   def to_finish_with_state_array
@@ -698,34 +809,45 @@ class Registrant < ActiveRecord::Base
     :partner_tracking_id  => self.tracking_id}]
   end
   
+  def send_emails?
+    !email_address.blank? && collect_email_address?
+  end
 
   def deliver_confirmation_email
-    Notifier.deliver_confirmation(self)
+    if send_emails?
+      Notifier.confirmation(self).deliver
+    end
   end
 
   def deliver_thank_you_for_state_online_registration_email
-    Notifier.deliver_thank_you_external(self)
+    if send_emails?
+      Notifier.thank_you_external(self).deliver
+    end
   end
 
   def enqueue_reminder_emails
-    update_attributes(:reminders_left => REMINDER_EMAILS_TO_SEND)
-    enqueue_reminder_email
+    if send_emails?
+      self.reminders_left = REMINDER_EMAILS_TO_SEND
+      enqueue_reminder_email
+    else
+      self.reminders_left = 0
+    end
   end
 
   def enqueue_reminder_email
     action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ ])
     interval = reminders_left == 2 ? AppConfig.hours_before_first_reminder : AppConfig.hours_between_first_and_second_reminder
-    Delayed::Job.enqueue(action, REMINDER_EMAIL_PRIORITY, interval.from_now)
+    Delayed::Job.enqueue(action, {:priority=>REMINDER_EMAIL_PRIORITY, :run_at=>interval.from_now})
   end
 
   def deliver_reminder_email
-    if reminders_left > 0
-      Notifier.deliver_reminder(self)
+    if reminders_left > 0 && send_emails?
+      Notifier.reminder(self).deliver
       update_attributes!(:reminders_left => reminders_left - 1)
       enqueue_reminder_email if reminders_left > 0
     end
   rescue StandardError => error
-    HoptoadNotifier.notify(
+    Airbrake.notify(
       :error_class => error.class.name,
       :error_message => "DelayedJob Worker Error(#{error.class.name}): #{error.message}",
       :request => { :params => {:worker => "deliver_reminder_email", :registrant_id => self.id} })
@@ -806,7 +928,7 @@ class Registrant < ActiveRecord::Base
     if partner && !partner.primary? && partner.whitelabeled? && !partner.from_email.blank?
       partner.from_email
     else
-      FROM_ADDRESS
+      RockyConf.from_address
     end
   end
 
@@ -887,7 +1009,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def tell_email
-    @tell_email ||= email_address
+    @tell_email ||= send_emails? ? email_address : email_address_to_send_from
   end
 
   def tell_subject
@@ -924,7 +1046,7 @@ class Registrant < ActiveRecord::Base
       r.calculate_age
       r.set_official_party_name
       r.generate_barcode
-      r.save(false)
+      r.save(:validate=>false)
       unless Rails.env.test?
         putc "." if (counter += 1) % 1000 == 0; $stdout.flush
       end
@@ -950,7 +1072,7 @@ class Registrant < ActiveRecord::Base
 
   def at_least_step?(step)
     current_step = STEPS.index(aasm_current_state)
-    current_step && (current_step >= step)
+    !current_step.nil? && (current_step >= step)
   end
 
   def has_phone?

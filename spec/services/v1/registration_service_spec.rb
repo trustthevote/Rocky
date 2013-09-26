@@ -54,7 +54,7 @@ describe V1::RegistrationService do
         V1::RegistrationService.create_record(:lang => 'en')
         fail 'ValidationError is expected'
       rescue V1::RegistrationService::ValidationError => e
-        e.field.should    == 'date_of_birth'
+        e.field.to_s.should    == 'date_of_birth'
         e.message.should  == "Required"
       end
     end
@@ -70,7 +70,7 @@ describe V1::RegistrationService do
         V1::RegistrationService.create_record(:home_state_id => 'NY')
         fail 'ValidationError is expected'
       rescue V1::RegistrationService::ValidationError => e
-        e.field.should    == 'lang'
+        e.field.should.to_s    == 'lang'
         e.message.should  == 'Required'
       end
     end
@@ -82,11 +82,11 @@ describe V1::RegistrationService do
     end
 
     context 'complete record' do
-      before { @reg = Factory(:maximal_registrant, :status => 'step_5') }
-      before { mock(Registrant).build_from_api_data({}) { @reg } }
+      before { @reg = FactoryGirl.create(:maximal_registrant, :status => 'step_5') }
+      before { Registrant.stub(:build_from_api_data).with({}) { @reg } }
 
       it 'should save the record and generate PDF' do
-        mock(@reg).enqueue_complete_registration_via_api
+        @reg.stub(:enqueue_complete_registration_via_api)
         V1::RegistrationService.create_record({}).should
       end
     end
@@ -115,7 +115,7 @@ describe V1::RegistrationService do
 
     it 'should return the list of registrants' do
       partner = Partner.first
-      reg = Factory(:maximal_registrant, :partner => partner)
+      reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
 
       V1::RegistrationService.find_records(:partner_id => partner.id, :partner_password => 'password').should == [
         { :status               => 'complete',
@@ -157,7 +157,7 @@ describe V1::RegistrationService do
 
     it 'should not list registrants before the since date' do
       partner = Partner.first
-      reg = Factory(:maximal_registrant, :partner => partner)
+      reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
 
       V1::RegistrationService.find_records(:partner_id => partner.id, :partner_password => 'password', :since => 1.minute.from_now.to_s).should == []
     end

@@ -1,48 +1,69 @@
-source 'http://gems.github.com'
-source 'http://gems.rubyforge.org'
+source 'http://rubygems.org'
 
-#gem "rake", "= 0.9.2"
-gem "rake", "0.8.7"
-gem "rails", "= 2.3.3"
-gem "aasm", "= 2.0.5"
-gem "authlogic", "= 2.1.1"
-gem "fastercsv", "= 1.5.0"
+
+gem "rake", "10.0.3"
+
+gem "figaro"
+gem "rails_config"
+
+gem "rails", "= 3.2.13"
+gem "aasm", "= 3.0.16"
+
+
+gem "authlogic", "= 3.3.0"
 gem "daemons", "= 1.0.10"
-gem "paperclip", "= 2.3.1.1"
-gem "mysql"
+gem "paperclip", "~> 3.0"
+gem "mysql2"
 gem "rubyzip"
 
-#gem "rocky_branding", "= 12.3.5"
-#gem "rocky_branding"
-gem "rocky_branding", "= 1.0.28"
+gem "dotenv-rails"
+
+gem "haml"
+
+gem "rails-i18n"
+gem 'jquery-rails', '~> 2.1'
+
 
 group :development, :test do
-  gem "rspec", "= 1.2.7"
+  gem "rspec-rails", "~> 2.10.1"
+  gem "rspec-spies",  "2.1.1"
+  
   gem "rr", "= 0.10.11"
-  gem "rspec-rails", "= 1.2.7"
-  gem "thoughtbot-factory_girl", "= 1.2.1"
-  #gem "pivotal-webrat", "= 0.4.4"
-  gem "webrat", "= 0.4.4"
-  #gem "pivotal-webrat-rspec-rails", "= 0.4.4"
-  gem "cucumber", "= 0.3.11"
+  
+  gem "cucumber-rails", "1.1.0", :require=>false
+  gem "capybara-webkit", "~> 0.7.1"
+  gem "webrat"
+  gem "factory_girl_rails", :require=>false
+  gem "database_cleaner"
+  
+  
   gem "treetop", "= 1.4.10"
-  gem "selenium-client", "= 1.2.16"
+  # gem "selenium-client", "= 1.2.16"
   gem "capistrano", "= 2.11.2"
+  gem "rvm-capistrano"
+  
   # Pito:
   gem "hpricot", "0.8.6"
-  gem "mongrel", "= 1.1.5"
 	gem "sqlite3"
+	
+	gem "assert_difference"
+	
 end
 
-gem "nokogiri", "= 1.3.2"
-gem "mechanize", "= 1.0.0"
-gem "newrelic_rpm", "= 2.11.1"
-gem "hoptoad_notifier", "= 2.2.2"
+
+group :assets do
+  gem 'therubyracer'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+end
+
+gem "nokogiri", "= 1.5.9"
+gem "mechanize", "= 2.7.1"
+gem "newrelic_rpm", "= 3.6.0.83"
+gem "airbrake"
 gem "ledermann-rails-settings", :require => "rails-settings"
 
 gem 'json'
 
-# group :test do
-#   gem "guard"
-#   gem "guard-rspec"
-# end
+gem "delayed_job_active_record"

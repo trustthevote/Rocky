@@ -25,12 +25,14 @@
 require 'zip/zip'
 
 class PartnerZip
+  extend ActiveModel::Naming
+  include ActiveModel::Conversion
   
   attr_accessor :tmp_file, :destination, :original_destination, :there_are_errors
   attr_reader :errors
   
   def self.tmp_root
-    File.join(RAILS_ROOT, 'tmp', 'partner_uploads')
+    File.join(Rails.root, 'tmp', 'partner_uploads')
   end
   
   def self.get_tmp_path
@@ -105,6 +107,10 @@ class PartnerZip
     true
   end
   
+  def persisted?
+    false
+  end
+  
 private
 
   def detect_csv
@@ -132,7 +138,7 @@ private
   def get_partners_from_csv
     new_partners = []
     row_idx = 1
-    FasterCSV.foreach(@csv_file, {:headers=>true}) do |row|
+    CSV.foreach(@csv_file, {:headers=>true,  :encoding => 'windows-1251:utf-8'}) do |row|
       if row.size != columns.size
         add_error("Row #{row_idx} column count is #{row.size} and should be #{columns.size}")
       end

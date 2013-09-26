@@ -1,0 +1,355 @@
+/* Eric Meyer's Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+body {
+  line-height: 1;
+  color: black;
+  background: white;
+}
+ol, ul {
+  list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+}
+blockquote, q {
+  quotes: "" "";
+}
+/* end reset */
+
+html, body {
+  height: 100%;
+}
+
+#container {
+  margin: 0 auto;
+  min-height: 100%;
+}
+
+body {
+  background-color: #2a2a2a;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, legend {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+h1 { font-size: 18px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+h4 { font-size: 12px; }
+h5 { font-size: 12px; }
+h6 { font-size: 12px; }
+legend { font-size: 14px; }
+
+a { text-decoration: none; }
+a:link    { color: #B2272C; }
+a:visited { color: #B2272C; }
+a:hover   { color: #000000; }
+a:active  { color: #666666; }
+
+
+form {
+  width: 100%;
+}
+
+fieldset {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+legend {
+  padding: 0 5px;
+  line-height: 17px;
+}
+
+form ul {
+  zoom: 1;
+  margin: 1em 0 1em 10px;
+  overflow: hidden;
+}
+
+form fieldset ul {
+  margin: 0 0 0 5px;
+}
+
+form li {
+  float: left;
+  margin-right: 5px;
+  zoom: 1;
+}
+
+form h3 {
+  font-weight: normal;
+  color: #222;
+  margin: 0;
+}
+
+/* classes for floating field widths */
+li.width_a div { width: 230px; }
+li.width_b div { width: 125px; }
+li.width_c div { width:  90px; }
+li.width_d div { width:  80px; }
+li.width_e div { width: 540px; }
+li.width_f div { width: 150px; }
+li.width_g div { width: 236px; }
+li.width_h div { width: 488px; }
+
+li.width_a input, li.width_a select { width: 224px; }
+li.width_b input, li.width_b select { width: 119px; }
+li.width_c input, li.width_c select { width:  84px; }
+li.width_d input, li.width_d select { width:  74px; }
+li.width_e input, li.width_e select { width: 534px; }
+li.width_f input, li.width_f select { width: 144px; }
+li.width_g input, li.width_g select { width: 230px; }
+li.width_h input, li.width_h select { width: 482px; }
+li.width_h textarea { width: 486px; }
+
+ul.flat h3 {
+  float: left;
+  height: 25px;
+  width: 120px;
+  margin-right: 5px;
+  line-height: 26px;      /* browser diff */
+  text-align: right;
+  font-size: 14px;
+/*  font-weight: bold;*/
+}
+
+ul.flat .secondary h3 {
+  width: 30px;
+  margin-left: 10px;
+}
+
+ul.flat div {
+  float: left;
+  height: 25px;
+}
+
+ul.flat div.flat-stack {
+  height: 50px;
+  overflow: hidden;
+}
+
+ul.flat .secondary div.flat-stack {
+  width: 130px;
+}
+
+ul.flat div div {
+  float: none;
+}
+
+ul.stacked {
+  margin-top: 5px;
+}
+
+ul.stacked h3 {
+  margin-bottom: 3px;
+  font-size: 13px;
+}
+
+ul.stacked li div {
+  height: 25px;
+}
+
+
+ul.checkbox h3 {
+  margin-bottom:5px;
+  line-height: 20px;
+	overflow:hidden;
+}
+
+ul.checkbox h3 label, ul.checkbox h3 input {
+	display:block;
+	float:left;
+}
+
+
+ul.checkbox h3 label {
+	width:400px;
+}
+
+ul.checkbox li.spacer {
+  width: 120px;
+  margin: 0;
+  clear: left;
+}
+
+ul.checkbox li {
+	width:425px;
+}
+
+span.error, span.example {
+  display: inline-block;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.example {
+  color: #838383;
+}
+
+.flat span.error, .flat span.example {
+  height: 24px;
+  line-height: 28px;
+  margin-left: 5px;
+}
+
+.stacked span.error, .stacked span.example {
+  height: 12px;
+  line-height: 15px;
+  margin-left: 5px;
+}
+
+input, select, textarea {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+}
+
+input, textarea {
+  letter-spacing: 0.08em;
+}
+
+.has_error input, .has_error select {
+  background-color: #fcc;
+}
+
+.error {
+  color: #B2272C;
+}
+
+
+
+/* rollover buttons */
+
+form div.button {
+  text-align: center;
+  margin: 25px auto;
+}
+
+.button a {
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
+}
+
+.button a button {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.button a span {
+  position: relative;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  text-indent: -9999em;
+  white-space: nowrap;
+}
+
+.button a:hover span  {
+  background-position: right top;
+}
+
+#sticky_footer {
+	background-color: #dddddd;  
+	height: auto;
+	margin:-40px auto 0 auto;
+  clear: both;
+}
+
+#footer {
+  position: relative;
+  height: auto;
+  margin: 0 auto;
+	padding:14px 0 12px;
+  border-top: 1px solid #999;
+  color: #444;
+  /* background-color: #dddddd; */
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+}
+
+
+#footer #powered_by_logo {
+	text-align: center;
+  display: block;
+	width: 100%;
+	padding: 0 0 1em;
+	margin-top:-5px;
+}
+
+#footer #powered_by_logo {
+	display: none;
+}
+
+/* Uncomment the below CSS to show the "Powered by Rock The Vote" logo in the registration footer */
+/* 
+#sticky_footer {
+     margin-top:-80px;
+}
+#footer #powered_by_logo {
+     display: block;
+}
+*/
+
+
+#footer p {
+  position: relative;
+  width: 100%;
+  font-size: 115%;
+  text-align: center;
+}
+
+#footer span {
+  margin: 0 0.5em;
+}
+
+#footer a:link    { color: #444; }
+#footer a:visited { color: #444; }
+#footer a:hover   { color: #B2272C; }
+#footer a:active  { color: #B2272C; }
+
+.copyright {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1em;
+  font-style: oblique;
+  color: #444;
+}

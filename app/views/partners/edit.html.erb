@@ -2,7 +2,7 @@
 <h1>Edit Your Profile</h1>
 
 <div class="profile">
-  <% form_for @partner, :url => partner_path, :method => :put do |form| %>
+  <%= form_for @partner, :url => partner_path, :method => :put do |form| %>
     <%= render :partial => form %>
     <%= partner_rollover_button("update", "update") %>
   <% end %>

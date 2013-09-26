@@ -1,0 +1,10 @@
+- using_default ||= false
+%span.method= key
+%span.value
+  = value
+  %br
+  = select_tag("config[#{state}.#{key.to_s}]", options_for_select(['true','false'], value.to_s))
+  - if key_has_default(key, state)
+    %br
+    = check_box_tag("config[#{state}.#{(key).to_s}]", "DEFAULT", using_default)
+    = "use default? (#{@defaults[key]})"

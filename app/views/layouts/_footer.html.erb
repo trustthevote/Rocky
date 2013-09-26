@@ -1,14 +1,14 @@
 <div id="footer">
   <p>
     <span id="powered_by_logo">
-      <a href="<%= SPONSOR_URL %>" target="_blank">
+      <a href="<%= RockyConf.sponsor.url %>" target="_blank">
         <img src="/images/powered-by-rtv-logo.png" alt="Rock The Vote">
       </a>
     </span>
-    <span><a href="<%= FOOTER_LINK_BASE_URL %>/faq.html" target="_blank" title="FAQ">FAQ</a></span>
-    <span><a href="<%= FOOTER_LINK_BASE_URL %>/privacy.html" target="_blank" title="Privacy &amp; Security">Privacy &amp; Security</a></span>
-    <span><a href="<%= FOOTER_LINK_BASE_URL %>/contact.html" target="_blank" title="Contact Us">Contact Us</a></span>
-    <span><a href="<%= FOOTER_LINK_BASE_URL %>/about.html" target="_blank" title="About">About</a></span>
-    <span class="copyright"><%= FOOTER_COPYRIGHT % Date.today.year %></span>
+    <span><a href="<%= RockyConf.sponsor.footer_link_base_url %>/faq.html" target="_blank" title="FAQ">FAQ</a></span>
+    <span><a href="<%= RockyConf.sponsor.footer_link_base_url %>/privacy.html" target="_blank" title="Privacy &amp; Security">Privacy &amp; Security</a></span>
+    <span><a href="<%= RockyConf.sponsor.footer_link_base_url %>/contact.html" target="_blank" title="Contact Us">Contact Us</a></span>
+    <span><a href="<%= RockyConf.sponsor.footer_link_base_url %>/about.html" target="_blank" title="About">About</a></span>
+    <span class="copyright"><%= (RockyConf.sponsor.footer_copyright % Date.today.year).html_safe %></span>
   </p>
 </div>

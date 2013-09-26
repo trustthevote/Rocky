@@ -1,0 +1,28 @@
+#state_configuration
+  %a.expand_all expand all
+  = form_tag submit_state_configurations_path do
+    #submission
+      = submit_tag 'Save and Email Configurations'
+    - @defaults = @state_importer.states_hash['defaults']
+    - @state_importer.states_hash.each do |state, state_key_values|
+      .setting
+        %h2.key= "#{state_key_values['name'] || state}"
+        %ul
+          - state_key_values.each do |key, value|
+            %li
+              - if StateImporter.is_localization?(key) || StateImporter.is_localization_list?(key)
+                = render 'localized_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values
+            
+              - elsif ['true', 'false'].include?(value.to_s.downcase)
+                = render 'boolean_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values
+              - else
+                = render 'text_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values
+          - defaults_used_by_state(state_key_values) do |key, value|
+            %li.default
+              - if StateImporter.is_localization?(key) || StateImporter.is_localization_list?(key)
+                = render 'localized_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values, :using_default=>true
+          
+              - elsif ['true', 'false'].include?(value.to_s.downcase)
+                = render 'boolean_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values, :using_default=>true
+              - else
+                = render 'text_item', :key=>key, :value=>value, :state=>state, :state_key_values=>state_key_values, :using_default=>true

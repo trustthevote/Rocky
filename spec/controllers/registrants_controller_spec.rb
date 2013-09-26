@@ -26,14 +26,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RegistrantsController do
   describe "widget loader" do
-    integrate_views
+    render_views
 
     it "generates bootstrap javascript targeted to server host" do
-      stub(request).protocol { "http://" }
-      stub(request).host_with_port { "example.com:3000" }
+      request.stub(:protocol) { "http://" }
+      request.stub(:host_with_port) { "example.com:3000" }
       get :widget_loader, :format => "js"
       assert_response :success
-      assert_template "widget_loader.js.erb"
+      assert_template "widget_loader"
       assert_match %r{createElement}, response.body
     end
   end
@@ -44,7 +44,7 @@ describe RegistrantsController do
       assert_redirected_to new_registrant_url(:protocol => "https")
     end
 
-    it "keeps partner, locale, source, tracking and short_form params when redirecting" do
+    it "keeps partner, locale, source, tracking, collectemailaddress and short_form params when redirecting" do
       get :landing, :partner => "2"
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => "2")
       get :landing, :locale => "es"
@@ -53,6 +53,8 @@ describe RegistrantsController do
       assert_redirected_to new_registrant_url(:protocol => "https", :source => "email")
       get :landing, :tracking => "trackid"
       assert_redirected_to new_registrant_url(:protocol => "https", :tracking => "trackid")
+      get :landing, :collectemailaddress => "yesnooptional"
+      assert_redirected_to new_registrant_url(:protocol => "https", :collectemailaddress => "yesnooptional")
       get :landing, :source => "email", :tracking=>"trackid"
       assert_redirected_to new_registrant_url(:protocol => "https", :source => "email", :tracking=>"trackid")
       get :landing, :partner => "2", :locale => "es"
@@ -82,13 +84,14 @@ describe RegistrantsController do
       assert_template "show"
     end
 
-    it "should start with partner id, locale, tracking source and partner tracking id" do
-      get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>"trackid"
+    it "should start with partner id, locale, tracking source, collectemailaddress and partner tracking id" do
+      get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>"trackid", :collectemailaddress=>"yes"
       reg = assigns[:registrant]
       assert_equal 'es', reg.locale
       assert_equal 2, reg.partner_id
       assert_equal 'email', reg.tracking_source
       assert_equal 'trackid', reg.tracking_id
+      assert_equal 'yes', reg.collect_email_address
     end
 
     it "should default partner id to RTV" do
@@ -104,7 +107,7 @@ describe RegistrantsController do
     end
 
     describe "keep initial params in hidden fields" do
-      integrate_views
+      render_views
 
       it "should keep partner, locale, tracking source, tracking id and short_form" do
         get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>'trackid', :short_form=>'1'
@@ -122,7 +125,7 @@ describe RegistrantsController do
     end
 
     describe "partner logo" do
-      integrate_views
+      render_views
 
       it "should not show partner banner or logo for primary partner" do
         get :new, :partner => Partner::DEFAULT_ID.to_s
@@ -131,8 +134,8 @@ describe RegistrantsController do
       end
 
       it "should show partner banner and logo for non-primary partner with custom logo" do
-        partner = Factory.create(:partner)
-        File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+        partner = FactoryGirl.create(:partner)
+        File.open(File.join(fixture_files_path, "partner_logo.jpg"), "r") do |logo|
           partner.update_attributes(:logo => logo)
           assert partner.custom_logo?
         end
@@ -142,14 +145,69 @@ describe RegistrantsController do
         assert_select "#partner-logo img[src=#{partner.logo.url(:header).split('?').first}]"
       end
     end
+      
+      # moving redirect scenarios into contorller specs instead of features
+      # Scenario: Start from a mobile agent
+      #   Given I am using a mobile browser
+      #   When I go to a new registration page
+      #   Then I should be redirected to the mobile url with partner="1"
+      # 
+      # Scenario: Start from a mobile agent and partner setting
+      #   Given I am using a mobile browser
+      #   And the following partner exists:
+      #     | organization |
+      #     | one          |
+      #     | two          |
+      #     | th3          |
+      #   When I go to a new registration page for partner="3"
+      #   Then I should be redirected to the mobile url with partner="3"
+      # 
+      # Scenario: Start from a mobile agent and partner, source and tracking setting
+      #   Given I am using a mobile browser
+      #   And the following partner exists:
+      #     | organization |
+      #     | one          |
+      #     | two          |
+      #     | th3          |
+      #   When I go to a new registration page for partner="3", source="abc" and tracking="def"
+      #   Then I should be redirected to the mobile url with partner="3", source="abc" and tracking="def"
+    
+      # Then /^I should be redirected to the mobile url with partner="([^\"]*)"$/ do |partner|
+      #   response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en'))
+      # end
+      # 
+      # Then /^I should be redirected to the mobile url with partner="([^\"]*)", source="([^\"]*)" and tracking="([^\"]*)"$/ do |partner,source,tracking|
+      #   response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en', :source=>source, :tracking=>tracking))
+      # end
+    
+    context "from a mobile browser" do  
+      before(:each) do
+        MobileConfig.stub(:is_mobile_request?).and_return(true)
+      end
+      it "redirects to the url with partner='1' when no other parameters are given" do
+        get :new
+        response.should redirect_to(MobileConfig.redirect_url(:partner=>'1',:locale=>'en'))
+      end
+      it "redirects for another partner" do
+        partner = FactoryGirl.create(:partner)
+        get :new, :partner=>partner.to_param
+        response.should redirect_to(MobileConfig.redirect_url(:partner=>partner.id,:locale=>'en'))
+      end
+      it "includes source, collectemailaddress and tracking setting" do
+        partner = FactoryGirl.create(:partner)
+        get :new, :partner=>partner.to_param, :source=>"abc", :tracking=>"def", :collectemailaddress=>'no'
+        response.should redirect_to(MobileConfig.redirect_url(:partner=>partner.id,:locale=>'en', :source=>"abc", :tracking=>"def", :collectemailaddress=>'no'))        
+      end
+    end
   end
 
   describe "#create" do
-    integrate_views
+    render_views
 
     before(:each) do
-      @partner = Factory.create(:partner)
-      @reg_attributes = Factory.attributes_for(:step_1_registrant)
+      @partner = FactoryGirl.create(:partner)
+      @reg_attributes = FactoryGirl.attributes_for(:step_1_registrant)
+      @reg_attributes.delete(:status)
     end
 
     it "should create a new registrant and complete step 1" do
@@ -158,14 +216,15 @@ describe RegistrantsController do
       assert_redirected_to registrant_step_2_url(assigns[:registrant])
     end
 
-    it "should set partner_id, locale, tracking_source, tracking_id and short_form" do
+    it "should set partner_id, locale, tracking_source, tracking_id, collectemailaddress and short_form" do
       @reg_attributes.delete(:locale)
       @reg_attributes.delete(:partner_id)
-      post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email", :tracking=>"trackid", :short_form=>"1"
+      post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email", :tracking=>"trackid", :short_form=>"1", :collectemailaddress=>'yes'
       assert_equal @partner.id, assigns[:registrant].partner_id
       assert_equal "es", assigns[:registrant].locale
       assert_equal "email", assigns[:registrant].tracking_source
       assert_equal "trackid", assigns[:registrant].tracking_id
+      assert_equal "yes", assigns[:registrant].collect_email_address
       assert_equal true, assigns[:registrant].short_form?
     end
 
@@ -176,8 +235,8 @@ describe RegistrantsController do
       assert_template "show"
     end
 
-    it "should keep partner, locale, source and tracking for next attempt" do
-      post :create, :registrant => @reg_attributes.merge(:home_zip_code => ""), :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid"
+    it "should keep partner, locale, source, collectemailaddress and tracking for next attempt" do
+      post :create, :registrant => @reg_attributes.merge(:home_zip_code => ""), :partner => "2", :locale => "es", :source => "email", :tracking=>"trackid", :collectemailaddress=>'yes'
       assert_not_nil assigns[:registrant]
       assert assigns[:registrant].new_record?, assigns[:registrant].inspect
       assert_template "show"
@@ -185,6 +244,7 @@ describe RegistrantsController do
       assert_select "input[name=locale][value=es]"
       assert_select "input[name=source][value=email]"
       assert_select "input[name=tracking][value=trackid]"
+      assert_select "input[name=collectemailaddress][value=yes]"
     end
 
     it "should reject ineligible registrants" do
@@ -200,7 +260,7 @@ describe RegistrantsController do
 
   describe "#update" do
     before(:each) do
-      @registrant = Factory.create(:step_4_registrant)
+      @registrant = FactoryGirl.create(:step_4_registrant)
     end
 
     it "should update registrant and complete step 1" do
@@ -240,7 +300,7 @@ describe RegistrantsController do
 
     describe "completed registration" do
       it "should not be visible" do
-        reg = Factory.create(:completed_registrant)
+        reg = FactoryGirl.create(:completed_registrant)
         assert_raise ActiveRecord::RecordNotFound do
           get :show, :id => reg.to_param
         end
@@ -249,7 +309,7 @@ describe RegistrantsController do
 
     describe "under-18 finished registration" do
       it "should not be visible" do
-        reg = Factory.create(:under_18_finished_registrant)
+        reg = FactoryGirl.create(:under_18_finished_registrant)
         assert_raise ActiveRecord::RecordNotFound do
           get :show, :id => reg.to_param
         end
@@ -258,10 +318,10 @@ describe RegistrantsController do
   end
 
   describe "abandoned registration" do
-    integrate_views
+    render_views
 
     it "should show a timeout page" do
-      reg = Factory.create(:step_1_registrant, :abandoned => true, :locale => "es", :partner_id=>2)
+      reg = FactoryGirl.create(:step_1_registrant, :abandoned => true, :locale => "es", :partner_id=>2)
       get :show, :id => reg.to_param
       assert_redirected_to registrants_timeout_url(:partner => reg.partner.id, :locale => reg.locale)
     end

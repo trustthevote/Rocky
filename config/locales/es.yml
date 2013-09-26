@@ -1,0 +1,106 @@
+es:
+  language_name: español
+  activerecord:
+    attributes:
+      registrant:
+        date_of_birth: Fecha de Nac
+        email_address: Correo Electrónico
+        first_registration: Me estoy registrando por primera vez para votar.
+        home_zip_code: Código Postal
+        us_citizen: Soy ciudadano americano.
+        name_title: Titulo
+        first_name: Nombre
+        middle_name: Segundo Nombre
+        last_name: Apellido
+        name_suffix: Sufijo
+        home_address: Dirección Casa
+        home_unit: No.
+        home_city: Ciudad
+        home_state_name: Estado
+        has_mailing_address: Recibo mi correo en una dirección diferente a la provista anteriormente.
+        mailing_address: Dirección Alterna
+        mailing_unit: No.
+        mailing_city: Ciudad
+        mailing_state_abbrev: Estado
+        mailing_zip_code: Código Postal
+        party: Partido
+        race: Raza
+        state_id_number: Número ID
+        phone: Teléfono
+        phone_type: Tipo
+        change_of_name: He cambiado mi nombre
+        prev_name_title: Titulo
+        prev_first_name: Nombre
+        prev_middle_name: Segundo Nombre
+        prev_last_name: Apellido
+        prev_name_suffix: Sufijo
+        change_of_address: He cambiado mi dirección
+        prev_address: Dirección
+        prev_unit: No.
+        prev_city: Ciudad
+        prev_state_abbrev: Estado
+        prev_zip_code: Código Postal
+        opt_in_email: Recibir correo electronico
+        opt_in_sms: Recibir mensajes de texto
+        attest_true: He revisado la información detalladamente, es fidedigna y veraz dentro de mi conocimiento.
+        tell_from: De
+        tell_email: Su correo electrónico
+        tell_recipients: Destinatarios
+        tell_subject: línea de asunto
+        tell_message: Mensaje
+    errors:
+      models:
+        registrant:
+          blank: "Requerido"
+          invalid_zip: "Código Postal Invalido"
+          attributes:
+            home_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            mailing_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            prev_zip_code:
+              invalid: "Utilize ZIP o ZIP+4"
+            email_address:
+              invalid: "Dirección no válida"
+            date_of_birth:
+              format: "Debe ser MM-DD-AAAA"
+            phone:
+              invalid: "Deber ser ***-***-****"
+              required_if_opt_in: Si necesita recibir TXT
+            attest_true:
+              accepted: "Debe indicar si la información arriba es correcta"
+            has_state_license:
+              inclusion: Requerido
+      messages:
+        inclusion: "%{attribute} no esta incluida en la lista"
+        exclusion: "%{attribute} esta reservado"
+        invalid: "%{attribute} es inválido"
+        confirmation: "%{attribute} no concuerda con la confirmación"
+        accepted: "%{attribute} debe ser aceptada"
+        empty: "%{attribute} no puede estar vacio"
+        blank: "%{attribute} no puede estar en blanco"
+        too_long: "%{attribute} es muy largo (máximo %{count} caracteres)"
+        too_short: "%{attribute} es muy corto (mínimo %{count} caracteres)"
+        wrong_length: "%{attribute} tamaño incorrecto (deber ser %{count} caracteres)"
+        taken: "%{attribute} ya fue tomado"
+        not_a_number: "%{attribute} no es un número"
+        greater_than: "%{attribute} debe ser mayor a %{count}"
+        greater_than_or_equal_to: "%{attribute} deber ser mayor a o igual a %{count}"
+        equal_to: "%{attribute} debe ser igual a %{count}"
+        less_than: "%{attribute} debe ser menor a %{count}"
+        less_than_or_equal_to: "%{attribute} debe ser menor a o igual a %{count}"
+        odd: "%{attribute} debe ser impar"
+        even: "%{attribute} debe ser par"
+  authlogic:
+    error_messages:
+      login_blank: "Login no puede estar en blanco."
+      login_not_found: "Combinación de Login/Password no es válida."
+      login_invalid: "Usuario solo puede ser letras, números, espacios, y .-_@ porfavor."
+      consecutive_failed_logins_limit_exceeded: "Login consecutivo incorrecto límite excedido, la cuenta ha sido desactivada."
+      email_invalid: "Correo electronico no es una dirección válida."
+      password_blank: "Password no puede estar en blanco."
+      password_invalid: "Login/Password no es un combinación válida."
+      not_active: "Tu cuenta no está activada."
+      not_confirmed: "Tu cuenta no está confirmada."
+      not_approved: "Tu cuenta no ha sido aprobada."
+      no_authentication_details: "Faltan detalles de autentificación."

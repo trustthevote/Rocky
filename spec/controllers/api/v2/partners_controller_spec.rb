@@ -48,7 +48,9 @@ describe Api::V2::PartnersController do
   describe "#create" do
     it "should return the ID of the created partner" do
       expect_api_response :partner_id => "2342"
-      new_partner { mock(Partner).id { 2342 } }
+      partner = mock(Partner)
+      partner.stub(:id) { 2342 }
+      new_partner { partner }
     end
 
     it 'should catch invalid fields' do
@@ -67,19 +69,19 @@ describe Api::V2::PartnersController do
 
   def partner(&block)
     query = { :partner_id => nil, :partner_api_key => nil }
-    mock(V2::PartnerService).find(query, false, &block)
+    V2::PartnerService.stub(:find).with(query, false, &block)
     get :show, :format => 'json'
   end
 
   def public_partner(&block)
     query = { :partner_id => nil, :partner_api_key => nil }
-    mock(V2::PartnerService).find(query, true, &block)
+    V2::PartnerService.stub(:find).with(query, true, &block)
     get :show_public, :format => 'json'
   end
 
   def new_partner(&block)
     data = {}
-    mock(V2::PartnerService).create_record(data, &block)
+    V2::PartnerService.stub(:create_record).with(data, &block)
     post :create, :format => 'json', :partner => data
   end
 

@@ -24,7 +24,7 @@
 #***** END LICENSE BLOCK *****
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe Api::V2::RegistrationStatesController, :focus do
+describe Api::V2::RegistrationStatesController do
 
   describe 'index' do
     it 'should return data' do
@@ -32,7 +32,7 @@ describe Api::V2::RegistrationStatesController, :focus do
       get :index, :format => 'json'
       GeoState.states_with_online_registration.each do |state_abbr|
         state = GeoState[state_abbr]
-        assigns(:data)[:states].should include(:name=>state.abbreviation, :url=>state.online_reg_url(nil))
+        assigns(:data)[:states].should include("name"=>state.abbreviation, "url"=>state.online_reg_url(nil))
       end
     end
   end

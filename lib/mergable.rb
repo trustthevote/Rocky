@@ -37,11 +37,11 @@ module Mergable
 
   def pdf_barcode
     user_code = id.to_s(36).rjust(6, "0")
-    "*#{BARCODE_PREFIX}-#{user_code}*".upcase
+    "*#{RockyConf.sponsor.barcode_prefix}-#{user_code}*".upcase
   end
 
   def to_xfdf
-    ERB.new(XFDF_TEMPLATE).result(binding)
+    ERB.new(XFDF_TEMPLATE).result(binding).force_encoding('UTF-8')
   end
 
   XFDF_TEMPLATE = <<'XML'

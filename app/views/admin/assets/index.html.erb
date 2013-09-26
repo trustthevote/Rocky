@@ -5,7 +5,7 @@
   <%= link_to "Back to partner", [ :admin, @partner ] %>
 </div>
 
-<%- form_for :asset, :html => { :multipart => true } do |f| %>
+<%= form_for :asset, :html => { :multipart => true } do |f| %>
   <fieldset>
     <legend>Upload</legend>
     <ul class="stacked">
@@ -36,7 +36,7 @@
     <%- @assets.each do |asset| %>
       <tr>
         <td class='name'><%= h asset %></td>
-        <td><%= link_to "Delete", admin_partner_asset_path(@partner.id, 0, :name => asset), :method => :delete, :confirm => "Are you sure?" %></td>
+        <td><%= link_to("Delete", admin_partner_asset_path(@partner.id, 0, :name => asset), {:method => :delete, :confirm => "Are you sure?"}) %></td>
       </tr>
     <% end %>
   <% end %>

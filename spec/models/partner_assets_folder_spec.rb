@@ -26,23 +26,25 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PartnerAssetsFolder do
 
-  before { @partner = Factory(:partner) }
-  before { stub(@partner).assets_root { "#{RAILS_ROOT}/tmp/test_assets" } }
-  before { @paf = PartnerAssetsFolder.new(@partner) }
+  before(:each) do 
+    @partner = FactoryGirl.create(:partner)
+    @partner.stub(:assets_root) { "#{Rails.root}/tmp/test_assets" }
+    @paf = PartnerAssetsFolder.new(@partner)
+  end
 
-  after  { FileUtils.rm_r("#{RAILS_ROOT}/tmp/test_assets") }
+  after  { FileUtils.rm_r("#{Rails.root}/tmp/test_assets") }
 
   describe 'update_css' do
     it 'should save asset file' do
-      @file = File.new("#{fixture_path}/files/sample.css")
+      @file = File.new("#{fixture_files_path}/sample.css")
       @paf.update_css('application', @file)
       @partner.application_css_present?.should be_true
     end
 
     context 'updating' do
       before do
-        @file = File.new("#{fixture_path}/files/sample.css")
-        @alt  = File.new("#{fixture_path}/files/alt.css")
+        @file = File.new("#{fixture_files_path}/sample.css")
+        @alt  = File.new("#{fixture_files_path}/alt.css")
         @paf.update_css('application', @file)
         @paf.update_css('application', @alt)
       end
@@ -96,7 +98,7 @@ describe PartnerAssetsFolder do
 
   describe 'upload_asset' do
     it 'should upload an asset' do
-      @file = File.new("#{fixture_path}/files/sample.css")
+      @file = File.new("#{fixture_files_path}/sample.css")
       @paf.update_asset('../sample.css', @file)
       @paf.list_assets.should == [ 'sample.css' ]
     end

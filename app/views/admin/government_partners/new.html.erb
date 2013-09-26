@@ -2,7 +2,7 @@
 
 <h1>Create New Government Partner</h1>
 
-<% form_for [ :admin, @partner ], :url=> admin_government_partners_path, :html => { :multipart => true } do |f| %>
+<%= form_for [ :admin, @partner ], :url=> admin_government_partners_path, :html => { :multipart => true } do |f| %>
   <%= render :partial=>'admin/shared/partner_general_fields', :locals=>{:f=>f} %>
 
   <%= render :partial=>'admin/shared/partner_whitelabel_fields', :locals=>{:f=>f} %>

@@ -28,20 +28,20 @@ describe Partner do
 
   describe "creation" do
     it "sets an API key on creation" do
-      p = Factory(:partner, :api_key=>'')
+      p = FactoryGirl.create(:partner, :api_key=>'')
       p.api_key.should_not be_blank
     end
   end
 
   describe "#primary?" do
     it "is false for non-primary partner" do
-      assert !Factory.build(:partner).primary?
+      assert !FactoryGirl.build(:partner).primary?
     end
   end
   
   describe "#generate_api_key!" do
     it "should change the api key" do
-      p = Factory(:partner)
+      p = FactoryGirl.create(:partner)
       p.api_key.should_not be_blank
       old_key = p.api_key
       p.generate_api_key!
@@ -52,7 +52,7 @@ describe Partner do
   
   describe "#generate_random_password" do
     it "sets the password and password confirmation" do
-      p = Factory.build(:api_created_partner)
+      p = FactoryGirl.build(:api_created_partner)
       p.generate_random_password
       p.password.should_not be_blank
       p.password_confirmation.should_not be_blank
@@ -61,7 +61,7 @@ describe Partner do
   
   describe "#generate_username" do
     it "should set a valid username from email address" do
-      p = Factory.build(:partner)
+      p = FactoryGirl.build(:partner)
       p.should be_valid
       p.email.should_not be_blank
       p.username = ''
@@ -73,55 +73,56 @@ describe Partner do
   describe "#logo_url=(URL)" do
     it "opens the file from the URL when saved" do
       url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
-      p = Factory.build(:partner)
-      mock_io = mock(StringIO)
-      mock_uri = mock(URI)
-      mock_uri.path { url }
-      mock_io.base_uri { mock_uri }
-      mock(p).open(url) { mock_io }
+      p = FactoryGirl.build(:partner)
+      mock_io = mock("StringIO")
+      mock_uri = mock("URI")
+      mock_uri.stub(:path).and_return(url)
+      mock_io.stub(:base_uri).and_return(mock_uri)
+      p.stub(:open).with(url).and_return(mock_io)
+      p.stub(:logo=).with(mock_io)
       p.logo_url = url
       p.save!
       p.should have_received(:open).with(url)
     end
     it "attaches the URL file as the logo" do
       url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
-      p = Factory.build(:partner)
+      p = FactoryGirl.build(:partner)
       p.logo_url = url
       p.save!
       p.logo.url.should_not == "/logos/original/missing.png"
     end
     it "adds a validation error if the url is not http" do
       bad_url = "home_rtv_logo_wrong.png"
-      p = Factory.build(:partner)
+      p = FactoryGirl.build(:partner)
       p.logo_url = bad_url
       p.should_not be_valid
-      p.errors.on(:logo_image_URL).should == "Pleave provide an HTTP url"
+      p.errors[:logo_image_URL].should include("Pleave provide an HTTP url")
     end
     it "adds a validation error if the file can not be downloaded" do
       bad_url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo_wrong.png"
-      p = Factory.build(:partner)
+      p = FactoryGirl.build(:partner)
       p.logo_url = bad_url
       p.should_not be_valid
-      p.errors.on(:logo_image_URL).should == "Could not download #{bad_url} for logo"
+      p.errors[:logo_image_URL].should include("Could not download #{bad_url} for logo")
     end
   end
   
   describe "#valid_api_key?(key)" do
     it "returns false when blank or not matching" do
-      partner = Factory.build(:partner, :api_key=>"")
+      partner = FactoryGirl.build(:partner, :api_key=>"")
       partner.valid_api_key?("").should be_false
       partner.api_key="abc"
       partner.valid_api_key?("bca").should be_false
     end
     it "return true when matching" do
-      partner = Factory.build(:partner, :api_key=>"abcdef")
+      partner = FactoryGirl.build(:partner, :api_key=>"abcdef")
       partner.valid_api_key?("abcdef").should be_true
     end
   end
 
   describe "widget image" do
     it "is set to default value if none set explicitly" do
-      partner = Factory.build(:partner, :widget_image => nil)
+      partner = FactoryGirl.build(:partner, :widget_image => nil)
       assert partner.valid?
       assert_equal Partner::DEFAULT_WIDGET_IMAGE_NAME, partner.widget_image_name
       partner.widget_image_name = "rtv100x100v1"
@@ -130,12 +131,12 @@ describe Partner do
     end
 
     it "gets name of widget image" do
-      partner = Factory.build(:partner, :widget_image => "rtv-100x100-v1.gif")
+      partner = FactoryGirl.build(:partner, :widget_image => "rtv-100x100-v1.gif")
       assert_equal "rtv100x100v1", partner.widget_image_name
     end
 
     it "sets widget_image by name" do
-      partner = Factory.build(:partner, :widget_image => nil)
+      partner = FactoryGirl.build(:partner, :widget_image => nil)
       partner.widget_image_name = "rtv100x100v1"
       assert_equal "rtv-100x100-v1.gif", partner.widget_image
     end
@@ -143,19 +144,15 @@ describe Partner do
 
   describe "logo image" do
     it "has an attached logo" do
-      partner = Factory.build(:partner)
+      partner = FactoryGirl.build(:partner)
       assert partner.respond_to?(:logo)
       assert_equal Paperclip::Attachment, partner.logo.class
     end
 
-    it "has an error when the logo is not an image type" do
-      File.open(File.join(fixture_path, "files/crazy.txt"), "r") do |crazy|
-        partner = Factory.create(:partner)
-        partner.update_attributes(:logo => crazy)
-        assert !partner.valid?
-        assert_match /must be a JPG, GIF, or PNG/, partner.errors.on(:logo)
-      end
-    end
+    it { should validate_attachment_content_type(:logo).
+                    allowing('image/png', 'image/gif', 'image/jpg', 'image/jpeg', 'image/x-png').
+                    rejecting('text/plain', 'text/xml') }
+
   end
 
   describe "custom_logo?" do
@@ -166,22 +163,22 @@ describe Partner do
     it "is always false for primary partner" do
       partner = Partner.find(Partner::DEFAULT_ID)
       assert !partner.custom_logo?
-      File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+      File.open(File.join(fixture_files_path, "partner_logo.jpg"), "r") do |logo|
         partner.update_attributes(:logo => logo)
         assert !partner.custom_logo?
       end
     end
 
     it "is true for partners with logos" do
-      partner = Factory.build(:partner)
-      File.open(File.join(fixture_path, "files/partner_logo.jpg"), "r") do |logo|
+      partner = FactoryGirl.build(:partner)
+      File.open(File.join(fixture_files_path, "partner_logo.jpg"), "r") do |logo|
         partner.update_attributes(:logo => logo)
         assert partner.custom_logo?
       end
     end
 
     it "is false for partners without logos" do
-      partner = Factory.build(:partner)
+      partner = FactoryGirl.build(:partner)
       assert !partner.custom_logo?
     end
   end
@@ -190,49 +187,49 @@ describe Partner do
     describe "Class Methods" do
       describe "#add_whitelabel(partner_id, app_css, reg_css)" do
         before(:each) do
-          @partner = Factory(:partner)
-          stub(File).expand_path("app.css").returns("app.css")
-          stub(File).expand_path("reg.css").returns("reg.css")
-          stub(File).expand_path("part.css").returns("part.css")
+          @partner = FactoryGirl.create(:partner)
+          File.stub(:expand_path).with("app.css").and_return("app.css")
+          File.stub(:expand_path).with("reg.css").and_return("reg.css")
+          File.stub(:expand_path).with("part.css").and_return("part.css")
 
-          stub(Partner).find.returns(@partner)
-          stub(File).exists?("app.css").returns(true)
-          stub(File).exists?("reg.css").returns(true)
-          stub(File).exists?("part.css").returns(true)
-          stub(@partner).any_css_present?.returns(false)
-          stub(@partner).application_css_present?.returns(true)
-          stub(@partner).registration_css_present?.returns(true)
-          stub(@partner).partner_css_present?.returns(true)
+          Partner.stub(:find).and_return(@partner)
+          File.stub(:exists?).with("app.css").and_return(true)
+          File.stub(:exists?).with("reg.css").and_return(true)
+          File.stub(:exists?).with("part.css").and_return(true)
+          @partner.stub(:any_css_present?).and_return(false)
+          @partner.stub(:application_css_present?).and_return(true)
+          @partner.stub(:registration_css_present?).and_return(true)
+          @partner.stub(:partner_css_present?).and_return(true)
 
-          stub(File).directory?(@partner.assets_path).returns(true)
-          stub(FileUtils).cp("app.css", @partner.absolute_application_css_path).returns(true)
-          stub(FileUtils).cp("reg.css", @partner.absolute_registration_css_path).returns(true)
-          stub(FileUtils).cp("part.css", @partner.absolute_partner_css_path).returns(true)
+          File.stub(:directory?).with(@partner.assets_path).and_return(true)
+          FileUtils.stub(:cp).with("app.css", @partner.absolute_application_css_path).and_return(true)
+          FileUtils.stub(:cp).with("reg.css", @partner.absolute_registration_css_path).and_return(true)
+          FileUtils.stub(:cp).with("part.css", @partner.absolute_partner_css_path).and_return(true)
         end
         it "finds the partner by id" do
           Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           Partner.should have_received(:find).with("123")
         end
         it "raises an error message if the partner is the primary one" do
-          stub(@partner).primary?.returns(true)
+          @partner.stub(:primary?).and_return(true)
           expect {
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           }.to raise_error("You can't whitelabel the primary partner.")
         end
         it "raises an error message if the partner is not found" do
-          stub(Partner).find.returns(nil)
+          Partner.stub(:find).and_return(nil)
           expect {
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           }.to raise_error("Partner with id '123' was not found.")
         end
         it "raises an error message with what to do if the partner is already whitelabeled" do
-          stub(@partner).whitelabeled.returns(true)
+          @partner.stub(:whitelabeled).and_return(true)
           expect {
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           }.to raise_error("Partner '123' is already whitelabeled. Try running 'rake partner:upload_assets 123 app.css reg.css'")
         end
         it "raises an error message with what to do if the partner already has assets" do
-          stub(@partner).any_css_present?.returns(true)
+          @partner.stub(:any_css_present?).and_return(true)
           expect {
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           }.to raise_error("Partner '123' has assets. Try running 'rake partner:enable_whitelabel 123'")
@@ -255,8 +252,8 @@ describe Partner do
         end
 
         it "creates the partner path if not already there" do
-          stub(File).directory?(@partner.assets_path).returns(false)
-          stub(Dir).mkdir(@partner.assets_path).returns(true)
+          File.stub(:directory?).with(@partner.assets_path).and_return(false)
+          Dir.stub(:mkdir).with(@partner.assets_path).and_return(true)
           Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           Dir.should have_received(:mkdir).with(@partner.assets_path)
         end
@@ -270,8 +267,8 @@ describe Partner do
           pending "Don't need URL designation of assets yet"
         end
         it "does not set the partner as whitelabeled if the path functions fail" do
-          stub(FileUtils).cp("app.css", @partner.absolute_application_css_path)
-          stub(@partner).application_css_present?.returns(false)
+          FileUtils.stub(:cp).with("app.css", @partner.absolute_application_css_path)
+          @partner.stub(:application_css_present?).and_return(false)
           begin
             Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           rescue
@@ -288,147 +285,147 @@ describe Partner do
 
     describe "#assets_url" do
       it "returns the url for the partner directory" do
-        partner = Factory(:partner)
+        partner = FactoryGirl.create(:partner)
         partner.assets_url.should == "/partners/#{partner.id}"
       end
     end
     describe "#assets_path" do
       it "returns the absolute path to the partner directory" do
-        partner = Factory(:partner)
-        partner.assets_path.should == "#{RAILS_ROOT}/public/TEST/partners/#{partner.id}"
+        partner = FactoryGirl.create(:partner)
+        partner.assets_path.should == "#{Rails.root}/public/TEST/partners/#{partner.id}"
       end
     end
     describe "#absolute_application_css_path" do
       it "returns the path RAILS_ROOT/public/TEST/partners/PARTNER_ID/style.css" do
-        partner = Factory(:partner)
-        partner.absolute_application_css_path.should == "#{RAILS_ROOT}/public/TEST/partners/#{partner.id}/application.css"
+        partner = FactoryGirl.create(:partner)
+        partner.absolute_application_css_path.should == "#{Rails.root}/public/TEST/partners/#{partner.id}/application.css"
       end
     end
     describe "#absolute_registration_css_path" do
       it "returns the path RAILS_ROOT/public/TEST/partners/PARTNER_ID/style.css" do
-        partner = Factory(:partner)
-        partner.absolute_registration_css_path.should == "#{RAILS_ROOT}/public/TEST/partners/#{partner.id}/registration.css"
+        partner = FactoryGirl.create(:partner)
+        partner.absolute_registration_css_path.should == "#{Rails.root}/public/TEST/partners/#{partner.id}/registration.css"
       end
     end
     describe "#absolute_partner_css_path" do
       it "returns the path RAILS_ROOT/public/TEST/partners/PARTNER_ID/partner.css" do
-        partner = Factory(:partner)
-        partner.absolute_partner_css_path.should == "#{RAILS_ROOT}/public/TEST/partners/#{partner.id}/partner.css"
+        partner = FactoryGirl.create(:partner)
+        partner.absolute_partner_css_path.should == "#{Rails.root}/public/TEST/partners/#{partner.id}/partner.css"
       end
     end
     describe "#css_present?" do
       it "returns true if the both custom css files are present" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
         partner.css_present?.should be_true
         File.should have_received(:exists?).with(partner.absolute_application_css_path)
         File.should have_received(:exists?).with(partner.absolute_registration_css_path)
       end
       it "returns false if the custom application css file is not present" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
         partner.css_present?.should be_false
       end
       it "returns false if the custom registration css file is not present" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
         partner.css_present?.should be_false
       end
       it "returns false if the both custom css files are not present" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
         partner.css_present?.should be_false
       end
     end
 
     describe "#any_css_present?" do
       it "returns true if the either custom css files is present" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(false)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
         partner.any_css_present?.should be_true
 
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(false)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
         partner.any_css_present?.should be_true
 
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
         partner.any_css_present?.should be_true
 
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(true)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
         partner.any_css_present?.should be_true
       end
       it "returns false if both css files are missing" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(false)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
         partner.any_css_present?.should be_false
       end
     end
 
     describe "#application_css_present?" do
       it "returns true when the file exists" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(true)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
         partner.application_css_present?.should be_true
       end
       it "returns false when the file is missing" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_application_css_path).returns(false)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
         partner.application_css_present?.should be_false
       end
     end
     describe "#registration_css_present?" do
       it "returns true when the file exists" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(true)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
         partner.registration_css_present?.should be_true
       end
       it "returns false when the file is missing" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_registration_css_path).returns(false)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
         partner.registration_css_present?.should be_false
       end
     end
     describe "#partner_css_present?" do
       it "returns true when the file exists" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(true)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
         partner.partner_css_present?.should be_true
       end
       it "returns false when the file is missing" do
-        partner = Factory.build(:partner)
-        stub(File).exists?(partner.absolute_partner_css_path).returns(false)
+        partner = FactoryGirl.build(:partner)
+        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
         partner.partner_css_present?.should be_false
       end
     end
 
     describe "#application_css_url" do
       it "is returns the URL for the custom application css" do
-        partner = Factory.build(:partner)
+        partner = FactoryGirl.build(:partner)
         partner.application_css_url.should == "/partners/#{partner.id}/application.css"
       end
     end
     describe "#registration_css_url" do
       it "is returns the URL for the custom registration css" do
-        partner = Factory.build(:partner)
+        partner = FactoryGirl.build(:partner)
         partner.registration_css_url.should == "/partners/#{partner.id}/registration.css"
       end
     end
     describe "#partner_css_url" do
       it "is returns the URL for the custom partner css" do
-        partner = Factory.build(:partner)
+        partner = FactoryGirl.build(:partner)
         partner.partner_css_url.should == "/partners/#{partner.id}/partner.css"
       end
     end
@@ -451,15 +448,15 @@ describe Partner do
 
   describe "CSV" do
     it "can generate CSV of all registrants" do
-      partner = Factory.create(:partner)
+      partner = FactoryGirl.create(:partner)
       registrants = []
-      3.times { registrants << Factory.create(:maximal_registrant, :partner => partner) }
-      registrants << Factory.create(:step_1_registrant, :partner => partner)
+      3.times { registrants << FactoryGirl.create(:maximal_registrant, :partner => partner) }
+      registrants << FactoryGirl.create(:step_1_registrant, :partner => partner)
 
-      other_partner = Factory.create(:partner)
-      registrants << Factory.create(:maximal_registrant, :partner => other_partner)
+      other_partner = FactoryGirl.create(:partner)
+      registrants << FactoryGirl.create(:maximal_registrant, :partner => other_partner)
 
-      csv = FasterCSV.parse(partner.generate_registrants_csv)
+      csv = CSV.parse(partner.generate_registrants_csv)
       assert_equal 5, csv.length # including header
       assert_equal Registrant::CSV_HEADER, csv[0]
       assert_equal registrants[0].to_csv_array, csv[1]
@@ -469,11 +466,11 @@ describe Partner do
     end
     describe "#generate_registrants_csv_async" do
       before(:each) do
-        @partner= Factory.create(:partner, :csv_ready=>true)
+        @partner= FactoryGirl.create(:partner, :csv_ready=>true)
         @t = Time.now
-        stub(Time).now { @t }
-        stub(Delayed::PerformableMethod).new { "action" }
-        stub(Delayed::Job).enqueue
+        Time.stub(:now).and_return(@t)
+        Delayed::PerformableMethod.stub(:new).and_return("action")
+        Delayed::Job.stub(:enqueue)
       end
       it "sets the csv_ready for the partner to false" do
         @partner.csv_ready.should be_true
@@ -489,7 +486,7 @@ describe Partner do
     end
     describe "#generate_csv_file_name" do
       it "generates obfuscated file name" do
-        stub(Digest::SHA1).hexdigest { "obfuscate" }
+        Digest::SHA1.stub(:hexdigest).and_return("obfuscate")
         d = DateTime.now
         Partner.new.generate_csv_file_name(d).should == "csv-obfuscate-#{d.strftime('%Y%m%d-%H%M%S')}.csv"
         #Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)} -- #{email_address} -- #{home_zip_code}" )
@@ -497,42 +494,42 @@ describe Partner do
     end
     describe "#csv_file_path" do
       it "returns the path to the file name in the record" do
-        @partner = Factory.create(:partner)        
-        stub(@partner).csv_file_name { "a_file_name.ext" }
-        stub(@partner).csv_path { "/some/path" }
-        stub(FileUtils).mkdir_p
+        @partner = FactoryGirl.create(:partner)        
+        @partner.stub(:csv_file_name) { "a_file_name.ext" }
+        @partner.stub(:csv_path) { "/some/path" }
+        FileUtils.stub(:mkdir_p)
         @partner.csv_file_path.should == "/some/path/a_file_name.ext"
       end
     end
     describe "#csv_path" do
       it "creates the path to the partner csv directory" do
-        @partner = Factory.create(:partner)
-        stub(FileUtils).mkdir_p
+        @partner = FactoryGirl.create(:partner)
+        FileUtils.stub(:mkdir_p)
         @partner.csv_path
         FileUtils.should have_received(:mkdir_p).with(File.join(Rails.root, "csv", @partner.id.to_s))
       end
       it "returns the path to the partner csv directory" do
-        @partner = Factory.create(:partner)
-        stub(FileUtils).mkdir_p
+        @partner = FactoryGirl.create(:partner)
+        FileUtils.stub(:mkdir_p)
         @partner.csv_path.should == File.join(Rails.root, "csv", @partner.id.to_s)
       end
     end
     describe "#generate_registrants_csv_file" do
       before(:each) do
-        @partner = Factory.create(:partner)        
+        @partner = FactoryGirl.create(:partner)        
         @t = Time.now
         @file = "mock_object"
-        stub(Time).now { @t }
-        stub(@partner).generate_csv_file_name { "fn.csv" }
-        stub(@partner).generate_registrants_csv { "generated_csv" }
-        stub(@partner).csv_ready=
-        stub(@partner).save!
-        stub(File).open { @file }
-        stub(@file).write { true }
-        stub(@file).close { true }
+        Time.stub(:now) { @t }
+        @partner.stub(:generate_csv_file_name) { "fn.csv" }
+        @partner.stub(:generate_registrants_csv) { "generated_csv" }
+        @partner.stub(:csv_ready=)
+        @partner.stub(:save!)
+        File.stub(:open) { @file }
+        @file.stub(:write) { true }
+        @file.stub(:close) { true }
         
-        stub(Delayed::PerformableMethod).new { "action" }
-        stub(Delayed::Job).enqueue
+        Delayed::PerformableMethod.stub(:new) { "action" }
+        Delayed::Job.stub(:enqueue)
       end
       it "generates obfuscated file names in partner directories with date/time stamp" do
         @partner.generate_registrants_csv_file
@@ -563,13 +560,13 @@ describe Partner do
   describe "registration statistics" do
     describe "by state" do
       it "should tally registrants by state" do
-        partner = Factory.create(:partner)
+        partner = FactoryGirl.create(:partner)
         3.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         2.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
           reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")
         end
         stats = partner.registration_stats_state
@@ -583,21 +580,21 @@ describe Partner do
       end
 
       it "only uses completed/step_5 registrations without finish-with-state for stats" do
-        partner = Factory.create(:partner)
+        partner = FactoryGirl.create(:partner)
         3.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         3.times do
-          reg = Factory.create(:step_4_registrant, :partner => partner)
+          reg = FactoryGirl.create(:step_4_registrant, :partner => partner)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         2.times do
-          reg = Factory.create(:step_5_registrant, :partner => partner)
+          reg = FactoryGirl.create(:step_5_registrant, :partner => partner)
           reg.update_attributes(:home_zip_code => "94101", :party => "Decline to State")
         end
         2.times do 
-          reg = Factory.create(:step_5_registrant, :partner=>partner, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg = FactoryGirl.create(:step_5_registrant, :partner=>partner, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         stats = partner.registration_stats_state
@@ -611,18 +608,18 @@ describe Partner do
       end
 
       it "should only include data for this partner" do
-        partner = Factory.create(:partner)
-        other_partner = Factory.create(:partner)
+        partner = FactoryGirl.create(:partner)
+        other_partner = FactoryGirl.create(:partner)
         3.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         3.times do
-          reg = Factory.create(:maximal_registrant, :partner => other_partner)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => other_partner)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         2.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
           reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")
         end
         stats = partner.registration_stats_state
@@ -638,9 +635,9 @@ describe Partner do
 
     describe "by race" do
       it "should tally registrants by race" do
-        partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
+        partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
         stats = partner.registration_stats_race
         assert_equal 2, stats.length
         assert_equal "Hispanic", stats[0][:race]
@@ -652,11 +649,11 @@ describe Partner do
       end
 
       it "should treat race names in different languages as equivalent" do
-        partner = Factory.create(:partner)
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispano", :locale => "es") }
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial", :locale => "es") }
+        partner = FactoryGirl.create(:partner)
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Hispano", :locale => "es") }
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Multi-racial", :locale => "es") }
         stats = partner.registration_stats_race
         assert_equal 2, stats.length
         assert_equal "Hispanic", stats[0][:race]
@@ -668,9 +665,9 @@ describe Partner do
       end
 
       it "doesn't need both English and Spanish results" do
-        partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial", :locale => "es") }
+        partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Multi-racial", :locale => "es") }
         stats = partner.registration_stats_race
         assert_equal 2, stats.length
         assert_equal "Hispanic", stats[0][:race]
@@ -682,9 +679,9 @@ describe Partner do
       end
 
       it "when the race is blank it is called 'Unknown'" do
-        partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
+        partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
         stats = partner.registration_stats_race
         assert_equal 2, stats.length
         assert_equal "Unknown", stats[0][:race]
@@ -696,10 +693,10 @@ describe Partner do
       end
 
       it "only uses completed/step_5 registrations for stats" do
-        partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
-        2.times { Factory.create(:step_4_registrant, :partner => partner, :race => "Hispanic") }
-        2.times { Factory.create(:step_5_registrant, :partner => partner, :race => "Multi-racial") }
+        partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
+        2.times { FactoryGirl.create(:step_4_registrant, :partner => partner, :race => "Hispanic") }
+        2.times { FactoryGirl.create(:step_5_registrant, :partner => partner, :race => "Multi-racial") }
         stats = partner.registration_stats_race
         assert_equal 2, stats.length
         assert_equal "Hispanic", stats[0][:race]
@@ -711,11 +708,11 @@ describe Partner do
       end
 
       it "should only include data for this partner" do
-        partner = Factory.create(:partner)
-        other_partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
-        3.times { Factory.create(:maximal_registrant, :partner => other_partner, :race => "Hispanic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
+        partner = FactoryGirl.create(:partner)
+        other_partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Hispanic") }
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :race => "Hispanic") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :race => "Multi-racial") }
         stats = partner.registration_stats_race
         assert_equal 2, stats.length
         assert_equal "Hispanic", stats[0][:race]
@@ -729,9 +726,9 @@ describe Partner do
 
     describe "by gender" do
       it "should tally registrants by gender based on name_title" do
-        partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
+        partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
         stats = partner.registration_stats_gender
         assert_equal 2, stats.length
         assert_equal "Male", stats[0][:gender]
@@ -743,11 +740,11 @@ describe Partner do
       end
 
       it "should treat titles in different languages as equivalent" do
-        partner = Factory.create(:partner)
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Sr.") }
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Sra.") }
+        partner = FactoryGirl.create(:partner)
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Sr.") }
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Sra.") }
         stats = partner.registration_stats_gender
         assert_equal 2, stats.length
         assert_equal "Male", stats[0][:gender]
@@ -759,9 +756,9 @@ describe Partner do
       end
 
       it "doesn't need both English and Spanish results" do
-        partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Sra.") }
+        partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Sra.") }
         stats = partner.registration_stats_gender
         assert_equal 2, stats.length
         assert_equal "Male", stats[0][:gender]
@@ -773,10 +770,10 @@ describe Partner do
       end
 
       it "only uses completed/step_5 registrations for stats" do
-        partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
-        2.times { Factory.create(:step_4_registrant, :partner => partner, :name_title => "Mr.") }
-        2.times { Factory.create(:step_5_registrant, :partner => partner, :name_title => "Sra.") }
+        partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { FactoryGirl.create(:step_4_registrant, :partner => partner, :name_title => "Mr.") }
+        2.times { FactoryGirl.create(:step_5_registrant, :partner => partner, :name_title => "Sra.") }
         stats = partner.registration_stats_gender
         assert_equal 2, stats.length
         assert_equal "Male", stats[0][:gender]
@@ -788,11 +785,11 @@ describe Partner do
       end
 
       it "should only include data for this partner" do
-        partner = Factory.create(:partner)
-        other_partner = Factory.create(:partner)
-        3.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
-        3.times { Factory.create(:maximal_registrant, :partner => other_partner, :name_title => "Mr.") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
+        partner = FactoryGirl.create(:partner)
+        other_partner = FactoryGirl.create(:partner)
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Mr.") }
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :name_title => "Mr.") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :name_title => "Ms.") }
         stats = partner.registration_stats_gender
         assert_equal 2, stats.length
         assert_equal "Male", stats[0][:gender]
@@ -806,12 +803,12 @@ describe Partner do
 
     describe "by registration date" do
       it "should tally registrants by date bucket" do
-        partner = Factory.create(:partner)
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
-        5.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago) }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago) }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago) }
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.years.ago) }
+        partner = FactoryGirl.create(:partner)
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        5.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago) }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago) }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago) }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.years.ago) }
         stats = partner.registration_stats_completion_date
         assert_equal  8, stats[:day_count]
         assert_equal 13, stats[:week_count]
@@ -821,39 +818,39 @@ describe Partner do
       end
 
       it "only uses completed/step_5 registrations without finish_with_state for stats" do
-        partner = Factory.create(:partner)
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
-        8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
-        8.times { Factory.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago) }
+        partner = FactoryGirl.create(:partner)
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        8.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
+        8.times { FactoryGirl.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         stats = partner.registration_stats_completion_date
         assert_equal  16, stats[:day_count]
       end
 
       it "should show percent complete" do
-        partner = Factory.create(:partner)
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
-        8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
+        partner = FactoryGirl.create(:partner)
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        8.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         stats = partner.registration_stats_completion_date
         assert_equal 0.5, stats[:percent_complete]
       end
 
       it "should not include :initial state registrants in calculations" do
-        partner = Factory.create(:partner)
-        5.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago) }
-        5.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago) }
-        5.times { Factory.create(:step_1_registrant,  :partner => partner, :created_at => 2.days.ago, :status => :initial) }
+        partner = FactoryGirl.create(:partner)
+        5.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago) }
+        5.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago) }
+        5.times { FactoryGirl.create(:step_1_registrant,  :partner => partner, :created_at => 2.days.ago, :status => :initial) }
         stats = partner.registration_stats_completion_date
         assert_equal   5, stats[:week_count]
         assert_equal 0.5, stats[:percent_complete]
       end
 
       it "should only include data for this partner" do
-        partner = Factory.create(:partner)
-        other_partner = Factory.create(:partner)
-        Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago)
-        Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago)
-        Factory.create(:maximal_registrant, :partner => other_partner, :created_at => 2.days.ago)
+        partner = FactoryGirl.create(:partner)
+        other_partner = FactoryGirl.create(:partner)
+        FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago)
+        FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago)
+        FactoryGirl.create(:maximal_registrant, :partner => other_partner, :created_at => 2.days.ago)
         stats = partner.registration_stats_completion_date
         assert_equal   1, stats[:week_count]
         assert_equal 0.5, stats[:percent_complete]
@@ -862,25 +859,25 @@ describe Partner do
 
     describe "finish-with-state by registration date & state" do
       it "should tally registrants by state and date bucket" do
-        partner = Factory.create(:partner)
+        partner = FactoryGirl.create(:partner)
         8.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         5.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
           reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")
         end
         4.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
         end
         2.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
           reg.update_attributes!(:home_zip_code => "94101", :party => "Decline to State")          
         end
         1.times do
-          reg = Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.years.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+          reg = FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.years.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")          
         end
         stats = partner.registration_stats_finish_with_state_completion_date
@@ -893,11 +890,11 @@ describe Partner do
       end
 
       it "only uses completed registrations with finish_with_state for stats" do
-        partner = Factory.create(:partner)
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
-        8.times { Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
-        8.times { Factory.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        partner = FactoryGirl.create(:partner)
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        8.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
+        8.times { FactoryGirl.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
         stats = partner.registration_stats_finish_with_state_completion_date
         assert_equal  "Massachusetts", stats[0][:state_name]
         assert_equal  8, stats[0][:day_count]
@@ -905,11 +902,11 @@ describe Partner do
       end
 
       it "should only include data for this partner" do
-        partner = Factory.create(:partner)
-        other_partner = Factory.create(:partner)
-        Factory.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
-        Factory.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
-        Factory.create(:maximal_registrant, :partner => other_partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        partner = FactoryGirl.create(:partner)
+        other_partner = FactoryGirl.create(:partner)
+        FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
+        FactoryGirl.create(:maximal_registrant, :partner => other_partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
         stats = partner.registration_stats_finish_with_state_completion_date
         assert_equal  "Massachusetts", stats[0][:state_name]
         assert_equal   1, stats[0][:week_count]
@@ -920,12 +917,12 @@ describe Partner do
 
     describe "by age" do
       it "should tally registrants count and percentage by age bracket on updated_at date" do
-        partner = Factory.create(:partner)
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
-        5.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
+        partner = FactoryGirl.create(:partner)
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
         stats = partner.registration_stats_age
         assert_equal  8, stats[:age_under_18][:count]
         assert_equal  5, stats[:age_18_to_29][:count]
@@ -940,18 +937,18 @@ describe Partner do
       end
 
       it "only uses completed/step_5 registrations for stats" do
-        partner = Factory.create(:partner)
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
-        5.times { Factory.create(:step_5_registrant,  :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
+        partner = FactoryGirl.create(:partner)
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { FactoryGirl.create(:step_5_registrant,  :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
 
-        8.times { Factory.create(:under_18_finished_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
-        8.times { Factory.create(:step_1_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
-        5.times { Factory.create(:step_2_registrant, :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
-        4.times { Factory.create(:step_3_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
-        2.times { Factory.create(:step_4_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        8.times { FactoryGirl.create(:under_18_finished_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        8.times { FactoryGirl.create(:step_1_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { FactoryGirl.create(:step_2_registrant, :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { FactoryGirl.create(:step_3_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { FactoryGirl.create(:step_4_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
 
         stats = partner.registration_stats_age
         assert_equal  8, stats[:age_under_18][:count]
@@ -962,19 +959,19 @@ describe Partner do
       end
 
       it "should only include data for this partner" do
-        partner = Factory.create(:partner)
-        other_partner = Factory.create(:partner)
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
-        5.times { Factory.create(:step_5_registrant,  :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
+        partner = FactoryGirl.create(:partner)
+        other_partner = FactoryGirl.create(:partner)
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { FactoryGirl.create(:step_5_registrant,  :partner => partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
 
-        8.times { Factory.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
-        5.times { Factory.create(:step_5_registrant,  :partner => other_partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
-        4.times { Factory.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
-        2.times { Factory.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
-        1.times { Factory.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 17.years.ago.strftime("%m/%d/%Y")) }
+        5.times { FactoryGirl.create(:step_5_registrant,  :partner => other_partner, :date_of_birth => 21.years.ago.strftime("%m/%d/%Y")) }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 31.years.ago.strftime("%m/%d/%Y")) }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 41.years.ago.strftime("%m/%d/%Y")) }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :date_of_birth => 71.years.ago.strftime("%m/%d/%Y")) }
 
         stats = partner.registration_stats_age
         assert_equal  8, stats[:age_under_18][:count]
@@ -987,12 +984,12 @@ describe Partner do
 
     describe "by party" do
       it "should tally registrants by party" do
-        partner = Factory.create(:partner)
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Democratic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Green") }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Republican") }
-        5.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Other") }
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Decline to State") }
+        partner = FactoryGirl.create(:partner)
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Democratic") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Green") }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Republican") }
+        5.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Other") }
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94114", :party => "Decline to State") }
         stats = partner.registration_stats_party
         assert_equal 5, stats.length
         assert_equal({:count => 8, :percentage => 0.40, :party => "None"},        stats[0])
@@ -1002,14 +999,14 @@ describe Partner do
         assert_equal({:count => 1, :percentage => 0.05, :party => "Democratic"},  stats[4])
       end
 
-      it "counts states that do not require party as None" do
-        partner = Factory.create(:partner)
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Democratic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Green") }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Republican") }
-        5.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Other") }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Decline to State") }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "02134") }
+      it "counts states that do not require party as 'None'" do
+        partner = FactoryGirl.create(:partner)
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Democratic") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Green") }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Republican") }
+        5.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Other") }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Decline to State") }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "02134") }
         stats = partner.registration_stats_party
         assert_equal 5, stats.length
         assert_equal({:count => 8, :percentage => 0.40, :party => "None"},        stats[0])
@@ -1020,23 +1017,23 @@ describe Partner do
       end
 
       it "should only include data for this partner" do
-        partner = Factory.create(:partner)
-        other_partner = Factory.create(:partner)
-        1.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Democratic") }
-        2.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Green") }
-        4.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Republican") }
-        5.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Other") }
-        8.times { Factory.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Decline to State") }
-        4.times { Factory.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Republican") }
-        5.times { Factory.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Other") }
-        8.times { Factory.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Decline to State") }
+        partner = FactoryGirl.create(:partner)
+        other_partner = FactoryGirl.create(:partner)
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Democratic") }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Green") }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Republican") }
+        5.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Other") }
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :home_zip_code => "94103", :party => "Decline to State") }
+        4.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Republican") }
+        5.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Other") }
+        8.times { FactoryGirl.create(:maximal_registrant, :partner => other_partner, :home_zip_code => "94103", :party => "Decline to State") }
         stats = partner.registration_stats_party
         assert_equal 5, stats.length
-        assert_equal({:count => 8, :percentage => 0.40, :party => "None"},        stats[0])
-        assert_equal({:count => 5, :percentage => 0.25, :party => "Other"},       stats[1])
-        assert_equal({:count => 4, :percentage => 0.20, :party => "Republican"},  stats[2])
-        assert_equal({:count => 2, :percentage => 0.10, :party => "Green"},       stats[3])
-        assert_equal({:count => 1, :percentage => 0.05, :party => "Democratic"},  stats[4])
+        stats.should include({:count => 8, :percentage => 0.4, :party => "None"})
+        stats.should include({:count => 5, :percentage => 0.25, :party => "Other"})
+        stats.should include({:count => 4, :percentage => 0.20, :party => "Republican"})
+        stats.should include({:count => 2, :percentage => 0.10, :party => "Green"})
+        stats.should include({:count => 1, :percentage => 0.05, :party => "Democratic"})
       end
     end
   end
@@ -1045,8 +1042,8 @@ describe Partner do
     describe "Class Methods" do
       describe ".find_by_login(login)" do
         it "returns nil if the found partner is a government partner" do
-          Factory.create(:partner, :is_government_partner=>false, :username=>"partner")
-          Factory.create(:partner, :is_government_partner=>true, :username=>"gov_partner", :government_partner_zip_code_list=>"90000")
+          FactoryGirl.create(:partner, :is_government_partner=>false, :username=>"partner")
+          FactoryGirl.create(:partner, :is_government_partner=>true, :username=>"gov_partner", :government_partner_zip_code_list=>"90000")
           
           Partner.find_by_login("partner").should be_a(Partner)
           Partner.find_by_login("gov_partner").should be_nil
@@ -1056,11 +1053,11 @@ describe Partner do
       describe ".government" do
         it "returns all government partners" do
           3.times do
-            Factory.create(:partner)
+            FactoryGirl.create(:partner)
           end
           gps = []
           3.times do
-            gps << Factory.create(:government_partner, :is_government_partner=>true)
+            gps << FactoryGirl.create(:government_partner, :is_government_partner=>true)
           end
           results = Partner.government
           results.should have(3).partners
@@ -1074,11 +1071,11 @@ describe Partner do
           ngps = []
           existing_partner_count = Partner.count
           3.times do
-            ngps << Factory.create(:partner)
+            ngps << FactoryGirl.create(:partner)
           end
           gps = []
           3.times do
-            gps << Factory.create(:government_partner, :is_government_partner=>true)
+            gps << FactoryGirl.create(:government_partner, :is_government_partner=>true)
           end
           results = Partner.standard
           results.should have(3 + existing_partner_count).partners
@@ -1091,20 +1088,20 @@ describe Partner do
     
     describe "Validations" do
       it "adds an error to government_partner_state_abbrev and government_partner_zip_code_list when both are blank" do
-        p = Factory.create(:government_partner)
+        p = FactoryGirl.create(:government_partner)
         p.government_partner_zip_codes = nil
         p.government_partner_state_id = nil
         p.valid?.should be_false
-        p.errors.on(:government_partner_state_abbrev).should_not be_nil
-        p.errors.on(:government_partner_zip_code_list).should_not be_nil
+        p.errors[:government_partner_state_abbrev].should_not be_empty
+        p.errors[:government_partner_zip_code_list].should_not be_empty
       end
       it "ads an error to government_partner_state_abbrev and government_partner_zip_code_list when both are present" do
-        p = Factory.create(:government_partner)
+        p = FactoryGirl.create(:government_partner)
         p.government_partner_state_abbrev="MA"
         p.government_partner_zip_code_list="90000"
         p.valid?.should be_false
-        p.errors.on(:government_partner_state_abbrev).should_not be_nil
-        p.errors.on(:government_partner_zip_code_list).should_not be_nil
+        p.errors[:government_partner_state_abbrev].should_not be_empty
+        p.errors[:government_partner_zip_code_list].should_not be_empty
       end
     end
     

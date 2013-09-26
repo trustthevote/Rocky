@@ -1,6 +1,6 @@
 <h1><%= t('txt.registration.step_3_header') %></h1>
 
-<% form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
+<%= form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
   <%- if @registrant.custom_step_2? %>
     <%= render :partial=> "registrants/home_address", :locals=>{:form=>form, :show_hr=>false} %>
     <%= render(:partial => 'previous', :locals => {:form => form, :show_hr=>false}) unless @registrant.first_registration? %>
@@ -16,9 +16,9 @@
     <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
     <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
 
-    <%= rollover_button(:next_step, I18n.t('txt.button.submit')) %>
+    <%= rollover_button(:next_step, I18n.t('txt.button.submit').html_safe) %>
   <%- end %>
 
   
-  <div class="back"><%= link_to t('txt.button.back'), registrant_step_2_path(@registrant) %></div>
+  <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_2_path(@registrant) %></div>
 <% end %>

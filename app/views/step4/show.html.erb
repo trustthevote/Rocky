@@ -1,6 +1,6 @@
 <h1><%= t('txt.registration.step_4_header') %></h1>
 
-<% form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
+<%= form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
   <div class="step-4">
     <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
   </div>
@@ -8,5 +8,5 @@
   <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
 
   <%= rollover_button(:review, I18n.t('txt.button.review')) %>
-  <div class="back"><%= link_to t('txt.button.back'), registrant_step_3_path(@registrant) %></div>
+  <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_3_path(@registrant) %></div>
 <% end %>

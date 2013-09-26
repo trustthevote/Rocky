@@ -22,6 +22,13 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
+
+require 'dotenv'
+Dotenv.load
+
+
+
+
 set :application, "rocky"
 set :repository,  "git@github.com:trustthevote/Rocky.git"
 
@@ -43,9 +50,10 @@ set :repository,  "git@github.com:trustthevote/Rocky.git"
 # load 'ext/passenger-mod-rails.rb'  # Restart task for use with mod_rails
 # load 'ext/web-disable-enable.rb'   # Gives you web:disable and web:enable
 
-set :deploy_to, "/var/www/register.rockthevote.com/rocky"
 
-set :stages, Dir["config/deploy/*"].map {|stage|File.basename(stage, '.rb')}
+set :deploy_to, ENV['DEPLOY_TO']
+
+set :stages, Dir["config/deploy/*"].map {|stage| File.basename(stage, '.rb')}
 set :default_stage, "production"
 require 'capistrano/ext/multistage'
 
@@ -58,13 +66,29 @@ set :group_writable, false
 set :use_sudo, false
 
 
-# before "deploy", "deploy:stop_workers"
-after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "deploy:symlink_csv", "deploy:symlink_partners"
+set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "enable"
+set :rvm_install_with_sudo, true 
+
+before 'deploy:setup', 'rvm:install_rvm'   # install RVM
+before 'deploy:setup', 'rvm:install_ruby' 
+before 'deploy:setup', 'rvm:install_passenger' 
+before 'deploy:setup', 'rvm:setup_passenger' 
+
+
+before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
+
+require "rvm/capistrano"
+
+load 'deploy/assets'
+
+
+
+after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
 
 set :rake, 'bundle exec rake'
 
-after "deploy:symlink_configs", "deploy:symlink_state_configs", "deploy:symlink_mobile_configs", "deploy:symlink_app_configs"
-before "deploy:restart", "deploy:symlink_branding", "deploy:import_states_csv"   # runs after migrations when migrating
+before "deploy:restart", "deploy:import_states_yml"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
@@ -78,22 +102,50 @@ namespace :admin do
   end
 end
 
+
+
+
+namespace :rvm do
+  
+  desc "Install passenger"
+  task :install_passenger, :roles => :app do
+    run "gem install passenger --version=3.0.19", :shell => fetch(:rvm_shell)
+  end
+  
+  desc "Install and setup RVM Passenger"
+  task :setup_passenger, :roles => :app do
+    run "passenger-install-apache2-module --auto", :shell => fetch(:rvm_shell)    
+  end
+end
+
 namespace :deploy do
-  # no more geminstaller - bundler [AMM]
-  # desc "run GemInstaller"
-  # task :geminstaller, :roles => [:app, :util] do
-  #   sudo "geminstaller -c #{current_release}/config/geminstaller.yml"
+
+  # namespace :assets do
+  #   task :precompile, :roles => :web, :except => { :no_release => true } do
+  #     from = source.next_revision(current_revision)
+  #     if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+  #       run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+  #     else
+  #       logger.info "Skipping asset pre-compilation because there were no asset changes"
+  #     end
+  #   end
   # end
 
-  desc "import states.csv data"
-  task :import_states_csv, :roles => [:app] do
+
+  before "deploy:assets:precompile", "deploy:link_db"
+  task :link_db do
+    run "ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
+  end
+  
+  desc "import states.yml data"
+  task :import_states_yml, :roles => [:app] do
     run <<-CMD
       cd #{latest_release} &&
-      bundle exec rake import:states CSV_FILE=db/bootstrap/import/states.csv
+      bundle exec rake import:states
     CMD
   end
 
-  desc "Link the database.yml and mongrel_cluster.yml files into the current release path."
+  desc "Link the database.yml, .env.{environment} files, and newrelic.yml files into the current release path."
   task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
@@ -105,70 +157,17 @@ namespace :deploy do
     CMD
     run <<-CMD
       cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/initializers/hoptoad.rb #{latest_release}/config/initializers/hoptoad.rb
+      ln -nfs #{shared_path}/.env.#{rails_env} #{latest_release}/.env.#{rails_env}
     CMD
   end
   
-  desc "Link the states_with_online_registration.yml into the current release path. Create from the example if it doesn't exist"
-  task :symlink_state_configs, :roles=>[:app, :util], :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      cp -n #{latest_release}/config/states_with_online_registration.yml.example #{shared_path}/config/states_with_online_registration.yml
-    CMD
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/states_with_online_registration.yml #{latest_release}/config/states_with_online_registration.yml
-    CMD
-  end
-  
-  desc "Link the mobile.yml configuration into the current release path. Create from the example if it doesn't exist"
-  task :symlink_mobile_configs, :roles=>[:app, :util], :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      cp -n #{latest_release}/config/mobile.yml.example #{shared_path}/config/mobile.yml
-    CMD
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/mobile.yml #{latest_release}/config/mobile.yml
-    CMD
-  end
-
-  desc "Link the app_config.yml configuration into the current release path. Create from the example if it doesn't exist"
-  task :symlink_app_configs, :roles=>[:app, :util], :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      cp -n #{latest_release}/config/app_config.yml.example #{shared_path}/config/app_config.yml
-    CMD
-    run <<-CMD
-      cd #{latest_release} &&
-      ln -nfs #{shared_path}/config/app_config.yml #{latest_release}/config/app_config.yml
-    CMD
-  end
-
-
-  desc "Install the branding gem from a local .gem file onto all servers"
-  task :install_branding, :roles => [:app, :util] do
-    local_path = ENV['GEM_FILE']
-    unless local_path
-      puts "You must provide a gem to upload and install in GEM_FILE env var."
-      exit 1
-    end
-    remote_path = File.join("/tmp", File.basename(local_path))
-    top.upload local_path, remote_path, :via => :scp
-    sudo "gem install #{remote_path}"
-  end
-
-  desc "Link the files/directories in the branding gem into the app directory structure"
-  task :symlink_branding, :roles => [:app, :util], :except => {:no_release => true} do
-    run "cd #{latest_release} && bundle exec rake branding:symlink"
-  end
 
   desc "Link the pdf dir to /data/rocky/pdf"
   task :symlink_pdf, :roles => [:util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
       rm -rf pdf &&
-      ln -nfs /data/rocky/html pdf
+      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html pdf
     CMD
   end
   
@@ -177,7 +176,7 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       rm -rf csv &&
-      ln -nfs /data/rocky/html/partner_csv csv
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv csv
     CMD
   end
 
@@ -203,44 +202,30 @@ namespace :deploy do
 
   desc "Run (or restart) worker processes on util server"
   task :run_workers, :roles => :util do
-    run "cd #{latest_release} && ruby script/rocky_runner stop"
-    run "cd #{latest_release} && ruby script/rocky_pdf_runner stop"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_runner stop"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_pdf_runner stop"
     # nasty hack to make sure it stops
     run "pkill -f com.pivotallabs.rocky.PdfServer" rescue nil
     sleep 5
-    run "cd #{latest_release} && ruby script/rocky_pdf_runner start"
-    # two job runners?
-    run "cd #{latest_release} && ruby script/rocky_runner start"
-    #run "cd #{latest_release} && ruby script/rocky_runner start"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_pdf_runner start"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_runner start"
     unset(:latest_release)
   end
 
   desc "Stop worker processes on util server"
   task :stop_workers, :roles => :util do
-    run "cd #{latest_release} && ruby script/rocky_runner stop"
-    run "cd #{latest_release} && ruby script/rocky_pdf_runner stop"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_runner stop"
+    run "cd #{latest_release} && bundle exec ruby script/rocky_pdf_runner stop"
     # nasty hack to make sure it stops
     run "pkill -f com.pivotallabs.rocky.PdfServer" rescue nil
     unset(:latest_release)
   end
 end
 
-namespace :import do
-  desc "Upload state data from CSV_FILE and restart server"
-  task :states, :roles => :app do
-    local_path = ENV['CSV_FILE'] || 'states.csv'
-    remote_dir = File.join(shared_path, "uploads")
-    remote_path = File.join(remote_dir, File.basename(local_path))
-    run "mkdir -p #{remote_dir}"
-    top.upload local_path, remote_path, :via => :scp
-    run "cd #{current_path} && bundle exec rake import:states CSV_FILE=#{remote_path}"
-    find_and_execute_task "deploy:restart"
-  end
-end
 
+require './config/boot'
 
-Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
-  $: << File.join(vendored_notifier, 'lib')
-end
+require 'airbrake/capistrano'
 
-require 'hoptoad_notifier/capistrano'
+require 'bundler/capistrano'
+

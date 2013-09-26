@@ -13,7 +13,7 @@
     <div class="logo">
       <%= image_tag @partner.logo.url(:header) %>
     </div>
-    <% form_for @partner, :url => partner_logo_path, :html => {:method => :delete} do |form| %>
+    <%= form_for @partner, :url => partner_logo_path, :html => {:method => :delete} do |form| %>
     <%= partner_rollover_button("deletelogo", "Delete Logo") %>
     <% end %>
   <% else %>
@@ -28,12 +28,12 @@
         resize your logo to those dimensions first for optimum results.</li>
   </ul>
   <h3>Logo image</h3>
-  <% if @partner.errors[:logo] %>
+  <% if @partner.errors[:logo].join("\n") %>
     <ul class="error">
-      <li><%= Array(@partner.errors[:logo]).first %></li>
+      <li><%= Array(@partner.errors[:logo].join("\n")).first %></li>
     </ul>
   <% end %>
-  <% form_for @partner, :url => partner_logo_path, :html => { :multipart => true } do |form| %>
+  <%= form_for @partner, :url => partner_logo_path, :html => { :multipart => true } do |form| %>
     <%= field_div form, :logo, :kind => "file", :size => 40 %>
     <%= partner_rollover_button("uploadlogo", "Upload Logo") %>
   <% end %>

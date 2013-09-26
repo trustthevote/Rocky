@@ -1,0 +1,213 @@
+// Place all the styles related to the state_configuration controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#state_configuration, #translations {
+  background: white;
+  padding:10px;
+  font-size: 13px;
+  line-height: 1.25em;
+  padding-bottom:75px;
+  
+  form ul {
+    zoom: 1;
+    margin: 0;
+  }
+
+  form li {
+    float: none;
+    margin-right: 0;
+  }
+  
+  h2 {
+    font-size:18px;
+  }
+  
+  .setting {
+    border:1px solid #000;
+    margin:15px 0;
+    padding:10px;
+		li.default {
+			background:#ccc;
+		}
+  }
+  
+  ul.nav {
+    li {
+      overflow:hidden;
+      span {
+        width:150px;
+        float:left;
+        
+      }
+      a {
+        float:left;
+        width:150px;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  .translation_instructions {
+    font-size: 110%;
+    padding:10px;
+    margin-top:10px;
+    background:#fDD;
+    width:800px;
+    
+    h3 {
+      font-weight:bold;
+    }
+    ul {
+      padding:0;
+      margin:0;
+      font-weight: bold;
+      li {
+        border:0;
+        list-style: disc inside none;
+        display:list-item;
+      }
+    }
+  }
+  
+  ul {
+    padding-bottom:25px;
+    padding-top:5px;
+    margin-top:5px;
+    overflow:hidden;
+    li {
+      overflow:hidden;
+      border-top:1px solid #000;
+      padding-top:5px;
+      padding-left:5px;
+      ul {
+        margin-left:20px;
+        &.locales {
+          margin-left:0;
+          padding-bottom:0;
+        }
+      }
+      .method {
+        font-weight: bold;
+      }
+      .values {
+        display: none;
+      }
+      &.translation_key_part_list {
+        border:0;
+        border-left:1px solid #aaa;
+        .translation_key_part {
+          font-weight:bold;
+        } 
+      }
+      &.locale {
+        margin-top:5px;
+        padding:5px;
+        width:800px;
+        border: 0;
+        margin-bottom:10px;
+        h4.locale_name {
+          margin-bottom:5px;
+        }
+        .translation {
+          textarea {
+            width:750px;
+            height:4em;
+          }
+          .substitution {
+            font-weight:bold;
+          }
+        }
+        ul.translation_list {
+          li {
+            height:30px;
+            width: 380px;
+            float: left;
+            input {
+              width:350px;
+            }
+          }
+          &.translatable {
+            width:400px;
+          }
+        }  
+      }
+      &.translatable {
+        background: #ccf;
+      }
+      
+      
+    }
+  }
+  #submission {
+    padding:15px 50px;
+    background: #44f;
+    position: fixed;
+    bottom:0;
+    right:0;
+    left:0;
+    input {
+      padding:10px 10px;
+      background-color:#fff;
+      font-size:110%;
+      font-weight:bold;
+    }
+  }
+  .errors, ul li.error {
+    color: #000;
+    background: #f66;
+    span.error_message, a.error_message {
+      font-weight:bold;
+      margin:8px 10px;
+      font-size:110%;
+      display:block;
+    }
+		a.error_message {
+			color: #333;
+			margin-left: 15px;
+			text-decoration:underline;
+		}
+  }
+  
+  
+}
+
+#state_configuration {
+	.locale {
+		margin-left:200px;
+	}
+	span.method {
+		width:200px;
+		float: left;
+	}
+	.value {
+		select, input[type='checkbox'] {
+			margin-left:200px;
+		}
+		input[type='text'] {
+			margin-left:200px;
+			width:600px;
+		}
+	}
+	.translation {
+		.substitution {
+			font-weight: bold;
+		}
+	}
+}
+
+#translations {
+  ul {
+    li {
+      .collapsable {
+        cursor: default;
+        padding-left:14px;
+        height:12px;
+        background:url('/admin/downArrow.png') no-repeat center left;
+      }
+      .collapsed {
+        background-image:url('/admin/collapsedArrow.png');
+      }
+    }
+  }
+}
+

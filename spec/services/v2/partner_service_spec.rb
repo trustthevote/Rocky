@@ -33,16 +33,16 @@ describe V2::PartnerService do
         }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
       end
       it 'raises an error if the api key is invalid' do
-        partner = Factory(:partner)
-        stub(Partner).find_by_id { partner }
-        stub(partner).valid_api_key? { false }
+        partner = FactoryGirl.create(:partner)
+        Partner.stub(:find_by_id) { partner }
+        partner.stub(:valid_api_key?) { false }
         lambda {
           V2::PartnerService.find(:partner_id => partner.id, :partner_api_key=>nil)
         }.should raise_error V2::PartnerService::INVALID_PARTNER_OR_API_KEY
       end
     end
     it 'should return all data' do
-      partner = Factory(:whitelabel_partner)
+      partner = FactoryGirl.create(:whitelabel_partner)
       V2::PartnerService.find(:partner_id => partner.id, :partner_api_key => partner.api_key).should == {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
@@ -53,7 +53,7 @@ describe V2::PartnerService do
         :contact_city             => partner.city,
         :contact_state            => partner.state_abbrev,
         :contact_ZIP              => partner.zip_code,
-        :logo_image_URL           => "https://#{PDF_HOST_NAME}#{partner.logo.url}",
+        :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
         :survey_question_1_en     => partner.survey_question_1_en,
         :survey_question_2_en     => partner.survey_question_2_en,
         :survey_question_1_es     => partner.survey_question_1_es,
@@ -69,12 +69,12 @@ describe V2::PartnerService do
     end
 
     it 'should return only public data' do
-      partner = Factory(:whitelabel_partner)
+      partner = FactoryGirl.create(:whitelabel_partner)
       V2::PartnerService.find({ :partner_id => partner.id, :partner_api_key => partner.api_key }, true).should == {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
         :org_privacy_url          => partner.privacy_url,
-        :logo_image_URL           => "https://#{PDF_HOST_NAME}#{partner.logo.url}",
+        :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
         :survey_question_1_en     => partner.survey_question_1_en,
         :survey_question_2_en     => partner.survey_question_2_en,
         :survey_question_1_es     => partner.survey_question_1_es,
@@ -126,30 +126,30 @@ describe V2::PartnerService do
         V2::PartnerService.create_record({})
         fail 'ValidationError is expected'
       rescue V2::RegistrationService::ValidationError => e
-        e.field.should    == 'address'
+        e.field.to_s.should    == 'address'
         e.message.should  == "Address can't be blank."
       end
     end
 
     it "raise validation errors if the logo URL is not a URI" do
       begin
-        partner = Factory.build(:api_created_partner, :logo_url=>"no_url")
-        mock(Partner).new({}) { partner }
+        partner = FactoryGirl.build(:api_created_partner, :logo_url=>"no_url")
+        Partner.stub(:new).with({}) { partner }
         V2::PartnerService.create_record({})
         fail 'ValidationError is expected'
       rescue V2::RegistrationService::ValidationError => e
-        e.field.should    == 'logo_image_URL'
+        e.field.to_s.should    == 'logo_image_URL'
         e.message.should  == "Pleave provide an HTTP url"
       end
     end
     it "raise validation errors if the logo URL can not be downloaded" do
       begin
-        partner = Factory.build(:api_created_partner, :logo_url=>"http://no_url")
-        mock(Partner).new({}) { partner }
+        partner = FactoryGirl.build(:api_created_partner, :logo_url=>"http://no_url")
+        Partner.stub(:new).with({}) { partner }
         V2::PartnerService.create_record({})
         fail 'ValidationError is expected'
       rescue V2::RegistrationService::ValidationError => e
-        e.field.should    == 'logo_image_URL'
+        e.field.to_s.should    == 'logo_image_URL'
         e.message.should  == "Could not download http://no_url for logo"
       end
     end
@@ -167,8 +167,8 @@ describe V2::PartnerService do
 
 
     context 'complete record' do
-      before { @partner = Factory.build(:api_created_partner) }
-      before { mock(Partner).new({}) { @partner } }
+      before { @partner = FactoryGirl.build(:api_created_partner) }
+      before { Partner.stub(:new).with({}) { @partner } }
 
       it 'should save the record' do
         V2::PartnerService.create_record({}).should

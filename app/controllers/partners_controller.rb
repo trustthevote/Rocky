@@ -23,6 +23,7 @@
 #
 #***** END LICENSE BLOCK *****
 class PartnersController < PartnerBase
+  layout "partners"
   before_filter :require_partner, :except => [:new, :create]
 
   ### public access

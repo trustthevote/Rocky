@@ -2,12 +2,10 @@
 # task: rake import:states
 
 namespace :import do
-  desc "Import state and state localization data from CSV_FILE"
+  desc "Import state and state localization data from the standard file"
   task :states => :environment do
-    path = ENV["CSV_FILE"] || "states.csv"
-    puts path
-    File.open(path) do |file|
-      StateImporter.import(file)
-    end
+    si = StateImporter.new
+    si.import
+    si.commit!
   end
 end

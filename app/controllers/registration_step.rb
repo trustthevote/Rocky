@@ -28,7 +28,6 @@ class RegistrationStep < ApplicationController
 
   layout "registration"
   before_filter :find_partner
-  filter_parameter_logging :state_id_number
 
   rescue_from Registrant::AbandonedRecord do |exception|
     reg = exception.registrant
@@ -110,6 +109,7 @@ class RegistrationStep < ApplicationController
     @source = params[:source]
     @tracking = params[:tracking]
     @short_form = params[:short_form]
+    @collect_email_address = params[:collectemailaddress]
   end
   
   

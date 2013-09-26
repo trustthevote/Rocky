@@ -1,0 +1,5 @@
+pdf_host_name: 'register.rockthevote.com'
+from_address: "register@rockthevote.com"
+default_url_host: "register.rockthevote.com"
+
+

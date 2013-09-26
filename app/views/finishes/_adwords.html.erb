@@ -1,0 +1,42 @@
+<% if Rails.env.production? %>
+  <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-1913089-11");
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
+  <!-- Google Code for OVR Conversion Page -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1058320021;
+    var google_conversion_language = "en";
+    var google_conversion_format = "3";
+    var google_conversion_color = "ffffff";
+    var google_conversion_label = "LWNiCL_42wEQld3S-AM";
+    var google_conversion_value = 0;
+    if (1) {
+      google_conversion_value = 1;
+    }
+    /* ]]> */
+  </script>
+  <script type="text/javascript"
+    src="//www.googleadservices.com/pagead/conversion.js">
+  </script>
+  <noscript>
+    <div style="display:inline;">
+    <img height="1" width="1" style="border-style:none;" alt=""
+      src="//www.googleadservices.com/pagead/conversion/1058320021/?value=1&amp;label=LWNiCL_42wEQld3S-AM&amp;guid=ON&amp;script=0"/>
+    </div>
+  </noscript>
+
+  <script src="//ah8.facebook.com/js/conversions/tracking.js"></script>
+  <script type="text/javascript">
+    try {
+      FB.Insights.impression({
+         'id' : 6002658041136,
+         'h' : '1d114bec56',
+         'value' : 1 // you can change this dynamically
+      });
+    } catch (e) {}
+  </script>
+<% end %>

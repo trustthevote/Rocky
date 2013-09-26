@@ -8,10 +8,12 @@
       <legend><%= t('txt.registration.step_1_header') %></legend>
 
       <ul>
-        <li>
-          <span><%= I18n.t('activerecord.attributes.registrant.email_address') %></span>
-          <div><%=h @registrant.email_address %></div>
-        </li>
+        <%- if @registrant.collect_email_address? %>
+          <li>
+            <span><%= I18n.t('activerecord.attributes.registrant.email_address') %></span>
+            <div><%=h @registrant.email_address %></div>
+          </li>
+        <%- end%>
         <li>
           <span><%= I18n.t('activerecord.attributes.registrant.home_zip_code') %></span>
           <div><%=h @registrant.home_zip_code %></div>
@@ -101,7 +103,7 @@
   </div>
 </div>
 
-<% form_for(@registrant, :url => registrant_step_5_path(@registrant)) do |form| %>
+<%= form_for(@registrant, :url => registrant_step_5_path(@registrant)) do |form| %>
   <ul class="affirm">
     <li>
       <h3>
@@ -110,15 +112,15 @@
       </h3>
     </li>
     <li>
-      <span class="error"><%= form.object.errors.on :attest_true %></span>
+      <span class="error"><%= form.object.errors[:attest_true].join("\n") %></span>
     </li>
   </ul>
 
   <%= rollover_button(:prepare, I18n.t('txt.button.prepare')) %>
   <%- if @registrant.custom_step_2? %>
-    <div class="back"><%= link_to t('txt.button.back'), registrant_step_3_path(@registrant) %></div>
+    <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_3_path(@registrant) %></div>
   <%- else %>
-    <div class="back"><%= link_to t('txt.button.back'), registrant_step_4_path(@registrant) %></div>
+    <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_4_path(@registrant) %></div>
   <%- end %>
   
 <% end %>

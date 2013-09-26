@@ -1,84 +1,146 @@
-#***** BEGIN LICENSE BLOCK *****
-#
-#Version: RTV Public License 1.0
-#
-#The contents of this file are subject to the RTV Public License Version 1.0 (the
-#"License"); you may not use this file except in compliance with the License. You
-#may obtain a copy of the License at: http://www.osdv.org/license12b/
-#
-#Software distributed under the License is distributed on an "AS IS" basis,
-#WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the
-#specific language governing rights and limitations under the License.
-#
-#The Original Code is the Online Voter Registration Assistant and Partner Portal.
-#
-#The Initial Developer of the Original Code is Rock The Vote. Portions created by
-#RockTheVote are Copyright (C) RockTheVote. All Rights Reserved. The Original
-#Code contains portions Copyright [2008] Open Source Digital Voting Foundation,
-#and such portions are licensed to you under this license by Rock the Vote under
-#permission of Open Source Digital Voting Foundation.  All Rights Reserved.
-#
-#Contributor(s): Open Source Digital Voting Foundation, RockTheVote,
-#                Pivotal Labs, Oregon State University Open Source Lab.
-#
-#***** END LICENSE BLOCK *****
-ActionController::Routing::Routes.draw do |map|
-  map.root :controller => "registrants", :action => "landing"
-  map.registrants_timeout "/registrants/timeout", :controller => "timeouts"
-  map.resources "registrants", :only => [:new, :create, :show, :update] do |reg|
-    reg.resource "step_1", :controller => "step1", :only => [:show, :update]
-    reg.resource "step_2", :controller => "step2", :only => [:show, :update]
-    reg.resource "step_3", :controller => "step3", :only => [:show, :update]
-    reg.resource "step_4", :controller => "step4", :only => [:show, :update]
-    reg.resource "step_5", :controller => "step5", :only => [:show, :update]
-    reg.resource "download", :only => :show
-    reg.resource "finish", :only => :show
-    reg.resource "ineligible", :only => [:show, :update]
-    reg.resources "tell_friends", :only => :create
-    reg.resource "state_online_registration", :only=>:show
+Rocky::Application.routes.draw do
+  
+  root :to => "registrants#landing"
+  match "/registrants/timeout", :to => "timeouts#index", :as=>'registrants_timeout'
+  resources "registrants", :only => [:new, :create, :show, :update] do
+    resource "step_1", :controller => "step1", :only => [:show, :update]
+    resource "step_2", :controller => "step2", :only => [:show, :update]
+    resource "step_3", :controller => "step3", :only => [:show, :update]
+    resource "step_4", :controller => "step4", :only => [:show, :update]
+    resource "step_5", :controller => "step5", :only => [:show, :update]
+    resource "download", :only => :show
+    resource "finish", :only => :show
+    resource "ineligible", :only => [:show, :update]
+    resources "tell_friends", :only => :create
+    resource "state_online_registration", :only=>:show
   end
 
-  map.resource  "partner_session"
-  map.login  "login",  :controller => "partner_sessions", :action => "new"
-  map.logout "logout", :controller => "partner_sessions", :action => "destroy"
+  resource  "partner_session"
+  match  "login",  :to => "partner_sessions#new", :as=>'login'
+  match "logout", :to => "partner_sessions#destroy", :as=>'logout'
 
-  map.resource "partner", :path_names => {:new => "register", :edit => "profile"},
-                          :member => {:statistics => :get, :registrations => :get, :download_csv=>:get, :embed_codes => :get} do |partner|
-    partner.resource "questions",     :only => [:edit, :update]
-    partner.resource "widget_image",  :only => [:show, :update]
-    partner.resource "logo",          :only => [:show, :update, :destroy]
-  end
-  map.widget_loader "/widget_loader.js", :format => "js", :controller => "registrants", :action => "widget_loader"
-  map.resources "password_resets", :only => [:new, :create, :edit, :update]
-
-
-  map.namespace :api do |api|
-    api.namespace :v1 do |v1|
-      v1.map '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
-      v1.map '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
-      v1.map '/state_requirements.json',  :format => 'json', :controller => 'state_requirements', :action => 'show'
+  resource "partner", :path_names => {:new => "register", :edit => "profile"} do
+    member do
+      get "statistics"
+      get "registrations"
+      get "download_csv"
+      get "embed_codes"
     end
-    api.namespace :v2 do |v2|
-      v2.map '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'index',  :conditions => { :method => :get }
-      v2.map '/registrations.json',       :format => 'json', :controller => 'registrations', :action => 'create', :conditions => { :method => :post }
-      v2.map '/state_requirements.json',  :format => 'json', :controller => 'state_requirements', :action => 'show'
-      v2.map '/partners/partner.json',    :format => 'json', :controller => 'partners', :action => 'show',  :conditions => { :method => :get }
-      v2.map '/partners.json',            :format => 'json', :controller => 'partners', :action => 'create', :conditions => { :method => :post }
-      v2.map '/gregistrationstates.json', :format => 'json', :controller => 'registration_states', :action => 'index'
-      v2.map '/partnerpublicprofiles/partner.json',
-                                          :format => 'json', :controller => 'partners', :action => 'show_public', :conditions => { :method => :get }
-      v2.map '/gregistrations.json',      :format => 'json', :controller => 'registrations', :action => 'index_gpartner', :conditions => { :method => :get }
-      v2.map '/gregistrations.json',      :format => 'json', :controller => 'registrations', :action => 'create_finish_with_state', :conditions => { :method => :post }
+    resource "questions",     :only => [:edit, :update]
+    resource "widget_image",  :only => [:show, :update]
+    resource "logo",          :only => [:show, :update, :destroy]
+  end
+  
+  match "/widget_loader.js", :format => "js", :to => "registrants#widget_loader", :as=>'widget_loader'
+  
+  resources "password_resets", :only => [:new, :create, :edit, :update]
+
+  resources "state_configurations", :only=>[:index, :show] do
+    collection do
+      post :submit
+    end
+  end
+  
+  resources "translations", :only=>[:index, :show] do
+    member do
+      post :submit
     end
   end
 
-  map.namespace :admin do |admin|
-    admin.root :controller => 'partners', :action => 'index'
-    admin.resources :partners, :member => { :regen_api_key => :get } do |p|
-      p.resources :assets, :only => [ :index, :create, :destroy ]
+  namespace :api do
+    namespace :v1 do
+      resources :registrations, :only=>[:index, :create], :format=>'json'
+      resource :state_requirements, :only=>:show, :format=>'json'
     end
-    admin.resources :government_partners
-    admin.resource :partner_zips, :only=>[:create]
+    namespace :v2 do
+      resources :registrations, :only=>[:index, :create], :format=>'json'
+      resource :state_requirements, :only=>:show, :format=>'json'
+
+      resources :partners, :only=>[:create], :format=>'json' do
+        collection do
+          get "partner", :action=>"show"
+        end
+      end
+      
+      resources :registration_states, :as=>:gregistrationstates, :format=>'json', :only=>'index'      
+      
+      resources :partners, :path=>'partnerpublicprofiles', :only=>[], :format=>'json' do
+        collection do
+          get "partner", :action=>"show_public"
+        end
+      end
+      match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'index_gpartner', :via => :get
+      match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'create_finish_with_state', :via => :post
+    end
   end
 
+  namespace :admin do
+    root :controller => 'partners', :action => 'index'
+    resources :partners do
+      member do
+        get :regen_api_key
+      end
+      resources :assets, :only => [ :index, :create, :destroy ]
+    end
+    resources :government_partners
+    resource :partner_zips, :only=>[:create]
+  end
+  
+  
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
+
+  # Sample of regular route:
+  #   match 'products/:id' => 'catalog#view'
+  # Keep in mind you can assign values other than :controller and :action
+
+  # Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
+
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
+
+  # Sample resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
+
+  # Sample resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
+
+  # Sample resource route with more complex sub-resources
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', :on => :collection
+  #     end
+  #   end
+
+  # Sample resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => 'welcome#index'
+
+  # See how all your routes lay out with "rake routes"
+
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  # match ':controller(/:action(/:id))(.:format)'
 end

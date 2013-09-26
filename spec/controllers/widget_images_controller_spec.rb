@@ -29,18 +29,18 @@ describe WidgetImagesController do
   describe "when logged in" do
     before(:each) do
       activate_authlogic
-      @partner = Factory.create(:partner, :id => 5)
+      @partner = FactoryGirl.create(:partner, :id => 5)
       PartnerSession.create(@partner)
     end
 
     describe "show" do
-      integrate_views
+      render_views
       it "shows image selection page" do
         get :show
         assert_response :success
         assert_template "show"
         assert_not_nil assigns[:partner]
-        assert_equal Partner::WIDGET_IMAGES.length, response.body.scan(%r{/images/widget/rtv-[^.]+\.gif}).length
+        assert_equal Partner::WIDGET_IMAGES.length, response.body.scan(%r{/assets/widget/rtv-[^.]+\.gif}).length
       end
     end
 

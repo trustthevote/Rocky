@@ -25,6 +25,8 @@
 class GeoState < ActiveRecord::Base
 
   has_many :localizations, :class_name => 'StateLocalization', :foreign_key => 'state_id'
+  
+  delegate :online_reg_url, :to=>:state_customization
 
   def self.[](id_or_abbrev)
     init_all_states
@@ -74,56 +76,21 @@ class GeoState < ActiveRecord::Base
     !for_zip_code(zip).nil?
   end
   
-  def self.state_online_reg_file_name
-    "config/states_with_online_registration.yml"
+  def self.states_with_online_registration
+    RockyConf.states_with_online_registration
   end
   
-  def self.states_with_online_registration
-    @@states_with_online_registration ||= nil
-    if @@states_with_online_registration.nil?
-      File.open(File.join(RAILS_ROOT, state_online_reg_file_name), "r") do |f|
-        @@states_with_online_registration = YAML::load(f)
-      end
-    end
-    @@states_with_online_registration
+  def get_localization(locale)
+    localizations.find_or_initialize_by_locale(locale.to_s)
   end
+  
+  def state_customization
+    @state_customization ||= StateCustomization.for(self)
+  end  
   
   def online_reg_enabled?
     GeoState.states_with_online_registration.include?(self.abbreviation)
   end
-  
-  
-  def online_reg_url(registrant)
-    case self.name
-      when "Arizona"
-        "https://servicearizona.com/webapp/evoter/selectLanguage"
-      when "California"
-        "http://www.registertovote.ca.gov/"
-      when "Colorado"
-        "https://www.sos.state.co.us/Voter/secuVerifyExist.do"
-      when "Washington"
-        root_url ="https://weiapplets.sos.wa.gov/myvote/myvote"
-        return root_url if registrant.nil?
-        fn = CGI.escape registrant.first_name.to_s
-        ln = CGI.escape registrant.last_name.to_s
-        dob= CGI.escape registrant.form_date_of_birth.to_s.gsub('-','/')
-        lang= registrant.locale
-        "#{root_url}?language=#{lang}&Org=RocktheVote&firstname=#{fn}&lastName=#{ln}&DOB=#{dob}"
-      when "Nevada"
-        root_url ="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&utm_source=rtv&utm_medium=rtv&utm_campaign=rtv"
-        return root_url if registrant.nil?
-        fn = CGI.escape registrant.first_name.to_s
-        mn = CGI.escape registrant.middle_name.to_s
-        ln = CGI.escape registrant.last_name.to_s
-        sf = CGI.escape registrant.name_suffix.to_s
-        zip = CGI.escape registrant.home_zip_code.to_s
-        lang = registrant.locale.to_s
-        "#{root_url}&fn=#{fn}&mn=#{mn}&ln=#{ln}&lang=#{lang}&zip=#{zip}&sf=#{sf}"
-      else
-        ""
-    end
-  end
-  
-  
+    
   
 end

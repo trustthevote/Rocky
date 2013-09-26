@@ -28,8 +28,8 @@ describe RegistrationStep do
 
   before do
     @rs = RegistrationStep.new
-    @partner = Factory(:partner)
-    @reg = Factory(:step_5_registrant, :partner => @partner)
+    @partner = FactoryGirl.create(:partner)
+    @reg = FactoryGirl.create(:step_5_registrant, :partner => @partner)
   end
 
   it 'should set partner fields' do
@@ -41,6 +41,12 @@ describe RegistrationStep do
   it 'should set registrant' do
     @rs.send(:find_registrant, nil, { :id => @reg.to_param })
     @rs.instance_variable_get("@registrant").should == @reg
+  end
+  
+  it 'should set collect_email_address' do
+    @rs.stub(:params).and_return({:collectemailaddress=>"val"})
+    @rs.send(:find_partner)
+    @rs.instance_variable_get("@collect_email_address").should == "val"
   end
   
   it "should set the registrant's finish_with_state flag to false if it was true" do

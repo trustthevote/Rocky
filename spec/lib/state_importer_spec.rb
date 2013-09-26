@@ -27,13 +27,62 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe StateImporter do
   attr_accessor :csv_basic, :file_basic
   before(:each) do
-    @csv_basic = <<CSV
-abbreviation,name,participating,not_participating_tooltip_en,not_participating_tooltip_es,requires_race,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,requires_party,parties_en,parties_es,no_party_en,no_party_es,id_length_min,id_length_max,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
-AL,Alabama,1,dead_end_en,dead_end_es,1,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
-AK,Alaska,0,dead_end_en,dead_end_es,1,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,1,"Red, Green, Blue","Rojo, Verde, Azul",no_party_en,no_party_es,10,13,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
-AZ,Arizona,1,dead_end_en,dead_end_es,0,party_tooltip_en,party_tooltip_es,race_tooltip_en,race_tooltip_es,0,,,,,8,12,id_number_tooltip_en,id_number_tooltip_es,sos_address,sos_phone,sos_url,sub_18_en,sub_18_es
-CSV
-    @file_basic = StringIO.new(@csv_basic)
+    @yml_basic = <<YML
+    defaults:
+      participating: true
+      not_participating_tooltip: blank
+      requires_race: false
+      race_tooltip: virginia
+      parties:
+        - democratic
+        - independent
+        - green
+        - libertarian
+        - republican
+        - other
+      no_party: none
+      id_length_min: '6'
+      id_length_max: '60'
+      sub_18: turn_by_next_election
+    record_0: 
+      abbreviation: AL
+      name: Alabama
+      participating: "1"
+      not_participating_tooltip: new_hampshire 
+      requires_race: "1"
+      requires_party: "1"
+      parties:
+        - independent
+        - green
+      id_length_min: "8"
+      id_length_max: "12"
+      sos_address: sos_address
+      sos_phone: sos_phone
+      sos_url: sos_url
+    record_1: 
+      abbreviation: AK
+      name: Alaska
+      participating: "0"
+      requires_race: "1"
+      requires_party: "1"
+      id_length_min: "10"
+      id_length_max: "13"
+      sos_address: sos_address
+      sos_phone: sos_phone
+      sos_url: sos_url
+    record_2: 
+      abbreviation: AZ
+      name: Arizona
+      participating: "1"
+      requires_race: "0"
+      requires_party: "0"
+      id_length_min: "8"
+      id_length_max: "12"
+      sos_address: sos_address
+      sos_phone: sos_phone
+      sos_url: sos_url
+YML
+    @file_basic = StringIO.new(@yml_basic)
   end
 
   describe "populate GeoState" do
@@ -42,7 +91,9 @@ CSV
     end
     it "sets fields in state record" do
       silence_output do
-        StateImporter.import(file_basic)
+        si = StateImporter.new(file_basic)
+        si.import
+        si.commit!
       end
 
       state = GeoState['AL']
@@ -72,8 +123,11 @@ CSV
       alabama = GeoState['AL']
       alabama.update_attributes!(:name => "ALABAMA")
       silence_output do
-        StateImporter.import(file_basic)
+        si = StateImporter.new(file_basic)
+        si.import
+        si.commit!
       end
+      
       alabama.reload
       assert_equal "Alabama", alabama.name
     end
@@ -87,49 +141,42 @@ CSV
 
     it "sets fields in each locale's record" do
       silence_output do
-        StateImporter.import(file_basic)
+        si = StateImporter.new(file_basic)
+        si.import
+        si.commit!
       end
+      
 
       state = GeoState['AL']
       en = state.localizations.find_by_locale!('en')
-      assert_equal "dead_end_en", en.not_participating_tooltip
-      assert_equal "race_tooltip_en", en.race_tooltip
-      assert_equal %w(Red Green Blue), en.parties
-      assert_equal "no_party_en", en.no_party
-      assert_equal "id_number_tooltip_en", en.id_number_tooltip
-      assert_equal "sub_18_en", en.sub_18
+      assert_equal I18n.t('states.tooltips.not_participating.new_hampshire').strip, en.not_participating_tooltip
+      assert_equal I18n.t('states.tooltips.race.virginia').strip, en.race_tooltip
+      assert_equal %w(Independent Green), en.parties
+      
       es = state.localizations.find_by_locale!('es')
-      assert_equal "dead_end_es", es.not_participating_tooltip
-      assert_equal "race_tooltip_es", es.race_tooltip
-      assert_equal %w(Rojo Verde Azul), es.parties
-      assert_equal "no_party_es", es.no_party
-      assert_equal "id_number_tooltip_es", es.id_number_tooltip
-      assert_equal "sub_18_es", es.sub_18
+      assert_equal I18n.t('states.tooltips.not_participating.new_hampshire', :locale=>:es).strip, es.not_participating_tooltip
+      assert_equal I18n.t('states.tooltips.race.virginia', :locale=>:es).strip, es.race_tooltip
+      assert_equal %w(Independiente Verde), es.parties
 
-      state = GeoState['AZ']
-      en = state.localizations.find_by_locale!('en')
-      assert_equal [], en.parties
     end
 
-    it "checks sanity of actual states.csv file" do
-      headers = File.open(Rails.root.join("db/bootstrap/import/states.csv")) do |csv_file|
-        csv_file.gets.chomp.split(",").sort
-      end.map { |h| h.gsub('"', '') }
-
-      assert_equal @csv_basic.split("\n").first.split(",").sort, headers
-    end
   end
 
   describe "reports errors" do
     attr_accessor :csv_bad, :file_bad
     before(:each) do
-      @csv_bad = <<CSV
-abbreviation,name
-A,Aa
-B,Bb
-C,Cc
-CSV
-      @file_bad = StringIO.new(@csv_bad)
+      @yml_bad = <<YML
+one:
+  abbreviation: a
+  name: Aa
+two:
+  abbreviation: b
+  name: Bb
+three:
+  abbreviation: c
+  name: Cc
+YML
+      @file_bad = StringIO.new(@yml_bad)
     end
     it "catches errors to report them" do
       old_stderr = $stderr
@@ -137,13 +184,249 @@ CSV
       $stderr = err_output
       assert_nothing_raised do
         silence_output do
-          StateImporter.import(file_bad)
+          si = StateImporter.new(file_bad)
+          si.import
+          si.commit!
         end
+        
       end
       $stderr = old_stderr
       assert_match /could not import state data/, err_output.string
     end
   end
+
+
+  describe ".new" do
+    context "without parameters passed" do
+      let(:fs) { mock(File) }
+      let(:states_hash) { {'defaults'=>"defaults"} }
+      before(:each) do
+        File.stub(:open).and_return(fs)
+        YAML.stub(:load).with(fs).and_return(states_hash)
+        fs.stub(:close).and_return(true)
+      end
+
+      it "opens the db/bootstrap/import/states yml file" do
+        File.should_receive(:open).with(Rails.root.join('db/bootstrap/import/states.yml').to_s).and_return(fs)
+        si = StateImporter.new        
+      end
+      
+      it "sets the states hash" do
+        si = StateImporter.new
+        si.states_hash.should == states_hash
+      end
+      
+      it "reads defaults from states hash" do
+        si = StateImporter.new
+        si.defaults.should == "defaults"
+        
+      end
+    
+    end
+    context "when passed a string" do
+      
+    end
+    context "when passed a file" do
+      let(:file) { mock(File) }
+      
+    end
+  end
+
+  describe ".defaults" do
+    it "returns defaults from a new instance" do
+      si = mock(StateImporter)
+      si.should_receive(:defaults).and_return("base-defaults")
+      StateImporter.should_receive(:new).and_return(si)
+      StateImporter.defaults.should == "base-defaults"
+    end
+  end
+
+  context "import" do
+    let(:states_hash) do
+      {
+        record_0: {
+          abbreviation: "AL",
+          name: "Alabama",
+          participating: "1",
+          not_participating_tooltip: "new_hampshire",
+          requires_race: "1",
+          requires_party: "1",
+          parties:
+            ["independent",
+            "green"],
+          id_length_min: "8",
+          id_length_max: "12",
+          sos_address: "sos_address",
+          sos_phone: "sos_phone",
+          sos_url: "sos_url" },
+        record_1: {
+          abbreviation: "AK",
+          name: "Alaska",
+          participating: "0",
+          requires_race: "1",
+          requires_party: "1",
+          id_length_min: "10",
+          id_length_max: "13",
+          sos_address: "sos_address",
+          sos_phone: "sos_phone",
+          sos_url: "sos_url" }
+      }
+    end
+    let(:si) { StateImporter.new }
+    before(:each) do
+      si.stub(:states_hash).and_return(states_hash)
+    end
+    describe "#import" do
+      it "runs import_state for each row in the hash" do
+        si.should_receive(:import_state).with(states_hash[:record_0])
+        si.should_receive(:import_state).with(states_hash[:record_1])
+        si.import
+      end
+    end
+    describe "#import_state(row)" do
+      let(:state) { mock(GeoState).as_null_object }
+      before(:each) do
+        @row = states_hash[:record_0].stringify_keys
+        si.stub(:import_localizations)
+      end
+      it "finds the state from the row" do
+        GeoState.should_receive('[]').with(@row['abbreviation']).and_return(GeoState.find_by_abbreviation(@row['abbreviation']))
+        si.send(:import_state, @row)
+      end
+      it "sets each method from the hash" do
+        si.stub(:get_from_row)
+        state.stub(:send)
+        StateImporter.state_settings.each do |method, yaml_key|
+          si.should_receive(:get_from_row).with(@row, yaml_key).and_return("new-val")
+          state.should_receive(:send).with("#{method}=", "new-val")
+        end
+        GeoState.stub('[]').and_return(state)
+        si.send(:import_state, @row)
+      end
+      it "adds the state to the list of imported states" do
+        si.imported_states.size.should == 0
+        si.send(:import_state, @row)       
+        si.imported_states.size.should == 1 
+      end
+      it "calls import_localizations" do
+        GeoState.stub('[]').and_return(state)
+        si.should_receive(:import_localizations).with(state, @row)
+        si.send(:import_state, @row)
+      end
+    end
+    
+    describe "#import_localizations(state, row)" do
+      let(:state) { mock(GeoState).as_null_object }
+      before(:each) do
+        @row = states_hash[:record_0].stringify_keys
+        state.stub(:name).and_return("state-name")
+        si.stub(:report_any_changes)
+      end
+      
+      it "saves the translated values for each translation key" do
+        I18n.available_locales.each do |locale|
+          loc = mock(StateLocalization)
+          state.should_receive(:get_localization).with(locale).and_return(loc)
+
+          si.should_receive(:translate_list_item).with(
+            'parties', "independent", locale, "state-name"
+          ).and_return("new-val-1")
+          
+          si.should_receive(:translate_list_item).with(
+            'parties', "green", locale, "state-name"
+          ).and_return("new-val-2")
+          loc.should_receive(:send).with("parties")
+          loc.stub(:id)
+          loc.should_receive(:send).with("parties=", ["new-val-1", "new-val-2"])
+          
+          StateImporter.state_localizations.each do |method|
+            si.should_receive(:translate_from_row).with(
+                @row, method, locale, "state-name"
+            ).and_return("new-val")
+            loc.should_receive(:send).with(method)
+            loc.should_receive(:send).with("#{method}=", "new-val")          
+          end
+        end
+        si.send(:import_localizations, state, @row)
+      end
+      it "adds the state to the list of imported states" do
+        si.imported_locales.size.should == 0
+        si.send(:import_localizations, state, @row)       
+        si.imported_locales.size.should == I18n.available_locales.size
+      end
+      
+    end
+
+    describe "#commit!" do
+      let(:si) { StateImporter.new }
+      let(:state) { mock(GeoState) }
+      let(:loc) { mock(StateLocalization) }
+      before(:each) do
+        state.stub(:save!)
+        loc.stub(:save!)
+        si.stub(:imported_states).and_return([state])
+        si.stub(:imported_locales).and_return([loc])
+      end
+      it "saves each state in the imported_states list" do
+        state.should_receive(:save!)
+        si.commit!
+      end
+      it "saves each localization in the imported_localizations list" do
+        loc.should_receive(:save!)
+        si.commit!
+      end
+
+    end
+    
+    describe "#get_from_row(row, key)" do
+      it "selects the key from the row when present" do
+        si.send(:get_from_row, {'a'=>"b"}, 'a').should == 'b'
+      end
+      it "selects the key from the defaults when missing" do
+        si.stub(:defaults).and_return({'c'=>'d'})
+        si.send(:get_from_row, {'a'=>"b"}, 'c').should == 'd'
+      end
+    end
+    
+    describe "#translate_from_row(row, key, locale, state_name='')" do
+      it "calls the class translate_key" do        
+        StateImporter.should_receive(:translate_key).with('b', 'a', 'locale', 'state-name')
+        si.send(:translate_from_row, {'a'=>"b"}, 'a','locale','state-name')
+        
+        StateImporter.should_receive(:translate_key).with('d', 'c', 'locale', 'state-name')
+        si.stub(:defaults).and_return({'c'=>'d'})
+        si.send(:translate_from_row, {'a'=>"b"}, 'c','locale','state-name')
+      end
+    end
+    
+    describe "self.translate_list_item(list_key, item_key, locale, state_name='')" do
+      it "translates within the states namespace" do
+        I18n.should_receive(:t).with("states.list_key.item_key", 
+          :locale=>"locale", 
+          :state_name=>"state_name")
+        StateImporter.translate_list_item("list_key", "item_key", "locale", "state_name")
+      end
+    end
+    
+    describe "self.get_loc_part(key)" do
+      it "returns values according to this list" do
+        loc_keys = {
+          not_participating_tooltip: 'states.tooltips.not_participating', #blank
+          race_tooltip: 'states.tooltips.race', #not_required_but_appreciated_with_state_name
+          no_party: 'states.no_party_label', #none
+          sub_18: 'states.sub_18', # turn_by_next_election
+          race_tooltip: 'states.tooltips.race', #required_with_state_name 
+          party_tooltip: 'states.tooltips.party', #not_required_can_choose_any
+          id_number_tooltip: 'states.tooltips.id_number', #ssn_or_none_5
+          sub_18: 'states.sub_18' #be_by_next_election
+        }
+        loc_keys.each do |key, return_value|
+          StateImporter.get_loc_part(key.to_s).should == return_value
+        end
+      end
+    end
+  end
+
 
   def silence_output
     old_stdout = $stdout

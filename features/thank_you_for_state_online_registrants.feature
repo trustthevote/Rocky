@@ -8,9 +8,9 @@ Feature: Thank you email for registrants who choose to register online with a st
   Scenario: Registrant goes to the state online registration page
     Given I have completed step 1 as a resident of "Washington" state
     When I go to the step 2 page
-    And I select "Mr." from "title"
-    And I fill in "first" with "John"
-    And I fill in "last" with "Public"
+    And I select "Mr." from "Title"
+    And I fill in "First" with "John"
+    And I fill in "Last" with "Public"
     And I choose "I have a current WA state identification card or driver's license"
     And I press "registrant_state_online_registration"
     Then I should be recorded as having selected to finish with the state
@@ -31,9 +31,9 @@ Feature: Thank you email for registrants who choose to register online with a st
   Scenario: Registrant who finished online gets sent a thank-you email
     Given I have completed step 1 as a resident of "Washington" state
     When I go to the step 2 page
-    And I select "Mr." from "title"
-    And I fill in "first" with "John"
-    And I fill in "last" with "Public"
+    And I select "Mr." from "Title"
+    And I fill in "First" with "John"
+    And I fill in "Last" with "Public"
     And I choose "I have a current WA state identification card or driver's license"
     And I press "registrant_state_online_registration"
     And my session expires
@@ -48,9 +48,9 @@ Feature: Thank you email for registrants who choose to register online with a st
       | Opt-in Partner | true           | true               | alexmek+partner-email@gmail.com | true         |
     Given I have completed step 1 as a resident of "Washington" state from that partner
     When I go to the step 2 page
-    And I select "Mr." from "title"
-    And I fill in "first" with "John"
-    And I fill in "last" with "Public"
+    And I select "Mr." from "Title"
+    And I fill in "First" with "John"
+    And I fill in "Last" with "Public"
     And I choose "I have a current WA state identification card or driver's license"
     And I press "registrant_state_online_registration"
     And my session expires
@@ -65,9 +65,9 @@ Feature: Thank you email for registrants who choose to register online with a st
       | Opt-in Partner | true           | true               | alexmek+partner-email@gmail.com | false        |
     Given I have completed step 1 as a resident of "Washington" state from that partner
     When I go to the step 2 page
-    And I select "Mr." from "title"
-    And I fill in "first" with "John"
-    And I fill in "last" with "Public"
+    And I select "Mr." from "Title"
+    And I fill in "First" with "John"
+    And I fill in "Last" with "Public"
     And I choose "I have a current WA state identification card or driver's license"
     And I press "registrant_state_online_registration"
     And my session expires
@@ -96,9 +96,9 @@ Feature: Thank you email for registrants who choose to register online with a st
   Scenario: Registrant who finished online but hasn't expired yet doesn't get sent a thank-you email
     Given I have completed step 1 as a resident of "Washington" state
     When I go to the step 2 page
-    And I select "Mr." from "title"
-    And I fill in "first" with "John"
-    And I fill in "last" with "Public"
+    And I select "Mr." from "Title"
+    And I fill in "First" with "John"
+    And I fill in "Last" with "Public"
     And I choose "I have a current WA state identification card or driver's license"
     And I press "registrant_state_online_registration"
     And the timeout_stale_registrations task has run
@@ -109,9 +109,9 @@ Feature: Thank you email for registrants who choose to register online with a st
   Scenario: Registrant who at one point finished online but went back to the RTV form and had their session expire doesn't get sent a thank you email
     Given I have completed step 1 as a resident of "Washington" state
     When I go to the step 2 page
-    And I select "Mr." from "title"
-    And I fill in "first" with "John"
-    And I fill in "last" with "Public"
+    And I select "Mr." from "Title"
+    And I fill in "First" with "John"
+    And I fill in "Last" with "Public"
     And I choose "I have a current WA state identification card or driver's license"
     And I press "registrant_state_online_registration"
     And I follow "finish your registration with Rock the Vote"

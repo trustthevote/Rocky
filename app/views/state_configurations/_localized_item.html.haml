@@ -1,0 +1,41 @@
+- using_default ||= false
+%span.method= key
+%span.translation_key= value
+- if StateImporter.is_localization_list?(key)
+  - options = []
+  .value
+    - if key_has_default(key, state)
+      %br
+      = check_box_tag("config[#{state}.#{(key).to_s}][]", "DEFAULT", using_default)
+      = "use default? (#{@defaults[key]})"
+      %br
+      
+    
+    - StateImporter.config_options(key).each do |key_part,lang_values| 
+      %br
+      = check_box_tag("config[#{state}.#{key.to_s}][]", key_part, value.include?(key_part.to_s))
+      - lang_values.each do |locale, yml_v| 
+        = locale
+        = StateImporter.translate_key(key_part, key, locale, "<span class='substitution'>#{state_key_values['name'] || 'STATE_NAME'}</span>").html_safe                
+- else
+  .values{:id=>"#{state}_#{StateImporter.get_loc_part(key).to_s}"}
+    - options = []
+    - if key_has_default(key, state)
+      - options << ['DEFAULT', "DEFAULT"]
+      - translations = {}
+      - I18n.available_locales.each do |locale|
+        - translations[locale] = StateImporter.translate_key(@defaults[key], key, locale, "<span class='substitution'>#{state_key_values['name'] || 'STATE_NAME'}</span>").html_safe
+      .option{:class=>'DEFAULT'}= translations.to_json
+    
+    - StateImporter.config_options(key).each do |key_part,lang_values| #[k.to_s,k.to_s]
+      - options << [key_part.to_s, key_part.to_s]
+      - translations = {}
+      - lang_values.each do |locale, yml_v| 
+        - translations[locale] = StateImporter.translate_key(key_part, key, locale, "<span class='substitution'>#{state_key_values['name'] || 'STATE_NAME'}</span>").html_safe
+      .option{:class=>key_part.to_s}= translations.to_json
+  .value= select_tag("config[#{state}.#{(key).to_s}]", options_for_select(options, using_default ? 'DEFAULT' : value.to_s))
+  %br
+  - I18n.available_locales.each do |locale|
+    .locale{:class=>"locale_#{locale}"}
+      %h4.locale_name= locale           
+      .translation= StateImporter.translate_key(value, key, locale, "<span class='substitution'>#{state_key_values['name'] || 'STATE_NAME'}</span>").html_safe

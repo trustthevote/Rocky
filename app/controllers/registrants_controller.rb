@@ -39,6 +39,7 @@ class RegistrantsController < RegistrationStep
     options[:source] = params[:source] if params[:source]
     options[:tracking] = params[:tracking] if params[:tracking]
     options[:short_form] = params[:short_form] if params[:short_form]
+    options[:collectemailaddress] = params[:collectemailaddress] if params[:collectemailaddress]
     options.merge!(:protocol => "https") unless Rails.env.development?
     redirect_to new_registrant_url(options)
   end
@@ -47,9 +48,9 @@ class RegistrantsController < RegistrationStep
   def new
     set_up_locale
     if MobileConfig.is_mobile_request?(request)
-      redirect_to MobileConfig.redirect_url(:partner=>@partner_id, :locale=>@locale, :source=>@source, :tracking=>@tracking)
+      redirect_to MobileConfig.redirect_url(:partner=>@partner_id, :locale=>@locale, :source=>@source, :tracking=>@tracking, :collectemailaddress=>@collect_email_address)
     else
-      @registrant = Registrant.new(:partner_id => @partner_id, :locale => @locale, :tracking_source => @source, :tracking_id=>@tracking, :short_form=>@short_form)
+      @registrant = Registrant.new(:partner_id => @partner_id, :locale => @locale, :tracking_source => @source, :tracking_id=>@tracking, :short_form=>@short_form, :collect_email_address=>@collect_email_address)
       render "show"
     end
   end
@@ -62,7 +63,8 @@ class RegistrantsController < RegistrationStep
                                     :partner_id => @partner_id,
                                     :tracking_source => @source,
                                     :tracking_id => @tracking,
-                                    :short_form => @short_form))
+                                    :short_form => @short_form,
+                                    :collect_email_address => @collect_email_address))
                                     
     if @registrant.partner.primary?
       @registrant.opt_in_email = true
@@ -89,7 +91,6 @@ class RegistrantsController < RegistrationStep
   def set_up_locale
     @locale = params[:locale] || 'en'
     I18n.locale = @locale.to_sym
-    @alt_locale = (@locale == 'en' ? 'es' : 'en')
   end
 
   def advance_to_next_step

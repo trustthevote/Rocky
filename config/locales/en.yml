@@ -1,0 +1,109 @@
+en:
+  language_name: English
+  activerecord:
+    attributes:
+      partner:
+        from_email: From Email
+        url: URL
+      registrant:
+        date_of_birth: Date of Birth
+        email_address: Email Address
+        first_registration: I am registering to vote for the first time.
+        home_zip_code: ZIP Code
+        us_citizen: I am a U.S. citizen.
+        name_title: Title
+        first_name: First
+        middle_name: Middle
+        last_name: Last
+        name_suffix: Suffix
+        home_address: Address
+        home_unit: "Unit/Lot #"
+        home_city: City
+        home_state_name: State
+        has_mailing_address: I get my mail at a different address from the one above.
+        mailing_address: Address
+        mailing_unit: "Unit/Lot #"
+        mailing_city: City
+        mailing_state_abbrev: State
+        mailing_zip_code: ZIP Code
+        party: Party
+        race: Race
+        state_id_number: ID Number
+        phone: Phone
+        phone_type: Type
+        change_of_name: I have changed my name.
+        prev_name_title: Title
+        prev_first_name: First
+        prev_middle_name: Middle
+        prev_last_name: Last
+        prev_name_suffix: Suffix
+        change_of_address: I have changed my address.
+        prev_address: Address
+        prev_unit: "Unit/Lot #"
+        prev_city: City
+        prev_state_abbrev: State
+        prev_zip_code: ZIP Code
+        opt_in_email: Receive emails
+        opt_in_sms: Receive txt messages
+        attest_true: I have reviewed the above information, and it is true and accurate to the best of my knowledge.
+        tell_from: From
+        tell_email: Your Email
+        tell_recipients: Recipients
+        tell_subject: Subject
+        tell_message: Personal Message
+    errors:
+      models:
+        registrant:
+          blank: "Required"
+          invalid_zip: "Invalid ZIP"
+          attributes:
+            home_zip_code:
+              invalid: "Use ZIP or ZIP+4"
+            mailing_zip_code:
+              invalid: "Use ZIP or ZIP+4"
+            prev_zip_code:
+              invalid: "Use ZIP or ZIP+4"
+            email_address:
+              invalid: "Not a valid address"
+            date_of_birth:
+              format: "Should be MM-DD-YYYY"
+            phone:
+              invalid: "Should be ###-###-####"
+              required_if_opt_in: "Required if receiving TXT"
+            attest_true:
+              accepted: "You must indicate whether the above information is correct."
+            has_state_license:
+              inclusion: Please indicate whether you have a valid state license
+      messages:
+        inclusion: "%{attribute} is not included in the list."
+        exclusion: "%{attribute} is reserved."
+        invalid: "%{attribute} is invalid."
+        confirmation: "%{attribute} doesn't match confirmation."
+        accepted: "%{attribute} must be accepted."
+        empty: "%{attribute} can't be empty."
+        blank: "%{attribute} can't be blank."
+        too_long: "%{attribute} is too long (maximum is %{count} characters)."
+        too_short: "%{attribute} is too short (minimum is %{count} characters)."
+        wrong_length: "%{attribute} is the wrong length (should be %{count} characters)."
+        taken: "%{attribute} has already been taken."
+        not_a_number: "%{attribute} is not a number."
+        greater_than: "%{attribute} must be greater than %{count}."
+        greater_than_or_equal_to: "%{attribute} must be greater than or equal to %{count}."
+        equal_to: "%{attribute} must be equal to %{count}."
+        less_than: "%{attribute} must be less than %{count}."
+        less_than_or_equal_to: "%{attribute} must be less than or equal to %{count}."
+        odd: "%{attribute} must be odd."
+        even: "%{attribute} must be even."
+  authlogic:
+    error_messages:
+      login_blank: "Login cannot be blank."
+      login_not_found: "Login/password combination is not valid."
+      login_invalid: "Username should use only letters, numbers, spaces, and .-_@ please."
+      consecutive_failed_logins_limit_exceeded: "Consecutive failed logins limit exceeded, account is disabled."
+      email_invalid: "Email is not a valid address."
+      password_blank: "Password can not be blank."
+      password_invalid: "Login/password combination is not valid."
+      not_active: "Your account is not active."
+      not_confirmed: "Your account is not confirmed."
+      not_approved: "Your account is not approved."
+      no_authentication_details: "You did not provide any details for authentication."

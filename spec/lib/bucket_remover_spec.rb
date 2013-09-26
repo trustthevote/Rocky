@@ -26,7 +26,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe BucketRemover do
   before(:each) do
-    stub(AppConfig).pdf_expiration_days { 14.days }
+    AppConfig.stub(:pdf_expiration_days) { 14.days }
     @folder_name = Rails.root.join("tmp/pdf_#{$$}_#{Time.now.to_i}_#{Time.now.usec.to_i}")
     (21..30).each do |i|
       file_name = "#{@folder_name}/d.#{i}"
@@ -34,7 +34,7 @@ describe BucketRemover do
     end
 
     @remover = BucketRemover.new
-    stub(@remover).pdf_root { @folder_name }
+    @remover.stub(:pdf_root) { @folder_name }
   end
 
   def create_dir_in_past(path, ago)

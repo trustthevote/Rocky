@@ -1,0 +1,357 @@
+geo_state_0:
+  id: '1'
+  abbreviation: AL
+  name: Alabama
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_1:
+  id: '2'
+  abbreviation: AK
+  name: Alaska
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_2:
+  id: '3'
+  abbreviation: AZ
+  name: Arizona
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_3:
+  id: '4'
+  abbreviation: AR
+  name: Arkansas
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_4:
+  id: '5'
+  abbreviation: CA
+  name: California
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_5:
+  id: '6'
+  abbreviation: CO
+  name: Colorado
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_6:
+  id: '7'
+  abbreviation: CT
+  name: Connecticut
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_7:
+  id: '8'
+  abbreviation: DE
+  name: Delaware
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_8:
+  id: '9'
+  abbreviation: DC
+  name: District of Columbia
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_9:
+  id: '10'
+  abbreviation: FL
+  name: Florida
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_10:
+  id: '11'
+  abbreviation: GA
+  name: Georgia
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_11:
+  id: '12'
+  abbreviation: HI
+  name: Hawaii
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_12:
+  id: '13'
+  abbreviation: ID
+  name: Idaho
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_13:
+  id: '14'
+  abbreviation: IL
+  name: Illinois
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_14:
+  id: '15'
+  abbreviation: IN
+  name: Indiana
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_15:
+  id: '16'
+  abbreviation: IA
+  name: Iowa
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_16:
+  id: '17'
+  abbreviation: KS
+  name: Kansas
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_17:
+  id: '18'
+  abbreviation: KY
+  name: Kentucky
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_18:
+  id: '19'
+  abbreviation: LA
+  name: Louisiana
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_19:
+  id: '20'
+  abbreviation: ME
+  name: Maine
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_20:
+  id: '21'
+  abbreviation: MD
+  name: Maryland
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_21:
+  id: '22'
+  abbreviation: MA
+  name: Massachusetts
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_22:
+  id: '23'
+  abbreviation: MI
+  name: Michigan
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_23:
+  id: '24'
+  abbreviation: MN
+  name: Minnesota
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_24:
+  id: '25'
+  abbreviation: MS
+  name: Mississippi
+  requires_race: '1'
+  requires_party: '1'
+  participating: '1'
+geo_state_25:
+  id: '26'
+  abbreviation: MO
+  name: Missouri
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_26:
+  id: '27'
+  abbreviation: MT
+  name: Montana
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_27:
+  id: '28'
+  abbreviation: NE
+  name: Nebraska
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_28:
+  id: '29'
+  abbreviation: NV
+  name: Nevada
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_29:
+  id: '30'
+  abbreviation: NH
+  name: New Hampshire
+  requires_race: '0'
+  requires_party: '0'
+  participating: '0'
+geo_state_30:
+  id: '31'
+  abbreviation: NJ
+  name: New Jersey
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_31:
+  id: '32'
+  abbreviation: NM
+  name: New Mexico
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_32:
+  id: '33'
+  abbreviation: NY
+  name: New York
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_33:
+  id: '34'
+  abbreviation: NC
+  name: North Carolina
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_34:
+  id: '35'
+  abbreviation: ND
+  name: North Dakota
+  requires_race: '0'
+  requires_party: '0'
+  participating: '0'
+geo_state_35:
+  id: '36'
+  abbreviation: OH
+  name: Ohio
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_36:
+  id: '37'
+  abbreviation: OK
+  name: Oklahoma
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_37:
+  id: '38'
+  abbreviation: OR
+  name: Oregon
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_38:
+  id: '39'
+  abbreviation: PA
+  name: Pennsylvania
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_39:
+  id: '40'
+  abbreviation: RI
+  name: Rhode Island
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_40:
+  id: '41'
+  abbreviation: SC
+  name: South Carolina
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_41:
+  id: '42'
+  abbreviation: SD
+  name: South Dakota
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_42:
+  id: '43'
+  abbreviation: TN
+  name: Tennessee
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_43:
+  id: '44'
+  abbreviation: TX
+  name: Texas
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_44:
+  id: '45'
+  abbreviation: UT
+  name: Utah
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_45:
+  id: '46'
+  abbreviation: VT
+  name: Vermont
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_46:
+  id: '47'
+  abbreviation: VA
+  name: Virginia
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_47:
+  id: '48'
+  abbreviation: WA
+  name: Washington
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_48:
+  id: '49'
+  abbreviation: WV
+  name: West Virginia
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_49:
+  id: '50'
+  abbreviation: WI
+  name: Wisconsin
+  requires_race: '0'
+  requires_party: '0'
+  participating: '1'
+geo_state_50:
+  id: '51'
+  abbreviation: WY
+  name: Wyoming
+  requires_race: '0'
+  requires_party: '0'
+  participating: '0'
