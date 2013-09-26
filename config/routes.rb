@@ -87,6 +87,7 @@ Rocky::Application.routes.draw do
     resource :partner_zips, :only=>[:create]
   end
   
+  get '/system/partners/logos/:id1/:id2/:id3/:style/:filename.:ext', to: "fileserving#partner_logo"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
