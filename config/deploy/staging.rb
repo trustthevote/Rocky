@@ -29,4 +29,4 @@ role :db,   ENV['STAGING_DB'], :primary => true
 
 set :rails_env,    "staging"
 
-set :branch, "staging_for_pdf_slow"
+set :branch, "master"
