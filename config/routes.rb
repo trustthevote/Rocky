@@ -55,6 +55,7 @@ Rocky::Application.routes.draw do
     namespace :v2 do
       resources :registrations, :only=>[:index, :create], :format=>'json'
       resource :state_requirements, :only=>:show, :format=>'json'
+      post "state_requirements", :to=>"state_requirements#show", :format=>'json'
 
       resources :partners, :only=>[:create], :format=>'json' do
         collection do
