@@ -42,7 +42,7 @@ class StateImporter
 
   #list of conf_keys with values that are I18n key-parts
   def self.state_localizations
-    %w(not_participating_tooltip race_tooltip party_tooltip no_party id_number_tooltip sub_18)
+    %w(not_participating_tooltip race_tooltip party_tooltip no_party id_number_tooltip sub_18 registration_deadline)
   end
   
   #list of conf_keys with values that are arrays

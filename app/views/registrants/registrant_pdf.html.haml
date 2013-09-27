@@ -1,6 +1,6 @@
 %div.page#page_1
   #logo= wicked_pdf_image_tag RockyConf.pdf.nvra.page1.default_logo
-  %h1.title= I18n.t('pdf.nvra.page1.title', :locale=>@locale).html_safe
+  %h1.title= I18n.t('pdf.nvra.page1.title').html_safe
   %h2.subtitle= I18n.t('pdf.nvra.page1.subtitle', :locale=>@locale).html_safe
   %p.top_paragraph= I18n.t('pdf.nvra.page1.top_paragraph', :locale=>@locale).html_safe
   %table#instructions_table
@@ -10,18 +10,24 @@
         %p= I18n.t('pdf.nvra.page1.instructions_block.subtitle', :locale=>@locale).html_safe
         %ol
           %li= I18n.t('pdf.nvra.page1.instructions_block.step1', :locale=>@locale).html_safe
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step2', :locale=>@locale).html_safe
+          %li
+            = I18n.t('pdf.nvra.page1.instructions_block.step2', :locale=>@locale).html_safe
+            .mailer
+              .instructions= I18n.t('pdf.nvra.page1.instructions_block.step2mailer', :locale=>@locale).html_safe
+              .image= wicked_pdf_image_tag("pdf/mailer.png")
           %li= I18n.t('pdf.nvra.page1.instructions_block.step3', :locale=>@locale).html_safe
           %li= I18n.t('pdf.nvra.page1.instructions_block.step4', :locale=>@locale).html_safe
           %li= I18n.t('pdf.nvra.page1.instructions_block.step5', :locale=>@locale).html_safe
       %td.submit_block
         %h4.title= I18n.t('pdf.nvra.page1.submit_block.title', :locale=>@locale).html_safe
+        %p= @state.registrar_address.html_safe
     %tr
       %td.deadline_block
         %h4.title= I18n.t('pdf.nvra.page1.deadline_block.title', :locale=>@locale).html_safe
+        %p= @registrant.registration_deadline
     %tr
       %td.other_block
-        %h4.title= I18n.t('pdf.nvra.page1.other_block', :locale=>@locale).html_safe
+        %h4.title= I18n.t('pdf.nvra.page1.other_block', :instructions_url=>@registrant_instructions_link).html_safe
   %h3.bottom_title= I18n.t('pdf.nvra.page1.bottom_block.title', :locale=>@locale).html_safe
   %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph1', :locale=>@locale).html_safe
   %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph2', :locale=>@locale).html_safe
@@ -35,6 +41,7 @@
   %table.form
     %tr#topblock
       %td.items
+        .value.value1= @registrant.yes_no_us_citizen?
         .item1= I18n.t('pdf.nvra.page2.topblock.item1', :locale=>@locale).html_safe
         .item2= I18n.t('pdf.nvra.page2.topblock.item2', :locale=>@locale).html_safe
         .item3= I18n.t('pdf.nvra.page2.topblock.item3', :locale=>@locale).html_safe
@@ -197,10 +204,15 @@
           .address_map_wrapper
             .address_map= wicked_pdf_image_tag("pdf/address_map.png")
             %ul.instructions 
-              %li TBD 
-              %li TBD 
-              %li TBD
-            .example_label TBDTBDTBD [Example]
+              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet1', :locale=>@locale).html_safe
+              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet2', :locale=>@locale).html_safe
+              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet3', :locale=>@locale).html_safe
+            .example.label= I18n.t('pdf.nvra.page2.blockC.example.title', :locale=>@locale).html_safe
+            .example.store= I18n.t('pdf.nvra.page2.blockC.example.grocery_store', :locale=>@locale).html_safe
+            .example.school= I18n.t('pdf.nvra.page2.blockC.example.public_school', :locale=>@locale).html_safe
+            .example.street1= I18n.t('pdf.nvra.page2.blockC.example.street1', :locale=>@locale).html_safe
+            .example.street2= I18n.t('pdf.nvra.page2.blockC.example.street2', :locale=>@locale).html_safe
+            .north= I18n.t('pdf.nvra.page2.blockC.north', :locale=>@locale).html_safe
           
     
     %p.block_title.blockD= I18n.t('pdf.nvra.page2.blockD.title', :locale=>@locale).html_safe
@@ -211,3 +223,10 @@
           .value
     %h4.bottom_half_footer
       = I18n.t('pdf.nvra.page2.bottom_half_footer', :locale=>@locale).html_safe
+
+.page#page_3
+  #page_3_wrapper
+    #page_3_background= wicked_pdf_image_tag("pdf/page_3.png")
+    %h1= I18n.t('pdf.nvra.page3.fouo', :locale=>@locale).html_safe
+    #address
+      .line.line1= @state.registrar_address.html_safe

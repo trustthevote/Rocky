@@ -585,6 +585,16 @@ class Registrant < ActiveRecord::Base
   def home_state_not_participating_text
     localization.not_participating_tooltip
   end
+  
+  def registration_deadline
+    localization.registration_deadline
+  end
+  
+  def registration_instructions_url
+    RockyConf.pdf.nvra.page1.other_block.instructions_url.gsub(
+      "<LOCALE>",locale
+    ).gsub("<STATE>",home_state_abbrev)
+  end
 
   def under_18_instructions_for_home_state
     I18n.t('txt.registration.instructions.under_18',
@@ -763,8 +773,18 @@ class Registrant < ActiveRecord::Base
   end
 
   def generate_pdf
+    return false if self.locale.nil? || self.home_state.nil?
+    renderer = PdfRenderer.new
+    renderer.locale=self.locale
+    renderer.registrant=self
+    renderer.state=self.home_state
     pdf = WickedPdf.new.pdf_from_string(
-      PdfRenderer.new.render_to_string('registrants/registrant_pdf.html.haml', :layout => 'layouts/nvra', :locale=>self.locale)
+      renderer.render_to_string(
+        'registrants/registrant_pdf.html.haml', 
+        :layout => 'layouts/nvra'
+      ),
+      :disable_internal_links         => false,
+      :disable_external_links         => false
     )
     
     File.open("tmpPdfGen.pdf", "wb") do |f|
@@ -1096,7 +1116,16 @@ class Registrant < ActiveRecord::Base
   def yes_no(attribute)
     attribute ? "Yes" : "No"
   end
-
+  
+  def method_missing(sym, *args)
+    if sym.to_s =~ /^yes_no_(.+)$/
+      attribute = $1
+      return self.send(:yes_no, (self.send(attribute)))
+    else
+      super
+    end
+  end
+  
   def ineligible_reason
     case
     when ineligible_non_citizen? then "Not a US citizen"

@@ -23,7 +23,7 @@ b, strong {
 p {
 	padding-bottom: 1em;
 	font-size: $fs;
-	line-height:1.6em;
+	line-height:1.5em;
 }
 
 
@@ -80,6 +80,18 @@ p {
 					list-style-position: outside;
 					list-style-type: decimal;
 					padding-bottom:1em;
+					.mailer {
+						overflow: hidden;
+						padding:20px 0 0;
+						.instructions, .image {
+							float: left;
+						}
+						.instructions {
+							font-size: 1.2 * $fs;
+							width: 425px;
+							padding:50px 80px 0;
+						}
+					}
 				}
 			}
 		}
@@ -88,6 +100,9 @@ p {
 			h4 {
 				text-transform:uppercase;
 				font-size:.7 * $fs;
+				a {
+					text-transform:none;
+				}
 			}
 			width:40%;
 			padding:2.5%;
@@ -95,10 +110,11 @@ p {
 	}
 	
 	h3.bottom_title {
-		padding:1em 0;
-		font-size: 2.5 * $fs;
+		padding:.7em 0;
+		font-size: 1.6 * $fs;
 		line-height:1em;
 		text-transform:uppercase;
+		font-weight: normal;
 	}
 	
 }
@@ -147,6 +163,9 @@ p {
 				div {
 					padding-bottom:.25em;
 					line-height: 1.4em;
+				}
+				.value {
+					float: right;
 				}
 				.item3 {
 					font-weight: bold;
@@ -311,10 +330,10 @@ p {
 			color: $red;
 			font-style: italic;
 			font-weight: bold;
-			font-size: 1.75 * $fs;
+			font-size: 1.5 * $fs;
 		}
 		p.block_title {
-			padding-top:1.25em;
+			padding-top:1em;
 			padding-bottom:.25em;
 			line-height: 1.25em;
 			font-size: $table_label_fs;
@@ -325,7 +344,7 @@ p {
 		}
 		table.form {
 			td {
-				height:105px;
+				height:110px;
 			}
 			tr#blockA {
 				td.box1 {
@@ -360,7 +379,8 @@ p {
 					height: 570px;
 					.address_map_wrapper {
 						position: relative;
-						.instructions {
+						ul.instructions {
+							width: 1150px;
 							position: absolute;
 							top: 0;
 							left: 20px;
@@ -372,23 +392,84 @@ p {
 									line-height:1.25em;
 							}
 						}
-						.example_label {
+						.example {
 							position: absolute;
+						}
+						.label {
 							left: 20px;
-							top: 2800px;
+							top: 280px;
 							text-decoration: underline;
+						}
+						.store {
+							left: 630px;
+							top: 365px;
+						}
+						.school {
+							left: 175px;
+							top:490px;
+						}
+						.street1 {
+							left: 400px;
+							top:330px;
+							-webkit-transform: rotate(-90deg); 
+						}
+						.street2 {
+							left: 550px;
+							top:430px;
+						}
+						.north {
+							position: absolute;
+							left: 2000px;
+							top: 20px;
+							font-weight: bold;
 						}
 					}
 				}
 			}
 		}
+		
+		p.blockD {
+			padding-top:.5em;
+		}
 		h4.bottom_half_footer {
 			color: $red;
 			text-align: center;
 			font-weight: bold;
-			font-size: 1.75 * $fs;
-			padding-top: .5em;
+			font-size: 1.5 * $fs;
+			line-height:1.5em;
+			padding-top: .25em;
+			padding-bottom:.25em;
 		}
 	}
 }
 
+#page_3 {
+	#page_3_wrapper {
+		position: relative;
+		height: 3300px;
+		overflow:hidden;
+		#page_3_background {
+			img {
+				width:$page_width;
+				top:0;
+			}
+		}
+		h1 {
+			width: $page_width;
+			position: absolute;
+			top: 100px;
+			text-align:center;
+			color:white;
+			font-size: 2 * $fs;
+		}
+		#address {
+			position: absolute;
+			top: 2540px;
+			left: 450px;
+			font-size: 1.25 * $fs;
+			.line {
+				line-height: 2.8 * $fs;
+			}
+		}		
+	}
+}

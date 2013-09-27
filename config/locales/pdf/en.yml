@@ -11,6 +11,7 @@ en:
           subtitle: "Take these easy steps to complete your voter registration:"
           step1: "Sign the form. You must sign the voter registration form before you mail it."
           step2: "Make a mailer. Fold the form and address sheet in half. Make sure the address is visible on the outside. Tape or staple the folded form at the bottom to create the mailer. Alternately, place your form in an envelope and hand address it to the Secretary of State."
+          step2mailer: HOW TO MAKE A MAILER
           step3: "Stamp it. Place first class stamp on your envelope or folded mailer."
           step4: "Mail it. Put your voter registration form in the mail."
           step5: "Vote. On Election Day, go to the polls and vote."
@@ -95,9 +96,21 @@ en:
           box5_label: "Zip Code"
         blockC:
           title: "If you live in a rural area but do not have a street number, or if you have no address, please show on the map where you live"
+          instructions:
+            bullet1: Write in the names of crossroads (or streets) nearest to where you live.
+            bullet2: Draw an <b>X</b> to show where you live
+            bullet3: "Use a dot to show any schools, churches, stores, or other landmarks near where you live, and write the name of the landmark."
+          example:
+            title: Example
+            grocery_store: Grocery Store
+            public_school: Public School
+            street1: "Route #2"
+            street2: "Woodchuck Road"
+          north: NORTH
         blockD:
           title: "If the applicant is unable to sign, who helped the applicant fill out this application? Give name, address and phone number (phone number optional)."
         bottom_half_footer: "Mail this application to the address provided for your State"
-        # block C and D are image file that is a config item
+      page3:
+        fouo: FOR OFFICIAL USE ONLY
 
 

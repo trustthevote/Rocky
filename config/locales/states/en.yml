@@ -437,3 +437,5 @@ en:
       60_days_before_election_novemeber: if it is 60 days before the next election and you will be 18 years old by that election (usually in November)
       2_months_before: two months before your 18th birthday
       17_turn_18: if you are 17 and will turn 18 before the next election
+    registration_deadline:
+      thirty_days_before: 30 days before the election
