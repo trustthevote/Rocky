@@ -579,6 +579,23 @@ class Registrant < ActiveRecord::Base
   def pdf_date_of_birth_year
     pdf_date_of_birth.split('/')[2]
   end
+  
+  def pdf_date_of_birth
+    date_of_birth.to_s(:month_day_year)
+  end
+
+  def pdf_race
+    if requires_race? && race != I18n.t('txt.registration.races').last
+      race
+    else
+      ""
+    end
+  end
+
+  def pdf_barcode
+    user_code = id.to_s(36).rjust(6, "0")
+    "*#{RockyConf.sponsor.barcode_prefix}-#{user_code}*".upcase
+  end
 
   def state_id_tooltip
     localization.id_number_tooltip
@@ -801,15 +818,12 @@ class Registrant < ActiveRecord::Base
       f << pdf
     end
     
-    #File.open(pdf_file_path)...
-    
-    # unless File.exists?(pdf_file_path)
-    #   Tempfile.open("nvra-#{to_param}") do |f|
-    #     f.puts to_xfdf
-    #     f.close
-    #     merge_pdf(f)
-    #   end
-    # end
+    unless File.exists?(pdf_file_path)
+      File.open(pdf_file_path, "w") do |f|
+        f << pdf
+      end
+    end
+
     self.pdf_ready = true
   end
   
@@ -895,21 +909,6 @@ class Registrant < ActiveRecord::Base
 
   def redact_sensitive_data
     self.state_id_number = nil
-  end
-
-  def merge_pdf(tmp)
-    if File.exist?('tmp/pids/rocky_pdf_worker.pid')
-      response = Net::HTTP.post_form(URI.parse('http://localhost:8080/pdfmerge/'),
-                                     {'nvraTemplatePath'=> nvra_template_path, 'tmpPath'=> tmp.path, 'pdfFilePath' => pdf_file_path })
-      raise "PDF merge failed with status #{response.code}" unless response.code == "200"
-    else
-      classpath = [
-          "$CLASSPATH",
-          File.join(Rails.root, "lib/pdf_merge/lib/iText-2.1.7.jar"),
-          File.join(Rails.root, "lib/pdf_merge/lib/pdfmerge.jar")
-        ].join(":")
-      `java -classpath #{classpath} com.pivotallabs.rocky.PdfMerge #{nvra_template_path} #{tmp.path} #{pdf_file_path}`
-    end
   end
 
   def nvra_template_path
