@@ -32,7 +32,6 @@ class Registrant < ActiveRecord::Base
   end
 
   include AASM
-  include Mergable
   include Lolrus
   include Rails.application.routes.url_helpers
   
@@ -807,7 +806,7 @@ class Registrant < ActiveRecord::Base
     renderer.state=self.home_state
     pdf = WickedPdf.new.pdf_from_string(
       renderer.render_to_string(
-        'registrants/registrant_pdf.html.haml', 
+        'registrants/registrant_pdf', 
         :layout => 'layouts/nvra'
       ),
       :disable_internal_links         => false,
@@ -820,7 +819,7 @@ class Registrant < ActiveRecord::Base
     
     unless File.exists?(pdf_file_path)
       File.open(pdf_file_path, "w") do |f|
-        f << pdf
+        f << pdf.force_encoding('UTF-8')
       end
     end
 

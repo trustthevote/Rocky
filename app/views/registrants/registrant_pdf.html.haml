@@ -1,104 +1,104 @@
 %div.page#page_1
   #logo= wicked_pdf_image_tag RockyConf.pdf.nvra.page1.default_logo
   %h1.title= I18n.t('pdf.nvra.page1.title').html_safe
-  %h2.subtitle= I18n.t('pdf.nvra.page1.subtitle', :locale=>@locale).html_safe
-  %p.top_paragraph= I18n.t('pdf.nvra.page1.top_paragraph', :locale=>@locale).html_safe
+  %h2.subtitle= I18n.t('pdf.nvra.page1.subtitle' ).html_safe
+  %p.top_paragraph= I18n.t('pdf.nvra.page1.top_paragraph' ).html_safe
   %table#instructions_table
     %tr
       %td.instructions_block{:rowspan=>3}
-        %h4= I18n.t('pdf.nvra.page1.instructions_block.title', :locale=>@locale).html_safe
-        %p= I18n.t('pdf.nvra.page1.instructions_block.subtitle', :locale=>@locale).html_safe
+        %h4= I18n.t('pdf.nvra.page1.instructions_block.title' ).html_safe
+        %p= I18n.t('pdf.nvra.page1.instructions_block.subtitle' ).html_safe
         %ol
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step1', :locale=>@locale).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step1' ).html_safe
           %li
-            = I18n.t('pdf.nvra.page1.instructions_block.step2', :locale=>@locale).html_safe
+            = I18n.t('pdf.nvra.page1.instructions_block.step2' ).html_safe
             .mailer
-              .instructions= I18n.t('pdf.nvra.page1.instructions_block.step2mailer', :locale=>@locale).html_safe
+              .instructions= I18n.t('pdf.nvra.page1.instructions_block.step2mailer' ).html_safe
               .image= wicked_pdf_image_tag("pdf/mailer.png")
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step3', :locale=>@locale).html_safe
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step4', :locale=>@locale).html_safe
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step5', :locale=>@locale).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step3' ).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step4' ).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step5' ).html_safe
       %td.submit_block
-        %h4.title= I18n.t('pdf.nvra.page1.submit_block.title', :locale=>@locale).html_safe
-        %p= @state.registrar_address.html_safe
+        %h4.title= I18n.t('pdf.nvra.page1.submit_block.title' ).html_safe
+        %p= @state.registrar_address.to_s.html_safe
     %tr
       %td.deadline_block
-        %h4.title= I18n.t('pdf.nvra.page1.deadline_block.title', :locale=>@locale).html_safe
-        %p= @registrant.registration_deadline
+        %h4.title= I18n.t('pdf.nvra.page1.deadline_block.title' ).html_safe
+        %p= @registrant.registration_deadline.to_s.html_safe
     %tr
       %td.other_block
         %h4.title= I18n.t('pdf.nvra.page1.other_block', :instructions_url=>@registrant_instructions_link).html_safe
-  %h3.bottom_title= I18n.t('pdf.nvra.page1.bottom_block.title', :locale=>@locale).html_safe
-  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph1', :locale=>@locale).html_safe
-  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph2', :locale=>@locale).html_safe
-  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph3', :locale=>@locale).html_safe
-  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph4', :locale=>@locale).html_safe
+  %h3.bottom_title= I18n.t('pdf.nvra.page1.bottom_block.title' ).html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph1' ).html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph2' ).html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph3' ).html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph4' ).html_safe
   
 .page#page_2
-  %h1.title= I18n.t('pdf.nvra.page2.title', :locale=>@locale).html_safe
-  %h2.subtitle= I18n.t('pdf.nvra.page2.subtitle', :locale=>@locale).html_safe
+  %h1.title= I18n.t('pdf.nvra.page2.title' ).html_safe
+  %h2.subtitle= I18n.t('pdf.nvra.page2.subtitle' ).html_safe
   
   %table.form
     %tr#topblock
       %td.items
         .item1
-          = I18n.t('pdf.nvra.page2.topblock.item1', :locale=>@locale).html_safe
+          = I18n.t('pdf.nvra.page2.topblock.item1' ).html_safe
           %span.value= @registrant.yes_no_us_citizen?
         .item2
-          = I18n.t('pdf.nvra.page2.topblock.item2', :locale=>@locale).html_safe
+          = I18n.t('pdf.nvra.page2.topblock.item2' ).html_safe
           %span.value= @registrant.yes_no_will_be_18_by_election?
-        .item3= I18n.t('pdf.nvra.page2.topblock.item3', :locale=>@locale).html_safe
-        .item4= I18n.t('pdf.nvra.page2.topblock.item4', :locale=>@locale).html_safe
-      %td.fouo= I18n.t('pdf.nvra.page2.topblock.fouo', :locale=>@locale).html_safe
+        .item3= I18n.t('pdf.nvra.page2.topblock.item3' ).html_safe
+        .item4= I18n.t('pdf.nvra.page2.topblock.item4' ).html_safe
+      %td.fouo= I18n.t('pdf.nvra.page2.topblock.fouo' ).html_safe
   %table.form
     %tr#block1
       %td.block_number 1
       %td.box1
-        .label= I18n.t('pdf.nvra.page2.block1.box1_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block1.box1_label' ).html_safe
         .value= @registrant.name_title
       %td.box2
-        .label= I18n.t('pdf.nvra.page2.block1.box2_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block1.box2_label' ).html_safe
         .value= @registrant.first_name
       %td.box3
-        .label= I18n.t('pdf.nvra.page2.block1.box3_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block1.box3_label' ).html_safe
         .value= @registrant.middle_name
       %td.box4
-        .label= I18n.t('pdf.nvra.page2.block1.box4_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block1.box4_label' ).html_safe
         .value= @registrant.last_name
       %td.box5
-        .label= I18n.t('pdf.nvra.page2.block1.box5_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block1.box5_label' ).html_safe
         .value= @registrant.name_suffix
   %table.form
     %tr#block2
       %td.block_number 2
       %td.box1
-        .label= I18n.t('pdf.nvra.page2.block2.box1_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block2.box1_label' ).html_safe
         .value= @registrant.home_address
       %td.box2
-        .label= I18n.t('pdf.nvra.page2.block2.box2_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block2.box2_label' ).html_safe
         .value= @registrant.home_unit
       %td.box3
-        .label= I18n.t('pdf.nvra.page2.block2.box3_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block2.box3_label' ).html_safe
         .value= @registrant.home_city
       %td.box4
-        .label= I18n.t('pdf.nvra.page2.block2.box4_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block2.box4_label' ).html_safe
         .value= @registrant.home_state_abbrev
       %td.box5
-        .label= I18n.t('pdf.nvra.page2.block2.box5_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block2.box5_label' ).html_safe
         .value= @registrant.home_zip_code
     %tr#block3
       %td.block_number 3
       %td.box1{:colspan=>2}
-        .label= I18n.t('pdf.nvra.page2.block3.box1_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block3.box1_label' ).html_safe
         .value= @registrant.mailing_address
       %td.box2
-        .label= I18n.t('pdf.nvra.page2.block3.box2_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block3.box2_label' ).html_safe
         .value= @registrant.mailing_city
       %td.box3
-        .label= I18n.t('pdf.nvra.page2.block3.box3_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block3.box3_label' ).html_safe
         .value= @registrant.mailing_state_abbrev
       %td.box4
-        .label= I18n.t('pdf.nvra.page2.block3.box4_label', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block3.box4_label' ).html_safe
         .value= @registrant.mailing_zip_code
   %table.form
     %tr#block4
@@ -106,101 +106,101 @@
       %td.block4.box1
         %table.inner_form
           %tr
-            %td.label= I18n.t('pdf.nvra.page2.block4.box1_label', :locale=>@locale).html_safe
+            %td.label= I18n.t('pdf.nvra.page2.block4.box1_label' ).html_safe
             %td.item2
               .value= @registrant.pdf_date_of_birth_month + ' /'
-              .label=I18n.t('pdf.nvra.page2.block4.item2', :locale=>@locale).html_safe
+              .label=I18n.t('pdf.nvra.page2.block4.item2' ).html_safe
             %td.item3
               .value= @registrant.pdf_date_of_birth_day + ' /'
-              .label=I18n.t('pdf.nvra.page2.block4.item3', :locale=>@locale).html_safe
+              .label=I18n.t('pdf.nvra.page2.block4.item3' ).html_safe
             %td.item4
               .value= @registrant.pdf_date_of_birth_year
-              .label=I18n.t('pdf.nvra.page2.block4.item4', :locale=>@locale).html_safe
+              .label=I18n.t('pdf.nvra.page2.block4.item4' ).html_safe
       %td.block5.block_number 5
       %td.block5.box1
-        .label= I18n.t('pdf.nvra.page2.block5', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block5' ).html_safe
         .value= @registrant.phone
       %td.block6.block_number{:rowspan=>2} 6
       %td.block6.box1{:rowspan=>2}
-        .label= I18n.t('pdf.nvra.page2.block6.box1_label', :locale=>@locale).html_safe
-        .sublabel= I18n.t('pdf.nvra.page2.block6.box1_sublabel', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block6.box1_label' ).html_safe
+        .sublabel= I18n.t('pdf.nvra.page2.block6.box1_sublabel' ).html_safe
         .value= @registrant.state_id_number
     %tr#block7
       %td.block7.block_number 7
       %td.block7.box1
-        .label= I18n.t('pdf.nvra.page2.block7.box1_label', :locale=>@locale).html_safe
-        .sublabel= I18n.t('pdf.nvra.page2.block7.box1_sublabel', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block7.box1_label' ).html_safe
+        .sublabel= I18n.t('pdf.nvra.page2.block7.box1_sublabel' ).html_safe
         .value= @registrant.party
       %td.block8.block_number 8
       %td.block8.box2
-        .label= I18n.t('pdf.nvra.page2.block8.box1_label', :locale=>@locale).html_safe
-        .sublabel= I18n.t('pdf.nvra.page2.block8.box1_sublabel', :locale=>@locale).html_safe
+        .label= I18n.t('pdf.nvra.page2.block8.box1_label' ).html_safe
+        .sublabel= I18n.t('pdf.nvra.page2.block8.box1_sublabel' ).html_safe
         .value= @registrant.pdf_race
   %table.form
     %tr#block9
       %td.block_number 9
       %td.box1
-        .affirmation_header= I18n.t('pdf.nvra.page2.block9.affirmation_header', :locale=>@locale).html_safe
+        .affirmation_header= I18n.t('pdf.nvra.page2.block9.affirmation_header' ).html_safe
         %ul.affirmations
-          %li.affirmation_1= I18n.t('pdf.nvra.page2.block9.affirmation_1', :locale=>@locale).html_safe
-          %li.affirmation_2= I18n.t('pdf.nvra.page2.block9.affirmation_2', :locale=>@locale).html_safe
-          %li.affirmation_3= I18n.t('pdf.nvra.page2.block9.affirmation_3', :locale=>@locale).html_safe
+          %li.affirmation_1= I18n.t('pdf.nvra.page2.block9.affirmation_1' ).html_safe
+          %li.affirmation_2= I18n.t('pdf.nvra.page2.block9.affirmation_2' ).html_safe
+          %li.affirmation_3= I18n.t('pdf.nvra.page2.block9.affirmation_3' ).html_safe
       %td.box2
         .signature_box= wicked_pdf_image_tag("pdf/signature_box.png")
-        .please_sign= I18n.t('pdf.nvra.page2.block9.please_sign', :locale=>@locale).html_safe
+        .please_sign= I18n.t('pdf.nvra.page2.block9.please_sign' ).html_safe
         .signature_date
-          .date= I18n.t('pdf.nvra.page2.block9.date', :locale=>@locale).html_safe
+          .date= I18n.t('pdf.nvra.page2.block9.date' ).html_safe
           .date_box= wicked_pdf_image_tag("pdf/date_box.png")
-          .month= I18n.t('pdf.nvra.page2.block9.month', :locale=>@locale).html_safe
-          .day= I18n.t('pdf.nvra.page2.block9.day', :locale=>@locale).html_safe
-          .year= I18n.t('pdf.nvra.page2.block9.year', :locale=>@locale).html_safe
+          .month= I18n.t('pdf.nvra.page2.block9.month' ).html_safe
+          .day= I18n.t('pdf.nvra.page2.block9.day' ).html_safe
+          .year= I18n.t('pdf.nvra.page2.block9.year' ).html_safe
   %h4.top_half_footer
-    = I18n.t('pdf.nvra.page2.top_half_footer', :locale=>@locale).html_safe
+    = I18n.t('pdf.nvra.page2.top_half_footer' ).html_safe
   .bottom_half
     .pdf_barcode= @registrant.pdf_barcode
     %h3.bottom_half_title
-      = I18n.t('pdf.nvra.page2.bottom_half_title', :locale=>@locale).html_safe
-    %p.block_title.blockA= I18n.t('pdf.nvra.page2.blockA.title', :locale=>@locale).html_safe
+      = I18n.t('pdf.nvra.page2.bottom_half_title' ).html_safe
+    %p.block_title.blockA= I18n.t('pdf.nvra.page2.blockA.title' ).html_safe
     %table.form
       %tr#blockA
         %td.block_number A
         %td.box1
-          .label= I18n.t('pdf.nvra.page2.blockA.box1_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockA.box1_label' ).html_safe
           .value= @registrant.prev_name_title
         %td.box2
-          .label= I18n.t('pdf.nvra.page2.blockA.box2_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockA.box2_label' ).html_safe
           .value= @registrant.prev_first_name
         %td.box3
-          .label= I18n.t('pdf.nvra.page2.blockA.box3_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockA.box3_label' ).html_safe
           .value= @registrant.prev_middle_name
         %td.box4
-          .label= I18n.t('pdf.nvra.page2.blockA.box4_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockA.box4_label' ).html_safe
           .value= @registrant.prev_last_name
         %td.box5
-          .label= I18n.t('pdf.nvra.page2.blockA.box5_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockA.box5_label' ).html_safe
           .value= @registrant.prev_name_suffix
           
-    %p.block_title.blockB= I18n.t('pdf.nvra.page2.blockB.title', :locale=>@locale).html_safe
+    %p.block_title.blockB= I18n.t('pdf.nvra.page2.blockB.title' ).html_safe
     %table.form
       %tr#blockB
         %td.block_number B
         %td.box1
-          .label= I18n.t('pdf.nvra.page2.blockB.box1_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockB.box1_label' ).html_safe
           .value= @registrant.prev_address
         %td.box2
-          .label= I18n.t('pdf.nvra.page2.blockB.box2_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockB.box2_label' ).html_safe
           .value= @registrant.prev_unit
         %td.box3
-          .label= I18n.t('pdf.nvra.page2.blockB.box3_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockB.box3_label' ).html_safe
           .value= @registrant.prev_city
         %td.box4
-          .label= I18n.t('pdf.nvra.page2.blockB.box4_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockB.box4_label' ).html_safe
           .value= @registrant.prev_state_abbrev
         %td.box5
-          .label= I18n.t('pdf.nvra.page2.blockB.box5_label', :locale=>@locale).html_safe
+          .label= I18n.t('pdf.nvra.page2.blockB.box5_label' ).html_safe
           .value= @registrant.prev_zip_code
           
-    %p.block_title.blockC= I18n.t('pdf.nvra.page2.blockC.title', :locale=>@locale).html_safe
+    %p.block_title.blockC= I18n.t('pdf.nvra.page2.blockC.title' ).html_safe
     %table.form
       %tr#blockC
         %td.block_number C
@@ -208,29 +208,29 @@
           .address_map_wrapper
             .address_map= wicked_pdf_image_tag("pdf/address_map.png")
             %ul.instructions 
-              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet1', :locale=>@locale).html_safe
-              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet2', :locale=>@locale).html_safe
-              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet3', :locale=>@locale).html_safe
-            .example.label= I18n.t('pdf.nvra.page2.blockC.example.title', :locale=>@locale).html_safe
-            .example.store= I18n.t('pdf.nvra.page2.blockC.example.grocery_store', :locale=>@locale).html_safe
-            .example.school= I18n.t('pdf.nvra.page2.blockC.example.public_school', :locale=>@locale).html_safe
-            .example.street1= I18n.t('pdf.nvra.page2.blockC.example.street1', :locale=>@locale).html_safe
-            .example.street2= I18n.t('pdf.nvra.page2.blockC.example.street2', :locale=>@locale).html_safe
-            .north= I18n.t('pdf.nvra.page2.blockC.north', :locale=>@locale).html_safe
+              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet1' ).html_safe
+              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet2' ).html_safe
+              %li= I18n.t('pdf.nvra.page2.blockC.instructions.bullet3' ).html_safe
+            .example.label= I18n.t('pdf.nvra.page2.blockC.example.title' ).html_safe
+            .example.store= I18n.t('pdf.nvra.page2.blockC.example.grocery_store' ).html_safe
+            .example.school= I18n.t('pdf.nvra.page2.blockC.example.public_school' ).html_safe
+            .example.street1= I18n.t('pdf.nvra.page2.blockC.example.street1' ).html_safe
+            .example.street2= I18n.t('pdf.nvra.page2.blockC.example.street2' ).html_safe
+            .north= I18n.t('pdf.nvra.page2.blockC.north' ).html_safe
           
     
-    %p.block_title.blockD= I18n.t('pdf.nvra.page2.blockD.title', :locale=>@locale).html_safe
+    %p.block_title.blockD= I18n.t('pdf.nvra.page2.blockD.title' ).html_safe
     %table.form
       %tr#blockD
         %td.block_number D
         %td.box1
           .value
     %h4.bottom_half_footer
-      = I18n.t('pdf.nvra.page2.bottom_half_footer', :locale=>@locale).html_safe
+      = I18n.t('pdf.nvra.page2.bottom_half_footer' ).html_safe
 
 .page#page_3
   #page_3_wrapper
     #page_3_background= wicked_pdf_image_tag("pdf/page_3.png")
-    %h1= I18n.t('pdf.nvra.page3.fouo', :locale=>@locale).html_safe
+    %h1= I18n.t('pdf.nvra.page3.fouo' ).html_safe
     #address
-      .line.line1= @state.registrar_address.html_safe
+      .line.line1= @state.registrar_address.to_s.html_safe
