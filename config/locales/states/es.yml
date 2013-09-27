@@ -420,3 +420,5 @@ es:
       60_days_before_election_novemeber: si son 60 días antes de las próximas elecciones y tendrás 18 años en el dia de la elección (que es generalmente en noviembre)
       2_months_before: dos meses antes que cumples 18 años
       17_turn_18: Si tienes 17 anos y vas a cumplir 18 años antes de las próximas elecciones.
+    registration_deadline:
+      thirty_days_before: "[ES]30 días antes de las elecciones."

@@ -46,7 +46,7 @@ p {
 		padding-right:5%;
 		text-transform:uppercase;
 		font-size:3.3*$fs;
-		padding-top:4%;
+		padding-top:0;;
 		text-align:right;
 		font-weight:bold;
 	}
@@ -58,7 +58,7 @@ p {
 		font-weight: bold;
 	}
 	p.top_paragraph {
-		width:75%;
+		width: $page_width;
 		padding-top: 1em;
 		line-height:1.25em;
 		font-size: 1.8 *$fs;
@@ -119,6 +119,19 @@ p {
 	
 }
 
+table.form {
+	td {
+		.value {
+			color: $black;
+			font-size:$fs;
+			padding-top:5px;
+		}
+		.label, .sublabel {
+			padding-left:10px;
+		}
+	}
+}
+
 #page_2 {
 	h1.title {
 		font-size:1.8 * $fs;
@@ -141,9 +154,6 @@ p {
 			padding:10px;
 			font-size: $table_label_fs;
 			color: $light_black;
-			.value {
-				color: $black;
-			}
 			.sublabel {
 				font-size: $table_sublabel_fs;
 			}
@@ -165,7 +175,7 @@ p {
 					line-height: 1.4em;
 				}
 				.value {
-					float: right;
+					padding-left:5px;
 				}
 				.item3 {
 					font-weight: bold;
@@ -229,6 +239,7 @@ p {
 						height: 84px;
 						border-bottom:1px solid $border_color;
 						margin-bottom:10px;
+						text-align: center;
 					}
 					.value, .label {
 						width: 100%;
@@ -323,14 +334,20 @@ p {
 		color: $red;
 		font-size:$fs;
 		line-height:1.25em;
-		padding: .5em 0 2em;
+		padding: .5em 0 .5em;
 	}
 	.bottom_half {
+		.pdf_barcode {
+			float: right;
+			font-weight: bold;
+			font-size: 1.5 * $fs;
+		}
 		h3.bottom_half_title {
 			color: $red;
 			font-style: italic;
 			font-weight: bold;
 			font-size: 1.5 * $fs;
+			width: $page_width * .75;
 		}
 		p.block_title {
 			padding-top:1em;

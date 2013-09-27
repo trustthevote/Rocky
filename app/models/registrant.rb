@@ -570,6 +570,16 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def pdf_date_of_birth_month
+    pdf_date_of_birth.split('/')[0]
+  end
+  def pdf_date_of_birth_day
+    pdf_date_of_birth.split('/')[1]
+  end
+  def pdf_date_of_birth_year
+    pdf_date_of_birth.split('/')[2]
+  end
+
   def state_id_tooltip
     localization.id_number_tooltip
   end

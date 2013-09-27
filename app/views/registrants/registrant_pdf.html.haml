@@ -41,9 +41,12 @@
   %table.form
     %tr#topblock
       %td.items
-        .value.value1= @registrant.yes_no_us_citizen?
-        .item1= I18n.t('pdf.nvra.page2.topblock.item1', :locale=>@locale).html_safe
-        .item2= I18n.t('pdf.nvra.page2.topblock.item2', :locale=>@locale).html_safe
+        .item1
+          = I18n.t('pdf.nvra.page2.topblock.item1', :locale=>@locale).html_safe
+          %span.value= @registrant.yes_no_us_citizen?
+        .item2
+          = I18n.t('pdf.nvra.page2.topblock.item2', :locale=>@locale).html_safe
+          %span.value= @registrant.yes_no_will_be_18_by_election?
         .item3= I18n.t('pdf.nvra.page2.topblock.item3', :locale=>@locale).html_safe
         .item4= I18n.t('pdf.nvra.page2.topblock.item4', :locale=>@locale).html_safe
       %td.fouo= I18n.t('pdf.nvra.page2.topblock.fouo', :locale=>@locale).html_safe
@@ -52,51 +55,51 @@
       %td.block_number 1
       %td.box1
         .label= I18n.t('pdf.nvra.page2.block1.box1_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.name_title
       %td.box2
         .label= I18n.t('pdf.nvra.page2.block1.box2_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.first_name
       %td.box3
         .label= I18n.t('pdf.nvra.page2.block1.box3_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.middle_name
       %td.box4
         .label= I18n.t('pdf.nvra.page2.block1.box4_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.last_name
       %td.box5
         .label= I18n.t('pdf.nvra.page2.block1.box5_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.name_suffix
   %table.form
     %tr#block2
       %td.block_number 2
       %td.box1
         .label= I18n.t('pdf.nvra.page2.block2.box1_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.home_address
       %td.box2
         .label= I18n.t('pdf.nvra.page2.block2.box2_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.home_unit
       %td.box3
         .label= I18n.t('pdf.nvra.page2.block2.box3_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.home_city
       %td.box4
         .label= I18n.t('pdf.nvra.page2.block2.box4_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.home_state_abbrev
       %td.box5
         .label= I18n.t('pdf.nvra.page2.block2.box5_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.home_zip_code
     %tr#block3
       %td.block_number 3
       %td.box1{:colspan=>2}
         .label= I18n.t('pdf.nvra.page2.block3.box1_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.mailing_address
       %td.box2
         .label= I18n.t('pdf.nvra.page2.block3.box2_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.mailing_city
       %td.box3
         .label= I18n.t('pdf.nvra.page2.block3.box3_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.mailing_state_abbrev
       %td.box4
         .label= I18n.t('pdf.nvra.page2.block3.box4_label', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.mailing_zip_code
   %table.form
     %tr#block4
       %td.block4.block_number 4
@@ -105,34 +108,34 @@
           %tr
             %td.label= I18n.t('pdf.nvra.page2.block4.box1_label', :locale=>@locale).html_safe
             %td.item2
-              .value
+              .value= @registrant.pdf_date_of_birth_month + ' /'
               .label=I18n.t('pdf.nvra.page2.block4.item2', :locale=>@locale).html_safe
             %td.item3
-              .value
+              .value= @registrant.pdf_date_of_birth_day + ' /'
               .label=I18n.t('pdf.nvra.page2.block4.item3', :locale=>@locale).html_safe
             %td.item4
-              .value
+              .value= @registrant.pdf_date_of_birth_year
               .label=I18n.t('pdf.nvra.page2.block4.item4', :locale=>@locale).html_safe
       %td.block5.block_number 5
       %td.block5.box1
         .label= I18n.t('pdf.nvra.page2.block5', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.phone
       %td.block6.block_number{:rowspan=>2} 6
       %td.block6.box1{:rowspan=>2}
         .label= I18n.t('pdf.nvra.page2.block6.box1_label', :locale=>@locale).html_safe
         .sublabel= I18n.t('pdf.nvra.page2.block6.box1_sublabel', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.state_id_number
     %tr#block7
       %td.block7.block_number 7
       %td.block7.box1
         .label= I18n.t('pdf.nvra.page2.block7.box1_label', :locale=>@locale).html_safe
         .sublabel= I18n.t('pdf.nvra.page2.block7.box1_sublabel', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.party
       %td.block8.block_number 8
       %td.block8.box2
         .label= I18n.t('pdf.nvra.page2.block8.box1_label', :locale=>@locale).html_safe
         .sublabel= I18n.t('pdf.nvra.page2.block8.box1_sublabel', :locale=>@locale).html_safe
-        .value
+        .value= @registrant.pdf_race
   %table.form
     %tr#block9
       %td.block_number 9
@@ -154,6 +157,7 @@
   %h4.top_half_footer
     = I18n.t('pdf.nvra.page2.top_half_footer', :locale=>@locale).html_safe
   .bottom_half
+    .pdf_barcode= @registrant.pdf_barcode
     %h3.bottom_half_title
       = I18n.t('pdf.nvra.page2.bottom_half_title', :locale=>@locale).html_safe
     %p.block_title.blockA= I18n.t('pdf.nvra.page2.blockA.title', :locale=>@locale).html_safe
@@ -162,19 +166,19 @@
         %td.block_number A
         %td.box1
           .label= I18n.t('pdf.nvra.page2.blockA.box1_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_name_title
         %td.box2
           .label= I18n.t('pdf.nvra.page2.blockA.box2_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_first_name
         %td.box3
           .label= I18n.t('pdf.nvra.page2.blockA.box3_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_middle_name
         %td.box4
           .label= I18n.t('pdf.nvra.page2.blockA.box4_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_last_name
         %td.box5
           .label= I18n.t('pdf.nvra.page2.blockA.box5_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_name_suffix
           
     %p.block_title.blockB= I18n.t('pdf.nvra.page2.blockB.title', :locale=>@locale).html_safe
     %table.form
@@ -182,19 +186,19 @@
         %td.block_number B
         %td.box1
           .label= I18n.t('pdf.nvra.page2.blockB.box1_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_address
         %td.box2
           .label= I18n.t('pdf.nvra.page2.blockB.box2_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_unit
         %td.box3
           .label= I18n.t('pdf.nvra.page2.blockB.box3_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_city
         %td.box4
           .label= I18n.t('pdf.nvra.page2.blockB.box4_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_state_abbrev
         %td.box5
           .label= I18n.t('pdf.nvra.page2.blockB.box5_label', :locale=>@locale).html_safe
-          .value
+          .value= @registrant.prev_zip_code
           
     %p.block_title.blockC= I18n.t('pdf.nvra.page2.blockC.title', :locale=>@locale).html_safe
     %table.form

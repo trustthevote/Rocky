@@ -15,7 +15,6 @@ en:
           step3: "Stamp it. Place first class stamp on your envelope or folded mailer."
           step4: "Mail it. Put your voter registration form in the mail."
           step5: "Vote. On Election Day, go to the polls and vote."
-          howtoimage: mailer.gif
         submit_block:
           title: "SUBMIT YOUR COMPLETED, SIGNED FORM TO:"
         deadline_block:
@@ -81,7 +80,7 @@ en:
         top_half_footer: "<b>If you are registering to vote for the first time</b>: please refer to the application instructions for information on submitting copes of valid identification documents with this form."
         bottom_half_title: "Please fill out the sections below if they apply to you."
         blockA:
-          title: "If this application is for a <b>change or name</b>, what was your name before you changed it?"
+          title: "If this application is for a <b>change of name</b>, what was your name before you changed it?"
           box1_label: ''
           box2_label: "Last Name"
           box3_label: "First Name"
