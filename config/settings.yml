@@ -21,7 +21,9 @@ admin_username: 'admin'
 widget_js_url:  'https://s3.amazonaws.com/ovr/widget_loader.js'
 
 use_https: true
-paperclip_options: {}
+paperclip_options: 
+  path: ":rails_root/public/system/:attachment/:id/:style/:filename"
+  url: "/system/:class/:attachment/:id_partition/:style/:filename"
 delayed_wrap_up: true
 
 mobile_redirect_url: https://mobile.rockthevote.com/

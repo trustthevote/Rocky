@@ -41,7 +41,7 @@ module Mergable
   end
 
   def to_xfdf
-    ERB.new(XFDF_TEMPLATE).result(binding)
+    ERB.new(XFDF_TEMPLATE).result(binding).force_encoding('UTF-8')
   end
 
   XFDF_TEMPLATE = <<'XML'

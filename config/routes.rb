@@ -55,6 +55,7 @@ Rocky::Application.routes.draw do
     namespace :v2 do
       resources :registrations, :only=>[:index, :create], :format=>'json'
       resource :state_requirements, :only=>:show, :format=>'json'
+      post "state_requirements", :to=>"state_requirements#show", :format=>'json'
 
       resources :partners, :only=>[:create], :format=>'json' do
         collection do
@@ -86,6 +87,7 @@ Rocky::Application.routes.draw do
     resource :partner_zips, :only=>[:create]
   end
   
+  get '/system/partners/logos/:id1/:id2/:id3/:style/:filename.:ext', to: "fileserving#partner_logo"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
