@@ -10,19 +10,19 @@
           <td> <img src="/admin/downArrow.png" /> </td>
         </tr>
         <tr class="<%= cycle('even', 'odd') %>">
-          <th>Today</th>
+          <th>Within last 24 hrs</th>
           <td><%= state_completions[:day_count] %></td>
         </tr>
         <tr class="<%= cycle('even', 'odd') %>">
-          <th>This Week</th>
+          <th>Within last 7 days</th>
           <td><%= state_completions[:week_count] %></td>
         </tr>
         <tr class="<%= cycle('even', 'odd') %>">
-          <th>This Month</th>
+          <th>Within last month</th>
           <td><%= state_completions[:month_count] %></td>
         </tr>
         <tr class="<%= cycle('even', 'odd') %>">
-          <th>This Year</th>
+          <th>Within last year</th>
           <td><%= state_completions[:year_count] %></td>
         </tr>
         <tr class="<%= cycle('even', 'odd') %>">

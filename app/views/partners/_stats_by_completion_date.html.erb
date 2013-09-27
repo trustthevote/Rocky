@@ -4,19 +4,19 @@
     <thead><tr><th colspan="3">Completed Applications *</th></tr></thead>
     <tbody>
       <tr class="<%= cycle('even', 'odd') %>">
-        <th>Today</th>
+        <th>Within last 24hrs</th>
         <td><%= @stats_by_completion_date[:day_count] %></td>
       </tr>
       <tr class="<%= cycle('even', 'odd') %>">
-        <th>This Week</th>
+        <th>Within last 7 days</th>
         <td><%= @stats_by_completion_date[:week_count] %></td>
       </tr>
       <tr class="<%= cycle('even', 'odd') %>">
-        <th>This Month</th>
+        <th>Within last month</th>
         <td><%= @stats_by_completion_date[:month_count] %></td>
       </tr>
       <tr class="<%= cycle('even', 'odd') %>">
-        <th>This Year</th>
+        <th>Within last year</th>
         <td><%= @stats_by_completion_date[:year_count] %></td>
       </tr>
       <tr class="<%= cycle('even', 'odd') %>">
