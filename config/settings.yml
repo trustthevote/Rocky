@@ -22,7 +22,7 @@ paperclip_options:
   url: "/system/:attachment/:id/:style/:filename"
 delayed_wrap_up: true
 
-mobile_redirect_url: https://mobile.rockthevote.com/
+mobile_redirect_url: https://register2.rockthevote.com
 mobile_browsers:
   - mobile
   - webos
