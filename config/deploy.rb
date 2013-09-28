@@ -65,6 +65,8 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 set :group_writable, false
 set :use_sudo, false
 
+set :assets_role, [:app, :util]
+
 
 set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "enable"
@@ -80,7 +82,6 @@ before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if mi
 
 require "rvm/capistrano"
 
-set :assets_role, [:web, :util]
 
 load 'deploy/assets'
 
