@@ -5,7 +5,6 @@
     - RockyConf.enabled_locales.each do |loc|
       - unless loc.to_s == I18n.locale.to_s
         = link_to t('txt.registration.in_language_name', :locale=>loc), new_registrant_path(params.dup.merge({:locale=>loc})), :class => 'other_language_link'
-        -# new_registrant_path(partner_locale_options(@partner_id, loc, @source)),
 
 = form_for(@registrant) do |form|
   = render :partial => 'form', :object => form
