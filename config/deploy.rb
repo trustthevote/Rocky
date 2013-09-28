@@ -80,9 +80,10 @@ before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if mi
 
 require "rvm/capistrano"
 
+set :assets_role, [:web, :util]
+
 load 'deploy/assets'
 
-set :assets_role, [:web, :util]
 
 
 
