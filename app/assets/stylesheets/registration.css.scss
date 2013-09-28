@@ -548,9 +548,33 @@ div, span {
 					font-family:  'Lucida Grande';
 					color:#B2272C;
 					text-transform: none;
+					color: #FFFFFF;
+					
 				}
+				
 			}
 		}
+		a.button_share_facebook, a.button_share-google_buzz, a.button_share_twitter         { 
+			width: 122px; height: 42px; 
+			background: none;
+			padding:0;
+			span {
+				width: 80px; height: 32px;
+				font-size:14px;
+				padding: 10px 0 0 42px;
+				background: url(/images/buttons/button_share_facebook_ro.gif) no-repeat left top;
+			}
+			&:hover {
+				span {
+					color: #000000;
+					background-position: right top;
+				}
+			}
+			
+		}
+		a.button_share_google_buzz  span {  background-image: url(/images/buttons/button_share_google_buzz_ro.gif); }
+		a.button_share_twitter      span {  background-image: url(/images/buttons/button_share_twitter_ro.gif); }
+		
 	}
 }
 div, span {
@@ -571,12 +595,8 @@ div, span {
 
 
 
-a.button_share_facebook         { width: 122px; height: 42px; }
-a.button_share_facebook     span { width: 122px; height: 42px; background-image: url(/images/buttons/button_share_facebook_ro.gif); }
+a.button_share_facebook     span { width: 122px; height: 42px;  }
 a.button_share_google_buzz       { width: 122px; height: 42px; }
-a.button_share_google_buzz  span { width: 122px; height: 42px; background-image: url(/images/buttons/button_share_google_buzz_ro.gif); }
-a.button_share_twitter          { width: 122px; height: 42px; }
-a.button_share_twitter      span { width: 122px; height: 42px; background-image: url(/images/buttons/button_share_twitter_ro.gif); }
 
 a.button_share_facebook, a.button_share_google_buzz, a.button_share_twitter {
 	span {

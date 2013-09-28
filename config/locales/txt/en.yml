@@ -13,8 +13,8 @@ en:
       prepare: Prepare Form
       review: Review Application
       sendmail: Send Email
-      share_facebook: Share on Facebook!
-      share_twitter: Share on Twitter!
+      share_facebook: Post It!
+      share_twitter: Tweet It!
       share_google_buzz: Share on Google!
       state_online_registration: "I'd like to submit<br/> my form online with<br/> %{state} now."
       skip_state_online_registration: "&gt; No Thanks, I'll continue with %{rtv_and_partner_name} and send in my form later."
