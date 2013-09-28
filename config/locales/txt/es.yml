@@ -4,8 +4,8 @@ es:
     button:
       submit: "Siguientes pasos"
       edit: Editar
-      back: "Paso Anterior"
-      download: "Descargar PDF"
+      back: "&lt; Paso Anterior"
+      download: "Imprimir su<br/>formulario de<br/>registro ahora"
       ineligible_try_again: Regresar
       keep_going: Keep Going
       remind_me_later: Remind Me Later
@@ -16,8 +16,8 @@ es:
       share_facebook: Compartir en Facebook!
       share_twitter: Compartir en Twitter!
       share_google_buzz: Compartir en Buzz!
-      state_online_registration: "Me gustaría someter mi solicitud vía internet con el estado ahora."
-      skip_state_online_registration: "No gracias, continuaré con Rock the Vote y enviaré mi solicitud más tarde."
+      state_online_registration: "Me gustaría someter<br/>mi solicitud vía internet<br/>con el estado ahora."
+      skip_state_online_registration: "&gt; No gracias, continuaré con Rock the Vote y enviaré mi solicitud más tarde."
     registration:
       in_language_name: En español
       powered_by: "accionado por:"

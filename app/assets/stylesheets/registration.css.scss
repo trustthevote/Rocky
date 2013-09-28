@@ -486,18 +486,89 @@ legend img.tooltip {
   vertical-align: middle;
 }
 
+$gradient: #c64d4f 0%, #ce6367 10%, #ce6367 65%, #bf363b 95%, #ad2328 100%;
+$roll_gradient: #e4aaac 0%, #e4aaac 10%, #ce6367 65%, #bf363b 95%, #ad2328 100%;
+
 /* rollover buttons */
-div.button a {
-	height:22px;
-	width: auto;
-	span {
-		height: 22px;
-		width: auto;
-		padding:8px 10px; font-size:13px;
-		white-space: normal;
-		color: #B2272C;
+div, span {
+	
+	&.rollover_button, &.rollover_button:hover, &.rollover_button:active {
+		a {
+			display: inline-block;
+			width: auto;
+			white-space: normal;
+		  border: 0px solid #c64d4f;
+		  background: #ad2328;
+		  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c64d4f), color-stop(10%,#ce6367), color-stop(65%,#ce6367), color-stop(95%,#bf363b), color-stop(100%,#ad2328));
+		  background: -webkit-linear-gradient(top, $gradient);
+		  background: -moz-linear-gradient(top,  $gradient);
+		  background: -ms-linear-gradient(top,  $gradient);
+		  background: -o-linear-gradient(top,  $gradient);
+		  padding: 5.5px 11px;
+		  -webkit-border-radius: 4px;
+		  -moz-border-radius: 4px;
+		  border-radius: 4px;
+			text-align: left;
+			/* 
+		  font-family: Helvetica, Arial, Sans-Serif;
+		  text-decoration: none;
+		  vertical-align: middle; */
+			span {
+				background:url(image_path('buttons/button_arrow.png')) no-repeat right center;
+				padding:7px 20px 5px 0;
+				width: auto;
+				display: inline-block;
+			  color: white;
+			  font-size: 20px;
+				line-height: 1em;
+				font-weight: bold;
+				text-transform: uppercase;
+				font-family: Helvetica, Arial, Sans-Serif;
+				text-align: left;
+			}
+			&.button_edit {
+				width: auto;
+				padding: 3px;
+		
+				span {
+					width: auto;
+					padding: 3px;
+					font-size:14px;
+					background-image:none;
+				}
+			}
+			&.button_skip_state_online_registration {
+				background: none;
+				display: inline;
+				span {
+					display: inline;
+					background: none;
+					font-size:13px;
+					font-weight: normal;
+					font-family:  'Lucida Grande';
+					color:#B2272C;
+					text-transform: none;
+				}
+			}
+		}
 	}
 }
+div, span {
+	
+	&.rollover_button:hover, &.rollover_button:active {
+		a {
+	  	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e4aaac), color-stop(10%,#e4aaac), color-stop(65%,#ce6367), color-stop(95%,#bf363b), color-stop(100%,#ad2328));
+		  background: -webkit-linear-gradient(top, $roll_gradient);
+		  background: -moz-linear-gradient(top,  $roll_gradient);
+		  background: -ms-linear-gradient(top,  $roll_gradient);
+		  background: -o-linear-gradient(top,  $roll_gradient);
+			span {
+				background-image: url(image_path('buttons/button_arrow_hover.png'));
+			}
+		}
+	}
+}
+
 
 
 a.button_share_facebook         { width: 122px; height: 42px; }

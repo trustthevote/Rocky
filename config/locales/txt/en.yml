@@ -2,10 +2,10 @@ en:
   txt:
     rtv_and_partner: "Rock the Vote and %{partner_name}"
     button:
-      submit: "Next Step &gt;"
+      submit: "Next Step"
       edit: Edit
       back: "&lt; Previous Step"
-      download: "Download PDF!"
+      download: "Print your<br/>registration<br/>form now"
       ineligible_try_again: Return
       keep_going: Keep Going
       remind_me_later: Remind Me Later
@@ -16,7 +16,7 @@ en:
       share_facebook: Share on Facebook!
       share_twitter: Share on Twitter!
       share_google_buzz: Share on Google!
-      state_online_registration: "I'd like to submit my form online with %{state} now."
+      state_online_registration: "I'd like to submit<br/> my form online with<br/> %{state} now."
       skip_state_online_registration: "&gt; No Thanks, I'll continue with %{rtv_and_partner_name} and send in my form later."
     registration:
       in_language_name: In English

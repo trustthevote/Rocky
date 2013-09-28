@@ -84,7 +84,7 @@ module ApplicationHelper
   def rollover_button(name, text, button_options={})
     button_options[:id] ||= "registrant_submit"
     html =<<-HTML
-      <div class="button">
+      <div class="button rollover_button">
         <a class="button_#{name}_#{I18n.locale} button_#{name}" href="#">
           <button type="submit" id="#{button_options.delete(:id)}" #{button_options.collect{|k,v| "#{k}=\"#{v}\"" }.join(" ")}>
             <span>#{text}</span>
@@ -98,7 +98,7 @@ module ApplicationHelper
   def rollover_image_link(name, text, url, options={})
     optional_attrs = options.inject("") {|s,(k,v)| s << %Q[ #{k}="#{v}"] }
     html =<<-HTML
-      <span class="button">
+      <span class="button rollover_button">
         <a class="button_#{name}_#{I18n.locale} button_#{name}" href="#{url}"#{optional_attrs}><span>#{text}</span></a>
       </span>
     HTML
