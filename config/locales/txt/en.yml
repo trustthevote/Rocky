@@ -14,7 +14,9 @@ en:
       review: Review Application
       sendmail: Send Email
       share_facebook: Post It!
+      share_facebook_translation_instructions: Please keep to under 9 characters to fit on the button
       share_twitter: Tweet It!
+      share_twitter_translation_instructions: Please keep to under 9 characters to fit on the button
       share_google_buzz: Share on Google!
       state_online_registration: "I'd like to submit<br/> my form online with<br/> %{state} now."
       skip_state_online_registration: "&gt; No Thanks, I'll continue with %{rtv_and_partner_name} and send in my form later."
