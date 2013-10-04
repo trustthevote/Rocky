@@ -11,12 +11,28 @@ class TranslationsController < ApplicationController
   def show
   end
   
+  def save
+    file = @translation.generate_yml(params[:locale], params[params[:locale]])
+  end
+  
   def submit
     file = @translation.generate_yml(params[:locale], params[params[:locale]])
-    if @translation.has_errors?
-      render :action=>:show
-    else
-      submit_data(file, params[:id], params[:locale])
+    if params[:save]
+      begin
+        File.open(@translation.tmp_file_path(params[:id],params[:locale]), "w+") do |f|
+          f.write file
+        end
+        flash[:notice] = "#{params[:id]}-#{params[:locale]} saved"
+      rescue
+        flash[:notice] = "Error saving translation #{params[:id]}-#{params[:locale]}"
+      end
+      render :action=>:show    
+    else      
+      if @translation.has_errors?
+        render :action=>:show
+      else
+        submit_data(file, params[:id], params[:locale])
+      end
     end
   end
   

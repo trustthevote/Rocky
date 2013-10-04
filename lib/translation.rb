@@ -75,6 +75,17 @@ class Translation
     I18n.t('language_name', :locale=>locale) + " (#{locale})"
   end
   
+  def self.tmp_file_dir
+    dir = Rails.root.join('tmp', 'translation_files')
+    FileUtils.mkdir_p(dir)
+    return dir
+  end
+  
+  def self.tmp_file_path(type, locale)
+    tmp_file_dir.join("#{type}-#{locale}.yml")
+  end
+  
+  
   attr_reader :directory
   attr_reader :type
   attr_reader :errors
@@ -85,6 +96,11 @@ class Translation
     @directory = self.class.directory(type)
     @errors = {:blanks=>[], :missing_variables=>[]}
   end
+  
+  def tmp_file_path(type, locale)
+    self.class.tmp_file_path(type, locale)
+  end
+  
   
   def blanks
     errors[:blanks]
@@ -113,7 +129,12 @@ class Translation
   end
   
   def file_path(fn)
-    File.join(directory, fn)
+    temp_file = tmp_file_path(type, language(fn))
+    if File.exists?(temp_file)
+      temp_file
+    else 
+      File.join(directory, fn)
+    end
   end
   
   def language(fn)

@@ -1,6 +1,9 @@
 #translations
   = render :partial=>'translations_nav'
   %hr
+  - if flash[:notice]
+    .notice= flash[:notice]
+    %hr
   %h2= "Translate '#{@translation.name}' in #{Translation.language_name(@locale)}"
   - if @translation.has_errors?
     .errors
@@ -15,7 +18,8 @@
       
   = form_tag submit_translation_path(:locale=>@locale) do
     #submission
-      = submit_tag 'Save and Email Translations'
+      = submit_tag 'Save Translations', :name=>'save'
+      = submit_tag 'Submit Translations'
     .languages
       - @translation.contents['en'].each do |k,v|
         %ul= render :partial=>'key_value', :locals=>{:key=>k, :value=>v, :id_ct=>1}

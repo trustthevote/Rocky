@@ -54,30 +54,30 @@ es:
       has_state_license: "Tengo un carnet de identificación expedida por el estado o licencia de conducir que es válida."
       has_no_state_license: "No tengo ni carnet de identificación expedida por el estado ni licencia de conducir que es válida."
       titles:
-      - Sr.
-      - Sra.
-      - Srta.
-      - Ms
+        mr: Sr.
+        mrs: Sra.
+        miss: Srta.
+        ms: Ms
       suffixes:
-      - Jr.
-      - Sr.
-      - II
-      - III
-      - IV
+        jr: Jr.
+        sr: Sr.
+        ii: II
+        iii: III
+        iv: IV
       races:
-      - Indio Americano / Nativo de Alaska
-      - Asiático / Islas del Pacífico
-      - Negra (No hispano)
-      - Hispano
-      - Multi-racial
-      - Blanca (no hispano)
-      - Otra
-      - Declino comentar
+        american_indian_alaskan_native: Indio Americano / Nativo de Alaska
+        asian: Asiático / Islas del Pacífico
+        black_not_hispanic: Negra (No hispano)
+        hispanic: Hispano
+        mutli_racial: Multi-racial
+        white_not_hispanic: Blanca (no hispano)
+        other: Otra
+        decline_to_state: Declino comentar
       phone_types:
-      - Móvil
-      - Casa
-      - Trabajo
-      - Otro
+        mobile: Móvil
+        home: Casa
+        work: Trabajo
+        other: Otro
       instructions:
         overseas: "Si Usted es un ciudadano americano viviendo afuera el país o Usted es un miembro de servicio, haga <a href='http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html' target='_blank'> clic aquí</a>  para registrarse a votar."
         opt_in_email: Le enviaremos recordatorios de la elección, información del recinto electoral asignado, y información oportuna sobre música y temas información.

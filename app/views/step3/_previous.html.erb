@@ -70,7 +70,7 @@
   <ul class="stacked">
     <li class="width_d">
       <h3><%= form.label :prev_name_title %></h3>
-      <%= select_div form, :prev_name_title, I18n.t('txt.registration.titles'), :include_blank => true %>
+      <%= select_div form, :prev_name_title, @registrant.titles, :include_blank => true %>
       <span class="error"><%= form.object.errors[:prev_name_title].join("\n") %></span>
     </li>
     <li class="width_b">
@@ -90,7 +90,7 @@
     </li>
     <li class="width_d">
       <h3><%= form.label :prev_name_suffix %></h3>
-      <div><%= form.select :prev_name_suffix, t('txt.registration.suffixes'), :include_blank => t('txt.registration.select_none') %></div>
+      <div><%= form.select :prev_name_suffix,  @registrant.suffixes, :include_blank => t('txt.registration.select_none') %></div>
       <span class="error"><%= form.object.errors[:prev_name_suffix].join("\n") %></span>
     </li>
   </ul>

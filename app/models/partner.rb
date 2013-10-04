@@ -161,8 +161,8 @@ class Partner < ActiveRecord::Base
       GROUP BY race
     SQL
 
-    en_races = I18n.backend.send(:lookup, :en, "txt.registration.races")
-    es_races = I18n.backend.send(:lookup, :es, "txt.registration.races")
+    en_races = I18n.backend.send(:lookup, :en, "txt.registration.races").values
+    es_races = I18n.backend.send(:lookup, :es, "txt.registration.races").values
     counts, es_counts = counts.partition { |row| row["locale"] == "en" || !es_races.include?(row["race"]) }
     counts.each do |row|
       if ( i = en_races.index(row["race"]) )
@@ -197,7 +197,7 @@ class Partner < ActiveRecord::Base
       GROUP BY name_title
     SQL
 
-    male_titles = [I18n.backend.send(:lookup, :en, "txt.registration.titles")[0], I18n.backend.send(:lookup, :es, "txt.registration.titles")[0]]
+    male_titles = [I18n.backend.send(:lookup, :en, "txt.registration.titles.#{Registrant::TITLE_KEYS[0]}"), I18n.backend.send(:lookup, :es, "txt.registration.titles.#{Registrant::TITLE_KEYS[0]}")]
     male_count = female_count = 0
 
     counts.each do |row|

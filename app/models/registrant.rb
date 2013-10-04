@@ -37,9 +37,14 @@ class Registrant < ActiveRecord::Base
   
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
+  
+  TITLE_KEYS = I18n.t('txt.registration.titles', :locale => :en).keys
+  SUFFIX_KEYS = I18n.t('txt.registration.suffixes', :locale => :en).keys
+  RACE_KEYS = I18n.t('txt.registration.races', :locale => :en).keys
+  PHONE_TYPE_KEYS = I18n.t('txt.registration.phone_types', :locale => :en).keys
 
-  TITLES = RockyConf.enabled_locales.collect{|l| I18n.t('txt.registration.titles', :locale => l) }.flatten
-  SUFFIXES = RockyConf.enabled_locales.collect{|l| I18n.t('txt.registration.suffixes', :locale => l) }.flatten
+  TITLES = RockyConf.enabled_locales.collect{|l| TITLE_KEYS.collect{|key| I18n.t("txt.registration.titles.#{key}", :locale => l) } }.flatten
+  SUFFIXES = RockyConf.enabled_locales.collect{|l| SUFFIX_KEYS.collect{|key| I18n.t("txt.registration.suffixes.#{key}", :locale => l) } }.flatten
   REMINDER_EMAILS_TO_SEND = 2
   STALE_TIMEOUT = 30.minutes
   REMINDER_EMAIL_PRIORITY = 0
@@ -479,16 +484,33 @@ class Registrant < ActiveRecord::Base
     end
   end
   
+  def titles
+    TITLE_KEYS.collect {|key| I18n.t("txt.registration.titles.#{key}", :locale=>locale)}
+  end
+
+  def suffixes
+    SUFFIX_KEYS.collect {|key| I18n.t("txt.registration.suffixes.#{key}", :locale=>locale)}
+  end
+
+  def races
+    RACE_KEYS.collect {|key| I18n.t("txt.registration.races.#{key}", :locale=>locale)}
+  end
+  
+  def phone_types
+    PHONE_TYPE_KEYS.collect {|key| I18n.t("txt.registration.phone_types.#{key}", :locale=>locale)}
+  end
+
+  
   def english_races
-    I18n.t('txt.registration.races', :locale=>:en)
+    I18n.t('txt.registration.races', :locale=>:en).values
   end
 
   def english_race
     if locale.to_s == 'en' || english_races.include?(race)
       return race
     else
-      if (race_idx = I18n.t('txt.registration.races').index(race))
-        return I18n.t('txt.registration.races', :locale=>:en)[race_idx]
+      if (race_idx = I18n.t('txt.registration.races', :locale=>locale).values.index(race))
+        return I18n.t('txt.registration.races', :locale=>:en).values[race_idx]
       else
         return nil
       end
@@ -584,7 +606,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def pdf_race
-    if requires_race? && race != I18n.t('txt.registration.races').last
+    if requires_race? && race != I18n.t('txt.registration.races', :locale=>locale).values.last
       race
     else
       ""

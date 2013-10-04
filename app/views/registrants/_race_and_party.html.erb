@@ -1,7 +1,7 @@
 <ul class="flat race-dropdown">
   <li>
     <h3><%= form.label :race %></h3>
-    <div><%= form.select :race, I18n.t('txt.registration.races'), :include_blank => true %></div>
+    <div><%= form.select :race, @registrant.races, :include_blank => true %></div>
     <div class="tooltip"><%= tooltip_tag :race, @race_tooltip %></div>
     <span class="error"><%= form.object.errors[:race].join("\n") %></span>
   </li>

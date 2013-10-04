@@ -56,30 +56,30 @@ en:
       has_state_license: "I have a current %{state} state identification card or driver's license"
       has_no_state_license: "I do not have a current %{state} state identification card or driver's license"
       titles:
-      - Mr.
-      - Mrs.
-      - Miss
-      - Ms.
+        mr: Mr.
+        mrs: Mrs.
+        miss: Miss
+        ms: Ms.
       suffixes:
-      - Jr.
-      - Sr.
-      - II
-      - III
-      - IV
+        jr: Jr.
+        sr: Sr.
+        ii: II
+        iii: III
+        iv: IV
       races:
-      - American Indian / Alaskan Native
-      - Asian / Pacific Islander
-      - Black (not Hispanic)
-      - Hispanic
-      - Multi-racial
-      - White (not Hispanic)
-      - Other
-      - Decline to State
+        american_indian_alaskan_native: American Indian / Alaskan Native
+        asian: Asian / Pacific Islander
+        black_not_hispanic: Black (not Hispanic)
+        hispanic: Hispanic
+        mutli_racial: Multi-racial
+        white_not_hispanic: White (not Hispanic)
+        other: Other
+        decline_to_state: Decline to State
       phone_types:
-      - Mobile
-      - Home
-      - Work
-      - Other
+        mobile: Mobile
+        home: Home
+        work: Work
+        other: Other
       instructions:
         overseas: "<b>Note</b>: If you are an American citizen living abroad or a uniformed military voter, <a href='http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html' target='_blank'>click here</a> to register to vote."
         opt_in_email: "We will send you timely election reminders, your polling place location, and information about music and issues."

@@ -14,7 +14,7 @@
   <li class="secondary">
     <h3><%= form.label :phone_type %></h3>
     <div class="flat-stack">
-      <div><%= form.select :phone_type, I18n.t('txt.registration.phone_types') %></div>
+      <div><%= form.select :phone_type, @registrant.phone_types %></div>
       <span class="error"><%= form.object.errors[:phone_type].join("\n") %></span>
     </div>
   </li>
