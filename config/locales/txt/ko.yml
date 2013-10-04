@@ -3,5 +3,5 @@ ko:
     registration:
       in_language_name: In KO
       titles:
-        - Mr.
-        - Ms.
+        mr: Mr.
+        ms: Ms.

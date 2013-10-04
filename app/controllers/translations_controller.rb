@@ -22,9 +22,9 @@ class TranslationsController < ApplicationController
         File.open(@translation.tmp_file_path(params[:id],params[:locale]), "w+") do |f|
           f.write file
         end
-        flash[:notice] = "#{params[:id]}-#{params[:locale]} saved"
+        flash[:notice] = "#{Translation.language_name(@locale)} '#{@translation.name}' translations saved"
       rescue
-        flash[:notice] = "Error saving translation #{params[:id]}-#{params[:locale]}"
+        flash[:notice] = "Error saving #{Translation.language_name(@locale)} '#{@translation.name}' translations"
       end
       render :action=>:show    
     else      
