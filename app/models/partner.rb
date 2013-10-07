@@ -277,8 +277,11 @@ class Partner < ActiveRecord::Base
         AND finish_with_state = ?
         AND partner_id = ?
         AND created_at >= ?
+        AND home_state_id in (?)
       GROUP BY home_state_id
     SQL
+    
+    enabled_state_ids = GeoState.states_with_online_registration.collect{|abbr| GeoState[abbr].id }
     
     stats = {}
     
@@ -287,7 +290,7 @@ class Partner < ActiveRecord::Base
      [:month_count, 1.month.ago],
      [:year_count, 1.year.ago],
      [:total_count, 1000.years.ago]].each do |range,time|
-      counts = Registrant.connection.select_all(Registrant.send(:sanitize_sql_for_conditions, [sql, true, self, time]))
+      counts = Registrant.connection.select_all(Registrant.send(:sanitize_sql_for_conditions, [sql, true, self, time, enabled_state_ids]))
       counts.each do |row|
         state_name = GeoState[row["home_state_id"].to_i].name
         stats[state_name] ||= {:state_name=>state_name}

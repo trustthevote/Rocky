@@ -144,7 +144,7 @@ class Registrant < ActiveRecord::Base
 
   before_create :generate_uid
 
-  before_save :set_questions
+  before_save :set_questions, :set_finish_with_state
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of   :partner_id
@@ -713,11 +713,14 @@ class Registrant < ActiveRecord::Base
     prev_state && prev_state.abbreviation
   end
 
+  def home_state_online_reg_enabled?
+    !home_state.nil? && home_state.online_reg_enabled?
+  end
 
   def custom_step_2?
     !javascript_disabled &&
       !home_state.nil? &&
-      home_state.online_reg_enabled? &&
+      home_state_online_reg_enabled? &&
       File.exists?(File.join(Rails.root, 'app/views/step2/', "_#{custom_step_2_partial}.html.erb"))
   end
 
@@ -1181,5 +1184,10 @@ class Registrant < ActiveRecord::Base
       self.original_survey_question_2 = partner_survey_question_2
     end
     true
+  end
+  
+  def set_finish_with_state
+    self.finish_with_state = false unless self.home_state_online_reg_enabled?
+    return true
   end
 end

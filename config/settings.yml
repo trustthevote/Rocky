@@ -41,7 +41,6 @@ pdf_no_email_expiration_minutes: 10
 partner_csv_expiration_minutes: 30
 
 states_with_online_registration:
-  - CO
   - CA
   - NV
   - WA

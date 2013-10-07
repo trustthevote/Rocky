@@ -33,6 +33,7 @@ describe StateOnlineRegistrationsController do
     end
     it "sets the finish_with_state flag for the registrant to true" do
       reg = FactoryGirl.create(:step_1_registrant)
+      GeoState.stub(:states_with_online_registration).and_return([reg.home_state_abbrev])
       reg.finish_with_state.should be_false
       get :show, :registrant_id => reg.to_param
       assigns[:registrant].finish_with_state.should be_true

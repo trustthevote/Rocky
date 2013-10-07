@@ -95,6 +95,23 @@ describe Registrant do
     end
   end
   
+  describe "finish_with_state" do
+    it "gets set to false for non-enabled states" do
+      r = FactoryGirl.build(:step_3_registrant)
+      r.stub(:home_state_online_reg_enabled?).and_return(false)
+      r.finish_with_state = true
+      r.save!
+      r.finish_with_state.should be_false
+    end
+    it "can be set to true for enabled states" do
+      r = FactoryGirl.build(:step_3_registrant)
+      r.stub(:home_state_online_reg_enabled?).and_return(true)
+      r.finish_with_state = true
+      r.save!
+      r.finish_with_state.should be_true      
+    end
+  end
+  
   describe "#email_address_to_send_from" do
     before(:each) do
       @p = Partner.new
@@ -1175,6 +1192,8 @@ describe Registrant do
       assert !complete_rec.reload.abandoned?
     end
     it "should send an email if registrant chose to finish online with state" do
+      GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
+      
       stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
       stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
       
@@ -1184,6 +1203,8 @@ describe Registrant do
       
     end
     it "should not send an email if registrant email is blank" do
+      GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
+      
       stale_state_online_reg = FactoryGirl.create(:step_2_registrant, 
         :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, 
         :finish_with_state=>true, 
@@ -1195,10 +1216,13 @@ describe Registrant do
         Registrant.abandon_stale_records
       }.to change { ActionMailer::Base.deliveries.count }.by(0)      
     end
+    
     it "should not send an email to registrants that have been thanked" do
+      GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
       stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
       
       Registrant.abandon_stale_records
+      
       
       stale_state_online_reg_2 = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
       expect {

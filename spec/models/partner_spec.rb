@@ -581,6 +581,9 @@ describe Partner do
 
       it "only uses completed/step_5 registrations without finish-with-state for stats" do
         partner = FactoryGirl.create(:partner)
+        # Assume any relevant states are *allowed* to have online reg
+        GeoState.stub(:states_with_online_registration).and_return(['PA','MA','FL','CA'])
+        
         3.times do
           reg = FactoryGirl.create(:maximal_registrant, :partner => partner)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
@@ -819,6 +822,8 @@ describe Partner do
 
       it "only uses completed/step_5 registrations without finish_with_state for stats" do
         partner = FactoryGirl.create(:partner)
+        GeoState.stub(:states_with_online_registration).and_return(['PA','MA'])
+        
         8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
         2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
         8.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
@@ -860,6 +865,7 @@ describe Partner do
     describe "finish-with-state by registration date & state" do
       it "should tally registrants by state and date bucket" do
         partner = FactoryGirl.create(:partner)
+        GeoState.stub(:states_with_online_registration).and_return(['MA','PA','CA','FL'])
         8.times do
           reg = FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
           reg.update_attributes(:home_zip_code => "32001", :party => "Decline to State")
@@ -891,6 +897,8 @@ describe Partner do
 
       it "only uses completed registrations with finish_with_state for stats" do
         partner = FactoryGirl.create(:partner)
+        GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
+        
         2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
         8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
         8.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false) }
@@ -903,6 +911,8 @@ describe Partner do
 
       it "should only include data for this partner" do
         partner = FactoryGirl.create(:partner)
+        GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
+        
         other_partner = FactoryGirl.create(:partner)
         FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
         FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>false)
