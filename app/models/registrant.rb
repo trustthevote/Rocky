@@ -500,6 +500,42 @@ class Registrant < ActiveRecord::Base
     PHONE_TYPE_KEYS.collect {|key| I18n.t("txt.registration.phone_types.#{key}", :locale=>locale)}
   end
 
+  def name_title_key
+    key_for_attribute(:name_title, 'titles')
+  end
+  def english_name_title
+    english_attribute_value(name_title_key, 'titles')
+  end
+  
+  def name_suffix_key
+    key_for_attribute(:name_suffix, 'suffixes')
+  end
+  def english_name_suffix
+    english_attribute_value(name_suffix_key, 'suffixes')
+  end
+    
+  def prev_name_title_key
+    key_for_attribute(:prev_name_title, 'titles')
+  end
+  def english_prev_name_title
+    english_attribute_value(prev_name_title_key, 'titles')
+  end
+
+  def prev_name_suffix_key
+    key_for_attribute(:prev_name_suffix, 'suffixes')
+  end
+  def english_prev_name_suffix
+    english_attribute_value(prev_name_suffix_key, 'suffixes')
+  end
+  
+  def key_for_attribute(attr_name, i18n_list)
+    key_value = I18n.t("txt.registration.#{i18n_list}", :locale=>locale).detect{|k,v| v==self.send(attr_name)}
+    key_value && key_value.length == 2 ? key_value[0] : nil    
+  end
+  
+  def english_attribute_value(key, i18n_list)
+    key.nil? ? nil : I18n.t("txt.registration.#{i18n_list}.#{key}", :locale=>:en)
+  end
   
   def english_races
     I18n.t('txt.registration.races', :locale=>:en).values
@@ -605,6 +641,14 @@ class Registrant < ActiveRecord::Base
     date_of_birth.to_s(:month_day_year)
   end
 
+  def pdf_english_race
+    if requires_race? && race != I18n.t('txt.registration.races', :locale=>locale).values.last
+      english_race
+    else
+      ""
+    end
+  end
+  
   def pdf_race
     if requires_race? && race != I18n.t('txt.registration.races', :locale=>locale).values.last
       race

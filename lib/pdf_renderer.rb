@@ -6,6 +6,8 @@ class PdfRenderer < AbstractController::Base
   include ActionView::Helpers::UrlHelper
   include Rails.application.routes.url_helpers
   helper ApplicationHelper
+  helper PdfRendererHelper
+  
   
   self.view_paths = "app/views"
   
@@ -21,5 +23,6 @@ class PdfRenderer < AbstractController::Base
     url = self.registrant.registration_instructions_url
     @registrant_instructions_link = link_to url, url
   end
+  
   
 end

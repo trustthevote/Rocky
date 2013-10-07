@@ -125,6 +125,37 @@ table.form {
 			color: $black;
 			font-size:$fs;
 			padding-top:5px;
+			.translated_value {
+				display:inline;
+				font-size:.7*$fs;
+			}
+			&.checkboxes {
+				overflow: hidden;
+				font-size: .7*$fs;
+				.checkbox-col {
+					width: 49%;
+					float: left;
+					.checkbox {
+						padding:5px 15px 10px 0;
+					}
+					img {
+						width: 34px;
+						height: 34px;
+					}
+				}
+			}	
+			&.suffix-checkboxes {
+				font-size: .65* $fs;
+				.checkbox-col {
+					.checkbox {
+						padding: 0 15px 5px 0;
+					}
+					img {
+						width: 26px;
+						height: 26px;
+					}
+				}
+			}		
 		}
 		.label, .sublabel {
 			padding-left:10px;
@@ -365,13 +396,13 @@ table.form {
 			}
 			tr#blockA {
 				td.box1 {
-					width:52px;
+					width: 266px;
 				}
 				td.box2 {
-					width: 740px;
+					width: 548px;
 				}
 				td.box3 {
-					width: 568px;
+					width: 576px;
 				}
 				td.box4 {
 					width: 570px;

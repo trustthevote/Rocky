@@ -55,7 +55,22 @@
       %td.block_number 1
       %td.box1
         .label= I18n.t('pdf.nvra.page2.block1.box1_label' ).html_safe
-        .value= @registrant.name_title
+        .value.checkboxes
+          .checkbox-col
+            .checkbox
+              = checkbox(:mr, :name_title)
+              = I18n.t("txt.registration.titles.mr", :locale=>:en)
+            .checkbox
+              = checkbox(:mrs, :name_title)
+              = I18n.t("txt.registration.titles.mrs", :locale=>:en)
+          .checkbox-col
+            .checkbox
+              = checkbox(:miss, :name_title)
+              = I18n.t("txt.registration.titles.miss", :locale=>:en)
+            .checkbox
+              = checkbox(:ms, :name_title)
+              = I18n.t("txt.registration.titles.ms", :locale=>:en)
+      
       %td.box2
         .label= I18n.t('pdf.nvra.page2.block1.box2_label' ).html_safe
         .value= @registrant.last_name
@@ -67,7 +82,24 @@
         .value= @registrant.middle_name
       %td.box5
         .label= I18n.t('pdf.nvra.page2.block1.box5_label' ).html_safe
-        .value= @registrant.name_suffix
+        .value.checkboxes.suffix-checkboxes
+          .checkbox-col
+            .checkbox
+              = checkbox(:jr, :name_suffix)
+              = I18n.t("txt.registration.suffixes.jr", :locale=>:en)
+            .checkbox
+              = checkbox(:sr, :name_suffix)
+              = I18n.t("txt.registration.suffixes.sr", :locale=>:en)
+          .checkbox-col
+            .checkbox
+              = checkbox(:ii, :name_suffix)
+              = I18n.t("txt.registration.suffixes.ii", :locale=>:en)
+            .checkbox
+              = checkbox(:iii, :name_suffix)
+              = I18n.t("txt.registration.suffixes.iii", :locale=>:en)
+            .checkbox
+              = checkbox(:iv, :name_suffix)
+              = I18n.t("txt.registration.suffixes.iv", :locale=>:en)
   %table.form
     %tr#block2
       %td.block_number 2
@@ -130,12 +162,16 @@
       %td.block7.box1
         .label= I18n.t('pdf.nvra.page2.block7.box1_label' ).html_safe
         .sublabel= I18n.t('pdf.nvra.page2.block7.box1_sublabel' ).html_safe
-        .value= @registrant.party
+        .value
+          = @registrant.english_party_name
+          - if locale.to_s != 'en' && !@registrant.party.blank?
+            .translated_value= "/ #{@registrant.party}"
       %td.block8.block_number 8
       %td.block8.box2
         .label= I18n.t('pdf.nvra.page2.block8.box1_label' ).html_safe
         .sublabel= I18n.t('pdf.nvra.page2.block8.box1_sublabel' ).html_safe
-        .value= @registrant.pdf_race
+        .value
+          = @registrant.pdf_english_race
   %table.form
     %tr#block9
       %td.block_number 9
@@ -166,10 +202,24 @@
         %td.block_number A
         %td.box1
           .label= I18n.t('pdf.nvra.page2.blockA.box1_label' ).html_safe
-          .value= @registrant.prev_name_title
-          .value= @registrant.prev_last_name
+          .value.checkboxes
+            .checkbox-col
+              .checkbox
+                = checkbox(:mr, :prev_name_title)
+                = I18n.t("txt.registration.titles.mr", :locale=>:en)
+              .checkbox
+                = checkbox(:mrs, :prev_name_title)
+                = I18n.t("txt.registration.titles.mrs", :locale=>:en)
+            .checkbox-col
+              .checkbox
+                = checkbox(:miss, :prev_name_title)
+                = I18n.t("txt.registration.titles.miss", :locale=>:en)
+              .checkbox
+                = checkbox(:ms, :prev_name_title)
+                = I18n.t("txt.registration.titles.ms", :locale=>:en)
         %td.box2
           .label= I18n.t('pdf.nvra.page2.blockA.box2_label' ).html_safe
+          .value= @registrant.prev_last_name
         %td.box3
           .label= I18n.t('pdf.nvra.page2.blockA.box3_label' ).html_safe
           .value= @registrant.prev_first_name
@@ -178,8 +228,24 @@
           .value= @registrant.prev_middle_name
         %td.box5
           .label= I18n.t('pdf.nvra.page2.blockA.box5_label' ).html_safe
-          .value= @registrant.prev_name_suffix
-          
+          .value.checkboxes.suffix-checkboxes
+            .checkbox-col
+              .checkbox
+                = checkbox(:jr, :prev_name_suffix)
+                = I18n.t("txt.registration.suffixes.jr", :locale=>:en)
+              .checkbox
+                = checkbox(:sr, :prev_name_suffix)
+                = I18n.t("txt.registration.suffixes.sr", :locale=>:en)
+            .checkbox-col
+              .checkbox
+                = checkbox(:ii, :prev_name_suffix)
+                = I18n.t("txt.registration.suffixes.ii", :locale=>:en)
+              .checkbox
+                = checkbox(:iii, :prev_name_suffix)
+                = I18n.t("txt.registration.suffixes.iii", :locale=>:en)
+              .checkbox
+                = checkbox(:iv, :prev_name_suffix)
+                = I18n.t("txt.registration.suffixes.iv", :locale=>:en)          
     %p.block_title.blockB= I18n.t('pdf.nvra.page2.blockB.title' ).html_safe
     %table.form
       %tr#blockB
