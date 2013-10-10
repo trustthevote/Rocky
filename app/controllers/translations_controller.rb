@@ -5,6 +5,8 @@ class TranslationsController < ApplicationController
   before_filter :get_translations
   before_filter :get_locale_and_translation, :except=>:index
   
+  before_filter :authenticate, :if => lambda { !%w{ development test }.include?(Rails.env) }
+
   def index
   end
   
@@ -58,5 +60,14 @@ private
     ConfigMailer.translation_file(file, "#{group_name}-#{locale}.yml").deliver
     #send_data file.to_s, :filename=>"#{group_name}-#{locale}.yml", :type=>"text"
   end
+
+
+  def authenticate
+    authenticate_or_request_with_http_basic("Translation UI") do |user, password|
+      pass = Settings.admin_password
+      pass.present? && user == 'rtvdemo' && password == 'bullwinkle'
+    end
+  end
+
   
 end

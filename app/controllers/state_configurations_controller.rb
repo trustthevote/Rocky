@@ -4,6 +4,8 @@ class StateConfigurationsController < ApplicationController
   before_filter :get_state_importer
   before_filter :disallow_production
   
+  before_filter :authenticate, :if => lambda { !%w{ development test }.include?(Rails.env) }
+  
   def index
   end
   
@@ -34,6 +36,15 @@ protected
   def submit_data(file)
     # later this will be 'email'
     send_data file, :filename=>"new_states.yml", :type=>"text"
+  end
+  
+  private
+
+  def authenticate
+    authenticate_or_request_with_http_basic("Settings UI") do |user, password|
+      pass = Settings.admin_password
+      pass.present? && user == 'rtvdemo' && password == 'bullwinkle'
+    end
   end
   
   
