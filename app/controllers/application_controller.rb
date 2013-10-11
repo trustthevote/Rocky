@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :ensure_https
 
-  before_filter :authenticate, :if => lambda { !%w{ development test production }.include?(Rails.env) }
+  before_filter :authenticate_everything, :if => lambda { !%w{ development test production }.include?(Rails.env) }
 
   protected
 
@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def authenticate
+  def authenticate_everything
     authenticate_or_request_with_http_basic("Translation UI") do |user, password|
       pass = Settings.admin_password
       pass.present? && user == 'rtvdemo' && password == 'bullwinkle'
