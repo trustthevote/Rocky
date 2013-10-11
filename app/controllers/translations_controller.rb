@@ -5,7 +5,6 @@ class TranslationsController < ApplicationController
   before_filter :get_translations
   before_filter :get_locale_and_translation, :except=>:index
   
-  before_filter :authenticate, :if => lambda { !%w{ development test }.include?(Rails.env) }
 
   def index
   end
@@ -62,12 +61,6 @@ private
   end
 
 
-  def authenticate
-    authenticate_or_request_with_http_basic("Translation UI") do |user, password|
-      pass = Settings.admin_password
-      pass.present? && user == 'rtvdemo' && password == 'bullwinkle'
-    end
-  end
 
   
 end

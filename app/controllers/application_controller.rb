@@ -27,6 +27,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :ensure_https
 
+  before_filter :authenticate, :if => lambda { !%w{ development test production }.include?(Rails.env) }
+
   protected
 
   # override in subclass controller if plain HTTP is allowed
@@ -43,4 +45,13 @@ class ApplicationController < ActionController::Base
       false
     end
   end
+  
+  def authenticate
+    authenticate_or_request_with_http_basic("Translation UI") do |user, password|
+      pass = Settings.admin_password
+      pass.present? && user == 'rtvdemo' && password == 'bullwinkle'
+    end
+  end
+  
+  
 end
