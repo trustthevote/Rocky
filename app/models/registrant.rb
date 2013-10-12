@@ -886,11 +886,11 @@ class Registrant < ActiveRecord::Base
       f << pdf
     end
     
-    unless File.exists?(pdf_file_path)
+    #unless File.exists?(pdf_file_path)
       File.open(pdf_file_path, "w") do |f|
         f << pdf.force_encoding('UTF-8')
       end
-    end
+    #end
 
     self.pdf_ready = true
   end
