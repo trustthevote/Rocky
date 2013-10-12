@@ -455,6 +455,11 @@ td#left_column, td#right_column {
 }
 
 /* rollover buttons */
+.rollover_button {
+	span {
+		text-indent: -9999em;
+	}
+}
 
 a.button_viewreport         { width: 137px; height: 22px; }
 a.button_viewreport span    { width: 137px; height: 22px; background-image: url(/images/partner/button_viewreport_ro.gif); }

@@ -107,7 +107,7 @@ module ApplicationHelper
 
   def partner_rollover_button(name, text)
     html =<<-HTML
-      <div class="button">
+      <div class="button rollover_button">
         <a class="button_#{name}" href="#"><button type="submit" id="partner_submit"><span>#{text}</span></button></a>
       </div>
     HTML
