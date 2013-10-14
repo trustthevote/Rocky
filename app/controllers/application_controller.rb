@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_everything
-    authenticate_or_request_with_http_basic("Translation UI") do |user, password|
+    authenticate_or_request_with_http_basic("Rocky") do |user, password|
       pass = Settings.admin_password
       pass.present? && user == 'rtvdemo' && password == 'bullwinkle'
     end

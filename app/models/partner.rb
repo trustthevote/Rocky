@@ -354,7 +354,7 @@ class Partner < ActiveRecord::Base
       end
     end
   end
-
+  
   def generate_random_password
     self.password = random_key
     self.password_confirmation = self.password

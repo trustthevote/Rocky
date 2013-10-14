@@ -869,10 +869,7 @@ class Registrant < ActiveRecord::Base
 
   def generate_pdf
     return false if self.locale.nil? || self.home_state.nil?
-    renderer = PdfRenderer.new
-    renderer.locale=self.locale
-    renderer.registrant=self
-    renderer.state=self.home_state
+    renderer = PdfRenderer.new(self)
     pdf = WickedPdf.new.pdf_from_string(
       renderer.render_to_string(
         'registrants/registrant_pdf', 

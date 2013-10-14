@@ -1,5 +1,5 @@
 %div.page#page_1
-  #logo= wicked_pdf_image_tag RockyConf.pdf.nvra.page1.default_logo
+  #logo= image_tag(@logo_image_path)
   %h1.title= I18n.t('pdf.nvra.page1.title').html_safe
   %h2.subtitle= I18n.t('pdf.nvra.page1.subtitle' ).html_safe
   %p.top_paragraph= I18n.t('pdf.nvra.page1.top_paragraph' ).html_safe

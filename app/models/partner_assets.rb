@@ -27,6 +27,7 @@ module PartnerAssets
   APP_CSS = "application.css"
   REG_CSS = "registration.css"
   PART_CSS = "partner.css"
+  PDF_LOGO = "pdf_logo" #.jpeg, .jpg or .gif
 
   def css_present?
     application_css_present? && registration_css_present?
@@ -46,6 +47,30 @@ module PartnerAssets
 
   def partner_css_present?
     File.exists?(self.absolute_partner_css_path)
+  end
+  
+  def pdf_logo_present?
+    !pdf_logo_ext.nil?
+  end
+  
+  def pdf_logo_ext
+    logo_extensions = %w(gif jpg jpeg)
+    logo_extensions.each do |ext|
+      if File.exists?(self.absolute_pdf_logo_path(ext))
+        return ext
+      end
+    end
+    return nil
+  end
+    
+  def absolute_pdf_logo_path(ext=nil)
+    ext ||= pdf_logo_ext || "gif"
+    "#{assets_root}#{pdf_logo_url(ext)}"
+  end
+
+  def pdf_logo_url(ext=nil)
+    ext ||= pdf_logo_ext || "gif"
+    "#{assets_url}/#{PDF_LOGO}.#{ext}"
   end
 
   def assets_root
