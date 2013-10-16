@@ -28,7 +28,7 @@ class PdfRenderer < AbstractController::Base
     if @registrant.partner && @registrant.partner.whitelabeled? && @registrant.partner.pdf_logo_present?
       @registrant.partner.absolute_pdf_logo_path
     else
-      "file:///#{asset_pathname(RockyConf.pdf.nvra.page1.default_logo).to_s}" 
+      "file:///#{Rails.root.join('app/assets/images', RockyConf.pdf.nvra.page1.default_logo).to_s}" 
     end
   end
   
