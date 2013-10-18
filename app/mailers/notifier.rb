@@ -75,7 +75,7 @@ class Notifier < ActionMailer::Base
     @cancel_reminders_url = registrant_finish_url(registrant, :protocol => "https", :reminders => "stop")
     @locale               = registrant.locale.to_sym
     @registrar_phone      = registrant.home_state.registrar_phone
-    @registrar_address    = registrant.home_state.registrar_address
+    @registrar_address    = registrant.home_state.registrar_address.to_s.html_safe
     @registrar_url        = registrant.home_state.registrar_url
     @registrant           = registrant
 
