@@ -1,7 +1,172 @@
+---
 ko:
   txt:
+    rtv_and_partner: Rock the Vote 와 %{partner_name}
+    button:
+      submit: 다음
+      edit: 편집
+      back: 이전 단계로
+      download: 지금<br/>유권자 등록 용지를<br/>작성하세요
+      ineligible_try_again: 다시 시도
+      keep_going: 계속하기
+      remind_me_later: 나중에 알려주십시오
+      help: 도움말
+      prepare: 양식 준비하기
+      review: 신청서 검토하기
+      sendmail: 이메일 보내기
+      share_facebook: 페이스북
+      share_twitter: 트위터
+      share_google_buzz: 구글 버즈
+      state_online_registration: ! '%{state} 주 정부 사이트를 통해 <br/> 온라인 유권자 등록 양식을 <br/>
+        제출하고 싶습니다.'
+      skip_state_online_registration: ! '&gt;%{rtv_and_partner_name} 를 통해서 나중에 양식을
+        보내겠습니다.'
     registration:
-      in_language_name: In KO
+      in_language_name: 한국어
+      powered_by: 협찬
+      progress_indicator: ! '단계:'
+      step_1_header: 새로운 유권자
+      step_2_header: 개인 정보
+      step_3_header: 추가 정보
+      step_4_header: 저희 활동에 참여해주세요
+      step_5_header: 확인하기
+      stay_informed_header: 정보를 받아보세요
+      identification_header: 본인 확인 정보
+      survey_title: 질문
+      preparing_header: 등록 양식을 준비중입니다...
+      download_header: 인쇄하기
+      finish_header: 주변에 알려주세요!
+      finish_under_18_header: 대기 명단에 등록되셨습니다!
+      tell_a_friend_title: 친구에게 이메일로 알려주세요!
+      finish_reminder: ! '%{first_name} %{last_name} 님, 감사합니다. 주 정부 선거 관리국에서 유권자 등록
+        여부를 확인 해드릴 것입니다. 경우에 따라서 몇주씩 걸릴 수 있습니다.'
+      finish_reminder_2: 유권자 등록 진행 상태를 확인하기 위해서는<a href="http://www.rockthevote.com/election-center/"
+        target="_blank">저희 웹사이트</a>를 방문하셔서 주 정부 선거관리국 주소를 찾아주세요.
+      ineligible_header: 아래의 이유로 유권자 등록을 하실 수 없습니다.
+      external_header: ! '%{state} 주 유권자'
+      name: 이름
+      select_none: (없음)
+      home_address: 집 주소
+      mailing_address: 우편 주소
+      previous_name: 이전 이름
+      previous_address: 이전 주소
+      opt_in_sms: ! '%{organization} 에서 문자 메세지를 보내주십시오'
+      opt_in_email: ! '%{organization} 에서 이메일을 보내주십시오'
+      remind_when_18: 제 생일이 18세가 되면 알려주십시오
+      get_updates: Rock the Vote 에서 소식을 보내주십시오
+      volunteer: ! '%{organization} 에서 자원봉사를 하기 원합니다.'
+      not_given: 없음
+      has_state_license: ! '%{state} 주 정부 신분증 또는 운전면허증을 가지고 있습니다.'
+      has_no_state_license: ! '%{state} 주 정부 신분증 또는 운전면허증을 가지고 있지 않습니다.'
       titles:
         mr: Mr.
+        mrs: Mrs.
+        miss: Miss
         ms: Ms.
+      suffixes:
+        jr: Jr.
+        sr: Sr.
+        ii: II
+        iii: III
+        iv: IV
+      races:
+        american_indian_alaskan_native: 미국 원주민/알라스카 원주민
+        asian: 아시안/태평양계 (한인 포함)
+        black_not_hispanic: 흑인 (히스패닉 제외)
+        hispanic: 히스패닉
+        mutli_racial: 다인종
+        white_not_hispanic: 백인 (히스패닉 제외)
+        other: 기타
+        decline_to_state: 답변 거부
+      phone_types:
+        mobile: 핸드폰
+        home: 집
+        work: 직장
+        other: 기타
+      instructions:
+        overseas: ! '<b>주의</b>: 해외 거주 중인 미국 시민권자 또는 현역 미군 군인일 경우 <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>별도의 웹사이트</a> 에서 등록하십시오.'
+        opt_in_email: 선거 정보와 투표소 위치 그리고 음악과 이슈에 대한 정보를 보내드리겠습니다.
+        under_18: ! '아직 나이 18세가 되지 않으셨습니다. %{state_name} 주에서 등록을 하실 수가 있습니다. 그 규칙은
+          다음과 같습니다: %{state_rule}. 다음 선거 날짜는 <a href="http://www.rockthevote.com/election-center/"
+          target="_blank">저희 웹사이트</a> 에서 찾아보실 수 있습니다.'
+        under_18_2: 만일 상기 조건에 해당하시면 아래의 버튼을 클릭하고 유권자 등록을 계속하십시오.
+        under_18_3: 상기 조건에 해당하지 않을 경우, 18세가 되었을 때 저희가 알려드리겠습니다.
+        remind_when_18: ! '%{email_address} 로 이메일을 보내드리겠습니다.'
+        review: 아래의 정보를 확인 해 주십시오.
+        download: 아직 끝나지 않았습니다! 인쇄 버튼을 눌러서 유권자 등록 양식을 인쇄하세요. 서명해서 용지에 적혀있는 주소로 보내주세요.
+        download_2: 꼭 양식을 인쇄, 서명하고 발송해야지만 등록을 마칠 수 있습니다.
+        finish: 유권자 등록, 쉬웠죠? 주변 친구들과 가족들도 등록하도록 알려주세요! 아래의 버튼으로 페이스북과 트위터를 통해 공유 할
+          수 있습니다.
+        finish_2: 웹사이트나 블로그를 운영하시나요? 유권자 등록 도구를 당신의 웹사이트에 올릴 수 있습니다. 아래의 웹페이지에서 무료로
+          신청 할 수 있습니다.
+        finish_under_18: 유권자 등록을 할 수 있게 되면 알려드리겠습니다.
+        finish_under_18_2: 주변 친구와 가족들에게 온라인 유권자 등록에 대해 알려주세요! 아래에는 공유하실 수 있는 도구들이
+          있습니다.
+        finish_tell_recipients: (쉼표로 구분해주세요)
+        finish_email_sent: 이메일을 보냈습니다.
+        finish_update_status: 페이스북과 트위터에도 공유하세요!
+        state_online_registration: ! '%{state} 주 선거관리국 온라인 시스템을 통해 유권자 등록을 마칠 수도 있습니다.'
+        leave_state_online_registration: 아래의 양식을 이용해 %{state} 주 선거관리국에 유권자 등록을 할 수
+          있습니다. 만일 운전면허증이나 주 정부 신분증이 제대로 처리되지 않거나 주 정부가 당신의 DMV 기록을 찾지 못해도 %{link}
+          에서 양식을 인쇄하고 서명해서 보내면 됩니다.
+        leave_state_online_registration_link: ! '%{rtv_and_partner_name} 를 통해서 등록
+          절차를 마무리하세요.'
+      ineligible:
+        age: 다음 선거 날이 될 때까지 18세가 되어야 합니다.
+        non_citizen: 미국 시민권자가 아니면 유권자 등록을 하실 수 없습니다. 혹시 "저는 시민권자입니다" 상자에 체크하는 것을 잊으셨다면,
+          이전 페이지로 돌아가서 다시 계속해주세요.
+        attest: 유권자 등록 자격을 확인해주셔야 합니다.
+      external:
+        colorado:
+          register_link: 콜로라도 선거관리국(주 총무처)를 통해 유권자 등록을 마무리하세요.
+          continue_link: 저희 웹사이트를 통해 유권자 등록 절차를 진행 하세요
+          show:
+            p1: 콜로라도 주 운전면허증을 가지고 계시면 콜로라도 선거관리국(주 총무처)를 통해 유권자 등록 양식을 마무리 할 수 있습니다.
+            p2: 운전면허증 정보를 이미 제공하셨으면, 아래의 링크를 클릭하세요. 지금까지 제공하신 정보는 콜로라도 주 온라인 유권자 등록
+              사이트에 자동으로 기재되며, 거기서 양식을 마무리 하실 수 있습니다.
+            p3: 선거관리국 웹사이트에서 신청서를 작성하지 못할 경우 아래의 링크를 클릭하고 거기서 유권자 등록을 계속하실 수 있습니다.
+              유권자 등록 양식을 인쇄하고 서명해서 우편으로 보낼 수 있습니다.
+            p4: <br>
+          go:
+            title: 콜로라도 주 유권자 등록에 문제가 생겼습니다.
+            timeout: 콜로라도 주 웹사이트에 문제가 생긴 것으로 보입니다. 하지만 다른 방법으로 등록을 계속하실 수 있습니다.
+            timeout_2: 등록을 마치기 위해서는 세가지 옵션이 있습니다.</p><p>(1) 현재 창을 닫고 브라우저에서 뒤로가기 버튼을
+              눌러서 유권자 등록 양식을 교정 할 수 있습니다. 주 선거관리국에 정보를 보내실 수 있습니다.</p><p>(2) 창을 닫고
+              "저희 웹사이트를 통해 유권자 등록 절차를 진행 하세요" 링크를 클릭하세요. 유권자 등록 양식을 인쇄하실 수 있습니다.</p><p>(3)
+              <a href=%{co_url}>선거관리국(주 총무처)</a>에 가셔서 등록을 시도 할 수도 있습니다.
+            timeout_3: ''
+            p1: ! '제공하신 정보가 선거관리국(주 총무처)와 일치하지 않는 것 같습니다. 일반적으로 다음과 같은 이유로 일치하지 않을때가
+              있기 때문에 다시 한번 확인 해 주십시오. 1) 입력하신 이름이 주 정부 ID 에 있는 이름과 일치하지 않을 경우 (예:
+              정부 기록에는 "Chul" 이라고 적혀있지만 이 웹사이트에서는 "Chul Soo" 라고 기록헀을 경우) 2) ID 를 입력하시면서
+              "-" 문자를 함께 입력하셨을 경우 3) 운전면허증이 아닌 다른 신분증 번호를 입력했을 경우. (주 정부 ID와 운전면허증만
+              신분 확인용으로 사용 가능합니다)'
+            section: 개인 정보
+            colorado_id_number: 콜로라두 주 ID 번호
+            p2: 등록을 마치기 위해서는 세가지 옵션이 있습니다.</p><p>(1) 현재 창을 닫고 브라우저에서 뒤로가기 버튼을 눌러서
+              유권자 등록 양식을 교정 할 수 있습니다. 주 선거관리국에 정보를 보내실 수 있습니다.</p><p>(2) 창을 닫고 "저희
+              웹사이트를 통해 유권자 등록 절차를 진행 하세요" 링크를 클릭하세요. 유권자 등록 양식을 인쇄하실 수 있습니다.</p><p>(3)
+              <a href=%{co_url}>선거관리국(주 총무처)</a>에 가셔서 등록을 시도 할 수도 있습니다.
+            p3: ''
+      tooltips:
+        email_address: 유권자 등록 양식을 이메일로 보내드리겠습니다.
+        home_zip_code: 거주지의 ZIP 코드 번호를 입력해주십시오. (우편물용 주소의 ZIP 코드가 아니더라도 꼭 거주지의 ZIP
+          코드 번호를 기입하세요)
+        date_of_birth: 유권자 등록 양식에 선거날까지 18세가 되는지 표시해야 합니다. 그러나 많은 주에서는 18세가 되기 전에
+          등록을 할 수 있습니다. <a href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">관련
+          정보</a>를 참고하시고 미리 등록 할 수 있는지 확인 해 주세요.
+        registrant_name: 아래 칸에 이름을 기재해주십시오. 별명이나 약칭은 사용하지 마세요. 만일 이름을 바꾸어서 유권자 등록을
+          다시 하고 있는 경우일 경우, 다음 페이지에서 예전 이름을 기재할 수 있습니다. 그리고 경칭을 꼭 넣어주세요 (Mr., Mrs.,
+          Miss, Ms.)
+        home_address: 아래 칸에 집 주소를 기재하십시오. 우편물을 받는 주소가 따로 있을 경우에 그 주소는 "우편 주소"에 기재
+          해 주시고 여기에는 집 주소만을 기재하십시오. PO Box 우체국 우편함이나 박스 번호 없는 "Rural route"는 사용하지
+          마십시오.
+        mailing_address: ! '집이 아니라 다른 장소 (예: 직장)에서 우편물을 받기를 원하실 경우 그 주소를 아래에 기재하십시오.'
+        phone: 대부분의 주에서는 전화번호를 기재해서 신청서 내용에 대해 질문이 있을 경우 연락을 드리도록 하고 있습니다. 전화번호를 기재하는
+          것은 선택사항입니다.
+        previous_name: 지난번에 유권자 등록을 한 후 이름을 바꾼 적이 있으면 이전 이름을 여기에 입력하십시오.
+        previous_address: 지난번에 유권자 등록을 한 후 이사를 한 적이 있으면 이전 주소를 여기에 입력하십시오.
+    status_text:
+      message: 저는 이제 당당한 미국의 유권자가 되었습니다. 여러분도 등록해서 한표를 행사하세요!
+      under_18_message: 등록은 쉬워요!
+
