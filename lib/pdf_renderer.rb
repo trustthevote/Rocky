@@ -26,7 +26,7 @@ class PdfRenderer < AbstractController::Base
   
   def logo_image_path
     if @registrant.partner && @registrant.partner.whitelabeled? && @registrant.partner.pdf_logo_present?
-      "http://#{RockyConf.pdf_host_name}#{@registrant.partner.pdf_logo_url}"
+      @registrant.partner.absolute_pdf_logo_path
     else
       "file:///#{Rails.root.join('app/assets/images', RockyConf.pdf.nvra.page1.default_logo).to_s}" 
     end

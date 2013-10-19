@@ -88,7 +88,7 @@ load 'deploy/assets'
 
 
 
-after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
+after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_util_pdf", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
 
 set :rake, 'bundle exec rake'
 
@@ -166,14 +166,24 @@ namespace :deploy do
   end
   
 
+  desc "Link the pdf dir to shared/pdfs"
+  task :symlink_web_pdf, :roles => [:web], :except => {:no_release => true} do
+    run <<-CMD
+      mkdir -p #{shared_path}/pdfs &&
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/pdfs #{latest_release}/public/pdfs
+    CMD
+  end
+  
   desc "Link the pdf dir to /data/rocky/pdf"
-  task :symlink_pdf, :roles => [:util], :except => {:no_release => true} do
+  task :symlink_util_pdf, :roles => [:util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
       rm -rf pdf &&
       ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html pdf
     CMD
   end
+
   
   desc "Link the csv dir to /data/rocky/csv"
   task :symlink_csv, :roles => [:util], :except => {:no_release => true} do

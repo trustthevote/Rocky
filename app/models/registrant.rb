@@ -825,13 +825,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def wrap_up
-    if RockyConf.delayed_wrap_up
-      action = Delayed::PerformableMethod.new(self, :complete!, [])
-      Delayed::Job.enqueue(action, {:priority=>WRAP_UP_PRIORITY, :run_at=>Time.now})
-    else
-      complete
-      save!
-    end
+    complete!
   end
 
   def complete_registration
@@ -844,8 +838,7 @@ class Registrant < ActiveRecord::Base
 
   # Enqueues final registration actions for API calls
   def enqueue_complete_registration_via_api
-    action = Delayed::PerformableMethod.new(self, :complete_registration_via_api, [])
-    Delayed::Job.enqueue(action, {:priority=>WRAP_UP_PRIORITY, :run_at=>Time.now})
+    self.complete_registration_via_api
   end
 
   # Called from the worker queue to generate PDFs on the 'util' server
@@ -980,13 +973,25 @@ class Registrant < ActiveRecord::Base
     File.join(Rails.root, "data", "nvra_templates", "nvra_#{locale && locale.downcase}_#{home_state && home_state.abbreviation.downcase}.pdf")
   end
 
-  def pdf_path
-    "/pdf/#{bucket_code}/#{to_param}.pdf"
+  def pdf_path(pdfpre = nil)
+    "/#{pdf_dir(pdfpre)}/#{to_param}.pdf"
+  end
+  
+  def pdf_dir(pdfpre = nil)
+    if pdfpre
+      "#{pdfpre}/#{bucket_code}"
+    else
+      if File.exists?(pdf_file_path("pdf"))
+        "pdf/#{bucket_code}"
+      else
+        "pdfs/#{bucket_code}"
+      end
+    end
   end
 
-  def pdf_file_path
-    FileUtils.mkdir_p(File.join(Rails.root, "pdf", bucket_code))
-    File.join(Rails.root, pdf_path)
+  def pdf_file_path(pdfpre = nil)
+    FileUtils.mkdir_p(File.join(Rails.root, pdf_dir(pdfpre)))
+    File.join(Rails.root, pdf_path(pdfpre))
   end
 
   def bucket_code
