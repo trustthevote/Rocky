@@ -1237,13 +1237,6 @@ describe Registrant do
   end
 
   describe "PDF" do
-    describe "template path" do
-      it "determined by state and locale" do
-        registrant = FactoryGirl.build(:maximal_registrant, :home_zip_code => "00501", :locale => 'es')
-        assert_match(/_es_ny\.pdf/, registrant.nvra_template_path)
-      end
-    end
-
     describe "merge" do
       before(:each) do
         @registrant = FactoryGirl.create(:maximal_registrant)
@@ -1252,14 +1245,14 @@ describe Registrant do
 
       it "generates PDF with merged data" do
         `rm -f #{@registrant.pdf_file_path}`
-        assert_difference(%Q{Dir[File.join(Rails.root, "pdf/#{@registrant.bucket_code}/*")].length}) do
+        assert_difference(%Q{Dir[File.join(Rails.root, "pdfs/#{@registrant.bucket_code}/*")].length}) do
           @registrant.generate_pdf
         end
       end
 
       it "returns PDF if already exists" do
         `touch #{@registrant.pdf_file_path}`
-        assert_difference(%Q{Dir[File.join(Rails.root, "pdf/#{@registrant.bucket_code}/*")].length} => 0) do
+        assert_difference(%Q{Dir[File.join(Rails.root, "pdfs/#{@registrant.bucket_code}/*")].length} => 0) do
           @registrant.generate_pdf
         end
       end
@@ -1481,20 +1474,15 @@ describe Registrant do
           RockyConf.stub(:delayed_wrap_up) { true }
         end
 
-        it "should delay processing" do
+        it "should complete immediately" do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-          reg.should_not_receive(:complete!)
+          reg.should_receive(:complete!)
           reg.wrap_up
-          assert_match /#{reg.id}.*complete!/m, Delayed::Job.last.handler
         end
-
-        it "should be higher priority than email jobs" do
+        it "should  enqueue emails" do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
           reg.wrap_up
-          wrap_up_priority = Delayed::Job.last.priority
-          reg.enqueue_reminder_email
-          reminder_email_priority = Delayed::Job.last.priority
-          assert wrap_up_priority > reminder_email_priority
+          assert_match /#{reg.id}.*deliver_reminder_email/m, Delayed::Job.last.handler
         end
       end
 

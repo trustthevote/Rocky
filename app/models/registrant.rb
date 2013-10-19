@@ -969,9 +969,6 @@ class Registrant < ActiveRecord::Base
     self.state_id_number = nil
   end
 
-  def nvra_template_path
-    File.join(Rails.root, "data", "nvra_templates", "nvra_#{locale && locale.downcase}_#{home_state && home_state.abbreviation.downcase}.pdf")
-  end
 
   def pdf_path(pdfpre = nil)
     "/#{pdf_dir(pdfpre)}/#{to_param}.pdf"

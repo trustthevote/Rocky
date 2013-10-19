@@ -430,7 +430,105 @@ describe Partner do
       end
     end
     
-  
+    describe "pdf_logos" do
+      let(:partner) { FactoryGirl.build(:partner) }
+      describe "pdf_logo_present?" do
+        context "when pdf_logo_ext is nil" do
+          before(:each) do
+            partner.stub(:pdf_logo_ext).and_return(nil)
+          end
+          it "returns false" do
+            partner.pdf_logo_present?.should be_false
+          end
+          
+        end
+        context "when pdf_logo_ext is not nil" do
+          before(:each) do
+            partner.stub(:pdf_logo_ext).and_return('val')
+          end
+          it "returns true" do
+            partner.pdf_logo_present?.should be_true
+          end
+        end
+      end
+      describe "pdf_logo_ext" do
+        context "when there is no pdf_logo" do
+          before(:each) do
+            File.stub(:exists?).and_return(false)
+          end
+          it "returns nil" do
+            partner.pdf_logo_ext.should be_nil
+          end
+        end
+        context "when there is a pdf_logo jpeg" do
+          before(:each) do
+            partner.stub(:absolute_pdf_logo_path).and_return('badpath')
+            partner.stub(:absolute_pdf_logo_path).with('jpeg').and_return("path")
+            File.stub(:exists?).with('badpath').and_return(false)
+            File.stub(:exists?).with("path").and_return(true)
+          end
+          it "returns png" do
+            partner.pdf_logo_ext.should == 'jpeg'
+          end
+        end
+      end    
+      describe "pdf_logo_url(ext)" do
+        context "when nil is passed" do
+          context "when pdf_logo_ext returns nil" do
+            before(:each) do
+              partner.stub(:pdf_logo_ext).and_return(nil)
+            end
+            it "returns the asset url with a gif extension" do
+              partner.pdf_logo_url(nil).should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.gif"
+            end
+          end
+          context "when pdf_logo_ext returns jpg" do
+            before(:each) do
+              partner.stub(:pdf_logo_ext).and_return('jpg')
+            end
+            it "returns the url with a jpg exention" do
+              partner.pdf_logo_url(nil).should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.jpg"
+            end
+          end
+        end
+        context "when a value is passed" do
+          it "returns the url with the passed exention" do
+            partner.pdf_logo_url('jpeg').should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.jpeg"
+          end          
+        end
+      end
+      describe "absolute_pdf_logo_path(ext)" do
+        context "when nil is passed" do
+          context "when pdf_logo_ext returns nil" do
+            before(:each) do
+              partner.stub(:pdf_logo_ext).and_return(nil)
+              partner.stub(:pdf_logo_url).with('gif').and_return('gifpart')
+            end
+            it "returns the path with a gif extension" do
+              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_root}gifpart"
+            end
+          end
+          context "when pdf_logo_ext returns jpg" do
+            before(:each) do
+              partner.stub(:pdf_logo_ext).and_return('jpg')
+              partner.stub(:pdf_logo_url).with('jpg').and_return('jpgpart')
+            end
+            it "returns the path with a jpg exention" do
+              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_root}jpgpart"
+            end
+          end
+        end
+        context "when a value is passed" do
+          before(:each) do
+            partner.stub(:pdf_logo_url).with('jpeg').and_return('jpegpart')
+          end
+          it "returns the path with the passed exention" do
+            partner.absolute_pdf_logo_path('jpeg').should == "#{partner.assets_root}jpegpart"
+          end          
+        end
+      end
+    end
+    
     
   end
 
