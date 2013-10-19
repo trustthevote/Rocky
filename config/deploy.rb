@@ -171,7 +171,8 @@ namespace :deploy do
     run <<-CMD
       mkdir -p #{shared_path}/pdfs &&
       cd #{latest_release} &&
-      ln -nfs #{shared_path}/pdfs #{latest_release}/public/pdfs
+      ln -nfs #{latest_release}/pdfs #{latest_release}/public/pdfs
+      ln -nfs #{shared_path}/pdfs #{latest_release}/pdfs
     CMD
   end
   
