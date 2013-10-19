@@ -984,7 +984,7 @@ class Registrant < ActiveRecord::Base
       if File.exists?(pdf_file_path("pdf"))
         "pdf/#{bucket_code}"
       else
-        "pdfs/#{bucket_code}"
+        "public/pdfs/#{bucket_code}"
       end
     end
   end
