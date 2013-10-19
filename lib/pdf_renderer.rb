@@ -13,7 +13,7 @@ class PdfRenderer < AbstractController::Base
   
   self.view_paths = "app/views"
   
-  attr_accessor :registrant, :state, :logo_image_tag
+  attr_accessor :registrant, :state, :logo_image_tag, :locale, :registrant_instructions_link
   
   def initialize(registrant)
     super()
@@ -36,6 +36,7 @@ class PdfRenderer < AbstractController::Base
     url = self.registrant.registration_instructions_url
     @registrant_instructions_link = link_to url, url
   end
+  
   
   
 end
