@@ -6,7 +6,7 @@
       <li>
         <h3>
           <%= form.check_box :opt_in_email %>
-          <%= form.label :opt_in_email, t('txt.registration.opt_in_email', :organization => h("Rock the Vote")) %>
+          <%= form.label :opt_in_email, t('txt.registration.opt_in_email', :organization => h("Rock the Vote")).html_safe %>
         </h3>
       </li>
     </ul>
@@ -20,7 +20,7 @@
       <li>
         <h3>
           <%= form.check_box :partner_opt_in_email %>
-          <%= form.label :partner_opt_in_email, t('txt.registration.opt_in_email', :organization => h(@registrant.partner.organization)) %>
+          <%= form.label :partner_opt_in_email, t('txt.registration.opt_in_email', :organization => h(@registrant.partner.organization)).html_safe %>
         </h3>
       </li>
     </ul>
