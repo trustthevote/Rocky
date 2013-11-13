@@ -2,292 +2,122 @@
 ko:
   email:
     confirmation:
-      subject: ! '[KO] Reminder: Mail your voter registration form'
+      subject: 유권자 등록 양식을 우편으로 보내십시오
       body:
-        greeting: ! '[KO] Dear %{registrant_first_name},'
-        reminder: ! '[KO] Don''t forget!<br>
+        greeting: ! '%{registrant_first_name} 님,'
+        reminder: ! '기억하세요!<br>
 
-          You must sign, stamp &amp; mail your form.'
-        main: ! '[KO]
-
-          Thanks for completing your voter registration application. If you have not
-          already done so, please download <a href="%{pdf_url}>">your application</a>.<br><br>
-
-
-          <strong>Your registration is not yet complete. You are not registered until
-          you have turned in your form to your state election officials.</strong><br><br>
-
-
-          If you have not already done so, <strong>please make sure to PRINT, SIGN,
-          STAMP, and MAIL your form to the address provided on the form and shown
-          below.</strong><br><br>
-
-
-          %{registrar_address}<br><br>
-
-          If you have already mailed in your form, you can <a href="%{cancel_reminders_url}">click
-          here</a> to stop receiving reminders about sending it in.  You should receive
-          confirmation of your registration from your state''s election officials.  Sometimes
-          processing can take several weeks.  If you want to check on the status of
-          your voter registration application, call your Secretary of State at %{registrar_phone},
-          or check online at %{registrar_url}.<br><br>
-
-
-          We also need your help getting others registered to vote. There are big
-          elections all over the country in 2012.  Make sure everybody has their say:
-          send an email to your family and friends, or pass on the message below.<br><br>
-
-
-          And, finally, don''t forget to vote when Election Day rolls around. There
-          are 45 million eligible young voters and if we want politicians to pay attention
-          to the issues we care about, we have to vote.<br><br>
-
-
-          Thanks,<br>
-
-          Heather Smith<br>
-
-          President, Rock the Vote<br><br>
-
-
-          P.S. Visit <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>
-          for more information on voting, the elections, and the issues you care about,
-          as well as for tools to start your own voter registration campaign.<br><br>'
-        send_to_friends: ! '[KO]
-
-          <em><strong>Copy and paste the following in your favorite mail client, and
-          send to your friends.</strong></em><br><br>
-
-
-          Hey,<br><br>
-
-
-          You can''t vote if you''re not registered. That''s why Rock the Vote makes
-          it easy to fill out a voter registration form online at %{rtv_link}. Whether
-          you need to register to vote for the first time or just need to update your
-          address or change your name, it only takes a few minutes.<br><br>
-
-
-          To learn more, go to: %{rtv_link}.<br><br>
-
-
-          Already registered to vote? Rock the Vote needs your help getting others
-          registered to vote. Send an email to your friends and family asking them
-          to register to vote at %{rtv_link}. They even have a tool that lets you
-          start your own voter registration campaign on your website or blog.<br><br>
-
-
-          Sincerely,<br>
-
-          %{registrant_first_name}<br><br>'
-        footer: ! '[KO] Rock the Vote is committed to preserving your privacy and
-          safe-guarding your sensitive information. Please see our <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">voter
-          registration privacy policy</a></strong> for details.<br><br>
-
-
-          Please send question or comments to: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
+          유권자 등록 양식은 서명한 후 우표를 붙혀서 보내셔야 합니다.'
+        main: ! "유권자 등록을 해주셔서 감사합니다. 아직 유권자 등록을 하지 않으셨다면  <a href=\"%{pdf_url}>\">등록
+          양식</a>을 다운로드 받으십시오.<br><br>\n\n\n          <strong>유권자 등록 양식을 우편으로 보내기 전까지는
+          유권자 등록이 끝난것이 아닙니다.</strong><br><br>\n\n\n          유권자 등록 양식을 작성한 후, 서명과
+          우표를 확인하고 아래의 주소로 보내주십시오.</strong><br><br>\n\n\n          %{registrar_address}<br><br>\n\n
+          \         이제부터 Rock the Vote 에서 등록 양식을 잊지 말고 우편으로 보내라는 알림 이메일을 정기적으로 보내드릴
+          것입니다. 이러한 알림 이메일을 더 이상 받지 않기 원하시면 <a href=\"%{cancel_reminders_url}\">수신
+          거부 </a>를\n          클릭하면 됩니다. 주 선거사무실에서는 유권자 등록 양식이 접수되었다는 통보를 신청자에게 할 것
+          입니다. 양식이 접수되기까지 수 주가\n          걸릴 수도 있습니다. 유권자 등록이 제대로 진행되고 있는지를 확인하려면
+          주 총무처 %{registrar_phone}로 전화하거나 웹\n          사이트 %{registrar_url}.를 방문하여
+          확인할 수 있습니다.<br><br>\n\n\n          주변 시민권자들에게 유권자 등록을 할 것을 권장해 주세요. 모두가
+          투표를 통해 참여하면 커뮤니티에 정치적 힘이 생깁니다. 가족이나\n          친구들에게 알려주시고  아래의 내용을 이메일로
+          전달해 주십시오.<br><br>\n\n\n          마지막으로 선거 당일에 투표하는 것을 있지 마세요. 미국의 4천5백 만
+          명이나 되는 젊은 유권자들은 우리가 원하는 방향으로 정책이\n          이끌어질 수 있도록 정치인들을 움직일 힘이 있습니다.
+          그러기 위해서는 꼭 투표해야 합니다.<br><br>\n\n\n          감사합니다.<br>\n\n          Rock
+          the Vote, Heather Smith 회장<br><br>\n\n       \n\n\n          추신: 투표나 선거
+          방법에 대한 문의 또는 중요한 선거 이슈에 대한 정보나 유권자 등록 캠페인에 참여하기 위한 자료가 필요하시면\n          웹
+          사이트 <strong><ahref=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>을
+          방문하셔서\n          필요한 정보를 얻으시기 바랍니다.<br><br>"
+        send_to_friends: ! "<strong> 이 내용을 여러분의 지인과 친구에게 전달해 주십시오.</strong><br><br>\n\n\n
+          \         안녕하세요,<br><br>\n\n\n          투표를 하기 위해서는 유권자 등록을 꼭 해야 합니다. 그래서
+          <a href=\"%{rtv_link}\">Rock the Vote 웹사이트</a>에서는 편하게 유권자 등록을 할 수 있도록 인터넷
+          유권자 등록 시스템을 제공합니다. 유권자 등록을 하거나 새 주소를 기입하는데 몇 분 걸리지 않습니다.<br><br>\n\n\n          지금
+          인터넷으로 유권자 등록을 해놓으세요! %{rtv_link} .<br><br>\n\n\n          이미 유권자 등록을 하셨습니까?
+          \ Rock the Vote에서는 더 많은 사람들의 유권자 등록을 지원하기 위해 여러분의 도움이\n          필요합니다.
+          주변 사람들에게 %{rtv_link} 에서 유권자 등록을 할 수 있다고 알려주세요. 개인 블로그나 웹사이트에 설치 할 수 있는 위젯도
+          제공됩니다.<br><br>\n\n\n          감사합니다.<br>\n\n          %{registrant_first_name}<br><br>"
+        footer: ! "Rock the Vote 에서는 여러분의 개인 정보를 안전히 지키기 위해 최선을 다하고 있습니다.\n          저희의
+          <strong><a href=\"http://www.rockthevote.com/voter-registration/online-application-system/privacy.html\">개인정보
+          보호방침</a></strong>을 참고하세요.<br><br>\n\n\n          질문이나 의견은 <a href=\"mailto:register@rockthevote.com\">register@rockthevote.com</a>으로
+          보내주십시오.<br>"
     reminder:
-      subject: ! '[KO] Reminder: Mail your voter registration form'
+      subject: 유권자 등록 양식을 우편으로 보내십시오
       body:
-        greeting: ! '[KO] Dear %{registrant_first_name},'
-        reminder: ! '[KO]Don''t forget!<br>
-
-          You must sign, stamp &amp; mail your form.'
-        main: ! '[KO]Thanks for completing your voter registration application with
-          Rock the Vote. You can download your application <a href="%{pdf_url}">by
-          clicking here</a>.<br><br>
-
-
-          Just a reminder, if you have not already done so, <strong>please make sure
-          to PRINT, SIGN, STAMP, and MAIL your form to the address provided on the
-          form and shown below.</strong><br><br>
-
-
-          %{registrar_address}<br><br>
-
-
-          If you have already mailed in your form, you can <a href="%{cancel_reminders_url}">click
-          here</a> to stop receiving reminders about sending it in.  If you want to
-          check on the status of your voter registration application, call your Secretary
-          of State at %{registrar_phone}, or check online at %{registrar_url}.<br><br>
-
-
-          We also need your help getting others registered to vote. There are important
-          races all over the country in 2012.  Please direct them to %{rtv_link} or
-          send the message below.<br><br>
-
-
-          And, finally, don''t forget to vote when Election Day rolls around. There
-          are 45 million eligible young voters and if we want politicians to pay attention
-          to the issues we care about, we have to vote.<br><br>
-
-
-          Thanks,<br>
-
-          Heather Smith<br>
-
-          President, Rock the Vote<br><br>
-
-
-          P.S. Visit <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>
-          for more information on voting, the elections, and the issues you care about,
-          as well as for tools to start your own voter registration campaign.<br><br>'
-        send_to_friends: ! '[KO]
-
-
-          <em><strong>Copy and paste the following in an email message and send it
-          to your friends.</strong></em><br><br>
-
-
-          Hey,<br><br>
-
-
-          You can''t vote if you''re not registered. That''s why Rock the Vote makes
-          it easy to fill out a voter registration form online at %{rtv_link}. Whether
-          you need to register to vote for the first time or just need to update your
-          address or change your name, it only takes a few minutes.<br><br>
-
-
-          To learn more, go to: %{rtv_link}.<br><br>
-
-
-          Already registered to vote? Rock the Vote needs your help getting others
-          registered to vote. Send an email to your friends and family asking them
-          to register to vote at %{rtv_link}. They even have a tool that lets you
-          start your own voter registration campaign on your website or blog.<br><br>
-
-
-          Sincerely,<br>
-
-          %{registrant_first_name}<br><br>'
-        footer: ! '[KO]
-
-
-          Rock the Vote is committed to preserving your privacy and safe-guarding
-          your sensitive information. Please see our <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">voter
-          registration privacy policy</a></strong> for details.<br><br>
-
-
-          Please send question or comments to: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
+        greeting: ! '%{registrant_first_name} 님,'
+        reminder: ! "기억하세요!<br>\n\n          유권자 등록 양식은 서명한 후 우표를 붙혀서 보내셔야 합니다."
+        main: ! "유권자 등록을 해주셔서 감사합니다. 아직 유권자 등록을 하지 않으셨다면  <a href=\"%{pdf_url}>\">등록
+          양식</a>을 다운로드 받으십시오.<br><br>\n\n\n          <strong>유권자 등록 양식을 우편으로 보내기 전까지는
+          유권자 등록이 끝난것이 아닙니다.</strong><br><br>\n\n\n          유권자 등록 양식을 작성한 후, 서명과
+          우표를 확인하고 아래의 주소로 보내주십시오.</strong><br><br>\n\n\n          %{registrar_address}<br><br>\n\n
+          \         이제부터 Rock the Vote 에서 등록 양식을 잊지 말고 우편으로 보내라는 알림 이메일을 정기적으로 보내드릴
+          것입니다. 이러한 알림 이메일을 더 이상 받지 않기 원하시면 <a href=\"%{cancel_reminders_url}\">수신
+          거부 </a>를\n          클릭하면 됩니다. 주 선거사무실에서는 유권자 등록 양식이 접수되었다는 통보를 신청자에게 할 것
+          입니다. 양식이 접수되기까지 수 주가\n          걸릴 수도 있습니다. 유권자 등록이 제대로 진행되고 있는지를 확인하려면
+          주 총무처 %{registrar_phone}로 전화하거나 웹\n          사이트 %{registrar_url}.를 방문하여
+          확인할 수 있습니다.<br><br>\n\n\n          주변 시민권자들에게 유권자 등록을 할 것을 권장해 주세요. 모두가
+          투표를 통해 참여하면 커뮤니티에 정치적 힘이 생깁니다. 가족이나\n          친구들에게 알려주시고  아래의 내용을 이메일로
+          전달해 주십시오.<br><br>\n\n\n          마지막으로 선거 당일에 투표하는 것을 있지 마세요. 미국의 4천5백 만
+          명이나 되는 젊은 유권자들은 우리가 원하는 방향으로 정책이\n          이끌어질 수 있도록 정치인들을 움직일 힘이 있습니다.
+          그러기 위해서는 꼭 투표해야 합니다.<br><br>\n\n\n          감사합니다.<br>\n\n          Rock
+          the Vote, Heather Smith 회장<br><br>\n\n       \n\n\n          추신: 투표나 선거
+          방법에 대한 문의 또는 중요한 선거 이슈에 대한 정보나 유권자 등록 캠페인에 참여하기 위한 자료가 필요하시면\n          웹
+          사이트 <strong><ahref=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>을
+          방문하셔서\n          필요한 정보를 얻으시기 바랍니다.<br><br>"
+        send_to_friends: ! "<strong> 이 내용을 여러분의 지인과 친구에게 전달해 주십시오.</strong><br><br>\n\n\n
+          \         안녕하세요,<br><br>\n\n\n          투표를 하기 위해서는 유권자 등록을 꼭 해야 합니다. 그래서
+          <a href=\"%{rtv_link}\">Rock the Vote 웹사이트</a>에서는 편하게 유권자 등록을 할 수 있도록 인터넷
+          유권자 등록 시스템을 제공합니다. 유권자 등록을 하거나 새 주소를 기입하는데 몇 분 걸리지 않습니다.<br><br>\n\n\n          지금
+          인터넷으로 유권자 등록을 해놓으세요! %{rtv_link} .<br><br>\n\n\n          이미 유권자 등록을 하셨습니까?
+          \ Rock the Vote에서는 더 많은 사람들의 유권자 등록을 지원하기 위해 여러분의 도움이\n          필요합니다.
+          주변 사람들에게 %{rtv_link} 에서 유권자 등록을 할 수 있다고 알려주세요. 개인 블로그나 웹사이트에 설치 할 수 있는 위젯도
+          제공됩니다.<br><br>\n\n\n          감사합니다.<br>\n\n          %{registrant_first_name}<br><br>"
+        footer: ! "Rock the Vote 에서는 여러분의 개인 정보를 안전히 지키기 위해 최선을 다하고 있습니다.\n          저희의
+          <strong><a href=\"http://www.rockthevote.com/voter-registration/online-application-system/privacy.html\">개인정보
+          보호방침</a></strong>을 참고하세요.<br><br>\n\n\n          질문이나 의견은 <a href=\"mailto:register@rockthevote.com\">register@rockthevote.com</a>으로
+          보내주십시오.<br>"
     thank_you_external:
-      subject: ! '[KO] Thank you for using the online voter registration tool'
+      subject: 온라인 유권자 등록을 이용해 주셔서 감사합니다
       body:
-        main: ! '[KO]
-
-
-
-          Dear %{registrant_first_name},<br><br>
-
-
-          Thank you for using %{rtv_and_partner_name}''s online voter registration
-          tool.<br><br>
-
-
-          If you completed a voter registration application online, it was submitted
-          to the  %{state_name} Secretary of State Office for processing. Once approved,
-          you''ll receive a confirmation from the %{state_abbr} Secretary of State
-          Office and your county elections department will put your new voter registration
-          card in the mail.<br><br>
-
-
-          If you have questions or concerns, you can check the status of your voter
-          registration by calling the %{state_abbr} Secretary of State Office at %{registrar_phone},
-          or checking online at %{registrar_url}. Please contact %{rtv_and_partner_name}
-          directly if you encountered any issues with the registration process.<br><br>
-
-
-          Now, we need your help getting others registered to vote too. There are
-          big elections all over the country this year and 45 million eligible young
-          voters - and we need to make sure everybody has their say. So, send an email
-          to your family and friends or pass on the message below today.<br><br>
-
-
-          And, finally, don''t forget to vote when Election Day rolls around. If we
-          want politicians to pay attention to the issues we care about, we have to
-          vote.<br><br>
-
-
-          Thanks,<br>
-
-          Heather Smith<br>
-
-          President, Rock the Vote<br><br>
-
-
-          P.S. Visit <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>
-          for more information on voting, the elections, and the issues you care about.
-          You can also find tools to start your own voter registration campaign in
-          your community.<br><br>'
-        send_to_friends: ! '[KO]
-
-
-          <em><strong>Copy and paste the following in your favorite mail client, and
-          send to your friends.</strong></em><br><br>
-
-
-          Hey,<br><br>
-
-
-          You can''t vote if you''re not registered. That''s why Rock the Vote makes
-          it easy to fill out a voter registration form online at %{rtv_link}. Whether
-          you need to register to vote for the first time or just need to update your
-          address or change your name, it only takes a few minutes.<br><br>
-
-
-          To learn more, go to: %{rtv_link}.<br><br>
-
-
-          Already registered to vote? Rock the Vote needs your help getting others
-          registered to vote. Send an email to your friends and family asking them
-          to register to vote at %{rtv_link}. They even have a tool that lets you
-          start your own voter registration campaign on your website or blog.<br><br>
-
-
-          Sincerely,<br>
-
-          %{registrant_first_name}<br><br>'
-        footer: ! '[KO]
-
-
-          Rock the Vote is committed to preserving your privacy and safe-guarding
-          your sensitive information. Please see our <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">voter
-          registration privacy policy</a></strong> for details.<br><br>
-
-
-          Please send question or comments to: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
+        main: ! "%{registrant_first_name} 님,<br><br>\n\n\n          %{rtv_and_partner_name}''를
+          통해 온라인 유권자 등록을 해 주셔서 감사합니다.<br><br>\n\n\n          온라인으로 유권자 등록 절차를 완료하신
+          경우, 정보가 %{state_name} 주 총무처로 전달되어 절차가 진행됩니다. 유권자 등록이 승인되면  %{state_abbr}\n
+          \         주 총무처에서 승인 편지를 받고 해당되는 카운티 사무실에서 여러분의 새 유권자 등록 카드를 발송하게 됩니다.<br><br>\n\n\n
+          \         유권자 등록 사항에 대한 문의가 있으면 %{state_abbr} 주 총무처 %{registrar_phone} 로
+          전화하거나\n          웹 사이트 %{registrar_url} 를 방문하면 됩니다. 유권자 등록 과정에 문제가 발생하면
+          %{rtv_and_partner_name}\n          에게 직접 연락하십시오.<br><br>\n\n\n          지금
+          더 많은 사람들이 유권자 등록을 할 수 있도록 여러분의 도움이 필요합니다. 올해 선거는 전국적으로 중요한 선거이며 4,500만\n
+          \         명의 젊은 유권자 모두가 투표로 우리의 목소리를 내는 것이 중요합니다. 그러기 위해 친지나 친구에서 아래의 내용을
+          전달합시다.<br><br>\n\n\n          그리고. 마지막으로 선거 당일에 투표하는 것을 잊지 마세요.  유권자들은 우리가
+          원하는 방향으로 정책이 이끌어질 수 있도록 정치인들을\n          움직일 힘이 있습니다. 그러기 위해서는 꼭 투표해야 합니다.<br><br>\n\n\n
+          \         감사합니다.<br>\n\n             Rock the Vote, Heather Smith 회장<br><br>\n\n\n
+          \         추신: 투표나 선거 방법에 대한 문의 또는 중요한 선거 이슈에 대한 정보나 유권자 등록 캠페인에 참여하기 위한
+          자료가 필요하시면\n          웹 사이트 <strong><ahref=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>을
+          방문하셔서\n          필요한 정보를 얻으시기 바랍니다.<br><br>"
+        send_to_friends: ! "<strong> 이 내용을 여러분의 지인과 친구에게 전달해 주십시오.</strong><br><br>\n\n\n
+          \         안녕하세요,<br><br>\n\n\n          투표를 하기 위해서는 유권자 등록을 꼭 해야 합니다. 그래서
+          <a href=\"%{rtv_link}\">Rock the Vote 웹사이트</a>에서는 편하게 유권자 등록을 할 수 있도록 인터넷
+          유권자 등록 시스템을 제공합니다. 유권자 등록을 하거나 새 주소를 기입하는데 몇 분 걸리지 않습니다.<br><br>\n\n\n          지금
+          인터넷으로 유권자 등록을 해놓으세요! %{rtv_link} .<br><br>\n\n\n          이미 유권자 등록을 하셨습니까?
+          \ Rock the Vote에서는 더 많은 사람들의 유권자 등록을 지원하기 위해 여러분의 도움이\n          필요합니다.
+          주변 사람들에게 %{rtv_link} 에서 유권자 등록을 할 수 있다고 알려주세요. 개인 블로그나 웹사이트에 설치 할 수 있는 위젯도
+          제공됩니다.<br><br>\n\n\n          감사합니다.<br>\n\n          %{registrant_first_name}<br><br>"
+        footer: ! "Rock the Vote 에서는 여러분의 개인 정보를 안전히 지키기 위해 최선을 다하고 있습니다.\n          저희의
+          <strong><a href=\"http://www.rockthevote.com/voter-registration/online-application-system/privacy.html\">개인정보
+          보호방침</a></strong>을 참고하세요.<br><br>\n\n\n          질문이나 의견은 <a href=\"mailto:register@rockthevote.com\">register@rockthevote.com</a>으로
+          보내주십시오.<br>"
     tell_friend:
-      subject: ! '[KO]
-
-
-        I just registered to vote and you should too'
-      body: ! '[KO] Hey, I just registered to vote at %{rtv_url} and you can too.
-        It is really easy. Just fill out the online form here: %{rtv_url}. You can''t
-        vote if you''re not registered. Whether you need to register to vote for the
-        first time or just need to update your address or change your name, it only
-        takes a few minutes. To learn more, go to: %{rtv_url}. Already registered
-        to vote? You can help get others registered to vote. Send an email to your
-        friends and family asking them to register to vote at %{rtv_url}. Happy voting!'
+      subject: 저는 등록 했습니다! 유권자 등록 하셨어요?
+      body: ! "안녕하세요,<br><br>\n\n\n          투표를 하기 위해서는 유권자 등록을 꼭 해야 합니다. 그래서 <a
+        href=\"%{rtv_link}\">Rock the Vote 웹사이트</a>에서는 편하게 유권자 등록을 할 수 있도록 인터넷 유권자
+        등록 시스템을 제공합니다. 유권자 등록을 하거나 새 주소를 기입하는데 몇 분 걸리지 않습니다.<br><br>\n\n\n          지금
+        인터넷으로 유권자 등록을 해놓으세요! %{rtv_link} .<br><br>\n\n\n          이미 유권자 등록을 하셨습니까?
+        \ Rock the Vote에서는 더 많은 사람들의 유권자 등록을 지원하기 위해 여러분의 도움이\n          필요합니다. 주변
+        사람들에게 %{rtv_link} 에서 유권자 등록을 할 수 있다고 알려주세요.<br><br>\n\n\n          감사합니다.<br>"
     tell_friend_under_18:
-      subject: ! '[KO]
+      subject: 저는 등록 했습니다! 유권자 등록 하셨어요?
+      body: ! "투표를 하기 위해서는 유권자 등록을 꼭 해야 합니다. 그래서 <a href=\"%{rtv_link}\">Rock the
+        Vote 웹사이트</a>에서는 편하게 유권자 등록을 할 수 있도록 인터넷 유권자 등록 시스템을 제공합니다. 유권자 등록을 하거나 새
+        주소를 기입하는데 몇 분 걸리지 않습니다.<br><br>\n\t  저는 아직 유권자 등록을 할 수 있는 나이가 되지 않았지만, 여러분은
+        등록을 하실 수 있습니다.<br><br>\n\t  \n\t  지금 인터넷으로 유권자 등록을 해놓으세요! %{rtv_link} .<br><br>\n\n\n
+        \    이미 등록을 하시거나 18살 미만이십니까?  Rock the Vote에서는 더 많은 사람들의 유권자 등록을 지원하기 위해 여러분의
+        도움이\n          필요합니다. 주변 사람들에게 %{rtv_link} 에서 유권자 등록을 할 수 있다고 알려주세요.<br><br>\n\n\n
+        \       다 함께 투표합시다.!"
 
-
-        Register to vote!'
-      body: ! '[KO]
-
-
-        Are you registered to vote? I may not be old enough to vote yet, but you are.  You
-        can''t vote unless you are registered.
-
-
-        You can fill out a voter registration form only at %{rtv_url}. It is super
-        easy.  Whether you need to register to vote for the first time or just need
-        to update your address or change your name, it only takes a few minutes.  Go
-        to %{rtv_url}.
-
-
-        Already registered to vote or not old enough to vote yet?  Help others get
-        registered to vote by sending an email to your friends and family asking them
-        to register at %{rtv_url}.
-
-
-        Happy voting!'
