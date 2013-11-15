@@ -1,114 +1,154 @@
+---
 es:
   pdf:
     nvra:
       page1:
-        title: "REGISTRO DE VOTANTES"
-        subtitle: "POR"
-        top_paragraph: "¡No estará registrado hasta que<br/><b>firme</b> , <b>selle</b> , y <b>envíe</b> por correo su solicitud llena!"
+        title: REGISTRO DE VOTANTES
+        subtitle: POR
+        top_paragraph: ¡No estará registrado hasta que<br/><b>firme</b> , <b>selle</b>
+          , y <b>envíe</b> por correo su solicitud llena!
         instructions_block:
-          title: "INSTRUCCIONES"
-          subtitle: "Siga estos sencillos pasos para completar su registro de votante:"
-          step1: "Firme lasolicitud. D	rmar su solicitud de registro de votante antes de enviarla."
-          step2: "Ciérrela. Doble la solicitud y la hoja con la dirección a la mitad. Asegúrese que la dirección se pueda leer en el exterior. Use cinta adhesiva o una grapa para fijar la solicitud en la parte baja y crear la pieza de correo."
-          step2mailer: "[ES]HOW TO MAKE A MAILER"
-          step3: "Séllela. Ponga un sello postal de primera clase en el sobre o pieza de correo."
-          step4: "Envíela. Deposite su solicitud de registro de votante en el correo."
-          step5: "Vote. En el Dia de la Elección, salga a votar."
+          title: INSTRUCCIONES
+          subtitle: ! 'Siga estos sencillos pasos para completar su registro de votante:'
+          step1: ! "Firme lasolicitud. D\trmar su solicitud de registro de votante
+            antes de enviarla."
+          step2: Ciérrela. Doble la solicitud y la hoja con la dirección a la mitad.
+            Asegúrese que la dirección se pueda leer en el exterior. Use cinta adhesiva
+            o una grapa para fijar la solicitud en la parte baja y crear la pieza
+            de correo.
+          step2mailer: ! '[ES]HOW TO MAKE A MAILER'
+          step3: Séllela. Ponga un sello postal de primera clase en el sobre o pieza
+            de correo.
+          step4: Envíela. Deposite su solicitud de registro de votante en el correo.
+          step5: Vote. En el Dia de la Elección, salga a votar.
         submit_block:
-          title: "ENVÍE SU SOLICITUD LLENADA Y FIRMADA A:"
+          title: ! 'ENVÍE SU SOLICITUD LLENADA Y FIRMADA A:'
         deadline_block:
-          title: "FECHA LÍMITE DE INSCRIPCIÓN:"
-        other_block: "[ES]See %{instructions_url} for complete general and state-specific instructions for your voter registration application."
-        bottom_block: 
-          title: "Votantes por primera vez que se inscriben por correo"
-          paragraph1: "Si se está inscribiendo para votar por primera vez en su jurisdicción y está enviando esta solicitud de inscripción por correo, usted tendrá por ley federal que presentar prueba de iden	rimera vez que vote. Los métodos de iden	robados incluyen: una iden	con foto válida y vigente, o una factura actual de suministro de energía, estado de cuenta bancario, cheque del gobierno, cheque de sueldo o documento que muestre su nombre y dirección."
-          paragraph2: "Los votantes pueden ser exentos de este requisito si envían una copia de uno de los modos aprobados de iden	nto con su solicitud de inscripción por correo."
-          paragraph3: "Si desea enviar una copia mantenga en mente lo siguiente: Su estado puede tener requisitos adicionales de iden	ato que usted muestre identificación en las mesas electorales incluso si usted cumple con la prueba federal de identificación"
-          paragraph4: "No envíe el documento original de iden	con esta solicitud, solo envíe copias."
+          title: ! 'FECHA LÍMITE DE INSCRIPCIÓN:'
+        other_block: ! '[ES]See %{instructions_url} for complete general and state-specific
+          instructions for your voter registration application.'
+        bottom_block:
+          title: Votantes por primera vez que se inscriben por correo
+          paragraph1: ! "Si se está inscribiendo para votar por primera vez en su
+            jurisdicción y está enviando esta solicitud de inscripción por correo,
+            usted tendrá por ley federal que presentar prueba de iden\trimera vez
+            que vote. Los métodos de iden\trobados incluyen: una iden\tcon foto válida
+            y vigente, o una factura actual de suministro de energía, estado de cuenta
+            bancario, cheque del gobierno, cheque de sueldo o documento que muestre
+            su nombre y dirección."
+          paragraph2: ! "Los votantes pueden ser exentos de este requisito si envían
+            una copia de uno de los modos aprobados de iden\tnto con su solicitud
+            de inscripción por correo."
+          paragraph3: ! "Si desea enviar una copia mantenga en mente lo siguiente:
+            Su estado puede tener requisitos adicionales de iden\tato que usted muestre
+            identificación en las mesas electorales incluso si usted cumple con la
+            prueba federal de identificación"
+          paragraph4: ! "No envíe el documento original de iden\tcon esta solicitud,
+            solo envíe copias."
       page2:
-        title: "Solicitud de Inscripción de Votante"
-        subtitle: "Antes de llenar este formulario, vea las instrucciones generales, las instrucciones para llenar esta solicitud, y las instrucciones específicas de su estado."
+        title: Solicitud de Inscripción de Votante
+        subtitle: Antes de llenar este formulario, vea las instrucciones generales,
+          las instrucciones para llenar esta solicitud, y las instrucciones específicas
+          de su estado.
         topblock:
-          item1: "¿Es usted ciudadano de Estados Unidos de América?"
-          item2: "¿Habrá cumplido los 18 años de edad para el día de las elecciones?"
-          item3: 'Si contestó “No” a alguna de estas preguntas, no llene el formulario.'
-          item4: "(Vea también las instrucciones específicas de su estado sobre la posibilidad de inscribirse antes de los 18 años de edad)."
-          fouo: "Este espacio sólo para uso de la oficina.<br>(This space is for office use only.)"
+          item1: ¿Es usted ciudadano de Estados Unidos de América?
+          item2: ¿Habrá cumplido los 18 años de edad para el día de las elecciones?
+          item3: Si contestó “No” a alguna de estas preguntas, no llene el formulario.
+          item4: (Vea también las instrucciones específicas de su estado sobre la
+            posibilidad de inscribirse antes de los 18 años de edad).
+          fouo: Este espacio sólo para uso de la oficina.<br>(This space is for office
+            use only.)
         block1:
-          box1_label:  ''
-          box2_label: "Apellido"
-          box3_label: "Primer nombre"
-          box4_label: "Segundo nombre"
+          box1_label: ''
+          box2_label: Apellido
+          box3_label: Primer nombre
+          box4_label: Segundo nombre
           box5_label: ''
         block2:
-          box1_label: "Dirección donde vive"
-          box2_label: "No. de depto. o lote"
-          box3_label: "Ciudad/Localidad"
-          box4_label: "Estado"
-          box5_label: "Código postal"
+          box1_label: Dirección donde vive
+          box2_label: No. de depto. o lote
+          box3_label: Ciudad/Localidad
+          box4_label: Estado
+          box5_label: Código postal
         block3:
-          box1_label: "Dirección donde recibe su correo, si es diferente a la de más arriba"
-          box2_label: "Ciudad/Localidad"
-          box3_label: "Estado"
-          box4_label: "Código postal"
+          box1_label: Dirección donde recibe su correo, si es diferente a la de más
+            arriba
+          box2_label: Ciudad/Localidad
+          box3_label: Estado
+          box4_label: Código postal
         block4:
-          box1_label: "Fecha de nacimiento"
-          item2: "Mes"
-          item3: "Día"
-          item4: "Año"
+          box1_label: Fecha de nacimiento
+          item2: Mes
+          item3: Día
+          item4: Año
         block5: Número de teléfono (optativo)
         block6:
-          box1_label: "Número de identificación"
-          box1_sublabel: " (Vea el número 6 en las Instrucciones de su estado)"
+          box1_label: Número de identificación
+          box1_sublabel: (Vea el número 6 en las Instrucciones de su estado)
         block7:
-          box1_label: "Selección de partido político"
-          box1_sublabel: "(Vea el número 7 en las instrucciones de su estado)"
+          box1_label: Selección de partido político
+          box1_sublabel: (Vea el número 7 en las instrucciones de su estado)
         block8:
-          box1_label: "Raza o grupo étnico"
-          box1_sublabel: "(Vea el número 8 en las instrucciones de su estado)"
+          box1_label: Raza o grupo étnico
+          box1_sublabel: (Vea el número 8 en las instrucciones de su estado)
         block9:
-          affirmation_header: "Leí las instrucciones de mi estado y juro/afirmo que:"
-          affirmation_1: "Soy ciudadano de Estados Unidos."
-          affirmation_2: "Cumplo con los requisitos de mi estado y presto cualquier juramento requerido."
-          affirmation_3: "La información que proporcioné es verdadera según mis mejores conocimientos, bajo pena de perjurio. Si proporcioné información falsa, se me puede multar, encarcelar o (si no soy ciudadano de EE UU), deportar de o denegar entrada a Estados Unidos."
-          please_sign: "Firme su nombre completo (o ponga su marca)"
-          date: "Fecha:"
-          month: "Mes"
-          day: "Día"
-          year: "Año"
-        top_half_footer: "<b>Si se está inscribiendo para votar por primera vez</b>, consulte las instrucciones de la solicitud para información sobre presentar copias documentos de identificación válidos con este formulario."
-        bottom_half_title: "Llene las secciones a continuación que correspondan a su situación."
+          affirmation_header: ! 'Leí las instrucciones de mi estado y juro/afirmo
+            que:'
+          affirmation_1: Soy ciudadano de Estados Unidos.
+          affirmation_2: Cumplo con los requisitos de mi estado y presto cualquier
+            juramento requerido.
+          affirmation_3: La información que proporcioné es verdadera según mis mejores
+            conocimientos, bajo pena de perjurio. Si proporcioné información falsa,
+            se me puede multar, encarcelar o (si no soy ciudadano de EE UU), deportar
+            de o denegar entrada a Estados Unidos.
+          please_sign: Firme su nombre completo (o ponga su marca)
+          date: ! 'Fecha:'
+          month: Mes
+          day: Día
+          year: Año
+        top_half_footer: <b>Si se está inscribiendo para votar por primera vez</b>,
+          consulte las instrucciones de la solicitud para información sobre presentar
+          copias documentos de identificación válidos con este formulario.
+        bottom_half_title: Llene las secciones a continuación que correspondan a su
+          situación.
         blockA:
-          title: "Si esta solicitud es para un <b>cambio de nombre</b>, ¿cómo se llamaba antes de cambiar de nombre?"
+          title: Si esta solicitud es para un <b>cambio de nombre</b>, ¿cómo se llamaba
+            antes de cambiar de nombre?
           box1_label: ''
-          box2_label: "Apellido"
-          box3_label: "Primer nombre"
-          box4_label: "Segundo nombre"
+          box2_label: Apellido
+          box3_label: Primer nombre
+          box4_label: Segundo nombre
           box5_label: ''
         blockB:
-          title: "Si estuvo <b>inscrito antes, pero esta es la primera vez que se está inscribiendo con la dirección en la Casilla 2</b>, ¿cuál era la dirección con que estaba inscrito antes?"
-          box1_label: "Calle (o número de ruta y casilla)"
-          box2_label: "No. de depto. o lote"
-          box3_label: "Ciudad/Localidad/Condado"
-          box4_label: "Estado"
-          box5_label: "Código postal"
+          title: Si estuvo <b>inscrito antes, pero esta es la primera vez que se está
+            inscribiendo con la dirección en la Casilla 2</b>, ¿cuál era la dirección
+            con que estaba inscrito antes?
+          box1_label: Calle (o número de ruta y casilla)
+          box2_label: No. de depto. o lote
+          box3_label: Ciudad/Localidad/Condado
+          box4_label: Estado
+          box5_label: Código postal
         blockC:
-          title: "Si vive en una zona rural, pero no tiene un número de calle, o si no tiene dirección, muestre en el mapa dónde vive."
+          title: Si vive en una zona rural, pero no tiene un número de calle, o si
+            no tiene dirección, muestre en el mapa dónde vive.
           instructions:
-            bullet1: Escriba el nombre de las calles que cruzan más cerca de donde vive.
+            bullet1: Escriba el nombre de las calles que cruzan más cerca de donde
+              vive.
             bullet2: Ponga una <b>X</b> para mostrar el lugar en que vive.
-            bullet3: "Ponga un punto para mostrar las escuelas, iglesias, tiendas u otros puntos de referencia y escriba el nombre del punto de referencia."
+            bullet3: Ponga un punto para mostrar las escuelas, iglesias, tiendas u
+              otros puntos de referencia y escriba el nombre del punto de referencia.
           example:
             title: Ejemplo
             grocery_store: Tienda de abarrotes
             public_school: Escuela pública
-            street1: "Ruta No. 2"
-            street2: "Woodchuck Road"
+            street1: Ruta No. 2
+            street2: Woodchuck Road
           north: NORTE
         blockD:
-          title: "Si el solicitante no puede firmar, ¿quién ayudó al solicitante a llenar esta solicitud? Dé el nombre, la dirección y el número de teléfono. (El número de teléfono es optativo)."
-        bottom_half_footer: "Envíe esta solicitud a la dirección provista por su estado."
+          title: Si el solicitante no puede firmar, ¿quién ayudó al solicitante a
+            llenar esta solicitud? Dé el nombre, la dirección y el número de teléfono.
+            (El número de teléfono es optativo).
+        bottom_half_footer: Envíe esta solicitud a la dirección provista por su estado.
       page3:
         fouo: FOR OFFICIAL USE ONLY
-
 

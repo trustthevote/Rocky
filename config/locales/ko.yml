@@ -1,2 +1,111 @@
+---
 ko:
-  language_name: 한국인
+  language_name: 한국어
+  activerecord:
+    attributes:
+      partner:
+        from_email: 발신인
+        url: 주소
+      registrant:
+        date_of_birth: 생년월일
+        email_address: 이메일 주소
+        first_registration: 저는 처음으로 유권자 등록을 하고 있습니다.
+        home_zip_code: 우편번호(ZIP)
+        us_citizen: 저는 미국 시민권자입니다.
+        name_title: Title
+        first_name: 이름 (First)
+        middle_name: Middle
+        last_name: 성 (Last)
+        name_suffix: Suffix
+        home_address: 주소
+        home_unit: 아파트 번호
+        home_city: 도시
+        home_state_name: 주
+        has_mailing_address: 저는 우편물을 받는 주소가 따로 있습니다.
+        mailing_address: 주소
+        mailing_unit: 아파트 번호
+        mailing_city: 도시
+        mailing_state_abbrev: 주
+        mailing_zip_code: 우편번호
+        party: 정당
+        race: 인종
+        state_id_number: ID 번호
+        phone: 전화번호
+        phone_type: 종류
+        change_of_name: 이름을 바꾸었습니다
+        prev_name_title: Title
+        prev_first_name: First
+        prev_middle_name: Middle
+        prev_last_name: Last
+        prev_name_suffix: Suffix
+        change_of_address: 주소를 바꾸었습니다
+        prev_address: 주소
+        prev_unit: 아파트 번호
+        prev_city: 도시
+        prev_state_abbrev: 주
+        prev_zip_code: 우편번호(ZIP)
+        opt_in_email: 이메일 받기
+        opt_in_sms: 문자 메세지 받기
+        attest_true: 상기 정보를
+        tell_from: 보내는 이
+        tell_email: 이메일 주소
+        tell_recipients: 받는 이
+        tell_subject: 제목
+        tell_message: 메세지
+    errors:
+      models:
+        registrant:
+          blank: 필수
+          invalid_zip: ZIP 코드 에러
+          attributes:
+            home_zip_code:
+              invalid: 5자리 ZIP 또는 9자리 ZIP 을 입력하십시오
+            mailing_zip_code:
+              invalid: 5자리 ZIP 또는 9자리 ZIP 을 입력하십시오.
+            prev_zip_code:
+              invalid: 5자리 ZIP 또는 9자리 ZIP 을 입력하십시오.
+            email_address:
+              invalid: 유효한 주소가 아닙니다.
+            date_of_birth:
+              format: 날짜는 월-일-연도 형식으로 기재해주십시오.
+            phone:
+              invalid: 전화번호는 000-000-0000 형식으로 기재해 주십시오.
+              required_if_opt_in: 문자 메세지를 받기 위해서는 핸드폰 번호가 필요합니다.
+            attest_true:
+              accepted: 상기 정보가 맞는지 확인했다는 박스를 클릭 해 주십시오.
+            has_state_license:
+              inclusion: 유효한 주 정부 운전면허증을 가지고 있는지 표시해주십시오.
+      messages:
+        inclusion: ! '%{attribute} 는 명단에 포함되어 있지 않습니다.'
+        exclusion: ! '%{attribute} 는 예약되어 있습니다.'
+        invalid: ! '%{attribute} 는 유효하지 않습니다.'
+        confirmation: ! '%{attribute} 는 확인과 일치하지 않습니다.'
+        accepted: ! '%{attribute} 를 승낙하셔야 합니다.'
+        empty: ! '%{attribute} 는 공란으로 남겨둘 수 없습니다.'
+        blank: ! '%{attribute} 는 공란으로 남겨둘 수 없습니다.'
+        too_long: ! '%{attribute} 가 너무 깁니다. (최고 %{count}자 까지만 가능합니다)'
+        too_short: ! '%{attribute} 가 너무 짧습니다. (최소 %{count}자가 되어야 합니다)'
+        wrong_length: ! '%{attribute} 의 길이를 수정 해 주세요. (정확히 %{count}자가 되어야 합니다)'
+        taken: ! '%{attribute} 는 이미 다른 사용자가 선택했습니다.'
+        not_a_number: ! '%{attribute} 는 숫자가 아닙니다.'
+        greater_than: ! '%{attribute} 는 %{count} 보다 더 큰 수치여야 합니다.'
+        greater_than_or_equal_to: ! '%{attribute} 는 %{count} 와 같거나 더 큰 수치여야 합니다.'
+        equal_to: ! '%{attribute}는 %{count}와 같아야 합니다.'
+        less_than: ! '%{attribute}는 %{count} 보다 적어야 합니다.'
+        less_than_or_equal_to: ! '%{attribute}는 %{count}와 같거나 적어야 합니다.'
+        odd: ! '%{attribute}는 홀수여야 합니다.'
+        even: ! '%{attribute}는 짝수여야 합니다.'
+  authlogic:
+    error_messages:
+      login_blank: 사용자 ID는 공란으로 남겨둘 수 없습니다.
+      login_not_found: 사용자 ID와 패스워드가 맞지 않습니다.
+      login_invalid: 사용자 ID는 알파벳, 숫자, 빈칸, 그리고 일부 특수 문자 (.-_@) 만 사용하실 수 있습니다
+      consecutive_failed_logins_limit_exceeded: 입력한 정보가 여러번 틀려서 계정이 잠금 모드로 바뀌었습니다.
+      email_invalid: 이메일 형식이 아니거나 틀린 이메일 주소입니다.
+      password_blank: 패스워드는 공란이 될 수 없습니다.
+      password_invalid: 사용자 ID와 패스워드가 맞지 않습니다.
+      not_active: 사용할 수 없는 계정입니다.
+      not_confirmed: 계정 허가 절차가 끝나지 않았습니다.
+      not_approved: 계정이 허가되지 않았습니다.
+      no_authentication_details: 본인 인증을 위한 정보를 기입하셔야 합니다.
+
