@@ -9,9 +9,9 @@
 </div>
 
 
-<div class='button' style="margin:50px auto;">
+<div class='button rollover_button' style="margin:50px auto; width:275px;">
   <a class='button_state_online_registration_<%= @registrant.locale.to_s.downcase %>' href='<%= @online_registration_iframe_url %>' target='_NEW'>
-    <span><%=  I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_name) %></span>
+    <span><%=  I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_name).html_safe %></span>
   </a>
 </div>
 
