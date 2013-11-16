@@ -82,7 +82,7 @@ class Notifier < ActionMailer::Base
     partner = registrant.partner
     custom_template = partner && partner.whitelabeled? && EmailTemplate.get(partner, "#{kind}.#{registrant.locale}")
 
-    if custom_template
+    if !custom_template.blank?
       render :inline => custom_template
     else
       render "notifier/#{kind}"
