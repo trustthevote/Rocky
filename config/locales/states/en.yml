@@ -438,4 +438,33 @@ en:
       2_months_before: two months before your 18th birthday
       17_turn_18: if you are 17 and will turn 18 before the next election
     registration_deadline:
+      california: postmarked or submitted to an elections office (or NVRA voter registration agency) on or before 15 days prior to Election Day (to vote in that election)
+      connecticut: postmarked 14 days before the election or received in person 7 days before the election
+      delaware: "postmarked by the fourth Saturday before a general or primary election, or 10 days before a special election"
+      georgia: postmarked by the fifth Monday before the election
+      iowa: "received in-person 10 days before General and Primary Elections (11 days before all other elections), or postmarked 15 days before Election Day."
+      kansas: "postmarked 21 days before the election if mailed, received at the county office 21 days before the election if delivered in person."
+      missouri: received before 5pm (or normal close of business) on the fourth Wednesday prior to the election
+      new_york: postmarked 25 days before the election and received no less than 20 days before the election
+      nebraska: "postmarked by the third Friday before the election, or received in-person by 6pm on the second Friday before the election"
+      nevada: "postmarked by 31 days before the election, or submitted online by 21 days before an election, or received in-person at a clerk's office 21 days before an election."
+      rhode_island: received 30 days before the election. Mailed voter registration forms received after the deadline will be accepted as long as the mail is postmarked on or before the voter registration deadline.
+      utah: "postmarked 30 days before the election, or received in person 15 days before the election"
+      vermont: "received by 5pm on the Wednesday before the election"
+      washington: "postmarked by the Monday four weeks before the election, or received in person at the county elections department the Monday one week before the election"
+      postmarked_11_days: postmarked 11 days before the election
+      postmarked_20_days: postmarked 20 days before the election
+      postmarked_21_days: postmarked 21 days before the election
+      postmarked_25_days: postmarked 25 days before the election
+      postmarked_28_days: postmarked 28 days before the election
+      postmarked_29_days: postmarked 29 days before the election
+      postmarked_30_days: postmarked 30 days before the election
+      received_10_days: received 10 days before the election
+      received_14_days: received 14 days before the election
+      received_15_days: received 15 days before the election
+      received_21_days: received 21 days before the election
+      received_22_days: received 22 days before the election
+      received_25_days: received 25 days before the election
+      received_30_days: received 30 days before the election
+      received_at_least_30_days: received at least 30 days before the election
       thirty_days_before: 30 days before the election

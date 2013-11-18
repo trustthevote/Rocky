@@ -15,7 +15,7 @@ defaults:
   id_length_min: '6'
   id_length_max: '60'
   sub_18: turn_by_next_election
-  registration_deadline: thirty_days_before
+  registration_deadline: postmarked_29_days
   
 record_0:
   abbreviation: AL
@@ -29,6 +29,7 @@ record_0:
   sos_phone: (800) 274-VOTE
   sos_url: http://www.sos.state.al.us/Elections/Default.aspx
   sub_18: be_by_next_election
+  registration_deadline: postmarked_11_days
 
   
 record_1:
@@ -41,7 +42,7 @@ record_1:
   sos_phone: (907) 465-4611
   sos_url: http://www.elections.alaska.gov/
   sub_18: 90_days_before
-
+  registration_deadline: received_30_days
   
 record_2:
   abbreviation: AZ
@@ -54,7 +55,7 @@ record_2:
   sos_url: http://www.azsos.gov/election/
   sub_18: turn_by_next_general_election_november
   online_registration_url: https://servicearizona.com/webapp/evoter/selectLanguage
-
+  registration_deadline: received_29_days
   
 record_3:
   abbreviation: AR
@@ -65,7 +66,8 @@ record_3:
   sos_address: "Secretary of State<br>ATTN: Voter Registration<br>P.O. Box 8111<br>Little Rock, AR 72203-8111"
   sos_phone: (501) 682-3526
   sos_url: http://www.sosweb.state.ar.us/elections.html
-
+  registration_deadline: postmarked_30_days
+  
 
 record_4:
   abbreviation: CA
@@ -78,6 +80,7 @@ record_4:
   sos_phone: (800) 345-VOTE
   sos_url: http://www.sos.ca.gov/elections/
   online_registration_url: http://www.registertovote.ca.gov/
+  registration_deadline: california
 
 
 record_5:
@@ -91,7 +94,6 @@ record_5:
   sos_url: http://www.sos.state.co.us/pubs/elections/
   online_registration_url: https://www.sos.state.co.us/Voter/secuVerifyExist.do
 
-
 record_6:
   abbreviation: CT
   name: Connecticut
@@ -102,6 +104,7 @@ record_6:
   sos_phone: (800) 509-6100
   sos_url: "http://www.sots.ct.gov/sots/cwp/view.asp?a=3&Q=415810&sotsNav=|"
   sub_18: once_turned_17
+  registration_deadline: connecticut
 
 
 record_7:
@@ -113,6 +116,7 @@ record_7:
   sos_address: "Office of the State Election Commissioner<br>905 S. Governors Ave, Suite 170<br>Dover, DE 19904"
   sos_phone: (302) 739-4277
   sos_url: http://elections.delaware.gov/
+  registration_deadline: delaware
 
 
 record_8:
@@ -126,7 +130,7 @@ record_8:
   sos_phone: (202) 727-2525
   sos_url: http://www.dcboee.org/
   sub_18: when_at_least_16
-
+  registration_deadline: postmarked_30_days
 
 record_9:
   abbreviation: FL
@@ -154,6 +158,7 @@ record_10:
   sos_phone: (404) 656-2871
   sos_url: http://www.sos.state.ga.us/elections/
   sub_18: 6_months_before 
+  registration_deadline: georgia
 
 
 record_11:
@@ -167,6 +172,7 @@ record_11:
   sos_phone: (808) 453-8683
   sos_url: http://www.hawaii.gov/elections/
   sub_18: once_turned_16 
+  registration_deadline: received_at_least_30_days
 
 
 record_12:
@@ -178,7 +184,7 @@ record_12:
   sos_address: 'Idaho Secretary of State''s Office<br>Attn: Elections Division<br>P.O. Box 83720<br>Boise, ID 83720-0080'
   sos_phone: (208) 334-2300
   sos_url: http://www.sos.idaho.gov/elect/eleindex.htm
-
+  registration_deadline: postmarked_26_days
 
 record_13:
   abbreviation: IL
@@ -189,7 +195,7 @@ record_13:
   sos_address: "Illinois State Board of Elections<br>Voter Registration Department<br>2329 S. MacArthur Boulevard<br>Springfield, IL 62704"
   sos_phone: (217) 782-4141
   sos_url: http://www.elections.il.gov/
-
+  registration_deadline: postmarked_28_days
 
 record_14:
   abbreviation: IN
@@ -213,6 +219,7 @@ record_15:
   sos_phone: (888) 767-8683
   sos_url: http://www.sos.state.ia.us/
   sub_18: 6_months_before
+  registration_deadline: iowa
 
 
 record_16:
@@ -225,6 +232,7 @@ record_16:
   sos_phone: (785) 796-4564
   sos_url: http://www.kssos.org/elections/elections.html
   sub_18: be_by_next_general_election_november
+  registration_deadline: kansas
 
 
 record_17:
@@ -251,6 +259,7 @@ record_18:
   sos_phone: (225) 922-0900
   sos_url: http://www.sos.louisiana.gov/tabid/68/Default.aspx
   sub_18: once_turned_17
+  registration_deadline: received_30_days
 
 
 record_19:
@@ -263,7 +272,7 @@ record_19:
   sos_phone: (207) 642-7736
   sos_url: http://www.state.me.us/sos/cec/elec/
   sub_18: once_turned_17_but
-
+  registration_deadline: received_21_days
 
 record_20:
   abbreviation: MD
@@ -274,6 +283,7 @@ record_20:
   sos_address: "State Board of Elections<br>P.O. Box 6486<br>Annapolis, MD 21401-0486"
   sos_phone: (800) 222-VOTE
   sos_url: http://www.electionsmaryland.com
+  registration_deadline: postmarked_21_days
 
 
 record_21:
@@ -285,6 +295,7 @@ record_21:
   sos_address: "Secretary of the Commonwealth<br>Elections Division<br>McCormack Building, Room 1705<br>One Ashburton Place<br>Boston, MA 02108"
   sos_phone: (800) 462-VOTE
   sos_url: http://www.sec.state.ma.us/ele
+  registration_deadline: postmarked_20_days
 
 
 record_22:
@@ -296,6 +307,7 @@ record_22:
   sos_address: "Michigan Department of State<br>Bureau of Elections<br>P.O. Box 20126<br>Lansing, MI 48901-0726"
   sos_phone: (517) 373-2540
   sos_url: "http://www.michigan.gov/sos/0,1607,7-127-1633---,00.html"
+  registration_deadline: postmarked_30_days
 
 
 record_23:
@@ -308,6 +320,7 @@ record_23:
   sos_address: "Secretary of State<br>60 Empire Drive, Suite 100<br>St. Paul, MN 55155-1299"
   sos_phone: (651) 215-1440
   sos_url: http://www.sos.state.mn.us/home/index.asp?page=134
+  registration_deadline: received_21_days
 
 
 record_24:
@@ -320,6 +333,7 @@ record_24:
   sos_phone: (800) 829-6786
   sos_url: http://www.sos.state.ms.us/elections/elections.asp
   sub_18: be_by_next_general_election_november
+  registration_deadline: postmarked_30_days
 
 
 record_25:
@@ -332,7 +346,7 @@ record_25:
   sos_phone: (573) 751-2301
   sos_url: http://www.sos.mo.gov/elections/
   sub_18: 6_months_before
-
+  registration_deadline: missouri
 
 record_26:
   abbreviation: MT
@@ -344,6 +358,7 @@ record_26:
   sos_phone: (406) 444-4732
   sos_url: http://sos.mt.gov/elections/index.asp
   sub_18: turn_by_next_election_2
+  registration_deadline: postmarked_30_days
   
 
 record_27:
@@ -356,7 +371,7 @@ record_27:
   sos_phone: (402) 471-2555
   sos_url: http://www.sos.state.ne.us/elec/
   sub_18: be_by_next_general_election_november
-
+  registration_deadline: Nebraska
 
 record_28:
   abbreviation: NV
@@ -367,6 +382,7 @@ record_28:
   sos_address: "Secretary of State<br>Elections Division<br>101 North Carson Street Suite 3<br>Carson City, NV 89701-4786"
   sos_phone: (775) 684-5705
   sos_url: http://nvsos.gov/index.aspx?page=3
+  registration_deadline: NV
 
 record_29:
   abbreviation: NH
@@ -385,6 +401,7 @@ record_29:
   sos_phone: ''
   sos_url: ''
   sub_18: blank
+  registration_deadline: received_10_days
 
 
 record_30:
@@ -396,6 +413,7 @@ record_30:
   sos_address: "New Jersey Department of State<br>Division of Elections<br>PO BOX 304<br>Trenton, NJ 08628-0304"
   sos_phone: (609) 292-3760
   sos_url: http://www.nj.gov/state/elections/
+  registration_deadline: received_21_days
 
 
 record_31:
@@ -407,6 +425,7 @@ record_31:
   sos_address: "Bureau of Elections<br>325 Don Gaspar, Suite 300<br>Santa Fe, NM 87503"
   sos_phone: (800) 477-3632
   sos_url: http://www.sos.state.nm.us/
+  registration_deadline: postmarked_28_days
 
 
 record_32:
@@ -426,6 +445,7 @@ record_32:
   sos_address: "NYS Board of Elections<br>40 North Pearl Street, Suite 5<br>Albany, NY 12207-2108"
   sos_phone: (800) FOR-VOTE
   sos_url: http://www.elections.ny.gov
+  registration_deadline: new_york
 
 
 record_33:
@@ -439,6 +459,7 @@ record_33:
   sos_address: "State Board of Elections<br>P.O. Box 27255<br>Raleigh, NC 27611-7255"
   sos_phone: (919) 733-7173
   sos_url: http://www.sboe.state.nc.us/
+  registration_deadline: received_25_days
 
 
 record_34:
@@ -470,6 +491,7 @@ record_35:
   sos_phone: (614) 466-2585
   sos_url: http://www.sos.state.oh.us/elections.aspx
   sub_18: turn_by_next_general_election_november_2
+  registration_deadline: received_30_days
 
 
 record_36:
@@ -482,6 +504,7 @@ record_36:
   sos_phone: (405) 521-2391
   sos_url: http://www.oklaosf.state.ok.us/~elections/
   sub_18: 60_days_before_election_novemeber
+  registration_deadline: postmarked_25_days
 
 
 record_37:
@@ -494,6 +517,7 @@ record_37:
   sos_phone: (503) 986-1518
   sos_url: http://www.sos.state.or.us/elections/
   sub_18: once_turned_17
+  registration_deadline: postmarked_21_days
 
 
 record_38:
@@ -507,6 +531,7 @@ record_38:
   sos_address: "Pennsylvania Department of State<br>Bureau of Commissions, Elections & Legislation<br> Room 210 North Office Building<br>Harrisburg, PA 17120"
   sos_phone: (717) 787-5280
   sos_url: http://www.dos.state.pa.us/BCEL/site/default.asp
+  registration_deadline: received_30_days
 
 
 record_39:
@@ -518,6 +543,7 @@ record_39:
   sos_address: "Rhode Island State Board of Elections<br>50 Branch Avenue<br>Providence, RI 02904"
   sos_phone: (401) 222-2345
   sos_url: http://www.elections.state.ri.us/
+  registration_deadline: rhode_island
 
 
 record_40:
@@ -531,6 +557,7 @@ record_40:
   sos_address: "State Election Commission<br>P.O. Box 5987<br>Columbia, SC 29250-5987"
   sos_phone: (803) 734-9060
   sos_url: http://www.scvotes.org/
+  registration_deadline: postmarked_30_days
 
 
 record_41:
@@ -542,7 +569,7 @@ record_41:
   sos_address: "Elections, Secretary of State<br>500 E. Capitol, Suite 204<br>Pierre, SD 57501-5070"
   sos_phone: (605) 773-3537
   sos_url: http://sdsos.gov/Elections/Default.aspx
-
+  registration_deadline: received_15_days
 
 record_42:
   abbreviation: TN
@@ -555,6 +582,7 @@ record_42:
   sos_address: "Coordinator of Elections<br>Tennessee Tower, Ninth Floor<br>312 Rosa L. Parks Avenue<br>Nashville, TN 37243"
   sos_phone: (615) 741-7956
   sos_url: http://www.state.tn.us/sos/election/index.htm
+  registration_deadline: postmarked_30_days
 
 
 record_43:
@@ -567,6 +595,7 @@ record_43:
   sos_phone: (800) 252-VOTE
   sos_url: http://www.sos.state.tx.us/elections/index.shtml
   sub_18: 2_months_before
+  registration_deadline: postmarked_30_days
 
 
 record_44:
@@ -579,6 +608,7 @@ record_44:
   sos_phone: (800) 995-VOTE
   sos_url: http://elections.utah.gov/
   sub_18: blank
+  registration_deadline: utah
 
 
 record_45:
@@ -590,6 +620,7 @@ record_45:
   sos_address: "Secretary of State<br>Elections Division<br>128 State Street<br>Montpelier, VT 05633-1101"
   sos_phone: (802) 828-2464
   sos_url: http://vermont-elections.org/
+  registration_deadline: vermont
 
 
 record_46:
@@ -602,6 +633,7 @@ record_46:
   sos_address: "State Board of Elections<br>Washington Building<br>1100 Bank Street<br>Richmond, VA 23219"
   sos_phone: (804) 786-6551
   sos_url: http://www.sbe.state.va.us/
+  registration_deadline: received_22_days
 
 
 record_47:
@@ -614,6 +646,7 @@ record_47:
   sos_phone: (360) 902-4180
   sos_url: http://www.secstate.wa.gov/elections/
   sub_18: turn_by_next_general_election_november
+  registration_deadline: washington
 
 
 record_48:
@@ -625,6 +658,7 @@ record_48:
   sos_address: "Secretary of State<br>Building 1, Suite 157-K<br>1900 Kanawha Blvd. East<br>Charleston, WV 25305-0770"
   sos_phone: (304) 558-6000
   sos_url: http://www.sos.wv.gov/elections/Pages/default.aspx
+  registration_deadline: postmarked_21_days
 
 
 record_49:
@@ -637,6 +671,7 @@ record_49:
   sos_phone: (608) 266-8005
   sos_url: http://elections.state.wi.us/
   sub_18: 17_turn_18
+  registration_deadline: postmark_20_days
 
 
 record_50:
@@ -656,3 +691,4 @@ record_50:
   sos_phone: ''
   sos_url: ''
   sub_18: turn_by_next_election
+  registration_deadline: received_14_days
