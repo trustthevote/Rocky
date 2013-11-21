@@ -655,7 +655,7 @@ record_48:
   requires_party: true
   party_tooltip: west_virginia
   id_number_tooltip: drivers_license_or_non_driver_id
-  sos_address: "Secretary of State<br>Building 1, Suite 157-K<br>1900 Kanawha Blvd.<br>East Charleston, WV 25305-0770"
+  sos_address: "Secretary of State<br>Building 1, Suite 157-K<br>1900 Kanawha Blvd. East<br>Charleston, WV 25305-0770"
   sos_phone: (304) 558-6000
   sos_url: http://www.sos.wv.gov/elections/Pages/default.aspx
   registration_deadline: postmarked_21_days
