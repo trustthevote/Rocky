@@ -54,5 +54,5 @@ pdf:
     page1:
       default_logo: 'pdf/rtvlogo.gif'
       other_block:
-        instructions_url: "https://rockthevote.com/nvra-form-instructions/?locale=<LOCALE>&state=<STATE>"  
+        instructions_url: "http://www.rockthevote.com/registration/instructions/index.html?state=<STATE>&lang=<LOCALE>"
   
