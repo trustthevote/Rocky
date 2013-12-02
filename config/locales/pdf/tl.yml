@@ -1,1 +1,166 @@
+---
 tl:
+  pdf:
+    nvra:
+      page1:
+        title: Pagrerehistro ng botante
+        subtitle: pinagagana ng
+        top_paragraph: Hindi ka nakarehistro hangga't hindi mo pinipirmahan. nilalagyan
+          ng selyo at ipinadadala sa koreo ang iyong natapos na porma.
+        instructions_block:
+          title: Tagubilin
+          subtitle: Kunin ang mga madadaling hakbang na ito upang matapos ang iyong
+            pagrerehistro ng botante.
+          step1: Pirmahan ang porma. Dapat mong pirmahan ang porma ng pagrerehistro
+            ng botante bago mo ito ihulog sa koreo.
+          step2: Gumawa ng isang mailer. Tiklupin ang porma at papel ng tirahan sa
+            kalahati. Siguraduhin na ang tirahang ito ay makikita sa labas. I-tape
+            o i-staple ang nakatiklop na porma sa ibaba upang lumikha ng mailer. Kung
+            hindi naman, ilagay ang iyong porma sa isang sobre at ipadala ang sulat-kamay
+            na tirahan sa Kalihim ng Estado.
+          step2mailer: Kung Paano Gumawa ng Mailer
+          step3: Selyohan ito. Maglagay ng primera klaseng selyo sa iyong sobre o
+            nakatiklop na mailer.
+          step4: Ihulog ito sa koreo. Ilagay sa koreo ang iyong porma ng pagrerehistro
+            ng botante.
+          step5: Bumoto. Sa Araw ng Halalan, pumunta sa lugar ng botohan at bumoto.
+        submit_block:
+          title: ! 'I-intrega ang iyong natapos at napirmahang porma sa:'
+        deadline_block:
+          title: Huling araw ng pagrerehistro
+        other_block: Tingnan ang %{instructions_url} para sa kumpletong tagubiling
+          pangkalahatan at partikular sa estado  para sa iyong aplikasyon ng pagrerehistro
+          ng botante.
+        bottom_block:
+          title: Mga unang beses na botante na nagrerehistro sa pamamagitan ng koreo
+          paragraph1: Kung ikaw ay nagrerehistro upang bumoto sa unang pagkakataon
+            sa iyong hurisdiksyon at nagpapadala nitong aplikasyon ng pagrerehistro
+            sa koreo, ang batas na Pederal ay nangangailangang magpakita ka ng katibayan
+            ng pagkakakilanlan sa unang pagkakataon mong bumoto. Katunayan ng pagkakakilanlan
+            ang kasalukuyan at may bisang larawan ng pagkakakilanlan o isang kasalukuyang
+            utility bill, bank statement, tseke ng pamahalaan, tseke ng suweldo, o
+            dokumento ng pamahalaan na nagpapakita ng iyong pangalan at tirahan.
+          paragraph2: Ang mga botante ay maaaring maging "exempt" (hindi saklaw) sa
+            kinakailangang ito kung i-intrega nila ang kopya ng pagkakakilanlang ito
+            kasama ng  kanilang porma ng pagpaparehistro ng botante na ihuhulog sa
+            koreo.
+          paragraph3: ! 'Kung nais mong mag-intrega ng isang kopya, mangyaring tandaan
+            ang mga sumusunod: Ang iyong estado ay maaaring mangailangan ng  karagdagang
+            pagkakakilanlan at maaaring mag-utos na ipakita mo ang pagkakakilanlan
+            sa mga lugar ng botohan kahit na natugunan mo ang mga Pederal na patunay
+            ng pagkakakilanlan.'
+          paragraph4: Huwag i-intrega ang mga dokumentong orihinal kasama ng aplikasyong
+            ito, kopya lamang.
+      page2:
+        title: Aplikasyon ng pagrerehistro ng botante.
+        subtitle: Bago tapusin ang pormang ito, suriin ang aplikasyong pangkalahatan
+          at tagubiling partikular sa estado.
+        topblock:
+          item1: Ikaw ba ay mamamayan ng Estados Unidos ng Amerika?
+          item2: Ikaw ba ay magiging 18 taong gulang sa araw ng halalan o bago mag-halalan?
+          item3: Kung nai-check mo ang "Hindi" bilang tugon sa alinman sa mga tanong
+            na ito, huwag kumpletuhin ang porma
+          item4: (Mangyaring tingnan ang mga tagubiling partikular sa estado tungkol
+            sa pagiging karapat-dapat na magrehistro bago dumating ang edad na 18.)
+          fouo: Ang puwang na ito ay para sa opisyal na gamit lamang.
+        block1:
+          box1_label: ''
+          box2_label: Huling Pangalan
+          box3_label: Unang Pangalan
+          box4_label: (Mga) Gitnang Pangalan
+          box5_label: ''
+        block2:
+          box1_label: Tirahan ng Tahanan
+          box2_label: Numero ng Apartment o Lote
+          box3_label: Lungsod/Bayan
+          box4_label: Estado
+          box5_label: Zip Code
+        block3:
+          box1_label: Tirahan na kinukunan mo ng koreo, kung naiiba kaysa itaas
+          box2_label: Lungsod/Bayan
+          box3_label: Estado
+          box4_label: Zip Code
+        block4:
+          box1_label: Petsa ng Kapanganakan
+          item2: Buwan
+          item3: Araw
+          item4: Taon
+        block5: Numero ng telepono (opsyonal)
+        block6:
+          box1_label: Numero ng Pagkakakilanlan
+          box1_sublabel: (Tingnan ang ikaanim na bagay sa mga tagubilin para sa iyong
+            estado)
+        block7:
+          box1_label: Napiling Partido
+          box1_sublabel: (Tingnan ang ikapitong bagay sa mga tagubilin para sa iyong
+            estado)
+        block8:
+          box1_label: Lahi o Grupong Etniko
+          box1_sublabel: (Tingnan ang ikawalong bagay sa mga tagubilin para sa iyong
+            estado)
+        block9:
+          affirmation_header: ! 'Nasuri ko ang mga tagubilin ng aking estado at isinusumpa/pinagtitibay
+            ko na:'
+          affirmation_1: Ako ay isang mamamayan ng Estados Unidos
+          affirmation_2: Natutugunan ko ang mga kinakailangan sa pagiging karapat-dapat
+            sa aking estado at sumusunod sa anumang mga panunumpa na kinakailangan.
+          affirmation_3: Ang impormasyong ibinigay ko ay totoo sa abot ng aking kaalaman
+            at maaari akong multahan kung manunumpa nang walang katotohanan. Kung
+            nagbigay ako ng huwad na impormasyon, maaari akong magmulta, mabilanggo,
+            o (kung hindi isang mamamayan ng Estados Unidos) ma-deporta o tanggihang
+            makapasok sa Estados Unidos.
+          please_sign: Mangyaring pirmahan ng buong pangalan (o lagyan ng marka)
+          date: Petsa
+          month: Buwan
+          day: Araw
+          year: Taon
+        top_half_footer: ! 'Kung ikaw ay nagrerehistro upang bumoto sa unang pagkakataon:
+          mangyaring sumangguni sa mga tagubilin ng aplikasyon para sa impormasyon
+          sa pag-i-intrega ng mga kopya ng wastong dokumento ng pagkakakilanlan kasama
+          ng pormang ito.'
+        bottom_half_title: Mangyaring punuan ang mga seksyon sa ibaba kung nauukol
+          sila sa iyo.
+        blockA:
+          title: Kung ang aplikasyong ito ay para sa pagbabago ng pangalan, ano ang
+            dati mong pangalan bago mo ito binago?
+          box1_label: ''
+          box2_label: Huling Pangalan
+          box3_label: Unang Pangalan
+          box4_label: (Mga) Gitnang Pangalan
+          box5_label: ''
+        blockB:
+          title: Kung ikaw ay dating nakarehistro ngunit ito ang unang pagkakataon
+            na ikaw ay magrerehistro mula sa tirahan na nasa Kahon, ano ang tirahan
+            kung saan ka dating nakarehistro?
+          box1_label: Kalye (o ruta at numero ng kahon)
+          box2_label: Numero ng Apartment o Lote
+          box3_label: Lungsod/Bayan/County
+          box4_label: Estado
+          box5_label: Zip Code
+        blockC:
+          title: Kung ikaw ay nakatira sa isang rural na lugar ngunit walang numero
+            ng kalye, o kung wala kang tirahan, mangyaring ipakita sa mapa kung saan
+            ka nakatira
+          instructions:
+            bullet1: Isulat ang mga pangalan ng sangang-daan (o kalye) na pinakamalapit
+              sa kung saan ka nakatira.
+            bullet2: Gumuhit ng isang "X" upang ipakita kung saan ka nakatira
+            bullet3: Gumamit ng tuldok upang ipakita ang anumang mga paaralan, mga
+              simbahan, mga tindahan, o iba pang palatandaan na malapit sa kung saan
+              ka nakatira, at isulat ang pangalan ng palatandaan.
+          example:
+            title: Halimbawa
+            grocery_store: Tindahan ng Groseria
+            public_school: Paaralang Publiko
+            street1: ! 'Ruta # 2'
+            street2: Woodchuck Road
+          north: HILAGA
+        blockD:
+          title: Kung ang aplikante ay hindi makapirma, sino ang tumulong sa aplikante
+            na punuan itong aplikasyon? Ibigay ang pangalan, tirahan at numero ng
+            telepono (ang numero ng telepono ay opsyonal)
+        bottom_half_footer: Ihulog sa koreo ang aplikasyong ito sa tirahan na ibinigay
+          para sa iyong Estado
+      page3:
+        fouo: PARA SA OPISYAL NA GAMIT LAMANG
+

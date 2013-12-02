@@ -1,2 +1,121 @@
+---
 tl:
-  language_name: Tagalog
+  language_name: Ingles
+  activerecord:
+    attributes:
+      partner:
+        from_email: Galing sa Email
+        url: URL
+      registrant:
+        date_of_birth: Petsa ng Kapanganakan
+        email_address: Address ng E-mail
+        first_registration: Ako ay nagpaparehistro para bumoto sa unang pagkakataon
+        home_zip_code: Zip Code
+        us_citizen: Ako ay isang mamamayan ng Estados Unidos
+        name_title: Titulo
+        first_name: Unang Pangalan
+        middle_name: Gitnang Pangalan
+        last_name: Apelyido
+        name_suffix: Huling Titulo
+        home_address: Tirahan
+        home_unit: Numero ng Unit o Lote
+        home_city: Lungsod
+        home_state_name: Estado
+        has_mailing_address: Nakukuha ko ang aking sulat sa address na naiiba kaysa
+          nasa itaas
+        mailing_address: Address
+        mailing_unit: Numero ng Yunit o Lote
+        mailing_city: Lungsod
+        mailing_state_abbrev: Estado
+        mailing_zip_code: Zip Code
+        party: Partido
+        race: Lahi
+        state_id_number: Numero ng ID
+        phone: Telepono
+        phone_type: Tipo
+        change_of_name: Ako ay nagpalit ng aking pangalan
+        prev_name_title: Titulo
+        prev_first_name: Unang pangalan
+        prev_middle_name: Gitnang Pangalan
+        prev_last_name: Apelyido
+        prev_name_suffix: Huling Titulo
+        change_of_address: Ako ay nagbago ng aking tirahan
+        prev_address: Tirahan
+        prev_unit: Numero ng Unit o Lote
+        prev_city: Lungsod
+        prev_state_abbrev: Estado
+        prev_zip_code: Zip Code
+        opt_in_email: Tumatanggap ng email
+        opt_in_sms: Tumatanggap ng text na mensahe
+        attest_true: Sinuri ko ang impormasyon sa itaas, at ito ay totoo at tumpak
+          sa abot ng aking kaalaman.
+        tell_from: Galing sa
+        tell_email: Iyong email
+        tell_recipients: Mga tatanggap
+        tell_subject: Paksa
+        tell_message: Personal na Mensahe
+    errors:
+      models:
+        registrant:
+          blank: Kailangan
+          invalid_zip: Walang Bisa na ZIP
+          attributes:
+            home_zip_code:
+              invalid: Gamitin ang ZIP o ZIP + 4
+            mailing_zip_code:
+              invalid: Gamitin ang ZIP o ZIP + 4
+            prev_zip_code:
+              invalid: Gamitin ang ZIP o ZIP + 4
+            email_address:
+              invalid: Walang Bisang Tahanan
+            date_of_birth:
+              format: ! 'Petsa ng kapanganakan
+
+                Kailangan: Buwan- Araw-Taon'
+            phone:
+              invalid: ! "Telepono \nKailangan ### /##/ ####"
+              required_if_opt_in: Kailangan kung tumatanggap ng Text
+            attest_true:
+              accepted: Kailangan mong ipahiwatig kung ang impormasyon sa itaas ay
+                tama.
+            has_state_license:
+              inclusion: Mangyaring ipahiwatig kung mayroon kang isang wastong lisensya
+                ng estado
+      messages:
+        inclusion: ! '%{attribute} ay hindi kasama sa listahan'
+        exclusion: ! '%{attribute} ay nakareserba'
+        invalid: ! '%{attribute} ay walang bisa'
+        confirmation: ! '%{attribute} ay hindi tumutugma sa kumpirmasyon'
+        accepted: ! '%{attribute} ay dapat na tanggapin.'
+        empty: ! '%{attribute} ay hindi maaaring walang laman.'
+        blank: ! '''%{attribute} ay hindi maaaring blangko'
+        too_long: ! '%{attribute} ay masyadong mahaba (pinakamahaba ay % {count} titik).'
+        too_short: ! '%{attribute} ay masyadong maikli (pinakamaikli ay %{count} titik.'
+        wrong_length: ! '%{attribute} ay maling haba (dapat na  %{count} titik.'
+        taken: ! '%{attribute} ay nakuha na'
+        not_a_number: ! '%{attribute} ay hindi numero.'
+        greater_than: ! '%{attribute} ay dapat na mas mataas kaysa %{count}.'
+        greater_than_or_equal_to: ! '%{attribute} ay dapat na mas mataas kaysa sa
+          o katumbas ng %{count}.'
+        equal_to: ! '%{attribute} ay dapat na katumbas ng %{count}.'
+        less_than: ! '%{attribute} dapat na mas mababa kaysa %{count}.'
+        less_than_or_equal_to: ! '%{attribute} ay dapat na mas mababa o katumbas ng
+          %{count}.'
+        odd: ! '%{attribute} numero ay dapat na odd (o hindi puwedeng hatiin sa dalawa)'
+        even: ! '%{attribute} numero ay dapat na even (o puwedeng hatiin sa dalawa)'
+  authlogic:
+    error_messages:
+      login_blank: Ang Login ay hindi maaaring blangko.
+      login_not_found: Ang kumbinasyon ng Login / password ay hindi wasto.
+      login_invalid: Mangyaring ang gamitin lamang na Username ay mga titik, numero,
+        puwang, at.-_ @ .
+      consecutive_failed_logins_limit_exceeded: Ang limitasyon ng magkakasunod na
+        pag-login ay nalampasan na, ang account ay hindi na gagana.
+      email_invalid: Ang email ay hindi wastong address.
+      password_blank: Ang Password ay hindi maaaring blangko.
+      password_invalid: Ang kumbinasyon ng Login / Password ay hindi wasto.
+      not_active: Ang iyong account ay hindi aktibo.
+      not_confirmed: Ang iyong account ay hindi nakumpirma.
+      not_approved: Ang iyong account ay hindi naaprubahan.
+      no_authentication_details: Hindi ka nagbigay ng anumang detalye para sa pagpapatunay.
+
