@@ -10,4 +10,5 @@ admin_password: abc123
 enabled_locales:
   - en
   - es
-  - ko  
+  - ko
+  - tl
