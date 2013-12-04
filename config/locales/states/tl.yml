@@ -3,19 +3,19 @@ tl:
   states:
     custom:
       ca:
-        online_instructions: Maaari mong tapusin ang iyong online na pagpaparehistro
-          ng botante sa iyong estado ngayon - sa pamamagitan ng paggamit ng aplikasyon
-          na ibinigay ng iyong Kalihim ng Estado Debra Bowen
+        online_instructions: Maaari mong tapusin ang online na pagpaparehistro ng
+          botante sa iyong estado ngayon - sa pamamagitan ng paggamit ng aplikasyon
+          na ibinigay ng iyong Kalihim ng Estado, si Debra Bowen
         step_2:
           checkbox_text: Ako ay mamamayan ng California, nakatira sa Estados Unidos
           instruction_text: Ikaw ay karapat-dapat na tapusin ang iyong pagpaparehistro
-            at gamitin ang online na sistema ng pagpaparehistro ng botante ng estado.
+            at gamitin ang online na sistema ng pagrerehistro ng botante ng estado.
       nv:
         online_instructions: Maaari mong makumpleto ang iyong online na pagrerehistro
-          ng botante sa estadong nasa ibaba. Ang Nevada Online na Aplikasyon ng Botante  (NOVA)
-          ay ibinigay ng Kalihim ng Estado ng Nevada, Ross Miller, para sa nagrerehistrong
-          mga mamamayan ng Nevada upang bumoto, o baguhin ang kanilang umiiral na
-          impormasyon ng pagrerehistro.  Ang NOVA ay makukuha rin dito <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">here</a>.</p>
+          ng botante sa estadong nasa ibaba. Ang Nevada Online Voter Application (NOVA)
+          ay ibinigay ng Kalihim ng Estado ng Nevada, si Ross Miller, para sa nagrerehistrong
+          mga mamamayan ng Nevada upang bumoto, o para baguhin ang kanilang umiiral
+          na impormasyon ng pagrerehistro.  Ang NOVA ay makukuha rin dito <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">here</a>.</p>
           <br/> <p> Kung ang iyong lisensya ng pagmamaneho ay walang bisa o hindi
           mahanap o makumpirma ng estado ang iyong DMV record - huwag mag-alaala -
           maaari mo ring <a href="%{next_url}"> tapusin ang iyong pagrerehistro kasama
@@ -24,7 +24,7 @@ tl:
     parties:
       democratic: Demokratiko
       independent: Independiente
-      green: Green (Berde)
+      green: Green
       libertarian: Libertarian
       republican: Republikano
       working_families: Nagtatrabahong pamilya
@@ -36,17 +36,17 @@ tl:
     tooltips:
       not_participating:
         blank: ! "hindi nakikilahok\n   blangko"
-        new_hampshire: Ang batas ng New Hampshire ay hindi nagpapahintulot sa iyo
-          na gamitin ang pormang ito upang magparehistrong bumoto. Para sa impormasyon
-          tungkol sa pagrerehistrong bumoto, makipag-ugnay sa kawani ng iyong bayan
-          o lungsod. Ang impormasyon ng pag-uugnay sa kawani ng bayan at  lungsod
-          ay nakalista sa http://www.state.nh.us/sos/clerks.htm.  Maaari ka ring makipag-ugnay
+        new_hampshire: Ang batas ng New Hampshire ay hindi nagpapahintulot na gamitin
+          mo ang pormang ito upang magrehistrong bumoto. Para sa impormasyon tungkol
+          sa pagrerehistrong bumoto, makipag-ugnay sa kawani ng iyong bayan o lungsod.
+          Ang impormasyon ng pag-uugnay sa kawani ng bayan at  lungsod ay nakalista
+          sa http://www.state.nh.us/sos/clerks.htm.  Maaari ka ring makipag-ugnay
           sa Kalihim ng Estado sa 603-271-3242 o bumisita sa http://www.state.nh.us/sos/electionsnew.htm.
-        north_dakota: Ang North (Hilagang) Dakota ay walang pagrerehistro ng botante.
-          Para sa karagdagang impormasyon, makipag-ugnay sa iyong Kalihim ng Estado
-          sa 701-328-3660 o bisitahin ang http://www.nd.gov/sos.
+        north_dakota: Ang North Dakota ay walang pagrerehistro ng botante. Para sa
+          karagdagang impormasyon, makipag-ugnay sa   Kalihim ng iyong Estado sa 701-328-3660
+          o bisitahin ang http://www.nd.gov/sos.
         wyoming: Ang batas ng Wyoming ay hindi nagpapahintulot na gamitin mo ang pormang
-          ito para magparehistrong bumoto. Upang malaman ang karagdagang impormasyon
+          ito para magrehistrong bumoto. Upang malaman ang karagdagang impormasyon
           tungkol sa pagrerehistrong bumoto sa Wyoming, makipag-ugnayan sa kawani
           ng tinitirahang County. Ang impormasyong ito ay makikita sa http://soswy.state.wy.us/election/clerks.htm
           o sa pamamagitan ng pagtawag sa 307-777-3573.
@@ -71,138 +71,132 @@ tl:
           ng impormasyon tungkol sa lahi or pagka-etniko.
         not_required_but_appreciated_with_state_name: Ang estado ng %{state_name}
           ay hindi humihiling ng impormasyon tungkol sa iyong lahi o pagka-etniko.
-          Gayunpaman. ang "Yugyugin ang Boto" (Rock the Vote) ay magpapahalaga sa  impormasyong  ito
+          Gayunpaman. ang  "Rock the Vote" ay magpapahalaga sa  impormasyong  ito
           para sukatin ang pagiging epektibo ng aming mga pagsusumikap sa pagrerehistro
           ng botante. HINDI lilitaw ang impormasyong ito sa iyong naka-imprentang
           porma ng pagrerehistro ng botante.
         not_required_but_appreciated_with_state_name_2: Ang estado ng %{state_name}
           ay hindi nangangailangan ng impormasyon tungkol sa iyong lahi o pagka-etniko.
-          Gayunpaman, ang "Yugyugin ang Boto" (Rock the Vote) ay magpapahalaga sa  impormasyong  ito
-          para sukatin ang pagiging epektibo ng aming mga pagsusumikap sa pagrerehistro
+          Gayunpaman, ang "Rock the Vote" ay magpapahalaga sa  impormasyong  ito para
+          sukatin ang pagiging epektibo ng aming mga pagsusumikap sa pagrerehistro
           ng botante. HINDI lilitaw ang impormasyong ito sa iyong naka-imprentang
           porma ng pagrerehistro ng botante.
-        virginia: Ang Komonwelt ng Virginia ay hindi humihiling ng impormasyon tungkol
-          sa iyong lahi o pagka-etniko. Gayunpaman, ang "Yugyugin ang Boto" (Rock
-          the Vote) ay  pahahalagahan ang impormasyong ito upang sukatin ang pagiging
-          epektibo ng aming mga pagsusumikap sa pagrerehistro ng botante. HINDI lilitaw
-          ang impormasyong ito sa iyong naka-imprentang porma ng pagrerehistro ng
-          botante.
+        virginia: Ang Commonwealth ng Virginia ay hindi humihiling ng impormasyon
+          tungkol sa iyong lahi o pagka-etniko. Gayunpaman, ang "Rock the Vote" ay  pahahalagahan
+          ang impormasyong ito upang sukatin ang pagiging epektibo ng aming mga pagsusumikap
+          sa pagrerehistro ng botante. HINDI lilitaw ang impormasyong ito sa iyong
+          naka-imprentang porma ng pagrerehistro ng botante.
         washington_dc: Ang Distrito ng Columbia ay hindi humihiling ng impormasyon
-          tungkol sa iyong lahi o pagka-etniko. Gayunpaman, ang "Yugyugin ang Boto"
-          (Rock the Vote) ay  pahahalagahan ang impormasyong ito upang sukatin ang
-          pagiging epektibo ng aming mga pagsusumikap sa pagrerehistro ng botante.
-          HINDI lilitaw ang impormasyong ito sa iyong naka-imprentang porma ng pagrerehistro
-          ng botante.
+          tungkol sa iyong lahi o pagka-etniko. Gayunpaman, ang "Rock the Vote" ay  pahahalagahan
+          ang impormasyong ito upang sukatin ang pagiging epektibo ng aming mga pagsusumikap
+          sa pagrerehistro ng botante. HINDI lilitaw ang impormasyong ito sa iyong
+          naka-imprentang porma ng pagrerehistro ng botante.
       party:
         blank: ! "Partido\n   Blangko"
-        arizona: Para sa halalan ng pagkiling sa pangulo, ang rehistrante ay kailangang
-          nakarehistro sa ilalim ng kinikilalang partido.   Para sa lahat ng iba pang
-          mga pangunahing halalan, ang mga botanteng nakarehistro bilang independiyente,
-          walang kinikilingang partido o mga miyembro ng isang partido na hindi kinikilala
-          sa balota ay pinapayagang bumoto sa  Pangunahing Halalan para sa kanilang
-          napili na isa sa kinikilalang partidong pampulitika. Ang mga botante na
-          nakarehistro sa isang kinikilalang partidong pampulitika ay makakatanggap
-          ng maagang balota ng kanilang partidong politikal. Tanging ang mga rehistradong
-          kasapi ng Partidong Libertarian ng Arizona ang maaaring bumoto sa Pangunahing
-          Halalan ng Partidong Libertarian.
+        arizona: Para sa halalan ng pangulo, ang rehistrante ay kailangang nakarehistro
+          sa ilalim ng kinikilalang partido.   Para sa lahat ng iba pang mga pangunahing
+          halalan, ang mga botanteng nakarehistro bilang independiyente, walang kinikilingang
+          partido o mga miyembro ng isang partido na hindi kinikilala sa balota ay
+          pinapayagang bumoto sa  Pangunahing Halalan para sa kanilang napili na isa
+          sa kinikilalang partido. Ang mga botante na nakarehistro sa isang kinikilalang
+          partido ay makakatanggap ng maagang balota ng kanilang partido. Tanging
+          ang mga rehistradong kasapi ng Partidong Libertarian ng Arizona ang maaaring
+          bumoto sa Pangunahing Halalan ng Partidong Libertarian.
         california: Pinapayagan ng batas ng California ang mga botante na tumatangging
-          sabihin ang pakikipag-ugnayan sa isang kwalipikadong partidong pampulitika
-          o ang nakiki-ugnay sa hindi kuwalipikadong partidong pampulitika para bumoto
-          sa pangunahing halalan ng anumang kwalipikadong partidong pampulitika na
-          nagbibigay-alam sa Kalihim ng Estado para pahintulutan silang gawin ito.
-          Maaari kang tumawag sa 1-800-345-VOTE o bumisita sa www.ss.ca.gov/elections/elections_d.htm
-          para malaman kung anong partidong pampulitika ang pumapayag sa mga walang
-          kaugnayang botante na makilahok sa kanilang pangunahing halalan.
-        idaho: ! 'Kailangan mong magparehistro sa isang partido kung nais mong lumahok
-          sa halalan ng nasabing partido. Ipasok ang iyong kinikilingang partidong
-          pampulitiko. Pumili sa: Konstitusyon, Demokratiko,  Libertarian, Republikano
-          o Walang Kaugnayan (o walang kinikilangang partido). Kung ang patlang na
-          ito ay iniwang blangko, makakatanggap ka  lamang ng balotang walang kaugnayan.'
-        indiana: Ang batas ng Indiana ay hindi nagpapahintulot sa isang tao na ipahiwatig
+          sabihin ang pakikipag-ugnayan sa isang kwalipikadong partido o sa hindi
+          kuwalipikadong partido para bumoto sa pangunahing halalan ng anumang kwalipikadong
+          partido na nagbibigay-alam sa Kalihim ng Estado para pahintulutan silang
+          gawin ito. Maaari kang tumawag sa 1-800-345-VOTE o bumisita sa www.ss.ca.gov/elections/elections_d.htm
+          para malaman kung anong partido ang pumapayag sa mga walang kaugnayang botante
+          na makilahok sa kanilang pangunahing halalan.
+        idaho: ! 'Kailangan mong magrehistro sa isang partido kung nais mong lumahok
+          sa halalan ng nasabing partido. Ipasok ang iyong kinikilingang partido.
+          Pumili sa: Konstitusyon, Demokratiko,  Libertarian, Republikano o Walang
+          Kaugnayan (o walang kinikilangang partido). Kung ang patlang na ito ay iniwang
+          blangko, makakatanggap ka  lamang ng balotang walang kaugnayan.'
+        indiana: Ang batas ng Indiana ay hindi nagpapahintulot sa mga tao na ipahiwatig
           ang kanilang kaugnay na partido, kung mayroon man, bilang bahagi ng kanilang
-          talaan ng pagpaparehistro. Kailangan mong ipahayag ang iyong kaugnay na
-          partido bago bumoto sa isang pangunahing halalan.
-        massachusetts: Kung hindi mo italaga ang isang partidong pampulitika, ikaw
-          ay ire-rehistro bilang hindi nakalista (karaniwang tinutukoy na independiyente).
-          Ang mga botanteng hindi nakalista ay maaaring makilahok sa mga halalan ng
-          pangunahing partido at sa pangkalahatang halalan. Sa kasalukuyan ay tatlo
-          ang partidong pampulitika (Demokrata, Republikana, Green-Rainbow)
+          talaan ng pagrerehistro. Kailangan mong ipahayag ang iyong partido bago
+          bumoto sa isang pangunahing halalan.
+        massachusetts: Kung hindi mo italaga ang isang partido, ikaw ay ire-rehistro
+          bilang hindi nakalista (karaniwang tinutukoy na independiyente). Ang mga
+          botanteng hindi nakalista ay maaaring makilahok sa mga halalan ng pangunahing
+          partido at sa pangkalahatang halalan. Sa kasalukuyan ay tatlo ang partido
+          (Demokrata, Republikana, Green-Rainbow)
         mississippi: Ang Mississippi ay walang pagrerehistro ng partido. Samakatuwid,
           hindi mo na kailangang magparehistro sa isang partido kung nais mong makibahagi
           sa mga pangunahing halalan, pagpupulong, o kumbensyon ng partido.
         north_carolina: Ang North Carolina ay may semi-closed na pangunahing sistema.
-          Ang mga botante na kaanib ng isang partidong pampulitika ay maaari lamang
-          bumoto sa halalan ng pangunahing partidong ito. Sa isang pangunahing halalan,
-          ang  mga botanteng walang kapanig ay maaaring pumili na iboto ang alinman
-          sa isang balota ng may kapanig o sa isang balota ng walang kaugnayan.
+          Ang mga botante na kaanib ng isang partido ay maaari lamang bumoto sa pangunahing
+          halalan ng partidong ito. Sa isang pangunahing halalan, ang  mga botanteng
+          walang kapanig ay maaaring pumili na iboto ang alinman sa isang balota ng
+          may kapanig o sa isang balota ng walang kapanig.
         rhode_island: Kung gusto mong makipag-ugnayan para bumoto, ilista ang partido.
           Kapag iniwanan mong blangko ang kahon o inilista ang hindi kinikilalang
-          partidong pampulitiko, ikaw ay ililista na walang kaugnayan.
-        tennessee: Ang Tennessee ay hindi nagrerehistro batay sa partidong pampulitiko.
-          Kung nais mong bumoto sa isang pangunahing halalan, kailangan mong magpahayag
-          ng isang partido sa sandaling iyon.
-        utah: Pinapayagan ng batas ng halalan ng Utah ang bawa't partidong pampulitika  na
-          pumili kung sino ang  papayagan nilang bumoto sa kanilang pangunahing halalan.  Kung
+          partido, ikaw ay ililista na walang kaugnayan.
+        tennessee: Ang Tennessee ay hindi nagrerehistro batay sa partido. Kung nais
+          mong bumoto sa isang pangunahing halalan, kailangan mong magpahayag ng isang
+          partido sa sandaling iyon.
+        utah: Pinapayagan ng batas ng halalan ng Utah ang bawa't partido na pumili
+          kung sino ang papayagan nilang bumoto sa kanilang pangunahing halalan.  Kung
           hindi ka makiki-anib sa isang partido, maaari kang  higpitan sa pagboto
           sa  pangunahing halalan.
-        vermont: Ang batas ng Vermont ay hindi pumapayag na magparehistro and partido
+        vermont: Ang batas ng Vermont ay hindi pumapayag na magrehistro ng partido
           para makilahok sa anumang halalan.
         virginia: Hindi mo kailangang magrehistro sa isang partido kung nais mong
           makibahagi sa mga pangunahing halalan, pagpupulong, o kumbensyon ng partidong
-          iyon. Gayunpaman, kung ikaw ay karapat-dapat na bumoto ng ipinapadala lamang
-          at gustong lumahok sa isang pangunahing partido, ang iyong aplikasyon para
-          sa balotang ipinapadala lamang ay kailangang kumilala ng partido para maipalam
-          kung saan ipadadala ang pangunahing balota.
+          iyon. Gayunpaman, kung ikaw ay karapat-dapat na bumoto ng absensiya at gustong
+          lumahok sa isang pangunahing partido, ang iyong aplikasyon para sa absentee
+          ballot ay kailangang kumilala ng partido para maipalam kung saan ipadadala
+          ang pangunahing balota.
         washington: Ang Estado ng Washington ay hindi nagrerehistro ng botante ayon
-          sa partidong pampulitika.
+          sa partido.
         west_virginia: Kailangan mong magparehistro sa isang partido kung nais mong
           makibahagi sa mga pangunahing halalan, pagpupulong, o kumbensyon ng partido
           (maliban kung humiling ka ng balota ng isang partido na pumapayag na bumoto
           ang mga independiente).
         wisconsin: Hindi mo kinakailangang italaga ang iyong kaugnay na partido para
           magparehistrong bumoto sa Wisconsin.
-        not_part_of_registration: Ang kaugnayang partido ay hindi bahagi ng pagpaparehistro
+        not_part_of_registration: Ang kaugnayang partido ay hindi bahagi ng pagrerehistro
           ng botante. Ipinahahayag mo ang iyong kaugnay na partido sa pamamagitan
-          ng paghiling ng balota ng isang partidong pampulitika sa isang pangunahing
-          halalan.
-        not_required_to_vote: Hindi mo kailangang magparehistro sa isang partidong
-          pampulitika para makapagrehistrong bumoto.
+          ng paghiling ng balota ng partidong ito sa isang pangunahing halalan.
+        not_required_to_vote: Hindi mo kailangang magparehistro sa isang partido para
+          makapagrehistrong bumoto.
         not_required: Hindi mo kailangang magparehistro sa isang partido kung gusto
           mong makisalo sa pangunahing halalan, pagpupulong o kumbensiyon ng partido.
         not_required_can_choose_any: Hindi mo kailangang magparehistro sa isang partido
           kung gusto mong makisalo sa pangunahing halalan, pagpupulong o kumbensyon
           ng partido, at maaari kang pumili ng kahi't anong balota para sa pangunahing
           halalan ng presidente (nguni't hindi kapwa) na walang kinalaman sa pagrerehistro
-        not_done_with_state_name: Hindi ka nagpaparehistro batay sa partidong pampulitika
-          ng %{state_name}. Gayunpaman, para makaboto sa isang pangunahing halalan,
-          dapat kang humiling ng balota ng isang partikular na partido.
+        not_done_with_state_name: Hindi ka nagpaparehistro batay sa partido ng %{state_name}.
+          Gayunpaman, para makaboto sa isang pangunahing halalan, dapat kang humiling
+          ng balota ng isang partikular na partido.
         party_not_required: Ang pagrerehistro ng partido o pagkiling ay hindi kinakailangan
-          para sa pagrerehistro ng botante. Gayunpaman, kapag mag-aplika ka para sa
+          para sa pagrerehistro ng botante. Gayunpaman, kapag nag-aplika ka para sa
           isang pangunahing balota, kailangan mong ipahiwatig ang iyong kinikilingang
           partido sa halalang iyon.
         party_not_required_2: Ang pagrerehistro ng partido ay hindi kinakailangan
           upang lumahok sa anumang eleksyon.
         you_may_but_not_required: Maaari, ngunit hindi kailangang ikaw ay magrehistro
-          sa isang partido nang maaga kung nais mong makibahagi sa mga pangunahing
+          nang maaga sa isang partido kung nais mong makibahagi sa mga pangunahing
           halalan ng partido. Upang lumahok sa isang pangunahing halalan o pagpupulong,
           dapat kang magrehistro sa isang partido. Maaari mong baguhin o ipahayag
           ang kaugnay na partido sa mga lugar ng botohan sa araw ng pangunahing halalan
           o sa lugar ng pagpupulong.
-        closed_caucus_with_state_name: Ang  %{state_name} ay may saradong pangunahing
+        closed_caucus_with_state_name: Ang %{state_name} ay may saradong pangunahing
           halalan at sistema ng pagpupulong para sa presidente. Ang bawa't kinikilalang
-          partidong pampulitika ay maaaring pumili na magkaroon ng isang hiwalay na
-          balota na naglilista lamang ng mga kandidato mula sa kanilang partidong
-          pampulitika, o ang mga kinikilalang partidong pampulitika ay maaaring pumili
-          na pagsamahin ang kanilang mga kandidato sa isang balota. Maaari ding pumili
-          ang kinikilalang partidong pampulitika kung anong  kaugnay na  pulitika
-          ang maaaring makilahok sa kanilang pangunahing halalan. Ang kaugnay na pulitika
-          ng isang botante 30 araw bago ang Araw ng Halalan ay magtutukoy kung aling
-          mga balota ang maaaring piliin ng botante; gayunpaman, ang isang botante
-          ay maaaring pumili lamang ng isang balota.
+          partido ay maaaring pumili na magkaroon ng isang hiwalay na balota na naglilista
+          lamang ng mga kandidato mula sa kanilang partido, o ang mga kinikilalang
+          partido ay maaaring pumili na pagsamahin ang kanilang mga kandidato sa isang
+          balota. Maaari ding pumili ang kinikilalang partido kung anong  kaugnay
+          na  partido ang maaaring makilahok sa kanilang pangunahing halalan. Ang
+          kaugnay na partido ng isang botante 30 araw bago ang Araw ng Halalan ay
+          magtutukoy kung aling mga balota ang maaaring piliin ng botante; gayunpaman,
+          ang isang botante ay maaaring pumili lamang ng isang balota.
         required_for_presidential: Kung hindi mo ililista ang isang kaugnay na partido,
-          hindi ka maaaring bumoto sa Pangunahing Halalan ng Kinikilingang Presidente
-          at halalan ng komite ng partido. Ang pag-ugnay sa Partidong pampulitika
-          ay hindi kinakailangan para sa anumang iba pang mga halalan.
+          hindi ka maaaring bumoto sa Pangunahing Halalan ng Presidente at sa halalan
+          ng komite ng partido. Ang pag-ugnay sa Partido ay hindi kinakailangan para
+          sa anumang iba pang mga halalan.
         required_for_primary: Kailangan mong magparehistro sa isang partido kung nais
           mong makibahagi sa mga pangunahing halalan, pagpupulong, o kumbensyon ng
           partidong iyon.
@@ -228,55 +222,54 @@ tl:
           ng partido. Para makaboto sa isang pagpupulong ng partido, dapat na ikaw
           ay maging kaugnay ng partido sa panahong hindi bababa sa 2 buwan bago ganapin
           ang pagpupulong.  Para makaboto sa pangunahing halalan ng isang partido,
-          maaari kang magpahayag ng iyong pakikipag-ugnayan sa partido sa anumang
-          panahon hanggang sa at kasama ang araw ng pangunahing halalan.
+          maaari mong ipahayag ang iyong pakikipag-ugnayan sa partido sa anumang panahon
+          hanggang sa at kasama ang araw ng pangunahing halalan.
       id_number:
         blank: ! "Numero ng ID\n   blangko"
         arizona: Kung mayroon kang lisensya ng pagmamaneho o hindi gumaganang pagkakakilanlan
           na inisyu sa Arizona pagkalampas ng Oktubre 1, 1996, isulat ang numero sa
-          kahon 6 ng porma ng NVRA. Ito ay maglilingkod na katibayan ng pagkamamamayan
+          kahon 6 ng porma ng NVRA. Ito ay magsisilbing katibayan ng pagkamamamayan
           at walang karagdagang mga dokumento ang kinakailangan. Kung hindi, dapat
           mong ilakip ang patunay ng pagkamamamayan sa porma. Isang tinatanggap na
           paraan ng pagpapatunay lamang ang kailangan upang makapagrehistro para bumoto.
-        colorado: Kailangan mong maghatag ng numero ng lisensya ng pagmamaneho sa
-          Colorado o numero na pagkakakilanlan (na ibinigay ng  kagawaran ng pagkita
+        colorado: Kailangan mong magbigay ng numero ng lisensya ng pagmamaneho sa
+          Colorado o numero na pagkakakilanlan (na ibinigay ng  kagawaran ng revenue
           sa Colorado). Kung wala kang lisensya ng pagmamaneho o numero na pagkakakilanlan.
           kailangan mong ipahiwatig ito sa porma sa pamamagitan ng naaangkop na checkbox
           at ibigay ang huling apat na numero ng iyong Social Security. Kung wala
-          kang anuman sa mga form ng pagkakakilanlan, ang kalihim ng estado ay magtatalaga
+          kang anuman sa mga porma ng pagkakakilanlan, ang kalihim ng estado ay magtatalaga
           sa iyo ng isang natatanging numero na pagkakakilanlan.
         georgia: Kailangan mong magbigay ng numero ng lisensya ng pagmamaneho sa Georgia
-          o numero na pagkakakilanlan na ibinigay ng estado.  Kung wala ka ng alinman
-          sa mga iyon, dapat mong ibigay ang huling apat na numero ng iyong Social
-          Security. Kung wala ka ng anuman sa mga hiniling na mga numero na pagkakakilanlan,
-          mangyaring ipasok ang 'WALA' at ikaw ay bibigyan ng estado ng  isang natatanging
-          numero na pagkakakilanlan.
-        indiana: Dapat kang magbigay ng  iyong sampung numero sa lisensiya ng pagmamaneho
-          sa Indiana o numero na pagkakakilanlan mula sa Kagawaran ng Motor Vehicle
-          (BMV). Kung wala kang lisensya ng pagmamaneho o tarheta ng pagkakakilanlan
-          mula sa BMV ng Estado ng Indiana, mangyaring ipasok ang huling apat na numero
-          ng iyong Social Security. Mangyaring ipahiwatig kung aling numero ang ibinigay.
+          o numero na pagkakakilanlan galing sa estado.  Kung wala ka ng alinman sa
+          mga iyon, dapat mong ibigay ang huling apat na numero ng iyong Social Security.
+          Kung wala ka ng anuman sa mga hiniling na numerong pagkakakilanlan, mangyaring
+          ipasok ang 'WALA' at ikaw ay bibigyan ng estado ng isang natatanging numero
+          na pagkakakilanlan.
+        indiana: Dapat kang magbigay ng numero ng iyong lisensiya ng pagmamaneho sa
+          Indiana o numero na pagkakakilanlan mula sa Kagawaran ng Motor Vehicle (BMV).
+          Kung wala kang lisensya ng pagmamaneho o ID card mula sa BMV ng Estado ng
+          Indiana, mangyaring ipasok ang huling apat na numero ng iyong Social Security.
+          Mangyaring ipahiwatig kung aling numero ang ibinigay.
         maryland: Kung mayroon kang isang pangkasalukuyan at may bisang lisensya ng
-          pagmamaneho sa Maryland o tarheta ng pagkakakilanlan (ID card) ng  Motor
-          Vehicle Administration, dapat mong ipasok ang numero ng lisensya ng pagmamaneho
-          o numero na pagkakakilanlan. Kung wala ka ng alinman, dapat mong ipasok
-          ang huling apat na numero ng iyong Social Security. Kung wala ka ng alinman
-          sa mga numerong ito,  mangyaring ipasok ang 'Wala' at isang natatanging
-          numero na pagkakakilanlan ang itatalaga sa iyo ng estado.
+          pagmamaneho sa Maryland o ID card galing sa Motor Vehicle Administration,
+          dapat mong ipasok ang numero ng lisensya ng pagmamaneho o numero na pagkakakilanlan.
+          Kung wala ka ng alinman, dapat mong ipasok ang huling apat na numero ng
+          iyong Social Security. Kung wala ka ng alinman sa mga numerong ito,  mangyaring
+          ipasok ang 'Wala' at isang natatanging numero na pagkakakilanlan ang itatalaga
+          sa iyo ng estado.
         oklahoma: Ang huling apat na numero ng iyong Social Security ay kinakailangan.
           Humihiling din ang estado ng numero ng iyong lisensya ng pagmamaneho sa
           Oklahoma. Kung wala ka ng alinmang numero, mangyaring ipasok ang 'Wala'
           at ang estado ay magtatalaga sa iyo ng isang numero na pagkakakilanlan.
         wisconsin: Kung ikaw ay binigyan at mayroong pangkasalukuyan at may bisang
-          lisensiya ng pagmamaneho sa WI o  tarheta ng pagkakakilala (IDcard) na ibinigay
-          ng WI DOT, dapat mong ibigay ang numero. Kung ang ibinigay na lisensya ng
-          pagmamaneho sa WI ay binawi, sinuspinde, o nalampasan na, mangyaring ibigay
-          ang  huling apat  na numero ng iyong Social Security. Kung hindi ka nabigyan
-          ng lisensiya ng pagmamaneho sa WI o isang pagkakakilanlan na ibinigay WI
-          DOT, dapat mong ibigay ang huling apat na numero ng iyong social security.
-          Kung wala kang lisensiya ng pagmamaneho sa WI, isang pagkakakilanlan na
-          ibinigay ng WI DOT, o  numero ng social security, ipahiwatig ang katotohanan
-          sa pamamagitan ng pagpuno sa mga naaangkop na bilog.
+          lisensiya ng pagmamaneho sa WI o IDcard na ibinigay ng WI DOT, dapat mong
+          ibigay ang numero. Kung ang ibinigay na lisensya ng pagmamaneho sa WI ay
+          binawi, sinuspinde, o nalampasan na, mangyaring ibigay ang  huling apat  na
+          numero ng iyong Social Security. Kung hindi ka nabigyan ng lisensiya ng
+          pagmamaneho sa WI o ID na ibinigay ng WI DOT, dapat mong ibigay ang huling
+          apat na numero ng iyong social security. Kung wala kang lisensiya ng pagmamaneho
+          sa WI, isang ID na ibinigay ng WI DOT, o  numero ng social security, ipahiwatig
+          ang katotohanan sa pamamagitan ng pagpuno sa mga naaangkop na bilog.
         south_dakota: Ang numero ng iyong lisensya ng pagmamaneho ay kinakailangan.
           Kung wala ka ng isang may bisang lisensya ng  pagmamaneho, dapat mong ibigay
           ang huling apat na numero ng iyong Social Security. Kung wala ka ng alinman
@@ -292,7 +285,7 @@ tl:
           ng isang numero.
         ssn_or_none: Mangyaring ibigay ang numero ng iyong Social Security. (Kung
           wala kang numero ng Social Security, mangyaring ipasok ang 'Wala' at ang
-          estado ay magtatalaga sa iyo ng isang numero na pagkakakilanlan.
+          estado ay magtatalaga sa iyo ng isang numero na pagkakakilanlan).
         ssn_or_none_2: Ang buong numero ng iyong Social Security ay kinakailangan.
           Kung wala kang numero ng Social Security, ipasok ang 'Wala' at isang numero
           ang itatalaga sa iyo ng estado.
@@ -304,7 +297,7 @@ tl:
           wala kang numero ng Social Security, mangyaring ipasok ang 'Wala' at isang
           numero ang itatalaga sa iyo ng estado.
         ssn_full: Ang buong numero ng iyong social security ay kinakailangan. Ito
-          ay ginagamit upang maiwasan ang mapanlinlang na pagpaparehistro at pagboto.
+          ay ginagamit upang maiwasan ang mapanlinlang na pagrerehistro at pagboto.
           Ang hindi pagbibigay ng impormasyong ito ay pipigil sa pagtanggap ng aplikasyong
           ito.
         ssn_full_2: Dapat mong ibigay ang numero ng iyong Social Security.
@@ -312,26 +305,24 @@ tl:
           Walang  taong tatanggihan ng karapatan para magparehistro dahil sa pagkabigong
           isama ang numero ng Social Security.
         drivers_license_or_mvc: Dapat kang magbigay ng iyong lisensya ng pagmamaneho
-          o isang numero na pagkakakilanlan galing sa MVC para sa hindi nagmamaneho.
-          Kung wala kang lisensya ng pagmamaneho o numero na pagkakakilanlan galing
-          sa MVC para sa hindi nagmamaneho, dapat na ibigay mo ang huling apat na
-          numero ng iyong social security. Kung wala kang lisensiya ng pagmamaneho,
-          numero na pagkakakilanlan galing sa MVC para sa hindi nagmamaneho, o numero
-          ng social security, kakailanganin mong ipagtibay ito sa porma ng pagrerehistro
-          ng botante.
+          o isang numero ng ID galing sa MVC para sa hindi nagmamaneho. Kung wala
+          kang lisensya ng pagmamaneho o numero ng ID na galing sa MVC para sa hindi
+          nagmamaneho, dapat na ibigay mo ang huling apat na numero ng iyong social
+          security. Kung wala kang lisensiya ng pagmamaneho, numero ng ID galing sa
+          MVC para sa hindi nagmamaneho, o numero ng social security, kakailanganin
+          mong ipagtibay ito sa porma ng pagrerehistro ng botante.
         drivers_license_or_non_driver_id: Dapat kang magbigay ng numero ng iyong lisensya
-          ng pagmamaneho o  numero na pagkakakilanlan galing sa MVC para sa hindi
-          nagmamaneho. Kung wala kang lisensya ng pagmamaneho o numero na pagkakakilanlan
-          galing sa MVC para sa hindi nagmamaneho, dapat mong ibigay ang huling apat
-          na numero ng iyong social security. Kung wala kang lisensiya ng pagmamaneho  o
-          numero ng social security, mangyaring ipasok ang "WALA" at ang estado ay
-          magtatalaga sa iyo ng isang numero na pagkakakilanlan para sa layunin ng
-          pagboto.
+          ng pagmamaneho o  numero ng ID na galing sa MVC para sa hindi nagmamaneho.
+          Kung wala kang lisensya ng pagmamaneho o numero na pagkakakilanlan galing
+          sa MVC para sa hindi nagmamaneho, dapat mong ibigay ang huling apat na numero
+          ng iyong social security. Kung wala kang lisensiya ng pagmamaneho  o numero
+          ng social security, mangyaring ipasok ang "WALA" at ang estado ay magtatalaga
+          sa iyo ng isang numero na pagkakakilanlan para sa layunin ng pagboto.
         drivers_license_or_other_with_state_name: Dapat mong ibigay ang numero ng  iyong
           lisensiya ng pagmamaneho sa %{state_name}. Kung wala kang numero ng lisensiya
           ng pagmamaneho, mangyaring ipasok ang huling apat na numero ng iyong Social
           Security. Kung wala kang numero ng lisensiya ng pagmamaneho or numero ng
-          Social Security, mangyaring ipasok and "WALA" at ang estado ay magtatalaga
+          Social Security, mangyaring ipasok ang "WALA" at ang estado ay magtatalaga
           sa iyo ng isang numero na pagkakakilanlan.
         drivers_license_or_other_with_state_name_2: Dapat mong ibigay ang numero ng
           iyong lisensiya ng pagmamaneho sa %{state_name}. Kung wala kang numero ng
@@ -392,9 +383,9 @@ tl:
           ng pagmamaneho sa %{state_name} o tarheta na pagkakakilanlan galing sa estado.
           Kung wala kang numero ng lisensiya ng pagmamaneho, dapat mong ibigay ang
           huling apat na numero ng iyong Social Security. Kung wala kang lisensiya
-          ng pagmamaneho or numero ng Social Security, ikaw ay iparerehistro para
-          bumoto, nguni't dapat na magbigay ng kahaliling pagkakakilanlan sa paghuhulog
-          mo ng iyong unang balota.
+          ng pagmamaneho o numero ng Social Security, ikaw ay iparerehistro para bumoto,
+          nguni't dapat na magbigay ng kahaliling pagkakakilanlan sa paghuhulog mo
+          ng iyong unang balota.
         drivers_license_if_issued_with_state_name: Dapat mong ibigay ang numero ng
           iyong lisensiya ng pagmamaneho sa Louisiana, kung nakalathala. Kung hindi
           nakalathala, dapat mong ibigay ang huling apat na numero ng iyong Social
@@ -409,21 +400,21 @@ tl:
           isinama ang impormasyong ito, ikaw ay kinakailangang magbigay ng pagkakakilanlan
           kapag bumoto ka.
         drivers_license_non_driver_with_state_name: Dapat mong ibigay and numero ng
-          iyong lisensiya ng pagmamaneho sa %{state_name} or numero na pagkakakilanlan
+          iyong lisensiya ng pagmamaneho sa %{state_name} o numero na pagkakakilanlan
           para sa hindi nagmamaneho. Kung wala ng ng alinman sa mga ito, mangyaring
           ibigay and huling apat na numero ng iyong Social Security. Kung wala kang
           lisensiya ng pagmamaneho, tarheta na pagkakakilanlan, o numero ng Social
           Security, mangyaring ipasok ang "WALA" at isang numero na pagkakakilanlan
           ang itatalaga sa iyo ng estado.
         drivers_license_non_driver_2: Dapat mong ibigay ang numero ng iyong lisensiya
-          ng pagmamaneho na inihatag ng estado, or numero na pakakakilanlan para sa
+          ng pagmamaneho na ibinigay ng estado, or numero na pakakakilanlan para sa
           hindi nagmamaneho. Kung wala kang lisensiya ng pagmamaneho or tarheta na
           pagkakakilanlan para sa hindi nagmamaneho, dapat mong ibigay ang huling
           apat na numero ng iyong Social Security. Kung wala ka ng alinman sa mga
           ito, mangyaring ipasok ang "WALA" at isang natatanging numero ang itatalaga
           sa iyo ng estado.
         drivers_license_not_operating: Dapat mong ibigay ang numero ng iyong lisensiya
-          ng pagmamaneho na inihatag ng estado, or numero na pakakakilanlan para sa
+          ng pagmamaneho na ibinigay ng estado, or numero na pakakakilanlan para sa
           hindi nagmamaneho. Kung wala kang lisensiya ng pagmamaneho or tarheta na
           pagkakakilanlan para sa hingi nagmamaneho, dapat mong ibigay ang huling
           apat na numero ng iyong Social Security. Kung wala ka ng alinman sa mga
@@ -444,11 +435,11 @@ tl:
           ng alinman sa mga pormang ito na pagkakakilanlan, mangyaring ipasok ang
           "WALA" at isang natatanging numero na pagkakakilanlan ang itatalaga ng estado.
         drivers_license_state_id_with_state_name: Dapat mong ibigay ang numero ng
-          iyong lisensiya ng pagmamaneho sa %{state_name} or numero na pagkakakilanlan
-          sa Estado. Kung wala kang numero ng lisensiya ng pagmamaneho, mangyaring
-          ibigay ang huling apat na numero ng iyong Social Security. Kung wala ka
-          ng alinman sa dalawa, mangyaring ipasok ang "WALA" at isang natatanging
-          numero na pagkakakilanlan ang itatalaga sa iyo.
+          iyong lisensiya ng pagmamaneho sa %{state_name} or numero ng ID galing  sa
+          Estado. Kung wala kang numero ng lisensiya ng pagmamaneho, mangyaring ibigay
+          ang huling apat na numero ng iyong Social Security. Kung wala ka ng alinman
+          sa dalawa, mangyaring ipasok ang "WALA" at isang natatanging numero na pagkakakilanlan
+          ang itatalaga sa iyo.
         drivers_license_or_photo_id_and_other: Dapat mong ibigay ang numero ng iyong
           lisensiya ng pagmamaneho sa %{state_name}. Kung wala kang lisensiya ng pagmamaneho,
           mangyaring ibigay ang huling apat na numero ng iyong Social Security. Kung

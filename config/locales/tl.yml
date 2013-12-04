@@ -1,6 +1,6 @@
 ---
 tl:
-  language_name: Ingles
+  language_name: Tagalog
   activerecord:
     attributes:
       partner:
@@ -67,11 +67,9 @@ tl:
             prev_zip_code:
               invalid: Gamitin ang ZIP o ZIP + 4
             email_address:
-              invalid: Walang Bisang Tahanan
+              invalid: Walang Bisang Tirahan
             date_of_birth:
-              format: ! 'Petsa ng kapanganakan
-
-                Kailangan: Buwan- Araw-Taon'
+              format: ! 'Kailangan: MM-DD-YYYY'
             phone:
               invalid: ! "Telepono \nKailangan ### /##/ ####"
               required_if_opt_in: Kailangan kung tumatanggap ng Text
@@ -79,8 +77,8 @@ tl:
               accepted: Kailangan mong ipahiwatig kung ang impormasyon sa itaas ay
                 tama.
             has_state_license:
-              inclusion: Mangyaring ipahiwatig kung mayroon kang isang wastong lisensya
-                ng estado
+              inclusion: Mangyaring ipahiwatig kung mayroon kang isang may bisang
+                lisensya ng estado
       messages:
         inclusion: ! '%{attribute} ay hindi kasama sa listahan'
         exclusion: ! '%{attribute} ay nakareserba'
@@ -89,9 +87,11 @@ tl:
         accepted: ! '%{attribute} ay dapat na tanggapin.'
         empty: ! '%{attribute} ay hindi maaaring walang laman.'
         blank: ! '''%{attribute} ay hindi maaaring blangko'
-        too_long: ! '%{attribute} ay masyadong mahaba (pinakamahaba ay % {count} titik).'
-        too_short: ! '%{attribute} ay masyadong maikli (pinakamaikli ay %{count} titik.'
-        wrong_length: ! '%{attribute} ay maling haba (dapat na  %{count} titik.'
+        too_long: ! '%{attribute} ay masyadong mahaba (pinakamahaba ay % {count} na
+          titik).'
+        too_short: ! '%{attribute} ay masyadong maikli (pinakamaikli ay %{count} na
+          titik.'
+        wrong_length: ! '%{attribute} ay maling haba (dapat ay  %{count} na titik.'
         taken: ! '%{attribute} ay nakuha na'
         not_a_number: ! '%{attribute} ay hindi numero.'
         greater_than: ! '%{attribute} ay dapat na mas mataas kaysa %{count}.'
@@ -106,14 +106,14 @@ tl:
   authlogic:
     error_messages:
       login_blank: Ang Login ay hindi maaaring blangko.
-      login_not_found: Ang kumbinasyon ng Login / password ay hindi wasto.
+      login_not_found: Ang kumbinasyon ng Login / password ay walang bisa.
       login_invalid: Mangyaring ang gamitin lamang na Username ay mga titik, numero,
         puwang, at.-_ @ .
       consecutive_failed_logins_limit_exceeded: Ang limitasyon ng magkakasunod na
         pag-login ay nalampasan na, ang account ay hindi na gagana.
-      email_invalid: Ang email ay hindi wastong address.
+      email_invalid: Ang email address ay walang bisa.
       password_blank: Ang Password ay hindi maaaring blangko.
-      password_invalid: Ang kumbinasyon ng Login / Password ay hindi wasto.
+      password_invalid: Ang kumbinasyon ng Login / Password ay walang bisa.
       not_active: Ang iyong account ay hindi aktibo.
       not_confirmed: Ang iyong account ay hindi nakumpirma.
       not_approved: Ang iyong account ay hindi naaprubahan.

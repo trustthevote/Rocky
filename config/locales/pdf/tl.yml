@@ -40,10 +40,9 @@ tl:
             ang kasalukuyan at may bisang larawan ng pagkakakilanlan o isang kasalukuyang
             utility bill, bank statement, tseke ng pamahalaan, tseke ng suweldo, o
             dokumento ng pamahalaan na nagpapakita ng iyong pangalan at tirahan.
-          paragraph2: Ang mga botante ay maaaring maging "exempt" (hindi saklaw) sa
-            kinakailangang ito kung i-intrega nila ang kopya ng pagkakakilanlang ito
-            kasama ng  kanilang porma ng pagpaparehistro ng botante na ihuhulog sa
-            koreo.
+          paragraph2: Ang mga botante ay maaaring maging "exempt" sa kinakailangang
+            ito kung ii-intrega nila ang kopya ng pagkakakilanlang ito kasama ng kanilang
+            porma ng pagpaparehistro ng botante na ihuhulog sa koreo.
           paragraph3: ! 'Kung nais mong mag-intrega ng isang kopya, mangyaring tandaan
             ang mga sumusunod: Ang iyong estado ay maaaring mangailangan ng  karagdagang
             pagkakakilanlan at maaaring mag-utos na ipakita mo ang pagkakakilanlan
@@ -64,11 +63,11 @@ tl:
             sa pagiging karapat-dapat na magrehistro bago dumating ang edad na 18.)
           fouo: Ang puwang na ito ay para sa opisyal na gamit lamang.
         block1:
-          box1_label: ''
-          box2_label: Huling Pangalan
+          box1_label: Tagalog
+          box2_label: Apelyido
           box3_label: Unang Pangalan
           box4_label: (Mga) Gitnang Pangalan
-          box5_label: ''
+          box5_label: ! 'Tagalog:'
         block2:
           box1_label: Tirahan ng Tahanan
           box2_label: Numero ng Apartment o Lote
@@ -87,7 +86,7 @@ tl:
           item4: Taon
         block5: Numero ng telepono (opsyonal)
         block6:
-          box1_label: Numero ng Pagkakakilanlan
+          box1_label: Numero ng ID
           box1_sublabel: (Tingnan ang ikaanim na bagay sa mga tagubilin para sa iyong
             estado)
         block7:
@@ -116,22 +115,22 @@ tl:
           year: Taon
         top_half_footer: ! 'Kung ikaw ay nagrerehistro upang bumoto sa unang pagkakataon:
           mangyaring sumangguni sa mga tagubilin ng aplikasyon para sa impormasyon
-          sa pag-i-intrega ng mga kopya ng wastong dokumento ng pagkakakilanlan kasama
-          ng pormang ito.'
+          sa pag-i-intrega ng mga kopya ng may bisang dokumento ng pagkakakilanlan
+          kasama ng pormang ito.'
         bottom_half_title: Mangyaring punuan ang mga seksyon sa ibaba kung nauukol
           sila sa iyo.
         blockA:
           title: Kung ang aplikasyong ito ay para sa pagbabago ng pangalan, ano ang
             dati mong pangalan bago mo ito binago?
-          box1_label: ''
-          box2_label: Huling Pangalan
+          box1_label: Tagalog
+          box2_label: Apelyido
           box3_label: Unang Pangalan
           box4_label: (Mga) Gitnang Pangalan
-          box5_label: ''
+          box5_label: Tagalog
         blockB:
           title: Kung ikaw ay dating nakarehistro ngunit ito ang unang pagkakataon
-            na ikaw ay magrerehistro mula sa tirahan na nasa Kahon, ano ang tirahan
-            kung saan ka dating nakarehistro?
+            na ikaw ay magrerehistro mula sa tirahan na nasa Kahon, saan ka dating
+            nakarehistro?
           box1_label: Kalye (o ruta at numero ng kahon)
           box2_label: Numero ng Apartment o Lote
           box3_label: Lungsod/Bayan/County
@@ -159,7 +158,7 @@ tl:
           title: Kung ang aplikante ay hindi makapirma, sino ang tumulong sa aplikante
             na punuan itong aplikasyon? Ibigay ang pangalan, tirahan at numero ng
             telepono (ang numero ng telepono ay opsyonal)
-        bottom_half_footer: Ihulog sa koreo ang aplikasyong ito sa tirahan na ibinigay
+        bottom_half_footer: Ihulog ang aplikasyong ito sa tirahang pangkoreo na ibinigay
           para sa iyong Estado
       page3:
         fouo: PARA SA OPISYAL NA GAMIT LAMANG
