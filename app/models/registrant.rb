@@ -871,9 +871,9 @@ class Registrant < ActiveRecord::Base
       :disable_internal_links         => false,
       :disable_external_links         => false
     )
-    
-    unless File.exists?(pdf_file_path)
-      File.open(pdf_file_path, "w") do |f|
+    path = pdf_file_path("public")
+    unless File.exists?(path)
+      File.open(path, "w") do |f|
         f << pdf.force_encoding('UTF-8')
       end
     end
@@ -977,7 +977,7 @@ class Registrant < ActiveRecord::Base
       if File.exists?(pdf_file_path("pdf"))
         "pdf/#{bucket_code}"
       else
-        "public/pdfs/#{bucket_code}"
+        "pdfs/#{bucket_code}"
       end
     end
   end
