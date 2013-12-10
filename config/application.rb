@@ -78,7 +78,7 @@ module Rocky
     
     config.action_controller.allow_forgery_protection = false
     
-    config.i18n.available_locales = [:en, :es, :zh, :hi, :ur, :bn, :ja, :ko, :tl, :ilo, :th, :vi, :km]
+    config.i18n.available_locales = [:en, :es, :zh, :"zh-tw", :hi, :ur, :bn, :ja, :ko, :tl, :ilo, :th, :vi, :km]
     
     
   end
