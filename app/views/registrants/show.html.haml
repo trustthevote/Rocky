@@ -2,9 +2,16 @@
 
 #other_language_link
   - if @registrant.new_record?
-    - RockyConf.enabled_locales.each do |loc|
-      - unless loc.to_s == I18n.locale.to_s
-        = link_to t('txt.registration.in_language_name', :locale=>loc), new_registrant_path(params.dup.merge({:locale=>loc})), :class => 'other_language_link'
+    :javascript
+      function followOtherLanguageLink() {
+        window.location = $("#other_language_link select").val()
+      }
+    %select{:onchange=>"followOtherLanguageLink();"}
+      %option Select Language
+      - RockyConf.enabled_locales.each do |loc|
+        - unless loc.to_s == I18n.locale.to_s
+          %option{:value=>new_registrant_path(params.dup.merge({:locale=>loc}))}
+            = t('txt.registration.in_language_name', :locale=>loc)
 
 = form_for(@registrant) do |form|
   = render :partial => 'form', :object => form
