@@ -871,7 +871,7 @@ class Registrant < ActiveRecord::Base
       :disable_internal_links         => false,
       :disable_external_links         => false
     )
-    path = pdf_file_path("public")
+    path = pdf_file_path
     unless File.exists?(path)
       File.open(path, "w") do |f|
         f << pdf.force_encoding('UTF-8')
@@ -966,25 +966,29 @@ class Registrant < ActiveRecord::Base
   end
 
 
-  def pdf_path(pdfpre = nil)
-    "/#{pdf_dir(pdfpre)}/#{to_param}.pdf"
+  def pdf_path(pdfpre = nil, file=false)
+    "/#{file ? pdf_file_dir(pdfpre) : pdf_dir(pdfpre)}/#{to_param}.pdf"
   end
   
-  def pdf_dir(pdfpre = nil)
+  def pdf_file_dir(pdfpre = nil)
+    pdf_dir(pdfpre, false)
+  end
+  
+  def pdf_dir(pdfpre = nil, url_format=true)
     if pdfpre
       "#{pdfpre}/#{bucket_code}"
     else
       if File.exists?(pdf_file_path("pdf"))
         "pdf/#{bucket_code}"
       else
-        "pdfs/#{bucket_code}"
+        "#{url_format ? '' : "public/"}pdfs/#{bucket_code}"
       end
     end
   end
 
   def pdf_file_path(pdfpre = nil)
-    FileUtils.mkdir_p(File.join(Rails.root, pdf_dir(pdfpre)))
-    File.join(Rails.root, pdf_path(pdfpre))
+    FileUtils.mkdir_p(File.join(Rails.root, pdf_file_dir(pdfpre)))
+    File.join(Rails.root, pdf_path(pdfpre, true))
   end
 
   def bucket_code
