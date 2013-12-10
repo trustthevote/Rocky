@@ -872,15 +872,11 @@ class Registrant < ActiveRecord::Base
       :disable_external_links         => false
     )
     
-    File.open("tmpPdfGen.pdf", "wb") do |f|
-      f << pdf
-    end
-    
-    #unless File.exists?(pdf_file_path)
+    unless File.exists?(pdf_file_path)
       File.open(pdf_file_path, "w") do |f|
         f << pdf.force_encoding('UTF-8')
       end
-    #end
+    end
 
     self.pdf_ready = true
   end
@@ -981,7 +977,7 @@ class Registrant < ActiveRecord::Base
       if File.exists?(pdf_file_path("pdf"))
         "pdf/#{bucket_code}"
       else
-        "pdfs/#{bucket_code}"
+        "public/pdfs/#{bucket_code}"
       end
     end
   end
