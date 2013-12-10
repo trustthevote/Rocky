@@ -1,5 +1,6 @@
 en:
   language_name: English
+  language_name_translation_instructions: "Please provide the name of the translated language in that language. For example, if you are translating Japanese, provide the japanese word for \"Japanese\" (the language name)."
   activerecord:
     attributes:
       partner:
