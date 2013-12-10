@@ -40,20 +40,16 @@
           </ul>
         </div>
       <%- end %>
-      <fieldset>
-        <legend>Questions in English</legend>
-        <p><%= form.label :survey_question_1_en, "Question 1" %></p>
-        <p><%= form.text_field :survey_question_1_en, :size => 90 %></p>
-        <p><%= form.label :survey_question_2_en, "Question 2" %></p>
-        <p><%= form.text_field :survey_question_2_en, :size => 90 %></p>
-      </fieldset>
-      <fieldset>
-        <legend>Questions in Spanish</legend>
-        <p><%= form.label :survey_question_1_es, "Question 1" %></p>
-        <p><%= form.text_field :survey_question_1_es, :size => 90 %></p>
-        <p><%= form.label :survey_question_2_es, "Question 2" %></p>
-        <p><%= form.text_field :survey_question_2_es, :size => 90 %></p>
-      </fieldset>
+      <%- RockyConf.enabled_locales.each do |locale| %>
+        <fieldset>
+          <legend>Questions in <%= I18n.t('language_name', :locale=>locale)%> (<%= locale %>)</legend>
+          <p><%= form.label "survey_question_1_#{locale}", "Question 1" %></p>
+          <p><%= form.text_field "survey_question_1_#{locale}", :size => 90 %></p>
+          <p><%= form.label "survey_question_2_#{locale}", "Question 2" %></p>
+          <p><%= form.text_field "survey_question_2_#{locale}", :size => 90 %></p>
+        </fieldset>
+      
+      <%- end %>
       <fieldset>
         <legend>Volunteering</legend>
         <p>

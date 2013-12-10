@@ -104,6 +104,25 @@ class Partner < ActiveRecord::Base
 
   after_validation :make_paperclip_errors_readable
 
+  serialize :survey_question_1, Hash
+  serialize :survey_question_2, Hash
+  
+  # Need to declare attributes for each enabled lang
+  RockyConf.enabled_locales.each do |locale|
+    unless ['en', 'es'].include?(locale.to_s)
+      [1,2].each do |num|
+        attr_accessor "survey_question_#{num}_#{locale}"
+        define_method("survey_question_#{num}_#{locale}") do
+          method_missing("survey_question_#{num}_#{locale}")
+        end
+        define_method("survey_question_#{num}_#{locale}=") do |val|
+          method_missing("survey_question_#{num}_#{locale}=", val)
+        end
+      end
+    end
+  end
+  
+  
   include PartnerAssets
   
   scope :government, where(:is_government_partner=>true)
@@ -516,6 +535,29 @@ class Partner < ActiveRecord::Base
   
   
 protected
+
+
+  def method_missing(method_name, *args, &block)
+    if method_name =~ /^survey_question_(\d+)_([^=]+)(=?)$/
+      question_num = $1
+      locale = $2.to_s
+      setter = !($3.blank?)
+      if setter 
+        if args.size == 1
+          current = self.send("survey_question_#{question_num}")
+          current[locale] = args[0]
+          self.send("survey_question_#{question_num}=",current)
+        else
+          raise ArgumentError.new("Setting a survey question must have a value")
+        end
+      else
+        return self.send("survey_question_#{question_num}")[locale]
+      end
+    else
+      return super 
+    end
+  end
+
   def check_valid_logo_url
     logo_url_errors.each do |message|
       self.errors.add(:logo_image_URL, message)

@@ -1245,14 +1245,14 @@ describe Registrant do
 
       it "generates PDF with merged data" do
         `rm -f #{@registrant.pdf_file_path}`
-        assert_difference(%Q{Dir[File.join(Rails.root, "pdfs/#{@registrant.bucket_code}/*")].length}) do
+        assert_difference(%Q{Dir[File.join(Rails.root, "public/pdfs/#{@registrant.bucket_code}/*")].length}) do
           @registrant.generate_pdf
         end
       end
 
       it "returns PDF if already exists" do
         `touch #{@registrant.pdf_file_path}`
-        assert_difference(%Q{Dir[File.join(Rails.root, "pdfs/#{@registrant.bucket_code}/*")].length} => 0) do
+        assert_difference(%Q{Dir[File.join(Rails.root, "public/pdfs/#{@registrant.bucket_code}/*")].length} => 0) do
           @registrant.generate_pdf
         end
       end

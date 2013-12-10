@@ -48,7 +48,8 @@ describe QuestionsController do
                         :survey_question_1_en => "What is your favorite color?",
                         :survey_question_1_es => "Cual es tu color favorito?",
                         :survey_question_2_en => "What is the average airspeed velocity of an unladen swallow?",
-                        :survey_question_2_es => ""
+                        :survey_question_2_es => "",
+                        :survey_question_1_ko => "KO Question 1?"
                       }
         assert_redirected_to partner_url
       end
