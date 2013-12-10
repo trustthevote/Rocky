@@ -169,11 +169,9 @@ namespace :deploy do
   desc "Link the pdf dir to shared/pdfs"
   task :symlink_web_pdf, :roles => [:web], :except => {:no_release => true} do
     run <<-CMD
-      mkdir -p #{shared_path}/pdfs &&
       cd #{latest_release} &&
       rm -rf pdfs && 
-      ln -nfs #{shared_path}/pdfs #{latest_release}/pdfs &&
-      ln -nfs #{latest_release}/pdfs #{latest_release}/public/pdfs
+      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html/pdfs public/pdfs
     CMD
   end
   
