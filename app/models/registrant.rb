@@ -874,11 +874,13 @@ class Registrant < ActiveRecord::Base
       renderer.render_to_string(
         'registrants/registrant_pdf', 
         :layout => 'layouts/nvra',
-        :encoding => 'utf8'
+        :encoding => 'utf8',
+        :locale=>self.locale
       ),
       :disable_internal_links         => false,
       :disable_external_links         => false,
-      :encoding => 'utf8'
+      :encoding => 'utf8',
+      :locale=>self.locale
     )
     path = pdf_file_path
     unless File.exists?(path)

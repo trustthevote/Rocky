@@ -17,7 +17,7 @@ class PdfRenderer < AbstractController::Base
   
   def initialize(registrant)
     super()
-    @locale=registrant.locale
+    @locale =registrant.locale
     @registrant=registrant
     @state=registrant.home_state
     @logo_image_path = self.logo_image_path
