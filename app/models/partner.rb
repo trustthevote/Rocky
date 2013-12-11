@@ -185,6 +185,7 @@ class Partner < ActiveRecord::Base
       if crl["locale"] != 'en'
         crl['race'] = Registrant.english_race(crl['locale'], crl['race'])
       end
+      crl['race'] = "Unknown" if crl['race'].blank?
       crl
     end
     race_counts = {}
@@ -197,7 +198,7 @@ class Partner < ActiveRecord::Base
     named_counts = []
     race_counts.each do |k,v|
       named_counts << {
-        :race => k.blank? ? "Unknown" : k,
+        :race => k,
         :registrations_count => v,
         :registrations_percentage => v.to_f / sum
       }
