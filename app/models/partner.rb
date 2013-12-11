@@ -197,7 +197,7 @@ class Partner < ActiveRecord::Base
     named_counts = []
     race_counts.each do |k,v|
       named_counts << {
-        :race => k,
+        :race => k.blank? ? "Unknown" : k,
         :registrations_count => v,
         :registrations_percentage => v.to_f / sum
       }
@@ -497,12 +497,6 @@ class Partner < ActiveRecord::Base
       raise "Partner '#{partner_id}' is already whitelabeled. Try running 'rake partner:upload_assets #{partner_id} #{app_css} #{reg_css}'"
     end
 
-    # if !File.exists?(app_css)
-    #   raise "File '#{app_css}' not found"
-    # end
-    # if !File.exists?(reg_css)
-    #   raise "File '#{reg_css}' not found"
-    # end
 
     if partner.any_css_present?
       raise "Partner '#{partner_id}' has assets. Try running 'rake partner:enable_whitelabel #{partner_id}'"
