@@ -537,11 +537,14 @@ class Registrant < ActiveRecord::Base
     key.nil? ? nil : I18n.t("txt.registration.#{i18n_list}.#{key}", :locale=>:en)
   end
   
-  def english_races
+  def self.english_races
     I18n.t('txt.registration.races', :locale=>:en).values
   end
+  def english_races
+    self.class.english_races
+  end
 
-  def english_race
+  def self.english_race(locale, race)
     if locale.to_s == 'en' || english_races.include?(race)
       return race
     else
@@ -551,6 +554,10 @@ class Registrant < ActiveRecord::Base
         return nil
       end
     end
+  end
+  
+  def english_race
+    self.class.english_race(locale, race)
   end
   
   def validate_race_at_least_step_2
