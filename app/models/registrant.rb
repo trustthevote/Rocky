@@ -998,7 +998,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def pdf_file_path(pdfpre = nil)
-    FileUtils.mkdir_p(File.join(Rails.root, pdf_file_dir(pdfpre)))
+    dir = File.join(Rails.root, pdf_file_dir(pdfpre))
+    FileUtils.mkdir_p(dir) unless Dir.exists?(dir)
     File.join(Rails.root, pdf_path(pdfpre, true))
   end
 
