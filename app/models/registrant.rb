@@ -873,10 +873,12 @@ class Registrant < ActiveRecord::Base
     pdf = WickedPdf.new.pdf_from_string(
       renderer.render_to_string(
         'registrants/registrant_pdf', 
-        :layout => 'layouts/nvra'
+        :layout => 'layouts/nvra',
+        :encoding => 'utf8'
       ),
       :disable_internal_links         => false,
-      :disable_external_links         => false
+      :disable_external_links         => false,
+      :encoding => 'utf8'
     )
     path = pdf_file_path
     unless File.exists?(path)
