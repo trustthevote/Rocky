@@ -33,6 +33,12 @@ p {
 	page-break-after:always;
 }
 
+span.smaller_prompt {
+	font-size: .6em;
+	line-height:.6em;
+}
+
+
 #page_1 {
 	#logo {
 		float: right;
@@ -193,6 +199,8 @@ table.form {
 		padding-bottom: 1em;
 		color: $light_black;
 	}
+	
+	
 	table.form {
 		width: $page_width;
 		td {
@@ -233,6 +241,14 @@ table.form {
 					font-size: $table_sublabel_fs;
 				}
 			}
+			&.smaller_prompts {
+				td.items {
+					div {
+						line-height:.7em;
+					}
+				}
+			}
+			
 			td.fouo {
 				width: 945px;
 			}

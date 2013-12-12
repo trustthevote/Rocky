@@ -867,8 +867,14 @@ class Registrant < ActiveRecord::Base
     self.barcode = self.pdf_barcode
   end
 
-  def generate_pdf
+  def generate_pdf!
+    generate_pdf(true)
+  end
+
+  def generate_pdf(force_write = false)
     return false if self.locale.nil? || self.home_state.nil?
+    prev_locale = I18n.locale
+    I18n.locale = self.locale
     renderer = PdfRenderer.new(self)
     pdf = WickedPdf.new.pdf_from_string(
       renderer.render_to_string(
@@ -883,12 +889,12 @@ class Registrant < ActiveRecord::Base
       :locale=>self.locale
     )
     path = pdf_file_path
-    unless File.exists?(path)
+    if !File.exists?(path) || force_write
       File.open(path, "w") do |f|
         f << pdf.force_encoding('UTF-8')
       end
     end
-
+    I18n.locale = prev_locale
     self.pdf_ready = true
   end
   
