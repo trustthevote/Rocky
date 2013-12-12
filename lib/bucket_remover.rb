@@ -32,7 +32,11 @@ class BucketRemover
   end
 
   def expired_buckets
-    Dir["#{pdf_root}/*"].select { |dir| File.directory?(dir) && File.mtime(dir) < expired_time }
+    Dir["#{pdf_root}/*"].select { |dir| File.directory?(dir) && File.mtime(dir) < expired_time && can_delete?(dir) }
+  end
+  
+  def can_delete?(dir)
+    !(dir =~ /\/(pdfs|partner_csv)$/)
   end
 
   def expiration_period

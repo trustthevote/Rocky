@@ -74,7 +74,11 @@ module Rocky
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
+    config.assets.paths << Rails.root.join("app", "assets", "fonts") 
+    
     config.assets.precompile += %w( admin.css partner.css jquery.qtip.min.css qtip-custom.css registration.css reset.css rocky.css nvra.css state_configuration.css admin.js registration.js state_configuration.js )
+    
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     
     config.action_controller.allow_forgery_protection = false
     
