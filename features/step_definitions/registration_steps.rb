@@ -145,6 +145,12 @@ Then /^I should be sent a thank\-you email in spanish$/ do
   email.subject.should == "Gracias por usar el instrumento de registración de votantes en línea"
 end
 
+Then /^I should be sent a thank\-you email in korean$/ do
+  email = ActionMailer::Base.deliveries.last
+  email.to.should include(@registrant.email_address)
+  email.subject.should == "온라인 유권자 등록을 이용해 주셔서 감사합니다"
+end
+
 Then /^I should not be sent a thank\-you email$/ do
   ActionMailer::Base.deliveries.count.should == 0
 end

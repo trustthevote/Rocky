@@ -46,6 +46,8 @@ module NavigationHelpers
       new_registrant_path
     when /new Spanish registration page/
       new_registrant_path(:locale => 'es')
+    when /new Korean registration page/
+      new_registrant_path(:locale => 'ko')
     when /the step 1 page/
       registrant_path(@registrant)
     when /the step (\d) page/

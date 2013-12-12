@@ -90,6 +90,21 @@ Feature: Thank you email for registrants who choose to register online with a st
     And the timeout_stale_registrations task has run
     Then I should be sent a thank-you email in spanish
     And my status should be "complete"
+    
+  @passing
+  Scenario: Registrant who finished online and selected korean gets sent a thank-you email
+    Given I have completed step 1 as a resident of "Washington" state
+    And my locale is "ko"
+    When I go to the step 2 page
+    And I select "Mr." from "registrant_name_title"
+    And I fill in "registrant_first_name" with "John"
+    And I fill in "registrant_last_name" with "Public"
+    And I choose "registrant_has_state_license_1"
+    And I press "registrant_state_online_registration"
+    And my session expires
+    And the timeout_stale_registrations task has run
+    Then I should be sent a thank-you email in korean
+    And my status should be "complete"
 
     
   @passing
