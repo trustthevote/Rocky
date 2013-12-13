@@ -1,2 +1,209 @@
+---
 vi:
-  
+  email:
+    confirmation:
+      subject: ! 'Nhắc nhở: Hãy gởi mẫu đăng ký cử tri của bạn'
+      body:
+        greeting: Chào %{registrant_first_name},
+        reminder: ! 'Đừng quên!<br>
+
+          Bạn phải ký tên, dán tem &amp; gởi mẫu đơn cuả bạn đi.'
+        main: ! "Xin cảm ơn việc hoàn thành đơn xin đăng ký cử tri của bạn. Nếu bạn
+          chưa đăng ký, vui lòng tải <a href=\"%{pdf_url}>\"> đơn xin của bạn</a>.<br><br>\n\n<strong>Việc
+          đăng ký của bạn chưa được hoàn thành. Bạn không được đăng ký cho đến khi
+          bạn nộp mẫu đơn của mình đến các quan chức bầu cử bang. </strong><br><br>\n\nNếu
+          bạn chưa làm như vậy, <strong> hãy nhớ IN RA, KÝ TÊN, DÁN TEN, và GỞI mẫu
+          đơn của bạn đến địa chỉ được cung cấp trên mẫu và biểu thị bên dưới. </strong><br><br>\n\n%
+          {registrar_address}<br><br>\nNếu bạn đã gửi mẫu của bạn rồi, bạn có thể
+          <a href=\"%{cancel_reminders_url}\">nhấp vào đây</a> để ngưng nhận lời nhắc
+          nhở về việc gửi nó đi. Bạn sẽ nhận được xác nhận đăng ký của bạn từ các
+          quan chức bầu cử bang . Đôi khi việc xúc tiến có thể mất vài tuần. Nếu bạn
+          muốn kiểm tra về tình trạng hồ sơ đăng ký cử tri của bạn, hãy gọi Thư ký
+          \ Bang tại% {registrar_phone}, hoặc kiểm tra trực tuyến tại %{registrar_url}.<br><br>\n\nChúng
+          tôi cũng cần sự giúp đỡ của bạn để có được nhiều người khác đăng ký đi bầu.
+          Có những cuộc bầu cử lớn khắp nơi trong nước. Hãy chắc chắn rằng tất cả
+          mọi người đều có tiếng nói của mình: gửi email cho gia đình và bạn bè của
+          bạn, hoặc truyền đạt đến họ mẫu tin bên dưới. <br><br> \n\nVà sau cùng,
+          đừng quên đi bầu khi ngày bầu cử đến. Có 45 triệu cử tri trẻ tuổi đủ điều
+          kiện, và nếu chúng ta muốn các chính trị gia phải chú ý đến những vấn đề
+          chúng ta quan tâm, chúng ta phải đi bầu.<br><br>\n\nXin cảm ơn,<br>\nHeather
+          Smith<br>\nChủ tịch, Rock the Vote<br><br>\n\nT.B. Hãy đến thăm trang mạng
+          <strong><a href=http://www.rockthevote.com</a></strong> để biết thêm chi
+          tiết về bầu cử, những cuộc đầu phiếu, và những vấn đề bạn quan tâm, cũng
+          như những công cụ có sẵn cho việc khởi đầu chiến dịch đăng ký cử tri cho
+          chính bạn."
+        send_to_friends: ! '<em><strong> Sao chép và dán lại sau đây vào hộp thư đện
+          tử của bạn, và gửi cho bạn bè mình. </strong></em><br><br>
+
+
+          Chào,<br><br>
+
+
+          Bạn không thể đi bầu nếu bạn không đăng ký. Đó là lý do tại sao Rock the
+          Vote làm cho việc điền vào mẫu đơn đăng ký cử tri trực tuyến tại %{rtv_link}
+          trở nên dễ dàng. Cho dù bạn cần đăng ký đi bầu lần đầu tiên, hoặc cần cập
+          nhật địa chỉ của bạn, hoặc đổi tên của bạn, tất cả chỉ mất vài phút. <br><br>
+
+
+          Để biết thêm chi tiết xin đến: %{rtv_link} <br><br>
+
+
+          Bạn đã đăng ký đi bầu? Rock the Vote cần sự giúp đỡ của bạn để có nhiều
+          người khác đăng ký đi bầu. Gửi email cho bạn bè và gia đình của bạn, yêu
+          cầu họ đăng ký đi bầu tại %{rtv_link}.  Thậm chí họ còn có các công cụ để
+          bạn bắt đầu chiến dịch đăng ký cử tri cho riêng bạn trên trang web hoặc
+          blog của mình. <br><br>
+
+
+          Thân mến, <br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! "Rock the Vote cam kết bảo vệ sự riêng tư và bảo hộ các thông tin
+          nhạy cảm của bạn. Xin vui lòng xem<strong<a href=\"http://www.rockthevote.com/voter-registration/online-application-system/privacy.html\">
+          chính sách bảo mật đăng ký cử tri </a></strong> để biết thêm chi tiết. <br><br>\n\nXin
+          gửi câu hỏi hoặc ý kiến đóng góp đến: <a href=\"mailto:register@rockthevote.com\">
+          register@rockthevote.com \n</a><br>"
+    reminder:
+      subject: ! 'Nhắc nhở: Hãy gởi mẫu đăng ký cử tri của bạn'
+      body:
+        greeting: Xin chào %{registrant_first_name},
+        reminder: ! 'Đừng quên!<br>
+
+          Bạn phải ký tên, dán tem &amp; gởi mẫu của bạn.'
+        main: ! 'Cảm ơn bạn đã hoàn thành mẫu đăng ký cử tri với Rock the Vote. Bạn
+          có thể tải đơn đăng ký của bạn <a href="%{pdf_url}">bằng cách nhấp vào đây</a>.<br>br>
+
+
+          Chỉ là lời nhắc nhở, nếu bạn chưa làm xong, <strong> hãy nhớ IN RA, KÝ TÊN,
+          DÁN TEM, và GỬI mẫu của bạn đến địa chỉ được ghi trên mẫu và dưới đây. </strong><br><br>
+
+
+          %{registrar_address}<br><br>
+
+
+          Nếu bạn đã gửi mẫu đơn của mình qua thư rồi, bạn có thể <a href="%{cancel_reminders_url}">ấn
+          vào đây</a> để ngưng việc nhận các lời nhắc nhở về việc gửi đơn. Nếu bạn
+          muốn kiểm tra tình trạng của bản đơn đăng ký của mình, xin gọi Thư ký Bang
+          bạn tại %{registrar_phone}, hoặc kiểm tra trực tuyến tại %{registrar_url}.<br><br>
+
+
+          Chúng tôi cũng cần sự giúp đỡ của bạn để có nhiều người khác đăng ký đi
+          bầu. Có những cuộc tranh cử quan trọng khắp nơi trong nước. Xin hãy hướng
+          dẫn họ đến %{rtv_link} hoặc gửi tin nhắn dưới đây.<br><br>
+
+
+          Và  sau cùng, đừng quên đi bầu khi ngày bầu cử đến. Có 45 triệu cử tri trẻ
+          tuổi hội đủ điều kiện, và nếu chúng ta muốn các chính trị gia phải chú ý
+          đến những vấn đề chúng ta quan tâm, chúng ta phải đi bầu. <br><br>
+
+
+          Xin cám ơn,<br>
+
+          Heather Smith<br>
+
+          Chủ Tịch, Rock the Vote<br><br>
+
+
+          T.B. Hãy ghé thăm trang mạng <strong><a href=http://www.rockthevote.com</a></strong>
+          để biết thêm chi tiết về bầu cử, những cuộc đầu phiếu, và những vấn đề bạn
+          quan tâm, cũng như cho những công cụ hỗ trợ việc khởi đầu chiến dịch đăng
+          ký cử tri cho chính bạn.<br><br>'
+        send_to_friends: ! "<em><strong> Sao chép và dán lại sau đây vào hộp thư điện
+          tử của bạn, và gửi cho bạn bè của mình. \n</strong></em><br><br>\n\nXin
+          chào,<br><br>\n\nBạn không thể đi bầu nếu bạn không đăng ký. Đó là lý do
+          tại sao Rock the Vote làm cho việc điền vào mẫu đăng ký cử tri trực tuyến
+          tại %{rtv_link} trở nên dễ dàng. Cho dù bạn cần đăng ký đi bầu lần đầu tiên,
+          hoặc cần cập nhật địa chỉ của bạn, hoặc đổi tên của bạn, tất cả chỉ mất
+          vài phút. <br><br>\n\nĐể biết thêm, xin đến: %{rtv_link} <br><br>\n\nBạn
+          đã đăng ký đi bầu? Rock the Vote cần sự giúp đỡ của bạn để có nhiều người
+          khác đăng ký đi bầu. Gửi email cho bạn bè và gia đình của bạn, yêu cầu họ
+          đăng ký đi bầu tại %{rtv_link}. Họ thậm chí có công cụ để bạn bắt đầu chiến
+          dịch đăng ký cử tri cho chính mình trên trang web hoặc blog. <br><br>\n\nThân
+          mến, <br>\n%{registrant_first_name}<br><br>"
+        footer: ! "Rock the Vote cam kết bảo vệ sự riêng tư và bản hộ thông tin nhạy
+          cảm của bạn. Xin vui lòng xem <strong<a href=\"http://www.rockthevote.com/voter-registration/online-application-system/privacy.html\">
+          chính sách bảo mật đăng ký cử tri </a></strong> để biết chi tiết. <br><br>\n\nXin
+          gửi câu hỏi hoặc ý kiến đóng góp ​​đến: <a href=\"mailto:register@rockthevote.com\">
+          register@rockthevote.com \n</a><br>"
+    thank_you_external:
+      subject: Cảm ơn bạn đã xử dụng phương thức đăng ký cử tri trực tuyến
+      body:
+        main: ! "Thân chào % {registrant_first_name},<br><br>\n\nCảm ơn bạn đã sử
+          dụng phương thức đăng ký cử tri trực tuyến của %{rtv_and_partner_name}.<br><br>\n\nNếu
+          bạn hoàn thành đơn xin đăng ký cử tri trực tuyến, đơn đã được trình lên
+          Văn phòng Thư ký Bang %{state_name} để xúc tiến. Khi được chấp nhận, bạn
+          sẽ nhận được xác nhận từ văn phòng Thư ký Bang %{state_abbr} và bộ phận
+          bầu cử quận sẽ gửi thẻ đăng ký cử tri mới đến cho bạn. <br><br>\n\nNếu bạn
+          có câu hỏi hoặc quan tâm, bạn có thể kiểm tra tình trạng đăng ký cử tri
+          của bạn bằng cách gọi \nVăn phòng Thư ký Bang %{state_abbr} tại %{registrar_phone}
+          , hoặc kiểm tra trực tuyến tại \n%{registrar_url} . Xin liên hệ trực tiếp
+          với %{ rtv_and_partner_name} nếu bạn gặp phải bất kỳ vấn đề gì trong quá
+          trình đăng ký. <br><br>\n\nHiện taị, chúng tôi cũng cần sự giúp đỡ của bạn
+          để có được nhiều người khác đăng ký đi bầu. Có các cuộc bầu cử lớn trên
+          cả nước trong năm nay, và 45 triệu cử tri trẻ tuổi đủ điều kiện - và chúng
+          ta cần phải chắc chắn rằng tất cả mọi người đều có tiếng nói của mình .
+          Vì vậy, gửi email cho gia đình và bạn bè của bạn hoặc nhắn tin ngay hôm
+          nay sau đây.\n\nVà cuối cùng, đừng quên đi bầu khi ngày bầu cử đến vơí chúng
+          ta . Nếu chúng ta muốn các chính trị gia phải chú ý đến những vấn đề chúng
+          ta quan tâm , chúng ta phải đi bầu . <br><br>\n\nXin cảm ơn, <br>\nHeather
+          Smith <br>\nChủ tịch , Rock Vote <br><br>\n\nT.B.: Xin ghé thăm <strong><a
+          href=\"http://www.rockthevote.com/\"> www.rockthevote.com </ a> </ strong
+          > để biết thêm thông tin về bầu cử, các cuộc bầu cử, và những vấn đề bạn
+          quan tâm. Bạn cũng có thể tìm thấy những công cụ để bắt đầu chiến dịch đăng
+          ký cử tri của mình trong cộng đồng của bạn . <br><br>"
+        send_to_friends: ! "<em><strong> Sao chép và dán vào theo đây vào hộp thư
+          điện tử của bạn, và gửi cho bạn bè mình.\n </strong></em><br><br>\n\nXin
+          chào, <br><br>\n\nBạn không thể đi bầu nếu bạn không đăng ký. Đó là lý do
+          tại sao Rock the Vote làm cho việc điền vào mẫu đăng ký cử tri trực tuyến
+          tại %{rtv_link} trở nên dễ dàng. Cho dù bạn cần đăng ký đi bầu lần đầu tiên,
+          hoặc chỉ cần để cập nhật địa chỉ của bạn, hoặc thay đổi tên của bạn, tất
+          cả chỉ mất vài phút. <br><br>\n\nrtv_link} <br><br>\n\nBạn đã đăng ký đi
+          bầu? Rock the Vote cần sự giúp đỡ của bạn để nhận được những người khác
+          đăng ký đi bầu. Gửi email cho bạn bè và gia đình của bạn yêu cầu họ đăng
+          ký đi bầu tại %{rtv_link}. Họ thậm chí có công cụ cho bạn bắt đầu chiến
+          dịch đăng ký cử tri của chính mình trên trang web hoặc blog của bạn. <br><br>\n\nThân
+          mến, <br>\n%{registrant_first_name}<br><br>"
+        footer: ! 'Rock the Vote cam kết bảo vệ sự riêng tư và bảo mật thông tin nhạy
+          cảm của bạn. Xin vui lòng xem <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">
+          chính sách bảo mật đăng ký cử tri </a></strong> để biết chi tiết . <br><br>
+          cuả chúng tôi.
+
+
+          Xin vui lòng gửi câu hỏi hoặc ý kiến đóng góp: <a href="mailto:register@rockthevote.com">register@rockthvote.com">
+          register@rockthevote.com </a><br>'
+    tell_friend:
+      subject: Tôi vừa đăng ký đi bầu, và bạn cũng nên đăng ký đi
+      body: ! 'Chào bạn, tôi vừa đăng ký đi bầu tại %{rtv_url} và bạn cũng có thể
+        nữa. Rất dễ dàng.
+
+
+        Chỉ cần điền vào mẫu trực tuyến ở đây: %{rtv_url}. Bạn không thể đi bầu nếu
+        bạn không đăng ký. Cho dù bạn cần đăng ký bỏ phiếu lần đầu tiên, hoặc chỉ
+        cần để cập nhật địa chỉ của bạn, hoặc thay đổi tên của bạn, tất cả chỉ mất
+        vài phút. Để tìm hiểu thêm, hãy vào: %{rtv_url}.
+
+
+        Bạn đã đăng ký bỏ phiếu? Bạn có thể giúp được những người khác đăng ký đi
+        bầu. Gửi email cho bạn bè và gia đình của bạn yêu cầu họ đăng ký đi bầu tại
+        %{rtv_url}.
+
+
+        Bầu cử vui vẻ!'
+    tell_friend_under_18:
+      subject: Hãy đăng ký đi bầu!
+      body: ! 'Bạn đã đăng ký đi bầu? Tôi có thể chưa đủ tuổi để đi bầu, nhưng bạn
+        thì có. Bạn không thể bỏ phiếu trừ khi bạn đã được đăng ký.
+
+
+        Bạn có thể điền vào mẫu đăng ký cử tri tại %{rtv_url}. Rất dễ dàng. Cho dù
+        bạn cần đăng ký đi bầu lần đầu tiên, hoặc cần cập nhật địa chỉ của bạn, hoặc
+        đổi tên của bạn, tất cả chỉ mất vài phút. Hãy ghé thăm %{rtv_url}.
+
+
+        Bạn đã đăng ký đi bầu, hoặc chưa đủ tuổi để đi bầu? Hãy giúp những người khác
+        đăng ký đi bầu bằng cách gửi email đến bạn bè và gia đình của bạn, yêu cầu
+        họ đăng ký tại% {rtv_ur}l.
+
+
+        Bầu cử vui vẻ!'
+

@@ -1,1 +1,144 @@
+---
 ilo:
+  pdf:
+    nvra:
+      page1:
+        title: Pagrehistro iti Botante
+        subtitle: pinaandar to
+        top_paragraph: Saan ka yo nga rehistrado sa masapol nga<br/><b> pirmaan</b>,
+          <b>ken selyo</b>, dayta complete nga porma sakbay nga ibuson.
+        instructions_block:
+          title: Instruksyones
+          subtitle: ! 'Alaen dagitay nalaka nga instruksyones tapno macompleto dayta
+            rehistrasyon nga bomoto:'
+          step1: Masapol nga pirmaanyo dayta porma sakbay nga ibuson.
+          step2: Agaramid iti pagbusonan. Itupi nga aggudua iti porma ken ti address.
+            Isigurum nga mabasa ti address ditoy ruar. i-tape o i-staple mo ti naitupi
+            nga porma dita baba tapno maaramid iti pagbusonan. Isuksuk ti porma ti
+            uneg ti sobre ken isurat iti ima ti address ti Secretarya ti Estado.
+          step2mailer: KASTOY ITI AGARAMID ITI PAGBUSONAN
+          step3: Ikabil yo iti First Class nga selyo iti envelope wenno naitupi pagbusonan.
+          step4: Ibuson yo. Ikabil diay buson dayta porma iti voter registration.
+          step5: Agrabuto. Mapan kayo idiay lugar nga agboto into no aldaw iti pagboto.
+        submit_block:
+          title: ! 'ETEDYO DAYTA COMPLETO KEN PIRMADO NGA PORMA:'
+        deadline_block:
+          title: ! 'NA-UDI NGA ALDAW ITI PAGREHISTRO:'
+        other_block: Kitaenyo %{instructions_url}  kadagiti amin ken particular nga
+          estado dayta applikasyon rehistro nga botante.
+        bottom_block:
+          title: DAGITI ITI PRIMERO BOTANTE NGA NAGREHISTRO DIAY KOREO
+          paragraph1: Nodamdomoyo nga agrehistro para agboto dita hurisdiksyon ken
+            ipaw-it yo datay applikasyon. Masapol nga ipakita yo dagiti documento
+            iti pagkatao yo, masapol aytoy iti "Federal Law". Dagiti masapol nga documento,
+            litrato wenno recita nga nagbayad kayo,recita diay banko, wenno any nga
+            documento nga ta vasgon ken address yo.
+          paragraph2: Mabalin nga saan kayo nga masapol no nangited kayo iti kopya
+            datoy identificacion ken diay koreo idta painra iti rehistrasyon para
+            botante.
+          paragraph3: ! 'No kayat nga ikabil ta kopya, pangngaasi langi pen yo: Mabalin
+            nga adda pay sabali nga kasapulan da nga identificacion idiay pagbutoan,
+            way no naited yo aminen na Federal identificacion.'
+          paragraph4: Saan yo nga ited iti documento orihinal idta aplikasyon. Kopya
+            laeng.
+      page2:
+        title: Botante Rehistro Applikasyon
+        subtitle: Sakbay nga completuin datoy porma, rebisuen iti aplikasyon general
+          ken instruksyones particular para estado.
+        topblock:
+          item1: U.S. Citizen ti Amerika ba kayo?
+          item2: Kayo ba ay edad 18 sakbay eleksyon o into eleksyon?
+          item3: No saan, haan yo kompletuin datoy porma
+          item4: (Pangngaasi, kitaan iti instruksyones no mabalin ka nga agrehistro
+            sakbay nga iti edad 18.)
+          fouo: Ditoy linya ket para opisyal laeng.
+        block1:
+          box1_label: Ilocano (ilo)
+          box2_label: Apilyedo
+          box3_label: Umuna nga Nagan
+          box4_label: Nagting-nga a Nagan
+          box5_label: Ilocano (ilo)
+        block2:
+          box1_label: Address iti balay
+          box2_label: ! 'Apt o Lote #'
+          box3_label: Ciudad/ Ili
+          box4_label: Estado
+          box5_label: Zip Code
+        block3:
+          box1_label: Address nga awaten yo iti surat yo, no sabali diay ngato
+          box2_label: Ciudad/ Ili
+          box3_label: Estado
+          box4_label: Zip Code
+        block4:
+          box1_label: Petsa ti kaaldawan
+          item2: Bulan
+          item3: Aldaw
+          item4: Tawen
+        block5: Numero iti telepono (opsyonal)
+        block6:
+          box1_label: Numero iti ID
+          box1_sublabel: (Kitaenyo yo iti ika 6 nga instruksyones para iti estado
+            yo)
+        block7:
+          box1_label: Anya ti napili yo nga partido
+          box1_sublabel: (Kitaen yo iti 7 instruksyones para iti estado yo)
+        block8:
+          box1_label: Pagkatao o Grupo Etniko
+          box1_sublabel: (Kitaen yo iti may 8 nga instruksyones iti estado yo)
+        block9:
+          affirmation_header: ! 'Narebisok toy instruksyones iti estado ko ken ikarik/takderak
+            nga:'
+          affirmation_1: U.S. citizen nak
+          affirmation_2: Natungpal ko amin nga kasapulan daytoy Estado ken mabalin
+            ko nga takderan.
+          affirmation_3: Amin nga impormasyon nga imbagak ket apayso, ket no nangiteddak
+            iti palso impormasyon, mabalinak nga mabuwis, mapreso wenno (no saan nga
+            U.S. Citizen) madeporte wenno saan nga makaentra ditoy Estados Unidos.
+          please_sign: Ipirmayo ta nagan ken apelyido (haanyo nga maikaan)
+          date: Petsa
+          month: Bulan
+          day: Aldaw
+          year: Tawen
+        top_half_footer: ! '<b>No-tatta laeng kayo nga agrehistro para bomoto</b>:
+          pangngaasi, kitaenyo dagiti instruksyon ti applikasyon para kadagiti agusar
+          ti porma mangtedda ti copia ti dokumento para ti valido nga identificacion.'
+        bottom_half_title: Pangngaasi ta punwenyo datoy section no panggep kenyao.
+        blockA:
+          title: Ito datoy applikasyon ket <b>nagsukat iti naganyo</b>, ikabil yo
+            diay naganyo idi?
+          box1_label: Ilocano (ilo)
+          box2_label: Apilyedo
+          box3_label: Umuna nga Nagan
+          box4_label: Nagting-nga a Nagan
+          box5_label: Ilocano (ilo)
+        blockB:
+          title: No rehistrado kayo ngam tatta kayo laeng nga agrehistro ditoy address
+            iti Kahon anya iti addressyo idi?
+          box1_label: Kalye (o ruto wenno numero iti kahon)
+          box2_label: ! 'Apt o lote #'
+          box3_label: Ciudad/Ili/County
+          box4_label: Estado
+          box5_label: Zip Code
+        blockC:
+          title: No awan iti numero iti calsada yo, o no awan iti address mo, ipakitam
+            ditoy mapa ti lugar nga ayan ti balay mo.
+          instructions:
+            bullet1: Ikabil yo itinagan iti asideg nga calsada iti balayo.
+            bullet2: Isurat yo iti <b>"X"</b> tapno mapakita diay balayo
+            bullet3: Isurat yo iti "." maypakita no escuela, simbaan, tindaan nga
+              asideg dita balayo, isurat dagiti ditalye ti lugar nga makatulong ti
+              pagbiruc ti address mo.
+          example:
+            title: Kaspangarigan
+            grocery_store: Tindaan Grocerya
+            public_school: Escuela Publiko
+            street1: ! 'Ruta # 2'
+            street2: Woodchuck Road
+          north: AMMIANAN
+        blockD:
+          title: No ti applikante saan na nga ammo ti agpirma, itedmo iti nagan, address,
+            ken numero ti telepono (no mabalin), iti tao nga tumulong kenka.
+        bottom_half_footer: Ibuson yo datoy aplikasyon idiay address iti estado yo
+      page3:
+        fouo: PARA OPISYALES LAENG
+

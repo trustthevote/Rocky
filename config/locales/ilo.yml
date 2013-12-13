@@ -1,2 +1,122 @@
+---
 ilo:
-  language_name: Ilocano
+  language_name: Ilocano (ilo)
+  language_name_translation_instructions: ! 'Ited mo iti nagan iti sao nga naggappuan
+    iti tinatranscriba mo. Ehemplo: no ilipat mo ti sao nga Hapon, isurat mo nga "Hapon"
+    (iti orihinal nga nagan).'
+  activerecord:
+    attributes:
+      partner:
+        from_email: Naggapo iti Email
+        url: URL
+      registrant:
+        date_of_birth: Petsa iti kaaldawan
+        email_address: Address iti Email
+        first_registration: Nagpaparehistro-ac tapno makabutosac daytoy umay nga eleksyon.
+        home_zip_code: ZIP Code
+        us_citizen: Nagbalinak nga U.S. Citizen.
+        name_title: Titulo
+        first_name: Umuna nga nagan
+        middle_name: Nagting-nga a nagan
+        last_name: Apilyedo
+        name_suffix: Nainayon nga nagan
+        home_address: Address
+        home_unit: ! 'Unit/Lote #'
+        home_city: Ciudad
+        home_state_name: Estado
+        has_mailing_address: Al-alaek dagiti surat ko iti address nga sabali ken ti
+          im-mununa.
+        mailing_address: Address
+        mailing_unit: ! 'Unit/Lote #'
+        mailing_city: Ciudad
+        mailing_state_abbrev: Estado
+        mailing_zip_code: ZIP Code
+        party: Partido
+        race: Pagkatao
+        state_id_number: Numero ti ID
+        phone: Telepono
+        phone_type: Tipo
+        change_of_name: Nagbaliwac iti nagan.
+        prev_name_title: Titulo
+        prev_first_name: Umuna nga nagan
+        prev_middle_name: Nagting-nga a nagan
+        prev_last_name: Apilyedo
+        prev_name_suffix: Nainayon nga nagan
+        change_of_address: Nagsukatak iti address.
+        prev_address: Address
+        prev_unit: ! 'Unit/Lote #'
+        prev_city: Ciudad
+        prev_state_abbrev: Estado
+        prev_zip_code: ZIP Code
+        opt_in_email: Awaten nga Email
+        opt_in_sms: Awaten nga txt nga mensahe
+        attest_true: Inadal ko dagiti ti impormasyon ditoy ngato, ken ket isuda ket
+          agpayso taamok unay-unay isuda.
+        tell_from: naggapo
+        tell_email: Iti email mo
+        tell_recipients: dagiti umaw-awat
+        tell_subject: tema
+        tell_message: Kukuak nga Mensahe
+    errors:
+      models:
+        registrant:
+          blank: Masapul
+          invalid_zip: Invalido nga ZIP
+          attributes:
+            home_zip_code:
+              invalid: Usaren iti ZIP o ZIP + 4
+            mailing_zip_code:
+              invalid: Usaren iti ZIP o ZIP + 4
+            prev_zip_code:
+              invalid: Usaren iti ZIP o ZIP + 4
+            email_address:
+              invalid: Invalido nga address
+            date_of_birth:
+              format: Masapul MM-DD-YYYY
+            phone:
+              invalid: ! 'Masapul ###-###-####'
+              required_if_opt_in: Masapul no umaw-awat iti TXT
+            attest_true:
+              accepted: Masapul mo nga ibaga no iti impormasyon ditoy ngato ket husto.
+            has_state_license:
+              inclusion: Ibagam no adda valido nga lisensya iti estado kenka
+      messages:
+        inclusion: ! '''%{attribute}'' ket saan nga kabilang iti listaan.'
+        exclusion: ! '''%{attribute}'' ket nakareserba.'
+        invalid: ! '%{attribute} ket awan iti invalido na.'
+        confirmation: ! '%{attribute} ket saan nga pumapares iti conpirmasyon.'
+        accepted: ! '%{attribute} ket masapul nga awaten.'
+        empty: ! '%{attribute} ket saan nga mabalin nga awan iti nagyan na.'
+        blank: ! '%{attribute} ket saan nga nga blanko.'
+        too_long: ! '%{attribute} ket atid-dog unay (ka-atid-dogan ket % (count) letras).'
+        too_short: ! '%{attribute} ket aba-ba unay (kaba-baan ket %(count) letras).'
+        wrong_length: ! '%{attribute} ket nagkamali iti ka-atid-dogna (iti husto nga%{count}
+          letras.'
+        taken: ! '%{attribute} ket naalan.'
+        not_a_number: ! '%{attribute} ket saan nga numero.'
+        greater_than: ! '%{attribute} ket iti agpayso, nangat-ngato daytoy %{count}.'
+        greater_than_or_equal_to: ! '%{attribute} ket masapul nga nangat-ngato o kapareho
+          daytoy iti %{count}.'
+        equal_to: ! '%{attribute} ket masapul nga kapareho iti %{count}.'
+        less_than: ! '%{attribute} masapul nga nabab-baba ken %{count}.'
+        less_than_or_equal_to: ! '%{attribute} ket masapul nga nabab-baba wenno kapareho
+          iti %{count}.'
+        odd: ! '%{attribute} bilang ket masapul nga ODD (o saan nga makuddua).'
+        even: ! '%{attribute} bilang ket masapul nga EVEN (o mabalin nga makud-dawa).'
+  authlogic:
+    error_messages:
+      login_blank: Iti Log-in ket saan mga mabalin nga blanko.
+      login_not_found: Iti kumbinasyon nga pag-Login / password ket saan nga valido.
+      login_invalid: ! 'Masapul nga usaren iti Username dagiti: Letra, Bilang, Blanco,
+        at .-_@ laeng.'
+      consecutive_failed_logins_limit_exceeded: Dagiti log-ins nga saan nga makapasa
+        ket sobra na, isunga iti account, saanen nga umandar.
+      email_invalid: Saan nga valido iti email address.
+      password_blank: Saan nga mabalin nga blanco iti Password.
+      password_invalid: Saan nga valido iti combinasyon ti login/password.
+      not_active: Saan nga aktibo iti account mo.
+      not_confirmed: Saan nga conpirmado iti account mo.
+      not_approved: Saan nga naaprobaran iti account mo.
+      no_authentication_details: Awan iti intedmo nga detalye nga suporta ti kinaagpayso
+        na.
+

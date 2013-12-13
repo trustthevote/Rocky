@@ -1,1 +1,151 @@
+---
 vi:
+  pdf:
+    nvra:
+      page1:
+        title: Đăng ký cử tri
+        subtitle: được cung cấp bởi
+        top_paragraph: Bạn không được đăng ký cho đến khi bạn<br/><b>ký tên</b>, <b>dán
+          tem</b>, và <b>gởi đi</b> mẫu đơn đã hoàn thành của bạn!
+        instructions_block:
+          title: Chỉ dẫn
+          subtitle: ! 'Theo những bước đơn giản này để hoàn thành việc đăng ký cử
+            tri của bạn:'
+          step1: Ký tên vào mẫu. Bạn phải ký tên vào mẫu đăng ký cử tri trước khi
+            gởi đi.
+          step2: Làm một bưu phẩm. Gấp mẫu đơn và tờ địa chỉ làm đôi. Hãy chắc chắn
+            rằng địa chỉ có thể được nhìn thấy ở bên ngoài. Băng hoặc bấm kim mẫu
+            đơn đã xếp để tạo thành bưu phẩm. Hoặc bạn có thể đặt mẫu đơn vào một
+            phong bì và đưa tận tay đến Thư ký Bang.
+          step2mailer: CÁCH LÀM MỘT BƯU PHẨM
+          step3: Dán tem. Dùng tem hạng nhất dán vaò phong bì hay bưu phẩm đã gấp
+            laị.
+          step4: Gởi đi. Đặt mẫu đăng ký cử tri vào thùng thư.
+          step5: Đi bầu cử. Vào ngày bầu cử, hãy đến điạ điểm đầu phiếu và bỏ phiếu.
+        submit_block:
+          title: ! 'NỘP MẪU ĐƠN ĐÃ HOÀN TẤT VÀ KÝ TÊN CỦA BẠN ĐẾN:'
+        deadline_block:
+          title: ! 'NGÀY HẾT HẠN ĐĂNG KÝ:'
+        other_block: Xem %{instructions_url} để xem thêm các chỉ dẫn hoàn chỉnh tổng
+          quát và cụ thể của bang cho việc đăng ký cử tri của bạn.
+        bottom_block:
+          title: CỬ TRI THAM GIA BẦU CỬ LẦN ĐẦU ĐĂNG KÝ QUA ĐƯỜNG BƯU ĐIỆN
+          paragraph1: ! 'Nếu bạn đăng ký đi bầu lần đầu tiên trong thẩm quyền của
+            mình, và gửi đơn đăng ký này qua đường bưu điện, luật liên bang đòi hỏi
+            bạn phải trình bằng chứng xác định căn cước lần đầu tiên bạn bỏ phiếu.
+            Bằng chứng xác định bao gồm: Một giấy tùy thân hợp lệ có ảnh, hoặc một
+            hóa đơn tiền điện/nước/gas trong nhà hiện tại, tờ báo cáo tài khoản ngân
+            hàng, ngân phiếu chính phủ, ngân phiếu tiền lương, hoặc tài liệu của chính
+            phủ cho thấy tên và địa chỉ của bạn.'
+          paragraph2: Cử tri có thể được miễn yêu cầu này nếu họ nộp bản sao giấy
+            nhận diện với thư của họ trong mẫu đăng ký cử tri.
+          paragraph3: ! 'Nếu bạn muốn nộp bản sao, hãy nhớ những điều sau đây: Tiểu
+            bang của bạn có thể có những yêu cầu xác định bổ sung mà bạn cần trình
+            nhận dạng tại địa điểm đầu phiếu thậm chí khi bạn hội đủ bằng chứng nhận
+            dạng liên bang.'
+          paragraph4: Không nên nộp bản chính các giấy tờ của bạn trong đơn xin, chỉ
+            dùng các bản sao mà thôi.
+      page2:
+        title: Đơn xin đăng ký cử tri
+        subtitle: Trước khi hoàn tất mẫu này, hãy xem lại phần chỉ dẫn Tổng quát,
+          Đơn xin, và những Chỉ dẫn cụ thể khác của bang.
+        topblock:
+          item1: Bạn có là công dân Hoa Kỳ không?
+          item2: Bạn sẽ tròn 18 tuổi vào ngày bầu cử hay trước ngày bầu cử chứ?
+          item3: Nếu bạn có ghi "Không" vào một khung nào trong các câu hỏi nầy, xin
+            đừng điền mẫu xin
+          item4: (Xin vui lòng xem hướng dẫn cụ thể cuả bang về quy tắc về điều kiện
+            đăng ký trước khi bạn được 18 tuổi.)
+          fouo: Phần này chỉ dành riêng cho văn phòng sử dụng mà thôi.
+        block1:
+          box1_label: ''
+          box2_label: Họ
+          box3_label: Tên
+          box4_label: Tên lót
+          box5_label: ''
+        block2:
+          box1_label: Địa chỉ nhà
+          box2_label: Căn hộ/Số lô
+          box3_label: Thành phố/Thị trấn
+          box4_label: Tiểu bang
+          box5_label: Mã số vùng
+        block3:
+          box1_label: Địa chỉ nơi bạn nhận thư nếu khác với địa chỉ trên
+          box2_label: Thành phố/Thị trấn
+          box3_label: Tiểu bang
+          box4_label: Mã số vùng
+        block4:
+          box1_label: Ngày tháng năm sinh
+          item2: Tháng
+          item3: Ngày
+          item4: Năm
+        block5: Số điện thọai (không bắt buộc)
+        block6:
+          box1_label: Số thẻ nhận dạng/thẻ căn cước
+          box1_sublabel: (Xem Khoản 6 trong hướng dẫn cho tiểu bang của bạn)
+        block7:
+          box1_label: Chọn đảng
+          box1_sublabel: (Xem Khoản 7 trong hướng dẫn cho tiểu bang của bạn)
+        block8:
+          box1_label: Chủng tộc/Sắc tộc/Dân tộc
+          box1_sublabel: (Xem Khoản 8 trong hướng dẫn cho tiểu bang của bạn)
+        block9:
+          affirmation_header: ! 'Tôi đã xem lại hướng dẫn của bang và tôi thề/khẳng
+            định rằng:'
+          affirmation_1: Tôi là công dân Mỹ
+          affirmation_2: Tôi hội đủ điều kiện yêu cầu của tiểu bang và đồng ý với
+            bất cứ lời tuyên thệ cần thiết nào.
+          affirmation_3: Những thông tin tôi cung cấp là đúng với sự hiểu biết của
+            tôi dưới hình phạt về tội khai man. Nếu tôi cung cấp thông tin sai, tôi
+            có thể bị phạt, bị bỏ tù, hoặc (nếu tôi không phải là công dân Hoa Kỳ)
+            tôi có thể bị trục xuất, hoặc từ chối nhập cảnh vào Hoa Kỳ.
+          please_sign: Vui lòng ký đầy đủ tên họ (hoặc đặt dấu)
+          date: Ngày tháng năm
+          month: Tháng
+          day: Ngày
+          year: Năm
+        top_half_footer: ! '<b> Nếu bạn đăng ký đi bầu lần đầu tiên </b>: vui lòng
+          tham khảo những hướng dẫn để biết thêm thông tin về việc nộp các bản sao
+          giấy tờ hợp lệ của mình chung với mẫu đơn này.'
+        bottom_half_title: Xin điền vào các phần dưới đây nếu chúng áp dụng cho bạn.
+        blockA:
+          title: Nếu đơn xin này là về việc<b>đổi tên<b></b>, thì tên trước đây của
+            bạn là gì?
+          box1_label: ''
+          box2_label: Họ
+          box3_label: Tên
+          box4_label: Tên lót
+          box5_label: ''
+        blockB:
+          title: Nếu trước đây bạn đã đăng ký rồi nhưng đây là lần đầu tiên bạn đăng
+            ký từ địa chỉ trong hộp, địa chỉ mà bạn đã đăng ký trước đây là gì?
+          box1_label: Đường phố (hoặc đường và số hộp thư)
+          box2_label: Căn hộ hay số lô
+          box3_label: Thành phố/Thị trấn/Quận
+          box4_label: Tiểu bang
+          box5_label: Mã số vùng
+        blockC:
+          title: Nếu bạn sống ở vùng nông thôn không có số đường phố, hoặc nếu bạn
+            không có địa chỉ, hãy chỉ nơi bạn sống trên bản đồ.
+          instructions:
+            bullet1: Hãy viết tên ngã tư đường (hoặc đường phố) gần nhất nơi bạn sinh
+              sống.
+            bullet2: Hãy đánh dấu <b>X<b> để chỉ nơi cư trú cuả bạn
+            bullet3: Sử dụng dấu chấm để cho biết trường học, nhà thờ, các cửa hàng,
+              hoặc địa điểm lịch sử  khác gần nơi bạn sinh sống, và viết tên điạ điểm
+              lịch sử.
+          example:
+            title: Ví dụ
+            grocery_store: Tiệm tạp hóa
+            public_school: Trường Công Lập
+            street1: Tuyến đường số 2
+            street2: Đường Woodchuck
+          north: Phương Bắc
+        blockD:
+          title: Nếu người đứng đơn không thể ký tên, ai đã giúp điền đơn này?  Xin
+            cho biết tên, địa chỉ và số điện thoại (số điện thoại không bắt buộc).
+        bottom_half_footer: Gửi đơn này đến địa chỉ đã cung cấp cho Tiểu bang của
+          bạn
+      page3:
+        fouo: CHỈ DÀNH CHO QUAN CHỨC SỬ DỤNG MÀ THÔI
+

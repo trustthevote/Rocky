@@ -18,4 +18,11 @@ states_with_online_registration:
 enabled_locales:
   - en
   - es
-  - ko  
+  - ko
+  - tl
+  - ilo
+  - hi
+  - km
+  - th
+  - vi
+  - zh

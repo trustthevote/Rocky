@@ -1,1 +1,150 @@
+---
 zh:
+  txt:
+    rtv_and_partner: Rock the Vote 和 %{partner_name}
+    button:
+      submit: 下一步
+      edit: 编辑
+      back: ! '&lt; 上一步'
+      download: 现在打印您的<br/>登记<br/>表格
+      ineligible_try_again: 返回
+      keep_going: 继续
+      remind_me_later: 以后提醒我
+      help: 帮助
+      prepare: 准备表格
+      review: 检查申请表
+      sendmail: 发送电子邮件
+      share_facebook: 发布！
+      share_twitter: 发一条Tweet
+      share_google_buzz: 在Google上分享它！
+      state_online_registration: 我想要现在就提交<br/> 我的我的在线表格到<br/> %{state}
+      skip_state_online_registration: ! '&gt; 不用了，谢谢，我会继续在 %{rtv_and_partner_name}
+        填写申请表然后邮寄出去。'
+    registration:
+      in_language_name: 英文
+      powered_by: 提供者：
+      progress_indicator: 步骤：
+      step_1_header: 新的登记
+      step_2_header: 个人信息
+      step_3_header: 额外的登记信息
+      step_4_header: 保持知情并采取行动
+      step_5_header: 审阅并确认
+      stay_informed_header: 保持知情
+      identification_header: 身份识别信息
+      survey_title: 问题
+      preparing_header: 准备注册表格
+      download_header: 打印您的申请表
+      finish_header: 传播消息
+      finish_under_18_header: 您报名成功了！
+      tell_a_friend_title: 发电子邮件告诉您的朋友！
+      finish_reminder: ! '%{first_name}， 感谢您提交选民登记申请表！您将会收到从州官员那里发出的确认您的申请的信息。这个过程有时候会需要几个星期。'
+      finish_reminder_2: 如果您想要查询您的选民登记申请表的状态，您可以通过网站： <a href="http://www.rockthevote.com/election-center/"
+        target="_blank">选举中心</a>上找到您的州务卿的联系方式。
+      ineligible_header: 对不起，基于以下原因，您不符合选民登记的条件：
+      external_header: ! '%{state}登记人'
+      name: 姓名
+      select_none: （无）
+      home_address: 家庭住址
+      mailing_address: 邮寄地址
+      previous_name: 曾用名
+      previous_address: 旧地址
+      opt_in_sms: 请%{organization}给我发短信。
+      opt_in_email: 接收%{organization}发送的电子邮件
+      remind_when_18: 请在我18岁生日的当天提醒我。
+      get_updates: 从Rock the Vote获得最新资讯.
+      volunteer: 我想要成为%{organization}的义工。
+      not_given: 空白
+      has_state_license: 我持有当前和有效的%{state}州身份证或驾驶证
+      has_no_state_license: 我没有现时有效的%{state}州身份证或驾驶证
+      titles:
+        mr: 先生
+        mrs: 太太
+        miss: 小姐
+        ms: 女士
+      suffixes:
+        jr: 小
+        sr: 老
+        ii: 二世
+        iii: 三世
+        iv: 四世
+      races:
+        american_indian_alaskan_native: 美国印第安人/阿拉斯加土著
+        asian: 亚裔/太平洋岛民
+        black_not_hispanic: 黑人（非南美裔）
+        hispanic: 南美裔
+        mutli_racial: 多种族
+        white_not_hispanic: 白人（非南美裔）
+        other: 其他
+        decline_to_state: 拒绝回答
+      phone_types:
+        mobile: 手机
+        home: 家庭
+        work: 工作
+        other: 其他
+      instructions:
+        overseas: ! '<b>注意e</b>: 如果您是美国公民，住在美国领土外或是有投票选举权的军人，请<a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>点击此处</a>进行选民登记。'
+        opt_in_email: 我们会给您发送及时的选举提醒信息，包括您的选举地点，以及有关选举气氛和关注话题的信息。
+        under_18: 看来您还未满18岁。没有关系。在%{state_name}， 您可以登记投票 %{state_rule}。 请访问<a href="http://www.rockthevote.com/election-center/"
+          target="_blank">投票中心</a>来查询下一次投票的时间。
+        under_18_2: 如果您符合该法律的规定，请点击此按钮开始您的申请。
+        under_18_3: 如果不行，我们会在您18岁生日的时候提醒您。
+        remind_when_18: 我们会给您的%{email_address}发送电子邮件。
+        review: 请审阅一下信息并确认其准确性。
+        download: 您还没有完成。请点击打印表格按键来打印您的选民注册表格。在表格上签名并邮寄至表格中提供的地址。
+        download_2: 您还没有登记成功，登记需要你打印，签名并邮寄您的表格才算完成！
+        finish: 不要忘记告诉您的朋友和家人进行登记是多么容易的一件事情。这里有一些可以帮助您传播选民登记的讯息的工具。
+        finish_2: 将这个选民登记工具安装到您的网站。免费注册连接：
+        finish_under_18: 我们会在重要的选举日期临近之时给您发送选民登记提醒。
+        finish_under_18_2: 与此同时，请告诉您的朋友和家人选民登记是一件多么容易的事情。您可以利用这里的一些来传播有关选民登记的讯息的工具。
+        finish_tell_recipients: （请用逗号隔开）
+        finish_email_sent: 电子邮件已发送！
+        finish_update_status: 不要忘记更新您在FACEBOOK和Twitter的状态！
+        state_online_registration: 您或许符合资格使用%{state}网上选民登记系统进行选民登记。
+        leave_state_online_registration: 您可以使用以下表格，与%{state} 完成您的网上选民登记。如果您的驾驶证或州身份证不再有效或者州政府无法查询或确认您的DMV机动车管理部记录，不用担心&mdash，
+          您还可以%{link}。您只需要打印，签名并邮寄。
+        leave_state_online_registration_link: 在%{rtv_and_partner_name}完成您的登记。
+      ineligible:
+        age: 你必须在下一个选举日前年满18岁。
+        non_citizen: 您的登记不能完成因为您没有勾选表明您是美国公民的格子。必须是美国公民才能登记投票。如果您是公民，请回到上一页并勾选确认公民身份的格子。
+        attest: 你必须确认您符合投票的资格。
+      external:
+        colorado:
+          register_link: 与科罗拉多州州务卿完成网上登记
+          continue_link: 继续与Rock the Vote进行登记。
+          show:
+            p1: 好消息！如果您拥有当前的有效的科罗拉多州驾驶证，你可以与科罗拉多州州务卿完成您的选民登记申请。
+            p2: 如果您提供您的驾驶证号码且是首次注册或更改您现有的科罗拉多州选民登记的地址，请点击以下链接。那些您已经填过了的信息将会出现在州务卿的网上选民注册门户网站。您可以在那里完成您的申请。
+            p3: 否则，如果您不能够在州务卿网站上完成您的申请，您可以点击以下链接，在那里继续填写您的表格。你将会获得您的选民登记表格，然后打印，签名并邮寄至州务卿办公室。
+            p4: ''
+          go:
+            title: 科罗拉多州登记系统错误
+            timeout: 看来科罗拉多州网站的长时间没有响应，可能目前无法使用。不过不用担心！您有其他几个选择来继续您的选民登记。
+            timeout_2: 为了完成您的选民登记申请，您有三个选择：</p><p>(1) 关闭这个窗口然后使用您的浏览器的后退键来更正您的选民登记表的信息。您可以在州务卿的网站上重新提交您的信息。</p><p>(2)
+              关闭这个窗口然后在您之前访问过的网页上点击“继续与Rock the Vote" 链接。您将可以完成申请然后获得选民登记表，然后打印，签名并邮寄至州务卿办公室。</p><p>(3)
+              您还可以直接访问<a href=%{co_url}>州务卿网站</a> 来重新输入正确的信息。
+            timeout_3: ''
+            p1: 看来您所提供的信息与州务卿的记录不一致。三个常见错误有： (1) 您所提供的姓名与您的身份证件上的不一致（例如，您写的是"Steve"
+              但是在您的身份证上的名是"Stephen")，(2) 您包括了身份证号码中的横杠 (3) 您没有提供驾驶证号码，而是使用了其他身份证明文件。请检查您所提供的信息：
+            section: 身份证明信息
+            colorado_id_number: 科罗拉多州身份证号码
+            p2: 为了完成您的选民登记申请，您有三个选择：</p><p>(1) 关闭这个窗口然后使用您的浏览器的后退键来更正您的选民登记表的信息。您将在州务卿的网站上可以重新提交您的信息。</p><p>(2)
+              关闭这个窗口然后在您之前访问过的网页上点击“继续与Rock the Vote" 链接。您将可以完成申请然后获得选民登记表，然后打印，签名并邮寄至州务卿办公室。</p><p>(3)
+              您还可以直接访问<a href=%{co_url}>州务卿网站</a> 来重新输入正确的信息。
+            p3: ''
+      tooltips:
+        email_address: 我们会使用电子邮件将您的选民注册表的副本发送给您。
+        home_zip_code: 写下您家庭住址的邮政编码，即使您不使用这个地址接收邮件。
+        date_of_birth: 在您的选民登记申请表上，你必须表明您是否将在选举日或之前年满18岁。尽管如此，很多州允许您在满18岁前登记，所以请<a
+          href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">点击此处</a>
+          查看您所在州的规定。
+        registrant_name: 将您的全名写在此空格中。不要使用别名或缩写。如果本申请表是用于更改姓名，在表格的下半部分您将需要写上您改名前的全名。不要忘记写下您的称呼（先生，太太，小姐，女士）。
+        home_address: 在此空格中写上您的家庭住址。如果您的邮政地址与您的家庭住址不同，不要将邮政地址写在此处。不要使用邮政信箱或没有信箱号的乡村路线。如果您住在没有街道名称的农村，或您没有地址，请在打印出来的表格上的地图上注明您住的地方。
+        mailing_address: 如果您的邮政地址与您的家庭住址不同，请把您的邮政地址写在这个空格中。如果您不使用家庭住址接收邮件，那么您必须填写这一项，提供一个您能够收到邮件地址。
+        phone: 大多数州希望获得您的电话号码，以备他们对您的申请有任何问题。但是您不是必须提供电话号码。
+        previous_name: 如果您在上一次登记后更改过姓名，请写下您以前的姓名。
+        previous_address: 如果您在上一次登记后搬过家，请写下您以前的地址。
+    status_text:
+      message: 我刚刚完成了选民登记，你也可以登记！
+      under_18_message: 确保进行选民登记。这是一件非常容易的事情！
+

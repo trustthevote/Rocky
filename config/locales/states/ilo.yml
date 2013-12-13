@@ -1,1 +1,499 @@
+---
 ilo:
+  states:
+    custom:
+      ca:
+        online_instructions: Mabalin mon nga ilep-pas iti online nga pagpaparehistrom
+          dita estado nga pag-giyanam - usaren laeng iti applikasyon nga ited kenka
+          ti Sekretarya ti Estado nga pag-yanam, Debra Bowen.
+        step_2:
+          checkbox_text: Ag-gi-gyanak ditoy Estados Unidos, iti estado ti California.
+          instruction_text: Masapul nga ilep-pas mo iti pagrerehistro, ken usarem
+            ti online sistema ti botante iti estado.
+      nv:
+        online_instructions: <p>Masapul mo nga ikumpleto iti online nga pagrerehistro
+          ti botante nga sumasarsaruno. Iti Nevada Online Voter Application (NOVA)
+          ay inted ni Sekretarya ti Estado Nevada, Ross Miller, tapno agrehistro dagiti
+          botante iti Nevada ken tapno isuda ket makaboto, wenno suktan ti agpayao
+          nga impormasyon. Masapul mo met iti NOVA na aksukat ka <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">ditoy</a>.</p><br/><p>iti
+          impormasyon ti driver's license iti invalido wenno iti DMV record - saan
+          ka nga agdanag - mabalin mo met <a href="%{next_url}">ngalipasen ti rehistrasyon
+          mo ti saan ka nga agdanag %{rtv_and_partner_name}</a>. - Masapul mo laeng
+          nga iprenta, isurat iti nagan mo, ken ibuson data porma.</p>
+    parties:
+      democratic: Demokratiko
+      independent: Independiente
+      green: Green
+      libertarian: Libertaryan
+      republican: Republikano
+      working_families: Familya nga agtrab-trabaho
+      other: Dad-duma
+    no_party_label:
+      none: Awan
+      decline_to_state: Saan nga ibaga
+      blank: ! 'Ilocano(ilo)
+
+
+        estado. awan_ti_partido.blanco'
+    tooltips:
+      not_participating:
+        blank: Ilocano (ilo)
+        new_hampshire: ! "Gapu iti linteg ti New Hampshire, saan nga mabalin nga usaren
+          daytoy porma nga pagparehistro tapmo makabuto. Tapno makabuto kasaritan
+          iti Clerk iti ili wenno ciudad nakalista ti    \nhttp://www.state.nh.us/sos/clerks.htm.
+          \ Mabalin mo met nga kasao ti Sekretarya ti Estado ti 603-271-3242 wenno
+          bumisita iti http://www.state.nh.us/sos/electionsnew.htm."
+        north_dakota: Awan ti pagrerehistro iti botante ti North Dakota. Para ti dad-duma
+          nga impormasyon, agdamagka iti Sekretarya ti Estado ti 701-328-3660, wenno
+          mapan ka iti http://www.nd.gov/sos.
+        wyoming: ! 'Iti linteg ti Wyoming saan na nga ipalubos nga usaren daytoy porma
+          nga pagrerehistro tapno makabuto. No kayat mo nga adalen wenno ammo-em no
+          kasano iti agboto ditoy Wyoming, kasaritan iti county clerk ti ili nga ayan
+          mo. Masarakam dagiti contact impormasyon iti http://soswy.state.wy.us/Elections/RegisteringToVote.aspx
+          wenno tel # 307-777-3573.'
+      race:
+        blank: Ilocano (ilo)
+        required_with_state_name: Iti estado ti  %{state_name} masapul nga ibagam
+          impormasyon iti pagkatao ken pagka-etniko mo. Saan da nga alaen iti applikasyon
+          mo no di mo ited dagitoy nga impormasyon.
+        requested_with_state_name: Iti estado ti  %{state_name} dawaten nga ibagam
+          impormasyon iti pagkatao ken pagka-etniko mo. Saan da nga alaen iti applikasyon
+          mo no di mo ited dagitoy nga impormasyon.
+        georgia: Saan da nga awaten iti applikasyon mo no di mo ited dagiti impormasyon
+          mo ti gender ken pagkatao/pagkaetniko.
+        requested_not_required_with_state_name: Iti estado ti  %{state_name} dawaten
+          na ibagam iti impormasyon mo ti pagkatao wenno pagka-etniko uray no saan
+          na nga masapul.
+        required_no_conditions_with_state_name: Iti estado ti %{state_name} masapul
+          nga ibagam iti impormasyon mo ti pagkatao wenno pagka-etniko uray no saan
+          na nga masapul.
+        requested_no_conditions_with_state_name: Iti estado ti %{state_name} dawaten
+          nga ibagam iti impormasyon mo ti pagkatao wenno pagka-etniko.
+        not_required_with_state_name: Iti estado ti %{state_name} saan nga masapul
+          iti impormasyon ti pagkatao wenno pagka-etniko.
+        not_required_but_appreciated_with_state_name: Iti estado ti %{state_name}
+          saan nga agdamag iti impormasyon mo ti pagkatao wenno pagka-etniko. Uray
+          mo kasta, ina-appreciar iti Rock the Vote dagitoy nga impormasyon tapno
+          marucudna iti pagka-ipektibo ti voter registration effort. Saan nga mai-prenta
+          daytoy nga impormasyon idiay porma ti voter registration.
+        not_required_but_appreciated_with_state_name_2: Iti estado ti  %{state_name}
+          saan nga masapul iti impormasyon mo ti pagkatao wenno pagka-etniko. Ngem
+          uray no casta, importante dagitoy nga impormasyon iti Rock the Vote tapno
+          marukod no kasano ti epektibo iti rigrigat nga inaramidna iti pagparehistro
+          ti botante. Saan nga mai -prenta daytoy nga impormasyon idiay porma ti voter
+          registration.
+        virginia: Iti Commonwealth ti Virginia  saan nga agdamag iti impormasyon mo
+          ti pagkatao wenno pagka-etniko. Uray mo kasta, ina-appreciar iti Rock the
+          Vote dagitoy nga impormasyon tapno marucud na iti pagka-ipektibo ti voter
+          registration effort. Saan nga ma-iprenta daytoy nga impormasyon idiay porma
+          ti voter registration.
+        washington_dc: Iti Distrito ti Columbia  saan nga agdamag iti impormasyon
+          mo ti pagkatao wenno pagka-etniko. Uray mo kasta, ina-appreciar iti Rock
+          the Vote dagitoy nga impormasyon tapno marucud na iti pagka-ipektibo ti
+          voter registration effort. Saan nga mai-prenta daytoy nga impormasyon idiay
+          porma ti voter registration.
+      party:
+        blank: ! 'Ilocano (ilo):'
+        arizona: ! 'Iti botante ti Presidential Preference Elections, masapul nga
+          nakarehistro nga myembro ti maysa nga opisyal nga partido. Iti amin-non
+          nga sab-sabali nga primary eleksyones, dagiti botantes: independiente, awan
+          iti partido na, myembro iti partido nga awan ti nagan-na ket mabalin da
+          amin ti agbuto iti partisan primary eleksyon iti partido nga kayatda.  Dagiti
+          botante nga nagrehistro iti opisyal nga partido political ti agawat iti
+          masapa nga balota. Dagiti laeng miembro iti Partido Libertaryan iti Arizona
+          iti mabalin nga agbuto idiay primary eleksyon iti Partido Libertaryan.'
+        california: Ipalubos iti linteg ti California nga agbuto iti primary eleksyon
+          ti anniaman nga partido nga kwalipikado ken nagrehistro iti opisina ti Sekretarya
+          ti Estado nga nangted kanniada iti parmiso, dagiti botante uray no saan
+          da nga imbag-baga no sino iti partido da. Mabalin mo to umayab ti 1-800-345-VOTE
+          o mapan ka iti www.ss.ca.gov/elections/elections_d.htm  dagiti botante uray
+          no saan da nga imbag-baga no sino iti partido da, wenno saan nga opisyal
+          iti partidoda.
+        idaho: ! 'Masapul nga agrehistro ka iti partido nga kayatmo nga sali-an. Ibagam
+          iti partido nga kagkayat mo (Political Party Preference): Pagpil-liam: Constitution,
+          Demokratiko, Libertaryan, Republikano, wenno Awan ti Partido. No awan ti
+          pagpil-piliam, wenno blanco, maka-awat ka iti Unaffiliated Ballot.'
+        indiana: Saan nga ipalubos iti linteg ti Indiana nga iti maysa nga tao suratna
+          no annia iti partidona no agrehistro tapno agbuto. Ngem, uray no kasta,
+          masapul nga ibagana ti nagan ti partido  no agnuto iti primary eleksyon.
+        massachusetts: No saan mo nga ibaga iti nagan iti partido political, mairehistroka
+          nga unenrolled, wenno Independiente. Adda tal-lo nga partido itat-ta (Democrat,
+          Republican, Green-Rainbow).
+        mississippi: Iti Mississippi, awan ti pagrehistro ti partido. Mabalin nga
+          agbuto iti maysa nga botante iti primary eleksyon, miting, wenno conbensyon
+          iti partido.
+        north_carolina: Semi-closed primary iti sistema ti North Carolina. No annia
+          iti partido iti maysa nga botante, idiay primary eleksyon  iti partidona
+          laeng nga agbuto isuna. Iti primary eleksyon, ti maysa nga botante nga awan
+          ti partidona wenno independiente isuna mabalin na ti agbuto iti partisan
+          balota wenno non-partisan nga balota.
+        rhode_island: No kayatmo nga sumali nga agbuto, aglistaka ti maysa nga partido.
+          No saan mo nga suratan iti kahon, wenno ilistam iti maysa nga partido nga
+          unrecognized, ibilang daka nga unaffiliated.
+        tennessee: Awan iti agrerehistro ito partido iti Tennessee. No kayat iti maysa
+          nga botante ti agbuto ti primary eleksyon, isurat nanto laeng ituno tiempo
+          nga agbuto isuna iti partido nga kayatna.
+        utah: Ipalubos iti linteg ti Utah nga ti partido iti agpili no sino iti agbuto
+          ti primary eleksyon ti nasao nga partido. no saan ka nga agmiembro iti partido,
+          saan ka nga mabalin ti agboto iti primary.
+        vermont: Iti linteg ti Vermont, saan nga masapul nga agrehistro iti partido
+          tapno sumali iti eleksyon.
+        virginia: Saan mo nga masapul nga agrehistro iti maysa nga partido no kayat
+          mo ti agbuto ti primary eleksyon, miting wenno conbensyon ti partido. Uray
+          no kasta, no sika ket botante, mabalin mo nga agbuto nga absentee iti partido
+          primary. ikabil mo laeng ti nagan ti partido nga kayatmo nga papanan iti
+          butomo idiay applikasyon mo.
+        washington: Iti Estado ti Washington, saan nga agrerehistro dagiti botante
+          no annia iti partidoda.
+        west_virginia: Masapul nga agrehistro ti botante iti maysa nga partido no
+          kayatna iti agbuto ti primary eleksyon ti nasao nga partido, miting wenno
+          conbensyon ti partido (mabalin met nga agbuto iti independiente no dumawat
+          iti balota iti partido nga agawat nga agbuto dagiti botante nga independiente).
+        wisconsin: Saan nga masapul nga ited mo iti nagan ti partidom tapno agrehistroka
+          nga agbuto idiay Wisconsin.
+        not_part_of_registration: Saan nga masapul nga ibagam no sino iti partidom
+          no agrehistroka nga botante. Ibagam ti nagan ti partido no dumawat kas iti
+          balota iti partido no usarem iti primary eleksyon.
+        not_required_to_vote: Saan nga masapul ti agrehistro mo iti maysa nga partido
+          no kayatmo iti sumali nga agrehistro tapno agboto.
+        not_required: Saan mo nga masapul iti agrehistro ti maysa nga partido laeng
+          ti kayatmo ket sumali ka iti primary eleksyon, miting wenno conbensyon ti
+          partido.
+        not_required_can_choose_any: Saan mo nga masapul iti agrehistro ti maysa nga
+          partido laeng ti kayatmo ket sumali iti primary eleksyon, miting wenno conbensyon
+          ti partido, ken no ito kayatmo ti agpili ti anniiaman nga balota para iti
+          pangpresidente nga primary (ngem saan nga mabalin nga dua) ta awan met iti
+          relasyonda ti pagrerehistro.
+        not_done_with_state_name: Saan nga masapul nga agrehistroka ti partido iti
+          %{state_name}. Ngem, tapno mabalin mo ti agbuto iti primary, masapul mo
+          iti dumawat ti balota iti maysa laeng nga partido.
+        party_not_required: No agparehistro iti maysa nga botante, saan na nga masapul
+          nga agrehistro iti maysa nga partido, wenno agpili ti partidona. Ngem, tapno
+          maikkan ka iti primary nga balota, masapul nga isurat mo iti nagan ti partido
+          nga napilim para daytoy nga eleksyon.
+        party_not_required_2: Saan nga masapul nga agrehistro ti maysa nga partido
+          ti maysa nga botante tapno sumali iti amin nga eleksyon.
+        you_may_but_not_required: Mabalin mo, ngem saan nga masapul nga agrehistroka
+          nga nasapa iti maysa nga partido no kayatmo iti sumali iti primary eleksyon
+          ti partido. Tapno makasali ka iti primary eleksyon wenno miting, masapul
+          nga agrehistroka iti maysa wenno agpili ka sabali mo met nga suktan iti
+          partidom wenno agpili ka sabali nga sukatna idiay lugar ti pagbutosan ti
+          primary eleksyon wenno idiay lugar iti miting.
+        closed_caucus_with_state_name: Iti %{state_name} adda cerrado nga primary
+          eleksyon ken sistema ti miting iti para president. Kada partido, mabalin
+          no nga agtagikua ti maysa laeng nga balota para iti amin nga kandidatona.
+          Mabalin met nga iti dua wenno adu nga partido agtagikwa iti maysa laeng
+          nga balota para iti amin nga kandidatoda. Dagiti partido nga opisyal, mabalin
+          da ti agpili no annia nga partido dagiti sumali idiay primary eleksyon.  No
+          annia nga partido ti ayanna, wenno sagino nga partido isuna, ti maysa nga
+          botante maammuanna 30 nga aldaw sakbay ti aldawti eleksyon no annia ti usarenna
+          nga balota, wenno agpili isuna ti maysa laeng nga balota.
+        required_for_presidential: No awan iti isurat mo nga partido, saan mo nga
+          mabalin nga agbuto iti Presidential Preference Primary, ken iti komiti ti
+          partido eleksyon. Saan nga masapul nga sumalika kadagiti partido tapno makaboto
+          ka kadagiti nga eleksyon.
+        required_for_primary: Masapul ti agrehistro iti partido no kayatmo ti agbuto
+          to primary eleksyon iti nasao nga partido, miting, wenno conbensyon.
+        required_for_primary_2: Masapul nga agrehistro iti maysa nga partido no kayatmo
+          ti agbuto ti primary eleksyon iti nasao nga partido.
+        required_for_primary_dem_rep_only: Masapul nga agrehistro iti maysa nga partido
+          iti botante tapno isuna ket mabalinna ti agbuto iti primary eleksyon. Adda
+          primary eleksyon dagiti partido ti Democratic ken Republican.
+        required_for_primary_nonpartisan: Masapul ti agrehistro iti partido no kayatmo
+          ti agbuto to primary eleksyon iti nasao nga partido, miting, wenno conbensyon.
+          No agrehistroka ti partido menor, wenno iti partido nga Nonpartisan, agawatka
+          iti nga balota para ti primary eleksyon.
+        required_for_primary_unless: Masapul ti agrehistro iti partido no kayatmo
+          ti agbuto to primary eleksyon iti nasao nga partido, miting, wenno conbensyon
+          (ngem uray no saanca nga nakarehistro, mabalinmo laeng nga sumali no adda
+          laketdi iti palubos ti partido political).
+        required_for_primary_no_change_30_days: Masapul ti agrehistro iti partido
+          no kayatmo ti agbuto to primary eleksyon iti nasao nga partido, miting,
+          wenno conbensyon. Saan mo nga mabalin nga suktan ti kasasaadmo iti partidom
+          iti uneg 30 nga aldaw sakbay iti partisan primary eleksyon.
+        required_for_primary_2_months: Masapul ti agrehistro iti partido no kayatmo
+          ti agbuto to primary eleksyon iti nasao nga partido, miting, wenno conbensyon.
+          Tapno mabalin mo iti agbuto ti miting iti partido, masapul nga agmiembroca
+          iti nasao nga partido ti saan nga nabab-baba ti dua nga bulan sakbay ti
+          nasao nga miting. Tapno agbuto iti primary eleksyon ti partido, masapul
+          nga ibagam iti casa sa-admo iti partido uray no annia nga aldaw sakbay ti
+          primary eleksyon.
+      id_number:
+        blank: ! 'blanko
+
+          Ilocano (ilo)'
+        arizona: No addas Arizona driver's license wenno sabali nga ID nga naalam
+          kalpasan ti Oktubre 1,1996 isurat mo ti numero idiay kahon 6 ti NVAR form.
+          Daytoy ket prueba ti pagka-citizenship mo, ket saan mo nga masapulen ti
+          mangted pay ti sabsabali nga detalye wenno impormasyon. Maysa laeng nga
+          antigo nga dokumento ti masapul mo tapno makarehistro ka nga agbuto.
+        colorado: Masapul nga itedmo ti Colorado Driver's License  mo, wenno ti numero
+          iti Colorado ID nga inissyo kenka ti Department of Revenue. No awan dagitoy
+          dua nga ID, masapul nga isurat mo nga "AWAN" kenka dagitoy dua nga ID -
+          idiay husto nga kahon, ken isurat mo iti up-pat nga maudi nga numero iti
+          Social Security mo. No awan kenka amin dagitoy nga ID, ikkan naka ti Sekretarya
+          ti Estado ito sabali nga ID nga awan ti kaparis na.
+        georgia: Masapul nga itedmo dagiti numero ti Georgia Driver's License ken
+          Georgia ID nga inted kenka ti estado. No awan iti maysa kadagiti dua, masapul
+          nga ited mo iti up-pat nga maudi nga numero ti Social Security mo. No awan
+          amin dagitoy nasao nga ID, isurat mo ti "AWAN" ket ti estado mangted kenka
+          ti espesyal nga numero iti ID.
+        indiana: Masapul nga itedmo ti sangapulo (10) nga numero ti Indiana Driver's
+          License mo, wenno ti numero ti Indiana Motor Vehicle Number mo. No awan
+          ti maysa iti dua, isurat mo iti uppat nga maudi nga numero ti Social Security.
+          Isurat wenno ibagam no annia nga ID iti naggapuan dagiti numero nga insurat
+          wenno imbagam.
+        maryland: No agpayso ken aktibo ti Maryland Driver'sLicense ken Motor Vehicle
+          Administration card mo, masapul nga isurat mo ti maysa kadagiti dua. No
+          awan kenka dagitoy dua, masapul nga isurat mo ti uppat nga maudi nga numero
+          ti Social Security nga cucuam. No awan amin dagitoy nga tallo, isurat mo
+          ti "AWAN" ket ti Estado mangted kenka ti especial nga numero.
+        oklahoma: Masapul dagiti uppat nga maudi nga numero iti cucuam nga Social
+          Security. Dawatan ti estado kenka iti numero ti Oklahoma Driver's License
+          mo. No awan kenka dagitoy dua na numero, pakisurat mo ti "AWAN", tapno ti
+          estado mangted kenka ti numero ti ID mo.
+        wisconsin: No adda cucuam nga aktibo ken husto nga WI driver's license wenno
+          ID card nga inted ti WI DOT kenka, masapul nga itedmo dagiti numeroda. Ngem,
+          no nakansel, nasospende o espiradona ti WI driver's license mo, itedmo met
+          laeng ti numerona. No awan ti WI driver's license ken WI-DOT ID card nga
+          cucuam, itedmo ti up-pat nga maudi nga numero ti Social Security mo. No
+          awan ti cucuam nga WI driver's license, WI-DOT ID card wenno numero ti Social
+          Security, ibilog mo ti husto nga sungbat mo.
+        south_dakota: Masapal iti numero ti driver's license mo. No awan iti valido
+          nga driver's license mo ited mo ti up-pat nga maudi nga numero ti Social
+          Security mo. No awan ti driver's license ken Social Security nga cucuam,
+          agsuratca iti deklarasyon nga awan ti cucuam nga South Dakota driver's license
+          ken numero ti Social Security.
+        ssn_requested: Dawatenda ti numero iti Social Security mo. Bolontario iti
+          mangted daytoy nga impormasyon. No saan mo nga ited ti numero ti Social
+          Security mo, masapul nga ited mo iti up-pat nga maudi nga numero ti cucuam
+          nga Social Security. No awan kenka dagitoy dua, isurat mo iti "AWAN" tapno
+          ti estado mangted kenka ito numero.
+        ssn_or_none: Ited mo iti numero ti cucuam nga Social Security. (No awan ti
+          numero ti cucuam nga Social Security, isurat mo iti "AWAN", ket ti estado
+          mangted ti numero nga ID kenka)
+        ssn_or_none_2: Ited mo amin ti numero ti cucuam nga Social Security. No awan
+          ti cucuam nga Social Security, isurat mo iti "AWAN", ket ti estado mangted
+          kenka ti numero nga ID mo.
+        ssn_or_none_3: Masapul nga itedmo amin nga numero iti cucuam nga Social Security.
+        ssn_or_none_4: Masapul amin nga numero ti cucuam nga Social Security. (No
+          awan ti cucuam nga Social Security, isurat mo ti "AWAN", ket ti estado mangted
+          kenka iti numero nga ID mo.)
+        ssn_or_none_5: No mabalin, ited mo ti numero ti cucuam nga Social Security.
+          No awan ti cucuam nga Social Security, isurat mo iti "AWAN", ket ti estado
+          ikkan nakanto ti numero nga para kenka laeng.
+        ssn_full: Masapul amin nga numero iti cucuam nga Social Security. Mausar daytoy
+          numero tapno awan iti anomalya wenno dakes nga maaramid iti pagrerehistro
+          ken pagboto. Saan nga maawat ti applikasyon mo no saan mo nga maited dagitoy
+          nga numero.
+        ssn_full_2: Masapul nga itedmo ti numero ti cucuam nga Social Security.
+        ssn_full_not_required: Masapul nga ited mo amin nga numero iti cucuam nga
+          Social Security. Awan ti tao nga saan nga makarehistro no awan laeng kencuana
+          iti Social Security.
+        drivers_license_or_mvc: Masapul nga ited iti numero ti Driver's License wenno
+          MVC non-driver ID numero. No awan kenka iti maysa itidua, masapul iti up-pat
+          nga maudi nga numero iti cucuam nga Social Security, ket no awan amin dagiti
+          nasao nga tallo, agcarica iti Voter Registration Form.
+        drivers_license_or_non_driver_id: Masapul nga ited mo ti numero ti Driver's
+          License wenno ti numero ti non-Driver ID. No awan ti maysa iti dua nga nasao,
+          ited mo ti up-pat nga maudi nga numero ti cucuam nga Social Security. No
+          awan dagitoy dua, isurat mo ti "AWAN" ket ti estado ikkan nakanto iti identification
+          number tapno casta mabalin mo iti agbuto.
+        drivers_license_or_other_with_state_name: Masapul nga ited ti numero ti Driver's
+          License mo idta  %{state_name} nga ayanmo. No awan kenka daytoy, masapul
+          nga ited mo ti up-pat nga maudi nga numero iti cucuam nga Social Security.
+          No awan dagitoy dua kenka, isurat mo ti "AWAN" tapno maikkan ka ti numero
+          nga usarem nga ID nga aggapu ti estado.
+        drivers_license_or_other_with_state_name_2: Masapul nga ited mo iti  '%{state_name}'
+          ti numero ti driver's license mo. No awan datoy, ited mo ti up-pat nga maudi
+          nga numero iti cucuam nga Social Security. No awan dagitoy dua, isurat mo
+          iti "AWAN" tapno maikkan ka iti sabali nga numero nga ingka usaren nga ID.
+        drivers_license_or_other_with_state_name_3: Masapul nga ited mo iti '%{state_name}'
+          ti numero ti driver's license mo. No awan daytoy '%{state_name}' ti driver's
+          license, masapul nga ited mo iti up-pat nga maudi nga numero ti cucuam nga
+          Social Security. No awan ti numero ti driver's license wenno numero ti Social
+          Security, isurat mo iti "AWAN" ket iti estado mangted to kenka iti ID numero.
+        drivers_license_or_other_with_state_name_4: Masapul nga ited mo ti numero
+          ti driver's license iti '%{state_name}'. No awan daytoy, masapul nga ited
+          mo iti up-pat nga maudi nga numero ti cucuam nga Social Security. No awan
+          dagitoy dua, isurat mo iti 'AWAN' ket iti estado mangted to kenka iti ID
+          numero.
+        drivers_license_or_ssn_or_none: Masapul nga ited mo ti numero ti driver's
+          license mo wenno ti up-pat nga maudi nga numero ti cucuam nga Social Security.
+          No awan dagitoy dua, isurat mo ti 'AWAN' tapno ti estado mangted ti espesyal
+          nga usarem ng ID.
+        drivers_license_or_ssn_or_none_2: Masapul nga ited mo ti numero ti driver's
+          license mo. No awan iti driver's license mo, ited mo ti up-pat nga maudi
+          nga numero ti cucuam nga Social Security. No awan dagitoy dua, isurat mo
+          iti "AWAN" tapno iti estado mangted ti espesyal nga usarem ng ID.
+        drivers_license_or_ssn_or_none_3: Masapul nga ited mo ti numero ti driver's
+          license, no adda driver's license mo. No awan, masapul nga ited mo ti up-pat
+          nga maudi nga numero ti cucuam nga Social Security. No awan dagitoy dua,
+          isurat mo ti check iti uneg ti kahon nga sumaruno.
+        drivers_license_or_ssn_or_none_4: Masapul nga ited mo ti numero ti cucuam
+          nga driver's license. No awan kenka daytoy, ited mo ti up-pat nga maudi
+          nga numero ti cucuam nga Social Security. No awan dagitoy dua, isurat mo
+          iti "AWAN" tapno iti estado mangted ti espesyal nga usarem ng ID.
+        drivers_license_or_ssn_county_clerk_with_state_name: Ited mo ti  %{state_name}
+          ti numero ti driver's license mo. No adda, ngam no awan, masapul nga ited
+          mo ti up-pat nga maudi nga numero ti cucuam nga Social Security. No awan
+          kenka dagitoy dua, mapanka iti clerk ti county nga ayan mo tapno mangted
+          kenka ti especial ng ID.
+        drivers_license_or_dmv_with_state_name: Masapul nga ited mo ti numero ti cucuam
+          nga driver's license iti %{state_name} wenno ti numero ti cucuam nga Departamento
+          ti Motor Vehicle ID. No awan dagitoy dua, ited mo ti up-pat nga maudi nga
+          numero ti cucuam nga Social Security. No amin dagitoy ket awan kenka, isurat
+          mo ti "AWAN" tapno ikkan naka ti estado iti numero nga usarem nga ID.
+        drivers_license_with_state_name: Masapul nga ited mo ti numero ti cucuam nga
+          driver's license iti  %{state_name} wenno ti numero ti cucuam nga ID ti
+          estado. No awan dagitoy dua kenka, isurat mo ti "AWAN" tapno ti estado mangted
+          kenka ti espesyal nga numero ti ID nga usarem na agbuto.
+        drivers_license_with_state_name_2: Masapul nga ited mo ti %{state_name} iti
+          numero ti cucuam nga driver's license wenno ti numero ti cucuam nga ID iti
+          estado. No awan ti numero ti cucuam nga driver's license, ited mo iti up-pat
+          nga maudi nga numero ti cucuam nga Social Security. No awan dagiti numero
+          ti cucuam nga driver's license ken Social Security, tapno mabalin mo ti
+          agbuto, masapul nga mangted ka ti sab-sabali pay nga ID.
+        drivers_license_if_issued_with_state_name: Masapul nga ited mo iti numero
+          ti cucuam nga Louisiana driver's license. No awan, masapul nga ited mo ti
+          up-pat nga maudi nga numero iti cucuam nga Social Security. No awan dagitoy
+          dua, isurat mo ti "AWAN" tapno iti estado mangted kenka iti numero nga usarem
+          nga ID.
+        drivers_license_required_at_voting_with_state_name: Masapul nga ited mo iti
+          numero ti cucuam nga %{state_name} driver's license, wenno ti numero ti
+          cucuam nga '%{state_name}' ID. No awan kenka dagitoy dua, masapul nga itedmo
+          ti up-pat nga maudi nga numero ti cucuam nga Social Security. No awan iti
+          maited mo nga impormasyon, masapul nga magted ka iti sab-sabali nga ID sakbay
+          nga mabalin mo iti agbuto.
+        drivers_license_non_driver_with_state_name: Masapul nga ited mo iti numero
+          ti cucuam nga %{state_name} driver's license, wenno iti cucuam nga non-driver
+          ID. No awan dagiti dua, ited mo iti up-pat nga maudi nga numero ti cucuam
+          nga Social Security. No awan amin dagitoy tal-lo, isurat mo iti "AWAN" tapno
+          iti estado mangted ti ID numero kenka.
+        drivers_license_non_driver_2: Masapul nga ited mo dagiti numero ti driver's
+          license ken numero ti non-driver's license ID nga nag-gapu iti estado. No
+          awan kenka dagiti dua, masapul nga ited mo ti up-pat nga maudi nga numero
+          ti cucuam nga Social Security. No awan kenka amin dagitoy, pakisurat mo
+          ti "AWAN" tapno mangted ti estado kenka iti espesyal nga numero ti ID.
+        drivers_license_not_operating: Masapul nga ited mo iti numero ti driver's
+          license nga inted iti estado kenka, wenno iti numero iti non-driver's ID
+          nga nag-gapu ti estado, ken no awan dagitoy dua, ited mo ti up-pat nga maudi
+          nga numero iti cucuam nga Social Security. No awan kenka dagitoy nga tal-lo,
+          pakisurat mo iti "AWAN" tapno casta mangted iti estado kenka ti espesyal
+          nga ID numero nga usarem.
+        drivers_license_non_operating_with_state_name: Masapul nga ited mo iti numero
+          ti %{state_name} driver's license ken iti numero ti non-driver's ID nga
+          cucuam. No awan dagitoy dua kenka, ited mo ti up-pat nga maudi nga numero
+          ti cucuam nga Social Security. No amin dagitoy awan kenka, pakisurat mo
+          iti "AWAN" tapno casta mangted iti estado kenka ti espesyal nga ID numero
+          nga usarem.
+        drivers_license_personal_identification_with_state_name: Masapul nga ited
+          mo ti %{state_name} iti numero ti cucuam nga driver's license wenno ti numero
+          ti cucuam nga ID iti estado. No awan ti  numero ti cucuam nga driver's license
+          wenno ti numero ti cucuam nga ID iti estado, ited mo ti up-pat nga maudi
+          nga numero ti cucuam nga Social Security. No amin dagitoy awan kenka, pakisurat
+          mo iti "AWAN" tapno casta mangted iti estado kenka ti espesyal nga ID numero
+          nga usarem.
+        drivers_license_state_id_with_state_name: Masapul nga ited mo ti %{state_name}
+          iti numero ti cucuam nga driver's license wenno ti numero ti cucuam nga
+          ID iti estado. No awan ti  numero ti cucuam nga driver's license, ited mo
+          ti up-pat nga maudi nga numero iti cucuam nga Social Security. No amin dagitoy
+          awan kenka, pakisurat mo iti "AWAN" tapno casta mangted iti estado kenka
+          ti espesyal nga ID numero nga usarem.
+        drivers_license_or_photo_id_and_other: Masapul nga ited mo ti numero ti  %{state_name}
+          driver's license nga cucuam. No awan ti driver's license mo, ited mo ti
+          up-pat nga maudi nga numero iti cucuam nga Social Security. No awan dagitoy
+          dua, ited mo ti maysa nga copia iti agdama ken aprobado nga ID retrato wenno
+          copia ti agdama nga utility bill, bank statement, cheke de govierno, cheke
+          de sueldo, wenno documento ti govierno nga adda iti nagan nga documento
+          intono umuna nga agbutos ka.
+        drivers_license_current_and_valid: Masapul nga ited mo ti numero iti agdama
+          ken husto nga driver's license mo. No awan daytoy, ited mo ti up-pat nga
+          maudi nga numero ti cucuam nga Social Security. No awan dagitoy dua, isurat
+          mo iti "AWAN" tapno ikkan ti numero iti ID nga ited kenka ti estado.
+        drivers_license_current_and_valid_with_state_name: Masapul nga ited mo iti
+          numero ti  %{state_name} driver's license nga cucuam no daytoy ket agdama
+          ken husto. No awan ti agdama ken husto nga driver's license mo, ited mo
+          ti up-pat nga maudi nga numero iti Social Security mo. No awan dagitoy dua,
+          isurat mo ti "AWAN" tapno ikkan iti estado iti numero ti ID nga ited kenka.
+        driver_license_state_issues_and_ssn: Masapul nga ited mo iti numero ti driver's
+          license mo nga inted iti estado kenka KEN iti up-pat nga maudi nga numero
+          iti Social Security mo. No awan ti driver's license  mo, wenno numero ti
+          Social Security mo, isurat mo iti "AWAN", ket ti estado mangted kenka ti
+          espesyal nga ID numero nga usarem.
+    sub_18:
+      blank: Ilocano (ilo)
+      be_by_next_election: 18 iti tawen mo daytoy umay nga eleksyon
+      be_by_next_general_election_november: No 18 iti tawen mo sakbay ti sumaruno
+        nga eleksyon heneral (kasla, tung-gal Noviembre)
+      once_turned_16: No 16 iti tawen mo (ngem saan ka pay nga mabalin nga agbuto
+        ing-gana no agtawen ka ti 18)
+      once_turned_17: Intono agtawen ka ti 17
+      once_turned_17_but: No ti tawen mo 17 (ngem masapul nga 18 ti tawen mo tapno
+        agbuto)
+      turn_by_next_election: No 18 iti tawen mo ti sumaruno nga eleksyon
+      turn_by_next_election_2: 18 ti tawen mo daytoy sumaruno nga eleksyon
+      turn_by_next_general_election_november: No 18 ti tawen mo sakbay ni eleksyon
+        heneral (kasla tung-gal Noviembre)
+      turn_by_next_general_election_november_2: No 18 iti tawen mo ti sumaruno nga
+        eleksyon ti Noviembre
+      when_at_least_16: No ti tawen ti tao ket awan ti kurangna nga 16
+      when_is_16: No 16 iti tawen ti tao
+      when_will_be_18: No 18 ti tawen ti tao sakbay wenno intono eleksyon
+      90_days_before: 90 nga aldao sakbay iti 18 nga kaaldawan
+      6_months_before: innem nga bulan sakbay ti 18 nga kaaldawan
+      60_days_before_election_novemeber: No 60 nga aldaw pay sakbay ti sumaruno nga
+        eleksyon ket 18 ti tawen mo ti nasao nga eleksyon (kasla tung-gal Noviembre)
+      2_months_before: Dua nga bulan sakbay ti 18 nga kaaldawan
+      17_turn_18: No ti tawen mo 17 ngem tawen mo 18 sakbay ti sumaruno nga eleksyon
+    registration_deadline:
+      california: Markado ti koreo wenno inawat ti opisina ti Eleksyon (o ahensya
+        ti NVRA Voter Registration) iti kaaldawan, wenno 15 nga aldaw sakbay ti aldaw
+        ti eleksyon.
+      connecticut: Adda marka ti coreo 14 nga aldaw sakbay iti eleksyon, wenno naawat
+        mismo iti tao 7 nga aldaw sakbay iti eleksyon
+      delaware: Markado ti coreo ti mayka-up-pat nga Sabado sakbay ti heneral o primary
+        eleksyon, wenno 10 nga aldaw sakbay ti eleksyon espesyal.
+      georgia: Markado ti coreo iti maikalima nga Lunes sakbay ti eleksyon
+      iowa: Naawat mismo ti tao 10 nga aldaw sakbay dagiti Heneral ken Primary Eleksyon
+        (11 nga aldaw sakbay amin nga dad-duma nga eleksyon), o markado ti coreo 15
+        nga aldaw sakbay ti aldaw ti eleksyon.
+      kansas: Markado ti coreo 21 nga aldaw sakbay ti eleksyon no naibuson, naawat
+        idiay opisina ti county 21 nga aldaw sakbay ti eleksyon no intulud mismo ti
+        tao.
+      missouri: naawat sakbay ti oras ti 5 ti malem (wenno oras nga panagserra dagiti
+        opisina) iti maika-uppat nga Mierkoles sakbay ti eleksyon.
+      new_york: Markado ti coreo 25 nga aldaw sakbay ti eleksyon naawat ti aldaw nga
+        saan nga bas-bassit ngem 20 nga aldaw sakbay ti eleksyon
+      nebraska: Markado ti maika-tallo nga Viernes sakbay ti eleksyon o naawat mismo
+        ti tao ti oras ti 6 ti malem ti maika-dua nga Viernes sakbay ti eleksyon
+      nevada: Markado ti coreo 31 nga aldaw sakbay ti eleksyon, o naited online 21
+        nga aldaw sakbay ti eleksyon o inawat mismo ti tao idiay opisina ti eskribiente
+        21 nga aldaw sakbay ti eleksyon
+      rhode_island: naawat 30 nga aldaw sakbay ti eleksyon. Dagiti porma ti rehistrasyon
+        nga naawat kalpasan ti deadline mabalin nga awaten no laeng markado ti coreo
+        iti aldaw wenno sakbay ti deadline ti voter registration
+      utah: markado 30 nga aldaw sakbay ti eleksyon, o naawat mismo ti tao 15 nga
+        aldaw sakbay ti eleksyon
+      vermont: naawat ti oras ti 5 iti malem ti Mierkoles sabay ti eleksyo9n
+      washington: markado ti coreo ti Lunes up-pat nga semana sakbay ti eleksyon,
+        o naawat mismo ti tao idiay departamento ti county elections iti Lunes mai-sa
+        nga semana sakbay ti eleksyon
+      postmarked_11_days: markado ti coreo 11 nga aldaw sakbay ti eleksyon
+      postmarked_20_days: markado ti coreo 20 nga aldaw sakbay ti eleksyon
+      postmarked_21_days: markado ti coreo 21 nga aldaw sakbay ti eleksyon
+      postmarked_25_days: markado ti coreo 25 nga aldaw sakbay ti eleksyon
+      postmarked_28_days: markado ti coreo 28 nga aldaw sakbay ti eleksyon
+      postmarked_29_days: markado ti coreo 29 nga aldaw sakbay ti eleksyon
+      postmarked_30_days: markado ti coreo 30 nga aldaw sakbay ti eleksyon
+      received_10_days: naawat 10 nga aldaw sakbay ti eleksyon
+      received_14_days: naawat 14 nga aldaw sakbay ti eleksyon
+      received_15_days: naawat 15 nga aldaw sakbay ti eleksyon
+      received_21_days: naawat 21 nga aldaw sakbay ti eleksyon
+      received_22_days: naawat 22 nga aldaw sakbay ti eleksyon
+      received_25_days: naawat 25 nga aldaw sakbay ti eleksyon
+      received_30_days: naawat 30 nga aldaw sakbay ti eleksyon
+      received_at_least_30_days: naawat saan nga nasapsapa gem 30 nga aldaw sakbay
+        ti eleksyon
+      thirty_days_before: 30 nga aldaw sakbay ti eleksyon
+

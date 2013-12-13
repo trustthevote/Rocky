@@ -1,1 +1,486 @@
+---
 vi:
+  states:
+    custom:
+      ca:
+        online_instructions: Bạn có thể hoàn thành đăng ký cử tri trực tuyến của bạn
+          với tiểu bang ngay bây giờ - qua việc sử dụng đơn đăng ký cung cấp bởi Thư
+          ký Bang Debra Bowen.
+        step_2:
+          checkbox_text: Tôi là cư dân tiểu bang California, sống tại Hoa Kỳ.
+          instruction_text: Bạn có đủ điều kiện để hoàn thành đăng ký của bạn bằng
+            cách sử dụng hệ thống đăng ký cử tri trực tuyến của Bang.
+      nv:
+        online_instructions: <p>Dưới đây bạn có thể hoàn tất đăng ký cử tri trực tuyến
+          của bạn với bang mình.  Đơn cử tri trực tuyến Nevada (NOVA) được cung cấp
+          bởi Thư ký Bang Nevada , Ross Miller, cho công dân Nevada đăng ký đi bầu,
+          hoặc thay đổi thông tin đăng ký hiện tại của họ. NOVA cũng có sẵn <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">
+          tại đây </a></P><br/><p> Nếu bằng lái xe của bạn không hợp lệ, hoặc bang
+          bạn không thể tìm thấy hay xác nhận hồ sơ xe của bạn - xin đừng lo  - bạn
+          cũng có thể <a href="%{next_url}"> hoàn thành đăng ký của bạn với %{rtv_and_partner_name}</a>.
+          Bạn sẽ chỉ cần in ra, ký tên, và gởi mẫu đi. </P>
+    parties:
+      democratic: Đảng Dân Chủ
+      independent: Đảng Độc Lập
+      green: Đảng Xanh
+      libertarian: Đảng Tự Do
+      republican: Đảng Cộng Hòa
+      working_families: Đảng Gia đình Làm việc
+      other: Khác
+    no_party_label:
+      none: Không đảng
+      decline_to_state: Từ chối nêu ra
+      blank: ''
+    tooltips:
+      not_participating:
+        blank: ''
+        new_hampshire: Pháp luật bang New Hampshire không cho phép bạn sử dụng mẫu
+          này để đăng ký đi bầu. Để biết thông tin về đăng ký bầu cử, nên liên hệ
+          với Thư ký thị trấn hoặc thành phố của bạn. Thông tin liên lạc của thư ký
+          thị trấn và thành phố được liệt kê ở http://www.state.nh.us/sos/clerks.htm.
+          Bạn cũng có thể liên hệ với Thư ký Bang tại 603-271-3242 hoặc ghé thăm http://www.state.nh.us/sos/electionsnew.htm.
+        north_dakota: North Dakota không có đăng ký cử tri. Để biết thêm thông tin,
+          liên hệ với Thư ký Bang tại 701-328-3660 hoặc ghé thăm http://www.nd.gov/sos.
+        wyoming: Pháp luật Bang Wyoming không cho phép bạn sử dụng mẫu này để đăng
+          ký đi bầu. Để biết thêm về đăng ký đi bầu ở Wyoming, xin vui lòng liên lạc
+          với Thư ký quận nơi bạn sinh sống. Thông tin liên lạc có thể tìm tại http://soswy.state.wy.us/election/clerks.htm
+          hoặc gọi 307-777-3573.
+      race:
+        blank: ''
+        required_with_state_name: Chính quyền của bang %{state_name} đòi hỏi thông
+          tin về chủng tộc hay sắc tộc của bạn. Đơn xin của bạn sẽ không bị từ chối
+          nếu bạn không cung cấp thông tin này.
+        requested_with_state_name: Chính quyền của bang %{state_name} yêu cầu thông
+          tin về chủng tộc hay sắc tộc của bạn. Đơn xin của bạn sẽ không bị từ chối
+          nếu bạn không cung cấp thông tin này.
+        georgia: Đơn xin của bạn sẽ không bị từ chối nếu bạn không cung cấp thông
+          tin liên quan đến giới tính và chủng tộc/sắc tộc.
+        requested_not_required_with_state_name: Chính quyền của bang %{state_name}
+          yêu cầu thông tin về chủng tộc hoặc sắc tộc của bạn, nhưng không bắt buộc.
+        required_no_conditions_with_state_name: Chính quyền của bang %{state_name}
+          đòi hỏi thông tin về chủng tộc hoặc sắc tộc của bạn.
+        requested_no_conditions_with_state_name: Chính quyền của bang %{state_name}
+          yêu cầu thông tin về chủng tộc hoặc sắc tộc của bạn
+        not_required_with_state_name: Chính quyền của bang %{state_name} không yêu
+          cầu thông tin về chủng tộc hoặc sắc tộc.
+        not_required_but_appreciated_with_state_name: Chính quyền của bang %{state_name}
+          không yêu cầu thông tin về chủng tộc hoặc sắc tộc của bạn. Tuy nhiên, Rock
+          the Vote sẽ đánh giá cao những thông tin này, để đo lường hiệu quả của những
+          nỗ lực đăng ký cử tri của chúng tôi. Thông tin này sẽ không xuất hiện trên
+          mẫu in đăng ký cử tri của bạn.
+        not_required_but_appreciated_with_state_name_2: Chính quyền của bang %{state_name}
+          không yêu cầu thông tin về chủng tộc hoặc sắc tộc của bạn. Tuy nhiên, Rock
+          the Vote sẽ đánh giá cao những thông tin này, để đo lường hiệu quả của những
+          nỗ lực đăng ký cử tri của chúng tôi. Thông tin này sẽ không xuất hiện trên
+          mẫu in đăng ký cử tri của bạn.
+        virginia: Khối thịnh vượng chung Bang Virginia không yêu cầu thông tin về
+          chủng tộc hoặc sắc tộc của bạn. Tuy nhiên, Rock the Vote sẽ đánh giá cao
+          những thông tin này,  để đo lường hiệu quả của những nỗ lực đăng ký cử tri
+          của chúng tôo. Thông tin này sẽ không xuất hiện trên mẫu in đăng ký cử tri
+          của bạn.
+        washington_dc: Quận Columbia không yêu cầu thông tin về chủng tộc hoặc sắc
+          tộc của bạn. Tuy nhiên, Rock the Vote sẽ đánh giá cao những thông tin này,
+          để đo lường hiệu quả của những nỗ lực đăng ký cử tri của chúng tôi. Thông
+          tin này sẽ không xuất hiện trên mẫu in đăng ký cử tri của bạn.
+      party:
+        blank: ''
+        arizona: Cho cuộc bầu cử tổng thống ưu tiên, người đăng ký cần phải được đăng
+          ký theo một đảng đươc công nhận. Cho tất cả các cuộc bầu cử sơ bộ khác,
+          các cử tri đã đăng ký với tư cách Độc lập, không có sở thích phe phái, hoặc
+          thành viên của đảng không được công nhận trong bầu cử được phép bỏ trong
+          cuộc bầu cử chính đảng mà họ lựa chọn thuộc một trong những đảng chính trị
+          được công nhận. Cử tri đã đăng ký với một đảng chính trị được công nhận,  sẽ
+          nhận được lá phiếu bầu cho đảng của họ. Chỉ những thành viên đã đăng ký
+          của đảng Tự Do Arizona được phép bỏ phiếu trong cuộc bầu cử Chính Đảng Tự
+          Do .
+        california: Luật California cho phép cử tri từ chối tuyên bố liên kết với
+          bất kì đảng chính trị nào, hoặc liên kết với đảng chính trị mà trước đây
+          mình không gia nhập, để bỏ phiếu cho cuộc bầu cử chính đối với bất kỳ đảng
+          phái chính trị đủ điều kiện nào mà Thư ký Chính Phủ cho phép họ làm như
+          vậy. Bạn có thể gọi số 1-800-345-VOTE hoặc ghé thăm www.ss.ca.gov/elections/elections_d.htm
+          để biết các đảng chính trị cho phép cử tri không liên kết tham gia bỏ phiếu
+          trong cuộc bầu cử chính của họ.
+        idaho: ! 'Bạn phải đăng ký với một đảng nếu bạn muốn tham gia vào cuộc bầu
+          cử của đảng đó. Ghi vào Ưu tiên Đảng Chính Trị của bạn. Lựa chọn: Hiến pháp,
+          Dân chủ, Tự do, Cộng hòa hoặc không liên kết (không có sở thích đối với
+          đảng nào). Nếu phần này để trống, bạn sẽ nhận được lá phiếu đề bên trên
+          Không Liên Kết.'
+        indiana: Pháp luật bang Indiana không cho phép một người cho biết đảng của
+          họ trong hồ sơ đăng ký. Bạn sẽ phải tuyên bố đảng bạn liên kết trước khi
+          bỏ phiếu trong cuộc bầu cử chính.
+        massachusetts: Nếu bạn không chọn một đảng chính trị, bạn sẽ được đăng ký
+          như là không đảng phái (thường được gọi là độc lập). Cử tri không đảng phái
+          có thể tham gia bầu cử sơ bộ đảng và tổng tuyển cử. Hiện tại có ba đảng
+          phái chính trị (Dân chủ, Cộng hòa, Cầu Vòng Xanh).
+        mississippi: Bang Mississippi không có đăng ký đảng. Vì vậy, bạn không cần
+          phải đăng ký với một đảng nếu bạn muốn tham gia vào cuộc bầu cử chính, phiên
+          họp kín, hoặc hội nghị của đảng đó.
+        north_carolina: North Carolina có một hệ thống bán khép kín. Cử tri liên kết
+          với một đảng chính trị nào thì chỉ có thể bỏ phiếu cho đảng đó. Trong cuộc
+          bầu cử chính của đảng, cử tri không liên kết với đảng nào, có thể chọn để
+          bỏ phiếu có đảng phái hay không đảng phái.
+        rhode_island: Nếu bạn muốn liên kết để bỏ phiếu, hãy ghi đảng bạn chọn. Nếu
+          bạn để khung trống hoặc ghi là không chọn đảng, bạn sẽ được liệt kê vào
+          danh sách không liên kết.
+        tennessee: Tennessee không đăng ký theo đảng phái chính trị. Khi bạn muốn
+          bỏ phiếu trong một cuộc bầu cử, bạn sẽ phải khai báo đảng phái ngay vào
+          thời điểm bầu cử đó.
+        utah: Luật bầu cử của bang Utah cho phép mỗi đảng phái chính trị được lựa
+          chọn người mà đảng sẽ cho phép bỏ phiếu trong cuộc bầu cử  của đảng. Nếu
+          bạn không liên kết với một đảng, bạn có thể bị hạn chế bỏ phiếu.
+        vermont: Luật ở Vermont không cho phép đăng ký đảng để tham gia vào bất kỳ
+          cuộc bầu cử nào.
+        virginia: Bạn không cần phải đăng ký với một đảng nếu bạn muốn tham gia vào
+          cuộc bầu cử, phiên họp kín, hoặc hội nghị của đảng đó. Tuy nhiên, nếu bạn
+          hội đủ điều kiện để bỏ phiếu vắng mặt, và muốn tham gia vào một chính đảng,
+          đơn xin lá phiếu khiếm diện của bạn phải xác định đảng phái cho lá phiếu
+          sẽ được gửi đi.
+        washington: Tiểu Bang Washington không đăng ký cử tri theo đảng phái chính
+          trị.
+        west_virginia: Bạn phải đăng ký với một đảng nếu bạn muốn tham gia vào cuộc
+          bầu cử, phiên họp kín, hoặc hội nghị của đảng đó (trừ khi bạn yêu cầu cách
+          bỏ phiếu của đảng cho phép người không liên kết đi bầu).
+        wisconsin: Bạn không cần phải chọn đảng của bạn để đăng ký đi bầu ở Wisconsin.
+        not_part_of_registration: Gia nhập đảng không phải là một thành phần của đăng
+          ký cử tri. Bạn khai báo đảng của bạn bằng cách yêu cầu phiếu bầu của một
+          đảng chính trị trong một cuộc bầu cử chính đảng.
+        not_required_to_vote: Bạn không cần phải đăng ký với một đảng chính trị để
+          đăng ký đi bầu.
+        not_required: Bạn không cần phải đăng ký với một đảng nếu bạn muốn tham gia
+          vào cuộc bầu cử, phiên họp kín, hoặc hội nghị cuả đảng đó.
+        not_required_can_choose_any: Bạn không cần phải đăng ký với một đảng nếu bạn
+          muốn tham gia vào cuộc bầu cử, phiên họp kín, hoặc hội nghị của đảng đó,
+          và có thể chọn bất kỳ cuộc bầu cử tổng thống nào (nhưng không phải cả hai)
+          bất kể việc đăng ký.
+        not_done_with_state_name: Bạn không đăng ký theo đảng phái chính trị trong
+          bang %{state_name}. Tuy nhiên, để bầu cử,  bạn phải yêu cầu cuộc đầu phiếu
+          cho một đảng bất kỳ.
+        party_not_required: Việc đăng ký hoặc có đảng ưa thích là không cần thiết
+          để đăng ký đi bầu. Tuy nhiên, khi bạn xin bỏ phiếu cho cuộc tuyển cử chính,  bạn
+          phải chỉ định đảng mà bạn chọn cho cuộc bầu cử đó.
+        party_not_required_2: Đăng ký đảng không cần thiết để tham gia vào bất kỳ
+          cuộc bầu cử nào.
+        you_may_but_not_required: Bạn có thể, nhưng không cần phải, đăng ký với một
+          đảng trước nếu bạn muốn tham gia vào cuộc bầu cử chính của đảng đó. Tham
+          gia vào một cuộc bầu cử hoặc phiên họp kín, phải đăng ký với một đảng. Bạn
+          có thể thay đổi hoặc khai báo một đảng tại các cuộc thăm dò vào ngày bầu
+          cử hoặc tại địa điểm họp kín.
+        closed_caucus_with_state_name: Bang %{state_name} có cuộc bầu cử sơ bộ kín
+          và hệ thống họp kín cho tổng thống. Mỗi đảng chính trị được công nhận có
+          thể lựa chọn để có cuộc đầu phiếu riêng biệt, chỉ niêm yết các ứng cử viên
+          từ đảng chính trị của họ, hoặc đảng phái chính trị được công nhận có thể
+          chọn để kết hợp các ứng cử viên của họ trên một lá phiếu. Đảng phái chính
+          trị được công nhận cũng có thể chọn những gì đảng phái chính trị có thể
+          tham gia trong cuộc bầu cử chính của họ. Liên kết chính trị của một cử tri
+          30 ngày trước ngày bầu cử sẽ quyết định lá phiếu cử tri có thể lựa chọn,
+          tuy nhiên, cử tri chỉ có thể chọn một lá phiếu.
+        required_for_presidential: Nếu bạn không liệt kê đảng phái, bạn không thể
+          bỏ phiếu trong cuộc bầu cử Tổng thống. Tham gia đảng phái chính trị không
+          yêu cầu đối với bất kỳ cuộc bầu cử nào khác.
+        required_for_primary: Bạn phải đăng ký với một đảng nếu bạn muốn tham gia
+          vào cuộc bầu cử chính, họp kín hoặc hội nghị của đảng đó
+        required_for_primary_2: Bạn phải đăng ký với một đảng nếu bạn muốn tham gia
+          vào cuộc bầu cử chính của đảng đó.
+        required_for_primary_dem_rep_only: Bạn phải đăng ký với một đảng để bỏ phiếu
+          trong cuộc bầu cử của đảng. Cuộc bầu cử chỉ được tổ chức cho đảng Dân chủ
+          và đảng Cộng hòa.
+        required_for_primary_nonpartisan: Bạn phải đăng ký với một đảng nếu bạn muốn
+          tham gia vào cuộc bầu cử chính, họp kín, hoặc hội nghị của đảng đó. Nếu
+          bạn đăng ký với một đảng chính trị nhỏ, hoặc không thuộc đảng phái nào,
+          bạn sẽ nhận được một Phiếu Không Đảng Phái trong ngày Bầu Cử.
+        required_for_primary_unless: Bạn phải đăng ký với một đảng nếu bạn muốn tham
+          gia vào cuộc bầu cử chính, họp kín hoặc hội nghị cuả đảng đó (trừ trường
+          hợp bạn được đảng đó cho phép).
+        required_for_primary_no_change_30_days: Bạn phải đăng ký với một đảng nếu
+          bạn muốn tham gia vào cuộc bầu cử chính, họp kín hoặc hội nghị của đảng
+          đó. Bạn không thể thay đổi trạng thái liên kết đảng trong vòng 30 ngày của
+          một cuộc bầu cử chính đảng.
+        required_for_primary_2_months: Bạn phải đăng ký với một đảng nếu bạn muốn
+          tham gia vào cuộc bầu cử, họp kín hoặc hội nghị của đảng đó. Để bỏ phiếu
+          trong phiên họp kín của một đảng, bạn phải có một phần liên kết với đãng
+          trong ít nhất 2 tháng trước khi họp kín được tổ chức. Bỏ phiếu trong cuộc
+          bầu cử của đảng, bạn có thể tuyên bố liên kết của bạn với đảng bất cứ lúc
+          nào bao gồm cả ngày bầu cử chính.
+      id_number:
+        blank: ''
+        arizona: Nếu bạn có giấy phép lái xe hoặc giấy xác nhận không hoạt động của
+          Arizona ban hành sau ngày 1 tháng 10 năm 1996, viết số giấy phép trong hộp
+          6 mẫu NVRA. Điều này sẽ coi như là bằng chứng về quyền công dân, và không
+          cần tài liệu bổ sung. Nếu không, bạn phải đính kèm giấy tờ chứng minh quốc
+          tịch để hình thành. Chỉ có mẫu chứng minh mới có thể chấp nhận để đăng ký
+          đi bầu.
+        colorado: Bạn phải cung cấp số bằng lái xe Colorado hoặc số nhận dạng (do
+          bộ phận doanh thu Colorado cấp ). Nếu bạn không có giấy phép lái xe hoặc
+          số nhận dạng. Nếu bạn không có bất kỳ mẫu nhận dạng nào, bạn phải chỉ định
+          điều này thông qua việc đánh các khung thích hợp, và cung cấp bốn số cuối
+          của số an sinh xã hội của bạn. Nếu bạn không có bất kỳ mẫu nhận dạng nào,
+          thư ký của bang sẽ chỉ định cho bạn một số nhận dạng riêng.
+        georgia: Bạn phải cung cấp số bằng lái xe của Georgia hoặc số nhận dạng do
+          bang cấp. Nếu bạn không có một trong những thứ đó, bạn phải cung cấp bốn
+          số cuối của số an sinh xã hội của bạn. Nếu bạn không có bất kỳ mã số yêu
+          cầu, vui lòng nhập vào chữ "NONE" và bạn sẽ được chỉ định một số nhận dạng
+          riêng của bang.
+        indiana: Bạn phải cung cấp số giấy phép lái xe gồm mười số của Indiana hoặc
+          số ID do Cục Vận Chuyển cấp . Nếu bạn không có giấy phép lái xe hoặc thẻ
+          ID tiểu bang Indiana BMV, xin vui lòng nhập bốn số cuối của số an sinh xã
+          hội của bạn. Xin chỉ định số đã được cung cấp.
+        maryland: Nếu bạn có giấy phép lái xe Maryland hợp lệ, hoặc thẻ nhận dạng
+          quản lý xe cơ giới, bạn phải nhập vào giấy phép lái xe hoặc số nhận dạng.
+          Nếu bạn không có cái nào, bạn phải nhập vào bốn số cuối của số an sinh xã
+          hội của bạn. Nếu bạn không có bất kỳ của những con số này, vui lòng nhập
+          vào chữ "NONE" và số nhận dạng riêng của bang sẽ được cấp cho bạn.
+        oklahoma: Bốn số cuối của số an sinh xã hội của bạn được yêu cầu. Bang cũng
+          yêu cầu số giấy phép lái xe Oklahoma của bạn. Nếu bạn không có số nào, vui
+          lòng nhập vào chữ "NONE" và bang sẽ chỉ định một mã số riêng cho bạn.
+        wisconsin: Nếu bạn đã được cấp bằng lái xe Wisconsin hiện tại và hợp lệ, hoặc
+          thẻ căn cước (ID) do DOT WI  cấp,  bạn phải cung cấp số của nó. Nếu giấy
+          phép lái xe WI của bạn bị thu hồi, đình chỉ, hoặc đã hết hạn, vui lòng cung
+          cấp số của nó và 4 số cuối của số an sinh xã hội của bạn. Nếu bạn chưa được
+          cấp giấy phép lái xe của WI hoặc ID do DOT WI  cấp, bạn phải cung cấp 4
+          số cuối của số an sinh xã hội của bạn. Nếu bạn không có bằng lái xe của
+          WI, hoặc ID do DOT WI cấp hoặc thẻ an sinh xã hội, xin điền vào vòng tròn
+          thích hợp.
+        south_dakota: Giấy phép lái xe của bạn là cần thiết. Nếu bạn không có bằng
+          lái xe hợp lệ, bạn phải cung cấp bốn số cuối của số an sinh xã hội của bạn.
+          Nếu bạn không có một trong hai giấy phép lái xe hoặc một số an sinh xã hội,
+          bạn phải đăng ký tại văn phòng quận để kiểm toán viên sẽ tuyên bố xác nhận
+          sự thật rằng bạn có không giấy phép lái xe của South Dakota cũng không số
+          An Sinh Xã Hội.
+        ssn_requested: Số an sinh xã hội của bạn được yêu cầu. Cung cấp thông tin
+          này là tự nguyện. Nếu bạn không cung cấp số an sinh xã hội của bạn, bạn
+          phải nhập số giấy phép lái xe hoặc bốn chữ số cuối của số an sinh xã hội
+          của bạn. Nếu bạn không có một trong hai thứ này, vui lòng nhập vào chữ "NONE"
+          và bang sẽ chỉ định cho bạn một số riêng.
+        ssn_or_none: Vui lòng cung cấp số an sinh xã hội của bạn. (Nếu bạn không có
+          số an sinh xã hội, vui lòng nhập vào chữ  "NONE" và bang sẽ chỉ định cho
+          bạn một mã số riêng.)
+        ssn_or_none_2: Số an sinh xã hội đầy đủ của bạn là bắt buộc. Nếu bạn không
+          có số An Sinh Xã Hội, nhập vào chữ "NONE" và một số riêng của bang sẽ được
+          giao cho bạn.
+        ssn_or_none_3: Số an sinh xã hội đầy đủ của bạn là bắt buộc.
+        ssn_or_none_4: Số an sinh xã hội đầy đủ của bạn là bắt buộc. (Nếu bạn không
+          có số An Sinh Xã Hội, nhập vào chữ "NONE" và bang sẽ chỉ định cho bạn một
+          mã số riêng.)
+        ssn_or_none_5: Vui lòng cung cấp số an sinh xã hội của bạn. Nếu bạn không
+          có  số an sinh xã hội, vui lòng nhập vào chữ "NONE" và một số riêng của
+          bang sẽ được giao cho bạn.
+        ssn_full: Số an sinh xã hội đầy đủ của bạn là bắt buộc. Nó được sử dụng để
+          ngăn chặn gian lận đăng ký và bỏ phiếu. Thất bại trong việc cung cấp thông
+          tin này sẽ  cản trở sự chấp nhận đơn xin nầy cuả bạn.
+        ssn_full_2: Vui lòng cung cấp số an sinh xã hội của bạn.
+        ssn_full_not_required: Số an sinh xã hội đầy đủ của bạn là bắt buộc. Không
+          có người bị từ chối quyền đăng ký vì không bao gồm số an sinh xã hội.
+        drivers_license_or_mvc: Bạn phải cung cấp giấy phép lái xe hoặc không lái
+          xe MVC ID. Nếu bạn không có giấy phép lái xe hoặc MVC ID không lái xe, bốn
+          chữ số cuối của số an sinh xã hội của bạn phải được cung cấp. Nếu bạn không
+          có giấy phép lái xe, giấy không lái xe MVC ID, hoặc  số an sinh xã hội,
+          bạn sẽ phải để xác định trên mẫu đăng ký cử tri.
+        drivers_license_or_non_driver_id: Bạn phải cung cấp giấy phép lái xe, hoặc
+          số ID không lái xe. Nếu bạn không có bằng lái xe hoặc số ID không lái xe,  bạn
+          phải cung cấp bốn số cuối của số an sinh xã hội của bạn. Nếu bạn không có
+          giấy phép lái xe hoặc một số an sinh xã hội, vui lòng nhập và0 chữ "NONE"
+          và bang sẽ chỉ định cho bạn một mã số riêng cho mục đích bỏ phiếu
+        drivers_license_or_other_with_state_name: Bạn phải cung cấp số giấy phép lái
+          xe bang %{state_name} của bạn. Nếu bạn không có bằng lái xe, xin vui lòng
+          nhập vào bốn số cuối của số an sinh xã hội của bạn. Nếu bạn không có số
+          giấy phép lái xe hoặc số an sinh xã hội, vui lòng nhập vào chữ  "NONE" và
+          bang sẽ chỉ định cho bạn một mã số riêng.
+        drivers_license_or_other_with_state_name_2: Bạn phải cung cấp số giấy phép
+          lái xe bang %{state_name} của bạn. Nếu bạn không có số giấy phép lái xe,
+          xin vui lòng cung cấp bốn số cuối của số an sinh xã hội của bạn. Nếu bạn
+          có không, vui lòng nhậpvào chữ "NONE" và số nhận dạng riêng sẽ được chỉ
+          định cho bạn.
+        drivers_license_or_other_with_state_name_3: ! 'Bạn phải cung cấp số giấy phép
+          lái xe bang %{state_name} của bạn. Nếu bạn không có số giấy phép lái xe
+          bang %{state_name},  bạn phải cung cấp bốn số cuối của số an sinh xã hội
+          của bạn. Nếu bạn không có giấy phép lái xe hoặc một số an sinh xã hội, vui
+          lòng nhập vào chữ "NONE" và bang sẽ chỉ định cho bạn một mã số riêng.
+
+
+          Bạn phải cung cấp số giấy phép lái xe bang %{state_name}. Nếu bạn không
+          có số giấy phép lái xe bang %{state_name}, bạn phải cung cấp bốn số cuối
+          của số an sinh xã hội của bạn. Nếu bạn không có giấy phép lái xe hoặc một
+          số an sinh xã hội, vui lòng nhập "NONE" và bang sẽ chỉ định cho bạn một
+          mã số.'
+        drivers_license_or_other_with_state_name_4: Bạn phải cung cấp số giấy phép
+          lái xe bang %{state_name} của bạn. Nếu bạn không có số giấy phép lái xe,
+          bạn phải cung cấp bốn số cuối của số an sinh xã hội của bạn. Nếu bạn không
+          có giấy phép lái xe hoặc một số an sinh xã hội, vui lòng nhập vào chữ "NONE"
+          và bang sẽ chỉ định cho bạn một mã số riêng.
+        drivers_license_or_ssn_or_none: Bạn phải cung cấp hoặc số giấy phép lái xe,
+          hoặc bốn chữ số cuối của số an sinh xã hội của bạn. Nếu bạn có không giấy
+          phép lái xe, cũng không có số an sinh xã hội, vui lòng nhập vào chữ "NONE"
+          và một số nhận dạng riêng sẽ được bang cấp cho bạn.
+        drivers_license_or_ssn_or_none_2: Bạn phải cung cấp số giấy phép lái xe của
+          bạn. Nếu bạn không có bằng lái xe, xin vui lòng cung cấp bốn số cuối của
+          số an sinh xã hội của bạn. Nếu bạn có không, vui lòng nhập vào chữ  "NONE"
+          và bang sẽ cung cấp một số nhận dạng riêng cho bạn.
+        drivers_license_or_ssn_or_none_3: Bạn phải cung cấp số giấy phép lái xe của
+          bạn, nếu bạn không có số giấy phép lái xe, bạn phải cung cấp bốn số cuối
+          của số an sinh xã hội của bạn. Nếu bạn không có một trong hai số, đánh dấu
+          vào ô bên cạnh.
+        drivers_license_or_ssn_or_none_4: Bạn phải cung cấp số giấy phép lái xe của
+          bạn. Nếu bạn không có số giấy phép lái xe, bạn phải cung cấp bốn số cuối
+          của số an sinh xã hội của bạn. Nếu bạn không có cả hai số, nhập vào chữ
+          "NONE" và  số nhận dạng riêng của bang sẽ được giao cho bạn.
+        drivers_license_or_ssn_county_clerk_with_state_name: Bạn phải cung cấp số
+          bằng lái xe của bang %{state_name} nếu bạn đã được cấp. Nếu bạn không có
+          số giấy phép lái xe, bạn phải cung cấp bốn số cuối của số an sinh xã hội
+          của bạn. Nếu bạn không có giấy phép lái xe hoặc một số an sinh xã hội, xin
+          vui lòng liên hệ với thư ký quận của bạn để được chỉ định một định danh
+          riêng.
+        drivers_license_or_dmv_with_state_name: Bạn phải cung cấp số giấy phép lái
+          xe bang %{state_name}, hoặc số chứng thực sở hữu phương tiện cơ giới của
+          bạn. Nếu bạn không có giấy phép lái xe hoặc chứng thực, bạn phải cung cấp
+          bốn số cuối của số an sinh xã hội của bạn. Nếu bạn không có bất kỳ thứ nào
+          trong số này, nhập vào chữ  "NONE" và bang sẽ chỉ định cho bạn một mã số
+          riêng.
+        drivers_license_with_state_name: Bạn phải cung cấp số giấy phép lái xe bang
+          %{state_name} hoặc số thẻ căn cước bang cấp cho bạn. Nếu bạn không có một
+          trong những thứ nầy, bạn phải cung cấp bốn số cuối của số an sinh xã hội
+          của bạn. Nếu bạn không có bất kỳ số nào, vui lòng nhập vào chữ "NONE" và
+          một số nhận dạng riêng  cuả bang sẽ được giao cho bạn.
+        drivers_license_with_state_name_2: Bạn phải cung cấp số bằng lái xe bang %{state_name}
+          hoặc thẻ căn cước bang cấp cho bạn. Nếu bạn không có số giấy phép lái xe,
+          bạn phải cung cấp bốn số cuối của số an sinh xã hội của bạn. Nếu bạn không
+          có giấy phép lái xe hoặc số an sinh xã hội, bạn sẽ được đăng ký bỏ phiếu,
+          nhưng phải cung cấp nhận dạng thay thế khi bạn bỏ phiếu đầu tiên.
+        drivers_license_if_issued_with_state_name: Bạn phải cung cấp số bằng lái xe
+          của tiểu bang Louisiana nếu có. Nếu không, bạn phải cung cấp bốn số cuối
+          an sinh xã hội của bạn. Nếu bạn không có giấy phép lái xe hoặc số an sinh
+          xã hội, vui lòng nhập vào chữ "NONE" và bang sẽ chỉ định cho bạn một mã
+          số riêng.
+        drivers_license_required_at_voting_with_state_name: Bạn phải cung cấp bang
+          %{state_name} giấy phép lái xe hoặc số thẻ nhận dạng bang %{state_name}
+          của bạn. Nếu bạn không có giấy phép lái xe hoặc thẻ ID, bạn phải cung cấp
+          bốn số cuối an sinh xã hội của bạn. Nếu bạn không có như những thông tin
+          này, bạn sẽ được yêu cầu cung cấp nhận dạng khi bỏ phiếu.
+        drivers_license_non_driver_with_state_name: Bạn phải cung cấp số bằng lái
+          xe bang %{state_name}, hoặc không lái xe, số nhận dạng của bạn. Nếu bạn
+          không có một trong những thứ nầy, vui lòng cung cấp bốn số cuối an sinh
+          xã hội của bạn. Nếu bạn không có giấy phép lái xe, chứng minh thư, hoặc
+          số an sinh xã hội, vui lòng nhập vào chữ "NONE" và một số nhận dạng của
+          bang sẽ được cấp cho bạn.
+        drivers_license_non_driver_2: Bạn phải cung cấp số bằng lái xe bang cấp cho
+          bạn, hoặc số thẻ chứng nhận không lái xe. Nếu bạn không có bằng lái xe hoặc
+          thẻ chứng nhận không lái xe, bạn phải cung cấp bốn số cuối an sinh xã hội
+          của bạn. Nếu bạn không có bất kỳ thứ gì, xin vui lòng nhập vào vào chữ "NONE"
+          và số nhận dạng riêng  của bang sẽ được cấp cho bạn.
+        drivers_license_not_operating: Bạn phải cung cấp số bằng lái xe bang cấp,
+          hoặc số cuả giấy chứng nhận không hoạt động cuả bạn. Nếu bạn không có giấy
+          phép hoặcgiấy không hoạt động, bạn phải cung cấp bốn số cuối  an sinh xã
+          hội của bạn. Nếu bạn không có bất kỳ các hình thức nào, vui lòng nhập vào
+          chữ "NONE" và  số nhận dạng riêng của bang sẽ được chỉ định cho bạn.
+        drivers_license_non_operating_with_state_name: Bạn phải cung cấp số giấy phép
+          lái xe bang %{state_name} của bạn, hoặc số giấy chứng nhận không vận hành,
+          số giấy   nhận dạng. Nếu bạn không có giấy phép laí xe, hoặc giấy chứng
+          nhận không hoạt động, bạn phải cung cấp bốn số cuối an sinh xã hội của bạn.
+          Nếu bạn không có bất kỳ các hình thức nhận dạng nào, vui lòng nhập vào chữ
+          "NONE" và số nhận dạng riêng của bang sẽ được chỉ định cho bạn.
+        drivers_license_personal_identification_with_state_name: Bạn phải cung cấp
+          số giấy phép lái xe bang %{state_name} hoặc số thẻ nhận dạng cá nhân do
+          bang cấp. Nếu bạn không có giấy phép lái xe, hoặc thẻ  nhậN dạng, bạn phải
+          cung cấp bốn số cuối an sinh xã hội của bạn. Nếu bạn không có bất kỳ thứ
+          naò, vui lòng nhập vaò chữ "NONE" và  số nhận dạng riêng của bang sẽ được
+          chỉ định cho bạn.
+        drivers_license_state_id_with_state_name: Bạn phải cung cấp số giấy phép lái
+          xe bang %{state_name} hoặc số ID của bang cấp. Nếu bạn không có số giấy
+          phép lái xe, xin vui lòng cung cấp bốn số cuối an sinh xã hội của bạn. Nếu
+          bạn có không những thứ nầy, vui lòng nhập vào chữ "NONE" và  số nhận dạng
+          riêng sẽ được chỉ định cho bạn.
+        drivers_license_or_photo_id_and_other: Bạn phải cung cấp số giấy phép lái
+          xe bang %{state_name}. Nếu bạn không có bằng lái xe, xin vui lòng cung cấp
+          bốn số cuối an sinh xã hội của bạn. Nếu bạn có không giấy phép lái xe cũng
+          không có số an sinh xã hội, xin vui lòng cung cấp một bản sao ID  có  ảnh
+          hiện tại và hợp lệ,  hoặc một bản sao của một hóa đơn về tiện ích trong
+          nhà hiện tại, tài khoản ngân hàng, giấy kiểm tra của chính phủ, tiền lương,
+          hoặc tài liệu của chính phủ cho thấy tên và địa chỉ của bạn, để tránh những
+          yêu cầu ID thêm trong lần đầu tiên bạn bỏ phiếu.
+        drivers_license_current_and_valid: Bạn phải cung cấp số bằng lái xe hiện tại
+          và có giá trị của bạn. Nếu bạn không có, vui lòng cung cấp bốn số cuối  an
+          sinh xã hội của bạn. Nếu bạn có không giấy phép lái xe cũng không có số
+          an sinh xã hội, vui lòng nhập vào chữ "NONE" và số nhận dạng riêng của bang
+          sẽ được cấp cho bạn.
+        drivers_license_current_and_valid_with_state_name: Bạn phải cung cấp số giấy
+          phép lái xe bang %{state_name} có giá trị hiện tại của bạn. Nếu bạn không
+          có, bạn phải cung cấp bốn số cuối an sinh xã hội của bạn. Nếu bạn không
+          có giấy phép lái xe hoặc số an sinh xã hội, vui lòng nhập vào chữ "NONE"
+          và bang sẽ chỉ định cho bạn một mã số riêng.
+        driver_license_state_issues_and_ssn: Bạn phải cung cấp số giấy phép lái xe
+          bang cấp, hoặc bốn số cuối an sinh xã hội của bạn. Nếu bạn không có giấy
+          phép lái xe hoặc số an sinh xã hội, vui lòng nhập vào chữ "NONE" và số nhận
+          dạng riêng của bang sẽ được chỉ định cho bạn.
+    sub_18:
+      blank: ''
+      be_by_next_election: nếu bạn sẽ được 18 tuổi vào cuộc bầu cử lần sau.
+      be_by_next_general_election_november: nếu bạn sẽ được 18 tuổi trước cuộc tổng
+        tuyển cử  lần sau (thường là vào tháng Mười Một)
+      once_turned_16: một khi bạn đã bước sang tuổi 16 (bạn không thể bỏ phiếu cho
+        đến khi bạn được 18 tuổi)
+      once_turned_17: một khi bạn đã bước sang tuổi 17
+      once_turned_17_but: một khi bạn bước sang tuổi 17 (bạn phải chờ đến 18 tuổi
+        mơí bỏ phiếu được)
+      turn_by_next_election: nếu bạn sẽ tròn 18 tuổi trước khi cuộc bầu cử lần sau
+      turn_by_next_election_2: nếu bạn sẽ tròn 18 tuổi cho cuộc bầu cử lần sau
+      turn_by_next_general_election_november: nếu bạn sẽ tròn 18 tuổi trước khi cuộc
+        tổng tuyển cử lần sau (thường là vào tháng Mười Một)
+      turn_by_next_general_election_november_2: nếu bạn sẽ tròn 18 tuổi trước cuộc
+        bầu cử lần sau vào tháng Mười Một
+      when_at_least_16: khi người được ít nhất là 16 tuổi
+      when_is_16: khi người này được 16 tuổi
+      when_will_be_18: khi người này sẽ được 18 tuổi vào khi hoặc trước khi cuộc bầu
+        cử lần sau
+      90_days_before: 90 ngày trước sinh nhật thứ 18 của bạn
+      6_months_before: sáu tháng trước sinh nhật thứ 18 của bạn
+      60_days_before_election_novemeber: nếu là 60 ngày trước khi cuộc bầu cử lần
+        sau và bạn sẽ được 18 tuổi vào ngày ấy (thường là tháng Mười Một)
+      2_months_before: hai tháng trước sinh nhật thứ 18 của bạn
+      17_turn_18: nếu bạn được 17 tuổi, và sẽ bước sang 18 trước khi cuộc bầu cử lần
+        sau
+    registration_deadline:
+      california: postmarked or submitted to an elections office (or NVRA voter registration
+        agency) on or before 15 days prior to Election Day (to vote in that election)
+      connecticut: postmarked 14 days before the election or received in person 7
+        days before the election
+      delaware: postmarked by the fourth Saturday before a general or primary election,
+        or 10 days before a special election
+      georgia: postmarked by the fifth Monday before the election
+      iowa: received in-person 10 days before General and Primary Elections (11 days
+        before all other elections), or postmarked 15 days before Election Day.
+      kansas: postmarked 21 days before the election if mailed, received at the county
+        office 21 days before the election if delivered in person.
+      missouri: received before 5pm (or normal close of business) on the fourth Wednesday
+        prior to the election
+      new_york: postmarked 25 days before the election and received no less than 20
+        days before the election
+      nebraska: postmarked by the third Friday before the election, or received in-person
+        by 6pm on the second Friday before the election
+      nevada: postmarked by 31 days before the election, or submitted online by 21
+        days before an election, or received in-person at a clerk's office 21 days
+        before an election.
+      rhode_island: received 30 days before the election. Mailed voter registration
+        forms received after the deadline will be accepted as long as the mail is
+        postmarked on or before the voter registration deadline.
+      utah: postmarked 30 days before the election, or received in person 15 days
+        before the election
+      vermont: received by 5pm on the Wednesday before the election
+      washington: postmarked by the Monday four weeks before the election, or received
+        in person at the county elections department the Monday one week before the
+        election
+      postmarked_11_days: postmarked 11 days before the election
+      postmarked_20_days: postmarked 20 days before the election
+      postmarked_21_days: postmarked 21 days before the election
+      postmarked_25_days: postmarked 25 days before the election
+      postmarked_28_days: postmarked 28 days before the election
+      postmarked_29_days: postmarked 29 days before the election
+      postmarked_30_days: postmarked 30 days before the election
+      received_10_days: 10 ngày trước cuộc bầu cử
+      received_14_days: 14 ngày trước cuộc bầu cử
+      received_15_days: 15 ngày trước cuộc bầu cử
+      received_21_days: 21 ngày trước cuộc bầu cử
+      received_22_days: 22 ngày trước cuộc bầu cử
+      received_25_days: 25 ngày trước cuộc bầu cử
+      received_30_days: 30 ngày trước cuộc bầu cử
+      received_at_least_30_days: 30 ngày trước cuộc bầu cử
+      thirty_days_before: 30 ngày trước cuộc bầu cử
+

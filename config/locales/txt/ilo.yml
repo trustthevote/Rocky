@@ -1,1 +1,221 @@
+---
 ilo:
+  txt:
+    rtv_and_partner: Rock the Vote ken  %{partner_name}
+    button:
+      submit: Sumaruno nga Pagna
+      edit: Limpio
+      back: Sakbay ti Pagna
+      download: Iprentam <br/>tatta dayta cucuam nga porma iti rehistrasyon<br/>
+      ineligible_try_again: Subli
+      keep_going: Ituloy mo ti mag-magna
+      remind_me_later: Ipalagip mo canniac tat-tanto
+      help: Tulong
+      prepare: Irubuat ti porma
+      review: Dublien ti applikasyon
+      sendmail: Agpatulod ti Email
+      share_facebook: Ibandillio mo!
+      share_twitter: i-Tweet mo!
+      share_google_buzz: Bingay ti Google!
+      state_online_registration: Kayatco ti mangted<br/>ti pormac online idiay<br/>%{state}
+        tatta.
+      skip_state_online_registration: ! '&gt; Saan, ngem Dios ti ag-ngina, ituloyco
+        ''%{rtv_and_partner_name}'' nga ipaw-it it pormac tat-tanto ken.'
+    registration:
+      in_language_name: Ilocano (ilo)
+      powered_by: pinaandar ti
+      progress_indicator: Pagna
+      step_1_header: Baro nga nagre-rehistro
+      step_2_header: Impormasyon personal
+      step_3_header: Dagdag nga impormasyon para ti rehistrasyon
+      step_4_header: Ugdeng-ngegca ti impormasyon ken ug-garawca
+      step_5_header: Adalem manen ken agconpirmaca
+      stay_informed_header: Agdeng-ngeg
+      identification_header: Ditalye ti Impormasyon
+      survey_title: Damdamag para kenca
+      preparing_header: Agrub-rubuat iti porma ti rehistrasyon...
+      download_header: Iprenta iti porma
+      finish_header: Iwaragawag mo iti sarita!
+      finish_under_18_header: Addaca idiay lista!
+      tell_a_friend_title: Ibagam ti gay-yem idiay Email
+      finish_reminder: Dios ti ag-ngina, %{first_name}, iti impaw-it mo nga applikasyon
+        ti rehistrasyon! Maawat munto ti rehistrasyon mo nga conpirmadona dagiti opisyales
+        ti eleksyon iti estado. No dad-duma, adu nga semana iti masapulda nga ugadal
+        ti applikasyon mo.
+      finish_reminder_2: No cayat mo nga maam-muan iti kasasaad ti porma ti rehistrasyon
+        mo, maam-muam daytoy iti Sekretarya ti Estado idiay sa <a href="http://www.rockthevote.com/election-center/"
+        target="_blank">Election Center</a>.
+      ineligible_header: ! 'Madi iti damag, saan mo nga mabalin iti agbuto gapu kadagitoy
+        nga rason:'
+      external_header: ! '%{state} tao nga agparehistro'
+      name: Nagan
+      select_none: (awan)
+      home_address: Address ti balay
+      mailing_address: Address ti surat
+      previous_name: Nagbaliw nga nagan
+      previous_address: Umun-una nga address
+      opt_in_sms: Ipatulod mo txt mensahi nga aggapu ti %{organization}.
+      opt_in_email: Umawat dagiti email nga aggapu ti '%{organization}.
+      remind_when_18: Ipalagip mo caniac ti aldaw nga kaaldawam ko no 18 ti tawen
+        ko.
+      get_updates: Agala ti damdamag nga aggapu ti Rock The Vote
+      volunteer: Kayatco ti agbolontario idiay %{organization}.
+      not_given: awan
+      has_state_license: Adda cucuac nga aktibo nga %{state} estado ID card o driver's
+        license
+      has_no_state_license: Awan ti cucuac nga aktibo nga %{state} estado ID card
+        o driver's license
+      titles:
+        mr: Mr.
+        mrs: Mrs.
+        miss: Miss
+        ms: Ms.
+      suffixes:
+        jr: Jr.
+        sr: Sr.
+        ii: II
+        iii: III
+        iv: IV
+      races:
+        american_indian_alaskan_native: American Indian / Alaskan Native
+        asian: Asian/ Pacific Islander
+        black_not_hispanic: Nangisit (saan nga Hispanic)
+        hispanic: Hispanic
+        mutli_racial: Aglalaoc nga pagkatao
+        white_not_hispanic: Napudaw (saan nga Hispanic)
+        other: Sabali
+        decline_to_state: Saan nga ibaga
+      phone_types:
+        mobile: Mobile
+        home: Balay
+        work: Trabaho
+        other: Sabali
+      instructions:
+        overseas: ! '<b>Palagip</b>: No sica Americano nga aggigian ti ruar ti USA,
+          o botante nga aktibo iti militar, <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>i-click ditoy</a> para agrehistro nga agbuto'
+        opt_in_email: Macaawat ka dagiti palagip iti eleksyon nga aggapu cadakami,
+          ti lugar ti agbuto, ken impormasyon ti musika kensaba-sabali nga tema.
+        under_18: Hey, kasla saan kapay nga agtawen ti 18. Kool ka. Sa %{state_name},
+          mabalin mo agrehistro nga agbuto '%{state_rule}'. Mapanka idiay ti <a href="http://www.rockthevote.com/election-center/"
+          target="_blank">Election Center</a>to kitaem ti sumaruno nga eleksyon.
+        under_18_2: I-click iti button tapno ituloy iti applikasyon no usto iti kuwenta.
+        under_18_3: Ketno saan, pawitan da kayo iti abiso nga agrehistro into no diesyocho
+          kayo.
+        remind_when_18: Ipawitan da kayo iti e-mail iti %{email_address}
+        review: Rebisuen yo nga agpayso amin nga impormasyon.
+        download: Saan pay nalpas. I-click yo ta para i-prenta button edta palma iti
+          rehistro. Pirmaon yo ken edta address nga naka-kabil edta porma.
+        download_2: Saan kayo nga rehistrado no saan yo nga i-prenta, pirmaan ken
+          ibuson dayta porma yo!
+        finish: Saan yo nga lipatan nga ibaga kada gayyem ken pamilya yo nga nalaka
+          laeng iti agrehistro. Ket adtoy amin a tulong nga mausaryo tapno ipakaalammo
+          yo panggep iti botante nga agrehistro.
+        finish_2: ! 'Mabalin nga alaenyo daytoy tulong edta website. Ag-sign-up iti
+          libre diay:'
+        finish_under_18: Ipaammo danto into no kaano nga agrehistro uga bomoto.
+        finish_under_18_2: Mantras, ipaammoyo ami kadagiti gayyem ken familyayo. Addatoy
+          iti mabalin nga usaron tapno maypaammoyo panggep iti rehistrasyon para botante.
+        finish_tell_recipients: (aduaenyo amin nga comma)
+        finish_email_sent: Impaw-it iti Email!
+        finish_update_status: Saan yo nga malipatan ti i-update ta Facebook ken Twitter!
+        state_online_registration: Mabalinyo nga palpasen dayta rehistro yo idta "online"
+          usaren iti  %{state} online voter registration system.
+        leave_state_online_registration: Mabalinyo nga palpasen dayta rehistro online
+          dita '%{state}' usaren yo daytoy porma. No saan nga mabalin iti lisensya
+          yo ken awan iti DMV impormasyon awan problema- mabalin mo met %{link}. imprinta
+          ken perma-anyo ken ibuson yo.
+        leave_state_online_registration_link: Ileppa mo dayta pagrehistro agraman
+          ita %{rtv_and_partner_name}
+      ineligible:
+        age: Maspa nga 18 edad yo into aldaw iti sumaruno nga eleksyon.
+        non_citizen: Saan nga makompleto dayta rehistroyo, saan yo nga na "check"
+          iti kahon nga US Citizen kayo. Masapol nga US Citizen kayo tapno makarehistro
+          nga bomoto. Ketno Citizen, agsubli kay idiay pagiao ken "check" iti citizenship
+          box.
+        attest: Ipakitam nga mabalin kayo nga bomoto.
+      external:
+        colorado:
+          register_link: Palpasen yo dayta rehistrasyon online dita Secretarya diay
+            Estado iti Colorado
+          continue_link: Ituloy iti rehistrasyon diay Rock The Vote
+          show:
+            p1: Naimbag nga balita! No adda driver's license iti Colorado, mabalin
+              yo-nga palpasen dayta rehistration applikasyon ken Secretarya diay Estado
+              iti Colorado.
+            p2: No intedmo iti numero ti driver's license mo ken datoy iti umunam
+              nga agrehistro tapno agbuto, wenno agsucat iti agdama nga address mo
+              nga adda iti voter registration ti Colorado, iklik mo lang ti link nga
+              adda ditoy baba. Dagiti impormasyon nga nalpas mo nga inted, agparang
+              da idiay online registration portal ti Sekretarya ti Estado ket mabalin
+              nga illepas mo diay met laeng iti applikasyon mo.
+            p3: Ket no saanyo nga macompleto dayta applikasyon yo edta website iti
+              Secretarya diay Estado iti Colorado, i-click dayta 'link' edta baba
+              ket ituloyo dayta porma. Maimprenta iti rehistrasyon porma, pirmaan
+              ken ibuson diay Opisina diay Secretarya diay Estado.
+            p4: Ilocano (ilo)
+          go:
+            title: Saan nga agpayso iti rehistration idta Colorado
+            timeout: Nabayag nga dinak sumonbat iti Colorado website ket diak mausar
+              ita. Saan nga problema. Adda dua nga pag-pilian tapnon malpas mo ti
+              pagrehistro nga bomoto.
+            timeout_2: Tapno malpas dayta aplikasyon botante nga agrehistro, adda
+              tallo nga pagpilian tapno malpas iti applikasyon para pagrehistro botante:</p><p>(1)
+              Isara iti "window" ken usaren iti buton diay likod iti "browser" tapno
+              correcta diay impormasyon idta applikasyon. Mabalin nga ikabil dayta
+              impormasyon idta website iti Secretarya diay Estado..</p><p>( (2) Iserra
+              iti "window" ket i-click iti "Continue Registration with Rock the Vote"
+              link ida pahina nga immune. Maimprenta dayta porma para mapirmaon ken
+              ibuson yo diay opisina iti  Secretarya diay Estado .</p><p>(3) Mabalin
+              nga agdiretso diay <a href=%{co_url}> website iti Secretarya diay Estado
+              diay tapno isubli ti husto nga impormasyon.
+            timeout_3: ! 'Ilocano (ilo):'
+            p1: ! 'Kaslasaan nga agpareho iti intedyo nga impormasyon diay  Secretarya
+              diay Estado. Tallo nga problema: (1) Saan nga agpareho diay nagan nga
+              inkabil yo Record" ken diay ID yo (ehemplo, inkabil yo "Steve" ngem
+              iti umana nga nagan diay ID ket "Stephen") (2) Incabil yo dagiti "-"
+              idiay numero iti ID yo wenno (3) Saan yo inkabil ta iti sabali nga porma.
+              Kitaenyo nga nalaing dagiti impormasyon nga intedyo.'
+            section: Impormasyon no sin-noka
+            colorado_id_number: Numero it ID diay Colorado
+            p2: Tapno malpas dayta aplikasyon botante nga agrehistro, adda tallo nga
+              pagpilian tapno malpass iti applikasyon para pagrehistro botante:</p><p>(
+              (1) Isara iti "window" ken usaren iti buton diay likod iti "browser"
+              tapno correcta diay impormasyon idta applikasyon. Mabalin nga ikabil
+              dayta impormasyon idta website iti Secretarya diay Estado..</p><p>(
+              (2) Iserra iti "window" ket i-click iti "Continue Registration with
+              Rock the Cote" link ida pahina nga immune. Maimprinta dayta porma para
+              mapirmaon ken ibuson yo diay oficina iti  Secretarya diay Estado .</p><p>(3)
+              Mabalin nga agdiretso diay  <a href=%{co_url}> website iti  Secretarya
+              diay Estado</a>  diay tapno isubli ti husto nga impormasyon.
+            p3: Ilocano (ilo)
+      tooltips:
+        email_address: I-email iti kopya iti porma iti pagrehistro para botante.
+        home_zip_code: Ikabil iti Zip code dita address iti balay, uray no saan yo
+          nga aw-awatin iti suratyo dita.
+        date_of_birth: Dita applikasyon para bomoto, masapol nga ipakita nga diyesyocho
+          ka into wenno antes aldaw iti eleksyon. Kem, addo nga estado nga mabalin
+          kayo agrehistro antes diyesyocho iti. Ket pangngaasi <a href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">i-click
+          iti ditoy</a>ta basaem dagiti regulasyon ti estado nga ayanmo.
+        registrant_name: Ikabil iti nagan ditoy kahon. Saan nga usaren iti "nicknames"
+          wenno initiales. No datoy nga aplikasyon ket para nagsukat iti nagan, masaludsod
+          kayo no inno iti dati nga nagan diay sabali nga section. Saan nga lipatan
+          nga ikabil iti titulo yo (Mr, Mrs, Miss, Ms).
+        home_address: Ikabil diay address iti balay ditoy kahon. Saan nga iti address
+          para surat no sabali ken address iti balay. Saan nga usaren iti P.O. Box
+          wenno rural nga ruta nga awan iti numero, ilustrayo diay mapa iti lugar
+          yo idta porma nga nakaimprenta.
+        mailing_address: Ikabil yo iti address yo idiay kahon no sabali iti address
+          iti balay yo. No saan kayo nga agawat iti surat idta balay, ikabil ditoy
+          nga seksyon iti lugar nga awatin iti suratyo.
+        phone: Kadaiwan nga estado laeng nga ammoon iti telepono yo tapno matawagan
+          da kayo no adda masapol nga ammaun da panggep iti applikasyon yo, ngem saan
+          nga masapol nga ikabil iti applikasyon yo,  ngem saan nga masapol nga ikabil
+          iti numero ti telepono.
+        previous_name: No sabali iti nagan yo tatta, ikabil diay sakbay ti nagan.
+        previous_address: No sabali iti address yo manipod idi nagrehistro kayo, ikabil
+          iti sakbay ti address yo.
+    status_text:
+      message: Nagrehistro-ak tapno makaboto, mabalin yo met!
+      under_18_message: Agrehistro kayo tapno makaboto kayo. Nalaka laeng!
+

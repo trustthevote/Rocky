@@ -1,2 +1,120 @@
+---
 hi:
-  language_name: Hindi
+  language_name: अंग्रेज़ी
+  activerecord:
+    attributes:
+      partner:
+        from_email: ईमेल से
+        url: URL
+      registrant:
+        date_of_birth: जनम दिन
+        email_address: ईमेल अड्रेस
+        first_registration: मैं वोट देने के लिए पहली बार रिजिस्टर कर रही/रहा हूँ|
+        home_zip_code: ZIP कोड
+        us_citizen: मैं U.S. सिटिज़न हूँ|
+        name_title: ख़िताब
+        first_name: प्रथम नाम
+        middle_name: मध्य नाम
+        last_name: सरनेम
+        name_suffix: सफिक्स
+        home_address: पता
+        home_unit: यूनिट/लॉट#
+        home_city: शहर
+        home_state_name: रज्य
+        has_mailing_address: मेरी चिट्ठियां उपर दिए गये पाते से दूसरे पाते पर आतीं
+          हैं|
+        mailing_address: पता
+        mailing_unit: यूनिट/लॉट#
+        mailing_city: शहर
+        mailing_state_abbrev: रज्य
+        mailing_zip_code: ZIP कोड
+        party: पार्टी
+        race: जाती
+        state_id_number: ID नंबर
+        phone: फोन
+        phone_type: ढंग
+        change_of_name: मैं ने अपना नाम बदल दिया है|
+        prev_name_title: ख़िताब
+        prev_first_name: प्रथम नाम
+        prev_middle_name: मध्य नाम
+        prev_last_name: सरनेम
+        prev_name_suffix: सफिक्स
+        change_of_address: मैं ने अपना पता बदल दिया है|
+        prev_address: पता
+        prev_unit: यूनिट/लॉट#
+        prev_city: शहर
+        prev_state_abbrev: रज्य
+        prev_zip_code: ZIP कोड
+        opt_in_email: ईमेल्स लेना
+        opt_in_sms: टेक्स्ट मेसेज लेना
+        attest_true: उपर दी गयी जानकारी को मैने अच्छे से देख लिया है| मेरे अनुसार
+          यह सारी जानकारी सही और पूरी है|
+        tell_from: से
+        tell_email: आपका ईमेल
+        tell_recipients: लेने वाला
+        tell_subject: विषय
+        tell_message: व्यक्तिगत संदेश
+    errors:
+      models:
+        registrant:
+          blank: माँगा हुआ
+          invalid_zip: ग़लत ZIP
+          attributes:
+            home_zip_code:
+              invalid: ZIP या ZIP+4 उपयोग करना
+            mailing_zip_code:
+              invalid: ZIP या ZIP+4 उपयोग करना
+            prev_zip_code:
+              invalid: ZIP या ZIP+4 उपयोग करना
+            email_address:
+              invalid: सही पता नही है
+            date_of_birth:
+              format: MM-DD-YY होना चाहिए
+            phone:
+              invalid: ! '###-###-#### होना चाहिए'
+              required_if_opt_in: अगर TXT ले रहें है तो ज़रूरी है
+            attest_true:
+              accepted: उपर दी गयी जानकारी सही है या नही यह ज़रूर बतायें
+            has_state_license:
+              inclusion: कृपया बतायें अगर आपके पास सही स्टेट लाइसेन्स है या नही
+      messages:
+        inclusion: ! '%{attribute} लिस्ट में शामिल नही है'
+        exclusion: ! '%{attribute} रिज़र्व किया गया है'
+        invalid: ! '%{attribute} सही नही है'
+        confirmation: ! '%{attribute} कन्फर्मेशन के साथ मॅच नही कर रहा है'
+        accepted: ! '%{attribute} स्वीकार होना चाहिए'
+        empty: ! '%{attribute} खाली नही होना चाहिए'
+        blank: ! '%{attribute} रिक्त नही होना चाहिए'
+        too_long: ! '%{attribute} बहुत लंबा है (अधिक से अधिक %{count}अक्षर या संख्या
+          होने चाहिए)'
+        too_short: ! '%{attribute}  बहुत छोटा है (कम से कम %{count} अक्षर या संख्या
+          होने चाहिए)'
+        wrong_length: ! '%{attribute} की लंबाई ग़लत है (%{count}अक्षर या संख्या होने
+          चाहिए)'
+        taken: ! '%{attribute} ले लिया गया है'
+        not_a_number: ! '%{attribute} एक नंबर नही है'
+        greater_than: ! '%{attribute} %{count} से ज़्यादा होना चाहिए'
+        greater_than_or_equal_to: ! '%{attribute} %{count} से ज़्यादा या एक समान होना
+          चाहिए'
+        equal_to: ! '%{attribute} %{count} के समान होना चाहिए'
+        less_than: ! '%{attribute} %{count} से कम होना चाहिए'
+        less_than_or_equal_to: ! '%{attribute} %{count} से कम या समान होना चाहिए'
+        odd: ! '%{attribute} बेजोड़ होना चाहिए'
+        even: ! '%{attribute} बराबर होना चाहिए'
+  authlogic:
+    error_messages:
+      login_blank: लॉगिन खाली नहीं हो सकता
+      login_not_found: लॉगिन / पासवर्ड मान्य नहीं है
+      login_invalid: कृपया, यूजर का नाम केवल अक्षर, संख्या, रिक्त स्थान, और. _ @  का
+        उपयोग करें
+      consecutive_failed_logins_limit_exceeded: लगातार असफल लॉगिन के सीमा पार हो गई,
+        अकाउंट निष्क्रिय है
+      email_invalid: ईमेल एक मान्य पता नहीं है
+      password_blank: पासवर्ड खाली नहीं हो सकता है
+      password_invalid: लॉगिन / पासवर्ड मान्य नहीं है
+      not_active: आपका अकाउंट सक्रिय नहीं है
+      not_confirmed: आपके अकाउंट की पुष्टि नहीं की है
+      not_approved: आपका खाता स्वीकृत नहीं है
+      no_authentication_details: आप ने प्रमाणीकरण के लिए कोई भी जानकारी प्रदान नहीं
+        की है
+

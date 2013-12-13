@@ -6,7 +6,7 @@ tl:
       submit: susunod na hakbang
       edit: isaayos ang sinulat
       back: Nakaraang Hakbang
-      download: I-imprenta ang iyong porma ng pagrerehistro ngayon.
+      download: ! 'I-imprenta ang iyong porma ng pagrerehistro ngayon '
       ineligible_try_again: Ibalik
       keep_going: Magpatuloy
       remind_me_later: Paalalahanan Ako Mamaya
@@ -17,7 +17,7 @@ tl:
       share_facebook: I-post ito!
       share_twitter: I-Tweet ito!
       share_google_buzz: I-bahagi sa Google !
-      state_online_registration: Gusto kong i-intrega online ang aking porma para
+      state_online_registration: Gusto kong mag-intrega online ng aking porma para
         sa %{state} ngayon.
       skip_state_online_registration: Hindi. Salamat ! Ipagpapatuloy ko ang %{rtv_and_partner_name}
         at ipadadala ang aking porma mamaya.
@@ -45,13 +45,13 @@ tl:
       finish_reminder_2: Kung gusto mong malaman ang kalagayan ng iyong porma sa pagrerehistro
         ng botante, maaari mong hanapin ang  taga-ugnay na impormasyon sa iyong Kalihim
         ng Estado sa aming <a href="http://www.rockthevote.com/election-center/" target="_blank">Sentro
-        ng Halalan
-      ineligible_header: ! 'Paumanhin, hindi ka karapat-dapat na magrehistro upang
-        bumoto dahil sa (mga) sumusunod na kadahilanan:'
+        ng Halalan</a>.
+      ineligible_header: ! 'Paumanhin, hindi ka eligible na magrehistro upang bumoto
+        dahil sa (mga) sumusunod na kadahilanan:'
       external_header: Rehistrante ng %{state}
       name: Pangalan
       select_none: (wala)
-      home_address: Bahay na tirahan
+      home_address: Address ng bahay
       mailing_address: Tirahang pangkoreo
       previous_name: Dating Pangalan
       previous_address: Dating Tirahan
@@ -91,9 +91,9 @@ tl:
         work: Trabaho
         other: Iba pa
       instructions:
-        overseas: ! 'Tandaan: Kung ikaw ay isang mamamayan ng Amerika na naninirahan
-          sa ibang bansa o isang naka-unipormeng botante militar, mag-click dito para
-          magrehistrong bumoto'
+        overseas: ! '<b>Itala</b>:  Kung ikaw ay isang mamamayan ng Amerika na naninirahan
+          sa ibang bansa o isang naka-unipormeng botante militar, <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>mag-click dito</a>  para magrehistrong bumoto'
         opt_in_email: Ipadadala namin sa iyo ang napapanahong mga paalaala ng halalan,
           ang iyong lugar ng botohan, at impormasyon tungkol sa mga musika at mga
           isyu.
@@ -110,9 +110,9 @@ tl:
           ito ay tama.
         download: Ikaw ay hindi pa tapos. I-Click ang buton ng pormang pang-imprenta
           para mai-imprenta ang iyong porma ng pagrerehistro ng botante. Pirmahan
-          ito at ihulog sa tirahang nasa porma.
-        download_2: Hindi ka mairerehistro hanggang hindi mo i-imprenta, mapirmahan
-          at maihulog sa koreo ang iyong porma.
+          ito at ihulog sa address na nasa porma.
+        download_2: Hindi ka mairerehistro hanggang hindi mo ma-imprenta, mapirmahan
+          at maihulog sa koreo ang iyong porma!
         finish: Huwag kalimutang sabihin sa iyong mga kaibigan at pamilya kung gaano
           kadali ang magrehistro. Narito ang mga pantulong na maaari mong gamitin
           para ikalat ang salita tungkol sa pagrerehistro ng botante.
@@ -127,14 +127,15 @@ tl:
         finish_email_sent: Naipadala ang Email !
         finish_update_status: Huwag kalimutang i-update ang iyong katayuan sa Facebook
           at Twitter!
-        state_online_registration: Ikaw ay karapat-dapat na tumapos ng iyong pagrerehistro
+        state_online_registration: Ikaw ay eligible na tumapos ng iyong pagrerehistro
           ng botante na gumagamit ng online na sistema ng pagrerehistro ng botante
           sa %{state}
         leave_state_online_registration: Maaari mong tapusin ang iyong pagrerehistro
           ng botante online sa %{state} na gumagamit ng pormang nasa ibaba. Kung ang
-          iyong lisensiya ng pagmamaneho ay walang bisa o hindi makita o makumpirma
-          ng estado ang iyong talaan sa DMV, huwag mag-alaala - maaari mo ring %{link}.
-          Kailangan mo lamang na i-imprenta, pirmahan, at ihulog ito sa koreo.
+          iyong lisensiya ng pagmamaneho ay hindi valid o hindi makita o makumpirma
+          ng estado ang iyong talaan sa DMV, huwag mag-alaala&mdash;- maaari mo ring
+          %{link}. Kailangan mo lamang na ma-imprenta, mapirmahan, at maihulog ito
+          sa koreo.
         leave_state_online_registration_link: Tapusin ang iyong pagrerehistro sa %{rtv_and_partner_name}
       ineligible:
         age: Kailangan mong maging 18 taong gulang sa petsa ng susunod na halalan.
@@ -143,7 +144,7 @@ tl:
           Unidos.  Kailangan mong maging isang mamamayan ng Estados Unidos para magrehistrong
           bumoto. Kung ikaw ay isang mamamayan, maaari lamang na isauli ang nakaraang
           pahina at i-check ang kahong pangmamamayan.
-        attest: Kailangan mong kumpirmahin na ikaw ay karapat-dapat na bumoto.
+        attest: Kailangan mong kumpirmahin na ikaw ay eligible na bumoto.
       external:
         colorado:
           register_link: Tapusin ang pagrerehistro online sa Kalihim ng Estado ng

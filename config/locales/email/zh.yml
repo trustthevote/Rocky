@@ -1,2 +1,187 @@
+---
 zh:
-  
+  email:
+    confirmation:
+      subject: 提醒：请邮寄您的选民登记表格
+      body:
+        greeting: 亲爱的%{registrant_first_name}，
+        reminder: ! '不要忘记！<br>
+
+          您必须在申请表上签名，贴上邮票&amp并邮寄。'
+        main: ! '感谢您完成选民登记申请表。如果您还没有下载您的表格，请在此处下载<a href="%{pdf_url}>">您的申请表</a>.<br><br>。
+
+
+          <strong>您的登记还没有完成。你需要将申请表格上交至您所在州的选举官员。</strong><br><br>
+
+          如果您还没有做以下事项，请您务必完成： 打印申请表格，在申请表格上签名，贴邮票，并邮寄您的申请表格至表格中提供的即如下显示的地址。</strong><br><br>
+
+
+          %{registrar_address}<br><br>
+
+
+          如果您已经邮寄出您的申请表格，您可以<a href="%{cancel_reminders_url}">点击此处</a> 来停止接收提醒您邮寄的信息。您将会从州选举官员那里收到有关您的申请表格的确认信息。这个过程有时长达几个星期。如果您想要查询您的选民登记申请的状态，请拨打您的州务卿的电话%{registrar_phone}，
+          或者在以下网址查询%{registrar_url}.<br><br>
+
+
+          我们还需要您帮助我们鼓励其他人进行选民登记。全国范围内有很多选举正在进行。确保每个人都能够发表自己的意见：写一封电子邮件给您的家人和朋友们，或者转发以下信息。<br><br>
+
+
+          最后，请不要忘记在选举日临近时去投票站投票。符合资格的年轻选民人数高达4千5百万。如果我们想要官员们重视我们所关心的问题，我们就必须投票。<br><br>
+
+
+          非常感谢！<br>
+
+          Heather Smith<br>
+
+          Rock the Vote 主席<br><br>
+
+
+          附言：请访问<strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>来获取更多有关投票，选举和您所关心的问题的信息以及帮助您鼓励他人进行选民登记活动的工具。<br><br>'
+        send_to_friends: ! '<em><strong>请将您的常用收信人名单复制并粘贴在此处，然后发送给您的朋友们。</strong></em><br><br>
+
+
+          你好,<br><br>
+
+
+          如果您还没有登记就不可以投票。所以Rock the Vote 提供简单易填的网上选民登记表%{rtv_link}。无论你是首次登记的选民还是需要更改地址或姓名，整个过程只需要短短几分钟。<br><br>
+
+
+          想要了解更多信息，请访问: %{rtv_link}。<br><br>
+
+
+          已经登记过了？Rock the Vote需要您的帮助来鼓励其他人进行选民登记。给您的朋友和家人发电子邮件，鼓励他们在%{rtv_link}进行选民登记。那里甚至还提供工具来帮助你在自己的网站或者博客上鼓励他人进行选民登记。<br><br>
+
+
+          你忠诚的,<br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! 'Rock the Vote 致力于保护您的隐私及敏感信息。请查阅我们的<strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">选民登记的隐私保护政策</a></strong>获取详细信息.<br><br>
+
+
+          如有疑问或评论请发送电子邮件至: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
+    reminder:
+      subject: 提醒：请邮寄您的选民注册申请表
+      body:
+        greeting: 亲爱的%{registrant_first_name}，
+        reminder: ! '不要忘记！<br>
+
+          您必须在申请表上签名，贴邮票 &amp；并邮寄。'
+        main: ! '感谢您在Rock the Vote完成选民登记申请表。您可以<a href="%{pdf_url}">点击此处</a>下载您的申请表。<br><br>
+
+
+          还要提醒您一句，如果您还没有完成以下事项，<strong>请您务必打印申请表格，在申请表格上签名，贴邮票，并邮寄您的申请表格至表格中提供的即如下显示的地址。</strong><br><br>
+
+
+          %{registrar_address}<br><br>
+
+
+          如果您已经邮寄出您的申请表格，您可以<a href="%{cancel_reminders_url}">点击此处</a> 来停止接收提醒您邮寄的信息。您将会从州选举官员那里收到有关您的申请表格的确认信息。这个过程有时长达几个星期。如果您想要查询您的选民注册申请的状态，请拨打您的州务卿的电话%{registrar_phone}，
+          或者在以下网址查询%{registrar_url}.<br><br>
+
+
+          我们还需要您帮助我们鼓励其他人进行选民登记。全国范围内有很多选举正在进行。确保每个人都能够发表自己的意见：写一封电子邮件给您的家人和朋友们，或者转发以下信息。<br><br>
+
+
+          最后，请不要忘记在选举日临近时去投票站投票。符合资格的年轻选民人数高达4千5百万。如果我们想要官员们重视我们所关心的问题，我们就必须投票。<br><br>
+
+
+          非常感谢！<br>
+
+          Heather Smith<br>
+
+          Rock the Vote 主席<br><br>
+
+
+          附言：请访问<strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>来获取更多有关投票，选举和您所关心的问题的信息以及帮助您鼓励他人进行选民登记活动的工具。<br><br>'
+        send_to_friends: ! '<em><strong>复制并粘贴以下内容作为您的电子邮件信息发送给您的朋友们。</strong></em><br><br>
+
+
+          您好,<br><br>
+
+
+          如果您还没有登记就不可以投票。所以Rock the Vote 提供简单易填的网上选民登记表%{rtv_link}。无论你是首次登记的选民还是需要更改地址或姓名，整个过程只需要短短几分钟。<br><br>
+
+
+          想要了解更多信息，请访问: %{rtv_link}。<br><br>
+
+
+          已经登记过了？Rock the Vote需要您的帮助来鼓励其他人进行选民登记。给您的朋友和家人发电子邮件，鼓励他们在%{rtv_link}进行选民登记。那里甚至还提供工具来帮助你在自己的网站或者博客上鼓励他人进行选民登记。<br><br>
+
+
+          你忠诚的,<br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! 'Rock the Vote 致力于保护您的隐私及敏感信息。请查阅我们的<strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">选民登记的隐私保护政策</a></strong>获取详细信息.<br><br>
+
+
+          如有疑问或评论请发送电子邮件至: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
+    thank_you_external:
+      subject: 感谢您使用网上选民登记工具
+      body:
+        main: ! '亲爱的%{registrant_first_name},<br><br>
+
+
+          感谢您使用%{rtv_and_partner_name}的网上选民登记工具。<br><br>
+
+
+          如果您在网上完成了选民登记申请，您的申请已经被提交至%{state_name}州务卿办公室处理。一旦批准，您将接收到由%{state_name}州务卿办公室发放的确认表格，同时，您所在的郡选举部门将您的选民登记卡邮寄给您。<br><br>
+
+
+          如果您有任何问题或疑问，您可以查询你的选民登记状态通过拨打%{state_abbr}州务卿办公室电话%{registrar_phone}，或以下网址%{registrar_url}。如果您在登记过程中遇到任何问题，请直接与%{rtv_and_partner_name}联系。
+
+
+          现在，我们需要您的帮助来鼓励其他人也进行选民登记。全国范围内有很多选举，符合投票资格的年轻选民有4千5百万之多-我们需要确保每个人都能够表达他的意愿。请现在就发送电子邮件给您的家人和朋友或者将以下信息传播出去。<br><br>
+
+
+          最后，不要忘记在选举日临近时去投票站投票。如果我们希望政客们重视我们所关心的问题，我们就必须投票。<br><br>
+
+
+          非常感谢！<br>
+
+          Heather Smith<br>
+
+          Rock the Vote 主席<br><br>
+
+
+          附言：请访问<strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>来获取更多有关投票，选举和您所关心的问题的信息以及帮助您鼓励他人进行选民登记活动的工具。<br><br>'
+        send_to_friends: ! '<em><strong>复制并粘贴以下内容发送给您的常用收信人以及您的朋友们。</strong></em><br><br>
+
+
+          您好,<br><br>
+
+
+          如果您还没有登记就不可以投票。所以Rock the Vote 提供简单易填的网上选民登记表%{rtv_link}。无论你是首次登记的选民还是需要更改地址或姓名，整个过程只需要短短几分钟。<br><br>
+
+
+          想要了解更多信息，请访问: %{rtv_link}。<br><br>
+
+
+          已经登记过了？Rock the Vote需要您的帮助来鼓励其他人进行选民登记。给您的朋友和家人发电子邮件，鼓励他们在%{rtv_link}进行选民登记。那里甚至还提供工具来帮助你在自己的网站或者博客上鼓励他人进行选民登记。<br><br>
+
+
+          你忠诚的,<br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! 'Rock the Vote 致力于保护您的隐私及敏感信息。请查阅我们的<strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">选民登记的隐私保护政策</a></strong>获取详细信息.<br><br>
+
+
+          如有疑问或评论请发送电子邮件至: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
+    tell_friend:
+      subject: 我刚刚完成了选民登记，你也应该进行登记！
+      body: ! '嘿，我刚刚在%{rtv_url}完成登记投票！你也可以。过程非常简单。
+
+
+        只要在这里%{rtv_url}填写电子表格。如果您还没有登记就不可以投票。无论是需要第一次登记投票还是更新地址或是变更姓名，都只需要几分钟。了解更多信息，请登录%{rtv_url}。'
+    tell_friend_under_18:
+      subject: 登记投票！
+      body: ! '您进行选民登记了吗？我还未到投票的年龄，但是你已经达到了。如果您还没有登记就不可以投票。
+
+
+        您只能在%{rtv_url}填写选民登记申请表。填写十分容易。不管你是首次进行登记投票还是更改您的地址或姓名，只需要短短几分钟的时间。请前往%{rtv_url}。
+
+
+        若已经登记过了，或者还未到投票年龄？帮助其他人进行选民登记，发送此电子邮件给你的朋友和家人，告诉他们在%{rtv_url}进行登记。
+
+
+        祝投票快乐！'
+

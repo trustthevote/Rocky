@@ -1,1 +1,257 @@
+---
 ilo:
+  email:
+    confirmation:
+      subject: ! 'Ipalagip: ibuson mo ti cucuam nga porma iti rehistrasyon'
+      body:
+        greeting: Kabsat nga %{registrant_first_name},
+        reminder: ! 'Dimo lip-lipatan!<br>
+
+          Dayta pirmaan, iccam ti selyo &amp;, ket ibuson mo diay koreo iti porma.'
+        main: ! "Dios ti agngina te napalmon ta aplikasyon mo nga agbuto, no dika
+          pay sigurado i-download mo laeng diay <a href=\"%{pdf_url}>\">dayta applikasyon
+          mo </a>.<br><br>\n\n<strong>Saan nga completo ti rehistrasyon mo. Saan ka
+          nga rehistrado inggana no maited mo ti porma kadagiti opisyales ti eleksyon.</strong><br><br>\n\nNo
+          saan pay nga naaramid, <strong>isigurum nga NASURATAN, NAPIRMAAN, NAIKKAN
+          iti selyo ken naibuson mo idiay address nga nakasurat iti baba ti porma.</strong><br><br>\n\n%{registrar_address}<br><br>\nNo
+          naibuson mo ti porma, mabalin <a href=\"%{cancel_reminders_url}\"> mo nga
+          i-click ti</a>para ikansel tapno agsardenga nga agawat ti palagip nga agbuson.
+          Makaawat ka ti conpirmasyon ti rehistrasyon mo nga aggapu ti opisyales ti
+          eleksyon ti estado nga ayanmo. No dad-duma, ti pagproces maalana ti adu
+          nga semana. No kayat mo nga maammuan ti kasasaad ti applikasyon mo nga agrehistro
+          para agbuto, kasaum ti Sekretarya ti Estado ti  %{registrar_phone}, wenno
+          i-check online idiay %{registrar_url}.<br><br>\n\nMasapul mi ti tulong nga
+          agala dagiti tao nga agrehistro para agbuto. Adda dadakkel nga eleksyon
+          ti amin nga nasyon. Isegurado nga isuda amin ammuda ti ag-email mapan ti
+          pamilya ken gagay-yem, wenno i-forward ti mensahe ditoy baba.<br><br>\n\nKen,
+          kamaud-diananma, saan mo nga lipaten ti agbuto no umay ti aldaw ti eleksyon.
+          Adda 45 milyon nga ub-ubbing nga baru nga botante, ken no kayat tayo nga
+          dagiti politicians aginteresada cadagiti issyo nga kayat tayo, datayo ket
+          agbuto.<br><br>\n\nDios ti ag-ngina .<br><br>\n Heather Smith<br>\nPresidente,
+          Rock the Vote<br><br>\n\nP.S.  Bumisita diay <strong><a href=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>
+          para ti dad-duma pay nga impormasyon ti pagbuto, eleksyon ken issyo nga
+          kayat mo, wenno tools nga usaren no irugim ti agkompanya para ti voter registration.<br><br>"
+        send_to_friends: ! '<em><strong> I-copia ken i-paste mo ti sumar-saruno nga
+          mensahe iti porma ti email, kalpasan na i-send mo daytoy kadagiti ga-gayyem
+          mo.</strong></em><br><br>
+
+
+          Hey,<br><br>
+
+
+          Saan ka nga makabuto no saan ka nga nagrehistro. Isu nga Rock the Vote aramiden
+          na nga malaka ti ag-fill out ti voter registration form online idiay %{rtv_link}.
+          No baru ka nga agbuto wenno masapul mo ti agsukat ti address wenno nagan,
+          maaramid mo dagitoy iti bassit nga minuto.<br><br>
+
+
+          No kayatmo nga adalen, mapanka idiay: %{rtv_link}.<br><br>
+
+
+          Nalpas kan nga nagrehistro para agbuto? Masapul ti Rock the Vote ti tulong
+          mo para alaen dagiti dad-duma para agrehistro nga agbuto. I-send mo iti
+          email kadagiti ga-gay-yem ken pamilya mo ken dawatem nga agrehistroda para
+          agbuto idiay %{rtv_link}. Adda pay tool nga mausar mo para mairugim ti agkompanya
+          idiay website wenno blog mo.<br><br>
+
+
+          Daytoy nanumo,<br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! "Ikari ti Rock the Vote nga pinuprotekta mi dagiti personal ken
+          sensetibo nga impormasyon mo. Pakibasam idiay\n <strong><a href=\"http://www.rockthevote.com/voter-registration/online-application-system/privacy.html\">voter
+          registration policy</a></strong>para dagiti ditalye.<br><br>\n\nPakitulod
+          mo dagiti saludsul wenno comentario idiay: <a href=\"mailto:register@rockthevote.com\">register@rockthevote.com</a><br>"
+    reminder:
+      subject: ! 'Palagip: Ibuson ti voter registration form mo'
+      body:
+        greeting: Gay-yem ko nga %{registrant_first_name},
+        reminder: ! 'Saan mo nga lip-lipaten!<br>
+
+          Dayta pirmaan, iccam ti selyo &amp; ket ibuson mo idiay koreo iti porma.'
+        main: ! 'Dios ti ag-ngina ta nakompleto mo ti applikasyon mo ti voter registration
+          iti Rock the Vote. Mabalin nga i-download ti applikasyon mo ti <a href="%{pdf_url}">
+          ti i-click ditoy</a>.<br><br>
+
+
+          Palagip laeng: No malpasen nga naaramid mo <strong>isigurum nga PIRMADO,
+          ADDA SELYO KEN IBUSON MO ti porma nga ti address nga pareho iti address
+          nga nakasurat iti baba ti porma.</strong><br><br>
+
+
+          %{registrar_address}<br><br>
+
+
+          No nalpas nga naibuson ti porma mo<a href="%{cancel_reminders_url}">i-click
+          ditoy</a> para ikansel mo ti palagip tapno agsardengka ti voter registration
+          applikasyon mo, tumaguam Sekretarya ti Estado idiay %{registrar_phone},
+          wenno i-check online idiay %{registrar_url}.<br><br>
+
+
+          Masapul mi ti tulong mo nga agala dadduma nga agrehistro para agbuto. Adu
+          dagiti importante nga laban amin ditoy nasyon. Paki idirek mo ida idiay
+          %{rtv_link}o i-tulod iti adda ditoy baba nga mensahe.<br><br>
+
+
+          Ken iti maudi, saan mo nga lipaten ti agbuto no umay ti aldaw ti eleksyon,
+          adda 45 milyon nga baru nga agbuto ken no kayat tayo nga dagiti politicians
+          mag-interes kadagiti issyo nga kayat tayo, masapul agbuto tayo.<br><br>
+
+
+          Dios ti ag-ngina,<br>
+
+          Heather Smith<br>
+
+          Presidente, Rock the Vote<br><br>
+
+
+          P.S.  Bumisita diay <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>
+          para ti dad-duma pay nga impormasyon ti pagbuto, eleksyon ken issyo nga
+          kayat mo, wenno tools nga usaren no irugim ti agkompanya para ti voter registration.<br><br>'
+        send_to_friends: ! '<em><strong>I-copia ken i-paste mo ti sumar-saruno nga
+          mensahe iti porma ti email, kalpasan na i-send mo daytoy kadagiti gagay-yem
+          mo.</strong></em><br><br>
+
+
+          Hey,<br><br>
+
+
+          Saan ka nga makabuto no saan ka nga agrehistro. Isu nga ti Rock the Vote
+          aramiden na nga nalaka ti ag-fill out ti voter registration form online
+          idiay %{rtv_link}. No masapul mo ti agrehistro ta daytoy ti primero wenno
+          umuna nga eleksyon mo, wenno masapul nga agsukat ka iti address, wenno nagan,
+          maaramid mo iti agrehistro iti bassit nabiit nga minuto.<br><br>
+
+
+          No kayat mo pay nga adalen, mapanka idiay: %{rtv_link}.<br><br>
+
+
+          Nalpas kan nga nagrehistro para agbuto? Masapul ti Rock the Vote ti tulong
+          mo para alaen sab-sabali pay nga tao nga agrehistro tapno agbuto. I-send
+          ti email mo kadagiti gagay-yem ken p-amilya mo ken dawatem ida nga agrehistro
+          para agbuto idiay %{rtv_link}.  Adda tool nga usarem para mairugim ti adkompanya
+          iti website wenno blog mo.<br><br>
+
+
+          Daytoy nanumo,<br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! "Ikari ti Rock the Vote nga pinuprotekta mi dagiti personal ken
+          sensetibo nga impormasyon mo. Pakibasam idiay\n <strong><a href=\"http://www.rockthevote.com/voter-registration/online-application-system/privacy.html\">voter
+          registration policy</a></strong>para dagiti ditalye.<br><br>\n\nPakitulod
+          mo dagiti saludsul wenno comentario idiay: <a href=\"mailto:register@rockthevote.com\">register@rockthevote.com</a><br>"
+    thank_you_external:
+      subject: Dios ti agngina kenka ti pagusar mo iti online registration tool
+      body:
+        main: ! 'Gay-yem ko nga %{registrant_first_name},<br><br>
+
+
+          Dios ti agngina kenka ti pagusar mo iti %{rtv_and_partner_name}''s online
+          registration tool.<br><br>
+
+
+          No inted mo nga completo ti voter registration mo online, napan daytoy ti  %{state_name}  opisina
+          ti Sekretarya ti Estado para maproseso. No pasado, maawat mo ti conpirmasyon
+          ti %{state_abbr}  opisina ti Sekretarya ti Estado, ket ti departamento ti
+          eleksyon iti County ti agpatulud kenka iti baru nga voter registration card
+          sa email.<br><br>
+
+
+          No adda dagiti saludsud ken issyo, wenno cayatmo nga maamuan ti kasasaad
+          ti voter registration applikasyon mo, tawagem ti Sekretarya ti Estado %{state_abbr}
+          idiay %{registrar_phone}, wenno i-check online idiay %{registrar_url}. Pakicontak
+          %{rtv_and_partner_name} derecho no adda problema ti applikasyon mo.<br><br>
+
+
+          Masapul mi itatta ti tulong mo tapno maala dagiti sab-sabali nga botante.
+          Adu ti dadakkel nga eleksyones ditoy Estados Unidos ti daytoy nga tawen,
+          ken adda 45 milyon dagiti baru nga posible nga botante. Isunga, ag-email
+          ka kadagiti pamilya ken gagay-yem mo ken iwaragawag mo daytoy nga mensahe
+          nga sumarsaruno.<br><br>
+
+
+          Ken iti maudi, saan mo nga lipaten ti agbuto no umay ti aldaw ti eleksyon.
+          No kayat tayo nga dagiti politicians mag-interes kadagiti issyo nga kayat
+          tayo, masapul agbuto tayo.<br><br>
+
+
+          Dios ti ag-ngina,<br>
+
+          Heather Smith<br>
+
+          Presidente, Rock the Vote<br><br>
+
+
+          P.S.  Bumisita diay <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>
+          para ti dad-duma pay nga impormasyon ti pagbuto, eleksyon ken issyo nga
+          kayat mo, wenno tools nga usaren no irugim ti agkompanya para ti voter registration.<br><br>'
+        send_to_friends: ! '<em><strong>I-copia ken i-paste mo ti sumar-saruno nga
+          mensahe iti porma ti email, kalpasan na i-send mo daytoy kadagiti nanagt-yem
+          mo.</strong></em><br><br>
+
+
+          Hey,<br><br>
+
+
+          Saan ka nga makabuto no saan ka nga agrehistro. Isu nga ti Rock the Vote
+          aramiden na nga nalaka ti ag-fill out ti voter registration form online
+          idiay %{rtv_link}. No masapul mo ti agrehistro ta daytoy ti primero wenno
+          umuna nga eleksyon mo, wenno masapul nga agsukat ka iti address, wenno nagan,
+          maaramid mo iti agrehistro iti bassit nabiit nga minuto.<br><br>
+
+
+          No kayat mo pay nga adalen, mapanka idiay: %{rtv_link}.<br><br>
+
+
+          Nalpas kan nga nagrehistro para agbuto? Masapul ti Rock the Vote ti tulong
+          mo para alaen sab-sabali pay nga tao nga agrehistro tapno agbuto. I-send
+          ti email mo kadagiti gagay-yem ken p-amilya mo ken dawatem ida nga agrehistro
+          para agbuto idiay %{rtv_link}.  Adda tool nga usarem para mairugim ti adkompanya
+          iti website wenno blog mo.<br><br>
+
+
+          Daytoy nanumo,<br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! "Ikari ti Rock the Vote nga pinuprotekta mi dagiti personal ken
+          sensetibo nga impormasyon mo. Pakibasam idiay\n <strong><a href=\"http://www.rockthevote.com/voter-registration/online-application-system/privacy.html\">voter
+          registration policy</a></strong>para dagiti ditalye.<br><br>\n\nPakitulod
+          mo dagiti saludsul wenno comentario idiay: <a href=\"mailto:register@rockthevote.com\">register@rockthevote.com</a><br>"
+    tell_friend:
+      subject: Sika agrahistro ka metten kasta met koniak
+      body: ! 'Hi, nalpasak nga nagbutosen idiay %{rtv_url} ket sapay kuma, kasta
+        ka met. Agpayso nga nalaka.
+
+
+        I-fill out mo laeng online form ditoy: %{rtv_url}.  Saan ka nga makabuto no
+        saan ka nga agrehistro. No masapul mo ti agrehistro ta daytoy ti primero wenno
+        umuna nga eleksyon mo, wenno masapul nga agsukat ka iti address, wenno nagan,
+        maaramid mo iti agrehistro iti bassit nabiit nga minuto.  No kayat mo pay
+        nga adalen, mapanka idiay: %{rtv_url}.
+
+
+        Nalpas kan nga nagrehistro para agbuto? Masapul ti tulong mo para alaen sab-sabali
+        pay nga tao nga agrehistro tapno agbuto. I-send ti email mo kadagiti gagay-yem
+        ken p-amilya mo ken dawatem ida nga agrehistro para agbuto idiay %{rtv_url}.
+
+
+        Naragsak nga pagbuto!'
+    tell_friend_under_18:
+      subject: Agrehistro tapno agbuto!
+      body: ! 'Nalpas kan nga nagrehistro para agbuto? Kasla awan pay ti husto nga
+        tawen ko tapno mabalinak awan nga agbuto; ngem sika, mabalin mo. Saan mo nga
+        mabalin ti agbuto no saan ka nga nagrehistro.
+
+
+        Mabalin mo ti ag-fill out ti voter registration form laeng idiay %{rtv_url}.
+        Nalaka unay-unay. No baru ka nga botante, wenno suktan ti address wenno agbaliw
+        iti nagan, alaen na laeng dagitoy iti bassit nga minuto. Napanka idiay %{rtv_url}.
+
+
+        Nalpaskan nga nagrehistro, wenno awan pay laeng ti tawen mo tapno agbuto?
+        Tumulong ka kadagiti tao nga agrehistro tapno agbutoda. Agpatulod ti email
+        kaagiti gagayyem ken pamilya mo. Dawatan kanniada nga agrehistroda idiay %{rtv_url}.
+
+
+        Naragsak nga pagbubuto!'
+

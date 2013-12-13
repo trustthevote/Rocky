@@ -5,8 +5,9 @@ tl:
       page1:
         title: Pagrerehistro ng botante
         subtitle: pinagagana ng
-        top_paragraph: Hindi ka nakarehistro hangga't hindi mo pinipirmahan. nilalagyan
-          ng selyo at ipinadadala sa koreo ang iyong natapos na porma.
+        top_paragraph: Hindi ka nakarehistro hangga't hindi mo <br/><b>pinipirmahan</b>,
+          <b>nilalagyan ng selyo</b> at <b>ipinadadala sa koreo</b> ang iyong natapos
+          na porma!
         instructions_block:
           title: Tagubilin
           subtitle: Kunin ang mga madadaling hakbang na ito upang matapos ang iyong
@@ -18,21 +19,21 @@ tl:
             o i-staple ang nakatiklop na porma sa ibaba upang lumikha ng mailer. Kung
             hindi naman, ilagay ang iyong porma sa isang sobre at ipadala ang sulat-kamay
             na tirahan sa Kalihim ng Estado.
-          step2mailer: Kung Paano Gumawa ng Mailer
+          step2mailer: KUNG PAANO GUMAWA NG ISANG MAILER
           step3: Selyohan ito. Maglagay ng primera klaseng selyo sa iyong sobre o
             nakatiklop na mailer.
           step4: Ihulog ito sa koreo. Ilagay sa koreo ang iyong porma ng pagrerehistro
             ng botante.
           step5: Bumoto. Sa Araw ng Halalan, pumunta sa lugar ng botohan at bumoto.
         submit_block:
-          title: ! 'I-intrega ang iyong natapos at napirmahang porma sa:'
+          title: ! 'I-INTREGA ANG IYONG NATAPOS AT NAPIRMAHANG PORMA SA:'
         deadline_block:
-          title: Huling araw ng pagrerehistro
+          title: HULING ARAW NG PAGREREHISTRO
         other_block: Tingnan ang %{instructions_url} para sa kumpletong tagubiling
-          pangkalahatan at partikular sa estado  para sa iyong aplikasyon ng pagrerehistro
+          pangkalahatan at partikular sa estado para sa iyong aplikasyon ng pagrerehistro
           ng botante.
         bottom_block:
-          title: Mga unang beses na botante na nagrerehistro sa pamamagitan ng koreo
+          title: MGA UNANG BESES NA BOTANTE NA NAGREREHISTRO SA PAMAMAGITAN NG KOREO
           paragraph1: Kung ikaw ay nagrerehistro upang bumoto sa unang pagkakataon
             sa iyong hurisdiksyon at nagpapadala nitong aplikasyon ng pagrerehistro
             sa koreo, ang batas na Pederal ay nangangailangang magpakita ka ng katibayan
@@ -41,8 +42,8 @@ tl:
             utility bill, bank statement, tseke ng pamahalaan, tseke ng suweldo, o
             dokumento ng pamahalaan na nagpapakita ng iyong pangalan at tirahan.
           paragraph2: Ang mga botante ay maaaring maging "exempt" sa kinakailangang
-            ito kung ii-intrega nila ang kopya ng pagkakakilanlang ito kasama ng kanilang
-            porma ng pagpaparehistro ng botante na ihuhulog sa koreo.
+            ito kung sila ay magi-intrega ng isang kopya ng pagkakakilanlang ito kasama
+            ng kanilang porma ng pagpaparehistro ng botante na ihuhulog sa koreo.
           paragraph3: ! 'Kung nais mong mag-intrega ng isang kopya, mangyaring tandaan
             ang mga sumusunod: Ang iyong estado ay maaaring mangailangan ng  karagdagang
             pagkakakilanlan at maaaring mag-utos na ipakita mo ang pagkakakilanlan
@@ -69,13 +70,13 @@ tl:
           box4_label: (Mga) Gitnang Pangalan
           box5_label: ! 'Tagalog:'
         block2:
-          box1_label: Tirahan ng Tahanan
-          box2_label: Numero ng Apartment o Lote
+          box1_label: Address ng Tahanan
+          box2_label: ! 'Apt o Lote #'
           box3_label: Lungsod/Bayan
           box4_label: Estado
           box5_label: Zip Code
         block3:
-          box1_label: Tirahan na kinukunan mo ng koreo, kung naiiba kaysa itaas
+          box1_label: Address na kinukunan mo ng koreo, kung naiiba kaysa itaas
           box2_label: Lungsod/Bayan
           box3_label: Estado
           box4_label: Zip Code
@@ -101,7 +102,7 @@ tl:
           affirmation_header: ! 'Nasuri ko ang mga tagubilin ng aking estado at isinusumpa/pinagtitibay
             ko na:'
           affirmation_1: Ako ay isang mamamayan ng Estados Unidos
-          affirmation_2: Natutugunan ko ang mga kinakailangan sa pagiging karapat-dapat
+          affirmation_2: Natutugunan ko ang mga kinakailangan sa pagiging eligible
             sa aking estado at sumusunod sa anumang mga panunumpa na kinakailangan.
           affirmation_3: Ang impormasyong ibinigay ko ay totoo sa abot ng aking kaalaman
             at maaari akong multahan kung manunumpa nang walang katotohanan. Kung
@@ -113,10 +114,10 @@ tl:
           month: Buwan
           day: Araw
           year: Taon
-        top_half_footer: ! 'Kung ikaw ay nagrerehistro upang bumoto sa unang pagkakataon:
+        top_half_footer: ! '<b>Kung ikaw ay nagrerehistro upang bumoto sa unang pagkakataon</b>:
           mangyaring sumangguni sa mga tagubilin ng aplikasyon para sa impormasyon
-          sa pag-i-intrega ng mga kopya ng may bisang dokumento ng pagkakakilanlan
-          kasama ng pormang ito.'
+          sa pag-i-intrega ng mga kopya ng valid na dokumentong pagkakakilanlan kasama
+          ng pormang ito.'
         bottom_half_title: Mangyaring punuan ang mga seksyon sa ibaba kung nauukol
           sila sa iyo.
         blockA:
@@ -132,18 +133,18 @@ tl:
             na ikaw ay magrerehistro mula sa tirahan na nasa Kahon, saan ka dating
             nakarehistro?
           box1_label: Kalye (o ruta at numero ng kahon)
-          box2_label: Numero ng Apartment o Lote
+          box2_label: ! 'Apt. o Lote #'
           box3_label: Lungsod/Bayan/County
           box4_label: Estado
           box5_label: Zip Code
         blockC:
           title: Kung ikaw ay nakatira sa isang rural na lugar ngunit walang numero
-            ng kalye, o kung wala kang tirahan, mangyaring ipakita sa mapa kung saan
+            ng kalye, o kung wala kang address, mangyaring ipakita sa mapa kung saan
             ka nakatira
           instructions:
-            bullet1: Isulat ang mga pangalan ng sangang-daan (o kalye) na pinakamalapit
+            bullet1: Isulat ang pangalan ng mga sangang-daan (o kalye) na pinakamalapit
               sa kung saan ka nakatira.
-            bullet2: Gumuhit ng isang "X" upang ipakita kung saan ka nakatira
+            bullet2: Gumuhit ng isang <b>X</b> upang ipakita kung saan ka nakatira
             bullet3: Gumamit ng tuldok upang ipakita ang anumang mga paaralan, mga
               simbahan, mga tindahan, o iba pang palatandaan na malapit sa kung saan
               ka nakatira, at isulat ang pangalan ng palatandaan.

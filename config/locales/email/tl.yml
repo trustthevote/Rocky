@@ -5,159 +5,236 @@ tl:
       subject: ! 'Paalaala: Ihulog sa koreo ang iyong porma ng pagrerehistro ng botante.'
       body:
         greeting: Dear  %{registrant_first_name},
-        reminder: Huwag kalimutan! Dapat mong pirmahan, lagyan ng selyo at ihulog
-          sa koreo ang iyong porma.
+        reminder: ! 'Huwag kalimutan!<br>
+
+          Dapat mong pirmahan, lagyan ng selyo at ihulog sa koreo ang iyong porma.'
         main: ! "Salamat sa pagtatapos ng iyong aplikasyon sa pagrerehistro ng botante.
           Kung hindi mo pa nagagawa ito, paki-download <a href=\"%{pdf_url}>\" ang
-          iyong aplikasyon.\n\nAng iyong pagrerehistro ay hindi pa kumpleto. Hindi
-          ka pa nakarehistro hanggang hindi mo naibibigay ang iyong porma sa mga ospisyal
-          ng halalan sa iyong Estado.\n\nKung hindi mo pa nagagawa, mangyaring siguruhin
-          na ma-imprenta, malagdaan, at maihulog sa koreo ang iyong porma sa tirahan
-          na nakalagay sa porma at ipinakikita sa ilalim.\n\nKung  naihulog mo na
-          sa koreo ang iyong porma, maaari mong <a href=\"%{cancel_reminders_url}\">click
-          here</a>  itigil ang pagtanggap ng mga paalaala tungkol sa pagpapadala nito.
-          Dapat kang makatanggap ng kumpirmasyon ng iyong pagrerehistro mula sa mga
-          opisyal ng halalan sa iyong estado. Kung minsan, ang  pagpoproseso ay maaaring
-          tumagal ng ilang linggo. Kung nais mong matingnan ang kalagayan ng iyong
-          aplikasyon sa pagrerehistro ng botante, tawagan ang iyong Kalihim ng Estado
-          sa %{registrar_phone}, o alamin online sa  %(registrar_url}.  \n\nKailangan
-          din namin ang iyong tulong sa pagkuha ng iba upang magrehistro upang bumoto.
-          May mga malaking halalan sa buong bansa. Tiyaking lahat ng tao ay makapagsasabi:
-          magpadala ng email sa iyong pamilya at mga kaibigan, o ipasa ang mensahe
-          sa ibaba.  \n\nAt, sa huli, huwag kalimutang bumoto kapag dumating ang Araw
-          ng Halalan. Mayroong 45 milyon na karapat-dapat na batang botante at kung
-          gusto nating magbigay-pansin ang mga pulitiko sa mga isyu na mahalaga sa
-          atin, kailangan nating bumoto. &lt;br&gt; &lt;br&gt;"
-        send_to_friends: ! "Kopyahin at ipasta ang sumusunod sa iyong paboritong kliyente
-          ng koreo, at ipadala sa iyong mga kaibigan.\n\nHey, \nHindi ka maaaring
-          bumoto kung hindi ka nakarehistro. Ito ang dahilan kung bakit ginagawa ng
-          \"Rock the Vote\" na maging madali ang pagpuno sa pagrerehistro ng botante
-          online sa %{rtv_link}. Kung kailangan mong magrehistro para bumoto sa unang
-          pagkakataon o kailangan lang na i-update ang iyong tirahan o baguhin ang
-          iyong pangalan, ito ay nangangailangan lamang ng ilang minuto.  \n\nUpang
-          matuto nang higit pa, pumunta sa %{rtv_link}. \n\nNakarehistro nang bumoto?
-          Ang \"Rock the Vote\" ay nangangailangan ng iyong tulong sa pagkuha ng iba
-          pa na magrehistrong bumoto. Magpadala ng isang email sa iyong mga kaibigan
-          at pamilya na humihiling sa  kanilang magrehistro para bumoto  %{rtv_link}.
-          Mayroon pa nga silang pantulong na hinahayaan kang magsimula ng iyong sariling
-          kampanya para sa pagrerehistro ng botante sa iyong website o blog.\n\nAng
-          matapat sa iyo, \n%{registrant_first_name}<br><br>"
-        footer: Ang "Rock the Vote" ay nangangako na pananatilihin at pangangalagaan
+          iyong aplikasyon</a>.<br><br>\n\n<strong>Ang iyong pagrerehistro ay hindi
+          pa kumpleto. Hindi ka pa nakarehistro hanggang hindi mo naibibigay ang iyong
+          porma sa mga ospisyal ng halalan sa iyong Estado.</strong><br><br>\n\nKung
+          hindi mo pa nagagawa, <strong> mangyaring siguruhin na MA-IMPRENTA, MALAGDAAN,
+          MASELYOHAN, at MAIHULOG SA KOREO ang iyong porma sa tirahan na nakalagay
+          sa porma at ipinakikita sa ilalim.</strong><br><br>\n\n%{registrar_address}<br><br>\nKung
+          \ naihulog mo na sa koreo ang iyong porma, maaari mong <a href=\"%{cancel_reminders_url}\">i-click
+          dito</a>para tumigil ang pagtanggap ng mga paalaala tungkol sa pagpapadala
+          nito. Dapat kang makatanggap ng kumpirmasyon ng iyong pagrerehistro mula
+          sa mga opisyal ng halalan sa iyong estado. Kung minsan, ang  pagpoproseso
+          ay maaaring tumagal ng ilang linggo. Kung nais mong malaman ang kalagayan
+          ng iyong aplikasyon sa pagrerehistro ng botante, tawagan ang iyong Kalihim
+          ng Estado sa %{registrar_phone}, o i-check online sa %(registrar_url}.<br><br>\n
+          \ \nKailangan din namin ang iyong tulong sa pagkuha ng iba upang magrehistro
+          upang bumoto. May mga malaking halalan sa buong bansa. Tiyaking lahat ng
+          tao ay makapagsasabi: magpadala ng email sa iyong pamilya at mga kaibigan,
+          o ipasa ang mensahe sa ibaba.<br><br>\n\nAt, sa huli, huwag kalimutang bumoto
+          kapag dumating ang Araw ng Halalan. Mayroong 45 milyon na karapat-dapat
+          na batang botante at kung gusto nating magbigay-pansin ang mga pulitiko
+          sa mga isyu na mahalaga sa atin, kailangan nating bumoto.<br><br>\n\nSalamat,<br>\nHeather
+          Smith<br>\nPresidente, Rock the Vote<br><br>\n\nP.S. Bumisita sa <strong><a
+          href=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong> para
+          sa karagdagang impormasyon sa pagboto, eleksyon, at mga isyug mahalaga sa
+          iyo, pati mga pantulong para makapagsimula ka nga sarili mong voter registration
+          campaign.<br><br>"
+        send_to_friends: ! '<em><strong>Kopyahin at ipasta ang sumusunod sa iyong
+          paboritong kliyente ng koreo, at ipadala sa iyong mga kaibigan.</strong></em><br><br>
+
+
+          Hey,<br><br>
+
+
+          Hindi ka maaaring bumoto kung hindi ka nakarehistro. Ito ang dahilan kung
+          bakit ginagawa ng "Rock the Vote" na maging madali ang pagpuno sa pagrerehistro
+          ng botante online sa %{rtv_link}. Kung kailangan mong magrehistro para bumoto
+          sa unang pagkakataon o kailangan lang na i-update ang iyong tirahan o baguhin
+          ang iyong pangalan, ito ay nangangailangan lamang ng ilang minuto.<br><br>
+
+
+          Upang matuto nang higit pa, pumunta sa %{rtv_link}.<br><br>
+
+
+          Nakarehistro nang bumoto? Ang "Rock the Vote" ay nangangailangan ng iyong
+          tulong sa pagkuha ng iba pa na magrehistrong bumoto. Magpadala ng isang
+          email sa iyong mga kaibigan at pamilya na humihiling sa  kanilang magrehistro
+          para bumoto sa %{rtv_link}. Mayroon pa nga silang pantulong na hinahayaan
+          kang magsimula ng iyong sariling kampanya para sa pagrerehistro ng botante
+          sa iyong website o blog.<br><br>
+
+
+          Ang matapat sa iyo,<br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! 'Ang "Rock the Vote" ay nangangako na pananatilihin at pangangalagaan
           ang iyong pribado at sensitibong impormasyon. Mangyaring tingnan ang aming
-          patakaran sa pribadong pagrerehistro ng botante para sa mga detalye <strong><a
-          href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">
+          <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">patakaran
+          sa pribadong pagrerehistro ng botante</a></strong> para sa mga detalye.<br><br>
+
+
+          Mangyaring ipadala ang mga katanungan o komentaryo sa: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
     reminder:
       subject: ! 'Paalaala: Ipadala sa koreo ang iyong porma ng pagrerehistro ng botante.'
       body:
         greeting: Dear %{registrant_first_name},
-        reminder: ! 'Huwag kalimutan: Kailangan mong pirmahan, lagyan ng selyo at
-          ipadala sa koreo ang iyong porma.'
-        main: ! "Salamat sa pagtapos ng iyong aplikasyon sa pagrerehistro ng botante
-          para sa \"Rock the Vote\". Maari mong i-download ang iyong aplikasyon  sa
-          pamamagitan ng pag-click dito \"%{pdf_url}\".\n\nPaalaala lamang: Kung hindi
-          mo pa nagagawa, mangyaring siguruhin na i-imprenta, pirmahan. lagyan ng
-          selyo at ihulog sa koreo ang iyong porma sa address na nasa sa porma at
-          ipinakikita sa ibaba.\n'%{cancel_reminde\n\nKung naihulog mo na sa koreo
-          ang iyong porma, maaari mong i-click ang '%{cancel_reminders_url}' para
-          mahinto ang pagtanggap ng mga paalaala tungkol sa pagpapadala nito.  Kung
-          nais mong matingnan ang kalagayan ng iyong aplikasyon sa pagrerehistro ng
-          botante, tawagan ang iyong Kalihim ng Estado sa %{registrar_phone}, o tumingin
-          online sa %{registrar_url}. \n\nKailangan din namin ang iyong tulong para
-          mairehistrong bumoto ang iba. Mayroong mga mahalagang lahi sa buong bansa.
-          Mangyaring idirekta ang mga ito sa %{rtv_link} o ipadala ang mensahe sa
-          ibaba.  \n\nAt sa huli, huwag kalimutang bumoto pagdating the Araw ng Halalan,
-          Mayroong 45 milyong karapat-dapat na batang botante at kung gusto nating
-          magbigay-pansin ang maga pulitiko sa mga isyung mahalaga sa atin, kailangan
-          nating bumoto.  \n\nSalamat, \nHeather Smith\nPresidente ng Yugyugin ang
-          Boto (Rock the Vote)\n\nP.S. Bisitahin ang <strong><a href=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>
-          para sa mas mahigit na impormasyon sa pagboto, sa halalan, at sa mga isyung
-          mahalaga sa iyo, kasama ng pantulong para masimulan ang iyong kampanya sa
-          pagrerehistro ng botante."
-        send_to_friends: ! "Uy, \n\nHindi ka maaaring bumoto kung hindi ka naka-rehistro.
-          Iyan ang dahilan kung bakit ginagawa ng \"Rock the Vote\" na maging madali
-          ang online na pagpuno ng porma ng pagrerehistro ng botante  sa %{rtv_link}.
-          Kung kailangan mong magrehistro para bumoto sa unang pagkakataon o kailangan
-          lang na i-update ang iyong tirahan o baguhin ang iyong pangalan, ilang minuto
-          lamang ang kailangan para magawa ito.  \n\nUpang matuto nang higit pa, pumunta
-          sa %{rtv_link}. \n\nNakarehistro nang bumoto? Yugyugin ang Boto (Rock the
-          Vote) ay nangangailangan ng iyong tulong sa pagkuha ng iba pa upang makarehistrong
-          bumoto. Magpadala ng email sa iyong mga kaibigan at pamilya at hilingin
-          na sila ay magrehistro para bumoto %{rtv_link}. Mayroon pa nga silang pantulong
-          (tools) na hinahayaan kang magsimula ng iyong sariling kampanya para sa
-          pagrerehistro ng botante sa iyong website o blog.\n\nMatapat na sumasaiyo,
-          \n%{registrant_first_name}"
-        footer: Ang "Rock the Vote" ay  nangangako na pananatilihin at pangangalagaan
-          ang iyong pribado at sensitibong impormasyon. Mangyaring tingnan ang aming
-          patakaran sa pribadong pagrerehistro ng botante para sa mga detalya <strong><a
-          href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">
-    thank_you_external:
-      subject: Salamat sa paggamit ng pantulong (tool) para sa pagrerehistro ng botante
-        online
-      body:
-        main: ! "Dear %{registrant_first_name},\n\nSalamat sa paggamit ng pantulong
-          sa pagrerehistro ng botante online.\n\nKung natapos mo na ang aplikasyon
-          para sa pagrerehistro ng botante online, ito ay i-intrega sa Kalihim ng
-          Estado ng %{state_name} para maproseso. Sa sandaling maaprubahan, makakatanggap
-          ka ng isang kumpirmasyon mula sa opisina ng Kalihim ng Estado sa% {state_abbr}
-          at ang departamento ng halalan sa iyong county ay maglalagay ng iyong bagong
-          tarheta ng rehistrasyon sa koreo.  \n\nKung mayroon kang mga katanungan
-          o alalahanin, maaari mong suriin ang katayuan ng iyong pagrerehistro ng
-          botante sa pamamagitan ng pagtawag sa opisina ng Kalihim ng Estado  sa %{registrar_phone},
-          o mag-check online sa %{registrar_url}. Mangyaring makipag-ugnay nang direkta
-          sa  %{rtv_and_partner_name} kung ikaw ay makatagpo ng anumang mga isyu sa
-          pagproseso ng pagrerehistro.  \n\nNgayon, kailangan namin ang iyong tulong
-          para mairehistro ring bumoto ang iba. Mayroong mga malaking halalan sa buong
-          bansa sa taong ito at 45 milyong karapat-dapat na batang botante -- at kailangan
-          nating matiyak na bawa't isa ay may kanyang masasabi. Kaya. magpadala ng
-          e-mail sa iyong pamilya at mga kaibigan o ipasa ang mensahe sa ibaba ngayon.
-          \ Mangyaring idirekta ang mga ito sa %{rtv_link} o ipadala ngayon ang mensahe
-          sa ibaba.  \n\nAt panghuli, huwag kalimutang bumoto pagdating ng Araw ng
-          Halalan. Kung nais nating magbigay-pansin ang mga pulitiko sa mga isyung
-          mahalaga sa atin, kailangan nating bumoto.  \n\nSalamat, \nHeather Smith\nPresidente
-          ng \"Rock the Vote\"\n\nP.S. Bisitahin ang <strong><a href=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>
-          para sa mahigit pang impormasyon sa pagboto, sa halalan at sa mga isyung
-          mahalaga sa iyo. Maaari mo ring makita ang mga pantulong para masimulan
-          ang iyong sariling kampanya para sa pagrerehistro ng botante sa iyong komunidad."
-        send_to_friends: ! "Kopyahin at idikit ang sumusunod sa iyong paboritong kliyente
-          ng koreo, at ipadala sa iyong mga kaibigan.\n\nUy,\n\nHindi ka maaaring
-          bumoto kung hindi ka nakarehistro. Iyan ang dahilan kung bakit ang \"Rock
-          the Vote\" ay ginagawang madali ang pagpuno ng porma ng pagreregistro ng
-          botante online sa %{rtv_link}. Kung kailangan mong magparehistro upang bumoto
-          sa unang pagkakataon o kailangan lang i-update ang iyong tirahan o para
-          baguhin ang iyong pangalan, ito ay nangangailangan lamang ng ilang minuto.
-          \    \n\nUpang matuto ng higit pa, pumunta sa %{rtv_link}.<br><br>\n\nNakarehistro
-          nang bumoto? Yugyugin ang Boto (Rock the Vote) ay nangangailangan ng iyong
-          tulong upang mairehistrong bumoto ang iba. Magpadala ng email sa iyong mga
-          kaibigan at pamilya na humihiling sa kanilang magrehistro upang bumoto  %{rtv_link}.
-          Mayroon pa nga silang pantulong (tools) na hinahayaan kang magsimula ng
-          iyong sariling kampanya para sa pagrerehistro ng botante sa iyong website
-          o blog.\n\nMatapat na sumasaiyo, \n%{registrant_first_name}"
+        reminder: ! 'Huwag kalimutan!<br>
+
+          Kailangan mong pirmahan, lagyan ng selyo &amp; at ipadala sa koreo ang iyong
+          porma.'
+        main: ! 'Salamat sa pagtapos ng iyong aplikasyon sa pagrerehistro ng botante
+          para sa "Rock the Vote". Maari mong i-download ang iyong aplikasyon<a href="%{pdf_url}">
+          sa pamamagitan ng pag-click dito</a>.<br><br>
+
+
+          Isang Paalaala, kung hindi mo pa nagagawa, <strong>mangyaring siguruhin
+          na I-IMPRENTA, PIRMAHAN, LAGYAN NG SELYO AT IHULOG SA KOREO ang iyong porma
+          sa address na nasa sa porma at ipinakikita sa ibaba.</strong><br><br>
+
+
+          %{registrar_address}<br><br>
+
+
+          Kung naihulog mo na sa koreo ang iyong porma, maaari mong <a href="%{cancel_reminders_url}">i-click
+          dito</a> para mahinto ang pagtanggap ng mga paalaala tungkol sa pagpapadala
+          nito.  Kung nais mong matingnan ang kalagayan ng iyong aplikasyon sa pagrerehistro
+          ng botante, tawagan ang iyong Kalihim ng Estado sa %{registrar_phone}, o
+          mag-check online sa %{registrar_url}.<br><br>
+
+
+          Kailangan din namin ang iyong tulong para mairehistrong bumoto ang iba.
+          Mayroong mga mahalagang lahi sa buong bansa. Mangyaring idirekta ang mga
+          ito sa %{rtv_link} o ipadala ang mensahe sa ibaba.<br><br>
+
+
+          At sa huli, huwag kalimutang bumoto pagdating the Araw ng Halalan, Mayroong
+          45 milyong karapat-dapat na batang botante at kung gusto nating magbigay-pansin
+          ang maga pulitiko sa mga isyung mahalaga sa atin, kailangan nating bumoto.<br><br>
+
+
+          Salamat,<br>
+
+          Heather Smith<br>
+
+          Presidente ng Rock the Vote<br><br>
+
+
+          P.S. Bisitahin ang <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong>
+          para sa karagdagang impormasyon sa pagboto, sa mga halalan, at sa mga isyung
+          mahalaga sa iyo, kasama ng pantulong para masimulan ang iyong sariling kampanya
+          sa pagrerehistro ng botante.<br><br>'
+        send_to_friends: ! '<em><strong>Kopyahin at i-dikit ang mga sumusunod sa isang
+          email na mensahe at ipadala ito sa iyong mga kaibigan.</strong></em><br><br>
+
+
+
+          Hey,<br><br>
+
+
+          Hindi ka maaaring bumoto kung hindi ka naka-rehistro. Iyan ang dahilan kung
+          bakit ginagawa ng "Rock the Vote" na maging madali ang pagpuno ng porma
+          ng pagrerehistro ng botante online sa %{rtv_link}. Kung kailangan mo mang
+          magrehistro para bumoto sa unang pagkakataon o kailangan lamang na i-update
+          ang iyong address o baguhin ang iyong pangalan, ilang minuto lamang ang
+          kailangan.<br><br>
+
+
+          Upang matuto nang higit pa, pumunta sa %{rtv_link}.<br><br>
+
+
+          Nakarehistro nang bumoto? Ang Rock the Vote ay nangangailangan ng iyong
+          tulong sa pagkuha ng iba pa upang makarehistrong bumoto. Magpadala ng email
+          sa iyong mga kaibigan at pamilya at hilingin na sila ay magrehistro para
+          bumoto %{rtv_link}. Mayroon pa nga silang pantulong (tools) na hinahayaan
+          kang magsimula ng iyong sariling kampanya para sa pagrerehistro ng botante
+          sa iyong website o blog.<br><br>
+
+
+          Matapat na sumasaiyo,<br>
+
+          %{registrant_first_name}<br><br>'
         footer: ! 'Ang "Rock the Vote" ay  nangangako na pananatilihin at pangangalagaan
           ang iyong pribado at sensitibong impormasyon. Mangyaring tingnan ang aming
-          patakaran sa pribadong pagrerehistro ng botante para sa mga detalye <strong><a
-          href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">
+          <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">patakaran
+          sa pribadong pagrerehistro ng botante</a></strong> para sa mga detalya.<br><br>
 
 
-          Mangyaring ipadala ang katanungan o masasabi sa "mailto:register@rockthevote.com"'
+          Mangyaring ipadala ang katanungan o mga komentaryo sa: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
+    thank_you_external:
+      subject: Salamat sa paggamit ng online na pantulong (tool) para sa pagrerehistro
+        ng botante
+      body:
+        main: ! "Dear %{registrant_first_name},<br><br>\n\nSalamat sa paggamit ng
+          %{rtv_and_partner_name} pantulong sa pagrerehistro ng botante online.<br><br>\n\nKung
+          natapos mo na ang aplikasyon para sa pagrerehistro ng botante online, ito
+          ay na-intrega sa Kalihim ng Estado ng %{state_name} para maproseso. Sa sandaling
+          maaprubahan, makakatanggap ka ng isang kumpirmasyon mula sa opisina ng Kalihim
+          ng Estado sa% {state_abbr} at ang departamento ng halalan sa iyong county
+          ay maglalagay ng iyong bagong tarheta ng rehistrasyon sa koreo.<br><br>\n\nKung
+          mayroon kang mga katanungan o alalahanin, maaari mong matingnan ang katayuan
+          ng iyong pagrerehistro ng botante sa pamamagitan ng pagtawag sa opisina
+          ng Kalihim ng Estado sa %{state_abbr} sa %{registrar_phone}, o tumingin
+          online sa %{registrar_url}. Mangyaring makipag-ugnay nang direkta sa  %{rtv_and_partner_name}
+          kung ikaw ay makatagpo ng anumang mga isyu sa pagproseso ng pagrerehistro.<br><br>\n\nNgayon,
+          kailangan namin ang iyong tulong para mairehistro ring bumoto ang iba. Mayroong
+          mga malaking halalan sa buong bansa sa taong ito at 45 milyong eligible
+          na mga batang botante -- at kailangan nating matiyak na bawa't isa ay may
+          kanyang masasabi. Kaya, magpadala ng e-mail sa iyong pamilya at mga kaibigan
+          o ipasa ang mensahe sa ibaba ngayon.<br><br>\n \nAt panghuli, huwag kalimutang
+          bumoto pagdating ng Araw ng Halalan. Kung nais nating magbigay-pansin ang
+          mga pulitiko sa mga isyung mahalaga sa atin, kailangan nating bumoto.<br><br>\n\nSalamat,<br>\nHeather
+          Smith<br>\nPresidente ng Rock the Vote.<br><br>\n\nP.S. Bisitahin ang <strong><a
+          href=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong> para
+          sa karagdagang impormasyon sa pagboto, sa halalan at sa mga isyung mahalaga
+          sa iyo. Maaari mo ring makita ang mga pantulong para masimulan ang iyong
+          sariling kampanya para sa pagrerehistro ng botante sa iyong komunidad.<br><br>"
+        send_to_friends: ! '<em><strong>Kopyahin at idikit ang sumusunod sa iyong
+          paboritong kliyente ng koreo, at ipadala sa iyong mga kaibigan.</strong></em><br><br>
+
+
+          Hey,<br><br>
+
+
+          Hindi ka maaaring bumoto kung hindi ka nakarehistro. Iyan ang dahilan kung
+          bakit ang "Rock the Vote" ay ginagawang madali ang pagpuno ng porma ng pagreregistro
+          ng botante online sa %{rtv_link}. Kung kailangan mong magparehistro upang
+          bumoto sa unang pagkakataon o kailangan lamang na i-update ang iyong tirahan
+          o palitan ang iyong pangalan, ito ay nangangailangan lamang ng ilang minuto.<br><br>
+
+
+          Upang matuto ng higit pa, pumunta sa %{rtv_link}.<br><br>
+
+
+          Nakarehistro nang bumoto? Ang Rock the Vote ay nangangailangan ng iyong
+          tulong upang mairehistrong bumoto ang iba. Magpadala ng email sa iyong mga
+          kaibigan at pamilya na humihiling sa kanilang magrehistro upang bumoto sa
+          %{rtv_link}. Mayroon pa nga silang pantulong (tools) na hinahayaan kang
+          magsimula ng iyong sariling kampanya para sa pagrerehistro ng botante sa
+          iyong website o blog.<br><br>
+
+
+          Matapat na sumasaiyo,<br>
+
+          %{registrant_first_name}<br><br>'
+        footer: ! 'Ang "Rock the Vote" ay  nangangako na pananatilihin at pangangalagaan
+          ang iyong pribado at sensitibong impormasyon. Mangyaring tingnan ang aming
+          <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">patakaran
+          sa pribadong pagrerehistro ng botante </a></strong>para sa mga detalye.<br><br>
+
+
+          Mangyaring ipadala ang katanungan o Kumentaryo sa:  <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
     tell_friend:
       subject: Karerehistro ko lang na bumoto at dapat ka rin.
-      body: ! 'Uy,
+      body: ! 'Hey, karerehistro ko lang na bumoto sa ''%{rtv_url}'' at maaari ka
+        rin. Talagang madali lang ito.
 
 
-        Karerehistro ko lang na bumoto sa ''%{rtv_url}'' at maaari ka rin. Talagang
-        madali lang ito.
-
-
-        Punuan lang ang online na porma dito: %{rtv_url}.  Hindi ka maaaring bumoto
-        kung hindi ka nakarehistro. Kung kailangan mo  lamang na magparehistro para
-        bumoto sa unang pagkakataon o kailangan lang na i-update ang iyong tirahan
-        o baguhin ang iyong pangalan, ilang minuto lamang ang kailangan. Para malaman
-        ang mahigit pa, pumunta sa: %{rtv_url}.
+        Punuan lamang ang online na porma dito: %{rtv_url}.  Hindi ka maaaring bumoto
+        kung hindi ka nakarehistro. Kung kailangan mo mang magrehistro para bumoto
+        sa unang pagkakataon o kailangan lamang na i-update ang iyong tirahan o baguhin
+        ang iyong pangalan, ilang minuto lamang ang kailangan. Para malaman ang higit
+        pa, pumunta sa: %{rtv_url}.
 
 
         Nakarehistro nang bumoto? Maaari kang tumulong na mairehistro ang iba para
         bumoto. Magpadala ng email sa iyong mga kaibigan at pamilya na humihiling
-        sa kanilang magrehistro para bumoto.
+        sa kanilang magrehistro para bumoto sa %{rtv_url}.
 
 
         Maligayang pagboto !'
@@ -171,5 +248,10 @@ tl:
         Maaari mo lamang punuan ang porma ng pagrerehistro ng botante sa %{rtv_url}.
         Ito ay napakadali. Kung kailangan mong magrehistro para bumoto sa unang pagkakataon
         o kailangan lang na i-update ang iyong tirahan o baguhin ang iyong pangalan,
-        ilang minuto lamang ang kailangan.'
+        ilang minuto lamang ang kailangan. Pumunta sa %{rtv_url}.
+
+
+        Nakarehistro nang bumoto o wala pang sapat na gulang para bumoto? Tulungan
+        ang iba na magrehistrong bumoto sa pamamagitan ng pagpapadala ng email sa
+        iyong mga kaibigan at pamilya, na hinihilingan silang magrehistro sa %{rtv_url}.'
 

@@ -1,2 +1,112 @@
+---
 zh:
-  language_name: Chinese
+  language_name: 中文（简体）
+  language_name_translation_instructions: 请使用翻译的语言来表示翻译语言的名称。例如，如果你正在翻译日语，请使用日语中表示“日语”（语言名称）的词汇。
+  activerecord:
+    attributes:
+      partner:
+        from_email: 来自电子邮件
+        url: URL
+      registrant:
+        date_of_birth: 出生日期
+        email_address: 电子邮件地址
+        first_registration: 这是我首次进行选民登记。
+        home_zip_code: 邮政编码
+        us_citizen: 我是美国公民。
+        name_title: 称呼
+        first_name: 名
+        middle_name: 中间名
+        last_name: 姓
+        name_suffix: 后缀
+        home_address: 地址
+        home_unit: 公寓/小区号码
+        home_city: 城市
+        home_state_name: 州
+        has_mailing_address: 我的收信地址与以上不同
+        mailing_address: 地址
+        mailing_unit: 公寓/小区号码
+        mailing_city: 城市
+        mailing_state_abbrev: 州
+        mailing_zip_code: 邮政编码
+        party: 政党
+        race: 种族
+        state_id_number: 身份证号码
+        phone: 电话
+        phone_type: 类型
+        change_of_name: 我更改过姓名
+        prev_name_title: 称呼
+        prev_first_name: 名
+        prev_middle_name: 中间名
+        prev_last_name: 姓
+        prev_name_suffix: 后缀
+        change_of_address: 我已更改地址。
+        prev_address: 地址
+        prev_unit: 单元/小区号码
+        prev_city: 城市
+        prev_state_abbrev: 州
+        prev_zip_code: 邮政编码
+        opt_in_email: 接收电子邮件
+        opt_in_sms: 接收短信
+        attest_true: 我已审阅以上信息，尽我所知它是真实的，准确的。
+        tell_from: 从
+        tell_email: 您的电子邮件
+        tell_recipients: 收件人
+        tell_subject: 主题
+        tell_message: 个人留言
+    errors:
+      models:
+        registrant:
+          blank: 必须填写
+          invalid_zip: 无效的邮政编码
+          attributes:
+            home_zip_code:
+              invalid: 请使用标准邮政编码或标准邮政编码+4位数
+            mailing_zip_code:
+              invalid: 请使用标准邮政编码或标准邮政编码+4位数
+            prev_zip_code:
+              invalid: 请使用标准邮政编码或标准邮政编码+4位数
+            email_address:
+              invalid: 这不是一个有效的地址
+            date_of_birth:
+              format: 格式是月份（两位数）- 日期 （两位数）- 年份（四位数）
+            phone:
+              invalid: 格式是###-###-####
+              required_if_opt_in: 如果想要接收短信，那么必须填写此项
+            attest_true:
+              accepted: 请务必确认以上信息是否正确。
+            has_state_license:
+              inclusion: 请说明您是否持有有效的州执照
+      messages:
+        inclusion: ! '%{attribute} 不在列表当中。'
+        exclusion: ! '%{attribute} 已经被占用。'
+        invalid: ! '%{attribute}是无效的。'
+        confirmation: ! '%{attribute}与确认信息不匹配。'
+        accepted: ! '%{attribute} 必须被接受。'
+        empty: ! '%{attribute} 不能留空。'
+        blank: ! '%{attribute} 不能留空。'
+        too_long: ! '%{attribute} 太长 （最长是 %{count} 个字）。'
+        too_short: ! '%{attribute} 太短（最少需要%{count} 个字）。'
+        wrong_length: ! '%{attribute} 的长度不对 (必须是 %{count} 个字)'
+        taken: ! '%{attribute} 已经被占用。'
+        not_a_number: ! '%{attribute} 不是一个数字。'
+        greater_than: ! '%{attribute} 必须大于 %{count}。'
+        greater_than_or_equal_to: ! '%{attribute} 必须大于或等于%{count}。'
+        equal_to: ! '%{attribute} 必须等于%{count}。'
+        less_than: ! '%{attribute} 必须小于%{count}。'
+        less_than_or_equal_to: ! '%{attribute} 必须小于或等于%{count}。'
+        odd: ! '%{attribute} 必须是单数。'
+        even: ! '%{attribute} 必须是双数。'
+  authlogic:
+    error_messages:
+      login_blank: 用户名不能留空。
+      login_not_found: 用户名/密码组合无效。
+      login_invalid: 用户名仅限使用字母，数字，空格，以及.-_@
+      consecutive_failed_logins_limit_exceeded: 超过连续输入错误次数上限，该账户被禁用。
+      email_invalid: 该电子邮件地址不是一个有效的电子邮件地址。
+      password_blank: 密码不能为空。
+      password_invalid: 用户名/密码组合无效。
+      not_active: 您的帐户没有被激活。
+      not_confirmed: 您的帐户未获得确认。
+      not_approved: 您的帐户没有获得许可。
+      no_authentication_details: 您没有提供认证所需的信息。
+
