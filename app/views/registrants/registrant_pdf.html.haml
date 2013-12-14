@@ -246,7 +246,7 @@
               .checkbox{:class=>checked?(:iv, :prev_name_suffix) ? 'checkbox-checked' : ''}
                 = checkbox(:iv, :prev_name_suffix)
                 %span= I18n.t("txt.registration.suffixes.iv", :locale=>:en)          
-    %p.block_title.blockB= I18n.t('pdf.nvra.page2.blockB.title' ).html_safe
+    %p.block_title.blockB= form_prompt('pdf.nvra.page2.blockB.title' ).html_safe
     %table.form
       %tr#blockB
         %td.block_number B
