@@ -1,2 +1,113 @@
+---
 ja:
-  language_name: Japanese
+  language_name: 英語
+  language_name_translation_instructions: 翻訳された言語の名前をその言語で表示してください。たとえばあなたが日本語を翻訳しているのであれば、
+    "日本語"（言語の名前）と日本語で表示してください。
+  activerecord:
+    attributes:
+      partner:
+        from_email: Eメールから
+        url: URL
+      registrant:
+        date_of_birth: 生年月日
+        email_address: Eメールアドレス
+        first_registration: 私は初めて投票登録をします。
+        home_zip_code: 郵便番号
+        us_citizen: 私は米国市民です。
+        name_title: 敬称(Mr. Ms. Dr. )
+        first_name: 名（ファーストネーム）
+        middle_name: ミドルネーム
+        last_name: 姓（ラストネーム）
+        name_suffix: 接尾辞（Jr., Sir., II,III ）
+        home_address: 住所
+        home_unit: ユニット、ロット番号
+        home_city: 市
+        home_state_name: 州
+        has_mailing_address: 上記とは別の住所で郵便を受け取ります。
+        mailing_address: 住所
+        mailing_unit: ユニット、ロット番号
+        mailing_city: 市
+        mailing_state_abbrev: 州
+        mailing_zip_code: 郵便番号
+        party: 政党
+        race: 人種
+        state_id_number: ID番号
+        phone: 電話番号
+        phone_type: 電話の種類
+        change_of_name: 私は名前を変えました。
+        prev_name_title: 敬称(Mr. Ms. Mrs. Dr.)
+        prev_first_name: 名（ファーストネーム）
+        prev_middle_name: ミドルネーム
+        prev_last_name: 姓（ラストネーム）
+        prev_name_suffix: 接尾辞 （Jr., Sir., II,III ）
+        change_of_address: 私は住所を変えました。
+        prev_address: 住所
+        prev_unit: ユニット、ロット番号
+        prev_city: 市
+        prev_state_abbrev: 州
+        prev_zip_code: 郵便番号
+        opt_in_email: eメールを受け取ります。
+        opt_in_sms: テキストメッセージを受け取ります。
+        attest_true: 私は上記の情報を見返し、それらが真実で正確であることを確認しました。
+        tell_from: 送信者
+        tell_email: あなたのEメール
+        tell_recipients: 受信者
+        tell_subject: 題名
+        tell_message: メッセージ
+    errors:
+      models:
+        registrant:
+          blank: 必須
+          invalid_zip: 無効な郵便番号
+          attributes:
+            home_zip_code:
+              invalid: 家の郵便番号あるいは郵便番号＋４桁
+            mailing_zip_code:
+              invalid: 郵送先の郵便番号あるいは郵便番号＋４桁
+            prev_zip_code:
+              invalid: 以前の郵便番号あるいは郵便番号＋４桁
+            email_address:
+              invalid: eメールアドレスが有効ではありません。
+            date_of_birth:
+              format: 月ー日ー年の形式を使用してください。
+            phone:
+              invalid: ◯◯◯-◯◯◯-◯◯◯◯の形式を使用してください。
+              required_if_opt_in: テキストメッセージを受け取るのであれば必要です。
+            attest_true:
+              accepted: 上記の情報が正しいかどう表示する必要があります。
+            has_state_license:
+              inclusion: あなたが有効な州の免許をもっているかどうか表示してください。
+      messages:
+        inclusion: ! '%{attribute}はこのリストに含まれていません。'
+        exclusion: ! '%{attribute}を維持してください。'
+        invalid: ! '%{attribute} は無効です。'
+        confirmation: ! '%{attribute}は確認ができません。'
+        accepted: ! '%{attribute}は受付られます。'
+        empty: ! '%{attribute}は空欄にできません。'
+        blank: ! '%{attribute}は空白にできません。'
+        too_long: ! '%{attribute} は長過ぎます。最大 %{count} 文字までです。'
+        too_short: ! '%{attribute} は短すぎます。最低 %{count} 文字以上です。'
+        wrong_length: ! '%{attribute} は間違った長さです。 （ %{count} に文字にしてください。）'
+        taken: ! '%{attribute} はすでに使用されています。'
+        not_a_number: ! '%{attribute} は数字ではありません。'
+        greater_than: ! '%{attribute} は %{count}.より大きくするべきです。'
+        greater_than_or_equal_to: ! '%{attribute} は %{count}より大きいか同じになるべきです。'
+        equal_to: ! '%{attribute} は%{count}と同じでなければなりません。'
+        less_than: ! '%{attribute} は %{count}より少なくなければなりません。'
+        less_than_or_equal_to: ! '%{attribute} は %{count}より少ないか、同じでなければなりません。'
+        odd: ! '%{attribute}は奇数でなければなりません。'
+        even: ! '%{attribute} は偶数でなければなりません。'
+  authlogic:
+    error_messages:
+      login_blank: ログインは空白に出来ません。
+      login_not_found: ログイン／パスワードの組み合わせは有効ではありません。
+      login_invalid: ユーザーネームは文字、数字、スペース、そして.-_@ などしか使えません。
+      consecutive_failed_logins_limit_exceeded: 度重なるログインの失敗が限界を超えると、アカウントが無効になります。
+      email_invalid: Eメールのアドレスが有効ではありません。
+      password_blank: パスワードは空白には出来ません。
+      password_invalid: ログイン／パスワードの組み合わせが有効ではありません。
+      not_active: あなたのアカウントはアクティブではありません。
+      not_confirmed: あなたのアカウントは確認されていません。
+      not_approved: あなたのアカウントは承認されていません。
+      no_authentication_details: あなたは認証を得るための詳細を提供しませんでした。
+

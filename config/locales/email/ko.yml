@@ -8,15 +8,15 @@ ko:
         reminder: ! '기억하세요!<br>
 
           유권자 등록 양식은 서명한 후 우표를 붙혀서 보내셔야 합니다.'
-        main: ! "유권자 등록을 해주셔서 감사합니다. 아직 유권자 등록을 하지 않으셨다면  <a href=\"%{pdf_url}>\">등록
+        main: ! "유권자 등록을 해주셔서 감사합니다. 아직 유권자 등록을 하지 않으셨다면  <a href=\"%{pdf_url}\">등록
           양식</a>을 다운로드 받으십시오.<br><br>\n\n\n          <strong>유권자 등록 양식을 우편으로 보내기 전까지는
           유권자 등록이 끝난것이 아닙니다.</strong><br><br>\n\n\n          유권자 등록 양식을 작성한 후, 서명과
           우표를 확인하고 아래의 주소로 보내주십시오.</strong><br><br>\n\n\n          %{registrar_address}<br><br>\n\n
           \         이제부터 Rock the Vote 에서 등록 양식을 잊지 말고 우편으로 보내라는 알림 이메일을 정기적으로 보내드릴
           것입니다. 이러한 알림 이메일을 더 이상 받지 않기 원하시면 <a href=\"%{cancel_reminders_url}\">수신
-          거부 </a>를\n          클릭하면 됩니다. 주 선거사무실에서는 유권자 등록 양식이 접수되었다는 통보를 신청자에게 할 것
+          거부</a> 를\n          클릭하면 됩니다. 주 선거사무실에서는 유권자 등록 양식이 접수되었다는 통보를 신청자에게 할 것
           입니다. 양식이 접수되기까지 수 주가\n          걸릴 수도 있습니다. 유권자 등록이 제대로 진행되고 있는지를 확인하려면
-          주 총무처 %{registrar_phone}로 전화하거나 웹\n          사이트 %{registrar_url}.를 방문하여
+          주 총무처 %{registrar_phone}로 전화하거나 웹\n          사이트 %{registrar_url} 를 방문하여
           확인할 수 있습니다.<br><br>\n\n\n          주변 시민권자들에게 유권자 등록을 할 것을 권장해 주세요. 모두가
           투표를 통해 참여하면 커뮤니티에 정치적 힘이 생깁니다. 가족이나\n          친구들에게 알려주시고  아래의 내용을 이메일로
           전달해 주십시오.<br><br>\n\n\n          마지막으로 선거 당일에 투표하는 것을 있지 마세요. 미국의 4천5백 만
@@ -24,7 +24,7 @@ ko:
           그러기 위해서는 꼭 투표해야 합니다.<br><br>\n\n\n          감사합니다.<br>\n\n          Rock
           the Vote, Heather Smith 회장<br><br>\n\n       \n\n\n          추신: 투표나 선거
           방법에 대한 문의 또는 중요한 선거 이슈에 대한 정보나 유권자 등록 캠페인에 참여하기 위한 자료가 필요하시면\n          웹
-          사이트 <strong><ahref=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>을
+          사이트 <strong><a href=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>을
           방문하셔서\n          필요한 정보를 얻으시기 바랍니다.<br><br>"
         send_to_friends: ! "<strong> 이 내용을 여러분의 지인과 친구에게 전달해 주십시오.</strong><br><br>\n\n\n
           \         안녕하세요,<br><br>\n\n\n          투표를 하기 위해서는 유권자 등록을 꼭 해야 합니다. 그래서
@@ -51,7 +51,7 @@ ko:
           것입니다. 이러한 알림 이메일을 더 이상 받지 않기 원하시면 <a href=\"%{cancel_reminders_url}\">수신
           거부 </a>를\n          클릭하면 됩니다. 주 선거사무실에서는 유권자 등록 양식이 접수되었다는 통보를 신청자에게 할 것
           입니다. 양식이 접수되기까지 수 주가\n          걸릴 수도 있습니다. 유권자 등록이 제대로 진행되고 있는지를 확인하려면
-          주 총무처 %{registrar_phone}로 전화하거나 웹\n          사이트 %{registrar_url}.를 방문하여
+          주 총무처 %{registrar_phone}로 전화하거나 웹\n          사이트 %{registrar_url} 를 방문하여
           확인할 수 있습니다.<br><br>\n\n\n          주변 시민권자들에게 유권자 등록을 할 것을 권장해 주세요. 모두가
           투표를 통해 참여하면 커뮤니티에 정치적 힘이 생깁니다. 가족이나\n          친구들에게 알려주시고  아래의 내용을 이메일로
           전달해 주십시오.<br><br>\n\n\n          마지막으로 선거 당일에 투표하는 것을 있지 마세요. 미국의 4천5백 만
@@ -59,7 +59,7 @@ ko:
           그러기 위해서는 꼭 투표해야 합니다.<br><br>\n\n\n          감사합니다.<br>\n\n          Rock
           the Vote, Heather Smith 회장<br><br>\n\n       \n\n\n          추신: 투표나 선거
           방법에 대한 문의 또는 중요한 선거 이슈에 대한 정보나 유권자 등록 캠페인에 참여하기 위한 자료가 필요하시면\n          웹
-          사이트 <strong><ahref=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>을
+          사이트 <strong><a href=\"http://www.rockthevote.com/\">www.rockthevote.com</a></strong>을
           방문하셔서\n          필요한 정보를 얻으시기 바랍니다.<br><br>"
         send_to_friends: ! "<strong> 이 내용을 여러분의 지인과 친구에게 전달해 주십시오.</strong><br><br>\n\n\n
           \         안녕하세요,<br><br>\n\n\n          투표를 하기 위해서는 유권자 등록을 꼭 해야 합니다. 그래서
