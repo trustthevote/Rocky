@@ -34,7 +34,7 @@ class PdfRenderer < AbstractController::Base
   
   def set_registrant_instructions_link
     url = self.registrant.registration_instructions_url
-    @registrant_instructions_link = link_to url, url
+    @registrant_instructions_link = "<br>" + link_to(url, url) + "<br>"
   end
   
   
