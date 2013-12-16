@@ -15,11 +15,11 @@ ilo:
           ti botante nga sumasarsaruno. Iti Nevada Online Voter Application (NOVA)
           ay inted ni Sekretarya ti Estado Nevada, Ross Miller, tapno agrehistro dagiti
           botante iti Nevada ken tapno isuda ket makaboto, wenno suktan ti agpayao
-          nga impormasyon. Masapul mo met iti NOVA na aksukat ka <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">ditoy</a>.</p><br/><p>iti
-          impormasyon ti driver's license iti invalido wenno iti DMV record - saan
-          ka nga agdanag - mabalin mo met <a href="%{next_url}">ngalipasen ti rehistrasyon
-          mo ti saan ka nga agdanag %{rtv_and_partner_name}</a>. - Masapul mo laeng
-          nga iprenta, isurat iti nagan mo, ken ibuson data porma.</p>
+          nga impormasyon. Masapul mo met iti NOVA na aksukat ka <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">ditoy</a>.</p><br/>
+          <p> iti impormasyon ti driver's license iti invalido wenno iti DMV record
+          - saan ka nga agdanag - mabalin mo met <a href="%{next_url}">ngalipasen
+          ti rehistrasyon mo ti saan ka nga agdanag %{rtv_and_partner_name}</a>. -
+          Masapul mo laeng nga iprenta, isurat iti nagan mo, ken ibuson data porma.</p>
     parties:
       democratic: Demokratiko
       independent: Independiente
@@ -475,7 +475,7 @@ ilo:
         iti aldaw wenno sakbay ti deadline ti voter registration
       utah: markado 30 nga aldaw sakbay ti eleksyon, o naawat mismo ti tao 15 nga
         aldaw sakbay ti eleksyon
-      vermont: naawat ti oras ti 5 iti malem ti Mierkoles sabay ti eleksyo9n
+      vermont: naawat ti oras ti 5 iti malem ti Mierkoles sabay ti eleksyon
       washington: markado ti coreo ti Lunes up-pat nga semana sakbay ti eleksyon,
         o naawat mismo ti tao idiay departamento ti county elections iti Lunes mai-sa
         nga semana sakbay ti eleksyon

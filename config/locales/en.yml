@@ -1,6 +1,9 @@
+---
 en:
   language_name: English
-  language_name_translation_instructions: "Please provide the name of the translated language in that language. For example, if you are translating Japanese, provide the japanese word for \"Japanese\" (the language name)."
+  language_name_translation_instructions: Please provide the name of the translated
+    language in that language. For example, if you are translating Japanese, provide
+    the japanese word for "Japanese" (the language name).
   activerecord:
     attributes:
       partner:
@@ -18,12 +21,12 @@ en:
         last_name: Last
         name_suffix: Suffix
         home_address: Address
-        home_unit: "Unit/Lot #"
+        home_unit: ! 'Unit/Lot #'
         home_city: City
         home_state_name: State
         has_mailing_address: I get my mail at a different address from the one above.
         mailing_address: Address
-        mailing_unit: "Unit/Lot #"
+        mailing_unit: ! 'Unit/Lot #'
         mailing_city: City
         mailing_state_abbrev: State
         mailing_zip_code: ZIP Code
@@ -40,13 +43,14 @@ en:
         prev_name_suffix: Suffix
         change_of_address: I have changed my address.
         prev_address: Address
-        prev_unit: "Unit/Lot #"
+        prev_unit: ! 'Unit/Lot #'
         prev_city: City
         prev_state_abbrev: State
         prev_zip_code: ZIP Code
         opt_in_email: Receive emails
         opt_in_sms: Receive txt messages
-        attest_true: I have reviewed the above information, and it is true and accurate to the best of my knowledge.
+        attest_true: I have reviewed the above information, and it is true and accurate
+          to the best of my knowledge.
         tell_from: From
         tell_email: Your Email
         tell_recipients: Recipients
@@ -55,56 +59,59 @@ en:
     errors:
       models:
         registrant:
-          blank: "Required"
-          invalid_zip: "Invalid ZIP"
+          blank: Required
+          invalid_zip: Invalid ZIP
           attributes:
             home_zip_code:
-              invalid: "Use ZIP or ZIP+4"
+              invalid: Use ZIP or ZIP+4
             mailing_zip_code:
-              invalid: "Use ZIP or ZIP+4"
+              invalid: Use ZIP or ZIP+4
             prev_zip_code:
-              invalid: "Use ZIP or ZIP+4"
+              invalid: Use ZIP or ZIP+4
             email_address:
-              invalid: "Not a valid address"
+              invalid: Not a valid address
             date_of_birth:
-              format: "Should be MM-DD-YYYY"
+              format: Should be MM-DD-YYYY
             phone:
-              invalid: "Should be ###-###-####"
-              required_if_opt_in: "Required if receiving TXT"
+              invalid: ! 'Should be ###-###-####'
+              required_if_opt_in: Required if receiving TXT
             attest_true:
-              accepted: "You must indicate whether the above information is correct."
+              accepted: You must indicate whether the above information is correct.
             has_state_license:
               inclusion: Please indicate whether you have a valid state license
       messages:
-        inclusion: "%{attribute} is not included in the list."
-        exclusion: "%{attribute} is reserved."
-        invalid: "%{attribute} is invalid."
-        confirmation: "%{attribute} doesn't match confirmation."
-        accepted: "%{attribute} must be accepted."
-        empty: "%{attribute} can't be empty."
-        blank: "%{attribute} can't be blank."
-        too_long: "%{attribute} is too long (maximum is %{count} characters)."
-        too_short: "%{attribute} is too short (minimum is %{count} characters)."
-        wrong_length: "%{attribute} is the wrong length (should be %{count} characters)."
-        taken: "%{attribute} has already been taken."
-        not_a_number: "%{attribute} is not a number."
-        greater_than: "%{attribute} must be greater than %{count}."
-        greater_than_or_equal_to: "%{attribute} must be greater than or equal to %{count}."
-        equal_to: "%{attribute} must be equal to %{count}."
-        less_than: "%{attribute} must be less than %{count}."
-        less_than_or_equal_to: "%{attribute} must be less than or equal to %{count}."
-        odd: "%{attribute} must be odd."
-        even: "%{attribute} must be even."
+        inclusion: ! '%{attribute} is not included in the list.'
+        exclusion: ! '%{attribute} is reserved.'
+        invalid: ! '%{attribute} is invalid.'
+        confirmation: ! '%{attribute} doesn''t match confirmation.'
+        accepted: ! '%{attribute} must be accepted.'
+        empty: ! '%{attribute} can''t be empty.'
+        blank: ! '%{attribute} can''t be blank.'
+        too_long: ! '%{attribute} is too long (maximum is %{count} characters).'
+        too_short: ! '%{attribute} is too short (minimum is %{count} characters).'
+        wrong_length: ! '%{attribute} is the wrong length (should be %{count} characters).'
+        taken: ! '%{attribute} has already been taken.'
+        not_a_number: ! '%{attribute} is not a number.'
+        greater_than: ! '%{attribute} must be greater than %{count}.'
+        greater_than_or_equal_to: ! '%{attribute} must be greater than or equal to
+          %{count}.'
+        equal_to: ! '%{attribute} must be equal to %{count}.'
+        less_than: ! '%{attribute} must be less than %{count}.'
+        less_than_or_equal_to: ! '%{attribute} must be less than or equal to %{count}.'
+        odd: ! '%{attribute} must be odd.'
+        even: ! '%{attribute} must be even.'
   authlogic:
     error_messages:
-      login_blank: "Login cannot be blank."
-      login_not_found: "Login/password combination is not valid."
-      login_invalid: "Username should use only letters, numbers, spaces, and .-_@ please."
-      consecutive_failed_logins_limit_exceeded: "Consecutive failed logins limit exceeded, account is disabled."
-      email_invalid: "Email is not a valid address."
-      password_blank: "Password can not be blank."
-      password_invalid: "Login/password combination is not valid."
-      not_active: "Your account is not active."
-      not_confirmed: "Your account is not confirmed."
-      not_approved: "Your account is not approved."
-      no_authentication_details: "You did not provide any details for authentication."
+      login_blank: Login cannot be blank.
+      login_not_found: Login/password combination is not valid.
+      login_invalid: Username should use only letters, numbers, spaces, and .-_@ please.
+      consecutive_failed_logins_limit_exceeded: Consecutive failed logins limit exceeded,
+        account is disabled.
+      email_invalid: Email is not a valid address.
+      password_blank: Password can not be blank.
+      password_invalid: Login/password combination is not valid.
+      not_active: Your account is not active.
+      not_confirmed: Your account is not confirmed.
+      not_approved: Your account is not approved.
+      no_authentication_details: You did not provide any details for authentication.
+

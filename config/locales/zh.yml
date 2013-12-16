@@ -1,7 +1,7 @@
 ---
 zh:
   language_name: 中文（简体）
-  language_name_translation_instructions: 请使用翻译的语言来表示翻译语言的名称。例如，如果你正在翻译日语，请使用日语中表示“日语”（语言名称）的词汇。
+  language_name_translation_instructions: 请使用翻译的语言来表示翻译语言的名称。例如，如果您正在翻译日语，请使用日语中表示“日语”（语言名称）的词汇。
   activerecord:
     attributes:
       partner:
@@ -39,7 +39,7 @@ zh:
         prev_middle_name: 中间名
         prev_last_name: 姓
         prev_name_suffix: 后缀
-        change_of_address: 我已更改地址。
+        change_of_address: 我更改过地址。
         prev_address: 地址
         prev_unit: 单元/小区号码
         prev_city: 城市

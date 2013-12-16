@@ -3,10 +3,10 @@ tl:
   txt:
     rtv_and_partner: ! '"Rock the Vote" at %{partner_name}'
     button:
-      submit: susunod na hakbang
-      edit: isaayos ang sinulat
-      back: Nakaraang Hakbang
-      download: ! 'I-imprenta ang iyong porma ng pagrerehistro ngayon '
+      submit: Susunod na Hakbang
+      edit: Isaayos ang sinulat
+      back: ! '&lt; Nakaraang Hakbang'
+      download: I-imprenta ang iyong porma ng<br/>pagrerehistro<br/>ng porma ngayon.
       ineligible_try_again: Ibalik
       keep_going: Magpatuloy
       remind_me_later: Paalalahanan Ako Mamaya
@@ -14,16 +14,16 @@ tl:
       prepare: Ihanda ang Porma
       review: Suriin ang Aplikasyon
       sendmail: Ipadala ang E-mail
-      share_facebook: I-post ito!
-      share_twitter: I-Tweet ito!
-      share_google_buzz: I-bahagi sa Google !
-      state_online_registration: Gusto kong mag-intrega online ng aking porma para
-        sa %{state} ngayon.
-      skip_state_online_registration: Hindi. Salamat ! Ipagpapatuloy ko ang %{rtv_and_partner_name}
-        at ipadadala ang aking porma mamaya.
+      share_facebook: I-post!
+      share_twitter: I-Tweet!
+      share_google_buzz: I-bahagi sa Google!
+      state_online_registration: Nais kong i-intrega<br/>online ang aking porma para
+        sa<br/>%{state} ngayon.
+      skip_state_online_registration: ! '&gt; Hindi. Salamat, ipagpapatuloy ko ang
+        %{rtv_and_partner_name} at ipadadala ang aking porma mamaya.'
     registration:
       in_language_name: sa Tagalog
-      powered_by: Pinagagana sa pamamagitan ng
+      powered_by: Pinagagana ng
       progress_indicator: Hakbang
       step_1_header: Bagong Rehistrante
       step_2_header: Personal na impormasyon
@@ -31,12 +31,12 @@ tl:
       step_4_header: Manatiling Nakakaalam at Gumawa ng Aksyon
       step_5_header: Suriin at Kumpirmahin
       stay_informed_header: Manatiling nakakaalam
-      identification_header: Impormasyon na Pagkakakilanlan
-      survey_title: Katanungan Para sa Iyo
+      identification_header: Impormasyong Pagkakakilanlan
+      survey_title: Mga Katanungan Para sa Iyo
       preparing_header: Inihahanda ang Porma ng Pagpaparehistro
       download_header: I-imprenta ang Iyong Porma
-      finish_header: Ipagkalat ang salita !
-      finish_under_18_header: Ikaw ay nasa listahan !
+      finish_header: Ikalat ang salita!
+      finish_under_18_header: Ikaw ay nasa listahan!
       tell_a_friend_title: Sabihan ang isang kaibigan sa pamamagitan ng E-mail
       finish_reminder: Salamat, %{first_name}, sa  pagpapadala ng iyong aplikasyon
         para sa pagrerehistro ng botante. Ikaw ay dapat na tumanggap ng kumpirmasion
@@ -44,15 +44,15 @@ tl:
         maaring tumagal ng ilang linggo.
       finish_reminder_2: Kung gusto mong malaman ang kalagayan ng iyong porma sa pagrerehistro
         ng botante, maaari mong hanapin ang  taga-ugnay na impormasyon sa iyong Kalihim
-        ng Estado sa aming <a href="http://www.rockthevote.com/election-center/" target="_blank">Sentro
+        ng Estado sa aming<a href="http://www.rockthevote.com/election-center/" target="_blank">Sentro
         ng Halalan</a>.
       ineligible_header: ! 'Paumanhin, hindi ka eligible na magrehistro upang bumoto
         dahil sa (mga) sumusunod na kadahilanan:'
       external_header: Rehistrante ng %{state}
       name: Pangalan
       select_none: (wala)
-      home_address: Address ng bahay
-      mailing_address: Tirahang pangkoreo
+      home_address: Bahay na tirahan
+      mailing_address: Address na pangkoreo
       previous_name: Dating Pangalan
       previous_address: Dating Tirahan
       opt_in_sms: Ipadala sa akin ang mga mensaheng txt galing sa %{organization}.
@@ -61,13 +61,13 @@ tl:
       get_updates: Kumuha ng mga updates galing sa "Rock the Vote"
       volunteer: Nais kong magboluntaryo sa %{organization}.
       not_given: Wala
-      has_state_license: Meron akong pangkasalukuyang tarheta na pagkakakilanlan o
+      has_state_license: Meron akong pangkasalukuyang tarhetang pagkakakilanlan o
         lisensiya ng pagmamaneho sa %{state}
-      has_no_state_license: Wala ako ng pangkasalukuyang tarheta na pagkakakilanlan
+      has_no_state_license: Wala ako ng pangkasalukuyang tarhetang pagkakakilanlan
         o lisensiya ng pagmamaneho sa %{state}
       titles:
-        mr: Ginoo
-        mrs: Ginang
+        mr: G.
+        mrs: Gng.
         miss: Binibini
         ms: Bb.
       suffixes:
@@ -91,15 +91,14 @@ tl:
         work: Trabaho
         other: Iba pa
       instructions:
-        overseas: ! '<b>Itala</b>:  Kung ikaw ay isang mamamayan ng Amerika na naninirahan
-          sa ibang bansa o isang naka-unipormeng botante militar, <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
-          target=''_blank''>mag-click dito</a>  para magrehistrong bumoto'
+        overseas: ! '<b>Itala</b>: Kung ikaw ay isang mamamayan ng Amerika na naninirahan
+          sa ibang bansa o isang naka-unipormeng botante military, <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>mag-click dito</a> para magrehistrong bumoto.'
         opt_in_email: Ipadadala namin sa iyo ang napapanahong mga paalaala ng halalan,
-          ang iyong lugar ng botohan, at impormasyon tungkol sa mga musika at mga
-          isyu.
-        under_18: Uy, mukhang hindi ka pa 18. Iyan ay cool. Sa %{state_name}, maaari
-          kang magrehistrong bumoto sa %{state_rule}. Bisitahin ang aming 'http//www.rockthevote.com/election-center/"
-          target="_blank">Sentro ng Halalan upang malaman kung kailan ang susunod
+          ang iyong lugar ng botohan, at impormasyon tungkol sa musika at mga isyu.
+        under_18: Hey, mukhang hindi ka pa 18. Iyan ay cool. Sa %{state_name}, maaari
+          kang magrehistrong bumoto sa %{state_rule}. Bisitahin ang aming  <a href="http://www.rockthevote.com/election-center/"
+          target="_blank">Election Center</a> upang malaman kung kailan ang susunod
           na halalan.
         under_18_2: Kung tama sa iyo ang kuwenta, i-click ang buton upang ipagpatuloy
           ang iyong aplikasyon.
@@ -112,37 +111,36 @@ tl:
           para mai-imprenta ang iyong porma ng pagrerehistro ng botante. Pirmahan
           ito at ihulog sa address na nasa porma.
         download_2: Hindi ka mairerehistro hanggang hindi mo ma-imprenta, mapirmahan
-          at maihulog sa koreo ang iyong porma!
+          at maihulog sa koreo ang iyong porma.
         finish: Huwag kalimutang sabihin sa iyong mga kaibigan at pamilya kung gaano
           kadali ang magrehistro. Narito ang mga pantulong na maaari mong gamitin
           para ikalat ang salita tungkol sa pagrerehistro ng botante.
         finish_2: ! 'Kunin itong pantulong sa pagrerehistro ng botante sa iyong website.
           Libreng mag-sign up sa:'
-        finish_under_18: Ipadadala namin sa iyo ang paalaala para magrehistrong bumoto
-          kapag dumating ang malaking araw.
+        finish_under_18: Ipadadala namin sa iyo ang isang paalaala para magrehistrong
+          bumoto kapag dumating ang malaking araw.
         finish_under_18_2: Samantala, sabihin sa iyong mga kaibigan at pamilya kung
           gaano kadali ang magrehistro para bumoto. Narito ang mga pantulong na maaari
           mong gamitin para ikalat ang salita tungkol sa pagrerehistro ng botante.
         finish_tell_recipients: (pinaghiwalay ng mga kuwit ("commas")
-        finish_email_sent: Naipadala ang Email !
+        finish_email_sent: Naipadala ang Email!
         finish_update_status: Huwag kalimutang i-update ang iyong katayuan sa Facebook
           at Twitter!
-        state_online_registration: Ikaw ay eligible na tumapos ng iyong pagrerehistro
-          ng botante na gumagamit ng online na sistema ng pagrerehistro ng botante
-          sa %{state}
+        state_online_registration: Ikaw ay maaaring maging eligible na tapusin ang
+          iyong pagrerehistro ng botante na gumagamit ng online na sistema ng pagrerehistro
+          ng botante sa %{state}
         leave_state_online_registration: Maaari mong tapusin ang iyong pagrerehistro
           ng botante online sa %{state} na gumagamit ng pormang nasa ibaba. Kung ang
           iyong lisensiya ng pagmamaneho ay hindi valid o hindi makita o makumpirma
-          ng estado ang iyong talaan sa DMV, huwag mag-alaala&mdash;- maaari mo ring
-          %{link}. Kailangan mo lamang na ma-imprenta, mapirmahan, at maihulog ito
-          sa koreo.
+          ng estado ang iyong talaan sa DMV, huwag mag-alaala&mdash; maaari mo ring
+          %{link}. Kailangan mo lamang na i-imprenta, pirmahan, at ihulog ito sa koreo.
         leave_state_online_registration_link: Tapusin ang iyong pagrerehistro sa %{rtv_and_partner_name}
       ineligible:
         age: Kailangan mong maging 18 taong gulang sa petsa ng susunod na halalan.
         non_citizen: Ang iyong pagrerehistro ay hindi makukumpleto dahil sa hindi
-          na-check ang kahong nagpapahiwatig na ikaw ay isang mamamayan ng Estados
+          mo na-check ang kahong nagpapahiwatig na ikaw ay isang mamamayan ng Estados
           Unidos.  Kailangan mong maging isang mamamayan ng Estados Unidos para magrehistrong
-          bumoto. Kung ikaw ay isang mamamayan, maaari lamang na isauli ang nakaraang
+          bumoto. Kung ikaw ay isang mamamayan, mangyari lamang na isauli ang nakaraang
           pahina at i-check ang kahong pangmamamayan.
         attest: Kailangan mong kumpirmahin na ikaw ay eligible na bumoto.
       external:
@@ -151,93 +149,93 @@ tl:
             Colorado
           continue_link: Ituloy ang pagrerehistro sa "Rock the Vote"
           show:
-            p1: Magandang balita ! Kung mayroon kang may bisang lisensiya ng pagmamaneho
+            p1: Magandang balita! Kung mayroon kang valid na lisensiya ng pagmamaneho
               sa Colorado, maaari mong tapusin ang iyong pagrerehistro sa Kalihim
               ng Estado ng Colorado.
             p2: Kung ibinigay mo ang numero ng iyong lisensiya ng pagmamaneho at ikaw
               ay nagrerehistrong bumoto sa unang pagkakataon o nagpapalit ng tirahan
               sa iyong kasalukuyang pagrerehistro ng botante sa Colorado, i-click
               lamang ang link na nasa ibaba. Ang impormasyong naibigay mo na ay lalabas
-              online sa portal ng pagrerehistro ng botante sa Colorado at maaari mong
+              online sa portal ng pagrerehistro ng Kalihim ng Estado at maaari mong
               tapusin doon ang iyong aplikasyon.
-            p3: Kung hindi naman, kung hindi mo nagawang makumpleto ang iyong aplikasyon
+            p3: Kung hindi naman, kung hindi mo magawang makumpleto ang iyong aplikasyon
               sa website ng Kalihim ng Estado, maaari mong i-click ang link sa ibaba
-              at ipagpatuloy dito ang pagpuno sa iyong porma. Makakatanggap ka ng
-              iyong porma ng pagrerehistro ng botante upang mag-imprenta, pirmahan,
-              at ipadala sa opisina ng Kalihim ng Estado sa pamamagitan ng koreo.
+              at ipagpatuloy dito ang pagpuno sa iyong porma. Makakakuha ka ng iyong
+              porma ng pagrerehistro ng botante upang i-imprenta, pirmahan, at ipadala
+              sa opisina ng Kalihim ng Estado sa pamamagitan ng koreo.
             p4: Tagalog
           go:
             title: Kamalian ng Pagrerehistro sa Colorado
             timeout: Mukhang matagal ang pagsagot sa website ng Colorado, at ito ay
-              hindi magagamit sa ngayon. Huwag mag-alaala ! Mayroon kang dalawang
-              pagpipilian para tapusin ang iyong pagrerehistro para bumoto.
+              hindi magagamit sa ngayon. Huwag mag-alaala! Mayroon kang dalawang pagpipilian
+              para tapusin ang iyong pagrerehistro para bumoto.
             timeout_2: Para tapusin ang aplikasyon sa pagrerehistro ng botante, mayroon
-              kang tatlong pagpipilian. (1) Isara ang bintanang ito at gamitin ang
-              pabalik na buton sa iyong browser para mapagtama ang impormasyon sa
-              iyong aplikasyon sa pagrerehistro ng botante. (2) Isara ang bintanang
-              ito at i-click ang ("Ipagpatuloy ang Pagrerehistro sa "Rock the Vote")
-              ("Continue Registration with Rock the Vote" ) na naka-link sa pahinang
-              iniwan mo. Magagawa mong tapusin ang iyong aplikasyon at kunin ang iyong
-              porma ng pagrerehistro ng botante para mapirmahan, malagdaan at maipadala
-              sa opisina ng Kalihim ng Estado sa pamamagitan ng koreo. (3) Maaari
-              mo ring pumunta ng deretso sa website ng Kalihim ng Estado <a href=%{co_url}>
-              para  maipasok muli ang tamang impormasyon.
-            timeout_3: ''
-            p1: ! 'Mukhang ang impormasyong ibinigay mo ay hindi umuugma sa talaan
+              kang tatlong pagpipilian:</p><p>(1) Isara ang bintanang ito at gamitin
+              ang pabalik na buton sa iyong browser para mapagtama ang impormasyon
+              sa iyong aplikasyon sa pagrerehistro ng botante. Magagawa mong i-intrega
+              ang iyong impormasyon sa website ng Kalihim ng Estado.</p><p>(2) Isara
+              ang bintanang ito at i-click ang ("Ipagpatuloy ang Pagrerehistro sa
+              "Rock the Vote") ("Continue Registration with Rock the Vote" ) na naka-link
+              sa pahinang iniwan mo. Magagawa mong tapusin ang iyong aplikasyon at
+              kunin ang iyong porma ng pagrerehistro ng botante para mapirmahan, malagdaan
+              at maipadala sa opisina ng Kalihim ng Estado sa pamamagitan ng koreo.</p><p>(3)
+              Maaari ka ring pumunta ng diretso sa<a href=%{co_url}>website ng Kalihim
+              ng Estado</a>upang mai-intregang muli ang tamang impormasyon.
+            timeout_3: ! 'Tagalog:'
+            p1: ! 'Mukhang ang impormasyong ibinigay mo ay hindi umuugma sa mga talaan
               ng Kalihim ng Estado. Tatlong mga karaniwang problema: (1) ang pangalang
               iyong ibinigay ay hindi eksaktong tumutugma sa pangalang nasa iyong
               ID (halimbawa, ipinasok mo ang ''Steve'' ngunit ang aktwal na unang
               pangalan sa iyong pagkakakilanlan ay ''Stephen''), (2) naisama mo ang
               mga gitling sa numero ng iyong ID, o (3) hindi mo ibinigay ang numero
-              ng lisensya ng pagmamaneho, ngunit ginamit ang isa pang paraan ng pagtanggap
-              ng pagkakakilanlan. Mangyaring suriin ang impormasyon na iyong ibinigay.'
-            section: Impormasyon na pagkakakilanlan
+              ng lisensya ng pagmamaneho, ngunit ginamit ang isa pang porma ng tinatanggap
+              na pagkakakilanlan. Mangyaring suriin ang impormasyon na iyong ibinigay.'
+            section: Impormasyong pagkakakilanlan
             colorado_id_number: numero ng ID sa Colorado
-            p2: ! 'Para tapusin ang iyong aplikasyon sa pagrerehistro ng botante,
-              mayroon kang tatlong pagpipilian: (1) Isara ang bintanang ito at gamitin
+            p2: Para tapusin ang iyong aplikasyon sa pagrerehistro ng botante, mayroon
+              kang tatlong pagpipilian:</p><p>(1) Isara ang bintanang ito at gamitin
               ang pabalik na buton para mapagtama ang impormasyon sa iyong aplikasyon
               ng pagrerehistro ng botante. Magagawa mong muling i-intrega ang iyong
-              impormasyon sa website ng Kalihim ng Estado. (2) Isara ang bintanang
+              impormasyon sa website ng Kalihim ng Estado.</p><p>(2) Isara ang bintanang
               ito at i-click ang link na " Ipagpatuloy ang Pagrerehistro sa Rock the
               Vote" ("Continue Registration with Rock the Vote") sa pahinang pinanggalingan
               mo.  Maaari mong tapusin ang iyong aplikasyon at kunin ang porma ng
               pagrerehistro ng botante upang mai-imprenta, malagdaan at maipadala
-              sa opisina ng Kalihim ng Estado sa pamamagitan ng koreo.  (3) Maaari
-              ka ring pumunta nang direkta sa website ng Kalihim ng Estado n g <a
-              href=%{co_url}> upang muling ipasok ang wastong impormasyon.'
+              sa opisina ng Kalihim ng Estado sa pamamagitan ng koreo.</p><p>(3) Maaari
+              ka ring pumunta nang direkta sa <a href=%{co_url}>website ng Kalihim
+              ng Estado</a> upang muling ipasok ang wastong impormasyon.
             p3: Tagalog
       tooltips:
         email_address: Ipadadala namin sa iyo ang kopya ng iyong porma ng pagrerehistro
           ng botante.
         home_zip_code: Ipasok ang ZIP code para sa address na iyong tinitirahan, kahit
-          na hindi mo natatanggap ang koreo doon.
+          na hindi ka tumatanggap ng koreo doon.
         date_of_birth: Sa iyong aplikasyon para sa pagrerehistro ng botante, ikaw
-          ay kinakailangang magpahiwatig kung ikaw ay 18 taong gulang sa o bago ang
-          araw ng halalan. Gayunpaman, maraming mga estado ang nagpapahintulot sa
-          iyo na magparehistro bago ang iyong ika-18 kaarawan, kaya mangyaring i-click
-          ang  <href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">
-          para makita ang batas para sa iyong estado.
+          ay kinakailangang magpahiwatig kung ikaw ay 18 taong gulang sa araw ng o
+          bago dumating ang araw ng halalan. Gayunpaman, maraming mga estado ang nagpapahintulot
+          sa iyo na magrehistro bago ang iyong ika-18 kaarawan, kaya mangyaring  <a
+          href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">i-click
+          dito</a> para makita ang batas para sa iyong estado.
         registrant_name: Ilagay ang iyong buong pangalan sa mga kahong ito. Mangyari
-          lamang na huwag gumamit ng palayaw o inisyal Kung ang aplikasyong ito ay
-          para sa pagbabago ng pangalan, ikaw ay hihingan ng iyong nakaraang pangalan
+          lamang na huwag gumamit ng palayaw o mga inisyal. Kung ang aplikasyong ito
+          ay para sa pagbabago ng pangalan, ikaw ay hihingan ng iyong nakaraang pangalan
           sa isang seksyon sa ibang pagkakataon. At huwag kalimutang isama ang iyong
           titulo (Ginoo, Ginang, Binibini, Bb).
         home_address: Ilagay ang iyong tirahan ng tahanan sa mga kahong ito. Huwag
-          ilagay ang iyong tirahang pangkoreo kung ito ay naiiba sa iyong tirahan
+          ilagay ang iyong address na pangkoreo kung ito ay naiiba sa iyong tirahan
           ng tahanan. Huwag gumamit ng isang kahon sa post office o rural na ruta
           na walang numero sa kahon. Kung ikaw ay nakatira sa isang rural na lugar
-          ngunit walang isang address ng kalye, o kung wala kang tirahan, mangyaring
-          ipakita kung saan ka nakatira at gamitin ang mapa sa mga naka-imprentang
-          porma.
-        mailing_address: Ilagay ang iyong tirahang pangkoreo sa kahong ito, kung ikaw
-          ay tumatanggap ng sulat sa tirahang naiiba kaysa  tirahan ng iyong tahanan.
-          Kung hindi mo tinatanggap ang koreo sa tirahan ng iyong tahanan, kailangan
+          ngunit walang isang address ng kalye, o kung wala kang address, mangyaring
+          ipakita kung saan ka nakatira at gamitin ang mapa sa naka-imprentang porma.
+        mailing_address: Ilagay ang iyongaddress na pangkoreo sa kahong ito, kung
+          ikaw ay tumatanggap ng koreo sa address na naiiba address ng iyong tahanan.
+          Kung hindi mo tinatanggap ang koreo sa address ng iyong tahanan, kailangan
           mong punuan ang seksyong ito upang ipahiwatig kung saan ka maaaring maabot
           sa pamamagitan ng koreo.
         phone: Karamihan ng estado ay humihingi ng numero ng iyong telepono, kung
-          sakaling mayroong katanungan tungkol sa iyong aplikasyon. Hindi mo kinakailangang
+          sakaling mayroong mga katanungan tungkol sa iyong aplikasyon. Hindi mo kinakailangang
           magbigay ng numero ng iyong telepono.
-        previous_name: Kung binago mo na ang iyong pangalan mula ng huli kang magrehistro,
+        previous_name: Kung binago mo ang iyong pangalan mula ng huli kang magrehistro,
           ipasok ang iyong dating pangalan.
         previous_address: Kung lumipat ka mula ng huli kang magrehistro, ipasok ang
           iyong dating tirahan.

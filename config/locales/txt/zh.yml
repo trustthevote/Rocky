@@ -17,11 +17,10 @@ zh:
       share_facebook: 发布！
       share_twitter: 发一条Tweet
       share_google_buzz: 在Google上分享它！
-      state_online_registration: 我想要现在就提交<br/> 我的我的在线表格到<br/> %{state}
-      skip_state_online_registration: ! '&gt; 不用了，谢谢，我会继续在 %{rtv_and_partner_name}
-        填写申请表然后邮寄出去。'
+      state_online_registration: 我想要现在就提交<br/> 我的在线表格到<br/> %{state}
+      skip_state_online_registration: 不用了，谢谢，我会继续在 %{rtv_and_partner_name} 填写申请表然后邮寄出去。
     registration:
-      in_language_name: 英文
+      in_language_name: 使用中文
       powered_by: 提供者：
       progress_indicator: 步骤：
       step_1_header: 新的登记
@@ -31,11 +30,11 @@ zh:
       step_5_header: 审阅并确认
       stay_informed_header: 保持知情
       identification_header: 身份识别信息
-      survey_title: 问题
-      preparing_header: 准备注册表格
+      survey_title: 给您的问题
+      preparing_header: 准备登记表格
       download_header: 打印您的申请表
-      finish_header: 传播消息
-      finish_under_18_header: 您报名成功了！
+      finish_header: 传播消息！
+      finish_under_18_header: 您登记在名单上了！
       tell_a_friend_title: 发电子邮件告诉您的朋友！
       finish_reminder: ! '%{first_name}， 感谢您提交选民登记申请表！您将会收到从州官员那里发出的确认您的申请的信息。这个过程有时候会需要几个星期。'
       finish_reminder_2: 如果您想要查询您的选民登记申请表的状态，您可以通过网站： <a href="http://www.rockthevote.com/election-center/"
@@ -47,7 +46,7 @@ zh:
       home_address: 家庭住址
       mailing_address: 邮寄地址
       previous_name: 曾用名
-      previous_address: 旧地址
+      previous_address: 以前的地址
       opt_in_sms: 请%{organization}给我发短信。
       opt_in_email: 接收%{organization}发送的电子邮件
       remind_when_18: 请在我18岁生日的当天提醒我。
@@ -90,13 +89,13 @@ zh:
         under_18_2: 如果您符合该法律的规定，请点击此按钮开始您的申请。
         under_18_3: 如果不行，我们会在您18岁生日的时候提醒您。
         remind_when_18: 我们会给您的%{email_address}发送电子邮件。
-        review: 请审阅一下信息并确认其准确性。
-        download: 您还没有完成。请点击打印表格按键来打印您的选民注册表格。在表格上签名并邮寄至表格中提供的地址。
-        download_2: 您还没有登记成功，登记需要你打印，签名并邮寄您的表格才算完成！
+        review: 请审阅以下信息并确认其准确性。
+        download: 您还没有完成。请点击打印表格按键来打印您的选民登记表格。在表格上签名并邮寄至表格中提供的地址。
+        download_2: 您还没有登记成功，登记需要您打印，签名并邮寄您的表格才算完成！
         finish: 不要忘记告诉您的朋友和家人进行登记是多么容易的一件事情。这里有一些可以帮助您传播选民登记的讯息的工具。
-        finish_2: 将这个选民登记工具安装到您的网站。免费注册连接：
+        finish_2: 将这个选民登记工具安装到您的网站。免费注册链接：
         finish_under_18: 我们会在重要的选举日期临近之时给您发送选民登记提醒。
-        finish_under_18_2: 与此同时，请告诉您的朋友和家人选民登记是一件多么容易的事情。您可以利用这里的一些来传播有关选民登记的讯息的工具。
+        finish_under_18_2: 与此同时，请告诉您的朋友和家人选民登记是一件多么容易的事情。您可以利用这里的一些用来传播有关选民登记的讯息的工具。
         finish_tell_recipients: （请用逗号隔开）
         finish_email_sent: 电子邮件已发送！
         finish_update_status: 不要忘记更新您在FACEBOOK和Twitter的状态！
@@ -105,17 +104,17 @@ zh:
           您还可以%{link}。您只需要打印，签名并邮寄。
         leave_state_online_registration_link: 在%{rtv_and_partner_name}完成您的登记。
       ineligible:
-        age: 你必须在下一个选举日前年满18岁。
+        age: 您必须在下一个选举日前年满18岁。
         non_citizen: 您的登记不能完成因为您没有勾选表明您是美国公民的格子。必须是美国公民才能登记投票。如果您是公民，请回到上一页并勾选确认公民身份的格子。
-        attest: 你必须确认您符合投票的资格。
+        attest: 您必须确认您符合投票的资格。
       external:
         colorado:
           register_link: 与科罗拉多州州务卿完成网上登记
           continue_link: 继续与Rock the Vote进行登记。
           show:
-            p1: 好消息！如果您拥有当前的有效的科罗拉多州驾驶证，你可以与科罗拉多州州务卿完成您的选民登记申请。
+            p1: 好消息！如果您拥有当前的有效的科罗拉多州驾驶证，您可以与科罗拉多州州务卿完成您的选民登记申请。
             p2: 如果您提供您的驾驶证号码且是首次注册或更改您现有的科罗拉多州选民登记的地址，请点击以下链接。那些您已经填过了的信息将会出现在州务卿的网上选民注册门户网站。您可以在那里完成您的申请。
-            p3: 否则，如果您不能够在州务卿网站上完成您的申请，您可以点击以下链接，在那里继续填写您的表格。你将会获得您的选民登记表格，然后打印，签名并邮寄至州务卿办公室。
+            p3: 否则，如果您不能够在州务卿网站上完成您的申请，您可以点击以下链接，在那里继续填写您的表格。您将会获得您的选民登记表格，然后打印，签名并邮寄至州务卿办公室。
             p4: ''
           go:
             title: 科罗拉多州登记系统错误
@@ -135,7 +134,7 @@ zh:
       tooltips:
         email_address: 我们会使用电子邮件将您的选民注册表的副本发送给您。
         home_zip_code: 写下您家庭住址的邮政编码，即使您不使用这个地址接收邮件。
-        date_of_birth: 在您的选民登记申请表上，你必须表明您是否将在选举日或之前年满18岁。尽管如此，很多州允许您在满18岁前登记，所以请<a
+        date_of_birth: 在您的选民登记申请表上，您必须表明您是否将在选举日或之前年满18岁。尽管如此，很多州允许您在满18岁前登记，所以请<a
           href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">点击此处</a>
           查看您所在州的规定。
         registrant_name: 将您的全名写在此空格中。不要使用别名或缩写。如果本申请表是用于更改姓名，在表格的下半部分您将需要写上您改名前的全名。不要忘记写下您的称呼（先生，太太，小姐，女士）。

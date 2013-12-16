@@ -14,8 +14,8 @@ ilo:
       prepare: Irubuat ti porma
       review: Dublien ti applikasyon
       sendmail: Agpatulod ti Email
-      share_facebook: Ibandillio mo!
-      share_twitter: i-Tweet mo!
+      share_facebook: Ibandillio!
+      share_twitter: i-Tweet!
       share_google_buzz: Bingay ti Google!
       state_online_registration: Kayatco ti mangted<br/>ti pormac online idiay<br/>%{state}
         tatta.

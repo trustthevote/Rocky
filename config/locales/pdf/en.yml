@@ -87,16 +87,16 @@ en:
           box1_label: Race or Ethic Group
           box1_sublabel: (See Item 8 in the instructions for your state)
         block9:
-          affirmation_header: ! 'I have reviewed my state''s instructioons and I swear/affirm
+          affirmation_header: ! 'I have reviewed my state''s instructions and I swear/affirm
             that:'
           affirmation_1: I am a United States Citizen
           affirmation_2: I meet the eligibility requirements of my state and subscribe
             to any oath required.
-          affirmation_3: The informatioon I provided is true to the best of my knowledge
+          affirmation_3: The information I provided is true to the best of my knowledge
             under penalty of perjury. If I have provided false infromation, I may
             be fined, imprisoned, or (if not a U.S. citizen) deported from or refused
             entry to the United States.
-          please_sign: Please sign fiull name (or put mark)
+          please_sign: Please sign full name (or put mark)
           date: Date
           month: Month
           day: Day
@@ -124,11 +124,11 @@ en:
           box5_label: Zip Code
         blockC:
           title: If you live in a rural area but do not have a street number, or if
-            you have no address, please show on the map where you live
+            you have no address, please show on the map where you live.
           instructions:
             bullet1: Write in the names of crossroads (or streets) nearest to where
               you live.
-            bullet2: Draw an <b>X</b> to show where you live
+            bullet2: Draw an <b>X</b> to show where you live.
             bullet3: Use a dot to show any schools, churches, stores, or other landmarks
               near where you live, and write the name of the landmark.
           example:
@@ -143,6 +143,7 @@ en:
             out this application? Give name, address and phone number (phone number
             optional).
         bottom_half_footer: Mail this application to the address provided for your
-          State
+          State.
       page3:
         fouo: FOR OFFICIAL USE ONLY
+

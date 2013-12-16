@@ -1,2 +1,118 @@
+---
 ur:
-  language_name: Urdu
+  language_name: اردو
+  language_name_translation_instructions: اردو
+  activerecord:
+    attributes:
+      partner:
+        from_email: بذریعہ ای میل
+        url: URL
+      registrant:
+        date_of_birth: تاریخ پیدائش
+        email_address: ای میل پتہ
+        first_registration: میں ووٹ دینے کے لیے پہلی بار رجسٹریشن کروا رہا / رہی ہوں
+        home_zip_code: زپ کوڈ
+        us_citizen: میں امریکی شہری ہوں
+        name_title: نام
+        first_name: پہلا
+        middle_name: درمیانی
+        last_name: آخری
+        name_suffix: اضافی یا عرف نام
+        home_address: پتہ
+        home_unit: مکان / فلیٹ نمبر
+        home_city: شہر
+        home_state_name: ریاست
+        has_mailing_address: میں اپنی ڈاک مندرجہ بالا پتہ کے علاوہ دوسرے پتہ پر وصول
+          کرتا ہوں
+        mailing_address: پتہ
+        mailing_unit: مکان / فلیٹ نمبر
+        mailing_city: شہر
+        mailing_state_abbrev: ریاست
+        mailing_zip_code: زپ کوڈ
+        party: جماعت
+        race: خاندان / قبیلہ / نسل
+        state_id_number: شناختی نمبر
+        phone: فون
+        phone_type: قسم
+        change_of_name: میں نے اپنا نام تبدیل کر لیا ہے
+        prev_name_title: نام
+        prev_first_name: پہلا
+        prev_middle_name: درمیانی
+        prev_last_name: آخری
+        prev_name_suffix: اضافی یا عرف نام
+        change_of_address: میں نے اپنا نام تبدیل کر لیا ہے
+        prev_address: پتہ
+        prev_unit: فلیٹ / مکان نمبر
+        prev_city: شہر
+        prev_state_abbrev: ریاست
+        prev_zip_code: زپ کوڈ
+        opt_in_email: ای میل وصولی
+        opt_in_sms: ٹیکسٹ میسج وصولی
+        attest_true: میں نے مندرجہ بالا تمام معلومات پڑھ لی ہیں اور یہ میرے علم کے
+          مطابق بالکل درست ہیں
+        tell_from: منجانب
+        tell_email: آپ کا ای میل
+        tell_recipients: وصول کنندہ
+        tell_subject: موضوع
+        tell_message: ذاتی پیغام
+    errors:
+      models:
+        registrant:
+          blank: مطلوبہ
+          invalid_zip: ناقابل قبول زپ
+          attributes:
+            home_zip_code:
+              invalid: زپ یا زپ پلس فور استعمال کریں
+            mailing_zip_code:
+              invalid: زپ یا زپ پلس فور استعمال کریں
+            prev_zip_code:
+              invalid: زپ یا زپ پلس فور استعمال کریں
+            email_address:
+              invalid: نامکمل / ناقابل قبول پتہ
+            date_of_birth:
+              format: ! 'یہ ایسے ہونا چاہئے: دن - مہینہ - سال'
+            phone:
+              invalid: ! '### ### ###یہ ایسے ہونا چاہئے:'
+              required_if_opt_in: ٹیکسٹ کی وصولی کے لیے درکار ہے
+            attest_true:
+              accepted: لازمی طور پر واضح کریں کہ مندرجہ بالا معلومات درست ہیں
+            has_state_license:
+              inclusion: براہ مہربانی تصدیق کریں کہ آپ کے پاس حکومت کا جاری کردہ موثر
+                لائسنس ہے
+      messages:
+        inclusion: فیصد تناسب اس فہرست میں شامل نہیں ہے %{attribute}
+        exclusion: فیصد تناسب محفوظ %{attribute}
+        invalid: نامکمل / ناقابل قبول%{attribute}
+        confirmation: تصدیق کے معیار پرپورا نہیں اترتا%{attribute}
+        accepted: لازمی طور پر تسلیم کیا جائے%{attribute}
+        empty: خالی نہ چھوڑیں%{attribute}
+        blank: نامکمل نہ چھوڑیں%{attribute}
+        too_long: ! '%{count} زیادہ لمبا ہے، الفاظ شمار کریں%{attribute}'
+        too_short: ! '%{count} بہت مختصر ہے، الفاظ شمار کریں%{attribute}'
+        wrong_length: ! '%{count} طوالت درست نہ ہے، الفاظ شمار کریں%{attribute}'
+        taken: پہلے دیا جا چکا ہے%{attribute}
+        not_a_number: یہ نمبر نہیں ہے%{attribute}
+        greater_than: ! '%{count} یہ اس سے زیادہ بڑا ہونا چاہئے%{attribute}'
+        greater_than_or_equal_to: ! '%{count}لازمی طور زیادہ بڑا یا اس کے برابر ہونا
+          چاہئے%{attribute}'
+        equal_to: ! '%{count}لازمی طور اس کے برابر ہونا چاہئے%{attribute}'
+        less_than: ! '%{count} لازمی طور اس سے کم ہونا چاہئے%{attribute}'
+        less_than_or_equal_to: ! '%{count} لازمی طور اس سے کم یا برابر ہونا چاہئے%{attribute}'
+        odd: لازمی طور پر طاق ہندسہ ہونا چاہئے%{attribute}
+        even: لازمی طور پر جفت ہندسہ ہونا چاہئے%{attribute}
+  authlogic:
+    error_messages:
+      login_blank: ٭ لاگ اِن کسی بھی صورت خالی نہیں ہونا چاہئے
+      login_not_found: ٭ لاگ اِن / پاس ورڈ کا تال میل درست نہیں ہے
+      login_invalid: ٭ یوزر نیم میں الفاظ، ہندسے اور سپیس کے علاوہ صرف @ استعمال کیا
+        جائے
+      consecutive_failed_logins_limit_exceeded: ٭ لاگ اِن میں متواتر ناکامی بہت بڑھ
+        گئی ہے لہٰذا آپ کا اکاﺅنٹ منجمد ہو گیا ہے
+      email_invalid: ٭ ای میل مکمل پتہ نہیں ہے
+      password_blank: ٭ پاس ورڈ خالی نہیں چھوڑا جا سکتا
+      password_invalid: ٭ لاگ اِن / پاس ورڈ کا تال میل درست نہیں ہے
+      not_active: ٭ آپ کا اکاﺅنٹ کام نہیں کر رہا
+      not_confirmed: ٭ آپ کے اکاﺅنٹ کی تصدیق نہیں ہو رہی
+      not_approved: ٭ آپ کا اکاﺅنٹ منظور کیا جاتا ہے
+      no_authentication_details: ٭ آپ نے تصدیق کی تفصیل مہیا نہیں کی
+

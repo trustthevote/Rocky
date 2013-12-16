@@ -94,8 +94,7 @@ tl:
           titik).'
         too_short: ! '%{attribute} ay masyadong maikli (pinakamaikli ay %{count} na
           titik.'
-        wrong_length: ! '%{attribute} ay hindi tamang haba (dapat ay  %{count} na
-          titik.'
+        wrong_length: ! '%{attribute} ay hindi tamang haba (dapat ay  %{count}.'
         taken: ! '%{attribute} ay nakuha na.'
         not_a_number: ! '%{attribute} ay hindi isang numero.'
         greater_than: ! '%{attribute} ay dapat na mahigit kaysa %{count}.'
@@ -111,11 +110,11 @@ tl:
     error_messages:
       login_blank: Ang Login ay hindi maaaring blangko.
       login_not_found: Ang kumbinasyon ng Login/password ay hindi valid.
-      login_invalid: Mangyaring ang gamitin lamang na Username ay mga titik, numero,
+      login_invalid: Ang Username ay kailangang gumamit lamang ng mga titik, numero,
         puwang, at.-_ @.
       consecutive_failed_logins_limit_exceeded: Ang limitasyon ng magkakasunod na
         nabigong pagla-login ay nalampasan na, ang account ay hindi na gagana.
-      email_invalid: Ang email address ay walang bisa.
+      email_invalid: Ang email address ay hindi valid.
       password_blank: Ang Password ay hindi maaaring blangko.
       password_invalid: Ang kumbinasyon ng Login/Password ay hindi valid.
       not_active: Ang iyong account ay hindi aktibo.

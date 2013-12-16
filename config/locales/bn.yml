@@ -1,2 +1,119 @@
+---
 bn:
-  language_name: Bengali
+  language_name: বাংলা
+  language_name_translation_instructions: বাংলা
+  activerecord:
+    attributes:
+      partner:
+        from_email: ইমেইল হতে
+        url: URL
+      registrant:
+        date_of_birth: জন্ম তারিখ
+        email_address: ইমেইল ঠিকানা
+        first_registration: ভোটার হওয়ার জন্য আমি প্রথমবারের মতো নিবন্ধিত হচ্ছি।
+        home_zip_code: জিপ কোড
+        us_citizen: আমি আমেরিকার নাগরিক
+        name_title: উপাধি
+        first_name: প্রথম
+        middle_name: মধ্য
+        last_name: শেষ
+        name_suffix: N/A
+        home_address: ঠিকানা
+        home_unit: ! 'ইউনিট #'
+        home_city: পাড়া
+        home_state_name: রাজ্য
+        has_mailing_address: আমি অন্য একটি ঠিকানায় চিঠি পেয়ে থাকি, উপরে উল্লেখিত
+          ঠিকানায় নয়।
+        mailing_address: ঠিকানা
+        mailing_unit: ! 'ইউনিট #'
+        mailing_city: পাড়া
+        mailing_state_abbrev: রাজ্য
+        mailing_zip_code: জিপ কোড
+        party: দল
+        race: জাতি
+        state_id_number: আইডি নম্বর
+        phone: ফোন
+        phone_type: প্রকার
+        change_of_name: আমি আমার নাম পরিবর্তন করেছি
+        prev_name_title: উপাধি
+        prev_first_name: প্রথম
+        prev_middle_name: মধ্য
+        prev_last_name: শেষ
+        prev_name_suffix: N/A
+        change_of_address: আমি আমার ঠিকানার পরিবর্তন করেছি।
+        prev_address: ঠিকানা
+        prev_unit: ! 'ইউনিট #'
+        prev_city: পাড়া
+        prev_state_abbrev: রাজ্য
+        prev_zip_code: জিপ কোড
+        opt_in_email: ইমেইল গ্রহণে আগ্রহী
+        opt_in_sms: টেক্সট বার্তা গ্রহণে আগ্রহী
+        attest_true: উল্লেখিত তথ্যাবলী আমি পর্যালোচনা করে দেখেছি, আমার জানা মতে এটি
+          সত্য এবং সঠিক।
+        tell_from: হতে
+        tell_email: আপনার ইমেইল
+        tell_recipients: প্রাপক
+        tell_subject: বিষয়
+        tell_message: ব্যাক্তিগত মেসেজ
+    errors:
+      models:
+        registrant:
+          blank: প্রয়োজনীয়
+          invalid_zip: অকার্যকর জিপ
+          attributes:
+            home_zip_code:
+              invalid: জিপ অথবা জিপ+৪ ব্যবহার করুন
+            mailing_zip_code:
+              invalid: জিপ অথবা জিপ+৪ ব্যবহার করুন
+            prev_zip_code:
+              invalid: জিপ অথবা জিপ+৪ ব্যবহার করুন
+            email_address:
+              invalid: ঠিকানাটি যৌক্তিক নয়
+            date_of_birth:
+              format: মাস-দিন-সাল এরকম হওয়া উচিত
+            phone:
+              invalid: ! 'হওয়া উচিত ###-###-####'
+              required_if_opt_in: টেক্সট গ্রহণের জন্য এটি প্রয়োজনীয়
+            attest_true:
+              accepted: উল্লেখিত তথ্যাবলী সঠিক কিনা তা নির্দেশ করুন
+            has_state_license:
+              inclusion: রাজ্য কর্তৃপক্ষ অনুমোদিত কার্যকর লাইসেন্স আছে কিনা তা উল্লেখ
+                করুন
+      messages:
+        inclusion: ! '%{attribute} তালিকায় অন্তর্ভুক্ত নয়।'
+        exclusion: ! '%{attribute} সংরক্ষিত।'
+        invalid: ! '%{attribute} অকার্যকর।'
+        confirmation: ! '%{attribute} নিশ্চয়তা'
+        accepted: ! '%{attribute} গ্রহণ করা আবশ্যক।'
+        empty: ! '%{attribute} খালি থাকতে পারবে না।'
+        blank: ! '%{attribute} শূণ্য থাকতে পারবে না।'
+        too_long: ! '%{attribute} বেশি বড় (সর্বোচ্চ %{count} অক্ষর)।'
+        too_short: ! '%{attribute} খুব ছোট (সর্বনিম্ন %{count} অক্ষর)।'
+        wrong_length: ! '%{attribute} ভুল দৈর্ঘ্য (অক্ষরগুলো %{count} হওয়া উচিত।'
+        taken: ! '%{attribute} ইতোমধ্যে নেয়া হয়েছে।'
+        not_a_number: ! '%{attribute} একটি সংখ্যা নয়।'
+        greater_than: ! '%{attribute} %{count} এর চেয়ে বেশি হতে হবে ।'
+        greater_than_or_equal_to: ! '%{attribute} %{count} এর চেয়ে বেশি অথবা সমান
+          হতে হবে।'
+        equal_to: ! '%{attribute} %{count} সমান হতে হবে ।'
+        less_than: ! '%{attribute} %{count} এর চেয়ে কম হতে হবে।'
+        less_than_or_equal_to: ! '%{attribute} %{count} এর চেয়ে কম অথবা সমান হতে
+          হবে।'
+        odd: ! '%{attribute} বেজোড় সংখ্যা হতে হবে।'
+        even: ! '%{attribute} সমান সংখ্যা হতে হবে।'
+  authlogic:
+    error_messages:
+      login_blank: লগইন শূণ্য থাকতে পারবে না।
+      login_not_found: লগইন/পাসওয়ার্ড সমন্বয় সঠিক হয়নি।
+      login_invalid: অনুগ্রহপূর্বক ব্যবহারকারীর নাম শুধুমাত্র অক্ষর, সংখ্যা, স্পেস
+        এবং.-_@ ।
+      consecutive_failed_logins_limit_exceeded: লগইন করতে উপর্যুপরি ব্যর্থ হওয়ায়
+        এর সীমা অতিক্রান্ত হয়ে পড়েছে, একাউন্টটি অকেজো হয়ে আছে।
+      email_invalid: ইমেইল ঠিকানিাটি সঠিক নয়।
+      password_blank: পাসওয়ার্ড এর ঘরটি শূণ্য থাকতে পারবে না।
+      password_invalid: লগইন/পাসওয়ার্ড সমনব্য়টি সঠিক হয়নি।
+      not_active: আপনার একাউন্টটি সচল নয়।
+      not_confirmed: আপনার একাউন্টটি নিশ্চিত নয়।
+      not_approved: আপনার একাউন্টটি অনুমোদিত নয়।
+      no_authentication_details: সত্যতা যাচাইয়ের জন্য আপনি বিস্তারিত কোন তথ্য দেননি।
+
