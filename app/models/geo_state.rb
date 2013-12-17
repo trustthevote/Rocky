@@ -88,8 +88,14 @@ class GeoState < ActiveRecord::Base
     @state_customization ||= StateCustomization.for(self)
   end  
   
-  def online_reg_enabled?
-    GeoState.states_with_online_registration.include?(self.abbreviation)
+  def online_reg_enabled?(reg)
+    GeoState.states_with_online_registration.include?(self.abbreviation) && self.enabled_for_language?(reg.locale)
+  end
+  
+  def enabled_for_language?(lang)
+    lang_list = RockyConf.ovr_states[self.abbreviation]
+    return true if lang_list.blank? || lang_list.empty?
+    return lang_list.include?(lang)
   end
     
   

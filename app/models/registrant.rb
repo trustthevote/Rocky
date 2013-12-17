@@ -793,7 +793,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def home_state_online_reg_enabled?
-    !home_state.nil? && home_state.online_reg_enabled?
+    !home_state.nil? && home_state.online_reg_enabled?(self)
   end
 
   def custom_step_2?

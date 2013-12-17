@@ -45,6 +45,15 @@ states_with_online_registration:
   - NV
   - WA
   
+ovr_states:
+  NV:
+    - en
+    - es
+  WA:
+    - en
+    - es
+  
+  
 enabled_locales:
   - en
   - es

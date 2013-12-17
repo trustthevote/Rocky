@@ -68,16 +68,31 @@ describe GeoState do
     end
   end
 
-  describe "#online_reg_enabled?" do
-    it "returns true if the state is in the config list" do
-      GeoState.stub(:state_online_reg_file_name) { "spec/fixtures/files/states_with_online_registration.yml" }
+  describe "#online_reg_enabled?(registrant)" do
+    let(:r) { Registrant.new(:locale=>"es")}
+    it "returns true if the state is in the config list without locale restrictions" do
+      RockyConf.stub(:states_with_online_registration) { ["AZ"] }
+      RockyConf.stub(:ovr_states) { {} }
       s = GeoState.new(:abbreviation=>"AZ")
-      s.online_reg_enabled?.should be_true
+      s.online_reg_enabled?(r).should be_true
+    end
+    it "returns true if the state is in the config list and registrant's locale is included" do
+      RockyConf.stub(:states_with_online_registration) { ["AZ"] }
+      RockyConf.stub(:ovr_states) { {"AZ"=>["en", "es"]} }
+      s = GeoState.new(:abbreviation=>"AZ")
+      s.online_reg_enabled?(r).should be_true
+    end
+    it "returns false if the state is in the config list but the registrants locale is not enabled" do
+      RockyConf.stub(:states_with_online_registration) { ["AZ"] }
+      RockyConf.stub(:ovr_states) { {"AZ"=>["en", "ko"]} }      
+      s = GeoState.new(:abbreviation=>"AZ")
+      s.online_reg_enabled?(r).should be_false
     end
     it "returns false if the state is not in the config list" do
-      GeoState.stub(:state_online_reg_file_name) { "spec/fixtures/files/states_with_online_registration.yml" }
-      s = GeoState.new(:abbreviation=>"MD")
-      s.online_reg_enabled?.should be_false      
+      RockyConf.stub(:states_with_online_registration) { ["CA"] }
+      RockyConf.stub(:ovr_states) { {"CA"=>["en", "es"]} }      
+      s = GeoState.new(:abbreviation=>"AZ")
+      s.online_reg_enabled?(r).should be_false      
     end
   end
 
