@@ -477,6 +477,7 @@ en:
       received_21_days: received 21 days before the election
       received_22_days: received 22 days before the election
       received_25_days: received 25 days before the election
+      received_29_days: received 29 days before the election
       received_30_days: received 30 days before the election
       received_at_least_30_days: received at least 30 days before the election
       thirty_days_before: 30 days before the election
