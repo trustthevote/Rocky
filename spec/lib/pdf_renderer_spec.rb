@@ -55,9 +55,9 @@ describe PdfRenderer do
   end
   
   describe "set_registrant_instructions_link" do
-    it "returns a link to the registrant's instruction URL" do
+    it "returns a link to the registrant's instruction URL with forced spacing" do
       pdfg.set_registrant_instructions_link.should == 
-        "<a href=\"#{ERB::Util.html_escape(r.registration_instructions_url)}\">#{ERB::Util.html_escape(r.registration_instructions_url)}</a>"
+        "<br><a href=\"#{ERB::Util.html_escape(r.registration_instructions_url)}\">#{ERB::Util.html_escape(r.registration_instructions_url)}</a><br>"
     end
   end
   

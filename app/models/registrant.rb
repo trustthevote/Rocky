@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 #***** BEGIN LICENSE BLOCK *****
 #
 #Version: RTV Public License 1.0
@@ -49,6 +51,32 @@ class Registrant < ActiveRecord::Base
   STALE_TIMEOUT = 30.minutes
   REMINDER_EMAIL_PRIORITY = 0
   WRAP_UP_PRIORITY = REMINDER_EMAIL_PRIORITY + 1
+
+
+  PDF_FIELDS = [
+      "home_zip_code",
+       "first_name", 
+       "middle_name", 
+       "last_name", 
+       "home_address", 
+       "home_unit", 
+       "home_city", 
+       "mailing_address", 
+       "mailing_unit", 
+       "mailing_city", 
+       "mailing_zip_code", 
+       "prev_first_name", 
+       "prev_middle_name", 
+       "prev_last_name", 
+       "prev_address", 
+       "prev_unit", 
+       "prev_city", 
+       "prev_zip_code"
+    ]
+  PDF_FIELDS.each do |pdf_field|
+    validates pdf_field, format: { with: /^(\p{Latin}|\P{Letter})*$/ , 
+      message: :invalid_for_pdf }#I18n.t('activerecord.errors.messages.invalid_for_pdf')}
+  end
 
   FINISH_IFRAME_URL = "https://s3.rockthevote.com/rocky/rtv-ovr-share.php"
 

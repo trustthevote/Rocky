@@ -272,6 +272,37 @@ describe Registrant do
       assert !reg.errors[:date_of_birth].empty?
       assert_equal "May 3, 1978", reg.date_of_birth_before_type_cast
     end
+  
+    it "only allows latin characters for PDF fields" do
+      latin_locales = [:en, :es, :tl, :ilo, :vi]
+      non_latin_locales = [:zh, :"zh-tw", :hi, :ur, :bn, :ja, :ko, :th, :km]
+      
+      Registrant::PDF_FIELDS.each do |field|
+        r = Registrant.new
+        r.stub(:has_mailing_address?).and_return(true)
+        r.stub(:change_of_name?).and_return(true)
+        r.stub(:change_of_address?).and_return(true)
+        
+        #puts "testing field: #{field}"
+        non_latin_locales.each do |loc|
+          txt = I18n.t('txt.registration.in_language_name', :locale=>loc, :default => "")
+          unless txt.blank?
+            #puts "\tTesting #{loc}: #{txt}"
+            r.send("#{field}=",txt)
+            r.should_not be_valid
+            r.errors[field].should_not be_empty          
+          end
+        end
+        latin_locales.each do |loc|
+          txt = I18n.t('txt.registration.in_language_name', :locale=>loc, :default => "").to_s +  " 123 !@$%^&*"
+          # puts "\tTesting #{loc}: #{txt}"
+          r.send("#{field}=",txt)
+          r.valid?
+          r.errors[field].should be_empty
+        end
+      end
+    end
+  
   end
 
   describe "step 1" do
