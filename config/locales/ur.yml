@@ -82,24 +82,25 @@ ur:
       messages:
         inclusion: فیصد تناسب اس فہرست میں شامل نہیں ہے %{attribute}
         exclusion: فیصد تناسب محفوظ %{attribute}
-        invalid: نامکمل / ناقابل قبول%{attribute}
-        confirmation: تصدیق کے معیار پرپورا نہیں اترتا%{attribute}
-        accepted: لازمی طور پر تسلیم کیا جائے%{attribute}
-        empty: خالی نہ چھوڑیں%{attribute}
-        blank: نامکمل نہ چھوڑیں%{attribute}
-        too_long: ! '%{count} زیادہ لمبا ہے، الفاظ شمار کریں%{attribute}'
-        too_short: ! '%{count} بہت مختصر ہے، الفاظ شمار کریں%{attribute}'
-        wrong_length: ! '%{count} طوالت درست نہ ہے، الفاظ شمار کریں%{attribute}'
-        taken: پہلے دیا جا چکا ہے%{attribute}
-        not_a_number: یہ نمبر نہیں ہے%{attribute}
-        greater_than: ! '%{count} یہ اس سے زیادہ بڑا ہونا چاہئے%{attribute}'
-        greater_than_or_equal_to: ! '%{count}لازمی طور زیادہ بڑا یا اس کے برابر ہونا
-          چاہئے%{attribute}'
-        equal_to: ! '%{count}لازمی طور اس کے برابر ہونا چاہئے%{attribute}'
-        less_than: ! '%{count} لازمی طور اس سے کم ہونا چاہئے%{attribute}'
-        less_than_or_equal_to: ! '%{count} لازمی طور اس سے کم یا برابر ہونا چاہئے%{attribute}'
-        odd: لازمی طور پر طاق ہندسہ ہونا چاہئے%{attribute}
-        even: لازمی طور پر جفت ہندسہ ہونا چاہئے%{attribute}
+        invalid: نامکمل / ناقابل قبول %{attribute}
+        confirmation: تصدیق کے معیار پرپورا نہیں اترتا %{attribute}
+        accepted: لازمی طور پر تسلیم کیا جائے %{attribute}
+        empty: خالی نہ چھوڑیں %{attribute}
+        blank: نامکمل نہ چھوڑیں %{attribute}
+        too_long: ! '%{count} زیادہ لمبا ہے، الفاظ شمار کریں %{attribute}'
+        too_short: ! '%{count} بہت مختصر ہے، الفاظ شمار کریں %{attribute}'
+        wrong_length: ! '%{count} طوالت درست نہ ہے، الفاظ شمار کریں %{attribute}'
+        taken: پہلے دیا جا چکا ہے %{attribute}
+        not_a_number: یہ نمبر نہیں ہے %{attribute}
+        greater_than: ! '%{count} یہ اس سے زیادہ بڑا ہونا چاہئے %{attribute}'
+        greater_than_or_equal_to: ! '%{count} لازمی طور زیادہ بڑا یا اس کے برابر ہونا
+          چاہئے %{attribute}'
+        equal_to: ! '%{count} لازمی طور اس کے برابر ہونا چاہئے %{attribute}'
+        less_than: ! '%{count} لازمی طور اس سے کم ہونا چاہئے %{attribute}'
+        less_than_or_equal_to: ! '%{count} لازمی طور اس سے کم یا برابر ہونا چاہئے
+          %{attribute}'
+        odd: لازمی طور پر طاق ہندسہ ہونا چاہئے %{attribute}
+        even: لازمی طور پر جفت ہندسہ ہونا چاہئے %{attribute}
   authlogic:
     error_messages:
       login_blank: ٭ لاگ اِن کسی بھی صورت خالی نہیں ہونا چاہئے

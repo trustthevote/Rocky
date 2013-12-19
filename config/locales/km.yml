@@ -1,8 +1,8 @@
 ---
 km:
-  language_name: ចំណុចសំខាន់
+  language_name: ភាសាខ្មែរ
   language_name_translation_instructions: សូមផ្តល់ឈ្មោះនៃភាសាដែលបានបកប្រែ ក្នុងភាសានោះ។
-    ឧទាហរណ៍, បើសិនជាអ្នកបកប្រែភាសាជប៉ុន ចូរផ្តល់ពាក្យជាភាសា ជប៉ុន សម្រាប់ "ភាសាជប៉ុន"
+    ឧទាហរណ៍, ប្រសិនបើជាអ្នកបកប្រែភាសាជប៉ុន ចូរផ្តល់ពាក្យជាភាសា ជប៉ុន សម្រាប់ "ភាសាជប៉ុន"
     (ឈ្មោះភាសា)។
   activerecord:
     attributes:
@@ -10,27 +10,27 @@ km:
         from_email: ពីអ៊ីម៉ែល
         url: យូអាអិល​- URL
       registrant:
-        date_of_birth: ខែថ្ងៃឆ្នាំកំណើត
+        date_of_birth: កាលបរិច្ឆេទថ្ងៃកំណើត
         email_address: អាស័យដ្ឋានអ៊ីម៉ែល
-        first_registration: ខ្ញុំកំពុងតែចុះឈ្មោះបោះឆ្នោតជាលើកដំបូង
-        home_zip_code: លេខហ្សិបកូត
-        us_citizen: ខ្ញុំជាសញ្ជាតិអាមេរិកាំង
+        first_registration: ខ្ញុំកំពុងតែចុះឈ្មោះបោះឆ្នោតជាលើកដំបូង។
+        home_zip_code: លេខហ្សីបកូត
+        us_citizen: ខ្ញុំមានសញ្ជាតិអាមេរិកាំង។
         name_title: ឋានៈ
         first_name: នាមខ្លួន
         middle_name: នាមកណ្តាល
         last_name: នាមត្រកូល
-        name_suffix: ផ្នត់ចុង
-        home_address: អាសយដ្ឋាន
-        home_unit: ! '#យូនិត/ឡុត​​​'
+        name_suffix: អក្សរខាងចុង
+        home_address: អាស័យដ្ឋាន
+        home_unit: លេខក្រុមតូច/ឡូត៍#
         home_city: ទីក្រុង
         home_state_name: រដ្ឋ
-        has_mailing_address: ខ្ញុំ​ទទួលសំបុត្រនៅអាស័យដ្ឋានខុសពីអាស័យដ្ឋានខាងលើ​។​
+        has_mailing_address: ខ្ញុំ​ទទួលសំបុត្រពីអាស័យដ្ឋានផ្សេងខុសពីមួយខាងលើនោះ​។​
         mailing_address: អាស័យដ្ឋាន
-        mailing_unit: លេខយូនិត/ឡុត
+        mailing_unit: លេខក្រុមតូច/ឡូត៍#
         mailing_city: ទីក្រុង
         mailing_state_abbrev: រដ្ឋ
-        mailing_zip_code: លេខហ្សិបកូត
-        party: គណបក្ស
+        mailing_zip_code: លេខហ្សីបកូត
+        party: គណបក្សនយោបាយ
         race: ពូជសាសន៍
         state_id_number: លេខអត្តសញ្ញាណ
         phone: ទូរស័ព្ទ
@@ -40,16 +40,17 @@ km:
         prev_first_name: នាមខ្លួន
         prev_middle_name: នាមកណ្តាល
         prev_last_name: នាមត្រកូល
-        prev_name_suffix: ផ្នត់ចុង
+        prev_name_suffix: អក្សរខាងចុង
         change_of_address: ខ្ញុំបានដូរឈ្មោះរបស់ខ្ញុំរួចហើយ​។​
         prev_address: អាស័យដ្ឋាន
-        prev_unit: លេខយូនិត/ឡុត
+        prev_unit: ! 'លេខក្រុមតូច/ឡូត៍ #'
         prev_city: ទីក្រុង
         prev_state_abbrev: រដ្ឋ
-        prev_zip_code: លេខហ្សិបកូត
+        prev_zip_code: លេខហ្សីបកូត
         opt_in_email: ទទួលអ៊ីម៉ែល
         opt_in_sms: ទទួលសារអត្ថបទ
-        attest_true: ខ្ញុំបានទទួលព័ត៌មានខាងលើ ហើយនិង
+        attest_true: ខ្ញុំបានពិនិត្យផ្ទៀងផ្ទាត់ព័ត៌មានខាងលើ ហើយឃើញថាវាត្រឹមត្រូវ នឹងជាក់លាក់ទៅតាមការយល់ដឹងពិតរបស់ខ្ញុំ
+          ។
         tell_from: ពី
         tell_email: អ៊ីម៉ែលរបស់អ្នក
         tell_recipients: អ្នកទទួល
@@ -58,38 +59,38 @@ km:
     errors:
       models:
         registrant:
-          blank: តំរូវអោយ
-          invalid_zip: លេខហ្សិបកូតអស់សុពលភាព
+          blank: តម្រូវអោយ
+          invalid_zip: លេខហ្សីបកូតអស់សុពលភាព
           attributes:
             home_zip_code:
-              invalid: ប្រើលេខហ្សិប​ឬ​លេខហ្សិប​+4
+              invalid: ប្រើលេខហ្សីប​ឬ​លេខហ្សីប​+4
             mailing_zip_code:
-              invalid: ប្រើលេខហ្សិប​ឬ​លេខហ្សិប​+4
+              invalid: ប្រើលេខហ្សីប​ឬ​លេខហ្សីប​+4
             prev_zip_code:
-              invalid: ប្រើលេខហ្សិប​ឬ​លេខហ្សិប​+4
+              invalid: ប្រើលេខហ្សីប​ឬ​លេខហ្សីប​+4
             email_address:
               invalid: មិនមែនជាអាស័យដ្ឋានមានសុពលភាពទេ
             date_of_birth:
               format: គប្បីសរសេរជា ខែ-ថ្ងៃ-ឆ្នាំ
             phone:
               invalid: គប្បីជា###-###-####
-              required_if_opt_in: តម្រូវអោយមានបើទទួលនូវអត្ថបទ
+              required_if_opt_in: តម្រូវអោយមាន បើទទួលជាអត្ថបទ
             attest_true:
               accepted: អ្នកត្រូវតែចង្អុលប្រាប់ថាតើព័ត៌មានខាងលើត្រឹមត្រូវ​ឬទេ។
             has_state_license:
-              inclusion: អ្នកត្រូវតែចង្អុលប្រាប់ថាតើអ្នកមានប័ណ្ណរដ្ឋត្រឹមត្រូវឬទេ
+              inclusion: អ្នកត្រូវតែចង្អុលប្រាប់ថាតើអ្នកមានអាជ្ញាប័ណ្ណរដ្ឋត្រឹមត្រូវឬទេ
       messages:
         inclusion: ! '%{attribute}មិនត្រូវបានរាប់បញ្ចូលក្នុងបញ្ជីទេ។​'
         exclusion: ! '%{attribute}ត្រូវបានរក្សាសិទិ្ធ។​'
-        invalid: ! '%{attribute}គ្មានសុពលភាព'
-        confirmation: ! '%{attribute}មិនសមស្របនឹងសេចក្តីបញ្ជាក់។'
+        invalid: ! '%{attribute}គ្មានសុពលភាពទេ'
+        confirmation: ! '%{attribute} មិនសមស្របនឹងសេចក្តីបញ្ជាក់ទេ។'
         accepted: ! '%{attribute}ត្រូវតែបានទទួលស្គាល់។'
         empty: ! '%{attribute}មិនអាចនៅទទេបានទេ។'
-        blank: ! '%{attribute}មិនអាចនៅចន្លោះទទេបានទេ។​'
-        too_long: ! '%{attribute} គឺវែងពេក (តួអតិបរមា គឺ %{count})។'
-        too_short: ! '%{attribute} គឺខ្លីពេក (តួអប្បបរមា គឺ %{count})។'
-        wrong_length: ! '%{attribute} គឺមានប្រវែងខុស (គប្បីមានតួ %{count})។'
-        taken: ! '%{attribute}ត្រូវបានយករួចហើយ។'
+        blank: ! '%{attribute}មិនអាចនៅ​មានចន្លោះទទេ បានទេ។​'
+        too_long: ! '%{attribute} គឺវែងពេក (តួអក្សរអតិបរមា គឺ %{count})។'
+        too_short: ! '%{attribute} គឺខ្លីពេក (តួអក្សរអប្បបរមា គឺ %{count})។'
+        wrong_length: ! '%{attribute} គឺមានប្រវែងខុស (គប្បីមានតួអក្សរ %{count})។'
+        taken: ! '%{attribute}ត្រូវបានដកយករួចហើយ។'
         not_a_number: ! '%{attribute}មិនមែនជាលេខទេ។'
         greater_than: ! '%{attribute} ត្រូវតែធំជាង %{count}។'
         greater_than_or_equal_to: ! '%{attribute} ត្រូវតែធំជាងឬ​ស្មើនឹង %{count}។'
@@ -101,15 +102,15 @@ km:
   authlogic:
     error_messages:
       login_blank: កន្លែងបើកចូល ​មិនអាចនៅចន្លោះទទេបានទេ។​
-      login_not_found: ការផ្សំបញ្ចូលគ្នានៅកន្លែងបើកចូល/ពាក្យសំងាត់​គឺមិនត្រឹមត្រូវទេ។​
-      login_invalid: ឈ្មោះអ្នកប្រើគប្បីប្រើតែតួអក្សរ លេខ ចន្លោះ និង  -_@ ប៉ុណ្ណោះ។
-      consecutive_failed_logins_limit_exceeded: កម្រិតកន្លែងបើកចូលដែលបរាជ័យតៗគ្នាបានកើនឡើងលើសលប់  គណនី
-        ត្រូវបញ្ឈប់អោយដើរ។
+      login_not_found: កន្លែងបើកចូល/ការផ្សំបញ្ចូលគ្នាបង្កើតពាក្យសំងាត់​មិនត្រឹមត្រូវទេ។​
+      login_invalid: ឈ្មោះអ្នកប្រើ គប្បីប្រើតែតួអក្សរ, លេខ, ចន្លោះឃ្លា និង  -_@ ប៉ុណ្ណោះ។
+      consecutive_failed_logins_limit_exceeded: ស្ទះគាំងកន្លែងបើកចូលមិនរួច ដោយលើសកម្រិត,
+        គណនី ត្រូវបញ្ឈប់អោយដើរ។
       email_invalid: អ៊ីម៉ែលនេះគឺមិនមែនជាអាស័យដ្ឋានត្រឹមត្រូវទេ។
       password_blank: ពាក្យសំងាត់មិនអាចនៅចន្លោះទទេបានទេ។
-      password_invalid: ការផ្សំគ្នានៃកន្លែងបើកចូល/ពាក្យសំងាត់គឺមិនត្រឹមត្រូវទេ។​
-      not_active: គណនីរបស់អ្នកមិនសកម្មទេ។​
-      not_confirmed: គណនីរបស់អ្នកមិនបានបញ្ជាក់ទេ។​​
+      password_invalid: ​កន្លែងបើកចូល/ការផ្សំបញ្ចូលគ្នាបង្កើតពាក្យសំងាត់​មិនត្រឹមត្រូវទេ។​
+      not_active: គណនីរបស់អ្នកមិនដើរទេ។​
+      not_confirmed: គណនីរបស់អ្នកមិនអាចបញ្ជាក់បានទេ។​​
       not_approved: គណនីរបស់អ្នកមិនត្រូវបានអនុញ្ញាតទេ។​
       no_authentication_details: អ្នកមិនបានផ្តល់សេចក្តីពិស្តារ សម្រាប់ការបញ្ជាក់ពិតប្រាកដទេ។​
 
