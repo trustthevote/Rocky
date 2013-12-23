@@ -559,7 +559,7 @@ record_42:
 record_43:
   abbreviation: TX
   name: Texas
-  requires_party: true
+  requires_party: false
   party_tooltip: not_required
   id_number_tooltip: drivers_license_or_ssn_or_none_4
   sos_address: "Office of the Secretary of State<br>Elections Division<br>P.O. Box 12060<br>Austin, TX 78711-2060"
