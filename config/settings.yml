@@ -46,12 +46,13 @@ states_with_online_registration:
   - WA
   
 ovr_states:
+  CA:
+    - en
+    - es
   NV:
     - en
-    - es
   WA:
     - en
-    - es
   
   
 enabled_locales:
