@@ -69,9 +69,6 @@ iframe {
   left: 5px;
 }
 
-.progress-title {
-  padding-right: 5px;
-}
 
 #progress-bar li {
   float: left;
@@ -84,6 +81,12 @@ iframe {
   line-height: 28px;
   background-repeat: no-repeat;
 }
+
+#progress-bar li.progress-title {
+  padding-right: 5px;
+  font-size: 8px;
+}
+
 
 #progress-bar li.progress-done {
   background-image: url('/images/buttons/progress_done.gif');
