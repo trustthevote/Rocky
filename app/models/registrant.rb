@@ -73,8 +73,12 @@ class Registrant < ActiveRecord::Base
        "prev_city", 
        "prev_zip_code"
     ]
+  
+  # OVR_REGEX = /^(\p{Latin}|\P{Letter})*$/
+  OVR_REGEX = /^[a-zA-Z0-9\s\+\.\-!@#\$%\^&\*_=\(\)\[\]\{\};':"\\\/,<>\?\|]*$/
+  #white space and hyphen for names; and for addresses phone#s and other stuff, also include special chars such as # ( ) / + 
   PDF_FIELDS.each do |pdf_field|
-    validates pdf_field, format: { with: /^(\p{Latin}|\P{Letter})*$/ , 
+    validates pdf_field, format: { with: OVR_REGEX , 
       message: :invalid_for_pdf }#I18n.t('activerecord.errors.messages.invalid_for_pdf')}
   end
 
