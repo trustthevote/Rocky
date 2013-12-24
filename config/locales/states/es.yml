@@ -424,5 +424,53 @@ es:
       17_turn_18: Si tienes 17 anos y vas a cumplir 18 años antes de las próximas
         elecciones.
     registration_deadline:
-      thirty_days_before: ! '[ES]30 días antes de las elecciones.'
+      california: Sello postal o presentarse a la oficina de elecciones (o agencia
+        de registro electoral NVRA) en o antes de 15 días antes del Día de la elección
+        (a votar en la elección)
+      connecticut: Matasellos 14 días antes de la elección o recibido en persona 7
+        días antes de las elecciones
+      delaware: Matasellos de la cuarta el sábado antes de una elección primaria o
+        general, o 10 días antes de una elección especial
+      georgia: Matasellos de la quinta lunes antes de las elecciones
+      iowa: Recibido en persona 10 días antes de que el General y las elecciones primarias
+        (11 días antes de que todos los demás elecciones), o el matasellos 15 días
+        antes del Día de la elección.
+      kansas: Matasellos 21 días antes de la elección si por correo, recibido en la
+        oficina del condado 21 días antes de las elecciones si entregadas en persona.
+      missouri: Recibidos antes de las 5 pm (o cierre normal de la actividad empresarial)
+        el cuarto miércoles antes de las elecciones
+      new_york: Matasellos 25 días antes de la elección y recibió no menos de 20 días
+        antes de la elección
+      nebraska: Matasellos de la tercera el Viernes antes de las elecciones, o recibido
+        en persona a las 6pm del segundo viernes antes de las elecciones
+      nevada: Matasellos de 31 días antes de la elección, o en línea por un plazo
+        de 21 días antes de la elección, o recibido en persona a la oficina del vendedor
+        21 días antes de la elección.
+      rhode_island: Recibido 30 días antes de la elección. Formularios de registro
+        de votantes por correo recibido después de la fecha límite serán aceptadas,
+        siempre y cuando el matasellos de correo o antes el límite para el registro
+        de electores.
+      utah: Matasellos 30 días antes de la elección, o recibido en persona 15 días
+        antes de las elecciones
+      vermont: Recibido antes de las 5pm el miércoles antes de las elecciones
+      washington: Matasellos para el lunes cuatro semanas antes de la elección, o
+        recibido en persona en la oficina de elecciones del condado el lunes una semana
+        antes de las elecciones
+      postmarked_11_days: Matasellos 11 días antes de las elecciones
+      postmarked_20_days: Matasellos 20 días antes de la elección
+      postmarked_21_days: Matasellos 21 días antes de las elecciones
+      postmarked_25_days: Matasellos 25 días antes de las elecciones
+      postmarked_28_days: Matasellos 28 días antes de las elecciones
+      postmarked_29_days: Matasellos 29 días antes de las elecciones
+      postmarked_30_days: Matasellos 30 días antes de las elecciones
+      received_10_days: Recibido 10 días antes de las elecciones
+      received_14_days: Recibido 14 días antes de las elecciones
+      received_15_days: Recibido 15 días antes de las elecciones
+      received_21_days: 21 Días antes de las elecciones
+      received_22_days: Ha recibido 22 días antes de las elecciones
+      received_25_days: Recibido 25 días antes de las elecciones
+      received_29_days: Recibido 29 días antes de la elección
+      received_30_days: Recibido 30 días antes de las elecciones
+      received_at_least_30_days: Al menos 30 días antes de las elecciones
+      thirty_days_before: 30 Días antes de las elecciones
 

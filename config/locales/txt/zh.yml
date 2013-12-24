@@ -81,7 +81,7 @@ zh:
         work: 工作
         other: 其他
       instructions:
-        overseas: ! '<b>注意e</b>: 如果您是美国公民，住在美国领土外或是有投票选举权的军人，请<a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+        overseas: ! '<b>注意</b>: 如果您是美国公民，住在美国领土外或是有投票选举权的军人，请<a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
           target=''_blank''>点击此处</a>进行选民登记。'
         opt_in_email: 我们会给您发送及时的选举提醒信息，包括您的选举地点，以及有关选举气氛和关注话题的信息。
         under_18: 看来您还未满18岁。没有关系。在%{state_name}， 您可以登记投票 %{state_rule}。 请访问<a href="http://www.rockthevote.com/election-center/"

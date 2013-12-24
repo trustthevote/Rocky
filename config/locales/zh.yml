@@ -80,6 +80,7 @@ zh:
         inclusion: ! '%{attribute} 不在列表当中。'
         exclusion: ! '%{attribute} 已经被占用。'
         invalid: ! '%{attribute}是无效的。'
+        invalid_for_pdf: ! '%{attribute} 必须使用英文填写。'
         confirmation: ! '%{attribute}与确认信息不匹配。'
         accepted: ! '%{attribute} 必须被接受。'
         empty: ! '%{attribute} 不能留空。'

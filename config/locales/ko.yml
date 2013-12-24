@@ -1,6 +1,7 @@
 ---
 ko:
   language_name: 한국어
+  language_name_translation_instructions: 한국어
   activerecord:
     attributes:
       partner:
@@ -79,6 +80,7 @@ ko:
         inclusion: ! '%{attribute} 는 명단에 포함되어 있지 않습니다.'
         exclusion: ! '%{attribute} 는 예약되어 있습니다.'
         invalid: ! '%{attribute} 는 유효하지 않습니다.'
+        invalid_for_pdf: ! '%{attribute} 는 영어로 기입하세요.'
         confirmation: ! '%{attribute} 는 확인과 일치하지 않습니다.'
         accepted: ! '%{attribute} 를 승낙하셔야 합니다.'
         empty: ! '%{attribute} 는 공란으로 남겨둘 수 없습니다.'

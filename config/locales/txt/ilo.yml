@@ -28,7 +28,7 @@ ilo:
       step_1_header: Baro nga nagre-rehistro
       step_2_header: Impormasyon personal
       step_3_header: Dagdag nga impormasyon para ti rehistrasyon
-      step_4_header: Ugdeng-ngegca ti impormasyon ken ug-garawca
+      step_4_header: Agdeng-ngegca ti impormasyon ken ag-garawca
       step_5_header: Adalem manen ken agconpirmaca
       stay_informed_header: Agdeng-ngeg
       identification_header: Ditalye ti Impormasyon
@@ -40,7 +40,7 @@ ilo:
       tell_a_friend_title: Ibagam ti gay-yem idiay Email
       finish_reminder: Dios ti ag-ngina, %{first_name}, iti impaw-it mo nga applikasyon
         ti rehistrasyon! Maawat munto ti rehistrasyon mo nga conpirmadona dagiti opisyales
-        ti eleksyon iti estado. No dad-duma, adu nga semana iti masapulda nga ugadal
+        ti eleksyon iti estado. No dad-duma, adu nga semana iti masapulda nga agadal
         ti applikasyon mo.
       finish_reminder_2: No cayat mo nga maam-muan iti kasasaad ti porma ti rehistrasyon
         mo, maam-muam daytoy iti Sekretarya ti Estado idiay sa <a href="http://www.rockthevote.com/election-center/"
@@ -54,7 +54,7 @@ ilo:
       mailing_address: Address ti surat
       previous_name: Nagbaliw nga nagan
       previous_address: Umun-una nga address
-      opt_in_sms: Ipatulod mo txt mensahi nga aggapu ti %{organization}.
+      opt_in_sms: Ipatulod mo txt mensahe nga aggapu ti %{organization}.
       opt_in_email: Umawat dagiti email nga aggapu ti '%{organization}.
       remind_when_18: Ipalagip mo caniac ti aldaw nga kaaldawam ko no 18 ti tawen
         ko.
@@ -99,15 +99,15 @@ ilo:
         under_18: Hey, kasla saan kapay nga agtawen ti 18. Kool ka. Sa %{state_name},
           mabalin mo agrehistro nga agbuto '%{state_rule}'. Mapanka idiay ti <a href="http://www.rockthevote.com/election-center/"
           target="_blank">Election Center</a>to kitaem ti sumaruno nga eleksyon.
-        under_18_2: I-click iti button tapno ituloy iti applikasyon no usto iti kuwenta.
-        under_18_3: Ketno saan, pawitan da kayo iti abiso nga agrehistro into no diesyocho
+        under_18_2: I-click iti button tapno ituloy iti applikasyon no husto iti kuwenta.
+        under_18_3: Ketno saan, pawitan da kayo iti abiso nga agrehistro into no dies-y-ocho
           kayo.
         remind_when_18: Ipawitan da kayo iti e-mail iti %{email_address}
         review: Rebisuen yo nga agpayso amin nga impormasyon.
         download: Saan pay nalpas. I-click yo ta para i-prenta button edta palma iti
           rehistro. Pirmaon yo ken edta address nga naka-kabil edta porma.
-        download_2: Saan kayo nga rehistrado no saan yo nga i-prenta, pirmaan ken
-          ibuson dayta porma yo!
+        download_2: Saan ka nga rehistrado no saan yo nga i-prenta, pirmaan ken ibuson
+          dayta porma yo!
         finish: Saan yo nga lipatan nga ibaga kada gayyem ken pamilya yo nga nalaka
           laeng iti agrehistro. Ket adtoy amin a tulong nga mausaryo tapno ipakaalammo
           yo panggep iti botante nga agrehistro.
@@ -149,21 +149,21 @@ ilo:
               adda ditoy baba. Dagiti impormasyon nga nalpas mo nga inted, agparang
               da idiay online registration portal ti Sekretarya ti Estado ket mabalin
               nga illepas mo diay met laeng iti applikasyon mo.
-            p3: Ket no saanyo nga macompleto dayta applikasyon yo edta website iti
-              Secretarya diay Estado iti Colorado, i-click dayta 'link' edta baba
+            p3: Ket no saanyo nga macompleto dayta applikasyon yo dita website iti
+              Secretarya diay Estado iti Colorado, i-click dayta 'link' dita baba
               ket ituloyo dayta porma. Maimprenta iti rehistrasyon porma, pirmaan
-              ken ibuson diay Opisina diay Secretarya diay Estado.
+              ken ibuson idiay Opisina diay Secretarya iti Estado.
             p4: Ilocano (ilo)
           go:
-            title: Saan nga agpayso iti rehistration idta Colorado
+            title: Saan nga agpayso iti rehistration dita Colorado
             timeout: Nabayag nga dinak sumonbat iti Colorado website ket diak mausar
-              ita. Saan nga problema. Adda dua nga pag-pilian tapnon malpas mo ti
+              dagita. Saan nga problema. Adda dua nga pag-pilian tapno malpas mo ti
               pagrehistro nga bomoto.
             timeout_2: Tapno malpas dayta aplikasyon botante nga agrehistro, adda
               tallo nga pagpilian tapno malpas iti applikasyon para pagrehistro botante:</p><p>(1)
               Isara iti "window" ken usaren iti buton diay likod iti "browser" tapno
-              correcta diay impormasyon idta applikasyon. Mabalin nga ikabil dayta
-              impormasyon idta website iti Secretarya diay Estado..</p><p>( (2) Iserra
+              correcta diay impormasyon dita applikasyon. Mabalin nga ikabil dayta
+              impormasyon dita website iti Secretarya diay Estado..</p><p>( (2) Iserra
               iti "window" ket i-click iti "Continue Registration with Rock the Vote"
               link ida pahina nga immune. Maimprenta dayta porma para mapirmaon ken
               ibuson yo diay opisina iti  Secretarya diay Estado .</p><p>(3) Mabalin
@@ -177,7 +177,7 @@ ilo:
               idiay numero iti ID yo wenno (3) Saan yo inkabil ta iti sabali nga porma.
               Kitaenyo nga nalaing dagiti impormasyon nga intedyo.'
             section: Impormasyon no sin-noka
-            colorado_id_number: Numero it ID diay Colorado
+            colorado_id_number: Numero ti ID diay Colorado
             p2: Tapno malpas dayta aplikasyon botante nga agrehistro, adda tallo nga
               pagpilian tapno malpass iti applikasyon para pagrehistro botante:</p><p>(
               (1) Isara iti "window" ken usaren iti buton diay likod iti "browser"
@@ -198,7 +198,7 @@ ilo:
           kayo agrehistro antes diyesyocho iti. Ket pangngaasi <a href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">i-click
           iti ditoy</a>ta basaem dagiti regulasyon ti estado nga ayanmo.
         registrant_name: Ikabil iti nagan ditoy kahon. Saan nga usaren iti "nicknames"
-          wenno initiales. No datoy nga aplikasyon ket para nagsukat iti nagan, masaludsod
+          wenno initiales. No daytoy nga aplikasyon ket para nagsukat iti nagan, masaludsod
           kayo no inno iti dati nga nagan diay sabali nga section. Saan nga lipatan
           nga ikabil iti titulo yo (Mr, Mrs, Miss, Ms).
         home_address: Ikabil diay address iti balay ditoy kahon. Saan nga iti address

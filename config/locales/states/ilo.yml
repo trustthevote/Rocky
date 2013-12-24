@@ -12,14 +12,14 @@ ilo:
             ti online sistema ti botante iti estado.
       nv:
         online_instructions: <p>Masapul mo nga ikumpleto iti online nga pagrerehistro
-          ti botante nga sumasarsaruno. Iti Nevada Online Voter Application (NOVA)
-          ay inted ni Sekretarya ti Estado Nevada, Ross Miller, tapno agrehistro dagiti
-          botante iti Nevada ken tapno isuda ket makaboto, wenno suktan ti agpayao
-          nga impormasyon. Masapul mo met iti NOVA na aksukat ka <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">ditoy</a>.</p><br/>
+          ti botante nga sumarsaruno. Iti Nevada Online Voter Application (NOVA) inted
+          ni Sekretarya ti Estado Nevada, Ross Miller, tapno agrehistro dagiti botante
+          iti Nevada ken tapno isuda ket makaboto, wenno suktan ti agpayso nga impormasyon.
+          Masapul mo met iti NOVA na aksukat ka <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">ditoy</a>.</p><br/>
           <p> iti impormasyon ti driver's license iti invalido wenno iti DMV record
           - saan ka nga agdanag - mabalin mo met <a href="%{next_url}">ngalipasen
-          ti rehistrasyon mo ti saan ka nga agdanag %{rtv_and_partner_name}</a>. -
-          Masapul mo laeng nga iprenta, isurat iti nagan mo, ken ibuson data porma.</p>
+          ti rehistrasyon mo %{rtv_and_partner_name}</a>. - Masapul mo laeng nga iprenta,
+          isurat iti nagan mo, ken ibuson data porma.</p>
     parties:
       democratic: Demokratiko
       independent: Independiente
@@ -39,8 +39,8 @@ ilo:
       not_participating:
         blank: Ilocano (ilo)
         new_hampshire: ! "Gapu iti linteg ti New Hampshire, saan nga mabalin nga usaren
-          daytoy porma nga pagparehistro tapmo makabuto. Tapno makabuto kasaritan
-          iti Clerk iti ili wenno ciudad nakalista ti    \nhttp://www.state.nh.us/sos/clerks.htm.
+          daytoy porma nga pagparehistro tapmo makabuto. Tapno makabuto kasaritam
+          iti Clerk iti ili wenno ciudad nga nakalista ti    \nhttp://www.state.nh.us/sos/clerks.htm.
           \ Mabalin mo met nga kasao ti Sekretarya ti Estado ti 603-271-3242 wenno
           bumisita iti http://www.state.nh.us/sos/electionsnew.htm."
         north_dakota: Awan ti pagrerehistro iti botante ti North Dakota. Para ti dad-duma
@@ -48,17 +48,17 @@ ilo:
           mapan ka iti http://www.nd.gov/sos.
         wyoming: ! 'Iti linteg ti Wyoming saan na nga ipalubos nga usaren daytoy porma
           nga pagrerehistro tapno makabuto. No kayat mo nga adalen wenno ammo-em no
-          kasano iti agboto ditoy Wyoming, kasaritan iti county clerk ti ili nga ayan
+          kasano iti agboto ditoy Wyoming, kasaritam iti county clerk ti ili nga ayan
           mo. Masarakam dagiti contact impormasyon iti http://soswy.state.wy.us/Elections/RegisteringToVote.aspx
           wenno tel # 307-777-3573.'
       race:
         blank: Ilocano (ilo)
         required_with_state_name: Iti estado ti  %{state_name} masapul nga ibagam
-          impormasyon iti pagkatao ken pagka-etniko mo. Saan da nga alaen iti applikasyon
-          mo no di mo ited dagitoy nga impormasyon.
-        requested_with_state_name: Iti estado ti  %{state_name} dawaten nga ibagam
-          impormasyon iti pagkatao ken pagka-etniko mo. Saan da nga alaen iti applikasyon
-          mo no di mo ited dagitoy nga impormasyon.
+          iti impormasyon iti pagkatao ken pagka-etniko mo. Saan da nga alaen iti
+          applikasyon mo no di mo ited dagitoy nga impormasyon.
+        requested_with_state_name: Iti estado ti  %{state_name} dawaten na nga ibagam
+          iti impormasyon iti pagkatao ken pagka-etniko mo. Saan da nga alaen iti
+          applikasyon mo no di mo ited dagitoy nga impormasyon.
         georgia: Saan da nga awaten iti applikasyon mo no di mo ited dagiti impormasyon
           mo ti gender ken pagkatao/pagkaetniko.
         requested_not_required_with_state_name: Iti estado ti  %{state_name} dawaten
@@ -95,25 +95,25 @@ ilo:
       party:
         blank: ! 'Ilocano (ilo):'
         arizona: ! 'Iti botante ti Presidential Preference Elections, masapul nga
-          nakarehistro nga myembro ti maysa nga opisyal nga partido. Iti amin-non
+          nakarehistro nga myembro ti maysa nga opisyal nga partido. Iti amin-nen
           nga sab-sabali nga primary eleksyones, dagiti botantes: independiente, awan
           iti partido na, myembro iti partido nga awan ti nagan-na ket mabalin da
           amin ti agbuto iti partisan primary eleksyon iti partido nga kayatda.  Dagiti
           botante nga nagrehistro iti opisyal nga partido political ti agawat iti
-          masapa nga balota. Dagiti laeng miembro iti Partido Libertaryan iti Arizona
+          nasapa nga balota. Dagiti laeng miembro iti Partido Libertaryan iti Arizona
           iti mabalin nga agbuto idiay primary eleksyon iti Partido Libertaryan.'
         california: Ipalubos iti linteg ti California nga agbuto iti primary eleksyon
           ti anniaman nga partido nga kwalipikado ken nagrehistro iti opisina ti Sekretarya
-          ti Estado nga nangted kanniada iti parmiso, dagiti botante uray no saan
+          ti Estado nga nangted kanniada iti permiso, dagiti botante uray no saan
           da nga imbag-baga no sino iti partido da. Mabalin mo to umayab ti 1-800-345-VOTE
           o mapan ka iti www.ss.ca.gov/elections/elections_d.htm  dagiti botante uray
           no saan da nga imbag-baga no sino iti partido da, wenno saan nga opisyal
           iti partidoda.
         idaho: ! 'Masapul nga agrehistro ka iti partido nga kayatmo nga sali-an. Ibagam
-          iti partido nga kagkayat mo (Political Party Preference): Pagpil-liam: Constitution,
+          iti partido nga kaykayat mo (Political Party Preference): Pagpil-liam: Constitution,
           Demokratiko, Libertaryan, Republikano, wenno Awan ti Partido. No awan ti
           pagpil-piliam, wenno blanco, maka-awat ka iti Unaffiliated Ballot.'
-        indiana: Saan nga ipalubos iti linteg ti Indiana nga iti maysa nga tao suratna
+        indiana: Saan nga ipalubos iti linteg ti Indiana nga iti maysa nga tao isuratna
           no annia iti partidona no agrehistro tapno agbuto. Ngem, uray no kasta,
           masapul nga ibagana ti nagan ti partido  no agnuto iti primary eleksyon.
         massachusetts: No saan mo nga ibaga iti nagan iti partido political, mairehistroka
@@ -131,7 +131,7 @@ ilo:
           No saan mo nga suratan iti kahon, wenno ilistam iti maysa nga partido nga
           unrecognized, ibilang daka nga unaffiliated.
         tennessee: Awan iti agrerehistro ito partido iti Tennessee. No kayat iti maysa
-          nga botante ti agbuto ti primary eleksyon, isurat nanto laeng ituno tiempo
+          nga botante ti agbuto ti primary eleksyon, isurat nanto laeng intono tiempo
           nga agbuto isuna iti partido nga kayatna.
         utah: Ipalubos iti linteg ti Utah nga ti partido iti agpili no sino iti agbuto
           ti primary eleksyon ti nasao nga partido. no saan ka nga agmiembro iti partido,
@@ -152,18 +152,18 @@ ilo:
         wisconsin: Saan nga masapul nga ited mo iti nagan ti partidom tapno agrehistroka
           nga agbuto idiay Wisconsin.
         not_part_of_registration: Saan nga masapul nga ibagam no sino iti partidom
-          no agrehistroka nga botante. Ibagam ti nagan ti partido no dumawat kas iti
+          no agrehistroka nga botante. Ibagam ti nagan ti partido no dumawat ka iti
           balota iti partido no usarem iti primary eleksyon.
-        not_required_to_vote: Saan nga masapul ti agrehistro mo iti maysa nga partido
-          no kayatmo iti sumali nga agrehistro tapno agboto.
-        not_required: Saan mo nga masapul iti agrehistro ti maysa nga partido laeng
-          ti kayatmo ket sumali ka iti primary eleksyon, miting wenno conbensyon ti
-          partido.
+        not_required_to_vote: Saan mo nga masapul ti agrehistro iti maysa nga partido
+          no kayatmo iti agrehistro tapno agboto.
+        not_required: Saan mo nga masapul iti agrehistro iti maysa nga partido no
+          laeng ti kayatmo ket sumali ka iti primary eleksyon, miting wenno conbensyon
+          ti partido.
         not_required_can_choose_any: Saan mo nga masapul iti agrehistro ti maysa nga
-          partido laeng ti kayatmo ket sumali iti primary eleksyon, miting wenno conbensyon
-          ti partido, ken no ito kayatmo ti agpili ti anniiaman nga balota para iti
-          pangpresidente nga primary (ngem saan nga mabalin nga dua) ta awan met iti
-          relasyonda ti pagrerehistro.
+          partido no laeng ti kayatmo ket sumali iti primary eleksyon, miting wenno
+          conbensyon ti partido, ken no iti kayatmo ti agpili ti anniaman nga balota
+          para iti pangpresidente nga primary (ngem saan nga mabalin nga dua) ta awan
+          met iti relasyonda ti pagrerehistro.
         not_done_with_state_name: Saan nga masapul nga agrehistroka ti partido iti
           %{state_name}. Ngem, tapno mabalin mo ti agbuto iti primary, masapul mo
           iti dumawat ti balota iti maysa laeng nga partido.
@@ -181,17 +181,17 @@ ilo:
           primary eleksyon wenno idiay lugar iti miting.
         closed_caucus_with_state_name: Iti %{state_name} adda cerrado nga primary
           eleksyon ken sistema ti miting iti para president. Kada partido, mabalin
-          no nga agtagikua ti maysa laeng nga balota para iti amin nga kandidatona.
+          na nga agtagikua ti maysa laeng nga balota para iti amin nga kandidatona.
           Mabalin met nga iti dua wenno adu nga partido agtagikwa iti maysa laeng
           nga balota para iti amin nga kandidatoda. Dagiti partido nga opisyal, mabalin
           da ti agpili no annia nga partido dagiti sumali idiay primary eleksyon.  No
-          annia nga partido ti ayanna, wenno sagino nga partido isuna, ti maysa nga
+          annia nga partido ti ayanna, wenno sadino nga partido isuna, ti maysa nga
           botante maammuanna 30 nga aldaw sakbay ti aldawti eleksyon no annia ti usarenna
           nga balota, wenno agpili isuna ti maysa laeng nga balota.
         required_for_presidential: No awan iti isurat mo nga partido, saan mo nga
           mabalin nga agbuto iti Presidential Preference Primary, ken iti komiti ti
           partido eleksyon. Saan nga masapul nga sumalika kadagiti partido tapno makaboto
-          ka kadagiti nga eleksyon.
+          ka kadagitoy nga eleksyon.
         required_for_primary: Masapul ti agrehistro iti partido no kayatmo ti agbuto
           to primary eleksyon iti nasao nga partido, miting, wenno conbensyon.
         required_for_primary_2: Masapul nga agrehistro iti maysa nga partido no kayatmo
@@ -202,17 +202,17 @@ ilo:
         required_for_primary_nonpartisan: Masapul ti agrehistro iti partido no kayatmo
           ti agbuto to primary eleksyon iti nasao nga partido, miting, wenno conbensyon.
           No agrehistroka ti partido menor, wenno iti partido nga Nonpartisan, agawatka
-          iti nga balota para ti primary eleksyon.
+          iti balota para ti primary eleksyon.
         required_for_primary_unless: Masapul ti agrehistro iti partido no kayatmo
           ti agbuto to primary eleksyon iti nasao nga partido, miting, wenno conbensyon
           (ngem uray no saanca nga nakarehistro, mabalinmo laeng nga sumali no adda
           laketdi iti palubos ti partido political).
         required_for_primary_no_change_30_days: Masapul ti agrehistro iti partido
-          no kayatmo ti agbuto to primary eleksyon iti nasao nga partido, miting,
+          no kayatmo ti agbuto ti primary eleksyon iti nasao nga partido, miting,
           wenno conbensyon. Saan mo nga mabalin nga suktan ti kasasaadmo iti partidom
-          iti uneg 30 nga aldaw sakbay iti partisan primary eleksyon.
+          iti uneg ti 30 nga aldaw sakbay iti partisan primary eleksyon.
         required_for_primary_2_months: Masapul ti agrehistro iti partido no kayatmo
-          ti agbuto to primary eleksyon iti nasao nga partido, miting, wenno conbensyon.
+          ti agbuto ti primary eleksyon iti nasao nga partido, miting, wenno conbensyon.
           Tapno mabalin mo iti agbuto ti miting iti partido, masapul nga agmiembroca
           iti nasao nga partido ti saan nga nabab-baba ti dua nga bulan sakbay ti
           nasao nga miting. Tapno agbuto iti primary eleksyon ti partido, masapul
@@ -222,11 +222,11 @@ ilo:
         blank: ! 'blanko
 
           Ilocano (ilo)'
-        arizona: No addas Arizona driver's license wenno sabali nga ID nga naalam
-          kalpasan ti Oktubre 1,1996 isurat mo ti numero idiay kahon 6 ti NVAR form.
-          Daytoy ket prueba ti pagka-citizenship mo, ket saan mo nga masapulen ti
-          mangted pay ti sabsabali nga detalye wenno impormasyon. Maysa laeng nga
-          antigo nga dokumento ti masapul mo tapno makarehistro ka nga agbuto.
+        arizona: No adda Arizona driver's license wenno sabali nga ID nga naalam kalpasan
+          ti Oktubre 1,1996 isurat mo ti numero idiay kahon 6 ti NVAR form. Daytoy
+          ket prueba ti pagka-citizenship mo, ket saan mo nga masapulen ti mangted
+          pay ti sabsabali nga detalye wenno impormasyon. Maysa laeng nga antigo nga
+          dokumento ti masapul mo tapno makarehistro ka nga agbuto.
         colorado: Masapul nga itedmo ti Colorado Driver's License  mo, wenno ti numero
           iti Colorado ID nga inissyo kenka ti Department of Revenue. No awan dagitoy
           dua nga ID, masapul nga isurat mo nga "AWAN" kenka dagitoy dua nga ID -
@@ -335,7 +335,7 @@ ilo:
           nga numero ti cucuam nga Social Security. No awan dagitoy dua, isurat mo
           iti "AWAN" tapno iti estado mangted ti espesyal nga usarem ng ID.
         drivers_license_or_ssn_county_clerk_with_state_name: Ited mo ti  %{state_name}
-          ti numero ti driver's license mo. No adda, ngam no awan, masapul nga ited
+          ti numero ti driver's license mo. No adda, ngem no awan, masapul nga ited
           mo ti up-pat nga maudi nga numero ti cucuam nga Social Security. No awan
           kenka dagitoy dua, mapanka iti clerk ti county nga ayan mo tapno mangted
           kenka ti especial ng ID.
@@ -465,16 +465,16 @@ ilo:
         opisina) iti maika-uppat nga Mierkoles sakbay ti eleksyon.
       new_york: Markado ti coreo 25 nga aldaw sakbay ti eleksyon naawat ti aldaw nga
         saan nga bas-bassit ngem 20 nga aldaw sakbay ti eleksyon
-      nebraska: Markado ti maika-tallo nga Viernes sakbay ti eleksyon o naawat mismo
-        ti tao ti oras ti 6 ti malem ti maika-dua nga Viernes sakbay ti eleksyon
+      nebraska: Markado ti coreo maika-tallo nga Viernes sakbay ti eleksyon o naawat
+        mismo ti tao ti oras ti 6 ti malem ti maika-dua nga Viernes sakbay ti eleksyon
       nevada: Markado ti coreo 31 nga aldaw sakbay ti eleksyon, o naited online 21
         nga aldaw sakbay ti eleksyon o inawat mismo ti tao idiay opisina ti eskribiente
         21 nga aldaw sakbay ti eleksyon
       rhode_island: naawat 30 nga aldaw sakbay ti eleksyon. Dagiti porma ti rehistrasyon
         nga naawat kalpasan ti deadline mabalin nga awaten no laeng markado ti coreo
         iti aldaw wenno sakbay ti deadline ti voter registration
-      utah: markado 30 nga aldaw sakbay ti eleksyon, o naawat mismo ti tao 15 nga
-        aldaw sakbay ti eleksyon
+      utah: markado ti coreo 30 nga aldaw sakbay ti eleksyon, o naawat mismo ti tao
+        15 nga aldaw sakbay ti eleksyon
       vermont: naawat ti oras ti 5 iti malem ti Mierkoles sabay ti eleksyon
       washington: markado ti coreo ti Lunes up-pat nga semana sakbay ti eleksyon,
         o naawat mismo ti tao idiay departamento ti county elections iti Lunes mai-sa
@@ -493,7 +493,7 @@ ilo:
       received_22_days: naawat 22 nga aldaw sakbay ti eleksyon
       received_25_days: naawat 25 nga aldaw sakbay ti eleksyon
       received_30_days: naawat 30 nga aldaw sakbay ti eleksyon
-      received_at_least_30_days: naawat saan nga nasapsapa gem 30 nga aldaw sakbay
+      received_at_least_30_days: naawat nga saan nga nasapsapa ngem 30 nga aldaw sakbay
         ti eleksyon
       thirty_days_before: 30 nga aldaw sakbay ti eleksyon
 

@@ -24,7 +24,7 @@ ko:
     registration:
       in_language_name: 한국어
       powered_by: 협찬
-      progress_indicator: ! '단계:'
+      progress_indicator: 단계
       step_1_header: 새로운 유권자
       step_2_header: 개인 정보
       step_3_header: 추가 정보

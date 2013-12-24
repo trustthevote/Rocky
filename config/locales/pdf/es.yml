@@ -16,7 +16,7 @@ es:
             Asegúrese que la dirección se pueda leer en el exterior. Use cinta adhesiva
             o una grapa para fijar la solicitud en la parte baja y crear la pieza
             de correo.
-          step2mailer: ! '[ES]HOW TO MAKE A MAILER'
+          step2mailer: CÓMO HACER UN MAILER
           step3: Séllela. Ponga un sello postal de primera clase en el sobre o pieza
             de correo.
           step4: Envíela. Deposite su solicitud de registro de votante en el correo.
@@ -25,8 +25,8 @@ es:
           title: ! 'ENVÍE SU SOLICITUD LLENADA Y FIRMADA A:'
         deadline_block:
           title: ! 'FECHA LÍMITE DE INSCRIPCIÓN:'
-        other_block: ! '[ES]See %{instructions_url} for complete general and state-specific
-          instructions for your voter registration application.'
+        other_block: Ver <br />%{instructions_url}<br />para instrucciones generales
+          y estatales y específicas completas para su aplicación de registro del votante.
         bottom_block:
           title: Votantes por primera vez que se inscriben por correo
           paragraph1: ! "Si se está inscribiendo para votar por primera vez en su
@@ -150,5 +150,5 @@ es:
             (El número de teléfono es optativo).
         bottom_half_footer: Envíe esta solicitud a la dirección provista por su estado.
       page3:
-        fouo: FOR OFFICIAL USE ONLY
+        fouo: SÓLO PARA USO OFICIAL
 

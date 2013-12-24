@@ -50,8 +50,8 @@ ilo:
         prev_zip_code: ZIP Code
         opt_in_email: Awaten nga Email
         opt_in_sms: Awaten nga txt nga mensahe
-        attest_true: Inadal ko dagiti ti impormasyon ditoy ngato, ken ket isuda ket
-          agpayso taamok unay-unay isuda.
+        attest_true: Inadal ko dagiti impormasyon ditoy ngato, ket isuda agpayso taamok
+          unay-unay isuda.
         tell_from: naggapo
         tell_email: Iti email mo
         tell_recipients: dagiti umaw-awat
@@ -84,6 +84,7 @@ ilo:
         inclusion: ! '''%{attribute}'' ket saan nga kabilang iti listaan.'
         exclusion: ! '''%{attribute}'' ket nakareserba.'
         invalid: ! '%{attribute} ket awan iti invalido na.'
+        invalid_for_pdf: ! '%{attribute} masapul nga ikka iti Ilokano'
         confirmation: ! '%{attribute} ket saan nga pumapares iti conpirmasyon.'
         accepted: ! '%{attribute} ket masapul nga awaten.'
         empty: ! '%{attribute} ket saan nga mabalin nga awan iti nagyan na.'
@@ -101,8 +102,8 @@ ilo:
         less_than: ! '%{attribute} masapul nga nabab-baba ken %{count}.'
         less_than_or_equal_to: ! '%{attribute} ket masapul nga nabab-baba wenno kapareho
           iti %{count}.'
-        odd: ! '%{attribute} bilang ket masapul nga ODD (o saan nga makuddua).'
-        even: ! '%{attribute} bilang ket masapul nga EVEN (o mabalin nga makud-dawa).'
+        odd: ! '%{attribute} bilang ket masapul nga ODD (o saan nga makud-dua).'
+        even: ! '%{attribute} bilang ket masapul nga EVEN (o mabalin nga makud-dua).'
   authlogic:
     error_messages:
       login_blank: Iti Log-in ket saan mga mabalin nga blanko.
