@@ -1,6 +1,7 @@
 ---
 es:
   language_name: español
+  language_name_translation_instructions: Español
   activerecord:
     attributes:
       partner:
@@ -81,6 +82,7 @@ es:
         inclusion: ! '%{attribute} no esta incluida en la lista'
         exclusion: ! '%{attribute} esta reservado'
         invalid: ! '%{attribute} es inválido'
+        invalid_for_pdf: ! '%{attribute} must be provided in English'
         confirmation: ! '%{attribute} no concuerda con la confirmación'
         accepted: ! '%{attribute} debe ser aceptada'
         empty: ! '%{attribute} no puede estar vacio'

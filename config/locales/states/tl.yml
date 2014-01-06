@@ -546,6 +546,7 @@ tl:
       received_21_days: natanggap 21 araw bago maghalalan
       received_22_days: natanggap 22 araw bago maghalalan
       received_25_days: natanggap 25 araw bago maghalalan
+      received_29_days: natanggap 29 araw bago maghalalan
       received_30_days: natanggap 30 araw bago maghalalan
       received_at_least_30_days: natanggap kahit  30 araw bago maghalalan
       thirty_days_before: 30 araw bago maghalalan

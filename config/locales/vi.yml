@@ -82,6 +82,7 @@ vi:
         inclusion: ! '%{attribute} không bao gồm trong danh sách.'
         exclusion: ! '%{attribute} được để riêng.'
         invalid: ! '%{attribute} không hợp lệ.'
+        invalid_for_pdf: ! '%{attribute} must be provided in English'
         confirmation: ! '%{attribute} không phù hợp với xác nhận.'
         accepted: ! '%{attribute} phải được chấp nhận.'
         empty: ! '%{attribute} không thể để trống.'

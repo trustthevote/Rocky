@@ -83,6 +83,7 @@ ur:
         inclusion: فیصد تناسب اس فہرست میں شامل نہیں ہے %{attribute}
         exclusion: فیصد تناسب محفوظ %{attribute}
         invalid: نامکمل / ناقابل قبول %{attribute}
+        invalid_for_pdf: ! '%{attribute} must be provided in English'
         confirmation: تصدیق کے معیار پرپورا نہیں اترتا %{attribute}
         accepted: لازمی طور پر تسلیم کیا جائے %{attribute}
         empty: خالی نہ چھوڑیں %{attribute}

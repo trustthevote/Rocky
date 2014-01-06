@@ -14,7 +14,7 @@ hi:
       prepare: फॉर्म तैयार करें
       review: अप्लिकेशन की समीक्षा (रिव्यू) करें
       sendmail: Email भेजो
-      share_facebook: पोस्ट करो !
+      share_facebook: post करो !
       share_twitter: Tweet करो !
       share_google_buzz: Google पर शेयर करें!
       state_online_registration: मैं अब <br/> अपना फॉर्म ऑनलाइन <br/> %{state} जमा

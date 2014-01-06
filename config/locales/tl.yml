@@ -86,6 +86,7 @@ tl:
         inclusion: ! '%{attribute} ay hindi kasama sa listahan.'
         exclusion: ! '%{attribute} ay nakareserba.'
         invalid: ! '%{attribute} ay hindi valid.'
+        invalid_for_pdf: ! '%{attribute} must be provided in English'
         confirmation: ! '%{attribute} ay hindi tumutugma sa kumpirmasyon.'
         accepted: ! '%{attribute} ay dapat na tanggapin.'
         empty: ! '%{attribute} ay hindi maaaring walang laman.'

@@ -519,6 +519,7 @@ ur:
       received_21_days: انتخابات سے اکیس روز قبل وصول شدہ
       received_22_days: انتخابات سے بائیس روز قبل وصول شدہ
       received_25_days: انتخابات سے پچیس روز قبل وصول شدہ
+      received_29_days: received 29 days before the election
       received_30_days: انتخابات سے تیس روز قبل وصول شدہ
       received_at_least_30_days: انتخابات سے کم از کم تیس روز قبل وصول شدہ
       thirty_days_before: انتخابات سے تیس دن پہلے

@@ -486,6 +486,7 @@ bn:
       received_21_days: নির্বাচনের ২১ দিন পূর্বে গৃহীত
       received_22_days: নির্বাচনের ২২ দিন পূর্বে গৃহীত
       received_25_days: নির্বাচনের ২৫ দিন পূর্বে গৃহীত
+      received_29_days: received 29 days before the election
       received_30_days: নির্বাচনের ৩০ দিন পূর্বে গৃহীত
       received_at_least_30_days: নির্বাচনের কমপক্ষে ৩০ দিন পূর্বে গৃহীত
       thirty_days_before: নির্বাচনের ৩০ দিন পূর্বে

@@ -83,6 +83,7 @@ en:
         inclusion: ! '%{attribute} is not included in the list.'
         exclusion: ! '%{attribute} is reserved.'
         invalid: ! '%{attribute} is invalid.'
+        invalid_for_pdf: ! '%{attribute} must be provided in English'
         confirmation: ! '%{attribute} doesn''t match confirmation.'
         accepted: ! '%{attribute} must be accepted.'
         empty: ! '%{attribute} can''t be empty.'

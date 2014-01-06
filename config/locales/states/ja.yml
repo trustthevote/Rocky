@@ -182,6 +182,7 @@ ja:
       received_21_days: 選挙の２１日前までに提出されたもの
       received_22_days: 選挙の２２日前までに提出されたもの
       received_25_days: 選挙の２５日前までに提出されたもの
+      received_29_days: received 29 days before the election
       received_30_days: 選挙の３０日前までに提出されたもの
       received_at_least_30_days: 選挙の少なくとも３０日前に提出されたもの
       thirty_days_before: 選挙日の30日前

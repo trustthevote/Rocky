@@ -83,6 +83,7 @@ bn:
         inclusion: ! '%{attribute} তালিকায় অন্তর্ভুক্ত নয়।'
         exclusion: ! '%{attribute} সংরক্ষিত।'
         invalid: ! '%{attribute} অকার্যকর।'
+        invalid_for_pdf: ! '%{attribute} must be provided in English'
         confirmation: ! '%{attribute} নিশ্চয়তা'
         accepted: ! '%{attribute} গ্রহণ করা আবশ্যক।'
         empty: ! '%{attribute} খালি থাকতে পারবে না।'

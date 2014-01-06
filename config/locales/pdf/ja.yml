@@ -53,7 +53,7 @@ ja:
           box3_label: 州
           box4_label: 郵便番号
         block4:
-          box1_label: 誕生日
+          box1_label: 生年月日
           item2: 月
           item3: 日
           item4: 年

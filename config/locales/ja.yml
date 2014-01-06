@@ -81,7 +81,7 @@ ja:
         inclusion: ! '%{attribute}はこのリストに含まれていません。'
         exclusion: ! '%{attribute}を維持してください。'
         invalid: ! '%{attribute} は無効です。'
-        invalid_for_pdf: ! '%{attribute} 英語で提出して下さい。'
+        invalid_for_pdf: ! '%{attribute}英語で提出して下さい。'
         confirmation: ! '%{attribute}は確認ができません。'
         accepted: ! '%{attribute}は受付られます。'
         empty: ! '%{attribute}は空欄にできません。'

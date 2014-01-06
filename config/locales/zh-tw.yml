@@ -1,2 +1,113 @@
+---
 zh-tw:
-  language_name: Traditional Chinese
+  language_name: 中文（繁体）
+  language_name_translation_instructions: 請使用翻譯的語言來表示翻譯語言的名稱，例如，如果你正在翻譯日語，請使用日語中表示“日語”（語言名稱）的詞彙。
+  activerecord:
+    attributes:
+      partner:
+        from_email: 來自電子郵件
+        url: URL
+      registrant:
+        date_of_birth: 出生日期
+        email_address: 電子郵件地址
+        first_registration: 這是我首次進行選民登記。
+        home_zip_code: 郵政編碼
+        us_citizen: 我是美國公民。
+        name_title: 稱呼
+        first_name: 名
+        middle_name: 中間名
+        last_name: 姓
+        name_suffix: 後綴
+        home_address: 地址
+        home_unit: 公寓/小區號碼
+        home_city: 城市
+        home_state_name: 州
+        has_mailing_address: 我的收信地址與以上不同。
+        mailing_address: 地址
+        mailing_unit: 公寓/小區號碼
+        mailing_city: 城市
+        mailing_state_abbrev: 州
+        mailing_zip_code: 郵政編碼
+        party: 政黨
+        race: 種族
+        state_id_number: 身份照號碼
+        phone: 電話
+        phone_type: 類型
+        change_of_name: 我更改過姓名。
+        prev_name_title: 稱呼
+        prev_first_name: 名
+        prev_middle_name: 中間名
+        prev_last_name: 姓
+        prev_name_suffix: 後綴
+        change_of_address: 我已更改地址。
+        prev_address: 地址
+        prev_unit: 單元/小區號碼
+        prev_city: 城市
+        prev_state_abbrev: 州
+        prev_zip_code: 郵政編碼
+        opt_in_email: 接收電子郵件
+        opt_in_sms: 接收短信
+        attest_true: 我已審閱以上信息，盡我所知它是真實的、準確的。
+        tell_from: 從
+        tell_email: 您的電子郵件
+        tell_recipients: 收件人
+        tell_subject: 主題
+        tell_message: 個人留言
+    errors:
+      models:
+        registrant:
+          blank: 必須填寫
+          invalid_zip: 無效的郵政編碼
+          attributes:
+            home_zip_code:
+              invalid: 請使用標準郵政編碼或標準郵政編碼+4位數
+            mailing_zip_code:
+              invalid: 請使用標準郵政編碼或標準郵政編碼+4位數
+            prev_zip_code:
+              invalid: 請使用標準郵政編碼或標準郵政編碼+4位數
+            email_address:
+              invalid: 這不是一個有效的地址
+            date_of_birth:
+              format: 格式是月份（兩位數）-日期（兩位數）-年份（四位數）
+            phone:
+              invalid: ! '格式是 ###-###-####'
+              required_if_opt_in: 如果想要接收短信，那麼必須填寫此項
+            attest_true:
+              accepted: 請務必確認以上信息是否正確。
+            has_state_license:
+              inclusion: 請說明您是否持有有效的州執照
+      messages:
+        inclusion: ! '%{attribute} 不在列表當中。'
+        exclusion: ! '%{attribute} 已經被佔用。'
+        invalid: ! '%{attribute}是無效的。'
+        invalid_for_pdf: ! '%{attribute} 必須使用英文填寫。'
+        confirmation: ! '%{attribute}與確認信息不匹配。'
+        accepted: ! '%{attribute} 必須被接受。'
+        empty: ! '%{attribute} 不能留空'
+        blank: ! '%{attribute} 不能留空'
+        too_long: ! '%{attribute} 太長（最長是%{count}個字）。'
+        too_short: ! '%{attribute}太短（最少需要%{count}個字）。'
+        wrong_length: ! '%{attribute}長度不對（必須是%{count}個字）。'
+        taken: ! '%{attribute} 已經被佔用。'
+        not_a_number: ! '%{attribute} 不是一個數字。'
+        greater_than: ! '%{attribute}必須大於%{count}。'
+        greater_than_or_equal_to: ! '%{attribute}必須大於或等於%{count}。'
+        equal_to: ! '%{attribute}必須等於%{count}。'
+        less_than: ! '%{attribute}必須少於%{count}。'
+        less_than_or_equal_to: ! '%{attribute}必須少於或等於%{count}。'
+        odd: ! '%{attribute} 必須是單數。'
+        even: ! '%{attribute} 必須是雙數。'
+  authlogic:
+    error_messages:
+      login_blank: 用戶名不能留空。
+      login_not_found: 用戶名/密碼組合無效。
+      login_invalid: 用戶名僅限使用字母，數字，空格，以及.-_@
+      consecutive_failed_logins_limit_exceeded: 超過連續輸入錯誤次數上限，該賬戶被禁用。
+      email_invalid: 該電子郵件地址不是一個有效的電子郵件地址。
+      password_blank: 密碼不能為空。
+      password_invalid: 用戶名/密碼組合無效。
+      not_active: 您的帳戶沒有被激活。
+      not_confirmed: 您的帳戶未獲得確認。
+      not_approved: 您的帳戶沒有獲得許可。
+      no_authentication_details: 您沒有提供認證所需的信息。
+

@@ -462,23 +462,71 @@ hi:
       once_turned_16: आपके 16 वर्ष पूरे होने के बाद (लेकिन आप जब तक 18 वर्ष के नही
         होंगे आप वोट नही दे सकतें)
       once_turned_17: आपके 17 वर्ष पूरे होने के बाद
-      once_turned_17_but: आपके 17 वर्ष पूरे होने के बाद (लेकिन वोट देने के लिए आपको
-        18 वर्ष का होना पड़ेगा)
-      turn_by_next_election: अगर आप अगले चुनाव से पहले 18 वर्ष के हो जाएँगे
-      turn_by_next_election_2: अगर आप अगले चुनाव तक 18 वर्ष के हो जाएँगे
-      turn_by_next_general_election_november: अगर आप अगले आम चुनाव से पहले 18 वर्ष
-        के हो जाएँगे (जो आमतौर पे नवेंबर मे होता है)
-      turn_by_next_general_election_november_2: अगर आप नवेंबर मे अगले चुनाव से पहले
-        18 वर्ष के हो जाएँगे
-      when_at_least_16: जब व्यक्ति की उमर कम से कम 16 वर्ष की हो जाएगी
-      when_is_16: जब व्यक्ति 16 वर्ष का होगा/होगी
-      when_will_be_18: अगले चुनाव पर या उससे पहले जब व्यक्ति 18 वर्ष का हो जाएगा/जाएगी
-      90_days_before: आपके 18वे जन्मदिन से 90 दिन पहले
-      6_months_before: आपके 18वे जन्मदिन से 6 महीने पहले
-      60_days_before_election_novemeber: अगर अगले चुनाव के 60 दिन पहले है और आप उस
-        चुनाव तक 18 वर्ष के हो जाएँगे (आमतौर से नवेंबर में)
-      2_months_before: आपके 18वे जन्मदिन के 2 महीने पहले
-      17_turn_18: अगर आपकी उमर 17 साल है और आपक अगले चुनाव से पहले 18 वर्ष के हो जाएँगे
+      once_turned_17_but: aapke 17 varsh purey hone ke baad (lekin vote dene ke liye
+        aapko 18 varsh ka hona padega)
+      turn_by_next_election: agar aap agle chunav se pehle 18 varsh ke ho jayenge
+      turn_by_next_election_2: agar aap agle chunav tak 18 varsh ke ho jayenge
+      turn_by_next_general_election_november: agar aap agle aam chunav se pehle 18
+        varsh ke ho jayenge (jo aamtaur pe November mei hota hai)
+      turn_by_next_general_election_november_2: agar aap November mei agle chunav
+        se pehle 18 varsh ke ho jayenge
+      when_at_least_16: jab vyakti ki umar kam se kam 16 varsh ki ho jayegi
+      when_is_16: jab vyakti 16 varsh ka hoga/hogi
+      when_will_be_18: agle chunav per ya usse pehle jab vyakti 18 varsh ka ho jayega/jayegi
+      90_days_before: aapke 18ve janamdin se 90 din pehle
+      6_months_before: aapke 18ve janamdin se 6 mahine pehle
+      60_days_before_election_novemeber: agar agle chunav ke 60 din pehle hai aur
+        aap us chunav tak 18 varsh ke ho jayenge (aamtaur se November mein)
+      2_months_before: aapke 18ve janam din ke 2 mahine pehle
+      17_turn_18: agar aapki umar 17 saal hai aur aapk agle chunav se pehle 18 varsh
+        ke ho jayenge
     registration_deadline:
-      thirty_days_before: चुनाव के 30 दिन पहले
+      california: postmarked or submitted to an elections office (or NVRA voter registration
+        agency) on or before 15 days prior to Election Day (to vote in that election)
+      connecticut: postmarked 14 days before the election or received in person 7
+        days before the election
+      delaware: postmarked by the fourth Saturday before a general or primary election,
+        or 10 days before a special election
+      georgia: postmarked by the fifth Monday before the election
+      iowa: received in-person 10 days before General and Primary Elections (11 days
+        before all other elections), or postmarked 15 days before Election Day.
+      kansas: postmarked 21 days before the election if mailed, received at the county
+        office 21 days before the election if delivered in person.
+      missouri: received before 5pm (or normal close of business) on the fourth Wednesday
+        prior to the election
+      new_york: postmarked 25 days before the election and received no less than 20
+        days before the election
+      nebraska: postmarked by the third Friday before the election, or received in-person
+        by 6pm on the second Friday before the election
+      nevada: postmarked by 31 days before the election, or submitted online by 21
+        days before an election, or received in-person at a clerk's office 21 days
+        before an election.
+      rhode_island: received 30 days before the election. Mailed voter registration
+        forms received after the deadline will be accepted as long as the mail is
+        postmarked on or before the voter registration deadline.
+      utah: postmarked 30 days before the election, or received in person 15 days
+        before the election
+      vermont: received by 5pm on the Wednesday before the election
+      washington: postmarked by the Monday four weeks before the election, or received
+        in person at the county elections department the Monday one week before the
+        election
+      postmarked_11_days: postmarked by the Monday four weeks before the election,
+        or received in person at the county elections department the Monday one week
+        before the election
+      postmarked_20_days: postmarked 20 days before the election
+      postmarked_21_days: postmarked 21 days before the election
+      postmarked_25_days: postmarked 25 days before the election
+      postmarked_28_days: postmarked 28 days before the election
+      postmarked_29_days: postmarked 29 days before the election
+      postmarked_30_days: postmarked 30 days before the election
+      received_10_days: chunav ke 10 din pehle
+      received_14_days: chunav ke 14 din pehle
+      received_15_days: chunav ke 15 din pehle
+      received_21_days: chunav ke 21 din pehle
+      received_22_days: chunav ke 22 din pehle
+      received_25_days: chunav ke 25 din pehle
+      received_29_days: chunav ke 29 din pehle
+      received_30_days: chunav ke 30 din pehle
+      received_at_least_30_days: chunav ke 30 din pehle
+      thirty_days_before: chunav ke 30 din pehle
 

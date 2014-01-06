@@ -1,1 +1,114 @@
+---
 zh-tw:
+  pdf:
+    nvra:
+      page1:
+        title: 選民登記
+        subtitle: 提供者
+        top_paragraph: 您還需要在表格上<br/><b>簽名</b> , <b>貼上郵票</b>，並<b>郵寄</b>才算完成選民登記！
+        instructions_block:
+          title: 指引
+          subtitle: 只需要經過以下幾個簡單步驟就可以完成您的選民登記：
+          step1: 在表格上簽名。您必須在郵寄之前在選民登記表上簽名。
+          step2: 製作郵件。把表格與地址單對折。確保有地址的那一邊露在外面。將折好的表格底部粘貼或用訂書機訂起來，這樣郵件就製作好了。或者，您可以將表格放入一個信封然後手寫出國務卿的地址。
+          step2mailer: 如何製作郵件
+          step3: 貼上郵票。請在您的信封或者折好的郵件上貼上頭等郵票。
+          step4: 郵寄出去。將您的選民登記表放入郵箱。
+          step5: 投票。在選舉當日，前往投票站進行投票。
+        submit_block:
+          title: 將您填妥並簽了名字的表格上交到：
+        deadline_block:
+          title: 登記截止日期
+        other_block: 請在%{instructions_url} 查看完整的有關選民登記申請的一般指引以及各州指引。
+        bottom_block:
+          title: 用郵寄方式進行的首次投票選民
+          paragraph1: 如果您在您的轄區是第一次登記投票並郵寄本登記申請表，聯邦法律要求您應在第一次投票時出示身份證明。這些身份證明包括：一個當前和有效的帶照片的身份證或一個寫有您的姓名和地址的當前的水電費賬單、銀行對賬單、政府支票、工資支票或政府文件。
+          paragraph2: 如果選民在郵寄選民登記表時提交了這種身份證明副本，則該選民可免除此要求。
+          paragraph3: 如果您想提供一份副本，請記住以下事項：您所在的州可能有額外的身份證明要求，即使您達到了聯邦身份證明要求，可能在投票站仍然要求您出示身份證明。
+          paragraph4: 不要隨本申請表遞交原件，僅提交副本。
+      page2:
+        title: 選民登記申請表
+        subtitle: 請在填表前，閱讀一般指引，申請表指引和州指引。
+        topblock:
+          item1: 您是否是美國公民？
+          item2: 您在選舉日之前是否年滿18 歲？
+          item3: 如果您對任何一個問題的回答是“否”，請不要填寫表格。
+          item4: （請見有關未滿18歲登記資格規定的州特別指引）
+          fouo: 本欄僅供辦公室使用。
+        block1:
+          box1_label: ''
+          box2_label: 姓
+          box3_label: 名
+          box4_label: 中間名
+          box5_label: ''
+        block2:
+          box1_label: 家庭住址
+          box2_label: 公寓或小區號碼
+          box3_label: 城市/鎮
+          box4_label: 州
+          box5_label: 郵政編碼
+        block3:
+          box1_label: 您收取郵件但不同於上述地址的地址
+          box2_label: 城市/鎮
+          box3_label: 州
+          box4_label: 郵政編碼
+        block4:
+          box1_label: 出生日期
+          item2: 月
+          item3: 日
+          item4: 年
+        block5: 電話號碼（可選）
+        block6:
+          box1_label: 身份證明號碼
+          box1_sublabel: -（參見所在州指引的第6項）
+        block7:
+          box1_label: 政黨選擇
+          box1_sublabel: （參見所在州指引的第7項）
+        block8:
+          box1_label: 種族或民族
+          box1_sublabel: （參見所在州指引的第8項）
+        block9:
+          affirmation_header: 我已經閱讀過我所在州的指引並宣誓/確認：
+          affirmation_1: 我是美國公民
+          affirmation_2: 我符合我所在州的資格要求並同意所要求的任何誓言。
+          affirmation_3: 盡我所知，我所提供的資料屬實，否則會受到偽證罪的處罰。如果我提供虛假資料，我可能被罰款、監禁或（如果不是美國公民）驅逐出境或被拒絕進入美國。
+          please_sign: 請簽署全名（或標記）
+          date: 日期
+          month: 月
+          day: 日
+          year: 年
+        top_half_footer: <b>如果您是第一次登記投票<b>：請參見申請表指引，以了解隨此表提交有效身份證明副本的有關信息。
+        bottom_half_title: 如果以下內容適合您，請填寫。
+        blockA:
+          title: 如果本申請表是用於 <b>更改姓名</b>， 您改名前的姓名是什麽？
+          box1_label: ''
+          box2_label: 姓
+          box3_label: 名
+          box4_label: 中間名
+          box5_label: ''
+        blockB:
+          title: 如果您以前登記過，但這次是您第一次用空格中的地址登記，則您以前登記的地址是什麽？
+          box1_label: 街（路線和郵箱號）
+          box2_label: 公寓或小區號碼
+          box3_label: 城市/鎮/郡
+          box4_label: 州
+          box5_label: 郵政編碼
+        blockC:
+          title: 如果您住在農村，沒有街道號碼，或您沒有地址，請在地圖上表示您住的地方。
+          instructions:
+            bullet1: 寫下離您住所最近的十字路口（或街道）名稱
+            bullet2: 畫一個<b>X</b>以表示您住的地方。
+            bullet3: 用點表示您住所附近的任何學校，教堂，商店或其他路標，並寫下它們的名稱。
+          example:
+            title: 例如
+            grocery_store: 日雜店
+            public_school: 公立學校
+            street1: 2好路線
+            street2: 旱獺路
+          north: 北
+        blockD:
+          title: 如果申請人不能簽名，誰幫助申請人填寫了本申請表？請寫明姓名、地址和電話號碼（電話號碼為可選）。
+        bottom_half_footer: 請將此申請表郵寄至您所在的州的地址。
+      page3:
+        fouo: 僅供官員使用
+

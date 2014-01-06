@@ -1,1 +1,149 @@
+---
 zh-tw:
+  txt:
+    rtv_and_partner: Rock the Vote 和 %{partner_name}
+    button:
+      submit: 下一步
+      edit: 編輯
+      back: 上一步
+      download: 現在打印您的<br/>登記<br/>表格
+      ineligible_try_again: 返回
+      keep_going: 繼續
+      remind_me_later: 以後提醒我
+      help: 幫助
+      prepare: 準備表格
+      review: 檢查申請表
+      sendmail: 發送電子郵件
+      share_facebook: 發佈！
+      share_twitter: 發一條Tweet
+      share_google_buzz: 在Google上分享它！
+      state_online_registration: 我想現在就提交<br/> 我的在線表格到<br/> %{state}。
+      skip_state_online_registration: 不用了，謝謝，我會繼續在%{rtv_and_partner_name} 填寫申請表然後郵寄出去。
+    registration:
+      in_language_name: 使用中文
+      powered_by: 提供者：
+      progress_indicator: 步驟：
+      step_1_header: 新的登記
+      step_2_header: 個人信息
+      step_3_header: 額外的登記信息
+      step_4_header: 保持知情并採取行動
+      step_5_header: 審閱并確認
+      stay_informed_header: 保持知情
+      identification_header: 身份識別信息
+      survey_title: 給您的問題
+      preparing_header: 準備登記表格
+      download_header: 打印您的申請表
+      finish_header: 傳播消息！
+      finish_under_18_header: 您登記在名單上了！
+      tell_a_friend_title: 發電子郵件告訴您的朋友！
+      finish_reminder: ! '%{first_name}， 感謝您提交選民登記申請表！您將會收到從州官員那裏發出的確認您的申請的信息。這個過程有時候會需要幾個星期。'
+      finish_reminder_2: 如果您想要查詢您的選民登記申請表的狀態，您可以通過網站： <a href="http://www.rockthevote.com/election-center/"
+        target="_blank">選舉中心</a>上找到您的州務卿的聯系方式。
+      ineligible_header: 對不起，基於以下原因，您不符合選民登記的條件：
+      external_header: ! '%{state}登記人'
+      name: 姓名
+      select_none: （無）
+      home_address: 家庭住址
+      mailing_address: 郵寄地址
+      previous_name: 曾用名
+      previous_address: 以前的地址
+      opt_in_sms: 請%{organization}給我發手機簡訊。
+      opt_in_email: 接收%{organization}發送的電子郵件。
+      remind_when_18: 請在我18歲生日的當天提醒我。
+      get_updates: 從Rock the Vote獲得最新資訊。
+      volunteer: 我想要成為%{organization}的義工。
+      not_given: 空白
+      has_state_license: 我持有當前和有效的%{state}州身份證或駕駛證。
+      has_no_state_license: 我沒有現時的有效的%{state}州身份證或駕駛證。
+      titles:
+        mr: 先生
+        mrs: 太太
+        miss: 小姐
+        ms: 女士
+      suffixes:
+        jr: 小
+        sr: 老
+        ii: 二世
+        iii: 三世
+        iv: 四世
+      races:
+        american_indian_alaskan_native: 美國印第安人/阿拉斯加土著
+        asian: 亚裔/太平洋岛民
+        black_not_hispanic: 黑人（非南美裔）
+        hispanic: 南美裔
+        mutli_racial: 多种族
+        white_not_hispanic: 白人（非南美裔）
+        other: 其他
+        decline_to_state: 拒绝回答
+      phone_types:
+        mobile: 手机
+        home: 家庭
+        work: 工作
+        other: 其他
+      instructions:
+        overseas: ! '<b>注意</b>: 如果您是美國公民，住在美國領土外或是有投票選舉權的軍人，請<a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>點擊此處</a>進行選民登記。'
+        opt_in_email: 我們會給您發送及時的選舉提醒信息，包括您的選舉地點，以及有關選舉氣氛和關註話題的信息。
+        under_18: 看來您還未滿18歲。沒有關係。在%{state_name}， 您可以登記投票 %{state_rule}。 請訪問<a href="http://www.rockthevote.com/election-center/"
+          target="_blank">投票中心</a>來查詢下一次投票的時間。
+        under_18_2: 如果您符合該法律的規定，請點擊此按鈕開始您的申請。
+        under_18_3: 如果不行，我們會在您18歲生日的時候提醒您。
+        remind_when_18: 我們會給您的%{email_address}發送電子郵件。
+        review: 請審閱以下信息并確認其準確性。
+        download: 您還沒有完成。請點擊打印表格按鍵來打印您的選民登記表格。在表格上簽名並郵寄至表格中提供的地址。
+        download_2: 您還沒有登記成功，登記需要您打印，簽名並郵寄您的表格才算完成！
+        finish: 不要忘記告訴您的朋友和家人進行登記是多麽容易的一件事情。這裏有一些可以幫助您傳播選民登記的訊息的工具。
+        finish_2: 將這個選民登記工具安裝到您的網站。免費註冊鏈接：
+        finish_under_18: 我們會在重要的選舉日期臨近之時給您發送選民登記提醒。
+        finish_under_18_2: 與此同時，請告訴您的朋友和家人選民登記是一件多麽容易的事情。您可以利用這裏的一些用來傳播有關選民登記的訊息的工具。
+        finish_tell_recipients: （請用逗號隔開）
+        finish_email_sent: 電子郵件已發送！
+        finish_update_status: 不要忘記更新您在Facebook和Twitter的狀態！
+        state_online_registration: 您或許符合資格使用%{state}網上選民登記系統進行選民登記。
+        leave_state_online_registration: 您可以使用以下表格，與%{state} 完成您的網上選民登記。如果您的駕駛證或州身份證不再有效或者州政府無法查詢或確認您的DMV機動車管理部記錄，不用擔心&mdash，
+          您還可以%{link}。您只需要打印，簽名並郵寄。
+        leave_state_online_registration_link: 在%{rtv_and_partner_name}完成您的登記。
+      ineligible:
+        age: 您必須在下一個選舉日前年滿18歲。
+        non_citizen: 您的登記不能完成因為您沒有勾選表明您是美國公民的格子。必須是美國公民才能登記投票。如果您是公民，請回到上一頁並勾選確認公民身份的格子。
+        attest: 您必須確認您符合投票的資格。
+      external:
+        colorado:
+          register_link: 與科羅拉多州州務卿完成網上登記
+          continue_link: 繼續與Rock the Vote進行登記。
+          show:
+            p1: 好消息！如果您擁有當前的有效的科羅拉多州駕駛證，您可以與科羅拉多州州務卿完成網上登記。
+            p2: 如果您提供您的駕駛證號碼且是首次註冊或更改您現有的科羅拉多州選民登記的地址，請點擊以下鏈接。那些您已經填過了的信息將會出現在州務卿的網上選民註冊門戶網站。您可以在那裏完成您的申請。
+            p3: 否則，如果您不能夠在州務卿網站上完成您的申請，您可以點擊以下鏈接，在那裏繼續填寫您的表格。您將會獲得您的選民登記表格，然後打印，簽名並郵寄至州務卿辦公室。
+            p4: ''
+          go:
+            title: 科羅拉多州登記系統錯誤
+            timeout: 看來科羅拉多州網站的長時間沒有響應，可能目前無法使用。不過不用擔心！您有其他幾個選擇來繼續您的選民登記。
+            timeout_2: 為了完成您的選民登記申請，您有三個選擇：</p><p>(1) 關閉這個窗口然後使用您的瀏覽器的後退鍵來更正您的選民登記表的信息。您可以在州務卿的網站上重新提交您的信息。</p><p>(2)
+              關閉這個窗口然後在您之前訪問過的網頁上點擊“繼續與Rock the Vote" 鏈接。您將可以完成申請然後獲得選民登記表，然後打印，簽名並郵寄至州務卿辦公室。</p><p>(3)
+              您還可以直接訪問<a href=%{co_url}>州務卿網站</a> 來重新輸入正確的信息。
+            timeout_3: ''
+            p1: 看來您所提供的信息與州務卿的記錄不一致。三個常見錯誤有： (1) 您所提供的姓名與您的身份證件上的不一致（例如，您寫的是"Steve"
+              但是在您的身份證上的名是"Stephen")，(2) 您包括了身份證號碼中的橫杠 (3) 您沒有提供駕駛證號碼，而是使用了其他身份證明文件。請檢查您所提供的信息：
+            section: 身份證明信息
+            colorado_id_number: 科羅拉多州身份證號碼
+            p2: 為了完成您的選民登記申請，您有三個選擇：</p><p>(1) 關閉這個窗口然後使用您的瀏覽器的後退鍵來更正您的選民登記表的信息。您將在州務卿的網站上可以重新提交您的信息。</p><p>(2)
+              關閉這個窗口然後在您之前訪問過的網頁上點擊“繼續與Rock the Vote" 鏈接。您將可以完成申請然後獲得選民登記表，然後打印，簽名並郵寄至州務卿辦公室。</p><p>(3)
+              您還可以直接訪問<a href=%{co_url}>州務卿網站</a> 來重新輸入正確的信息。
+            p3: ''
+      tooltips:
+        email_address: 我們會使用電子郵件將您的選民註冊表的副本發送給您。
+        home_zip_code: 寫下您家庭住址的郵政編碼，即使您不使用這個地址接收郵件。
+        date_of_birth: 在您的選民登記申請表上，您必須表明您是否將在選舉日或之前年滿18歲。盡管如此，很多州允許您在滿18歲前登記，所以請<a
+          href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">點擊此處</a>
+          查看您所在州的規定。
+        registrant_name: 將您的全名寫在此空格中。不要使用別名或縮寫。如果本申請表是用於更改姓名，在表格的下半部分您將需要寫上您改名前的全名。不要忘記寫下您的稱呼（先生，太太，小姐，女士）。
+        home_address: 在此空格中寫上您的家庭住址。如果您的郵政地址與您的家庭住址不同，不要將郵政地址寫在此處。不要使用郵政信箱或沒有信箱號的鄉村路線。如果您住在沒有街道名稱的農村，或您沒有地址，請在打印出來的表格上的地圖上註明您住的地方。
+        mailing_address: 如果您的郵政地址與您的家庭住址不同，請把您的郵政地址寫在這個空格中。如果您不使用家庭住址接收郵件，那麽您必須填寫這一項，提供一個您能夠收到郵件地址。
+        phone: 大多數州希望獲得您的電話號碼，以備他們對您的申請有任何問題。但是您不是必須提供電話號碼。
+        previous_name: 如果您在上一次登記後更改過姓名，請寫下您以前的姓名。
+        previous_address: 如果您在上一次登記後搬過家，請寫下您以前的地址。
+    status_text:
+      message: 我剛剛完成了選民登記，你也可以登記！
+      under_18_message: 確保進行選民登記。這是一件非常容易的事情！
+
