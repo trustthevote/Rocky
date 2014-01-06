@@ -371,7 +371,7 @@ record_27:
   sos_phone: (402) 471-2555
   sos_url: http://www.sos.state.ne.us/elec/
   sub_18: be_by_next_general_election_november
-  registration_deadline: Nebraska
+  registration_deadline: nebraska
 
 record_28:
   abbreviation: NV
@@ -382,7 +382,7 @@ record_28:
   sos_address: "Secretary of State<br>Elections Division<br>101 North Carson Street, Suite 3<br>Carson City, NV 89701-4786"
   sos_phone: (775) 684-5705
   sos_url: http://nvsos.gov/index.aspx?page=3
-  registration_deadline: NV
+  registration_deadline: nevada
 
 record_29:
   abbreviation: NH
