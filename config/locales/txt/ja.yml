@@ -34,8 +34,11 @@ ja:
       preparing_header: 登録用紙を作成
       download_header: あなたの用紙を印刷
       finish_header: 広く伝えましょう！
+      finish_pdf_delay_header: Eメールを確認して下さい。
+      finish_pdf_delay: ダウンロードのためにあなたの投票用紙を作るのに少々時間がかかりますが、ご心配なく。準備ができましたらeメールをお送りします。その間にあなたの友人達にどのように投票するのかを教えてあげてください。
       finish_under_18_header: あなたはリストに載っています。
       tell_a_friend_title: Eメールで友人に伝えましょう。
+      finish_reminder_header: ご登録ありがとうございます。
       finish_reminder: ! '%{first_name}投票登録の申込書のご送付ありがとうございます。登録確認書が州の選挙事務所より送られます。処理に数週間かかることがあります。'
       finish_reminder_2: あなたの投票者登録の状況を確認したい場合は、お住まいの州のウェブサイトの州務長官の連絡先が掲載されています。
       ineligible_header: 申し訳ありません。あなたは次の理由で投票登録をする資格がありません：
