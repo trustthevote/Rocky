@@ -12,3 +12,5 @@ Credentials
 
       $ bundle exec rake admin:reset_password
 
+* Change emailed file names to correct i18n yml names in each directory:
+      $ for f in *.yml; do mv -i "$f" "$(echo "$f" | sed -e 's/[^-]*-//')"; done

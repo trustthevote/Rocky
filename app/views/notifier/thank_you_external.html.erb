@@ -14,6 +14,7 @@
 
 <%= I18n.t('email.thank_you_external.body.main',
   :registrant_first_name=>@registrant.first_name,
+  :registrant_last_name=>@registrant.last_name,
   :rtv_and_partner_name=>@registrant.rtv_and_partner_name.to_s.html_safe,
   :state_name=>@registrant.home_state_name.to_s.html_safe,
   :state_abbr=> @registrant.home_state_abbrev.to_s.html_safe,
@@ -25,7 +26,8 @@
 
 <%= I18n.t('email.thank_you_external.body.send_to_friends', 
   :rtv_link=>rtv_link.to_s.html_safe,
-  :registrant_first_name=>@registrant.first_name, :locale => @registrant.locale.to_sym
+  :registrant_first_name=>@registrant.first_name,
+  :registrant_last_name=>@registrant.last_name, :locale => @registrant.locale.to_sym
   ).html_safe %>
 
 <hr size="3" align="left" width="100%" color="black"><br><br>
