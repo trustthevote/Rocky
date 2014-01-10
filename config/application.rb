@@ -84,6 +84,8 @@ module Rocky
     
     config.i18n.available_locales = [:en, :es, :zh, :"zh-tw", :hi, :ur, :bn, :ja, :ko, :tl, :ilo, :th, :vi, :km]
     
+    config.i18n.fallbacks =[:en]
+    
     
   end
 end
