@@ -1,7 +1,7 @@
 ---
 hi:
-  language_name: अंग्रेज़ी
-  language_name_translation_instructions: अंग्रेज़ी
+  language_name: हिन्दी
+  language_name_translation_instructions: हिन्दी
   activerecord:
     attributes:
       partner:
@@ -82,7 +82,7 @@ hi:
         inclusion: ! '%{attribute} लिस्ट में शामिल नही है'
         exclusion: ! '%{attribute} रिज़र्व किया गया है'
         invalid: ! '%{attribute} सही नही है'
-        invalid_for_pdf: ! '%{attribute} must be provided in English'
+        invalid_for_pdf: ! '%{attribute} हिन्दी में होना चाहिए'
         confirmation: ! '%{attribute} कन्फर्मेशन के साथ मॅच नही कर रहा है'
         accepted: ! '%{attribute} स्वीकार होना चाहिए'
         empty: ! '%{attribute} खाली नही होना चाहिए'
