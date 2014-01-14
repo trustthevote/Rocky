@@ -83,7 +83,7 @@ km:
         inclusion: ! '%{attribute}មិនត្រូវបានរាប់បញ្ចូលក្នុងបញ្ជីទេ។​'
         exclusion: ! '%{attribute}ត្រូវបានរក្សាសិទិ្ធ។​'
         invalid: ! '%{attribute}គ្មានសុពលភាពទេ'
-        invalid_for_pdf: ! '%{attribute} must be provided in English'
+        invalid_for_pdf: ! '%{attribute} ត្រូវតែត្រូវបានផ្តល់ជូនជាភាសាអង់គ្លេស'
         confirmation: ! '%{attribute} មិនសមស្របនឹងសេចក្តីបញ្ជាក់ទេ។'
         accepted: ! '%{attribute}ត្រូវតែបានទទួលស្គាល់។'
         empty: ! '%{attribute}មិនអាចនៅទទេបានទេ។'

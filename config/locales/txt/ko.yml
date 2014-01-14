@@ -36,8 +36,12 @@ ko:
       preparing_header: 등록 양식을 준비중입니다...
       download_header: 인쇄하기
       finish_header: 주변에 알려주세요!
+      finish_pdf_delay_header: 이메일을 확인하시고 유권자 등록 양식 주소를 받으십시오
+      finish_pdf_delay: 유권자 등록 양식을 생성하고 있습니다. 시간이 조금 걸릴 수 있지만 양식 생성이 완료되면 이메일로 알려드리곘습니다.
+        기다리는 사이에 주변 지인과 친구들에게 유권자 등록을 하도록 권유하세요!
       finish_under_18_header: 대기 명단에 등록되셨습니다!
       tell_a_friend_title: 친구에게 이메일로 알려주세요!
+      finish_reminder_header: 유권자 등록을 하신 것을 감사드립니다.
       finish_reminder: ! '%{first_name} %{last_name} 님, 감사합니다. 주 정부 선거 관리국에서 유권자 등록
         여부를 통보해드릴 것입니다. 경우에 따라서 몇주씩 걸릴 수 있습니다.'
       finish_reminder_2: 유권자 등록 진행 상태를 확인하기 위해서는<a href="http://www.rockthevote.com/election-center/"

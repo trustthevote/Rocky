@@ -13,7 +13,7 @@ ko:
         first_registration: 저는 처음으로 유권자 등록을 하고 있습니다.
         home_zip_code: 우편번호(ZIP)
         us_citizen: 저는 미국 시민권자입니다.
-        name_title: Title
+        name_title: 호칭
         first_name: 이름 (First)
         middle_name: Middle
         last_name: 성 (Last)
@@ -34,10 +34,10 @@ ko:
         phone: 전화번호
         phone_type: 종류
         change_of_name: 이름을 바꾸었습니다
-        prev_name_title: Title
-        prev_first_name: First
+        prev_name_title: 호칭
+        prev_first_name: 이름 (First)
         prev_middle_name: Middle
-        prev_last_name: Last
+        prev_last_name: 성(Last name)
         prev_name_suffix: Suffix
         change_of_address: 주소를 바꾸었습니다
         prev_address: 주소
