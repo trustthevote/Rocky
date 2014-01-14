@@ -7,3 +7,17 @@ states_with_online_registration:
   - CA
   - NV
   - WA
+
+ovr_states:
+  CA:
+    - en
+    - es
+  NV:
+    - en
+  WA:
+    - en
+
+enabled_locales:
+  - en
+  - es
+  - ko
