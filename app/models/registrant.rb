@@ -922,6 +922,7 @@ class Registrant < ActiveRecord::Base
     )
     path = pdf_file_path
     if !File.exists?(path) || force_write
+      FileUtils.mkdir_p(pdf_file_dir)
       File.open(path, "w") do |f|
         f << pdf.force_encoding('UTF-8')
       end
@@ -1037,7 +1038,6 @@ class Registrant < ActiveRecord::Base
 
   def pdf_file_path(pdfpre = nil)
     dir = File.join(Rails.root, pdf_file_dir(pdfpre))
-    FileUtils.mkdir_p(dir) unless Dir.exists?(dir)
     File.join(Rails.root, pdf_path(pdfpre, true))
   end
 

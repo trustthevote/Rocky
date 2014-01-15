@@ -165,6 +165,12 @@ namespace :deploy do
     CMD
   end
   
+  task :symlink_translations, :roles=>[:app], :except =>{:no_release => true} do
+    run <<-CMD
+      cd #{latest_release} &&
+      ln -nfs #{shared_path}/translation_files #{latest_release}/tmp/translation_files
+    CMD
+  end
 
   desc "Link the pdf dir to shared/pdfs"
   task :symlink_web_pdf, :roles => [:web], :except => {:no_release => true} do

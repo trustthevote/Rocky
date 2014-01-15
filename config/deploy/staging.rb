@@ -30,3 +30,5 @@ role :db,   ENV['STAGING_DB'], :primary => true
 set :rails_env,    "staging"
 
 set :branch, "pdf_generation"
+
+after "deploy:migrate", "deploy:symlink_translations"
