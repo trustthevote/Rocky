@@ -14,3 +14,15 @@ states_with_online_registration:
   - CO
   - NV
   - WA
+
+ovr_states:
+  CA:
+    - en
+    - es
+    - ko
+  NV:
+    - en
+  WA:
+    - en
+    - es
+ 

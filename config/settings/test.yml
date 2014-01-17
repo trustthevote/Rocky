@@ -20,3 +20,15 @@ enabled_locales:
   - en
   - es
   - ko  
+
+ovr_states:
+  CA:
+    - en
+    - es
+    - ko
+  NV:
+    - en
+  WA:
+    - en
+    - es
+

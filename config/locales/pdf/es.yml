@@ -5,8 +5,8 @@ es:
       page1:
         title: REGISTRO DE VOTANTES
         subtitle: POR
-        top_paragraph: ¡No estará registrado hasta que<br/><b>firme</b> , <b>selle</b>
-          , y <b>envíe</b> por correo su solicitud llena!
+        top_paragraph: ¡No estará registrado hasta que<br/><b>firme</b>, <b>selle</b>,
+          y <b>envíe</b> por correo su solicitud llena!
         instructions_block:
           title: INSTRUCCIONES
           subtitle: ! 'Siga estos sencillos pasos para completar su registro de votante:'

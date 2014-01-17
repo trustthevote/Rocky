@@ -37,9 +37,9 @@ en:
       download_header: Print Your Form
       finish_header: Spread the word!
       finish_pdf_delay_header: Check Your Email
-      finish_pdf_delay: It's taking a while to create your registration form to download, but don't worry.
-        We'll send you an email when it's ready. In the mean time, you can let your friends know
-        how they can register to vote too.      
+      finish_pdf_delay: It's taking a while to create your registration form to download,
+        but don't worry. We'll send you an email when it's ready. In the mean time,
+        you can let your friends know how they can register to vote too.
       finish_under_18_header: You're on the list!
       tell_a_friend_title: Tell a Friend by Email
       finish_reminder_header: Thanks for Registering!

@@ -273,9 +273,9 @@ describe Registrant do
       assert_equal "May 3, 1978", reg.date_of_birth_before_type_cast
     end
   
-    it "only allows latin characters for PDF fields" do
-      latin_locales = [:en, :es, :tl, :ilo, :vi]
-      non_latin_locales = [:zh, :"zh-tw", :hi, :ur, :bn, :ja, :ko, :th, :km]
+    it "only allows ascii characters for PDF fields" do
+      ascii_locales = [:en,  :tl, :ilo]
+      non_ascii_locales = [:es, :zh, :vi, :"zh-tw", :hi, :ur, :bn, :ja, :ko, :th, :km]
       
       Registrant::PDF_FIELDS.each do |field|
         r = Registrant.new
@@ -284,7 +284,7 @@ describe Registrant do
         r.stub(:change_of_address?).and_return(true)
         
         #puts "testing field: #{field}"
-        non_latin_locales.each do |loc|
+        non_ascii_locales.each do |loc|
           txt = I18n.t('txt.registration.in_language_name', :locale=>loc, :default => "")
           unless txt.blank?
             #puts "\tTesting #{loc}: #{txt}"
@@ -293,7 +293,7 @@ describe Registrant do
             r.errors[field].should_not be_empty          
           end
         end
-        latin_locales.each do |loc|
+        ascii_locales.each do |loc|
           txt = I18n.t('txt.registration.in_language_name', :locale=>loc, :default => "").to_s +  " 123 !@$%^&*"
           # puts "\tTesting #{loc}: #{txt}"
           r.send("#{field}=",txt)
