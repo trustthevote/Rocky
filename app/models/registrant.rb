@@ -677,7 +677,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def pdf_date_of_birth
-    date_of_birth.to_s(:month_day_year)
+    (date_of_birth.is_a?(Date) || date_of_birth.is_a?(DateTime)) ? date_of_birth.to_s(:month_day_year) : date_of_birth.to_s
   end
 
   def pdf_english_race
