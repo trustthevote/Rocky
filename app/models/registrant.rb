@@ -1001,7 +1001,8 @@ class Registrant < ActiveRecord::Base
   def deliver_reminder_email
     if reminders_left > 0 && send_emails?
       Notifier.reminder(self).deliver
-      update_attributes!(:reminders_left => reminders_left - 1)
+      self.reminders_left = reminders_left - 1
+      self.save(validate: false)
       enqueue_reminder_email if reminders_left > 0
     end
   rescue StandardError => error

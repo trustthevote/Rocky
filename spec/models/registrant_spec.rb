@@ -1624,7 +1624,7 @@ describe Registrant do
 
       it "should log an error to Airbrake if something blows up" do
         reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
-        reg.stub(:valid?) { false }
+        reg.stub(:save) { raise 'something blows up' }
 
         Airbrake.should_receive(:notify).with(kind_of(Hash))
         reg.deliver_reminder_email
