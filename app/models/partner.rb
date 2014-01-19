@@ -110,6 +110,7 @@ class Partner < ActiveRecord::Base
   # Need to declare attributes for each enabled lang
   RockyConf.enabled_locales.each do |locale|
     unless ['en', 'es'].include?(locale.to_s)
+      locale = locale.underscore
       [1,2].each do |num|
         attr_accessor "survey_question_#{num}_#{locale}"
         define_method("survey_question_#{num}_#{locale}") do
@@ -535,7 +536,7 @@ protected
   def method_missing(method_name, *args, &block)
     if method_name =~ /^survey_question_(\d+)_([^=]+)(=?)$/
       question_num = $1
-      locale = $2.to_s
+      locale = $2.to_s.underscore
       setter = !($3.blank?)
       if setter 
         if args.size == 1
