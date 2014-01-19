@@ -37,7 +37,7 @@ describe Partner do
     let(:p) { FactoryGirl.create(:partner) }
     describe "survey_question_1_zh-tw" do
       it "reads from the question_1 hash" do
-        p.survey_question_1 = {'zh-tw'=>"question in zh-tw"}
+        p.survey_question_1 = {'zh_tw'=>"question in zh-tw"}
         p.send(:"survey_question_1_zh-tw").should == "question in zh-tw"
       end
       it "returns nil when not present" do
@@ -46,7 +46,7 @@ describe Partner do
     end
     describe "survey_question_1_zh-tw=" do
       it "sets the value without destroying other values" do
-        p.survey_question_1 = {'zh-tw'=>"old", 'ko'=>'unchanged'}  
+        p.survey_question_1 = {'zh_tw'=>"old", 'ko'=>'unchanged'}  
         p.send(:"survey_question_1_zh-tw=",'new')
         p.send(:"survey_question_1_zh-tw").should == 'new'
         p.send(:"survey_question_1_ko").should == 'unchanged'
