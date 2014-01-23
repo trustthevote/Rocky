@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140123130350) do
+ActiveRecord::Schema.define(:version => 20140123131546) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -205,7 +205,7 @@ ActiveRecord::Schema.define(:version => 20140123130350) do
 
   create_table "state_localizations", :force => true do |t|
     t.integer  "state_id"
-    t.string   "locale",                    :limit => 2
+    t.string   "locale",                    :limit => 64
     t.string   "parties"
     t.string   "no_party"
     t.string   "not_participating_tooltip", :limit => 1024
