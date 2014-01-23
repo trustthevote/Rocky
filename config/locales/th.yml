@@ -1,6 +1,6 @@
 ---
 th:
-  language_name: ภาษาอังกฤษ
+  language_name: ภาษาไทย
   language_name_translation_instructions: ภาษาไทย
   activerecord:
     attributes:
@@ -47,7 +47,7 @@ th:
         prev_zip_code: รหัสไปรษณีย์
         opt_in_email: ต้องการที่จะได้รับอีเมล์
         opt_in_sms: ต้องการที่จะได้รับข้อความ
-        attest_true: ฉันได้ตรวจสอบข้อมูลข้างต้นและข้อมูลนี้เป็นความจริงและถูกต้องที่สุดในความรู้ของฉัน
+        attest_true: ฉันได้ตรวจสอบข้อมูลข้างต้นและขอยืนยันว่าข้อมูลนี้มีความถูกต้องสมบูรณ์และเป็นความจริงทุกประการ
         tell_from: จาก
         tell_email: อีเมล์ของคุณ
         tell_recipients: ผู้รับ
@@ -71,7 +71,7 @@ th:
               format: ควรจะเป็น เดือน-วัน-ปี (MM-DD-YYYY)
             phone:
               invalid: ! 'ควรจะเป็น ###-###-####'
-              required_if_opt_in: จำเป็นต้องกรอกถ้าต้องการที่จะได้รับข้อความ
+              required_if_opt_in: จำเป็นต้องกรอกถ้าต้องการรับข้อความ
             attest_true:
               accepted: คุณต้องยืนยันว่าข้อมูลดังกล่าวถูกต้อง
             has_state_license:

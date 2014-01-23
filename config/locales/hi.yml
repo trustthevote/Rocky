@@ -27,7 +27,7 @@ hi:
         mailing_address: पता
         mailing_unit: यूनिट/लॉट#
         mailing_city: शहर
-        mailing_state_abbrev: रज्य
+        mailing_state_abbrev: राज्य
         mailing_zip_code: ZIP कोड
         party: पार्टी
         race: जाती

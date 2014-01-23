@@ -256,23 +256,24 @@ ko:
           있지 않다면 "None"이라고 입력하세요. 그러면 주 정부가 ID 번호를 부여할 것입니다.
     sub_18:
       blank: ''
-      be_by_next_election: 다음 선거 때까지 18세가 되는 경우
-      be_by_next_general_election_november: 다음 총선거(보통 11월) 전에 18세가 되는 경우
-      once_turned_16: 16세가 된 후(투표를 하려면 18세가 되어야 함)
-      once_turned_17: 17세가 된 후
-      once_turned_17_but: 17세가 된 후(투표를 하려면 18세가 되어야 함)
-      turn_by_next_election: 다음 선거 전에 18세가 될 경우
-      turn_by_next_election_2: 다음 선거때까지 18세가 될 경우
-      turn_by_next_general_election_november: 다음 총선거(보통 11월) 전에 18세가 될 경우
-      turn_by_next_general_election_november_2: 11월에 있는 다음 선거 전에 18세가 될 경우
-      when_at_least_16: 그 사람이 적어도 16세 이상일 때
-      when_is_16: 그 사람이 16세일 때
-      when_will_be_18: 다음 선거일이나 그 전에 그 사람이 18세가 될 때
-      90_days_before: 18세 생일 90일전
-      6_months_before: 18세 생일 6 개월 전
-      60_days_before_election_novemeber: 다음 선거 60일 전이고 그 선거(보통 11월)때까지 18세가 될 경우
-      2_months_before: 18세 생일 2 개월 전
-      17_turn_18: 현재 17세이고 다음 선거 전에 18세가 되는 경우
+      be_by_next_election: 다음 선거 때까지 18세가 되는 경우 등록이 가능합니다.
+      be_by_next_general_election_november: 다음 총선거(보통 11월) 전에 18세가 되는 경우 등록이 가능합니다.
+      once_turned_16: 16세가 된 후 등록이 가능합니다.(투표를 하려면 18세가 되어야 함)
+      once_turned_17: 17세가 된 후 등록이 가능합니다.
+      once_turned_17_but: 17세가 된 후 등록이 가능합니다. (투표를 하려면 18세가 되어야 함)
+      turn_by_next_election: 다음 선거 전에 18세가 될 경우 등록이 가능합니다.
+      turn_by_next_election_2: 다음 선거때까지 18세가 될 경우 등록이 가능합니다.
+      turn_by_next_general_election_november: 다음 총선거(보통 11월) 전에 18세가 될 경우 등록이 가능합니다.
+      turn_by_next_general_election_november_2: 11월에 있는 다음 선거 전에 18세가 될 경우 등록이 가능합니다.
+      when_at_least_16: 적어도 16세 이상일 때 등록이 가능합니다.
+      when_is_16: 16세일 때 등록이 가능합니다.
+      when_will_be_18: 다음 선거일이나 그 전에 18세가 될 때 등록이 가능합니다.
+      90_days_before: 18세 생일 90일전에 등록이 가능합니다.
+      6_months_before: 18세 생일 6 개월 전에 등록이 가능합니다.
+      60_days_before_election_novemeber: 다음 선거 60일 전이고 그 선거(보통 11월)때까지 18세가 될 경우 등록이
+        가능합니다.
+      2_months_before: 18세 생일 2 개월 전에 등록이 가능합니다.
+      17_turn_18: 현재 17세이고 다음 선거 전에 18세가 되는 경우 등록이 가능합니다.
     registration_deadline:
       california: 선거날에 투표하기 위해서는 이 용지를 선거날이 되기 15일 전까지 우체국 소인(postmark)이 찍히도록 해서 보내거나
         선거관리국에 직접 전달하세요.

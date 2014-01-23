@@ -41,10 +41,10 @@ ko:
         기다리는 사이에 주변 지인과 친구들에게 유권자 등록을 하도록 권유하세요!
       finish_under_18_header: 대기 명단에 등록되셨습니다!
       tell_a_friend_title: 친구에게 이메일로 알려주세요!
-      finish_reminder_header: 유권자 등록을 하신 것을 감사드립니다.
+      finish_reminder_header: 유권자 등록을 하신 것을 감사드립니다
       finish_reminder: ! '%{first_name} %{last_name} 님, 감사합니다. 주 정부 선거 관리국에서 유권자 등록
         여부를 통보해드릴 것입니다. 경우에 따라서 몇주씩 걸릴 수 있습니다.'
-      finish_reminder_2: 유권자 등록 진행 상태를 확인하기 위해서는<a href="http://www.rockthevote.com/election-center/"
+      finish_reminder_2: 유권자 등록 진행 상태를 확인하기 위해서는 <a href="http://www.rockthevote.com/election-center/"
         target="_blank">저희 웹사이트</a>를 방문하셔서 주 정부 선거관리국 주소를 찾아주세요.
       ineligible_header: 아래의 이유로 유권자 등록을 하실 수 없습니다.
       external_header: ! '%{state} 주 유권자'
@@ -91,8 +91,8 @@ ko:
         overseas: ! '<b>주의</b>: 해외 거주 중인 미국 시민권자 또는 현역 미군 군인일 경우 <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
           target=''_blank''>별도의 웹사이트</a> 에서 등록하십시오.'
         opt_in_email: 선거 정보와 투표소 위치 그리고 음악과 이슈에 대한 정보를 보내드리겠습니다.
-        under_18: ! '아직 나이 18세가 되지 않으셨습니다. %{state_name} 주에서 등록을 하실 수가 있습니다. 그 규칙은
-          다음과 같습니다: %{state_rule}. 다음 선거 날짜는 <a href="http://www.rockthevote.com/election-center/"
+        under_18: ! '아직 나이 18세가 되지 않으셨습니다. 하지만 %{state_name} 주에서는 등록을 하실 수가 있습니다.
+          그 규칙은 다음과 같습니다: %{state_rule}. 다음 선거 날짜는 <a href="http://www.rockthevote.com/election-center/"
           target="_blank">저희 웹사이트</a> 에서 찾아보실 수 있습니다.'
         under_18_2: 만일 상기 조건에 해당되면 아래의 버튼을 클릭하고 유권자 등록을 계속하십시오.
         under_18_3: 상기 조건에 해당하지 않을 경우, 18세가 되었을 때 저희가 알려드리겠습니다.

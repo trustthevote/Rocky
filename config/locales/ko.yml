@@ -47,7 +47,7 @@ ko:
         prev_zip_code: 우편번호(ZIP)
         opt_in_email: 이메일 받기
         opt_in_sms: 문자 메세지 받기
-        attest_true: 상기 정보를
+        attest_true: 상기 정보를 검토 및 확인했습니다.
         tell_from: 보내는 이
         tell_email: 이메일 주소
         tell_recipients: 받는 이
