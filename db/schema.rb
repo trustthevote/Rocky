@@ -207,7 +207,7 @@ ActiveRecord::Schema.define(:version => 20140124185632) do
   create_table "state_localizations", :force => true do |t|
     t.integer  "state_id"
     t.string   "locale",                    :limit => 64
-    t.string   "parties"
+    t.string   "parties",                   :limit => 1024
     t.string   "no_party"
     t.string   "not_participating_tooltip", :limit => 1024
     t.string   "race_tooltip",              :limit => 1024
@@ -215,8 +215,10 @@ ActiveRecord::Schema.define(:version => 20140124185632) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "party_tooltip",             :limit => 1024
-    t.string   "sub_18"
-    t.string   "registration_deadline"
+    t.string   "sub_18",                    :limit => 1024
+    t.string   "registration_deadline",     :limit => 1024
+    t.string   "pdf_instructions",          :limit => 1024
+    t.string   "email_instructions",        :limit => 1024
   end
 
   add_index "state_localizations", ["state_id"], :name => "index_state_localizations_on_state_id"

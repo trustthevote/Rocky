@@ -229,6 +229,18 @@ describe Registrant do
       assert_nil Registrant.new(:home_state_id => 1).localization
       assert_nil Registrant.new(:locale => "en").localization
     end
+    
+    [:pdf_instructions, :email_instructions].each do |state_data|
+      describe "home_state_#{state_data}" do
+        it "reads #{state_data} from the locatlization" do
+          reg = Registrant.new
+          mock_localization = mock(StateLocalization)
+          mock_localization.should_receive(state_data).and_return "a value"
+          reg.stub(:localization).and_return(mock_localization)
+          reg.send("home_state_#{state_data}").should == "a value"
+        end
+      end
+    end
   end
 
   describe "any step" do

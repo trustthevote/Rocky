@@ -725,6 +725,12 @@ class Registrant < ActiveRecord::Base
     localization.registration_deadline
   end
   
+  [:pdf_instructions, :email_instructions].each do |state_data|
+    define_method("home_state_#{state_data}") do
+      localization.send(state_data)
+    end
+  end
+  
   def registration_instructions_url
     RockyConf.pdf.nvra.page1.other_block.instructions_url.gsub(
       "<LOCALE>",locale

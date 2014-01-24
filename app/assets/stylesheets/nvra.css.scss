@@ -120,6 +120,9 @@ span.smaller_prompt {
 				}
 			}
 			padding:2.5%;
+			.state_instructions p {
+				font-size: .6 * $fs;
+			}
 		}
 	}
 	
