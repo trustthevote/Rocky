@@ -180,6 +180,9 @@ class Registrant < ActiveRecord::Base
 
   with_options :if => :at_least_step_1? do |reg|
     reg.validates_presence_of   :partner_id
+    reg.validates_inclusion_of  :has_state_license, :in=>[true,false], :unless=>[:building_via_api_call]
+    reg.validates_inclusion_of  :will_be_18_by_election, :in=>[true,false], :unless=>[:building_via_api_call]
+    
     reg.validates_inclusion_of  :locale, :in => RockyConf.enabled_locales
     reg.validates_presence_of   :email_address, :unless=>:not_require_email_address?
     reg.validates_format_of     :email_address, :with => Authlogic::Regex.email, :allow_blank => true
@@ -203,7 +206,6 @@ class Registrant < ActiveRecord::Base
   
 
   with_options :if=> [:at_least_step_2?, :custom_step_2?] do |reg|
-    reg.validates_inclusion_of :has_state_license, :in=>[true,false], :unless=>[:building_via_api_call]
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
     reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_2
@@ -797,7 +799,15 @@ class Registrant < ActiveRecord::Base
   end
 
   def home_state_online_reg_enabled?
-    !home_state.nil? && home_state.online_reg_enabled?(self)
+    !home_state.nil? && home_state.online_reg_enabled?(locale)
+  end
+  
+  def in_ovr_flow?
+    has_state_license && home_state_allows_ovr?
+  end
+  
+  def home_state_allows_ovr?
+    localization ? localization.allows_ovr? : false
   end
 
   def custom_step_2?
@@ -806,6 +816,7 @@ class Registrant < ActiveRecord::Base
       home_state_online_reg_enabled? &&
       File.exists?(File.join(Rails.root, 'app/views/step2/', "_#{custom_step_2_partial}.html.erb"))
   end
+
 
   def custom_step_2_partial
     "#{home_state.abbreviation.downcase}"

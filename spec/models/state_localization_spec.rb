@@ -40,4 +40,16 @@ describe StateLocalization do
       assert_equal kilo_chars, loc.id_number_tooltip
     end
   end
+  
+  describe "allows_ovr?" do
+    it "asks the state if it's enabled for the locale" do
+      geo_state =mock(GeoState)
+      geo_state.should_receive(:online_reg_enabled?).with("abc").and_return(true)
+      loc = StateLocalistion.new(
+        :locale=>"abc",
+        :state=>geo_state
+      )
+      loc.should be_online_reg_enabled
+    end
+  end
 end

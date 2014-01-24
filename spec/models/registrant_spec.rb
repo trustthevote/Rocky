@@ -323,6 +323,18 @@ describe Registrant do
       assert_attribute_invalid_with(:step_1_registrant, :us_citizen => nil)
     end
     
+    it "should require has_state_license" do
+      reg = FactoryGirl.build(:step_1_registrant, :has_state_license=>nil)
+      reg.invalid?
+      assert reg.errors[:has_state_license]
+    end
+    
+    it "should require will_be_18_by_election" do
+      reg = FactoryGirl.build(:step_1_registrant, :will_be_18_by_election=>nil)
+      reg.invalid?
+      assert reg.errors[:will_be_18_by_election]
+    end
+    
     it "should not require email address when collect_email_address is 'no'" do
       assert_attribute_valid_with(:step_1_registrant, :email_address=>nil, :collect_email_address=>'no')
     end
@@ -490,12 +502,6 @@ describe Registrant do
         assert @reg.errors[:home_city].empty?
       end
     
-      it "should require has_state_license" do
-        reg = FactoryGirl.build(:step_2_registrant, :has_state_license=>nil)
-        reg.stub(:custom_step_2?) { true }
-        reg.invalid?
-        assert reg.errors[:has_state_license]
-      end
       it "should format phone as ###-###-####" do
         reg = FactoryGirl.build(:step_2_registrant, :phone => "1234567890", :phone_type => "mobile")
         reg.stub(:custom_step_2?) { true }
@@ -959,6 +965,43 @@ describe Registrant do
     end
   end
   
+  
+  describe "OVR flows" do
+    describe "in_ovr_flow?" do
+      let(:reg) { FactoryGirl.build(:step_1_registrant) }
+      it "is true when the registrant checked has-id and the registrant's state is enabled for ovr" do
+        reg.has_state_license = true
+        reg.stub(:home_state_allows_ovr?).and_return(true)
+        reg.should be_in_ovr_flow
+      end
+      it "is false when the registrant did not chck has-id" do
+        reg.has_state_license = false
+        reg.stub(:home_state_allows_ovr?).and_return(true)
+        reg.should_not be_in_ovr_flow
+      end
+      it "is false when the registrant's state is not enable for ovr" do
+        reg.has_state_license = true
+        reg.stub(:home_state_allows_ovr?).and_return(false)
+        reg.should_not be_in_ovr_flow
+      end
+    end
+    
+    describe "home_state_allows_ovr?" do
+      let(:reg) { FactoryGirl.build(:step_1_registrant) }
+      it "pulls from the localization" do
+        mock_loc = mock(StateLocalization)
+        mock_loc.should_receive(:allows_ovr?)
+        reg.stub(:localization).and_return(mock_loc)
+        reg.home_state_allows_ovr?
+      end
+      context "when localization nil" do
+        it "returns false" do
+          reg.home_state_id = nil
+          reg.home_state_allows_ovr?.should be_false
+        end
+      end
+    end
+  end
   
   describe "custom_step_2?" do
     it "returns true if the state has a custom step 2" do

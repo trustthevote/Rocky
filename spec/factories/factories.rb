@@ -31,6 +31,8 @@ FactoryGirl.define do
     date_of_birth   20.years.ago.to_date.strftime("%m/%d/%Y")
     home_zip_code   "15215"  # == Pennsylvania
     us_citizen      true
+    has_state_license false
+    will_be_18_by_election true
     #opt_in_email    true
     #opt_in_sms      true
   end

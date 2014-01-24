@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140123131546) do
+ActiveRecord::Schema.define(:version => 20140124185632) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20140123131546) do
     t.boolean  "building_via_api_call",                            :default => false
     t.boolean  "short_form",                                       :default => false
     t.string   "collect_email_address"
+    t.boolean  "will_be_18_by_election"
   end
 
   add_index "registrants", ["abandoned"], :name => "index_registrants_on_abandoned"
