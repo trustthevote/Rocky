@@ -68,6 +68,7 @@ describe Notifier do
       email.body.should include("this-is-the-phone")
       email.body.should include("this-is-the-address")
       email.body.should include("this-is-the-url")
+      
     end
 
     it "includes cancel reminders link" do
@@ -79,6 +80,15 @@ describe Notifier do
       email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
       email.from.should include(RockyConf.from_address)
       
+    end
+    
+    it "includes state-specific note" do
+      registrant = FactoryGirl.create(:maximal_registrant, :home_state=>GeoState['AZ'])
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.confirmation(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("arizona-email-instructions")
     end
 
     it "uses partner template" do

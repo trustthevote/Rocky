@@ -29,4 +29,4 @@ role :db,   ENV['STAGING2_DB'], :primary => true
 
 set :rails_env,    "staging2"
 
-set :branch, "master"
+set :branch, "per_state_pdf_and_emails"

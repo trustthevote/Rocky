@@ -40,4 +40,5 @@ describe StateLocalization do
       assert_equal kilo_chars, loc.id_number_tooltip
     end
   end
+  
 end

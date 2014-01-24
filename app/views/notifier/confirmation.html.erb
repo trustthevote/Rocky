@@ -1,4 +1,3 @@
-<% rtv_link = '<strong><a href="http://register.rockthevote.com/">register.rockthevote.com</a></strong>' %>
 <style type="text/css">
 <!--
 .boxtext {
@@ -12,28 +11,29 @@
 -->
 </style>
 
-<%= I18n.t('email.confirmation.body.greeting', :registrant_first_name=>@registrant.first_name, :registrant_last_name=>@registrant.last_name, :locale => @registrant.locale.to_sym).html_safe %> <br><br>
+<%= I18n.t('email.confirmation.body.greeting', :registrant_first_name=>@registrant_first_name, :registrant_last_name=>@registrant_last_name, :locale => @locale).html_safe %> <br><br>
 
 
 <table style="float: right; margin: 0 0 15px 15px; width: 275px; border: 8px solid #cc0000;color:black" width="275" cellspacing="0" cellpadding="10">
   <tr>
-    <td align="center" valign="middle" class="boxtext"><%=I18n.t('email.confirmation.body.reminder', :locale => @registrant.locale.to_sym).html_safe %></td>
+    <td align="center" valign="middle" class="boxtext"><%=I18n.t('email.confirmation.body.reminder', :locale => @locale).html_safe %></td>
   </tr>
 </table>
 
 <%= I18n.t('email.confirmation.body.main', 
   :pdf_url=>@pdf_url, 
-  :registrar_address=>@registrar_address.to_s.html_safe,
+  :home_state_email_instructions => @home_state_email_instructions,
+  :registrar_address=>@registrar_address,
   :cancel_reminders_url=>@cancel_reminders_url,
-  :registrar_phone=>@registrar_phone.to_s.html_safe,
-  :registrar_url=>@registrar_url.to_s.html_safe, :locale => @registrant.locale.to_sym).html_safe %>
+  :registrar_phone=>@registrar_phone,
+  :registrar_url=>@registrar_url, :locale => @locale).html_safe %>
 
 <hr size="3" align="left" width="100%" color="black"><br><br>
 
 <%= I18n.t('email.confirmation.body.send_to_friends',
-  :rtv_link=>rtv_link.to_s.html_safe,
-  :registrant_first_name=>@registrant.first_name, :registrant_last_name=>@registrant.last_name, :locale => @registrant.locale.to_sym).html_safe %>
+  :rtv_link=>@rtv_link,
+  :registrant_first_name=>@registrant_first_name, :registrant_last_name=>@registrant_last_name, :locale => @locale).html_safe %>
 
 <hr size="3" align="left" width="100%" color="black"><br><br>
 
-<%= I18n.t('email.confirmation.body.footer', :locale => @registrant.locale.to_sym).html_safe %>
+<%= I18n.t('email.confirmation.body.footer', :locale => @locale).html_safe %>

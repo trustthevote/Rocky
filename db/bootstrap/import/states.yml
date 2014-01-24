@@ -16,6 +16,8 @@ defaults:
   id_length_max: '60'
   sub_18: turn_by_next_election
   registration_deadline: postmarked_29_days
+  pdf_instructions: blank
+  email_instructions: blank
   
 record_0:
   abbreviation: AL
@@ -56,6 +58,8 @@ record_2:
   sub_18: turn_by_next_general_election_november
   online_registration_url: https://servicearizona.com/webapp/evoter/selectLanguage
   registration_deadline: received_29_days
+  pdf_instructions: arizona
+  email_instructions: arizona
   
 record_3:
   abbreviation: AR
@@ -233,6 +237,8 @@ record_16:
   sos_url: http://www.kssos.org/elections/elections.html
   sub_18: be_by_next_general_election_november
   registration_deadline: kansas
+  pdf_instructions: kansas
+  email_instructions: kansas
 
 
 record_17:

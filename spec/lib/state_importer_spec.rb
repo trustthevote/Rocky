@@ -44,6 +44,9 @@ describe StateImporter do
       id_length_min: '6'
       id_length_max: '60'
       sub_18: turn_by_next_election
+      registration_deadline: postmarked_29_days
+      pdf_instructions: blank
+      email_instructions: blank
     record_0: 
       abbreviation: AL
       name: Alabama
@@ -59,6 +62,8 @@ describe StateImporter do
       sos_address: sos_address
       sos_phone: sos_phone
       sos_url: sos_url
+      registration_deadline: postmarked_30_days
+      email_instructions: alabama
     record_1: 
       abbreviation: AK
       name: Alaska
@@ -70,6 +75,7 @@ describe StateImporter do
       sos_address: sos_address
       sos_phone: sos_phone
       sos_url: sos_url
+      pdf_instructions: arkansas
     record_2: 
       abbreviation: AZ
       name: Arizona
@@ -105,11 +111,13 @@ YML
       assert_equal "sos_address", state.registrar_address
       assert_equal "sos_phone", state.registrar_phone
       assert_equal "sos_url", state.registrar_url
+      
 
       state = GeoState['AK']
       assert_equal false, state.participating
       assert_equal 10, state.id_length_min
       assert_equal 13, state.id_length_max
+      
 
       state = GeoState['AZ']
       assert_equal true, state.participating
@@ -152,11 +160,24 @@ YML
       assert_equal I18n.t('states.tooltips.not_participating.new_hampshire').strip, en.not_participating_tooltip
       assert_equal I18n.t('states.tooltips.race.virginia').strip, en.race_tooltip
       assert_equal %w(Independent Green), en.parties
+      assert_equal I18n.t('states.registration_deadline.postmarked_30_days'), en.registration_deadline
+      assert_equal I18n.t('states.pdf_instructions.blank'), en.pdf_instructions
+      assert_equal I18n.t('states.email_instructions.alabama'), en.email_instructions
       
       es = state.localizations.find_by_locale!('es')
       assert_equal I18n.t('states.tooltips.not_participating.new_hampshire', :locale=>:es).strip, es.not_participating_tooltip
       assert_equal I18n.t('states.tooltips.race.virginia', :locale=>:es).strip, es.race_tooltip
       assert_equal %w(Independiente Verde), es.parties
+      assert_equal I18n.t('states.registration_deadline.postmarked_30_days', :locale=>:es), es.registration_deadline
+      assert_equal I18n.t('states.pdf_instructions.blank', :locale=>:es), es.pdf_instructions
+      assert_equal I18n.t('states.email_instructions.alabama', :locale=>:es), es.email_instructions
+      
+      state = GeoState['AK']
+      en = state.localizations.find_by_locale!('en')
+      assert_equal I18n.t('states.registration_deadline.postmarked_29_days'), en.registration_deadline
+      assert_equal I18n.t('states.pdf_instructions.arkansas'), en.pdf_instructions
+      assert_equal I18n.t('states.email_instructions.blank'), en.email_instructions
+      
 
     end
 

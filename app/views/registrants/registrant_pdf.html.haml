@@ -19,6 +19,10 @@
           %li= I18n.t('pdf.nvra.page1.instructions_block.step4' ).html_safe
           %li= I18n.t('pdf.nvra.page1.instructions_block.step5' ).html_safe
       %td.submit_block
+        - if !@registrant.home_state_pdf_instructions.blank?
+          .state_instructions
+            %p= @registrant.home_state_pdf_instructions.html_safe
+          
         %h4.title= I18n.t('pdf.nvra.page1.submit_block.title' ).html_safe
         %p= @state.registrar_address.to_s.html_safe
     %tr

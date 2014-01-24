@@ -14,7 +14,8 @@ en:
 
           <strong>Your registration is not yet complete. You are not registered until
           you have turned in your form to your state election officials.</strong><br><br>
-
+          
+          %{home_state_email_instructions}
 
           If you have not already done so, <strong>please make sure to PRINT, SIGN,
           STAMP, and MAIL your form to the address provided on the form and shown
@@ -93,6 +94,7 @@ en:
           the Vote. You can download your application <a href="%{pdf_url}">by clicking
           here</a>.<br><br>
 
+          %{home_state_email_instructions}
 
           Just a reminder, if you have not already done so, <strong>please make sure
           to PRINT, SIGN, STAMP, and MAIL your form to the address provided on the
