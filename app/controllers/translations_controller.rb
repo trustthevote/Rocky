@@ -3,7 +3,7 @@ class TranslationsController < ApplicationController
   
   before_filter :disallow_production
   before_filter :get_translations
-  before_filter :get_locale_and_translation, :except=>[:index, :all_languages_pdf]
+  before_filter :get_locale_and_translation, :except=>[:index, :all_languages]
   
 
   def index
@@ -37,7 +37,7 @@ class TranslationsController < ApplicationController
     end
   end
   
-  def all_languages_pdf
+  def all_languages
     @enabled_locales = RockyConf.enabled_locales
     @all_locales = I18n.available_locales
     respond_to do |format|
@@ -45,8 +45,8 @@ class TranslationsController < ApplicationController
         render :layout=>'nvra.html.haml'
       end
       format.pdf do
-        render :pdf => "all_languages_pdf", 
-          :template => 'translations/all_languages_pdf.html.haml', 
+        render :pdf => "all_languages", 
+          :template => 'translations/all_languages.html.haml', 
           :layout => 'nvra.html.haml'
       end
     end
