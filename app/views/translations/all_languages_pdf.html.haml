@@ -1,0 +1,27 @@
+#translations{:style=>"margin:20px;"}
+  :css
+    table {
+      border:0; 
+      border-collapse:collapse;
+    }
+    table td {
+      padding: 4px;
+    }
+  #enabled_languages
+    %h1 Enabled Languages
+    %table{:style=>""}
+      - @enabled_locales.each do |locale|
+        %tr
+          %td= I18n.t("locales.#{locale}.name")
+          %td= " (#{locale}) "
+          %td= I18n.t('language_name', :locale=>locale)
+  %br
+  %br
+  #all_languages
+    %h1 All Languages
+    %table
+      - @all_locales.each do |locale|
+        %tr
+          %td= I18n.t("locales.#{locale}.name")
+          %td= " (#{locale}) "
+          %td= I18n.t('language_name', :locale=>locale)

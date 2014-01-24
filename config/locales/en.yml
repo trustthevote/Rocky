@@ -4,6 +4,35 @@ en:
   language_name_translation_instructions: Please provide the name of the translated
     language in that language. For example, if you are translating Japanese, provide
     the japanese word for "Japanese" (the language name).
+  locales:
+    bn:
+      name: Bengali
+    en:
+      name: English
+    es:
+      name: Spanish
+    hi:
+      name: Hindi
+    ilo:
+      name: Ilocano
+    ja:
+      name: Japanese
+    km:
+      name: Khmer
+    ko:
+      name: Korean
+    th:
+      name: Thai
+    tl:
+      name: Tagalog
+    ur:
+      name: Urdu
+    vi:
+      name: Vietnamese
+    zh-tw:
+      name: Chinese (Traditional)
+    zh:
+      name: Chinese (Simplified)
   activerecord:
     attributes:
       partner:

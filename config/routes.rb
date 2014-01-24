@@ -42,6 +42,9 @@ Rocky::Application.routes.draw do
   end
   
   resources "translations", :only=>[:index, :show] do
+    collection do
+      get :all_languages_pdf
+    end
     member do
       post :submit
     end
