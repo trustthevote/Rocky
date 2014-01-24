@@ -32,12 +32,23 @@ describe StateLocalization do
         :locale => 'en',
         :not_participating_tooltip => kilo_chars,
         :race_tooltip => kilo_chars,
-        :id_number_tooltip => kilo_chars)
+        :id_number_tooltip => kilo_chars,
+        :parties => kilo_chars,
+        :sub_18 => kilo_chars,
+        :registration_deadline => kilo_chars,
+        :pdf_instructions => kilo_chars,
+        :email_instructions => kilo_chars)
 
       loc.reload
       assert_equal kilo_chars, loc.not_participating_tooltip
       assert_equal kilo_chars, loc.race_tooltip
       assert_equal kilo_chars, loc.id_number_tooltip
+      assert_equal kilo_chars, loc.parties
+      assert_equal kilo_chars, loc.sub_18
+      assert_equal kilo_chars, loc.registration_deadline
+      assert_equal kilo_chars, loc.pdf_instructions
+      assert_equal kilo_chars, loc.email_instructions
+      
     end
   end
   
