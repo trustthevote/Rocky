@@ -31,6 +31,9 @@ class Step2Controller < RegistrationStep
       if reg[:has_mailing_address] == "0"
         reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
       end
+      reg[:change_of_address] = !"#{reg[:prev_address]}#{reg[:prev_unit]}#{reg[:prev_city]}#{reg[:prev_zip_code]}".blank?
+      reg[:change_of_name] = !"#{reg[:prev_first_name]}#{reg[:prev_middle_name]}#{reg[:prev_last_name]}".blank?
+      
     end
     params[:registrant][:using_state_online_registration] = !params[:registrant_state_online_registration].nil?
     super
@@ -68,6 +71,8 @@ class Step2Controller < RegistrationStep
 
   def set_up_view_variables
     @registrant.mailing_state ||= @registrant.home_state
+    @registrant.prev_state ||= @registrant.home_state
+    
     @state_parties = @registrant.state_parties
     @race_tooltip = @registrant.race_tooltip
     @party_tooltip = @registrant.party_tooltip

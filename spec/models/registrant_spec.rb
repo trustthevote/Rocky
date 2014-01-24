@@ -690,6 +690,102 @@ describe Registrant do
       reg.advance_to_step_2
       assert_equal "*RTV-00ROFL*", reg.barcode
     end
+    
+    
+    it "should require previous name fields if change_of_name" do
+      assert_attribute_invalid_with(:step_2_registrant, :change_of_name => true, :prev_name_title => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :change_of_name => true, :prev_first_name => nil)
+      assert_attribute_invalid_with(:step_3_registrant, :change_of_name => true, :prev_last_name => nil)
+    end
+
+    it "requires previous address fields if change_of_address" do
+      assert_attribute_invalid_with(:step_2_registrant, :change_of_address => true, :prev_address => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :change_of_address => true, :prev_city => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :change_of_address => true, :prev_state_id => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :change_of_address => true, :prev_zip_code => nil)
+      assert_attribute_invalid_with(:step_2_registrant, :change_of_address => true, :prev_zip_code => '00000')
+    end
+    
+    it "should check format of prev_zip_code" do
+      reg = FactoryGirl.build(:step_2_registrant, :change_of_address => true, :prev_zip_code => 'ABCDE')
+      reg.invalid?
+
+      assert_equal ["Use ZIP or ZIP+4"], [reg.errors[:prev_zip_code]].flatten
+    end
+
+    it "should limit number of simultaneous errors on prev_zip_code" do
+      reg = FactoryGirl.build(:step_2_registrant, :change_of_address => true, :prev_zip_code => nil)
+      reg.invalid?
+
+      assert_equal ["Required"], [reg.errors[:prev_zip_code]].flatten
+    end
+
+    it "blanks previous name fields unless change_of_name" do
+      reg = FactoryGirl.build(:maximal_registrant, :change_of_name => false)
+      assert reg.valid?
+      assert_nil reg.prev_name_title
+      assert_nil reg.prev_first_name
+      assert_nil reg.prev_middle_name
+      assert_nil reg.prev_last_name
+      assert_nil reg.prev_name_suffix
+    end
+
+    it "blanks previous address fields unless change_of_address" do
+      reg = FactoryGirl.build(:maximal_registrant, :change_of_address => false)
+      assert reg.valid?
+      assert_nil reg.prev_address
+      assert_nil reg.prev_unit
+      assert_nil reg.prev_city
+      assert_nil reg.prev_state_id
+      assert_nil reg.prev_zip_code
+    end
+    
+    describe "phone validations" do
+      
+      it "should format phone as ###-###-####" do
+        reg = FactoryGirl.build(:step_2_registrant, :phone => "1234567890", :phone_type => "mobile")
+        assert reg.valid?
+        assert_equal "123-456-7890", reg.phone
+      end
+
+      it "should not require phone number" do
+        reg = FactoryGirl.build(:step_2_registrant, :phone => "")
+        assert reg.valid?
+      end
+
+      it "should require a valid phone number" do
+        reg = FactoryGirl.build(:step_2_registrant, :phone_type => "Mobile")
+        reg.phone = "1234567890"
+        assert reg.valid?
+
+        reg.phone = "123-456-7890"
+        assert reg.valid?
+        assert reg.errors.full_messages
+
+        reg.phone = "(123) 456 7890x123"
+        assert reg.valid?
+
+        reg.phone = "123.456.7890 ext 123"
+        assert reg.valid?
+
+        reg.phone = "asdfg"
+        assert !reg.valid?
+
+        reg.phone = "555-1234"
+        assert !reg.valid?
+      end
+
+      it "should not require phone type when registrant does not provide phone" do
+        reg = FactoryGirl.build(:step_2_registrant, :phone_type => "")
+        assert reg.valid?
+      end
+
+      it "should require phone type when registrant provides phone" do
+        reg = FactoryGirl.build(:step_2_registrant, :phone_type => "", :phone => "123-456-7890")
+        assert !reg.valid?
+      end
+    end
+    
   end
 
   describe "step 3" do
@@ -768,90 +864,15 @@ describe Registrant do
       assert_equal "ABC12345", reg.state_id_number
     end
 
-    it "should format phone as ###-###-####" do
-      reg = FactoryGirl.build(:step_3_registrant, :phone => "1234567890", :phone_type => "mobile")
-      assert reg.valid?
-      assert_equal "123-456-7890", reg.phone
-    end
-
-    it "should require previous name fields if change_of_name" do
-      assert_attribute_invalid_with(:step_3_registrant, :change_of_name => true, :prev_name_title => nil)
-      assert_attribute_invalid_with(:step_3_registrant, :change_of_name => true, :prev_first_name => nil)
-      assert_attribute_invalid_with(:step_3_registrant, :change_of_name => true, :prev_last_name => nil)
-    end
-
-    it "requires previous address fields if change_of_address" do
-      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_address => nil)
-      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_city => nil)
-      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_state_id => nil)
-      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
-      assert_attribute_invalid_with(:step_3_registrant, :change_of_address => true, :prev_zip_code => '00000')
-    end
+    
+    
 
     it "should not require attestations" do
       assert_attribute_valid_with(:step_3_registrant, :attest_true => nil)
     end
 
-    it "should check format of prev_zip_code" do
-      reg = FactoryGirl.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => 'ABCDE')
-      reg.invalid?
 
-      assert_equal ["Use ZIP or ZIP+4"], [reg.errors[:prev_zip_code]].flatten
-    end
-
-    it "should limit number of simultaneous errors on prev_zip_code" do
-      reg = FactoryGirl.build(:step_3_registrant, :change_of_address => true, :prev_zip_code => nil)
-      reg.invalid?
-
-      assert_equal ["Required"], [reg.errors[:prev_zip_code]].flatten
-    end
-
-    it "blanks previous name fields unless change_of_name" do
-      reg = FactoryGirl.build(:maximal_registrant, :change_of_name => false)
-      assert reg.valid?
-      assert_nil reg.prev_name_title
-      assert_nil reg.prev_first_name
-      assert_nil reg.prev_middle_name
-      assert_nil reg.prev_last_name
-      assert_nil reg.prev_name_suffix
-    end
-
-    it "blanks previous address fields unless change_of_address" do
-      reg = FactoryGirl.build(:maximal_registrant, :change_of_address => false)
-      assert reg.valid?
-      assert_nil reg.prev_address
-      assert_nil reg.prev_unit
-      assert_nil reg.prev_city
-      assert_nil reg.prev_state_id
-      assert_nil reg.prev_zip_code
-    end
-
-    it "should not require phone number" do
-      reg = FactoryGirl.build(:step_3_registrant, :phone => "")
-      assert reg.valid?
-    end
-
-    it "should require a valid phone number" do
-      reg = FactoryGirl.build(:step_3_registrant, :phone_type => "Mobile")
-      reg.phone = "1234567890"
-      assert reg.valid?
-
-      reg.phone = "123-456-7890"
-      assert reg.valid?
-      assert reg.errors.full_messages
-
-      reg.phone = "(123) 456 7890x123"
-      assert reg.valid?
-
-      reg.phone = "123.456.7890 ext 123"
-      assert reg.valid?
-
-      reg.phone = "asdfg"
-      assert !reg.valid?
-
-      reg.phone = "555-1234"
-      assert !reg.valid?
-    end
+    
     
     it "validates phone is present if rtv mobile opt-in is true" do
       reg = FactoryGirl.build(:step_3_registrant, :phone => "")
@@ -870,16 +891,6 @@ describe Registrant do
     end
     
     
-
-    it "should not require phone type when registrant does not provide phone" do
-      reg = FactoryGirl.build(:step_3_registrant, :phone_type => "")
-      assert reg.valid?
-    end
-
-    it "should require phone type when registrant provides phone" do
-      reg = FactoryGirl.build(:step_3_registrant, :phone_type => "", :phone => "123-456-7890")
-      assert !reg.valid?
-    end
   end
 
   describe "step 5" do

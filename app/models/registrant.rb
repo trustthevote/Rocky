@@ -202,6 +202,10 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of   :home_address,    :unless => [ :finish_with_state?, :custom_step_2? ]
     reg.validates_presence_of   :home_city,       :unless => [ :finish_with_state?, :custom_step_2? ]
     reg.validate                :validate_party_at_least_step_2,  :unless => [ :building_via_api_call, :custom_step_2? ]
+    
+    reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
+    reg.validates_presence_of :phone_type, :if => :has_phone?
+    
   end
   
 
@@ -221,8 +225,6 @@ class Registrant < ActiveRecord::Base
   with_options :if => :at_least_step_3? do |reg|
     reg.validates_presence_of :state_id_number, :unless=>:complete?
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
-    reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
-    reg.validates_presence_of :phone_type, :if => :has_phone?
     reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_3
   end
   
@@ -294,11 +296,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def needs_prev_name?
-    (at_least_step_3? || (at_least_step_2? && use_short_form?)) && change_of_name?
+    (at_least_step_2? || (at_least_step_2? && use_short_form?)) && change_of_name?
   end
 
   def needs_prev_address?
-    (at_least_step_3? || (at_least_step_2? && use_short_form?)) && change_of_address?
+    (at_least_step_2? || (at_least_step_2? && use_short_form?)) && change_of_address?
   end
 
   aasm_event :save_or_reject do

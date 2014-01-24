@@ -43,13 +43,13 @@ describe StateLocalization do
   
   describe "allows_ovr?" do
     it "asks the state if it's enabled for the locale" do
-      geo_state =mock(GeoState)
+      geo_state = mock_model(GeoState)
       geo_state.should_receive(:online_reg_enabled?).with("abc").and_return(true)
-      loc = StateLocalistion.new(
+      loc = StateLocalization.new(
         :locale=>"abc",
         :state=>geo_state
       )
-      loc.should be_online_reg_enabled
+      loc.allows_ovr?.should be_true
     end
   end
 end

@@ -1,22 +1,75 @@
 Feature: Step 2
   In order to provide personal information
   As a registrant
-  I want to enter name, address
+  I want to enter name, address, changes and contact info (phone)
   
     @passing
     Scenario: first visit
       Given I have completed step 1
       When I go to the step 2 page
-       And I select "Mr." from "Title"
-       And I fill in "First" with "John"
-       And I fill in "Last" with "Public"
-       And I fill in "Address" with "123 Market St."
-       And I fill in "City" with "Pittsburgh"
-       And I select "Hispanic" from "Race"
-       And I select "Democratic" from "Party"
-       And I press "registrant_submit"
+      And I select "Mr." from "Title"
+      And I fill in "First" with "John"
+      And I fill in "Last" with "Public"
+      And I fill in "Address" with "123 Market St."
+      And I fill in "City" with "Pittsburgh"
+      And I fill in "Phone" with "415-555-4254"
+      And I select "Hispanic" from "Race"
+      And I select "Democratic" from "Party"
+      And I press "registrant_submit"
+      Then I should see "Additional Registration Information"
+
+    @passing
+    Scenario: first time registrant
+      Given I have completed step 1
+      And I am a first time registrant
+      When I go to the step 2 page
+      Then I should not see "I have changed my name"
+      And I should not see "I have changed my address"
+
+    @passing
+    Scenario: changing name
+      Given I have completed step 1
+      When I go to the step 2 page
+      And I check "I have changed my name"
+      And I select "Mr." from "registrant_prev_name_title"
+      And I fill in "registrant_prev_first_name" with "First"
+      And I fill in "registrant_prev_last_name" with "Last"
+      And I select "Mr." from "Title"
+      And I fill in "First" with "John"
+      And I fill in "Last" with "Public"
+      And I fill in "Address" with "123 Market St."
+      And I fill in "City" with "Pittsburgh"
+      And I select "Hispanic" from "Race"
+      And I select "Democratic" from "Party"
+      And I press "registrant_submit"
+      Then I should see "Additional Registration Information"
+
+    @passing
+    Scenario: changing address
+      Given I have completed step 1
+      When I go to the step 2 page
+      And I check "I have changed my address"
+      And I fill in "registrant_prev_address" with "123 Market St."
+      And I fill in "registrant_prev_city" with "Pittsburgh"
+      And I select "Pennsylvania" from "registrant_prev_state_abbrev"
+      And I fill in "registrant_prev_zip_code" with "15215"
+      And I select "Mr." from "Title"
+      And I fill in "First" with "John"
+      And I fill in "Last" with "Public"
+      And I fill in "Address" with "123 Market St."
+      And I fill in "City" with "Pittsburgh"
+      And I select "Hispanic" from "Race"
+      And I select "Democratic" from "Party"
+      And I press "registrant_submit"
       Then I should see "Additional Registration Information"
     
+    @passing
+    Scenario: default prev state to home state
+      Given I have completed step 1
+      When I go to the step 2 page
+      Then I should see "Pennsylvania" in select box "registrant_prev_state_abbrev"
+
+     
     @passing  
     Scenario: default mailing state to home state
       Given I have completed step 1
@@ -27,7 +80,7 @@ Feature: Step 2
     Scenario Outline: fields for a <state> state resident with no javascript
       Given I have completed step 1 as a resident of "<state>" state without javascript
       When I go to the step 2 page
-      Then I should not see a field for "Phone"
+      Then I should not see a checkbox for "Send me txt messages from Rock the Vote"
       And I should see a field for "Address"
       And I should see a field for "Race"
       
@@ -142,21 +195,6 @@ Feature: Step 2
     
     
     
-    Scenario Outline: has_license field is required
-      Given I have completed step 1 as a resident of "<state>" state
-      When I go to the step 2 page
-      And I press "registrant_submit"
-      Then I should see "Please indicate whether you have a valid state license"
-    
-      Examples:
-        | state      |
-        | Washington |
-        | Arizona    |
-        | Colorado   |
-        | Nevada     |
-    
-    
-
     @passing
     Scenario Outline: <state> resident selects to finish registration with Rock the Vote
       Given I have completed step 1 as a resident of "<state>" state

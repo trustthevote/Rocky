@@ -27,6 +27,8 @@ class StateLocalization < ActiveRecord::Base
   belongs_to :state, :class_name => 'GeoState'
   validates_presence_of :locale
   
-  
+  def allows_ovr?
+    state && state.online_reg_enabled?(locale)
+  end
   
 end

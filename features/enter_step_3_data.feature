@@ -1,7 +1,7 @@
 Feature: Step 3
   In order to provide id and changes
   As a registrant
-  I want to enter id, phone and changes
+  I want to enter id and
 
   Background:
 
@@ -9,48 +9,10 @@ Feature: Step 3
      Given I have completed step 2
       When I go to the step 3 page
        And I fill in "ID Number" with "1234"
-       And I fill in "Phone" with "415-555-4254"
-       And I select "Mobile" from "registrant_phone_type"
        And I check "Send me txt messages"
        And I press "registrant_submit"
       Then I should see "Stay Informed and Take Action"
 
-    Scenario: first time registrant
-     Given I have completed step 2
-       And I am a first time registrant
-      When I go to the step 3 page
-      Then I should not see "I have changed my name"
-       And I should not see "I have changed my address"
-
-    @passing
-    Scenario: changing name
-     Given I have completed step 2
-      When I go to the step 3 page
-       And I fill in "ID Number" with "1234"
-       And I check "I have changed my name"
-       And I select "Mr." from "Title"
-       And I fill in "First" with "John"
-       And I fill in "Last" with "Public"
-       And I press "registrant_submit"
-      Then I should see "Stay Informed and Take Action"
-
-    @passing
-    Scenario: changing address
-     Given I have completed step 2
-      When I go to the step 3 page
-       And I fill in "ID Number" with "1234"
-       And I check "I have changed my address"
-       And I fill in "Address" with "123 Market St."
-       And I fill in "City" with "Pittsburgh"
-       And I select "Pennsylvania" from "State"
-       And I fill in "ZIP Code" with "15215"
-       And I press "registrant_submit"
-      Then I should see "Stay Informed and Take Action"
-
-    Scenario: default prev state to home state
-      Given I have completed step 2
-      When I go to the step 3 page
-      Then I should see "Pennsylvania" in select box "registrant_prev_state_abbrev"
 
     # Step 3 is SMS, Step 4 is email and volunteer
     Scenario: User sees RTV SMS opt-in options for partner 1
@@ -59,7 +21,6 @@ Feature: Step 3
       And I should see a checkbox for "Send me txt messages from Rock the Vote"
       When I check "Send me txt messages from Rock the Vote"
       And I fill in "ID Number" with "NONE"
-      And I fill in "Phone" with "415-555-4254"
       And I press "registrant_submit"
       Then I should be signed up for "opt_in_sms"
       And I should not be signed up for "partner_opt_in_sms"
@@ -76,7 +37,6 @@ Feature: Step 3
       When I check "Send me txt messages from Opt-in Partner"
       When I uncheck "Send me txt messages from Rock the Vote"
       And I fill in "ID Number" with "NONE"
-      And I fill in "Phone" with "415-555-4254"
       And I press "registrant_submit"
       Then I should be signed up for "partner_opt_in_sms"
       And I should not be signed up for "opt_in_sms"
@@ -92,7 +52,6 @@ Feature: Step 3
       And I should not see a checkbox for "Send me txt messages from Opt-in Partner"
       When I check "Send me txt messages from Rock the Vote"
       And I fill in "ID Number" with "NONE"
-      And I fill in "Phone" with "415-555-4254"
       And I press "registrant_submit"
       Then I should not be signed up for "partner_opt_in_sms"
       And I should be signed up for "opt_in_sms"
@@ -124,7 +83,6 @@ Feature: Step 3
       And I should see a checkbox for "Send me txt messages from Opt-in Partner"
       When I check "Send me txt messages from Opt-in Partner"
       And I fill in "ID Number" with "NONE"
-      And I fill in "Phone" with "415-555-4254"
       And I press "registrant_submit"
       Then I should be signed up for "partner_opt_in_sms"
       And I should not be signed up for "opt_in_sms"
