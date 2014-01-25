@@ -6,12 +6,9 @@ Feature: Thank you email for registrants who choose to register online with a st
   
   @passing
   Scenario: Registrant goes to the state online registration page
-    Given I have completed step 1 as a resident of "Washington" state
-    When I go to the step 2 page
-    And I select "Mr." from "Title"
-    And I fill in "First" with "John"
-    And I fill in "Last" with "Public"
-    And I choose "I have a current WA state identification card or driver's license"
+    Given I have completed step 3 as a resident of "Washington" state
+    And I have a state license
+    When I go to the step 4 page
     And I press "registrant_state_online_registration"
     Then I should be recorded as having selected to finish with the state
   
@@ -29,12 +26,9 @@ Feature: Thank you email for registrants who choose to register online with a st
   
   @passing
   Scenario: Registrant who finished online gets sent a thank-you email
-    Given I have completed step 1 as a resident of "Washington" state
-    When I go to the step 2 page
-    And I select "Mr." from "Title"
-    And I fill in "First" with "John"
-    And I fill in "Last" with "Public"
-    And I choose "I have a current WA state identification card or driver's license"
+    Given I have completed step 3 as a resident of "Washington" state
+    And I have a state license
+    When I go to the step 4 page
     And I press "registrant_state_online_registration"
     And my session expires
     And the timeout_stale_registrations task has run
@@ -46,12 +40,9 @@ Feature: Thank you email for registrants who choose to register online with a st
     Given the following partner exists:
       | organization   | rtv_sms_opt_in | partner_sms_opt_in | from_email                      | whitelabeled |
       | Opt-in Partner | true           | true               | alexmek+partner-email@gmail.com | true         |
-    Given I have completed step 1 as a resident of "Washington" state from that partner
-    When I go to the step 2 page
-    And I select "Mr." from "Title"
-    And I fill in "First" with "John"
-    And I fill in "Last" with "Public"
-    And I choose "I have a current WA state identification card or driver's license"
+    Given I have completed step 3 as a resident of "Washington" state from that partner
+    And I have a state license
+    When I go to the step 4 page
     And I press "registrant_state_online_registration"
     And my session expires
     And the timeout_stale_registrations task has run
@@ -63,12 +54,9 @@ Feature: Thank you email for registrants who choose to register online with a st
     Given the following partner exists:
       | organization   | rtv_sms_opt_in | partner_sms_opt_in | from_email                      | whitelabeled |
       | Opt-in Partner | true           | true               | alexmek+partner-email@gmail.com | false        |
-    Given I have completed step 1 as a resident of "Washington" state from that partner
-    When I go to the step 2 page
-    And I select "Mr." from "Title"
-    And I fill in "First" with "John"
-    And I fill in "Last" with "Public"
-    And I choose "I have a current WA state identification card or driver's license"
+    Given I have completed step 3 as a resident of "Washington" state from that partner
+    And I have a state license
+    When I go to the step 4 page
     And I press "registrant_state_online_registration"
     And my session expires
     And the timeout_stale_registrations task has run
@@ -78,13 +66,10 @@ Feature: Thank you email for registrants who choose to register online with a st
 
   @passing
   Scenario: Registrant who finished online and selected spanish gets sent a thank-you email
-    Given I have completed step 1 as a resident of "Washington" state
+    Given I have completed step 3 as a resident of "Washington" state
+    And I have a state license
     And my locale is "es"
-    When I go to the step 2 page
-    And I select "Sr." from "Titulo"
-    And I fill in "Nombre" with "John"
-    And I fill in "Apellido" with "Public"
-    And I choose "registrant_has_state_license_1"
+    When I go to the step 4 page
     And I press "registrant_state_online_registration"
     And my session expires
     And the timeout_stale_registrations task has run
@@ -93,12 +78,10 @@ Feature: Thank you email for registrants who choose to register online with a st
     
   @passing
   Scenario: Registrant who finished online and selected korean gets sent a thank-you email
-    Given I have completed step 1 as a resident of "California" state
+    Given I have completed step 3 as a resident of "California" state
+    And I have a state license
     And my locale is "ko"
-    When I go to the step 2 page
-    And I select "Mr." from "registrant_name_title"
-    And I fill in "registrant_first_name" with "John"
-    And I fill in "registrant_last_name" with "Public"
+    When I go to the step 4 page
     And I press "registrant_state_online_registration"
     And my session expires
     And the timeout_stale_registrations task has run
@@ -108,12 +91,9 @@ Feature: Thank you email for registrants who choose to register online with a st
     
   @passing
   Scenario: Registrant who finished online but hasn't expired yet doesn't get sent a thank-you email
-    Given I have completed step 1 as a resident of "Washington" state
-    When I go to the step 2 page
-    And I select "Mr." from "Title"
-    And I fill in "First" with "John"
-    And I fill in "Last" with "Public"
-    And I choose "I have a current WA state identification card or driver's license"
+    Given I have completed step 3 as a resident of "Washington" state
+    And I have a state license
+    When I go to the step 4 page
     And I press "registrant_state_online_registration"
     And the timeout_stale_registrations task has run
     Then I should not be sent a thank-you email
@@ -121,12 +101,9 @@ Feature: Thank you email for registrants who choose to register online with a st
 
   @passing
   Scenario: Registrant who at one point finished online but went back to the RTV form and had their session expire doesn't get sent a thank you email
-    Given I have completed step 1 as a resident of "Washington" state
-    When I go to the step 2 page
-    And I select "Mr." from "Title"
-    And I fill in "First" with "John"
-    And I fill in "Last" with "Public"
-    And I choose "I have a current WA state identification card or driver's license"
+    Given I have completed step 3 as a resident of "Washington" state
+    And I have a state license
+    When I go to the step 4 page
     And I press "registrant_state_online_registration"
     And I follow "finish your registration with Rock the Vote"
     And my session expires

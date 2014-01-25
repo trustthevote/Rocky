@@ -25,7 +25,6 @@
 #
 #***** END LICENSE BLOCK *****
 class Registrant < ActiveRecord::Base
-
   class AbandonedRecord < StandardError
     attr_reader :registrant
     def initialize(registrant)
@@ -198,23 +197,14 @@ class Registrant < ActiveRecord::Base
     reg.validates_presence_of   :first_name, :unless => :building_via_api_call
     reg.validates_presence_of   :last_name
     reg.validates_inclusion_of  :name_suffix, :in => SUFFIXES, :allow_blank => true
-    reg.validate                :validate_race_at_least_step_2,   :unless => [ :finish_with_state?, :custom_step_2? ]
-    reg.validates_presence_of   :home_address,    :unless => [ :finish_with_state?, :custom_step_2? ]
-    reg.validates_presence_of   :home_city,       :unless => [ :finish_with_state?, :custom_step_2? ]
-    reg.validate                :validate_party_at_least_step_2,  :unless => [ :building_via_api_call, :custom_step_2? ]
+    reg.validates_presence_of   :home_address,    :unless => [ :finish_with_state? ]
+    reg.validates_presence_of   :home_city,       :unless => [ :finish_with_state? ]
     
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
-    
+    reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_2    
   end
   
-
-  with_options :if=> [:at_least_step_2?, :custom_step_2?] do |reg|
-    reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
-    reg.validates_presence_of :phone_type, :if => :has_phone?
-    reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_2
-  end
-
   with_options :if => :needs_mailing_address? do |reg|
     reg.validates_presence_of :mailing_address
     reg.validates_presence_of :mailing_city
@@ -223,9 +213,12 @@ class Registrant < ActiveRecord::Base
   end
 
   with_options :if => :at_least_step_3? do |reg|
-    reg.validates_presence_of :state_id_number, :unless=>:complete?
+    reg.validates_presence_of :state_id_number, :unless=>[:complete?, :in_ovr_flow?]
     reg.validates_format_of :state_id_number, :with => /^(none|\d{4}|[-*A-Z0-9]{7,42})$/i, :allow_blank => true
     reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_3
+    reg.validate                :validate_race_at_least_step_3,   :unless => [ :in_ovr_flow? ]
+    reg.validate                :validate_party_at_least_step_3,  :unless => [ :building_via_api_call, :in_ovr_flow? ]
+    
   end
   
   with_options :if => [:at_least_step_2?, :use_short_form?] do |reg|
@@ -236,18 +229,12 @@ class Registrant < ActiveRecord::Base
     reg.validate :validate_phone_present_if_opt_in_sms_use_short_form
   end
 
-  with_options :if=>[:at_least_step_3?, :custom_step_2?] do |reg|
-    reg.validates_presence_of :home_address
-    reg.validates_presence_of :home_city
-    reg.validate :validate_race_at_least_step_3
-    reg.validate :validate_party_at_least_step_3, :unless => [:building_via_api_call]
-  end
-
   with_options :if => :needs_prev_name? do |reg|
     reg.validates_presence_of :prev_name_title
     reg.validates_presence_of :prev_first_name
     reg.validates_presence_of :prev_last_name
   end
+  
   with_options :if => :needs_prev_address? do |reg|
     reg.validates_presence_of :prev_address
     reg.validates_presence_of :prev_city
@@ -596,10 +583,10 @@ class Registrant < ActiveRecord::Base
     self.class.english_race(locale, race)
   end
   
-  def validate_race_at_least_step_2
+  def validate_race_at_least_step_3
     validate_race
   end
-  def validate_race_at_least_step_3
+  def validate_race_at_least_step_3_custom_2
     validate_race
   end
   
@@ -743,10 +730,10 @@ class Registrant < ActiveRecord::Base
             :state_rule => localization.sub_18).html_safe
   end
 
-  def validate_party_at_least_step_2
+  def validate_party_at_least_step_3
     validate_party
   end
-  def validate_party_at_least_step_3
+  def validate_party_at_least_step_3_custom_2
     validate_party
   end
 
@@ -789,6 +776,11 @@ class Registrant < ActiveRecord::Base
   def home_state_online_reg_url
     home_state && home_state.online_reg_url(self)
   end
+  
+  def has_home_state_online_redirect?
+    home_state && home_state.redirect_to_online_reg_url(self)
+  end
+  
 
   def mailing_state_abbrev=(abbrev)
     self.mailing_state = GeoState[abbrev]
@@ -818,15 +810,8 @@ class Registrant < ActiveRecord::Base
     localization ? localization.allows_ovr? : false
   end
 
-  def custom_step_2?
-    !javascript_disabled &&
-      !home_state.nil? &&
-      home_state_online_reg_enabled? &&
-      File.exists?(File.join(Rails.root, 'app/views/step2/', "_#{custom_step_2_partial}.html.erb"))
-  end
 
-
-  def custom_step_2_partial
+  def custom_step_4_partial
     "#{home_state.abbreviation.downcase}"
   end
   
@@ -842,19 +827,15 @@ class Registrant < ActiveRecord::Base
     File.exists?(File.join(Rails.root, 'app/views/state_online_registrations/', "#{home_state_online_registration_view}.html.erb"))
   end
   
+  
   def home_state_online_registration_view
     "#{home_state.abbreviation.downcase}"
   end
 
   def use_short_form?
-    short_form? && !custom_step_2?
+    short_form? && !in_ovr_flow?
   end
     
-    
-
-  def will_be_18_by_election?
-    true
-  end
 
   def full_name
     [name_title, first_name, middle_name, last_name, name_suffix].compact.join(" ")

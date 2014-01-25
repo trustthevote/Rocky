@@ -40,6 +40,10 @@ class StateCustomization
     state.online_registration_url
   end
   
+  def redirect_to_online_reg_url(registrant)
+    state.redirect_to_online_registration_url?
+  end
+  
 protected
   def self.class_exists?(class_name)
     klass = Module.const_get(class_name)

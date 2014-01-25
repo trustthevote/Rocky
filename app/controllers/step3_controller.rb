@@ -37,20 +37,11 @@ class Step3Controller < RegistrationStep
   protected
 
   def advance_to_next_step
-    if @registrant.custom_step_2?
-      @registrant.advance_to_step_3
-      @registrant.advance_to_step_4
-    else
-      @registrant.advance_to_step_3
-    end
+    @registrant.advance_to_step_3
   end
 
   def next_url
-    if @registrant.custom_step_2?
-      registrant_step_5_url(@registrant)
-    else
-      registrant_step_4_url(@registrant)
-    end
+    registrant_step_4_url(@registrant)
   end
 
   def set_up_view_variables

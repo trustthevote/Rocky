@@ -32,33 +32,26 @@
     </ul>
   </fieldset>
 
-  <%- if @registrant.custom_step_2? %>
-    <%= render :partial=> @registrant.custom_step_2_partial, :locals=>{:form=>form} %>
+  <%= render :partial=> "registrants/home_address", :locals=>{:form=>form} %>
+  
+  <%- if @registrant.use_short_form? %>
+    <%= render(:partial => 'previous', :locals => {:form => form, :show_hr=>false}) unless @registrant.first_registration? %>
+    
+    <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form, :include_race_and_party=>true} %>
+    
+    <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
+    <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
+    <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
+    
+    <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>      
+  
+    <%= rollover_button(:prepare, I18n.t('txt.button.prepare')) %>
+    
   <%- else %>
-    <%= render :partial=> "registrants/home_address", :locals=>{:form=>form} %>
+    <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
+    <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
     
-    <%- if @registrant.use_short_form? %>
-      <%= render(:partial => 'previous', :locals => {:form => form, :show_hr=>false}) unless @registrant.first_registration? %>
-      
-      <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form, :include_race_and_party=>true} %>
-      
-      <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
-      <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
-      <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
-      
-      <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>      
-    
-      <%= rollover_button(:prepare, I18n.t('txt.button.prepare')) %>
-      
-    <%- else %>
-      <%= render(:partial => 'previous', :locals => {:form => form}) unless @registrant.first_registration? %>
-      <%= render :partial=> "registrants/phone", :locals=>{:form=>form} %>
-      
-      <%= render :partial=> "registrants/race_and_party", :locals=>{:form=>form} %>
-      
-      <%= rollover_button(:next_step, I18n.t('txt.button.submit').html_safe) %>
-    <%- end %>
-    
+    <%= rollover_button(:next_step, I18n.t('txt.button.submit').html_safe) %>
   <%- end %>
   
   <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_path(@registrant) %></div>

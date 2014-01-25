@@ -47,6 +47,16 @@ $(document).ready(function() {
   </li>
 </ul>
 
+<ul class="checkbox checkbox-step-1">
+  <li class="spacer">&nbsp;</li>
+  <li>
+    <h3>
+      <%= form.check_box :us_citizen %> <%= form.label :us_citizen %>
+      <span class="error"><%= form.object.errors[:us_citizen].join("\n") %></span>
+    </h3>
+  </li>
+</ul>
+
 
 
 <ul class="checkbox checkbox-step-1">
@@ -72,15 +82,6 @@ $(document).ready(function() {
 </ul>
 
 
-<ul class="checkbox checkbox-step-1">
-  <li class="spacer">&nbsp;</li>
-  <li>
-    <h3>
-      <%= form.check_box :us_citizen %> <%= form.label :us_citizen %>
-      <span class="error"><%= form.object.errors[:us_citizen].join("\n") %></span>
-    </h3>
-  </li>
-</ul>
 
 <ul class="checkbox checkbox-step-1">
   <li class="spacer">&nbsp;</li>

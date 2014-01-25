@@ -51,14 +51,14 @@ FactoryGirl.define do
     home_city       "San Francisco"
     # home_state      { GeoState['CA'] }
     has_state_license false
-    race            "Hispanic"
-    party           "Democratic"
   end
 
   factory :step_3_registrant, :parent => :step_2_registrant do 
     status          "step_3"
     state_id_number "NONE"
     opt_in_sms      false
+    race            "Hispanic"
+    party           "Democratic"
   end
 
   factory :step_4_registrant, :parent => :step_3_registrant do 

@@ -69,15 +69,5 @@ describe Step3Controller do
 
 
     
-    context "for a WA state registrant" do
-      it "skips step 4" do
-        @registrant.stub(:custom_step_2?) { true }
-        Registrant.stub(:find_by_param!) { @registrant }
-        put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant).reject {|k,v| k == :status }
-        assert_not_nil assigns[:registrant]
-        assert assigns[:registrant].step_4?
-        assert_redirected_to registrant_step_5_url(assigns[:registrant])
-      end
-    end
   end
 end

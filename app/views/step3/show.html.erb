@@ -1,21 +1,18 @@
 <h1><%= t('txt.registration.step_3_header') %></h1>
 
 <%= form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
-  <%- if @registrant.custom_step_2? %>
-    <%= render :partial=> "registrants/home_address", :locals=>{:form=>form, :show_hr=>false} %>
-    <%= render(:partial => 'step2/previous', :locals => {:form => form, :show_hr=>false}) unless @registrant.first_registration? %>
-    <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form, :include_race_and_party=>true} %>
+  <%- if @registrant.in_ovr_flow? %>
+    <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
+    <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
     
-    <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
-    
-    <%= rollover_button(:review, I18n.t('txt.button.review')) %>
   <%- else %>
     <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form} %>
   
-    <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
+    <%= render :partial=> "registrants/race_and_party", :locals=>{:form=>form} %>
+    
 
-    <%= rollover_button(:next_step, I18n.t('txt.button.submit').html_safe) %>
   <%- end %>
+  <%= rollover_button(:next_step, I18n.t('txt.button.submit').html_safe) %>
 
   
   <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_2_path(@registrant) %></div>

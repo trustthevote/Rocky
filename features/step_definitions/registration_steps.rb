@@ -193,6 +193,11 @@ Given /^my phone number is not blank$/ do
   @registrant.save
 end
 
+Given(/^I have a state license$/) do
+  @registrant.has_state_license = true
+  @registrant.save
+end
+
 Given /^I have not downloaded the PDF before$/ do
   `rm -f #{@registrant.pdf_file_path}`
 end

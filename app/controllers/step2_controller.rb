@@ -35,7 +35,6 @@ class Step2Controller < RegistrationStep
       reg[:change_of_name] = !"#{reg[:prev_first_name]}#{reg[:prev_middle_name]}#{reg[:prev_last_name]}".blank?
       
     end
-    params[:registrant][:using_state_online_registration] = !params[:registrant_state_online_registration].nil?
     super
   end
 
@@ -51,9 +50,7 @@ class Step2Controller < RegistrationStep
   end
 
   def next_url
-    if @registrant.using_state_online_registration?
-      registrant_state_online_registration_url(@registrant)
-    elsif @registrant.use_short_form?
+    if @registrant.use_short_form?
       registrant_download_url(@registrant)
     else
       registrant_step_3_url(@registrant)
@@ -72,6 +69,9 @@ class Step2Controller < RegistrationStep
   def set_up_view_variables
     @registrant.mailing_state ||= @registrant.home_state
     @registrant.prev_state ||= @registrant.home_state
+    
+    
+    @state_id_tooltip = @registrant.state_id_tooltip
     
     @state_parties = @registrant.state_parties
     @race_tooltip = @registrant.race_tooltip
