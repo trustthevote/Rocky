@@ -14,7 +14,7 @@ en:
 
           <strong>Your registration is not yet complete. You are not registered until
           you have turned in your form to your state election officials.</strong><br><br>
-          
+
           %{home_state_email_instructions}
 
           If you have not already done so, <strong>please make sure to PRINT, SIGN,
