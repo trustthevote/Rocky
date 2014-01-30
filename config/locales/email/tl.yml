@@ -9,7 +9,7 @@ tl:
 
           Dapat mong pirmahan, lagyan ng selyo at ihulog sa koreo ang iyong porma.'
         main: ! "Salamat sa pagtatapos ng iyong aplikasyon sa pagrerehistro ng botante.
-          Kung hindi mo pa nagagawa ito, paki-download <a href=\"%{pdf_url}>\" ang
+          Kung hindi mo pa nagagawa ito, paki-download <a href=\"%{pdf_url}>\"> ang
           iyong aplikasyon</a>.<br><br>\n\n<strong>Ang iyong pagrerehistro ay hindi
           pa kumpleto. Hindi ka pa nakarehistro hanggang hindi mo naibibigay ang iyong
           porma sa mga ospisyal ng halalan sa iyong Estado.</strong><br><br>\n\nKung
@@ -79,8 +79,8 @@ tl:
           Kailangan mong pirmahan, lagyan ng selyo &amp; at ipadala sa koreo ang iyong
           porma.'
         main: ! 'Salamat sa pagtapos ng iyong aplikasyon sa pagrerehistro ng botante
-          para sa "Rock the Vote". Maari mong i-download ang iyong aplikasyon<a href="%{pdf_url}">
-          sa pamamagitan ng pag-click dito</a>.<br><br>
+          para sa "Rock the Vote". Maari mong i-download ang iyong aplikasyon <a href="%{pdf_url}">sa
+          pamamagitan ng pag-click dito</a>.<br><br>
 
 
           Isang Paalaala, kung hindi mo pa nagagawa, <strong>mangyaring siguruhin
@@ -165,7 +165,7 @@ tl:
           natapos mo na ang aplikasyon para sa pagrerehistro ng botante online, ito
           ay na-intrega sa opisina ng Kalihim ng Estado ng %{state_name} para maproseso.
           Sa sandaling maaprubahan, makakatanggap ka ng isang kumpirmasyon mula sa
-          opisina ng Kalihim ng Estado sa% {state_abbr} at ang departamento ng halalan
+          opisina ng Kalihim ng Estado sa %{state_abbr} at ang departamento ng halalan
           sa iyong county ay maglalagay ng iyong bagong tarheta ng rehistrasyon sa
           koreo.<br><br>\n\nKung mayroon kang mga katanungan o alalahanin, maaari
           mong matingnan ang katayuan ng iyong pagrerehistro ng botante sa pamamagitan

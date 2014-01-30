@@ -1,6 +1,6 @@
 ---
 ja:
-  language_name: 英語
+  language_name: 日本語
   language_name_translation_instructions: 翻訳された言語の名前をその言語で表示してください。たとえばあなたが日本語を翻訳しているのであれば、
     "日本語"（言語の名前）と日本語で表示してください。
   activerecord:
@@ -78,14 +78,14 @@ ja:
             has_state_license:
               inclusion: あなたが有効な州の免許をもっているかどうか表示してください。
       messages:
-        inclusion: ! '%{attribute}はこのリストに含まれていません。'
-        exclusion: ! '%{attribute}を維持してください。'
+        inclusion: ! '%{attribute} はこのリストに含まれていません。'
+        exclusion: ! '%{attribute} を維持してください。'
         invalid: ! '%{attribute} は無効です。'
-        invalid_for_pdf: ! '%{attribute}英語で提出して下さい。'
-        confirmation: ! '%{attribute}は確認ができません。'
-        accepted: ! '%{attribute}は受付られます。'
-        empty: ! '%{attribute}は空欄にできません。'
-        blank: ! '%{attribute}は空白にできません。'
+        invalid_for_pdf: ! '%{attribute} 英語で提出して下さい。'
+        confirmation: ! '%{attribute} は確認ができません。'
+        accepted: ! '%{attribute} は受付られます。'
+        empty: ! '%{attribute} は空欄にできません。'
+        blank: ! '%{attribute} は空白にできません。'
         too_long: ! '%{attribute} は長過ぎます。最大 %{count} 文字までです。'
         too_short: ! '%{attribute} は短すぎます。最低 %{count} 文字以上です。'
         wrong_length: ! '%{attribute} は間違った長さです。 （ %{count} に文字にしてください。）'

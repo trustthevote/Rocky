@@ -175,4 +175,20 @@ zh-tw:
       received_30_days: 申請表必須至少在選舉前30天收到。
       received_at_least_30_days: 申請表必須至少在選舉前30天收到。
       thirty_days_before: 在選舉前30天
+    pdf_instructions:
+      blank: ''
+      arizona: ! '*請注意首次選民登記申請及近期推動者：您還必須提交證明公民身份在州選舉中投票！如果這是您第一次註冊在亞利桑那州或者您移動到另一個縣，你的選民登記表還必須包括公民身份證明在州選舉（即州長，國務卿，與州議會）投票。否則，你只會被eleigible在聯邦選舉中投票。如果你有一個亞利桑那州的駕駛執照或1996年10月1日之後發行的狀態ID卡，也就是說suffient“公民身份證明”，並沒有其他的文件是必要的。如果沒有，你必須提交“證明公民身份的”隨您的選民登記申請。最常見的“證據”是你的出生證明或護照的複印件。可接受的文件的完整列表可以在網上找到。<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '<b>*請注意首次選民登記申請人：</b>您還必須提交證明公民身份在州選舉中投票！如果這是您第一次註冊在堪薩斯州，你的選民登記表還必須包括公民身份證明在州選舉（即州長，國務卿，與州議會）投票。否則，你只會有資格在聯邦選舉中投票。最常見的“證據”是你的出生證明或護照的複印件，但可以接受文件的完整列表可以在網上找到。<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+    email_instructions:
+      blank: ''
+      arizona: ! '*請注意首次選民登記申請及近期推動者：您還必須提交證明公民身份在州選舉中投票！如果這是您第一次註冊在亞利桑那州或者您移動到另一個縣，你的選民登記表還必須包括公民身份證明在州選舉（即州長，國務卿，與州議會）投票。否則，你只會被eleigible在聯邦選舉中投票。如果你有一個亞利桑那州的駕駛執照或1996年10月1日之後發行的狀態ID卡，也就是說suffient“公民身份證明”，並沒有其他的文件是必要的。如果沒有，你必須提交“證明公民身份的”隨您的選民登記申請。最常見的“證據”是你的出生證明或護照的複印件。可接受的文件的完整列表可以在網上找到。<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '<b>*請注意首次選民登記申請人：</b>您還必須提交證明公民身份在州選舉中投票！如果這是您第一次註冊在堪薩斯州，你的選民登記表還必須包括公民身份證明在州選舉（即州長，國務卿，與州議會）投票。否則，你只會有資格在聯邦選舉中投票。最常見的“證據”是你的出生證明或護照的複印件，但可以接受文件的完整列表可以在網上找到。<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
 

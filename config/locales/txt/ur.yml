@@ -1,7 +1,7 @@
 ---
 ur:
   txt:
-    rtv_and_partner: اپنے ووٹ کا استعمال کریں ۔۔۔۔۔۔ '%{partner_name}'
+    rtv_and_partner: اپنے ووٹ کا استعمال کریں '%{partner_name}'
     button:
       submit: اگلا قدم
       edit: جائزہ
@@ -36,8 +36,14 @@ ur:
       preparing_header: رجسٹریشن فارم کی تیاری جاری ہے
       download_header: اپنے فارم کا پرنٹ نکالیں
       finish_header: لفظ پھیلائیں
+      finish_pdf_delay_header: آپ کا ای میل چیک کریں
+      finish_pdf_delay: اسے ڈاؤن لوڈ کرنے کے لئے اپنے رجسٹریشن فارم تخلیق کرنے کے
+        لئے تھوڑی دیر کے لے جا رہا ہے، لیکن فکر مت کرو. اس کے لئے تیار ہے جب ہم نے
+        آپ کو ایک ای میل بھیج دیں گے. مطلب وقت میں، آپ کو آپ کے دوست وہ بھی ووٹ ڈالنے
+        کے لئے رجسٹر کر سکتے ہیں کس طرح پتہ کر سکتے ہیں.
       finish_under_18_header: آپ کا نام فہرست میں درج ہو گیا ہے
       tell_a_friend_title: اپنے دوست کو ای میل کے ذریعہ مطلع کریں
+      finish_reminder_header: رجسٹر کرنے کے لئے شکریہ!
       finish_reminder: ! 'مسٹر ووٹر رجسٹریشن کی درخواست بھجوانے کا شکریہ۔ آپ کی ریاست
         کی جانب سے آپ کو رجسٹریشن کا تصدیق نامہ مل جائے %{first_name}
 
@@ -91,11 +97,12 @@ ur:
         work: کام کی جگہ
         other: دیگر
       instructions:
-        overseas: ! 'اگر آپ امریکی شہری ہیں لیکن کسی دوسرے ملک میں رہتے ہیںیا فوجی
-          خدمات سرانجام دے رہے ہیں تو اپنے ووٹ کی رجسٹریشن کے لیے اسے کلک کریں
+        overseas: ! '<b>Note</b>: اگر آپ امریکی شہری ہیں لیکن کسی دوسرے ملک میں رہتے
+          ہیں یا فوجی خدمات سرانجام دے رہے ہیں تو اپنے ووٹ کی رجسٹریشن کے لیے اسے
+          کلک کریں
 
-          http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
-          target=''_blank''>'
+          <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>click here</a>'
         opt_in_email: ہم آپ کو انتخابات کے حوالے سے بروقت یاددہانی کا پیغام بھجوا
           دیں گے جس میں آپ کے ووٹ ڈالنے کی جگہ کے علاوہ دوسری ضروری معلومات ہوں گی
         under_18: ! 'ہائے! لگتا ہے آپ ابھی اٹھارہ سال کے نہیں ہوئے۔ کوئی مسئلہ نہیں۔
@@ -103,7 +110,8 @@ ur:
           انتخابات کے انعقاد کے بارے میں الیکشن سینٹر سے رابطہ کے لیے نیچے دی گئی
           ویب سائٹ کا معائنہ کریں
 
-          http://www.rockthevote.com/election-center/" target="_blank" %{state_rule}'
+          <a href="http://www.rockthevote.com/election-center/" target="_blank">Election
+          Center</a>'
         under_18_2: اگر آپ شرائط پر پورے اترتے ہوں تو بٹن دبائیں اور اپنی درخواست
           مکمل کریں
         under_18_3: اگر آپ اس معیار پر پورے نہیں اترتے تو ہم آپ کی اٹھارویں سالگرہ
@@ -204,7 +212,7 @@ ur:
           اٹھارویں سالگرہ سے قبل ووٹر رجسٹریشن کی اجازت دے دیتی ہیں۔ مزید معلومات
           کے لیے نیچے دی گئی ویب سائٹ دیکھیں
 
-          http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html"'
+          <a href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html"'
         registrant_name: خانوں کے اندر اپنا مکمل نام لکھیں۔ مہربانی فرما کر اپنا عرف
           نام یا مختصر نام نہ لکھیں۔ اگر آپ تبدیلی نام کے لیے درخواست دے رہے ہیں تو
           اس درخواست کے دوسرے حصے میں آپ سے آپ کا پہلا نام پوچھا جائے گا۔ اپنے نام
