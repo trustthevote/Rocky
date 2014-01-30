@@ -23,10 +23,10 @@ Feature: Step 5
 
     @passing
     Scenario Outline: Go back as a <state> resident
-      Given I have completed step 3 as a resident of "<state>" state
+      Given I have completed step 4 as a resident of "<state>" state
       When I go to the step 5 page
       And I follow "< Previous Step"
-      Then I should see "Additional Registration Information"
+      Then I should see "Stay Informed and Take Action"
 
       Examples:
         | state      |

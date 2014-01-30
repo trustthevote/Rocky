@@ -1,0 +1,102 @@
+<% content_for :head do %>
+  <script>
+  $(document).ready(function() {
+    checkboxTogglesSet($('#registrant_change_of_name'), $('#prev_name_set'), $('#prev_name_rule'));
+    checkboxTogglesSet($('#registrant_change_of_address'), $('#prev_address_set'), $('#prev_address_rule'));
+    $('#javascript_disabled').remove();
+  });
+  </script>
+<% end %>
+
+
+
+<fieldset class='no_border'>
+  <ul class="checkbox checkbox-with-tooltip">
+    <li class="spacer">&nbsp;</li>
+    <li>
+      <h3><%= form.check_box :change_of_address %> <%= form.label :change_of_address, I18n.t('activerecord.attributes.registrant.change_of_address')%> <%= tooltip_tag(:previous_address) %></h3>
+       
+    </li>
+  </ul>
+</fieldset>
+
+<fieldset id="prev_address_set">
+  <legend><%= I18n.t('txt.registration.previous_address') %></legend>
+  <ul class="stacked">
+    <li class="width_a">
+      <h3><%= form.label :prev_address %></h3>
+      <%= field_div form, :prev_address %>
+      <span class="error"><%= form.object.errors[:prev_address].join("\n") %></span>
+  </li>
+    <li class="width_b">
+      <h3><%= form.label :prev_unit %></h3>
+      <%= field_div form, :prev_unit, :size => 15 %>
+      <span class="error"><%= form.object.errors[:prev_unit].join("\n") %></span>
+    </li>
+  </ul>
+  <ul class="stacked">
+    <li class="width_a">
+      <h3><%= form.label :prev_city %></h3>
+      <%= field_div form, :prev_city %>
+      <span class="error"><%= form.object.errors[:prev_city].join("\n") %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :prev_state_abbrev %></h3>
+      <div><%= form.select :prev_state_abbrev, GeoState.collection_for_select %></div>
+      <span class="error"><%= form.object.errors[:prev_state_abbrev].join("\n") %></span>
+    </li>
+    <li class="width_c">
+      <h3><%= form.label :prev_zip_code %></h3>
+      <%= field_div form, :prev_zip_code, :size => 10, :maxlength => 10 %>
+      <span class="error"><%= form.object.errors[:prev_zip_code].join("\n") %></span>
+    </li>
+  </ul>
+</fieldset>
+
+<hr id="prev_address_rule" style="display:none;" />
+
+<fieldset class='no_border'>
+  <ul class="checkbox checkbox-with-tooltip">
+    <li class="spacer">&nbsp;</li>
+    <li>
+      <h3><%= form.check_box :change_of_name %> <%= form.label :change_of_name, I18n.t('activerecord.attributes.registrant.change_of_name') %> <%= tooltip_tag(:previous_name) %></h3>
+    </li>
+  </ul>
+</fieldset>
+
+<fieldset id="prev_name_set">
+  <%= hidden_field_tag "javascript_disabled", "1"  %>
+  <legend><%= I18n.t('txt.registration.previous_name') %></legend>
+  <ul class="stacked">
+    <li class="width_d">
+      <h3><%= form.label :prev_name_title %></h3>
+      <%= select_div form, :prev_name_title, @registrant.titles, :include_blank => true %>
+      <span class="error"><%= form.object.errors[:prev_name_title].join("\n") %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :prev_first_name %></h3>
+      <%= field_div form, :prev_first_name, :size => 15 %>
+      <span class="error"><%= form.object.errors[:prev_first_name].join("\n") %></span>
+    </li>
+    <li class="width_c">
+      <h3><%= form.label :prev_middle_name %></h3>
+      <%= field_div form, :prev_middle_name, :size => 10 %>
+      <span class="error"><%= form.object.errors[:prev_middle_name].join("\n") %></span>
+    </li>
+    <li class="width_b">
+      <h3><%= form.label :prev_last_name %></h3>
+      <%= field_div form, :prev_last_name, :size => 15 %>
+      <span class="error"><%= form.object.errors[:prev_last_name].join("\n") %></span>
+    </li>
+    <li class="width_d">
+      <h3><%= form.label :prev_name_suffix %></h3>
+      <div><%= form.select :prev_name_suffix,  @registrant.suffixes, :include_blank => t('txt.registration.select_none') %></div>
+      <span class="error"><%= form.object.errors[:prev_name_suffix].join("\n") %></span>
+    </li>
+  </ul>
+</fieldset>
+<%- show_hr = show_hr.nil? ? true : show_hr %>
+<%- if show_hr %>
+  <hr id="prev_name_rule" style="display:none;" />
+<%- end %>
+

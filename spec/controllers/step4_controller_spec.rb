@@ -91,5 +91,15 @@ describe Step4Controller do
       assert assigns[:registrant].reload.step_3?
       assert_template "show"
     end
+    
+    it "should show the state-specific system when registrant_state_online_registration button is pressed" do
+      put :update, :registrant_id => @registrant.to_param, 
+                   :registrant => FactoryGirl.attributes_for(:step_4_registrant, :has_state_license=>true).reject {|k,v| k == :status },
+                   :registrant_state_online_registration => ""
+      assert_not_nil assigns[:registrant]
+      assert assigns[:registrant].step_4?
+      assert assigns[:registrant].using_state_online_registration?
+      assert_redirected_to registrant_state_online_registration_url(assigns[:registrant])
+    end
   end
 end

@@ -57,6 +57,32 @@ $(document).ready(function() {
   </li>
 </ul>
 
+
+
+<ul class="checkbox checkbox-step-1">
+  <li class="spacer">&nbsp;</li>
+  <li>
+    <h3>
+      <%= form.check_box :has_state_license %> <%= form.label :has_state_license %>
+      <span class="error"><%= form.object.errors[:has_state_license].join("\n") %></span>
+      
+    </h3>
+  </li>
+</ul>
+
+<ul class="checkbox checkbox-step-1">
+  <li class="spacer">&nbsp;</li>
+  <li>
+    <h3>
+      <%= form.check_box :will_be_18_by_election %> <%= form.label :will_be_18_by_election %>
+      <span class="error"><%= form.object.errors[:will_be_18_by_election].join("\n") %></span>
+      
+    </h3>
+  </li>
+</ul>
+
+
+
 <ul class="checkbox checkbox-step-1">
   <li class="spacer">&nbsp;</li>
   <li>

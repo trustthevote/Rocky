@@ -43,13 +43,15 @@ Feature: Step 1
          | nO        | should not    |
          
     
-
+    @passing
     Scenario: completing step 1
       When I go to a new registration page
        And I have not set a locale
        And I fill in "Email Address" with "john.public@example.com"
        And I fill in "ZIP Code" with "94113"
        And I am 20 years old
+       And I check "registrant_has_state_license"
+       And I check "registrant_will_be_18_by_election"
        And I check "I am a U.S. citizen"
        And I press "registrant_submit"
       Then I should see "Personal Information"
