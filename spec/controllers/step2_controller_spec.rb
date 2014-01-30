@@ -41,6 +41,8 @@ describe Step2Controller do
       assert assigns[:state_parties]
       assert assigns[:race_tooltip]
       assert assigns[:party_tooltip]
+      assert_equal reg.mailing_state, reg.home_state
+      assert_equal reg.prev_state, reg.home_state
     end
   end
 
@@ -55,6 +57,8 @@ describe Step2Controller do
       assert assigns[:registrant].step_2?
       assert_redirected_to registrant_step_3_url(assigns[:registrant])
     end
+    
+
 
     it "should reject invalid input and show form again" do
       put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_2_registrant, :first_name => nil).reject {|k,v| k == :status }
@@ -70,6 +74,20 @@ describe Step2Controller do
       assert assigns[:registrant].invalid?
       assert_template "show"
     end
+    
+    
+    it "should notice disabled javascript and override has_prev_address" do
+      put :update, :registrant_id => @registrant.to_param,
+                   :registrant => FactoryGirl.attributes_for(:step_2_registrant, :prev_address => "submitted", :change_of_address => "0").reject {|k,v| k == :status },
+                   :javascript_disabled => "1"
+      assert assigns[:registrant].invalid?
+      assert_template "show"
+      put :update, :registrant_id => @registrant.to_param,
+                   :registrant => FactoryGirl.attributes_for(:step_2_registrant, :prev_first_name => "submitted", :change_of_name => "0").reject {|k,v| k == :status },
+                   :javascript_disabled => "1"
+      assert assigns[:registrant].invalid?
+      assert_template "show"
+    end
 
     it "should respect when has_mailing_address is checked and javascript disabled" do
       put :update, :registrant_id => @registrant.to_param,
@@ -79,15 +97,7 @@ describe Step2Controller do
       assert_template "show"
     end
     
-    it "should show the state-specific system when registrant_state_online_registration button is pressed" do
-      put :update, :registrant_id => @registrant.to_param, 
-                   :registrant => FactoryGirl.attributes_for(:step_2_registrant, :has_state_license=>true).reject {|k,v| k == :status },
-                   :registrant_state_online_registration => ""
-      assert_not_nil assigns[:registrant]
-      assert assigns[:registrant].step_2?
-      assert assigns[:registrant].using_state_online_registration?
-      assert_redirected_to registrant_state_online_registration_url(assigns[:registrant])
-    end
+
     
     it "should go to the confirmation page if using a short_form" do
       @registrant.stub(:use_short_form?) { true }      

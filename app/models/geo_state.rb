@@ -26,7 +26,7 @@ class GeoState < ActiveRecord::Base
 
   has_many :localizations, :class_name => 'StateLocalization', :foreign_key => 'state_id'
   
-  delegate :online_reg_url, :to=>:state_customization
+  delegate :online_reg_url, :redirect_to_online_reg_url, :to=>:state_customization
 
   def self.[](id_or_abbrev)
     init_all_states
@@ -88,8 +88,8 @@ class GeoState < ActiveRecord::Base
     @state_customization ||= StateCustomization.for(self)
   end  
   
-  def online_reg_enabled?(reg)
-    GeoState.states_with_online_registration.include?(self.abbreviation) && self.enabled_for_language?(reg.locale)
+  def online_reg_enabled?(locale)
+    GeoState.states_with_online_registration.include?(self.abbreviation) && self.enabled_for_language?(locale)
   end
   
   def enabled_for_language?(lang)

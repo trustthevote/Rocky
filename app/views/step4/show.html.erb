@@ -1,12 +1,17 @@
 <h1><%= t('txt.registration.step_4_header') %></h1>
 
 <%= form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
-  <div class="step-4">
-    <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
-  </div>
+  <%- if @registrant.in_ovr_flow? %>
+    <%= render :partial=> @registrant.custom_step_4_partial, :locals=>{:form=>form} %>
+  <%- else %>
+    <div class="step-4">
+      <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
+      <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
 
-  <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
+    </div>
 
-  <%= rollover_button(:review, I18n.t('txt.button.review')) %>
+    <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
+    <%= rollover_button(:review, I18n.t('txt.button.review')) %>
+  <%- end %>
   <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_3_path(@registrant) %></div>
 <% end %>

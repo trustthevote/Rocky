@@ -117,10 +117,7 @@
   </ul>
 
   <%= rollover_button(:prepare, I18n.t('txt.button.prepare')) %>
-  <%- if @registrant.custom_step_2? %>
-    <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_3_path(@registrant) %></div>
-  <%- else %>
-    <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_4_path(@registrant) %></div>
-  <%- end %>
+
+  <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_4_path(@registrant) %></div>
   
 <% end %>

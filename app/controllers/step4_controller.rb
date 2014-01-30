@@ -24,6 +24,11 @@
 #***** END LICENSE BLOCK *****
 class Step4Controller < RegistrationStep
   CURRENT_STEP = 4
+  
+  def update
+    params[:registrant][:using_state_online_registration] = !params[:registrant_state_online_registration].nil?
+    super
+  end
 
   protected
 
@@ -32,10 +37,21 @@ class Step4Controller < RegistrationStep
   end
 
   def next_url
-    registrant_step_5_url(@registrant)
+    if @registrant.using_state_online_registration?
+      registrant_state_online_registration_url(@registrant)
+    else
+      registrant_step_5_url(@registrant)
+    end
   end
 
   def set_up_view_variables
+    @state_id_tooltip = @registrant.state_id_tooltip
+    
+    @state_parties = @registrant.state_parties
+    @race_tooltip = @registrant.race_tooltip
+    @party_tooltip = @registrant.party_tooltip
+    
+    
     @question_1 = @registrant.partner.send("survey_question_1_#{@registrant.locale}")
     @question_2 = @registrant.partner.send("survey_question_2_#{@registrant.locale}")
   end

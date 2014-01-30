@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140124174157) do
+ActiveRecord::Schema.define(:version => 20140125001349) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20140124174157) do
   add_index "email_templates", ["partner_id", "name"], :name => "index_email_templates_on_partner_id_and_name", :unique => true
 
   create_table "geo_states", :force => true do |t|
-    t.string   "name",                    :limit => 21
-    t.string   "abbreviation",            :limit => 2
+    t.string   "name",                                :limit => 21
+    t.string   "abbreviation",                        :limit => 2
     t.boolean  "requires_race"
     t.boolean  "requires_party"
     t.boolean  "participating"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20140124174157) do
     t.datetime "updated_at"
     t.string   "registrar_url"
     t.string   "online_registration_url"
+    t.boolean  "redirect_to_online_registration_url"
   end
 
   create_table "partners", :force => true do |t|
@@ -179,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20140124174157) do
     t.boolean  "building_via_api_call",                            :default => false
     t.boolean  "short_form",                                       :default => false
     t.string   "collect_email_address"
+    t.boolean  "will_be_18_by_election"
   end
 
   add_index "registrants", ["abandoned"], :name => "index_registrants_on_abandoned"

@@ -67,29 +67,7 @@ describe Step3Controller do
       assert_template "show"
     end
 
-    it "should notice disabled javascript and override has_mailing_address" do
-      put :update, :registrant_id => @registrant.to_param,
-                   :registrant => FactoryGirl.attributes_for(:step_3_registrant, :prev_address => "submitted", :change_of_address => "0").reject {|k,v| k == :status },
-                   :javascript_disabled => "1"
-      assert assigns[:registrant].invalid?
-      assert_template "show"
-      put :update, :registrant_id => @registrant.to_param,
-                   :registrant => FactoryGirl.attributes_for(:step_3_registrant, :prev_first_name => "submitted", :change_of_name => "0").reject {|k,v| k == :status },
-                   :javascript_disabled => "1"
-      assert assigns[:registrant].invalid?
-      assert_template "show"
-    end
 
     
-    context "for a WA state registrant" do
-      it "skips step 4" do
-        @registrant.stub(:custom_step_2?) { true }
-        Registrant.stub(:find_by_param!) { @registrant }
-        put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant).reject {|k,v| k == :status }
-        assert_not_nil assigns[:registrant]
-        assert assigns[:registrant].step_4?
-        assert_redirected_to registrant_step_5_url(assigns[:registrant])
-      end
-    end
   end
 end
