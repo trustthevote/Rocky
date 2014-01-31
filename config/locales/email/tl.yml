@@ -9,10 +9,10 @@ tl:
 
           Dapat mong pirmahan, lagyan ng selyo at ihulog sa koreo ang iyong porma.'
         main: ! "Salamat sa pagtatapos ng iyong aplikasyon sa pagrerehistro ng botante.
-          Kung hindi mo pa nagagawa ito, paki-download <a href=\"%{pdf_url}>\"> ang
+          Kung hindi mo pa nagagawa ito, paki-download <a href=\"%{pdf_url}\"> ang
           iyong aplikasyon</a>.<br><br>\n\n<strong>Ang iyong pagrerehistro ay hindi
           pa kumpleto. Hindi ka pa nakarehistro hanggang hindi mo naibibigay ang iyong
-          porma sa mga ospisyal ng halalan sa iyong Estado.</strong><br><br>\n\nKung
+          porma sa mga ospisyal ng halalan sa iyong Estado.</strong><br><br>\n\n%{home_state_email_instructions}\n\nKung
           hindi mo pa nagagawa, <strong> mangyaring siguruhin na MA-IMPRENTA, MALAGDAAN,
           MASELYOHAN, at MAIHULOG SA KOREO ang iyong porma sa tirahan na nakalagay
           sa porma at ipinakikita sa ilalim.</strong><br><br>\n\n%{registrar_address}<br><br>\nKung

@@ -9,9 +9,9 @@ ilo:
 
           Dayta pirmaan, iccam ti selyo &amp;, ket ibuson mo diay koreo iti porma.'
         main: ! "Dios ti agngina te napalmon ta aplikasyon mo nga agbuto, no dika
-          pay sigurado i-download mo laeng diay <a href=\"%{pdf_url}>\">dayta applikasyon
+          pay sigurado i-download mo laeng diay <a href=\"%{pdf_url}\">dayta applikasyon
           mo </a>.<br><br>\n\n<strong>Saan nga completo ti rehistrasyon mo. Saan ka
-          nga rehistrado inggana no maited mo ti porma kadagiti opisyales ti eleksyon.</strong><br><br>\n\nNo
+          nga rehistrado inggana no maited mo ti porma kadagiti opisyales ti eleksyon.</strong><br><br>\n\n%{home_state_email_instructions}\n\nNo
           saan pay nga naaramid, <strong>isigurum nga NASURATAN, NAPIRMAAN, NAIKKAN
           iti selyo ken naibuson mo idiay address nga nakasurat iti baba ti porma.</strong><br><br>\n\n%{registrar_address}<br><br>\nNo
           naibuson mo ti porma, mabalin <a href=\"%{cancel_reminders_url}\"> mo nga

@@ -9,9 +9,9 @@ vi:
 
           Bạn phải ký tên, dán tem &amp; gởi mẫu đơn cuả bạn đi.'
         main: ! "Xin cảm ơn việc hoàn thành đơn xin đăng ký cử tri của bạn. Nếu bạn
-          chưa đăng ký, vui lòng tải <a href=\"%{pdf_url}>\"> đơn xin của bạn</a>.<br><br>\n\n<strong>Việc
+          chưa đăng ký, vui lòng tải <a href=\"%{pdf_url}\"> đơn xin của bạn</a>.<br><br>\n\n<strong>Việc
           đăng ký của bạn chưa được hoàn thành. Bạn không được đăng ký cho đến khi
-          bạn nộp mẫu đơn của mình đến các quan chức bầu cử bang. </strong><br><br>\n\nNếu
+          bạn nộp mẫu đơn của mình đến các quan chức bầu cử bang. </strong><br><br>\n\n%{home_state_email_instructions}\n\nNếu
           bạn chưa làm như vậy, <strong> hãy nhớ IN RA, KÝ TÊN, DÁN TEM, và GỞI mẫu
           đơn của bạn đến địa chỉ được cung cấp trên mẫu và biểu thị bên dưới. </strong><br><br>\n\n%{registrar_address}<br><br>\n\nNếu
           bạn đã gửi mẫu của bạn rồi, bạn có thể <a href=\"%{cancel_reminders_url}\">nhấp
