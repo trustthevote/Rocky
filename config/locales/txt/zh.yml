@@ -34,8 +34,11 @@ zh:
       preparing_header: 准备登记表格
       download_header: 打印您的申请表
       finish_header: 传播消息！
+      finish_pdf_delay_header: 请检查您的电子邮件地址
+      finish_pdf_delay: 它的服用一段时间来建立您的报名表下载，但不要担心。我们会当它准备向您发送电子邮件。在此同时，你可以让你的朋友知道他们如何能登记投票了。
       finish_under_18_header: 您登记在名单上了！
       tell_a_friend_title: 发电子邮件告诉您的朋友！
+      finish_reminder_header: 感谢您注册！
       finish_reminder: ! '%{first_name}， 感谢您提交选民登记申请表！您将会收到从州官员那里发出的确认您的申请的信息。这个过程有时候会需要几个星期。'
       finish_reminder_2: 如果您想要查询您的选民登记申请表的状态，您可以通过网站： <a href="http://www.rockthevote.com/election-center/"
         target="_blank">选举中心</a>上找到您的州务卿的联系方式。
