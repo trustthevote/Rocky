@@ -9,13 +9,15 @@ en:
 
           You must sign, stamp &amp; mail your form.'
         main: ! 'Thanks for completing your voter registration application. If you
-          have not already done so, please download <a href="%{pdf_url}>">your application</a>.<br><br>
+          have not already done so, please download <a href="%{pdf_url}">your application</a>.<br><br>
 
 
           <strong>Your registration is not yet complete. You are not registered until
           you have turned in your form to your state election officials.</strong><br><br>
-          
+
+
           %{home_state_email_instructions}
+
 
           If you have not already done so, <strong>please make sure to PRINT, SIGN,
           STAMP, and MAIL your form to the address provided on the form and shown

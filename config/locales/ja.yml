@@ -1,8 +1,37 @@
 ---
 ja:
-  language_name: 英語
+  language_name: 日本語
   language_name_translation_instructions: 翻訳された言語の名前をその言語で表示してください。たとえばあなたが日本語を翻訳しているのであれば、
     "日本語"（言語の名前）と日本語で表示してください。
+  locales:
+    bn:
+      name: バングラディッシュ語
+    en:
+      name: 英語
+    es:
+      name: スペイン語
+    hi:
+      name: ヒンドゥー語
+    ilo:
+      name: イロカノ語
+    ja:
+      name: 日本語
+    km:
+      name: カンボジア語
+    ko:
+      name: 韓国語
+    th:
+      name: タイ語
+    tl:
+      name: タガログ語
+    ur:
+      name: ウルドゥー語
+    vi:
+      name: ベトナム語
+    zh-tw:
+      name: 中国語（国語）
+    zh:
+      name: 中国語（簡体）
   activerecord:
     attributes:
       partner:

@@ -2,6 +2,35 @@
 ur:
   language_name: اردو
   language_name_translation_instructions: اردو
+  locales:
+    bn:
+      name: بنگالی
+    en:
+      name: انگریزی
+    es:
+      name: ہسپانوی
+    hi:
+      name: ہندی
+    ilo:
+      name: الوکانو
+    ja:
+      name: جاپانی
+    km:
+      name: خمر
+    ko:
+      name: کورین
+    th:
+      name: تھائی
+    tl:
+      name: تیگلوگ
+    ur:
+      name: اردو
+    vi:
+      name: ویتنامی
+    zh-tw:
+      name: (چینی  (علاقائی
+    zh:
+      name: (چینی (عام
   activerecord:
     attributes:
       partner:
@@ -83,7 +112,7 @@ ur:
         inclusion: فیصد تناسب اس فہرست میں شامل نہیں ہے %{attribute}
         exclusion: فیصد تناسب محفوظ %{attribute}
         invalid: نامکمل / ناقابل قبول %{attribute}
-        invalid_for_pdf: ! '%{attribute} must be provided in English'
+        invalid_for_pdf: لازمی طور پر انگریزی میں لکھا جائے%{attribute}
         confirmation: تصدیق کے معیار پرپورا نہیں اترتا %{attribute}
         accepted: لازمی طور پر تسلیم کیا جائے %{attribute}
         empty: خالی نہ چھوڑیں %{attribute}

@@ -473,4 +473,60 @@ es:
       received_30_days: Recibido 30 días antes de las elecciones
       received_at_least_30_days: Al menos 30 días antes de las elecciones
       thirty_days_before: 30 Días antes de las elecciones
+    pdf_instructions:
+      blank: ''
+      arizona: ! '<b>* Nota para el Primer Tiempo Registro de Votantes Applicatns
+        Y Movers recientes: debe acompañar la prueba de la ciudadanía a votar en las
+        elecciones estatales!</b><br/><i>Si esta es tu primera vez que se inscribe
+        en Arizona o ha mudado a otro condado, el formulario de inscripción de votante
+        también debe incluir prueba de ciudadanía para votar en las elecciones estatales
+        (es decir, el gobernador, el secretario de Estado, y la legislatura del estado).
+        De lo contrario, sólo serán eleigible para votar en las elecciones federales.
+        Si usted tiene una licencia de conducir o tarjeta de identificación AZ emitida
+        por el estado después de 10/1/1996, que es suffient "prueba de ciudadanía"
+        y no se necesita otra documentación. Si no, usted debe presentar "prueba de
+        ciudadanía", junto con su solicitud de registro de votantes. La "prueba" más
+        común es una fotocopia de su certificado de nacimiento o pasaporte. Una lista
+        completa de la documentación aceptable puede ser encontrada en línea.</i><br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '<b>* Nota para los solicitantes de registro de la primera vez del
+        votante: Debe acompañar la prueba de la ciudadanía a votar en las elecciones
+        estatales!</b><br/><i>Si esta es la primera vez que registrarse en Kansas,
+        el formulario de registro de votante también debe incluir prueba de ciudadanía
+        para votar en las elecciones estatales (es decir, el gobernador, el secretario
+        de Estado, y la legislatura del estado). De lo contrario, sólo serán elegibles
+        para votar en las elecciones federales. La "prueba" más común es una fotocopia
+        de su certificado de nacimiento o pasaporte, pero la lista completa de los
+        documentos aceptables se puede encontrar en línea.</i><br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+    email_instructions:
+      blank: ''
+      arizona: ! '<b>* Nota para el Primer Tiempo Registro de Votantes Applicatns
+        Y Movers recientes: debe acompañar la prueba de la ciudadanía a votar en las
+        elecciones estatales!</b><br/><i>Si esta es tu primera vez que se inscribe
+        en Arizona o ha mudado a otro condado, el formulario de inscripción de votante
+        también debe incluir prueba de ciudadanía para votar en las elecciones estatales
+        (es decir, el gobernador, el secretario de Estado, y la legislatura del estado).
+        De lo contrario, sólo serán eleigible para votar en las elecciones federales.
+        Si usted tiene una licencia de conducir o tarjeta de identificación AZ emitida
+        por el estado después de 10/1/1996, que es suffient "prueba de ciudadanía"
+        y no se necesita otra documentación. Si no, usted debe presentar "prueba de
+        ciudadanía", junto con su solicitud de registro de votantes. La "prueba" más
+        común es una fotocopia de su certificado de nacimiento o pasaporte. Una lista
+        completa de la documentación aceptable puede ser encontrada en línea.</i><br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '<b>* Nota para los solicitantes de registro de la primera vez del
+        votante: Debe acompañar la prueba de la ciudadanía a votar en las elecciones
+        estatales!</b><br/><i>Si esta es la primera vez que registrarse en Kansas,
+        el formulario de registro de votante también debe incluir prueba de ciudadanía
+        para votar en las elecciones estatales (es decir, el gobernador, el secretario
+        de Estado, y la legislatura del estado). De lo contrario, sólo serán elegibles
+        para votar en las elecciones federales. La "prueba" más común es una fotocopia
+        de su certificado de nacimiento o pasaporte, pero la lista completa de los
+        documentos aceptables se puede encontrar en línea.</i><br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
 

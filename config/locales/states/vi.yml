@@ -484,4 +484,58 @@ vi:
       received_30_days: 30 ngày trước cuộc bầu cử
       received_at_least_30_days: 30 ngày trước cuộc bầu cử
       thirty_days_before: 30 ngày trước cuộc bầu cử
+    pdf_instructions:
+      blank: ''
+      arizona: ! '* Lưu ý cho lần đầu tiên cử tri đăng ký nộp đơn và Movers gần đây:
+        Bạn CŨNG phải nộp bằng chứng về quyền công dân bỏ phiếu trong cuộc bầu cử
+        nhà nước! Nếu đây là lần đầu tiên bạn đăng ký ở Arizona hoặc bạn đã chuyển
+        sang quận khác, hình thức đăng ký cử tri của bạn cũng phải bao gồm bằng chứng
+        của quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước (ví dụ: Thống đốc,
+        Bộ trưởng Ngoại giao, và cơ quan lập pháp nhà nước). Nếu không, bạn sẽ chỉ
+        được eleigible bỏ phiếu trong cuộc bầu cử liên bang. Nếu bạn có một giấy phép
+        lái xe hoặc thẻ ID AZ nhà nước ban hành sau khi 1996/10/01, đó là suffient
+        "bằng chứng về quốc tịch" và không có tài liệu khác là cần thiết. Nếu không,
+        bạn phải nộp bằng chứng "của công dân" cùng với đơn đăng ký cử tri của bạn.
+        Phổ biến nhất "bằng chứng" là một bản sao giấy khai sinh hoặc hộ chiếu. Một
+        danh sách đầy đủ các tài liệu có thể chấp nhận có thể được tìm thấy trực tuyến.<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '* Lưu ý cho nộp đơn đăng ký lần đầu tiên cử tri: Bạn CŨNG phải nộp
+        bằng chứng về quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước! Nếu đây
+        là lần đầu tiên bạn đăng ký ở Kansas, mẫu đăng ký cử tri của bạn cũng phải
+        bao gồm bằng chứng của quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước
+        (ví dụ: Thống đốc, Bộ trưởng Ngoại giao, và cơ quan lập pháp nhà nước). Nếu
+        không, bạn sẽ chỉ có đủ điều kiện để bỏ phiếu trong cuộc bầu cử liên bang.
+        Phổ biến nhất "bằng chứng" là một bản sao giấy khai sinh hoặc hộ chiếu, nhưng
+        một danh sách đầy đủ các tài liệu có thể chấp nhận có thể được tìm thấy trực
+        tuyến.<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+    email_instructions:
+      blank: ''
+      arizona: ! '* Lưu ý cho lần đầu tiên cử tri đăng ký nộp đơn và Movers gần đây:
+        Bạn CŨNG phải nộp bằng chứng về quyền công dân bỏ phiếu trong cuộc bầu cử
+        nhà nước! Nếu đây là lần đầu tiên bạn đăng ký ở Arizona hoặc bạn đã chuyển
+        sang quận khác, hình thức đăng ký cử tri của bạn cũng phải bao gồm bằng chứng
+        của quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước (ví dụ: Thống đốc,
+        Bộ trưởng Ngoại giao, và cơ quan lập pháp nhà nước). Nếu không, bạn sẽ chỉ
+        được eleigible bỏ phiếu trong cuộc bầu cử liên bang. Nếu bạn có một giấy phép
+        lái xe hoặc thẻ ID AZ nhà nước ban hành sau khi 1996/10/01, đó là suffient
+        "bằng chứng về quốc tịch" và không có tài liệu khác là cần thiết. Nếu không,
+        bạn phải nộp bằng chứng "của công dân" cùng với đơn đăng ký cử tri của bạn.
+        Phổ biến nhất "bằng chứng" là một bản sao giấy khai sinh hoặc hộ chiếu. Một
+        danh sách đầy đủ các tài liệu có thể chấp nhận có thể được tìm thấy trực tuyến.<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '* Lưu ý cho nộp đơn đăng ký lần đầu tiên cử tri: Bạn CŨNG phải nộp
+        bằng chứng về quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước! Nếu đây
+        là lần đầu tiên bạn đăng ký ở Kansas, mẫu đăng ký cử tri của bạn cũng phải
+        bao gồm bằng chứng của quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước
+        (ví dụ: Thống đốc, Bộ trưởng Ngoại giao, và cơ quan lập pháp nhà nước). Nếu
+        không, bạn sẽ chỉ có đủ điều kiện để bỏ phiếu trong cuộc bầu cử liên bang.
+        Phổ biến nhất "bằng chứng" là một bản sao giấy khai sinh hoặc hộ chiếu, nhưng
+        một danh sách đầy đủ các tài liệu có thể chấp nhận có thể được tìm thấy trực
+        tuyến.<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
 

@@ -178,4 +178,20 @@ zh:
       received_30_days: 申请表必须在选举前30天收到
       received_at_least_30_days: 申请表必须至少在选举前30天收到
       thirty_days_before: 在选举前30天
+    pdf_instructions:
+      blank: ''
+      arizona: ! '*请注意首次选民登记申请及近期推动者：您还必须提交证明公民身份在州选举中投票！如果这是您第一次注册在亚利桑那州或者您移动到另一个县，你的选民登记表还必须包括公民身份证明在州选举（即州长，国务卿，与州议会）投票。否则，你只会被eleigible在联邦选举中投票。如果你有一个亚利桑那州的驾驶执照或1996年10月1日之后发行的状态ID卡，也就是说suffient“公民身份证明”，并没有其他的文件是必要的。如果没有，你必须提交“证明公民身份的”随您的选民​​登记申请。最常见的“证据”是你的出生证明或护照的复印件。可接受的文件的完整列表可以在网上找到。<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>.'
+      kansas: ! '*请注意首次选民登记申请人：您还必须提交证明公民身份在州选举中投票！如果这是您第一次注册在堪萨斯州，你的选民登记表还必须包括公民身份证明在州选举（即州长，国务卿，与州议会）投票。否则，你只会有资格在联邦选举中投票。最常见的“证据”是你的出生证明或护照的复印件，但可以接受文件的完整列表可以在网上找到。<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+    email_instructions:
+      blank: ''
+      arizona: ! '*请注意首次选民登记申请及近期推动者：您还必须提交证明公民身份在州选举中投票！如果这是您第一次注册在亚利桑那州或者您移动到另一个县，你的选民登记表还必须包括公民身份证明在州选举（即州长，国务卿，与州议会）投票。否则，你只会被eleigible在联邦选举中投票。如果你有一个亚利桑那州的驾驶执照或1996年10月1日之后发行的状态ID卡，也就是说suffient“公民身份证明”，并没有其他的文件是必要的。如果没有，你必须提交“证明公民身份的”随您的选民​​登记申请。最常见的“证据”是你的出生证明或护照的复印件。可接受的文件的完整列表可以在网上找到。<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>.'
+      kansas: ! '*请注意首次选民登记申请人：您还必须提交证明公民身份在州选举中投票！如果这是您第一次注册在堪萨斯州，你的选民登记表还必须包括公民身份证明在州选举（即州长，国务卿，与州议会）投票。否则，你只会有资格在联邦选举中投票。最常见的“证据”是你的出生证明或护照的复印件，但可以接受文件的完整列表可以在网上找到。<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
 

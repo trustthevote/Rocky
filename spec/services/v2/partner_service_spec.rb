@@ -43,7 +43,7 @@ describe V2::PartnerService do
     end
     it 'should return all data' do
       partner = FactoryGirl.create(:whitelabel_partner)
-      V2::PartnerService.find(:partner_id => partner.id, :partner_api_key => partner.api_key).should == {
+      expected_response = {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
         :contact_name             => partner.name,
@@ -54,10 +54,6 @@ describe V2::PartnerService do
         :contact_state            => partner.state_abbrev,
         :contact_ZIP              => partner.zip_code,
         :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
-        :survey_question_1_en     => partner.survey_question_1_en,
-        :survey_question_2_en     => partner.survey_question_2_en,
-        :survey_question_1_es     => partner.survey_question_1_es,
-        :survey_question_2_es     => partner.survey_question_2_es,
         :whitelabeled             => partner.whitelabeled?,
         :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
         :partner_ask_email_opt_in => partner.partner_email_opt_in?,
@@ -66,19 +62,24 @@ describe V2::PartnerService do
         :rtv_ask_volunteer        => partner.ask_for_volunteers?,
         :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
       }
+      
+      RockyConf.enabled_locales.each do |loc|
+        expected_response["survey_question_1_#{loc}".to_sym] = partner.send("survey_question_1_#{loc}")
+        expected_response["survey_question_2_#{loc}".to_sym] = partner.send("survey_question_2_#{loc}")
+      end
+      
+      V2::PartnerService.find(:partner_id => partner.id, :partner_api_key => partner.api_key).should == expected_response 
+      
     end
 
     it 'should return only public data' do
       partner = FactoryGirl.create(:whitelabel_partner)
-      V2::PartnerService.find({ :partner_id => partner.id, :partner_api_key => partner.api_key }, true).should == {
+      
+      expected_response = {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
         :org_privacy_url          => partner.privacy_url,
         :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
-        :survey_question_1_en     => partner.survey_question_1_en,
-        :survey_question_2_en     => partner.survey_question_2_en,
-        :survey_question_1_es     => partner.survey_question_1_es,
-        :survey_question_2_es     => partner.survey_question_2_es,
         :whitelabeled             => partner.whitelabeled?,
         :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
         :partner_ask_email_opt_in => partner.partner_email_opt_in?,
@@ -87,6 +88,13 @@ describe V2::PartnerService do
         :rtv_ask_volunteer        => partner.ask_for_volunteers?,
         :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
       }
+      
+      RockyConf.enabled_locales.each do |loc|
+        expected_response["survey_question_1_#{loc}".to_sym] = partner.send("survey_question_1_#{loc}")
+        expected_response["survey_question_2_#{loc}".to_sym] = partner.send("survey_question_2_#{loc}")
+      end
+      
+      V2::PartnerService.find({ :partner_id => partner.id, :partner_api_key => partner.api_key }, true).should == expected_response
     end
   end
 

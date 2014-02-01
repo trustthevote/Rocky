@@ -481,52 +481,97 @@ hi:
       17_turn_18: agar aapki umar 17 saal hai aur aapk agle chunav se pehle 18 varsh
         ke ho jayenge
     registration_deadline:
-      california: postmarked or submitted to an elections office (or NVRA voter registration
-        agency) on or before 15 days prior to Election Day (to vote in that election)
-      connecticut: postmarked 14 days before the election or received in person 7
-        days before the election
-      delaware: postmarked by the fourth Saturday before a general or primary election,
-        or 10 days before a special election
-      georgia: postmarked by the fifth Monday before the election
-      iowa: received in-person 10 days before General and Primary Elections (11 days
-        before all other elections), or postmarked 15 days before Election Day.
-      kansas: postmarked 21 days before the election if mailed, received at the county
-        office 21 days before the election if delivered in person.
-      missouri: received before 5pm (or normal close of business) on the fourth Wednesday
-        prior to the election
-      new_york: postmarked 25 days before the election and received no less than 20
-        days before the election
-      nebraska: postmarked by the third Friday before the election, or received in-person
-        by 6pm on the second Friday before the election
-      nevada: postmarked by 31 days before the election, or submitted online by 21
-        days before an election, or received in-person at a clerk's office 21 days
-        before an election.
-      rhode_island: received 30 days before the election. Mailed voter registration
-        forms received after the deadline will be accepted as long as the mail is
-        postmarked on or before the voter registration deadline.
-      utah: postmarked 30 days before the election, or received in person 15 days
-        before the election
-      vermont: received by 5pm on the Wednesday before the election
-      washington: postmarked by the Monday four weeks before the election, or received
-        in person at the county elections department the Monday one week before the
-        election
-      postmarked_11_days: postmarked by the Monday four weeks before the election,
-        or received in person at the county elections department the Monday one week
-        before the election
-      postmarked_20_days: postmarked 20 days before the election
-      postmarked_21_days: postmarked 21 days before the election
-      postmarked_25_days: postmarked 25 days before the election
-      postmarked_28_days: postmarked 28 days before the election
-      postmarked_29_days: postmarked 29 days before the election
-      postmarked_30_days: postmarked 30 days before the election
-      received_10_days: chunav ke 10 din pehle
-      received_14_days: chunav ke 14 din pehle
-      received_15_days: chunav ke 15 din pehle
-      received_21_days: chunav ke 21 din pehle
-      received_22_days: chunav ke 22 din pehle
-      received_25_days: chunav ke 25 din pehle
-      received_29_days: chunav ke 29 din pehle
-      received_30_days: chunav ke 30 din pehle
-      received_at_least_30_days: chunav ke 30 din pehle
+      california: पोस्टमार्क या (है कि चुनाव में वोट करने के लिए) से पहले चुनाव के
+        दिन के लिए 15 दिन या उससे पहले एक चुनाव कार्यालय (या NVRA मतदाता पंजीकरण एजेंसी)
+        को प्रस्तुत
+      connecticut: 14 दिनों के चुनाव से पहले या 7 दिनों चुनाव से पहले व्यक्ति में
+        प्राप्त पोस्टमार्क
+      delaware: एक सामान्य या प्राथमिक चुनाव से पहले, या 10 दिनों के एक विशेष चुनाव
+        से पहले चौथे शनिवार से पोस्टमार्क
+      georgia: चुनाव से पहले पांचवें सोमवार तक पोस्टमार्क
+      iowa: (11 दिनों के अन्य सभी चुनाव से पहले) सामान्य और प्राथमिक चुनावों से पहले
+        10 दिनों में व्यक्ति प्राप्त, या चुनाव के दिन से पहले 15 दिनों पोस्टमार्क.
+      kansas: व्यक्ति में दिया अगर पोस्टमार्क 21 दिन चुनाव से पहले भेज दिया, तो 21
+        दिनों के चुनाव से पहले काउंटी कार्यालय में प्राप्त किया.
+      missouri: पिछले चुनाव के चौथे बुधवार को 5:00 (या व्यापार के सामान्य के करीब)
+        से पहले प्राप्त
+      new_york: 25 दिनों के चुनाव से पहले पोस्टमार्क और कोई कम से कम 20 दिनों के चुनाव
+        से पहले प्राप्त
+      nebraska: चुनाव से पहले तीसरे शुक्रवार से पोस्टमार्क, या चुनाव से पहले दूसरे
+        शुक्रवार को 6:00 से व्यक्ति प्राप्त
+      nevada: चुनाव से पहले 31 दिनों से डाक द्वारा, या एक चुनाव से पहले 21 दिनों से
+        ऑनलाइन प्रस्तुत, या 21 दिनों के एक चुनाव से पहले एक क्लर्क के कार्यालय में
+        व्यक्तिगत रूप से प्राप्त किया.
+      rhode_island: 30 दिनों के चुनाव से पहले प्राप्त किया. समय सीमा के बाद प्राप्त
+        प्रेषित मतदाता पंजीकरण फार्म के रूप में लंबे समय से मेल मतदाता पंजीकरण की
+        समय सीमा पर या उससे पहले डाक रहा है के रूप में स्वीकार किया जाएगा.
+      utah: 30 दिन चुनाव उससे पहले डाक, या 15 दिनों के चुनाव से पहले व्यक्ति में प्राप्त
+      vermont: चुनाव से पहले बुधवार को 5:00 से प्राप्त की
+      washington: चुनाव, या चुनाव से पहले सोमवार से एक सप्ताह काउंटी चुनावों विभाग
+        में व्यक्ति में प्राप्त से पहले सोमवार को चार सप्ताह से पोस्टमार्क
+      postmarked_11_days: 11 दिनों के चुनाव से पहले पोस्टमार्क
+      postmarked_20_days: 20 दिनों के चुनाव से पहले पोस्टमार्क
+      postmarked_21_days: 21 दिनों के चुनाव से पहले पोस्टमार्क
+      postmarked_25_days: 25 दिनों के चुनाव से पहले पोस्टमार्क
+      postmarked_28_days: 28 दिनों के चुनाव से पहले पोस्टमार्क
+      postmarked_29_days: 29 दिन चुनाव से पहले पोस्टमार्क
+      postmarked_30_days: 30 दिनों के चुनाव से पहले पोस्टमार्क
+      received_10_days: 10 दिनों के चुनाव से पहले प्राप्त
+      received_14_days: 14 दिनों के चुनाव से पहले प्राप्त
+      received_15_days: 15 दिनों के चुनाव से पहले प्राप्त
+      received_21_days: 21 दिनों के चुनाव से पहले प्राप्त
+      received_22_days: 22 दिनों के चुनाव से पहले प्राप्त
+      received_25_days: 25 दिनों के चुनाव से पहले प्राप्त
+      received_29_days: 29 दिन चुनाव से पहले प्राप्त
+      received_30_days: 30 दिनों के चुनाव से पहले प्राप्त
+      received_at_least_30_days: कम से कम 30 दिनों के चुनाव से पहले प्राप्त
       thirty_days_before: chunav ke 30 din pehle
+    pdf_instructions:
+      blank: ''
+      arizona: ! '* पहली बार मतदाता पंजीकरण आवेदकों और हाल ही में आवागमन के लिए नोट:
+        आप भी विधानसभा चुनावों में मतदान करने के लिए नागरिकता का प्रमाण प्रस्तुत करना
+        होगा! इस एरिजोना में पंजीबद्ध आपकी पहली बार है या आप किसी अन्य काउंटी में
+        स्थानांतरित कर दिया है, तो अपने मतदाता पंजीकरण फार्म भी राज्य चुनाव (यानी
+        राज्यपाल, राज्य के सचिव, एवं राज्य विधायिका) में वोट करने के लिए नागरिकता
+        का सबूत शामिल करना चाहिए. नहीं तो आप केवल संघीय चुनाव में मतदान करने के लिए
+        eleigible हो जाएगा. आप एक AZ चालक लाइसेंस या 1996/10/01 के बाद जारी किए गए
+        राज्य आईडी कार्ड है, कि suffient "नागरिकता का सबूत ''है और कोई अन्य दस्तावेज
+        की जरूरत है. यदि नहीं, तो आप अपने मतदाता पंजीकरण आवेदन के साथ "नागरिकता का
+        सबूत ''प्रस्तुत करना होगा. सबसे आम ''सबूत'' अपने जन्म प्रमाण पत्र या पासपोर्ट
+        की फोटोकॉपी है. स्वीकार्य दस्तावेज की एक पूरी सूची ऑनलाइन पाया जा सकता है.<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '* पहली बार मतदाता पंजीकरण आवेदकों के लिए नोट: आप भी विधानसभा चुनावों
+        में मतदान करने के लिए नागरिकता का प्रमाण प्रस्तुत करना होगा! इस केन्सास में
+        दर्ज की आपकी पहली बार है, अपने मतदाता पंजीकरण फार्म भी राज्य चुनाव (यानी राज्यपाल,
+        राज्य के सचिव, एवं राज्य विधायिका) में वोट करने के लिए नागरिकता का सबूत शामिल
+        करना चाहिए. नहीं तो आप केवल संघीय चुनाव में मतदान करने के पात्र होंगे. सबसे
+        आम ''सबूत'' अपने जन्म प्रमाण पत्र या पासपोर्ट की फोटोकॉपी है, लेकिन स्वीकार्य
+        दस्तावेज की एक पूरी सूची ऑनलाइन पाया जा सकता है.<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+    email_instructions:
+      blank: ''
+      arizona: ! '* पहली बार मतदाता पंजीकरण आवेदकों और हाल ही में आवागमन के लिए नोट:
+        आप भी विधानसभा चुनावों में मतदान करने के लिए नागरिकता का प्रमाण प्रस्तुत करना
+        होगा! इस एरिजोना में पंजीबद्ध आपकी पहली बार है या आप किसी अन्य काउंटी में
+        स्थानांतरित कर दिया है, तो अपने मतदाता पंजीकरण फार्म भी राज्य चुनाव (यानी
+        राज्यपाल, राज्य के सचिव, एवं राज्य विधायिका) में वोट करने के लिए नागरिकता
+        का सबूत शामिल करना चाहिए. नहीं तो आप केवल संघीय चुनाव में मतदान करने के लिए
+        eleigible हो जाएगा. आप एक AZ चालक लाइसेंस या 1996/10/01 के बाद जारी किए गए
+        राज्य आईडी कार्ड है, कि suffient "नागरिकता का सबूत ''है और कोई अन्य दस्तावेज
+        की जरूरत है. यदि नहीं, तो आप अपने मतदाता पंजीकरण आवेदन के साथ "नागरिकता का
+        सबूत ''प्रस्तुत करना होगा. सबसे आम ''सबूत'' अपने जन्म प्रमाण पत्र या पासपोर्ट
+        की फोटोकॉपी है. स्वीकार्य दस्तावेज की एक पूरी सूची ऑनलाइन पाया जा सकता है.<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '* पहली बार मतदाता पंजीकरण आवेदकों के लिए नोट: आप भी विधानसभा चुनावों
+        में मतदान करने के लिए नागरिकता का प्रमाण प्रस्तुत करना होगा! इस केन्सास में
+        दर्ज की आपकी पहली बार है, अपने मतदाता पंजीकरण फार्म भी राज्य चुनाव (यानी राज्यपाल,
+        राज्य के सचिव, एवं राज्य विधायिका) में वोट करने के लिए नागरिकता का सबूत शामिल
+        करना चाहिए. नहीं तो आप केवल संघीय चुनाव में मतदान करने के पात्र होंगे. सबसे
+        आम ''सबूत'' अपने जन्म प्रमाण पत्र या पासपोर्ट की फोटोकॉपी है, लेकिन स्वीकार्य
+        दस्तावेज की एक पूरी सूची ऑनलाइन पाया जा सकता है.<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
 

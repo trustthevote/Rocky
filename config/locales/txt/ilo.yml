@@ -6,7 +6,7 @@ ilo:
       submit: Sumaruno nga Pagna
       edit: Limpio
       back: Sakbay ti Pagna
-      download: Iprentam <br/>tatta dayta cucuam nga porma iti rehistrasyon<br/>
+      download: Iprentam tatta<br/>dayta cucuam nga<br/>porma iti rehistrasyon
       ineligible_try_again: Subli
       keep_going: Ituloy mo ti mag-magna
       remind_me_later: Ipalagip mo canniac tat-tanto
@@ -36,8 +36,13 @@ ilo:
       preparing_header: Agrub-rubuat iti porma ti rehistrasyon...
       download_header: Iprenta iti porma
       finish_header: Iwaragawag mo iti sarita!
+      finish_pdf_delay_header: Check Your Email
+      finish_pdf_delay: It's taking a while to create your registration form to download,
+        but don't worry. We'll send you an email when it's ready. In the mean time,
+        you can let your friends know how they can register to vote too.
       finish_under_18_header: Addaca idiay lista!
       tell_a_friend_title: Ibagam ti gay-yem idiay Email
+      finish_reminder_header: Dios ti ag-ngina
       finish_reminder: Dios ti ag-ngina, %{first_name}, iti impaw-it mo nga applikasyon
         ti rehistrasyon! Maawat munto ti rehistrasyon mo nga conpirmadona dagiti opisyales
         ti eleksyon iti estado. No dad-duma, adu nga semana iti masapulda nga agadal

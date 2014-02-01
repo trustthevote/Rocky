@@ -36,8 +36,14 @@ es:
       preparing_header: Preparando el Formulario...
       download_header: Imprimir Formato
       finish_header: Pasen la voz!
+      finish_pdf_delay_header: Revise su correo electrónico
+      finish_pdf_delay: Se trata de tomar un tiempo para crear su formulario de inscripción
+        para descargar, pero no te preocupes. Te enviaremos un correo electrónico
+        cuando esté listo. Mientras tanto, puedes dejar que tus amigos sepan cómo
+        pueden registrarse para votar también.
       finish_under_18_header: Estás en la lista!
       tell_a_friend_title: Dile a tu amigo a través de un correo electronicó.
+      finish_reminder_header: ¡Gracias por registrarse!
       finish_reminder: Gracias, %{first_name}, para el envío de su solicitud de registro
         de votantes! Debe recibir la confirmación de su inscripción de los funcionarios
         electorales de su estado. A veces, el procesamiento puede tardar varias semanas.
@@ -182,7 +188,7 @@ es:
               included dashes in your ID number, or (3) you did not provide a driver''s
               license number, but used another form of accepted identification. Please
               review the information you provided:'
-            section: Identifying Information
+            section: Información de Identificación
             colorado_id_number: Colorado ID Number
             p2: To finish your voter registration application, you have three options:</p><p>(1)
               Close this window and use the back button on your browser to correct
