@@ -92,6 +92,72 @@ describe ApplicationHelper do
     end
   end
 
+  describe "registrant_css" do
+    context "when @locale is provided" do
+      before(:each) do
+        @locale = "en"
+        @registrant = nil
+      end
+      context "in english" do
+        it "returns an empty array" do
+          helper.registrant_css.should == []
+        end
+      end
+      context "in another language" do
+        before(:each) do
+          @locale = "es"
+        end
+        context "without a css file" do
+          before(:each) do
+            File.stub(:exists?).with(Translation.css_path("es")).and_return(false)
+          end
+          it "returns an empty array" do
+            helper.registrant_css.should == []
+          end
+        end
+        context "with a css file" do
+          before(:each) do
+            File.stub(:exists?).with(Translation.css_path("es")).and_return(true)
+          end
+          it "returns the es css file" do
+            helper.registrant_css.should == ["locales/es"]
+          end
+        end
+      end
+    end
+    context "when @locale is not provided" do
+      before(:each) do
+        @locale = nil
+        @registrant = Registrant.new
+      end
+      context "in english" do
+        it "returns an empty array" do
+          helper.registrant_css.should == []
+        end
+      end
+      context "in another language" do
+        before(:each) do
+          @registrant.locale = 'es'
+        end
+        context "without a css file" do
+          before(:each) do
+            File.stub(:exists?).with(Translation.css_path("es")).and_return(false)
+          end
+          it "returns an empty array" do
+            helper.registrant_css.should == []
+          end
+        end
+        context "with a css file" do
+          before(:each) do
+            File.stub(:exists?).with(Translation.css_path("es")).and_return(true)
+          end
+          it "returns the es css file" do
+            helper.registrant_css.should == ["locales/es"]
+          end
+        end
+      end
+    end
+  end
 
   describe "rollover_button" do
     it "is pending" do

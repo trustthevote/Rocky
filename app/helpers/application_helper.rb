@@ -43,6 +43,13 @@ module ApplicationHelper
     stylesheets << partner.partner_css_url if wl && partner.partner_css_present?
     stylesheets
   end
+  
+  def registrant_css(registrant = @registrant, locale = @locale)
+    locale ||= registrant.locale
+    stylesheets = []
+    stylesheets << "locales/#{locale}" if Translation.has_css?(locale)
+    stylesheets
+  end
 
   def yes_no_options
     [['', nil], ['Yes', true], ['No', false]]

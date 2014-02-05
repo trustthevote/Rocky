@@ -13,6 +13,18 @@ Feature: Step 1
        And I should see "Nuevo Registro"
        
     @passing
+    Scenario: Start in language with an external stylesheet
+      Given there is a stylesheet for Spanish
+      When I go to a new Spanish registration page
+      Then the Spanish style sheet should be included
+      
+    @passing
+    Scenario: Start in language without an external stylesheet
+      Given there is not a stylesheet for Spanish
+      When I go to a new Spanish registration page
+      Then the Spanish style sheet should not be included
+       
+    @passing
     Scenario: start in Korean
       When I go to a new Korean registration page
       Then I should not see "^New Registrant"
