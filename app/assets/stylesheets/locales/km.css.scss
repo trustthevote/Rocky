@@ -1,0 +1,76 @@
+/*
+Line-height adjustments
+*/
+
+h2, .download p {
+	line-height:1.6em;
+}
+
+.qtip-content {
+	line-height:1.6em;
+}
+
+
+legend {
+  line-height: 22px;
+}
+label {
+	line-height:1.6em;
+}
+
+.stacked span.error, .stacked span.example {
+  height: 24px;
+  line-height: 24px;
+}
+
+.review li {
+  line-height: 18px;
+}
+
+
+.instructions p {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+
+
+.state_online_registrations_instructions p {
+	font-size:14px;
+	line-height:20px;
+}
+
+
+.text p {
+  font-size: 15px;
+  line-height: 1.6em;
+}
+
+
+.fulltext p {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.state_online_registration .fulltext p {
+	font-size: 13px;
+	line-height: 20px;
+}
+
+div, span {
+	&.rollover_button, &.rollover_button:hover, &.rollover_button:active {
+		a {
+			span {
+				line-height: 1.4em;
+			}
+		}
+	}
+}
+
+/* end line-height adjustments */
+
+/* review buttons */
+.review .section span.button {
+	width: 110px;
+}
+/* end review buttons */

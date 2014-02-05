@@ -76,15 +76,15 @@ class Translation
   end
   
   def self.css_path(locale)
-    css_dir.join("#{locale}.css.scss")
+    css_dir.join("#{locale}.css.scss").to_s
   end
   
   def self.has_css?(locale)
-    File.exists?(css_path(locale))
+    File.exists?(css_path(locale)).to_s
   end
   
   def self.css_dir
-    Rails.root.join("app/assets/locales")
+    Rails.root.join("app/assets/stylesheets/locales")
   end
   
   def self.tmp_file_dir
