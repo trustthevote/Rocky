@@ -46,9 +46,11 @@ module ApplicationHelper
   end
   
   def registrant_css(registrant = @registrant, locale = @locale)
-    locale ||= registrant.locale
     stylesheets = []
-    stylesheets << "locales/#{locale}" if Translation.has_css?(locale)
+    locale ||= registrant ? registrant.locale : nil
+    if !locale.nil?
+      stylesheets << "locales/#{locale}" if Translation.has_css?(locale)
+    end
     stylesheets
   end
 

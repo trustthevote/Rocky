@@ -80,7 +80,7 @@ class Translation
   end
   
   def self.has_css?(locale)
-    File.exists?(css_path(locale)).to_s
+    File.exists?(css_path(locale))
   end
   
   def self.css_dir
