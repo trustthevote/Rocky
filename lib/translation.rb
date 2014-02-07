@@ -75,6 +75,18 @@ class Translation
     I18n.t('language_name', :locale=>locale) + " (#{locale})"
   end
   
+  def self.css_path(locale)
+    css_dir.join("#{locale}.css.scss").to_s
+  end
+  
+  def self.has_css?(locale)
+    File.exists?(css_path(locale)).to_s
+  end
+  
+  def self.css_dir
+    Rails.root.join("app/assets/stylesheets/locales")
+  end
+  
   def self.tmp_file_dir
     dir = Rails.root.join('tmp', 'translation_files')
     FileUtils.mkdir_p(dir)

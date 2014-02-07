@@ -73,6 +73,23 @@ end
 
 
 
+Given(/^there is a stylesheet for Spanish$/) do
+  File.stub(:exists?).with(Translation.css_path('es')).and_return(true)
+end
+
+Then(/^the Spanish style sheet should be included$/) do
+  page.should have_xpath("//link[@href='/assets/locales/es.css']")
+end
+
+Given(/^there is not a stylesheet for Spanish$/) do
+  File.stub(:exists?).with(Translation.css_path('es')).and_return(false)
+end
+
+Then(/^the Spanish style sheet should not be included$/) do
+  page.should_not have_xpath("//link[@href='/assets/locales/es.css']")
+end
+
+
 
 Given /^I have been to the state online registration page$/ do
   step 'I have completed step 4 as a resident of "Washington" state'
@@ -337,6 +354,8 @@ When /^the partner changes "([^\"]*)" to "([^\"]*)"$/ do |method, value|
   @partner.send("#{method}=", value)
   @partner.save!
 end
+
+
 
 
 After('@cleanup_pdf') do

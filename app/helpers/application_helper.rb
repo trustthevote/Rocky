@@ -40,7 +40,15 @@ module ApplicationHelper
     stylesheets = []
     stylesheets << (wl && partner.application_css_present? ? partner.application_css_url : "application")
     stylesheets << (wl && partner.registration_css_present? ? partner.registration_css_url : "registration")
+    stylesheets += registrant_css
     stylesheets << partner.partner_css_url if wl && partner.partner_css_present?
+    stylesheets
+  end
+  
+  def registrant_css(registrant = @registrant, locale = @locale)
+    locale ||= registrant.locale
+    stylesheets = []
+    stylesheets << "locales/#{locale}" if Translation.has_css?(locale)
     stylesheets
   end
 
