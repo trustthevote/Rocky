@@ -507,23 +507,24 @@ describe Registrant do
         assert !@reg.valid?
       end
       
-      it "validates phone is present if rtv mobile opt-in is true" do
+      it "DOES NOT validate phone is present if rtv mobile opt-in is true" do
         @reg.phone_type = "Mobile"
         @reg.phone = ''
         
         @reg.opt_in_sms = true
-        @reg.valid?.should be_false
-        assert @reg.errors[:phone]
+        @reg.valid?.should be_true
+        assert @reg.errors[:phone].empty?
       end
 
-      it "validates phone is present if partner mobile opt-in is true" do
+      it "DOES NOT validate phone is present if partner mobile opt-in is true" do
         @reg.phone_type = "Mobile"
         @reg.phone = ''
 
         @reg.partner_opt_in_sms = true
-        @reg.valid?.should be_false
-        assert @reg.errors[:phone]
+        @reg.valid?.should be_true
+        assert @reg.errors[:phone].empty?
       end
+      
       it "should require valid state id" do
         assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => nil)
 
@@ -543,11 +544,13 @@ describe Registrant do
         assert_attribute_valid_with(  :step_2_registrant, :short_form=>true, :state_id_number => "*234567")
         assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :state_id_number => "$234567")
       end
+      
       it "should upcase state id" do
         reg = FactoryGirl.build(:step_2_registrant, :short_form=>true, :state_id_number => "abc12345")
         assert reg.valid?
         assert_equal "ABC12345", reg.state_id_number
       end
+      
       it "should require previous name fields if change_of_name" do
         assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_name => true, :prev_name_title => nil)
         assert_attribute_invalid_with(:step_2_registrant, :short_form=>true, :change_of_name => true, :prev_first_name => nil)
@@ -787,20 +790,20 @@ describe Registrant do
     
     
     
-    it "validates phone is present if rtv mobile opt-in is true" do
+    it "DOES NOT validate phone is present if rtv mobile opt-in is true" do
       reg = FactoryGirl.build(:step_3_registrant, :phone => "")
       
       reg.opt_in_sms = true
-      reg.valid?.should be_false
-      assert reg.errors[:phone]
+      reg.valid?.should be_true
+      assert reg.errors[:phone].empty?
     end
 
-    it "validates phone is present if partner mobile opt-in is true" do
+    it "DOES NOT validate phone is present if partner mobile opt-in is true" do
       reg = FactoryGirl.build(:step_3_registrant, :phone => "")
 
       reg.partner_opt_in_sms = true
-      reg.valid?.should be_false
-      assert reg.errors[:phone]
+      reg.valid?.should be_true
+      assert reg.errors[:phone].empty?
     end
     
     

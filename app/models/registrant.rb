@@ -202,7 +202,7 @@ class Registrant < ActiveRecord::Base
     
     reg.validates_format_of :phone, :with => /[ [:punct:]]*\d{3}[ [:punct:]]*\d{3}[ [:punct:]]*\d{4}\D*/, :allow_blank => true
     reg.validates_presence_of :phone_type, :if => :has_phone?
-    reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_2    
+    reg.validate :validate_phone_present_if_opt_in_sms_at_least_step_2  
   end
   
   with_options :if => :needs_mailing_address? do |reg|
@@ -448,6 +448,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def validate_phone_present_if_opt_in_sms
+    return true
     if (self.opt_in_sms? || self.partner_opt_in_sms?) && phone.blank?
       errors.add(:phone, :required_if_opt_in)
     end

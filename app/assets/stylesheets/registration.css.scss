@@ -103,6 +103,7 @@ iframe {
 /*added larger font size for tooltips*/
 .qtip-content {
   font-size: 1.15em;
+	line-height: 1.6em;
 }
 
 #other_language_link {
@@ -302,8 +303,9 @@ div.back {
 
 .review li {
   position: relative;
-  height: 20px;
-  line-height: 14px;
+  height: auto;
+  overflow: hidden;
+  line-height: 18px;
   font-size: 12px;
 }
 
@@ -312,15 +314,15 @@ div.back {
 }
 
 .review li span {
-  position: absolute;
+  float: left;
   width: 150px;
   font-weight: bold;
   text-align: right;
 }
 
 .review li div {
-  position: absolute;
-  left: 160px;
+  float: left;
+  margin-left: 10px;
   font-family: Tahoma, sans-serif;
   letter-spacing: 0.08em;
 }
@@ -332,12 +334,12 @@ div.back {
   margin: -5px 75px 10px 135px;
   color: #434343;
   font-size: 13px;
-  line-height: 15px;
+  line-height: 20px;
 }
 
 .state_online_registrations_instructions p {
 	font-size:14px;
-	line-height:18px;
+	line-height:20px;
 	font-weight:bold;
 }
 
@@ -389,6 +391,7 @@ p.centered {
 .download p {
   font-size: 14px;
   margin: 15px;
+	line-height: 1.6em;
 }
 
 .download h2 {
@@ -523,7 +526,7 @@ div, span {
 				display: inline-block;
 			  color: white;
 			  font-size: 20px;
-				line-height: 1em;
+				line-height: 1.4em;
 				font-weight: bold;
 				text-transform: uppercase;
 				font-family: Helvetica, Arial, Sans-Serif;
