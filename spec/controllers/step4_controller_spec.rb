@@ -89,6 +89,7 @@ describe Step4Controller do
       put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_4_registrant, :state_id_number => nil).reject {|k,v| k == :status }
       assert assigns[:registrant].step_4?
       assert assigns[:registrant].reload.step_3?
+      assert assigns[:show_fields] == "1"
       assert_template "show"
     end
     

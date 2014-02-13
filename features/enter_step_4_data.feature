@@ -58,9 +58,9 @@ Feature: Step 4
       And my value for "survey_question_2" should be "Que?"
 
 
-
-    @wip
-    Scenario: User cannot sign up for opt_in_sms if phone isn't provided
+    #because of layout change we'll just allow this for now
+    @passing
+    Scenario: User CAN sign up for opt_in_sms if phone isn't provided
       Given the following partner exists:
         | organization   | rtv_sms_opt_in | partner_sms_opt_in  |
         | Opt-in Partner | true           | false               |        
@@ -70,8 +70,8 @@ Feature: Step 4
       And I should not see a checkbox for "Send me txt messages from Opt-in Partner"
       When I check "Send me txt messages from Rock the Vote"
       And I press "registrant_submit"
-      Then I should see "Stay Informed and Take Action"
-      And I should see "Required if receiving TXT"
+      Then I should not see "Stay Informed and Take Action"
+      And I should not see "Required if receiving TXT"
 
     @passing
     Scenario: User sees RTV SMS opt-in options for partner 1

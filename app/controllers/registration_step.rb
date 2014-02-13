@@ -79,6 +79,7 @@ class RegistrationStep < ApplicationController
         redirect_to registrant_ineligible_url(@registrant)
       end
     else
+      @show_fields = "1"
       render "show"
     end
   end

@@ -51,18 +51,27 @@
             <%=h @registrant.mailing_city %>, <%=h @registrant.mailing_state.name %> <%=h @registrant.mailing_zip_code %>
           </div>
         </li>
+        <% if @registrant.change_of_address? %>
+        <li class="tall">
+          <span><%= I18n.t('txt.registration.previous_address') %></span>
+          <div>
+            <%=h @registrant.prev_address %> <%=h octothorpe(@registrant.prev_unit) %><br/>
+            <%=h @registrant.prev_city %>, <%=h @registrant.prev_state.name %> <%=h @registrant.prev_zip_code %>
+          </div>
+        </li>
         <% end %>
-        <% unless @registrant.race.blank? %>
+        <% if @registrant.change_of_name? %>
           <li>
-            <span><%= I18n.t('activerecord.attributes.registrant.race') %></span>
-            <div><%=h @registrant.race %></div>
+            <span><%= I18n.t('txt.registration.previous_name') %></span>
+            <div><%=h @registrant.prev_full_name %></div>
           </li>
         <% end %>
-        <% unless @registrant.party.blank? %>
-          <li>
-            <span><%= I18n.t('activerecord.attributes.registrant.party') %></span>
-            <div><%=h @registrant.party %></div>
-          </li>
+        
+        <li>
+          <span><%= I18n.t('activerecord.attributes.registrant.phone') %></span>
+          <div><%=h @registrant.phone_and_type %></div>
+        </li>
+        
         <% end %>
       </ul>
     </fieldset>
@@ -78,28 +87,21 @@
           <span><%= I18n.t('activerecord.attributes.registrant.state_id_number') %></span>
           <div><%=h @registrant.state_id_number %></div>
         </li>
-        <li>
-          <span><%= I18n.t('activerecord.attributes.registrant.phone') %></span>
-          <div><%=h @registrant.phone_and_type %></div>
-        </li>
-        <% if @registrant.change_of_name? %>
+        <% unless @registrant.race.blank? %>
           <li>
-            <span><%= I18n.t('txt.registration.previous_name') %></span>
-            <div><%=h @registrant.prev_full_name %></div>
+            <span><%= I18n.t('activerecord.attributes.registrant.race') %></span>
+            <div><%=h @registrant.race %></div>
           </li>
         <% end %>
-        <% if @registrant.change_of_address? %>
-        <li class="tall">
-          <span><%= I18n.t('txt.registration.previous_address') %></span>
-          <div>
-            <%=h @registrant.prev_address %> <%=h octothorpe(@registrant.prev_unit) %><br/>
-            <%=h @registrant.prev_city %>, <%=h @registrant.prev_state.name %> <%=h @registrant.prev_zip_code %>
-          </div>
-        </li>
+        <% unless @registrant.party.blank? %>
+          <li>
+            <span><%= I18n.t('activerecord.attributes.registrant.party') %></span>
+            <div><%=h @registrant.party %></div>
+          </li>
         <% end %>
       </ul>
     </fieldset>
-    <%= rollover_image_link(:edit, I18n.t('txt.button.edit'), registrant_step_3_path(@registrant)) %>
+    <%= rollover_image_link(:edit, I18n.t('txt.button.edit'), (@registrant.in_ovr_flow? ? registrant_step_4_path(@registrant, :show_fields=>"1") : registrant_step_3_path(@registrant))) %>
   </div>
 </div>
 
@@ -118,6 +120,6 @@
 
   <%= rollover_button(:prepare, I18n.t('txt.button.prepare')) %>
 
-  <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_4_path(@registrant) %></div>
+  <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_4_path(@registrant, :show_fields=>"1") %></div>
   
 <% end %>

@@ -1,4 +1,8 @@
-<h1><%= t('txt.registration.step_3_header') %></h1>
+<%- if @registrant.in_ovr_flow? %>
+  <h1><%= t('txt.registration.step_4_header') %></h1>
+<%- else %>
+  <h1><%= t('txt.registration.step_3_header') %></h1>
+<%- end %>
 
 <%= form_for(@registrant, :url => registrant_step_3_path(@registrant)) do |form| %>
   <%- if @registrant.in_ovr_flow? %>

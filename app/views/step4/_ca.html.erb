@@ -2,9 +2,11 @@
 <script>
 
 $(document).ready(function() {
+  var show_fields = <%= [params[:show_fields], @show_fields].include?("1") ? 'true' : 'false' %>;
   $('.skip_state_registration_link').show();
-  
-  $('.skip_state_registration').hide();
+  if(!show_fields) {
+    $('.skip_state_registration').hide();    
+  }
   $('.skip_state_registration_link').click(function() {
     $('.skip_state_registration').show();
   });
@@ -25,6 +27,8 @@ $(document).ready(function() {
 <br/><br/>
 <br/><br/>
 <div class="skip_state_registration">
+  
+  <h1><%= t('txt.registration.step_3_header') %></h1>
   
 <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form} %>
 
