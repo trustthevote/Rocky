@@ -4,3 +4,4 @@
       %span= "#{Translation.language_name(lang)}: "
       - @types.each do |type|
         = link_to type.name, translation_path(type, :locale=>lang)
+      = link_to "PDF Sample", preview_pdf_translation_path(lang, :format=>:pdf)

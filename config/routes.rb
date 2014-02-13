@@ -47,6 +47,7 @@ Rocky::Application.routes.draw do
     end
     member do
       post :submit
+      get :preview_pdf
     end
   end
 

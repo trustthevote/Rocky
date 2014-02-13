@@ -3,7 +3,7 @@ class TranslationsController < ApplicationController
   
   before_filter :disallow_production
   before_filter :get_translations
-  before_filter :get_locale_and_translation, :except=>[:index, :all_languages]
+  before_filter :get_locale_and_translation, :except=>[:index, :all_languages, :preview_pdf]
   
 
   def index
@@ -11,6 +11,30 @@ class TranslationsController < ApplicationController
   
   def show
   end
+  
+  def preview_pdf
+    @locale = params[:id]
+    @state = (params[:state] ? GeoState[params[:state]]  : GeoState.first ) || GeoState.first
+    @registrant = Registrant.new
+    @registrant.home_state = @state
+    @registrant.date_of_birth = Date.parse("01-01-1900")
+    @registrant.id = 111
+    @registrant.locale = @locale
+    I18n.locale = @locale
+        
+    respond_to do |format|
+      format.html do
+        render :layout=>'nvra.html.haml', :template=>'registrants/registrant_pdf.html.haml'
+      end
+      format.pdf do
+        render :pdf => "registration", 
+          :template => 'registrants/registrant_pdf.html.haml', 
+          :layout => 'nvra.html.haml', :locale=>@locale
+      end
+    end
+    
+  end
+  
   
   def save
     file = @translation.generate_yml(params[:locale], params[params[:locale]])
