@@ -79,12 +79,24 @@ class Translation
     css_dir.join("#{locale}.css.scss").to_s
   end
   
+  def self.nvra_css_path(locale)
+    nvra_css_dir.join("#{locale}.css.scss").to_s
+  end
+  
   def self.has_css?(locale)
     File.exists?(css_path(locale))
   end
   
+  def self.has_nvra_css?(locale)
+    File.exists?(nvra_css_path(locale))
+  end
+  
   def self.css_dir
     Rails.root.join("app/assets/stylesheets/locales")
+  end
+  
+  def self.nvra_css_dir
+    Rails.root.join("app/assets/stylesheets/nvra/locales")
   end
   
   def self.tmp_file_dir
