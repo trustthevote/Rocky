@@ -80,6 +80,8 @@ module Rocky
     
     config.assets.precompile += ["locales/*.css"]
     
+    config.assets.precompile += ["nvra/locales/*.css"]
+    
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     
     config.action_controller.allow_forgery_protection = false
