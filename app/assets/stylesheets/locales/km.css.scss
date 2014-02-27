@@ -1,3 +1,29 @@
+@font-face {
+  font-family: 'Battambang';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Battambang'), url('/fonts/KhmerOSBattambang-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Battambang';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Battambang Bold'), local('Battambang-Bold'), url('/fonts/KhmerOSBattambang-Bold.ttf') format('truetype');
+}
+
+//body {
+//	font-family: 'Battambang', Helvetica, Arial, sans-serif;
+//}
+//
+//h1, h2, h3, h4, h5, h6, legend {
+//  font-family: 'Battambang', Helvetica, Arial, sans-serif;
+//}
+//
+//input, select, textarea {
+//  font-family: 'Battambang', Tahoma, sans-serif;
+//}
+
+
 /* review buttons */
 .review .section span.button {
 	width: 110px;
