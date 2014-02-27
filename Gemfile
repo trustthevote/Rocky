@@ -26,6 +26,7 @@ gem 'jquery-rails', '~> 2.1'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 
+gem 'savon'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.10.1"
