@@ -2,6 +2,35 @@
 zh-tw:
   language_name: 中文（繁体）
   language_name_translation_instructions: 請使用翻譯的語言來表示翻譯語言的名稱，例如，如果你正在翻譯日語，請使用日語中表示“日語”（語言名稱）的詞彙。
+  locales:
+    bn:
+      name: 孟加拉語
+    en:
+      name: 英語
+    es:
+      name: 西班牙語
+    hi:
+      name: 印地語
+    ilo:
+      name: 伊洛卡诺语
+    ja:
+      name: 日語
+    km:
+      name: 柬埔寨语
+    ko:
+      name: 韓語
+    th:
+      name: 泰語
+    tl:
+      name: 塔加洛语
+    ur:
+      name: 烏爾都語
+    vi:
+      name: 越南語
+    zh-tw:
+      name: 中文（繁體）
+    zh:
+      name: 中文（簡體）
   activerecord:
     attributes:
       partner:
@@ -23,6 +52,8 @@ zh-tw:
         home_city: 城市
         home_state_name: 州
         has_mailing_address: 我的收信地址與以上不同。
+        has_state_license: 我擁有駕駛證或者州身份證
+        will_be_18_by_election: 我將在下一個選舉日前滿18歲
         mailing_address: 地址
         mailing_unit: 公寓/小區號碼
         mailing_city: 城市
@@ -45,10 +76,10 @@ zh-tw:
         prev_city: 城市
         prev_state_abbrev: 州
         prev_zip_code: 郵政編碼
-        opt_in_email: 接收電子郵件
-        opt_in_sms: 接收短信
+        opt_in_email: 可接收電子郵件
+        opt_in_sms: 可接收短信
         attest_true: 我已審閱以上信息，盡我所知它是真實的、準確的。
-        tell_from: 從
+        tell_from: 來自
         tell_email: 您的電子郵件
         tell_recipients: 收件人
         tell_subject: 主題

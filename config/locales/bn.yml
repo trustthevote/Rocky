@@ -2,6 +2,35 @@
 bn:
   language_name: বাংলা
   language_name_translation_instructions: বাংলা
+  locales:
+    bn:
+      name: বাংলা
+    en:
+      name: ইংরেজী
+    es:
+      name: স্প্যানিশ
+    hi:
+      name: হিন্দি
+    ilo:
+      name: ইলোকানো
+    ja:
+      name: জাপানিজ
+    km:
+      name: খেমের
+    ko:
+      name: কোরিয়ান
+    th:
+      name: থাই
+    tl:
+      name: Tagalog
+    ur:
+      name: উর্দু
+    vi:
+      name: ভিয়েতনামিজ
+    zh-tw:
+      name: চাইনিজ (ঐতিহ্যবাহী)
+    zh:
+      name: চাইনিজ (সরলীকৃত)
   activerecord:
     attributes:
       partner:
@@ -17,17 +46,19 @@ bn:
         first_name: প্রথম
         middle_name: মধ্য
         last_name: শেষ
-        name_suffix: N/A
+        name_suffix: Suffix
         home_address: ঠিকানা
         home_unit: ! 'ইউনিট #'
-        home_city: পাড়া
-        home_state_name: রাজ্য
+        home_city: সিটি
+        home_state_name: স্টেট
         has_mailing_address: আমি অন্য একটি ঠিকানায় চিঠি পেয়ে থাকি, উপরে উল্লেখিত
           ঠিকানায় নয়।
+        has_state_license: আমার ড্রাইভার লাইসেন্স অথবা স্টেট আইডি কার্ড আছে
+        will_be_18_by_election: পরবর্তী নির্বাচনের আগে আমার বয়স আঠারো হবে
         mailing_address: ঠিকানা
         mailing_unit: ! 'ইউনিট #'
-        mailing_city: পাড়া
-        mailing_state_abbrev: রাজ্য
+        mailing_city: সিটি
+        mailing_state_abbrev: স্টেট
         mailing_zip_code: জিপ কোড
         party: দল
         race: জাতি
@@ -39,12 +70,12 @@ bn:
         prev_first_name: প্রথম
         prev_middle_name: মধ্য
         prev_last_name: শেষ
-        prev_name_suffix: N/A
+        prev_name_suffix: Suffix
         change_of_address: আমি আমার ঠিকানার পরিবর্তন করেছি।
         prev_address: ঠিকানা
         prev_unit: ! 'ইউনিট #'
-        prev_city: পাড়া
-        prev_state_abbrev: রাজ্য
+        prev_city: সিটি
+        prev_state_abbrev: স্টেট
         prev_zip_code: জিপ কোড
         opt_in_email: ইমেইল গ্রহণে আগ্রহী
         opt_in_sms: টেক্সট বার্তা গ্রহণে আগ্রহী
@@ -77,20 +108,20 @@ bn:
             attest_true:
               accepted: উল্লেখিত তথ্যাবলী সঠিক কিনা তা নির্দেশ করুন
             has_state_license:
-              inclusion: রাজ্য কর্তৃপক্ষ অনুমোদিত কার্যকর লাইসেন্স আছে কিনা তা উল্লেখ
+              inclusion: স্টেট কর্তৃপক্ষ অনুমোদিত কার্যকর লাইসেন্স আছে কিনা তা উল্লেখ
                 করুন
       messages:
         inclusion: ! '%{attribute} তালিকায় অন্তর্ভুক্ত নয়।'
         exclusion: ! '%{attribute} সংরক্ষিত।'
         invalid: ! '%{attribute} অকার্যকর।'
-        invalid_for_pdf: ! '%{attribute} must be provided in English'
-        confirmation: ! '%{attribute} নিশ্চয়তা'
+        invalid_for_pdf: ! '%{attribute} ইংরেজীতে দিতে হবে'
+        confirmation: ! '%{attribute} নিশ্চয়তা মেলেনি।'
         accepted: ! '%{attribute} গ্রহণ করা আবশ্যক।'
         empty: ! '%{attribute} খালি থাকতে পারবে না।'
         blank: ! '%{attribute} শূণ্য থাকতে পারবে না।'
         too_long: ! '%{attribute} বেশি বড় (সর্বোচ্চ %{count} অক্ষর)।'
         too_short: ! '%{attribute} খুব ছোট (সর্বনিম্ন %{count} অক্ষর)।'
-        wrong_length: ! '%{attribute} ভুল দৈর্ঘ্য (অক্ষরগুলো %{count} হওয়া উচিত।'
+        wrong_length: ! '%{attribute} ভুল দৈর্ঘ্য (অক্ষরগুলো %{count} হওয়া উচিত)।'
         taken: ! '%{attribute} ইতোমধ্যে নেয়া হয়েছে।'
         not_a_number: ! '%{attribute} একটি সংখ্যা নয়।'
         greater_than: ! '%{attribute} %{count} এর চেয়ে বেশি হতে হবে ।'
@@ -107,12 +138,12 @@ bn:
       login_blank: লগইন শূণ্য থাকতে পারবে না।
       login_not_found: লগইন/পাসওয়ার্ড সমন্বয় সঠিক হয়নি।
       login_invalid: অনুগ্রহপূর্বক ব্যবহারকারীর নাম শুধুমাত্র অক্ষর, সংখ্যা, স্পেস
-        এবং.-_@ ।
+        এবং.-_@ দিয়ে তৈরি করুন ।
       consecutive_failed_logins_limit_exceeded: লগইন করতে উপর্যুপরি ব্যর্থ হওয়ায়
         এর সীমা অতিক্রান্ত হয়ে পড়েছে, একাউন্টটি অকেজো হয়ে আছে।
-      email_invalid: ইমেইল ঠিকানিাটি সঠিক নয়।
+      email_invalid: ইমেইল ঠিকানাটি সঠিক নয়।
       password_blank: পাসওয়ার্ড এর ঘরটি শূণ্য থাকতে পারবে না।
-      password_invalid: লগইন/পাসওয়ার্ড সমনব্য়টি সঠিক হয়নি।
+      password_invalid: লগইন/পাসওয়ার্ড সমন্বয় সঠিক হয়নি।
       not_active: আপনার একাউন্টটি সচল নয়।
       not_confirmed: আপনার একাউন্টটি নিশ্চিত নয়।
       not_approved: আপনার একাউন্টটি অনুমোদিত নয়।

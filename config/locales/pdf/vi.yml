@@ -109,8 +109,8 @@ vi:
           giấy tờ hợp lệ của mình chung với mẫu đơn này.'
         bottom_half_title: Xin điền vào các phần dưới đây nếu chúng áp dụng cho bạn.
         blockA:
-          title: Nếu đơn xin này là về việc<b>đổi tên<b></b>, thì tên trước đây của
-            bạn là gì?
+          title: Nếu đơn xin này là về việc<b>đổi tên</b>, thì tên trước đây của bạn
+            là gì?
           box1_label: ''
           box2_label: Họ
           box3_label: Tên
@@ -130,7 +130,7 @@ vi:
           instructions:
             bullet1: Hãy viết tên ngã tư đường (hoặc đường phố) gần nhất nơi bạn sinh
               sống.
-            bullet2: Hãy đánh dấu <b>X<b> để chỉ nơi cư trú cuả bạn
+            bullet2: Hãy đánh dấu <b>X</b> để chỉ nơi cư trú cuả bạn
             bullet3: Sử dụng dấu chấm để cho biết trường học, nhà thờ, các cửa hàng,
               hoặc địa điểm lịch sử  khác gần nơi bạn sinh sống, và viết tên điạ điểm
               lịch sử.

@@ -550,4 +550,66 @@ tl:
       received_30_days: natanggap 30 araw bago maghalalan
       received_at_least_30_days: natanggap kahit  30 araw bago maghalalan
       thirty_days_before: 30 araw bago maghalalan
+    pdf_instructions:
+      blank: ''
+      arizona: ! '<b>* Paalala para sa mga aplikanteng Unang Botante Oras Pagpaparehistro
+        At Kamakailang Movers:</b> Dapat mong RIN isumite ang katibayan ng pagkamamamayan
+        upang bumoto sa mga eleksiyon ng estado! Kung ito ang iyong unang beses na
+        nagrerehistro sa Arizona o iyong inilipat sa ibang county, ang iyong form
+        sa pagpaparehistro ng botante ay dapat ding magsama ng katibayan ng pagkamamamayan
+        upang bumoto sa mga eleksiyon ng estado (ibig sabihin Gobernador, Kalihim
+        ng Estado, at mambabatas ng estado). Kung hindi man ay sa iyo LAMANG maging
+        eleigible upang bumoto sa mga pederal na halalan. Kung mayroon kang isang
+        AZ lisensiya sa pagmamaneho o ID card ng estado na ibinigay pagkatapos 1996/10/01,
+        iyon ay suffient "katibayan ng pagkamamamayan" at walang iba pang mga papeles
+        ay kinakailangan. Kung hindi, dapat mong isumite ang "patunay ng pagkamamamayan"
+        kasama ng iyong application botante pagpaparehistro. Ang pinaka-karaniwang
+        "patunay" ay isang kopya ng iyong kapanganakan sertipiko o pasaporte. Ang
+        isang buong listahan ng mga katanggap-tanggap na dokumentasyon ay matatagpuan
+        sa online.<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '<b>* Paalala para sa mga aplikanteng Unang Botante Oras Pagpaparehistro:</b>
+        Dapat mong RIN isumite ang katibayan ng pagkamamamayan upang bumoto sa mga
+        eleksiyon ng estado! Kung ito ang iyong unang beses na nagrerehistro sa Kansas,
+        ang iyong pagpaparehistro ng botante na form ay dapat ding magsama ng katibayan
+        ng pagkamamamayan upang bumoto sa mga eleksiyon ng estado (ibig sabihin Gobernador,
+        Kalihim ng Estado, at mambabatas ng estado). Kung hindi man ay magiging karapat-dapat
+        na bumoto sa mga pederal na halalan LAMANG. Ang pinaka-karaniwang "patunay"
+        ay isang kopya ng iyong kapanganakan sertipiko o pasaporte, ngunit ang isang
+        buong listahan ng mga katanggap-tanggap na dokumentasyon ay matatagpuan sa
+        online.<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+    email_instructions:
+      blank: ''
+      arizona: ! '<b>* Paalala para sa mga aplikanteng Unang Botante Oras Pagpaparehistro
+        At Kamakailang Movers:</b> Dapat mong RIN isumite ang katibayan ng pagkamamamayan
+        upang bumoto sa mga eleksiyon ng estado! Kung ito ang iyong unang beses na
+        nagrerehistro sa Arizona o iyong inilipat sa ibang county, ang iyong form
+        sa pagpaparehistro ng botante ay dapat ding magsama ng katibayan ng pagkamamamayan
+        upang bumoto sa mga eleksiyon ng estado (ibig sabihin Gobernador, Kalihim
+        ng Estado, at mambabatas ng estado). Kung hindi man ay sa iyo LAMANG maging
+        eleigible upang bumoto sa mga pederal na halalan. Kung mayroon kang isang
+        AZ lisensiya sa pagmamaneho o ID card ng estado na ibinigay pagkatapos 1996/10/01,
+        iyon ay suffient "katibayan ng pagkamamamayan" at walang iba pang mga papeles
+        ay kinakailangan. Kung hindi, dapat mong isumite ang "patunay ng pagkamamamayan"
+        kasama ng iyong application botante pagpaparehistro. Ang pinaka-karaniwang
+        "patunay" ay isang kopya ng iyong kapanganakan sertipiko o pasaporte. Ang
+        isang buong listahan ng mga katanggap-tanggap na dokumentasyon ay matatagpuan
+        sa online.<br/>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      kansas: ! '<b>* Paalala para sa mga aplikanteng Unang Botante Oras Pagpaparehistro:</b>
+        Dapat mong RIN isumite ang katibayan ng pagkamamamayan upang bumoto sa mga
+        eleksiyon ng estado! Kung ito ang iyong unang beses na nagrerehistro sa Kansas,
+        ang iyong pagpaparehistro ng botante na form ay dapat ding magsama ng katibayan
+        ng pagkamamamayan upang bumoto sa mga eleksiyon ng estado (ibig sabihin Gobernador,
+        Kalihim ng Estado, at mambabatas ng estado). Kung hindi man ay magiging karapat-dapat
+        na bumoto sa mga pederal na halalan LAMANG. Ang pinaka-karaniwang "patunay"
+        ay isang kopya ng iyong kapanganakan sertipiko o pasaporte, ngunit ang isang
+        buong listahan ng mga katanggap-tanggap na dokumentasyon ay matatagpuan sa
+        online.<br/>
+
+        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
 

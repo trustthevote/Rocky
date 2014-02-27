@@ -20,7 +20,7 @@ vi:
       state_online_registration: Tôi muốn nộp<br/>mẫu đơn của tôi trên mạng với<br>%{state}
         ngay bây giờ
       skip_state_online_registration: ! '&gt; Không, xin cảm ơn, tôi sẽ tiếp tục với
-        %{rtv_và_partner_name} và nộp mẫu của tôi sau.'
+        %{rtv_and_partner_name} và nộp mẫu của tôi sau.'
     registration:
       in_language_name: Bằng Tiếng Anh
       powered_by: ! 'Được hỗ trợ bỡi:'
@@ -36,14 +36,20 @@ vi:
       preparing_header: Đang chuẩn bị tờ đơn đăng ký...
       download_header: In Mẫu Của Bạn
       finish_header: Phát tán thông tin!
+      finish_pdf_delay_header: Kiểm tra Email của bạn
+      finish_pdf_delay: Nó một khoảng thời gian để tạo ra mẫu đăng ký của bạn để tải
+        về, nhưng đừng lo lắng. Chúng tôi sẽ gửi cho bạn một email khi nó sẵn sàng.
+        Trong khi đó, bạn có thể cho bạn bè của bạn biết làm thế nào họ có thể đăng
+        ký bỏ phiếu quá.
       finish_under_18_header: Tên của bạn có trên danh sách!
       tell_a_friend_title: Hãy nói với một người bạn qua email
+      finish_reminder_header: Nhờ Đăng ký!
       finish_reminder: Cảm ơn bạn, %{first_name}, đã gởi đơn xin đăng ký đi bầu!  Bạn
         sẽ nhận được xác nhận đăng ký của bạn từ các quan chức bầu cử bang.  Đôi khi
         việc tiến hành thủ tục phải mất vài tuần lễ.
       finish_reminder_2: Nếu bạn muốn biết tình trạng về đơn đăng ký đi bầu của bạn,
-        bạn có thể tìm thông tin liên lạc ở Thư ký Bang tại <a href="http://www.rockthevote.com/election-center/"target="_blank>Trung
-        tâm Bầu cử</a>.
+        bạn có thể tìm thông tin liên lạc ở Thư ký Bang tại <a href="http://www.rockthevote.com/election-center/
+        "target="_blank">Trung tâm Bầu cử</a>.
       ineligible_header: ! 'Xin lỗi, bạn không hội đủ điều kiện đăng ký đi bầu vì
         các lý do sau:'
       external_header: Người đăng ký %{state}
@@ -89,14 +95,15 @@ vi:
         work: Điện thoaị nơi làm việc
         other: Khác
       instructions:
-        overseas: ! '<b>Ghi chú<b>: Nếu bạn là công dân Hoa Kỳ sống ở nước ngoài hoặc
-          là cử tri trong quân đội, <ahref=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''target=''_blank''>ấn
-          vào đây<a/>để đăng ký bầu cử.'
+        overseas: ! '<b>Ghi chú</b>: Nếu bạn là công dân Hoa Kỳ sống ở nước ngoài
+          hoặc là cử tri trong quân đội, <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>ấn vào đây</a>để đăng ký bầu cử.'
         opt_in_email: Chúng tôi sẽ gởi bản nhắc nhở bầu cử, điạ điểm bầu cử, thông
           tin về âm nhạc và những vấn đề cần thiết đến cho bạn một cách đúng giờ.
         under_18: ! "Hey, bạn có vẻ chưa tròn 18 tuổi. Không sao. Tại %{state_name},
-          bạn có thể đăng ký bầu cử \n%{state_rule}. Hãy vào trang của chúng tôi <ahref=\"http://www.rockthevote.com/election-center/\"
-          target=\"blank>Trung tâm Bầu cử,</a> để tìm hiểu thời gian bầu cử lần kế."
+          bạn có thể đăng ký bầu cử \n%{state_rule}. Hãy vào trang của chúng tôi <a
+          href=\"http://www.rockthevote.com/election-center/\" target=\"_blank\">Trung
+          tâm Bầu cử,</a> để tìm hiểu thời gian bầu cử lần kế."
         under_18_2: Nếu bạn phù hợp giấy tờ, hãy nhấp vào nút này để tiếp tục đơn
           đăng ký của bạn.
         under_18_3: Nếu không, chúng tôi sẽ gởi nhắc nhở đăng ký vào sinh nhật thứ
@@ -129,7 +136,7 @@ vi:
           thẻ nhận dạng của bạn không hợp lệ, hoặc bang bạn không thể thấy hay xác
           nhận hồ sơ sở hữu xe của bạn, đừng lo,  &mdash; bạn cũng có thể %{link}.
           Bạn sẽ chỉ cần in ra, ký tên, và gửi nó.
-        leave_state_online_registration_link: kết thúc đăng ký của bạn với %{rtv}_and_partner_name}
+        leave_state_online_registration_link: kết thúc đăng ký của bạn với %{rtv_and_partner_name}
       ineligible:
         age: Bạn phải ít nhất 18 tuổi tính đến ngày bầu cử tới.
         non_citizen: Đăng ký của bạn không thể hoàn thành được, vì bạn đã không đánh
@@ -144,47 +151,11 @@ vi:
           show:
             p1: Tin vui! Nếu bạn có bằng lái xe hợp lệ của bang Colorado, bạn có thể
               hoàn thành đăng ký cử tri của bạn với Thư ký Bang Colorado.
-            p2: ! 'Nếu bạn cung cấp số giấy phép lái xe của bạn và đăng ký bỏ phiếu
-              lần đầu tiên, hoặc thay đổi địa chỉ đăng ký cử tri Colorado hiện tại
-              của bạn, chỉ cần nhấp vào liên kết dưới đây. Thông tin mà bạn cung cấp
-              sẽ xuất hiện trên bản tin đăng ký trực tuyến của Thư ký Bang, và bạn
-              có thể hoàn thành đơn xin của bạn nơi đó.
-
-
-
-
-              Nếu bạn cung cấp số giấy phép lái xe của bạn và được đăng ký bỏ phiếu
-              lần đầu tiên hoặc thay đổi địa chỉ đăng ký cử tri Colorado hiện tại
-              của bạn, chỉ cần nhấp vào liên kết dưới đây. Thông tin mà bạn đã cung
-              cấp sẽ xuất hiện trên các thư ký của cổng thông tin trực tuyến đăng
-              ký cử tri của Nhà nước và bạn có thể hoàn thành ứng dụng của bạn ở đó.
-
-
-
-
-              Nếu bạn cung cấp số giấy phép lái xe của bạn và được đăng ký bỏ phiếu
-              lần đầu tiên hoặc thay đổi địa chỉ đăng ký cử tri Colorado hiện tại
-              của bạn, chỉ cần nhấp vào liên kết dưới đây. Thông tin mà bạn đã cung
-              cấp sẽ xuất hiện trên các thư ký của cổng thông tin trực tuyến đăng
-              ký cử tri của Nhà nước và bạn có thể hoàn thành ứng dụng của bạn ở đó.
-
-
-
-
-
-              Nếu bạn cung cấp số giấy phép lái xe của bạn và được đăng ký bỏ phiếu
-              lần đầu tiên hoặc thay đổi địa chỉ đăng ký cử tri Colorado hiện tại
-              của bạn, chỉ cần nhấp vào liên kết dưới đây. Thông tin mà bạn đã cung
-              cấp sẽ xuất hiện trên các thư ký của cổng thông tin trực tuyến đăng
-              ký cử tri của Nhà nước và bạn có thể hoàn thành ứng dụng của bạn ở đó.
-
-
-
-              Nếu bạn cung cấp số giấy phép lái xe của bạn, và đăng ký bỏ phiếu lần
+            p2: Nếu bạn cung cấp số giấy phép lái xe của bạn và đăng ký bỏ phiếu lần
               đầu tiên, hoặc thay đổi địa chỉ đăng ký cử tri Colorado hiện tại của
-              bạn, chỉ cần nhấp vào liên kết dưới đây. Thông tin mà bạn đã cung cấp
-              sẽ xuất hiện trên   bản tin đăng ký cử tri trực tuyến của Nhà nước,
-              và bạn có thể hoàn thành đơn xin của bạn nơi đó.'
+              bạn, chỉ cần nhấp vào liên kết dưới đây. Thông tin mà bạn cung cấp sẽ
+              xuất hiện trên bản tin đăng ký trực tuyến của Thư ký Bang, và bạn có
+              thể hoàn thành đơn xin của bạn nơi đó.
             p3: Mặt khác, nếu bạn không thể hoàn thành đơn xin của bạn tại trang web
               của Thư ký Bang, bạn có thể nhấp vào liên kết dưới đây và tiếp tục điền
               vào mẫu nầy. Bạn sẽ nhận được mẫu đăng ký cử tri để in ra, ký tên, và
@@ -242,41 +213,10 @@ vi:
           hộp bưu điện, hoặc đường nông thôn mà không có số cuả hộp thư. Nếu bạn sống
           ở vùng nông thôn nhưng không có địa chỉ đường phố, hoặc nếu bạn không có
           địa chỉ, hãy cho biết nơi bạn ở bằng cách sử dụng bản đồ trên mẫu in sẵn.
-        mailing_address: ! 'Ghi địa chỉ gửi thư của bạn vào khung này nếu bạn nhận
-          thư tại một địa chỉ khác với địa chỉ nhà của bạn. Nếu bạn không nhận thư
-          ở địa chỉ nhà của bạn, bạn phải điền vào phần này để chỉ rõ nơi bạn có thể
-          nhận được thư qua đường bưu điện.
-
-
-
-
-
-
-          Đặt địa chỉ gửi thư của bạn trong hộp này nếu bạn nhận được thư của bạn
-          tại một địa chỉ khác với địa chỉ nhà của bạn. Nếu bạn không nhận được thư
-          ở địa chỉ nhà của bạn, bạn phải điền vào phần này để chỉ rõ nơi bạn có thể
-          đạt được qua đường bưu điện.
-
-
-
-
-
-
-
-
-          Đặt địa chỉ gửi thư của bạn trong hộp này nếu bạn nhận được thư của bạn
-          tại một địa chỉ khác với địa chỉ nhà của bạn. Nếu bạn không nhận được thư
-          ở địa chỉ nhà của bạn, bạn phải điền vào phần này để chỉ rõ nơi bạn có thể
-          đạt được qua đường bưu điện.
-
-
-
-
-
-          Đặt địa chỉ gửi thư của bạn trong hộp này nếu bạn nhận được thư của bạn
-          tại một địa chỉ khác với địa chỉ nhà của bạn. Nếu bạn không nhận được thư
-          ở địa chỉ nhà của bạn, bạn phải điền vào phần này để chỉ rõ nơi bạn có thể
-          đạt được qua đường bưu điện.'
+        mailing_address: Đặt địa chỉ gửi thư của bạn trong hộp này nếu bạn nhận được
+          thư của bạn tại một địa chỉ khác với địa chỉ nhà của bạn. Nếu bạn không
+          nhận được thư ở địa chỉ nhà của bạn, bạn phải điền vào phần này để chỉ rõ
+          nơi bạn có thể đạt được qua đường bưu điện.
         phone: Hầu hết các tiểu bang đều yêu cầu số điện thoại của bạn cho trường
           hợp có những câu hỏi về đơn xin của bạn. Bạn không cần phải cung cấp số
           điện thoại của bạn.

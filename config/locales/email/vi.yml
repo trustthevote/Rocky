@@ -121,7 +121,7 @@ vi:
           dịch đăng ký cử tri cho chính mình trên trang web hoặc blog. <br><br>\n\nThân
           mến, <br>\n%{registrant_first_name}<br><br>"
         footer: ! 'Rock the Vote cam kết bảo vệ sự riêng tư và bản hộ thông tin nhạy
-          cảm của bạn. Xin vui lòng xem <strong<a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">chính
+          cảm của bạn. Xin vui lòng xem <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">chính
           sách bảo mật đăng ký cử tri</a></strong> để biết chi tiết. <br><br>
 
 
@@ -129,8 +129,8 @@ vi:
     thank_you_external:
       subject: Cảm ơn bạn đã xử dụng phương thức đăng ký cử tri trực tuyến
       body:
-        main: ! "Thân chào % {registrant_first_name},<br><br>\n\nCảm ơn bạn đã sử
-          dụng phương thức đăng ký cử tri trực tuyến của %{rtv_and_partner_name}.<br><br>\n\nNếu
+        main: ! "Thân chào %{registrant_first_name},<br><br>\n\nCảm ơn bạn đã sử dụng
+          phương thức đăng ký cử tri trực tuyến của %{rtv_and_partner_name}.<br><br>\n\nNếu
           bạn hoàn thành đơn xin đăng ký cử tri trực tuyến, đơn đã được trình lên
           Văn phòng Thư ký Bang %{state_name} để xúc tiến. Khi được chấp nhận, bạn
           sẽ nhận được xác nhận từ văn phòng Thư ký Bang %{state_abbr} và bộ phận
@@ -138,7 +138,7 @@ vi:
           có câu hỏi hoặc quan tâm, bạn có thể kiểm tra tình trạng đăng ký cử tri
           của bạn bằng cách gọi \nVăn phòng Thư ký Bang %{state_abbr} tại %{registrar_phone}
           , hoặc kiểm tra trực tuyến tại \n%{registrar_url} . Xin liên hệ trực tiếp
-          với %{ rtv_and_partner_name} nếu bạn gặp phải bất kỳ vấn đề gì trong quá
+          với %{rtv_and_partner_name} nếu bạn gặp phải bất kỳ vấn đề gì trong quá
           trình đăng ký. <br><br>\n\nHiện taị, chúng tôi cũng cần sự giúp đỡ của bạn
           để có được nhiều người khác đăng ký đi bầu. Có các cuộc bầu cử lớn trên
           cả nước trong năm nay, và 45 triệu cử tri trẻ tuổi đủ điều kiện - và chúng
