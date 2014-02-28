@@ -13,27 +13,31 @@ curl -d @soapreq.xml -H "Content-Type:application/soap+xml;charset=UTF-8" https:
                 <tem:PostingAgencyKey>d2DE1Nht8I</tem:PostingAgencyKey>
                 <tem:CovrAgencyKey>RTV</tem:CovrAgencyKey>
                 
+                <tem:IsUsCitizen>1</tem:IsUsCitizen>
+                <tem:IsEighteenOrOlder>1</tem:IsEighteenOrOlder>
+                <tem:IsDisclosureDisplayed>1</tem:IsDisclosureDisplayed>
+                
+                <tem:VoterResidentType>1</tem:VoterResidentType>
+                
+                <tem:DobDay>1</tem:DobDay>
+                <tem:DobMonth>1</tem:DobMonth>
+                <tem:DobYear>1980</tem:DobYear>
+                <tem:DobStateId>1</tem:DobStateId>
+                <tem:DobCountryId>1</tem:DobCountryId>
+                
+                <tem:PrefixId>1</tem:PrefixId>
+                
+                <tem:IsHomeAddress>0</tem:IsHomeAddress>
+                <tem:IsMailingAddress>0</tem:IsMailingAddress>
+                <tem:IsPreviouslyRegistered>0</tem:IsPreviouslyRegistered>
+                <tem:IsNonUspsAddress>1</tem:IsNonUspsAddress>
+                <tem:EthnicityId>1</tem:EthnicityId>
+                <tem:ElectionMaterialLanguageId>1</tem:ElectionMaterialLanguageId>
                 
              </tem:postingEntity>    
       </tem:GetTokenNumber>
   </s:Body>
 </s:Envelope>
 
-<tem:IsUsCitizen>1</tem:IsUsCitizen>
-<tem:IsEighteenOrOlder>1</tem:IsEighteenOrOlder>
-<tem:IsDisclosureDisplayed>1</tem:IsDisclosureDisplayed>
 
 
-<tem:VoterResidentType>1</tem:VoterResidentType>
-<tem:DobDay>1</tem:DobDay>
-<tem:DobMonth>1</tem:DobMonth>
-<tem:DobYear>2000</tem:DobYear>
-<tem:PrefixId>1</tem:PrefixId>
-<tem:IsHomeAddress>1</tem:IsHomeAddress>
-<tem:IsMailingAddress>1</tem:IsMailingAddress>
-<tem:IsPreviouslyRegistered>0</tem:IsPreviouslyRegistered>
-<tem:IsNonUspsAddress>1</tem:IsNonUspsAddress>
-<tem:DobStateId>1</tem:DobStateId>
-<tem:DobCountryId>1</tem:DobCountryId>
-<tem:EthnicityId>1</tem:EthnicityId>
-<tem:ElectionMaterialLanguageId>1</tem:ElectionMaterialLanguageId>
