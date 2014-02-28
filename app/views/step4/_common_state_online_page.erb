@@ -17,9 +17,8 @@ $(document).ready(function() {
 
 
 
-  <%= I18n.t('txt.registration.instructions.state_online_registration', :state=>h(@registrant.home_state.abbreviation)).html_safe %>
 
-  <%= rollover_button(:state_online_registration, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_name).html_safe, {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
+  <%= rollover_button(:state_online_registration, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev).html_safe, {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
   
 <a href="#" class='skip_state_registration_link' style="display:none;">
   <%= I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe %>

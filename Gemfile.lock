@@ -127,6 +127,8 @@ GEM
     ledermann-rails-settings (2.0.3)
       activerecord (~> 3.1)
     libv8 (3.11.8.17)
+    lolsoap (0.5.1)
+      nokogiri (~> 1.5)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -292,6 +294,7 @@ DEPENDENCIES
   jquery-rails (~> 2.1)
   json
   ledermann-rails-settings
+  lolsoap
   mechanize (= 2.7.1)
   mysql2
   newrelic_rpm (= 3.6.0.83)

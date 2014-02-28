@@ -1,4 +1,7 @@
 <%- if @registrant.in_ovr_flow? %>
+  <h1><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_abbrev).html_safe %></h1>
+  <br/>
+  <h3><%= I18n.t('txt.registration.instructions.state_online_registration_sub_header').html_safe %></h3>
 <%- else %>
   <h1><%= t('txt.registration.step_4_header') %></h1>
 <%- end %>

@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'lolsoap'
 
 gem "rake", "10.0.3"
 

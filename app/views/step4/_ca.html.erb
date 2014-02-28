@@ -16,9 +16,8 @@ $(document).ready(function() {
 <% end %>
 
 
-<%= I18n.t('states.custom.ca.step_2.instruction_text')  %>
 
-  <%= rollover_button(:next_step, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_name), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
+  <%= rollover_button(:next_step, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
   
 
 <a href="#" class='skip_state_registration_link' style="display:none;">
