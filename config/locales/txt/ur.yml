@@ -15,7 +15,7 @@ ur:
       review: درخواست کا جائزہ لیں
       sendmail: ای میل بھیجیں
       share_facebook: اسے بھیجیں
-      share_twitter: ٹویٹ کریں
+      share_twitter: یہ ٹویٹ
       share_google_buzz: گوگل پر شیئر کریں
       state_online_registration: میں اپنا فارم اپنی ریاست کو آن لائن بھیجنا چاہتا
         ہوں %{state}
@@ -212,8 +212,7 @@ ur:
           اٹھارویں سالگرہ سے قبل ووٹر رجسٹریشن کی اجازت دے دیتی ہیں۔ مزید معلومات
           کے لیے نیچے دی گئی ویب سائٹ دیکھیں
 
-          <a href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html">یہاں
-          کلک کریں</a>'
+          <a href="http://www.rockthevote.com/voter-registration/online-application-system/register-before-you-are-18-rules.html"'
         registrant_name: خانوں کے اندر اپنا مکمل نام لکھیں۔ مہربانی فرما کر اپنا عرف
           نام یا مختصر نام نہ لکھیں۔ اگر آپ تبدیلی نام کے لیے درخواست دے رہے ہیں تو
           اس درخواست کے دوسرے حصے میں آپ سے آپ کا پہلا نام پوچھا جائے گا۔ اپنے نام

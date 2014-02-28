@@ -98,9 +98,8 @@ bn:
         other: অন্যান্য
       instructions:
         overseas: ! '<b>মন্তব্য </b>: আপনি যদি আমেরিকার নাগরিক হন কিন্ত বিদেশে বসবাস
-          করেন অথবা সামরিক বাহিনীর সদস্য হন তবে ভোটার হওয়ার জন্য এখানে ক্লিক করুন:<a
-          href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
-          target=''_blank''>'
+          করেন অথবা সামরিক বাহিনীর সদস্য হন তবে ভোটার হওয়ার জন্য :<a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+          target=''_blank''>এখানে ক্লিক করুন</a>'
         opt_in_email: আমরা আপনাকে নির্বাচনের সময় আপনার নির্বাচনী কেন্দ্রের ঠিকানা
           জানিয়ে দেব এবং সংগীত ও অন্যান্য গুরুত্বপূর্ণ বিষয়গুলো সম্পর্কে তথ্য জানাব।
         under_18: দেখা যাচ্ছে আপনার বয়স এখনো আঠারো বছর পূর্ণ হয়নি। তবে তাতে কোন
