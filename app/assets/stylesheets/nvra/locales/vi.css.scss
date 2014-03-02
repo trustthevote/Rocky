@@ -14,10 +14,21 @@ html, body {
 
 
 #page_1 {
-	h1 {
+	h1, h2 {
+		font-size:150px;
 		line-height: 1.6em;
 	}
+	h2 {
+		font-size:100px;
+		line-height: 1.4em;
+	}
+	p.top_paragraph {
+		padding:.5em 0;
+		font-size: 75px;
+	}
+	
 }
+
 p {
 	line-height: 1.4em;
 }
