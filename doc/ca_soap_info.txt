@@ -1,0 +1,55 @@
+curl -d @soapreq.xml -H "Content-Type:application/soap+xml;charset=UTF-8" https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc
+
+
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing"><s:Header><a:Action s:mustUnderstand="1">http://tempuri.org/IPostingEntityInterfaceService/GetTokenNumberResponse</a:Action></s:Header><s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><GetTokenNumberResponse xmlns="http://tempuri.org/"><GetTokenNumberResult><Token>F9B91DDE-BD95-41Z-905Z-9143511C32C27C190A</Token><Success>true</Success><ErrorCode>0</ErrorCode><ErrorMessage/></GetTokenNumberResult></GetTokenNumberResponse></s:Body>
+
+
+
+
+Ethnicity/Race 
+
+EthnicityIdId Int 1 Other
+
+2 American Indian or Alaska Native
+
+3 Asian or Pacific Islander
+
+4 Black, not of Hispanic Origin
+
+6 Multi-racial
+
+7 White, not of Hispanic Origin
+
+5 Hispanic
+
+
+
+
+Language
+
+Preference 
+
+for Election 
+
+Materials
+
+ElectionMaterialLanguageId Int 
+2 English
+
+3 Chinese
+
+4 Vietnamese
+
+5 Korean
+
+6 Tagalog
+
+7 Japanese
+
+8 Hindi
+
+9 Khmer
+
+10 Thai
+
+11 Spanish

@@ -1,6 +1,3 @@
-curl -d @soapreq.xml -H "Content-Type:application/soap+xml;charset=UTF-8" https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc
-
-
 <?xml version="1.0" encoding="UTF-8"?>
 <s:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tem="http://tempuri.org/" xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:ins0="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
   <s:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
@@ -22,15 +19,7 @@ curl -d @soapreq.xml -H "Content-Type:application/soap+xml;charset=UTF-8" https:
                 <tem:DobDay>1</tem:DobDay>
                 <tem:DobMonth>1</tem:DobMonth>
                 <tem:DobYear>1980</tem:DobYear>
-                <tem:DobStateId>1</tem:DobStateId>
-                <tem:DobCountryId>1</tem:DobCountryId>
                 
-                <tem:PrefixId>1</tem:PrefixId>
-                
-                <tem:IsHomeAddress>0</tem:IsHomeAddress>
-                <tem:IsMailingAddress>0</tem:IsMailingAddress>
-                <tem:IsPreviouslyRegistered>0</tem:IsPreviouslyRegistered>
-                <tem:IsNonUspsAddress>1</tem:IsNonUspsAddress>
                 <tem:EthnicityId>1</tem:EthnicityId>
                 <tem:ElectionMaterialLanguageId>1</tem:ElectionMaterialLanguageId>
                 
@@ -38,6 +27,3 @@ curl -d @soapreq.xml -H "Content-Type:application/soap+xml;charset=UTF-8" https:
       </tem:GetTokenNumber>
   </s:Body>
 </s:Envelope>
-
-
-
