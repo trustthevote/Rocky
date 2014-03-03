@@ -58,8 +58,8 @@ class CaCovrTest
   
   def deuniquify_responses
     if is_success_test?
-      @response = @response.gsub(Ca::XML_TOKEN_REGEXP,"TOKEN")
-      @expected_response = @expected_response.gsub(Ca::XML_TOKEN_REGEXP,"TOKEN")
+      @response = @response.gsub(CA::XML_TOKEN_REGEXP,"TOKEN")
+      @expected_response = @expected_response.gsub(CA::XML_TOKEN_REGEXP,"TOKEN")
     end
   end
   
