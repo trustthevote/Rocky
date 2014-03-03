@@ -1,7 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'lolsoap'
-
 gem "rake", "10.0.3"
 
 gem "figaro"
@@ -27,7 +25,9 @@ gem 'jquery-rails', '~> 2.1'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 
-gem 'savon'
+gem 'rest-client'
+gem 'diffy'
+
 
 group :development, :test do
   gem "rspec-rails", "~> 2.10.1"

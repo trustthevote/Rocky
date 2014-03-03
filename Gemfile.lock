@@ -33,9 +33,6 @@ GEM
       activesupport
       builder
       json
-    akami (1.2.1)
-      gyoku (>= 0.4.0)
-      nokogiri
     arel (3.0.2)
     assert_difference (0.5.0)
     authlogic (3.3.0)
@@ -87,6 +84,7 @@ GEM
       activerecord (>= 2.1.0, < 4)
       delayed_job (~> 3.0)
     diff-lcs (1.1.3)
+    diffy (3.0.2)
     domain_name (0.5.12)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (0.7.0)
@@ -106,8 +104,6 @@ GEM
       rails (>= 3, < 5)
     gherkin (2.11.8)
       multi_json (~> 1.3)
-    gyoku (1.1.1)
-      builder (>= 2.1.2)
     haml (4.0.2)
       tilt
     highline (1.6.19)
@@ -115,9 +111,6 @@ GEM
     hpricot (0.8.6)
     http-cookie (1.0.1)
       domain_name (~> 0.5)
-    httpi (2.1.0)
-      rack
-      rubyntlm (~> 0.3.2)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.3.0)
@@ -127,8 +120,6 @@ GEM
     ledermann-rails-settings (2.0.3)
       activerecord (~> 3.1)
     libv8 (3.11.8.17)
-    lolsoap (0.5.1)
-      nokogiri (~> 1.5)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -156,7 +147,6 @@ GEM
       net-ssh (>= 2.6.5)
     newrelic_rpm (3.6.0.83)
     nokogiri (1.5.9)
-    nori (2.3.0)
     ntlm-http (0.1.1)
     paperclip (3.4.1)
       activemodel (>= 3.0.0)
@@ -195,6 +185,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rr (0.10.11)
     rspec (2.10.0)
       rspec-core (~> 2.10.0)
@@ -212,7 +204,6 @@ GEM
     rspec-spies (2.1.1)
       rspec (~> 2.0)
       rspec-spies
-    rubyntlm (0.3.4)
     rubyzip (0.9.9)
     rvm-capistrano (1.3.0)
       capistrano (>= 2.0.0)
@@ -221,14 +212,6 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    savon (2.3.3)
-      akami (~> 1.2.0)
-      builder (>= 2.1.2)
-      gyoku (~> 1.1.0)
-      httpi (~> 2.1.0)
-      nokogiri (>= 1.4.0)
-      nori (~> 2.3.0)
-      wasabi (~> 3.2.2)
     selenium-webdriver (2.32.1)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
@@ -255,10 +238,6 @@ GEM
     unf (0.1.1)
       unf_ext
     unf_ext (0.0.6)
-    wasabi (3.2.3)
-      httpi (~> 2.0)
-      mime-types (< 2.0.0)
-      nokogiri (>= 1.4.0)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -286,6 +265,7 @@ DEPENDENCIES
   daemons (= 1.0.10)
   database_cleaner
   delayed_job_active_record
+  diffy
   dotenv-rails
   factory_girl_rails
   figaro
@@ -294,7 +274,6 @@ DEPENDENCIES
   jquery-rails (~> 2.1)
   json
   ledermann-rails-settings
-  lolsoap
   mechanize (= 2.7.1)
   mysql2
   newrelic_rpm (= 3.6.0.83)
@@ -304,13 +283,13 @@ DEPENDENCIES
   rails-i18n
   rails_config
   rake (= 10.0.3)
+  rest-client
   rr (= 0.10.11)
   rspec-rails (~> 2.10.1)
   rspec-spies (= 2.1.1)
   rubyzip
   rvm-capistrano
   sass-rails
-  savon
   sqlite3
   therubyracer
   treetop (= 1.4.10)

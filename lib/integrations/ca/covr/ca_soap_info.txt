@@ -3,7 +3,14 @@ curl -d @soapreq.xml -H "Content-Type:application/soap+xml;charset=UTF-8" https:
 
 <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing"><s:Header><a:Action s:mustUnderstand="1">http://tempuri.org/IPostingEntityInterfaceService/GetTokenNumberResponse</a:Action></s:Header><s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><GetTokenNumberResponse xmlns="http://tempuri.org/"><GetTokenNumberResult><Token>F9B91DDE-BD95-41Z-905Z-9143511C32C27C190A</Token><Success>true</Success><ErrorCode>0</ErrorCode><ErrorMessage/></GetTokenNumberResult></GetTokenNumberResponse></s:Body>
 
+<!-- 
+Step 2 URL: http://covrtest.sos.ca.gov/?language=en-US&t=p&CovrAgencyKey=RTV&PostingAgencyRecordId=F9B91DDE-BD95-41Z-905Z-9143511C32C27C190A
 
+//-->
+
+<!-- Step 2 URL:
+http://covrtest.sos.ca.gov/?language=en-US&t=p&CovrAgencyKey=RTV&PostingAgencyRecordId=81BC7465-6937-41Z-905Z-9143511C05C12C400A
+//-->
 
 
 Ethnicity/Race 
