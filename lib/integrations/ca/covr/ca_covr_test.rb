@@ -129,7 +129,7 @@ class CaCovrTest
 
   
   def is_success_test?
-    !!(test_name =~ /^success-/)
+    !!(xml_response_contents =~ CA::XML_TOKEN_REGEXP)
   end
   
   def self.xml_request_contents(test_name)
