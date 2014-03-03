@@ -14,8 +14,8 @@ class CaCovrTest
     @test_name = test_name
   end
   
-  TESTS.each do |t|
-    define_method("self.test_#{t.underscore}") do
+  def self.test_all!
+    TESTS.each do |t|
       self.new(t).test!
     end
   end
@@ -32,12 +32,26 @@ class CaCovrTest
   
   def compare_response
     @expected_response = xml_response_contents
+    deuniquify_responses
     @diff = Diffy::Diff.new(@response, @expected_response)
   end
   
+  def deuniquify_responses
+    if is_success_test?
+      @response = @response.gsub(/\<token\>.+\<\/token\>/,"TOKEN")
+      @expected_response = @expected_response.gsub(/\<token\>.+\<\/token\>/,"TOKEN")
+    end
+  end
+  
   def return_test_results
+    puts "\n\n"
     puts @diff
-    puts "#{test_name} test done."
+    if @diff.empty?
+      puts "#{test_name} test SUCCESS."
+    else
+      puts "#{test_name} test FAIL."
+    end
+    puts "\n\n"
   end
   
   def url
@@ -56,6 +70,9 @@ class CaCovrTest
     self.class.xml_response_contents(self.test_name)
   end
   
+  def is_success_test?
+    test_name =~ /^success-/
+  end
   
   def self.xml_request_contents(test_name)
     contents = ''
