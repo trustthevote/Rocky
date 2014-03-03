@@ -106,12 +106,12 @@ class CaCovrTest
   
   
   def success_token
-    if is_success_test?
+    if self.is_success_test?
       @success_token = CA.extract_token_from_xml_response(self.response)
     else
       @success_token = nil
     end
-    @sucess_token
+    @success_token
   end
   
   
