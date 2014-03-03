@@ -1,13 +1,14 @@
-# require './lib/integrations/ca/covr/ca_covr_tests'
+# require './lib/integrations/ca/covr/ca_covr_test'
 
 class CaCovrTest
   
   TESTS = %w(success-max success-min fail-max-lastname fail-min-agencycode fail-min-disclosures fail-min-residentid)
   
   attr_reader :test_name
-  attr_reader :response
+  attr_reader :response, :response2
   attr_writer :url
   attr_writer :key
+  attr_writer :step2_url_base
   
   def initialize(test_name)
     raise "Test #{test_name} not supported" unless TESTS.include?(test_name.to_s)
@@ -24,10 +25,22 @@ class CaCovrTest
     make_request
     compare_response
     return_test_results
+    if is_success_test?
+      make_step2_request
+      compare_response2
+      return_test_results2
+    end
   end
+  
+  
+  
   
   def make_request
     @response = Integrations::Soap.make_request(url, xml_request_contents)
+  end
+  
+  def make_step2_request
+    @response2 = RestClient.get(step_2_url)
   end
   
   def compare_response
@@ -36,24 +49,45 @@ class CaCovrTest
     @diff = Diffy::Diff.new(@response, @expected_response)
   end
   
+  def compare_response2
+    @expected_response2 = html_response2_contents
+    #deuniquify_responses
+    @diff2 = Diffy::Diff.new(@response2, @expected_response2)
+    
+  end
+  
   def deuniquify_responses
     if is_success_test?
-      @response = @response.gsub(/\<Token\>.+\<\/Token\>/,"TOKEN")
-      @expected_response = @expected_response.gsub(/\<Token\>.+\<\/Token\>/,"TOKEN")
+      @response = @response.gsub(Ca::XML_TOKEN_REGEXP,"TOKEN")
+      @expected_response = @expected_response.gsub(Ca::XML_TOKEN_REGEXP,"TOKEN")
     end
   end
+  
+  
+  
   
   def return_test_results
     puts "\n\n"
     puts @diff
     if @diff.to_s.empty?
-      puts "#{test_name} test SUCCESS."
+      puts "#{test_name} step 1 test SUCCESS."
     else
-      puts "#{test_name} test FAIL."
+      puts "#{test_name} step 1 test FAIL."
     end
     puts "\n\n"
   end
   
+  def return_test_results2
+    puts "\n\n"
+    puts @diff2
+    if @diff2.to_s.empty?
+      puts "#{test_name} step 2 test SUCCESS."
+    else
+      puts "#{test_name} step 2 test FAIL."
+    end
+    puts "\n\n"
+  end
+
   def url
     @url ||= "https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc"
   end
@@ -62,6 +96,25 @@ class CaCovrTest
     @key ||= "d2DE1Nht8I"
   end
   
+  def step_2_url
+"#{step_2_url_base}/?language=en-US&t=p&CovrAgencyKey=RTV&PostingAgencyRecordId=#{success_token}"   
+  end
+  
+  def step_2_url_base
+    @step_2_url_base ||= "http://covrtest.sos.ca.gov"
+  end
+  
+  
+  def success_token
+    if is_success_test?
+      @success_token = Ca.extract_token_from_xml_response(@response)
+    else
+      @success_toekn = nil
+    end
+    @sucess_token
+  end
+  
+  
   def xml_request_contents
     self.class.xml_request_contents(self.test_name)
   end
@@ -69,6 +122,11 @@ class CaCovrTest
   def xml_response_contents
     self.class.xml_response_contents(self.test_name)
   end
+
+  def html_response2_contents
+    self.class.html_response2_contents(self.test_name)
+  end
+
   
   def is_success_test?
     test_name =~ /^success-/
@@ -85,6 +143,14 @@ class CaCovrTest
   def self.xml_response_contents(test_name)
     contents = ''
     File.open(Rails.root.join("lib/integrations/ca/covr/fixtures","#{test_name}-resp.xml")) do |f|
+      contents = f.read
+    end
+    return contents
+  end
+  
+  def self.html_response2_contents(test_name)
+    contents = ''
+    File.open(Rails.root.join("lib/integrations/ca/covr/fixtures","#{test_name}-resp2.html")) do |f|
       contents = f.read
     end
     return contents
