@@ -9,13 +9,13 @@
     <tem:postingEntity>
                 <tem:PostingAgencyKey>d2DE1Nht8I</tem:PostingAgencyKey>
                 <tem:CovrAgencyKey>RTV</tem:CovrAgencyKey>
-                <!--
                 <tem:IsUsCitizen>1</tem:IsUsCitizen>
-                //-->
                 <tem:IsEighteenOrOlder>1</tem:IsEighteenOrOlder>
                 <tem:IsDisclosureDisplayed>1</tem:IsDisclosureDisplayed>
                 
+                <!--
                 <tem:VoterResidentType>1</tem:VoterResidentType>
+                //-->
                 
                 <tem:DobDay>1</tem:DobDay>
                 <tem:DobMonth>1</tem:DobMonth>

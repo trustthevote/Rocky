@@ -1,6 +1,6 @@
 # require './lib/integrations/ca/covr/ca_covr_tests'
 
-class CaCovrTests
+class CaCovrTest
   
   TESTS = %w(success-max success-min fail-max-lastname fail-min-agencycode fail-min-disclosures fail-min-residentid)
   
@@ -30,7 +30,7 @@ class CaCovrTests
     @response = Integrations::Soap.make_request(url, xml_request_contents)
   end
   
-  def compare_resposne
+  def compare_response
     @expected_response = xml_response_contents
     @diff = Diffy::Diff.new(@response, @expected_response)
   end
