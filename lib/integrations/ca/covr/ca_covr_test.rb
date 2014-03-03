@@ -38,15 +38,15 @@ class CaCovrTest
   
   def deuniquify_responses
     if is_success_test?
-      @response = @response.gsub(/\<token\>.+\<\/token\>/,"TOKEN")
-      @expected_response = @expected_response.gsub(/\<token\>.+\<\/token\>/,"TOKEN")
+      @response = @response.gsub(/\<Token\>.+\<\/Token\>/,"TOKEN")
+      @expected_response = @expected_response.gsub(/\<Token\>.+\<\/Token\>/,"TOKEN")
     end
   end
   
   def return_test_results
     puts "\n\n"
     puts @diff
-    if @diff.empty?
+    if @diff.to_s.empty?
       puts "#{test_name} test SUCCESS."
     else
       puts "#{test_name} test FAIL."
