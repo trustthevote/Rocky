@@ -52,7 +52,7 @@ class CaCovrTest
   def compare_response2
     @expected_response2 = html_response2_contents
     #deuniquify_responses
-    @diff2 = Diffy::Diff.new(@response2, @expected_response2)
+    @diff2 = Diffy::Diff.new(@response2.gsub(/\r\n?/, "\n"), @expected_response2.gsub(/\r\n?/, "\n"))
     
   end
   
