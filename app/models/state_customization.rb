@@ -44,6 +44,14 @@ class StateCustomization
     state.redirect_to_online_registration_url?
   end
   
+  def has_ovr_pre_check?(registrant)
+    false
+  end
+  
+  def ovr_pre_check(registrant=nil, controller=nil)
+    raise "Not Implemented"
+  end
+  
 protected
   def self.class_exists?(class_name)
     klass = Module.const_get(class_name)

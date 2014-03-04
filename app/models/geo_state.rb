@@ -26,7 +26,7 @@ class GeoState < ActiveRecord::Base
 
   has_many :localizations, :class_name => 'StateLocalization', :foreign_key => 'state_id'
   
-  delegate :online_reg_url, :redirect_to_online_reg_url, :to=>:state_customization
+  delegate :online_reg_url, :redirect_to_online_reg_url, :has_ovr_pre_check?, :ovr_pre_check, :to=>:state_customization
 
   def self.[](id_or_abbrev)
     init_all_states

@@ -66,8 +66,39 @@ describe Step3Controller do
       assert assigns[:registrant].reload.step_2?
       assert_template "show"
     end
-
-
     
+    describe "redirect_when_eligible" do
+      context "when there is no ovr pre-check" do
+        before(:each) do
+          @registrant.stub(:has_ovr_pre_check?).and_return(false)
+        end
+        it "should execute the redirect" do
+          put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant).reject {|k,v| k == :status }
+          assert_redirected_to registrant_step_4_url(assigns[:registrant])
+        end
+      end
+      context "when there is an ovr pre_check" do
+        before(:each) do
+          @registrant.stub(:has_ovr_pre_check?).and_return(true)
+          @registrant.stub(:some_code_to_execute)
+          @registrant.stub(:ovr_pre_check) do
+            @registrant.some_code_to_execute
+            controller.redirect_to "/"
+          end
+          Registrant.stub(:find_by_param!).and_return(@registrant)
+        end
+        
+        it "should run the registrant's OVR precheck instead of the redirect" do
+          @registrant.should_receive(:some_code_to_execute)
+          put :update, :registrant_id => @registrant.to_param, :registrant => FactoryGirl.attributes_for(:step_3_registrant).reject {|k,v| k == :status }
+          assert_redirected_to("/")
+        end
+      end
+
+    end
   end
+  
+
+
+  
 end

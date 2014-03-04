@@ -30,6 +30,7 @@ class Registrant < ActiveRecord::Base
     def initialize(registrant)
       @registrant = registrant
     end
+    
   end
 
   include AASM
@@ -782,6 +783,17 @@ class Registrant < ActiveRecord::Base
     home_state && home_state.redirect_to_online_reg_url(self)
   end
   
+  def has_ovr_pre_check?
+    in_ovr_flow? && home_state_has_ovr_pre_check?
+  end
+  
+  def home_state_has_ovr_pre_check?
+    home_state ? home_state.has_ovr_pre_check?(self) : false
+  end
+
+  def ovr_pre_check(controller = nil)
+    home_state ? home_state.ovr_pre_check(self, controller) : nil
+  end
 
   def mailing_state_abbrev=(abbrev)
     self.mailing_state = GeoState[abbrev]
@@ -810,7 +822,8 @@ class Registrant < ActiveRecord::Base
   def home_state_allows_ovr?
     localization ? localization.allows_ovr? : false
   end
-
+  
+  
 
   def custom_step_4_partial
     "#{home_state.abbreviation.downcase}"

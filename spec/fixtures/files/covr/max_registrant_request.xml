@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tem="http://tempuri.org/" xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:ins0="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+  <s:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+         <wsa:Action>http://tempuri.org/IPostingEntityInterfaceService/GetTokenNumber</wsa:Action>
+         <wsa:To>https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc</wsa:To>
+  </s:Header>
+  <s:Body>
+    <tem:GetTokenNumber>
+    <tem:postingEntity>
+                <tem:PostingAgencyKey>API_KEY</tem:PostingAgencyKey>
+                <tem:CovrAgencyKey>RTV</tem:CovrAgencyKey>
+                
+                <tem:IsUsCitizen>1</tem:IsUsCitizen>
+                <tem:IsEighteenOrOlder>1</tem:IsEighteenOrOlder>
+                <tem:IsDisclosureDisplayed>1</tem:IsDisclosureDisplayed>
+                
+                <tem:VoterResidentType>1</tem:VoterResidentType>
+                
+                <tem:DobDay>1</tem:DobDay>
+                <tem:DobMonth>1</tem:DobMonth>
+                <tem:DobYear>1980</tem:DobYear>
+                
+                <tem:EthnicityId>1</tem:EthnicityId>
+                <tem:ElectionMaterialLanguageId>1</tem:ElectionMaterialLanguageId>
+                
+                
+                
+                
+                <tem:PrefixId>1</tem:PrefixId>
+                <tem:CurrentFirstName>John</tem:CurrentFirstName>
+                <tem:CurrentMiddleName>A</tem:CurrentMiddleName>
+                <tem:CurrentLastName>Doe</tem:CurrentLastName>
+
+                <tem:PreviousFirstName>Jonathan</tem:PreviousFirstName>
+                <tem:PreviousMiddleName>Z</tem:PreviousMiddleName>
+                <tem:PreviousLastName>?Zoe</tem:PreviousLastName>
+
+                <tem:IsHomeAddress>1</tem:IsHomeAddress>
+                <tem:HomeAddressStreetLine1>401 Market St</tem:HomeAddressStreetLine1>
+                <tem:HomeAddressStreetLine2>APT 1</tem:HomeAddressStreetLine2>
+                <tem:HomeAddressCity>San Francisco</tem:HomeAddressCity>
+                <tem:HomeAddressState>California</tem:HomeAddressState>
+                <tem:HomeAddressZip>94111</tem:HomeAddressZip>
+
+                <tem:IsMailingAddress>1</tem:IsMailingAddress>
+                <tem:MailingAddressStreetLine1>402 Market St</tem:MailingAddressStreetLine1>
+                <tem:MailingAddressStreetLine2>APT 2</tem:MailingAddressStreetLine2>
+                <tem:MailingAddressCity>San Francisco</tem:MailingAddressCity>
+                <tem:MailingAddressState>California</tem:MailingAddressState>
+                <tem:MailingAddressZip>9411</tem:MailingAddressZip>
+
+                <tem:IsPreviouslyRegistered>1</tem:IsPreviouslyRegistered>
+                <tem:PreviousAddressStreetLine1>1 Main St</tem:PreviousAddressStreetLine1>
+                <tem:PreviousAddressStreetLine2>APT 3</tem:PreviousAddressStreetLine2>
+                <tem:PreviousAddressCity>Boston</tem:PreviousAddressCity>
+                <tem:PreviousAddressState>MA</tem:PreviousAddressState>
+                <tem:PreviousAddressZip>02110</tem:PreviousAddressZip>
+
+                <tem:PhoneNumber>1231231234</tem:PhoneNumber>
+                <tem:EmailId>registrant@example.com</tem:EmailId>
+                <tem:EmailIdConfirmation>registrant@example.com</tem:EmailIdConfirmation>
+                
+                
+                
+             </tem:postingEntity>    
+      </tem:GetTokenNumber>
+  </s:Body>
+</s:Envelope>

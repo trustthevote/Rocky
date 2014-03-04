@@ -89,5 +89,20 @@ describe StateCustomization do
     
   end
 
+  describe "has_ovr_pre_check?(registrant)" do
+    let(:sc) { StateCustomization.new(state) }
+    it "returns false" do
+      sc.has_ovr_pre_check?(nil).should be_false
+    end
+    
+  end
+  
+  describe "ovr_pre_check(registrant)" do
+    let(:sc) { StateCustomization.new(state) }
+    it "raises a not implemented error" do
+      expect { sc.ovr_pre_check(nil) }.to raise_error("Not Implemented")
+    end
+  end
+  
   
 end

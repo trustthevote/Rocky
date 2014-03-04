@@ -63,4 +63,6 @@ describe StateLocalization do
       loc.allows_ovr?.should be_true
     end
   end
+  
+  
 end

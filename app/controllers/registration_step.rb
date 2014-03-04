@@ -73,6 +73,7 @@ class RegistrationStep < ApplicationController
 
     if @registrant.valid?
       @registrant.save_or_reject!
+      
       if @registrant.eligible?
         redirect_when_eligible
       else

@@ -355,6 +355,15 @@ When /^the partner changes "([^\"]*)" to "([^\"]*)"$/ do |method, value|
   @partner.save!
 end
 
+Given(/^COVR UI debugging is true$/) do
+  RockyConf.ovr_states.CA.api_settings.debug_in_ui = true
+end
+
+Then(/^I should see the return XML from the API request$/) do
+  page.body.should =~ /s:Envelope xmlns:s="http:\/\/www.w3.org\/2003\/05\/soap-envelope"/
+  page.body.should =~ /\<Success\>true\<\/Success\>/
+end
+
 
 
 

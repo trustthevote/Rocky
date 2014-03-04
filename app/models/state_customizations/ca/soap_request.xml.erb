@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tem="http://tempuri.org/" xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:ins0="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+  <s:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+         <wsa:Action>http://tempuri.org/IPostingEntityInterfaceService/GetTokenNumber</wsa:Action>
+         <wsa:To><%= api_url %></wsa:To>
+  </s:Header>
+  <s:Body>
+    <tem:GetTokenNumber>
+    <tem:postingEntity>
+                <tem:PostingAgencyKey><%= api_key %></tem:PostingAgencyKey>
+                <tem:CovrAgencyKey><%= api_posting_entity_name %></tem:CovrAgencyKey>
+                
+                <tem:IsUsCitizen><%= us_citizen? %></tem:IsUsCitizen>
+                <tem:IsEighteenOrOlder><%= will_be_18_by_election? %></tem:IsEighteenOrOlder>
+                <tem:IsDisclosureDisplayed>1</tem:IsDisclosureDisplayed>
+                
+                <tem:VoterResidentType>1</tem:VoterResidentType>
+                
+                <tem:DobDay><%= dob_day %></tem:DobDay>
+                <tem:DobMonth><%= dob_month %></tem:DobMonth>
+                <tem:DobYear><%= dob_year %></tem:DobYear>
+                
+                <tem:EthnicityId><%= ethnicity_id %></tem:EthnicityId>
+                <tem:ElectionMaterialLanguageId><%= language_id %></tem:ElectionMaterialLanguageId>
+                
+                
+                
+                
+                <tem:PrefixId><%= name_prefix_id %></tem:PrefixId>
+                <tem:CurrentFirstName><%= first_name %></tem:CurrentFirstName>
+                <tem:CurrentMiddleName><%= middle_name %></tem:CurrentMiddleName>
+                <tem:CurrentLastName><%= last_name %></tem:CurrentLastName>
+
+                <tem:PreviousFirstName><%= prev_first_name %></tem:PreviousFirstName>
+                <tem:PreviousMiddleName><%= prev_middle_name %></tem:PreviousMiddleName>
+                <tem:PreviousLastName><%= prev_last_name %></tem:PreviousLastName>
+
+                <tem:IsHomeAddress><%= has_home_address? %></tem:IsHomeAddress>
+                <tem:HomeAddressStreetLine1><%= home_address %></tem:HomeAddressStreetLine1>
+                <tem:HomeAddressStreetLine2><%= home_unit %></tem:HomeAddressStreetLine2>
+                <tem:HomeAddressCity><%= home_city %></tem:HomeAddressCity>
+                <tem:HomeAddressState><%= home_state_name %></tem:HomeAddressState>
+                <tem:HomeAddressZip><%= home_zip %></tem:HomeAddressZip>
+
+                <tem:IsMailingAddress><%= has_mailing_address? %> </tem:IsMailingAddress>
+                <tem:MailingAddressStreetLine1><%= mailing_address %></tem:MailingAddressStreetLine1>
+                <tem:MailingAddressStreetLine2><%= mailing_unit %></tem:MailingAddressStreetLine2>
+                <tem:MailingAddressCity><%= mailing_city %></tem:MailingAddressCity>
+                <tem:MailingAddressState><%= mailing_state_name %></tem:MailingAddressState>
+                <tem:MailingAddressZip><%= mailing_zip %></tem:MailingAddressZip>
+
+                <tem:IsPreviouslyRegistered><%= has_prev_address? %></tem:IsPreviouslyRegistered>
+                <tem:PreviousAddressStreetLine1><%= prev_address %></tem:PreviousAddressStreetLine1>
+                <tem:PreviousAddressStreetLine2><%= prev_unit %></tem:PreviousAddressStreetLine2>
+                <tem:PreviousAddressCity><%= prev_city %></tem:PreviousAddressCity>
+                <tem:PreviousAddressState><%= prev_state_name %></tem:PreviousAddressState>
+                <tem:PreviousAddressZip><%= prev_zip %></tem:PreviousAddressZip>
+
+                <tem:PhoneNumber><%= phone %></tem:PhoneNumber>
+                <tem:EmailId><%= email %></tem:EmailId>
+                <tem:EmailIdConfirmation><%= email %></tem:EmailIdConfirmation>
+                
+                
+                
+             </tem:postingEntity>    
+      </tem:GetTokenNumber>
+  </s:Body>
+</s:Envelope>

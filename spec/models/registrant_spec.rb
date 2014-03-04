@@ -928,6 +928,58 @@ describe Registrant do
         end
       end
     end
+    
+    describe "has_ovr_pre_check?" do
+      let(:reg) { FactoryGirl.build(:step_1_registrant) }
+      it "is true when the registrant checked is in ovr_flow and state has an ovr pre-check" do
+        reg.stub(:in_ovr_flow?).and_return(true)
+        reg.stub(:home_state_has_ovr_pre_check?).and_return(true)
+        reg.should have_ovr_pre_check
+      end
+      it "is false when the registrant is not in ovr-flow" do
+        reg.stub(:in_ovr_flow?).and_return(false)
+        reg.stub(:home_state_has_ovr_pre_check?).and_return(true)
+        reg.should_not have_ovr_pre_check
+      end
+      it "is false when the registrant's state does not have ovr pre-check" do
+        reg.stub(:in_ovr_flow?).and_return(true)
+        reg.stub(:home_state_has_ovr_pre_check?).and_return(false)
+        reg.should_not have_ovr_pre_check
+      end
+    end
+    
+    describe "home_state_has_ovr_pre_check?" do
+      let(:reg) { FactoryGirl.build(:step_1_registrant) }
+      it "pulls from the home_state" do
+        mock_loc = mock(GeoState)
+        mock_loc.should_receive(:has_ovr_pre_check?).with(reg)
+        reg.stub(:home_state).and_return(mock_loc)
+        reg.home_state_has_ovr_pre_check?
+      end
+      context "when home_state is nil" do
+        it "returns false" do
+          reg.home_state_id = nil
+          reg.home_state_has_ovr_pre_check?.should be_false
+        end
+      end
+    end
+    
+    describe "ovr_pre_check" do
+      let(:reg) { FactoryGirl.build(:step_1_registrant) }
+      it "calls on the home_state" do
+        mock_loc = mock(GeoState)
+        mock_loc.should_receive(:ovr_pre_check).with(reg)
+        reg.stub(:home_state).and_return(mock_loc)
+        reg.ovr_pre_check
+      end
+      context "when home_state is nil" do
+        it "returns nil" do
+          reg.home_state_id = nil
+          reg.ovr_pre_check.should be_nil
+        end
+      end
+    end
+    
   end
   
 
