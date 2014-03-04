@@ -45,23 +45,15 @@ class CaCovrTest
   
   def compare_response
     @expected_response = xml_response_contents
-    deuniquify_responses
-    @diff = Diffy::Diff.new(@response, @expected_response)
+    @diff = Diffy::Diff.new(@response.gsub(CA::XML_TOKEN_REGEXP,"TOKEN"), @expected_response.gsub(CA::XML_TOKEN_REGEXP,"TOKEN"))
   end
   
   def compare_response2
     @expected_response2 = html_response2_contents
-    #deuniquify_responses
     @diff2 = Diffy::Diff.new(@response2.gsub(/\r\n?/, "\n").strip, @expected_response2.gsub(/\r\n?/, "\n").strip)
     
   end
   
-  def deuniquify_responses
-    if is_success_test?
-      @response = @response.gsub(CA::XML_TOKEN_REGEXP,"TOKEN")
-      @expected_response = @expected_response.gsub(CA::XML_TOKEN_REGEXP,"TOKEN")
-    end
-  end
   
   
   
