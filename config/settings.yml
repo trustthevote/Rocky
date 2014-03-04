@@ -50,7 +50,9 @@ ovr_states:
     api_settings:
       api_url: https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc
       api_key: d2DE1Nht8I
+      api_posting_entity_name: RTV
       web_url_base: http://covrtest.sos.ca.gov
+      web_agency_key: RTV
     languages:
       - en
       - es
