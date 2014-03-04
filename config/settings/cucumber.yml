@@ -17,12 +17,15 @@ states_with_online_registration:
 
 ovr_states:
   CA:
-    - en
-    - es
-    - ko
+    languages:
+      - en
+      - es
+      - ko
   NV:
-    - en
+    languages:
+      - en
   WA:
-    - en
-    - es
+    languages:
+      - en
+      - es
  

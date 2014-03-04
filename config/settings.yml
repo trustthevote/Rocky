@@ -47,13 +47,20 @@ states_with_online_registration:
   
 ovr_states:
   CA:
-    - en
-    - es
+    api_settings:
+      api_url: https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc
+      api_key: d2DE1Nht8I
+      web_url_base: http://covrtest.sos.ca.gov
+    languages:
+      - en
+      - es
   NV:
-    - en
+    languages:
+      - en
   WA:
-    - en
-  
+    languages:
+      - en
+
   
 enabled_locales:
   - en

@@ -81,11 +81,11 @@ class CaCovrTest
   end
 
   def url
-    @url ||= "https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc"
+    @url ||= RockyConf.ovr_states.CA.api_settings.api_url
   end
   
   def key
-    @key ||= "d2DE1Nht8I"
+    @key ||= RockyConf.ovr_states.CA.api_settings.api_key
   end
   
   def step_2_url
@@ -93,7 +93,7 @@ class CaCovrTest
   end
   
   def step_2_url_base
-    @step_2_url_base ||= "http://covrtest.sos.ca.gov"
+    @step_2_url_base ||= RockyConf.ovr_states.CA.api_settings.web_url_base
   end
   
   
@@ -108,7 +108,7 @@ class CaCovrTest
   
   
   def xml_request_contents
-    self.class.xml_request_contents(self.test_name)
+    self.class.xml_request_contents(self.test_name).gsub(/API_KEY/, key)
   end
   
   def xml_response_contents

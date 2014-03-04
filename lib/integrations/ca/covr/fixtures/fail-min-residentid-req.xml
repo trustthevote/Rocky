@@ -7,7 +7,7 @@
   <s:Body>
     <tem:GetTokenNumber>
     <tem:postingEntity>
-                <tem:PostingAgencyKey>d2DE1Nht8I</tem:PostingAgencyKey>
+                <tem:PostingAgencyKey>API_KEY</tem:PostingAgencyKey>
                 <tem:CovrAgencyKey>RTV</tem:CovrAgencyKey>
                 <tem:IsUsCitizen>1</tem:IsUsCitizen>
                 <tem:IsEighteenOrOlder>1</tem:IsEighteenOrOlder>

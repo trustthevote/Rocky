@@ -23,12 +23,15 @@ enabled_locales:
 
 ovr_states:
   CA:
-    - en
-    - es
-    - ko
+    languages:
+      - en
+      - es
+      - ko
   NV:
-    - en
+    languages:
+      - en
   WA:
-    - en
-    - es
+    languages:
+      - en
+      - es
 

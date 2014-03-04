@@ -7,7 +7,7 @@
   <s:Body>
     <tem:GetTokenNumber>
     <tem:postingEntity>
-                <tem:PostingAgencyKey>a</tem:PostingAgencyKey>
+                <tem:PostingAgencyKey>INVALID_API_KEY</tem:PostingAgencyKey>
                 <tem:CovrAgencyKey>RTV</tem:CovrAgencyKey>
                 
                 <tem:IsUsCitizen>1</tem:IsUsCitizen>

@@ -93,7 +93,7 @@ class GeoState < ActiveRecord::Base
   end
   
   def enabled_for_language?(lang)
-    lang_list = RockyConf.ovr_states[self.abbreviation]
+    lang_list = RockyConf.ovr_states[self.abbreviation].languages
     return true if lang_list.blank? || lang_list.empty?
     return lang_list.include?(lang)
   end

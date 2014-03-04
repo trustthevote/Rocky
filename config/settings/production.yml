@@ -10,12 +10,15 @@ states_with_online_registration:
 
 ovr_states:
   CA:
-    - en
-    - es
+    languages:
+      - en
+      - es
   NV:
-    - en
+    languages:
+      - en
   WA:
-    - en
+    languages:
+      - en
 
 enabled_locales:
   - en
