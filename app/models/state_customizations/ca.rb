@@ -212,18 +212,26 @@ class CA < StateCustomization
   end
   
   def self.request_token(request_xml)
-    if RockyConf.ovr_states.CA.api_settings.log_all_requests
+    if log_requests?
       Rails.logger.info("Making Request to: #{RockyConf.ovr_states.CA.api_settings.api_url}")
-      Rails.logger.info("With XML #{request_xml}")
+      Rails.logger.info("With XML\n#{request_xml}\n")
     end
     begin
-      Integrations::Soap.make_request(RockyConf.ovr_states.CA.api_settings.api_url, request_xml)
+      resp = Integrations::Soap.make_request(RockyConf.ovr_states.CA.api_settings.api_url, request_xml)
+      if log_requests?
+        Rails.logger.info("Response:\n#{resp}\n")
+      end
+      return resp
     rescue Exception => e
-      if RockyConf.ovr_states.CA.api_settings.log_all_requests
-        Rails.logger.info(e)
+      if log_requests?
+        Rails.logger.error(e)
       end
       nil
     end
+  end
+  
+  def self.log_requests?
+    RockyConf.ovr_states.CA.api_settings.log_all_requests
   end
   
   def self.extract_token_from_xml_response(xml_string)
