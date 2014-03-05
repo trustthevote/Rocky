@@ -46,3 +46,4 @@ Feature: Step 3
       When I go to the step 3 page
       And I press "registrant_submit"
       Then I should see the return XML from the API request
+
