@@ -110,7 +110,7 @@ Feature: Step 2
       And I fill in "Address" with "123 Market St."
       And I fill in "City" with "Pittsburgh"
       And I press "registrant_submit"
-      Then I should see "Additional Registration Information"
+      Then I should see "Stay Informed and Take Action"
       And I should see a field for "Send me txt messages from Rock the Vote"
       And I should see a field for "Receive emails from Rock the Vote"
       

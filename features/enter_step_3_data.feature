@@ -31,10 +31,10 @@ Feature: Step 3
 
       Examples:
         | state      | message             |
-        | Washington | You may be eligible |
-        | Arizona    | You may be eligible |
-        | Colorado   | You may be eligible |
-        | Nevada     | You may be eligible |
+        | Washington | Hang on. You are eligible to register online in your state. |
+        | Arizona    | Hang on. You are eligible to register online in your state. |
+        | Colorado   | Hang on. You are eligible to register online in your state. |
+        | Nevada     | Hang on. You are eligible to register online in your state. |
         
         
         

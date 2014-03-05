@@ -965,10 +965,10 @@ describe Registrant do
     end
     
     describe "ovr_pre_check" do
-      let(:reg) { FactoryGirl.build(:step_1_registrant) }
+      let(:reg) { FactoryGirl.create(:step_3_registrant) }
       it "calls on the home_state" do
         mock_loc = mock(GeoState)
-        mock_loc.should_receive(:ovr_pre_check).with(reg)
+        mock_loc.should_receive(:ovr_pre_check).with(reg, nil)
         reg.stub(:home_state).and_return(mock_loc)
         reg.ovr_pre_check
       end
