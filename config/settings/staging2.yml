@@ -11,7 +11,7 @@ ovr_states:
   CA:
     api_settings:
       debug_in_ui: true
-      log_all_request: true
+      log_all_requests: true
 
 enabled_locales:
   - en

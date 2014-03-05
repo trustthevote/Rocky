@@ -12,7 +12,7 @@ ovr_states:
   CA:
     api_settings:
       debug_in_ui: true
-      log_all_requests: false
+      log_all_requests: true
       
 states_with_online_registration:
   - AZ
