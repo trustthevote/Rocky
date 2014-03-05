@@ -38,16 +38,11 @@ Feature: Step 3
         
         
         
-    @wip
-    Scenario: CA resident eligible for OVR submits step 3
+    @passing
+    Scenario: CA resident eligible for OVR submits step 3 with UI debugging on
       Given I have completed step 2 as a resident of "California" state
       And I have a state license
       And COVR UI debugging is true
       When I go to the step 3 page
       And I press "registrant_submit"
       Then I should see the return XML from the API request
-      
-      
-      
-      
-    

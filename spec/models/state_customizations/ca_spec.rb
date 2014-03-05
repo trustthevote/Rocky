@@ -5,6 +5,7 @@ describe CA do
   before(:each) do
     Integrations::Soap.stub(:make_request).and_return("stubbed response")
     RockyConf.ovr_states.CA.api_settings.stub(:debug_in_ui).and_return(true)
+    RockyConf.ovr_states.CA.api_settings.stub(:api_key).and_return("API_KEY")
     
   end
   describe "has_ovr_pre_check?" do
@@ -13,14 +14,24 @@ describe CA do
   end
   
   describe "self.build_soap_xml(registrant)" do
-    let(:reg) { FactoryGirl.build(:step_3_registrant) }
+    let(:reg) { FactoryGirl.build(:maximal_registrant) }
     it "populates the maximal registrant template with registrant values" do
-      CA.build_soap_xml(reg).should == fixture_file_contents("covr/max_registrant.xml")
+      CA.build_soap_xml(reg).should == fixture_file_contents("covr/max_registrant_request.xml")
     end
   end
   
-  describe "self.request_token" do
-    
+  describe "self.request_token(req_xml)" do
+    it "makes a soap request with the XML at the config'd URL" do
+      Integrations::Soap.should_receive(:make_request).with(RockyConf.ovr_states.CA.api_settings.api_url, "request xml")
+      CA.request_token("request xml")
+    end
+  end
+  
+  describe "self.extract_token_from_xml_response" do
+    it "gets the token from the expected xml response string" do
+      xml_response = fixture_file_contents("covr/max_registrant_response.xml")
+      CA.extract_token_from_xml_response(xml_response).should == "F9B91DDE-BD95-41Z-905Z-9143511C32C27C190A"
+    end
   end
   
   describe "ovr_pre_check" do

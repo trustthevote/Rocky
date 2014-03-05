@@ -28,12 +28,12 @@ class CA < StateCustomization
     
     attr_reader :registrant
     
-    delegate :us_citizen?, :will_be_18_by_election?, 
+    delegate :email_address,
       :first_name, :middle_name, :last_name,
       :prev_first_name, :prev_middle_name, :prev_last_name,
-      :home_address, :home_unit, :home_city, :home_state_name, :home_zip,
-      :mailing_address, :mailing_unit, :mailing_city, :mailing_state_name, :mailing_zip,
-      :prev_address, :prev_unit, :prev_city, :prev_state_name, :prev_zip, 
+      :home_address, :home_unit, :home_city, :home_state_name, :home_zip_code,
+      :mailing_address, :mailing_unit, :mailing_city, :mailing_state_name, :mailing_zip_code,
+      :prev_address, :prev_unit, :prev_city, :prev_state_name, :prev_zip_code, 
       :to=>:registrant
     
     def initialize(r)
@@ -46,6 +46,14 @@ class CA < StateCustomization
       RockyConf.ovr_states.CA.api_settings
     end
     
+    def us_citizen?
+      registrant.us_citizen? ? '1' : '0'
+    end
+    
+    def will_be_18_by_election?
+      registrant.will_be_18_by_election? ? '1' : '0'
+    end
+    
     def dob_day
       registrant.date_of_birth.day
     end
@@ -56,14 +64,111 @@ class CA < StateCustomization
       registrant.date_of_birth.year
     end
     
+    def phone
+      registrant.phone_digits
+    end
+    
+    def has_home_address?
+      1
+    end
+    
+    def has_mailing_address?
+      registrant.has_mailing_address ? '1' : '0'
+    end
+    
+    def has_prev_address?
+      registrant.change_of_address? ? '1' : '0'
+    end
+    
+    
+    
+    # 1 Other
+    # 2 American Indian or Alaska Native
+    # 3 Asian or Pacific Islander
+    # 4 Black, not of Hispanic Origin
+    # 5 Hispanic
+    # 6 Multi-racial
+    # 7 White, not of Hispanic Origin
     def ethnicity_id
-      case registrant.english_race
-      when "A"
-        1231230
+      case registrant.race_key.to_s
+      when 'american_indian_alaskan_native'
+        2
+      when 'asian'
+        3
+      when 'black_not_hispanic'
+        4
+      when 'hispanic'
+        5
+      when 'mutli_racial'
+        6
+      when 'white_not_hispanic'
+        7
+      when 'other'
+        1
       else
-        2321230
+        ""
       end
     end
+    
+    # 2 English
+    # 3 Chinese
+    # 4 Vietnamese
+    # 5 Korean
+    # 6 Tagalog
+    # 7 Japanese
+    # 8 Hindi
+    # 9 Khmer
+    # 10 Thai
+    # 11 Spanish
+    def language_id
+      case registrant.locale.to_s
+      when 'en'
+        2
+      when 'cn-zh', 'cn-tw'
+        3
+      when 'vi'
+        4
+      when 'ko'
+        5
+      when 'tl'
+        6
+      when 'ja'
+        7
+      when 'hi'
+        8
+      when 'km'
+        9
+      when 'th'
+        10
+      when 'es'
+        11
+      else
+        ""
+      end        
+    end
+    
+    
+    
+    
+    # 1 Mr.
+    # 2 Mrs.
+    # 3 Miss
+    # 4 Ms.
+    def name_prefix_id
+      case registrant.name_title_key.to_s
+      when 'mr'
+        1
+      when 'mrs'
+        2
+      when 'miss'
+        3
+      when 'ms'
+        4
+      else
+        ""
+      end
+    end
+    
     
     def get_binding
       binding
@@ -99,11 +204,15 @@ class CA < StateCustomization
   end
   
   def self.build_soap_xml(registrant)
-    raise ERB.new(File.new(soap_xml_erb_file).read).result(RegistrantBinding.new(registrant).get_binding)
+    ERB.new(File.new(soap_xml_erb_file).read).result(RegistrantBinding.new(registrant).get_binding)
   end
   
   def self.soap_xml_erb_file
     Rails.root.join("app/models/state_customizations/ca/soap_request.xml.erb")
+  end
+  
+  def self.request_token(request_xml)
+    Integrations::Soap.make_request(RockyConf.ovr_states.CA.api_settings.api_url, request_xml)
   end
   
   def self.extract_token_from_xml_response(xml_string)

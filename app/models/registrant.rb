@@ -424,11 +424,15 @@ class Registrant < ActiveRecord::Base
 
   def reformat_phone
     if phone.present? && phone_changed?
-      digits = phone.gsub(/\D/,'')
+      digits = phone_digits
       if digits.length == 10
         self.phone = [digits[0..2], digits[3..5], digits[6..9]].join('-')
       end
     end
+  end
+  
+  def phone_digits
+    phone.to_s.gsub(/\D/,'')
   end
   
   def set_opt_in_email
@@ -573,16 +577,32 @@ class Registrant < ActiveRecord::Base
     if locale.to_s == 'en' || english_races.include?(race)
       return race
     else
-      if (race_idx = I18n.t('txt.registration.races', :locale=>locale).values.index(race))
-        return I18n.t('txt.registration.races', :locale=>:en).values[race_idx]
+      if ridx = race_idx(locale, race)
+        return I18n.t('txt.registration.races', :locale=>:en).values[ridx]
       else
         return nil
       end
     end
   end
   
+  def self.race_key(locale, race)
+    if ridx = race_idx(locale, race)
+      I18n.t('txt.registration.races').keys[ridx]
+    else
+      nil
+    end
+  end
+  
+  def self.race_idx(locale, race)
+    I18n.t('txt.registration.races', :locale=>locale).values.index(race)
+  end
+  
   def english_race
     self.class.english_race(locale, race)
+  end
+  
+  def race_key
+    self.class.race_key(locale, race)
   end
   
   def validate_race_at_least_step_3
@@ -802,6 +822,10 @@ class Registrant < ActiveRecord::Base
   def mailing_state_abbrev
     mailing_state && mailing_state.abbreviation
   end
+  
+  def mailing_state_name
+    mailing_state && mailing_state.name
+  end
 
   def prev_state_abbrev=(abbrev)
     self.prev_state = GeoState[abbrev]
@@ -809,6 +833,10 @@ class Registrant < ActiveRecord::Base
 
   def prev_state_abbrev
     prev_state && prev_state.abbreviation
+  end
+
+  def prev_state_name
+    prev_state && prev_state.name
   end
 
   def home_state_online_reg_enabled?

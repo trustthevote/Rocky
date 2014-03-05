@@ -27,6 +27,9 @@
 
 Before do
   MobileConfig.stub(:is_mobile_request?) {false}
+  Integrations::Soap.stub(:make_request) do
+    File.new(Rails.root.join("spec/fixtures/files/covr/max_registrant_response.xml")).read
+  end
 end
 
 # Given /^I am using a mobile browser$/ do
@@ -360,11 +363,9 @@ Given(/^COVR UI debugging is true$/) do
 end
 
 Then(/^I should see the return XML from the API request$/) do
-  page.body.should =~ /s:Envelope xmlns:s="http:\/\/www.w3.org\/2003\/05\/soap-envelope"/
-  page.body.should =~ /\<Success\>true\<\/Success\>/
+  page.source.should =~ /s:Envelope xmlns:s="http:\/\/www.w3.org\/2003\/05\/soap-envelope"/
+  page.source.should =~ /\<Success\>true\<\/Success\>/
 end
-
-
 
 
 After('@cleanup_pdf') do
