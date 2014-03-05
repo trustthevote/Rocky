@@ -20,7 +20,9 @@
                 <tem:DobMonth><%= dob_month %></tem:DobMonth>
                 <tem:DobYear><%= dob_year %></tem:DobYear>
                 
-                <tem:EthnicityId><%= ethnicity_id %></tem:EthnicityId>
+                <%- if !ethnicity_id.blank? %>
+                  <tem:EthnicityId><%= ethnicity_id %></tem:EthnicityId>
+                <%- end %>
                 <tem:ElectionMaterialLanguageId><%= language_id %></tem:ElectionMaterialLanguageId>
                 
                 

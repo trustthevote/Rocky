@@ -217,7 +217,6 @@ class CA < StateCustomization
       Rails.logger.info("With XML #{request_xml}")
     end
     begin
-      raise 'a'
       Integrations::Soap.make_request(RockyConf.ovr_states.CA.api_settings.api_url, request_xml)
     rescue Exception => e
       if RockyConf.ovr_states.CA.api_settings.log_all_requests
