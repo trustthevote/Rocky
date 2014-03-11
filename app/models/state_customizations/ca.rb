@@ -178,10 +178,24 @@ class CA < StateCustomization
   
   
   XML_TOKEN_REGEXP = /\<Token\>(.+)\<\/Token\>/
+  XML_ERROR_CODE_REGEXP = /\<ErrorCode\>(.+)\<\/ErrorCode\>/
+  XML_ERROR_MESSAGE_REGEXP = /\<ErrorMessage\>(.+)\<\/ErrorMessage\>/
   
   def has_ovr_pre_check?(registrant)
     true
   end
+  
+  
+  def decorate_registrant(registrant=nil, controller=nil)
+    unless registrant.respond_to?(:covr_token)
+      registrant.class.class_eval do
+        attr_accessor :covr_token, :covr_success, :ca_disclosures
+        validates_acceptance_of :ca_disclosures, :if=>:using_state_online_registration?
+        validates_acceptance_of :attest_true, :if=>:using_state_online_registration?
+      end
+    end
+  end
+  
   
   def ovr_pre_check(registrant, controller)
     request_xml = self.class.build_soap_xml(registrant)
@@ -190,18 +204,23 @@ class CA < StateCustomization
     if RockyConf.ovr_states.CA.api_settings.debug_in_ui
       controller.render :xml=>api_response, :layout=>nil, :content_type=>"application/xml"
     else
-      raise 'NOT HERE YET'
+      covr_token = self.class.extract_token_from_xml_response(api_response)
+      if covr_token
+        registrant.covr_token = covr_token
+        registrant.covr_success = true
+      else
+        error_code = self.class.extract_error_code_from_xml_response(api_response)
+        error_message = self.class.extract_error_message_from_xml_response(api_response)
+        Rails.logger.info("COVR Error #{error_code}: #{error_message.strip}")
+      end
+      
       # 4. Else, parse response
       # 5. if "success", mark as such
       # 6. Go to page 4 (which, for CA, may or may not include the "finish with state" option)
       
-      token = self.class.extract_token_from_xml_response(api_response)
-      if token.blank?
-        
-      else
-      end
     end
   end
+    
   
   def self.build_soap_xml(registrant)
     ERB.new(File.new(soap_xml_erb_file).read).result(RegistrantBinding.new(registrant).get_binding)
@@ -241,5 +260,22 @@ class CA < StateCustomization
       return nil
     end
   end
+
+  def self.extract_error_code_from_xml_response(xml_string)
+    if xml_string =~ XML_ERROR_CODE_REGEXP
+      return $1
+    else
+      return "N/A"
+    end
+  end
+
+  def self.extract_error_message_from_xml_response(xml_string)
+    if xml_string =~ XML_ERROR_MESSAGE_REGEXP
+      return $1.strip
+    else
+      return "Error Message Not Found"
+    end
+  end
+
   
 end

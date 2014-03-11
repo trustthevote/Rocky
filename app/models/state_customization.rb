@@ -36,6 +36,19 @@ class StateCustomization
     @state = state
   end
   
+  def online_reg_enabled?(locale, registrant = nil)
+    GeoState.states_with_online_registration.include?(state.abbreviation) && self.enabled_for_language?(locale)
+  end
+  
+  def enabled_for_language?(lang)
+    lang_list = RockyConf.ovr_states[state.abbreviation]
+    return true if lang_list.blank?
+    lang_list = lang_list["languages"]
+    return true if lang_list.blank? || lang_list.empty?
+    return lang_list.include?(lang)
+  end
+  
+  
   def online_reg_url(registrant)
     state.online_registration_url
   end
@@ -51,6 +64,10 @@ class StateCustomization
   def ovr_pre_check(registrant=nil, controller=nil)
     raise "Not Implemented"
   end
+  
+  def decorate_registrant(registrant=nil, controller=nil)
+  end
+  
   
 protected
   def self.class_exists?(class_name)

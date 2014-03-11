@@ -71,6 +71,23 @@ describe Step4Controller do
         assert_select "#registrant_volunteer", 0
       end
     end
+    context "when there is an ovr pre_check" do
+      let(:reg) { FactoryGirl.create(:step_3_registrant) }
+      before(:each) do
+        reg.stub(:has_ovr_pre_check?).and_return(true)
+        reg.stub(:some_code_to_execute)
+        reg.stub(:ovr_pre_check) do
+          reg.some_code_to_execute
+        end
+        Registrant.stub(:find_by_param!).and_return(reg)
+      end
+      
+      it "should run the registrant's OVR precheck instead of the redirect" do
+        reg.should_receive(:some_code_to_execute)
+        get :show, :registrant_id => reg.to_param
+        assert_template("show")
+      end
+    end
   end
 
   describe "#update" do

@@ -37,6 +37,13 @@ Feature: Step 3
         | Nevada     | Hang on. You are eligible to register online in your state. |
         
         
+    @passing
+    Scenario: CA resident NOT eligible for OVR submits step 3 and goes to regular step 4
+      Given I have completed step 2 as a resident of "California" state
+      When I go to the step 3 page
+      And I press "registrant_submit"
+      Then I should see "Additional Registration Information"
+    
         
     @passing
     Scenario: CA resident eligible for OVR submits step 3 with UI debugging on
@@ -46,4 +53,26 @@ Feature: Step 3
       When I go to the step 3 page
       And I press "registrant_submit"
       Then I should see the return XML from the API request
+
+    @passing
+    Scenario: CA resident eligible for OVR submits step 3 and is not approved
+      Given I have completed step 2 as a resident of "California" state
+      And I have a state license
+      And COVR responses return failures
+      When I go to the step 3 page
+      And I press "registrant_submit"
+      Then I should see "Additional Registration Information"
+      And I should not see "Hang on. You are eligible to register online in your state."
+      
+    @passing
+    Scenario: CA resident eligible for OVR submits step 3 and is approved
+      Given I have completed step 2 as a resident of "California" state
+      And I have a state license
+      And COVR responses return successes
+      When I go to the step 3 page
+      And I press "registrant_submit"
+      Then I should see "Hang on. You are eligible to register online in your state."
+      And I should see "TBD 5 CA Disclosures"
+      And I should see a checkbox for "registrant_attest_true"
+      
 

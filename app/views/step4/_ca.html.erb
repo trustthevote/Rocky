@@ -2,9 +2,9 @@
 <script>
 
 $(document).ready(function() {
-  var show_fields = <%= [params[:show_fields], @show_fields].include?("1") ? 'true' : 'false' %>;
+  var show_skip_ovr_fields = <%= [params[:show_fields], @show_fields].include?("1") ||  !@registrant.covr_success ? 'true' : 'false' %>;
   $('.skip_state_registration_link').show();
-  if(!show_fields) {
+  if(!show_skip_ovr_fields) {
     $('.skip_state_registration').hide();    
   }
   $('.skip_state_registration_link').click(function() {
@@ -15,16 +15,42 @@ $(document).ready(function() {
 </script>
 <% end %>
 
-
-
-  <%= rollover_button(:next_step, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
+<%- if @registrant.covr_success %>
+  <h1><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_abbrev).html_safe %></h1>
+  <br/>
+  <h3 class="ovr_step_4"><%= I18n.t('txt.registration.instructions.state_online_registration_sub_header').html_safe %></h3>
+  <%= form.hidden_field :covr_token %>
+  <%= form.hidden_field :covr_success %>
+  <ul class="affirm">
+    <li>
+      <h3>
+        <%= form.check_box :ca_disclosures %>
+        <%= form.label :ca_disclosures, "TBD 5 CA Disclosures" %>
+      </h3>
+    </li>
+    <li>
+      <span class="error"><%= form.object.errors[:ca_disclosures].join("\n") %></span>
+    </li>
+    <li>
+      <h3>
+        <%= form.check_box :attest_true %>
+        <%= form.label :attest_true %>
+      </h3>
+    </li>
+    <li>
+      <span class="error"><%= form.object.errors[:attest_true].join("\n") %></span>
+    </li>
+  </ul>
+    <%= rollover_button(:next_step, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
   
 
-<a href="#" class='skip_state_registration_link' style="display:none;">
-<%= I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe %>
-</a>
-<br/><br/>
-<br/><br/>
+  <a href="#" class='skip_state_registration_link' style="display:none;">
+  <%= I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe %>
+  </a>
+  <br/><br/>
+  <br/><br/>
+<%- end %>
+
 <div class="skip_state_registration">
   
   <h1><%= t('txt.registration.step_3_header') %></h1>

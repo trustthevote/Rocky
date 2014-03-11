@@ -210,3 +210,14 @@ Feature: Step 4
         | Colorado   | CO         |
         | Nevada     | NV         |
         | California | CA         |
+
+    @wip
+    Scenario: CA resident eligible and approved for OVR doesn't agree to disclosures
+      Given I have completed step 3 as a resident of "California" state
+      And I have a state license
+      And COVR responses return successes
+      When I go to the step 4 page
+      And I press "registrant_state_online_registration"
+      Then I should see "Hang on. You are eligible to register online in your state."
+
+

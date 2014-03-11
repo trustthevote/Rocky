@@ -362,6 +362,18 @@ Given(/^COVR UI debugging is true$/) do
   RockyConf.ovr_states.CA.api_settings.debug_in_ui = true
 end
 
+Given(/^COVR responses return failures$/) do
+  Integrations::Soap.stub(:make_request) do
+    File.new(Rails.root.join("spec/fixtures/files/covr/max_registrant_response_fail.xml")).read
+  end
+end
+
+Given(/^COVR responses return successes$/) do
+  Integrations::Soap.stub(:make_request) do
+    File.new(Rails.root.join("spec/fixtures/files/covr/max_registrant_response.xml")).read
+  end
+end
+
 Then(/^I should see the return XML from the API request$/) do
   page.source.should =~ /s:Envelope xmlns:s="http:\/\/www.w3.org\/2003\/05\/soap-envelope"/
   page.source.should =~ /\<Success\>true\<\/Success\>/

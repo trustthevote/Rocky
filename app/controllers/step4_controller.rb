@@ -25,12 +25,32 @@
 class Step4Controller < RegistrationStep
   CURRENT_STEP = 4
   
+  def show
+    super
+    if @registrant.has_ovr_pre_check?
+      @registrant.ovr_pre_check(self)
+    end
+  end
+  
   def update
     params[:registrant][:using_state_online_registration] = !params[:registrant_state_online_registration].nil?
     super
   end
 
   protected
+  
+  def find_registrant
+    super
+    if @registrant.has_ovr_pre_check? 
+      @registrant.decorate_for_state(self)
+    end
+  end
+
+  def set_show_skip_state_fields
+    if !@registrant.has_ovr_pre_check?
+      @show_fields = "1"
+    end
+  end
 
   def advance_to_next_step
     @registrant.advance_to_step_4

@@ -1,15 +1,8 @@
-<%- if @registrant.in_ovr_flow? %>
-  <h1><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_abbrev).html_safe %></h1>
-  <br/>
-  <h3 class="ovr_step_4"><%= I18n.t('txt.registration.instructions.state_online_registration_sub_header').html_safe %></h3>
-<%- else %>
-  <h1><%= t('txt.registration.step_4_header') %></h1>
-<%- end %>
-
 <%= form_for(@registrant, :url => registrant_step_4_path(@registrant)) do |form| %>
   <%- if @registrant.in_ovr_flow? %>
     <%= render :partial=> @registrant.custom_step_4_partial, :locals=>{:form=>form} %>
   <%- else %>
+    <h1><%= t('txt.registration.step_4_header') %></h1>
     <div class="step-4">
       <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
       <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>

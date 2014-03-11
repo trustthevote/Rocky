@@ -80,9 +80,13 @@ class RegistrationStep < ApplicationController
         redirect_to registrant_ineligible_url(@registrant)
       end
     else
-      @show_fields = "1"
+      set_show_skip_state_fields
       render "show"
     end
+  end
+
+  def set_show_skip_state_fields
+    @show_fields = "1"
   end
 
   def redirect_when_eligible

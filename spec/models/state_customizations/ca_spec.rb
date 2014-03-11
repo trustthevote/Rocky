@@ -14,7 +14,7 @@ describe CA do
   end
   
   describe "self.build_soap_xml(registrant)" do
-    let(:reg) { FactoryGirl.build(:maximal_registrant) }
+    let(:reg) { FactoryGirl.build(:maximal_registrant, :date_of_birth=>DateTime.parse("1994-03-05")) }
     it "populates the maximal registrant template with registrant values" do
       CA.build_soap_xml(reg).should == fixture_file_contents("covr/max_registrant_request.xml")
     end
@@ -33,9 +33,23 @@ describe CA do
       CA.extract_token_from_xml_response(xml_response).should == "F9B91DDE-BD95-41Z-905Z-9143511C32C27C190A"
     end
   end
+
+  describe "self.extract_error_code_from_xml_response" do
+    it "gets the token from the expected xml response string" do
+      xml_response = fixture_file_contents("covr/max_registrant_response_fail.xml")
+      CA.extract_error_code_from_xml_response(xml_response).should == "902"
+    end
+  end
+
+  describe "self.extract_error_message_from_xml_response" do
+    it "gets the token from the expected xml response string" do
+      xml_response = fixture_file_contents("covr/max_registrant_response_fail.xml")
+      CA.extract_error_message_from_xml_response(xml_response).should == "Invalid voter resident Id"
+    end
+  end
   
   describe "ovr_pre_check" do
-    let(:reg) { mock_model(Registrant) }
+    let(:reg) { FactoryGirl.create(:step_3_registrant) }
     let(:con) { mock(Step3Controller) }
     before(:each) do
       CA.stub(:build_soap_xml).with(reg).and_return("XML")
@@ -51,9 +65,45 @@ describe CA do
       ca.ovr_pre_check(reg, con)
     end
     context "when debugging" do
-      it "rendes the API response" do
+      it "renders the API response" do
         con.should_receive(:render).with(:xml=>"stubbed response", :layout=>nil, :content_type=>"application/xml")
         ca.ovr_pre_check(reg, con)
+      end
+    end
+    context "when not debugging" do
+      before(:each) do
+        RockyConf.ovr_states.CA.api_settings.stub(:debug_in_ui).and_return(false)
+      end
+      context "when the response is a failure" do
+        before(:each) do
+          CA.stub(:request_token).with("XML").and_return(fixture_file_contents("covr/max_registrant_response_fail.xml"))
+        end
+        it "logs the error" do
+          Rails.logger.should_receive(:info).with("COVR Error 902: Invalid voter resident Id")
+          ca.ovr_pre_check(reg, con)
+        end
+        it "sets covr_success should be false" do
+          ca.ovr_pre_check(reg, con)
+          ca.covr_success.should be_false
+        end
+      end
+      context "when the response is a success" do
+        before(:each) do
+          CA.stub(:request_token).with("XML").and_return(fixture_file_contents("covr/max_registrant_response.xml"))
+        end
+        it "sets covr_success should be true" do
+          ca.ovr_pre_check(reg, con)
+          ca.covr_success.should be_true
+        end
+        it "sets the covr_token" do
+          ca.ovr_pre_check(reg, con)
+          ca.covr_token.should == "F9B91DDE-BD95-41Z-905Z-9143511C32C27C190A"
+        end
+        it "adds a ca_disclosures method to the registrant" do
+          ca.ovr_pre_check(reg, con)
+          reg.should respond_to(:ca_disclosures)
+        end
+        it "?adds a ca_disclosures acceptance validation to the registrant"
       end
     end
   end

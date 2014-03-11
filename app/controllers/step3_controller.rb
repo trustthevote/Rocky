@@ -34,23 +34,17 @@ class Step3Controller < RegistrationStep
     super
   end
 
+
   protected
+
+  def next_url
+    registrant_step_4_url(@registrant)
+  end
 
   def advance_to_next_step
     @registrant.advance_to_step_3
   end
 
-  def redirect_when_eligible
-    if @registrant.has_ovr_pre_check?
-      @registrant.ovr_pre_check(self)
-    else
-      super
-    end
-  end
-
-  def next_url
-    registrant_step_4_url(@registrant)
-  end
 
   def set_up_view_variables
     @state_id_tooltip = @registrant.state_id_tooltip

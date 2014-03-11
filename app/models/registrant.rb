@@ -815,6 +815,10 @@ class Registrant < ActiveRecord::Base
     home_state ? home_state.ovr_pre_check(self, controller) : nil
   end
 
+  def decorate_for_state(controller = nil)
+    home_state ? home_state.decorate_registrant(self, controller) : nil
+  end
+  
   def mailing_state_abbrev=(abbrev)
     self.mailing_state = GeoState[abbrev]
   end
