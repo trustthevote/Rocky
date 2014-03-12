@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140125001349) do
+ActiveRecord::Schema.define(:version => 20140312013806) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "queue"
   end
 
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.integer  "partner_id", :null => false
     t.string   "name",       :null => false
     t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "email_templates", ["partner_id", "name"], :name => "index_email_templates_on_partner_id_and_name", :unique => true
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.integer  "id_length_max"
     t.string   "registrar_address"
     t.string   "registrar_phone"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "registrar_url"
     t.string   "online_registration_url"
     t.boolean  "redirect_to_online_registration_url"
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.string   "survey_question_1_es"
     t.string   "survey_question_2_en"
     t.string   "survey_question_2_es"
-    t.datetime "created_at",                                                    :null => false
-    t.datetime "updated_at",                                                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "ask_for_volunteers",                         :default => true
     t.string   "widget_image"
     t.string   "logo_file_name"
@@ -90,11 +90,11 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.string   "privacy_url"
     t.string   "from_email"
     t.string   "finish_iframe_url"
+    t.boolean  "csv_ready",                                  :default => false
+    t.string   "csv_file_name"
     t.boolean  "is_government_partner",                      :default => false
     t.integer  "government_partner_state_id"
     t.text     "government_partner_zip_codes"
-    t.boolean  "csv_ready",                                  :default => false
-    t.string   "csv_file_name"
     t.text     "survey_question_1"
     t.text     "survey_question_2"
   end
@@ -155,8 +155,8 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.boolean  "ineligible_non_participating_state"
     t.boolean  "ineligible_age"
     t.boolean  "ineligible_non_citizen"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "abandoned",                                        :default => false, :null => false
     t.boolean  "volunteer",                                        :default => false
     t.string   "tracking_source"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.boolean  "short_form",                                       :default => false
     t.string   "collect_email_address"
     t.boolean  "will_be_18_by_election"
+    t.text     "state_ovr_data"
   end
 
   add_index "registrants", ["abandoned"], :name => "index_registrants_on_abandoned"
@@ -199,8 +200,8 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.text     "value"
     t.integer  "target_id"
     t.string   "target_type", :limit => 30
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
@@ -213,8 +214,8 @@ ActiveRecord::Schema.define(:version => 20140125001349) do
     t.string   "not_participating_tooltip", :limit => 1024
     t.string   "race_tooltip",              :limit => 1024
     t.string   "id_number_tooltip",         :limit => 1024
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "party_tooltip",             :limit => 1024
     t.string   "sub_18",                    :limit => 1024
     t.string   "registration_deadline",     :limit => 1024

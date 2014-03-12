@@ -58,6 +58,7 @@ Feature: Step 3
     Scenario: CA resident eligible for OVR submits step 3 and is not approved
       Given I have completed step 2 as a resident of "California" state
       And I have a state license
+      And COVR UI debugging is false
       And COVR responses return failures
       When I go to the step 3 page
       And I press "registrant_submit"
@@ -68,6 +69,7 @@ Feature: Step 3
     Scenario: CA resident eligible for OVR submits step 3 and is approved
       Given I have completed step 2 as a resident of "California" state
       And I have a state license
+      And COVR UI debugging is false
       And COVR responses return successes
       When I go to the step 3 page
       And I press "registrant_submit"

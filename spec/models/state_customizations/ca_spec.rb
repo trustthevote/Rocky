@@ -48,6 +48,25 @@ describe CA do
     end
   end
   
+  describe "online_reg_url(registrant)" do
+    before(:each) do
+      RockyConf.ovr_states.CA.api_settings.stub(:web_url_base).and_return("base_url")
+      RockyConf.ovr_states.CA.api_settings.stub(:web_agency_key).and_return("ak")
+    end
+    it "returns a URL with language and token passed in" do
+      r = Registrant.new
+      r.stub(:locale).and_return("en")
+      r.stub(:covr_token).and_return("token")
+      ca.online_reg_url(r).should == "base_url?language=en-US&t=p&CovrAgencyKey=ak&PostingAgencyRecordId=token"
+      r.stub(:locale).and_return("zh-tw")
+      r.stub(:covr_token).and_return("xxx")
+      ca.online_reg_url(r).should == "base_url?language=zh-CN&t=p&CovrAgencyKey=ak&PostingAgencyRecordId=xxx"
+      r.stub(:locale).and_return("es")
+      r.stub(:covr_token).and_return("xxx")
+      ca.online_reg_url(r).should == "base_url?language=es-MX&t=p&CovrAgencyKey=ak&PostingAgencyRecordId=xxx"
+    end
+  end
+  
   describe "ovr_pre_check" do
     let(:reg) { FactoryGirl.create(:step_3_registrant) }
     let(:con) { mock(Step3Controller) }
@@ -82,29 +101,45 @@ describe CA do
           Rails.logger.should_receive(:info).with("COVR Error 902: Invalid voter resident Id")
           ca.ovr_pre_check(reg, con)
         end
-        it "sets covr_success should be false" do
+        it "sets covr_success on the registrant be false" do
           ca.ovr_pre_check(reg, con)
-          ca.covr_success.should be_false
+          reg.covr_success.should be_false
+          reg.covr_token.should be_nil
         end
       end
       context "when the response is a success" do
         before(:each) do
           CA.stub(:request_token).with("XML").and_return(fixture_file_contents("covr/max_registrant_response.xml"))
         end
-        it "sets covr_success should be true" do
+        it "sets covr_success on the registrant be true" do
           ca.ovr_pre_check(reg, con)
-          ca.covr_success.should be_true
+          reg.covr_success.should be_true
         end
         it "sets the covr_token" do
           ca.ovr_pre_check(reg, con)
-          ca.covr_token.should == "F9B91DDE-BD95-41Z-905Z-9143511C32C27C190A"
+          reg.covr_token.should == "F9B91DDE-BD95-41Z-905Z-9143511C32C27C190A"
         end
-        it "adds a ca_disclosures method to the registrant" do
-          ca.ovr_pre_check(reg, con)
-          reg.should respond_to(:ca_disclosures)
-        end
-        it "?adds a ca_disclosures acceptance validation to the registrant"
       end
     end
+  end
+
+  describe "decorate_registrant" do
+    let(:reg) { FactoryGirl.create(:step_3_registrant) }
+    before(:each) do
+
+    end
+    it "adds a ca_disclosures method to the registrant" do
+      ca.decorate_registrant(reg)
+      reg.should respond_to(:ca_disclosures)
+    end
+    it "adds a ca_disclosures acceptance validation to the registrant" do
+      ca.decorate_registrant(reg)
+      reg.class.should have(1).validators_on(:ca_disclosures)
+    end
+    it "adds an attest_true acceptance validation to the registrant" do
+      ca.decorate_registrant(reg)
+      reg.class.should have(2).validators_on(:attest_true)      
+    end
+    
   end
 end

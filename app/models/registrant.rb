@@ -37,6 +37,7 @@ class Registrant < ActiveRecord::Base
   include Lolrus
   include Rails.application.routes.url_helpers
   
+  serialize :state_ovr_data, Hash
 
   STEPS = [:initial, :step_1, :step_2, :step_3, :step_4, :step_5, :complete]
   
@@ -149,6 +150,21 @@ class Registrant < ActiveRecord::Base
   belongs_to :prev_state,    :class_name => "GeoState"
 
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
+
+  def self.state_attr_accessor(*args)
+    if args.is_a?(Array)
+      args.each do |arg|
+        cattr_accessor(arg)
+      end
+    else
+      define_method(arg) do
+        state_ovr_data[arg]
+      end
+      define_method("#{arg}=") do |val|
+        state_ovr_data[arg] = val
+      end
+    end
+  end
 
   def self.validates_zip_code(*attr_names)
     configuration = { }

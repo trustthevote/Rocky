@@ -120,4 +120,19 @@ describe Step4Controller do
       assert_redirected_to registrant_state_online_registration_url(assigns[:registrant])
     end
   end
+
+  describe "#find_registrant" do
+    let(:reg) { FactoryGirl.create(:step_3_registrant) }
+    before(:each) do
+      Registrant.stub(:find_by_param!).and_return(reg)
+      reg.stub(:has_ovr_pre_check?).and_return(true)
+    end
+    context "when reg has_ovr_pre_check" do
+      it "decorates the registrant" do
+        reg.should_receive(:decorate_for_state).with(controller)
+        controller.send(:find_registrant)
+      end
+    end
+  end
+
 end

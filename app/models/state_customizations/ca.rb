@@ -34,6 +34,7 @@ class CA < StateCustomization
       :home_address, :home_unit, :home_city, :home_state_name, :home_zip_code,
       :mailing_address, :mailing_unit, :mailing_city, :mailing_state_name, :mailing_zip_code,
       :prev_address, :prev_unit, :prev_city, :prev_state_name, :prev_zip_code, 
+      :covr_token, :covr_success,
       :to=>:registrant
     
     def initialize(r)
@@ -124,7 +125,7 @@ class CA < StateCustomization
       case registrant.locale.to_s
       when 'en'
         2
-      when 'cn-zh', 'cn-tw'
+      when 'zh', 'zh-tw'
         3
       when 'vi'
         4
@@ -147,8 +148,43 @@ class CA < StateCustomization
       end        
     end
     
+    # English en-US
+    # Chinese zh-CN
+    # Vietnamese vi-VN
+    # Korean ko-KR
+    # Tagalog tl-PH
+    # Japanese ja-JP
+    # Hindi hi-IN
+    # Khmer km-KH
+    # Thai th-TH
+    # Spanish es-MX
     
-    
+    def language_code
+      case registrant.locale.to_s
+      when 'en'
+        "en-US"
+      when 'zh', 'zh-tw'
+        "zh-CN"
+      when 'vi'
+        "vi-VN"
+      when 'ko'
+        "ko-KR"
+      when 'tl'
+        "tl-PH"
+      when 'ja'
+        "ja-JP"
+      when 'hi'
+        "hi-IN"
+      when 'km'
+        "km-KH"
+      when 'th'
+        "th-TH"
+      when 'es'
+        "es-MX"
+      else
+        ""
+      end
+    end
     
     # 1 Mr.
     # 2 Mrs.
@@ -181,6 +217,25 @@ class CA < StateCustomization
   XML_ERROR_CODE_REGEXP = /\<ErrorCode\>(.+)\<\/ErrorCode\>/
   XML_ERROR_MESSAGE_REGEXP = /\<ErrorMessage\>(.+)\<\/ErrorMessage\>/
   
+  
+  # http://covrtest.sos.ca.gov/?
+  #    language=en-US&
+  #    t=p&
+  #    CovrAgencyKey=RTV&
+  #    PostingAgencyRecordId=BCE31E53-7E91-419Z-904Z-914352C45C34C570P
+  def online_reg_url(registrant)
+    base_url = RockyConf.ovr_states.CA.api_settings.web_url_base
+    ak = RockyConf.ovr_states.CA.api_settings.web_agency_key
+    if registrant.nil?
+      "#{base_url}?language=LANGUAGE&t=p&CovrAgencyKey=AGENCY_KEY&PostingAgencyRecordId=TOKEN"
+    else
+      decorate_registrant(registrant)
+      rb = RegistrantBinding.new(registrant)
+      "#{base_url}?language=#{rb.language_code}&t=p&CovrAgencyKey=#{ak}&PostingAgencyRecordId=#{rb.covr_token}"
+    end
+  end
+  
+  
   def has_ovr_pre_check?(registrant)
     true
   end
@@ -189,7 +244,7 @@ class CA < StateCustomization
   def decorate_registrant(registrant=nil, controller=nil)
     unless registrant.respond_to?(:covr_token)
       registrant.class.class_eval do
-        attr_accessor :covr_token, :covr_success, :ca_disclosures
+        state_attr_accessor :covr_token, :covr_success, :ca_disclosures
         validates_acceptance_of :ca_disclosures, :if=>:using_state_online_registration?
         validates_acceptance_of :attest_true, :if=>:using_state_online_registration?
       end
@@ -198,6 +253,7 @@ class CA < StateCustomization
   
   
   def ovr_pre_check(registrant, controller)
+    decorate_registrant(registrant, controller)
     request_xml = self.class.build_soap_xml(registrant)
     api_response = self.class.request_token(request_xml)
     

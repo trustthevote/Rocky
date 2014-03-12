@@ -41,7 +41,7 @@ class Step4Controller < RegistrationStep
   
   def find_registrant
     super
-    if @registrant.has_ovr_pre_check? 
+    if @registrant.has_ovr_pre_check?
       @registrant.decorate_for_state(self)
     end
   end
