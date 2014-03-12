@@ -14,18 +14,7 @@ $(document).ready(function() {
 });
 </script>
 <% end %>
-<%- if RockyConf.ovr_states.CA.api_settings.debug_in_ui %>
-<h3>XML Request:</h3>
-<pre style="background: white; overflow:scroll; height: 200px; padding:10px; width: 500px; margin:10px 0"> 
-  <%= controller.debug_data[:api_xml_request]%>
-</pre>
 
-<h3>XML Response:</h3>
-<pre style="background: white; overflow:scroll; height: 200px; padding:10px; width: 500px; margin:10px 0"> 
-  <%= controller.debug_data[:api_xml_response]%>
-</pre>
-
-<%- end%>
 
 <%- if @registrant.covr_success %>
   <h1><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_abbrev).html_safe %></h1>
@@ -35,22 +24,17 @@ $(document).ready(function() {
   <%= form.hidden_field :covr_success %>
   <ul class="affirm">
     <li>
+      <div class="disclosures" style="background: white; overflow:scroll; height: 200px; width: 500px; padding: 5px margin:10px 0">
+        TBD 5 CA Disclosures
+      </div>
+      
       <h3>
         <%= form.check_box :ca_disclosures %>
-        <%= form.label :ca_disclosures, "TBD 5 CA Disclosures" %>
+        <%= form.label :ca_disclosures, I18n.t('activerecord.attributes.registrant.attest_true') %>
       </h3>
     </li>
     <li>
       <span class="error"><%= form.object.errors[:ca_disclosures].join("\n") %></span>
-    </li>
-    <li>
-      <h3>
-        <%= form.check_box :attest_true %>
-        <%= form.label :attest_true %>
-      </h3>
-    </li>
-    <li>
-      <span class="error"><%= form.object.errors[:attest_true].join("\n") %></span>
     </li>
   </ul>
     <%= rollover_button(:next_step, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
@@ -76,3 +60,16 @@ $(document).ready(function() {
 
 
 </div>
+
+<%- if RockyConf.ovr_states.CA.api_settings.debug_in_ui %>
+<h3>XML Request:</h3>
+<pre style="background: white; overflow:scroll; height: 200px; padding:10px; width: 500px; margin:10px 0"> 
+  <%= controller.debug_data[:api_xml_request]%>
+</pre>
+
+<h3>XML Response:</h3>
+<pre style="background: white; overflow:scroll; height: 200px; padding:10px; width: 500px; margin:10px 0"> 
+  <%= controller.debug_data[:api_xml_response]%>
+</pre>
+
+<%- end%>

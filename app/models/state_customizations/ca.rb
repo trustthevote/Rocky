@@ -250,7 +250,6 @@ class CA < StateCustomization
       registrant.class.class_eval do
         state_attr_accessor :covr_token, :covr_success, :ca_disclosures
         validates_acceptance_of :ca_disclosures, :if=>:using_state_online_registration?
-        validates_acceptance_of :attest_true, :if=>:using_state_online_registration?
       end
     end
   end
