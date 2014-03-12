@@ -231,7 +231,11 @@ class CA < StateCustomization
     else
       decorate_registrant(registrant)
       rb = RegistrantBinding.new(registrant)
-      "#{base_url}?language=#{rb.language_code}&t=p&CovrAgencyKey=#{ak}&PostingAgencyRecordId=#{rb.covr_token}"
+      oru = "#{base_url}?language=#{rb.language_code}&t=p&CovrAgencyKey=#{ak}&PostingAgencyRecordId=#{rb.covr_token}"
+      if self.class.log_requests?
+        Rails.logger.info("COVR:: Built URL #{oru} for registrant redirect")
+      end
+      oru
     end
   end
   
@@ -267,7 +271,7 @@ class CA < StateCustomization
       else
         error_code = self.class.extract_error_code_from_xml_response(api_response)
         error_message = self.class.extract_error_message_from_xml_response(api_response)
-        Rails.logger.info("COVR Error #{error_code}: #{error_message.strip}")
+        Rails.logger.info("COVR:: Error #{error_code}: #{error_message.strip}")
       end
       
       # 4. Else, parse response
@@ -288,13 +292,13 @@ class CA < StateCustomization
   
   def self.request_token(request_xml)
     if log_requests?
-      Rails.logger.info("Making Request to: #{RockyConf.ovr_states.CA.api_settings.api_url}")
+      Rails.logger.info("COVR:: Making Request to: #{RockyConf.ovr_states.CA.api_settings.api_url}")
       Rails.logger.info("With XML\n#{request_xml}\n")
     end
     begin
       resp = Integrations::Soap.make_request(RockyConf.ovr_states.CA.api_settings.api_url, request_xml)
       if log_requests?
-        Rails.logger.info("Response:\n#{resp}\n")
+        Rails.logger.info("COVR:: Response:\n#{resp}\n")
       end
       return resp
     rescue Exception => e
