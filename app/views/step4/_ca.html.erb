@@ -14,6 +14,18 @@ $(document).ready(function() {
 });
 </script>
 <% end %>
+<%- if RockyConf.ovr_states.CA.api_settings.debug_in_ui %>
+<h3>XML Request:</h3>
+<pre style="background: white; overflow:scroll; height: 200px; padding:10px; width: 500px; margin:10px 0"> 
+  <%= controller.debug_data[:api_xml_request]%>
+</pre>
+
+<h3>XML Response:</h3>
+<pre style="background: white; overflow:scroll; height: 200px; padding:10px; width: 500px; margin:10px 0"> 
+  <%= controller.debug_data[:api_xml_response]%>
+</pre>
+
+<%- end%>
 
 <%- if @registrant.covr_success %>
   <h1><%= I18n.t('txt.registration.instructions.state_online_registration', :state=>@registrant.home_state_abbrev).html_safe %></h1>

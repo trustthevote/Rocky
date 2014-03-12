@@ -11,7 +11,7 @@ pdf_expiration_days: .25
 ovr_states:
   CA:
     api_settings:
-      debug_in_ui: false
+      debug_in_ui: true
       log_all_requests: true
       
 states_with_online_registration:

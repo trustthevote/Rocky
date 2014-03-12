@@ -25,6 +25,11 @@
 class Step4Controller < RegistrationStep
   CURRENT_STEP = 4
   
+  attr_accessor :debug_data
+  def debug_data
+    @debug_data ||= {}
+  end
+  
   def show
     super
     if @registrant.has_ovr_pre_check?

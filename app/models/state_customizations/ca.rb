@@ -262,22 +262,19 @@ class CA < StateCustomization
     api_response = self.class.request_token(request_xml)
     
     if RockyConf.ovr_states.CA.api_settings.debug_in_ui
-      controller.render :xml=>api_response, :layout=>nil, :content_type=>"application/xml"
+      controller.debug_data[:api_xml_response] = api_response
+      controller.debug_data[:api_xml_request] = request_xml
+      #controller.render :xml=>api_response, :layout=>nil, :content_type=>"application/xml"
+    end
+
+    covr_token = self.class.extract_token_from_xml_response(api_response)
+    if covr_token
+      registrant.covr_token = covr_token
+      registrant.covr_success = true
     else
-      covr_token = self.class.extract_token_from_xml_response(api_response)
-      if covr_token
-        registrant.covr_token = covr_token
-        registrant.covr_success = true
-      else
-        error_code = self.class.extract_error_code_from_xml_response(api_response)
-        error_message = self.class.extract_error_message_from_xml_response(api_response)
-        Rails.logger.info("COVR:: Error #{error_code}: #{error_message.strip}")
-      end
-      
-      # 4. Else, parse response
-      # 5. if "success", mark as such
-      # 6. Go to page 4 (which, for CA, may or may not include the "finish with state" option)
-      
+      error_code = self.class.extract_error_code_from_xml_response(api_response)
+      error_message = self.class.extract_error_message_from_xml_response(api_response)
+      Rails.logger.info("COVR:: Error #{error_code}: #{error_message.strip}")
     end
   end
     
