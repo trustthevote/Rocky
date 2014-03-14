@@ -150,7 +150,7 @@ describe CA do
           CA.stub(:request_token).with("XML").and_return(fixture_file_contents("covr/max_registrant_response_fail.xml"))
         end
         it "logs the error" do
-          Rails.logger.should_receive(:info).with("COVR:: Error 902: Invalid voter resident Id")
+          Rails.logger.should_receive(:warn).with("COVR:: CUSTOM_COVR_ERROR\nError 902: Invalid voter resident Id")
           ca.ovr_pre_check(reg, con)
         end
         it "sets covr_success on the registrant be false" do

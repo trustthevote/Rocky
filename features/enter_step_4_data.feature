@@ -220,7 +220,7 @@ Feature: Step 4
       And I press "registrant_state_online_registration"
       Then I should see "Hang on. You are eligible to register online in your state."
 
-    @wip
+    @passing
     Scenario: CA resident eligible and approved for OVR agrees to disclosures
       Given I have completed step 3 as a resident of "California" state
       And I have a state license
@@ -228,6 +228,6 @@ Feature: Step 4
       When I go to the step 4 page
       And I check "registrant_ca_disclosures"
       And I press "registrant_state_online_registration"
-      Then I should be redirected to the CA url for that registrant
+      Then I should see an iFrame for the California State online system
 
 

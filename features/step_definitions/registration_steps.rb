@@ -382,8 +382,8 @@ Then(/^I should be redirected to the CA url for that registrant$/) do
 end
 
 Then(/^I should see the return XML from the API request$/) do
-  page.source.should =~ /s:Envelope xmlns:s="http:\/\/www.w3.org\/2003\/05\/soap-envelope"/
-  page.source.should =~ /\<Success\>true\<\/Success\>/
+  page.should have_content "s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope"
+  page.should have_content "<Success>true</Success>"
 end
 
 

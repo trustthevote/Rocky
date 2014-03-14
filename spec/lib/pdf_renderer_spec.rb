@@ -67,129 +67,129 @@ describe PdfRenderer do
     let(:doc) { Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra')) }
     it "should output us citizen" do
       assert_equal  registrant.us_citizen? ? 'Yes' : 'No',
-                    doc.css('#us_citizen .value').text
+                    doc.css('#us_citizen .value').inner_html
     end
     it "should output will be 18" do
       assert_equal  registrant.will_be_18_by_election? ? 'Yes' : 'No',
-                    doc.css('#will_be_18_by_election .value').text
+                    doc.css('#will_be_18_by_election .value').inner_html
     end
 
     it "should output name title" do
       assert_equal  registrant.name_title,
-                    doc.css('#name_title .value .checkbox-checked span').text
+                    doc.css('#name_title .value .checkbox-checked span').inner_html
     end
     it "should output first name" do
       assert_equal  registrant.first_name,
-                    doc.css('#name_first .value').text
+                    doc.css('#name_first .value').inner_html
     end
     it "should output middle name" do
       assert_equal  registrant.middle_name,
-                    doc.css('#name_middle .value').text
+                    doc.css('#name_middle .value').inner_html
     end
     it "should output last name" do
       assert_equal  registrant.last_name,
-                    doc.css('#name_last .value').text
+                    doc.css('#name_last .value').inner_html
     end
     it "should output name suffix" do
       assert_equal  registrant.name_suffix,
-                    doc.css('#name_suffix .value .checkbox-checked span').text
+                    doc.css('#name_suffix .value .checkbox-checked span').inner_html
     end
     
     it "should output home address street" do
-      assert_equal  registrant.home_address,
-                    doc.css('#home_address_street .value').text
+      assert_equal  CGI.escapeHTML(registrant.home_address),
+                    doc.css('#home_address_street .value').inner_html
     end
     it "should output home address unit" do
       assert_equal  registrant.home_unit,
-                    doc.css('#home_address_unit .value').text
+                    doc.css('#home_address_unit .value').inner_html
     end
     it "should output home address city" do
-      assert_equal  registrant.home_city,
-                    doc.css('#home_address_city .value').text
+      assert_equal  CGI.escapeHTML(registrant.home_city),
+                    doc.css('#home_address_city .value').inner_html
     end
     it "should output home address state" do
       assert_equal  registrant.home_state.abbreviation,
-                    doc.css('#home_address_state .value').text
+                    doc.css('#home_address_state .value').inner_html
     end
     it "should output home address zip code" do
       assert_equal  registrant.home_zip_code,
-                    doc.css('#home_address_zip_code .value').text
+                    doc.css('#home_address_zip_code .value').inner_html
     end
 
     it "should output mailing address street" do
       assert_equal  "#{registrant.mailing_address} #{registrant.mailing_unit}",
-                    doc.css('#mailing_address_street .value').text
+                    doc.css('#mailing_address_street .value').inner_html
     end
     it "should output mailing address city" do
       assert_equal  registrant.mailing_city,
-                    doc.css('#mailing_address_city .value').text
+                    doc.css('#mailing_address_city .value').inner_html
     end
     it "should output mailing address state" do
       assert_equal  registrant.mailing_state.abbreviation,
-                    doc.css('#mailing_address_state .value').text
+                    doc.css('#mailing_address_state .value').inner_html
     end
     it "should output mailing address zip code" do
       assert_equal  registrant.mailing_zip_code,
-                    doc.css('#mailing_address_zip_code .value').text
+                    doc.css('#mailing_address_zip_code .value').inner_html
     end
 
     it "should output date of birth" do
       assert_equal  registrant.pdf_date_of_birth,
-                    doc.css('#date_of_birth .value').text.gsub(/\s/, '')
+                    doc.css('#date_of_birth .value').inner_html.gsub(/\s/, '')
     end
     it "should output phone" do
       assert_equal  registrant.phone,
-                    doc.css('#phone_number .value').text
+                    doc.css('#phone_number .value').inner_html
     end
     it "should output state ID number" do
       assert_equal  registrant.state_id_number,
-                    doc.css('#id_number .value').text
+                    doc.css('#id_number .value').inner_html
     end
     it "should output party" do
       assert_equal  registrant.party.to_s,
-                    doc.css('#party .value').text.strip
+                    doc.css('#party .value').inner_html.strip
     end
     
     it "should output previous name title" do
       assert_equal  registrant.prev_name_title,
-                    doc.css('#prev_name_title .value .checkbox-checked span').text
+                    doc.css('#prev_name_title .value .checkbox-checked span').inner_html
     end
     it "should output previous first name" do
       assert_equal  registrant.prev_first_name,
-                    doc.css('#prev_name_first .value').text
+                    doc.css('#prev_name_first .value').inner_html
     end
     it "should output previous middle name" do
       assert_equal  registrant.prev_middle_name,
-                    doc.css('#prev_name_middle .value').text
+                    doc.css('#prev_name_middle .value').inner_html
     end
     it "should output previous last name" do
       assert_equal  registrant.prev_last_name,
-                    doc.css('#prev_name_last .value').text
+                    doc.css('#prev_name_last .value').inner_html
     end
     it "should output previous name suffix" do
       assert_equal  registrant.prev_name_suffix,
-                    doc.css('#prev_name_suffix .value .checkbox-checked span').text
+                    doc.css('#prev_name_suffix .value .checkbox-checked span').inner_html
     end
 
     it "should output previous address street" do
       assert_equal  registrant.prev_address,
-                    doc.css('#prev_address_street .value').text
+                    doc.css('#prev_address_street .value').inner_html
     end
     it "should output previous address unit" do
       assert_equal  registrant.prev_unit,
-                    doc.css('#prev_address_unit .value').text
+                    doc.css('#prev_address_unit .value').inner_html
     end
     it "should output previous address city" do
       assert_equal  registrant.prev_city,
-                    doc.css('#prev_address_city .value').text
+                    doc.css('#prev_address_city .value').inner_html
     end
     it "should output previous address state" do
       assert_equal  registrant.prev_state.abbreviation,
-                    doc.css('#prev_address_state .value').text
+                    doc.css('#prev_address_state .value').inner_html
     end
     it "should output previous address zip code" do
       assert_equal  registrant.prev_zip_code,
-                    doc.css('#prev_address_zip_code .value').text
+                    doc.css('#prev_address_zip_code .value').inner_html
     end
     
     describe "race" do
@@ -199,7 +199,7 @@ describe PdfRenderer do
         doc = Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra'))
         
         assert_equal  registrant.race,
-                      doc.css('#race .value').text.strip
+                      doc.css('#race .value').inner_html.strip
       end
       
       it "should not output race as decline to state" do
@@ -209,7 +209,7 @@ describe PdfRenderer do
         doc = Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra'))
         
         assert_equal  "",
-                      doc.css('#race .value').text.strip
+                      doc.css('#race .value').inner_html.strip
       end
       it "should not output race if it is not required" do
         registrant = FactoryGirl.create(:maximal_registrant, :race => "Multi-racial")
@@ -218,7 +218,7 @@ describe PdfRenderer do
         doc = Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra'))
         
         assert_equal  "",
-                      doc.css('#race .value').text.strip
+                      doc.css('#race .value').inner_html.strip
       end
     end
     
@@ -236,7 +236,7 @@ describe PdfRenderer do
   
       it "should output barcode text" do
         assert_equal  registrant.pdf_barcode,
-                      doc.css('.pdf_barcode').text
+                      doc.css('.pdf_barcode').inner_html
       end
     end
     

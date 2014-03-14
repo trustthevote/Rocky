@@ -245,7 +245,7 @@ class CA < StateCustomization
       rb = RegistrantBinding.new(registrant)
       oru = "#{base_url}?language=#{rb.language_code}&t=p&CovrAgencyKey=#{ak}&PostingAgencyRecordId=#{rb.covr_token}"
       if self.class.log_requests?
-        Rails.logger.info("COVR:: Built URL #{oru} for registrant redirect")
+        log_ovr_info("Built URL #{oru} for registrant redirect")
       end
       oru
     end
@@ -285,7 +285,7 @@ class CA < StateCustomization
     else
       error_code = self.class.extract_error_code_from_xml_response(api_response)
       error_message = self.class.extract_error_message_from_xml_response(api_response)
-      Rails.logger.info("COVR:: Error #{error_code}: #{error_message.strip}")
+      log_covr_error("Error #{error_code}: #{error_message.strip}")
     end
   end
     
@@ -316,7 +316,7 @@ class CA < StateCustomization
         begin
           @disclosures[locale.to_s][num] = RestClient.get(disclosure_url(locale, num)).to_s.force_encoding('UTF-8')
         rescue Exception=>e
-          Rails.logger.warn ("COVR:: While loading disclosures from #{disclosure_url(locale, num)} - #{e.message}\n#{e.backtrace.join("\n\t")}")
+          log_covr_error("While loading disclosures from #{disclosure_url(locale, num)} - #{e.message}\n#{e.backtrace.join("\n\t")}")
         end
       end
     end
@@ -337,18 +337,18 @@ class CA < StateCustomization
   
   def self.request_token(request_xml)
     if log_requests?
-      Rails.logger.info("COVR:: Making Request to: #{RockyConf.ovr_states.CA.api_settings.api_url}")
-      Rails.logger.info("With XML\n#{request_xml}\n")
+      log_covr_info("COVR:: Making Request to: #{RockyConf.ovr_states.CA.api_settings.api_url}")
+      log_covr_info("With XML\n#{request_xml}\n")
     end
     begin
       resp = Integrations::Soap.make_request(RockyConf.ovr_states.CA.api_settings.api_url, request_xml)
       if log_requests?
-        Rails.logger.info("COVR:: Response:\n#{resp}\n")
+        log_covr_info("COVR:: Response:\n#{resp}\n")
       end
       return resp
     rescue Exception => e
       if log_requests?
-        Rails.logger.error(e)
+        log_covr_error("#{e.message}\n#{e.backtrace.join("\n\t")}")
       end
       nil
     end
@@ -380,6 +380,23 @@ class CA < StateCustomization
     else
       return "Error Message Not Found"
     end
+  end
+  
+  
+  def log_covr_info(message)
+    self.class.log_covr_info(message)
+  end
+  
+  def self.log_covr_info(message)
+    Rails.logger.info("COVR:: #{message}")
+  end
+
+  def log_covr_error(message)
+    self.class.log_covr_error(message)
+  end
+  
+  def self.log_covr_error(message)
+    Rails.logger.warn("COVR:: #{RockyConf.ovr_states.CA.api_settings.custom_error_string}\n#{message}")
   end
 
   

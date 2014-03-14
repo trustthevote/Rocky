@@ -1,64 +1,64 @@
 %div.page#page_1
   #logo= image_tag(@logo_image_path)
-  %h1.title= I18n.t('pdf.nvra.page1.title').html_safe
-  %h2.subtitle= I18n.t('pdf.nvra.page1.subtitle' ).html_safe
-  %p.top_paragraph= I18n.t('pdf.nvra.page1.top_paragraph' ).html_safe
+  %h1.title= I18n.t('pdf.nvra.page1.title').to_s.html_safe
+  %h2.subtitle= I18n.t('pdf.nvra.page1.subtitle' ).to_s.html_safe
+  %p.top_paragraph= I18n.t('pdf.nvra.page1.top_paragraph' ).to_s.html_safe
   %table#instructions_table
     %tr
       %td.instructions_block{:rowspan=>3}
-        %h4= I18n.t('pdf.nvra.page1.instructions_block.title' ).html_safe
-        %p= I18n.t('pdf.nvra.page1.instructions_block.subtitle' ).html_safe
+        %h4= I18n.t('pdf.nvra.page1.instructions_block.title' ).to_s.html_safe
+        %p= I18n.t('pdf.nvra.page1.instructions_block.subtitle' ).to_s.html_safe
         %ol
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step1' ).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step1' ).to_s.html_safe
           %li
-            = I18n.t('pdf.nvra.page1.instructions_block.step2' ).html_safe
+            = I18n.t('pdf.nvra.page1.instructions_block.step2' ).to_s.html_safe
             .mailer
-              .instructions= I18n.t('pdf.nvra.page1.instructions_block.step2mailer' ).html_safe
+              .instructions= I18n.t('pdf.nvra.page1.instructions_block.step2mailer' ).to_s.html_safe
               .image= wicked_pdf_image_tag("pdf/mailer.png")
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step3' ).html_safe
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step4' ).html_safe
-          %li= I18n.t('pdf.nvra.page1.instructions_block.step5' ).html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step3' ).to_s.html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step4' ).to_s.html_safe
+          %li= I18n.t('pdf.nvra.page1.instructions_block.step5' ).to_s.html_safe
       %td.submit_block
         - if !@registrant.home_state_pdf_instructions.blank? && false
           .state_instructions
-            %p= @registrant.home_state_pdf_instructions.html_safe
+            %p= @registrant.home_state_pdf_instructions.to_s.html_safe
           
-        %h4.title= I18n.t('pdf.nvra.page1.submit_block.title' ).html_safe
+        %h4.title= I18n.t('pdf.nvra.page1.submit_block.title' ).to_s.html_safe
         %p= @state.registrar_address.to_s.html_safe
     %tr
       %td.deadline_block
-        %h4.title= I18n.t('pdf.nvra.page1.deadline_block.title' ).html_safe
+        %h4.title= I18n.t('pdf.nvra.page1.deadline_block.title' ).to_s.html_safe
         %p= @registrant.registration_deadline.to_s.html_safe
     %tr
       %td.other_block
-        %h4.title= I18n.t('pdf.nvra.page1.other_block', :instructions_url=>@registrant_instructions_link).html_safe
-  %h3.bottom_title= I18n.t('pdf.nvra.page1.bottom_block.title' ).html_safe
-  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph1' ).html_safe
-  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph2' ).html_safe
-  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph3' ).html_safe
-  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph4' ).html_safe
+        %h4.title= I18n.t('pdf.nvra.page1.other_block', :instructions_url=>@registrant_instructions_link).to_s.html_safe
+  %h3.bottom_title= I18n.t('pdf.nvra.page1.bottom_block.title' ).to_s.html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph1' ).to_s.html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph2' ).to_s.html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph3' ).to_s.html_safe
+  %p= I18n.t('pdf.nvra.page1.bottom_block.paragraph4' ).to_s.html_safe
   
 .page#page_2
-  %h1.title= form_prompt('pdf.nvra.page2.title' ).html_safe
-  %h2.subtitle= form_prompt('pdf.nvra.page2.subtitle' ).html_safe
+  %h1.title= form_prompt('pdf.nvra.page2.title' ).to_s.html_safe
+  %h2.subtitle= form_prompt('pdf.nvra.page2.subtitle' ).to_s.html_safe
   
   %table.form
     %tr#topblock{:class=>"#{non_english? ? 'smaller_prompts' : ''}"}
       %td.items
         .item1#us_citizen
-          = form_prompt('pdf.nvra.page2.topblock.item1' ).html_safe
+          = form_prompt('pdf.nvra.page2.topblock.item1' ).to_s.html_safe
           %span.value= @registrant.yes_no_us_citizen?
         .item2#will_be_18_by_election
-          = form_prompt('pdf.nvra.page2.topblock.item2' ).html_safe
+          = form_prompt('pdf.nvra.page2.topblock.item2' ).to_s.html_safe
           %span.value= @registrant.yes_no_will_be_18_by_election?
-        .item3= form_prompt('pdf.nvra.page2.topblock.item3' ).html_safe
-        .item4= form_prompt('pdf.nvra.page2.topblock.item4' ).html_safe
-      %td.fouo= form_prompt('pdf.nvra.page2.topblock.fouo' ).html_safe
+        .item3= form_prompt('pdf.nvra.page2.topblock.item3' ).to_s.html_safe
+        .item4= form_prompt('pdf.nvra.page2.topblock.item4' ).to_s.html_safe
+      %td.fouo= form_prompt('pdf.nvra.page2.topblock.fouo' ).to_s.html_safe
   %table.form
     %tr#block1
       %td.block_number 1
       %td.box1#name_title
-        .label= form_prompt('pdf.nvra.page2.block1.box1_label' ).html_safe
+        .label= form_prompt('pdf.nvra.page2.block1.box1_label' ).to_s.html_safe
         .value.checkboxes
           .checkbox-col
             .checkbox{:class=>checked?(:mr, :name_title) ? 'checkbox-checked' : ''}
@@ -76,16 +76,16 @@
               %span= I18n.t("txt.registration.titles.ms", :locale=>:en)
       
       %td.box2#name_last
-        .label= form_prompt('pdf.nvra.page2.block1.box2_label' ).html_safe
-        .value= @registrant.last_name
+        .label= form_prompt('pdf.nvra.page2.block1.box2_label' ).to_s.html_safe
+        .value= (@registrant.last_name).to_s.html_safe
       %td.box3#name_first
-        .label= form_prompt('pdf.nvra.page2.block1.box3_label' ).html_safe
-        .value= @registrant.first_name
+        .label= form_prompt('pdf.nvra.page2.block1.box3_label' ).to_s.html_safe
+        .value= (@registrant.first_name).to_s.html_safe
       %td.box4#name_middle
-        .label= form_prompt('pdf.nvra.page2.block1.box4_label' ).html_safe
-        .value= @registrant.middle_name
+        .label= form_prompt('pdf.nvra.page2.block1.box4_label' ).to_s.html_safe
+        .value= (@registrant.middle_name).to_s.html_safe
       %td.box5#name_suffix
-        .label= form_prompt('pdf.nvra.page2.block1.box5_label' ).html_safe
+        .label= form_prompt('pdf.nvra.page2.block1.box5_label' ).to_s.html_safe
         .value.checkboxes.suffix-checkboxes
           .checkbox-col
             .checkbox{:class=>checked?(:jr, :name_suffix) ? 'checkbox-checked' : ''}
@@ -108,104 +108,104 @@
     %tr#block2
       %td.block_number 2
       %td.box1#home_address_street
-        .label= form_prompt('pdf.nvra.page2.block2.box1_label' ).html_safe
-        .value= @registrant.home_address
+        .label= form_prompt('pdf.nvra.page2.block2.box1_label' ).to_s.html_safe
+        .value= (@registrant.home_address).to_s.html_safe
       %td.box2#home_address_unit
-        .label= form_prompt('pdf.nvra.page2.block2.box2_label' ).html_safe
-        .value= @registrant.home_unit
+        .label= form_prompt('pdf.nvra.page2.block2.box2_label' ).to_s.html_safe
+        .value= (@registrant.home_unit).to_s.html_safe
       %td.box3#home_address_city
-        .label= form_prompt('pdf.nvra.page2.block2.box3_label' ).html_safe
-        .value= @registrant.home_city
+        .label= form_prompt('pdf.nvra.page2.block2.box3_label' ).to_s.html_safe
+        .value= @registrant.home_city.to_s.html_safe
       %td.box4#home_address_state
-        .label= form_prompt('pdf.nvra.page2.block2.box4_label' ).html_safe
-        .value= @registrant.home_state_abbrev
+        .label= form_prompt('pdf.nvra.page2.block2.box4_label' ).to_s.html_safe
+        .value=  @registrant.home_state_abbrev
       %td.box5#home_address_zip_code
-        .label= form_prompt('pdf.nvra.page2.block2.box5_label' ).html_safe
-        .value= @registrant.home_zip_code
+        .label= form_prompt('pdf.nvra.page2.block2.box5_label' ).to_s.html_safe
+        .value=  @registrant.home_zip_code.to_s.html_safe
     %tr#block3
       %td.block_number 3
       %td.box1#mailing_address_street{:colspan=>2}
-        .label= form_prompt('pdf.nvra.page2.block3.box1_label' ).html_safe
-        .value= "#{@registrant.mailing_address} #{@registrant.mailing_unit}"
+        .label= form_prompt('pdf.nvra.page2.block3.box1_label' ).to_s.html_safe
+        .value= ("#{@registrant.mailing_address} #{@registrant.mailing_unit}").to_s.html_safe
       %td.box2#mailing_address_city
-        .label= form_prompt('pdf.nvra.page2.block3.box2_label' ).html_safe
-        .value= @registrant.mailing_city
+        .label= form_prompt('pdf.nvra.page2.block3.box2_label' ).to_s.html_safe
+        .value=  @registrant.mailing_city.to_s.html_safe
       %td.box3#mailing_address_state
-        .label= form_prompt('pdf.nvra.page2.block3.box3_label' ).html_safe
-        .value= @registrant.mailing_state_abbrev
+        .label= form_prompt('pdf.nvra.page2.block3.box3_label' ).to_s.html_safe
+        .value=  @registrant.mailing_state_abbrev.to_s.html_safe
       %td.box4#mailing_address_zip_code
-        .label= form_prompt('pdf.nvra.page2.block3.box4_label' ).html_safe
-        .value= @registrant.mailing_zip_code
+        .label= form_prompt('pdf.nvra.page2.block3.box4_label' ).to_s.html_safe
+        .value=  @registrant.mailing_zip_code.to_s.html_safe
   %table.form
     %tr#block4
       %td.block4.block_number 4
       %td.block4.box1#date_of_birth
         %table.inner_form
           %tr
-            %td.label= form_prompt('pdf.nvra.page2.block4.box1_label' ).html_safe
+            %td.label= form_prompt('pdf.nvra.page2.block4.box1_label' ).to_s.html_safe
             %td.item2
               .value= @registrant.pdf_date_of_birth_month + ' /'
-              .label=form_prompt('pdf.nvra.page2.block4.item2' ).html_safe
+              .label=form_prompt('pdf.nvra.page2.block4.item2' ).to_s.html_safe
             %td.item3
               .value= @registrant.pdf_date_of_birth_day + ' /'
-              .label=form_prompt('pdf.nvra.page2.block4.item3' ).html_safe
+              .label=form_prompt('pdf.nvra.page2.block4.item3' ).to_s.html_safe
             %td.item4
               .value= @registrant.pdf_date_of_birth_year
-              .label=form_prompt('pdf.nvra.page2.block4.item4' ).html_safe
+              .label=form_prompt('pdf.nvra.page2.block4.item4' ).to_s.html_safe
       %td.block5.block_number 5
       %td.block5.box1#phone_number
-        .label= form_prompt('pdf.nvra.page2.block5' ).html_safe
+        .label= form_prompt('pdf.nvra.page2.block5' ).to_s.html_safe
         .value= @registrant.phone
       %td.block6.block_number{:rowspan=>2} 6
       %td.block6.box1#id_number{:rowspan=>2}
-        .label= form_prompt('pdf.nvra.page2.block6.box1_label' ).html_safe
-        .sublabel= form_prompt('pdf.nvra.page2.block6.box1_sublabel' ).html_safe
+        .label= form_prompt('pdf.nvra.page2.block6.box1_label' ).to_s.html_safe
+        .sublabel= form_prompt('pdf.nvra.page2.block6.box1_sublabel' ).to_s.html_safe
         .value= @registrant.state_id_number
     %tr#block7
       %td.block7.block_number 7
       %td.block7.box1#party
-        .label= form_prompt('pdf.nvra.page2.block7.box1_label' ).html_safe
-        .sublabel= form_prompt('pdf.nvra.page2.block7.box1_sublabel' ).html_safe
+        .label= form_prompt('pdf.nvra.page2.block7.box1_label' ).to_s.html_safe
+        .sublabel= form_prompt('pdf.nvra.page2.block7.box1_sublabel' ).to_s.html_safe
         .value
           = @registrant.english_party_name
           - if non_english? && !@registrant.party.blank?
             .translated_value= "/ #{@registrant.party}"
       %td.block8.block_number 8
       %td.block8.box1#race
-        .label= form_prompt('pdf.nvra.page2.block8.box1_label' ).html_safe
-        .sublabel= form_prompt('pdf.nvra.page2.block8.box1_sublabel' ).html_safe
+        .label= form_prompt('pdf.nvra.page2.block8.box1_label' ).to_s.html_safe
+        .sublabel= form_prompt('pdf.nvra.page2.block8.box1_sublabel' ).to_s.html_safe
         .value
           = @registrant.pdf_english_race
   %table.form
     %tr#block9
       %td.block_number 9
       %td.box1
-        .affirmation_header= form_prompt('pdf.nvra.page2.block9.affirmation_header' ).html_safe
+        .affirmation_header= form_prompt('pdf.nvra.page2.block9.affirmation_header' ).to_s.html_safe
         %ul.affirmations
-          %li.affirmation_1= form_prompt('pdf.nvra.page2.block9.affirmation_1' ).html_safe
-          %li.affirmation_2= form_prompt('pdf.nvra.page2.block9.affirmation_2' ).html_safe
-          %li.affirmation_3= form_prompt('pdf.nvra.page2.block9.affirmation_3' ).html_safe
+          %li.affirmation_1= form_prompt('pdf.nvra.page2.block9.affirmation_1' ).to_s.html_safe
+          %li.affirmation_2= form_prompt('pdf.nvra.page2.block9.affirmation_2' ).to_s.html_safe
+          %li.affirmation_3= form_prompt('pdf.nvra.page2.block9.affirmation_3' ).to_s.html_safe
       %td.box2
         .signature_box= wicked_pdf_image_tag("pdf/signature_box.png")
-        .please_sign= form_prompt('pdf.nvra.page2.block9.please_sign' ).html_safe
+        .please_sign= form_prompt('pdf.nvra.page2.block9.please_sign' ).to_s.html_safe
         .signature_date
-          .date= form_prompt('pdf.nvra.page2.block9.date' ).html_safe
+          .date= form_prompt('pdf.nvra.page2.block9.date' ).to_s.html_safe
           .date_box= wicked_pdf_image_tag("pdf/date_box.png")
-          .month= form_prompt('pdf.nvra.page2.block9.month' ).html_safe
-          .day= form_prompt('pdf.nvra.page2.block9.day' ).html_safe
-          .year= form_prompt('pdf.nvra.page2.block9.year' ).html_safe
+          .month= form_prompt('pdf.nvra.page2.block9.month' ).to_s.html_safe
+          .day= form_prompt('pdf.nvra.page2.block9.day' ).to_s.html_safe
+          .year= form_prompt('pdf.nvra.page2.block9.year' ).to_s.html_safe
   %h4.top_half_footer
-    = form_prompt('pdf.nvra.page2.top_half_footer' ).html_safe
+    = form_prompt('pdf.nvra.page2.top_half_footer' ).to_s.html_safe
   .bottom_half
     .pdf_barcode= @registrant.pdf_barcode
     %h3.bottom_half_title
-      = form_prompt('pdf.nvra.page2.bottom_half_title' ).html_safe
-    %p.block_title.blockA= form_prompt('pdf.nvra.page2.blockA.title' ).html_safe
+      = form_prompt('pdf.nvra.page2.bottom_half_title' ).to_s.html_safe
+    %p.block_title.blockA= form_prompt('pdf.nvra.page2.blockA.title' ).to_s.html_safe
     %table.form
       %tr#blockA
         %td.block_number A
         %td.box1#prev_name_title
-          .label= form_prompt('pdf.nvra.page2.blockA.box1_label' ).html_safe
+          .label= form_prompt('pdf.nvra.page2.blockA.box1_label' ).to_s.html_safe
           .value.checkboxes
             .checkbox-col
               .checkbox{:class=>checked?(:mr, :prev_name_title) ? 'checkbox-checked' : ''}
@@ -222,16 +222,16 @@
                 = checkbox(:ms, :prev_name_title)
                 %span= I18n.t("txt.registration.titles.ms", :locale=>:en)
         %td.box2#prev_name_last
-          .label= form_prompt('pdf.nvra.page2.blockA.box2_label' ).html_safe
-          .value= @registrant.prev_last_name
+          .label= form_prompt('pdf.nvra.page2.blockA.box2_label' ).to_s.html_safe
+          .value=  @registrant.prev_last_name.to_s.html_safe
         %td.box3#prev_name_first
-          .label= form_prompt('pdf.nvra.page2.blockA.box3_label' ).html_safe
-          .value= @registrant.prev_first_name
+          .label= form_prompt('pdf.nvra.page2.blockA.box3_label' ).to_s.html_safe
+          .value=  @registrant.prev_first_name.to_s.html_safe
         %td.box4#prev_name_middle
-          .label= form_prompt('pdf.nvra.page2.blockA.box4_label' ).html_safe
-          .value= @registrant.prev_middle_name
+          .label= form_prompt('pdf.nvra.page2.blockA.box4_label' ).to_s.html_safe
+          .value=  @registrant.prev_middle_name.to_s.html_safe
         %td.box5#prev_name_suffix
-          .label= form_prompt('pdf.nvra.page2.blockA.box5_label' ).html_safe
+          .label= form_prompt('pdf.nvra.page2.blockA.box5_label' ).to_s.html_safe
           .value.checkboxes.suffix-checkboxes
             .checkbox-col
               .checkbox{:class=>checked?(:jr, :prev_name_suffix) ? 'checkbox-checked' : ''}
@@ -250,27 +250,27 @@
               .checkbox{:class=>checked?(:iv, :prev_name_suffix) ? 'checkbox-checked' : ''}
                 = checkbox(:iv, :prev_name_suffix)
                 %span= I18n.t("txt.registration.suffixes.iv", :locale=>:en)          
-    %p.block_title.blockB= form_prompt('pdf.nvra.page2.blockB.title' ).html_safe
+    %p.block_title.blockB= form_prompt('pdf.nvra.page2.blockB.title' ).to_s.html_safe
     %table.form
       %tr#blockB
         %td.block_number B
         %td.box1#prev_address_street
-          .label= form_prompt('pdf.nvra.page2.blockB.box1_label' ).html_safe
-          .value= @registrant.prev_address
+          .label= form_prompt('pdf.nvra.page2.blockB.box1_label' ).to_s.html_safe
+          .value= (@registrant.prev_address).to_s.html_safe
         %td.box2#prev_address_unit
-          .label= form_prompt('pdf.nvra.page2.blockB.box2_label' ).html_safe
-          .value= @registrant.prev_unit
+          .label= form_prompt('pdf.nvra.page2.blockB.box2_label' ).to_s.html_safe
+          .value=  @registrant.prev_unit.to_s.html_safe
         %td.box3#prev_address_city
-          .label= form_prompt('pdf.nvra.page2.blockB.box3_label' ).html_safe
-          .value= @registrant.prev_city
+          .label= form_prompt('pdf.nvra.page2.blockB.box3_label' ).to_s.html_safe
+          .value=  @registrant.prev_city.to_s.html_safe
         %td.box4#prev_address_state
-          .label= form_prompt('pdf.nvra.page2.blockB.box4_label' ).html_safe
-          .value= @registrant.prev_state_abbrev
+          .label= form_prompt('pdf.nvra.page2.blockB.box4_label' ).to_s.html_safe
+          .value=  @registrant.prev_state_abbrev
         %td.box5#prev_address_zip_code
-          .label= form_prompt('pdf.nvra.page2.blockB.box5_label' ).html_safe
-          .value= @registrant.prev_zip_code
+          .label= form_prompt('pdf.nvra.page2.blockB.box5_label' ).to_s.html_safe
+          .value=  @registrant.prev_zip_code.to_s.html_safe
           
-    %p.block_title.blockC= form_prompt('pdf.nvra.page2.blockC.title' ).html_safe
+    %p.block_title.blockC= form_prompt('pdf.nvra.page2.blockC.title' ).to_s.html_safe
     %table.form
       %tr#blockC
         %td.block_number C
@@ -278,29 +278,29 @@
           .address_map_wrapper
             .address_map= wicked_pdf_image_tag("pdf/address_map.png")
             %ul.instructions 
-              %li= form_prompt('pdf.nvra.page2.blockC.instructions.bullet1' ).html_safe
-              %li= form_prompt('pdf.nvra.page2.blockC.instructions.bullet2' ).html_safe
-              %li= form_prompt('pdf.nvra.page2.blockC.instructions.bullet3' ).html_safe
-            .example.label= I18n.t('pdf.nvra.page2.blockC.example.title' ).html_safe
-            .example.store= form_prompt('pdf.nvra.page2.blockC.example.grocery_store' ).html_safe
-            .example.school= form_prompt('pdf.nvra.page2.blockC.example.public_school' ).html_safe
-            .example.street1= I18n.t('pdf.nvra.page2.blockC.example.street1', :locale=>:en).html_safe
-            .example.street2= I18n.t('pdf.nvra.page2.blockC.example.street2', :locale=>:en).html_safe
-            .north= form_prompt('pdf.nvra.page2.blockC.north' ).html_safe
+              %li= form_prompt('pdf.nvra.page2.blockC.instructions.bullet1' ).to_s.html_safe
+              %li= form_prompt('pdf.nvra.page2.blockC.instructions.bullet2' ).to_s.html_safe
+              %li= form_prompt('pdf.nvra.page2.blockC.instructions.bullet3' ).to_s.html_safe
+            .example.label= I18n.t('pdf.nvra.page2.blockC.example.title' ).to_s.html_safe
+            .example.store= form_prompt('pdf.nvra.page2.blockC.example.grocery_store' ).to_s.html_safe
+            .example.school= form_prompt('pdf.nvra.page2.blockC.example.public_school' ).to_s.html_safe
+            .example.street1= I18n.t('pdf.nvra.page2.blockC.example.street1', :locale=>:en).to_s.html_safe
+            .example.street2= I18n.t('pdf.nvra.page2.blockC.example.street2', :locale=>:en).to_s.html_safe
+            .north= form_prompt('pdf.nvra.page2.blockC.north' ).to_s.html_safe
           
     
-    %p.block_title.blockD= form_prompt('pdf.nvra.page2.blockD.title' ).html_safe
+    %p.block_title.blockD= form_prompt('pdf.nvra.page2.blockD.title' ).to_s.html_safe
     %table.form
       %tr#blockD
         %td.block_number D
         %td.box1
           .value
     %h4.bottom_half_footer
-      = form_prompt('pdf.nvra.page2.bottom_half_footer' ).html_safe
+      = form_prompt('pdf.nvra.page2.bottom_half_footer' ).to_s.html_safe
 
 .page#page_3
   #page_3_wrapper
     #page_3_background= wicked_pdf_image_tag("pdf/page_3.png")
-    %h1= form_prompt('pdf.nvra.page3.fouo' ).html_safe
+    %h1= form_prompt('pdf.nvra.page3.fouo' ).to_s.html_safe
     #address
       .line.line1= @state.registrar_address.to_s.html_safe
