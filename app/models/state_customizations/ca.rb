@@ -41,6 +41,18 @@ class CA < StateCustomization
       @registrant = r
     end
     
+    def escape_xml(a_string)
+      "\"#{a_string.to_s.gsub(/"/, "&quot;")}\""
+    end
+    
+    def method_missing(meth, *args, &block)
+      if meth =~ /^escape_xml_(.+)/
+        self.escape_xml(self.send($1))
+      else
+        super
+      end
+    end
+    
     delegate :api_url, :api_key, :api_posting_entity_name, :to=>:api_settings
     
     def api_settings

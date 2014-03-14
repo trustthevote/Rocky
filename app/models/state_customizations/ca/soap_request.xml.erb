@@ -27,34 +27,34 @@
                 
                 
                 <tem:PrefixId><%= name_prefix_id %></tem:PrefixId>
-                <tem:CurrentFirstName><%= first_name %></tem:CurrentFirstName>
-                <tem:CurrentMiddleName><%= middle_name %></tem:CurrentMiddleName>
-                <tem:CurrentLastName><%= last_name %></tem:CurrentLastName>
+                <tem:CurrentFirstName><%= escape_xml_first_name %></tem:CurrentFirstName>
+                <tem:CurrentMiddleName><%= escape_xml_middle_name %></tem:CurrentMiddleName>
+                <tem:CurrentLastName><%= escape_xml_last_name %></tem:CurrentLastName>
 
-                <tem:PreviousFirstName><%= prev_first_name %></tem:PreviousFirstName>
-                <tem:PreviousMiddleName><%= prev_middle_name %></tem:PreviousMiddleName>
-                <tem:PreviousLastName><%= prev_last_name %></tem:PreviousLastName>
+                <tem:PreviousFirstName><%= escape_xml_prev_first_name %></tem:PreviousFirstName>
+                <tem:PreviousMiddleName><%= escape_xml_prev_middle_name %></tem:PreviousMiddleName>
+                <tem:PreviousLastName><%= escape_xml_prev_last_name %></tem:PreviousLastName>
 
                 <tem:IsHomeAddress><%= has_home_address? %></tem:IsHomeAddress>
-                <tem:HomeAddressStreetLine1><%= home_address %></tem:HomeAddressStreetLine1>
-                <tem:HomeAddressStreetLine2><%= home_unit %></tem:HomeAddressStreetLine2>
-                <tem:HomeAddressCity><%= home_city %></tem:HomeAddressCity>
-                <tem:HomeAddressState><%= home_state_name %></tem:HomeAddressState>
-                <tem:HomeAddressZip><%= home_zip_code %></tem:HomeAddressZip>
+                <tem:HomeAddressStreetLine1><%= escape_xml_home_address %></tem:HomeAddressStreetLine1>
+                <tem:HomeAddressStreetLine2><%= escape_xml_home_unit %></tem:HomeAddressStreetLine2>
+                <tem:HomeAddressCity><%= escape_xml_home_city %></tem:HomeAddressCity>
+                <tem:HomeAddressState><%= escape_xml_home_state_name %></tem:HomeAddressState>
+                <tem:HomeAddressZip><%= escape_xml_home_zip_code %></tem:HomeAddressZip>
 
                 <tem:IsMailingAddress><%= has_mailing_address? %></tem:IsMailingAddress>
-                <tem:MailingAddressStreetLine1><%= mailing_address %></tem:MailingAddressStreetLine1>
-                <tem:MailingAddressStreetLine2><%= mailing_unit %></tem:MailingAddressStreetLine2>
-                <tem:MailingAddressCity><%= mailing_city %></tem:MailingAddressCity>
-                <tem:MailingAddressState><%= mailing_state_name %></tem:MailingAddressState>
-                <tem:MailingAddressZip><%= mailing_zip_code %></tem:MailingAddressZip>
+                <tem:MailingAddressStreetLine1><%= escape_xml_mailing_address %></tem:MailingAddressStreetLine1>
+                <tem:MailingAddressStreetLine2><%= escape_xml_mailing_unit %></tem:MailingAddressStreetLine2>
+                <tem:MailingAddressCity><%= escape_xml_mailing_city %></tem:MailingAddressCity>
+                <tem:MailingAddressState><%= escape_xml_mailing_state_name %></tem:MailingAddressState>
+                <tem:MailingAddressZip><%= escape_xml_mailing_zip_code %></tem:MailingAddressZip>
 
                 <tem:IsPreviouslyRegistered><%= has_prev_address? %></tem:IsPreviouslyRegistered>
-                <tem:PreviousAddressStreetLine1><%= prev_address %></tem:PreviousAddressStreetLine1>
-                <tem:PreviousAddressStreetLine2><%= prev_unit %></tem:PreviousAddressStreetLine2>
-                <tem:PreviousAddressCity><%= prev_city %></tem:PreviousAddressCity>
-                <tem:PreviousAddressState><%= prev_state_name %></tem:PreviousAddressState>
-                <tem:PreviousAddressZip><%= prev_zip_code %></tem:PreviousAddressZip>
+                <tem:PreviousAddressStreetLine1><%= escape_xml_prev_address %></tem:PreviousAddressStreetLine1>
+                <tem:PreviousAddressStreetLine2><%= escape_xml_prev_unit %></tem:PreviousAddressStreetLine2>
+                <tem:PreviousAddressCity><%= escape_xml_prev_city %></tem:PreviousAddressCity>
+                <tem:PreviousAddressState><%= escape_xml_prev_state_name %></tem:PreviousAddressState>
+                <tem:PreviousAddressZip><%= escape_xml_prev_zip_code %></tem:PreviousAddressZip>
 
                 <tem:PhoneNumber><%= phone %></tem:PhoneNumber>
                 <tem:EmailId><%= email_address %></tem:EmailId>

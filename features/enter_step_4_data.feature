@@ -226,8 +226,7 @@ Feature: Step 4
       And I have a state license
       And COVR responses return successes
       When I go to the step 4 page
-      And I check "TBD 5 CA Disclosures"
-      And I check "registrant_attest_true"
+      And I check "registrant_ca_disclosures"
       And I press "registrant_state_online_registration"
       Then I should be redirected to the CA url for that registrant
 

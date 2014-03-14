@@ -73,7 +73,8 @@ describe CA do
     before(:each) do
       CA.stub(:build_soap_xml).with(reg).and_return("XML")
       CA.stub(:request_token).with("XML").and_return("stubbed response")
-      con.stub(:render)
+      RockyConf.ovr_states.CA.api_settings.stub(:debug_in_ui).and_return(false)
+      con.stub(:debug_data).and_return({})
     end
     it "builds XML" do
       CA.should_receive(:build_soap_xml).with(reg).and_return("XML")
@@ -84,21 +85,21 @@ describe CA do
       ca.ovr_pre_check(reg, con)
     end
     context "when debugging" do
+      before(:each) do
+        RockyConf.ovr_states.CA.api_settings.stub(:debug_in_ui).and_return(true)
+      end
       it "renders the API response" do
-        con.should_receive(:render).with(:xml=>"stubbed response", :layout=>nil, :content_type=>"application/xml")
+        con.should_receive(:debug_data).and_return({})
         ca.ovr_pre_check(reg, con)
       end
     end
     context "when not debugging" do
-      before(:each) do
-        RockyConf.ovr_states.CA.api_settings.stub(:debug_in_ui).and_return(false)
-      end
       context "when the response is a failure" do
         before(:each) do
           CA.stub(:request_token).with("XML").and_return(fixture_file_contents("covr/max_registrant_response_fail.xml"))
         end
         it "logs the error" do
-          Rails.logger.should_receive(:info).with("COVR Error 902: Invalid voter resident Id")
+          Rails.logger.should_receive(:info).with("COVR:: Error 902: Invalid voter resident Id")
           ca.ovr_pre_check(reg, con)
         end
         it "sets covr_success on the registrant be false" do
@@ -135,10 +136,6 @@ describe CA do
     it "adds a ca_disclosures acceptance validation to the registrant" do
       ca.decorate_registrant(reg)
       reg.class.should have(1).validators_on(:ca_disclosures)
-    end
-    it "adds an attest_true acceptance validation to the registrant" do
-      ca.decorate_registrant(reg)
-      reg.class.should have(2).validators_on(:attest_true)      
     end
     
   end

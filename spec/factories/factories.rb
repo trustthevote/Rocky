@@ -89,9 +89,9 @@ FactoryGirl.define do
     middle_name         "Brownell"
     last_name           "Anthony"
     name_suffix         "III"
-    home_address        "123 Civil Rights Way"
+    home_address        "123 Civil & \"Rights\" Way"
     home_unit           "Apt 2"
-    home_city           "West Grove"
+    home_city           "West > Grove"
     # home_state          { GeoState['MA'] }
     has_mailing_address true
     mailing_address     "10 Main St"

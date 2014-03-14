@@ -27,34 +27,34 @@
                 
                 
                 <tem:PrefixId>2</tem:PrefixId>
-                <tem:CurrentFirstName>Susan</tem:CurrentFirstName>
-                <tem:CurrentMiddleName>Brownell</tem:CurrentMiddleName>
-                <tem:CurrentLastName>Anthony</tem:CurrentLastName>
+                <tem:CurrentFirstName>"Susan"</tem:CurrentFirstName>
+                <tem:CurrentMiddleName>"Brownell"</tem:CurrentMiddleName>
+                <tem:CurrentLastName>"Anthony"</tem:CurrentLastName>
 
-                <tem:PreviousFirstName>Susana</tem:PreviousFirstName>
-                <tem:PreviousMiddleName>B.</tem:PreviousMiddleName>
-                <tem:PreviousLastName>Antonia</tem:PreviousLastName>
+                <tem:PreviousFirstName>"Susana"</tem:PreviousFirstName>
+                <tem:PreviousMiddleName>"B."</tem:PreviousMiddleName>
+                <tem:PreviousLastName>"Antonia"</tem:PreviousLastName>
 
                 <tem:IsHomeAddress>1</tem:IsHomeAddress>
-                <tem:HomeAddressStreetLine1>123 Civil Rights Way</tem:HomeAddressStreetLine1>
-                <tem:HomeAddressStreetLine2>Apt 2</tem:HomeAddressStreetLine2>
-                <tem:HomeAddressCity>West Grove</tem:HomeAddressCity>
-                <tem:HomeAddressState>Massachusetts</tem:HomeAddressState>
-                <tem:HomeAddressZip>02134</tem:HomeAddressZip>
+                <tem:HomeAddressStreetLine1>"123 Civil & &quot;Rights&quot; Way"</tem:HomeAddressStreetLine1>
+                <tem:HomeAddressStreetLine2>"Apt 2"</tem:HomeAddressStreetLine2>
+                <tem:HomeAddressCity>"West > Grove"</tem:HomeAddressCity>
+                <tem:HomeAddressState>"Massachusetts"</tem:HomeAddressState>
+                <tem:HomeAddressZip>"02134"</tem:HomeAddressZip>
 
                 <tem:IsMailingAddress>1</tem:IsMailingAddress>
-                <tem:MailingAddressStreetLine1>10 Main St</tem:MailingAddressStreetLine1>
-                <tem:MailingAddressStreetLine2>Box 5</tem:MailingAddressStreetLine2>
-                <tem:MailingAddressCity>Adams</tem:MailingAddressCity>
-                <tem:MailingAddressState>Massachusetts</tem:MailingAddressState>
-                <tem:MailingAddressZip>02135</tem:MailingAddressZip>
+                <tem:MailingAddressStreetLine1>"10 Main St"</tem:MailingAddressStreetLine1>
+                <tem:MailingAddressStreetLine2>"Box 5"</tem:MailingAddressStreetLine2>
+                <tem:MailingAddressCity>"Adams"</tem:MailingAddressCity>
+                <tem:MailingAddressState>"Massachusetts"</tem:MailingAddressState>
+                <tem:MailingAddressZip>"02135"</tem:MailingAddressZip>
 
                 <tem:IsPreviouslyRegistered>1</tem:IsPreviouslyRegistered>
-                <tem:PreviousAddressStreetLine1>321 Civil Wrongs Way</tem:PreviousAddressStreetLine1>
-                <tem:PreviousAddressStreetLine2>#9</tem:PreviousAddressStreetLine2>
-                <tem:PreviousAddressCity>Pittsburgh</tem:PreviousAddressCity>
-                <tem:PreviousAddressState>Pennsylvania</tem:PreviousAddressState>
-                <tem:PreviousAddressZip>15215</tem:PreviousAddressZip>
+                <tem:PreviousAddressStreetLine1>"321 Civil Wrongs Way"</tem:PreviousAddressStreetLine1>
+                <tem:PreviousAddressStreetLine2>"#9"</tem:PreviousAddressStreetLine2>
+                <tem:PreviousAddressCity>"Pittsburgh"</tem:PreviousAddressCity>
+                <tem:PreviousAddressState>"Pennsylvania"</tem:PreviousAddressState>
+                <tem:PreviousAddressZip>"15215"</tem:PreviousAddressZip>
 
                 <tem:PhoneNumber>1234567890</tem:PhoneNumber>
                 <tem:EmailId>citizen@example.com</tem:EmailId>
