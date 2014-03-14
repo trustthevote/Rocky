@@ -77,7 +77,7 @@ record_3:
 record_4:
   abbreviation: CA
   name: California
-  redirect_to_online_registration_url: true
+  redirect_to_online_registration_url: false
   requires_party: true
   party_tooltip: california 
   no_party: decline_to_state 
