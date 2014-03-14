@@ -42,7 +42,7 @@ class CA < StateCustomization
     end
     
     def escape_xml(a_string)
-      "\"#{CGI.escapeHTML(a_string.to_s)}\""
+      "#{CGI.escapeHTML(a_string.to_s)}"
     end
     
     def method_missing(meth, *args, &block)
