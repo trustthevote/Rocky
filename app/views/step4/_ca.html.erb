@@ -43,11 +43,12 @@ $(document).ready(function() {
     </li>
   </ul>
     <%= rollover_button(:next_step, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
-  
 
-  <a href="#" class='skip_state_registration_link' style="display:none;">
-  <%= I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe %>
-  </a>
+<div style="text-align:center;">
+  <a href="#" class='skip_state_registration_link' style="display:none; ">
+    <%= I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe %>
+    </a>
+</div>
   <br/><br/>
   <br/><br/>
 <%- end %>
