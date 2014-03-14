@@ -316,7 +316,7 @@ class CA < StateCustomization
         begin
           @disclosures[locale.to_s][num] = RestClient.get(disclosure_url(locale, num)).to_s.force_encoding('UTF-8')
         rescue Exception=>e
-          puts ("COVR:: While loading disclosures from #{disclosure_url(locale, num)} - #{e.message}\n#{e.backtrace.join("\n\t")}")
+          Rails.logger.warn ("COVR:: While loading disclosures from #{disclosure_url(locale, num)} - #{e.message}\n#{e.backtrace.join("\n\t")}")
         end
       end
     end
