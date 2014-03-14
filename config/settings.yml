@@ -53,11 +53,21 @@ ovr_states:
       api_posting_entity_name: RTV
       debug_in_ui: false
       log_all_requests: false
+      disclosures_url: https://a8e83b219df9c88311b3-01fbb794ac405944f26ec8749fe8fe7b.ssl.cf1.rackcdn.com/discl/
       web_url_base: http://covrtest.sos.ca.gov
       web_agency_key: RTV
     languages:
       - en
       - es
+      - zh
+      - zh-tw
+      - vi
+      - ko
+      - tl
+      - ja
+      - hi
+      - km
+      - th
   NV:
     languages:
       - en

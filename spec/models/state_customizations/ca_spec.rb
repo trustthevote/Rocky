@@ -13,6 +13,57 @@ describe CA do
     it { should be_true }
   end
   
+  describe "enabled_for_language?(lang)" do
+    it "returns false if 5 disclosures aren't present for the lang" do
+      CA.stub(:disclosures).and_return({"en"=>{1=>1, 2=>2, 3=>3, 4=>4, 5=>5}})
+      ca.enabled_for_language?("en").should be_true
+      CA.stub(:disclosures).and_return(nil)
+      ca.enabled_for_language?("en").should be_false
+      CA.stub(:disclosures).and_return({"en"=>nil})
+      ca.enabled_for_language?("en").should be_false
+      CA.stub(:disclosures).and_return({"en"=>{1=>1, 2=>2, 3=>3, 4=>4}})
+      ca.enabled_for_language?("en").should be_false
+    end
+  end
+  
+  describe "disclosure functions" do
+    describe "self.load_disclosures" do
+      it "requests the URL formated for each language and each disclosure" do
+        RockyConf.ovr_states.CA.stub(:languages).and_return(["a", "b"])
+        RockyConf.ovr_states.CA.languages.each do |lang|
+          5.times do |i|
+            num = i+1
+            RestClient.should_receive(:get).with(CA.disclosure_url(lang, num)).and_return("#{lang}-#{num}")
+          end
+        end
+        CA.load_disclosures
+        CA.disclosures.should == {
+          "a"=>{
+            1=>"a-1",
+            2=>"a-2",
+            3=>"a-3",
+            4=>"a-4",
+            5=>"a-5"
+          },
+          "b"=>{
+            1=>"b-1",
+            2=>"b-2",
+            3=>"b-3",
+            4=>"b-4",
+            5=>"b-5"
+          }
+        }
+      end
+    end
+  
+    describe "self.disclosure_url(lang, num)" do
+      it "returns the configured BASE/LN/disclX.txt where LN is the 2 letter language code and X is the digit" do
+        base = RockyConf.ovr_states.CA.api_settings.disclosures_url
+        CA.disclosure_url("lang", 34).should == "#{base}lang/discl34.txt"
+      end
+    end
+  end
+  
   describe "self.build_soap_xml(registrant)" do
     let(:reg) { FactoryGirl.build(:maximal_registrant, :date_of_birth=>DateTime.parse("1994-03-05")) }
     it "populates the maximal registrant template with registrant values" do

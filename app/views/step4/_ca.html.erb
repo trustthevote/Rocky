@@ -25,7 +25,12 @@ $(document).ready(function() {
   <ul class="affirm">
     <li>
       <div class="disclosures" style="background: white; overflow-y:scroll; height: 200px; width: 500px; padding:10px; margin:10px 0">
-        TBD 5 CA Disclosures
+        <%- CA.disclosures[@registrant.locale.to_s].each do |num, text| %>
+          <div class="disclosure" style="margin-bottom:2em;">
+            <p class="disclosure_num" style="float:left; "><%= "#{num}.&nbsp;".html_safe %></p>
+            <%= text.html_safe %>
+          </div>
+        <%- end %>
       </div>
       
       <h3>

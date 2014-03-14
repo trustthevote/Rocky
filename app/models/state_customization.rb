@@ -49,6 +49,8 @@ class StateCustomization
   end
   
   
+  
+  
   def online_reg_url(registrant)
     state.online_registration_url
   end

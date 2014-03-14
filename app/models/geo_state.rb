@@ -26,7 +26,7 @@ class GeoState < ActiveRecord::Base
 
   has_many :localizations, :class_name => 'StateLocalization', :foreign_key => 'state_id'
   
-  delegate :online_reg_url, :redirect_to_online_reg_url, :has_ovr_pre_check?, :ovr_pre_check, :decorate_registrant, :to=>:state_customization
+  delegate :online_reg_url, :redirect_to_online_reg_url, :has_ovr_pre_check?, :ovr_pre_check, :decorate_registrant, :enabled_for_language?, :to=>:state_customization
 
   def self.[](id_or_abbrev)
     init_all_states
@@ -92,13 +92,6 @@ class GeoState < ActiveRecord::Base
     GeoState.states_with_online_registration.include?(self.abbreviation) && self.enabled_for_language?(locale)
   end
   
-  def enabled_for_language?(lang)
-    lang_list = RockyConf.ovr_states[self.abbreviation]
-    return true if lang_list.blank?
-    lang_list = lang_list["languages"]
-    return true if lang_list.blank? || lang_list.empty?
-    return lang_list.include?(lang)
-  end
     
   
 end

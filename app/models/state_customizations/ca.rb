@@ -42,7 +42,7 @@ class CA < StateCustomization
     end
     
     def escape_xml(a_string)
-      "\"#{a_string.to_s.gsub(/"/, "&quot;")}\""
+      "\"#{CGI.escapeHTML(a_string.to_s)}\""
     end
     
     def method_missing(meth, *args, &block)
@@ -289,6 +289,43 @@ class CA < StateCustomization
     end
   end
     
+  NUM_DISCLOSURES = 5
+  
+  def enabled_for_language?(lang)
+    if CA.disclosures.nil? || CA.disclosures[lang.to_s].nil? || CA.disclosures[lang.to_s].size != NUM_DISCLOSURES
+      return false
+    end
+    super
+  end
+  
+  def self.disclosures
+    @disclosures ||= nil
+    if @disclosures.nil?
+      self.load_disclosures
+    end
+    @disclosures
+  end
+  
+  def self.load_disclosures
+    @disclosures = {}
+    
+    RockyConf.ovr_states.CA.languages.each do |locale|
+      @disclosures[locale.to_s] ||= {}
+      NUM_DISCLOSURES.times do |i|
+        num = i+1
+        begin
+          @disclosures[locale.to_s][num] = RestClient.get(disclosure_url(locale, num)).to_s.force_encoding('UTF-8')
+        rescue Exception=>e
+          puts ("COVR:: While loading disclosures from #{disclosure_url(locale, num)} - #{e.message}\n#{e.backtrace.join("\n\t")}")
+        end
+      end
+    end
+  end
+  def self.disclosure_url(lang, num)
+    base = RockyConf.ovr_states.CA.api_settings.disclosures_url
+    base = "#{base}/" unless (base =~ /\/$/)
+    "#{base}#{lang}/discl#{num}.txt"
+  end
   
   def self.build_soap_xml(registrant)
     ERB.new(File.new(soap_xml_erb_file).read).result(RegistrantBinding.new(registrant).get_binding)
