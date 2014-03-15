@@ -245,7 +245,7 @@ class CA < StateCustomization
       rb = RegistrantBinding.new(registrant)
       oru = "#{base_url}?language=#{rb.language_code}&t=p&CovrAgencyKey=#{ak}&PostingAgencyRecordId=#{rb.covr_token}"
       if self.class.log_requests?
-        log_ovr_info("Built URL #{oru} for registrant redirect")
+        log_covr_info("Built URL #{oru} for registrant redirect")
       end
       oru
     end
