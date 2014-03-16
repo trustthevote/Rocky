@@ -12,6 +12,8 @@ ovr_states:
     api_settings:
       debug_in_ui: true
       log_all_requests: true
+      disclosures_font_size: 12px
+      disclosures_box_height: 170px
 
 enabled_locales:
   - en

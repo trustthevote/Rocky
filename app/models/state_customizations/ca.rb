@@ -261,7 +261,23 @@ class CA < StateCustomization
     unless registrant.respond_to?(:covr_token)
       registrant.class.class_eval do
         state_attr_accessor :covr_token, :covr_success, :ca_disclosures
-        validates_acceptance_of :ca_disclosures, :if=>:using_state_online_registration?
+        validates_acceptance_of :ca_disclosures, :if=>:using_state_online_registration?, :message=>I18n.t('states.custom.ca.ca_disclosures_error')
+        
+        define_method(:disclosures_font_size) do
+          fs = (RockyConf.ovr_states.CA.api_settings.disclosures_font_size || '12').to_s
+          return (fs =~ /px$/) ? fs : "#{fs}px"
+        end
+        
+        define_method(:disclosures_box_height) do
+          fs = (RockyConf.ovr_states.CA.api_settings.disclosures_box_height || '170').to_s
+          return (fs =~ /px$/) ? fs : "#{fs}px"
+        end
+      end
+      if registrant.ca_disclosures.nil?
+        setting = RockyConf.ovr_states.CA.api_settings.disclosures_prechecked 
+        if setting || setting.nil?
+          registrant.ca_disclosures = true
+        end
       end
     end
   end

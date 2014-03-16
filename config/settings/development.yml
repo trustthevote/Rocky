@@ -13,6 +13,9 @@ ovr_states:
     api_settings:
       debug_in_ui: true
       log_all_requests: true
+      disclosures_font_size: 14px
+      disclosures_box_height: 100px
+      disclosures_prechecked: false
       
 states_with_online_registration:
   - AZ

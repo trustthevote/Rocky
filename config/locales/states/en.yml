@@ -10,6 +10,8 @@ en:
           checkbox_text: I am a resident of California, living in the United States
           instruction_text: You are eligible to finish your registration using the
             state's online voter registration system.
+        ca_disclosures: I have reviewed and accepted the notices above.
+        ca_disclosures_error: In order to finish your registration with the state of California, you must accept the disclosures above.
       nv:
         online_instructions: <p>You can complete your voter registration online with
           the state below. The Nevada Online Voter Application (NOVA) is provided

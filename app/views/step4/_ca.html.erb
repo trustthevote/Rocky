@@ -24,7 +24,7 @@ $(document).ready(function() {
   <%= form.hidden_field :covr_success %>
   <ul class="affirm">
     <li>
-      <div class="disclosures" style="background: white; overflow-y:scroll; height: 200px; width: 500px; padding:10px; margin:10px 0">
+      <div class="disclosures" style="background: white; overflow-y:scroll; height: <%= @registrant.disclosures_box_height %> ; width: 500px; padding:10px; margin:10px 0; font-size:<%= @registrant.disclosures_font_size %>;">
         <%- CA.disclosures[@registrant.locale.to_s].each do |num, text| %>
           <div class="disclosure" style="margin-bottom:2em;">
             <p class="disclosure_num" style="float:left; "><%= "#{num}.&nbsp;".html_safe %></p>
@@ -35,11 +35,11 @@ $(document).ready(function() {
       
       <h3>
         <%= form.check_box :ca_disclosures %>
-        <%= form.label :ca_disclosures, I18n.t('activerecord.attributes.registrant.attest_true') %>
+        <%= form.label :ca_disclosures, I18n.t('states.custom.ca.ca_disclosures') %>
       </h3>
     </li>
     <li>
-      <span class="error"><%= form.object.errors[:ca_disclosures].join("\n") %></span>
+      <div class="error"><%= form.object.errors[:ca_disclosures].join("\n") %></div>
     </li>
   </ul>
     <%= rollover_button(:next_step, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
