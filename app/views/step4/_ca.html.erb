@@ -13,6 +13,17 @@ $(document).ready(function() {
   
 });
 </script>
+<style>
+.disclosures * {
+  font-size: <%= @registrant.disclosures_font_size %>;
+  float: none;
+}
+ul.affirm  .disclosures li {
+  list-style: disc inside none;
+  font-size: <%= @registrant.disclosures_font_size %>;
+  float: none;
+}
+</style>
 <% end %>
 
 

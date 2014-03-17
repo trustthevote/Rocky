@@ -90,6 +90,8 @@ en:
     errors:
       models:
         registrant:
+          ca_disclosures_error: "In order to finish your registration with the state of California, you must accept the disclosures above."
+          
           blank: Required
           invalid_zip: Invalid ZIP
           attributes:

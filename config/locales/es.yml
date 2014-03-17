@@ -58,6 +58,8 @@ es:
     errors:
       models:
         registrant:
+          ca_disclosures_error: TBD-ES- In order to finish your registration with the state of California, you must accept the disclosures above.
+          
           blank: Requerido
           invalid_zip: Código Postal Invalido
           attributes:
