@@ -54,7 +54,7 @@ ovr_states:
       debug_in_ui: false
       log_all_requests: false
       disclosures_url: https://a8e83b219df9c88311b3-01fbb794ac405944f26ec8749fe8fe7b.ssl.cf1.rackcdn.com/discl/
-      web_url_base: http://covrtest.sos.ca.gov
+      web_url_base: https://covrtest.sos.ca.gov
       web_agency_key: RTV
       custom_error_string: CUSTOM_COVR_ERROR
     languages:
