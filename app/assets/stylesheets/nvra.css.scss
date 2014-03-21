@@ -371,9 +371,7 @@ table.form {
 				width:625px*(1/3);
 			}
 			td.block6.box1 { 
-				width: 865px*(1/3);
-				border-right:0;
-				border-bottom:0;
+				width: 288px;
 				.label, .sublabel {
 					display: inline-block;
 				}
@@ -458,6 +456,21 @@ table.form {
         
 			}
 		}
+	}
+	
+	#table_float_wrapper {
+		overflow: hidden;
+	}
+	
+	table#table_block4_7 {
+		float: left;
+		width: 491px;
+	}
+	table#table_block6 {
+		float: left;
+		margin-left: -1px;
+		width: 310px;
+		height: 100px;
 	}
 	h4.top_half_footer {
 		color: $red;

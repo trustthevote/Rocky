@@ -104,6 +104,7 @@
             .checkbox{:class=>checked?(:iv, :name_suffix) ? 'checkbox-checked' : ''}
               = checkbox(:iv, :name_suffix)
               %span= I18n.t("txt.registration.suffixes.iv", :locale=>:en)
+  
   %table.form
     %tr#block2
       %td.block_number 2
@@ -136,46 +137,50 @@
       %td.box4#mailing_address_zip_code
         .label= form_prompt('pdf.nvra.page2.block3.box4_label' ).to_s.html_safe
         .value=  @registrant.mailing_zip_code.to_s.html_safe
-  %table.form
-    %tr#block4
-      %td.block4.block_number 4
-      %td.block4.box1#date_of_birth
-        %table.inner_form
-          %tr
-            %td.label= form_prompt('pdf.nvra.page2.block4.box1_label' ).to_s.html_safe
-            %td.item2
-              .value= @registrant.pdf_date_of_birth_month + ' /'
-              .label=form_prompt('pdf.nvra.page2.block4.item2' ).to_s.html_safe
-            %td.item3
-              .value= @registrant.pdf_date_of_birth_day + ' /'
-              .label=form_prompt('pdf.nvra.page2.block4.item3' ).to_s.html_safe
-            %td.item4
-              .value= @registrant.pdf_date_of_birth_year
-              .label=form_prompt('pdf.nvra.page2.block4.item4' ).to_s.html_safe
-      %td.block5.block_number 5
-      %td.block5.box1#phone_number
-        .label= form_prompt('pdf.nvra.page2.block5' ).to_s.html_safe
-        .value= @registrant.phone
-      %td.block6.block_number{:rowspan=>2} 6
-      %td.block6.box1#id_number{:rowspan=>2}
-        .label= form_prompt('pdf.nvra.page2.block6.box1_label' ).to_s.html_safe
-        .sublabel= form_prompt('pdf.nvra.page2.block6.box1_sublabel' ).to_s.html_safe
-        .value= @registrant.state_id_number
-    %tr#block7
-      %td.block7.block_number 7
-      %td.block7.box1#party
-        .label= form_prompt('pdf.nvra.page2.block7.box1_label' ).to_s.html_safe
-        .sublabel= form_prompt('pdf.nvra.page2.block7.box1_sublabel' ).to_s.html_safe
-        .value
-          = @registrant.english_party_name
-          - if non_english? && !@registrant.party.blank?
-            .translated_value= "/ #{@registrant.party}"
-      %td.block8.block_number 8
-      %td.block8.box1#race
-        .label= form_prompt('pdf.nvra.page2.block8.box1_label' ).to_s.html_safe
-        .sublabel= form_prompt('pdf.nvra.page2.block8.box1_sublabel' ).to_s.html_safe
-        .value
-          = @registrant.pdf_english_race
+  #table_float_wrapper
+    %table.form#table_block4_7
+      %tr#block4
+        %td.block4.block_number 4
+        %td.block4.box1#date_of_birth
+          %table.inner_form
+            %tr
+              %td.label= form_prompt('pdf.nvra.page2.block4.box1_label' ).to_s.html_safe
+              %td.item2
+                .value= @registrant.pdf_date_of_birth_month + ' /'
+                .label=form_prompt('pdf.nvra.page2.block4.item2' ).to_s.html_safe
+              %td.item3
+                .value= @registrant.pdf_date_of_birth_day + ' /'
+                .label=form_prompt('pdf.nvra.page2.block4.item3' ).to_s.html_safe
+              %td.item4
+                .value= @registrant.pdf_date_of_birth_year
+                .label=form_prompt('pdf.nvra.page2.block4.item4' ).to_s.html_safe
+        %td.block5.block_number 5
+        %td.block5.box1#phone_number
+          .label= form_prompt('pdf.nvra.page2.block5' ).to_s.html_safe
+          .value= @registrant.phone
+      %tr#block7
+        %td.block7.block_number 7
+        %td.block7.box1#party
+          .label= form_prompt('pdf.nvra.page2.block7.box1_label' ).to_s.html_safe
+          .sublabel= form_prompt('pdf.nvra.page2.block7.box1_sublabel' ).to_s.html_safe
+          .value
+            = @registrant.english_party_name
+            - if non_english? && !@registrant.party.blank?
+              .translated_value= "/ #{@registrant.party}"
+        %td.block8.block_number 8
+        %td.block8.box1#race
+          .label= form_prompt('pdf.nvra.page2.block8.box1_label' ).to_s.html_safe
+          .sublabel= form_prompt('pdf.nvra.page2.block8.box1_sublabel' ).to_s.html_safe
+          .value
+            = @registrant.pdf_english_race
+    %table.form#table_block6
+      %tr#block4
+        %td.block6.block_number 6
+        %td.block6.box1#id_number
+          .label= form_prompt('pdf.nvra.page2.block6.box1_label' ).to_s.html_safe
+          .sublabel= form_prompt('pdf.nvra.page2.block6.box1_sublabel' ).to_s.html_safe
+          .value= @registrant.state_id_number
+
   %table.form
     %tr#block9
       %td.block_number 9
