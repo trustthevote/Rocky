@@ -1,3 +1,18 @@
+/* fix label widths */
+form ul {
+  margin-left: 0;
+}
+
+ul.flat h3 {
+  width: 130px;
+}
+
+label {
+  font-size:12px;
+}
+
+
+
 /* Phone drop-down width */
 ul.flat .secondary div#registrant_phone_type_wrapper {
 	width: 160px;
