@@ -1,0 +1,21 @@
+$fs: 15px;
+
+
+#page_1 {
+	p.top_paragraph {
+		font-size: 1.2 * $fs;
+		padding-top: .5em;
+		
+	}
+}
+#page_2 .bottom_half p.block_title.blockA {
+	padding-top:.25em;
+	padding-bottom:.25em;
+}
+
+#page_2 .bottom_half h4.bottom_half_footer {
+	font-size: 1.2 * $fs;
+	line-height: 1.2em;
+	padding-top: .1em;
+	padding-bottom: .1em;
+}
