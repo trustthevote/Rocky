@@ -8,10 +8,9 @@ es:
           del Estado Debra Bowen.
         step_2:
           checkbox_text: Soy residente de California y vivo en los Estados Unidos.
-          instruction_text: Ud. es eligible para terminar su formulario de inscripción
-            de votante usando el sistema en linea del estado de California.
-        ca_disclosures: TBD-ES- I have reviewed and accepted the notices above.
-            
+          instruction_text: Usted es elegible para finalizar su inscripción mediante
+            el sistema de registro de votantes en línea del estado.
+        ca_disclosures: He revisado y aceptado los avisos anteriormente.
       nv:
         online_instructions: <p>Usted se puede cumplir su inscripción para votar en
           linea con el estado abajo.  La solicitud de inscripción en linea para votar
@@ -445,26 +444,33 @@ es:
         antes de la elección
       nebraska: Matasellos de la tercera el Viernes antes de las elecciones, o recibido
         en persona a las 6pm del segundo viernes antes de las elecciones
-      nevada: Matasellos de 31 días antes de la elección, o en línea por un plazo
-        de 21 días antes de la elección, o recibido en persona a la oficina del vendedor
-        21 días antes de la elección.
+      nevada: Tiene que tener el cello del correo 31 días antes de la elección, o
+        en línea por un plazo de 21 días antes de la elección, o recibido en persona
+        a la oficina del vendedor 21 días antes de la elección.
       rhode_island: Recibido 30 días antes de la elección. Formularios de registro
         de votantes por correo recibido después de la fecha límite serán aceptadas,
         siempre y cuando el matasellos de correo o antes el límite para el registro
         de electores.
-      utah: Matasellos 30 días antes de la elección, o recibido en persona 15 días
-        antes de las elecciones
+      utah: Tiene que tener el cello del correo 30 días antes de la elección, o recibido
+        en persona 15 días antes de las elecciones
       vermont: Recibido antes de las 5pm el miércoles antes de las elecciones
       washington: Matasellos para el lunes cuatro semanas antes de la elección, o
         recibido en persona en la oficina de elecciones del condado el lunes una semana
         antes de las elecciones
-      postmarked_11_days: Matasellos 11 días antes de las elecciones
-      postmarked_20_days: Matasellos 20 días antes de la elección
-      postmarked_21_days: Matasellos 21 días antes de las elecciones
-      postmarked_25_days: Matasellos 25 días antes de las elecciones
-      postmarked_28_days: Matasellos 28 días antes de las elecciones
-      postmarked_29_days: Matasellos 29 días antes de las elecciones
-      postmarked_30_days: Matasellos 30 días antes de las elecciones
+      postmarked_11_days: Tiene que tener el cello del correo 11 días antes de la
+        elección.
+      postmarked_20_days: Tiene que tener el cello del correo 20 días antes de la
+        elección.
+      postmarked_21_days: Tiene que tener el cello del correo 21 días antes de la
+        elección.
+      postmarked_25_days: Tiene que tener el cello del correo 25 días antes de la
+        elección.
+      postmarked_28_days: Tiene que tener el cello del correo 28 días antes de la
+        elección.
+      postmarked_29_days: Tiene que tener el cello del correo 29 días antes de la
+        elección.
+      postmarked_30_days: Tiene que tener el cello del correo 30 días antes de la
+        elección.
       received_10_days: Recibido 10 días antes de las elecciones
       received_14_days: Recibido 14 días antes de las elecciones
       received_15_days: Recibido 15 días antes de las elecciones
@@ -477,32 +483,25 @@ es:
       thirty_days_before: 30 Días antes de las elecciones
     pdf_instructions:
       blank: ''
-      arizona: ! '<b>* Nota para el Primer Tiempo Registro de Votantes Applicatns
-        Y Movers recientes: debe acompañar la prueba de la ciudadanía a votar en las
-        elecciones estatales!</b><br/><i>Si esta es tu primera vez que se inscribe
-        en Arizona o ha mudado a otro condado, el formulario de inscripción de votante
-        también debe incluir prueba de ciudadanía para votar en las elecciones estatales
-        (es decir, el gobernador, el secretario de Estado, y la legislatura del estado).
-        De lo contrario, sólo serán eleigible para votar en las elecciones federales.
-        Si usted tiene una licencia de conducir o tarjeta de identificación AZ emitida
-        por el estado después de 10/1/1996, que es suffient "prueba de ciudadanía"
-        y no se necesita otra documentación. Si no, usted debe presentar "prueba de
-        ciudadanía", junto con su solicitud de registro de votantes. La "prueba" más
-        común es una fotocopia de su certificado de nacimiento o pasaporte. Una lista
-        completa de la documentación aceptable puede ser encontrada en línea.</i><br/>
-
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
-      kansas: ! '<b>* Nota para los solicitantes de registro de la primera vez del
-        votante: Debe acompañar la prueba de la ciudadanía a votar en las elecciones
-        estatales!</b><br/><i>Si esta es la primera vez que registrarse en Kansas,
-        el formulario de registro de votante también debe incluir prueba de ciudadanía
-        para votar en las elecciones estatales (es decir, el gobernador, el secretario
-        de Estado, y la legislatura del estado). De lo contrario, sólo serán elegibles
-        para votar en las elecciones federales. La "prueba" más común es una fotocopia
-        de su certificado de nacimiento o pasaporte, pero la lista completa de los
-        documentos aceptables se puede encontrar en línea.</i><br/>
-
-        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+      arizona: ! '<b>*Note for First Time Voter Registration Applicants And Recent
+        Movers: You must ALSO submit proof of citizenship to vote in state elections!</b><br/><i>If
+        this is your first time registering in Arizona or you have moved to another
+        county, your voter registration form must also include proof of citizenship
+        to vote in state elections (ie. Governor, Secretary of State, &amp; state
+        legislature). Otherwise you will ONLY be eleigible to vote in federal elections.
+        If you have an AZ driver license or state ID card issued after 10/1/1996,
+        that is suffient "proof of citizenship" and no other documentation is needed.
+        If not, you must submit "proof of citizenship" along with your voter registration
+        application. The most common "proof" is a photocopy of your birth certificate
+        or passport. A full list of acceptable documentation can be found <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">online</a>.</i>'
+      kansas: ! '<b>*Note for First Time Voter Registration Applicants: You must ALSO
+        submit proof of citizenship to vote in state elections!</b><br/><i>If this
+        is your first time registering in Kansas, your voter registration form must
+        also include proof of citizenship to vote in state elections (ie. Governor,
+        Secretary of State, & state legislature). Otherwise you will ONLY be eligible
+        to vote in federal elections.  The most common "proof" is a photocopy of your
+        birth certificate or passport, but a full list of acceptable documentation
+        can be found <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">online</a>.</i>'
     email_instructions:
       blank: ''
       arizona: ! '<b>* Nota para el Primer Tiempo Registro de Votantes Applicatns

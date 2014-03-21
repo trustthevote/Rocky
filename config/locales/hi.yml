@@ -2,6 +2,35 @@
 hi:
   language_name: हिन्दी
   language_name_translation_instructions: हिन्दी
+  locales:
+    bn:
+      name: बंगाली
+    en:
+      name: अंग्रेज़ी
+    es:
+      name: स्पेनिश
+    hi:
+      name: हिंदी
+    ilo:
+      name: Ilocano
+    ja:
+      name: जापानी
+    km:
+      name: खमेर
+    ko:
+      name: कोरियाई
+    th:
+      name: थाई
+    tl:
+      name: टेगलॉग
+    ur:
+      name: उर्दू
+    vi:
+      name: वियतनामी
+    zh-tw:
+      name: चीनी (पारंपरिक)
+    zh:
+      name: चीनी (सरल)
   activerecord:
     attributes:
       partner:
@@ -24,10 +53,13 @@ hi:
         home_state_name: रज्य
         has_mailing_address: मेरी चिट्ठियां उपर दिए गये पाते से दूसरे पाते पर आतीं
           हैं|
+        has_state_license: मेरे पास ड्राइवर लाइसेन्स या राज्य का पहचान पत्र है
+        will_be_18_by_election: मैं अगले चुनाव के दिन तक 18 वर्ष का हो जायूंगा / हो
+          जायूंगी
         mailing_address: पता
         mailing_unit: यूनिट/लॉट#
         mailing_city: शहर
-        mailing_state_abbrev: राज्य
+        mailing_state_abbrev: रज्य
         mailing_zip_code: ZIP कोड
         party: पार्टी
         race: जाती
@@ -58,6 +90,8 @@ hi:
     errors:
       models:
         registrant:
+          ca_disclosures_error: उपर दिए गये नोटिसों को मैने अच्छे से पढ़ लिया है और
+            मान लिया है
           blank: माँगा हुआ
           invalid_zip: ग़लत ZIP
           attributes:

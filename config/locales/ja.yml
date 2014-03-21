@@ -53,6 +53,8 @@ ja:
         home_city: 市
         home_state_name: 州
         has_mailing_address: 上記とは別の住所で郵便を受け取ります。
+        has_state_license: 私はカリフォルニアの運転免許、あるいは州のIDを持っています。
+        will_be_18_by_election: 私は次の選挙までに１８歳になります。
         mailing_address: 住所
         mailing_unit: ユニット、ロット番号
         mailing_city: 市
@@ -86,6 +88,7 @@ ja:
     errors:
       models:
         registrant:
+          ca_disclosures_error: California州の登録手続きを終了するために、上記の情報公開を了承しなければなりません。
           blank: 必須
           invalid_zip: 無効な郵便番号
           attributes:

@@ -7,6 +7,7 @@ zh:
         step_2:
           checkbox_text: 我是加州的居民，居住在美国。
           instruction_text: 您可以使用州政府的网上选民登记系统完成您的登记。
+        ca_disclosures: 我已阅读并同意接受上述通知。
       nv:
         online_instructions: <p>您可以在下面州政府的网站上完成您的选民登记。 Nevada Online Voter Application
           (NOVA) 是由内华达州州务卿 Ross Miller提供，以便内华达州的公民投票，或更改现存的登记资料。 NOVA也可在<a href=\"https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov"">此处</a>找到</p><br/><p>若您的驾驶证或州身份证已失效或州政府不能找到或确认您的DMV记录-请不用担心-您依然可以在<a
@@ -180,18 +181,14 @@ zh:
       thirty_days_before: 在选举前30天
     pdf_instructions:
       blank: ''
-      arizona: ! '*请注意首次选民登记申请及近期推动者：您还必须提交证明公民身份在州选举中投票！如果这是您第一次注册在亚利桑那州或者您移动到另一个县，你的选民登记表还必须包括公民身份证明在州选举（即州长，国务卿，与州议会）投票。否则，你只会被eleigible在联邦选举中投票。如果你有一个亚利桑那州的驾驶执照或1996年10月1日之后发行的状态ID卡，也就是说suffient“公民身份证明”，并没有其他的文件是必要的。如果没有，你必须提交“证明公民身份的”随您的选民​​登记申请。最常见的“证据”是你的出生证明或护照的复印件。可接受的文件的完整列表可以在网上找到。<br/>
-
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>.'
-      kansas: ! '*请注意首次选民登记申请人：您还必须提交证明公民身份在州选举中投票！如果这是您第一次注册在堪萨斯州，你的选民登记表还必须包括公民身份证明在州选举（即州长，国务卿，与州议会）投票。否则，你只会有资格在联邦选举中投票。最常见的“证据”是你的出生证明或护照的复印件，但可以接受文件的完整列表可以在网上找到。<br/>
-
-        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+      arizona: ! '*首次登记选民及近期更改地址的选民请注意：您必须在州选投票的同时出示证明公民身份的文件！</b><br/><i>如果这是您首次在亚利桑那州登记，您的选民登记表格必须同时包含证明公民身份的文件才可以参加州选举（即：州长，州秘书长以及州议会选举）。否则您将只能够在联邦政府选举中投票。如果您拥有亚利桑那州驾驶证或1996年10月以后发放的州身份证，就满足“公民身份证明”的条件，无需其他证明文件。否则，您必须随选民登记申请表附上您的“公民身份证明文件”。最常见的“证明文件”有出生证或护照的复印件，全部认可文件的详细列表可以在以下链接找到<a
+        href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">online</a>.</i>'
+      kansas: ! '<b>*首次进行登记的选民请注意: 您必须在州选投票的同时出示证明公民身份的文件！</b><br/><i>如果这是您首次在堪萨斯州登记，您的选民登记表格必须同时包含证明公民身份的文件才可以参加州选举（即：州长，州秘书长以及州议会选举）。否则您将只能够在联邦政府选举中投票。最常见的“证明文件”有出生证或护照的复印件，全部认可文件的详细列表可以在以下链接找到<a
+        href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">online</a>.</i>'
     email_instructions:
       blank: ''
-      arizona: ! '*请注意首次选民登记申请及近期推动者：您还必须提交证明公民身份在州选举中投票！如果这是您第一次注册在亚利桑那州或者您移动到另一个县，你的选民登记表还必须包括公民身份证明在州选举（即州长，国务卿，与州议会）投票。否则，你只会被eleigible在联邦选举中投票。如果你有一个亚利桑那州的驾驶执照或1996年10月1日之后发行的状态ID卡，也就是说suffient“公民身份证明”，并没有其他的文件是必要的。如果没有，你必须提交“证明公民身份的”随您的选民​​登记申请。最常见的“证据”是你的出生证明或护照的复印件。可接受的文件的完整列表可以在网上找到。<br/>
-
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>.'
-      kansas: ! '*请注意首次选民登记申请人：您还必须提交证明公民身份在州选举中投票！如果这是您第一次注册在堪萨斯州，你的选民登记表还必须包括公民身份证明在州选举（即州长，国务卿，与州议会）投票。否则，你只会有资格在联邦选举中投票。最常见的“证据”是你的出生证明或护照的复印件，但可以接受文件的完整列表可以在网上找到。<br/>
-
-        <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
+      arizona: ! '*首次登记选民及近期更改地址的选民请注意：您必须在州选投票的同时出示证明公民身份的文件！</b><br/><i>如果这是您首次在亚利桑那州登记或者您搬家至其他郡县，您的选民登记表格必须同时包含证明公民身份的文件才可以参加州选举（即：州长，州秘书长以及州议会选举）。否则您将只能够在联邦政府选举中投票。如果您拥有亚利桑那州驾驶证或1996年10月以后发放的州身份证，就满足“公民身份证明”的条件，无需其他证明文件。否则，您必须随选民登记申请表附上您的“公民身份证明文件”。最常见的“证明文件”有出生证或护照的复印件，全部认可文件的详细列表可以在以下链接找到<a
+        href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">online</a>.</i>'
+      kansas: ! '<b>*首次进行登记的选民请注意: 您必须在州选投票的同时出示证明公民身份的文件！</b><br/><i>如果这是您首次在堪萨斯州登记，您的选民登记表格必须同时包含证明公民身份的文件才可以参加州选举（即：州长，州秘书长以及州议会选举）。否则您将只能够在联邦政府选举中投票。最常见的“证明文件”有出生证或护照的复印件，全部认可文件的详细列表可以在以下链接找到<a
+        href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">online</a>.</i>'
 

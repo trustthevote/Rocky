@@ -29,6 +29,7 @@ ko:
       step_2_header: 개인 정보
       step_3_header: 추가 정보
       step_4_header: 저희 활동에 참여해주세요
+      step_4_ovr_header: 주 정부의 온라인 등록 시스템을 사용하여 등록을 마칠 수 있습니다.
       step_5_header: 확인하기
       stay_informed_header: 정보를 받아보세요
       identification_header: 본인 확인 정보
@@ -111,6 +112,8 @@ ko:
         finish_email_sent: 이메일을 보냈습니다.
         finish_update_status: 페이스북과 트위터에도 공유하세요!
         state_online_registration: ! '%{state} 주 선거관리국 온라인 시스템을 통해 유권자 등록을 마칠 수도 있습니다.'
+        state_online_registration_sub_header: 주 정부 웹사이트에서 유권자 등록을 완료하기 위해서는 아래의 버튼을
+          클릭하세요
         leave_state_online_registration: 아래의 양식을 이용해 %{state} 주 선거관리국에 유권자 등록을 할 수
           있습니다. 만일 운전면허증이나 주 정부 신분증이 제대로 처리되지 않거나 주 정부가 당신의 DMV 기록을 찾지 못해도 %{link}
           에서 양식을 인쇄하고 서명해서 보내면 됩니다.

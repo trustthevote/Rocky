@@ -8,6 +8,7 @@ th:
         step_2:
           checkbox_text: ฉันอาศัยในรัฐแคลิฟอร์เนีย ในประเทศสหรัฐอเมริกา
           instruction_text: คุณสามารถกรอกแบบฟอร์มจนเสร็จสมบูรณ์โดยใช้เว็บไซต์ระบบผู้ลงคะแนนเลือกตั้งของรัฐ
+        ca_disclosures: ฉันได้อ่านและยอมรับเงื่อนไขของใบประกาศด้านบน
       nv:
         online_instructions: <p>คุณสามารถกรอกแบบฟอร์มลงทะเบียนเลือกตั้งทางอินเตอร์เน็ตผ่านทางเว็บไซต์ของรัฐด้านล่างนี้
           ระบบลงทะเบียนทางอินเตอร์เน็ตของรัฐเนวาด้า (NOVA) ได้รับการจัดทำโดยเลขาธิการรัฐเนวาด้า
@@ -365,16 +366,17 @@ th:
       thirty_days_before: 30 วันก่อนวันเลือกตั้ง
     pdf_instructions:
       blank: ''
-      arizona: ! '* หมายเหตุให้ผู้มีสิทธิเลือกตั้งครั้งแรกผู้สมัครลงทะเบียนและรถหัวลากล่าสุด:
-        คุณยังจะต้องส่งหลักฐานการเป็นพลเมืองในการลงคะแนนเสียงในการเลือกตั้งรัฐ! ถ้าเป็นครั้งแรกของคุณลงทะเบียนในแอริโซนาหรือคุณได้ย้ายไปเขตอื่นแบบฟอร์มลงทะเบียนผู้มีสิทธิเลือกตั้งของคุณยังจะต้องมีหลักฐานการเป็นพลเมืองในการลงคะแนนเสียงในการเลือกตั้งของรัฐ
-        (เช่นผู้ว่าราชการเลขาธิการแห่งรัฐและสภานิติบัญญัติแห่งชาติ) มิฉะนั้นคุณเท่านั้นจะ
-        eleigible ออกเสียงลงคะแนนในการเลือกตั้งระดับชาติ หากคุณมีใบอนุญาตขับรถ AZ
-        หรือบัตรประจำตัวประชาชนของรัฐออกหลังจาก 1996/10/01 ที่เป็น suffient "หลักฐานการเป็นพลเมือง"
-        และไม่มีเอกสารอื่น ๆ ที่จำเป็น ถ้าไม่ได้คุณต้องส่ง "หลักฐานการเป็นพลเมือง"
-        พร้อมกับใบสมัครการลงทะเบียนผู้มีสิทธิเลือกตั้งของคุณที่พบมากที่สุด "หลักฐาน"
-        เป็นสำเนาสูติบัตรหรือสำเนาหนังสือเดินทางของคุณรายการเต็มรูปแบบของเอกสารที่ได้รับการยอมรับสามารถพบได้ทั่วไป<br/>
-
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      arizona: ! '<b>*Note for First Time Voter Registration Applicants And Recent
+        Movers: You must ALSO submit proof of citizenship to vote in state elections!</b><br/><i>If
+        this is your first time registering in Arizona or you have moved to another
+        county, your voter registration form must also include proof of citizenship
+        to vote in state elections (ie. Governor, Secretary of State, &amp; state
+        legislature). Otherwise you will ONLY be eleigible to vote in federal elections.
+        If you have an AZ driver license or state ID card issued after 10/1/1996,
+        that is suffient "proof of citizenship" and no other documentation is needed.
+        If not, you must submit "proof of citizenship" along with your voter registration
+        application. The most common "proof" is a photocopy of your birth certificate
+        or passport. A full list of acceptable documentation can be found <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">online</a>.</i>'
       kansas: ! '* หมายเหตุให้ผู้มีสิทธิเลือกตั้งครั้งแรกผู้สมัครที่ลงทะเบียน: นอกจากนี้คุณยังจะต้องส่งหลักฐานการเป็นพลเมืองในการลงคะแนนเสียงในการเลือกตั้งรัฐ!
         ถ้าเป็นครั้งแรกของคุณลงทะเบียนในแคนซัสแบบฟอร์มลงทะเบียนผู้มีสิทธิเลือกตั้งของคุณยังจะต้องมีหลักฐานการเป็นพลเมืองในการลงคะแนนเสียงในการเลือกตั้งของรัฐ
         (เช่นผู้ว่าราชการเลขาธิการแห่งรัฐและสภานิติบัญญัติแห่งชาติ) มิฉะนั้นคุณเท่านั้นจะมีสิทธิ์ลงคะแนนเสียงในการเลือกตั้งระดับชาติที่พบมากที่สุด
@@ -390,9 +392,11 @@ th:
         หรือบัตรประจำตัวประชาชนของรัฐออกหลังจาก 1996/10/01 ที่เป็น suffient "หลักฐานการเป็นพลเมือง"
         และไม่มีเอกสารอื่น ๆ ที่จำเป็น ถ้าไม่ได้คุณต้องส่ง "หลักฐานการเป็นพลเมือง"
         พร้อมกับใบสมัครการลงทะเบียนผู้มีสิทธิเลือกตั้งของคุณที่พบมากที่สุด "หลักฐาน"
-        เป็นสำเนาสูติบัตรหรือสำเนาหนังสือเดินทางของคุณรายการเต็มรูปแบบของเอกสารที่ได้รับการยอมรับสามารถพบได้ทั่วไป<br/>
+        เป็นสำเนาสูติบัตรหรือสำเนาหนังสือเดินทางของคุณรายการเต็มรูปแบบของเอกสารที่ได้รับการยอมรับสามารถพบได้ทั่วไป
 
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+        <BR>
+
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>.</i>'
       kansas: ! '* หมายเหตุให้ผู้มีสิทธิเลือกตั้งครั้งแรกผู้สมัครที่ลงทะเบียน: นอกจากนี้คุณยังจะต้องส่งหลักฐานการเป็นพลเมืองในการลงคะแนนเสียงในการเลือกตั้งรัฐ!
         ถ้าเป็นครั้งแรกของคุณลงทะเบียนในแคนซัสแบบฟอร์มลงทะเบียนผู้มีสิทธิเลือกตั้งของคุณยังจะต้องมีหลักฐานการเป็นพลเมืองในการลงคะแนนเสียงในการเลือกตั้งของรัฐ
         (เช่นผู้ว่าราชการเลขาธิการแห่งรัฐและสภานิติบัญญัติแห่งชาติ) มิฉะนั้นคุณเท่านั้นจะมีสิทธิ์ลงคะแนนเสียงในการเลือกตั้งระดับชาติที่พบมากที่สุด

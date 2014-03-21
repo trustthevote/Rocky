@@ -29,7 +29,7 @@ en:
       step_2_header: Personal Information
       step_3_header: Additional Registration Information
       step_4_header: Stay Informed and Take Action
-      step_4_ovr_header:
+      step_4_ovr_header: Hang on. You are eligible to register online in your state.
       step_5_header: Review and Confirm
       stay_informed_header: Stay Informed
       identification_header: Identification Information
@@ -125,8 +125,10 @@ en:
         finish_tell_recipients: (separated by commas)
         finish_email_sent: Email sent!
         finish_update_status: Don't forget to update your status on Facebook and Twitter!
-        state_online_registration: Hang on. You are eligible to register online in your state.
-        state_online_registration_sub_header: Click below to complete the registration process right now with your state.
+        state_online_registration: Hang on. You are eligible to register online in
+          your state.
+        state_online_registration_sub_header: Click below to complete the registration
+          process right now with your state.
         leave_state_online_registration: You can complete your voter registration
           online with %{state} using the form below. If your driver's license or state
           identification card is invalid or the state can't find or confirm your DMV

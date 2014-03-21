@@ -1,9 +1,38 @@
 ---
 km:
-  language_name: ភាសាខ្មែរ
+  language_name: ភាសាអង់គ្លេស
   language_name_translation_instructions: សូមផ្តល់ឈ្មោះនៃភាសាដែលបានបកប្រែ ក្នុងភាសានោះ។
     ឧទាហរណ៍, ប្រសិនបើជាអ្នកបកប្រែភាសាជប៉ុន ចូរផ្តល់ពាក្យជាភាសា ជប៉ុន សម្រាប់ "ភាសាជប៉ុន"
     (ឈ្មោះភាសា)។
+  locales:
+    bn:
+      name: ភាសាបែនហ្កាលី
+    en:
+      name: ភាសាអង់គ្លេស
+    es:
+      name: ភាសាស្ពែនិស្ស
+    hi:
+      name: ភាសាហ៊ិនឌី
+    ilo:
+      name: ភាសាអ៊ិឡូខាណូ
+    ja:
+      name: ភាសាជប៉ុន
+    km:
+      name: ភាសាខ្មែរ
+    ko:
+      name: ភាសាកូរេ
+    th:
+      name: ភាសាថៃ
+    tl:
+      name: ភាសាថាហ្កាឡូក
+    ur:
+      name: ភាសាអ៊ូរដួ
+    vi:
+      name: ភាសាវៀតណាម
+    zh-tw:
+      name: ភាសាចិន (បុរាណ)
+    zh:
+      name: ភាសាចិន (សម្រាយ)
   activerecord:
     attributes:
       partner:
@@ -25,6 +54,8 @@ km:
         home_city: ទីក្រុង
         home_state_name: រដ្ឋ
         has_mailing_address: ខ្ញុំ​ទទួលសំបុត្រពីអាស័យដ្ឋានផ្សេងខុសពីមួយខាងលើនោះ​។​
+        has_state_license: ខ្ញុំមានអាជ្ញ្ប័ណ្ណបបើកបរ ឬ អត្តសញ្ញាណ្ប័ណ្ណរដ្ឋ។
+        will_be_18_by_election: ខ្ញុំនឹងមានអាយញ ១៨ ឆ្នុំ បៅថ្ងៃប ោះបឆ្នត្បរោយ។
         mailing_address: អាស័យដ្ឋាន
         mailing_unit: លេខក្រុមតូច/ឡូត៍#
         mailing_city: ទីក្រុង
@@ -59,6 +90,8 @@ km:
     errors:
       models:
         registrant:
+          ca_disclosures_error: បដ្ើមបីបញ្ចប់ោរចញោះប្មោះរបស់អនក ជ្ញមួយ រដ្ឋ [state]
+            អនករត្ូវតត្ ទទួលស្គាល់ នូវ ោរបបញ្ចញេ័ត្ាមាន ខាងបលើ។
           blank: តម្រូវអោយ
           invalid_zip: លេខហ្សីបកូតអស់សុពលភាព
           attributes:
@@ -83,7 +116,7 @@ km:
         inclusion: ! '%{attribute}មិនត្រូវបានរាប់បញ្ចូលក្នុងបញ្ជីទេ។​'
         exclusion: ! '%{attribute}ត្រូវបានរក្សាសិទិ្ធ។​'
         invalid: ! '%{attribute}គ្មានសុពលភាពទេ'
-        invalid_for_pdf: ! '%{attribute} ត្រូវតែត្រូវបានផ្តល់ជូនជាភាសាអង់គ្លេស'
+        invalid_for_pdf: ! '%{attribute}គ្មានសុពលភាពទេ'
         confirmation: ! '%{attribute} មិនសមស្របនឹងសេចក្តីបញ្ជាក់ទេ។'
         accepted: ! '%{attribute}ត្រូវតែបានទទួលស្គាល់។'
         empty: ! '%{attribute}មិនអាចនៅទទេបានទេ។'

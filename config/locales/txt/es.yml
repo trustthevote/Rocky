@@ -29,6 +29,8 @@ es:
       step_2_header: Información Personal
       step_3_header: Información adicional para registro
       step_4_header: Mantente informado y toma acción
+      step_4_ovr_header: Usted es elegible para finalizar su inscripción mediante
+        el sistema de registro de votantes en línea del estado.
       step_5_header: Revisar y Confirmar
       stay_informed_header: Para más información
       identification_header: Información sobre identificación
@@ -130,6 +132,8 @@ es:
         finish_update_status: No se olviden actualizar su estatus por Facebook y Twitter.
         state_online_registration: Usted puede ser elegible para terminar su registro
           de votante usando el sistema de registro de votante en línea de %{state}.
+        state_online_registration_sub_header: Haga clic a continuación para completar
+          el proceso de registro en este momento con su estado.
         leave_state_online_registration: Tú puedes completar su registración de votantes
           vía internet con el estado  usando la solicitud de abajo. Si tu ni licencia
           de conducir ni tu carnet de identificación expedida por el estado está vigente

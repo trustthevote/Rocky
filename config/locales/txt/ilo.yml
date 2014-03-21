@@ -6,7 +6,7 @@ ilo:
       submit: Sumaruno nga Pagna
       edit: Limpio
       back: Sakbay ti Pagna
-      download: Iprentam tatta<br/>dayta cucuam nga<br/>porma iti rehistrasyon
+      download: Iprentam <br/>tatta dayta cucuam nga porma iti rehistrasyon<br/>
       ineligible_try_again: Subli
       keep_going: Ituloy mo ti mag-magna
       remind_me_later: Ipalagip mo canniac tat-tanto
@@ -29,6 +29,7 @@ ilo:
       step_2_header: Impormasyon personal
       step_3_header: Dagdag nga impormasyon para ti rehistrasyon
       step_4_header: Agdeng-ngegca ti impormasyon ken ag-garawca
+      step_4_ovr_header: Palpasen yo dayta rehistrasyon online
       step_5_header: Adalem manen ken agconpirmaca
       stay_informed_header: Agdeng-ngeg
       identification_header: Ditalye ti Impormasyon
@@ -36,13 +37,14 @@ ilo:
       preparing_header: Agrub-rubuat iti porma ti rehistrasyon...
       download_header: Iprenta iti porma
       finish_header: Iwaragawag mo iti sarita!
-      finish_pdf_delay_header: Check Your Email
-      finish_pdf_delay: It's taking a while to create your registration form to download,
-        but don't worry. We'll send you an email when it's ready. In the mean time,
-        you can let your friends know how they can register to vote too.
+      finish_pdf_delay_header: Suriin ang iyong Email
+      finish_pdf_delay: Paglalaan Ito ay isang habang upang likhain ang iyong pagpaparehistro
+        ng form na ito upang i-download, ngunit huwag mag-alala. Padadalhan ka namin
+        ng isang email kapag handa na. Pansamantala, maaari mong hayaan ang iyong
+        mga kaibigan kung paano sila ay maaaring magparehistro upang bumoto masyadong.
       finish_under_18_header: Addaca idiay lista!
       tell_a_friend_title: Ibagam ti gay-yem idiay Email
-      finish_reminder_header: Dios ti ag-ngina
+      finish_reminder_header: Salamat sa Nirerehistro sa Bumoto!
       finish_reminder: Dios ti ag-ngina, %{first_name}, iti impaw-it mo nga applikasyon
         ti rehistrasyon! Maawat munto ti rehistrasyon mo nga conpirmadona dagiti opisyales
         ti eleksyon iti estado. No dad-duma, adu nga semana iti masapulda nga agadal
@@ -124,8 +126,10 @@ ilo:
         finish_tell_recipients: (aduaenyo amin nga comma)
         finish_email_sent: Impaw-it iti Email!
         finish_update_status: Saan yo nga malipatan ti i-update ta Facebook ken Twitter!
-        state_online_registration: Mabalinyo nga palpasen dayta rehistro yo idta "online"
-          usaren iti  %{state} online voter registration system.
+        state_online_registration: Masapul nga ilep-pas mo iti pagrerehistro, ken
+          usarem ti online sistema ti botante iti estado.
+        state_online_registration_sub_header: Click mo ditoy baba, itat-tan, tapno
+          completo iti rehistrasyon mo dita estado nga ayan mo.
         leave_state_online_registration: Mabalinyo nga palpasen dayta rehistro online
           dita '%{state}' usaren yo daytoy porma. No saan nga mabalin iti lisensya
           yo ken awan iti DMV impormasyon awan problema- mabalin mo met %{link}. imprinta

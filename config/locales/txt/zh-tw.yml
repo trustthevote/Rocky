@@ -20,13 +20,14 @@ zh-tw:
       state_online_registration: 我想現在就提交<br/> 我的在線表格到<br/> %{state}。
       skip_state_online_registration: 不用了，謝謝，我會繼續在%{rtv_and_partner_name} 填寫申請表然後郵寄出去。
     registration:
-      in_language_name: 使用中文
+      in_language_name: 繁體中文
       powered_by: 提供者：
       progress_indicator: 步驟：
       step_1_header: 新的登記
       step_2_header: 個人信息
       step_3_header: 額外的登記信息
       step_4_header: 保持知情并採取行動
+      step_4_ovr_header: 您可以使用州政府的網上選民登記系統完成您的登記。
       step_5_header: 審閱并確認
       stay_informed_header: 保持知情
       identification_header: 身份識別信息
@@ -34,8 +35,11 @@ zh-tw:
       preparing_header: 準備登記表格
       download_header: 打印您的申請表
       finish_header: 傳播消息！
+      finish_pdf_delay_header: 請查收電子郵件
+      finish_pdf_delay: 看起來還需要一段時間來生成您的報名表以備下載，但不要擔心。當表格準備好以後，我們會給您發送電子郵件。在此同時，你可以讓您的朋友知道他們也可以登記投票了。
       finish_under_18_header: 您登記在名單上了！
       tell_a_friend_title: 發電子郵件告訴您的朋友！
+      finish_reminder_header: 感謝進行選民登記！
       finish_reminder: ! '%{first_name}， 感謝您提交選民登記申請表！您將會收到從州官員那裏發出的確認您的申請的信息。這個過程有時候會需要幾個星期。'
       finish_reminder_2: 如果您想要查詢您的選民登記申請表的狀態，您可以通過網站： <a href="http://www.rockthevote.com/election-center/"
         target="_blank">選舉中心</a>上找到您的州務卿的聯系方式。
@@ -100,6 +104,7 @@ zh-tw:
         finish_email_sent: 電子郵件已發送！
         finish_update_status: 不要忘記更新您在Facebook和Twitter的狀態！
         state_online_registration: 您或許符合資格使用%{state}網上選民登記系統進行選民登記。
+        state_online_registration_sub_header: 現在就點擊一下按鈕與您所在的州完成登記過程。
         leave_state_online_registration: 您可以使用以下表格，與%{state} 完成您的網上選民登記。如果您的駕駛證或州身份證不再有效或者州政府無法查詢或確認您的DMV機動車管理部記錄，不用擔心&mdash，
           您還可以%{link}。您只需要打印，簽名並郵寄。
         leave_state_online_registration_link: 在%{rtv_and_partner_name}完成您的登記。

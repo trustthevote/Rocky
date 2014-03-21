@@ -54,8 +54,8 @@ en:
         home_city: City
         home_state_name: State
         has_mailing_address: I get my mail at a different address from the one above.
-        has_state_license: I have a drivers license or state ID card
-        will_be_18_by_election: I will be 18 by the next election day
+        has_state_license: I have a drivers license or state ID card.
+        will_be_18_by_election: I will be 18 by the next election day.
         mailing_address: Address
         mailing_unit: ! 'Unit/Lot #'
         mailing_city: City
@@ -90,8 +90,8 @@ en:
     errors:
       models:
         registrant:
-          ca_disclosures_error: "In order to finish your registration with the state of California, you must accept the disclosures above."
-          
+          ca_disclosures_error: In order to finish your registration with the state
+            of California, you must accept the disclosures above.
           blank: Required
           invalid_zip: Invalid ZIP
           attributes:
@@ -111,12 +111,12 @@ en:
             attest_true:
               accepted: You must indicate whether the above information is correct.
             has_state_license:
-              inclusion: Please indicate whether you have a valid state license
+              inclusion: Please indicate whether you have a valid state license.
       messages:
         inclusion: ! '%{attribute} is not included in the list.'
         exclusion: ! '%{attribute} is reserved.'
         invalid: ! '%{attribute} is invalid.'
-        invalid_for_pdf: ! '%{attribute} must be provided in English'
+        invalid_for_pdf: ! '%{attribute} must be provided in English.'
         confirmation: ! '%{attribute} doesn''t match confirmation.'
         accepted: ! '%{attribute} must be accepted.'
         empty: ! '%{attribute} can''t be empty.'

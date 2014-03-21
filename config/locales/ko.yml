@@ -2,6 +2,35 @@
 ko:
   language_name: 한국어
   language_name_translation_instructions: 한국어
+  locales:
+    bn:
+      name: 벵골의
+    en:
+      name: 영어
+    es:
+      name: 스페인의
+    hi:
+      name: 힌디 어
+    ilo:
+      name: 일로 카노
+    ja:
+      name: 일본의
+    km:
+      name: 크메르어
+    ko:
+      name: 한국어
+    th:
+      name: 타이어
+    tl:
+      name: 타갈로그어
+    ur:
+      name: 우르두 말
+    vi:
+      name: 베트남의
+    zh-tw:
+      name: 중국어 (번체)
+    zh:
+      name: 중국어 (간체)
   activerecord:
     attributes:
       partner:
@@ -23,6 +52,8 @@ ko:
         home_city: 도시
         home_state_name: 주
         has_mailing_address: 저는 우편물을 받는 주소가 따로 있습니다.
+        has_state_license: 운전면허증 또는 주 정부 ID 를 가지고 있습니다.
+        will_be_18_by_election: 선거 날에 18살이 됩니다.
         mailing_address: 주소
         mailing_unit: 아파트 번호
         mailing_city: 도시
@@ -56,6 +87,7 @@ ko:
     errors:
       models:
         registrant:
+          ca_disclosures_error: California  정부와 유권자 등록을 완료하기 위해서는 아래의 내용에 동의하셔야 합니다.
           blank: 필수
           invalid_zip: ZIP 코드 에러
           attributes:

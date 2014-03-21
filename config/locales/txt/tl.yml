@@ -29,6 +29,7 @@ tl:
       step_2_header: Personal na impormasyon
       step_3_header: Karagdagang Impormasyon para sa Pagrerehistro
       step_4_header: Manatiling Nakakaalam at Gumawa ng Aksyon
+      step_4_ovr_header: Tapusin ang pagrerehistro online
       step_5_header: Suriin at Kumpirmahin
       stay_informed_header: Manatiling nakakaalam
       identification_header: Impormasyong Pagkakakilanlan
@@ -132,9 +133,10 @@ tl:
         finish_email_sent: Naipadala ang Email!
         finish_update_status: Huwag kalimutang i-update ang iyong katayuan sa Facebook
           at Twitter!
-        state_online_registration: Ikaw ay maaaring maging eligible na tapusin ang
-          iyong pagrerehistro ng botante na gumagamit ng online na sistema ng pagrerehistro
-          ng botante sa %{state}
+        state_online_registration: Ikaw ay eligible na tapusin ang iyong pagrerehistro
+          na gumagamit ng online na sistema ng pagrerehistro ng botante ng estado.
+        state_online_registration_sub_header: I-click mo sa ibaba para makumpleto
+          ang pagrerehistro ngayon sa iyong estado.
         leave_state_online_registration: Maaari mong tapusin ang iyong pagrerehistro
           ng botante online sa %{state} na gumagamit ng pormang nasa ibaba. Kung ang
           iyong lisensiya ng pagmamaneho ay hindi valid o hindi makita o makumpirma

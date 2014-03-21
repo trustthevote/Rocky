@@ -22,13 +22,15 @@ bn:
       skip_state_online_registration: ! '&gt; লাগবে না, ধন্যবাদ। আমি %{rtv_and_partner_name}
         এর সাথে করতে থাকব এবং আমার ফর্মটি পরে পাঠাবো।'
     registration:
-      in_language_name: ইংরেজীতে
+      in_language_name: বাংলা
       powered_by: ! 'সহায়তায়:'
       progress_indicator: ! 'ধাপ:'
       step_1_header: নতুন নিবন্ধনকারী
       step_2_header: ব্যক্তিগত তথ্য
       step_3_header: অতিরিক্ত নিবন্ধন তথ্যাবলী
       step_4_header: অবগত থাকুন এবং কাজে অংশ নিন
+      step_4_ovr_header: আপনি স্টেটের অনলাইন ভোটার নিবন্ধিকরণ পদ্ধতি ব্যবহার করে নিবন্ধিত
+        হওয়ার যোগ্যতা রাখেন।
       step_5_header: পরীক্ষা করুন এবং নিশ্চিত হোন
       stay_informed_header: অবগত থাকুন
       identification_header: শনাক্তকরণ তথ্যাবলী
@@ -134,6 +136,8 @@ bn:
           ভুলবেন না!
         state_online_registration: আ্পনি হয়তো %{state} অনলাইন ভোটার নিবন্ধন পদ্ধতি
           ব্যবহার করে ভোটার হিসেবে নিবন্ধিত হওয়ার যোগ্যতা রাখেন।
+        state_online_registration_sub_header: আপনার স্টেটের সাথে রেজিস্ট্রেশন সম্পন্ন
+          করার জন্য এখানে ক্লিক করুন।
         leave_state_online_registration: নিম্নোক্ত ফর্মটি ব্যবহার করে %{state} এর
           সাথে আপনি আপনার ভোটার নিবন্ধনের কাজ অনলাইনে সম্পন্ন করতে পারেন। যদি আপনার
           ড্রাইভার লাইসেন্স অথবা রাজ্য কর্তৃক প্রদত্ত শনাক্তকরণ কার্ডটি অকার্যকর হয়ে

@@ -9,6 +9,7 @@ km:
           checkbox_text: ខ្ញុំជាអ្នករស់នៅរដ្ឋ ខាលីហ្វ័រញ៉ា, សហរដ្ឋអាមេរិក
           instruction_text: អ្នកមានសិទិ្ធសព្វគ្រប់ចុះឈ្មោះរបស់អ្នក​  ដោយការប្រើប្រព័ន្ធចុះឈ្មោះបោះឆ្នោត
             អនឡាញ របស់រដ្ឋ​។​
+        ca_disclosures: ខ្ញុំ នេិនិត្យបមើល និង ទទួលស្គាល់នូវ កុំណ្ត្់បេត្ញ ខាងបលើ។
       nv:
         online_instructions: ! '<p>អ្នកអាចបំពេញការចុះឈ្មោះបោះឆ្នោតរបស់អ្នក​តាមរយៈប្រព័ន្ធ​អនឡាញ​ជាមួយនឹងរដ្ឋខាងក្រោម។
           ការបំពេញ សំណុំរឿង បោះឆ្នោត អនឡាញ រដ្ឋ នេវ៉ាដា(NOVA) ត្រូវបានផ្តល់អោយដោយ​លោករដ្ឋលេខាធិការ
@@ -420,17 +421,17 @@ km:
       thirty_days_before: ៣០ថ្ងៃ មុនពេលបោះឆ្នោត
     pdf_instructions:
       blank: ''
-      arizona: ! '* ចំណាំសម្រាប់ការដាក់ពាក្យសុំចុះឈ្មោះអ្នកបោះឆ្នោតនិងពេលវេលាទីមួយ
-        Movers ថ្មី: អ្នកក៏ត្រូវតែដាក់ភស្តុតាងនៃពលរដ្ឋបោះឆ្នោតនៅក្នុងការបោះឆ្នោតរដ្ឋ!
-        ប្រសិនបើនេះជាលើកដំបូងរបស់អ្នកចុះឈ្មោះនៅក្នុងរដ្ឋអារីស្សូណាឬអ្នកបានផ្លាស់ប្តូរទៅស្រុកមួយផ្សេងទៀតសំណុំបែបបទការចុះឈ្មោះអ្នកបោះឆ្នោតរបស់អ្នកក៏ត្រូវតែរួមបញ្ចូលទាំងភស្តុតាងនៃពលរដ្ឋបោះឆ្នោតនៅក្នុងការបោះឆ្នោតរដ្ឋ
-        (ឧទាហរណ៍ៈម៉ាស៊ីនជំនួសអភិបាលរដ្ឋលេខាធិការនិងរដ្ឋសភា) ។ បើមិនដូច្នេះទេអ្នកនឹងត្រូវបាន
-        eleigible បោះឆ្នោតនៅក្នុងការបោះឆ្នោតសហព័ន្ធ។ ប្រសិនបើអ្នកមានកម្មវិធីបញ្ជាអាជ្ញាប័ណ្ណពី
-        AZ ឬអត្តសញ្ញាណប័ណ្ណរដ្ឋចេញបន្ទាប់ពី 10/1/1996 នោះគឺ suffient "ភស្តុតាងនៃពលរដ្ឋ"
-        និងមិនមានឯកសារផ្សេងទៀតដែលត្រូវការ។ ប្រសិនបើមិនបានអ្នកត្រូវតែដាក់ "ភស្តុតាងនៃពលរដ្ឋ"
-        រួមជាមួយកម្មវិធីការចុះឈ្មោះអ្នកបោះឆ្នោតរបស់អ្នក។ "ការភ័ស្តុតាង" ទូទៅបំផុតគឺចម្លងនៃសំបុត្រកំណើតឬលិខិតឆ្លងដែនរបស់អ្នក។
-        បញ្ជីពេញលេញនៃឯកសារដែលអាចទទួលយកអាចត្រូវបានរកឃើញនៅលើបណ្ដាញ។<br/>
-
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      arizona: ! '<b>*Note for First Time Voter Registration Applicants And Recent
+        Movers: You must ALSO submit proof of citizenship to vote in state elections!</b><br/><i>If
+        this is your first time registering in Arizona or you have moved to another
+        county, your voter registration form must also include proof of citizenship
+        to vote in state elections (ie. Governor, Secretary of State, &amp; state
+        legislature). Otherwise you will ONLY be eleigible to vote in federal elections.
+        If you have an AZ driver license or state ID card issued after 10/1/1996,
+        that is suffient "proof of citizenship" and no other documentation is needed.
+        If not, you must submit "proof of citizenship" along with your voter registration
+        application. The most common "proof" is a photocopy of your birth certificate
+        or passport. A full list of acceptable documentation can be found <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">online</a>.</i>'
       kansas: ! '* ចំណាំសម្រាប់ការដាក់ពាក្យសុំចុះបញ្ជីដំបូងពេលវេលាបោះឆ្នោត: អ្នកក៏ត្រូវតែដាក់ភស្តុតាងនៃពលរដ្ឋបោះឆ្នោតនៅក្នុងការបោះឆ្នោតរដ្ឋ!
         ប្រសិនបើនេះជាលើកដំបូងរបស់អ្នកចុះឈ្មោះនៅក្នុងការកែន, សំណុំបែបបទចុះឈ្មោះអ្នកបោះឆ្នោតរបស់អ្នកក៏ត្រូវតែរួមបញ្ចូលភស្តុតាងនៃពលរដ្ឋបោះឆ្នោតនៅក្នុងការបោះឆ្នោតរដ្ឋ
         (ឧទាហរណ៍ៈម៉ាស៊ីនជំនួសអភិបាលរដ្ឋលេខាធិការនិងរដ្ឋសភា) ។ បើមិនដូច្នេះទេអ្នកនឹងតែមានសិទ្ធិបោះឆ្នោតនៅក្នុងការបោះឆ្នោតសហព័ន្ធ។
@@ -447,7 +448,7 @@ km:
         AZ ឬអត្តសញ្ញាណប័ណ្ណរដ្ឋចេញបន្ទាប់ពី 10/1/1996 នោះគឺ suffient "ភស្តុតាងនៃពលរដ្ឋ"
         និងមិនមានឯកសារផ្សេងទៀតដែលត្រូវការ។ ប្រសិនបើមិនបានអ្នកត្រូវតែដាក់ "ភស្តុតាងនៃពលរដ្ឋ"
         រួមជាមួយកម្មវិធីការចុះឈ្មោះអ្នកបោះឆ្នោតរបស់អ្នក។ "ការភ័ស្តុតាង" ទូទៅបំផុតគឺចម្លងនៃសំបុត្រកំណើតឬលិខិតឆ្លងដែនរបស់អ្នក។
-        បញ្ជីពេញលេញនៃឯកសារដែលអាចទទួលយកអាចត្រូវបានរកឃើញនៅលើបណ្ដាញ។<br/>
+        បញ្ជីពេញលេញនៃឯកសារដែលអាចទទួលយកអាចត្រូវបានរកឃើញនៅលើបណ្ដាញ។<BR>
 
         <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
       kansas: ! '* ចំណាំសម្រាប់ការដាក់ពាក្យសុំចុះបញ្ជីដំបូងពេលវេលាបោះឆ្នោត: អ្នកក៏ត្រូវតែដាក់ភស្តុតាងនៃពលរដ្ឋបោះឆ្នោតនៅក្នុងការបោះឆ្នោតរដ្ឋ!

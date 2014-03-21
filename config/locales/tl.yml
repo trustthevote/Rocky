@@ -4,13 +4,42 @@ tl:
   language_name_translation_instructions: Mangyaring ibigay ang pangalan ng naisaling
     wika sa wikang ito. Halimbawa kung ikaw ay nagsasalin sa Hapon, ibigay ang salitang
     "Hapon" (ang pangalan ng wika).
+  locales:
+    bn:
+      name: Bengali
+    en:
+      name: English
+    es:
+      name: Spanish
+    hi:
+      name: Hindi
+    ilo:
+      name: Ilocano
+    ja:
+      name: Japanese
+    km:
+      name: Khmer
+    ko:
+      name: Korean
+    th:
+      name: Thai
+    tl:
+      name: Tagalog
+    ur:
+      name: Urdu
+    vi:
+      name: Vietnamese
+    zh-tw:
+      name: Chinese (Traditional)
+    zh:
+      name: Chinese (Simplified)
   activerecord:
     attributes:
       partner:
         from_email: Galing sa Email
         url: URL
       registrant:
-        date_of_birth: Petsa ng Kapanganakan
+        date_of_birth: Kaarawan
         email_address: Address ng E-mail
         first_registration: Ako ay nagpaparehistro para bumoto sa unang pagkakataon.
         home_zip_code: Zip Code
@@ -26,6 +55,8 @@ tl:
         home_state_name: Estado
         has_mailing_address: Nakukuha ko ang aking koreo sa address na naiiba kaysa
           nasa itaas
+        has_state_license: Mayroon akong lisensiya ng pagmamaneho o ID card ng estado.
+        will_be_18_by_election: Ako ay magiging 18 taong gulang sa susunod na halalan.
         mailing_address: Address o Tirahan
         mailing_unit: ! 'Unit/Lote #'
         mailing_city: Lungsod
@@ -60,6 +91,8 @@ tl:
     errors:
       models:
         registrant:
+          ca_disclosures_error: Para matapos ang iyong pagrerehistro sa estado ng
+            California, dapat mong tanggapin ang mga pagbubunyag sa ibaba.
           blank: Kailangan
           invalid_zip: Hindi valid na ZIP
           attributes:
@@ -74,7 +107,7 @@ tl:
             date_of_birth:
               format: Kailangang MM-DD-YYYY
             phone:
-              invalid: ! 'Kailangang ### /##/ ####'
+              invalid: ! 'Kailangang ###-##-####'
               required_if_opt_in: Kailangan kung tumatanggap ng TXT
             attest_true:
               accepted: Kailangan mong ipahiwatig kung ang impormasyon sa itaas ay

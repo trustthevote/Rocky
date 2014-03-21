@@ -20,13 +20,14 @@ zh:
       state_online_registration: 我想要现在就提交<br/> 我的在线表格到<br/> %{state}
       skip_state_online_registration: 不用了，谢谢，我会继续在 %{rtv_and_partner_name} 填写申请表然后邮寄出去。
     registration:
-      in_language_name: 使用中文
+      in_language_name: 简体中文
       powered_by: 提供者：
       progress_indicator: 步骤：
       step_1_header: 新的登记
       step_2_header: 个人信息
       step_3_header: 额外的登记信息
       step_4_header: 保持知情并采取行动
+      step_4_ovr_header: 您可以使用州政府的网上选民登记系统完成您的登记。
       step_5_header: 审阅并确认
       stay_informed_header: 保持知情
       identification_header: 身份识别信息
@@ -35,7 +36,7 @@ zh:
       download_header: 打印您的申请表
       finish_header: 传播消息！
       finish_pdf_delay_header: 请检查您的电子邮件地址
-      finish_pdf_delay: 它的服用一段时间来建立您的报名表下载，但不要担心。我们会当它准备向您发送电子邮件。在此同时，你可以让你的朋友知道他们如何能登记投票了。
+      finish_pdf_delay: 看起来还需要一段时间来生成您的报名表以备下载，但不要担心。当表格准备好以后，我们会给您发送电子邮件。在此同时，你可以让您的朋友知道他们也可以登记投票了。
       finish_under_18_header: 您登记在名单上了！
       tell_a_friend_title: 发电子邮件告诉您的朋友！
       finish_reminder_header: 感谢您注册！
@@ -103,6 +104,7 @@ zh:
         finish_email_sent: 电子邮件已发送！
         finish_update_status: 不要忘记更新您在FACEBOOK和Twitter的状态！
         state_online_registration: 您或许符合资格使用%{state}网上选民登记系统进行选民登记。
+        state_online_registration_sub_header: 现在就点击以下按钮与您所在州完成登记过程。
         leave_state_online_registration: 您可以使用以下表格，与%{state} 完成您的网上选民登记。如果您的驾驶证或州身份证不再有效或者州政府无法查询或确认您的DMV机动车管理部记录，不用担心&mdash，
           您还可以%{link}。您只需要打印，签名并邮寄。
         leave_state_online_registration_link: 在%{rtv_and_partner_name}完成您的登记。

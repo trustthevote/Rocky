@@ -53,8 +53,9 @@ bn:
         home_state_name: স্টেট
         has_mailing_address: আমি অন্য একটি ঠিকানায় চিঠি পেয়ে থাকি, উপরে উল্লেখিত
           ঠিকানায় নয়।
-        has_state_license: আমার ড্রাইভার লাইসেন্স অথবা স্টেট আইডি কার্ড আছে
-        will_be_18_by_election: পরবর্তী নির্বাচনের আগে আমার বয়স আঠারো হবে
+        has_state_license: আমার ড্রা্‌ইভার লাইসেন্স বা স্টেট আইডি কার্ড​ আছে
+        will_be_18_by_election: পরবর্তী নির্বাচনের পূর্বে আমার বয়স আঠারো বছর পূর্ণ
+          হবে।
         mailing_address: ঠিকানা
         mailing_unit: ! 'ইউনিট #'
         mailing_city: সিটি
@@ -89,6 +90,8 @@ bn:
     errors:
       models:
         registrant:
+          ca_disclosures_error: California েএর সা​​থে আপনার রেজিস্ট্রেশন সম্পন্ন করার
+            জন্য, আপনাকে অবশ্যই উপরোক্ত তথ্যসমূহে স্বীকৃতি প্রদান করতে হবে
           blank: প্রয়োজনীয়
           invalid_zip: অকার্যকর জিপ
           attributes:

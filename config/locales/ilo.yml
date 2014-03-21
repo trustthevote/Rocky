@@ -4,13 +4,42 @@ ilo:
   language_name_translation_instructions: ! 'Ited mo iti nagan iti sao nga naggappuan
     iti tinatranscriba mo. Ehemplo: no ilipat mo ti sao nga Hapon, isurat mo nga "Hapon"
     (iti orihinal nga nagan).'
+  locales:
+    bn:
+      name: Bengali
+    en:
+      name: English
+    es:
+      name: Spanish
+    hi:
+      name: Hindi
+    ilo:
+      name: Ilocano
+    ja:
+      name: Japanese
+    km:
+      name: Khmer
+    ko:
+      name: Korean
+    th:
+      name: Thai
+    tl:
+      name: Tagalog
+    ur:
+      name: Urdu
+    vi:
+      name: Vietnamese
+    zh-tw:
+      name: Chinese (Traditional)
+    zh:
+      name: Chinese (Simplified)
   activerecord:
     attributes:
       partner:
         from_email: Naggapo iti Email
         url: URL
       registrant:
-        date_of_birth: Petsa iti kaaldawan
+        date_of_birth: Kaaldawan
         email_address: Address iti Email
         first_registration: Nagpaparehistro-ac tapno makabutosac daytoy umay nga eleksyon.
         home_zip_code: ZIP Code
@@ -26,6 +55,8 @@ ilo:
         home_state_name: Estado
         has_mailing_address: Al-alaek dagiti surat ko iti address nga sabali ken ti
           im-mununa.
+        has_state_license: Adda cucuac nga Driver's License ken State ID.
+        will_be_18_by_election: Agtawennacto ti 18 iti daytoy umay nga eleksyon.
         mailing_address: Address
         mailing_unit: ! 'Unit/Lote #'
         mailing_city: Ciudad
@@ -60,6 +91,9 @@ ilo:
     errors:
       models:
         registrant:
+          ca_disclosures_error: Tapno malpas ken completo ti rehistrasyon mo dita
+            estado nga ayanmo, masapul nga aminem dagiti declaraciones nga naisurat
+            ditoy ngato.
           blank: Masapul
           invalid_zip: Invalido nga ZIP
           attributes:

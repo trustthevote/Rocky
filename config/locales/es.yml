@@ -1,7 +1,38 @@
 ---
 es:
   language_name: español
-  language_name_translation_instructions: Español
+  language_name_translation_instructions: Por favor, indique el nombre de la lengua
+    traducida en ese idioma. Por ejemplo, si se está traduciendo japonés, proporcione
+    la palabra japonesa para "japonés" (el nombre del idioma).
+  locales:
+    bn:
+      name: bengalí
+    en:
+      name: Inglés
+    es:
+      name: español
+    hi:
+      name: hindi
+    ilo:
+      name: Ilocano
+    ja:
+      name: japonés
+    km:
+      name: Khmer
+    ko:
+      name: coreano
+    th:
+      name: tailandés
+    tl:
+      name: Tagalog
+    ur:
+      name: Urdu
+    vi:
+      name: vietnamita
+    zh-tw:
+      name: Chino (tradicional)
+    zh:
+      name: Chino (simplificado)
   activerecord:
     attributes:
       partner:
@@ -24,6 +55,9 @@ es:
         home_state_name: Estado
         has_mailing_address: Recibo mi correo en una dirección diferente a la provista
           anteriormente.
+        has_state_license: Tengo una licencia de conducir o tarjeta de identificación
+          estatal.
+        will_be_18_by_election: Voy a estar 18 por el siguiente día de la elección.
         mailing_address: Dirección Alterna
         mailing_unit: No.
         mailing_city: Ciudad
@@ -58,8 +92,8 @@ es:
     errors:
       models:
         registrant:
-          ca_disclosures_error: TBD-ES- In order to finish your registration with the state of California, you must accept the disclosures above.
-          
+          ca_disclosures_error: Con el fin de terminar su registro con el estado de
+            California, tiene que aceptar las revelaciones anteriores.
           blank: Requerido
           invalid_zip: Código Postal Invalido
           attributes:
@@ -84,7 +118,7 @@ es:
         inclusion: ! '%{attribute} no esta incluida en la lista'
         exclusion: ! '%{attribute} esta reservado'
         invalid: ! '%{attribute} es inválido'
-        invalid_for_pdf: ! '%{attribute} must be provided in English'
+        invalid_for_pdf: ! '%{attribute} debe ser proporcionada en Inglés'
         confirmation: ! '%{attribute} no concuerda con la confirmación'
         accepted: ! '%{attribute} debe ser aceptada'
         empty: ! '%{attribute} no puede estar vacio'

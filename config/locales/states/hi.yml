@@ -11,6 +11,8 @@ hi:
             हूँ
           instruction_text: आप रेजिस्ट्रेशन पूरा केरने के लिए स्टेट का ऑनलाइन वोटर
             रेजिस्ट्रेशन सिस्टम इस्तेमाल कर सकतें हैं
+        ca_disclosures: उपर दिए गये नोटिसों को मैने अच्छे से पढ़ लिया है और मान लिया
+          है
       nv:
         online_instructions: <p>नीचे दिए गये स्टेट के साथ आप अपना वोटर रेजिस्ट्रेशन
           ऑनलाइन पूरा कर सकतें हैं| नेवादा ऑनलाइन वोटर अप्लिकेशन (NOVA) नेवादा स्टेट
@@ -528,19 +530,17 @@ hi:
       thirty_days_before: chunav ke 30 din pehle
     pdf_instructions:
       blank: ''
-      arizona: ! '* पहली बार मतदाता पंजीकरण आवेदकों और हाल ही में आवागमन के लिए नोट:
-        आप भी विधानसभा चुनावों में मतदान करने के लिए नागरिकता का प्रमाण प्रस्तुत करना
-        होगा! इस एरिजोना में पंजीबद्ध आपकी पहली बार है या आप किसी अन्य काउंटी में
-        स्थानांतरित कर दिया है, तो अपने मतदाता पंजीकरण फार्म भी राज्य चुनाव (यानी
-        राज्यपाल, राज्य के सचिव, एवं राज्य विधायिका) में वोट करने के लिए नागरिकता
-        का सबूत शामिल करना चाहिए. नहीं तो आप केवल संघीय चुनाव में मतदान करने के लिए
-        eleigible हो जाएगा. आप एक AZ चालक लाइसेंस या 1996/10/01 के बाद जारी किए गए
-        राज्य आईडी कार्ड है, कि suffient "नागरिकता का सबूत ''है और कोई अन्य दस्तावेज
-        की जरूरत है. यदि नहीं, तो आप अपने मतदाता पंजीकरण आवेदन के साथ "नागरिकता का
-        सबूत ''प्रस्तुत करना होगा. सबसे आम ''सबूत'' अपने जन्म प्रमाण पत्र या पासपोर्ट
-        की फोटोकॉपी है. स्वीकार्य दस्तावेज की एक पूरी सूची ऑनलाइन पाया जा सकता है.<br/>
-
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      arizona: ! '<b>*Note for First Time Voter Registration Applicants And Recent
+        Movers: You must ALSO submit proof of citizenship to vote in state elections!</b><br/><i>If
+        this is your first time registering in Arizona or you have moved to another
+        county, your voter registration form must also include proof of citizenship
+        to vote in state elections (ie. Governor, Secretary of State, &amp; state
+        legislature). Otherwise you will ONLY be eleigible to vote in federal elections.
+        If you have an AZ driver license or state ID card issued after 10/1/1996,
+        that is suffient "proof of citizenship" and no other documentation is needed.
+        If not, you must submit "proof of citizenship" along with your voter registration
+        application. The most common "proof" is a photocopy of your birth certificate
+        or passport. A full list of acceptable documentation can be found <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">online</a>.</i>'
       kansas: ! '* पहली बार मतदाता पंजीकरण आवेदकों के लिए नोट: आप भी विधानसभा चुनावों
         में मतदान करने के लिए नागरिकता का प्रमाण प्रस्तुत करना होगा! इस केन्सास में
         दर्ज की आपकी पहली बार है, अपने मतदाता पंजीकरण फार्म भी राज्य चुनाव (यानी राज्यपाल,
@@ -562,9 +562,9 @@ hi:
         राज्य आईडी कार्ड है, कि suffient "नागरिकता का सबूत ''है और कोई अन्य दस्तावेज
         की जरूरत है. यदि नहीं, तो आप अपने मतदाता पंजीकरण आवेदन के साथ "नागरिकता का
         सबूत ''प्रस्तुत करना होगा. सबसे आम ''सबूत'' अपने जन्म प्रमाण पत्र या पासपोर्ट
-        की फोटोकॉपी है. स्वीकार्य दस्तावेज की एक पूरी सूची ऑनलाइन पाया जा सकता है.<br/>
+        की फोटोकॉपी है. स्वीकार्य दस्तावेज की एक पूरी सूची ऑनलाइन पाया जा सकता है.<BR>
 
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>.'
       kansas: ! '* पहली बार मतदाता पंजीकरण आवेदकों के लिए नोट: आप भी विधानसभा चुनावों
         में मतदान करने के लिए नागरिकता का प्रमाण प्रस्तुत करना होगा! इस केन्सास में
         दर्ज की आपकी पहली बार है, अपने मतदाता पंजीकरण फार्म भी राज्य चुनाव (यानी राज्यपाल,

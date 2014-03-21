@@ -2,6 +2,35 @@
 th:
   language_name: ภาษาไทย
   language_name_translation_instructions: ภาษาไทย
+  locales:
+    bn:
+      name: ภาษาเบงกาลี
+    en:
+      name: ภาษาอังกฤษ
+    es:
+      name: ภาษาสเปน
+    hi:
+      name: ภาษาฮินดี
+    ilo:
+      name: Ilocano
+    ja:
+      name: ญี่ปุ่น
+    km:
+      name: ขอม
+    ko:
+      name: เกาหลี
+    th:
+      name: ภาษาไทย
+    tl:
+      name: ตากาล็อก
+    ur:
+      name: ภาษาอิรดู
+    vi:
+      name: เวียตนาม
+    zh-tw:
+      name: ภาษาจีน (แบบดั้งเดิม)
+    zh:
+      name: จีน (ดั้งเดิม)
   activerecord:
     attributes:
       partner:
@@ -23,6 +52,8 @@ th:
         home_city: เมือง
         home_state_name: รัฐ
         has_mailing_address: ฉันได้รับจดหมายของฉันที่ที่อยู่แตกต่างจากข้างบน
+        has_state_license: ฉันมีใบขับขี่หรือบัตรประจำตัวประชาชนที่รัฐออกให้
+        will_be_18_by_election: ฉันจะมีอายุครบ 18 ปีบริบูรณ์ภายในวันเลือกตั้งครั้งต่อไป
         mailing_address: ที่อยู่
         mailing_unit: เลขที่ห้อง
         mailing_city: เมือง
@@ -56,6 +87,8 @@ th:
     errors:
       models:
         registrant:
+          ca_disclosures_error: เพื่อการส่งข้อมูลการสมัครที่เสร็จสมบูรณ์ต่อรัฐ [[state]]
+            คุณจะต้องยอมรับข้อมูลและเงื่อนไขด้านบนนี้
           blank: กรอกข้อมูลที่จำเป็นไม่ครบ
           invalid_zip: รหัสไปรษณีย์ไม่ถูกต้อง
           attributes:

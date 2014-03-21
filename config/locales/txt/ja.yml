@@ -27,6 +27,7 @@ ja:
       step_2_header: 個人情報
       step_3_header: 追加の登録情報
       step_4_header: 最新情報を得て、行動を起こしましょう。
+      step_4_ovr_header: あなたには州のオンライン投票登録システムを使用して登録を終了できる資格があります。
       step_5_header: 見直して確認する。
       stay_informed_header: 最新情報を収集する。
       identification_header: 身分証明情報
@@ -103,6 +104,7 @@ ja:
         finish_email_sent: Eメールが送られました。
         finish_update_status: フェイスブックやツイッターでの更新を忘れないで下さい。
         state_online_registration: あなたには、%{state} オンライン投票登録システムを使って投票登録を完了させる資格があるかもしれません。
+        state_online_registration_sub_header: あなたの州の登録手続きを完了させるために今すぐ下をクリックしてください。
         leave_state_online_registration: 下の用紙を使ってオンラインで%{state} の投票登録を完了させることができます。運転免許証や州の身分証明書カードが無効であったり、州があなたのDMVの記録を見つける、または確認することができなくても心配はいりません。&mdash%{link}することも可能です。印刷し、署名し、郵送するだけです。
         leave_state_online_registration_link: ! '%{rtv_and_partner_name}で登録を終了して下さい。'
       ineligible:
