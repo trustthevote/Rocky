@@ -22,7 +22,7 @@ gem "haml"
 gem "rails-i18n"
 gem 'jquery-rails', '~> 2.1'
 
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', :git=>"https://github.com/amekelburg/wkhtmltopdf-binary"
 gem 'wicked_pdf'
 
 gem 'rest-client'
