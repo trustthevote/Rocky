@@ -84,7 +84,7 @@ record_4:
   id_number_tooltip: drivers_license_required_at_voting_with_state_name
   sos_address: "Secretary of State<br>Elections Division<br>1500 11th Street<br>Sacramento, CA 95814"
   sos_phone: (800) 345-VOTE
-  sos_url: http://www.sos.ca.gov/elections/
+  sos_url: http://www.sos.ca.gov/elections/registration-status/
   online_registration_url: http://www.registertovote.ca.gov/
   registration_deadline: california
 

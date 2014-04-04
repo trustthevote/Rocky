@@ -53,6 +53,9 @@ ur:
         home_state_name: ریاست
         has_mailing_address: میں اپنی ڈاک مندرجہ بالا پتہ کے علاوہ دوسرے پتہ پر وصول
           کرتا ہوں
+        has_state_license: ​میرے پاس سٹیٹ کا ڈرائیونگ لائسنس اور شناختی کارڈ ہے
+        will_be_18_by_election: ​اگلے انتخابات کے دن تک میری عمر اٹھارہ سال ہو جائے
+          گی
         mailing_address: پتہ
         mailing_unit: مکان / فلیٹ نمبر
         mailing_city: شہر
@@ -87,6 +90,8 @@ ur:
     errors:
       models:
         registrant:
+          ca_disclosures_error: ​اپنی ریاست California کے ساتھ رجسٹریشن مکمل کرنے
+            کے لیے لازم ہے کہ آپ کو درج بالا اعلان / انکشاف کو قبول کرنا ہو گا۔​
           blank: مطلوبہ
           invalid_zip: ناقابل قبول زپ
           attributes:

@@ -55,9 +55,9 @@ es:
         home_state_name: Estado
         has_mailing_address: Recibo mi correo en una dirección diferente a la provista
           anteriormente.
-        has_state_license: Tengo una licencia de conducir o tarjeta de identificación
-          estatal.
-        will_be_18_by_election: Voy a estar 18 por el siguiente día de la elección.
+        has_state_license: Tengo una licencia de conducir o una tarjeta de identificación
+          del estado.
+        will_be_18_by_election: Tendré 18 años en el próximo día de elecciones.
         mailing_address: Dirección Alterna
         mailing_unit: No.
         mailing_city: Ciudad
@@ -92,8 +92,8 @@ es:
     errors:
       models:
         registrant:
-          ca_disclosures_error: Con el fin de terminar su registro con el estado de
-            California, tiene que aceptar las revelaciones anteriores.
+          ca_disclosures_error: Para completar su inscripción para votar en el estado
+            de California debe aceptar las condiciones arriba mencionadas.
           blank: Requerido
           invalid_zip: Código Postal Invalido
           attributes:
