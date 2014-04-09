@@ -80,11 +80,17 @@ describe StateCustomization do
   
   describe "redirect_to_online_reg_url(registrant)" do
     let(:sc) { StateCustomization.new(state) }
-    before(:each) do
-      state.stub(:redirect_to_online_registration_url?).and_return(true)
-    end
-    it "returns the state's configured url" do
+    it "returns whether the state should redirect" do
+      sc.redirect_to_online_reg_url(nil).should be_false
+      
+      settings = mock("Setting")
+      sc.stub(:ovr_settings).and_return(settings)
+      
+      settings.stub(:redirect_to_online_reg_url).and_return(true)
       sc.redirect_to_online_reg_url(nil).should be_true
+
+      settings.stub(:redirect_to_online_reg_url).and_return(false)
+      sc.redirect_to_online_reg_url(nil).should be_false
     end
     
   end

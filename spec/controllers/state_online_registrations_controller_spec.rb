@@ -48,9 +48,11 @@ describe StateOnlineRegistrationsController do
       get :show, :registrant_id => reg.to_param
       assert_template "show"
     end
+    
     it "renders a state template if it exists" do
       reg = FactoryGirl.create(:step_1_registrant, :home_state_id=>GeoState['CA'].id)
       File.stub(:exists?)
+      RockyConf.ovr_states.CA.stub(:redirect_to_online_reg_url).and_return(false)
       File.stub(:exists?).with(File.join(Rails.root,"app/views/state_online_registrations/#{reg.home_state_abbrev.downcase}.html.erb")) { true }
       get :show, :registrant_id => reg.to_param
       assert_template "#{reg.home_state_abbrev.downcase}"

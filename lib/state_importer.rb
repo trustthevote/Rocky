@@ -33,7 +33,7 @@ class StateImporter
   # conf_keys with values that are not I18n key-parts
   def self.state_settings
     # [method_name, yaml_key]
-    unaliased = %w(name participating requires_race requires_party id_length_min id_length_max online_registration_url redirect_to_online_registration_url)
+    unaliased = %w(name participating requires_race requires_party id_length_min id_length_max online_registration_url)
     unaliased.collect{|m| [m, m]} +
     [['registrar_address','sos_address'],
      ['registrar_phone','sos_phone'],

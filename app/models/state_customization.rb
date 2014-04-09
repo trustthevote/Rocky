@@ -41,9 +41,8 @@ class StateCustomization
   end
   
   def enabled_for_language?(lang)
-    lang_list = RockyConf.ovr_states[state.abbreviation]
-    return true if lang_list.blank?
-    lang_list = lang_list["languages"]
+    return true if ovr_settings.blank?
+    lang_list = ovr_settings["languages"]
     return true if lang_list.blank? || lang_list.empty?
     return lang_list.include?(lang)
   end
@@ -56,7 +55,12 @@ class StateCustomization
   end
   
   def redirect_to_online_reg_url(registrant)
-    state.redirect_to_online_registration_url?
+    return false if ovr_settings.blank?
+    return !!ovr_settings.redirect_to_online_reg_url
+  end
+  
+  def ovr_settings
+    RockyConf.ovr_states[state.abbreviation]
   end
   
   def has_ovr_pre_check?(registrant)

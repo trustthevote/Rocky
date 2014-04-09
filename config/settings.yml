@@ -47,6 +47,7 @@ states_with_online_registration:
   
 ovr_states:
   CA:
+    redirect_to_online_reg_url: true
     api_settings:
       api_url: https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc
       api_key: d2DE1Nht8I

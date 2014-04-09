@@ -3,7 +3,6 @@ defaults:
   participating: true
   not_participating_tooltip: blank
   requires_race: false
-  redirect_to_online_registration_url: false
   race_tooltip: not_required_but_appreciated_with_state_name
   parties:
     - democratic
@@ -77,14 +76,13 @@ record_3:
 record_4:
   abbreviation: CA
   name: California
-  redirect_to_online_registration_url: false
   requires_party: true
   party_tooltip: california 
   no_party: decline_to_state 
   id_number_tooltip: drivers_license_required_at_voting_with_state_name
   sos_address: "Secretary of State<br>Elections Division<br>1500 11th Street<br>Sacramento, CA 95814"
   sos_phone: (800) 345-VOTE
-  sos_url: http://www.sos.ca.gov/elections/
+  sos_url: http://www.sos.ca.gov/elections/registration-status/
   online_registration_url: http://www.registertovote.ca.gov/
   registration_deadline: california
 

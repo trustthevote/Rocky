@@ -170,16 +170,17 @@ en:
 
 
           If you completed a voter registration application online, it was submitted
-          to the  %{state_name} Secretary of State Office for processing. Once approved,
-          you''ll receive a confirmation from the %{state_abbr} Secretary of State
-          Office and your county elections department will put your new voter registration
-          card in the mail.<br><br>
+          to the  %{state_name} Secretary of State''s Office for processing. Once
+          approved, you''ll receive a confirmation from the %{state_abbr} Secretary
+          of State''s Office and your county elections department will put your new
+          voter registration card in the mail.<br><br>
 
 
           If you have questions or concerns, you can check the status of your voter
-          registration by calling the %{state_abbr} Secretary of State Office at %{registrar_phone},
-          or checking online at %{registrar_url}. Please contact %{rtv_and_partner_name}
-          directly if you encountered any issues with the registration process.<br><br>
+          registration by calling the %{state_abbr} Secretary of State''s Office at
+          %{registrar_phone}, or checking online at %{registrar_url}. Please contact
+          %{rtv_and_partner_name} directly if you encountered any issues with the
+          registration process.<br><br>
 
 
           Now, we need your help getting others registered to vote too. There are

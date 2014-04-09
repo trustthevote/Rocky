@@ -32,7 +32,6 @@ describe StateImporter do
       participating: true
       not_participating_tooltip: blank
       requires_race: false
-      redirect_to_online_registration_url: false
       race_tooltip: virginia
       parties:
         - democratic
@@ -52,7 +51,6 @@ describe StateImporter do
       abbreviation: AL
       name: Alabama
       participating: "1"
-      redirect_to_online_registration_url: true
       not_participating_tooltip: new_hampshire 
       requires_race: "1"
       requires_party: "1"
@@ -113,14 +111,12 @@ YML
       assert_equal "sos_address", state.registrar_address
       assert_equal "sos_phone", state.registrar_phone
       assert_equal "sos_url", state.registrar_url
-      assert_equal true, state.redirect_to_online_registration_url
       
 
       state = GeoState['AK']
       assert_equal false, state.participating
       assert_equal 10, state.id_length_min
       assert_equal 13, state.id_length_max
-      assert_equal false, state.redirect_to_online_registration_url
       
 
       state = GeoState['AZ']
