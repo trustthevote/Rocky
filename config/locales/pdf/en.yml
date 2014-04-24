@@ -103,7 +103,7 @@ en:
           year: Year
         top_half_footer: ! '<b>If you are registering to vote for the first time</b>:
           please refer to the application instructions for information on submitting
-          copes of valid identification documents with this form.'
+          copies of valid identification documents with this form.'
         bottom_half_title: Please fill out the sections below if they apply to you.
         blockA:
           title: If this application is for a <b>change of name</b>, what was your
@@ -115,8 +115,8 @@ en:
           box5_label: ''
         blockB:
           title: If you were registered before but this is the first time you are
-            registering from the address in Box, what was your address where you were
-            registered before?
+            registering from the address in Box 2, what was your address where you
+            were registered before?
           box1_label: Street (or route and box number)
           box2_label: ! 'Apt. or Lot #'
           box3_label: City/Town/County

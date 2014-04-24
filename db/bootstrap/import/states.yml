@@ -677,7 +677,7 @@ record_49:
   sos_phone: (608) 266-8005
   sos_url: http://elections.state.wi.us/
   sub_18: 17_turn_18
-  registration_deadline: postmark_20_days
+  registration_deadline: postmarked_20_days
 
 
 record_50:
