@@ -864,7 +864,8 @@ class Registrant < ActiveRecord::Base
   end
   
   def in_ovr_flow?
-    has_state_license && home_state_allows_ovr?
+    #has_state_license && 
+    home_state_allows_ovr?
   end
   
   def home_state_allows_ovr?

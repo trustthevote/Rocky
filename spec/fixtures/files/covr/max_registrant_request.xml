@@ -58,7 +58,6 @@
 
                 <tem:PhoneNumber>1234567890</tem:PhoneNumber>
                 <tem:EmailId>citizen@example.com</tem:EmailId>
-                <tem:EmailIdConfirmation>citizen@example.com</tem:EmailIdConfirmation>
                 
                 
                 
