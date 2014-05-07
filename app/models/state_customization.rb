@@ -37,10 +37,11 @@ class StateCustomization
   end
   
   def online_reg_enabled?(locale, registrant = nil)
-    GeoState.states_with_online_registration.include?(state.abbreviation) && self.enabled_for_language?(locale)
+    GeoState.states_with_online_registration.include?(state.abbreviation) && self.enabled_for_language?(locale, registrant)
   end
   
-  def enabled_for_language?(lang)
+  def enabled_for_language?(lang, reg)
+    return false if !reg.has_state_license?
     return true if ovr_settings.blank?
     lang_list = ovr_settings["languages"]
     return true if lang_list.blank? || lang_list.empty?

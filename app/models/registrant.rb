@@ -860,16 +860,15 @@ class Registrant < ActiveRecord::Base
   end
 
   def home_state_online_reg_enabled?
-    !home_state.nil? && home_state.online_reg_enabled?(locale)
+    !home_state.nil? && home_state.online_reg_enabled?(locale, self)
   end
   
   def in_ovr_flow?
-    #has_state_license && 
     home_state_allows_ovr?
   end
   
   def home_state_allows_ovr?
-    localization ? localization.allows_ovr? : false
+    localization ? localization.allows_ovr?(self) : false
   end
   
   

@@ -307,11 +307,15 @@ class CA < StateCustomization
     
   NUM_DISCLOSURES = 5
   
-  def enabled_for_language?(lang)
+  def enabled_for_language?(lang, reg)
     if CA.disclosures.nil? || CA.disclosures[lang.to_s].nil? || CA.disclosures[lang.to_s].size != NUM_DISCLOSURES
       return false
     end
-    super
+    return true if ovr_settings.blank?
+    lang_list = ovr_settings["languages"]
+    return true if lang_list.blank? || lang_list.empty?
+    return lang_list.include?(lang)
+    
   end
   
   def self.disclosures

@@ -51,6 +51,7 @@ describe RegistrationStep do
   
   it "should set the registrant's finish_with_state flag to false if it was true" do
     GeoState.stub(:states_with_online_registration).and_return([@reg.home_state_abbrev])
+    #raise @reg.home_state_online_reg_enabled?.to_s + @reg.has_state_license?.to_s
     @reg.update_attributes(:finish_with_state=>true)
     @reg.finish_with_state.should be_true
     @rs.send(:find_registrant, nil, { :id => @reg.to_param })

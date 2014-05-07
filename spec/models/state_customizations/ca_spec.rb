@@ -13,16 +13,16 @@ describe CA do
     it { should be_true }
   end
   
-  describe "enabled_for_language?(lang)" do
+  describe "enabled_for_language?(lang, reg)" do
     it "returns false if 5 disclosures aren't present for the lang" do
       CA.stub(:disclosures).and_return({"en"=>{1=>1, 2=>2, 3=>3, 4=>4, 5=>5}})
-      ca.enabled_for_language?("en").should be_true
+      ca.enabled_for_language?("en", nil).should be_true
       CA.stub(:disclosures).and_return(nil)
-      ca.enabled_for_language?("en").should be_false
+      ca.enabled_for_language?("en", nil).should be_false
       CA.stub(:disclosures).and_return({"en"=>nil})
-      ca.enabled_for_language?("en").should be_false
+      ca.enabled_for_language?("en", nil).should be_false
       CA.stub(:disclosures).and_return({"en"=>{1=>1, 2=>2, 3=>3, 4=>4}})
-      ca.enabled_for_language?("en").should be_false
+      ca.enabled_for_language?("en", nil).should be_false
     end
   end
   

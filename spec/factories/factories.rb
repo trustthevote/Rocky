@@ -31,7 +31,7 @@ FactoryGirl.define do
     date_of_birth   20.years.ago.to_date.strftime("%m/%d/%Y")
     home_zip_code   "15215"  # == Pennsylvania
     us_citizen      true
-    has_state_license false
+    has_state_license true
     will_be_18_by_election true
     #opt_in_email    true
     #opt_in_sms      true
@@ -50,7 +50,7 @@ FactoryGirl.define do
     home_address    "123 Market St."
     home_city       "San Francisco"
     # home_state      { GeoState['CA'] }
-    has_state_license false
+    has_state_license true
   end
 
   factory :step_3_registrant, :parent => :step_2_registrant do 
