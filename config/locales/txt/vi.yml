@@ -22,14 +22,15 @@ vi:
       skip_state_online_registration: ! '&gt; Không, xin cảm ơn, tôi sẽ tiếp tục với
         %{rtv_and_partner_name} và nộp mẫu của tôi sau.'
     registration:
-      in_language_name: Bằng Tiếng Việt
+      in_language_name: Bằng Tiếng Anh
       powered_by: ! 'Được hỗ trợ bỡi:'
       progress_indicator: ! 'Bước:'
       step_1_header: Người Đăng Ký Mới
       step_2_header: Thông Tin Cá Nhân
       step_3_header: Thông Tin Đăng Ký Phụ
       step_4_header: Cập nhật thông tin cho chính mình và Hành Động
-      step_4_ovr_header: Hang on. You are eligible to register online in your state.
+      step_4_ovr_header: Bạn có đủ điều kiện để hoàn thành đăng ký của bạn bằng cách
+        sử dụng hệ thống đăng ký cử tri trực tuyến của Bang.
       step_5_header: Xem Lại và Công Nhận
       stay_informed_header: Cập nhật thông tin cho chính mình
       identification_header: Thông Tin Nhận Dạng
@@ -132,8 +133,8 @@ vi:
         state_online_registration: Bạn có thể đủ điều kiện để hoàn thành đăng ký cử
           tri của bạn bằng cách sử dụng hệ thống đăng ký cử tri trực tuyến của bang
           %{state}.
-        state_online_registration_sub_header: Click below to complete the registration
-          process right now with your state.
+        state_online_registration_sub_header: Nhấp vào bên dưới để hoàn tất quá trình
+          đăng ký ngay bây giờ với nhà nước của bạn.
         leave_state_online_registration: Bạn có thể hoàn thành đăng ký cử tri trực
           tuyến với %{state} bằng cách sử dụng mẫu dưới đây. Nếu bằng lái xe hoặc
           thẻ nhận dạng của bạn không hợp lệ, hoặc bang bạn không thể thấy hay xác
