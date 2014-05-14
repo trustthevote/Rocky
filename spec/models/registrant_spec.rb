@@ -901,10 +901,10 @@ describe Registrant do
         reg.stub(:home_state_allows_ovr?).and_return(true)
         reg.should be_in_ovr_flow
       end
-      it "is false when the registrant did not chck has-id" do
+      it "is true when the registrant did not chck has-id" do
         reg.has_state_license = false
         reg.stub(:home_state_allows_ovr?).and_return(true)
-        reg.should_not be_in_ovr_flow
+        reg.should be_in_ovr_flow
       end
       it "is false when the registrant's state is not enable for ovr" do
         reg.has_state_license = true

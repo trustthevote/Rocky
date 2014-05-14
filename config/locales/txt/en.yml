@@ -96,8 +96,10 @@ en:
         work: Work
         other: Other
       instructions:
-        overseas: ! '<b>Note</b>: If you are an American citizen living abroad or
-          a uniformed military voter, <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
+        overseas: ! '<b>Note</b>: Some states offer online voter registration. <a
+          href=''http://www.rockthevote.com/voter-registration/online-application-system/online.html''
+          target=''_blank''>Learn more.</a> If you are an American citizen living
+          abroad or a uniformed military voter, <a href=''http://www.rockthevote.com/voting-is-easy/voting-rights/overseas-rights/overseas.html''
           target=''_blank''>click here</a> to register to vote.'
         opt_in_email: We will send you timely election reminders, your polling place
           location, and information about music and issues.

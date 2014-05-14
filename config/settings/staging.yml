@@ -11,11 +11,29 @@ pdf_expiration_days: .25
 ovr_states:
   CA:
     api_settings:
-      debug_in_ui: true
+      api_url: https://covrapitest.sos.ca.gov/PostingEntityInterfaceService.svc
+      api_key: d2DE1Nht8I
+      api_posting_entity_name: RTV
+      debug_in_ui: false
       log_all_requests: true
+      disclosures_font_size: 12px
+      disclosures_box_height: 170px
+      web_url_base: https://covrtest.sos.ca.gov
+      disclosures_url: https://408cfb943c38a5970903-5b52f06634f7505b14971829884d4c95.ssl.cf1.rackcdn.com/discl/
+      web_agency_key: RTV
+      
+      
 
 enabled_locales:
   - en
   - es
   - ko
+  - tl
+  - ilo
+  - hi
+  - th
+  - vi
   - zh
+  - zh-tw
+  - ur
+  - bn

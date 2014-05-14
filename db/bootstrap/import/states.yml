@@ -645,7 +645,7 @@ record_46:
 record_47:
   abbreviation: WA
   name: Washington
-  requires_party: true
+  requires_party: false
   party_tooltip: washington
   id_number_tooltip: drivers_license_with_state_name_2
   sos_address: "Secretary of State<br>Voter Registration by Mail<br>P.O. Box 40230<br>Olympia, WA 98504-0230"
@@ -677,7 +677,7 @@ record_49:
   sos_phone: (608) 266-8005
   sos_url: http://elections.state.wi.us/
   sub_18: 17_turn_18
-  registration_deadline: postmark_20_days
+  registration_deadline: postmarked_20_days
 
 
 record_50:

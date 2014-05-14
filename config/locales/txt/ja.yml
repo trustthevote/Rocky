@@ -20,7 +20,7 @@ ja:
       state_online_registration: 今<br/> オンラインで用紙<br/> を %{state}へ提出することを希望します。
       skip_state_online_registration: ! '&gt;いいえ、結構です。　私は%{rtv_and_partner_name}を続けてから後で用紙を送ります。'
     registration:
-      in_language_name: 英語で
+      in_language_name: 日本語
       powered_by: 提供される
       progress_indicator: 段階
       step_1_header: 新しい登録者

@@ -88,8 +88,8 @@ class GeoState < ActiveRecord::Base
     @state_customization ||= StateCustomization.for(self)
   end 
   
-  def online_reg_enabled?(locale)
-    GeoState.states_with_online_registration.include?(self.abbreviation) && self.enabled_for_language?(locale)
+  def online_reg_enabled?(locale, reg)
+    GeoState.states_with_online_registration.include?(self.abbreviation) && self.enabled_for_language?(locale, reg)
   end
   
     

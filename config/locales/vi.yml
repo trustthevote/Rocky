@@ -1,7 +1,36 @@
 ---
 vi:
   language_name: Tiếng Anh
-  language_name_translation_instructions: Tiếng Việt
+  language_name_translation_instructions: Tiếng Anh
+  locales:
+    bn:
+      name: Bengali
+    en:
+      name: English
+    es:
+      name: Tây Ban Nha
+    hi:
+      name: Tiếng Hin-ddi
+    ilo:
+      name: Ilocano
+    ja:
+      name: Japanese
+    km:
+      name: Khmer
+    ko:
+      name: Hàn Quốc
+    th:
+      name: Thái Lan
+    tl:
+      name: Tagalog
+    ur:
+      name: Urdu
+    vi:
+      name: tiếng Việt
+    zh-tw:
+      name: Trung Quốc (truyền thống)
+    zh:
+      name: Trung Quốc (giản thể)
   activerecord:
     attributes:
       partner:
@@ -11,7 +40,7 @@ vi:
         date_of_birth: Ngày tháng năm sinh
         email_address: Địa chỉ Email
         first_registration: Đây là lần đầu tiên tôi đăng ký đi bầu.
-        home_zip_code: Mã số vùng
+        home_zip_code:  Mã số vùng
         us_citizen: Tôi là công dân Hoa Kỳ.
         name_title: Chức vị
         first_name: Tên
@@ -23,6 +52,8 @@ vi:
         home_city: Thành phố
         home_state_name: Tiểu bang
         has_mailing_address: Tôi nhận thư tại một điạ chỉ khác với địa chỉ trên
+        has_state_license: Tôi có giấy phép lái xe hoặc thẻ căn cước bang.
+        will_be_18_by_election: Tôi sẽ đủ 18 tuổi vào kì bầu cử tới.
         mailing_address: Địa chỉ
         mailing_unit: Đơn vị/ Số lô
         mailing_city: Thành phố
@@ -57,6 +88,8 @@ vi:
     errors:
       models:
         registrant:
+          ca_disclosures_error: Để hoàn tất việc đăng ký với tiểu bang California,
+            bạn phải đồng ý với các thông cáo trên.
           blank: Yêu cầu
           invalid_zip: Mã vùng ZIP không hợp lệ
           attributes:
@@ -82,7 +115,7 @@ vi:
         inclusion: ! '%{attribute} không bao gồm trong danh sách.'
         exclusion: ! '%{attribute} được để riêng.'
         invalid: ! '%{attribute} không hợp lệ.'
-        invalid_for_pdf: ! '%{attribute} must be provided in English'
+        invalid_for_pdf: ! '%{attribute} phải được cung cấp bằng tiếng Anh.'
         confirmation: ! '%{attribute} không phù hợp với xác nhận.'
         accepted: ! '%{attribute} phải được chấp nhận.'
         empty: ! '%{attribute} không thể để trống.'
