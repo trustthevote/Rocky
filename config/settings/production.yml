@@ -3,8 +3,8 @@ from_address: "register@rockthevote.com"
 default_url_host: "register.rockthevote.com"
 
 
+#  - CA
 states_with_online_registration:
-  - CA
   - NV
   - WA
 

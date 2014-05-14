@@ -40,10 +40,6 @@ pdf_expiration_days: 14
 pdf_no_email_expiration_minutes: 10
 partner_csv_expiration_minutes: 30
 
-states_with_online_registration:
-  - CA
-  - NV
-  - WA
   
 ovr_states:
   CA:
