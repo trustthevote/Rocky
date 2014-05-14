@@ -22,7 +22,7 @@ vi:
       skip_state_online_registration: ! '&gt; Không, xin cảm ơn, tôi sẽ tiếp tục với
         %{rtv_and_partner_name} và nộp mẫu của tôi sau.'
     registration:
-      in_language_name: Bằng Tiếng Anh
+      in_language_name: Bằng Tiếng Việt
       powered_by: ! 'Được hỗ trợ bỡi:'
       progress_indicator: ! 'Bước:'
       step_1_header: Người Đăng Ký Mới
