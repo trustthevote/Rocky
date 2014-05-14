@@ -10,6 +10,7 @@ vi:
           checkbox_text: Tôi là cư dân tiểu bang California, sống tại Hoa Kỳ.
           instruction_text: Bạn có đủ điều kiện để hoàn thành đăng ký của bạn bằng
             cách sử dụng hệ thống đăng ký cử tri trực tuyến của Bang.
+        ca_disclosures: Tôi đã xem qua và chấp thuận các thông báo ở trên.
       nv:
         online_instructions: <p>Dưới đây bạn có thể hoàn tất đăng ký cử tri trực tuyến
           của bạn với bang mình.  Đơn cử tri trực tuyến Nevada (NOVA) được cung cấp
@@ -486,20 +487,17 @@ vi:
       thirty_days_before: 30 ngày trước cuộc bầu cử
     pdf_instructions:
       blank: ''
-      arizona: ! '* Lưu ý cho lần đầu tiên cử tri đăng ký nộp đơn và Movers gần đây:
-        Bạn CŨNG phải nộp bằng chứng về quyền công dân bỏ phiếu trong cuộc bầu cử
-        nhà nước! Nếu đây là lần đầu tiên bạn đăng ký ở Arizona hoặc bạn đã chuyển
-        sang quận khác, hình thức đăng ký cử tri của bạn cũng phải bao gồm bằng chứng
-        của quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước (ví dụ: Thống đốc,
-        Bộ trưởng Ngoại giao, và cơ quan lập pháp nhà nước). Nếu không, bạn sẽ chỉ
-        được eleigible bỏ phiếu trong cuộc bầu cử liên bang. Nếu bạn có một giấy phép
-        lái xe hoặc thẻ ID AZ nhà nước ban hành sau khi 1996/10/01, đó là suffient
-        "bằng chứng về quốc tịch" và không có tài liệu khác là cần thiết. Nếu không,
-        bạn phải nộp bằng chứng "của công dân" cùng với đơn đăng ký cử tri của bạn.
-        Phổ biến nhất "bằng chứng" là một bản sao giấy khai sinh hoặc hộ chiếu. Một
-        danh sách đầy đủ các tài liệu có thể chấp nhận có thể được tìm thấy trực tuyến.<br/>
-
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+      arizona: ! '<b>*Note for First Time Voter Registration Applicants And Recent
+        Movers: You must ALSO submit proof of citizenship to vote in state elections!</b><br/><i>If
+        this is your first time registering in Arizona or you have moved to another
+        county, your voter registration form must also include proof of citizenship
+        to vote in state elections (ie. Governor, Secretary of State, &amp; state
+        legislature). Otherwise you will ONLY be eleigible to vote in federal elections.
+        If you have an AZ driver license or state ID card issued after 10/1/1996,
+        that is suffient "proof of citizenship" and no other documentation is needed.
+        If not, you must submit "proof of citizenship" along with your voter registration
+        application. The most common "proof" is a photocopy of your birth certificate
+        or passport. A full list of acceptable documentation can be found <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">online</a>.</i>'
       kansas: ! '* Lưu ý cho nộp đơn đăng ký lần đầu tiên cử tri: Bạn CŨNG phải nộp
         bằng chứng về quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước! Nếu đây
         là lần đầu tiên bạn đăng ký ở Kansas, mẫu đăng ký cử tri của bạn cũng phải
@@ -524,9 +522,8 @@ vi:
         "bằng chứng về quốc tịch" và không có tài liệu khác là cần thiết. Nếu không,
         bạn phải nộp bằng chứng "của công dân" cùng với đơn đăng ký cử tri của bạn.
         Phổ biến nhất "bằng chứng" là một bản sao giấy khai sinh hoặc hộ chiếu. Một
-        danh sách đầy đủ các tài liệu có thể chấp nhận có thể được tìm thấy trực tuyến.<br/>
-
-        <a href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
+        danh sách đầy đủ các tài liệu có thể chấp nhận có thể được tìm thấy trực tuyến.<BR><a
+        href="http://www.azsos.gov/election/VoterRegistration.htm#Proof">http://www.azsos.gov/election/VoterRegistration.htm#Proof</a>'
       kansas: ! '* Lưu ý cho nộp đơn đăng ký lần đầu tiên cử tri: Bạn CŨNG phải nộp
         bằng chứng về quyền công dân bỏ phiếu trong cuộc bầu cử nhà nước! Nếu đây
         là lần đầu tiên bạn đăng ký ở Kansas, mẫu đăng ký cử tri của bạn cũng phải
