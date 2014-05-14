@@ -17,8 +17,8 @@ ovr_states:
       disclosures_box_height: 100px
       disclosures_prechecked: false
 
-# - CA
 states_with_online_registration:
+  - CA
   - AZ
   - CO
   - NV
