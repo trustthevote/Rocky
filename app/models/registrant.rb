@@ -154,7 +154,7 @@ class Registrant < ActiveRecord::Base
   def self.state_attr_accessor(*args)
     if args.is_a?(Array)
       args.each do |arg|
-        cattr_accessor(arg)
+        attr_accessor(arg)
       end
     else
       define_method(arg) do

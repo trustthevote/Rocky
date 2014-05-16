@@ -82,6 +82,7 @@ Feature: Thank you email for registrants who choose to register online with a st
     And I have a state license
     And my locale is "ko"
     When I go to the step 4 page
+    And I check "registrant_ca_disclosures"
     And I press "registrant_state_online_registration"
     And my session expires
     And the timeout_stale_registrations task has run

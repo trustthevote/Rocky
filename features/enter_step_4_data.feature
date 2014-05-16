@@ -199,17 +199,17 @@ Feature: Step 4
       When I go to the step 4 page
       Then I should see a field for "ID"
       And I should see a field for "Race"
-      And I should see a field for "Party"
+      And I <requires_party> see a field for "Party"
       When I press "registrant_skip_state_online_registration"
       Then I should see "Confirm"
 
       Examples:
-        | state      | state_abbr |
-        | Washington | WA         |
-        | Arizona    | AZ         |
-        | Colorado   | CO         |
-        | Nevada     | NV         |
-        | California | CA         |
+        | state      | state_abbr | requires_party |
+        | Washington | WA         | should not     |
+        | Arizona    | AZ         | should         |  
+        | Colorado   | CO         | should         |
+        | Nevada     | NV         | should         |
+        | California | CA         | should         |
 
     @passing
     Scenario: CA resident eligible and approved for OVR doesn't agree to disclosures

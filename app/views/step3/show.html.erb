@@ -9,6 +9,8 @@
     <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
     <%= render :partial=> 'registrants/phone_opt_ins', :locals=>{:form=>form, :show_hr=>true} %>
     
+    <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
+    
   <%- else %>
     <%= render :partial=> "registrants/state_id_number", :locals=>{:form=>form} %>
   
