@@ -344,7 +344,8 @@ class CA < StateCustomization
   def self.disclosure_url(lang, num)
     base = RockyConf.ovr_states.CA.api_settings.disclosures_url
     base = "#{base}/" unless (base =~ /\/$/)
-    "#{base}#{lang}/discl#{num}.txt"
+    lang_used = lang == "zh-tw" ? "zh" : lang
+    "#{base}#{lang_used}/discl#{num}.txt"
   end
   
   def self.build_soap_xml(registrant)

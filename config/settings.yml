@@ -57,7 +57,6 @@ ovr_states:
     languages:
       - en
       - es
-      - zh
       - zh-tw
       - vi
       - ko
