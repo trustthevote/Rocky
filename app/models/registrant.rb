@@ -152,11 +152,7 @@ class Registrant < ActiveRecord::Base
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
   def self.state_attr_accessor(*args)
-    if args.is_a?(Array)
-      args.each do |arg|
-        attr_accessor(arg)
-      end
-    else
+    [args].flatten.each do |arg|
       define_method(arg) do
         state_ovr_data[arg]
       end
@@ -165,6 +161,7 @@ class Registrant < ActiveRecord::Base
       end
     end
   end
+  
 
   def self.validates_zip_code(*attr_names)
     configuration = { }
