@@ -40,7 +40,8 @@
           </ul>
         </div>
       <%- end %>
-      <%- RockyConf.enabled_locales.each do |locale| %>
+      <%- RockyConf.enabled_locales.each do |loc| %>
+        <%- locale = loc.underscore %>
         <fieldset>
           <legend>Questions in <%= I18n.t('language_name', :locale=>locale)%> (<%= locale %>)</legend>
           <p><%= form.label "survey_question_1_#{locale}", "Question 1" %></p>

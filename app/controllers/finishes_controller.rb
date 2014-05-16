@@ -34,4 +34,6 @@ class FinishesController < RegistrationStep
     set_up_share_variables
   end
 
+  
+
 end

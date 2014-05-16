@@ -54,7 +54,41 @@ ul.affirm  .disclosures li {
     </li>
   </ul>
     <%= rollover_button(:next_step, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev), {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
-
+    <script>
+      function testCaDisclosures() {
+        if ($("#registrant_ca_disclosures").get(0).checked) {
+          $("#registrant_state_online_registration").attr('formtarget','_BLANK')
+          return true
+        } else {
+          $("#registrant_state_online_registration").attr('formtarget','')
+          return false
+        }
+      }
+      
+      $(document).ready(function() {
+        testCaDisclosures();
+      });
+      
+      $("#registrant_ca_disclosures").click(function() {
+        testCaDisclosures();
+        return true;
+      })
+      
+      $("#registrant_state_online_registration").click(function() {
+        if (testCaDisclosures()) {
+          console.log("enable sharing");
+          showSharing();
+        }
+        return true;
+      })
+      function showSharing() {
+        setTimeout(function(){
+          console.log("redirect!")
+          window.location.href = "<%= registrant_finish_path(@registrant) %>";
+        }, 1000);
+      }
+    </script>
+    
 <div style="text-align:center;">
   <a href="#" class='skip_state_registration_link' style="display:none; ">
     <%= I18n.t('txt.button.skip_state_online_registration', :rtv_and_partner_name=>@registrant.rtv_and_partner_name).html_safe %>
