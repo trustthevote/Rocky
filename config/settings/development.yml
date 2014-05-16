@@ -15,7 +15,7 @@ ovr_states:
       log_all_requests: true
       disclosures_font_size: 14px
       disclosures_box_height: 100px
-      disclosures_prechecked: false
+      disclosures_prechecked: true
 
 states_with_online_registration:
   - CA
