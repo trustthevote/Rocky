@@ -217,6 +217,7 @@ Feature: Step 4
       And I have a state license
       And COVR responses return successes
       When I go to the step 4 page
+      And I uncheck "registrant_ca_disclosures"
       And I press "registrant_state_online_registration"
       Then I should see "Hang on. You are eligible to register online in your state."
 
