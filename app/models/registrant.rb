@@ -107,9 +107,9 @@ class Registrant < ActiveRecord::Base
   end
   
   validate_fields(PDF_FIELDS, OVR_REGEX, :invalid_for_pdf)
-  validate_fields(NAME_FIELDS, CA_NAME_REGEX, :invalid_for_pdf)
-  validate_fields(ADDRESS_FIELDS, CA_ADDRESS_REGEX, :invalid_for_pdf)
-  validate_fields(CITY_FIELDS, CA_CITY_STATE_REGEX, :invalid_for_pdf)
+  validate_fields(NAME_FIELDS, CA_NAME_REGEX, :invalid)
+  validate_fields(ADDRESS_FIELDS, CA_ADDRESS_REGEX, :invalid)
+  validate_fields(CITY_FIELDS, CA_CITY_STATE_REGEX, :invalid)
   
   # PDF_FIELDS.each do |pdf_field|
   #   validates pdf_field, format: { with: OVR_REGEX , 
