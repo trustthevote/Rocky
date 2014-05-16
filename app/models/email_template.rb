@@ -24,7 +24,7 @@
 #***** END LICENSE BLOCK *****
 class EmailTemplate < ActiveRecord::Base
 
-  TEMPLATE_NAMES = %w(confirmation reminder).inject([]){|result,t| result + I18n.available_locales.collect{|l| ["#{t}.#{l}", "#{t.capitalize} #{l.upcase}"]} }
+  TEMPLATE_NAMES = %w(confirmation reminder thank_you_external).inject([]){|result,t| result + I18n.available_locales.collect{|l| ["#{t}.#{l}", "#{t.capitalize.gsub("_", " ")} #{l.upcase}"]} }
   
   
   # [ [ 'confirmation.en', 'Confirmation EN' ], [ 'confirmation.es', 'Confirmation ES' ],

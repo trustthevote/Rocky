@@ -35,11 +35,12 @@ Feature: Thank you email for registrants who choose to register online with a st
     Then I should be sent a thank-you email
     And my status should be "complete"
 
-  @passing
-  Scenario: Registrant from a whitelabeled partner who finished online gets sent a thank-you email from that partner
+  @wip
+  Scenario: Registrant from a whitelabeled partner who finished online gets sent a customized thank-you email from that partner
     Given the following partner exists:
       | organization   | rtv_sms_opt_in | partner_sms_opt_in | from_email                      | whitelabeled |
       | Opt-in Partner | true           | true               | alexmek+partner-email@gmail.com | true         |
+    And that partner has a custom thank-you external email
     Given I have completed step 3 as a resident of "Washington" state from that partner
     And I have a state license
     When I go to the step 4 page

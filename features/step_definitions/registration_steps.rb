@@ -144,12 +144,19 @@ Then /^I should be sent a thank\-you email$/ do
   email.subject.should == "Thank you for using the online voter registration tool"
 end
 
+Given(/^that partner has a custom thank\-you external email$/) do
+  @partner ||= Partner.last
+  EmailTemplate.set(@partner, "thank_you_external.en", "Custom partner for <%= @registrant_home_state_name %>, <%= @registrant_home_state_abbrev %>")
+end
+
 Then /^I should be sent a thank\-you email from that partner$/ do
   @partner ||= Partner.last
+  registrant = Registrant.last
   email = ActionMailer::Base.deliveries.last
   email.to.should include(@registrant.email_address)
   email.from.should include(@partner.from_email)
   email.subject.should == "Thank you for using the online voter registration tool"
+  email.body.should == "Custom partner for #{registrant.home_state_name}, #{registrant.home_state_abbrev}"
 end
 
 Then /^I should be sent a thank\-you email from RTV$/ do
