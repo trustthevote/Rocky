@@ -36,9 +36,9 @@
                 <tem:PreviousLastName>Antonia</tem:PreviousLastName>
 
                 <tem:IsHomeAddress>1</tem:IsHomeAddress>
-                <tem:HomeAddressStreetLine1>123 Civil &amp; &quot;Rights&quot; Way</tem:HomeAddressStreetLine1>
+                <tem:HomeAddressStreetLine1>123 Civil Rights Way</tem:HomeAddressStreetLine1>
                 <tem:HomeAddressStreetLine2>Apt 2</tem:HomeAddressStreetLine2>
-                <tem:HomeAddressCity>West &gt; Grove</tem:HomeAddressCity>
+                <tem:HomeAddressCity>West Grove</tem:HomeAddressCity>
                 <tem:HomeAddressState>Massachusetts</tem:HomeAddressState>
                 <tem:HomeAddressZip>02134</tem:HomeAddressZip>
 

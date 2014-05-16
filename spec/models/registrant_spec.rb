@@ -285,35 +285,93 @@ describe Registrant do
       assert_equal "May 3, 1978", reg.date_of_birth_before_type_cast
     end
   
-    it "only allows ascii characters for PDF fields" do
-      ascii_locales = [:en,  :tl, :ilo]
-      non_ascii_locales = [:es, :zh, :vi, :"zh-tw", :hi, :ur, :bn, :ja, :ko, :th, :km]
-      
+    describe "field text validations" do
       Registrant::PDF_FIELDS.each do |field|
-        r = Registrant.new
-        r.stub(:has_mailing_address?).and_return(true)
-        r.stub(:change_of_name?).and_return(true)
-        r.stub(:change_of_address?).and_return(true)
-        
-        #puts "testing field: #{field}"
-        non_ascii_locales.each do |loc|
-          txt = I18n.t('txt.registration.in_language_name', :locale=>loc, :default => "")
-          unless txt.blank?
-            #puts "\tTesting #{loc}: #{txt}"
+        it "only allows ascii characters for PDF field #{field}" do
+          ascii_locales = [:en,  :tl]
+          non_ascii_locales = [:es, :zh, :vi, :"zh-tw", :hi, :ur, :bn, :ja, :ko, :th, :km]
+
+          r = Registrant.new
+          r.stub(:has_mailing_address?).and_return(true)
+          r.stub(:change_of_name?).and_return(true)
+          r.stub(:change_of_address?).and_return(true)
+
+          #puts "testing field: #{field}"
+          non_ascii_locales.each do |loc|
+            txt = I18n.t('txt.registration.in_language_name', :locale=>loc, :default => "")
+            unless txt.blank?
+              #puts "\tTesting #{loc}: #{txt}"
+              r.send("#{field}=",txt)
+              r.should_not be_valid
+              r.errors[field].should_not be_empty          
+            end
+          end
+          ascii_locales.each do |loc|
+            txt = I18n.t('txt.registration.in_language_name', :locale=>loc, :default => "").to_s +  " 123"
+            # puts "\tTesting #{loc}: #{txt}"
             r.send("#{field}=",txt)
-            r.should_not be_valid
-            r.errors[field].should_not be_empty          
+            if !r.valid?
+              puts r.send(field)
+            end
+            r.errors[field].should be_empty
           end
         end
-        ascii_locales.each do |loc|
-          txt = I18n.t('txt.registration.in_language_name', :locale=>loc, :default => "").to_s +  " 123 !@$%^&*"
-          # puts "\tTesting #{loc}: #{txt}"
-          r.send("#{field}=",txt)
-          r.valid?
-          r.errors[field].should be_empty
+      end
+
+      Registrant::NAME_FIELDS.each do |field|
+        it "only allows 'A-Z a-z 0-9 '#,-/_ .@space' in name field #{field}" do
+          r = Registrant.new
+          r.stub(:has_mailing_address?).and_return(true)
+          r.stub(:change_of_name?).and_return(true)
+          r.stub(:change_of_address?).and_return(true)
+          r.send("#{field}=", "AZaz09'#,-/_.@ ")
+          r.should be_valid
+          r.send("#{field}=", "AZaz09'#,-/_.@ !")
+          r.should_not be_valid
+          r.errors[field].should_not be_empty
+        end
+      end
+      Registrant::ADDRESS_FIELDS.each do |field|
+        it "only allows 'A-Z a-z 0-9 # dash space, / .' in address line field #{field}" do
+          r = Registrant.new
+          r.stub(:has_mailing_address?).and_return(true)
+          r.stub(:change_of_name?).and_return(true)
+          r.stub(:change_of_address?).and_return(true)
+          r.send("#{field}=", "AZaz09#- ,/.")
+          r.should be_valid
+          r.send("#{field}=", "AZaz09'")
+          r.should_not be_valid
+          r.errors[field].should_not be_empty
+          r.send("#{field}=", "AZaz09_")
+          r.should_not be_valid
+          r.errors[field].should_not be_empty
+          r.send("#{field}=", "AZaz09@")
+          r.should_not be_valid
+          r.errors[field].should_not be_empty
+        end
+      end
+
+      Registrant::CITY_FIELDS.each do |field|
+        it "only allows 'A-Z a-z 0-9 # dash space' in city-state field #{field}" do
+          r = Registrant.new
+          r.stub(:has_mailing_address?).and_return(true)
+          r.stub(:change_of_name?).and_return(true)
+          r.stub(:change_of_address?).and_return(true)
+          r.send("#{field}=", "AZaz09#- ")
+          r.should be_valid
+          r.send("#{field}=", "AZaz09#,")
+          r.should_not be_valid
+          r.errors[field].should_not be_empty
+          r.send("#{field}=", "AZaz09#.")
+          r.should_not be_valid
+          r.errors[field].should_not be_empty
+          r.send("#{field}=", "AZaz09#/")
+          r.should_not be_valid
+          r.errors[field].should_not be_empty
         end
       end
     end
+
   
   end
 
@@ -1368,9 +1426,9 @@ describe Registrant do
                      "Brownell",
                      "Anthony",
                      "III",
-                     "123 Civil & \"Rights\" Way",
+                     "123 Civil Rights Way",
                      "Apt 2",
-                     "West > Grove",
+                     "West Grove",
                      "CA",
                      "94110",
                      "Yes",
@@ -1420,9 +1478,9 @@ describe Registrant do
                      "Brownell",
                      "Anthony",
                      "III",
-                     "123 Civil & \"Rights\" Way",
+                     "123 Civil Rights Way",
                      "Apt 2",
-                     "West > Grove",
+                     "West Grove",
                      "CA",
                      "94110",
                      "Yes",

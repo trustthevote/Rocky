@@ -54,6 +54,21 @@ class Registrant < ActiveRecord::Base
   WRAP_UP_PRIORITY = REMINDER_EMAIL_PRIORITY + 1
 
 
+  ADDRESS_FIELDS = ["home_address", 
+    "mailing_address", 
+    "prev_address"]
+
+  CITY_FIELDS = ["home_city", 
+   "mailing_city", 
+   "prev_city"]
+
+  NAME_FIELDS = ["first_name", 
+   "middle_name", 
+   "last_name",
+   "prev_first_name", 
+   "prev_middle_name", 
+   "prev_last_name"]
+
   PDF_FIELDS = [
       "home_zip_code",
        "first_name", 
@@ -76,12 +91,34 @@ class Registrant < ActiveRecord::Base
     ]
   
   # OVR_REGEX = /^(\p{Latin}|\P{Letter})*$/
-  OVR_REGEX = /^[a-zA-Z0-9\s\+\.\-!@#\$%\^&\*_=\(\)\[\]\{\};':"\\\/,<>\?\|]*$/
+  CA_NAME_REGEX =   /^[a-zA-Z0-9'#,\-\/_\.@\s]*$/ #A-Z a-z 0-9 '#,-/_ .@space
+  # CA_EMAIL_REGEX =  /^[a-zA-Z0-9\-\/_\.]+@.*\..*$/ #A-Z a-z 0-9, underscore, dash, and '@' followed by at least one "."
+  CA_ADDRESS_REGEX    = /^[a-zA-Z0-9#\-\s,\/\.]*$/ # A-Z a-z 0-9 # dash space, / .
+  CA_CITY_STATE_REGEX = /^[a-zA-Z0-9#\-\s]*$/      # A-Z a-z 0-9 # dash space
+  OVR_REGEX = /^[a-zA-Z0-9#\-\s,\/\.\+!@\$%\^&\*_=\(\)\[\]\{\};':"\\<>\?\|]*$/
   #white space and hyphen for names; and for addresses phone#s and other stuff, also include special chars such as # ( ) / + 
-  PDF_FIELDS.each do |pdf_field|
-    validates pdf_field, format: { with: OVR_REGEX , 
-      message: :invalid_for_pdf }#I18n.t('activerecord.errors.messages.invalid_for_pdf')}
+  
+  def self.validate_fields(list, regex, message)
+    list.each do |field|
+      validates field, format: { with: regex , 
+        message: message }#I18n.t('activerecord.errors.messages.invalid_for_pdf')}
+    end
+    
   end
+  
+  validate_fields(PDF_FIELDS, OVR_REGEX, :invalid_for_pdf)
+  validate_fields(NAME_FIELDS, CA_NAME_REGEX, :invalid_for_pdf)
+  validate_fields(ADDRESS_FIELDS, CA_ADDRESS_REGEX, :invalid_for_pdf)
+  validate_fields(CITY_FIELDS, CA_CITY_STATE_REGEX, :invalid_for_pdf)
+  
+  # PDF_FIELDS.each do |pdf_field|
+  #   validates pdf_field, format: { with: OVR_REGEX , 
+  #     message: :invalid_for_pdf }#I18n.t('activerecord.errors.messages.invalid_for_pdf')}
+  # end
+  
+  
+  
+  
 
   FINISH_IFRAME_URL = "https://s3.rockthevote.com/rocky/rtv-ovr-share.php"
 
@@ -152,11 +189,7 @@ class Registrant < ActiveRecord::Base
   delegate :requires_race?, :requires_party?, :to => :home_state, :allow_nil => true
 
   def self.state_attr_accessor(*args)
-    if args.is_a?(Array)
-      args.each do |arg|
-        attr_accessor(arg)
-      end
-    else
+    [args].flatten.each do |arg|
       define_method(arg) do
         state_ovr_data[arg]
       end

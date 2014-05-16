@@ -40,8 +40,7 @@ class StateOnlineRegistrationsController < RegistrationStep
 protected
   
   def set_up_view_variables
-    set_up_share_variables
-    
+    set_up_share_variables    
     
     @online_registration_iframe_url = @registrant.home_state_online_reg_url
         
