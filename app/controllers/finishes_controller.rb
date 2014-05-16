@@ -31,6 +31,9 @@ class FinishesController < RegistrationStep
       @registrant.update_attributes(:reminders_left => 0)
       @stop_reminders = true
     end
+    if params[:share_only] 
+      @share_only = true
+    end
     set_up_share_variables
   end
 

@@ -4,7 +4,7 @@
     <p><%= I18n.t('txt.registration.finish_reminder', :first_name => @registrant.first_name, :last_name=>@registrant.last_name).html_safe %></p>
     <p><%= I18n.t('txt.registration.finish_reminder_2').html_safe %></p>
   </div>
-<% elsif !@registrant.pdf_ready? && !@registrant.finish_with_state? -%>
+<% elsif !@registrant.pdf_ready? && !@share_only -%>
   <h1><%= I18n.t('txt.registration.finish_pdf_delay_header').html_safe %> </h1>
   <div class="fulltext">
     <p><%= I18n.t('txt.registration.finish_pdf_delay').html_safe %></p>

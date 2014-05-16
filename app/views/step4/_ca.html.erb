@@ -84,7 +84,7 @@ ul.affirm  .disclosures li {
       function showSharing() {
         setTimeout(function(){
           console.log("redirect!")
-          window.location.href = "<%= registrant_finish_path(@registrant) %>";
+          window.location.href = "<%= registrant_finish_path(@registrant, :share_only=>true) %>";
         }, 1000);
       }
     </script>
