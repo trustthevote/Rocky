@@ -198,6 +198,7 @@ class Registrant < ActiveRecord::Base
       end
     end
   end
+  
 
   def self.validates_zip_code(*attr_names)
     configuration = { }

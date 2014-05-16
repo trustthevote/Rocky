@@ -273,11 +273,11 @@ class CA < StateCustomization
           return (fs =~ /px$/) ? fs : "#{fs}px"
         end
       end
-      if registrant.ca_disclosures.nil?
-        setting = RockyConf.ovr_states.CA.api_settings.disclosures_prechecked 
-        if setting || setting.nil?
-          registrant.ca_disclosures = true
-        end
+    end
+    if registrant.ca_disclosures.nil? || registrant.ca_disclosures.blank?
+      setting = RockyConf.ovr_states.CA.api_settings.disclosures_prechecked 
+      if setting || setting.nil?
+        registrant.ca_disclosures = true
       end
     end
   end
