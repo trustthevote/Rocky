@@ -77,6 +77,7 @@ end
 
 
 Given(/^there is a stylesheet for Spanish$/) do
+  File.stub(:exists?)
   File.stub(:exists?).with(Translation.css_path('es')).and_return(true)
 end
 
@@ -85,6 +86,7 @@ Then(/^the Spanish style sheet should be included$/) do
 end
 
 Given(/^there is not a stylesheet for Spanish$/) do
+  File.stub(:exists?)
   File.stub(:exists?).with(Translation.css_path('es')).and_return(false)
 end
 
