@@ -66,25 +66,22 @@ class GeoState < ActiveRecord::Base
   
   def self.read_county_registrar_addresses
     cra = {}
-    CSV.foreach(Rails.root.join("data/zip_codes/zip_code_database.csv"), {:headers=>:first_row}) do |row|
+    CSV.foreach(Rails.root.join("data/zip_codes/county_addresses.csv"), {:headers=>:first_row}) do |row|
       cra[row["county"]] = row["address"]
     end
     cra
   end
   
   def self.read_zip_code_database
-    #1. Read county-addresses into memory
-    #2. Iterate on zip codes and look up county from hash
-      #3. If found, write zip/county/address into DB
-      #4. If not Found record error and send/print all at the end
-    # OR
-      #3/4. If found, keep in memory. If not found, raise error and don't commit data
-    
+    #1. Read list of counties from zip_code_database
+    #2. Read county-addresses into memory
+    #3. Make sure all county-address counties are in zip database
+    #4. Map county/zips/addresses and commit to DB
+    counties = {}
     CSV.foreach(Rails.root.join("data/zip_codes/zip_code_database.csv"), {:headers=>:first_row}) do |row|
       #puts row.headers
-      zip = row["zip"]
-      cra = county_registrar_addresses[row["county"]]
-      
+      counties[row["county"]] ||= []
+      counties[row["county"]] << row["zip"]      
       raise 'not implemented'
     end
   end
