@@ -98,6 +98,15 @@ Feature: Step 1
       Then I should see my email
        And I should see my date of birth
        
+    @passing
+    Scenario: External snippet for a partner
+      Given the following partner exists:
+        | organization   | external_tracking_snippet   |
+        | Opt-in Partner | Custom Snippet From Partner |
+      When I go to a new registration page for that partner
+      Then I should see "Custom Snippet From Partner"
+        
+      
     Scenario: Step1 creation default for primary partner
       When I go to a new registration page
       And I fill in "Email Address" with "john.public@example.com"
