@@ -1,5 +1,15 @@
 <fieldset>
-  <%- if @partner.can_be_whitelabeled? %>
+
+  <ul class="stacked">
+    <li class="width_h">
+      <h3><%= f.label :external_tracking_snippet %></h3>
+      <%= f.text_area :external_tracking_snippet, :rows => 5 %>
+    </li>
+  </ul>
+  
+</fieldset>
+<%- if @partner.can_be_whitelabeled? %>
+  <fieldset>
     <legend>Whitelabeling</legend>
     <ul class="stacked">
       <li class="width_a">
@@ -98,30 +108,8 @@
         </li>
       </ul>
       
-
     </div>
     <div class="whitelabeled">
-      <ul class="stacked">
-        <li class="width_h">
-          <h3><%= f.label :external_tracking_snippet %></h3>
-          <%= f.text_area :external_tracking_snippet, :rows => 5 %>
-        </li>
-      </ul>
-    </div>
-  
-  <%- end %>
-  <%- if @partner.primary? %>
-    <ul class="stacked">
-      <li class="width_h">
-        <h3><%= f.label :external_tracking_snippet %></h3>
-        <%= f.text_area :external_tracking_snippet, :rows => 5 %>
-      </li>
-    </ul>  
-  <%- end %>
-
-  <%- if @partner.can_be_whitelabeled? %>
-    <div class="whitelabeled">
-      
       <% EmailTemplate::TEMPLATE_NAMES.each do |name, label| %>
         <ul class="stacked">
           <li class="width_h">
@@ -131,5 +119,5 @@
         </ul>
       <% end %>
     </div>
-  <%- end %>
-</fieldset>
+  </fieldset>
+<% end %>
