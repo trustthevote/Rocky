@@ -41,6 +41,7 @@ Feature: Admin UI
       And I should not see a field for "Ask for partner SMS opt-in"
       And I should not see a field for "Ask for partner Volunteers"
   
+    @passing
     Scenario: Partner edit form for partner != 1
       Given the following partner exists:
         | id | name                |
@@ -58,6 +59,7 @@ Feature: Admin UI
       And I should see a field for "Ask for partner email opt-in"
       And I should see a field for "Ask for partner SMS opt-in"
       And I should see a field for "Ask for partner Volunteers"
+      And I should see a field for "External tracking snippet"
   
   
     Scenario: Uploading a zip to create new partners
