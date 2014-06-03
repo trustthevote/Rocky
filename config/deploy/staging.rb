@@ -29,6 +29,6 @@ role :db,   ENV['STAGING_DB'], :primary => true
 
 set :rails_env,    "staging"
 
-set :branch, "partner_tracking_snippet"
+set :branch, "master"
 
 after "deploy:migrate", "deploy:symlink_translations"
