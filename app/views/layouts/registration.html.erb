@@ -19,6 +19,9 @@
   <%= yield :head %>
 </head>
 <body>
+  <%- if @partner && !@partner.external_tracking_snippet.blank? %>
+    <%= @partner.external_tracking_snippet.to_s.html_safe %>
+  <%- end %>
   <div id="container">
 
   <% if @partner.custom_logo? -%>

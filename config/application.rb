@@ -90,6 +90,6 @@ module Rocky
     
     config.i18n.fallbacks =[:en]
     
-    
+    I18n.enforce_available_locales = false
   end
 end
