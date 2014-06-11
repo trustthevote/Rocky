@@ -155,7 +155,7 @@ record_10:
   name: Georgia
   requires_race: true
   race_tooltip: georgia
-  requires_party: true
+  requires_party: false
   party_tooltip: not_done_with_state_name
   id_number_tooltip: georgia
   sos_address: "Secretary of State<br>Elections Division<br>1104 West Tower<br>2 Martin Luther King Jr. Drive SE<br>Atlanta, GA 30334-1505"
