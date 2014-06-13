@@ -54,6 +54,7 @@ class StateImporter
   def initialize(file_or_filename = nil)
     @imported_states = []
     @imported_locales = []
+    @imported_zip_addresses = []
     @messages = []
     @defaults = {}
     
@@ -116,7 +117,7 @@ class StateImporter
   #> Reporting (end)
 
   #< Import (fold)
-  attr_accessor :imported_states, :imported_locales
+  attr_accessor :imported_states, :imported_locales, :imported_zip_addresses
   def import
     states_hash.each do |key, row|
       unless key == defaults_key
@@ -131,6 +132,22 @@ class StateImporter
         end
       end
     end
+    import_zip_county_addresses    
+  end
+  
+  def import_zip_county_addresses
+    GeoState.county_registrar_addresses.each do |state_abbr, counties|
+      counties.each do |county, addr_zips|
+        addr_zips[1].each do |zip|
+          self.imported_zip_addresses << ZipCodeCountyAddress.new({
+            :geo_state_id=> GeoState[state_abbr].id,
+            :zip => zip,
+            :address=>addr_zips[0],
+            :county=>county
+          })
+        end
+      end
+    end
   end
   
   def commit!
@@ -140,6 +157,9 @@ class StateImporter
       end
       imported_locales.each do |loc|
         loc.save!
+      end
+      imported_zip_addresses.each do |zca|
+        zca.save!
       end
     end
   end

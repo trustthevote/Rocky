@@ -6,6 +6,8 @@ namespace :import do
   task :states => :environment do
     si = StateImporter.new
     si.import
+    puts "All imports valid, comitting to DB..."
     si.commit!
+    puts "Import Done!"
   end
 end

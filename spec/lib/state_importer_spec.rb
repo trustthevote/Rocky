@@ -27,6 +27,17 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe StateImporter do
   attr_accessor :csv_basic, :file_basic
   before(:each) do
+    
+    GeoState.reset_county_zip_codes
+    GeoState.reset_county_registrar_addresses
+
+    GeoState.stub(:county_addresses_file).and_return(
+      Rails.root.join("spec/fixtures/files/county_addressing/county_addresses.csv")
+    )
+    GeoState.stub(:zip_code_database_file).and_return(
+      Rails.root.join("spec/fixtures/files/county_addressing/zip_code_database.csv")
+    )
+
     @yml_basic = <<YML
     defaults:
       participating: true
@@ -297,10 +308,12 @@ YML
     before(:each) do
       si.stub(:states_hash).and_return(states_hash)
     end
+    
     describe "#import" do
       it "runs import_state for each row in the hash" do
         si.should_receive(:import_state).with(states_hash[:record_0])
         si.should_receive(:import_state).with(states_hash[:record_1])
+        si.should_receive(:import_zip_county_addresses)
         si.import
       end
     end
@@ -378,15 +391,34 @@ YML
       
     end
 
+    describe "#import_zip_county_addresses" do
+      let(:si) { StateImporter.new }
+      
+
+      it "creates a list of ZipCodeCountyAddress objects" do
+        si.import_zip_county_addresses
+        # 3 counties, 4 zip codes
+        si.imported_zip_addresses.should have(4).zip_code_county_addresses
+        zca = si.imported_zip_addresses.first
+        zca.geo_state_id.should == GeoState["PA"].id
+        zca.zip.should == "00544"
+        zca.county.should == "Adams"
+        zca.address.should == "117 Baltimore Street\nRoom 106\nGettysburg, PA 17325"
+      end
+    end
+    
     describe "#commit!" do
       let(:si) { StateImporter.new }
       let(:state) { mock(GeoState) }
       let(:loc) { mock(StateLocalization) }
+      let(:zca) { mock_model(ZipCodeCountyAddress) }
       before(:each) do
         state.stub(:save!)
         loc.stub(:save!)
+        zca.stub(:save!)
         si.stub(:imported_states).and_return([state])
         si.stub(:imported_locales).and_return([loc])
+        si.stub(:imported_zip_addresses).and_return([zca])
       end
       it "saves each state in the imported_states list" do
         state.should_receive(:save!)
@@ -394,6 +426,10 @@ YML
       end
       it "saves each localization in the imported_localizations list" do
         loc.should_receive(:save!)
+        si.commit!
+      end
+      it "saves each zip_code_county_address" do
+        zca.should_receive(:save!)
         si.commit!
       end
 

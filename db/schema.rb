@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140528193930) do
+ActiveRecord::Schema.define(:version => 20140613132702) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -224,5 +224,17 @@ ActiveRecord::Schema.define(:version => 20140528193930) do
   end
 
   add_index "state_localizations", ["state_id"], :name => "index_state_localizations_on_state_id"
+
+  create_table "zip_code_county_addresses", :force => true do |t|
+    t.integer  "geo_state_id"
+    t.string   "zip"
+    t.string   "address"
+    t.string   "county"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "zip_code_county_addresses", ["geo_state_id"], :name => "index_zip_code_county_addresses_on_geo_state_id"
+  add_index "zip_code_county_addresses", ["zip"], :name => "index_zip_code_county_addresses_on_zip"
 
 end

@@ -63,27 +63,62 @@ class GeoState < ActiveRecord::Base
   def self.county_registrar_addresses
     @@county_registrar_addresses ||= read_county_registrar_addresses
   end
+  def self.reset_county_registrar_addresses
+    @@county_registrar_addresses = nil
+  end
   
   def self.read_county_registrar_addresses
+    #COUNTY,STREET 1,STREET 2,CITY,STATE,ZIP,PHONE
     cra = {}
-    CSV.foreach(Rails.root.join("data/zip_codes/county_addresses.csv"), {:headers=>:first_row}) do |row|
-      cra[row["county"]] = row["address"]
+    errors = []
+    CSV.foreach(county_addresses_file, {:headers=>:first_row}) do |cased_row|
+      row = {}
+      cased_row.each {|k,v| row[k.downcase] = v.to_s.strip }
+      cra[row["state"]] ||= {}
+      if cra[row["state"]].has_key?(row["county"])
+        raise "Duplicate county #{row["county"]} for state #{row["state"]}"
+      end
+      if county_zip_codes[row["state"]].nil?
+        errors << "State #{row["state"]} missing!"
+      elsif !county_zip_codes[row["state"]].has_key?(row["county"])
+        errors << "#{row["state"]}: #{row["county"]}"
+      else
+        cra[row["state"]][row["county"]] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), county_zip_codes[row["state"]][row["county"]]] 
+      end
+    end
+    if errors.any?
+      raise "The following counties are missing from the zip code database:\n" + errors.join("\n")
     end
     cra
+  end
+  
+  def self.county_addresses_file
+    Rails.root.join("data/zip_codes/county_addresses.csv")
+  end
+  def self.zip_code_database_file
+    Rails.root.join("data/zip_codes/zip_code_database.csv")
+  end
+  
+  def self.county_zip_codes
+    @@county_zip_codes ||= read_zip_code_database
+  end
+  
+  def self.reset_county_zip_codes
+    @@county_zip_codes = nil
   end
   
   def self.read_zip_code_database
     #1. Read list of counties from zip_code_database
     #2. Read county-addresses into memory
     #3. Make sure all county-address counties are in zip database
-    #4. Map county/zips/addresses and commit to DB
+    #4. Map county/state/zip/addresses and commit to DB
     counties = {}
-    CSV.foreach(Rails.root.join("data/zip_codes/zip_code_database.csv"), {:headers=>:first_row}) do |row|
-      #puts row.headers
-      counties[row["county"]] ||= []
-      counties[row["county"]] << row["zip"]      
-      raise 'not implemented'
+    CSV.foreach(zip_code_database_file, {:headers=>:first_row}) do |row|
+      counties[row["state"]] ||= {}
+      counties[row["state"]][row["county"]] ||= []
+      counties[row["state"]][row["county"]] << row["zip"]      
     end
+    counties
   end
 
   def self.zip5map

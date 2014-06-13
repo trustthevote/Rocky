@@ -96,4 +96,43 @@ describe GeoState do
     end
   end
 
+  describe "county addresses" do
+    before(:each) do
+      GeoState.reset_county_zip_codes
+      GeoState.reset_county_registrar_addresses
+      
+      GeoState.stub(:county_addresses_file).and_return(
+        Rails.root.join("spec/fixtures/files/county_addressing/county_addresses.csv")
+      )
+      GeoState.stub(:zip_code_database_file).and_return(
+        Rails.root.join("spec/fixtures/files/county_addressing/zip_code_database.csv")
+      )
+    end
+
+    describe "self#county_registrar_addresses" do
+      it "returns a hash of state_abbr=>county=>address" do
+        GeoState.county_registrar_addresses.should == {
+          "PA"=>{
+              "Adams" => ["117 Baltimore Street\nRoom 106\nGettysburg, PA 17325", ["00544"]],
+              "Allegheny" => ["542 Forbes Avenue\nSuite 609\nPittsburgh, PA 15219-2913", ["00501", "00502"]]
+            },
+          "NY"=>{
+            "Adjuntas"=>["542 Forbes Avenue\nSuite 609\nPittsburgh, NY 15219-2913", ["00601"]]
+          }
+        }
+      end
+      context "when a county isn't in the zip file" do
+        before(:each) do
+          GeoState.stub(:zip_code_database_file).and_return(
+            Rails.root.join("spec/fixtures/files/county_addressing/zip_code_database_missing_counties.csv")
+          )
+        end
+        it "raise a list of missing counties" do
+          expect { GeoState.county_registrar_addresses }.to raise_error(StandardError, "The following counties are missing from the zip code database:\nPA: Adams\nNY: Adjuntas")
+         
+        end
+      end
+    end
+  end
+
 end
