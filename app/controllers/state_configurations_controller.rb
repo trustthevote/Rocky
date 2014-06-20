@@ -18,6 +18,9 @@ class StateConfigurationsController < ApplicationController
     if @state_importer.has_errors?
       render :action=>:show
     else
+      File.open(StateImporter.tmp_file_path, "w+") do |f|
+        f.write file
+      end
       submit_data(file)
     end    
   end
@@ -35,7 +38,9 @@ protected
   
   def submit_data(file)
     # later this will be 'email'
-    send_data file, :filename=>"new_states.yml", :type=>"text"
+    #send_data file, :filename=>"new_states.yml", :type=>"text"
+    ConfigMailer.state_config_file(file, "updated-states.yml").deliver
+    
   end
   
   private
