@@ -50,6 +50,27 @@ class StateImporter
     %w(parties)
   end
   
+  def self.tmp_file_dir
+    dir = Rails.root.join('tmp', 'translation_files')
+    FileUtils.mkdir_p(dir)
+    return dir
+  end
+  
+  def self.tmp_file_path
+    tmp_file_dir.join("new-states.yml")
+  end
+  
+  def self.file_path
+    temp_file = tmp_file_path
+    if File.exists?(temp_file)
+      temp_file.to_s
+    else 
+      Rails.root.join('db/bootstrap/import/states.yml').to_s
+    end
+  end
+  
+    tmp_file_dir.join
+  
   #< Initialization (fold)
   def initialize(file_or_filename = nil)
     @imported_states = []
@@ -57,7 +78,7 @@ class StateImporter
     @messages = []
     @defaults = {}
     
-    file_name = file_or_filename || Rails.root.join('db/bootstrap/import/states.yml').to_s
+    file_name = file_or_filename || self.class.file_path
     
     begin
       @file = initialize_file(file_name)
