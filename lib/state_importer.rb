@@ -69,7 +69,6 @@ class StateImporter
     end
   end
   
-    tmp_file_dir.join
   
   #< Initialization (fold)
   def initialize(file_or_filename = nil)
