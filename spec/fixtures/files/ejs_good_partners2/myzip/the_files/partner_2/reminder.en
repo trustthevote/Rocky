@@ -1,0 +1,60 @@
+<% rtv_link = '<strong><a href="http://register.rockthevote.com/">register.rockthevote.com</a></strong>' %>
+<style type="text/css">
+<!--
+.boxtext {
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  line-height: 25px;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+-->
+</style>
+
+Dear <%= @registrant.first_name %>,<br><br>
+
+<table style="float: right; margin: 0 0 15px 15px; width: 275px; border: 8px solid #cc0000;color:black" width="275" cellspacing="0" cellpadding="10">
+  <tr>
+    <td align="center" valign="middle" class="boxtext">Don't forget!<br>
+      You must sign, stamp &amp; mail your form.</td>
+  </tr>
+</table>
+
+Thanks for completing your voter registration application with Rock the Vote. You can download your application <a href="<%= @pdf_url %>">by clicking here</a>.<br><br>
+
+Just a reminder, if you have not already done so, <strong>please make sure to PRINT, SIGN, STAMP, and MAIL your form to the address provided on the form and shown below.</strong><br><br>
+
+<%= @registrar_address %><br><br>
+
+If you have already mailed in your form, you can <a href="<%= @cancel_reminders_url %>">click here</a> to stop receiving reminders about sending it in.  If you want to check on the status of your voter registration application, call your Secretary of State at <%= @registrar_phone %>, or check online at <%= @registrar_url %>.<br><br>
+
+We also need your help getting others registered to vote. There are important races all over the country in 2012.  Please direct them to <%= rtv_link %> or send the message below.<br><br>
+
+And, finally, don't forget to vote when Election Day rolls around. There are 45 million eligible young voters and if we want politicians to pay attention to the issues we care about, we have to vote.<br><br>
+
+Thanks,<br>
+Heather Smith<br>
+Presidente, Rock the Vote<br><br>
+
+P.S. Visit <strong><a href="http://www.rockthevote.com/">www.rockthevote.com</a></strong> for more information on voting, the elections, and the issues you care about, as well as for tools to start your own voter registration campaign.<br><br>
+
+<hr size="3" align="left" width="100%" color="black"><br><br>
+<em><strong>Copy and paste the following in an email message and send it to your friends.</strong></em><br><br>
+
+Hey,<br><br>
+
+You can't vote if you're not registered. That's why Rock the Vote makes it easy to fill out a voter registration form online at <%= rtv_link %>. Whether you need to register to vote for the first time or just need to update your address or change your name, it only takes a few minutes.<br><br>
+
+To learn more, go to: <%= rtv_link %>.<br><br>
+
+Already registered to vote? Rock the Vote needs your help getting others registered to vote. Send an email to your friends and family asking them to register to vote at <%= rtv_link %>. They even have a tool that lets you start your own voter registration campaign on your website or blog.<br><br>
+
+Sincerely,<br>
+<%= @registrant.first_name %><br><br>
+
+<hr size="3" align="left" width="100%" color="black"><br><br>
+
+Rock the Vote is committed to preserving your privacy and safe-guarding your sensitive information. Please see our <strong><a href="http://www.rockthevote.com/voter-registration/online-application-system/privacy.html">voter registration privacy policy</a></strong> for details.<br><br>
+
+Please send question or comments to: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>

@@ -1,0 +1,431 @@
+#container {
+  width: 780px;
+  background: #dcdcdc;
+}
+#sticky_footer { width: 780px; }
+#footer        { width: 740px; }
+
+#container {
+  zoom: 1;
+  position: relative;
+}
+
+#main {
+  zoom: 1;
+  background: none;
+  overflow: auto;
+  padding-bottom: 40px;
+}
+
+#main_inner {
+  position: relative;
+  width: 740px;
+  padding: 20px 0 20px 20px;
+}
+
+#main a {
+  font-weight: bold;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.return a {
+  font-size: 12px;
+}
+
+#header {
+  zoom: 1;
+  position: relative;
+  height: 150px;
+  width: 100%;
+  margin: 0 auto;
+  background-image: url('local-sample-header.jpg');
+  background-repeat: no-repeat;
+}
+
+#header.partner {
+  background-image: url('http://s3.rockthevote.com/rocky/images/sample-header.jpg');
+}
+
+#partner-logo {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+}
+#partner-logo img {
+  width: 75px;
+  height: 45px;
+}
+
+#progress-bar {
+  position: absolute;
+  top: 121px;
+  left: 5px;
+}
+
+.progress-title {
+  padding-right: 5px;
+}
+
+#progress-bar li {
+  float: left;
+  width: 27px;
+  height: 22px;
+  margin: 0 2px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 28px;
+  background-repeat: no-repeat;
+}
+
+#progress-bar li.progress-done {
+  background-image: url('/images/buttons/progress_done.gif');
+}
+
+#progress-bar li.progress-current {
+  background-image: url('/images/buttons/progress_current.gif');
+}
+
+#progress-bar li.progress-todo {
+  background-image: url('/images/buttons/progress_todo.gif');
+}
+
+/*added larger font size for tooltips*/
+.qtip-content {
+  font-size: 1.15em;
+}
+
+#other_language_link {
+  zoom: 1;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* step 5 */
+
+div.section {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.section span.button {
+  display: block;
+  position: absolute;
+  width: 45px;  /* need for IE */
+  top: -2px;
+  _top: 8px;
+  right: 10px;
+  _left: 505px;
+}
+
+.section span.button a {
+  width: 45px;  /* need for IE */
+}
+
+.tell_friend {
+  width: 520px;
+  padding: 0 20px;
+}
+
+.tell_friend fieldset {
+  width: 488px;
+  padding: 5px 15px;
+}
+
+.tell_friend legend {
+  font-size: 16px;
+}
+
+.tell_friend ul {
+  width: 488px;
+  margin-left: 0;
+}
+
+.tell_friend ul li {
+  margin-right: 0;
+}
+
+.tell_friend ul li.width_x {
+  width: 16px;
+}
+
+.tell_friend label {
+  font-weight: bold;
+}
+
+.tell_friend div.tall {
+  height: 240px;
+}
+
+.tell_friend textarea {
+  height: 230px;
+  width: 480px !important;
+}
+
+.tell_friend form p {
+  margin: 1.5em 1em;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+fieldset.questions ul li {
+  margin: 10px 0;
+}
+
+ul.affirm {
+  width: 100%;
+  margin: 20px 0;
+}
+
+ul.affirm li {
+  width: 80%;
+  margin: 10px 0 0 30px;
+  font-size: 16px;
+}
+
+ul.affirm input {
+  float: left;
+  margin-right: 10px;
+}
+
+ul.affirm li .error {
+  margin-left: 30px;
+  font-size: 13px;
+}
+
+ul.question li, ul.question h3, ul.question div,
+ul.affirm h3, ul.affirm div {
+  width: 100%;
+}
+
+ul.question textarea {
+  width: 95%;
+  margin-top: 6px;
+  margin-left: 3%;
+}
+
+ul.question select, ul.question span{
+  display: block;
+  margin: 1em auto;
+  width: 10em;
+}
+
+
+form.edit_registrant, form.new_registrant {
+  position: relative;
+}
+
+form hr {
+  color: #ccc;
+  background-color: #ccc;
+  height: 1px;
+  margin: 0;
+  border: none;
+}
+
+div.back {
+  text-align: center;
+  font-size: 12px;
+}
+
+#external .review {
+  padding: 0 20px;
+}
+
+.review ul {
+  margin-top: 5px;
+  _margin-top: 10px;
+}
+
+.review li {
+  position: relative;
+  height: 20px;
+  line-height: 14px;
+  font-size: 12px;
+}
+
+.review li.tall {
+  height: 35px;
+}
+
+.review li span {
+  position: absolute;
+  width: 150px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.review li div {
+  position: absolute;
+  left: 160px;
+  font-family: Tahoma, sans-serif;
+  letter-spacing: 0.08em;
+}
+
+#external .review li span { width: 175px; }
+#external .review li div  { left: 185px; }
+
+.instructions p {
+  margin: -5px 75px 10px 135px;
+  color: #434343;
+  font-size: 13px;
+  line-height: 15px;
+}
+
+.text p {
+  margin: 20px;
+  color: #434343;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.checkbox-explanation p {
+  margin: -5px 0px 20px 40px;
+  color: #434343;
+  font-size: 13px;
+}
+
+p.centered {
+  text-align: center;
+}
+
+.download {
+  position: relative;
+  border: 3px solid #333;
+  background-color: #ddd;
+  width: 85%;
+  margin: 20px auto;
+}
+
+.download p {
+  font-size: 14px;
+  margin: 15px;
+}
+
+.download h2 {
+  margin: 15px;
+}
+
+.download h2.spaced_out {
+  visibility: hidden;
+}
+
+.download h2.preparing {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.download p.preparing {
+  height: 80px;
+  text-align: center;
+}
+.download p.preparing img {
+  vertical-align: middle;
+}
+
+#download_no_js {
+  padding: 30px;
+}
+
+.reason {
+  margin: 25px auto;
+  width: 65%;
+  color: #434343;
+  font-size: 12px;
+}
+
+.fulltext p {
+  margin: 20px 0px;
+  color: #434343;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.share {
+  width: 540px;
+  margin: 0 auto 40px auto;
+  overflow: hidden;
+}
+
+.share div {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+
+.share span.button {
+  display: inline-block;
+}
+
+div.tooltip {
+  width: 25px !important;
+}
+
+img.tooltip {
+  height: 17px;
+  width: 16px;
+}
+
+.flat img.tooltip {
+  margin: 1px 5px 0 5px;
+}
+
+legend img.tooltip {
+  margin: 0 0 0 5px;
+  vertical-align: middle;
+}
+
+/* rollover buttons */
+
+a.button_edit_en                    { width:  45px; height: 22px; }
+a.button_edit_en               span { width:  45px; height: 22px; background-image: url(/images/en/button_edit_ro.gif); }
+a.button_keep_going_en              { width: 207px; height: 36px; }
+a.button_keep_going_en         span { width: 207px; height: 36px; background-image: url(/images/en/button_keep_going_ro.gif); }
+a.button_next_step_en               { width: 150px; height: 36px; }
+a.button_next_step_en          span { width: 150px; height: 36px; background-image: url(/images/en/button_next_step_ro.gif); }
+a.button_prepare_en                 { width: 207px; height: 36px; }
+a.button_prepare_en            span { width: 207px; height: 36px; background-image: url(/images/en/button_prepare_ro.gif); }
+a.button_print_en                   { width: 207px; height: 80px; }
+a.button_print_en              span { width: 207px; height: 80px; background-image: url(/images/en/button_print_ro.gif); }
+a.button_remind_me_later_en         { width: 189px; height: 22px; }
+a.button_remind_me_later_en    span { width: 189px; height: 22px; background-image: url(/images/en/button_remind_me_later_ro.gif); }
+a.button_review_en                  { width: 207px; height: 56px; }
+a.button_review_en             span { width: 207px; height: 56px; background-image: url(/images/en/button_review_ro.gif); }
+a.button_send_email_en              { width: 137px; height: 22px; }
+a.button_send_email_en         span { width: 137px; height: 22px; background-image: url(/images/en/button_send_email_ro.gif); }
+a.button_share_facebook_en          { width: 122px; height: 42px; }
+a.button_share_facebook_en     span { width: 122px; height: 42px; background-image: url(/images/en/button_share_facebook_ro.gif); }
+a.button_share_google_buzz_en       { width: 122px; height: 42px; }
+a.button_share_google_buzz_en  span { width: 122px; height: 42px; background-image: url(/images/en/button_share_google_buzz_ro.gif); }
+a.button_share_twitter_en           { width: 122px; height: 42px; }
+a.button_share_twitter_en      span { width: 122px; height: 42px; background-image: url(/images/en/button_share_twitter_ro.gif); }
+
+a.button_edit_es                    { width:  65px; height: 22px; }
+a.button_edit_es               span { width:  65px; height: 22px; background-image: url(/images/es/button_edit_ro.gif); }
+a.button_keep_going_es              { width: 207px; height: 36px; }
+a.button_keep_going_es         span { width: 207px; height: 36px; background-image: url(/images/es/button_keep_going_ro.gif); }
+a.button_next_step_es               { width: 150px; height: 36px; }
+a.button_next_step_es          span { width: 150px; height: 36px; background-image: url(/images/es/button_next_step_ro.gif); }
+a.button_prepare_es                 { width: 207px; height: 36px; }
+a.button_prepare_es            span { width: 207px; height: 36px; background-image: url(/images/es/button_prepare_ro.gif); }
+a.button_print_es                   { width: 207px; height: 80px; }
+a.button_print_es              span { width: 207px; height: 80px; background-image: url(/images/es/button_print_ro.gif); }
+a.button_remind_me_later_es         { width: 275px; height: 22px; }
+a.button_remind_me_later_es    span { width: 275px; height: 22px; background-image: url(/images/es/button_remind_me_later_ro.gif); }
+a.button_review_es                  { width: 207px; height: 56px; }
+a.button_review_es             span { width: 207px; height: 56px; background-image: url(/images/es/button_review_ro.gif); }
+a.button_send_email_es              { width: 137px; height: 22px; }
+a.button_send_email_es         span { width: 137px; height: 22px; background-image: url(/images/es/button_send_email_ro.gif); }
+a.button_share_facebook_es          { width: 122px; height: 42px; }
+a.button_share_facebook_es     span { width: 122px; height: 42px; background-image: url(/images/es/button_share_facebook_ro.gif); }
+a.button_share_google_buzz_es       { width: 122px; height: 42px; }
+a.button_share_google_buzz_es  span { width: 122px; height: 42px; background-image: url(/images/es/button_share_google_buzz_ro.gif); }
+a.button_share_twitter_es           { width: 122px; height: 42px; }
+a.button_share_twitter_es      span { width: 122px; height: 42px; background-image: url(/images/es/button_share_twitter_ro.gif); }

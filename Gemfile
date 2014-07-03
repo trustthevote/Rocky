@@ -8,6 +8,7 @@ gem "rails_config"
 gem "rails", "= 3.2.18"
 gem "aasm", "= 3.0.16"
 
+gem 'utf8-cleaner'
 
 gem "authlogic", "= 3.3.0"
 gem "daemons", "= 1.0.10"

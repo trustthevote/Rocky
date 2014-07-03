@@ -243,6 +243,7 @@ GEM
     unf (0.1.1)
       unf_ext
     unf_ext (0.0.6)
+    utf8-cleaner (0.0.9)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -298,6 +299,7 @@ DEPENDENCIES
   therubyracer
   treetop (= 1.4.10)
   uglifier
+  utf8-cleaner
   webrat
   wicked_pdf
   wkhtmltopdf-binary!
