@@ -55,7 +55,7 @@ Feature: Step 1
          | nO        | should not    |
          
     
-    @passing
+    @wip
     Scenario: completing step 1
       When I go to a new registration page
        And I have not set a locale
