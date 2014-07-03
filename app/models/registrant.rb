@@ -695,7 +695,7 @@ class Registrant < ActiveRecord::Base
         return party == en_localization.no_party ? I18n.t('states.no_party_label.none') : party
       else
         if party == localization.no_party
-          return I18n.t('states.no_party_label.none')
+          return I18n.t('states.no_party_label.none', :locale=>:en)
         else
           if (p_index = localization[:parties].index(party))
             return en_localization[:parties][p_index]

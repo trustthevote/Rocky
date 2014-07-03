@@ -223,10 +223,10 @@ class Translation
       key_chain = k.split('.')
       key_chain.each_with_index do |key, i|
         if (i+1 == key_chain.size)
-          last_hash[key] = v.is_a?(String) ? v.gsub(/\r\n/,"\n") : v
+          last_hash[key] = value_for_yml(v)
           if check_translations
             if value_is_blank(v, k)
-              blanks << k 
+              blanks << k
             end
             if value_is_missing_variable(v, k)
               missing_variables << k
@@ -239,6 +239,18 @@ class Translation
       end
     end
     return [starter_hash, {:blanks=>blanks, :missing_variables=>missing_variables}]
+  end
+  
+  def self.value_for_yml(v)
+    val = v.is_a?(String) ? v.gsub(/\r\n/,"\n") : v
+    if val.is_a?(String)
+      if val.strip.downcase == "true"
+        val = true
+      elsif val.strip.downcase == "false"
+        val = false
+      end
+    end
+    return val
   end
   
   def value_is_blank(k,v)
