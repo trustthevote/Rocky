@@ -85,6 +85,8 @@ class Partner < ActiveRecord::Base
   validate :check_valid_logo_url
   validate :government_partner_zip_specification
   validate :check_valid_registration_instructions_url_format
+  validates :registration_instructions_url, :url_format=>true
+  
 
   validates_presence_of :name
   validates_presence_of :url

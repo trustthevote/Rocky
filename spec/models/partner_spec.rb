@@ -550,7 +550,46 @@ describe Partner do
       end
     end
     
-    
+    describe "registration_instructions_url" do
+      let(:partner) { FactoryGirl.build(:partner) }
+      it "can be blank" do
+        partner.registration_instructions_url = ''
+        partner.should be_valid
+      end
+      it "must include <STATE> and <LOCALE>" do
+        partner.registration_instructions_url = 'http://test.com/<state>-<locale>'
+        partner.should_not be_valid
+        partner.errors_on(:registration_instructions_url).should have(2).errors
+
+        partner.registration_instructions_url = 'http://test.com/'
+        partner.should_not be_valid
+        partner.errors_on(:registration_instructions_url).should have(2).errors
+
+        partner.registration_instructions_url = 'http://test.com/<STATE>-<locale>'
+        partner.should_not be_valid
+        partner.errors_on(:registration_instructions_url).should have(1).errors
+
+        partner.registration_instructions_url = 'http://test.com/<STATE>-<LOCALE>'
+        partner.should be_valid
+      end
+      
+      it "must be a valid url format" do
+        partner.registration_instructions_url = 'abccom/<STATE>-<LOCALE>'
+        partner.should_not be_valid
+
+        partner.registration_instructions_url = 'abc.com/<STATE>-<LOCALE>'
+        partner.should_not be_valid
+        
+        partner.registration_instructions_url = 'http://b.c/<STATE>-<LOCALE>'
+        partner.should_not be_valid
+        
+        partner.registration_instructions_url = 'https://abc.com/<STATE>-<LOCALE>'
+        partner.should be_valid
+        
+        partner.registration_instructions_url = 'http://abc.com/<STATE>-<LOCALE>'
+        partner.should be_valid
+      end
+    end
   end
 
   describe "default opt-in sets" do
