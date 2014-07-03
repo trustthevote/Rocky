@@ -75,15 +75,24 @@ class GeoState < ActiveRecord::Base
       row = {}
       cased_row.each {|k,v| row[k.downcase] = v.to_s.strip }
       cra[row["state"]] ||= {}
-      if cra[row["state"]].has_key?(row["county"])
-        raise "Duplicate county #{row["county"]} for state #{row["state"]}"
-      end
+      county_name = row["county"].to_s.downcase
+      
       if county_zip_codes[row["state"]].nil?
         errors << "State #{row["state"]} missing!"
-      elsif !county_zip_codes[row["state"]].has_key?(row["county"])
-        errors << "#{row["state"]}: #{row["county"]}"
       else
-        cra[row["state"]][row["county"]] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), county_zip_codes[row["state"]][row["county"]]] 
+        if !county_zip_codes[row["state"]].has_key?(county_name)
+          county_name = county_name + ((row["state"] == "LA") ? " parish" : " county")
+        end
+        
+        if !county_zip_codes[row["state"]].has_key?(county_name)          
+          errors << "#{row["state"]}: #{row["county"]}"
+        else
+          if cra[row["state"]].has_key?(county_name)
+            raise "Duplicate county #{row["county"]} for state #{row["state"]}"
+          end
+          
+          cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), county_zip_codes[row["state"]][county_name]]
+        end
       end
     end
     if errors.any?
@@ -115,8 +124,8 @@ class GeoState < ActiveRecord::Base
     counties = {}
     CSV.foreach(zip_code_database_file, {:headers=>:first_row}) do |row|
       counties[row["state"]] ||= {}
-      counties[row["state"]][row["county"]] ||= []
-      counties[row["state"]][row["county"]] << row["zip"]      
+      counties[row["state"]][row["county"].to_s.downcase] ||= []
+      counties[row["state"]][row["county"].to_s.downcase] << row["zip"]      
     end
     counties
   end

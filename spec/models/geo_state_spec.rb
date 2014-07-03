@@ -112,12 +112,12 @@ describe GeoState do
     describe "self#county_registrar_addresses" do
       it "returns a hash of state_abbr=>county=>address" do
         GeoState.county_registrar_addresses.should == {
-          "PA"=>{
-              "Adams" => ["117 Baltimore Street\nRoom 106\nGettysburg, PA 17325", ["00544"]],
-              "Allegheny" => ["542 Forbes Avenue\nSuite 609\nPittsburgh, PA 15219-2913", ["00501", "00502"]]
+          "LA"=>{
+              "adams" => ["117 Baltimore Street\nRoom 106\nGettysburg, LA 17325", ["00544"]],
+              "allegheny parish" => ["542 Forbes Avenue\nSuite 609\nPittsburgh, LA 15219-2913", ["00501", "00502"]]
             },
           "NY"=>{
-            "Adjuntas"=>["542 Forbes Avenue\nSuite 609\nPittsburgh, NY 15219-2913", ["00601"]]
+            "adjuntas county"=>["542 Forbes Avenue\nSuite 609\nPittsburgh, NY 15219-2913", ["00601"]]
           }
         }
       end
@@ -128,7 +128,7 @@ describe GeoState do
           )
         end
         it "raise a list of missing counties" do
-          expect { GeoState.county_registrar_addresses }.to raise_error(StandardError, "The following counties are missing from the zip code database:\nPA: Adams\nNY: Adjuntas")
+          expect { GeoState.county_registrar_addresses }.to raise_error(StandardError, "The following counties are missing from the zip code database:\nLA: Adams\nNY: AdJuntas")
          
         end
       end
