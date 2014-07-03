@@ -90,7 +90,7 @@ class PartnerZip
       :whitelabeled, :from_email, :finish_iframe_url,
       :rtv_email_opt_in, :rtv_sms_opt_in, :ask_for_volunteers, 
       :partner_email_opt_in, :partner_sms_opt_in, :partner_ask_for_volunteers, 
-      :tmp_asset_directory]    
+      :tmp_asset_directory, :registration_instructions_url]    
   end
   
   def error_messages

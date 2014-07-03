@@ -232,7 +232,7 @@ describe Registrant do
     
     [:pdf_instructions, :email_instructions].each do |state_data|
       describe "home_state_#{state_data}" do
-        it "reads #{state_data} from the locatlization" do
+        it "reads #{state_data} from the localization" do
           reg = Registrant.new
           mock_localization = mock(StateLocalization)
           mock_localization.should_receive(state_data).and_return "a value"
@@ -1354,6 +1354,32 @@ describe Registrant do
       after do
         `rm #{@registrant.pdf_file_path}`
         `rmdir #{File.dirname(@registrant.pdf_file_path)}`
+      end
+    end
+    
+    describe "registration_instructions_url" do
+      let(:registrant) { FactoryGirl.create(:maximal_registrant) }
+      let(:partner) { FactoryGirl.create(:partner) }
+      before(:each) do
+        registrant.partner = partner
+      end
+      context "when the partner's instructions url is blank" do
+        before(:each) do
+          partner.registration_instructions_url = ""
+        end
+        it "returns the pdf settings with state and locale substituted" do
+          registrant.registration_instructions_url.should == RockyConf.pdf.nvra.page1.other_block.instructions_url.gsub(
+            "<LOCALE>",registrant.locale
+          ).gsub("<STATE>",registrant.home_state_abbrev)
+        end
+      end
+      context "when the partner's instructions url is specified" do
+        before(:each) do
+          partner.registration_instructions_url = "http://custom-url/?l=<LOCALE>&s=<STATE>"
+        end
+        it "returns the custom url with state and locale substituted" do
+          registrant.registration_instructions_url.should == "http://custom-url/?l=#{registrant.locale}&s=#{registrant.home_state_abbrev}"
+        end
       end
     end
   end

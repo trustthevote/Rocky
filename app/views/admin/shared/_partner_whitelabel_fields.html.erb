@@ -24,6 +24,14 @@
         <span class="error"><%= @partner.errors[:finish_iframe_url].join("\n") %></span>
         <span class="instructions">* URL for iFrame to show registrants on the thank you page</span>
       </li>        
+      <li class="width_a">
+        <h3><%= f.label :registration_instructions_url %></h3>
+        <%= field_div f, :registration_instructions_url %>
+        <span class="error"><%= @partner.errors[:registration_instructions_url].join("\n") %></span>
+        <span class="instructions">* URL for web-based instructions spawned from the pdf. <br/>
+        Will replace http://www.rockthevote.com/registration/instructions/&lt;STATE&gt;-&lt;LOCALE&gt;.html
+        </span>
+      </li>        
     </ul>
     <br/>
     <ul class="checkbox">

@@ -77,6 +77,10 @@ describe PartnerZip do
       p.should be_whitelabeled
       p.application_css_present?.should be_true
       p.registration_css_present?.should be_true
+      p.registration_instructions_url.should be_blank
+      
+      p4 = Partner.find_by_username("csv_partner_4")
+      p4.registration_instructions_url.should == "http://custom-url.com?l=<LOCALE>&s=<STATE>"
     end
     it "works when there's just a partner.css" do
       @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'just_partner_css.zip'))

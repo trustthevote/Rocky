@@ -38,6 +38,7 @@ en:
       partner:
         from_email: From Email
         url: URL
+        registration_instructions_url: PDF instructions URL
       registrant:
         date_of_birth: Date of Birth
         email_address: Email Address

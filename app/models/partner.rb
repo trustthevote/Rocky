@@ -84,6 +84,7 @@ class Partner < ActiveRecord::Base
   
   validate :check_valid_logo_url
   validate :government_partner_zip_specification
+  validate :check_valid_registration_instructions_url_format
 
   validates_presence_of :name
   validates_presence_of :url
@@ -575,6 +576,18 @@ protected
     end
   end
 
+  def check_valid_registration_instructions_url_format
+    if !registration_instructions_url.blank?
+      if !(registration_instructions_url =~ /<STATE>/)
+        errors.add(:registration_instructions_url, "must include <STATE> substitution variable")
+      end
+      if !(registration_instructions_url =~ /<LOCALE>/)
+        errors.add(:registration_instructions_url, "must include <LOCALE> substitution variable")
+      end
+    end
+    return true
+  end
+  
   def random_key
     Digest::SHA1.hexdigest([Time.now, (1..10).map { rand.to_s}].join('--'))
   end

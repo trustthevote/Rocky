@@ -365,7 +365,7 @@ class Registrant < ActiveRecord::Base
   end
 
   aasm_event :advance_to_step_5 do
-    transitions :to => :step_5, :from => [:step_4, :rejected]
+    transitions :to => :step_5, :from => [:step_4, :step_5, :rejected]
   end
 
   aasm_event :complete do
@@ -791,9 +791,11 @@ class Registrant < ActiveRecord::Base
   end
   
   def registration_instructions_url
-    RockyConf.pdf.nvra.page1.other_block.instructions_url.gsub(
-      "<LOCALE>",locale
-    ).gsub("<STATE>",home_state_abbrev)
+    (partner.registration_instructions_url.blank? ? RockyConf.pdf.nvra.page1.other_block.instructions_url : partner.registration_instructions_url).tap do |r_url|
+      return r_url.gsub(
+        "<LOCALE>",locale
+      ).gsub("<STATE>",home_state_abbrev)
+    end
   end
 
   def under_18_instructions_for_home_state
