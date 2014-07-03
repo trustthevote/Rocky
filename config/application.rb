@@ -54,6 +54,15 @@ module Rocky
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :state_id_number, :password_confirmation]
 
+
+    config.middleware.use ::Rack::Robustness do |g|
+      g.no_catch_all
+      g.on(ArgumentError) { |ex| 400 }
+      g.content_type 'text/plain'
+      g.body{ |ex| ex.message }
+      g.ensure(true) { |ex| env['rack.errors'].write(ex.message) }
+    end
+
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
