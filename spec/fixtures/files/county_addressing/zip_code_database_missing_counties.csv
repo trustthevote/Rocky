@@ -1,4 +1,4 @@
 "zip","type","primary_city","acceptable_cities","unacceptable_cities","state","county","timezone","area_codes","latitude","longitude","world_region","country","decommissioned","estimated_population","notes"
 "00501","UNIQUE","Allegheny City",,"I R S Service Center","LA","Allegheny","America/New_York","631","40.81","-73.04","NA","US","0","384",
-"00544","UNIQUE","Adams City",,"Irs Service Center","LA","Adams County Mismatch","America/New_York","631","40.81","-73.04","NA","US","0","0",
-"00601","STANDARD","Adjuntas",,"Colinas Del Gigante, Jard De Adjuntas, Urb San Joaquin","NY","Adjuntas County Mismatch","America/Puerto_Rico","787,939","18.16","-66.72","NA","US","0","0",
+"00544","UNIQUE","Adams City No Match",,"Irs Service Center","LA","Adams County Mismatch","America/New_York","631","40.81","-73.04","NA","US","0","0",
+"00601","STANDARD","Adjuntas No Match",,"Colinas Del Gigante, Jard De Adjuntas, Urb San Joaquin","NY","Adjuntas County Mismatch","America/Puerto_Rico","787,939","18.16","-66.72","NA","US","0","0",

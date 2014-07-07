@@ -97,6 +97,7 @@ describe GeoState do
   end
 
   describe "county addresses" do
+    #zip_code_database source http://www.unitedstateszipcodes.org/zip-code-database/
     before(:each) do
       GeoState.reset_county_zip_codes
       GeoState.reset_county_registrar_addresses
@@ -128,7 +129,7 @@ describe GeoState do
           )
         end
         it "raise a list of missing counties" do
-          expect { GeoState.county_registrar_addresses }.to raise_error(StandardError, "The following counties are missing from the zip code database:\nLA: Adams\nNY: AdJuntas")
+          expect { GeoState.county_registrar_addresses }.to raise_error(StandardError, "The following counties are missing from the zip code database:\nLA: Adams City\nNY: AdJuntas")
          
         end
       end

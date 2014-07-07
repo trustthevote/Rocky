@@ -75,30 +75,112 @@ class GeoState < ActiveRecord::Base
       row = {}
       cased_row.each {|k,v| row[k.downcase] = v.to_s.strip }
       cra[row["state"]] ||= {}
-      county_name = row["county"].to_s.downcase
+      county_file_name = ActiveSupport::Multibyte::Chars.new(row["county"]).mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'')
       
       if county_zip_codes[row["state"]].nil?
         errors << "State #{row["state"]} missing!"
       else
-        if !county_zip_codes[row["state"]].has_key?(county_name)
-          county_name = county_name + ((row["state"] == "LA") ? " parish" : " county")
-        end
+        county_name = get_county_name_from_zip_codes(row["state"], county_file_name, errors)
         
-        if !county_zip_codes[row["state"]].has_key?(county_name)          
-          errors << "#{row["state"]}: #{row["county"]}"
-        else
+        if !county_name.nil?
           if cra[row["state"]].has_key?(county_name)
             raise "Duplicate county #{row["county"]} for state #{row["state"]}"
           end
           
           cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), county_zip_codes[row["state"]][county_name]]
+        else 
+          county_name = get_city_name_from_zip_codes(row["state"], county_file_name, errors)
+          if !county_name.nil?
+            if cra[row["state"]].has_key?(county_name)
+              raise "Duplicate city #{row["county"]} for state #{row["state"]}"
+            end
+        
+            cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), city_zip_codes[row["state"]][county_name]]
+          end
         end
       end
     end
+    
     if errors.any?
       raise "The following counties are missing from the zip code database:\n" + errors.join("\n")
     end
     cra
+  end
+  
+  def self.get_county_name_from_zip_codes(state, county_name, errors)
+    attempted_name = county_name
+    county_name = county_name.to_s.downcase.gsub("&", "and")
+    if county_zip_codes[state].has_key?(county_name)
+      return county_name
+    end
+    
+    # try the "st." substitution
+    st_county_name = county_name.to_s.downcase.gsub(/st\./, "saint")
+    if county_zip_codes[state].has_key?(st_county_name)
+      return st_county_name
+    end
+    st_county_name = county_name.to_s.downcase.gsub(/(st\.|saint)/, "st")
+    if county_zip_codes[state].has_key?(st_county_name)
+      return st_county_name
+    end
+    
+    # try adding suffix
+    county_name = county_name + ((state == "LA") ? " parish" : " county")
+    if county_zip_codes[state].has_key?(county_name)
+      return county_name
+    end
+
+    # try the "st." substitution
+    st_county_name = county_name.to_s.downcase.gsub(/st\./, "saint")
+    if county_zip_codes[state].has_key?(st_county_name)
+      return st_county_name
+    end
+    st_county_name = county_name.to_s.downcase.gsub(/(st\.|saint)/, "st")
+    if county_zip_codes[state].has_key?(st_county_name)
+      return st_county_name
+    end
+
+    
+    return nil
+  end
+  
+  def self.get_city_name_from_zip_codes(state, county_name, errors)
+    attempted_name = county_name
+    county_name = county_name.to_s.downcase
+    if city_zip_codes[state].has_key?(county_name)
+      return county_name
+    end
+    
+    
+    # try the "st." substitution
+    st_county_name = county_name.to_s.downcase.gsub(/st\./, "saint")
+    if city_zip_codes[state].has_key?(st_county_name)
+      return st_county_name
+    end
+    st_county_name = county_name.to_s.downcase.gsub(/(st\.|saint)/, "st")
+    if city_zip_codes[state].has_key?(st_county_name)
+      return st_county_name
+    end
+    
+    # try removing " City" and "City of "
+    city_name = county_name.gsub(/^city\s+of\s+/,'').gsub(/\s+city$/,'')
+    if city_zip_codes[state].has_key?(city_name)
+      return city_name
+    end
+    
+    # try the "st." substitution
+    st_county_name = city_name.to_s.downcase.gsub(/st\./, "saint")
+    if city_zip_codes[state].has_key?(st_county_name)
+      return st_county_name
+    end
+    st_county_name = city_name.to_s.downcase.gsub(/(st\.|saint)/, "st")
+    if city_zip_codes[state].has_key?(st_county_name)
+      return st_county_name
+    end
+    
+    
+    errors << "#{state}: #{attempted_name}"
+    return nil
   end
   
   def self.county_addresses_file
@@ -109,7 +191,19 @@ class GeoState < ActiveRecord::Base
   end
   
   def self.county_zip_codes
-    @@county_zip_codes ||= read_zip_code_database
+    @@county_zip_codes ||= []
+    if @@county_zip_codes.empty?
+      @@county_zip_codes, @@city_zip_codes = read_zip_code_database
+    end
+    return @@county_zip_codes
+  end
+  
+  def self.city_zip_codes
+    @@city_zip_codes ||= []
+    if @@city_zip_codes.empty?
+      @@county_zip_codes, @@city_zip_codes = read_zip_code_database
+    end
+    return @@city_zip_codes
   end
   
   def self.reset_county_zip_codes
@@ -122,12 +216,18 @@ class GeoState < ActiveRecord::Base
     #3. Make sure all county-address counties are in zip database
     #4. Map county/state/zip/addresses and commit to DB
     counties = {}
+    cities = {}
     CSV.foreach(zip_code_database_file, {:headers=>:first_row}) do |row|
       counties[row["state"]] ||= {}
       counties[row["state"]][row["county"].to_s.downcase] ||= []
       counties[row["state"]][row["county"].to_s.downcase] << row["zip"]      
+
+      cities[row["state"]] ||= {}
+      cities[row["state"]][row["primary_city"].to_s.downcase] ||= []
+      cities[row["state"]][row["primary_city"].to_s.downcase] << row["zip"]      
+
     end
-    counties
+    return [counties, cities]
   end
 
   def self.zip5map
