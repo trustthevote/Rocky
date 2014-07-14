@@ -70,6 +70,8 @@ class PartnerZip
     
     new_partners = get_partners_from_csv
     
+    #raise self.errors[0][1].messages.to_s if self.there_are_errors
+    
     return false if self.there_are_errors
     
     check_for_subdirectories(new_partners)
@@ -95,7 +97,8 @@ class PartnerZip
       :whitelabeled, :from_email, :finish_iframe_url,
       :rtv_email_opt_in, :rtv_sms_opt_in, :ask_for_volunteers, 
       :partner_email_opt_in, :partner_sms_opt_in, :partner_ask_for_volunteers, 
-      :tmp_asset_directory, :asset_directory, :registration_instructions_url, :external_tracking_snippet]    
+      :tmp_asset_directory, :asset_directory, :registration_instructions_url, :external_tracking_snippet,
+      :widget_image,:privacy_url,:is_government_partner,:government_partner_state,:government_partner_state_id,:government_partner_zip_codes]    
   end
   
   def self.allowed_columns
@@ -181,6 +184,17 @@ private
             data[:state_id] = state.id if state
           end
         end
+        if data[:government_partner_state_id].to_i == 0
+          state = GeoState.find_by_abbreviation(data[:government_partner_state_id])
+          if state
+            data[:government_partner_state_id] = state.id 
+          else
+            state = GeoState.find_by_abbreviation(data.delete(:government_partner_state))
+            data[:government_partner_state_id] = state.id if state
+          end
+        end
+        
+        data[:government_partner_zip_code_list] = data.delete(:government_partner_zip_codes)
         
         if (tad = data.delete(:asset_directory)) && data[:tmp_asset_directory].blank?
           data[:tmp_asset_directory] = tad

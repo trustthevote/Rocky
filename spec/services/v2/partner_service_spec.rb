@@ -180,6 +180,7 @@ describe V2::PartnerService do
 
       it 'should save the record' do
         params = {
+          username: "a-custom-username",
           organization: "Org Name",
           url: "http://www.google.com",
           privacy_url: "http://www.google.com/privacy",
@@ -208,9 +209,17 @@ describe V2::PartnerService do
           rtv_sms_opt_in: false,
           ask_for_volunteers: true,
           partner_email_opt_in: true,
-          partner_sms_opt_in: true 
+          partner_sms_opt_in: true,
+          is_government_partner: true,
+          government_partner_zip_codes: ["02113", "02110"]
         }
         V2::PartnerService.create_record(params).should
+        params2 = params.dup
+        params2.delete(:government_partner_zip_codes)
+        params2[:government_partner_state_id] = GeoState["MA"].id
+        params2[:email] = "contact_email+2@rtv.org"
+        V2::PartnerService.create_record(params2).should
+        
       end
     end
 

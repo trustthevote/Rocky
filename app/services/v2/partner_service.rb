@@ -26,7 +26,8 @@ module V2
   class PartnerService
     INVALID_PARTNER_OR_API_KEY = "Invalid partner ID or api key"
 
-    ALLOWED_ATTRS = [:organization,
+    ALLOWED_ATTRS = [:username, 
+        :organization,
         :url,
         :privacy_url,
         :logo_url,
@@ -52,7 +53,10 @@ module V2
         :rtv_sms_opt_in,
         :ask_for_volunteers,
         :partner_email_opt_in,
-        :partner_sms_opt_in]
+        :partner_sms_opt_in,
+        :is_government_partner,
+        :government_partner_state_id,
+        :government_partner_zip_codes]
         
     def self.allowed_attrs 
       ALLOWED_ATTRS + RockyConf.enabled_locales.collect do |locale|

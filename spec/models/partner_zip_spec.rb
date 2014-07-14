@@ -83,9 +83,16 @@ describe PartnerZip do
       p.application_css_present?.should be_true
       p.registration_css_present?.should be_true
       p.registration_instructions_url.should be_blank
+      p.is_government_partner.should be_true
+      p.government_partner_state_id.should == GeoState["MA"].id
       
       p4 = Partner.find_by_username("csv_partner_4")
       p4.registration_instructions_url.should == "http://custom-url.com?l=<LOCALE>&s=<STATE>"
+      p4.widget_image.should == "rtv-100x100-v1.gif"
+      p4.privacy_url.should == "http://example.com/privacy"
+      p4.is_government_partner.should be_true
+      p4.government_partner_zip_codes.should == ["02113","02110"]
+      
     end
     it "works when there's just a partner.css" do
       @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'just_partner_css.zip'))

@@ -128,6 +128,49 @@ describe Partner do
     end
   end
   
+  
+  
+  describe "#partner_css_download_url=(URL)" do
+    it "opens the file from the URL when saved" do
+      url = "http://www.rockthevote.com/assets/v4/css/base.css"
+      p = FactoryGirl.build(:partner)
+      mock_io = mock("StringIO")
+      mock_uri = mock("URI")
+      mock_uri.stub(:path).and_return(url)
+      mock_io.stub(:base_uri).and_return(mock_uri)
+      mock_io.stub(:read).and_return("css contents")
+      mock_io.stub(:close)
+      p.stub(:open).with(url).and_return(mock_io)
+      p.stub(:logo=).with(mock_io)
+      p.partner_css_download_url = url
+      p.save!
+      p.should have_received(:open).with(url)
+    end
+    it "attaches the CSS file as the partner css" do
+      url = "http://www.rockthevote.com/assets/v4/css/base.css"
+      p = FactoryGirl.build(:partner)
+      p.partner_css_download_url = url
+      p.save!
+      p.partner_css_present?.should be_true      
+    end
+    it "adds a validation error if the url is not http" do
+      bad_url = "home_rtv_logo_wrong.png"
+      p = FactoryGirl.build(:partner)
+      p.partner_css_download_url = bad_url
+      p.should_not be_valid
+      p.errors[:partner_css_download_URL].should include("Pleave provide an HTTP url")
+    end
+    it "adds a validation error if the file can not be downloaded" do
+      bad_url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo_wrong.css"
+      p = FactoryGirl.build(:partner)
+      p.partner_css_download_url = bad_url
+      p.should_not be_valid
+      p.errors[:partner_css_download_URL].should include("Could not download #{bad_url} for partner css")
+    end
+  end
+  
+  
+  
   describe "#valid_api_key?(key)" do
     it "returns false when blank or not matching" do
       partner = FactoryGirl.build(:partner, :api_key=>"")
