@@ -1,3 +1,7 @@
+$gradient: #c64d4f 0%, #ce6367 10%, #ce6367 65%, #bf363b 95%, #ad2328 100%;
+$roll_gradient: #e4aaac 0%, #e4aaac 10%, #ce6367 65%, #bf363b 95%, #ad2328 100%;
+
+
 iframe {
 	margin:1em 0;
 }
@@ -447,11 +451,87 @@ p.centered {
   overflow: hidden;
 }
 
+$fb_gradient: #627Db2 0%, #5175ad 10%, #4966af 65%, #3f5fa1 95%, #5f76a9 100%;
+$fb_gradient_hover: #9eb3d5 0%, #97a2d2 10%, #8ea7cf 65%, #809ccb 95%, #9cadd0 100%;
+
 .share div {
-  width: 50%;
-  float: left;
+  width: 100%;
+  float: none;
   text-align: center;
+	margin-bottom:10px;
+	
+	.rollover_button, .rollover_button:hover {
+	  
+		display: block;
+		width: 100%;
+		
+		a.button_share_facebook, a.button_share_twitter, a.button_share_facebook:hover, a.button_share_twitter:hover {
+
+			width: 90%;
+			display: block;
+
+			border: 1px solid #314fac;
+		  background: #ad2328;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#627Db2), color-stop(10%,#5175ad), color-stop(65%,#4966af), color-stop(95%,#3f5fa1), color-stop(100%,#5f76a9));
+		  background: -webkit-linear-gradient(top, $fb_gradient);
+		  background: -moz-linear-gradient(top,  $fb_gradient);
+		  background: -ms-linear-gradient(top,  $fb_gradient);
+		  background: -o-linear-gradient(top,  $fb_gradient);
+		  padding: 5.5px 11px;
+		  -webkit-border-radius: 4px;
+		  -moz-border-radius: 4px;
+		  border-radius: 4px;
+
+			&:hover {
+			  background: #ad2328;
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9eb3d5), color-stop(10%,#97a2d2), color-stop(65%,#8ea7cf), color-stop(95%,#809ccb), color-stop(100%,#9cadd0));
+			  background: -webkit-linear-gradient(top, $fb_gradient_hover);
+			  background: -moz-linear-gradient(top,  $fb_gradient_hover);
+			  background: -ms-linear-gradient(top,  $fb_gradient_hover);
+			  background: -o-linear-gradient(top,  $fb_gradient_hover);
+				
+			}
+
+			span, span:hover {
+				background-image: url('/assets/buttons/button_share_facebook_icon.png');
+				background-position: 0 25%;
+				padding-left:30px;
+				display: block;
+				width: auto;
+			}
+		}	
+		
+		$tw_gradient: #85ddEA 0%, #88deeb 10%, #96e0ec 65%, #9de1ed 95%, #9ee0ec 100%;
+		$tw_gradient_hover: #b8edf4 0%, #baedf5 10%, #c3eff5 65%, #c6eff6 95%, #e8f5f6 100%;
+		
+		a.button_share_twitter, a.button_share_twitter:hover {
+			border: 1px solid #50b7c6;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#627Db2), color-stop(10%,#5175ad), color-stop(65%,#4966af), color-stop(95%,#3f5fa1), color-stop(100%,#5f76a9));
+		  background: -webkit-linear-gradient(top, $tw_gradient);
+		  background: -moz-linear-gradient(top,  $tw_gradient);
+		  background: -ms-linear-gradient(top,  $tw_gradient);
+		  background: -o-linear-gradient(top,  $tw_gradient);
+
+			&:hover {
+			  background: #ad2328;
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9eb3d5), color-stop(10%,#97a2d2), color-stop(65%,#8ea7cf), color-stop(95%,#809ccb), color-stop(100%,#9cadd0));
+			  background: -webkit-linear-gradient(top, $tw_gradient_hover);
+			  background: -moz-linear-gradient(top,  $tw_gradient_hover);
+			  background: -ms-linear-gradient(top,  $tw_gradient_hover);
+			  background: -o-linear-gradient(top,  $tw_gradient_hover);
+				
+			}
+
+			span, span:hover {
+				background-image: url('/assets/buttons/button_share_twitter_icon.png');
+			}
+		}	
+	}
+	
 }
+
+
+
 
 .share span.button {
   display: inline-block;
@@ -499,8 +579,6 @@ legend img.tooltip {
   vertical-align: middle;
 }
 
-$gradient: #c64d4f 0%, #ce6367 10%, #ce6367 65%, #bf363b 95%, #ad2328 100%;
-$roll_gradient: #e4aaac 0%, #e4aaac 10%, #ce6367 65%, #bf363b 95%, #ad2328 100%;
 
 /* rollover buttons */
 div, span {

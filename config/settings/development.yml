@@ -16,6 +16,15 @@ ovr_states:
       disclosures_font_size: 14px
       disclosures_box_height: 100px
       disclosures_prechecked: true
+  NV:
+    languages:
+      - en
+      - es
+  WA:
+    languages:
+      - en
+      - es
+  
 
 states_with_online_registration:
   - CA
