@@ -54,6 +54,11 @@ describe PartnerZip do
       pz = PartnerZip.new(@file)
       pz.create.should be_true      
     end
+    it "sets an error wben the parter directory has subfolder" do
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'partner_2_subs.zip'))
+      pz = PartnerZip.new(@file)
+      pz.create.should be_false
+    end
     it "creates and checks validity of each partner in the CSV" do
       @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
       pz = PartnerZip.new(@file)
@@ -112,6 +117,16 @@ describe PartnerZip do
       pz = PartnerZip.new(@file)
       pz.create.should
       Dir.entries(PartnerZip.tmp_root).size.should == 2      
+    end
+    it "sets tracking snippets and survey questions" do
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'ejs_good_partners1.zip'))
+      pz = PartnerZip.new(@file)
+      pz.create.should be_true
+      
+      p = Partner.find_by_username("ejstest_4")
+      p.survey_question_2_zh_tw.should == "abc"
+      p.external_tracking_snippet.should == "<some code>code snipped</some code>"
+      
     end
   end
   describe "#error_messages" do

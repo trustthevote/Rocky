@@ -1,4 +1,4 @@
-<% unless @question_1.blank? && @question_2.blank? && !@registrant.partner.ask_for_volunteers? && !@registrant.partner.primary? && !@registrant.partner.partner_ask_for_volunteers? %>
+<% if !@question_1.blank? || !@question_2.blank? || !@registrant.any_ask_for_volunteers? %>
   <fieldset class="questions">
     <legend><%= t('txt.registration.survey_title') %></legend>
     <% unless @question_1.blank? %>

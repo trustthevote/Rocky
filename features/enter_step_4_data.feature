@@ -98,6 +98,16 @@ Feature: Step 4
       And I press "registrant_submit"
       Then I should not be signed up for "opt_in_email" 
     
+    @passing
+    Scenario: User redirected to step 5 when there are no opt ins or survey questions
+      Given the following partner exists:
+        | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers | rtv_sms_opt_in | partner_sms_opt_in | survey_question_1_en | survey_question_2_en |
+        | false     | false         | false         | false             | false   | false       | | |
+      And I have completed step 3 from that partner
+      When I go to the step 4 page
+      Then I should see "Confirm"
+      
+    
   
     @passing
     Scenario: User sees RTV and partner SMS opt-in options for partner configured to have rtv and partner opt-ins, and checks partner-sms

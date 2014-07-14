@@ -316,8 +316,31 @@ class Registrant < ActiveRecord::Base
   validates_presence_of  :send_confirmation_reminder_emails, :in => [ true, false ], :if=>[:building_via_api_call, :finish_with_state?]
 
 
+  def skip_step_4?
+    !in_ovr_flow? && question_1.blank? && question_2.blank? && !any_ask_for_volunteers? && !any_email_opt_ins? && !any_phone_opt_ins?
+  end
+
+  def question_1
+    partner.send("survey_question_1_#{self.locale}")
+  end
+  def question_2
+    partner.send("survey_question_2_#{self.locale}")
+  end
+
   def collect_email_address?
     collect_email_address.to_s.downcase.strip != 'no'
+  end
+  
+  def any_email_opt_ins?
+    collect_email_address? && (partner.rtv_email_opt_in || partner.primary? || partner.partner_email_opt_in)
+  end
+  
+  def any_phone_opt_ins?
+    partner.rtv_sms_opt_in || partner.partner_sms_opt_in || partner.primary?
+  end
+  
+  def any_ask_for_volunteers?
+    partner.ask_for_volunteers? || partner.primary? || partner.partner_ask_for_volunteers
   end
   
   def not_require_email_address?
