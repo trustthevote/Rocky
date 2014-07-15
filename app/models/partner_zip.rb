@@ -194,6 +194,10 @@ private
           end
         end
         
+        if data.has_key?(:is_government_partner) && data[:is_government_partner].blank?
+          data.delete(:is_government_partner)
+        end
+        
         data[:government_partner_zip_code_list] = data.delete(:government_partner_zip_codes)
         
         if (tad = data.delete(:asset_directory)) && data[:tmp_asset_directory].blank?

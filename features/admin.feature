@@ -65,16 +65,14 @@ Feature: Admin UI
       And I should see a field for "External tracking snippet"
   
     @passing
-    Scenario: Uploading a zip to create new partners
+    Scenario: Uploading a zip to create new partners and government partners
       When I go to the admin dashboard
       Then I should see a field for "Upload partner-creation zip file"
       When I upload the "four_good_partners.zip" zip file
       And I press "Upload"
       Then I should be on the admin dashboard
       And I should see "CSV Partner 1"
-      And I should see "CSV Partner 2"
       And I should see "CSV Partner 3"
-      And I should see "CSV Partner 4"
     
     
     Scenario: Uploading a zip with missing required assets
