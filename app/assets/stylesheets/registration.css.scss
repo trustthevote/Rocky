@@ -455,7 +455,8 @@ $fb_gradient: #627Db2 0%, #5175ad 10%, #4966af 65%, #3f5fa1 95%, #5f76a9 100%;
 $fb_gradient_hover: #9eb3d5 0%, #97a2d2 10%, #8ea7cf 65%, #809ccb 95%, #9cadd0 100%;
 
 .share div {
-  width: 100%;
+  width: 250px;
+	margin-left: 15px;
   float: none;
   text-align: center;
 	margin-bottom:10px;
