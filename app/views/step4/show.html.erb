@@ -13,5 +13,6 @@
     <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
     <%= rollover_button(:review, I18n.t('txt.button.review')) %>
   <%- end %>
-  <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_3_path(@registrant) %></div>
+  <div class="back">
+    <%= link_to t('txt.button.back').html_safe, (@registrant.skip_survey_and_opt_ins? && @registrant.in_ovr_flow?) ? registrant_step_2_path(@registrant) : registrant_step_3_path(@registrant) %></div>
 <% end %>

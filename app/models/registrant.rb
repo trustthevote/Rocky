@@ -316,8 +316,8 @@ class Registrant < ActiveRecord::Base
   validates_presence_of  :send_confirmation_reminder_emails, :in => [ true, false ], :if=>[:building_via_api_call, :finish_with_state?]
 
 
-  def skip_step_4?
-    !in_ovr_flow? && question_1.blank? && question_2.blank? && !any_ask_for_volunteers? && !any_email_opt_ins? && !any_phone_opt_ins?
+  def skip_survey_and_opt_ins?
+    question_1.blank? && question_2.blank? && !any_ask_for_volunteers? && !any_email_opt_ins? && !any_phone_opt_ins?
   end
 
   def question_1

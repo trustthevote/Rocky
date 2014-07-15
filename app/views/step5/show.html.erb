@@ -120,6 +120,6 @@
 
   <%= rollover_button(:prepare, I18n.t('txt.button.prepare')) %>
 
-  <div class="back"><%= link_to t('txt.button.back').html_safe, @registrant.skip_step_4? ? registrant_step_3_path(@registrant, :show_fields=>"1") : registrant_step_4_path(@registrant, :show_fields=>"1") %></div>
+  <div class="back"><%= link_to t('txt.button.back').html_safe, (@registrant.skip_survey_and_opt_ins? && !@registrant.in_ovr_flow?) ? registrant_step_3_path(@registrant, :show_fields=>"1") : registrant_step_4_path(@registrant, :show_fields=>"1") %></div>
   
 <% end %>
