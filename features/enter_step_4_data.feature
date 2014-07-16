@@ -107,6 +107,16 @@ Feature: Step 4
       When I go to the step 4 page
       Then I should see "Confirm"
       
+    @passing
+    Scenario: Go back when skipping step 3
+      Given the following partner exists:
+        | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers | rtv_sms_opt_in | partner_sms_opt_in | survey_question_1_en | survey_question_2_en |
+        | false     | false         | false         | false             | false   | false       | | |
+      And I have completed step 4 from that partner as a resident of "Nevada" state
+      When I go to the step 4 page
+      And I follow "< Previous Step"
+      Then I should see "Personal Information"
+      
     
   
     @passing

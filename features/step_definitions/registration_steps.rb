@@ -64,6 +64,15 @@ Given /^I have completed step (\d+) as a resident of "([^\"]*)" state$/ do |step
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
 end
 
+Given /^I have completed step (\d+) from that partner as a resident of "([^\"]*)" state$/ do |step_num,state_name|
+  state = GeoState.find_by_name(state_name)
+  zip_prefix = GeoState.zip3map.key(state.abbreviation)
+  @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
+  @registrant.partner = Partner.last
+  @registrant.save!
+end
+
+
 Given(/^I have completed step (\d+) without an email address$/) do |step_num|
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :collect_email_address=>'no', :email_address=>nil)  
 end
