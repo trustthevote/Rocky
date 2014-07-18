@@ -183,6 +183,7 @@ describe V2::RegistrationService do
 
       V2::RegistrationService.find_records(:partner_id => partner.id, :partner_api_key => partner.api_key).should == [
         { :status               => 'complete',
+          :will_be_18_by_election => reg.will_be_18_by_election?,
           :create_time          => reg.created_at.to_s,
           :complete_time        => reg.updated_at.to_s,
           :lang                 => reg.locale,

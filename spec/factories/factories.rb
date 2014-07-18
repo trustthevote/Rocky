@@ -139,6 +139,7 @@ FactoryGirl.define do
     survey_answer_2     "fido"
     send_confirmation_reminder_emails false
     building_via_api_call true
+    will_be_18_by_election true
   end
 
   factory :api_created_partner, :class=>'partner' do

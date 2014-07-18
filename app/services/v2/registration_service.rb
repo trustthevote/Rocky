@@ -122,6 +122,7 @@ module V2
 
       regs.map do |reg|
         { :status               => reg.extended_status,
+          :will_be_18_by_election => reg.will_be_18_by_election?,
           :create_time          => reg.created_at.to_s,
           :complete_time        => reg.completed_at.to_s,
           :lang                 => reg.locale,
