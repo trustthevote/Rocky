@@ -66,6 +66,7 @@ ovr_states:
       - km
       - th
   NV:
+    redirect_to_online_reg_url: true
     languages:
       - en
   WA:

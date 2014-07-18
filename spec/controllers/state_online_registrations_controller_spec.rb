@@ -54,8 +54,12 @@ describe StateOnlineRegistrationsController do
       File.stub(:exists?)
       RockyConf.ovr_states.CA.stub(:redirect_to_online_reg_url).and_return(false)
       File.stub(:exists?).with(File.join(Rails.root,"app/views/state_online_registrations/#{reg.home_state_abbrev.downcase}.html.erb")) { true }
-      get :show, :registrant_id => reg.to_param
-      assert_template "#{reg.home_state_abbrev.downcase}"
+      expect {
+        get :show, :registrant_id => reg.to_param
+      }.to raise_error(ActionView::MissingTemplate, /Missing template state_online_registrations\/#{reg.home_state_abbrev.downcase}/)
+      
+      #assert_template "#{reg.home_state_abbrev.downcase}"
+      
     end
   end
 end

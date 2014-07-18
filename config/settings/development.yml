@@ -17,6 +17,7 @@ ovr_states:
       disclosures_box_height: 100px
       disclosures_prechecked: true
   NV:
+    redirect_to_online_url: true
     languages:
       - en
       - es

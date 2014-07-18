@@ -26,12 +26,17 @@ Feature: Admin UI
       And I should see instructions provided in the english file
     
     #_translation_instructions values
+    @wip
     Scenario: Translator views the states group in english  
       
+    @wip
     Scenario: Translator saves the states group in spanish with missing translations
     
+    @wip
     Scenario: Translator submits the states group in spanish with missing translations
     
+    @wip
     Scenario: Translator submits the states group in spanish with missing interpolation variables
     
+    @wip
     Scenario: Translator submits a states group with no errors
