@@ -1541,6 +1541,11 @@ describe Registrant do
       reg = FactoryGirl.create(:step_1_registrant, :us_citizen => false)
       assert_equal "Not a US citizen", reg.to_csv_array[-4]
     end
+    
+    it "includes non-english/spanish locale names" do
+      reg = FactoryGirl.create(:api_v2_maximal_registrant, :locale => "zh-tw")
+      reg.to_csv_array[3].should == "Chinese (Traditional)"
+    end
 
     it "has a CSV header" do
       assert_not_nil Registrant::CSV_HEADER

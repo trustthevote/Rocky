@@ -319,6 +319,10 @@ class Registrant < ActiveRecord::Base
   def skip_survey_and_opt_ins?
     question_1.blank? && question_2.blank? && !any_ask_for_volunteers? && !any_email_opt_ins? && !any_phone_opt_ins?
   end
+  
+  def locale_english_name
+    I18n.t("locales.#{locale}.name", locale: "en")
+  end
 
   def question_1
     partner.send("survey_question_1_#{self.locale}")
@@ -1223,7 +1227,7 @@ class Registrant < ActiveRecord::Base
       status.humanize,
       self.tracking_source,
       self.tracking_id,
-      locale == 'en' ? "English" : "Spanish",
+      locale_english_name,
       pdf_date_of_birth,
       email_address,
       yes_no(first_registration?),
