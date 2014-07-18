@@ -56,7 +56,8 @@ module V2
         :partner_sms_opt_in,
         :is_government_partner,
         :government_partner_state_id,
-        :government_partner_zip_codes]
+        :government_partner_zip_codes,
+        :partner_css_download_url]
         
     def self.allowed_attrs 
       ALLOWED_ATTRS + RockyConf.enabled_locales.collect do |locale|

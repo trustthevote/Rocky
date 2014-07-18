@@ -211,7 +211,8 @@ describe V2::PartnerService do
           partner_email_opt_in: true,
           partner_sms_opt_in: true,
           is_government_partner: true,
-          government_partner_zip_codes: ["02113", "02110"]
+          government_partner_zip_codes: ["02113", "02110"],
+          partner_css_download_url: "http://www.google.com"
         }
         V2::PartnerService.create_record(params).should
         params2 = params.dup
