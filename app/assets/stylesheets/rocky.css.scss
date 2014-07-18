@@ -226,6 +226,10 @@ span.error, span.example {
 input, select, textarea {
   font-family: Tahoma, sans-serif;
   font-size: 12px;
+	&:focus {
+		//border-color: #fcc;
+		outline: 2px solid #ffe460;
+	}
 }
 
 input, textarea {
