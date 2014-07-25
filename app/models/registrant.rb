@@ -703,7 +703,7 @@ class Registrant < ActiveRecord::Base
     if requires_party?
       localization ? localization.parties + [ localization.no_party ] : []
     else
-      nil
+      []
     end
   end
   
