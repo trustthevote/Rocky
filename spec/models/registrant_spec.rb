@@ -1167,7 +1167,7 @@ describe Registrant do
 
     it "gets no parties when not required" do
       reg = FactoryGirl.build(:step_2_registrant, :home_state => GeoState["PA"])
-      assert_equal nil, reg.state_parties
+      assert_equal [], reg.state_parties
     end
 
     it "gets no parties when no locale" do

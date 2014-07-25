@@ -46,6 +46,12 @@ rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
 
+# this needs to run for the data to be in the state expected by cucumber
+si = StateImporter.new
+si.import
+si.commit!
+
+
 Before do
   I18n.locale = :en
 end
