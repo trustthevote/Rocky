@@ -383,6 +383,13 @@ Given(/^COVR UI debugging is false$/) do
   RockyConf.ovr_states.CA.api_settings.debug_in_ui = false
 end
 
+Given(/^the setting for allowing ask\-for\-volunteer is true$/) do
+  RockyConf.sponsor.allow_ask_for_volunteers = true
+end
+Given(/^the setting for allowing ask\-for\-volunteer is false$/) do
+  RockyConf.sponsor.allow_ask_for_volunteers = false
+end
+
 Given(/^COVR responses return failures$/) do
   Integrations::Soap.stub(:make_request) do
     File.new(Rails.root.join("spec/fixtures/files/covr/max_registrant_response_fail.xml")).read

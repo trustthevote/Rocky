@@ -325,6 +325,10 @@ class Partner < ActiveRecord::Base
     stats.to_a.sort {|a,b| a[0]<=>b[0] }.collect{|a| a[1]}
   end
 
+  def ask_for_volunteers?
+    RockyConf.sponsor.allow_ask_for_volunteers && read_attribute(:ask_for_volunteers)
+  end
+
   def state_abbrev=(abbrev)
     self.state = GeoState[abbrev]
   end

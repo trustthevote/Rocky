@@ -344,7 +344,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def any_ask_for_volunteers?
-    partner.ask_for_volunteers? || partner.primary? || partner.partner_ask_for_volunteers
+    partner.ask_for_volunteers? || (partner.primary? && RockyConf.sponsor.allow_ask_for_volunteers) || partner.partner_ask_for_volunteers
   end
   
   def not_require_email_address?
