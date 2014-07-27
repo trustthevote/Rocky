@@ -40,7 +40,7 @@ describe PartnersController do
       assigns[:partner].partner_email_opt_in.should be_false
       assigns[:partner].rtv_sms_opt_in.should be_true
       assigns[:partner].partner_sms_opt_in.should be_false
-      assigns[:partner].ask_for_volunteers.should be_true
+      assigns[:partner].ask_for_volunteers.should be_false
       assigns[:partner].partner_ask_for_volunteers.should be_false
     end
 

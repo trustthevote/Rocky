@@ -818,7 +818,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def registration_instructions_url
-    (partner.registration_instructions_url.blank? ? RockyConf.pdf.nvra.page1.other_block.instructions_url : partner.registration_instructions_url).tap do |r_url|
+    ((partner.blank? || partner.registration_instructions_url.blank?) ? RockyConf.pdf.nvra.page1.other_block.instructions_url : partner.registration_instructions_url).tap do |r_url|
       return r_url.gsub(
         "<LOCALE>",locale
       ).gsub("<STATE>",home_state_abbrev)

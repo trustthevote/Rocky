@@ -51,12 +51,12 @@ describe Step4Controller do
     describe "when partner wants volunteers" do
       render_views
       it "should show volunteer checkbox" do
-        partner = FactoryGirl.create(:partner, :ask_for_volunteers => true)
+        partner = FactoryGirl.create(:partner, :partner_ask_for_volunteers => true)
 
         reg = FactoryGirl.create(:step_3_registrant, :partner_id => partner.to_param)
         get :show, :registrant_id => reg.to_param
 
-        assert_select "#registrant_volunteer"
+        assert_select "#registrant_partner_volunteer"
       end
     end
 

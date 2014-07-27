@@ -642,7 +642,7 @@ describe Partner do
       partner.partner_email_opt_in.should be_false
       partner.rtv_sms_opt_in.should be_true
       partner.partner_sms_opt_in.should be_false
-      partner.ask_for_volunteers.should be_true
+      partner.ask_for_volunteers.should be_false
       partner.ask_for_volunteers?.should == RockyConf.sponsor.allow_ask_for_volunteers
       partner.partner_ask_for_volunteers.should be_false
     end

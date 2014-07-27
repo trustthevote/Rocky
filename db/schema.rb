@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140703145450) do
+ActiveRecord::Schema.define(:version => 20140727152509) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(:version => 20140703145450) do
     t.string   "survey_question_2_es"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "ask_for_volunteers",                          :default => true
+    t.boolean  "ask_for_volunteers",                          :default => false
     t.string   "widget_image"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
