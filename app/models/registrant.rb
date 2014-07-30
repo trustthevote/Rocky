@@ -1263,7 +1263,7 @@ class Registrant < ActiveRecord::Base
       yes_no(volunteer?),
       yes_no(partner_volunteer?),
       ineligible_reason,
-      created_at && created_at.to_s(:month_day_year),
+      created_at && created_at.to_s,
       yes_no(finish_with_state?),
       yes_no(building_via_api_call?)
     ]

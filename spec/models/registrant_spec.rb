@@ -1478,7 +1478,7 @@ describe Registrant do
                      "Yes",
                      "Yes",
                      nil,
-                     reg.created_at && reg.created_at.to_s(:month_day_year),
+                     reg.created_at && reg.created_at.to_s,
                      "No",
                      "Yes"
                      ],
@@ -1530,7 +1530,7 @@ describe Registrant do
                      "Yes",
                      "Yes",
                      nil,
-                     reg.created_at && reg.created_at.to_s(:month_day_year),
+                     reg.created_at && reg.created_at.to_s,
                      "No",
                      "Yes"
                      ]
