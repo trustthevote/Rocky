@@ -22,6 +22,9 @@ Rocky::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Serve assets from S3
+  config.action_controller.asset_host = "http://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 

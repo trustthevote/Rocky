@@ -8,7 +8,7 @@
   font-size: 13px;
   line-height: 1.25em;
   padding-bottom:75px;
-  
+
   form ul {
     zoom: 1;
     margin: 0;
@@ -18,11 +18,11 @@
     float: none;
     margin-right: 0;
   }
-  
+
   h2 {
     font-size:18px;
   }
-  
+
   .setting {
     border:1px solid #000;
     margin:15px 0;
@@ -31,14 +31,14 @@
 			background:#ccc;
 		}
   }
-  
+
   ul.nav {
     li {
       overflow:hidden;
       span {
         width:150px;
         float:left;
-        
+
       }
       a {
         float:left;
@@ -47,14 +47,14 @@
       }
     }
   }
-  
+
   .translation_instructions {
     font-size: 110%;
     padding:10px;
     margin-top:10px;
     background:#fDD;
     width:800px;
-    
+
     h3 {
       font-weight:bold;
     }
@@ -69,7 +69,7 @@
       }
     }
   }
-  
+
   ul {
     padding-bottom:25px;
     padding-top:5px;
@@ -98,7 +98,7 @@
         border-left:1px solid #aaa;
         .translation_key_part {
           font-weight:bold;
-        } 
+        }
       }
       &.locale {
         margin-top:5px;
@@ -138,13 +138,13 @@
           &.translatable {
             width:400px;
           }
-        }  
+        }
       }
       &.translatable {
         background: #ccf;
       }
-      
-      
+
+
     }
   }
   #submission {
@@ -166,7 +166,7 @@
     background: #afA;
     padding:20px;
     font-size:120%;
-    
+
   }
   .errors, ul li.error {
     color: #000;
@@ -183,8 +183,8 @@
 			text-decoration:underline;
 		}
   }
-  
-  
+
+
 }
 
 #state_configuration {
@@ -218,10 +218,10 @@
         cursor: default;
         padding-left:14px;
         height:12px;
-        background:url('/admin/downArrow.png') no-repeat center left;
+        background:image-url('admin/downArrow.png') no-repeat center left;
       }
       .collapsed {
-        background-image:url('/admin/collapsedArrow.png');
+        background-image:image-url('admin/collapsedArrow.png');
       }
     }
   }

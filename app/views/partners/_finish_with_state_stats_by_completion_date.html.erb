@@ -7,7 +7,7 @@
       <%- @stats_by_completion_date_finish_with_state.each do |state_completions| %>
         <tr class="<%= cycle('even', 'odd') %>">
           <th><strong><%= state_completions[:state_name] %></strong></th>
-          <td> <img src="/admin/downArrow.png" /> </td>
+          <td> <%= image_tag "admin/downArrow.png" %> </td>
         </tr>
         <tr class="<%= cycle('even', 'odd') %>">
           <th>Within last 24 hours</th>
