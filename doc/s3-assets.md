@@ -16,6 +16,13 @@ asset pipeline helper methods are used -- image_url (in CSS), image_tag
 pipeline guide](http://guides.rubyonrails.org/v3.2.18/asset_pipeline.html).
 
 
+## Bucket configuration
+
+Target Amazon S3 bucket should be created and configured to provide
+public access to the assets. To make it public, choose the bucket in the
+AWS S3 Console and set the "List" permissions to "Everyone".
+
+
 ## Deployment configuration
 
 All configuration is performed via environment variables, that must be
