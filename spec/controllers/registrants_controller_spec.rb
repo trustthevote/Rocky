@@ -105,6 +105,11 @@ describe RegistrantsController do
       reg = assigns[:registrant]
       assert_equal 'en', reg.locale
     end
+    
+    it 'should sanitize locale' do
+      get :new, :locale=>'nv'
+      assert_equal 'en', assigns[:locale]
+    end
 
     describe "keep initial params in hidden fields" do
       render_views
