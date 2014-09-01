@@ -65,7 +65,7 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 set :group_writable, false
 set :use_sudo, false
 
-set :assets_role, [:app, :util]
+set :assets_role, [:app]
 
 
 set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
