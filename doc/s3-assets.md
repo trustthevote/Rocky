@@ -29,8 +29,6 @@ All configuration is performed via environment variables, that must be
 set in an environment-specific `.env` file (see `.env.ENVNAME.example`
 for an example).
 
-  * FOG_PROVIDER -- provider to use for assets storage (always 'AWS')
   * AWS_ACCESS_KEY_ID -- AWS user access key (from AWS Credentials)
   * AWS_SECRET_ACCESS_KEY -- AWS secret access key (from AWS Credentials)
-  * FOG_DIRECTORY -- name of AWS bucket (avoid periods in the name)
 
