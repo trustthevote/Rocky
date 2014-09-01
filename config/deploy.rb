@@ -88,7 +88,7 @@ load 'deploy/assets'
 
 
 
-after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_util_pdf", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
+after "deploy:update_code", "deploy:symlink_util_pdf", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
 
 set :rake, 'bundle exec rake'
 
@@ -136,7 +136,7 @@ namespace :deploy do
   # end
 
 
-  before "deploy:assets:precompile", "deploy:link_db"
+  before "deploy:assets:precompile", "deploy:link_db", "deploy:symlink_configs"
   task :link_db do
     run "ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
