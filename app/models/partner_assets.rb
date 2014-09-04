@@ -83,7 +83,17 @@ module PartnerAssets
   end
 
   def assets_url
-    "/partners/#{self.id}"
+    "//#{partner_assets_host}/partners/#{self.id}"
+  end
+  
+  def partner_assets_host
+    if Rails.env.staging?
+      "rtvstaging.osuosl.org"
+    elsif Rails.env.staging2?
+      "rtvstaging2.osuosl.org"
+    else
+      "register.rockthevote.com"
+    end
   end
 
   def assets_path
