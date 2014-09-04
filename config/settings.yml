@@ -80,6 +80,7 @@ enabled_locales:
   - es
   
 pdf:
+  pdf_gen_server: "http://localhost:3000"
   nvra:
     page1:
       default_logo: 'pdf/rtvlogo.gif'

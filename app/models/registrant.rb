@@ -1023,12 +1023,87 @@ class Registrant < ActiveRecord::Base
   def generate_barcode
     self.barcode = self.pdf_barcode
   end
+  
+  def partner_absolute_pdf_logo_path
+    if partner && partner.whitelabeled? && partner.pdf_logo_present?
+      parter.absolute_pdf_logo_path
+    else
+      ""
+    end
+  end
+
+  def to_pdf_hash
+    {
+      :id =>  id,
+      :uid  =>  uid,
+      :locale => locale,
+      :email_address => email_address,
+      :us_citizen => us_citizen?,
+      :will_be_18_by_election => will_be_18_by_election?,
+      :home_zip_code => home_zip_code,
+      :name_title_key => name_title_key,        
+      :first_name => first_name,         
+      :middle_name => middle_name,        
+      :last_name => last_name,   
+      :name_suffix_key => name_suffix_key,        
+      :home_address => home_address,       
+      :home_unit => home_unit,        
+      :home_city => home_city,
+      :home_state_id => home_state_abbrev,       
+      :mailing_address => mailing_address,    
+      :mailing_unit => mailing_unit,      
+      :mailing_city => mailing_city,       
+      :mailing_state_id => mailing_state_abbrev,
+      :mailing_zip_code => mailing_zip_code,
+      :phone => phone,          
+      :state_id_number => state_id_number,
+      :prev_name_title_key => prev_name_title_key,    
+      :prev_first_name => prev_first_name,    
+      :prev_middle_name => prev_middle_name,   
+      :prev_last_name => prev_last_name, 
+      :prev_name_suffix_key => prev_name_suffix_key,
+      :prev_address => prev_address,   
+      :prev_unit => prev_unit,       
+      :prev_city => prev_city,          
+      :prev_state_id => prev_state_abbrev,
+      :prev_zip_code => prev_zip_code,
+      :partner_absolute_pdf_logo_path => partner_absolute_pdf_logo_path,
+      :registration_instructions_url => registration_instructions_url,
+      :home_state_pdf_instructions => home_state_pdf_instructions,
+      :state_registrar_address => home_state.registrar_address,
+      :registration_deadline => registration_deadline,
+      :party => party,
+      :english_party_name => english_party_name,
+      :pdf_english_race => pdf_english_race,
+      :pdf_date_of_birth => pdf_date_of_birth,
+      :pdf_barcode => pdf_barcode,
+      :created_at => created_at.to_param
+        
+    }
+  end
 
   def generate_pdf!
     generate_pdf(true)
   end
 
   def generate_pdf(force_write = false)
+    begin
+      resp = RestClient.post(RockyConf.pdf.pdf_gen_server, {
+        :client_id=>'rtv',
+        :key=>'cb02de017d55bd4e579bb98a73bb889a269d7bc4',
+        :registrant=>self.to_pdf_hash
+      }.to_json, :content_type=>:json, :accept=>:json)
+      
+      puts resp
+      
+      self.pdf_ready = true
+      
+    rescue Exception=>e
+      puts e.message
+    end
+  end
+
+  def generate_pdf_local(force_write = false)
     return false if self.locale.nil? || self.home_state.nil?
     prev_locale = I18n.locale
     I18n.locale = self.locale
