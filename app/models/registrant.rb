@@ -1029,6 +1029,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def generate_pdf(force_write = false)
+    # HACK to skip pdf gen
+    self.pdf_ready = true
+    return true
+    # END HACK
+    
     return false if self.locale.nil? || self.home_state.nil?
     prev_locale = I18n.locale
     I18n.locale = self.locale
