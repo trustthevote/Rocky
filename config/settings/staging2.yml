@@ -40,3 +40,6 @@ enabled_locales:
   - zh-tw
   - ur
   - bn
+
+pdf:
+  pdf_gen_server: "http://rtvstaging-pdforg1.osuosl.org"

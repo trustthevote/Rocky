@@ -11,7 +11,7 @@
   <h2>Current Logo</h2>
   <% if @partner.custom_logo? %>
     <div class="logo">
-      <%= image_tag @partner.logo.url(:header) %>
+      <%= image_tag "//#{@partner.partner_assets_host}#{@partner.logo.url(:header)}" %>
     </div>
     <%= form_for @partner, :url => partner_logo_path, :html => {:method => :delete} do |form| %>
     <%= partner_rollover_button("deletelogo", "Delete Logo") %>
