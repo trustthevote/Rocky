@@ -42,4 +42,4 @@ enabled_locales:
   - bn
 
 pdf:
-  pdf_gen_server: "http://rtvstaging-pdforg1.osuosl.org"
+  pdf_gen_server: "http://rtvstaging-pdfgen1.osuosl.org"
