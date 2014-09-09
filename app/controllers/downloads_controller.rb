@@ -29,7 +29,7 @@ class DownloadsController < RegistrationStep
     find_registrant(:download)
     if @registrant.pdf_ready?
       render "show"
-    elsif @registrant.updated_at < 30.seconds.ago
+    elsif @registrant.updated_at < 12.seconds.ago
       redirect_to registrant_finish_url(@registrant)
     else
       render "preparing"

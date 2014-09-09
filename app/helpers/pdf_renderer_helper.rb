@@ -14,7 +14,7 @@ module PdfRendererHelper
   end
   
   def checked?(key, attr_name)
-    @registrant.send("#{attr_name}_key") == key
+    @registrant.send("#{attr_name}_key").to_s == key.to_s
   end
 
   def checkbox(key, attr_name)

@@ -1023,6 +1023,14 @@ class Registrant < ActiveRecord::Base
   def generate_barcode
     self.barcode = self.pdf_barcode
   end
+  
+  def partner_absolute_pdf_logo_path
+    if partner && partner.whitelabeled? && partner.pdf_logo_present?
+      parter.absolute_pdf_logo_path
+    else
+      ""
+    end
+  end
 
   def to_pdf_hash
     {
@@ -1077,11 +1085,18 @@ class Registrant < ActiveRecord::Base
   def generate_pdf!
     generate_pdf(true)
   end
+  
+  def generate_pdf(force = false)
+    w = PdfWriter.new
+    w.assign_attributes(self.to_pdf_hash)
+    w.generate_pdf(force)
+  end
+  
 
-  def generate_pdf(force_write = false)
+  def generate_pdf_inline(force_write = false)
     # HACK to skip pdf gen
-    self.pdf_ready = true
-    return true
+    # self.pdf_ready = true
+    # return true
     # END HACK
     
     return false if self.locale.nil? || self.home_state.nil?

@@ -19,14 +19,13 @@ class PdfRenderer < AbstractController::Base
     super()
     @locale =registrant.locale
     @registrant=registrant
-    @state=registrant.home_state
     @logo_image_path = self.logo_image_path
     set_registrant_instructions_link
   end
   
   def logo_image_path
-    if @registrant.partner && @registrant.partner.whitelabeled? && @registrant.partner.pdf_logo_present?
-      @registrant.partner.absolute_pdf_logo_path
+    if !@registrant.partner_absolute_pdf_logo_path.blank?
+      @registrant.partner_absolute_pdf_logo_path
     else
       "file:///#{Rails.root.join('app/assets/images', RockyConf.pdf.nvra.page1.default_logo).to_s}" 
     end
@@ -34,7 +33,11 @@ class PdfRenderer < AbstractController::Base
   
   def set_registrant_instructions_link
     url = self.registrant.registration_instructions_url
-    @registrant_instructions_link = "<br>" + link_to(url, url) + "<br>"
+    if !url.blank?
+      @registrant_instructions_link = "<br>" + link_to(url, url) + "<br>"
+    else
+      @registrant_instructions_link = ''
+    end
   end
   
   
