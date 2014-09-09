@@ -173,7 +173,7 @@ namespace :deploy do
   end
 
   desc "Link the pdf dir to shared/pdfs"
-  task :symlink_web_pdf, :roles => [:web], :except => {:no_release => true} do
+  task :symlink_web_pdf, :roles => [:web, :util], :except => {:no_release => true} do
     run <<-CMD
       mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/pdfs &&
       cd #{latest_release} &&
@@ -182,14 +182,14 @@ namespace :deploy do
     CMD
   end
   
-  desc "Link the pdf dir to /data/rocky/pdf"
-  task :symlink_util_pdf, :roles => [:util], :except => {:no_release => true} do
-    run <<-CMD
-      cd #{latest_release} &&
-      rm -rf pdf &&
-      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html pdf
-    CMD
-  end
+  # desc "Link the pdf dir to /data/rocky/pdf"
+  # task :symlink_util_pdf, :roles => [:util], :except => {:no_release => true} do
+  #   run <<-CMD
+  #     cd #{latest_release} &&
+  #     rm -rf pdf &&
+  #     ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html pdf
+  #   CMD
+  # end
 
   
   desc "Link the csv dir to /data/rocky/csv"
