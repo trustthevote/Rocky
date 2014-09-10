@@ -88,7 +88,8 @@ load 'deploy/assets'
 
 
 
-after "deploy:update_code", "deploy:symlink_util_pdf", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
+after "deploy:update_code", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
+# , "deploy:symlink_util_pdf", 
 
 set :rake, 'bundle exec rake'
 
