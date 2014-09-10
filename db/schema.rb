@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140727152509) do
+ActiveRecord::Schema.define(:version => 20140910205538) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(:version => 20140727152509) do
     t.datetime "updated_at",                :null => false
     t.string   "queue"
   end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "index_delayed_jobs_on_priority_and_run_at"
+  add_index "delayed_jobs", ["queue"], :name => "index_delayed_jobs_on_queue"
 
   create_table "email_templates", :force => true do |t|
     t.integer  "partner_id", :null => false
