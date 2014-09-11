@@ -1,6 +1,6 @@
 class AddRegAbandonedIndex < ActiveRecord::Migration
   def up
-    add_index :registrants, [:abandoned, :status, :updated_at], :name=>:registrant_stale
+    add_index :registrants, [:abandoned, :status], :name=>:registrant_stale
     
   end
   

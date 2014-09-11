@@ -994,7 +994,7 @@ class Registrant < ActiveRecord::Base
 
   def complete_registration
     I18n.locale = self.locale.to_sym
-    generate_pdf
+    queue_pdf
     redact_sensitive_data
     deliver_confirmation_email
     enqueue_reminder_emails
@@ -1007,7 +1007,7 @@ class Registrant < ActiveRecord::Base
 
   # Called from the worker queue to generate PDFs on the 'util' server
   def complete_registration_via_api
-    generate_pdf unless self.finish_with_state?
+    queue_pdf unless self.finish_with_state?
 
     redact_sensitive_data
 
@@ -1080,6 +1080,10 @@ class Registrant < ActiveRecord::Base
       :created_at => created_at.to_param
         
     }
+  end
+  
+  def queue_pdf
+    PdfGenerator.create!(:registrant_id=>self.id)
   end
   
   def generate_pdf!
