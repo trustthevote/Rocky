@@ -457,7 +457,7 @@ class Partner < ActiveRecord::Base
   def generate_registrants_csv_async
     self.update_attributes!(:csv_ready=>false)
     action = Delayed::PerformableMethod.new(self, :generate_registrants_csv_file, [])
-    Delayed::Job.enqueue(action, {:priority=>CSV_GENERATION_PRIORITY, :run_at=>Time.now,:queue=>'csvgen'})
+    Delayed::Job.enqueue(action, {:priority=>CSV_GENERATION_PRIORITY, :run_at=>Time.now})
   end
   
   def generate_registrants_csv_file
@@ -470,7 +470,7 @@ class Partner < ActiveRecord::Base
     self.save!
 
     action = Delayed::PerformableMethod.new(self, :delete_registrants_csv_file, [])
-    Delayed::Job.enqueue(action, {:priority=>CSV_GENERATION_PRIORITY,:run_at=> AppConfig.partner_csv_expiration_minutes.from_now,:queue=>'csvgen'})
+    Delayed::Job.enqueue(action, {:priority=>CSV_GENERATION_PRIORITY,:run_at=> AppConfig.partner_csv_expiration_minutes.from_now})
   end
   
   def delete_registrants_csv_file
