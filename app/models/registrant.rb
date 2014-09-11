@@ -1089,7 +1089,11 @@ class Registrant < ActiveRecord::Base
   def generate_pdf(force = false)
     w = PdfWriter.new
     w.assign_attributes(self.to_pdf_hash)
-    w.generate_pdf(force)
+    if w.valid?
+      return w.generate_pdf(force)
+    else
+      return false
+    end
   end
   
 

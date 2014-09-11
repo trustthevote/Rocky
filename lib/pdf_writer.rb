@@ -132,21 +132,22 @@ class PdfWriter
   def generate_pdf(force_write = false)
     html_string = registrant_to_html_string
     return false if !html_string
+
     
     PdfWriter.write_pdf_from_html_string(html_string, pdf_file_path, self.locale, pdf_file_dir, force_write)
     
-    begin
-      r = Registrant.find(self.id)
-      r.update_attributes(pdf_ready: true)
-    rescue
-    end
+    return pdf_exists?
+    
   end
-  handle_asynchronously :generate_pdf, :priority=>0, :queue=>'pdfgen'
+  #handle_asynchronously :generate_pdf, :priority=>0, :queue=>'pdfgen'
   
   def self.write_pdf_from_html_string(html_string, path, locale, pdf_file_dir, force_write = false)
-    PdfWriter.write_pdf_from_html(html_string, path, locale, pdf_file_dir, force_write = false)
+    PdfWriter.write_pdf_from_html(html_string, path, locale, pdf_file_dir, force_write)
   end
   
+  def pdf_exists?
+    File.exists?(pdf_file_path)
+  end
   
   
   
