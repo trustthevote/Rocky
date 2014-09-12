@@ -1083,7 +1083,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def queue_pdf
-    PdfGenerator.create!(:registrant_id=>self.id)
+    PdfGeneration.create!(:registrant_id=>self.id)
   end
   
   def generate_pdf!
