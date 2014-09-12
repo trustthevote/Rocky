@@ -1083,11 +1083,23 @@ class Registrant < ActiveRecord::Base
   end
   
   def queue_pdf
-    PdfGenerator.create!(:registrant_id=>self.id)
+    #TODO: re-enable pdf-queuing after david tests
+    
+    #PdfGenerator.create!(:registrant_id=>self.id)
   end
   
   def generate_pdf!
     generate_pdf(true)
+  end
+  
+  def generate_html
+    w = PdfWriter.new
+    w.assign_attributes(self.to_pdf_hash)
+    if w.valid?
+      return w.registrant_to_html_string
+    else
+      return false
+    end
   end
   
   def generate_pdf(force = false)
