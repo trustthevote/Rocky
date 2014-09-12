@@ -65,7 +65,7 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 set :group_writable, false
 set :use_sudo, false
 
-set :assets_role, [:app, :util]
+set :assets_role, [:web, :util]
 
 
 set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
@@ -113,12 +113,12 @@ end
 namespace :rvm do
   
   desc "Install passenger"
-  task :install_passenger, :roles => :app do
+  task :install_passenger, :roles => :web do
     run "gem install passenger --version=3.0.19", :shell => fetch(:rvm_shell)
   end
   
   desc "Install and setup RVM Passenger"
-  task :setup_passenger, :roles => :app do
+  task :setup_passenger, :roles => :web do
     run "passenger-install-apache2-module --auto", :shell => fetch(:rvm_shell)    
   end
 end
@@ -151,7 +151,7 @@ namespace :deploy do
   end
 
   desc "Link the database.yml, .env.{environment} files, and newrelic.yml files into the current release path."
-  task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
+  task :symlink_configs, :roles => [:web, :util], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml
@@ -166,7 +166,7 @@ namespace :deploy do
     CMD
   end
   
-  task :symlink_translations, :roles=>[:app], :except =>{:no_release => true} do
+  task :symlink_translations, :roles=>[:web], :except =>{:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/translation_files #{latest_release}/tmp/translation_files
@@ -204,7 +204,7 @@ namespace :deploy do
 
 
   desc "Link the public/partners dir to the shared path"
-  task :symlink_partners, :roles=>[:app], :except => {:no_release => true} do
+  task :symlink_partners, :roles=>[:web], :except => {:no_release => true} do
     run <<-CMD
       mkdir -p #{shared_path}/partner_assets &&
       cd #{latest_release} &&
@@ -213,13 +213,13 @@ namespace :deploy do
   end
 
   desc "Restarting mod_rails with restart.txt"
-  task :restart, :roles => :app, :except => { :no_release => true } do
+  task :restart, :roles => :web, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
   end
 
   [:start, :stop].each do |t|
     desc "#{t} task is a no-op with mod_rails"
-    task t, :roles => :app do ; end
+    task t, :roles => :web do ; end
   end
 
   desc "Run (or restart) worker processes on util server"

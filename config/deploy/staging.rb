@@ -22,10 +22,13 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-role :web,  ENV['STAGING_WEB']
 role :app,  ENV['STAGING_APP']
 role :util, ENV['STAGING_UTIL']
 role :db,   ENV['STAGING_DB'], :primary => true
+role :web,  ENV['STAGING_WEB'].split(',').collect(&:strip)
+role :pdf,  ENV['STAGING_PDF'].split(',').collect(&:strip)
+
+
 
 set :rails_env,    "staging"
 

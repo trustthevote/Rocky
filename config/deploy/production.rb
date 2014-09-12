@@ -22,9 +22,11 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-role :web, ENV['PRODUCTION_WEB']
-role :app, ENV['PRODUCTION_APP']
+role :app,  ENV['PRODUCTION_APP']
 role :util, ENV['PRODUCTION_UTIL']
 role :db,   ENV['PRODUCTION_DB'], :primary => true
+role :web,  ENV['PRODUCTION_WEB'].split(',').collect(&:strip)
+role :pdf,  ENV['PRODUCTION_PDF'].split(',').collect(&:strip)
+
 
 set :branch, "production"
