@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/amekelburg/wkhtmltopdf-binary
-  revision: e2624f3c1da257f48ab4a91dbc0440d44d533235
+  remote: git@github.com:amekelburg/wkhtmltopdf-binary.git
+  revision: 16d53225caebf3b5308bf413a7eac8310f8ba59e
   specs:
     wkhtmltopdf-binary (0.12.0)
 
