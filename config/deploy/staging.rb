@@ -32,6 +32,6 @@ role :pdf,  *(ENV['STAGING_PDF'].split(',').collect(&:strip))
 
 set :rails_env,    "staging"
 
-set :branch, "util_pdf_gen"
+set :branch, "master"
 
 after "deploy:migrate", "deploy:symlink_translations"
