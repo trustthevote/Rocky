@@ -1083,9 +1083,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def queue_pdf
-    #TODO: re-enable pdf-queuing after david tests
-    
-    #PdfGenerator.create!(:registrant_id=>self.id)
+    PdfGenerator.create!(:registrant_id=>self.id)
   end
   
   def generate_pdf!
