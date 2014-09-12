@@ -46,7 +46,7 @@ class PdfGeneration < ActiveRecord::Base
     if pdfgen_id
       pdfgen = self.find(pdfgen_id)
       r = pdfgen.registrant
-      if r && r.generate_pdf
+      if r && r.generate_pdf(true)
         r.update_attribute('pdf_ready', true)
         puts "Generated #{r.pdf_path}"
         pdfgen.delete
