@@ -28,7 +28,7 @@
   </div>
   <script type="text/javascript">
       $(document).ready(function() {
-          if (uid = window.location.pathname.match(/^pdfs\/.+\/(.+)\.pdf/)[1]) {
+          if (uid = window.location.pathname.match(/pdfs\/.+\/(.+)\.pdf/)[1]) {
               $("#dialog").hide();
               $("#missing-pdf").show();
               window.location.pathname = "/registrants/"+uid+"/finish"
