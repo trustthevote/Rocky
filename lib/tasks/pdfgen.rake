@@ -4,7 +4,6 @@ namespace :pdf do
   task :generate => :environment do
     loop do
       PdfGeneration.find_and_generate
-      sleep(0.1)
     end
   end
   
@@ -12,7 +11,6 @@ namespace :pdf do
   task :dequeue => :environment do
     loop do
       PdfGeneration.find_and_remove
-      sleep(0.1)
     end
   end
 
@@ -20,7 +18,6 @@ namespace :pdf do
   task :htmlify => :environment do
     loop do
       PdfGeneration.find_and_htmlify
-      sleep(0.1)
     end
   end
   
