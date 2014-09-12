@@ -25,8 +25,8 @@
 role :app,  ENV['STAGING_APP']
 role :util, ENV['STAGING_UTIL']
 role :db,   ENV['STAGING_DB'], :primary => true
-role :web,  ENV['STAGING_WEB'].split(',').collect(&:strip)
-role :pdf,  ENV['STAGING_PDF'].split(',').collect(&:strip)
+role :web,  *(ENV['STAGING_WEB'].split(',').collect(&:strip))
+role :pdf,  *(ENV['STAGING_PDF'].split(',').collect(&:strip))
 
 
 
