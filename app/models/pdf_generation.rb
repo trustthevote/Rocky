@@ -42,6 +42,7 @@ class PdfGeneration < ActiveRecord::Base
   end
   
   def self.find_and_generate
+    pdfgen_id = retrieve
     if pdfgen_id
       pdfgen = self.find(pdfgen_id)
       r = pdfgen.registrant
