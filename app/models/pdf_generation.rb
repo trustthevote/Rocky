@@ -32,7 +32,7 @@ class PdfGeneration < ActiveRecord::Base
       pdfgen = self.find(pdfgen_id)
       r = pdfgen.registrant
       if r && r.generate_pdf_html
-        r.update_attribute('pdf_ready', true)
+        r.finish_pdf
         puts "Generated HTML for #{r.id}"
         pdfgen.delete
       else
@@ -47,7 +47,7 @@ class PdfGeneration < ActiveRecord::Base
       pdfgen = self.find(pdfgen_id)
       r = pdfgen.registrant
       if r && r.generate_pdf(true)
-        r.update_attribute('pdf_ready', true)
+        r.finish_pdf
         puts "Generated #{r.pdf_path}"
         pdfgen.delete
       else

@@ -995,7 +995,7 @@ class Registrant < ActiveRecord::Base
   def complete_registration
     I18n.locale = self.locale.to_sym
     queue_pdf
-    redact_sensitive_data
+    #redact_sensitive_data - this needs to happen AFTER PDF generation
     deliver_confirmation_email
     enqueue_reminder_emails
   end
@@ -1009,7 +1009,7 @@ class Registrant < ActiveRecord::Base
   def complete_registration_via_api
     queue_pdf unless self.finish_with_state?
 
-    redact_sensitive_data
+    # redact_sensitive_data - this needs to happen AFTER PDF generation
 
     if self.send_confirmation_reminder_emails?
       deliver_confirmation_email
@@ -1143,6 +1143,13 @@ class Registrant < ActiveRecord::Base
     I18n.locale = prev_locale
     self.pdf_ready = true
   end
+  
+  def finish_pdf
+    self.pdf_ready = true
+    redact_sensitive_data
+    save
+  end
+  
   
   def lang
     locale
