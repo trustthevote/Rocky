@@ -121,12 +121,13 @@ class PdfWriter
     return false if !html_string
       
     path = html_file_path
-    if !File.exists?(path) || force_write
+    # skip FS check
+    # if !File.exists?(path) || force_write
       FileUtils.mkdir_p(html_file_dir)
       File.open(path, "w") do |f|
         f << html_string.force_encoding('UTF-8')
       end
-    end
+    # end
   end
   
   def generate_pdf(force_write = false)
@@ -136,7 +137,9 @@ class PdfWriter
     
     PdfWriter.write_pdf_from_html_string(html_string, pdf_file_path, self.locale, pdf_file_dir, force_write)
     
-    return pdf_exists?
+    # lets assume if there's no error raise, the file got generated
+    return true
+    # return pdf_exists?
     
   end
   #handle_asynchronously :generate_pdf, :priority=>0, :queue=>'pdfgen'
@@ -175,11 +178,12 @@ class PdfWriter
     if pdfpre
       "#{pdfpre}/#{bucket_code}"
     else
-      if File.exists?(pdf_file_path("pdf"))
-        "pdf/#{bucket_code}"
-      else
+      # we're past this old format
+      # if File.exists?(pdf_file_path("pdf"))
+      #  "pdf/#{bucket_code}"
+      # else
         "#{url_format ? '' : "public/"}pdfs/#{bucket_code}"
-      end
+      # end
     end
   end
   
@@ -200,7 +204,8 @@ class PdfWriter
   
   
   def self.write_pdf_from_html(html_string, path, locale, pdf_file_dir, force_write = false)
-    if !File.exists?(path) || force_write
+    # skip exists check
+    # if force_write || !File.exists?(path)
         pdf = WickedPdf.new.pdf_from_string(
         html_string,
         :disable_internal_links         => false,
@@ -212,7 +217,7 @@ class PdfWriter
       File.open(path, "w") do |f|
         f << pdf.force_encoding('UTF-8')
       end
-    end
+    # end
   end
     
     
