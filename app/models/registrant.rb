@@ -423,7 +423,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.abandon_stale_records
-    self.find_each(:batch_size=>500, :conditions => ["(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago]) do |reg|
+    id_list = self.where("(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago).pluck(:id)
+    self.find_each(:batch_size=>500, :conditions => ["id in (?)", id_list]) do |reg|
       if reg.finish_with_state?
         reg.status = "complete"
         begin
