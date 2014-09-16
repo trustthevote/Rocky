@@ -2,13 +2,11 @@
 require 'rubygems'
 require 'daemons'
 
-script = "TZ=:/etc/localtime bundle exec rake pdf:generate"
-#File.join(File.dirname(__FILE__), 'rocky_pdf_worker')
+script = File.join(File.dirname(__FILE__), 'rocky_pdf_worker')
 dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 Daemons.run(script, :ARGV => ARGV + ['--', dir],
             :mode => :exec,
-            :force => true,
             :dir_mode => :script,
             :dir => '../tmp/pids',
             :log_output => true,
