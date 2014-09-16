@@ -94,7 +94,7 @@ after "deploy:update_code", "deploy:symlink_web_pdf", "deploy:symlink_csv", "dep
 set :rake, 'bundle exec rake'
 
 before "deploy:restart", "deploy:import_states_yml"   # runs after migrations when migrating
-after "deploy:restart", "deploy:run_workers", "deploy:run_pdf_workers"
+after "deploy:restart", "deploy:run_pdf_workers", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
 namespace :admin do
@@ -237,19 +237,18 @@ namespace :deploy do
     unset(:latest_release)
   end
   
-  desc "Run (or restart) worker processes on util server"
+  desc "Run (or restart) pdf worker processes on pdf server"
   task :run_pdf_workers, :roles => :pdf do
-    run "cd #{latest_release} && TZ=:/etc/localtime bundle exec ruby script/rocky_pdf_runner stop"
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec ruby script/rocky_pdf_runner stop"
     sleep 5
-    run "cd #{latest_release} && TZ=:/etc/localtime bundle exec ruby script/rocky_pdf_runner start"
-    unset(:latest_release)
+    2.times do
+      run "cd #{latest_release} && RAILS_ENV=#{rails_env} TZ=:/etc/localtime bundle exec ruby script/rocky_pdf_runner start"
+    end
   end
 
-  desc "Stop worker processes on util server"
+  desc "Stop worker pdf processes on pdf server"
   task :stop_pdf_workers, :roles => :pdf do
-    run "cd #{latest_release} && bundle exec ruby script/rocky_pdf_runner stop"
-    # nasty hack to make sure it stops
-    unset(:latest_release)
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec ruby script/rocky_pdf_runner stop"
   end
   
 end

@@ -13,7 +13,10 @@ class PdfGeneration < ActiveRecord::Base
         pdfgen_id = pdfgen.id
       end
     end
-    puts "Failed to get lock!" if pdfgen_id.nil?
+    if pdfgen_id.nil?
+      puts "Couldn't get lock on any PdfGeneration" 
+      sleep(5)
+    end
     return pdfgen_id
   end
   
