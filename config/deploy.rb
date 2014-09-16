@@ -185,9 +185,10 @@ namespace :deploy do
   desc "Link the pdf dir to /data/rocky/pdf"
   task :symlink_util_pdf, :roles => [:util], :except => {:no_release => true} do
     run <<-CMD
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/pdfs &&
       cd #{latest_release} &&
-      rm -rf pdf &&
-      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html pdf
+      rm -rf pdfs && 
+      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html/pdfs public/pdfs
     CMD
   end
 

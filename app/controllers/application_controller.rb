@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :ensure_https
 
-  before_filter :authenticate_everything, :if => lambda { !%w{ development test production staging }.include?(Rails.env) }
+  before_filter :authenticate_everything, :if => lambda { !%w{ development test production staging staging2 }.include?(Rails.env) }
 
   protected
 
