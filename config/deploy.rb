@@ -65,7 +65,7 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 set :group_writable, false
 set :use_sudo, false
 
-set :assets_role, [:web, :util]
+set :assets_role, [:web, :util, :pdf]
 
 
 set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
@@ -94,7 +94,7 @@ after "deploy:update_code", "deploy:symlink_web_pdf", "deploy:symlink_csv", "dep
 set :rake, 'bundle exec rake'
 
 before "deploy:restart", "deploy:import_states_yml"   # runs after migrations when migrating
-after "deploy:restart", "deploy:run_workers"
+after "deploy:restart", "deploy:run_workers", "deploy:run_pdf_workers"
 after "deploy", "deploy:cleanup"
 
 namespace :admin do
@@ -151,7 +151,7 @@ namespace :deploy do
   end
 
   desc "Link the database.yml, .env.{environment} files, and newrelic.yml files into the current release path."
-  task :symlink_configs, :roles => [:web, :util], :except => {:no_release => true} do
+  task :symlink_configs, :roles => [:web, :util, :pdf], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml
@@ -174,7 +174,7 @@ namespace :deploy do
   end
 
   desc "Link the pdf dir to shared/pdfs"
-  task :symlink_web_pdf, :roles => [:web, :util], :except => {:no_release => true} do
+  task :symlink_web_pdf, :roles => [:web, :util, :pdf], :except => {:no_release => true} do
     run <<-CMD
       mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/pdfs &&
       cd #{latest_release} &&
@@ -236,6 +236,22 @@ namespace :deploy do
     # nasty hack to make sure it stops
     unset(:latest_release)
   end
+  
+  desc "Run (or restart) worker processes on util server"
+  task :run_pdf_workers, :roles => :pdf do
+    run "cd #{latest_release} && TZ=:/etc/localtime bundle exec ruby script/rocky_pdf_runner stop"
+    sleep 5
+    run "cd #{latest_release} && TZ=:/etc/localtime bundle exec ruby script/rocky_pdf_runner start"
+    unset(:latest_release)
+  end
+
+  desc "Stop worker processes on util server"
+  task :stop_pdf_workers, :roles => :pdf do
+    run "cd #{latest_release} && bundle exec ruby script/rocky_pdf_runner stop"
+    # nasty hack to make sure it stops
+    unset(:latest_release)
+  end
+  
 end
 
 

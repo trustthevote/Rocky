@@ -1,0 +1,3 @@
+#!/bin/bash
+cd $1
+TZ=:/etc/localtime bundle exec rake pdf:generate
