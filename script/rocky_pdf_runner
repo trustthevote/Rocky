@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'daemons'
+
+script = File.join(File.dirname(__FILE__), 'script/rocky_pdf_worker')
+#dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+
+Daemons.run(script, :ARGV => ARGV,
+            :mode => :exec,
+            :dir_mode => :script,
+            :dir => '../tmp/pids',
+            :log_output => false,
+            :multiple => true)
+
+
