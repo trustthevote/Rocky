@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config/environment'))
 
-Dir.chdir Rails.root
+Dir.chdir(Rails.root)
 
 loop do
   PdfGeneration.find_and_generate
