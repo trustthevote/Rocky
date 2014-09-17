@@ -1,3 +1,11 @@
-#!/bin/bash
-cd $1
-TZ=:/etc/localtime bundle exec rake pdf:generate
+#!/usr/bin/env ruby
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config/environment'))
+
+loop do
+  PdfGeneration.find_and_generate
+end
+
+
+# #!/bin/bash
+# cd $1
+# TZ=:/etc/localtime bundle exec rake pdf:generate

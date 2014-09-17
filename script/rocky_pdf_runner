@@ -7,9 +7,9 @@ dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 Daemons.run(script, :ARGV => ARGV + ['--', dir],
             :mode => :exec,
-            :dir_mode => :script,
-            :dir => '../tmp/pids',
-            :log_output => true,
+            :dir_mode => :normal,
+            :dir => 'tmp/pids',
+            :log_output => false,
             :multiple => true)
 
 
