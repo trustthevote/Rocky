@@ -1104,7 +1104,12 @@ class Registrant < ActiveRecord::Base
     w = PdfWriter.new
     w.assign_attributes(self.to_pdf_hash)
     if w.valid?
-      return w.generate_pdf(force)
+      if w.generate_pdf(force)
+        deliver_confirmation_email
+        return true
+      else
+        return false
+      end
     else
       return false
     end
