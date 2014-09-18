@@ -408,6 +408,7 @@ class Registrant < ActiveRecord::Base
     r = Registrant.new(data)
     r.building_via_api_call   = true
     r.finish_with_state       = api_finish_with_state
+    r.has_state_license = true if api_finish_with_state
     r.status                  = api_finish_with_state ? :step_2 : :step_5
     r
   end

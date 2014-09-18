@@ -24,7 +24,7 @@ class PdfGeneration < ActiveRecord::Base
           pdfgen_id = pdfgen.id
         end
       end
-      if pdfgen_id.nil?
+      if pdfgen_id.nil? && PdfGeneration.count != 0
         puts "Couldn't get lock on any PdfGeneration" 
         sleep(5)
       end
@@ -63,7 +63,7 @@ class PdfGeneration < ActiveRecord::Base
       r = pdfgen.registrant
       if r && r.generate_pdf(true)
         r.finish_pdf
-        puts "Generated #{r.pdf_path}"
+        # puts "Generated #{r.pdf_path}"
         pdfgen.delete
       else
         puts "FAILED to generate PDF for #{r.id}"
