@@ -14,8 +14,20 @@ class PdfGeneration < ActiveRecord::Base
       end
     end
     if pdfgen_id.nil?
-      puts "Couldn't get lock on any PdfGeneration" 
-      sleep(5)
+      # Try an old locked one?
+      PdfGeneration.transaction do
+        pdfgen  = self.where(:locked => true).where("updated_at < ?", 10.minutes.ago).lock(true).first
+        if pdfgen
+          pdfgen.locked = true
+          pdfgen.updated_at = Time.now
+          pdfgen.save!
+          pdfgen_id = pdfgen.id
+        end
+      end
+      if pdfgen_id.nil?
+        puts "Couldn't get lock on any PdfGeneration" 
+        sleep(5)
+      end
     end
     return pdfgen_id
   end

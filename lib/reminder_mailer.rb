@@ -27,8 +27,8 @@
 class ReminderMailer
 
   def deliver_reminders!
-    deliver_reminders(reg_ids(2, first_reminder_time))
     deliver_reminders(reg_ids(1, second_reminder_time))
+    deliver_reminders(reg_ids(2, first_reminder_time))
   end
 
   def reg_ids(count, time)
@@ -49,5 +49,3 @@ class ReminderMailer
     end
   end
 end
-
-#BucketRemover.new.remove_buckets! if $0 == __FILE__
