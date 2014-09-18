@@ -1113,16 +1113,9 @@ class Registrant < ActiveRecord::Base
   def enqueue_reminder_emails
     if send_emails?
       self.reminders_left = REMINDER_EMAILS_TO_SEND
-      enqueue_reminder_email
     else
       self.reminders_left = 0
     end
-  end
-
-  def enqueue_reminder_email
-    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ ])
-    interval = reminders_left == 2 ? AppConfig.hours_before_first_reminder : AppConfig.hours_between_first_and_second_reminder
-    Delayed::Job.enqueue(action, {:priority=>REMINDER_EMAIL_PRIORITY, :run_at=>interval.from_now})
   end
 
   def deliver_reminder_email
@@ -1130,7 +1123,7 @@ class Registrant < ActiveRecord::Base
       Notifier.reminder(self).deliver
       self.reminders_left = reminders_left - 1
       self.save(validate: false)
-      enqueue_reminder_email if reminders_left > 0
+      # enqueue_reminder_email if reminders_left > 0
     end
   rescue StandardError => error
     Airbrake.notify(
