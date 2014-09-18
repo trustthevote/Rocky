@@ -28,5 +28,7 @@ role :util, ENV['STAGING2_UTIL']
 role :db,   ENV['STAGING2_DB'], :primary => true
 
 set :rails_env,    "staging2"
+set :keep_releases, 3
+
 
 set :branch, "s3_assets"
