@@ -72,6 +72,8 @@ set :rvm_ruby_string, :local        # use the same ruby as used locally for depl
 set :rvm_autolibs_flag, "enable"
 set :rvm_install_with_sudo, true 
 
+set :sync_assets, fetch(:sync_assets, true)
+
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby' 
 before 'deploy:setup', 'rvm:install_passenger' 
@@ -144,10 +146,12 @@ namespace :deploy do
   
   after "deploy:assets:precompile", "deploy:asset_sync"
   task :asset_sync, :roles => [:app] do
-    run <<-CMD
-      cd #{latest_release} &&
-      bundle exec rake assets:sync
-    CMD
+    if sync_assets
+      run <<-CMD
+        cd #{latest_release} &&
+        bundle exec rake assets:sync
+      CMD
+    end
   end
   
   
