@@ -996,9 +996,9 @@ class Registrant < ActiveRecord::Base
   def complete_registration
     I18n.locale = self.locale.to_sym
     queue_pdf
-    #redact_sensitive_data - this needs to happen AFTER PDF generation
-    deliver_confirmation_email
-    enqueue_reminder_emails
+    # redact_sensitive_data - this needs to happen AFTER PDF generation
+    # deliver_confirmation_email - this needs to happend AFTER PDF gen
+    # enqueue_reminder_emails - this happens as part of deliver_confirmation_email
   end
 
   # Enqueues final registration actions for API calls
@@ -1008,13 +1008,12 @@ class Registrant < ActiveRecord::Base
 
   # Called from the worker queue to generate PDFs on the 'util' server
   def complete_registration_via_api
-    queue_pdf unless self.finish_with_state?
-
-    # redact_sensitive_data - this needs to happen AFTER PDF generation
-
-    if self.send_confirmation_reminder_emails?
-      deliver_confirmation_email
-      enqueue_reminder_emails
+    if self.finish_with_state?
+      if self.send_confirmation_reminder_emails?
+        deliver_confirmation_email
+      end
+    else
+      queue_pdf
     end
 
     self.status = 'complete'
@@ -1195,6 +1194,7 @@ class Registrant < ActiveRecord::Base
   def deliver_confirmation_email
     if send_emails?
       Notifier.confirmation(self).deliver
+      enqueue_reminder_emails
     end
   end
 
@@ -1207,24 +1207,17 @@ class Registrant < ActiveRecord::Base
   def enqueue_reminder_emails
     if send_emails?
       self.reminders_left = REMINDER_EMAILS_TO_SEND
-      enqueue_reminder_email
     else
       self.reminders_left = 0
     end
   end
 
-  def enqueue_reminder_email
-    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ ])
-    interval = reminders_left == 2 ? AppConfig.hours_before_first_reminder : AppConfig.hours_between_first_and_second_reminder
-    Delayed::Job.enqueue(action, {:priority=>REMINDER_EMAIL_PRIORITY, :run_at=>interval.from_now})
-  end
 
   def deliver_reminder_email
     if reminders_left > 0 && send_emails?
       Notifier.reminder(self).deliver
       self.reminders_left = reminders_left - 1
       self.save(validate: false)
-      enqueue_reminder_email if reminders_left > 0
     end
   rescue StandardError => error
     Airbrake.notify(

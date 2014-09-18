@@ -6,8 +6,3 @@ Dir.chdir(Rails.root)
 loop do
   PdfGeneration.find_and_generate
 end
-
-
-# #!/bin/bash
-# cd $1
-# TZ=:/etc/localtime bundle exec rake pdf:generate

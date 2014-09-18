@@ -8,4 +8,10 @@ namespace :utility do
   task :remove_buckets => :environment do
     BucketRemover.new.remove_buckets!
   end
+  
+  desc "Deliver reminder emails"
+  task :remove_buckets => :environment do
+    ReminderMailer.new.deliver_reminders!
+  end
+  
 end
