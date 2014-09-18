@@ -142,8 +142,8 @@ namespace :deploy do
     run "ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
   
-  after "deploy:assets:precompile", "deploy:assets:sync"
-  task :sync, :roles => [:app] do
+  after "deploy:assets:precompile", "deploy:asset_sync"
+  task :asset_sync, :roles => [:app] do
     run <<-CMD
       cd #{latest_release} &&
       bundle exec rake assets:sync
