@@ -19,7 +19,6 @@ class PdfRenderer < AbstractController::Base
     super()
     @locale =registrant.locale
     @registrant=registrant
-    @state=registrant.home_state
     @logo_image_path = self.logo_image_path
     set_registrant_instructions_link
   end
@@ -34,7 +33,11 @@ class PdfRenderer < AbstractController::Base
   
   def set_registrant_instructions_link
     url = self.registrant.registration_instructions_url
-    @registrant_instructions_link = "<br>" + link_to(url, url) + "<br>"
+    if !url.blank?
+      @registrant_instructions_link = "<br>" + link_to(url, url) + "<br>"
+    else
+      @registrant_instructions_link = ''
+    end
   end
   
   
