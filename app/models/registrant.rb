@@ -1026,6 +1026,14 @@ class Registrant < ActiveRecord::Base
     self.barcode = self.pdf_barcode
   end
 
+  def partner_absolute_pdf_logo_path
+    if partner && partner.whitelabeled? && partner.pdf_logo_present?
+      parter.absolute_pdf_logo_path
+    else
+      ""
+    end
+  end
+
   def generate_pdf!
     generate_pdf(true)
   end

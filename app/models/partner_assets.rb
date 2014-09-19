@@ -70,7 +70,7 @@ module PartnerAssets
 
   def absolute_pdf_logo_path(ext=nil)
     ext ||= pdf_logo_ext || "gif"
-    "#{assets_root}#{pdf_logo_url(ext)}"
+    "#{pdf_logo_url(ext)}"
   end
 
 
