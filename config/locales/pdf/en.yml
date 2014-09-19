@@ -24,8 +24,8 @@ en:
           title: ! 'SUBMIT YOUR COMPLETED, SIGNED FORM TO:'
         deadline_block:
           title: ! 'REGISTRATION DEADLINE:'
-        other_block: See %{instructions_url} for complete general and state-specific
-          instructions for your voter registration application.
+        other_block: You must read %{instructions_url} for complete general and state-specific
+          instructions, including eligibility requirements.
         bottom_block:
           title: FIRST TIME VOTERS WHO REGISTER BY MAIL
           paragraph1: ! 'If you are registering to vote for the first time in your
@@ -146,4 +146,3 @@ en:
           State.
       page3:
         fouo: FOR OFFICIAL USE ONLY
-
