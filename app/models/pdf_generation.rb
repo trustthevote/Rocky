@@ -24,8 +24,10 @@ class PdfGeneration < ActiveRecord::Base
           pdfgen_id = pdfgen.id
         end
       end
-      if pdfgen_id.nil? && PdfGeneration.count != 0
-        puts "#{Time.now} Couldn't get lock on any PdfGeneration" 
+      if pdfgen_id.nil? 
+        if PdfGeneration.count != 0
+          puts "#{Time.now} Couldn't get lock on any PdfGeneration" 
+        end
         sleep(15)
       end
     end
