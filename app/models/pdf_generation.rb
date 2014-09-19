@@ -71,6 +71,7 @@ class PdfGeneration < ActiveRecord::Base
     end
   rescue Exception => e
     puts "#{Time.now} Error finding and generating PDF:\n#{e.message}\n#{e.backtrace}"
+    sleep(15)
     raise e
   end
   
