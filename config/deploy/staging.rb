@@ -28,7 +28,7 @@ role :db,   ENV['STAGING_DB'], :primary => true
 role :web,  *(ENV['STAGING_WEB'].split(',').collect(&:strip))
 role :pdf,  *(ENV['STAGING_PDF'].split(',').collect(&:strip))
 
-set
+set :keep_releases, 3
 
 set :rails_env,    "staging"
 
