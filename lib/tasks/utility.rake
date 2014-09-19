@@ -10,7 +10,7 @@ namespace :utility do
   end
   
   desc "Deliver reminder emails"
-  task :remove_buckets => :environment do
+  task :deliver_reminders => :environment do
     ReminderMailer.new.deliver_reminders!
   end
   
