@@ -70,7 +70,7 @@ class PdfGeneration < ActiveRecord::Base
       end
     end
   rescue Exception => e
-    puts "#{time.now} Error finding and generating PDF:\n#{e.message}\n#{e.backtrace}"
+    puts "#{Time.now} Error finding and generating PDF:\n#{e.message}\n#{e.backtrace}"
   end
   
 end
