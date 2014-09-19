@@ -146,7 +146,7 @@ namespace :deploy do
   
   after "deploy:assets:precompile", "deploy:asset_sync"
   task :asset_sync, :roles => [:app] do
-    if sync_assets
+    if sync_assets != 0
       run <<-CMD
         cd #{latest_release} &&
         bundle exec rake assets:sync

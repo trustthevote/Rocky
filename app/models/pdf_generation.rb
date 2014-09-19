@@ -25,8 +25,8 @@ class PdfGeneration < ActiveRecord::Base
         end
       end
       if pdfgen_id.nil? && PdfGeneration.count != 0
-        puts "Couldn't get lock on any PdfGeneration" 
-        sleep(5)
+        puts "#{Time.now} Couldn't get lock on any PdfGeneration" 
+        sleep(15)
       end
     end
     return pdfgen_id
@@ -69,6 +69,8 @@ class PdfGeneration < ActiveRecord::Base
         puts "FAILED to generate PDF for #{r.id}"
       end
     end
+  rescue Exception => e
+    puts "#{time.now} Error finding and generating PDF:\n#{e.message}\n#{e.backtrace}"
   end
   
 end
