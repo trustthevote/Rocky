@@ -813,6 +813,10 @@ class Registrant < ActiveRecord::Base
     localization.registration_deadline
   end
   
+  def state_registrar_address
+    home_state && home_state.registrar_address
+  end
+  
   [:pdf_instructions, :email_instructions].each do |state_data|
     define_method("home_state_#{state_data}") do
       localization.send(state_data)

@@ -1,3 +1,5 @@
-WickedPdf.config = {
-  :exe_path => '/var/www/register.rockthevote.com/rocky/shared/bundle/ruby/1.9.1/bin/wkhtmltopdf'
-}
+unless Rails.env.development?
+  WickedPdf.config = {
+    :exe_path => '/var/www/register.rockthevote.com/rocky/shared/bundle/ruby/1.9.1/bin/wkhtmltopdf'
+  }
+end
