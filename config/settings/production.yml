@@ -1,6 +1,6 @@
-pdf_host_name: 'register.rockthevote.com'
+pdf_host_name: 'register2g.rockthevote.com'
 from_address: "register@rockthevote.com"
-default_url_host: "register.rockthevote.com"
+default_url_host: "register2g.rockthevote.com"
 
 
 states_with_online_registration:
