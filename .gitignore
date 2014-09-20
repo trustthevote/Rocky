@@ -20,6 +20,8 @@
 .rvmrc*
 .vimrc
 .env
+.env2g
+.env-no-g
 .env.staging2
 .env.staging
 .env.production
