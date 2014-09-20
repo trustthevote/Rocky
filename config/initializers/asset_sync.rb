@@ -8,7 +8,7 @@ AssetSync.configure do |config|
   # To use AWS reduced redundancy storage.
   # config.aws_reduced_redundancy = true
   if Rails.env.production?  
-    config.fog_directory = "rocky-assets"
+    config.fog_directory = "rocky-assets-g"
   else
     config.fog_directory = "rocky-assets-#{Rails.env}"
   end
