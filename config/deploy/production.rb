@@ -29,4 +29,4 @@ role :web,  *(ENV['PRODUCTION_WEB'].split(',').collect(&:strip))
 role :pdf,  *(ENV['PRODUCTION_PDF'].split(',').collect(&:strip))
 
 
-set :branch, "production"
+set :branch, "master"
