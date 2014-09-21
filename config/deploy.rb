@@ -219,9 +219,9 @@ namespace :deploy do
   desc "Link the public/partners dir to the shared path"
   task :symlink_partners, :roles=>[:web], :except => {:no_release => true} do
     run <<-CMD
-      mkdir -p #{shared_path}/partner_assets &&
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets &&
       cd #{latest_release} &&
-      ln -nfs #{shared_path}/partner_assets #{latest_release}/public/partners
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets #{latest_release}/public/partners
     CMD
   end
 
