@@ -182,7 +182,7 @@ locally with control scripts or remotely with capistrano.
 
     $ script/rocky_runner start
     $ script/rocky_runner stop
-    $ script/rocky_pdf_runner start
+    $ script/rocky_pdf_runner start  // See the 'rocky_pdf_runner' description below for syntax
     $ script/rocky_pdf_runner stop
 
     $ cap deploy:run_workers    # start/restart both workers
@@ -198,10 +198,22 @@ second daemon to do that work.
 
 #### `rocky_pdf_runner`
 
-It would be nice to have both daemons merged into one process, but it was faster
-to set things up this way. In the future, using JRuby would let someone do
-that. For now, we use the second daemon to avoid paying the cost of launching a
-Java VM for every PDF merger.
+This runs a task to work off the PDF queue. It is only run on the PDFGen servers. The syntax should be:
+
+    $ RAILS_ENV=[ENV_NAME] TZ=:/etc/localtime bundle exec ruby script/rocky_pdf_runner start
+    $ RAILS_ENV=[ENV_NAME] TZ=:/etc/localtime bundle exec ruby script/rocky_pdf_runner stop
+    
+Running "start" will clean up PIDs for workers that have died and start 1 new task.
+Running "stop" will stop all running tasks.
+
+During a deploy "stop" is ran, and then after a timeout, "start" is ran 12 times. At any given time 12 workers should be
+running on a PDFGen server. Sometimes the stop command doesn't successfully stop all instances, so the process
+list should be checked after a deploy to ensure there are not more than 12 workers running.
+
+There should be a separate process monitoring the group that restarts stopped workers, but it's not always successful.
+
+PID files as well as a rocky_pdf_worker.log and rocky_pdf_worker.output are in the current/tmp/pids/ directory. Occasional mysql/deadlock errors in the .output file are acceptable, but if the file grows rapidly with these or other errors, it's a sign of something wrong.
+
 
 ## 5. Importing State Data
 
