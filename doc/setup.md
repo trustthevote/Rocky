@@ -216,7 +216,7 @@ During a deploy "stop" is ran, and then after a timeout, "start" is ran 12 times
 
 These deploy tasks can be run manually via
 
-    $ cap <environment> deploy:run_pdf_workers    # runs 'stop' and then "start" 12 times on all PDFGen servers
+    $ cap <environment> deploy:run_pdf_workers    # runs 'stop' and then 'start' 12 times on all PDFGen servers
     $ cap <environment> deploy:stop_pdf_workers    # runs 'stop' on all PDFGen servers
 
 You can get finer control over which servers you run the task on via the HOSTFILTER environment variable
