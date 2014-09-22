@@ -18,6 +18,12 @@
 
     cap <environment> deploy:setup
     cap <environment> deploy
+    
+    
+To deploy to a single server, add the HOSTFILTER environment variable
+
+  cap HOSTFILTER=servername <environment> deploy
+
 
 ## 1. Create real versions of the .example files
 
