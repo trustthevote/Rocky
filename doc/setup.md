@@ -212,13 +212,25 @@ This runs a task to work off the PDF queue. It is only run on the PDFGen servers
 Running "start" will clean up PIDs for workers that have died and start 1 new task.
 Running "stop" will stop all running tasks.
 
-During a deploy "stop" is ran, and then after a timeout, "start" is ran 12 times. At any given time 12 workers should be
-running on a PDFGen server. Sometimes the stop command doesn't successfully stop all instances, so the process
+During a deploy "stop" is ran, and then after a timeout, "start" is ran 12 times. 
+
+These deploy tasks can be run manually via
+
+    $ cap <environment> deploy:run_pdf_workers    # runs 'stop' and then "start" 12 times on all PDFGen servers
+    $ cap <environment> deploy:stop_pdf_workers    # runs 'stop' on all PDFGen servers
+
+You can get finer control over which servers you run the task on via the HOSTFILTER environment variable
+
+    $ cap HOSTFILTER=servername <environment> deploy:run_pdf_workers
+    
+
+At any given time 12 workers should be running on a PDFGen server. Sometimes the stop command doesn't successfully stop all instances, so the process
 list should be checked after a deploy to ensure there are not more than 12 workers running.
 
 There should be a separate process monitoring the group that restarts stopped workers, but it's not always successful.
 
 PID files as well as a rocky_pdf_worker.log and rocky_pdf_worker.output are in the current/tmp/pids/ directory. Occasional mysql/deadlock errors in the .output file are acceptable, but if the file grows rapidly with these or other errors, it's a sign of something wrong.
+
 
 
 ## 5. Importing State Data
