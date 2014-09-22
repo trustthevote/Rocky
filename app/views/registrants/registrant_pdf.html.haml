@@ -119,7 +119,7 @@
         .value= @registrant.home_city.to_s.html_safe
       %td.box4#home_address_state
         .label= form_prompt('pdf.nvra.page2.block2.box4_label' ).to_s.html_safe
-        .value=  @registrant.home_state_id
+        .value=  @registrant.home_state_abbrev
       %td.box5#home_address_zip_code
         .label= form_prompt('pdf.nvra.page2.block2.box5_label' ).to_s.html_safe
         .value=  @registrant.home_zip_code.to_s.html_safe
