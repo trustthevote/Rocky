@@ -208,12 +208,14 @@ namespace :deploy do
 
   
   desc "Link the csv dir to /data/rocky/csv"
-  task :symlink_csv, :roles => [:util], :except => {:no_release => true} do
+  task :symlink_csv, :roles => [:web, :util], :except => {:no_release => true} do
     run <<-CMD
       mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv &&
       cd #{latest_release} &&
       rm -rf csv &&
-      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv csv
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv csv &&
+      rm -rf public/csv &&
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv #{latest_release}/public/csv
     CMD
   end
 
