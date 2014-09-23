@@ -1027,7 +1027,7 @@ class Registrant < ActiveRecord::Base
   
   def partner_absolute_pdf_logo_path
     if partner && partner.whitelabeled? && partner.pdf_logo_present?
-      parter.absolute_pdf_logo_path
+      partner.absolute_pdf_logo_path
     else
       ""
     end
