@@ -90,7 +90,8 @@ load 'deploy/assets'
 
 
 
-after "deploy:update_code", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
+after "deploy:update_code", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners",  "deploy:migrate"
+after "deploy:finalize_update", "deploy:symlink_system"
 # , "deploy:symlink_util_pdf", 
 
 set :rake, 'bundle exec rake'
@@ -209,6 +210,7 @@ namespace :deploy do
   desc "Link the csv dir to /data/rocky/csv"
   task :symlink_csv, :roles => [:util], :except => {:no_release => true} do
     run <<-CMD
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv &&
       cd #{latest_release} &&
       rm -rf csv &&
       ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv csv
@@ -222,6 +224,16 @@ namespace :deploy do
       mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets &&
       cd #{latest_release} &&
       ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets #{latest_release}/public/partners
+    CMD
+  end
+
+  desc "Link the public/system dir to the shared path"
+  task :symlink_system, :roles=>[:web], :except => {:no_release => true} do
+    run <<-CMD
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/system_assets &&
+      cd #{latest_release} &&
+      rm -rf public/system && 
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/system_assets #{latest_release}/public/system
     CMD
   end
 
