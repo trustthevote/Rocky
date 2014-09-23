@@ -219,7 +219,7 @@ namespace :deploy do
 
 
   desc "Link the public/partners dir to the shared path"
-  task :symlink_partners, :roles=>[:web], :except => {:no_release => true} do
+  task :symlink_partners, :roles=>[:web, :pdf, :util], :except => {:no_release => true} do
     run <<-CMD
       mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets &&
       cd #{latest_release} &&
@@ -228,7 +228,7 @@ namespace :deploy do
   end
 
   desc "Link the public/system dir to the shared path"
-  task :symlink_system, :roles=>[:web], :except => {:no_release => true} do
+  task :symlink_system, :roles=>[:web, :pdf, :util], :except => {:no_release => true} do
     run <<-CMD
       mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/system_assets &&
       cd #{latest_release} &&
