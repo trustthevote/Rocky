@@ -228,6 +228,17 @@ namespace :deploy do
       ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets #{latest_release}/public/partners
     CMD
   end
+  
+  desc "TEMP Link the public/partners dir to the shared path"
+  task :symlink_partners_temp, :roles=>[:pdf], :except => {:no_release => true} do
+    run <<-CMD
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets &&
+      cd #{latest_release} &&
+      mkdir -p #{latest_release}/public/register2g.rockthevote.com &&
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets #{latest_release}/public/register2g.rockthevote.com/partners
+    CMD
+  end
+  
 
   desc "Link the public/system dir to the shared path"
   task :symlink_system, :roles=>[:web, :pdf, :util], :except => {:no_release => true} do
