@@ -94,7 +94,7 @@ module PartnerAssets
     elsif Rails.env.development?
       "localhost:3000"
     else
-      "register.rockthevote.com"
+      "register2g.rockthevote.com"
     end
   end
 
