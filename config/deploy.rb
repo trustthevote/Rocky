@@ -182,7 +182,9 @@ namespace :deploy do
   
   task :symlink_translations, :roles=>[:web], :except =>{:no_release => true} do
     run <<-CMD
+      mkdir -p #{shared_path}/translation_files &&
       cd #{latest_release} &&
+      rm -rf tmp/translation_files &&
       ln -nfs #{shared_path}/translation_files #{latest_release}/tmp/translation_files
     CMD
   end
