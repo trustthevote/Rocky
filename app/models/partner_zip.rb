@@ -69,6 +69,13 @@ class PartnerZip
     end
     
     new_partners = get_partners_from_csv
+    
+    #raise self.errors[0][1].messages.to_s if self.there_are_errors
+    
+    return false if self.there_are_errors
+    
+    check_for_subdirectories(new_partners)
+    
     return false if self.there_are_errors
 
     new_partners.each do |p|
@@ -82,16 +89,33 @@ class PartnerZip
     remove_tmp_directory
   end
   
-  def columns
+  def self.columns
     [:username, :email, :name, :organization, :url, 
-      :address, :city, :state_id, :zip_code, :phone, 
+      :address, :city, :state_id, :state, :zip_code, :phone, 
       :survey_question_1_en, :survey_question_1_es, 
       :survey_question_2_en, :survey_question_2_es, 
-      :whitelabeled, :from_email, :finish_iframe_url,
+      :whitelabeled, :from_email, :finish_iframe_url, :partner_css_download_url,
       :rtv_email_opt_in, :rtv_sms_opt_in, :ask_for_volunteers, 
       :partner_email_opt_in, :partner_sms_opt_in, :partner_ask_for_volunteers, 
-      :tmp_asset_directory]    
+      :tmp_asset_directory, :asset_directory, :registration_instructions_url, :external_tracking_snippet,
+      :widget_image,:privacy_url,:is_government_partner,:government_partner_state,:government_partner_state_id,:government_partner_zip_codes]    
   end
+  
+  def self.allowed_columns
+    columns + RockyConf.enabled_locales.collect do |locale|
+      unless ['en', 'es'].include?(locale.to_s)
+        locale = locale.underscore
+        [1,2].collect do |num|
+          "survey_question_#{num}_#{locale}".to_sym
+        end
+      end
+    end.flatten.compact
+  end
+  
+  def allowed_columns
+    self.class.allowed_columns
+  end
+    
   
   def error_messages
     @errors.collect {|err|
@@ -137,42 +161,81 @@ private
 
   def get_partners_from_csv
     new_partners = []
-    row_idx = 1
-    CSV.foreach(@csv_file, {:headers=>true,  :encoding => 'windows-1251:utf-8'}) do |row|
-      if row.size != columns.size
-        add_error("Row #{row_idx} column count is #{row.size} and should be #{columns.size}")
+    imports = CSV.read(@csv_file, {:headers=>true,  :encoding => 'windows-1251:utf-8'})
+    imports.headers.each do |h|
+      if !allowed_columns.include?(h.to_s.strip.to_sym)
+        add_error("Header #{h} is not an allowed column")
       end
-      
-      #Create a data hash for a Partner instance, mapping to the #columns values
-      data = {}
-      columns.each_with_index do |col,i|
-        data[col] = row[i].to_s.strip
-      end
-      
-      #give some flexibility to the state_id field
-      if data[:state_id].to_i == 0
-        state = GeoState.find_by_abbreviation(data[:state_id])
-        data[:state_id] = state.id if state
-      end
-
-      p = Partner.new(data)
-      #assign a random password. Imported partners will need to go through the forgot password process      
-      p.password = Authlogic::Random::friendly_token
-      p.password_confirmation = p.password
-      
-      new_partners << p
-      
-      if !p.valid?
-        add_error("Row #{row_idx} is invalid", p)
-      end
-      row_idx +=1
     end
+    unless there_are_errors
+      imports.each_with_index do |row, i|
 
+        #Create a data hash for a Partner instance, mapping to the #columns values
+        data = {}
+        row.each {|k,v| data[k.strip.to_sym] = v.to_s.strip }
+      
+        #give some flexibility to the state_id fielde
+        if data[:state_id].to_i == 0
+          state = GeoState.find_by_abbreviation(data[:state_id])
+          if state
+            data[:state_id] = state.id 
+          else
+            state = GeoState.find_by_abbreviation(data.delete(:state))
+            data[:state_id] = state.id if state
+          end
+        end
+        if data[:government_partner_state_id].to_i == 0
+          state = GeoState.find_by_abbreviation(data[:government_partner_state_id])
+          if state
+            data[:government_partner_state_id] = state.id 
+          else
+            state = GeoState.find_by_abbreviation(data.delete(:government_partner_state))
+            data[:government_partner_state_id] = state.id if state
+          end
+        end
+        
+        if data.has_key?(:is_government_partner) && data[:is_government_partner].blank?
+          data.delete(:is_government_partner)
+        end
+        
+        data[:government_partner_zip_code_list] = data.delete(:government_partner_zip_codes)
+        
+        if (tad = data.delete(:asset_directory)) && data[:tmp_asset_directory].blank?
+          data[:tmp_asset_directory] = tad
+        end
+
+        p = Partner.new(data)
+        #assign a random password. Imported partners will need to go through the forgot password process      
+        p.password = Authlogic::Random::friendly_token
+        p.password_confirmation = p.password
+      
+        new_partners << p
+      
+        if !p.valid?
+          add_error("Row #{i + 1} is invalid", p)
+        end
+      end
+    end
     return new_partners
+  end
+  
+  def check_for_subdirectories(new_partners)
+    new_partners.each do |p|
+      if !p.tmp_asset_directory.blank?
+        Dir.entries(tmp_asset_path(p)).each do |fname|
+          # only copy asset if not specifically dealt with above and not an email template file
+          if not_expected_file(fname) && File.directory?(File.join(tmp_asset_path(p), fname))
+            add_error("#{File.join(p.tmp_asset_directory, fname)} is a directory")
+          end
+        end
+      end
+    end
   end
   
   # Set CSS files, read in email templates, copy all other assets
   def load_tmp_assets(p)
+    # check if there are subdirectoy issues
+    
     if p.whitelabeled
       paf = PartnerAssetsFolder.new(p)
       paf.update_css('application', File.open(tmp_application_css_path(p))) if File.exists?(tmp_application_css_path(p))

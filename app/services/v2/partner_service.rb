@@ -26,7 +26,8 @@ module V2
   class PartnerService
     INVALID_PARTNER_OR_API_KEY = "Invalid partner ID or api key"
 
-    ALLOWED_ATTRS = [:organization,
+    ALLOWED_ATTRS = [:username, 
+        :organization,
         :url,
         :privacy_url,
         :logo_url,
@@ -42,7 +43,32 @@ module V2
         :survey_question_2_en,
         :survey_question_1_es,
         :survey_question_2_es,
-        :partner_ask_for_volunteers]
+        :partner_ask_for_volunteers,
+        :external_tracking_snippet,
+        :registration_instructions_url,
+        :whitelabeled,
+        :from_email,
+        :finish_iframe_url,
+        :rtv_email_opt_in,
+        :rtv_sms_opt_in,
+        :ask_for_volunteers,
+        :partner_email_opt_in,
+        :partner_sms_opt_in,
+        :is_government_partner,
+        :government_partner_state_id,
+        :government_partner_zip_codes,
+        :partner_css_download_url]
+        
+    def self.allowed_attrs 
+      ALLOWED_ATTRS + RockyConf.enabled_locales.collect do |locale|
+        unless ['en', 'es'].include?(locale.to_s)
+          locale = locale.underscore
+          [1,2].collect do |num|
+            "survey_question_#{num}_#{locale}".to_sym
+          end
+        end
+      end.flatten.compact
+    end
 
     def self.find(query, only_public = false)
 
@@ -157,7 +183,7 @@ module V2
 
     def self.block_protected_attributes(attrs)
       attrs.each do |key,val|
-        if !ALLOWED_ATTRS.include?(key.to_sym)
+        if !allowed_attrs.include?(key.to_sym)
           raise ActiveRecord::UnknownAttributeError.new("unknown attribute: #{key.to_s}")
         end
       end

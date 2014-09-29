@@ -24,6 +24,24 @@ $(document).ready(function() {
 
 
   <%= rollover_button(:state_online_registration, I18n.t('txt.button.state_online_registration', :state=>@registrant.home_state_abbrev).html_safe, {:id=>'registrant_state_online_registration',:name=>'registrant_state_online_registration',:value=>'registrant_state_online_registration'}) %>  
+  <%- if @registrant.has_home_state_online_redirect? %>
+    <script>
+      $(document).ready(function() {
+        $("#registrant_state_online_registration").attr('formtarget','_BLANK')      
+      });
+    
+      $("#registrant_state_online_registration").click(function() {
+        showSharing();
+        return true;
+      })
+      function showSharing() {
+        setTimeout(function(){
+          //console.log("redirect!")
+          window.location.href = "<%= registrant_finish_path(@registrant, :share_only=>true) %>";
+        }, 1000);
+      }
+    </script>
+  <%- end %>
   
 <div style="text-align:center;">
 <a href="#" class='skip_state_registration_link' style="display:none;">

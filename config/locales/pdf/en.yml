@@ -24,8 +24,8 @@ en:
           title: ! 'SUBMIT YOUR COMPLETED, SIGNED FORM TO:'
         deadline_block:
           title: ! 'REGISTRATION DEADLINE:'
-        other_block: See %{instructions_url} for complete general and state-specific
-          instructions for your voter registration application.
+        other_block: You must read %{instructions_url} for complete general and state-specific
+          instructions, including eligibility requirements.
         bottom_block:
           title: FIRST TIME VOTERS WHO REGISTER BY MAIL
           paragraph1: ! 'If you are registering to vote for the first time in your
@@ -84,7 +84,7 @@ en:
           box1_label: Choice of Party
           box1_sublabel: (See Item 7 in the instructions for your state)
         block8:
-          box1_label: Race or Ethic Group
+          box1_label: Race or Ethnic Group
           box1_sublabel: (See Item 8 in the instructions for your state)
         block9:
           affirmation_header: ! 'I have reviewed my state''s instructions and I swear/affirm
@@ -146,4 +146,3 @@ en:
           State.
       page3:
         fouo: FOR OFFICIAL USE ONLY
-

@@ -8,6 +8,8 @@ gem "rails_config"
 gem "rails", "= 3.2.18"
 gem "aasm", "= 3.0.16"
 
+#gem 'utf8-cleaner'
+gem 'rack-robustness'
 
 gem "authlogic", "= 3.3.0"
 gem "daemons", "= 1.0.10"
@@ -27,6 +29,7 @@ gem 'wicked_pdf'
 
 gem 'rest-client'
 gem 'diffy'
+gem 'asset_sync'
 
 
 group :development, :test do
@@ -49,10 +52,9 @@ group :development, :test do
   
   # Pito:
   gem "hpricot", "0.8.6"
-	gem "sqlite3"
-	
-	gem "assert_difference"
-	
+  gem "sqlite3"
+  
+  gem "assert_difference"
 end
 
 

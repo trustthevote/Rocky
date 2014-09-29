@@ -65,7 +65,7 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 set :group_writable, false
 set :use_sudo, false
 
-set :assets_role, [:app, :util]
+set :assets_role, [:app]
 
 
 set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
@@ -88,7 +88,7 @@ load 'deploy/assets'
 
 
 
-after "deploy:update_code", "deploy:symlink_configs", "deploy:symlink_util_pdf", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
+after "deploy:update_code", "deploy:symlink_util_pdf", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
 
 set :rake, 'bundle exec rake'
 
@@ -136,7 +136,7 @@ namespace :deploy do
   # end
 
 
-  before "deploy:assets:precompile", "deploy:link_db"
+  before "deploy:assets:precompile", "deploy:link_db", "deploy:symlink_configs"
   task :link_db do
     run "ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
@@ -185,9 +185,10 @@ namespace :deploy do
   desc "Link the pdf dir to /data/rocky/pdf"
   task :symlink_util_pdf, :roles => [:util], :except => {:no_release => true} do
     run <<-CMD
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/pdfs &&
       cd #{latest_release} &&
-      rm -rf pdf &&
-      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html pdf
+      rm -rf pdfs && 
+      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html/pdfs public/pdfs
     CMD
   end
 

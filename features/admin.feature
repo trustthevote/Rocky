@@ -25,6 +25,7 @@ Feature: Admin UI
       Then I should be on the partner page for that partner
       And that partner's api key should not be "abc123"
     
+    @passing
     Scenario: Partner edit form for partner 1
       Given the following partner exists:
         | id | name                |
@@ -34,6 +35,7 @@ Feature: Admin UI
       And I should see a field for "Organization"
       And I should see a field for "Email"
       And I should not see a field for "Whitelabeled CSS"
+      And I should not see a field for "PDF instructions URL"
       And I should not see a field for "Ask for RTV email opt-in"
       And I should not see a field for "Ask for RTV SMS opt-in"
       And I should not see a field for "Ask for RTV Volunteers"
@@ -53,6 +55,7 @@ Feature: Admin UI
       And I should see a field for "From Email"
       And I should see a field for "Finish iframe url"
       And I should see a field for "Whitelabeled CSS"
+      And I should see a field for "PDF instructions URL"
       And I should see a field for "Ask for RTV email opt-in"
       And I should see a field for "Ask for RTV SMS opt-in"
       And I should see a field for "Ask for RTV Volunteers"
@@ -61,17 +64,15 @@ Feature: Admin UI
       And I should see a field for "Ask for partner Volunteers"
       And I should see a field for "External tracking snippet"
   
-  
-    Scenario: Uploading a zip to create new partners
+    @passing
+    Scenario: Uploading a zip to create new partners and government partners
       When I go to the admin dashboard
       Then I should see a field for "Upload partner-creation zip file"
       When I upload the "four_good_partners.zip" zip file
       And I press "Upload"
       Then I should be on the admin dashboard
       And I should see "CSV Partner 1"
-      And I should see "CSV Partner 2"
       And I should see "CSV Partner 3"
-      And I should see "CSV Partner 4"
     
     
     Scenario: Uploading a zip with missing required assets

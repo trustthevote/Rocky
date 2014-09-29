@@ -35,6 +35,10 @@ class Step4Controller < RegistrationStep
     if @registrant.has_ovr_pre_check?
       @registrant.ovr_pre_check(self)
     end
+    if @registrant.skip_survey_and_opt_ins? && !@registrant.in_ovr_flow?
+    
+      attempt_to_advance
+    end
   end
   
   def update
@@ -77,7 +81,7 @@ class Step4Controller < RegistrationStep
     @party_tooltip = @registrant.party_tooltip
     
     
-    @question_1 = @registrant.partner.send("survey_question_1_#{@registrant.locale}")
-    @question_2 = @registrant.partner.send("survey_question_2_#{@registrant.locale}")
+    @question_1 = @registrant.question_1
+    @question_2 = @registrant.question_2
   end
 end

@@ -139,6 +139,7 @@ FactoryGirl.define do
     survey_answer_2     "fido"
     send_confirmation_reminder_emails false
     building_via_api_call true
+    will_be_18_by_election true
   end
 
   factory :api_created_partner, :class=>'partner' do
@@ -159,6 +160,20 @@ FactoryGirl.define do
     survey_question_1_es  "Uno?"
     survey_question_2_es  "Dos?"
     partner_ask_for_volunteers true
+    external_tracking_snippet "<code>snippet</code>"
+    registration_instructions_url "http://register.rockthevote.com/reg-instructions?l=<LOCALE>&s=<STATE>"
+    survey_question_2_zh_tw "%E9%9B%BB%E5%AD%90%E9%83%B5%E4%BB%B6%E5%9C%B0%E5%9D%80"
+    survey_question_1_ko "KO One"
+    whitelabeled true
+    from_email "custom-from@rtv.org"
+    finish_iframe_url "http://example.com/iFrame-url"
+    rtv_email_opt_in false
+    rtv_sms_opt_in false
+    ask_for_volunteers true
+    partner_email_opt_in true
+    partner_sms_opt_in true
+    
+    
   end
 
   factory :partner do

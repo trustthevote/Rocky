@@ -44,6 +44,15 @@ Feature: Step 3
       And I press "registrant_submit"
       Then I should see "Additional Registration Information"
     
+    @passing
+    Scenario: NV resident redirected to step 4 when there are no opt ins or survey questions
+      Given the following partner exists:
+        | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers | rtv_sms_opt_in | partner_sms_opt_in | survey_question_1_en | survey_question_2_en |
+        | false     | false         | false         | false             | false   | false       | | |
+      And I have completed step 2 from that partner as a resident of "Nevada" state
+      When I go to the step 3 page
+      Then I should see "Additional Registration Information"
+    
         
     @passing
     Scenario: CA resident eligible for OVR submits step 3 with UI debugging on

@@ -37,6 +37,16 @@ Feature: Step 5
         | Colorado   |
       
       
+    @passing
+    Scenario: Go back when skipping step 4
+      Given the following partner exists:
+        | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers | rtv_sms_opt_in | partner_sms_opt_in | survey_question_1_en | survey_question_2_en |
+        | false     | false         | false         | false             | false   | false       | | |
+      And I have completed step 4 from that partner
+      When I go to the step 5 page
+      And I follow "< Previous Step"
+      Then I should see "Additional Registration Information"
+      
 
     @cleanup_pdf
     Scenario: enter data

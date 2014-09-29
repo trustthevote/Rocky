@@ -164,10 +164,10 @@ describe V2::PartnerService do
 
     it 'does not allow parameters except the expected ones to be set' do
       begin
-        V2::PartnerService.create_record({:whitelabeled=>true})
+        V2::PartnerService.create_record({:survey_question_1=>true})
         fail 'UnknownAttributeError expected'
       rescue ActiveRecord::UnknownAttributeError => e
-        e.message.should == 'unknown attribute: whitelabeled'
+        e.message.should == 'unknown attribute: survey_question_1'
       end
     end
 
@@ -175,11 +175,52 @@ describe V2::PartnerService do
 
 
     context 'complete record' do
-      before { @partner = FactoryGirl.build(:api_created_partner) }
-      before { Partner.stub(:new).with({}) { @partner } }
+      #before { @partner = FactoryGirl.build(:api_created_partner) }
+      #before { Partner.stub(:new).with({}) { @partner } }
 
       it 'should save the record' do
-        V2::PartnerService.create_record({}).should
+        params = {
+          username: "a-custom-username",
+          organization: "Org Name",
+          url: "http://www.google.com",
+          privacy_url: "http://www.google.com/privacy",
+          logo_url: "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png",
+          name: "Contact Name",
+          email: "contact_email@rtv.org",
+          phone: "123 234 3456",
+          address: "123 Main St",
+          city: "Boston",
+          state_id: GeoState["MA"].id,
+          zip_code: "02110",
+          widget_image: "rtv-234x60-v1.gif",
+          survey_question_1_en:  "One?",
+          survey_question_2_en:  "Two?",
+          survey_question_1_es:  "Uno?",
+          survey_question_2_es:  "Dos?",
+          partner_ask_for_volunteers: true,
+          external_tracking_snippet: "<code>snippet</code>",
+          registration_instructions_url: "http://register.rockthevote.com/reg-instructions?l=<LOCALE>&s=<STATE>",
+          survey_question_2_zh_tw: "%E9%9B%BB%E5%AD%90%E9%83%B5%E4%BB%B6%E5%9C%B0%E5%9D%80",
+          survey_question_1_ko: "KO One",
+          whitelabeled: true,
+          from_email: "custom-from@rtv.org",
+          finish_iframe_url: "http://example.com/iFrame-url",
+          rtv_email_opt_in: false,
+          rtv_sms_opt_in: false,
+          ask_for_volunteers: true,
+          partner_email_opt_in: true,
+          partner_sms_opt_in: true,
+          is_government_partner: true,
+          government_partner_zip_codes: ["02113", "02110"],
+          partner_css_download_url: "http://www.google.com"
+        }
+        V2::PartnerService.create_record(params).should
+        params2 = params.dup
+        params2.delete(:government_partner_zip_codes)
+        params2[:government_partner_state_id] = GeoState["MA"].id
+        params2[:email] = "contact_email+2@rtv.org"
+        V2::PartnerService.create_record(params2).should
+        
       end
     end
 

@@ -128,6 +128,49 @@ describe Partner do
     end
   end
   
+  
+  
+  describe "#partner_css_download_url=(URL)" do
+    it "opens the file from the URL when saved" do
+      url = "http://www.rockthevote.com/assets/v4/css/base.css"
+      p = FactoryGirl.build(:partner)
+      mock_io = mock("StringIO")
+      mock_uri = mock("URI")
+      mock_uri.stub(:path).and_return(url)
+      mock_io.stub(:base_uri).and_return(mock_uri)
+      mock_io.stub(:read).and_return("css contents")
+      mock_io.stub(:close)
+      p.stub(:open).with(url).and_return(mock_io)
+      p.stub(:logo=).with(mock_io)
+      p.partner_css_download_url = url
+      p.save!
+      p.should have_received(:open).with(url)
+    end
+    it "attaches the CSS file as the partner css" do
+      url = "http://www.rockthevote.com/assets/v4/css/base.css"
+      p = FactoryGirl.build(:partner)
+      p.partner_css_download_url = url
+      p.save!
+      p.partner_css_present?.should be_true      
+    end
+    it "adds a validation error if the url is not http" do
+      bad_url = "home_rtv_logo_wrong.png"
+      p = FactoryGirl.build(:partner)
+      p.partner_css_download_url = bad_url
+      p.should_not be_valid
+      p.errors[:partner_css_download_URL].should include("Pleave provide an HTTP url")
+    end
+    it "adds a validation error if the file can not be downloaded" do
+      bad_url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo_wrong.css"
+      p = FactoryGirl.build(:partner)
+      p.partner_css_download_url = bad_url
+      p.should_not be_valid
+      p.errors[:partner_css_download_URL].should include("Could not download #{bad_url} for partner css")
+    end
+  end
+  
+  
+  
   describe "#valid_api_key?(key)" do
     it "returns false when blank or not matching" do
       partner = FactoryGirl.build(:partner, :api_key=>"")
@@ -550,7 +593,46 @@ describe Partner do
       end
     end
     
-    
+    describe "registration_instructions_url" do
+      let(:partner) { FactoryGirl.build(:partner) }
+      it "can be blank" do
+        partner.registration_instructions_url = ''
+        partner.should be_valid
+      end
+      it "must include <STATE> and <LOCALE>" do
+        partner.registration_instructions_url = 'http://test.com/<state>-<locale>'
+        partner.should_not be_valid
+        partner.errors_on(:registration_instructions_url).should have(2).errors
+
+        partner.registration_instructions_url = 'http://test.com/'
+        partner.should_not be_valid
+        partner.errors_on(:registration_instructions_url).should have(2).errors
+
+        partner.registration_instructions_url = 'http://test.com/<STATE>-<locale>'
+        partner.should_not be_valid
+        partner.errors_on(:registration_instructions_url).should have(1).errors
+
+        partner.registration_instructions_url = 'http://test.com/<STATE>-<LOCALE>'
+        partner.should be_valid
+      end
+      
+      it "must be a valid url format" do
+        partner.registration_instructions_url = 'abccom/<STATE>-<LOCALE>'
+        partner.should_not be_valid
+
+        partner.registration_instructions_url = 'abc.com/<STATE>-<LOCALE>'
+        partner.should_not be_valid
+        
+        partner.registration_instructions_url = 'http://b.c/<STATE>-<LOCALE>'
+        partner.should_not be_valid
+        
+        partner.registration_instructions_url = 'https://abc.com/<STATE>-<LOCALE>'
+        partner.should be_valid
+        
+        partner.registration_instructions_url = 'http://abc.com/<STATE>-<LOCALE>'
+        partner.should be_valid
+      end
+    end
   end
 
   describe "default opt-in sets" do
@@ -560,7 +642,8 @@ describe Partner do
       partner.partner_email_opt_in.should be_false
       partner.rtv_sms_opt_in.should be_true
       partner.partner_sms_opt_in.should be_false
-      partner.ask_for_volunteers.should be_true
+      partner.ask_for_volunteers.should be_false
+      partner.ask_for_volunteers?.should == RockyConf.sponsor.allow_ask_for_volunteers
       partner.partner_ask_for_volunteers.should be_false
     end
   end

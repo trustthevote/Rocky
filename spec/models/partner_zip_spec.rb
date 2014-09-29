@@ -54,6 +54,11 @@ describe PartnerZip do
       pz = PartnerZip.new(@file)
       pz.create.should be_true      
     end
+    it "sets an error wben the parter directory has subfolder" do
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'partner_2_subs.zip'))
+      pz = PartnerZip.new(@file)
+      pz.create.should be_false
+    end
     it "creates and checks validity of each partner in the CSV" do
       @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'invalid_partners.zip'))
       pz = PartnerZip.new(@file)
@@ -77,6 +82,17 @@ describe PartnerZip do
       p.should be_whitelabeled
       p.application_css_present?.should be_true
       p.registration_css_present?.should be_true
+      p.registration_instructions_url.should be_blank
+      p.is_government_partner.should be_true
+      p.government_partner_state_id.should == GeoState["MA"].id
+      
+      p4 = Partner.find_by_username("csv_partner_4")
+      p4.registration_instructions_url.should == "http://custom-url.com?l=<LOCALE>&s=<STATE>"
+      p4.widget_image.should == "rtv-100x100-v1.gif"
+      p4.privacy_url.should == "http://example.com/privacy"
+      p4.is_government_partner.should be_true
+      p4.government_partner_zip_codes.should == ["02113","02110"]
+      
     end
     it "works when there's just a partner.css" do
       @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'just_partner_css.zip'))
@@ -108,6 +124,16 @@ describe PartnerZip do
       pz = PartnerZip.new(@file)
       pz.create.should
       Dir.entries(PartnerZip.tmp_root).size.should == 2      
+    end
+    it "sets tracking snippets and survey questions" do
+      @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'ejs_good_partners1.zip'))
+      pz = PartnerZip.new(@file)
+      pz.create.should be_true
+      
+      p = Partner.find_by_username("ejstest_4")
+      p.survey_question_2_zh_tw.should == "abc"
+      p.external_tracking_snippet.should == "<some code>code snipped</some code>"
+      
     end
   end
   describe "#error_messages" do

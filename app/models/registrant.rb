@@ -316,8 +316,35 @@ class Registrant < ActiveRecord::Base
   validates_presence_of  :send_confirmation_reminder_emails, :in => [ true, false ], :if=>[:building_via_api_call, :finish_with_state?]
 
 
+  def skip_survey_and_opt_ins?
+    question_1.blank? && question_2.blank? && !any_ask_for_volunteers? && !any_email_opt_ins? && !any_phone_opt_ins?
+  end
+  
+  def locale_english_name
+    I18n.t("locales.#{locale}.name", locale: "en")
+  end
+
+  def question_1
+    partner.send("survey_question_1_#{self.locale}")
+  end
+  def question_2
+    partner.send("survey_question_2_#{self.locale}")
+  end
+
   def collect_email_address?
     collect_email_address.to_s.downcase.strip != 'no'
+  end
+  
+  def any_email_opt_ins?
+    collect_email_address? && (partner.rtv_email_opt_in || partner.primary? || partner.partner_email_opt_in)
+  end
+  
+  def any_phone_opt_ins?
+    partner.rtv_sms_opt_in || partner.partner_sms_opt_in || partner.primary?
+  end
+  
+  def any_ask_for_volunteers?
+    partner.ask_for_volunteers? || (partner.primary? && RockyConf.sponsor.allow_ask_for_volunteers) || partner.partner_ask_for_volunteers
   end
   
   def not_require_email_address?
@@ -365,7 +392,7 @@ class Registrant < ActiveRecord::Base
   end
 
   aasm_event :advance_to_step_5 do
-    transitions :to => :step_5, :from => [:step_4, :rejected]
+    transitions :to => :step_5, :from => [:step_4, :step_5, :rejected]
   end
 
   aasm_event :complete do
@@ -381,6 +408,7 @@ class Registrant < ActiveRecord::Base
     r = Registrant.new(data)
     r.building_via_api_call   = true
     r.finish_with_state       = api_finish_with_state
+    r.has_state_license = true if api_finish_with_state
     r.status                  = api_finish_with_state ? :step_2 : :step_5
     r
   end
@@ -396,7 +424,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.abandon_stale_records
-    self.find_each(:batch_size=>500, :conditions => ["(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago]) do |reg|
+    id_list = self.where("(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago).pluck(:id)
+    self.find_each(:batch_size=>500, :conditions => ["id in (?)", id_list]) do |reg|
       if reg.finish_with_state?
         reg.status = "complete"
         begin
@@ -676,7 +705,7 @@ class Registrant < ActiveRecord::Base
     if requires_party?
       localization ? localization.parties + [ localization.no_party ] : []
     else
-      nil
+      []
     end
   end
   
@@ -695,7 +724,7 @@ class Registrant < ActiveRecord::Base
         return party == en_localization.no_party ? I18n.t('states.no_party_label.none') : party
       else
         if party == localization.no_party
-          return I18n.t('states.no_party_label.none')
+          return I18n.t('states.no_party_label.none', :locale=>:en)
         else
           if (p_index = localization[:parties].index(party))
             return en_localization[:parties][p_index]
@@ -712,7 +741,7 @@ class Registrant < ActiveRecord::Base
     if requires_party?
       en_localization ? en_localization.parties + [ en_localization.no_party ] : []
     else
-      nil
+      []
     end    
   end
 
@@ -784,6 +813,10 @@ class Registrant < ActiveRecord::Base
     localization.registration_deadline
   end
   
+  def state_registrar_address
+    home_state && home_state.registrar_address
+  end
+  
   [:pdf_instructions, :email_instructions].each do |state_data|
     define_method("home_state_#{state_data}") do
       localization.send(state_data)
@@ -791,9 +824,11 @@ class Registrant < ActiveRecord::Base
   end
   
   def registration_instructions_url
-    RockyConf.pdf.nvra.page1.other_block.instructions_url.gsub(
-      "<LOCALE>",locale
-    ).gsub("<STATE>",home_state_abbrev)
+    ((partner.blank? || partner.registration_instructions_url.blank?) ? RockyConf.pdf.nvra.page1.other_block.instructions_url : partner.registration_instructions_url).tap do |r_url|
+      return r_url.gsub(
+        "<LOCALE>",locale
+      ).gsub("<STATE>",home_state_abbrev)
+    end
   end
 
   def under_18_instructions_for_home_state
@@ -995,6 +1030,14 @@ class Registrant < ActiveRecord::Base
     self.barcode = self.pdf_barcode
   end
 
+  def partner_absolute_pdf_logo_path
+    if partner && partner.whitelabeled? && partner.pdf_logo_present?
+      partner.absolute_pdf_logo_path
+    else
+      ""
+    end
+  end
+
   def generate_pdf!
     generate_pdf(true)
   end
@@ -1082,16 +1125,9 @@ class Registrant < ActiveRecord::Base
   def enqueue_reminder_emails
     if send_emails?
       self.reminders_left = REMINDER_EMAILS_TO_SEND
-      enqueue_reminder_email
     else
       self.reminders_left = 0
     end
-  end
-
-  def enqueue_reminder_email
-    action = Delayed::PerformableMethod.new(self, :deliver_reminder_email, [ ])
-    interval = reminders_left == 2 ? AppConfig.hours_before_first_reminder : AppConfig.hours_between_first_and_second_reminder
-    Delayed::Job.enqueue(action, {:priority=>REMINDER_EMAIL_PRIORITY, :run_at=>interval.from_now})
   end
 
   def deliver_reminder_email
@@ -1099,7 +1135,7 @@ class Registrant < ActiveRecord::Base
       Notifier.reminder(self).deliver
       self.reminders_left = reminders_left - 1
       self.save(validate: false)
-      enqueue_reminder_email if reminders_left > 0
+      # enqueue_reminder_email if reminders_left > 0
     end
   rescue StandardError => error
     Airbrake.notify(
@@ -1198,7 +1234,7 @@ class Registrant < ActiveRecord::Base
       status.humanize,
       self.tracking_source,
       self.tracking_id,
-      locale == 'en' ? "English" : "Spanish",
+      locale_english_name,
       pdf_date_of_birth,
       email_address,
       yes_no(first_registration?),
@@ -1234,7 +1270,7 @@ class Registrant < ActiveRecord::Base
       yes_no(volunteer?),
       yes_no(partner_volunteer?),
       ineligible_reason,
-      created_at && created_at.to_s(:month_day_year),
+      created_at && created_at.to_s,
       yes_no(finish_with_state?),
       yes_no(building_via_api_call?)
     ]

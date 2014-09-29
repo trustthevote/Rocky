@@ -22,6 +22,9 @@ Rocky::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Serve assets from S3
+  config.action_controller.asset_host = "//s3.amazonaws.com/rocky-assets-#{Rails.env}"
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
@@ -33,7 +36,7 @@ Rocky::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
@@ -56,9 +59,9 @@ Rocky::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
-  
-  
-  
+
+
+
   # Enable threaded mode
   # config.threadsafe!
 

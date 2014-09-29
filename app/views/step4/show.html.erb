@@ -2,6 +2,7 @@
   <%- if @registrant.in_ovr_flow? %>
     <%= render :partial=> @registrant.custom_step_4_partial, :locals=>{:form=>form} %>
   <%- else %>
+    
     <h1><%= t('txt.registration.step_4_header') %></h1>
     <div class="step-4">
       <%= render :partial=> 'registrants/email_opt_ins', :locals=>{:form=>form} %>
@@ -12,5 +13,6 @@
     <%= render :partial=>'registrants/survey_and_volunteer', :locals=>{:form=>form} %>
     <%= rollover_button(:review, I18n.t('txt.button.review')) %>
   <%- end %>
-  <div class="back"><%= link_to t('txt.button.back').html_safe, registrant_step_3_path(@registrant) %></div>
+  <div class="back">
+    <%= link_to t('txt.button.back').html_safe, (@registrant.skip_survey_and_opt_ins? && @registrant.in_ovr_flow?) ? registrant_step_2_path(@registrant) : registrant_step_3_path(@registrant) %></div>
 <% end %>

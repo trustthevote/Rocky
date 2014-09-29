@@ -24,7 +24,7 @@
             %p= @registrant.home_state_pdf_instructions.to_s.html_safe
           
         %h4.title= I18n.t('pdf.nvra.page1.submit_block.title' ).to_s.html_safe
-        %p= @state.registrar_address.to_s.html_safe
+        %p= @registrant.state_registrar_address.to_s.html_safe
     %tr
       %td.deadline_block
         %h4.title= I18n.t('pdf.nvra.page1.deadline_block.title' ).to_s.html_safe
@@ -133,7 +133,7 @@
         .value=  @registrant.mailing_city.to_s.html_safe
       %td.box3#mailing_address_state
         .label= form_prompt('pdf.nvra.page2.block3.box3_label' ).to_s.html_safe
-        .value=  @registrant.mailing_state_abbrev.to_s.html_safe
+        .value=  @registrant.mailing_state_id.to_s.html_safe
       %td.box4#mailing_address_zip_code
         .label= form_prompt('pdf.nvra.page2.block3.box4_label' ).to_s.html_safe
         .value=  @registrant.mailing_zip_code.to_s.html_safe
@@ -270,7 +270,7 @@
           .value=  @registrant.prev_city.to_s.html_safe
         %td.box4#prev_address_state
           .label= form_prompt('pdf.nvra.page2.blockB.box4_label' ).to_s.html_safe
-          .value=  @registrant.prev_state_abbrev
+          .value=  @registrant.prev_state_id
         %td.box5#prev_address_zip_code
           .label= form_prompt('pdf.nvra.page2.blockB.box5_label' ).to_s.html_safe
           .value=  @registrant.prev_zip_code.to_s.html_safe
@@ -308,4 +308,4 @@
     #page_3_background= wicked_pdf_image_tag("pdf/page_3.png")
     %h1= form_prompt('pdf.nvra.page3.fouo' ).to_s.html_safe
     #address
-      .line.line1= @state.registrar_address.to_s.html_safe
+      .line.line1= @registrant.state_registrar_address.to_s.html_safe

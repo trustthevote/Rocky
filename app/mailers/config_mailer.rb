@@ -25,6 +25,16 @@
 class ConfigMailer < ActionMailer::Base
   default from: RockyConf.admin.from_address
   
+  def state_config_file(file, file_name)
+    attachments[file_name] = file
+    
+    mail(
+      to: RockyConf.admin.translation_recipients,
+      subject: "New state config submited",
+      body: "Attached YML file for new state configs has been submitted"
+    )
+  end
+  
   def translation_file(file, file_name)
     attachments[file_name] = file
     

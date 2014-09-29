@@ -1,6 +1,6 @@
 #container {
   width: 720px;
-  background: #ddd url(../images/partner/content_bg.gif) repeat-x top left;
+  background: #ddd image-url('partner/content_bg.gif') repeat-x top left;
 }
 #sticky_footer { width: 720px; }
 #footer        { width: 700px; }
@@ -55,11 +55,11 @@ strong {
   position: relative;
   height: 100px;
   width: 100%;
-  background: #ddd url(/images/partner/header_bg.jpg) no-repeat top left;
+  background: #ddd image-url('partner/header_bg.jpg') no-repeat top left;
 }
 
 #header.not_logged_in {
-  background-image: url(/images/partner/header_not_logged_in_bg.jpg);
+  background-image: image-url('partner/header_not_logged_in_bg.jpg');
 }
 
 #header a:link    { color: #b42225; }
@@ -299,7 +299,7 @@ form li {
   width: 313px;
   height: 69px;
   margin: 10px 2px;
-  background: white url(/images/partner/logo_frame.png) no-repeat top left;
+  background: white image-url('partner/logo_frame.png') no-repeat top left;
 }
 
 #upload_logo .logo img {
@@ -426,7 +426,7 @@ td#left_column, td#right_column {
   padding-top: 6px;
   padding-bottom: 6px;
   color: #d8d8d8;
-  background: #0b0b0b url(/images/partner/stats_header_bg.gif) top left repeat-x;
+  background: #0b0b0b image-url('partner/stats_header_bg.gif') top left repeat-x;
   font-weight: bold;
 }
 
@@ -462,26 +462,26 @@ td#left_column, td#right_column {
 }
 
 a.button_viewreport         { width: 137px; height: 22px; }
-a.button_viewreport span    { width: 137px; height: 22px; background-image: url(/images/partner/button_viewreport_ro.gif); }
+a.button_viewreport span    { width: 137px; height: 22px; background-image: image-url('partner/button_viewreport_ro.gif'); }
 a.button_downloaddata       { width: 145px; height: 22px; }
-a.button_downloaddata span  { width: 145px; height: 22px; background-image: url(/images/partner/button_downloaddata_ro.gif); }
+a.button_downloaddata span  { width: 145px; height: 22px; background-image: image-url('partner/button_downloaddata_ro.gif'); }
 a.button_customizetool      { width: 156px; height: 22px; }
-a.button_customizetool span { width: 156px; height: 22px; background-image: url(/images/partner/button_customizetool_ro.gif); }
+a.button_customizetool span { width: 156px; height: 22px; background-image: image-url('partner/button_customizetool_ro.gif'); }
 a.button_editprofile        { width: 127px; height: 22px; }
-a.button_editprofile span   { width: 127px; height: 22px; background-image: url(/images/partner/button_editprofile_ro.gif); }
+a.button_editprofile span   { width: 127px; height: 22px; background-image: image-url('partner/button_editprofile_ro.gif'); }
 a.button_downloadcsv        { width: 258px; height: 22px; }
-a.button_downloadcsv span   { width: 258px; height: 22px; background-image: url(/images/partner/button_downloadcsv_ro.gif); }
+a.button_downloadcsv span   { width: 258px; height: 22px; background-image: image-url('partner/button_downloadcsv_ro.gif'); }
 a.button_save               { width: 207px; height: 36px; }
-a.button_save span          { width: 207px; height: 36px; background-image: url(/images/partner/button_save_ro.gif); }
+a.button_save span          { width: 207px; height: 36px; background-image: image-url('partner/button_save_ro.gif'); }
 a.button_deletelogo         { width: 137px; height: 22px; }
-a.button_deletelogo span    { width: 137px; height: 22px; background-image: url(/images/partner/button_deletelogo_ro.gif); }
+a.button_deletelogo span    { width: 137px; height: 22px; background-image: image-url('partner/button_deletelogo_ro.gif'); }
 a.button_uploadlogo         { width: 137px; height: 22px; }
-a.button_uploadlogo span    { width: 137px; height: 22px; background-image: url(/images/partner/button_uploadlogo_ro.gif); }
+a.button_uploadlogo span    { width: 137px; height: 22px; background-image: image-url('partner/button_uploadlogo_ro.gif'); }
 a.button_signup             { width: 207px; height: 36px; }
-a.button_signup span        { width: 207px; height: 36px; background-image: url(/images/partner/button_signup_ro.gif); }
+a.button_signup span        { width: 207px; height: 36px; background-image: image-url('partner/button_signup_ro.gif'); }
 a.button_login              { width: 207px; height: 36px; }
-a.button_login span         { width: 207px; height: 36px; background-image: url(/images/partner/button_login_ro.gif); }
+a.button_login span         { width: 207px; height: 36px; background-image: image-url('partner/button_login_ro.gif'); }
 a.button_reset              { width: 240px; height: 36px; }
-a.button_reset span         { width: 240px; height: 36px; background-image: url(/images/partner/button_reset_ro.gif); }
+a.button_reset span         { width: 240px; height: 36px; background-image: image-url('partner/button_reset_ro.gif'); }
 a.button_update             { width: 207px; height: 36px; }
-a.button_update span        { width: 207px; height: 36px; background-image: url(/images/partner/button_update_ro.gif); }
+a.button_update span        { width: 207px; height: 36px; background-image: image-url('partner/button_update_ro.gif'); }

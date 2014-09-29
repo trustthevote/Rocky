@@ -24,6 +24,13 @@
 #***** END LICENSE BLOCK *****
 class Step3Controller < RegistrationStep
   CURRENT_STEP = 3
+  
+  def show
+    super
+    if @registrant.skip_survey_and_opt_ins? && @registrant.in_ovr_flow?
+      attempt_to_advance
+    end
+  end
 
   def update
     if params[:javascript_disabled] == "1" && params[:registrant]

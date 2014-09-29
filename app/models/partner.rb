@@ -82,8 +82,12 @@ class Partner < ActiveRecord::Base
 
   before_create :generate_api_key
   
-  validate :check_valid_logo_url
+  validate :check_valid_logo_url, :check_valid_partner_css_download_url
   validate :government_partner_zip_specification
+  validate :check_valid_registration_instructions_url_format
+  validates :registration_instructions_url, :url_format=>true
+  
+  after_save :write_partner_css_download_contents
 
   validates_presence_of :name
   validates_presence_of :url
@@ -321,6 +325,10 @@ class Partner < ActiveRecord::Base
     stats.to_a.sort {|a,b| a[0]<=>b[0] }.collect{|a| a[1]}
   end
 
+  def ask_for_volunteers?
+    RockyConf.sponsor.allow_ask_for_volunteers && read_attribute(:ask_for_volunteers)
+  end
+
   def state_abbrev=(abbrev)
     self.state = GeoState[abbrev]
   end
@@ -375,6 +383,35 @@ class Partner < ActiveRecord::Base
       end
     end
   end
+  
+  def partner_css_download_url
+    @partner_css_download_url
+  end
+  
+  def partner_css_download_contents
+    @partner_css_download_contents
+  end
+  
+  def partner_css_download_url_errors
+    @partner_css_download_url_errors ||= []
+  end
+  
+  def partner_css_download_url=(url)
+    @partner_css_download_url=url
+    if !(url=~/^http:\/\//)
+      partner_css_download_url_errors << "Pleave provide an HTTP url"
+    else
+      begin
+        io = open(url)
+        @partner_css_download_contents = io.read
+        io.close
+      rescue Exception=>e
+        # puts e.message
+        partner_css_download_url_errors << "Could not download #{url} for partner css"        
+      end
+    end
+  end
+  
   
   def generate_random_password
     self.password = random_key
@@ -505,12 +542,8 @@ class Partner < ActiveRecord::Base
     end
 
 
-    unless File.directory?(partner.assets_path)
-      unless Dir.mkdir(partner.assets_path)
-        raise "Asset directory #{partner.assets_path} could not be created."
-      end
-    end
-
+    build_whitelabel_css_directories(partner)
+    
     FileUtils.cp(app_css, partner.absolute_application_css_path) if File.exists?(app_css)
     FileUtils.cp(reg_css, partner.absolute_registration_css_path) if File.exists?(reg_css)
     FileUtils.cp(part_css, partner.absolute_partner_css_path) if File.exists?(part_css)
@@ -527,6 +560,14 @@ class Partner < ActiveRecord::Base
       return "Partner '#{partner_id}' has been whitelabeled. Place all asset files in\n#{partner.assets_path}"
     end
 
+  end
+  
+  def self.build_whitelabel_css_directories(partner)
+    unless File.directory?(partner.assets_path)
+      unless FileUtils.mkdir_p(partner.assets_path)
+        raise "Asset directory #{partner.assets_path} could not be created."
+      end
+    end
   end
   
   
@@ -560,6 +601,21 @@ protected
     end
   end
   
+  def check_valid_partner_css_download_url
+    partner_css_download_url_errors.each do |message|
+      self.errors.add(:partner_css_download_URL, message)
+    end
+  end
+  
+  def write_partner_css_download_contents
+    if !partner_css_download_contents.blank?
+      self.class.build_whitelabel_css_directories(self)
+      File.open(absolute_partner_css_path, "w") do |f|
+        f.write partner_css_download_contents
+      end
+    end
+  end
+  
   def government_partner_zip_specification
     if self.is_government_partner? 
       [[self.government_partner_state.nil? && self.government_partner_zip_codes.blank?, 
@@ -575,6 +631,18 @@ protected
     end
   end
 
+  def check_valid_registration_instructions_url_format
+    if !registration_instructions_url.blank?
+      if !(registration_instructions_url =~ /<STATE>/)
+        errors.add(:registration_instructions_url, "must include <STATE> substitution variable")
+      end
+      if !(registration_instructions_url =~ /<LOCALE>/)
+        errors.add(:registration_instructions_url, "must include <LOCALE> substitution variable")
+      end
+    end
+    return true
+  end
+  
   def random_key
     Digest::SHA1.hexdigest([Time.now, (1..10).map { rand.to_s}].join('--'))
   end

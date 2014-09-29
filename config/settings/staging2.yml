@@ -20,6 +20,10 @@ ovr_states:
       log_all_requests: true
       disclosures_font_size: 12px
       disclosures_box_height: 170px
+  NV:
+    languages:
+      - en
+      - es
 
 enabled_locales:
   - en

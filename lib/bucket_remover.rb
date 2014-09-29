@@ -28,7 +28,7 @@ require 'time'
 require 'fileutils'
 class BucketRemover
   def pdf_root
-    File.expand_path(File.join(File.dirname(__FILE__), "../pdf"))
+    File.expand_path(File.join(File.dirname(__FILE__), "../public/pdfs"))
   end
 
   def expired_buckets

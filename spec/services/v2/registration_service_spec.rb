@@ -143,6 +143,9 @@ describe V2::RegistrationService do
     specify { V2::RegistrationService.send(:data_to_attrs, { :partner_opt_in_volunteer => true }).should == { :partner_volunteer => true } }
     specify { V2::RegistrationService.send(:data_to_attrs, { :home_state_id => 'NY', :mailing_state => 'ca', :prev_state_id => 'Nj' }).should == { :home_state_id => 33, :mailing_state_id => 5, :prev_state_id => 31 } } # See geo_states.csv
     specify { V2::RegistrationService.send(:data_to_attrs, { :id_number => 'id' }).should == { :state_id_number => 'id' } }
+    specify { V2::RegistrationService.send(:data_to_attrs, { :IsEighteenOrOlder => true }).should == { :will_be_18_by_election => true } }
+    specify { V2::RegistrationService.send(:data_to_attrs, { :is_eighteen_or_older => false }).should == { :will_be_18_by_election => false } }
+    
   end
 
   describe 'find_records' do
@@ -180,6 +183,7 @@ describe V2::RegistrationService do
 
       V2::RegistrationService.find_records(:partner_id => partner.id, :partner_api_key => partner.api_key).should == [
         { :status               => 'complete',
+          :will_be_18_by_election => reg.will_be_18_by_election?,
           :create_time          => reg.created_at.to_s,
           :complete_time        => reg.updated_at.to_s,
           :lang                 => reg.locale,
@@ -219,7 +223,7 @@ describe V2::RegistrationService do
           :finish_with_state    => reg.finish_with_state?,
           :created_via_api      => reg.building_via_api_call?,
           :tracking_source      => reg.tracking_source,
-          :traicking_id         => reg.tracking_id,
+          :tracking_id         => reg.tracking_id,
           :dob                  => reg.pdf_date_of_birth}
       ]
     end

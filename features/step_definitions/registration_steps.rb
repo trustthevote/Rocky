@@ -64,6 +64,15 @@ Given /^I have completed step (\d+) as a resident of "([^\"]*)" state$/ do |step
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
 end
 
+Given /^I have completed step (\d+) from that partner as a resident of "([^\"]*)" state$/ do |step_num,state_name|
+  state = GeoState.find_by_name(state_name)
+  zip_prefix = GeoState.zip3map.key(state.abbreviation)
+  @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
+  @registrant.partner = Partner.last
+  @registrant.save!
+end
+
+
 Given(/^I have completed step (\d+) without an email address$/) do |step_num|
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :collect_email_address=>'no', :email_address=>nil)  
 end
@@ -372,6 +381,13 @@ Given(/^COVR UI debugging is true$/) do
 end
 Given(/^COVR UI debugging is false$/) do
   RockyConf.ovr_states.CA.api_settings.debug_in_ui = false
+end
+
+Given(/^the setting for allowing ask\-for\-volunteer is true$/) do
+  RockyConf.sponsor.allow_ask_for_volunteers = true
+end
+Given(/^the setting for allowing ask\-for\-volunteer is false$/) do
+  RockyConf.sponsor.allow_ask_for_volunteers = false
 end
 
 Given(/^COVR responses return failures$/) do

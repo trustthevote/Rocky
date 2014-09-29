@@ -10,8 +10,8 @@ es:
         instructions_block:
           title: INSTRUCCIONES
           subtitle: ! 'Siga estos sencillos pasos para completar su registro de votante:'
-          step1: ! "Firme lasolicitud. D\trmar su solicitud de registro de votante
-            antes de enviarla."
+          step1: Firme lasolicitud. Debe firmar su solicitud de registro de votante
+            antes de enviarla.
           step2: Ciérrela. Doble la solicitud y la hoja con la dirección a la mitad.
             Asegúrese que la dirección se pueda leer en el exterior. Use cinta adhesiva
             o una grapa para fijar la solicitud en la parte baja y crear la pieza
@@ -25,8 +25,8 @@ es:
           title: ! 'ENVÍE SU SOLICITUD LLENADA Y FIRMADA A:'
         deadline_block:
           title: ! 'FECHA LÍMITE DE INSCRIPCIÓN:'
-        other_block: Ver <br />%{instructions_url}<br />para instrucciones generales
-          y estatales y específicas completas para su aplicación de registro del votante.
+        other_block: Necesito leer<br />%{instructions_url}<br />para instrucciones
+          completos general y de estado, incluyendo requisitos de elegibilidad.
         bottom_block:
           title: Votantes por primera vez que se inscriben por correo
           paragraph1: ! "Si se está inscribiendo para votar por primera vez en su
@@ -151,4 +151,3 @@ es:
         bottom_half_footer: Envíe esta solicitud a la dirección provista por su estado.
       page3:
         fouo: SÓLO PARA USO OFICIAL
-

@@ -70,7 +70,7 @@ module V2
       return reg
     end
 
-    # Lists records for the given partner
+    # Lists records for the given registrant
     ALLOWED_PARAMETERS = [:partner_id, :gpartner_id, :partner_api_key, :gpartner_api_key, :since, :email, :callback]
     def self.find_records(query)
       query ||= {}
@@ -122,6 +122,7 @@ module V2
 
       regs.map do |reg|
         { :status               => reg.extended_status,
+          :will_be_18_by_election => reg.will_be_18_by_election?,
           :create_time          => reg.created_at.to_s,
           :complete_time        => reg.completed_at.to_s,
           :lang                 => reg.locale,
@@ -161,7 +162,7 @@ module V2
           :finish_with_state    => reg.finish_with_state?,
           :created_via_api      => reg.building_via_api_call?,
           :tracking_source      => reg.tracking_source,
-          :traicking_id         => reg.tracking_id,
+          :tracking_id         => reg.tracking_id,
           :dob                  => reg.pdf_date_of_birth }
       end
     end
@@ -222,6 +223,14 @@ module V2
 
       if l = attrs.delete(:id_number)
         attrs[:state_id_number] = l
+      end
+
+
+      if !(l = attrs.delete(:IsEighteenOrOlder)).nil?
+        attrs[:will_be_18_by_election] = l
+      end
+      if !(l = attrs.delete(:is_eighteen_or_older)).nil?
+        attrs[:will_be_18_by_election] = l
       end
 
       if l = attrs.delete(:survey_question_1)

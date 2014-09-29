@@ -232,7 +232,7 @@ describe Registrant do
     
     [:pdf_instructions, :email_instructions].each do |state_data|
       describe "home_state_#{state_data}" do
-        it "reads #{state_data} from the locatlization" do
+        it "reads #{state_data} from the localization" do
           reg = Registrant.new
           mock_localization = mock(StateLocalization)
           mock_localization.should_receive(state_data).and_return "a value"
@@ -1167,7 +1167,7 @@ describe Registrant do
 
     it "gets no parties when not required" do
       reg = FactoryGirl.build(:step_2_registrant, :home_state => GeoState["PA"])
-      assert_equal nil, reg.state_parties
+      assert_equal [], reg.state_parties
     end
 
     it "gets no parties when no locale" do
@@ -1356,6 +1356,32 @@ describe Registrant do
         `rmdir #{File.dirname(@registrant.pdf_file_path)}`
       end
     end
+    
+    describe "registration_instructions_url" do
+      let(:registrant) { FactoryGirl.create(:maximal_registrant) }
+      let(:partner) { FactoryGirl.create(:partner) }
+      before(:each) do
+        registrant.partner = partner
+      end
+      context "when the partner's instructions url is blank" do
+        before(:each) do
+          partner.registration_instructions_url = ""
+        end
+        it "returns the pdf settings with state and locale substituted" do
+          registrant.registration_instructions_url.should == RockyConf.pdf.nvra.page1.other_block.instructions_url.gsub(
+            "<LOCALE>",registrant.locale
+          ).gsub("<STATE>",registrant.home_state_abbrev)
+        end
+      end
+      context "when the partner's instructions url is specified" do
+        before(:each) do
+          partner.registration_instructions_url = "http://custom-url/?l=<LOCALE>&s=<STATE>"
+        end
+        it "returns the custom url with state and locale substituted" do
+          registrant.registration_instructions_url.should == "http://custom-url/?l=#{registrant.locale}&s=#{registrant.home_state_abbrev}"
+        end
+      end
+    end
   end
 
   describe "CSV" do
@@ -1452,7 +1478,7 @@ describe Registrant do
                      "Yes",
                      "Yes",
                      nil,
-                     reg.created_at && reg.created_at.to_s(:month_day_year),
+                     reg.created_at && reg.created_at.to_s,
                      "No",
                      "Yes"
                      ],
@@ -1504,7 +1530,7 @@ describe Registrant do
                      "Yes",
                      "Yes",
                      nil,
-                     reg.created_at && reg.created_at.to_s(:month_day_year),
+                     reg.created_at && reg.created_at.to_s,
                      "No",
                      "Yes"
                      ]
@@ -1514,6 +1540,11 @@ describe Registrant do
     it "renders ineligible CSV" do
       reg = FactoryGirl.create(:step_1_registrant, :us_citizen => false)
       assert_equal "Not a US citizen", reg.to_csv_array[-4]
+    end
+    
+    it "includes non-english/spanish locale names" do
+      reg = FactoryGirl.create(:api_v2_maximal_registrant, :locale => "zh-tw")
+      reg.to_csv_array[3].should == "Chinese (Traditional)"
     end
 
     it "has a CSV header" do

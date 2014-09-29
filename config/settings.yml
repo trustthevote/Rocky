@@ -1,4 +1,5 @@
 sponsor:
+  allow_ask_for_volunteers: false
   barcode_prefix: "RTV"
   name: "Rock the Vote"
   url: "http://www.rockthevote.com"
@@ -35,7 +36,7 @@ mobile_browsers:
   
 widget_loader_url: https://s3.amazonaws.com/ovr/widget_loader.js
 hours_before_first_reminder: 120
-hours_between_first_and_second_reminder: 120
+hours_between_first_and_second_reminder: 72
 pdf_expiration_days: 14
 pdf_no_email_expiration_minutes: 10
 partner_csv_expiration_minutes: 30
@@ -66,6 +67,7 @@ ovr_states:
       - km
       - th
   NV:
+    redirect_to_online_reg_url: true
     languages:
       - en
   WA:

@@ -70,7 +70,7 @@ module PartnerAssets
 
   def absolute_pdf_logo_path(ext=nil)
     ext ||= pdf_logo_ext || "gif"
-    "#{assets_root}#{pdf_logo_url(ext)}"
+    "#{assets_path}/#{PDF_LOGO}.#{ext}"
   end
 
 
@@ -83,23 +83,48 @@ module PartnerAssets
   end
 
   def assets_url
+    "//#{partner_assets_host}#{partner_path}"
+  end
+  
+  def partner_assets_host
+    if Rails.env.staging?
+      "rtvstaging.osuosl.org"
+    elsif Rails.env.staging2?
+      "rtvstaging2.osuosl.org"
+    elsif Rails.env.development?
+      "localhost:3000"
+    else
+      "register.rockthevote.com"
+    end
+  end
+
+  def partner_path
     "/partners/#{self.id}"
   end
 
   def assets_path
-    "#{assets_root}#{assets_url}"
+    "#{assets_root}#{partner_path}"
   end
 
   def application_css_url
     "#{assets_url}/#{APP_CSS}"
   end
+  def application_css_path
+    "#{partner_path}/#{APP_CSS}"
+  end
 
   def registration_css_url
     "#{assets_url}/#{REG_CSS}"
   end
+  def registration_css_path
+    "#{partner_path}/#{REG_CSS}"
+  end
 
   def partner_css_url
     "#{assets_url}/#{PART_CSS}"
+  end
+  def partner_css_path
+    "#{partner_path}/#{PART_CSS}"
   end
 
   def absolute_old_assets_path
@@ -107,15 +132,15 @@ module PartnerAssets
   end
 
   def absolute_application_css_path
-    "#{assets_root}#{application_css_url}"
+    "#{assets_root}#{application_css_path}"
   end
 
   def absolute_registration_css_path
-    "#{assets_root}#{registration_css_url}"
+    "#{assets_root}#{registration_css_path}"
   end
   
   def absolute_partner_css_path
-    "#{assets_root}#{partner_css_url}"
+    "#{assets_root}#{partner_css_path}"
   end
 
 end

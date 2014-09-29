@@ -6,7 +6,7 @@
     <span class="error"><%= form.object.errors[:race].join("\n") %></span>
   </li>
 </ul>
-<% if @state_parties %>
+<% if @state_parties && @state_parties.any? %>
   <ul class="flat party-dropdown">
     <li>
       <h3><%= form.label :party %></h3>
