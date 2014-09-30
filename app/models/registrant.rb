@@ -1135,12 +1135,11 @@ class Registrant < ActiveRecord::Base
       Notifier.reminder(self).deliver
       self.reminders_left = reminders_left - 1
       self.save(validate: false)
-      # enqueue_reminder_email if reminders_left > 0
     end
   rescue StandardError => error
     Airbrake.notify(
       :error_class => error.class.name,
-      :error_message => "DelayedJob Worker Error(#{error.class.name}): #{error.message}",
+      :error_message => "Email Delivery Error(#{error.class.name}): #{error.message}",
       :request => { :params => {:worker => "deliver_reminder_email", :registrant_id => self.id} })
   end
 

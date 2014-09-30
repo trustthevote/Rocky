@@ -1339,6 +1339,8 @@ describe Registrant do
       end
 
       it "returns PDF if already exists" do
+        FileUtils.mkdir_p(@registrant.pdf_file_dir)
+        
         `touch #{@registrant.pdf_file_path}`
         assert_difference(%Q{Dir[File.join(Rails.root, "public/pdfs/#{@registrant.bucket_code}/*")].length} => 0) do
           @registrant.generate_pdf
@@ -1589,10 +1591,6 @@ describe Registrant do
 
     describe "background processing" do
       describe "when there is a job queue (production, staging)" do
-        before(:each) do
-          RockyConf.stub(:delayed_wrap_up) { true }
-        end
-
         it "should complete immediately" do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
           reg.should_receive(:complete!)
@@ -1601,19 +1599,7 @@ describe Registrant do
         it "should  enqueue emails" do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
           reg.wrap_up
-          assert_match /#{reg.id}.*deliver_reminder_email/m, Delayed::Job.last.handler
-        end
-      end
-
-      describe "when there is no job queue (production, staging)" do
-        before(:each) do
-          RockyConf.stub(:delayed_wrap_up) { false }
-        end
-        it "should run immediately" do
-          reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-          reg.stub(:generate_pdf)
-          reg.wrap_up
-          assert_match /#{reg.id}.*deliver_reminder_email/m, Delayed::Job.last.handler
+          reg.reminders_left.should == 2
         end
       end
     end
@@ -1652,10 +1638,8 @@ describe Registrant do
 
     it "should queue series of reminder emails" do
       reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 0)
-      assert_difference('Delayed::Job.count', 1) do
-        reg.enqueue_reminder_emails
-        assert_equal Registrant::REMINDER_EMAILS_TO_SEND, reg.reminders_left
-      end
+      reg.enqueue_reminder_emails
+      assert_equal Registrant::REMINDER_EMAILS_TO_SEND, reg.reminders_left
     end
 
     describe "delivery" do
@@ -1688,24 +1672,16 @@ describe Registrant do
         assert_equal 2, reg.reload.reminders_left
       end
 
-      it "should enqueue another reminder email" do
-        assert_difference('Delayed::Job.count', 1) do
-          reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 3)
-          reg.deliver_reminder_email
-        end
-      end
-
       it "should not enqueue another reminder email if on last email" do
-        assert_difference('Delayed::Job.count'=>0) do
-          reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
-          reg.deliver_reminder_email
-        end
+        reg = FactoryGirl.create(:maximal_registrant, :reminders_left => 1)
+        reg.deliver_reminder_email
+        reg.reminders_left.should == 0
       end
+      
       it "should not enqueue another reminder email if no email address" do
-        assert_difference('Delayed::Job.count'=>0) do
-          reg = FactoryGirl.create(:maximal_registrant, 
-            :reminders_left => 3,
-            :collect_email_address=>'no')
+        reg = FactoryGirl.create(:maximal_registrant,
+          :collect_email_address=>'no')
+        assert_difference("reg.reminders_left"=>0) do
           reg.deliver_reminder_email
         end
       end

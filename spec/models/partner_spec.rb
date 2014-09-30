@@ -350,7 +350,7 @@ describe Partner do
     describe "#assets_url" do
       it "returns the url for the partner directory" do
         partner = FactoryGirl.create(:partner)
-        partner.assets_url.should == "/partners/#{partner.id}"
+        partner.assets_url.should == "//#{partner.partner_assets_host}/partners/#{partner.id}"
       end
     end
     describe "#assets_path" do
@@ -478,19 +478,19 @@ describe Partner do
     describe "#application_css_url" do
       it "is returns the URL for the custom application css" do
         partner = FactoryGirl.build(:partner)
-        partner.application_css_url.should == "/partners/#{partner.id}/application.css"
+        partner.application_css_url.should == "//#{partner.partner_assets_host}/partners/#{partner.id}/application.css"
       end
     end
     describe "#registration_css_url" do
       it "is returns the URL for the custom registration css" do
         partner = FactoryGirl.build(:partner)
-        partner.registration_css_url.should == "/partners/#{partner.id}/registration.css"
+        partner.registration_css_url.should == "//#{partner.partner_assets_host}/partners/#{partner.id}/registration.css"
       end
     end
     describe "#partner_css_url" do
       it "is returns the URL for the custom partner css" do
         partner = FactoryGirl.build(:partner)
-        partner.partner_css_url.should == "/partners/#{partner.id}/partner.css"
+        partner.partner_css_url.should == "//#{partner.partner_assets_host}/partners/#{partner.id}/partner.css"
       end
     end
     
@@ -566,28 +566,23 @@ describe Partner do
           context "when pdf_logo_ext returns nil" do
             before(:each) do
               partner.stub(:pdf_logo_ext).and_return(nil)
-              partner.stub(:pdf_logo_url).with('gif').and_return('gifpart')
             end
             it "returns the path with a gif extension" do
-              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_root}gifpart"
+              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_path}/#{Partner::PDF_LOGO}.gif"
             end
           end
           context "when pdf_logo_ext returns jpg" do
             before(:each) do
               partner.stub(:pdf_logo_ext).and_return('jpg')
-              partner.stub(:pdf_logo_url).with('jpg').and_return('jpgpart')
             end
             it "returns the path with a jpg exention" do
-              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_root}jpgpart"
+              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_path}/#{Partner::PDF_LOGO}.jpg"
             end
           end
         end
         context "when a value is passed" do
-          before(:each) do
-            partner.stub(:pdf_logo_url).with('jpeg').and_return('jpegpart')
-          end
           it "returns the path with the passed exention" do
-            partner.absolute_pdf_logo_path('jpeg').should == "#{partner.assets_root}jpegpart"
+            partner.absolute_pdf_logo_path('jpeg').should == "#{partner.assets_path}/#{Partner::PDF_LOGO}.jpeg"
           end          
         end
       end
