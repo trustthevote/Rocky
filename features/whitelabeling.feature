@@ -27,7 +27,8 @@ Feature: White labeling
       And that partner's css file does not exist
       When I go to the registration page for that partner
       Then I should see a link to the standard CSS
-  
+ 
+    
     Scenario: Whitelabeled partner with assets should use the custom CSS
       Given the following partner exists:
         | name                | whitelabeled |

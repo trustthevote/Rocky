@@ -42,8 +42,8 @@ end
 
 
 Then /^I should see a link to that partner's CSS$/ do
-  page.body.should include("link href=\"/partners/#{@partner.id}/application.css")
-  page.body.should include("link href=\"/partners/#{@partner.id}/registration.css")
+  page.body.should include("link href=\"//#{@partner.partner_assets_host}/partners/#{@partner.id}/application.css")
+  page.body.should include("link href=\"//#{@partner.partner_assets_host}/partners/#{@partner.id}/registration.css")
 end
 
 
