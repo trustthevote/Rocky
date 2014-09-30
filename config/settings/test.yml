@@ -1,6 +1,5 @@
 pdf_host_name: 'example-pdf.com'
 use_https: false
-delayed_wrap_up: false
 paperclip_options:
   path: ":rails_root/tmp/system/:attachment/:id/:style/:filename"
   

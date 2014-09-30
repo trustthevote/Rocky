@@ -25,7 +25,6 @@ use_https: true
 paperclip_options: 
   path: ":rails_root/public/system/:attachment/:id/:style/:filename"
   url: "/system/:attachment/:id/:style/:filename"
-delayed_wrap_up: true
 
 mobile_redirect_url: https://register2.rockthevote.com
 mobile_browsers:
