@@ -26,6 +26,101 @@ class StateImporter
   
   attr_accessor :file, :defaults, :states_hash
   
+  
+  class CountyAddresses
+    # get states: /states
+    
+    # get regions per state: /regions?state_id=?
+    
+    # get office for region
+
+    #expires:      2014-12-31
+    #?oauth_consumer_key=[token]
+    def self.oauth_token
+      "6e49c968a17e1415946d8121d33202ff1550178b"      
+    end
+    
+    def self.base_uri
+      "http://eod.usvotefoundation.org"
+    end
+    
+    def self.api_uri
+      "/api/v1"
+    end
+    
+    def self.path(resource_type, params={})
+      p = case resource_type
+      when :offices
+        "/offices"
+      when :regions
+        "/regions"
+      end
+      params["oauth_consumer_key"]=oauth_token
+      params["limit"] = 1000
+      return "#{api_uri}#{p}?#{params.collect{|k,v| "#{k}=#{v}"}.join("&")}"
+    end
+    
+    def self.get(path)
+      puts "Getting #{path}"
+      response =  JSON.parse(RestClient.get("#{base_uri}#{path}"))
+      puts response["meta"]
+      return [response["objects"], response["meta"]]
+    rescue Exception => e
+      puts path
+      raise e
+    end
+    
+    def self.regions
+      # get all offices      
+      offices, meta = get(path(:offices))
+      while meta["next"] do
+        next_offices, meta = get(meta["next"])
+        offices += next_offices
+      end
+      
+      # get all regions
+      regions, meta = get(path(:regions))
+      while meta["next"] do
+        next_regions, meta = get(meta["next"])
+        regions += next_regions
+      end
+
+      # map region names to uri
+      region_names = {}
+      regions.each do |r|
+        region_names[r["resource_uri"]] = r["name"]
+      end
+      
+      region_address_list = []
+      
+      # generate list of data needed
+      offices.each do |office|
+        o = office["mailing_address"]
+        region_address_list << OpenStruct.new({
+          name: region_names[office["region"]],
+          street1: o["street1"],
+          street2: o["street2"],
+          city: o["city"],
+          state: o["state"],
+          zip: o["zip"],
+          phone: ""
+        })
+      end
+      
+      return region_address_list
+    end
+    
+    # format COUNTY,STREET 1,STREET 2,CITY,STATE,ZIP,PHONE
+    def self.generate_from_api!
+      CSV.open(GeoState.county_addresses_file, "wb") do |csv|
+        csv << ["COUNTY","STREET 1","STREET 2","CITY","STATE","ZIP","PHONE"]
+        regions.each do |region|
+          csv << [region.name, region.street1, region.street2, region.city, region.state, region.zip, region.phone]
+        end
+      end
+    end
+  end
+  
   def self.defaults
     @@defaults ||= StateImporter.new.defaults
   end

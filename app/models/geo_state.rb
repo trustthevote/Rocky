@@ -162,8 +162,8 @@ class GeoState < ActiveRecord::Base
       return st_county_name
     end
     
-    # try removing " City" and "City of "
-    city_name = county_name.gsub(/^city\s+of\s+/,'').gsub(/\s+city$/,'')
+    # try removing " City" and "City of " and "Town of"
+    city_name = county_name.gsub(/^city\s+of\s+/,'').gsub(/\s+city$/,'').gsub(/^town\s+of\s+/,'')
     if city_zip_codes[state].has_key?(city_name)
       return city_name
     end
@@ -177,6 +177,7 @@ class GeoState < ActiveRecord::Base
     if city_zip_codes[state].has_key?(st_county_name)
       return st_county_name
     end
+    
     
     
     errors << "#{state}: #{attempted_name}"
@@ -217,6 +218,7 @@ class GeoState < ActiveRecord::Base
     #4. Map county/state/zip/addresses and commit to DB
     counties = {}
     cities = {}
+    acceptable_cities = {}
     CSV.foreach(zip_code_database_file, {:headers=>:first_row}) do |row|
       counties[row["state"]] ||= {}
       counties[row["state"]][row["county"].to_s.downcase] ||= []
@@ -224,9 +226,27 @@ class GeoState < ActiveRecord::Base
 
       cities[row["state"]] ||= {}
       cities[row["state"]][row["primary_city"].to_s.downcase] ||= []
-      cities[row["state"]][row["primary_city"].to_s.downcase] << row["zip"]      
-
+      cities[row["state"]][row["primary_city"].to_s.downcase] << row["zip"]
+      
+      acceptable_cities[row["state"]] ||= {}
+      acceptables = row["acceptable_cities"].to_s.split(',')
+      acceptables.each do |ac|
+        acceptable_cities[row["state"]][ac.to_s.downcase.strip] ||= []
+        acceptable_cities[row["state"]][ac.to_s.downcase.strip] << row["zip"]
+      end
+      
     end
+    
+    # merge in acceptables to cities
+    acceptable_cities.each do |state, city_list|
+      city_list.each do |city, zips|
+        if cities[state][city].nil?
+          cities[state][city] ||= []
+          cities[state][city] += zips
+        end
+      end
+    end
+    
     return [counties, cities]
   end
 
