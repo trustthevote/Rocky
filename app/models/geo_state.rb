@@ -74,6 +74,10 @@ class GeoState < ActiveRecord::Base
     CSV.foreach(county_addresses_file, {:headers=>:first_row}) do |cased_row|
       row = {}
       cased_row.each {|k,v| row[k.downcase] = v.to_s.strip }
+      row["state"] = row["state"].upcase
+      if %w(WI MI).include?(row["state"])
+        next
+      end
       cra[row["state"]] ||= {}
       county_file_name = ActiveSupport::Multibyte::Chars.new(row["county"]).mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'')
       
@@ -163,13 +167,28 @@ class GeoState < ActiveRecord::Base
     end
     
     # try removing " City" and "City of " and "Town of"
-    city_name = county_name.gsub(/^city\s+of\s+/,'').gsub(/\s+city$/,'').gsub(/^town\s+of\s+/,'')
+    # and township and hyphens
+    city_name = county_name.gsub(/^city\s+of\s+/,'').
+      gsub(/\s+city$/,'').
+      gsub(/^town\s+of\s+/,'').
+      gsub(/ township/,'').
+      gsub(/\s+twp$/,'').
+      gsub(/-/,' ')
     if city_zip_codes[state].has_key?(city_name)
       return city_name
     end
+
+    # # try removing twp and plt
+    # city_name = city_name.
+    #   gsub(/\s+twp$/,'').
+    #   gsub(/\s+plt$/,'')
+    # if city_zip_codes[state].has_key?(city_name)
+    #   return city_name
+    # end
+
     
     # try the "st." substitution
-    st_county_name = city_name.to_s.downcase.gsub(/st\./, "saint")
+    st_county_name = city_name.to_s.downcase.gsub(/\sst\.?\s/, " saint ")
     if city_zip_codes[state].has_key?(st_county_name)
       return st_county_name
     end
@@ -187,6 +206,8 @@ class GeoState < ActiveRecord::Base
   def self.county_addresses_file
     Rails.root.join("data/zip_codes/county_addresses.csv")
   end
+  
+  # from http://www.unitedstateszipcodes.org/zip_code_database.cs
   def self.zip_code_database_file
     Rails.root.join("data/zip_codes/zip_code_database.csv")
   end
@@ -223,10 +244,24 @@ class GeoState < ActiveRecord::Base
       counties[row["state"]] ||= {}
       counties[row["state"]][row["county"].to_s.downcase] ||= []
       counties[row["state"]][row["county"].to_s.downcase] << row["zip"]      
+      # also add the county without apostraphes
+      county_clean = "#{row["county"]}".gsub(/'/, '').to_s.downcase
+      counties[row["state"]][county_clean] ||= []
+      counties[row["state"]][county_clean] << row["zip"]
+
 
       cities[row["state"]] ||= {}
       cities[row["state"]][row["primary_city"].to_s.downcase] ||= []
       cities[row["state"]][row["primary_city"].to_s.downcase] << row["zip"]
+      # also add the city, county version 
+      city_county = "#{row["primary_city"]}, #{row["county"]}".to_s.downcase
+      cities[row["state"]][city_county] ||= []
+      cities[row["state"]][city_county] << row["zip"]
+      # also add the city without apostraphes
+      city_clean = "#{row["primary_city"]}".gsub(/'/, '').to_s.downcase
+      cities[row["state"]][city_clean] ||= []
+      cities[row["state"]][city_clean] << row["zip"]
+      
       
       acceptable_cities[row["state"]] ||= {}
       acceptables = row["acceptable_cities"].to_s.split(',')
