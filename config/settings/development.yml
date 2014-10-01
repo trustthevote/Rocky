@@ -1,6 +1,5 @@
 pdf_host_name: localhost:3000
 use_https: false
-delayed_wrap_up: false
 from_address: "rocky-dev@gmail.com"
 default_url_host: "register.example.com"
 

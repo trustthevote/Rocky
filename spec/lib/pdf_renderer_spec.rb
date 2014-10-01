@@ -16,9 +16,6 @@ describe PdfRenderer do
     it "sets registrant" do
       pdfg.registrant.should == r
     end
-    it "sets state" do
-      pdfg.state.should == r.home_state
-    end
     it "sets logo_image_path" do
       pdfg.logo_image_path.should_not be_nil
     end

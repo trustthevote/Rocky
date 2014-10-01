@@ -133,7 +133,7 @@
         .value=  @registrant.mailing_city.to_s.html_safe
       %td.box3#mailing_address_state
         .label= form_prompt('pdf.nvra.page2.block3.box3_label' ).to_s.html_safe
-        .value=  @registrant.mailing_state_id.to_s.html_safe
+        .value=  @registrant.mailing_state_abbrev.to_s.html_safe
       %td.box4#mailing_address_zip_code
         .label= form_prompt('pdf.nvra.page2.block3.box4_label' ).to_s.html_safe
         .value=  @registrant.mailing_zip_code.to_s.html_safe
@@ -270,7 +270,7 @@
           .value=  @registrant.prev_city.to_s.html_safe
         %td.box4#prev_address_state
           .label= form_prompt('pdf.nvra.page2.blockB.box4_label' ).to_s.html_safe
-          .value=  @registrant.prev_state_id
+          .value=  @registrant.prev_state_abbrev
         %td.box5#prev_address_zip_code
           .label= form_prompt('pdf.nvra.page2.blockB.box5_label' ).to_s.html_safe
           .value=  @registrant.prev_zip_code.to_s.html_safe

@@ -147,7 +147,7 @@ describe RegistrantsController do
         get :new, :partner => partner.to_param
         assert_response :success
         assert_select "#header.partner"
-        assert_select "#partner-logo img[src=#{partner.logo.url(:header).split('?').first}]"
+        assert_select "#partner-logo img[src=//#{partner.partner_assets_host}#{partner.logo.url(:header).split('?').first}]"
       end
     end
       

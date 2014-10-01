@@ -91,7 +91,7 @@ module PartnerAssets
       "rtvstaging.osuosl.org"
     elsif Rails.env.staging2?
       "rtvstaging2.osuosl.org"
-    elsif Rails.env.development?
+    elsif Rails.env.development? || Rails.env.test? || Rails.env.cucumber?
       "localhost:3000"
     else
       "register.rockthevote.com"
