@@ -398,12 +398,12 @@ YML
       it "creates a list of ZipCodeCountyAddress objects" do
         si.import_zip_county_addresses
         # 3 counties, 4 zip codes
-        si.imported_zip_addresses.should have(4).zip_code_county_addresses
+        si.imported_zip_addresses.should have(4).zip_code_county_addresses        
         zca = si.imported_zip_addresses.first
-        zca.geo_state_id.should == GeoState["PA"].id
+        zca.geo_state_id.should == GeoState["LA"].id
         zca.zip.should == "00544"
-        zca.county.should == "Adams"
-        zca.address.should == "117 Baltimore Street\nRoom 106\nGettysburg, PA 17325"
+        zca.county.should == "adams"
+        zca.address.should == "117 Baltimore Street\nRoom 106\nGettysburg, LA 17325"
       end
     end
     

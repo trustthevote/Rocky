@@ -60,17 +60,18 @@ class GeoState < ActiveRecord::Base
     Hash[*(lines.collect {|line| line.chomp.split(',')}.flatten)]
   end
   
-  def self.county_registrar_addresses
-    @@county_registrar_addresses ||= read_county_registrar_addresses
+  def self.county_registrar_addresses(raise_errors = true)
+    @@county_registrar_addresses ||= read_county_registrar_addresses(raise_errors)
   end
   def self.reset_county_registrar_addresses
     @@county_registrar_addresses = nil
   end
   
-  def self.read_county_registrar_addresses
+  def self.read_county_registrar_addresses(raise_errors = true)
     #COUNTY,STREET 1,STREET 2,CITY,STATE,ZIP,PHONE
     cra = {}
     errors = []
+    city_matched_zip_codes = []
     CSV.foreach(county_addresses_file, {:headers=>:first_row}) do |cased_row|
       row = {}
       cased_row.each {|k,v| row[k.downcase] = v.to_s.strip }
@@ -84,29 +85,59 @@ class GeoState < ActiveRecord::Base
       if county_zip_codes[row["state"]].nil?
         errors << "State #{row["state"]} missing!"
       else
-        county_name = get_county_name_from_zip_codes(row["state"], county_file_name, errors)
+        county_name = get_city_name_from_zip_codes(row["state"], county_file_name, errors)
         
         if !county_name.nil?
           if cra[row["state"]].has_key?(county_name)
             raise "Duplicate county #{row["county"]} for state #{row["state"]}"
           end
           
-          cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), county_zip_codes[row["state"]][county_name]]
+          # keep a list of all *city* matched zip codes
+          cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), city_zip_codes[row["state"]][county_name], "city"]
+          city_matched_zip_codes += city_zip_codes[row["state"]][county_name].flatten
         else 
-          county_name = get_city_name_from_zip_codes(row["state"], county_file_name, errors)
+          county_name = get_county_name_from_zip_codes(row["state"], county_file_name, errors)
           if !county_name.nil?
             if cra[row["state"]].has_key?(county_name)
               raise "Duplicate city #{row["county"]} for state #{row["state"]}"
             end
         
-            cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), city_zip_codes[row["state"]][county_name]]
+            cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), county_zip_codes[row["state"]][county_name], "county"]
           end
         end
       end
     end
     
+    #clean out any city_matched_zip_codes from county names
+    cra.each do |state, region_list|
+      region_list.each do |region, addr_zip_type|
+        if addr_zip_type[2] == "county"
+          addr_zip_type[1].delete_if do |zip| 
+            if city_matched_zip_codes.include?(zip) 
+              puts "Removing #{zip} from county #{region}"
+              true
+            else
+              false
+            end
+          end
+        end
+      end
+    end
+    
+    #uniquify lines
+    cra.each do |state, region_list|
+      region_list.each do |region, addr_zip_type|
+        addr_zip_type[1].uniq!
+      end
+    end
+    
     if errors.any?
-      raise "The following counties are missing from the zip code database:\n" + errors.join("\n")
+      msg = "The following counties are missing from the zip code database:\n" + errors.join("\n")
+      if raise_errors
+        raise msg
+      else
+        puts msg
+      end
     end
     cra
   end
@@ -117,6 +148,22 @@ class GeoState < ActiveRecord::Base
     if county_zip_codes[state].has_key?(county_name)
       return county_name
     end
+    
+    # NYC fix
+    if county_name =~ /\((.+ county)\)/
+      nyc_county_name = $1
+      if county_zip_codes[state].has_key?(nyc_county_name)
+        return nyc_county_name
+      end
+    end
+    
+    # try without spaces
+    concat_county_name = county_name.gsub(/\s/,'')
+    if county_zip_codes[state].has_key?(concat_county_name)
+      return concat_county_name
+    end
+    
+    
     
     # try the "st." substitution
     st_county_name = county_name.to_s.downcase.gsub(/st\./, "saint")
@@ -133,6 +180,13 @@ class GeoState < ActiveRecord::Base
     if county_zip_codes[state].has_key?(county_name)
       return county_name
     end
+    
+    # try without spaces
+    concat_county_name = county_name.gsub(/\s/,'')
+    if county_zip_codes[state].has_key?(concat_county_name)
+      return concat_county_name
+    end
+    
 
     # try the "st." substitution
     st_county_name = county_name.to_s.downcase.gsub(/st\./, "saint")
@@ -144,6 +198,7 @@ class GeoState < ActiveRecord::Base
       return st_county_name
     end
 
+    errors << "#{state}: #{attempted_name}"
     
     return nil
   end
@@ -199,7 +254,6 @@ class GeoState < ActiveRecord::Base
     
     
     
-    errors << "#{state}: #{attempted_name}"
     return nil
   end
   
@@ -240,6 +294,7 @@ class GeoState < ActiveRecord::Base
     counties = {}
     cities = {}
     acceptable_cities = {}
+    unacceptable_cities = {}
     CSV.foreach(zip_code_database_file, {:headers=>:first_row}) do |row|
       counties[row["state"]] ||= {}
       counties[row["state"]][row["county"].to_s.downcase] ||= []
@@ -249,6 +304,11 @@ class GeoState < ActiveRecord::Base
       counties[row["state"]][county_clean] ||= []
       counties[row["state"]][county_clean] << row["zip"]
 
+      # also add the county without spaces
+      county_concat = "#{row["county"]}".gsub(/\s/, '').to_s.downcase
+      counties[row["state"]][county_concat] ||= []
+      counties[row["state"]][county_concat] << row["zip"]
+      
 
       cities[row["state"]] ||= {}
       cities[row["state"]][row["primary_city"].to_s.downcase] ||= []
@@ -270,17 +330,33 @@ class GeoState < ActiveRecord::Base
         acceptable_cities[row["state"]][ac.to_s.downcase.strip] << row["zip"]
       end
       
+      unacceptable_cities[row["state"]] ||= {}
+      unacceptables = row["unacceptable_cities"].to_s.split(',')
+      unacceptables.each do |ac|
+        unacceptable_cities[row["state"]][ac.to_s.downcase.strip] ||= []
+        unacceptable_cities[row["state"]][ac.to_s.downcase.strip] << row["zip"]
+      end
+      
     end
     
-    # merge in acceptables to cities
-    acceptable_cities.each do |state, city_list|
-      city_list.each do |city, zips|
-        if cities[state][city].nil?
-          cities[state][city] ||= []
-          cities[state][city] += zips
-        end
-      end
-    end
+    # merge in acceptables and unacceptables to cities
+    # acceptable_cities.each do |state, city_list|
+    #   city_list.each do |city, zips|
+    #     if cities[state][city].nil?
+    #       cities[state][city] ||= []
+    #       cities[state][city] += zips
+    #     end
+    #   end
+    # end
+    # unacceptable_cities.each do |state, city_list|
+    #   city_list.each do |city, zips|
+    #     if cities[state][city].nil?
+    #       cities[state][city] ||= []
+    #       cities[state][city] += zips
+    #     end
+    #   end
+    # end
+    
     
     return [counties, cities]
   end
@@ -317,6 +393,14 @@ class GeoState < ActiveRecord::Base
     GeoState.states_with_online_registration.include?(self.abbreviation) && self.enabled_for_language?(locale, reg)
   end
   
+  def registrar_address(zip_code=nil)
+    county_address_zip = zip_code.nil? ? nil : ZipCodeCountyAddress.where(:zip=>zip_code).first
+    if county_address_zip
+      county_address_zip.address.gsub(/\n/,"<br/>")
+    else
+      read_attribute(:registrar_address)
+    end
+  end
     
   
 end

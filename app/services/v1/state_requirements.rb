@@ -47,7 +47,7 @@ module V1
         :id_length_min =>      state.id_length_min,
         :id_length_max =>      state.id_length_max,
         :id_number_msg =>      locale.id_number_tooltip,
-        :sos_address =>        state.registrar_address,
+        :sos_address =>        state.registrar_address(nil),
         :sos_phone =>          state.registrar_phone,
         :sos_url =>            state.registrar_url,
         :sub_18_msg =>         locale.sub_18 }

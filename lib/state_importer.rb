@@ -251,9 +251,9 @@ class StateImporter
   end
   
   def import_zip_county_addresses
-    GeoState.county_registrar_addresses.each do |state_abbr, counties|
+    GeoState.county_registrar_addresses(false).each do |state_abbr, counties|
       counties.each do |county, addr_zips|
-        addr_zips[1].each do |zip|
+        addr_zips[1].uniq.each do |zip|
           self.imported_zip_addresses << ZipCodeCountyAddress.new({
             :geo_state_id=> GeoState[state_abbr].id,
             :zip => zip,

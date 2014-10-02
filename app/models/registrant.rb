@@ -814,7 +814,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def state_registrar_address
-    home_state && home_state.registrar_address
+    home_state && home_state.registrar_address(self.home_zip_code)
   end
   
   [:pdf_instructions, :email_instructions].each do |state_data|
