@@ -37,9 +37,9 @@ class TranslationsController < ApplicationController
   end
   
   
-  def save
-    file = @translation.generate_yml(params[:locale], params[params[:locale]])
-  end
+  # def save
+  #   file = @translation.generate_yml(params[:locale], params[params[:locale]])
+  # end
   
   def submit
     file = @translation.generate_yml(params[:locale], params[params[:locale]])

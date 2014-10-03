@@ -1,9 +1,9 @@
 !!!
 %html
   %head
-    = wicked_pdf_stylesheet_link_tag 'reset', 'nvra'
+    = stylesheet_link_tag asset_data_base64('reset'), asset_data_base64('nvra')
     - nvra_css.each do |file|
-      = wicked_pdf_stylesheet_link_tag file
+      = stylesheet_link_tag asset_data_base64(file)
     %meta{:'http-equiv'=>"content-type", :content=>"text/html; charset=utf-8"}
     %meta{:charset=>"UTF-8"}
   %body

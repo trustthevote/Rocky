@@ -1,4 +1,4 @@
-Feature: Admin UI
+Feature: Translation UI
   
   So that translators can provide translations for all keys
   As a translator 
@@ -75,4 +75,3 @@ Feature: Admin UI
       And a tmp translation file should be created
       And there should be an email sent with an attachment
       
-    

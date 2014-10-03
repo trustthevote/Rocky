@@ -66,3 +66,8 @@ Then(/^there should be an email sent with an attachment$/) do
   ActionMailer::Base.deliveries.count.should == 1
   ActionMailer::Base.deliveries.last.attachments.size.should == 1
 end
+
+Then(/^I should get a PDF$/) do
+  puts page.response_headers.to_s
+  page.response_headers['Content-Type'].should == "application/pdf"
+end

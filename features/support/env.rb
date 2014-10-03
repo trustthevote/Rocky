@@ -5,7 +5,6 @@
 # files.
 
 require 'simplecov'
-SimpleCov.start
 
 require 'factory_girl'
 require 'factory_girl_rails'

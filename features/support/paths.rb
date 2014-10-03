@@ -36,8 +36,12 @@ module NavigationHelpers
       root_path
     when /the translations page/i
       translations_path
-    when /the ([^\s]+) ([^\s]+) translation page/
+    when /the ([^\s]+) ([^\s]+) translation page/i
       translation_path($2, :locale=>$1)
+    when /the ([^\s]+) translations pdf preview page/i
+      preview_pdf_translation_path($1, :format=>:pdf)
+    when /the state configurations page/i
+      state_configurations_path
     when /a new registration page for that partner/
       new_registrant_path(:partner=>Partner.last.id)
     when /a new registration page for partner="(\d)", source="(.+)" and tracking="(.+)"/
