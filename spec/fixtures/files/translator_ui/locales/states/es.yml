@@ -1,0 +1,5 @@
+es:
+  states:
+    testing:
+      val1: Numero Uno
+      val2: Numero Dos

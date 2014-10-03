@@ -42,6 +42,10 @@ Given /^I have completed step (\d+)$/ do |step_num|
   @registrant = FactoryGirl.create("step_#{step_num}_registrant")
 end
 
+Given(/^my zip code is "(.*?)"$/) do |zip|
+  @registrant.update_attributes(:home_zip_code=>zip)
+end
+
 Given /^I have completed step (\d+) for a short form$/ do |step_num|
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :short_form=>true)
 end
@@ -148,6 +152,11 @@ end
 # Then /^I should be redirected to the mobile url with partner="([^\"]*)", source="([^\"]*)" and tracking="([^\"]*)"$/ do |partner,source,tracking|
 #   response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en', :source=>source, :tracking=>tracking))
 # end
+
+Then(/^my confirmation email should include "(.*?)"$/) do |text|
+  email = ActionMailer::Base.deliveries.last
+  email.body.should include(text)
+end
 
 Then /^I should be sent a thank\-you email$/ do
   email = ActionMailer::Base.deliveries.last

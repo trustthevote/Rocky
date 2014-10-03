@@ -273,6 +273,8 @@ class StateImporter
       imported_locales.each do |loc|
         loc.save!
       end
+      # Clear out all zca's first
+      ZipCodeCountyAddress.delete_all
       imported_zip_addresses.each do |zca|
         zca.save!
       end

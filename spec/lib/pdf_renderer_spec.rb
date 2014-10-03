@@ -59,13 +59,27 @@ describe PdfRenderer do
   end
   
   describe "render_to_string('registrants/registrant_pdf', :layout => 'layouts/nvra')" do
+    let(:registrant) { FactoryGirl.create(:maximal_registrant, :home_zip_code=>"00501") }
+    let(:pdfg) { PdfRenderer.new(registrant) }
+    let(:doc) { Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra')) }
+    
+    it "should use a custom address" do
+      doc.css('#registrar_address').inner_html.should == "542 Forbes Avenue<br>Suite 609<br>Pittsburgh, LA 15219-2913"      
+    end
+  end
+  
+  describe "render_to_string('registrants/registrant_pdf', :layout => 'layouts/nvra')" do
     let(:registrant) { FactoryGirl.create(:maximal_registrant) }
     let(:pdfg) { PdfRenderer.new(registrant) }
     let(:doc) { Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra')) }
+    
+
+    
     it "should output us citizen" do
       assert_equal  registrant.us_citizen? ? 'Yes' : 'No',
                     doc.css('#us_citizen .value').inner_html
     end
+    
     it "should output will be 18" do
       assert_equal  registrant.will_be_18_by_election? ? 'Yes' : 'No',
                     doc.css('#will_be_18_by_election .value').inner_html

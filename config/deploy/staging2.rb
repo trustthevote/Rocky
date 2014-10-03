@@ -31,4 +31,4 @@ set :rails_env,    "staging2"
 set :keep_releases, 3
 
 
-set :branch, "s3_assets"
+set :branch, "county_level_address"

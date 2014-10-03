@@ -43,18 +43,21 @@ class TranslationsController < ApplicationController
   
   def submit
     file = @translation.generate_yml(params[:locale], params[params[:locale]])
-    if params[:save]
-      begin
-        File.open(@translation.tmp_file_path(params[:id],params[:locale]), "w+") do |f|
-          f.write file
-        end
-        flash[:notice] = "#{Translation.language_name(@locale)} '#{@translation.name}' translations saved"
-      rescue
-        flash[:notice] = "Error saving #{Translation.language_name(@locale)} '#{@translation.name}' translations"
+
+    begin
+      File.open(@translation.tmp_file_path(params[:id],params[:locale]), "w+") do |f|
+        f.write file
       end
+      flash[:notice] = "#{Translation.language_name(@locale)} '#{@translation.name}' translations saved."
+    rescue
+      flash[:notice] = "Error saving #{Translation.language_name(@locale)} '#{@translation.name}' translations."
+    end
+
+    if params[:save]
       render :action=>:show    
     else      
       if @translation.has_errors?
+        flash[:notice] += " Translations were NOT submitted due to errors."
         render :action=>:show
       else
         submit_data(file, params[:id], params[:locale])

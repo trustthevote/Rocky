@@ -4,6 +4,8 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
+require 'simplecov'
+SimpleCov.start
 
 require 'factory_girl'
 require 'factory_girl_rails'
@@ -47,6 +49,10 @@ rescue NameError
 end
 
 # this needs to run for the data to be in the state expected by cucumber
+GeoState.county_addresses_file =  Rails.root.join("spec/fixtures/files/county_addressing/county_addresses.csv")
+GeoState.zip_code_database_file =  Rails.root.join("spec/fixtures/files/county_addressing/zip_code_database.csv")
+
+
 si = StateImporter.new
 si.import
 si.commit!

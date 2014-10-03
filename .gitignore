@@ -20,6 +20,7 @@
 .rvmrc*
 .vimrc
 .env
+.env-no-g
 .env2g
 .env.staging2
 .env.staging
@@ -27,6 +28,7 @@
 .env.development
 .env.test
 .env.cucumber
+coverage
 config/mobile.yml
 config/states_with_online_registration.yml
 config/database.yml

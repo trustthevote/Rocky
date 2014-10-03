@@ -1,0 +1,6 @@
+---
+es:
+  states:
+    testing:
+      val1: Cambio - %{variable}
+      val2: Numero Dos

@@ -257,13 +257,15 @@ class GeoState < ActiveRecord::Base
     return nil
   end
   
+  cattr_writer :county_addresses_file
   def self.county_addresses_file
-    Rails.root.join("data/zip_codes/county_addresses.csv")
+    @@county_addresses_file ||= Rails.root.join("data/zip_codes/county_addresses.csv")
   end
   
   # from http://www.unitedstateszipcodes.org/zip_code_database.cs
+  cattr_writer :zip_code_database_file
   def self.zip_code_database_file
-    Rails.root.join("data/zip_codes/zip_code_database.csv")
+    @@zip_code_database_file ||= Rails.root.join("data/zip_codes/zip_code_database.csv")
   end
   
   def self.county_zip_codes

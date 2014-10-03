@@ -428,10 +428,15 @@ YML
         loc.should_receive(:save!)
         si.commit!
       end
+      it "deletes all zip_code_county_addresses" do
+        ZipCodeCountyAddress.should_receive(:delete_all)
+        si.commit!
+      end
       it "saves each zip_code_county_address" do
         zca.should_receive(:save!)
         si.commit!
       end
+      
 
     end
     

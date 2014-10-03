@@ -1,0 +1,6 @@
+en:
+  states:
+    testing:
+      val1: "Number One - %{variable}"
+      val1_translation_instructions: "Special Instructions for Val 1"
+      val2: Number Two

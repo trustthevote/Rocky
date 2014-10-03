@@ -43,7 +43,8 @@ group :development, :test do
   gem "webrat"
   gem "factory_girl_rails", :require=>false
   gem "database_cleaner"
-  
+  gem "shoulda"
+  gem 'simplecov', :require => false
   
   gem "treetop", "= 1.4.10"
   # gem "selenium-client", "= 1.2.16"

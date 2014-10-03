@@ -55,3 +55,16 @@ Feature: Step 5
        And I check "registrant_attest_true"
        And I press "registrant_submit"
       Then I should see "Print Your Form"
+
+
+    @cleanup_pdf @passing
+    Scenario: Custom zip-code-based addreses
+     Given I have completed step 4
+       And my zip code is "00501"
+      When I go to the step 5 page
+       And I check "registrant_attest_true"
+       And I press "registrant_submit"
+      Then I should see "Print Your Form"
+       And my confirmation email should include "542 Forbes Avenue"
+       And my confirmation email should include "Suite 609"
+       And my confirmation email should include "Pittsburgh, LA 15219-2913"

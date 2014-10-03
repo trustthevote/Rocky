@@ -50,6 +50,18 @@ massachusetts_es:
   parties: 
   no_party: 
   sub_18: si va a cumplir 18 años de las próximas elecciones
+new_york_en:
+  state_id: 33
+  locale: en
+  parties: 
+  no_party: 
+  sub_18: if you will turn 18 by the next election
+new_york_es:
+  state_id: 33
+  locale: es
+  parties: 
+  no_party: 
+  sub_18: si va a cumplir 18 años de las próximas elecciones
 north_dakota_en:
   state_id: 35
   locale: en
