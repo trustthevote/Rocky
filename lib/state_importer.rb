@@ -37,7 +37,7 @@ class StateImporter
     #expires:      2014-12-31
     #?oauth_consumer_key=[token]
     def self.oauth_token
-      "6e49c968a17e1415946d8121d33202ff1550178b"      
+      ENV['US_VOTE_FOUNDATION_OAUTH']
     end
     
     def self.base_uri
@@ -98,6 +98,7 @@ class StateImporter
         o = office["mailing_address"]
         region_address_list << OpenStruct.new({
           name: region_names[office["region"]],
+          address_to: o["address_to"],
           street1: o["street1"],
           street2: o["street2"],
           city: o["city"],
@@ -113,9 +114,9 @@ class StateImporter
     # format COUNTY,STREET 1,STREET 2,CITY,STATE,ZIP,PHONE
     def self.generate_from_api!
       CSV.open(GeoState.county_addresses_file, "wb") do |csv|
-        csv << ["COUNTY","STREET 1","STREET 2","CITY","STATE","ZIP","PHONE"]
+        csv << ["COUNTY","ADDRESS TO","STREET 1","STREET 2","CITY","STATE","ZIP","PHONE"]
         regions.each do |region|
-          csv << [region.name, region.street1, region.street2, region.city, region.state, region.zip, region.phone]
+          csv << [region.name, region.address_to, region.street1, region.street2, region.city, region.state, region.zip, region.phone]
         end
       end
     end

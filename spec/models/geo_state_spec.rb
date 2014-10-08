@@ -111,14 +111,14 @@ describe GeoState do
     end
 
     describe "self#county_registrar_addresses" do
-      it "returns a hash of state_abbr=>county=>address" do
+      it "returns a hash of state_abbr=>county=>address with blank lines removed" do
         GeoState.county_registrar_addresses.should == {
           "LA"=>{
-              "adams" => ["117 Baltimore Street\nRoom 106\nGettysburg, LA 17325", ["00544"], "city"],
-              "allegheny parish" => ["542 Forbes Avenue\nSuite 609\nPittsburgh, LA 15219-2913", ["00501", "00502"], "county"]
+              "adams" => ["AC Office\n117 Baltimore Street\nRoom 106\nGettysburg, LA 17325", ["00544"], "city"],
+              "allegheny parish" => ["A Office\n542 Forbes Avenue\nSuite 609\nPittsburgh, LA 15219-2913", ["00501", "00502"], "county"]
             },
           "NY"=>{
-            "adjuntas county"=>["542 Forbes Avenue\nSuite 609\nPittsburgh, NY 15219-2913", ["00601"], "county"]
+            "adjuntas county"=>["AC2 Office\n542 Forbes Avenue\nPittsburgh, NY 15219-2913", ["00601"], "county"]
           }
         }
       end

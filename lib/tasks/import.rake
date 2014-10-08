@@ -11,3 +11,10 @@ namespace :import do
     puts "Import Done!"
   end
 end
+
+namespace :import do
+  task :build_county_address_csv => :environment do
+    StateImporter::CountyAddresses.generate_from_api!
+  end
+end
+  

@@ -87,13 +87,15 @@ class GeoState < ActiveRecord::Base
       else
         county_name = get_city_name_from_zip_codes(row["state"], county_file_name, errors)
         
+        address = [row["address to"], row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].collect{|l| l.strip.blank? ? nil : l}.compact.join("\n")
+        
         if !county_name.nil?
           if cra[row["state"]].has_key?(county_name)
             raise "Duplicate county #{row["county"]} for state #{row["state"]}"
           end
           
           # keep a list of all *city* matched zip codes
-          cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), city_zip_codes[row["state"]][county_name], "city"]
+          cra[row["state"]][county_name] = [address, city_zip_codes[row["state"]][county_name], "city"]
           city_matched_zip_codes += city_zip_codes[row["state"]][county_name].flatten
         else 
           county_name = get_county_name_from_zip_codes(row["state"], county_file_name, errors)
@@ -102,7 +104,7 @@ class GeoState < ActiveRecord::Base
               raise "Duplicate city #{row["county"]} for state #{row["state"]}"
             end
         
-            cra[row["state"]][county_name] = [[row["street 1"], row["street 2"], "#{row["city"]}, #{row["state"]} #{row["zip"]}"].join("\n"), county_zip_codes[row["state"]][county_name], "county"]
+            cra[row["state"]][county_name] = [address, county_zip_codes[row["state"]][county_name], "county"]
           end
         end
       end

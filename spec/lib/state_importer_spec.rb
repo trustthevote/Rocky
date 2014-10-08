@@ -403,7 +403,7 @@ YML
         zca.geo_state_id.should == GeoState["LA"].id
         zca.zip.should == "00544"
         zca.county.should == "adams"
-        zca.address.should == "117 Baltimore Street\nRoom 106\nGettysburg, LA 17325"
+        zca.address.should == "AC Office\n117 Baltimore Street\nRoom 106\nGettysburg, LA 17325"
       end
     end
     
