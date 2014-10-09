@@ -64,7 +64,7 @@ describe PdfRenderer do
     let(:doc) { Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra')) }
     
     it "should use a custom address" do
-      doc.css('#registrar_address').inner_html.should == "542 Forbes Avenue<br>Suite 609<br>Pittsburgh, LA 15219-2913"      
+      doc.css('#registrar_address').inner_html.should == "A Office<br>542 Forbes Avenue<br>Suite 609<br>Pittsburgh, LA 15219-2913"      
     end
   end
   
