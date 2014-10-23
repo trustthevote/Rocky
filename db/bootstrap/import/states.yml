@@ -1,8 +1,8 @@
 ---
 defaults:
-  participating: 'true'
+  participating: true
   not_participating_tooltip: blank
-  requires_race: 'false'
+  requires_race: false
   race_tooltip: not_required_but_appreciated_with_state_name
   parties:
   - democratic
@@ -21,9 +21,9 @@ defaults:
 record_0:
   abbreviation: AL
   name: Alabama
-  requires_race: 'true'
+  requires_race: true
   race_tooltip: required_with_state_name
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: not_required_can_choose_any
   id_number_tooltip: ssn_or_none_5
   sos_address: Office of the Secretary of State<br>Elections Division<br>P.O. Box
@@ -35,7 +35,7 @@ record_0:
 record_1:
   abbreviation: AK
   name: Alaska
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: closed_caucus_with_state_name
   id_number_tooltip: drivers_license_with_state_name
   sos_address: State of Alaska<br>Division of Elections<br>PO Box 110017<br>Juneau,
@@ -47,7 +47,7 @@ record_1:
 record_2:
   abbreviation: AZ
   name: Arizona
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: arizona
   id_number_tooltip: arizona
   sos_address: Secretary of State<br>Elections Department<br>1700 W. Washington, 7th
@@ -62,7 +62,7 @@ record_2:
 record_3:
   abbreviation: AR
   name: Arkansas
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: not_required
   id_number_tooltip: drivers_license_non_operating_with_state_name
   sos_address: Secretary of State<br>Voter Services<br>P.O. Box 8111<br>Little Rock,
@@ -73,7 +73,7 @@ record_3:
 record_4:
   abbreviation: CA
   name: California
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: california
   no_party: decline_to_state
   id_number_tooltip: drivers_license_required_at_voting_with_state_name
@@ -86,7 +86,7 @@ record_4:
 record_5:
   abbreviation: CO
   name: Colorado
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary_2_months
   id_number_tooltip: colorado
   sos_address: Secretary of State<br>1700 Broadway, Suite 200<br>Denver, CO 80290
@@ -96,7 +96,7 @@ record_5:
 record_6:
   abbreviation: CT
   name: Connecticut
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: drivers_license_or_photo_id_and_other
   sos_address: Secretary of State<br>Elections Division<br>30 Trinity Street<br>Hartford,
@@ -108,7 +108,7 @@ record_6:
 record_7:
   abbreviation: DE
   name: Delaware
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: drivers_license_non_operating_with_state_name
   sos_address: Office of the State Election Commissioner<br>905 South Governors Ave,
@@ -120,7 +120,7 @@ record_8:
   abbreviation: DC
   name: District of Columbia
   race_tooltip: washington_dc
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary_no_change_30_days
   id_number_tooltip: drivers_license_or_ssn_or_none
   sos_address: District of Columbia Board of Elections<br>441 4th Street, NW, Suite
@@ -132,9 +132,9 @@ record_8:
 record_9:
   abbreviation: FL
   name: Florida
-  requires_race: 'true'
+  requires_race: true
   race_tooltip: requested_with_state_name
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: drivers_license_non_operating_with_state_name
   sos_address: State of Florida, Department of State<br>Division of Elections<br>The
@@ -145,9 +145,9 @@ record_9:
 record_10:
   abbreviation: GA
   name: Georgia
-  requires_race: 'true'
+  requires_race: true
   race_tooltip: georgia
-  requires_party: 'false'
+  requires_party: false
   party_tooltip: not_done_with_state_name
   id_number_tooltip: georgia
   sos_address: Secretary of State<br>Elections Division<br>1104 West Tower<br>2 Martin
@@ -160,7 +160,7 @@ record_11:
   abbreviation: HI
   name: Hawaii
   race_tooltip: not_required_but_appreciated_with_state_name_2
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: not_required_to_vote
   id_number_tooltip: ssn_full
   sos_address: State of Hawaii<br>Office of Elections<br>802 Lehua Avenue<br>Pearl
@@ -172,7 +172,7 @@ record_11:
 record_12:
   abbreviation: ID
   name: Idaho
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: idaho
   id_number_tooltip: drivers_license_or_other_with_state_name
   sos_address: Secretary of State<br>Elections Division<br>P.O. Box 83720<br>State
@@ -182,7 +182,7 @@ record_12:
 record_13:
   abbreviation: IL
   name: Illinois
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: party_not_required
   id_number_tooltip: drivers_license_or_ssn_or_none_2
   sos_address: State Board of Elections<br>2329 S. MacArthur Boulevard<br>Springfield,
@@ -193,7 +193,7 @@ record_13:
 record_14:
   abbreviation: IN
   name: Indiana
-  requires_party: 'false'
+  requires_party: false
   party_tooltip: indiana
   id_number_tooltip: indiana
   sos_address: Office of the Secretary of State<br>Election Division<br>302 West Washington
@@ -203,7 +203,7 @@ record_14:
 record_15:
   abbreviation: IA
   name: Iowa
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: you_may_but_not_required
   id_number_tooltip: drivers_license_non_driver_with_state_name
   sos_address: Office of the Secretary of State<br>Elections Division<br>Lucas Building
@@ -215,7 +215,7 @@ record_15:
 record_16:
   abbreviation: KS
   name: Kansas
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: drivers_license_non_driver_2
   sos_address: Secretary of State<br>Memorial Hall - 1st Floor<br>120 SW 10th Ave.<br>Topeka,
@@ -229,7 +229,7 @@ record_16:
 record_17:
   abbreviation: KY
   name: Kentucky
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: ssn_full_not_required
   sos_address: State Board of Elections<br>140 Walnut Street<br>Frankfort, KY 40601-3240
@@ -239,9 +239,9 @@ record_17:
 record_18:
   abbreviation: LA
   name: Louisiana
-  requires_race: 'true'
+  requires_race: true
   race_tooltip: requested_with_state_name
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_presidential
   id_number_tooltip: drivers_license_if_issued_with_state_name
   sos_address: Secretary of State<br>Voter Registration<br>P.O. Box 94125<br>Baton
@@ -253,7 +253,7 @@ record_18:
 record_19:
   abbreviation: ME
   name: Maine
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary_unless
   id_number_tooltip: drivers_license_or_other_with_state_name_2
   sos_address: Bureau of Corporations, Elections and Commissions<br>Elections Division<br>101
@@ -265,7 +265,7 @@ record_19:
 record_20:
   abbreviation: MD
   name: Maryland
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary_2
   id_number_tooltip: maryland
   sos_address: State Board of Elections<br>P.O. Box 6486<br>Annapolis, MD 21401-0486
@@ -275,7 +275,7 @@ record_20:
 record_21:
   abbreviation: MA
   name: Massachusetts
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: massachusetts
   id_number_tooltip: drivers_license_or_other_with_state_name_2
   sos_address: Secretary of the Commonwealth<br>Elections Division<br>One Ashburton
@@ -286,7 +286,7 @@ record_21:
 record_22:
   abbreviation: MI
   name: Michigan
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: not_required_to_vote
   id_number_tooltip: drivers_license_personal_identification_with_state_name
   sos_address: Michigan Department of State<br>Bureau of Elections<br>P.O. Box 20126<br>Lansing,
@@ -297,7 +297,7 @@ record_22:
 record_23:
   abbreviation: MN
   name: Minnesota
-  requires_party: 'false'
+  requires_party: false
   party_tooltip: blank
   id_number_tooltip: drivers_license_state_id_with_state_name
   sos_address: Secretary of State<br>60 Empire Drive, Suite 100<br>St. Paul, MN 55155-1299
@@ -307,7 +307,7 @@ record_23:
 record_24:
   abbreviation: MS
   name: Mississippi
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: mississippi
   id_number_tooltip: drivers_license_current_and_valid
   sos_address: Secretary of State<br>P.O. Box 136<br>Jackson, MS 39205-0136
@@ -318,7 +318,7 @@ record_24:
 record_25:
   abbreviation: MO
   name: Missouri
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: not_required
   id_number_tooltip: driver_license_state_issues_and_ssn
   sos_address: Secretary of State<br>P.O. Box 1767<br>Jefferson City, MO 65102-1767
@@ -329,7 +329,7 @@ record_25:
 record_26:
   abbreviation: MT
   name: Montana
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: party_not_required_2
   id_number_tooltip: drivers_license_or_other_with_state_name_2
   sos_address: Secretary of State<br><br>P.O. Box 202801<br>State Capitol<br>Helena,
@@ -341,7 +341,7 @@ record_26:
 record_27:
   abbreviation: NE
   name: Nebraska
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: drivers_license_or_other_with_state_name_3
   sos_address: Secretary of State<br>State Capitol Building - Suite 2300<br>Lincoln,
@@ -353,7 +353,7 @@ record_27:
 record_28:
   abbreviation: NV
   name: Nevada
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary_nonpartisan
   id_number_tooltip: drivers_license_or_ssn_county_clerk_with_state_name
   sos_address: Secretary of State<br>Elections Division<br>101 North Carson Street,
@@ -364,10 +364,10 @@ record_28:
 record_29:
   abbreviation: NH
   name: New Hampshire
-  participating: 'false'
+  participating: false
   not_participating_tooltip: new_hampshire
   race_tooltip: blank
-  requires_party: 'false'
+  requires_party: false
   party_tooltip: blank
   no_party: blank
   id_length_min: ''
@@ -381,7 +381,7 @@ record_29:
 record_30:
   abbreviation: NJ
   name: New Jersey
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary_dem_rep_only
   id_number_tooltip: drivers_license_or_mvc
   sos_address: New Jersey Department of State<br>Division of Elections<br>PO BOX 304<br>Trenton,
@@ -392,7 +392,7 @@ record_30:
 record_31:
   abbreviation: NM
   name: New Mexico
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: ssn_full_2
   sos_address: Bureau of Elections<br>325 Don Gaspar, Suite 300<br>Santa Fe, NM 87503
@@ -402,7 +402,7 @@ record_31:
 record_32:
   abbreviation: NY
   name: New York
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   parties:
   - democratic
@@ -421,9 +421,9 @@ record_32:
 record_33:
   abbreviation: NC
   name: North Carolina
-  requires_race: 'true'
+  requires_race: true
   race_tooltip: not_required_with_state_name
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: north_carolina
   id_number_tooltip: drivers_license_or_dmv_with_state_name
   sos_address: State Board of Elections<br>P.O. Box 27255<br>Raleigh, NC 27611-7255
@@ -433,10 +433,10 @@ record_33:
 record_34:
   abbreviation: ND
   name: North Dakota
-  participating: 'false'
+  participating: false
   not_participating_tooltip: north_dakota
   race_tooltip: blank
-  requires_party: 'false'
+  requires_party: false
   party_tooltip: blank
   no_party: blank
   id_length_min: ''
@@ -449,7 +449,7 @@ record_34:
 record_35:
   abbreviation: OH
   name: Ohio
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: not_part_of_registration
   id_number_tooltip: ssn_requested
   sos_address: Secretary of State of Ohio<br>Elections Division<br>180 E. Broad Street
@@ -461,7 +461,7 @@ record_35:
 record_36:
   abbreviation: OK
   name: Oklahoma
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: oklahoma
   sos_address: Oklahoma State Election Board<br>P.O. Box 528800<br>Oklahoma City,
@@ -473,7 +473,7 @@ record_36:
 record_37:
   abbreviation: OR
   name: Oregon
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary_2
   id_number_tooltip: drivers_license_or_other_with_state_name_4
   sos_address: Secretary of State<br>Elections Division<br>141 State Capitol<br>Salem,
@@ -485,9 +485,9 @@ record_37:
 record_38:
   abbreviation: PA
   name: Pennsylvania
-  requires_race: 'true'
+  requires_race: true
   race_tooltip: requested_no_conditions_with_state_name
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary_2
   id_number_tooltip: drivers_license_or_ssn_or_none_3
   sos_address: Office of the Secretary of the Commonwealth<br>210 North Office Building<br>Harrisburg,
@@ -498,7 +498,7 @@ record_38:
 record_39:
   abbreviation: RI
   name: Rhode Island
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: rhode_island
   id_number_tooltip: drivers_license_current_and_valid_with_state_name
   sos_address: Rhode Island State Board of Elections<br>50 Branch Avenue<br>Providence,
@@ -509,9 +509,9 @@ record_39:
 record_40:
   abbreviation: SC
   name: South Carolina
-  requires_race: 'true'
+  requires_race: true
   race_tooltip: required_no_conditions_with_state_name
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: not_required
   id_number_tooltip: ssn_or_none_2
   sos_address: State Election Commission<br>P.O. Box 5987<br>Columbia, SC 29250-5987
@@ -521,7 +521,7 @@ record_40:
 record_41:
   abbreviation: SD
   name: South Dakota
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: required_for_primary
   id_number_tooltip: south_dakota
   sos_address: Elections, Secretary of State<br>500 E. Capitol<br>Pierre, SD 57501-5070
@@ -531,9 +531,9 @@ record_41:
 record_42:
   abbreviation: TN
   name: Tennessee
-  requires_race: 'true'
+  requires_race: true
   race_tooltip: requested_not_required_with_state_name
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: tennessee
   id_number_tooltip: ssn_or_none_4
   sos_address: Coordinator of Elections<br>Tennessee Tower, Ninth Floor<br>312 Eighth
@@ -544,7 +544,7 @@ record_42:
 record_43:
   abbreviation: TX
   name: Texas
-  requires_party: 'false'
+  requires_party: false
   party_tooltip: not_required
   id_number_tooltip: drivers_license_or_ssn_or_none_4
   sos_address: Office of the Secretary of State<br>Elections Division<br>P.O. Box
@@ -556,7 +556,7 @@ record_43:
 record_44:
   abbreviation: UT
   name: Utah
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: utah
   id_number_tooltip: drivers_license_not_operating
   sos_address: Office of the Lieutenant Governor<br>P.O. Box 142325<br>Salt Lake City,
@@ -568,7 +568,7 @@ record_44:
 record_45:
   abbreviation: VT
   name: Vermont
-  requires_party: 'true'
+  requires_party: false
   party_tooltip: vermont
   id_number_tooltip: drivers_license_or_ssn_or_none_4
   sos_address: Office of the Secretary of State<br>Director of Elections<br>26 Terrace
@@ -580,7 +580,7 @@ record_46:
   abbreviation: VA
   name: Virginia
   race_tooltip: virginia
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: virginia
   id_number_tooltip: ssn_or_none_3
   sos_address: State Board of Elections<br>1100 Bank Street, 1st Floor<br>Richmond,
@@ -591,7 +591,7 @@ record_46:
 record_47:
   abbreviation: WA
   name: Washington
-  requires_party: 'false'
+  requires_party: false
   party_tooltip: washington
   id_number_tooltip: drivers_license_with_state_name_2
   sos_address: Secretary of State<br>Voter Registration by Mail<br>P.O. Box 40230<br>Olympia,
@@ -603,7 +603,7 @@ record_47:
 record_48:
   abbreviation: WV
   name: West Virginia
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: west_virginia
   id_number_tooltip: drivers_license_or_non_driver_id
   sos_address: Secretary of State<br>Building 1, Suite 157-K<br>1900 Kanawha Blvd.
@@ -614,22 +614,22 @@ record_48:
 record_49:
   abbreviation: WI
   name: Wisconsin
-  requires_party: 'true'
+  requires_party: true
   party_tooltip: wisconsin
   id_number_tooltip: wisconsin
   sos_address: Government Accountability Board<br>17 West Main St, Suite 310<br>P.O.
     Box 2973<br>Madison, WI 53701-2973
   sos_phone: (608) 266-8005
-  sos_url: http://elections.state.wi.us/
+  sos_url: https://myvote.wi.gov
   sub_18: 17_turn_18
   registration_deadline: postmarked_20_days
 record_50:
   abbreviation: WY
   name: Wyoming
-  participating: 'false'
+  participating: false
   not_participating_tooltip: wyoming
   race_tooltip: blank
-  requires_party: 'false'
+  requires_party: false
   party_tooltip: blank
   no_party: blank
   id_length_min: ''
