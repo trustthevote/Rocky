@@ -93,6 +93,7 @@ record_5:
   sos_phone: (303) 894-2200
   sos_url: http://www.sos.state.co.us/pubs/elections/
   online_registration_url: https://www.sos.state.co.us/Voter/secuVerifyExist.do
+  registration_deadline: colorado
 record_6:
   abbreviation: CT
   name: Connecticut
