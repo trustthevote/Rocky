@@ -207,6 +207,7 @@ FactoryGirl.define do
     survey_question_1_en  "Hello?"
     survey_question_2_en  "Outta here?"
   end
+  
 
   factory :government_partner, :parent=>:partner do
     is_government_partner true

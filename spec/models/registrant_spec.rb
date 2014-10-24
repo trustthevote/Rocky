@@ -27,6 +27,41 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Registrant do
   include Rails.application.routes.url_helpers
   
+  describe '#partner' do
+    let(:r) { Registrant.new }
+    before(:each) do
+      r.partner_id = 123
+    end
+    context 'when partner ID is present' do
+      it "returns a partner object" do
+        RemotePartner.should_not_receive(:find)
+        r.partner.should be_nil
+      end
+    end
+    context 'when remote_partner_id is present' do
+      it "returns a remote-partner object" do
+        r.remote_partner_id = 234
+        RemotePartner.should_receive(:find).with(234)
+        Partner.should_not_receive(:find)
+        r.partner
+        
+      end
+    end
+  end
+  describe '#partner=' do
+    let(:r) { Registrant.new }
+    let(:p) { Partner.new({:id=>123}) }
+    let(:rp) { RemotePartner.new({:id=>234}) }
+    it "sets remote_partner_id when object is a remote partner" do
+      r.partner = rp
+      r.remote_partner_id.should == 234
+    end
+    it "sets partner values when object is a partner" do
+      r.partner = p
+      r.partner.should == p
+    end
+  end
+  
   describe "default opt-in flags" do
     it "should be false for new records" do
       r = Registrant.new

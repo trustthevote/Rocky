@@ -28,7 +28,9 @@ describe RegistrationStep do
 
   before do
     @rs = RegistrationStep.new
-    @partner = FactoryGirl.create(:partner)
+    @partner = RemotePartner.new(:id=>123)
+    RemotePartner.stub(:find_by_id).and_return(@partner)
+    RemotePartner.stub(:find).and_return(@partner)
     @reg = FactoryGirl.create(:step_5_registrant, :partner => @partner)
   end
 

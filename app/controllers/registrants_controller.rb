@@ -50,7 +50,7 @@ class RegistrantsController < RegistrationStep
     if MobileConfig.is_mobile_request?(request)
       redirect_to MobileConfig.redirect_url(:partner=>@partner_id, :locale=>@locale, :source=>@source, :tracking=>@tracking, :collectemailaddress=>@collect_email_address)
     else
-      @registrant = Registrant.new(:partner_id => @partner_id, :locale => @locale, :tracking_source => @source, :tracking_id=>@tracking, :short_form=>@short_form, :collect_email_address=>@collect_email_address)
+      @registrant = Registrant.new(:remote_partner_id => @partner_id, :locale => @locale, :tracking_source => @source, :tracking_id=>@tracking, :short_form=>@short_form, :collect_email_address=>@collect_email_address)
       render "show"
     end
   end
