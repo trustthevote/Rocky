@@ -80,11 +80,7 @@ Rocky::Application.routes.draw do
       resources :registrations, :only=>[:index, :create], :format=>'json'
       resource :state_requirements, :only=>:show, :format=>'json'
 
-      resources :partners, :only=>[:create], :format=>'json' do
-        collection do
-          get "partner", :action=>"show"
-        end
-      end
+      resources :partners, :only=>[:show, :create], :format=>'json'
       
       resources :registration_states, :as=>:gregistrationstates, :format=>'json', :only=>'index'      
       

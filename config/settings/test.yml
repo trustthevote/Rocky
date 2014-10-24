@@ -1,4 +1,5 @@
 pdf_host_name: 'example-pdf.com'
+api_host_name: 'example-api.com'
 use_https: false
 paperclip_options:
   path: ":rails_root/tmp/system/:attachment/:id/:style/:filename"

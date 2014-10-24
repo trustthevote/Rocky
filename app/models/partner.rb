@@ -143,6 +143,8 @@ class Partner < ActiveRecord::Base
   end
   
   def valid_api_key?(key)
+    # return true
+    # TODO: Need to validate general API keys for getting partner data (e.g. 5step/2step)
     !key.blank? && !self.api_key.blank? && key == self.api_key
   end
 
