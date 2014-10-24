@@ -141,6 +141,21 @@ FactoryGirl.define do
     building_via_api_call true
     will_be_18_by_election true
   end
+  factory :api_v3_maximal_registrant, :parent => :maximal_registrant do 
+    partner_opt_in_email        true
+    partner_opt_in_sms          true
+    volunteer           true
+    partner_volunteer   true
+    tracking_source       "tracking_source"
+    tracking_id   "part_tracking_id"
+    original_survey_question_1     "color?"
+    original_survey_question_2     "dog name?"
+    survey_answer_1     "blue"
+    survey_answer_2     "fido"
+    send_confirmation_reminder_emails false
+    building_via_api_call true
+    will_be_18_by_election true
+  end
 
   factory :api_created_partner, :class=>'partner' do
     organization "Org Name"

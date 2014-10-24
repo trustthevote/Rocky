@@ -77,7 +77,10 @@ ovr_states:
 enabled_locales:
   - en
   - es
+
+
   
+
 pdf:
   nvra:
     page1:

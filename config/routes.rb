@@ -76,6 +76,26 @@ Rocky::Application.routes.draw do
       match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'index_gpartner', :via => :get
       match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'create_finish_with_state', :via => :post
     end
+    namespace :v3 do
+      resources :registrations, :only=>[:index, :create], :format=>'json'
+      resource :state_requirements, :only=>:show, :format=>'json'
+
+      resources :partners, :only=>[:create], :format=>'json' do
+        collection do
+          get "partner", :action=>"show"
+        end
+      end
+      
+      resources :registration_states, :as=>:gregistrationstates, :format=>'json', :only=>'index'      
+      
+      resources :partners, :path=>'partnerpublicprofiles', :only=>[], :format=>'json' do
+        collection do
+          get "partner", :action=>"show_public"
+        end
+      end
+      match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'index_gpartner', :via => :get
+      match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'create_finish_with_state', :via => :post
+    end
   end
 
   namespace :admin do
