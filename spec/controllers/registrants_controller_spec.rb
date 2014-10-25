@@ -25,6 +25,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RegistrantsController do
+  before(:each) do
+    RemotePartner.stub(:find) do |arg|
+      RemotePartner.new(:id=>arg)
+    end
+    RemotePartner.stub(:find).with(nil).and_raise("Not Found")
+  end
+  
   describe "widget loader" do
     render_views
 
@@ -70,8 +77,9 @@ describe RegistrantsController do
     end
 
     it "assumes default partner when partner given doesn't exist" do
-      non_existent_partner_id = 43243243
-      assert Partner.find_by_id(non_existent_partner_id).nil?
+      non_existent_partner_id = "43243243"
+      RemotePartner.stub(:find).with("43243243").and_raise("Not Found")
+      assert RemotePartner.find_by_id(non_existent_partner_id).nil?
       get :landing, :partner => non_existent_partner_id.to_s
       assert_redirected_to new_registrant_url(:protocol => "https", :partner => Partner::DEFAULT_ID)
     end
@@ -88,7 +96,8 @@ describe RegistrantsController do
       get :new, :locale => 'es', :partner => '2', :source => 'email', :tracking=>"trackid", :collectemailaddress=>"yes"
       reg = assigns[:registrant]
       assert_equal 'es', reg.locale
-      assert_equal 2, reg.partner_id
+      assert_equal 2, reg.remote_partner_id
+      assert_equal "2", reg.partner.id.to_s
       assert_equal 'email', reg.tracking_source
       assert_equal 'trackid', reg.tracking_id
       assert_equal 'yes', reg.collect_email_address
@@ -97,7 +106,7 @@ describe RegistrantsController do
     it "should default partner id to RTV" do
       get :new
       reg = assigns[:registrant]
-      assert_equal Partner::DEFAULT_ID, reg.partner_id
+      assert_equal Partner::DEFAULT_ID, reg.remote_partner_id
     end
 
     it "should default locale to English" do
@@ -139,15 +148,15 @@ describe RegistrantsController do
       end
 
       it "should show partner banner and logo for non-primary partner with custom logo" do
-        partner = FactoryGirl.create(:partner)
-        File.open(File.join(fixture_files_path, "partner_logo.jpg"), "r") do |logo|
-          partner.update_attributes(:logo => logo)
-          assert partner.custom_logo?
-        end
+        partner = RemotePartner.new
+        partner.custom_logo = true
+        partner.header_logo_url = "abc123"
+
+        RemotePartner.stub(:find).with(partner.to_param).and_return(partner)
         get :new, :partner => partner.to_param
         assert_response :success
         assert_select "#header.partner"
-        assert_select "#partner-logo img[src=//#{partner.partner_assets_host}#{partner.logo.url(:header).split('?').first}]"
+        assert_select "#partner-logo img[src=//#{partner.header_logo_url}]"
       end
     end
       
@@ -225,7 +234,7 @@ describe RegistrantsController do
       @reg_attributes.delete(:locale)
       @reg_attributes.delete(:partner_id)
       post :create, :registrant => @reg_attributes, :partner => @partner.id, :locale => "es", :source => "email", :tracking=>"trackid", :short_form=>"1", :collectemailaddress=>'yes'
-      assert_equal @partner.id, assigns[:registrant].partner_id
+      assert_equal @partner.id, assigns[:registrant].remote_partner_id
       assert_equal "es", assigns[:registrant].locale
       assert_equal "email", assigns[:registrant].tracking_source
       assert_equal "trackid", assigns[:registrant].tracking_id

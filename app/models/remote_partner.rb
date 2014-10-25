@@ -9,4 +9,29 @@ class RemotePartner < ActiveResource::Base
     nil
   end
   
+  def to_param
+    self.id
+  end
+  
+  (Partner.column_names + [:custom_logo, :header_logo_url]).each do |column|
+    define_method "#{column}" do
+      self.attributes[column] || nil
+    end
+    define_method "#{column}=" do |val|
+      self.attributes[column]= val
+    end
+  end
+  
+  def custom_logo?
+    custom_logo == true
+  end
+  
+  # [:custom_logo?, :partner_assets_host].each do |method|
+  #   delegate method, :to=> :partner
+  # end
+  #
+  # def partner
+  #   @partner ||= Partner.new(attributes)
+  # end
+  
 end

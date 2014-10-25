@@ -27,7 +27,7 @@
   <% if @partner.custom_logo? -%>
     <div id="header" class="partner">
       <div id="partner-logo">
-        <%= image_tag "//#{@partner.partner_assets_host}#{@partner.logo.url(:header)}" %>
+        <%= image_tag "//#{@partner.header_logo_url}" %>
       </div>
   <% else -%>
     <div id="header">

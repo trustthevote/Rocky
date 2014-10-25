@@ -28,7 +28,7 @@ describe RemotePartner do
       }"))      
     end
     it "Reads from the API method if not cached" do
-      Rails.cache.clear
+      ActiveResource::Connection.cache.clear
       RemotePartner.connection.should_receive(:get_without_cache)
       p = RemotePartner.find(1)
     end
@@ -58,6 +58,35 @@ describe RemotePartner do
         it "returns nil" do
           RemotePartner.find_by_id(2).should be_nil
         end
+      end
+    end
+    describe 'to_param' do
+      it "returns id" do
+        r = RemotePartner.new
+        r.should_receive(:id)
+        r.to_param
+      end
+    end
+    describe 'custom_logo?' do
+      it "returns custom_logo" do
+        r = RemotePartner.new
+        r.should_receive(:custom_logo)
+        r.custom_logo?
+      end
+      
+    end
+    
+    describe 'expected attributes from partner model' do
+      subject { RemotePartner.new }
+      Partner.column_names.each do |method|
+        it { should respond_to(method) }
+        it { should respond_to("#{method}=") }
+      end
+    end
+    describe 'additional expected methods from partner model' do
+      subject { RemotePartner.new }
+      [:custom_logo, :header_logo_url].each do |method|
+        it { should respond_to(method)}
       end
     end
   end
