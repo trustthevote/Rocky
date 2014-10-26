@@ -490,11 +490,4 @@ YML
   end
 
 
-  def silence_output
-    old_stdout = $stdout
-    $stdout = StringIO.new('')
-    yield
-  ensure
-    $stdout = old_stdout
-  end
 end

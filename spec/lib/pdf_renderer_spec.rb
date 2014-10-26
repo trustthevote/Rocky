@@ -63,6 +63,10 @@ describe PdfRenderer do
     let(:pdfg) { PdfRenderer.new(registrant) }
     let(:doc) { Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra')) }
     
+    before(:each) do
+      ZipCodeCountyAddress.create(:address=>"A Office\n542 Forbes Avenue\nSuite 609\nPittsburgh, LA 15219-2913", :zip=>"00501")
+    end
+    
     it "should use a custom address" do
       doc.css('#registrar_address').inner_html.should == "A Office<br>542 Forbes Avenue<br>Suite 609<br>Pittsburgh, LA 15219-2913"      
     end

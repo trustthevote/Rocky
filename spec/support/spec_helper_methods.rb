@@ -16,5 +16,14 @@ module SpecHelperMethods
   def fixture_files_file_upload(path, mime_type = nil, binary = false)
     Rack::Test::UploadedFile.new("#{fixture_files_path}#{path}", mime_type, binary)    
   end
+  
+  def silence_output
+    old_stdout = $stdout
+    $stdout = StringIO.new('')
+    yield
+  ensure
+    $stdout = old_stdout
+  end
+  
 
 end

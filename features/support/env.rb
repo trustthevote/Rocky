@@ -59,6 +59,8 @@ si.commit!
 
 Before do
   I18n.locale = :en
+  ActiveResource::Connection.cache.clear
+  stub_partners
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.

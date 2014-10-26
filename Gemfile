@@ -56,6 +56,8 @@ group :development, :test do
   gem "sqlite3"
   
   gem "assert_difference"
+  
+  gem "webmock"
 end
 
 

@@ -3,8 +3,13 @@ class RemotePartner < ActiveResource::Base
   self.prefix = "/api/v3/"
   self.element_name = "partner"
   
+  
   def self.find_by_id(id)
-    self.find(id)
+    if id != nil
+      self.find(id)
+    else
+      nil
+    end
   rescue
     nil
   end
