@@ -107,7 +107,7 @@ Feature: Step 4
       Then I should not see a checkbox for "I would like to volunteer with Rock the Vote"
     
     
-    @passing
+    @wip
     Scenario: User does not see RTV ask for volunteer if setting is false even if partner is true
       Given the following partner exists:
         | organization   | ask_for_volunteers | partner_ask_for_volunteers | 
@@ -189,7 +189,7 @@ Feature: Step 4
         | true      | false         | false         | false             | true    | true        | should                 | should not                 | should not                 | should not                     | should               | should               | should                   |
         | false     | false         | false         | false             | false   | false       | should not             | should not                 | should not                 | should not                     | should not           | should not           | should not               |
       
-    @passing
+    @wip
     Scenario: User signs up for everything
       Given the following partner exists:
         | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers | rtv_sms_opt_in | partner_sms_opt_in |

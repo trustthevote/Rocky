@@ -53,7 +53,7 @@ Feature: Step 3
       When I go to the step 3 page
       Then I should see "Additional Registration Information"
     
-        
+    
     @passing
     Scenario: CA resident eligible for OVR submits step 3 with UI debugging on
       Given I have completed step 2 as a resident of "California" state

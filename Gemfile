@@ -57,9 +57,11 @@ group :development, :test do
   
   gem "assert_difference"
   
-  gem "webmock"
 end
 
+group :test do
+  gem "webmock"
+end
 
 group :assets do
   gem 'therubyracer'

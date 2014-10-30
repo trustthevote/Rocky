@@ -29,6 +29,7 @@ Feature: White labeling
       Then I should see a link to the standard CSS
  
     
+    @passing
     Scenario: Whitelabeled partner with assets should use the custom CSS
       Given the following partner exists:
         | name                | whitelabeled |

@@ -35,7 +35,7 @@ Feature: Thank you email for registrants who choose to register online with a st
     Then I should be sent a thank-you email
     And my status should be "complete"
 
-  @passing
+  @wip
   Scenario: Registrant from a whitelabeled partner who finished online gets sent a customized thank-you email from that partner
     Given the following partner exists:
       | organization   | rtv_sms_opt_in | partner_sms_opt_in | from_email                      | whitelabeled |

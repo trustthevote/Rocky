@@ -38,15 +38,18 @@ module PartnerAssets
   end
 
   def application_css_present?
-    File.exists?(self.absolute_application_css_path)
+    folder.asset_file_exists?(APP_CSS)
+    #File.exists?(self.absolute_application_css_path)
   end
 
   def registration_css_present?
-    File.exists?(self.absolute_registration_css_path)
+    folder.asset_file_exists?(REG_CSS)
+    #File.exists?(self.absolute_registration_css_path)
   end
 
   def partner_css_present?
-    File.exists?(self.absolute_partner_css_path)
+    folder.asset_file_exists?(PART_CSS)
+    #File.exists?(self.absolute_partner_css_path)
   end
   
   def pdf_logo_present?
@@ -63,14 +66,15 @@ module PartnerAssets
     return nil
   end
     
-  def pdf_logo_url(ext=nil)
-    ext ||= pdf_logo_ext || "gif"
-    "#{assets_url}/#{PDF_LOGO}.#{ext}"
-  end
+  # def pdf_logo_url(ext=nil)
+  #   ext ||= pdf_logo_ext || "gif"
+  #   "#{assets_url}/#{PDF_LOGO}.#{ext}"
+  # end
 
+  # Assuming always the case of shared/symlinked FS across partner upload server and PDF gen servers
   def absolute_pdf_logo_path(ext=nil)
     ext ||= pdf_logo_ext || "gif"
-    "#{assets_path}/#{PDF_LOGO}.#{ext}"
+    "#{assets_root}/#{assets_path}/#{PDF_LOGO}.#{ext}"
   end
 
 
@@ -82,46 +86,67 @@ module PartnerAssets
     end
   end
 
-  def assets_url
-    "//#{partner_assets_host}#{partner_path}"
+  # def assets_url
+  #   "//#{partner_assets_host}#{partner_path}"
+  # end
+  
+  def partner_assets_bucket
+    if Rails.env.production?
+      "rocky-partner-assets"
+    else
+      "rocky-partner-assets-#{Rails.env}"
+    end
   end
   
-  def partner_assets_host
-    if Rails.env.staging?
-      "rtvstaging.osuosl.org"
-    elsif Rails.env.staging2?
-      "rtvstaging2.osuosl.org"
-    elsif Rails.env.development? || Rails.env.test? || Rails.env.cucumber?
-      "localhost:3000"
-    else
-      "register.rockthevote.com"
-    end
+  def folder
+    @paf ||= PartnerAssetsFolder.new(self)
+  end
+  
+  # def partner_pdf_assets_host
+  #   if Rails.env.staging?
+  #     "rtvstaging.osuosl.org"
+  #   elsif Rails.env.staging2?
+  #     "rtvstaging2.osuosl.org"
+  #   elsif Rails.env.development? || Rails.env.test? || Rails.env.cucumber?
+  #     "localhost:3000"
+  #   else
+  #     "register.rockthevote.com"
+  #   end
+  # end
+
+  def partner_root
+    "partners"
   end
 
   def partner_path
-    "/partners/#{self.id}"
+    File.join(partner_root, self.id.to_s)
   end
 
   def assets_path
-    "#{assets_root}#{partner_path}"
+    #"#{assets_root}#{partner_path}"
+    partner_path
   end
 
   def application_css_url
-    "#{assets_url}/#{APP_CSS}"
+    folder.asset_url(APP_CSS)
+    #"#{assets_url}/#{APP_CSS}"
   end
+  
   def application_css_path
     "#{partner_path}/#{APP_CSS}"
   end
 
   def registration_css_url
-    "#{assets_url}/#{REG_CSS}"
+    folder.asset_url(REG_CSS)
+    #"#{assets_url}/#{REG_CSS}"
   end
   def registration_css_path
     "#{partner_path}/#{REG_CSS}"
   end
 
   def partner_css_url
-    "#{assets_url}/#{PART_CSS}"
+    folder.asset_url(PART_CSS)
+    #"#{assets_url}/#{PART_CSS}"
   end
   def partner_css_path
     "#{partner_path}/#{PART_CSS}"
@@ -131,16 +156,16 @@ module PartnerAssets
     "#{assets_path}/old"
   end
 
-  def absolute_application_css_path
-    "#{assets_root}#{application_css_path}"
-  end
-
-  def absolute_registration_css_path
-    "#{assets_root}#{registration_css_path}"
-  end
-  
-  def absolute_partner_css_path
-    "#{assets_root}#{partner_css_path}"
-  end
+  # def absolute_application_css_path
+  #   "#{assets_root}#{application_css_path}"
+  # end
+  #
+  # def absolute_registration_css_path
+  #   "#{assets_root}#{registration_css_path}"
+  # end
+  #
+  # def absolute_partner_css_path
+  #   "#{assets_root}#{partner_css_path}"
+  # end
 
 end

@@ -40,6 +40,7 @@ end
 
 Given /^I have completed step (\d+)$/ do |step_num|
   @registrant = FactoryGirl.create("step_#{step_num}_registrant")
+  switch_partner_to_remote(@registrant)
 end
 
 Given(/^my zip code is "(.*?)"$/) do |zip|
@@ -48,17 +49,23 @@ end
 
 Given /^I have completed step (\d+) for a short form$/ do |step_num|
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :short_form=>true)
+  switch_partner_to_remote(@registrant)
+  
 end
 
 Given /^I have completed step (\d+) for a short form as a resident of "([^\"]*)"$/ do |step_num, state_name|
   state = GeoState.find_by_name(state_name)
   zip_prefix = GeoState.zip3map.key(state.abbreviation)
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01', :short_form=>true)
+  switch_partner_to_remote(@registrant)
+  
 end
 
 Given /^I have completed step (\d+) from that partner$/ do |step_num|
   @registrant = FactoryGirl.create("step_#{step_num}_registrant")
   @registrant.partner = Partner.last
+  switch_partner_to_remote(@registrant)
+  
   @registrant.save!
 end
 
@@ -66,6 +73,8 @@ Given /^I have completed step (\d+) as a resident of "([^\"]*)" state$/ do |step
   state = GeoState.find_by_name(state_name)
   zip_prefix = GeoState.zip3map.key(state.abbreviation)
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
+  switch_partner_to_remote(@registrant)
+  
 end
 
 Given /^I have completed step (\d+) from that partner as a resident of "([^\"]*)" state$/ do |step_num,state_name|
@@ -73,18 +82,24 @@ Given /^I have completed step (\d+) from that partner as a resident of "([^\"]*)
   zip_prefix = GeoState.zip3map.key(state.abbreviation)
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01')
   @registrant.partner = Partner.last
+  switch_partner_to_remote(@registrant)
+  
   @registrant.save!
 end
 
 
 Given(/^I have completed step (\d+) without an email address$/) do |step_num|
-  @registrant = FactoryGirl.create("step_#{step_num}_registrant", :collect_email_address=>'no', :email_address=>nil)  
+  @registrant = FactoryGirl.create("step_#{step_num}_registrant", :collect_email_address=>'no', :email_address=>nil)
+  switch_partner_to_remote(@registrant)
+  
 end
 
 Given(/^I have completed step (\d+) as a resident of "(.*?)" state without an email address$/) do |step_num,state_name|
   state = GeoState.find_by_name(state_name)
   zip_prefix = GeoState.zip3map.key(state.abbreviation)
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip_prefix+'01', :collect_email_address=>'no', :email_address=>nil)  
+  switch_partner_to_remote(@registrant)
+  
 end
 
 
@@ -120,6 +135,8 @@ Given /^I have completed step (\d+) as a resident of "([^\"]*)" state from that 
   zip = GeoState.zip5map.invert[geo_state.abbreviation] || GeoState.zip3map.invert[geo_state.abbreviation]
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip+'00')
   @registrant.partner = Partner.last
+  switch_partner_to_remote(@registrant)
+  
   @registrant.save!
 end
 
@@ -128,6 +145,8 @@ Given /^I have completed step (\d+) as a resident of "([^\"]*)" state without ja
   zip = GeoState.zip5map.invert[geo_state.abbreviation] || GeoState.zip3map.invert[geo_state.abbreviation]
   @registrant = FactoryGirl.create("step_#{step_num}_registrant", :home_zip_code=>zip+'00')
   @registrant.partner = Partner.last
+  switch_partner_to_remote(@registrant)
+  
   @registrant.javascript_disabled = true
   @registrant.save!
 end

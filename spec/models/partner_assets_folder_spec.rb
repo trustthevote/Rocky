@@ -28,11 +28,11 @@ describe PartnerAssetsFolder do
 
   before(:each) do 
     @partner = FactoryGirl.create(:partner)
-    @partner.stub(:assets_root) { "#{Rails.root}/tmp/test_assets" }
+    @partner.stub(:partner_root).and_return("partners/TEST")
     @paf = PartnerAssetsFolder.new(@partner)
   end
 
-  after  { FileUtils.rm_r("#{Rails.root}/tmp/test_assets") }
+  after  {  @paf.directory.files.each {|f| f.destroy} }
 
   describe 'update_css' do
     it 'should save asset file' do
@@ -50,27 +50,23 @@ describe PartnerAssetsFolder do
       end
 
       it 'should replace asset file' do
-        File.open(@partner.absolute_application_css_path, 'r').read.should == "alt\n"
+        open(@partner.application_css_url).read.should == "alt\n"
       end
 
       it 'should create the versioned copy' do
-        css_files = Dir.glob(File.join(@partner.absolute_old_assets_path, '*.css'))
+        css_files = @paf.old_directory.files
         css_files.count.should == 1
-        css_files.first.should match /\/application-#{Time.now.strftime("%Y%m%d%H")}\d{4}\.css$/
+        css_files.first.key.should match /\/application-#{Time.now.strftime("%Y%m%d%H")}\d{4}\.css$/
       end
     end
   end
 
   describe 'list_assets' do
     before do
-      ap = @partner.assets_path
-
-      # Create assets folder and old
-      FileUtils.mkdir_p File.join(ap, 'old')
-
-      # Place a couple of assets
-      FileUtils.touch File.join(ap, 'application.css')
-      FileUtils.touch File.join(ap, 'bg.png')
+      @file = File.new("#{fixture_files_path}/sample.css")
+      @paf.update_css('application', @file)
+      @paf.update_css('application', @file)
+      @paf.update_asset('bg.png', @file)
     end
 
     it 'should list assets only' do
@@ -80,13 +76,13 @@ describe PartnerAssetsFolder do
 
   describe 'delete_asset' do
     before do
-      ap = @partner.assets_path
-      FileUtils.mkdir_p ap
-      FileUtils.touch File.join(ap, 'application.css')
+      @file = File.new("#{fixture_files_path}/sample.css")
+      @paf.update_css('application', @file)
+      
     end
 
     it 'should delete asset' do
-      @paf.delete_asset('../../../application.css')
+      @paf.delete_asset('application.css')
       @paf.list_assets.should == []
     end
 
@@ -99,7 +95,7 @@ describe PartnerAssetsFolder do
   describe 'upload_asset' do
     it 'should upload an asset' do
       @file = File.new("#{fixture_files_path}/sample.css")
-      @paf.update_asset('../sample.css', @file)
+      @paf.update_asset('sample.css', @file)
       @paf.list_assets.should == [ 'sample.css' ]
     end
   end

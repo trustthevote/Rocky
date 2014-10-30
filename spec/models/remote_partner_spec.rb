@@ -67,13 +67,26 @@ describe RemotePartner do
         r.to_param
       end
     end
-    describe 'custom_logo?' do
-      it "returns custom_logo" do
-        r = RemotePartner.new
-        r.should_receive(:custom_logo)
-        r.custom_logo?
+    describe "quetion_methods" do
+      [:custom_logo, :whitelabeled, 
+        :application_css_present, :registration_css_present, :partner_css_present,
+        :ask_for_volunteers,
+        :partner_ask_for_volunteers,
+        :rtv_email_opt_in,
+        :partner_email_opt_in,
+        :rtv_sms_opt_in,
+        :partner_sms_opt_in
+      ].each do |method|
+
+          describe "#{method}?" do
+            it "calls #{method}" do
+              r = RemotePartner.new
+              r.should_receive(method)
+              r.send("#{method}?")
+            end
+          end
+          
       end
-      
     end
     
     describe 'expected attributes from partner model' do

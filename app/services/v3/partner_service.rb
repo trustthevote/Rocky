@@ -75,8 +75,10 @@ module V3
       partner = find_partner(query[:partner_id], query[:partner_api_key], only_public)
 
       data = {
+        :id                       => partner.id,
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
+        
         :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
         :whitelabeled             => partner.whitelabeled?,
         :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
@@ -84,8 +86,41 @@ module V3
         :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
         :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
         :rtv_ask_volunteer        => partner.ask_for_volunteers?,
-        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
+        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?,
+        :whitelabeled             => partner.whitelabeled?,
+        
+        :application_css_present  => partner.application_css_present?,
+        :application_css_url      => partner.application_css_url,
+        :registration_css_present => partner.registration_css_present?,
+        :registration_css_url     => partner.registration_css_url,
+        :partner_css_present      => partner.partner_css_present?,
+        :partner_css_url          => partner.partner_css_url,
+        
+        
+        :primary =>partner.primary?,
+        :organization                 => partner.organization,
+        :url => partner.url,
+        :address => partner.address,
+        :city   => partner.city,
+        :state_id => partner.state_id,
+        :zip_code => partner.zip_code,
+        :phone => partner.phone,
+        :ask_for_volunteers => partner.ask_for_volunteers,
+        :widget_image => partner.widget_image,
+        :partner_ask_for_volunteers => partner.partner_ask_for_volunteers,
+        :rtv_email_opt_in => partner.rtv_email_opt_in,
+        :partner_email_opt_in => partner.partner_email_opt_in,
+        :rtv_sms_opt_in => partner.rtv_sms_opt_in,
+        :partner_sms_opt_in => partner.partner_sms_opt_in,
+        :privacy_url => partner.privacy_url,
+        :finish_iframe_url => partner.finish_iframe_url,
+        :is_government_partner => partner.is_government_partner?,
+        :government_partner_state_id => partner.government_partner_state_id,
+        :government_partner_zip_codes => partner.government_partner_zip_codes,
+        :external_tracking_snippet => partner.external_tracking_snippet,
+        :registration_instructions_url => partner.registration_instructions_url
       }
+      
       
       RockyConf.enabled_locales.each do |loc|
         data["survey_question_1_#{loc}".to_sym] = partner.send("survey_question_1_#{loc}")
