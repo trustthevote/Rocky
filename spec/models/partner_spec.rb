@@ -248,9 +248,14 @@ describe Partner do
   end
 
   describe "whitelabeling" do
+    let(:paf) { mock(PartnerAssetsFolder) }
+    before(:each) do
+      PartnerAssetsFolder.stub(:new).and_return(paf)
+    end
+  
     describe "Class Methods" do
       describe "#add_whitelabel(partner_id, app_css, reg_css)" do
-        let(:paf) { mock(PartnerAssetsFolder) }
+        
         before(:each) do
           @partner = FactoryGirl.create(:partner)
           File.stub(:expand_path).with("app.css").and_return("app.css")
@@ -273,7 +278,6 @@ describe Partner do
 
 
           paf.stub(:update_css)
-          PartnerAssetsFolder.stub(:new).and_return(paf)
           
           
         end
@@ -311,11 +315,13 @@ describe Partner do
         end
 
         it "copies the CSS to the partner path (with the correct names) from the filesystem" do
+          
+          paf.should_receive("update_css").with("application", "app.css")
+          paf.should_receive("update_css").with("registration", "reg.css")
+          paf.should_receive("update_css").with("partner", "part.css")
+          
           Partner.add_whitelabel("123", "app.css", "reg.css", "part.css")
           
-          paf.should have_received("update_css").with("application", "app.css")
-          paf.should have_received("update_css").with("registration", "reg.css")
-          paf.should have_received("update_css").with("partner", "part.css")
         end
         it "copies the CSS files to the partner path (with the correct names) from URLs" do
           pending "Don't need URL designation of assets yet"
@@ -345,29 +351,26 @@ describe Partner do
     describe "#css_present?" do
       it "returns true if the both custom css files are present" do
         partner = FactoryGirl.build(:partner)
-        
-        #File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
-        #File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
+        paf.stub("asset_file_exists?").and_return(true)
         partner.css_present?.should be_true
-        #File.should have_received(:exists?).with(partner.absolute_application_css_path)
-        #File.should have_received(:exists?).with(partner.absolute_registration_css_path)
       end
       it "returns false if the custom application css file is not present" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
+        paf.stub("asset_file_exists?").with("application.css").and_return(false)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(true)
+        
         partner.css_present?.should be_false
       end
       it "returns false if the custom registration css file is not present" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        paf.stub("asset_file_exists?").with("application.css").and_return(true)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(false)
         partner.css_present?.should be_false
       end
       it "returns false if the both custom css files are not present" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        paf.stub("asset_file_exists?").with("application.css").and_return(false)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(false)
         partner.css_present?.should be_false
       end
     end
@@ -375,31 +378,32 @@ describe Partner do
     describe "#any_css_present?" do
       it "returns true if the either custom css files is present" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
-        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
+        paf.stub("asset_file_exists?").with("application.css").and_return(true)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(false)
+        paf.stub("asset_file_exists?").with("partner.css").and_return(false)
         partner.any_css_present?.should be_true
 
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
-        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
+        paf.stub("asset_file_exists?").with("application.css").and_return(false)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(true)
+        paf.stub("asset_file_exists?").with("partner.css").and_return(false)
         partner.any_css_present?.should be_true
 
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
-        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
+        paf.stub("asset_file_exists?").with("application.css").and_return(false)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(false)
+        paf.stub("asset_file_exists?").with("partner.css").and_return(true)
         partner.any_css_present?.should be_true
 
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
-        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
+        paf.stub("asset_file_exists?").with("application.css").and_return(true)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(true)
+        paf.stub("asset_file_exists?").with("partner.css").and_return(true)
         partner.any_css_present?.should be_true
       end
-      it "returns false if both css files are missing" do
+      it "returns false if all css files are missing" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
-        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
+        paf.stub("asset_file_exists?").with("application.css").and_return(false)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(false)
+        paf.stub("asset_file_exists?").with("partner.css").and_return(false)
+
         partner.any_css_present?.should be_false
       end
     end
@@ -407,36 +411,36 @@ describe Partner do
     describe "#application_css_present?" do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(true)
+        paf.stub("asset_file_exists?").with("application.css").and_return(true)
         partner.application_css_present?.should be_true
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_application_css_path).and_return(false)
+        paf.stub("asset_file_exists?").with("application.css").and_return(false)
         partner.application_css_present?.should be_false
       end
     end
     describe "#registration_css_present?" do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(true)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(true)
         partner.registration_css_present?.should be_true
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_registration_css_path).and_return(false)
+        paf.stub("asset_file_exists?").with("registration.css").and_return(false)
         partner.registration_css_present?.should be_false
       end
     end
     describe "#partner_css_present?" do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(true)
+        paf.stub("asset_file_exists?").with("partner.css").and_return(true)
         partner.partner_css_present?.should be_true
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
-        File.stub(:exists?).with(partner.absolute_partner_css_path).and_return(false)
+        paf.stub("asset_file_exists?").with("partner.css").and_return(false)
         partner.partner_css_present?.should be_false
       end
     end
@@ -444,19 +448,22 @@ describe Partner do
     describe "#application_css_url" do
       it "is returns the URL for the custom application css" do
         partner = FactoryGirl.build(:partner)
-        partner.application_css_url.should == "//#{partner.partner_assets_host}/partners/#{partner.id}/application.css"
+        paf.should_receive(:asset_url).with("application.css")
+        partner.application_css_url
       end
     end
     describe "#registration_css_url" do
       it "is returns the URL for the custom registration css" do
         partner = FactoryGirl.build(:partner)
-        partner.registration_css_url.should == "//#{partner.partner_assets_host}/partners/#{partner.id}/registration.css"
+        paf.should_receive(:asset_url).with("registration.css")
+        partner.registration_css_url
       end
     end
     describe "#partner_css_url" do
       it "is returns the URL for the custom partner css" do
         partner = FactoryGirl.build(:partner)
-        partner.partner_css_url.should == "//#{partner.partner_assets_host}/partners/#{partner.id}/partner.css"
+        paf.should_receive(:asset_url).with("partner.css")
+        partner.partner_css_url
       end
     end
     
@@ -502,31 +509,31 @@ describe Partner do
           end
         end
       end    
-      describe "pdf_logo_url(ext)" do
-        context "when nil is passed" do
-          context "when pdf_logo_ext returns nil" do
-            before(:each) do
-              partner.stub(:pdf_logo_ext).and_return(nil)
-            end
-            it "returns the asset url with a gif extension" do
-              partner.pdf_logo_url(nil).should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.gif"
-            end
-          end
-          context "when pdf_logo_ext returns jpg" do
-            before(:each) do
-              partner.stub(:pdf_logo_ext).and_return('jpg')
-            end
-            it "returns the url with a jpg exention" do
-              partner.pdf_logo_url(nil).should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.jpg"
-            end
-          end
-        end
-        context "when a value is passed" do
-          it "returns the url with the passed exention" do
-            partner.pdf_logo_url('jpeg').should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.jpeg"
-          end          
-        end
-      end
+      # describe "pdf_logo_url(ext)" do
+      #   context "when nil is passed" do
+      #     context "when pdf_logo_ext returns nil" do
+      #       before(:each) do
+      #         partner.stub(:pdf_logo_ext).and_return(nil)
+      #       end
+      #       it "returns the asset url with a gif extension" do
+      #         partner.pdf_logo_url(nil).should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.gif"
+      #       end
+      #     end
+      #     context "when pdf_logo_ext returns jpg" do
+      #       before(:each) do
+      #         partner.stub(:pdf_logo_ext).and_return('jpg')
+      #       end
+      #       it "returns the url with a jpg exention" do
+      #         partner.pdf_logo_url(nil).should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.jpg"
+      #       end
+      #     end
+      #   end
+      #   context "when a value is passed" do
+      #     it "returns the url with the passed exention" do
+      #       partner.pdf_logo_url('jpeg').should == "#{partner.assets_url}/#{Partner::PDF_LOGO}.jpeg"
+      #     end
+      #   end
+      # end
       describe "absolute_pdf_logo_path(ext)" do
         context "when nil is passed" do
           context "when pdf_logo_ext returns nil" do
@@ -534,7 +541,7 @@ describe Partner do
               partner.stub(:pdf_logo_ext).and_return(nil)
             end
             it "returns the path with a gif extension" do
-              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_path}/#{Partner::PDF_LOGO}.gif"
+              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_root}/#{partner.assets_path}/#{Partner::PDF_LOGO}.gif"
             end
           end
           context "when pdf_logo_ext returns jpg" do
@@ -542,13 +549,13 @@ describe Partner do
               partner.stub(:pdf_logo_ext).and_return('jpg')
             end
             it "returns the path with a jpg exention" do
-              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_path}/#{Partner::PDF_LOGO}.jpg"
+              partner.absolute_pdf_logo_path(nil).should == "#{partner.assets_root}/#{partner.assets_path}/#{Partner::PDF_LOGO}.jpg"
             end
           end
         end
         context "when a value is passed" do
           it "returns the path with the passed exention" do
-            partner.absolute_pdf_logo_path('jpeg').should == "#{partner.assets_path}/#{Partner::PDF_LOGO}.jpeg"
+            partner.absolute_pdf_logo_path('jpeg').should == "#{partner.assets_root}/#{partner.assets_path}/#{Partner::PDF_LOGO}.jpeg"
           end          
         end
       end

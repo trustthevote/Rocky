@@ -91,11 +91,7 @@ module PartnerAssets
   # end
   
   def partner_assets_bucket
-    if Rails.env.production?
-      "rocky-partner-assets"
-    else
-      "rocky-partner-assets-#{Rails.env}"
-    end
+    self.class.partner_assets_bucket
   end
   
   def folder

@@ -72,7 +72,25 @@ class Partner < ActiveRecord::Base
   belongs_to :government_partner_state, :class_name=> "GeoState"
   has_many :registrants
 
-  has_attached_file :logo, RockyConf.paperclip_options.to_hash.symbolize_keys.merge(:styles => { :header => "75x45" })
+  def self.partner_assets_bucket
+    if Rails.env.production?
+      "rocky-partner-assets"
+    else
+      "rocky-partner-assets-#{Rails.env}"
+    end
+  end
+
+  has_attached_file :logo, RockyConf.paperclip_options.to_hash.symbolize_keys.merge(:styles => { 
+    :header => "75x45" 
+  }).merge({
+    fog_directory: partner_assets_bucket,
+    fog_credentials: {
+      provider: "AWS",
+      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  })
+  
 
   serialize :government_partner_zip_codes
 
@@ -100,6 +118,7 @@ class Partner < ActiveRecord::Base
   validates_presence_of :phone
   validates_format_of :phone, :with => /^\d{3}-\d{3}-\d{4}$/, :message => 'Phone must look like ###-###-####', :allow_blank => true
   validates_presence_of :organization
+
 
   validates_attachment :logo, 
     :size=>{:less_than => 1.megabyte, :message => "Logo must not be bigger than 1 megabyte"},

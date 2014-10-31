@@ -23,6 +23,7 @@ widget_js_url:  'https://s3.amazonaws.com/ovr/widget_loader.js'
 
 use_https: true
 paperclip_options: 
+  storage: "fog"
   path: ":rails_root/public/system/:attachment/:id/:style/:filename"
   url: "/system/:attachment/:id/:style/:filename"
 
