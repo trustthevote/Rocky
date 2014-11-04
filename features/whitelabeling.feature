@@ -20,6 +20,7 @@ Feature: White labeling
       When I go to the registration page for that partner
       Then I should see a link to the standard CSS
   
+    @passing
     Scenario: Whitelabeled partner with missing CSS should use the standard assets
       Given the following partner exists:
         | name                | whitelabeled |

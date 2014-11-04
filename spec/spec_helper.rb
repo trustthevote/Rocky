@@ -20,7 +20,6 @@ require 'webmock/rspec'
 WebMock.allow_net_connect!
 
 
-
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -69,4 +68,14 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = true
+  
+  
+  config.before(:each) do
+    stub_request(:any, %r{http://example-api\.com/api/v3/partners/\d+\.json}).to_return do |req|
+      req.uri.to_s =~ /(\d+)\.json$/
+      id = $1
+      {:body=>{:partner => V3::PartnerService.find(:partner_id=>id) }.to_json}
+    end
+  end
+  
 end

@@ -189,7 +189,7 @@ Feature: Step 4
         | true      | false         | false         | false             | true    | true        | should                 | should not                 | should not                 | should not                     | should               | should               | should                   |
         | false     | false         | false         | false             | false   | false       | should not             | should not                 | should not                 | should not                     | should not           | should not           | should not               |
       
-    @wip
+    @passing
     Scenario: User signs up for everything
       Given the following partner exists:
         | organization   | rtv_email_opt_in | ask_for_volunteers | partner_email_opt_in | partner_ask_for_volunteers | rtv_sms_opt_in | partner_sms_opt_in |

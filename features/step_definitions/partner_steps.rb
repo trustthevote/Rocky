@@ -30,7 +30,11 @@ Given /^that partner's css file exists$/ do
 end
 
 Given /^that partner's css file does not exist$/ do
-  File.stub(:exists?).and_return(false)
+  @partner ||= Partner.last
+  RemotePartner.any_instance.stub(:application_css_present?).and_return(false)
+  RemotePartner.any_instance.stub(:registration_css_present?).and_return(false)
+  # @partner.stub(:application_css_present?).and_return(false)
+  # @partner.stub(:registration_css_present?).and_return(false)
 end
 
 
@@ -42,8 +46,8 @@ end
 
 
 Then /^I should see a link to that partner's CSS$/ do
-  page.body.should include("link href=\"//#{@partner.partner_assets_host}/partners/#{@partner.id}/application.css")
-  page.body.should include("link href=\"//#{@partner.partner_assets_host}/partners/#{@partner.id}/registration.css")
+  page.body.should include("link href=\"#{@partner.application_css_url}")
+  page.body.should include("link href=\"#{@partner.registration_css_url}")
 end
 
 

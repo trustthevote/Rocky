@@ -18,13 +18,14 @@ module ActiveResourceCaching
 
 
   def get_with_cache(path, headers = {})
-    
     response = cache.read(path)
     if response.nil?
       response = get_without_cache(path, headers)
       cache.write(path, response)
     end
     response
+  rescue
+    get_without_cache(path, headers)
   end
     
   # def get_with_cache(path, headers = {})

@@ -111,6 +111,7 @@ class RegistrationStep < ApplicationController
 
   def find_partner
     @partner = RemotePartner.find_by_id(params[:partner]) || RemotePartner.find(Partner::DEFAULT_ID)
+
     @partner_id = @partner.id
     @source = params[:source]
     @tracking = params[:tracking]

@@ -25,5 +25,15 @@ module SpecHelperMethods
     $stdout = old_stdout
   end
   
+  def clear_partner_asset_test_buckets
+    connection = Fog::Storage.new({
+      :provider                 => 'AWS',
+      :aws_access_key_id        => ENV['AWS_ACCESS_KEY_ID'],
+      :aws_secret_access_key    => ENV['AWS_SECRET_ACCESS_KEY']
+    })
+    connection.directories.get("rocky-partner-assets-test").files.each do |f|
+      f.destroy
+    end
+  end
 
 end

@@ -41,27 +41,45 @@ describe V3::PartnerService do
         }.should raise_error V3::PartnerService::INVALID_PARTNER_OR_API_KEY
       end
     end
-    it 'should return all data' do
+    it 'should return all data and all columns' do
       partner = FactoryGirl.create(:whitelabel_partner)
       expected_response = {
-        :org_name                 => partner.organization,
-        :org_URL                  => partner.url,
-        :contact_name             => partner.name,
-        :contact_email            => partner.email,
-        :contact_phone            => partner.phone,
-        :contact_address          => partner.address,
-        :contact_city             => partner.city,
-        :contact_state            => partner.state_abbrev,
-        :contact_ZIP              => partner.zip_code,
+        :id                       => partner.id,
         :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
         :whitelabeled             => partner.whitelabeled?,
-        :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
-        :partner_ask_email_opt_in => partner.partner_email_opt_in?,
-        :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
-        :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
-        :rtv_ask_volunteer        => partner.ask_for_volunteers?,
-        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
+
+        :application_css_present  => partner.application_css_present?,
+        :application_css_url      => partner.application_css_url,
+        :registration_css_present => partner.registration_css_present?,
+        :registration_css_url     => partner.registration_css_url,
+        :partner_css_present      => partner.partner_css_present?,
+        :partner_css_url          => partner.partner_css_url,
+        
+        :primary =>partner.primary?,
+        :organization                 => partner.organization,
+        :url => partner.url,
+        :name => partner.name,
+        :address => partner.address,
+        :city   => partner.city,
+        :state_id => partner.state_id,
+        :zip_code => partner.zip_code,
+        :phone => partner.phone,
+        :ask_for_volunteers => partner.ask_for_volunteers,
+        :widget_image => partner.widget_image,
+        :partner_ask_for_volunteers => partner.partner_ask_for_volunteers,
+        :rtv_email_opt_in => partner.rtv_email_opt_in,
+        :partner_email_opt_in => partner.partner_email_opt_in,
+        :rtv_sms_opt_in => partner.rtv_sms_opt_in,
+        :partner_sms_opt_in => partner.partner_sms_opt_in,
+        :privacy_url => partner.privacy_url,
+        :finish_iframe_url => partner.finish_iframe_url,
+        :is_government_partner => partner.is_government_partner?,
+        :government_partner_state_id => partner.government_partner_state_id,
+        :government_partner_zip_codes => partner.government_partner_zip_codes,
+        :external_tracking_snippet => partner.external_tracking_snippet,
+        :registration_instructions_url => partner.registration_instructions_url
       }
+      
       
       RockyConf.enabled_locales.each do |loc|
         expected_response["survey_question_1_#{loc}".to_sym] = partner.send("survey_question_1_#{loc}")
@@ -76,17 +94,26 @@ describe V3::PartnerService do
       partner = FactoryGirl.create(:whitelabel_partner)
       
       expected_response = {
-        :org_name                 => partner.organization,
-        :org_URL                  => partner.url,
-        :org_privacy_url          => partner.privacy_url,
+        :id                       => partner.id,
         :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
-        :whitelabeled             => partner.whitelabeled?,
-        :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
-        :partner_ask_email_opt_in => partner.partner_email_opt_in?,
-        :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
-        :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
-        :rtv_ask_volunteer        => partner.ask_for_volunteers?,
-        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
+        
+        :organization                 => partner.organization,
+        :url => partner.url,
+
+        :ask_for_volunteers => partner.ask_for_volunteers,
+        :widget_image => partner.widget_image,
+        :partner_ask_for_volunteers => partner.partner_ask_for_volunteers,
+        :rtv_email_opt_in => partner.rtv_email_opt_in,
+        :partner_email_opt_in => partner.partner_email_opt_in,
+        :rtv_sms_opt_in => partner.rtv_sms_opt_in,
+        :partner_sms_opt_in => partner.partner_sms_opt_in,
+        :privacy_url => partner.privacy_url,
+        :finish_iframe_url => partner.finish_iframe_url,
+        :is_government_partner => partner.is_government_partner?,
+        :government_partner_state_id => partner.government_partner_state_id,
+        :government_partner_zip_codes => partner.government_partner_zip_codes,
+
+        :registration_instructions_url => partner.registration_instructions_url
       }
       
       RockyConf.enabled_locales.each do |loc|

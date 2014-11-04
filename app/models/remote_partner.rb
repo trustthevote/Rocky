@@ -15,7 +15,7 @@ class RemotePartner < ActiveResource::Base
   end
   
   def to_param
-    self.id
+    self.id.to_s
   end
   
   (Partner.column_names + [:custom_logo, :header_logo_url]).each do |column|
@@ -43,17 +43,6 @@ class RemotePartner < ActiveResource::Base
       
   end
   
-  # [:custom_logo?, :partner_assets_host].each do |method|
-  #   delegate method, :to=> :partner
-  # end
-  #
-  
-  # def partner
-  #   @partner ||= Partner.new(attributes)
-  # end
-  #
-  # def method_missing(meth, *args, &block)
-  #   partner.send(meth, *args, &block)
-  # end
+
   
 end

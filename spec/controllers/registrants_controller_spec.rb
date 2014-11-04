@@ -149,11 +149,14 @@ describe RegistrantsController do
 
       it "should show partner banner and logo for non-primary partner with custom logo" do
         partner = RemotePartner.new
+        partner.id = 1234
         partner.custom_logo = true
         partner.header_logo_url = "abc123"
 
         RemotePartner.stub(:find).with(partner.to_param).and_return(partner)
+        ActiveResource::Connection.cache.clear
         get :new, :partner => partner.to_param
+
         assert_response :success
         assert_select "#header.partner"
         assert_select "#partner-logo img[src=//#{partner.header_logo_url}]"

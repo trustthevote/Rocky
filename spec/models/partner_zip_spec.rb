@@ -96,6 +96,9 @@ describe PartnerZip do
     end
     it "works when there's just a partner.css" do
       @file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'files', 'just_partner_css.zip'))
+      # cleanup remote files first
+      clear_partner_asset_test_buckets
+      
       pz = PartnerZip.new(@file)
       assert_difference("Partner.count", 1) do
         pz.create.should be_true
