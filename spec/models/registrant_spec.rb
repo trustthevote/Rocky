@@ -1593,35 +1593,35 @@ describe Registrant do
   end
 
   describe "wrapping up" do
+    let(:reg) { FactoryGirl.create(:step_5_registrant) }
+    before(:each) do
+      RestClient.stub(:post).and_return({
+        :pdfurl=>"http://abc",
+        :uid=>reg.uid
+      }.to_json)
+      reg.stub(:to_api_hash).and_return({"data"=>"value"})
+    end
+    
     it "should transition to complete state" do
-      reg = FactoryGirl.create(:step_5_registrant)
       reg.stub(:complete_registration)
       reg.wrap_up
       assert reg.reload.complete?
     end
 
+    it "calls the core API" do
+      RestClient.should_receive(:post).with("#{RockyConf.api_host_name}/api/v3/registrations.json", {:registration=>{"data"=>"value"}})
+      reg.complete_registration
+    end
+    
     it "clears out sensitive data" do
-      reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-      reg.stub(:generate_pdf)                  # avoid messy out-of-band action in tests
-      reg.stub(:deliver_confirmation_email)    # avoid messy out-of-band action in tests
-      reg.stub(:enqueue_reminder_emails)       # avoid messy out-of-band action in tests
       reg.complete_registration
       assert_nil reg.state_id_number
     end
-
-    it "sets system locale using registrant's locale" do
-      reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-      reg.stub(:generate_pdf)                  # avoid messy out-of-band action in tests
-      reg.stub(:deliver_confirmation_email)    # avoid messy out-of-band action in tests
-      reg.stub(:enqueue_reminder_emails)       # avoid messy out-of-band action in tests
-
-      reg.locale = 'en'
-      reg.complete_registration
-      assert_equal :en, I18n.locale
-
-      reg.locale = 'es'
-      reg.complete_registration
-      assert_equal :es, I18n.locale
+    
+    describe '#to_api_hash' do
+      it "sends async = false for no-email registrations" do
+        pending
+      end
     end
 
     describe "background processing" do
@@ -1630,11 +1630,6 @@ describe Registrant do
           reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
           reg.should_receive(:complete!)
           reg.wrap_up
-        end
-        it "should  enqueue emails" do
-          reg = FactoryGirl.create(:step_5_registrant, :state_id_number => "1234567890")
-          reg.wrap_up
-          reg.reminders_left.should == 2
         end
       end
     end

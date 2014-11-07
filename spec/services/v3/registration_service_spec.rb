@@ -103,11 +103,26 @@ describe V3::RegistrationService do
     end
 
     context 'complete record' do
-      before { @reg = FactoryGirl.create(:api_v3_maximal_registrant, :status => 'step_5') }
-      before { Registrant.stub(:build_from_api_data).with({}, false) { @reg } }
-
-      it 'should save the record and generate PDF' do
+      before(:each) do
+        @reg = FactoryGirl.create(:api_v3_maximal_registrant, :status => 'step_5')
         @reg.stub(:enqueue_complete_registration_via_api)
+        Registrant.stub(:build_from_api_data).with({}, false) { @reg }
+      end
+      
+      describe "async setting" do
+        it "should pass async to build_from_api data" do
+          @reg.should_receive(:enqueue_complete_registration_via_api).with(true)
+          V3::RegistrationService.create_record({async: true}).should
+
+          @reg.should_receive(:enqueue_complete_registration_via_api).with(false)
+          V3::RegistrationService.create_record({async: false}).should
+        end
+        it "should default to true" do
+          @reg.should_receive(:enqueue_complete_registration_via_api).with(true)
+          V3::RegistrationService.create_record({}).should
+        end
+      end
+      it 'should save the record and generate PDF' do
         V3::RegistrationService.create_record({}).should
       end
     end

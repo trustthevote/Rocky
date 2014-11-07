@@ -57,12 +57,15 @@ module V3
       block_protected_attributes(data)
 
       attrs = data_to_attrs(data)
+      async = attrs.delete(:async)
+      async = true if (async != false)
+      
       validate_survey_questions(attrs) unless finish_with_state
 
       reg = Registrant.build_from_api_data(attrs, finish_with_state)
 
       if reg.save
-        reg.enqueue_complete_registration_via_api unless finish_with_state
+        reg.enqueue_complete_registration_via_api(async) unless finish_with_state
       else
         validate_language(reg)
         raise_validation_error(reg)

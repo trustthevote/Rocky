@@ -101,6 +101,12 @@ describe Registrant do
         reg.should have_received(:enqueue_reminder_emails)        
         reg.should have_received(:save)        
       end
+      it "should  enqueue emails" do
+        reg = Registrant.new(:send_confirmation_reminder_emails=>true)
+        reg.complete_registration_via_api
+        reg.reminders_left.should == 2
+      end
+      
     end
     context "when send_confirmation_reminder_emails is false" do
       it "generates pdf, redacts sensitif data, sets the status to complete and saves" do

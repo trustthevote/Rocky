@@ -1014,20 +1014,100 @@ class Registrant < ActiveRecord::Base
   end
 
   def complete_registration
-    I18n.locale = self.locale.to_sym
-    generate_pdf
-    redact_sensitive_data
-    deliver_confirmation_email
-    enqueue_reminder_emails
+    begin
+      response = RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations.json", 
+        :registration => self.to_api_hash
+      ) 
+    
+      redact_sensitive_data
+    
+    rescue Exception => e
+      puts e.response
+    end
+    
+    
+    # I18n.locale = self.locale.to_sym
+    # generate_pdf
+    # deliver_confirmation_email
+    # enqueue_reminder_emails
+  end
+  
+  def to_api_hash
+    {
+      lang: locale,
+      partner_id: partner_id,
+      send_confirmation_reminder_emails: send_confirmation_reminder_emails,
+      collect_email_address: collect_email_address,
+      source_tracking_id: tracking_source,
+      partner_tracking_id: tracking_id,
+      short_form: use_short_form?,
+      state_ovr_data: state_ovr_data,
+      created_at: created_at.to_s(:db),
+      updated_at: updated_at.to_s(:db),
+
+      date_of_birth: date_of_birth.to_s("%m-%d-%Y"),
+
+      id_number: state_id_number,
+      email_address: email_address,
+      first_registration: first_registration?,
+      home_zip_code: home_zip_code,
+
+      us_citizen: us_citizen?,
+      has_state_license: has_state_license?,
+      is_eighteen_or_older: will_be_18_by_election?,
+
+      name_title: name_title,
+      first_name: first_name,
+      middle_name: middle_name,
+      last_name: last_name,
+      name_suffix: name_suffix,
+      home_address: home_address,
+      home_unit: home_unit,
+      home_city: home_city,
+      home_state_id: home_state_abbrev,
+      has_mailing_address: has_mailing_address?,
+      mailing_address: mailing_address,
+      mailing_unit: mailing_unit,
+      mailing_city: mailing_city,
+      mailing_state_id: mailing_state_abbrev,
+      mailing_zip_code: mailing_zip_code,
+      race: race,
+      party: party,
+      phone: phone,
+      phone_type: phone_type,
+      change_of_name: change_of_name?,
+      prev_name_title: prev_name_title,
+      prev_first_name: prev_first_name,
+      prev_middle_name: prev_middle_name,
+      prev_last_name: prev_last_name,
+      prev_name_suffix: prev_name_suffix,
+      change_of_address: change_of_address?,
+      prev_address: prev_address,
+      prev_unit: prev_unit,
+      prev_city: prev_city,
+      prev_state_id: prev_state_abbrev,
+      prev_zip_code: prev_zip_code,
+      opt_in_email: opt_in_email?,
+      opt_in_sms: opt_in_sms?,
+      opt_in_volunteer: volunteer?,
+      partner_opt_in_email: partner_opt_in_email?,
+      partner_opt_in_sms: partner_opt_in_sms?, 
+      partner_opt_in_volunteer: partner_volunteer?,
+      survey_question_1: survey_question_1,
+      survey_answer_1: survey_answer_1, 
+      survey_question_2: survey_question_2,
+      survey_answer_2: survey_answer_2, 
+      async: collect_email_address?
+    }
   end
 
   # Enqueues final registration actions for API calls
-  def enqueue_complete_registration_via_api
-    self.complete_registration_via_api
+  def enqueue_complete_registration_via_api(async=true)
+    self.complete_registration_via_api(async)
   end
 
   # Called from the worker queue to generate PDFs on the 'util' server
-  def complete_registration_via_api
+  def complete_registration_via_api(async=true)
     generate_pdf unless self.finish_with_state?
 
     redact_sensitive_data

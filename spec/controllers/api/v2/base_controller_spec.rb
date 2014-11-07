@@ -24,10 +24,10 @@
 #***** END LICENSE BLOCK *****
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe Api::V2::BaseController do
+describe Api::V3::BaseController do
 
   describe 'jsonp' do
-    before { @c = Api::V2::BaseController.new }
+    before { @c = Api::V3::BaseController.new }
 
     it 'should render plain JSON' do
       @c.stub(:params) { {} }
