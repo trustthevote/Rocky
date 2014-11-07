@@ -73,59 +73,58 @@ describe Registrant do
   describe "#enqueue_complete_registration_via_api" do
     it "should queue up complete_registration_via_api" do
       reg = Registrant.new
-
-      Time.stub(:now) {"now"}
-      Delayed::PerformableMethod.stub(:new).with(reg,:complete_registration_via_api,[]) { "Action" }
-      Delayed::Job.stub(:enqueue).with("Action", {:priority=>Registrant::WRAP_UP_PRIORITY, :run_at=>"now"})
-      
+      reg.stub(:complete_registration_via_api)
+      reg.should_receive(:complete_registration_via_api)
       reg.enqueue_complete_registration_via_api
     end
   end
   
+  
   describe "#complete_registration_via_api" do
-    context "when send_confirmation_reminder_emails is true" do
-      it "generates pdf, redacts sensitif data, sets the status to complete, deliver_confirmation_email, enqueue_reminder_emails and saves" do
-        reg = Registrant.new(:send_confirmation_reminder_emails=>true)
-        reg.stub(:generate_pdf)
-        reg.stub(:redact_sensitive_data)
-        reg.stub(:deliver_confirmation_email)
-        reg.stub(:enqueue_reminder_emails)
-        reg.stub(:save)
-        
-        
+    let(:reg)  { Registrant.new(:send_confirmation_reminder_emails=>true) }
+    before(:each) do
+      reg.stub(:save)
+      reg.stub(:generate_pdf)
+      reg.stub(:queue_pdf)
+      reg.stub(:redact_sensitive_data)
+      reg.stub(:deliver_confirmation_email)
+      reg.stub(:enqueue_reminder_emails)
+      reg.stub(:finalize_pdf)
+    end
+    
+
+    
+    context "when finish_with_state is false" do
+      it "queues pdf, sets status to complete and saves" do
+        reg.should_receive(:queue_pdf)
+        reg.should_receive(:save)
+
+        reg.should_not_receive(:generate_pdf)        
+        reg.should_not_receive(:redact_sensitive_data)        
+        reg.should_not_receive(:deliver_confirmation_email)        
+        reg.should_not_receive(:enqueue_reminder_emails)        
+
         reg.complete_registration_via_api
         reg.status.should == 'complete'
-        reg.should have_received(:generate_pdf)        
-        reg.should have_received(:redact_sensitive_data)        
-        reg.should have_received(:deliver_confirmation_email)        
-        reg.should have_received(:enqueue_reminder_emails)        
-        reg.should have_received(:save)        
-      end
-      it "should  enqueue emails" do
-        reg = Registrant.new(:send_confirmation_reminder_emails=>true)
-        reg.complete_registration_via_api
-        reg.reminders_left.should == 2
-      end
+
+      end      
       
     end
-    context "when send_confirmation_reminder_emails is false" do
-      it "generates pdf, redacts sensitif data, sets the status to complete and saves" do
-        reg = Registrant.new(:send_confirmation_reminder_emails=>false)
-        reg.stub(:generate_pdf)
-        reg.stub(:redact_sensitive_data)
-        reg.stub(:save)
-        
-        reg.complete_registration_via_api
-        
-        reg.status.should == 'complete'
-        reg.should_not have_received(:deliver_confirmation_email)
-        reg.should_not have_received(:enqueue_reminder_emails)        
-        
-        reg.should have_received(:generate_pdf)        
-        reg.should have_received(:redact_sensitive_data)        
-        reg.should have_received(:save)        
+    
+    
+    context 'when async is false' do
+      it "should not queue PDF" do
+        reg.should_not_receive(:queue_pdf)
+        reg.complete_registration_via_api(false)
       end
-      
+      it "should generate PDF" do
+        reg.should_receive(:generate_pdf)
+        reg.complete_registration_via_api(false)
+      end
+      it "should finalize PDF" do
+        reg.should_receive(:finalize_pdf)
+        reg.complete_registration_via_api(false)
+      end
     end
   end
 

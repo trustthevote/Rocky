@@ -445,7 +445,7 @@ class Registrant < ActiveRecord::Base
         reg.status = "complete"
         begin
           reg.deliver_thank_you_for_state_online_registration_email
-        rescue
+        rescue Exception => e
         end
       end
       reg.abandon!
@@ -1108,13 +1108,11 @@ class Registrant < ActiveRecord::Base
 
   # Called from the worker queue to generate PDFs on the 'util' server
   def complete_registration_via_api(async=true)
-    generate_pdf unless self.finish_with_state?
-
-    redact_sensitive_data
-
-    if self.send_confirmation_reminder_emails?
-      deliver_confirmation_email
-      enqueue_reminder_emails
+    if async
+      queue_pdf
+    else 
+      generate_pdf
+      finalize_pdf
     end
 
     self.status = 'complete'
@@ -1137,36 +1135,99 @@ class Registrant < ActiveRecord::Base
     generate_pdf(true)
   end
 
-  def generate_pdf(force_write = false)
-    return false if self.locale.nil? || self.home_state.nil?
-    prev_locale = I18n.locale
-    I18n.locale = self.locale
-    renderer = PdfRenderer.new(self)
-    pdf = WickedPdf.new.pdf_from_string(
-      renderer.render_to_string(
-        'registrants/registrant_pdf', 
-        :layout => 'layouts/nvra',
-        :encoding => 'utf8',
-        :locale=>self.locale
-      ),
-      :disable_internal_links         => false,
-      :disable_external_links         => false,
-      :encoding => 'utf8',
-      :locale=>self.locale
-    )
-    path = pdf_file_path
-    if !File.exists?(path) || force_write
-      FileUtils.mkdir_p(pdf_file_dir)
-      File.open(path, "w") do |f|
-        f << pdf.force_encoding('UTF-8')
-      end
-    end
-    I18n.locale = prev_locale
-    self.pdf_ready = true
+  def pdf_file_path(pdfpre=nil)
+    pdf_writer.pdf_file_path(pdfpre)
   end
+  
+  def pdf_path(pdfpre = nil, file=false)
+    pdf_writer.pdf_path(pdfpre, file)
+  end
+  
+  def pdf_file_dir(pdfpre = nil)
+    pdf_writer.pdf_file_dir(pdfpre)
+  end
+  
+  
+
+  def pdf_writer
+    if @pdf_writer.nil?
+      @pdf_writer = PdfWriter.new
+      @pdf_writer.assign_attributes(self.to_pdf_hash)
+    end
+    @pdf_writer
+  end
+
+  def generate_pdf(force = false)
+    if pdf_writer.valid?
+      if pdf_writer.generate_pdf(force)
+        deliver_confirmation_email
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+  
   
   def lang
     locale
+  end
+  
+  def finalize_pdf
+    self.pdf_ready = true
+    redact_sensitive_data
+    save
+  end
+  
+  def to_pdf_hash
+    {
+      :id =>  id,
+      :uid  =>  uid,
+      :locale => locale,
+      :email_address => email_address,
+      :us_citizen => us_citizen?,
+      :will_be_18_by_election => will_be_18_by_election?,
+      :home_zip_code => home_zip_code,
+      :name_title_key => name_title_key,        
+      :first_name => first_name,         
+      :middle_name => middle_name,        
+      :last_name => last_name,   
+      :name_suffix_key => name_suffix_key,        
+      :home_address => home_address,       
+      :home_unit => home_unit,        
+      :home_city => home_city,
+      :home_state_id => home_state_abbrev,       
+      :mailing_address => mailing_address,    
+      :mailing_unit => mailing_unit,      
+      :mailing_city => mailing_city,       
+      :mailing_state_id => mailing_state_abbrev,
+      :mailing_zip_code => mailing_zip_code,
+      :phone => phone,          
+      :state_id_number => state_id_number,
+      :prev_name_title_key => prev_name_title_key,    
+      :prev_first_name => prev_first_name,    
+      :prev_middle_name => prev_middle_name,   
+      :prev_last_name => prev_last_name, 
+      :prev_name_suffix_key => prev_name_suffix_key,
+      :prev_address => prev_address,   
+      :prev_unit => prev_unit,       
+      :prev_city => prev_city,          
+      :prev_state_id => prev_state_abbrev,
+      :prev_zip_code => prev_zip_code,
+      :partner_absolute_pdf_logo_path => partner_absolute_pdf_logo_path,
+      :registration_instructions_url => registration_instructions_url,
+      :home_state_pdf_instructions => home_state_pdf_instructions,
+      :state_registrar_address => home_state.registrar_address,
+      :registration_deadline => registration_deadline,
+      :party => party,
+      :english_party_name => english_party_name,
+      :pdf_english_race => pdf_english_race,
+      :pdf_date_of_birth => pdf_date_of_birth,
+      :pdf_barcode => pdf_barcode,
+      :created_at => created_at.to_param 
+    }
   end
   
   def to_finish_with_state_array
@@ -1202,12 +1263,13 @@ class Registrant < ActiveRecord::Base
   end
   
   def send_emails?
-    !email_address.blank? && collect_email_address?
+    !email_address.blank? && collect_email_address? && (!building_via_api_call? || send_confirmation_reminder_emails?)
   end
 
   def deliver_confirmation_email
     if send_emails?
       Notifier.confirmation(self).deliver
+      enqueue_reminder_emails
     end
   end
 
@@ -1242,34 +1304,35 @@ class Registrant < ActiveRecord::Base
     self.state_id_number = nil
   end
 
-
-  def pdf_path(pdfpre = nil, file=false)
-    "/#{file ? pdf_file_dir(pdfpre) : pdf_dir(pdfpre)}/#{to_param}.pdf"
-  end
+  #
+  # def pdf_path(pdfpre = nil, file=false)
+  #   "/#{file ? pdf_file_dir(pdfpre) : pdf_dir(pdfpre)}/#{to_param}.pdf"
+  # end
+  #
+  # def pdf_file_dir(pdfpre = nil)
+  #   pdf_dir(pdfpre, false)
+  # end
+  #
+  # def pdf_dir(pdfpre = nil, url_format=true)
+  #   if pdfpre
+  #     "#{pdfpre}/#{bucket_code}"
+  #   else
+  #     if File.exists?(pdf_file_path("pdf"))
+  #       "pdf/#{bucket_code}"
+  #     else
+  #       "#{url_format ? '' : "public/"}pdfs/#{bucket_code}"
+  #     end
+  #   end
+  # end
+  #
+  # def pdf_file_path(pdfpre = nil)
+  #   dir = File.join(Rails.root, pdf_file_dir(pdfpre))
+  #   File.join(Rails.root, pdf_path(pdfpre, true))
+  # end
+  #
   
-  def pdf_file_dir(pdfpre = nil)
-    pdf_dir(pdfpre, false)
-  end
-  
-  def pdf_dir(pdfpre = nil, url_format=true)
-    if pdfpre
-      "#{pdfpre}/#{bucket_code}"
-    else
-      if File.exists?(pdf_file_path("pdf"))
-        "pdf/#{bucket_code}"
-      else
-        "#{url_format ? '' : "public/"}pdfs/#{bucket_code}"
-      end
-    end
-  end
-
-  def pdf_file_path(pdfpre = nil)
-    dir = File.join(Rails.root, pdf_file_dir(pdfpre))
-    File.join(Rails.root, pdf_path(pdfpre, true))
-  end
-
   def bucket_code
-    super(self.created_at)
+    pdf_writer.bucket_code
   end
 
   def check_ineligible

@@ -1317,7 +1317,7 @@ describe Registrant do
     it "should send an email if registrant chose to finish online with state" do
       GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
       
-      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>true)
       stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
       
       expect {
@@ -1360,66 +1360,142 @@ describe Registrant do
   end
 
   describe "PDF" do
+    before(:each) do
+      @registrant = FactoryGirl.create(:maximal_registrant)
+    end
+    
     describe "merge" do
-      before(:each) do
-        @registrant = FactoryGirl.create(:maximal_registrant)
-        @registrant.stub(:merge_pdf) { `touch #{@registrant.pdf_file_path}` }
-      end
-
+      
       it "generates PDF with merged data" do
         `rm -f #{@registrant.pdf_file_path}`
         assert_difference(%Q{Dir[File.join(Rails.root, "public/pdfs/#{@registrant.bucket_code}/*")].length}) do
-          @registrant.generate_pdf
+          @registrant.generate_pdf.to_s
         end
       end
 
       it "returns PDF if already exists" do
-        FileUtils.mkdir_p(@registrant.pdf_file_dir)
-        
+        `mkdir #{File.join(Rails.root, "public/pdfs/#{@registrant.bucket_code}")}`
         `touch #{@registrant.pdf_file_path}`
         assert_difference(%Q{Dir[File.join(Rails.root, "public/pdfs/#{@registrant.bucket_code}/*")].length} => 0) do
-          @registrant.generate_pdf
+          @registrant.generate_pdf.should be_true
         end
       end
-
-      it "sets pdf_ready if file exists or is generated" do
-        assert !@registrant.pdf_ready?
-        @registrant.generate_pdf
-        assert @registrant.pdf_ready?
-      end
-
       after do
         `rm #{@registrant.pdf_file_path}`
         `rmdir #{File.dirname(@registrant.pdf_file_path)}`
       end
+      
+    end
+      
+    describe 'to_pdf_hash' do
+      it "generates a hash of attributes for PDF generation" do
+        @registrant.to_pdf_hash.should be_a(Hash)
+      end
     end
     
-    describe "registration_instructions_url" do
-      let(:registrant) { FactoryGirl.create(:maximal_registrant) }
-      let(:partner) { FactoryGirl.create(:partner) }
+    describe 'generate_pdf' do
+      let(:pdf_writer) { mock(PdfWriter) }
       before(:each) do
-        registrant.partner = partner
+        pdf_writer.stub(:assign_attributes)
+        pdf_writer.stub(:valid?).and_return(true)
+        pdf_writer.stub(:generate_pdf).and_return(true)
+        PdfWriter.stub(:new).and_return(pdf_writer)
+        @registrant.stub(:to_pdf_hash).and_return("pdf_hash")
+        @registrant.stub(:deliver_confirmation_email)
       end
-      context "when the partner's instructions url is blank" do
-        before(:each) do
-          partner.registration_instructions_url = ""
+      it "builds a PDF writer" do
+        PdfWriter.should_receive(:new)
+        @registrant.generate_pdf
+      end
+      it "assigns PDF attributes" do
+        pdf_writer.should_receive(:assign_attributes).with("pdf_hash")
+        @registrant.generate_pdf
+      end        
+      
+      context "when pdf_writer is valid" do
+        context 'when pdf is genereated' do
+          it "returns true" do
+            @registrant.generate_pdf.should == true
+          end
+          it "calls deliver_confirmation_reminder_emails" do
+            @registrant.should_receive(:deliver_confirmation_email)
+            @registrant.generate_pdf
+          end
         end
-        it "returns the pdf settings with state and locale substituted" do
-          registrant.registration_instructions_url.should == RockyConf.pdf.nvra.page1.other_block.instructions_url.gsub(
-            "<LOCALE>",registrant.locale
-          ).gsub("<STATE>",registrant.home_state_abbrev)
+        context 'when pdf is not generated' do  
+          before(:each) do
+            pdf_writer.stub(:generate_pdf).and_return(false)
+          end          
+          it "returns false" do
+            @registrant.generate_pdf.should == false
+          end
+          it "does not send confirmation email" do
+            @registrant.should_not_receive(:deliver_confirmation_email)
+            @registrant.generate_pdf
+          end
         end
       end
-      context "when the partner's instructions url is specified" do
+
+      context 'when pdf_writer is not valid' do
         before(:each) do
-          partner.registration_instructions_url = "http://custom-url/?l=<LOCALE>&s=<STATE>"
+          pdf_writer.stub(:valid?).and_return(false)
+        end          
+        
+        it "returns false" do
+          @registrant.generate_pdf.should == false
         end
-        it "returns the custom url with state and locale substituted" do
-          registrant.registration_instructions_url.should == "http://custom-url/?l=#{registrant.locale}&s=#{registrant.home_state_abbrev}"
+        it "does not send confirmation email" do
+          @registrant.should_not_receive(:deliver_confirmation_reminder_emails)
+          @registrant.generate_pdf
         end
+      end
+    end
+    
+    describe 'finalize_pdf' do
+      let(:r) { FactoryGirl.create(:maximal_registrant) }
+      it "sets pdf_ready to true" do
+        r.finalize_pdf
+        r.pdf_ready.should == true
+      end
+        
+      it "redacts sensitive data" do
+        r.finalize_pdf
+        r.state_id_number.should == nil
+      end
+      it "saves the model" do
+        r.should_receive(:save)
+        r.finalize_pdf
+      end
+    end
+
+  end
+    
+  describe "registration_instructions_url" do
+    let(:registrant) { FactoryGirl.create(:maximal_registrant) }
+    let(:partner) { FactoryGirl.create(:partner) }
+    before(:each) do
+      registrant.partner = partner
+    end
+    context "when the partner's instructions url is blank" do
+      before(:each) do
+        partner.registration_instructions_url = ""
+      end
+      it "returns the pdf settings with state and locale substituted" do
+        registrant.registration_instructions_url.should == RockyConf.pdf.nvra.page1.other_block.instructions_url.gsub(
+          "<LOCALE>",registrant.locale
+        ).gsub("<STATE>",registrant.home_state_abbrev)
+      end
+    end
+    context "when the partner's instructions url is specified" do
+      before(:each) do
+        partner.registration_instructions_url = "http://custom-url/?l=<LOCALE>&s=<STATE>"
+      end
+      it "returns the custom url with state and locale substituted" do
+        registrant.registration_instructions_url.should == "http://custom-url/?l=#{registrant.locale}&s=#{registrant.home_state_abbrev}"
       end
     end
   end
+
 
   describe "CSV" do
     it "renders minimal CSV" do
@@ -1636,15 +1712,50 @@ describe Registrant do
   end
 
   describe "deliver_confirmation_email" do
+    let(:r) { FactoryGirl.create(:maximal_registrant) }
+    before(:each) do
+      r.stub(:send_emails?).and_return(true)
+    end
     it "should deliver an email" do
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
-        FactoryGirl.create(:maximal_registrant).deliver_confirmation_email
+        r.deliver_confirmation_email
       end
     end
-    it "does not send an email when address is blank" do
+    it "enquees reminders if send_emails? is true" do
+      r.should_receive(:enqueue_reminder_emails)
+      r.deliver_confirmation_email
+    end
+    it "does not send an email when send_emails? is false" do
+      
       assert_difference('ActionMailer::Base.deliveries.size', 0) do
-        FactoryGirl.create(:maximal_registrant, :collect_email_address=>'no', :email_address=>'').deliver_confirmation_email
+        r.stub(:send_emails?).and_return(false)
+        r.deliver_confirmation_email
       end
+    end
+  end
+  
+  describe 'send_emails?' do
+    let(:r) { FactoryGirl.create(:maximal_registrant) }
+    it "is true if email is present, collect_email_address is true and not building via api call" do
+      r.send_emails?.should be_true
+    end
+    it "is true if email is present, collect_email_address is true and building via api call and send_confirmation_reminders is true" do
+      r.building_via_api_call = true
+      r.send_confirmation_reminder_emails = true
+      r.send_emails?.should be_true
+    end
+    it "is false if email is blank" do
+      r.email_address = ''
+      r.send_emails?.should be_false
+    end
+    it "is false if collect_email_address is false" do
+      r.collect_email_address = 'no'
+      r.send_emails?.should be_false
+    end
+    it "is false if building_via_api and send_confirmation_reminders is false" do
+      r.building_via_api_call = true
+      r.send_confirmation_reminder_emails = false
+      r.send_emails?.should be_false
     end
   end
   

@@ -152,6 +152,8 @@ geo_state_21:
   requires_race: '0'
   requires_party: '0'
   participating: '1'
+  registrar_address: Secretary of the Commonwealth<br>Elections Division<br>One Ashburton
+    Place - Room 1705<br>Boston, MA 02108
 geo_state_22:
   id: '23'
   abbreviation: MI
