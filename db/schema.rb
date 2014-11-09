@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141024195843) do
+ActiveRecord::Schema.define(:version => 20141109005207) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -106,6 +106,15 @@ ActiveRecord::Schema.define(:version => 20141024195843) do
   add_index "partners", ["username"], :name => "index_partners_on_username"
   add_index "partners", ["whitelabeled"], :name => "index_partners_on_whitelabeled"
 
+  create_table "pdf_generations", :force => true do |t|
+    t.integer  "registrant_id"
+    t.boolean  "locked",        :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "pdf_generations", ["locked"], :name => "index_pdf_generations_on_locked"
+
   create_table "registrants", :force => true do |t|
     t.string   "status"
     t.string   "locale",                             :limit => 64
@@ -186,6 +195,7 @@ ActiveRecord::Schema.define(:version => 20141024195843) do
     t.integer  "remote_partner_id"
   end
 
+  add_index "registrants", ["abandoned", "status"], :name => "registrant_stale"
   add_index "registrants", ["abandoned"], :name => "index_registrants_on_abandoned"
   add_index "registrants", ["age"], :name => "index_registrants_on_age"
   add_index "registrants", ["created_at"], :name => "index_registrants_on_created_at"
@@ -194,6 +204,7 @@ ActiveRecord::Schema.define(:version => 20141024195843) do
   add_index "registrants", ["official_party_name"], :name => "index_registrants_on_official_party_name"
   add_index "registrants", ["partner_id"], :name => "index_registrants_on_partner_id"
   add_index "registrants", ["race"], :name => "index_registrants_on_race"
+  add_index "registrants", ["reminders_left", "updated_at"], :name => "index_registrants_on_reminders_left_and_updated_at"
   add_index "registrants", ["remote_partner_id"], :name => "index_registrants_on_remote_partner_id"
   add_index "registrants", ["status"], :name => "index_registrants_on_status"
   add_index "registrants", ["uid"], :name => "index_registrants_on_uid"
