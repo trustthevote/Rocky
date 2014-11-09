@@ -57,7 +57,8 @@ class PdfWriter
       :created_at
       
   validates_presence_of :id, :uid, :home_state_id, :pdf_barcode, :locale, :registration_instructions_url, :state_registrar_address, :registration_deadline, :pdf_date_of_birth, :created_at
-
+  validate :pdf_date_of_birth_format
+  
   def us_citizen?
     self.us_citizen == true
   end
@@ -96,8 +97,9 @@ class PdfWriter
     end
   end
 
+
   def registrant_to_html_string
-    return false if self.locale.nil? || self.home_state_id.nil?
+    return false if self.locale.blank? || self.home_state_id.blank?
     prev_locale = I18n.locale
 
 
@@ -119,38 +121,38 @@ class PdfWriter
     html_string = registrant_to_html_string
     return false if !html_string
 
-    path = html_file_path
-    # skip FS check
-    # if !File.exists?(path) || force_write
-      FileUtils.mkdir_p(html_file_dir)
-      File.open(path, "w") do |f|
-        f << html_string.force_encoding('UTF-8')
-      end
-    # end
+    if force_write || !html_exists?
+      PdfWriter.write_html_from_html_string(html_string, html_file_dir, html_file_path, force_write)
+    end
+
+    return true
+  end
+  
+  def self.write_html_from_html_string(html_string, dir, path)
+    FileUtils.mkdir_p(dir)
+    File.open(path, "w") do |f|
+      f << html_string.force_encoding('UTF-8')
+    end
   end
 
   def generate_pdf(force_write = false)
     html_string = registrant_to_html_string
     return false if !html_string
 
-
-    PdfWriter.write_pdf_from_html_string(html_string, pdf_file_path, self.locale, pdf_file_dir, force_write)
-
-    # lets assume if there's no error raise, the file got generated
+    if force_write || !pdf_exists?
+      PdfWriter.write_pdf_from_html_string(html_string, pdf_file_path, self.locale, pdf_file_dir)
+    end
+    # lets assume if there's no error raise, the file got generated (to limit FS operations)
     return true
-    # return pdf_exists?
-
-  end
-  #handle_asynchronously :generate_pdf, :priority=>0, :queue=>'pdfgen'
-
-  def self.write_pdf_from_html_string(html_string, path, locale, pdf_file_dir, force_write = false)
-    PdfWriter.write_pdf_from_html(html_string, path, locale, pdf_file_dir, force_write)
   end
 
   def pdf_exists?
     File.exists?(pdf_file_path)
   end
-
+  
+  def html_exists?
+    File.exists?(html_file_path)
+  end
 
 
   def to_param
@@ -202,21 +204,29 @@ class PdfWriter
 
 
 
-  def self.write_pdf_from_html(html_string, path, locale, pdf_file_dir, force_write = false)
-    # skip exists check
-    # if force_write || !File.exists?(path)
-        pdf = WickedPdf.new.pdf_from_string(
-        html_string,
-        :disable_internal_links         => false,
-        :disable_external_links         => false,
-        :encoding => 'utf8',
-        :locale=>locale
-      )      
-      FileUtils.mkdir_p(pdf_file_dir)
-      File.open(path, "w") do |f|
-        f << pdf.force_encoding('UTF-8')
-      end
-    # end
+  def self.write_pdf_from_html_string(html_string, path, locale, pdf_file_dir)
+    pdf = WickedPdf.new.pdf_from_string(
+      html_string,
+      :disable_internal_links         => false,
+      :disable_external_links         => false,
+      :encoding => 'utf8',
+      :locale=>locale
+    )      
+    FileUtils.mkdir_p(pdf_file_dir)
+    File.open(path, "w") do |f|
+      f << pdf.force_encoding('UTF-8')
+    end
   end   
+  
+  private 
+  
+  def pdf_date_of_birth_format
+    if (/^\d{1,2}\/\d{1,2}\/\d{2,4}$/.match(self.pdf_date_of_birth))
+      return true
+    else
+      errors.add(:pdf_date_of_birth, "Must be MM/DD/YYYY")
+      return false
+    end
+  end
   
 end

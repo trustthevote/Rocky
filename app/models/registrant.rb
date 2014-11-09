@@ -1022,7 +1022,11 @@ class Registrant < ActiveRecord::Base
       redact_sensitive_data
     
     rescue Exception => e
-      puts e.response
+      begin
+        puts e.response
+      rescue
+        raise e
+      end
     end
     
     
@@ -1219,7 +1223,7 @@ class Registrant < ActiveRecord::Base
       :partner_absolute_pdf_logo_path => partner_absolute_pdf_logo_path,
       :registration_instructions_url => registration_instructions_url,
       :home_state_pdf_instructions => home_state_pdf_instructions,
-      :state_registrar_address => home_state.registrar_address,
+      :state_registrar_address => state_registrar_address,
       :registration_deadline => registration_deadline,
       :party => party,
       :english_party_name => english_party_name,
@@ -1303,33 +1307,6 @@ class Registrant < ActiveRecord::Base
   def redact_sensitive_data
     self.state_id_number = nil
   end
-
-  #
-  # def pdf_path(pdfpre = nil, file=false)
-  #   "/#{file ? pdf_file_dir(pdfpre) : pdf_dir(pdfpre)}/#{to_param}.pdf"
-  # end
-  #
-  # def pdf_file_dir(pdfpre = nil)
-  #   pdf_dir(pdfpre, false)
-  # end
-  #
-  # def pdf_dir(pdfpre = nil, url_format=true)
-  #   if pdfpre
-  #     "#{pdfpre}/#{bucket_code}"
-  #   else
-  #     if File.exists?(pdf_file_path("pdf"))
-  #       "pdf/#{bucket_code}"
-  #     else
-  #       "#{url_format ? '' : "public/"}pdfs/#{bucket_code}"
-  #     end
-  #   end
-  # end
-  #
-  # def pdf_file_path(pdfpre = nil)
-  #   dir = File.join(Rails.root, pdf_file_dir(pdfpre))
-  #   File.join(Rails.root, pdf_path(pdfpre, true))
-  # end
-  #
   
   def bucket_code
     pdf_writer.bucket_code

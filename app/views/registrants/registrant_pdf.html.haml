@@ -24,7 +24,7 @@
             %p= @registrant.home_state_pdf_instructions.to_s.html_safe
           
         %h4.title= I18n.t('pdf.nvra.page1.submit_block.title' ).to_s.html_safe
-        %p= @registrant.state_registrar_address.to_s.html_safe
+        %p#registrar_address= @registrant.state_registrar_address.to_s.html_safe
     %tr
       %td.deadline_block
         %h4.title= I18n.t('pdf.nvra.page1.deadline_block.title' ).to_s.html_safe

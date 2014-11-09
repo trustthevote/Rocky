@@ -2,19 +2,14 @@ require 'spec_helper'
 
 describe PdfRenderer do
   let(:r) { FactoryGirl.create(:maximal_registrant, :locale=>'es') }
-  let(:pdfg) { PdfRenderer.new(r) }
+  let(:pdfg) { PdfRenderer.new(r.pdf_writer) }
   
   describe "initialize(reg)" do
-    # @locale=registrant.locale
-    # @registrant=registrant
-    # @state=registrant.home_state
-    # @logo_image_path = self.logo_image_path
-    # set_registrant_instructions_link
     it "sets locale" do
       pdfg.locale.should == r.locale
     end
     it "sets registrant" do
-      pdfg.registrant.should == r
+      pdfg.registrant.should == r.pdf_writer
     end
     it "sets logo_image_path" do
       pdfg.logo_image_path.should_not be_nil
@@ -60,7 +55,7 @@ describe PdfRenderer do
   
   describe "render_to_string('registrants/registrant_pdf', :layout => 'layouts/nvra')" do
     let(:registrant) { FactoryGirl.create(:maximal_registrant, :home_zip_code=>"00501") }
-    let(:pdfg) { PdfRenderer.new(registrant) }
+    let(:pdfg) { PdfRenderer.new(registrant.pdf_writer) }
     let(:doc) { Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra')) }
     
     before(:each) do
@@ -74,7 +69,7 @@ describe PdfRenderer do
   
   describe "render_to_string('registrants/registrant_pdf', :layout => 'layouts/nvra')" do
     let(:registrant) { FactoryGirl.create(:maximal_registrant) }
-    let(:pdfg) { PdfRenderer.new(registrant) }
+    let(:pdfg) { PdfRenderer.new(registrant.pdf_writer) }
     let(:doc) { Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra')) }
     
 
@@ -239,7 +234,7 @@ describe PdfRenderer do
     
     describe "barcode" do
       let(:registrant) { FactoryGirl.build(:maximal_registrant) }
-      let(:pdfg) { PdfRenderer.new(registrant) }
+      let(:pdfg) { PdfRenderer.new(registrant.pdf_writer) }
       before(:each) do
         registrant.id = 42_000_000
         doc = Nokogiri::XML(pdfg.render_to_string('registrants/registrant_pdf', :layout=>'layouts/nvra'))

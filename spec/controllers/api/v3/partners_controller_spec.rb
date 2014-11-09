@@ -68,9 +68,9 @@ describe Api::V3::PartnersController do
   private
 
   def partner(&block)
-    query = { :partner_id => nil, :partner_api_key => nil }
+    query = { :partner_id => "1", :partner_api_key => nil }
     V3::PartnerService.stub(:find).with(query, false, &block)
-    get :show, :format => 'json'
+    get :show, :format => 'json', :id=>1
   end
 
   def public_partner(&block)
