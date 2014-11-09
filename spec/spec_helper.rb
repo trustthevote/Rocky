@@ -76,6 +76,9 @@ RSpec.configure do |config|
       id = $1
       {:body=>{:partner => V3::PartnerService.find(:partner_id=>id) }.to_json}
     end
+    stub_request(:any, %r{http://example-api\.com/api/v3/registrations.json}).to_return do |req|
+      {:body=>{:pdfurl=>"http://example-api/pdfurl.pdf", :uid=>"uid"}.to_json}
+    end
   end
   
 end
