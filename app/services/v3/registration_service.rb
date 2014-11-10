@@ -170,6 +170,12 @@ module V3
       end
     end
 
+
+    def self.check_pdf_ready(query)
+      reg = Registrant.find_by_uid(query[:UID])
+      return reg && reg.pdf_ready?
+    end
+
     private
 
     def self.block_protected_attributes(attrs)

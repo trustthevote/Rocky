@@ -76,5 +76,10 @@ class Step2Controller < RegistrationStep
     @state_parties = @registrant.state_parties
     @race_tooltip = @registrant.race_tooltip
     @party_tooltip = @registrant.party_tooltip
+    
+    if @registrant.use_short_form?
+      @question_1 = @registrant.question_1
+      @question_2 = @registrant.question_2
+    end
   end
 end

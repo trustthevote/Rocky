@@ -81,5 +81,20 @@ class Api::V3::RegistrationsController < Api::V3::BaseController
     name = e.message.split(': ')[1]
     jsonp({ :field_name => name, :message => "Invalid parameter type" }, :status => 400)
   end
+  
+  def pdf_ready
+    query = {
+      :UID              => params[:UID]
+    }
+
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+    headers['Access-Control-Allow-Headers'] = '*'
+    headers['Access-Control-Max-Age'] = "1728000"
+
+    jsonp :pdf_ready => V3::RegistrationService.check_pdf_ready(query), :UID=>params[:UID]
+  rescue ArgumentError => e
+    jsonp({ :message => e.message }, :status => 400)
+  end
 
 end

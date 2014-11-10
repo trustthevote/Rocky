@@ -29,9 +29,15 @@ class DownloadsController < RegistrationStep
     find_registrant(:download)
     if @registrant.pdf_ready?
       render "show"
-    elsif @registrant.updated_at < 30.seconds.ago
-      redirect_to registrant_finish_url(@registrant)
+    elsif @registrant.javascript_disabled?
+      if @registrant.updated_at < 30.seconds.ago && !@registrant.email_address.blank?
+        redirect_to registrant_finish_url(@registrant)
+      else
+        render "preparing"
+      end
     else
+      @uid = @registrant.remote_uid
+      @timeout = !@registrant.email_address.blank?
       render "preparing"
     end
   end

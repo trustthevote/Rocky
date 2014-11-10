@@ -77,7 +77,11 @@ Rocky::Application.routes.draw do
       match 'gregistrations',      :format => 'json', :controller => 'registrations', :action => 'create_finish_with_state', :via => :post
     end
     namespace :v3 do
-      resources :registrations, :only=>[:index, :create], :format=>'json'
+      resources :registrations, :only=>[:index, :create], :format=>'json' do
+        collection do
+          get "pdf_ready", :action=>"pdf_ready"
+        end
+      end
       resource :state_requirements, :only=>:show, :format=>'json'
 
       resources :partners, :only=>[:show, :create], :format=>'json'

@@ -1015,12 +1015,14 @@ class Registrant < ActiveRecord::Base
 
   def complete_registration
     begin
-      response = RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations.json", 
+      response = JSON.parse(RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations.json", 
         :registration => self.to_api_hash
-      ) 
-    
+      ))
+      
+      self.remote_uid = response["uid"]
+      self.remote_pdf_path = response["pdfurl"]
+      self.save!
       redact_sensitive_data
-    
     rescue Exception => e
       begin
         puts e.response
@@ -1039,7 +1041,7 @@ class Registrant < ActiveRecord::Base
   def to_api_hash
     {
       lang: locale,
-      partner_id: partner_id,
+      partner_id: remote_partner_id,
       send_confirmation_reminder_emails: send_confirmation_reminder_emails,
       collect_email_address: collect_email_address,
       source_tracking_id: tracking_source,
@@ -1101,7 +1103,7 @@ class Registrant < ActiveRecord::Base
       survey_answer_1: survey_answer_1, 
       survey_question_2: survey_question_2,
       survey_answer_2: survey_answer_2, 
-      async: collect_email_address?
+      async: true
     }
   end
 
@@ -1122,6 +1124,7 @@ class Registrant < ActiveRecord::Base
     self.status = 'complete'
     self.save
   end
+  
 
   def generate_barcode
     self.barcode = self.pdf_barcode
@@ -1138,7 +1141,11 @@ class Registrant < ActiveRecord::Base
   def generate_pdf!
     generate_pdf(true)
   end
-
+  
+  def queue_pdf
+    PdfGeneration.create!(:registrant_id=>self.id)
+  end
+  
   def pdf_file_path(pdfpre=nil)
     pdf_writer.pdf_file_path(pdfpre)
   end

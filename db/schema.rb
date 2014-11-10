@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141109005207) do
+ActiveRecord::Schema.define(:version => 20141110212955) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -193,6 +193,8 @@ ActiveRecord::Schema.define(:version => 20141109005207) do
     t.boolean  "will_be_18_by_election"
     t.text     "state_ovr_data"
     t.integer  "remote_partner_id"
+    t.string   "remote_uid"
+    t.string   "remote_pdf_path"
   end
 
   add_index "registrants", ["abandoned", "status"], :name => "registrant_stale"
@@ -206,6 +208,7 @@ ActiveRecord::Schema.define(:version => 20141109005207) do
   add_index "registrants", ["race"], :name => "index_registrants_on_race"
   add_index "registrants", ["reminders_left", "updated_at"], :name => "index_registrants_on_reminders_left_and_updated_at"
   add_index "registrants", ["remote_partner_id"], :name => "index_registrants_on_remote_partner_id"
+  add_index "registrants", ["remote_uid"], :name => "index_registrants_on_remote_uid"
   add_index "registrants", ["status"], :name => "index_registrants_on_status"
   add_index "registrants", ["uid"], :name => "index_registrants_on_uid"
 

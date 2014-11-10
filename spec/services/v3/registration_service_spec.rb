@@ -335,4 +335,27 @@ describe V3::RegistrationService do
     end
   end
 
+  describe 'check_pdf_ready' do
+    let(:query) do
+      { :UID=>"123"}
+    end
+    let(:reg) { mock_model(Registrant) }
+    before(:each) do
+      Registrant.stub(:find_by_uid).and_return(reg)
+      reg.stub(:pdf_ready?).and_return(true)
+    end
+    it "finds the registrant" do
+      Registrant.should_receive(:find_by_uid).with("123")
+      V3::RegistrationService.check_pdf_ready(query).should be_true
+    end
+    it "returns false if the registrant is not found" do
+      Registrant.stub(:find_by_uid).and_return(nil)
+      V3::RegistrationService.check_pdf_ready(query).should be_false
+    end
+    it "returns false if the registrant pdf is not ready" do
+      reg.stub(:pdf_ready?).and_return(false)
+      V3::RegistrationService.check_pdf_ready(query).should be_false
+    end
+  end
+
 end

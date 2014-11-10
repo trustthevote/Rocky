@@ -1,12 +1,61 @@
-<% content_for :head do -%>
-  <meta http-equiv="refresh" content="2" />
-<% end -%>
-<h1><%= I18n.t('txt.registration.download_header') %></h1>
-<div class="download" style="position:relative">
-  <div>
-    <h2 class="spaced_out"><%= I18n.t('txt.registration.instructions.download') %></h2>
-    <h2 class="preparing"><br/><%= I18n.t('txt.registration.preparing_header') %></h2>
+<%- if @uid.nil? %>
+  <% content_for :head do -%>
+    <meta http-equiv="refresh" content="2" />
+  <%- end %>
+<%- else %>
+  <script type="text/javascript" charset="utf-8">
+  <%- pdf_ready_api_url = "#{RockyConf.api_host_name}/api/v3/registrations/pdf_ready.json" %>
+  
+  var pulseTime = 2000;
+  var checkPdfUrl = function() {
+    console.log("Querying ")
+    $.ajax({
+      url: '<%= pdf_ready_api_url %>',
+      data: {
+        "UID": '<%= @uid %>'
+      },
+      error: function(xhr, status, err) {
+        if (status !== "Unknown") {
+          setTimeout(checkPdfUrl, pulseTime);
+        }
+        if (status === "Unknown") {
+          return setTimeout(function() {
+            //$('#waiting').hide();
+            //return $('#download').show();
+            checkPdfUrl
+          }, pulseTime);
+        }
+      },
+      success: function(d) {
+        console.log(d);
+        if (d["pdf_ready"]) {
+          $("#preparing_content").hide();
+          $("#download_button_content").show();
+        } else {
+          setTimeout(checkPdfUrl, pulseTime);
+        }
+      }
+    });
+  };
+  
+  $(document).ready(function() {
+    setTimeout(checkPdfUrl, pulseTime);
+  });
+  
+  </script>
+
+<%- end %>
+<div id="preparing_content">
+  <h1><%= I18n.t('txt.registration.download_header') %></h1>
+  <div class="download" style="position:relative">
+    <div>
+      <h2 class="spaced_out"><%= I18n.t('txt.registration.instructions.download') %></h2>
+      <h2 class="preparing"><br/><%= I18n.t('txt.registration.preparing_header') %></h2>
+    </div>
+    <p class="preparing"><%= image_tag "reg/spinner.gif" %></p>
+    <p><%= I18n.t('txt.registration.instructions.download_2') %></p>
   </div>
-  <p class="preparing"><%= image_tag "reg/spinner.gif" %></p>
-  <p><%= I18n.t('txt.registration.instructions.download_2') %></p>
+</div>
+<div id="download_button_content" style="display:none;">
+  <%= render "download_button"%>
 </div>

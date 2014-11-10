@@ -1698,6 +1698,7 @@ describe Registrant do
       it "sends async = false for no-email registrations" do
         pending
       end
+      it "uses the remote_partner_id"
     end
 
     describe "background processing" do

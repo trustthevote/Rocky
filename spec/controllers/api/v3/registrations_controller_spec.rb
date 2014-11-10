@@ -89,7 +89,28 @@ describe Api::V3::RegistrationsController do
     end    
   end
 
+  describe 'pdf_ready' do
+    it "should catch errors" do
+      expect_api_error :message => 'error'
+      pdf_ready { raise ArgumentError.new('error') }
+      
+    end
+    it "returns a hash of pdfready true/false and uid" do
+      expect_api_response({:pdf_ready => true, :UID=>"1234"})
+      pdf_ready { true }
+
+      expect_api_response({:pdf_ready => false, :UID=>"1234"})
+      pdf_ready { false }
+    end
+  end
+
   private
+
+  def pdf_ready(&block)
+    query = { :UID=>"1234"}
+    V3::RegistrationService.stub(:check_pdf_ready).with(query, &block)
+    get :pdf_ready, query.merge(:format=>'json')
+  end
 
   def registrations(&block)
     query = { :partner_id => nil, :partner_api_key => nil, :since => nil, :email=>nil }

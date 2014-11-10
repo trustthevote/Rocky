@@ -29,10 +29,8 @@ describe DownloadsController do
 
   describe "when PDF is ready" do
     before(:each) do
-      @registrant = FactoryGirl.create(:step_5_registrant)
-      @registrant.stub(:merge_pdf) { `touch #{@registrant.pdf_file_path}` }
-      @registrant.generate_pdf
-      @registrant.save!
+      @registrant = FactoryGirl.create(:maximal_registrant)
+      @registrant.finalize_pdf
     end
 
     it "provides a link to download the PDF" do
@@ -44,31 +42,77 @@ describe DownloadsController do
       assert_select "span.button a[onclick]"
     end
 
-    after(:each) do
-      `rm #{@registrant.pdf_file_path}`
-    end
   end
 
   describe "when PDF is not ready" do
     before(:each) do
       @registrant = FactoryGirl.create(:step_5_registrant)
     end
-
-    it "provides a link to download the PDF" do
-      assert !@registrant.pdf_ready?
-      get :show, :registrant_id => @registrant.to_param
-      assert_not_nil assigns[:registrant]
-      assert_response :success
-      assert_template "preparing"
+    context 'with javascript enabled' do
+      context 'when email address is present' do
+        it "renders a preparing page that polls the PDF ready api with the registrant UID and a timeout redirect" do
+          assert !@registrant.pdf_ready?
+          get :show, :registrant_id => @registrant.to_param
+          assert_not_nil assigns[:registrant]
+          assert assigns[:uid] == @registrant.remote_uid
+          assert assigns[:timeout] == true
+          assert_response :success
+          assert_template "preparing"
+        end        
+      end
+      context 'with no email address' do
+        it "renders a preparing page that polls the PDF ready api with the registrant UID with no timeout" do
+          @registrant.collect_email_address = 'no'
+          @registrant.email_address = ''
+          @registrant.save!
+          assert !@registrant.pdf_ready?
+          get :show, :registrant_id => @registrant.to_param
+          assert_not_nil assigns[:registrant]
+          assert assigns[:uid] == @registrant.remote_uid
+          assert assigns[:timeout] == false
+          assert_response :success
+          assert_template "preparing"
+        end                
+      end
+    end
+    context 'when javascript is disabled' do
+      before(:each) do
+        @registrant.javascript_disabled = true
+        @registrant.save!
+      end
+      it "provides a link to download the PDF" do
+        assert !@registrant.pdf_ready?
+        get :show, :registrant_id => @registrant.to_param
+        assert_not_nil assigns[:registrant]
+        assert_response :success
+        assert_template "preparing"
+      end
+      context 'when the user has an email address' do
+        it "times out preparing page after 30 seconds" do
+          Registrant.update_all("updated_at = '#{35.seconds.ago.to_s(:db)}'", "id = #{@registrant.id}")
+          assert !@registrant.pdf_ready?
+          get :show, :registrant_id => @registrant.to_param
+          assert_not_nil assigns[:registrant]
+          assert_redirected_to registrant_finish_url(@registrant)
+        end
+      end
+      context 'when the user has no email' do
+        before(:each) do
+          @registrant.collect_email_address = 'no'
+          @registrant.email_address = nil
+          @registrant.save!
+        end
+        it "does not times out preparing page after 30 seconds" do
+          Registrant.update_all("updated_at = '#{125.seconds.ago.to_s(:db)}'", "id = #{@registrant.id}")
+          assert !@registrant.pdf_ready?
+          get :show, :registrant_id => @registrant.to_param
+          assert_not_nil assigns[:registrant]
+          assert_response :success
+          assert_template "preparing"
+        end
+      end
     end
 
-    it "times out preparing page after 30 seconds" do
-      Registrant.update_all("updated_at = '#{35.seconds.ago.to_s(:db)}'", "id = #{@registrant.id}")
-      assert !@registrant.pdf_ready?
-      get :show, :registrant_id => @registrant.to_param
-      assert_not_nil assigns[:registrant]
-      assert_redirected_to registrant_finish_url(@registrant)
-    end
   end
 
 end
