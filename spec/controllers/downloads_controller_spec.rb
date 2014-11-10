@@ -30,7 +30,7 @@ describe DownloadsController do
   describe "when PDF is ready" do
     before(:each) do
       @registrant = FactoryGirl.create(:maximal_registrant)
-      @registrant.finalize_pdf
+      Registrant.any_instance.stub(:remote_pdf_ready?).and_return(true)
     end
 
     it "provides a link to download the PDF" do
@@ -47,11 +47,12 @@ describe DownloadsController do
   describe "when PDF is not ready" do
     before(:each) do
       @registrant = FactoryGirl.create(:step_5_registrant)
+      Registrant.any_instance.stub(:remote_pdf_ready?).and_return(false)
+      
     end
     context 'with javascript enabled' do
       context 'when email address is present' do
         it "renders a preparing page that polls the PDF ready api with the registrant UID and a timeout redirect" do
-          assert !@registrant.pdf_ready?
           get :show, :registrant_id => @registrant.to_param
           assert_not_nil assigns[:registrant]
           assert assigns[:uid] == @registrant.remote_uid
@@ -65,7 +66,6 @@ describe DownloadsController do
           @registrant.collect_email_address = 'no'
           @registrant.email_address = ''
           @registrant.save!
-          assert !@registrant.pdf_ready?
           get :show, :registrant_id => @registrant.to_param
           assert_not_nil assigns[:registrant]
           assert assigns[:uid] == @registrant.remote_uid
@@ -81,7 +81,6 @@ describe DownloadsController do
         @registrant.save!
       end
       it "provides a link to download the PDF" do
-        assert !@registrant.pdf_ready?
         get :show, :registrant_id => @registrant.to_param
         assert_not_nil assigns[:registrant]
         assert_response :success
@@ -90,7 +89,6 @@ describe DownloadsController do
       context 'when the user has an email address' do
         it "times out preparing page after 30 seconds" do
           Registrant.update_all("updated_at = '#{35.seconds.ago.to_s(:db)}'", "id = #{@registrant.id}")
-          assert !@registrant.pdf_ready?
           get :show, :registrant_id => @registrant.to_param
           assert_not_nil assigns[:registrant]
           assert_redirected_to registrant_finish_url(@registrant)
@@ -104,7 +102,6 @@ describe DownloadsController do
         end
         it "does not times out preparing page after 30 seconds" do
           Registrant.update_all("updated_at = '#{125.seconds.ago.to_s(:db)}'", "id = #{@registrant.id}")
-          assert !@registrant.pdf_ready?
           get :show, :registrant_id => @registrant.to_param
           assert_not_nil assigns[:registrant]
           assert_response :success

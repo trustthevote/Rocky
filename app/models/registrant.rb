@@ -1025,7 +1025,7 @@ class Registrant < ActiveRecord::Base
       redact_sensitive_data
     rescue Exception => e
       begin
-        puts e.response
+        Rails.logger.error e.response
       rescue
         raise e
       end
@@ -1036,6 +1036,19 @@ class Registrant < ActiveRecord::Base
     # generate_pdf
     # deliver_confirmation_email
     # enqueue_reminder_emails
+  end
+  
+  def remote_pdf_ready?
+    response = JSON.parse(RestClient.get("#{RockyConf.api_host_name}/api/v3/registrations/pdf_ready.json?UID=#{self.remote_uid}"))
+    
+    return (response["pdf_ready"] == true)
+  rescue Exception => e
+    begin
+      Rails.logger.error e.response
+    rescue
+      raise e
+    end
+    return false
   end
   
   def to_api_hash
