@@ -40,6 +40,12 @@ module V3
     class SurveyQuestionError < StandardError
     end
     
+    class InvalidUIDError < ValidationError
+      def initialize
+        super("UID", "Registrant not found")
+      end
+    end
+    
     class InvalidParameterValue < ValidationError
       def initialize(field)
         super(field, "Invalid Parameter Value")
@@ -173,7 +179,19 @@ module V3
 
     def self.check_pdf_ready(query)
       reg = Registrant.find_by_uid(query[:UID])
+      raise InvalidUIDError.new if reg.nil?
       return reg && reg.pdf_ready?
+    end
+    
+    def self.stop_reminders(query)
+      reg = Registrant.find_by_uid(query[:UID])
+      raise InvalidUIDError.new if reg.nil?
+      return {
+        :first_name=>reg.first_name,
+        :last_name=> reg.last_name,
+        :email_address=>reg.email_address,
+        :reminders_stopped=>reg.update_attributes(:reminders_left=>0)
+      }
     end
 
     private

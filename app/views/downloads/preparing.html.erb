@@ -7,8 +7,13 @@
   <%- pdf_ready_api_url = "#{RockyConf.api_host_name}/api/v3/registrations/pdf_ready.json" %>
   
   var pulseTime = 3000;
+  var attempts = 0;
+  var timeOut = <%= @timeout.to_s %>;
   var checkPdfUrl = function() {
-    console.log("Querying ")
+    attempts += 1;
+    if (timeOut && attempts > 10) {
+      window.location = "<%=registrant_finish_path(@registrant)%>";
+    }
     $.ajax({
       url: '<%= pdf_ready_api_url %>',
       data: {
@@ -27,7 +32,7 @@
         }
       },
       success: function(d) {
-        console.log(d);
+        //console.log(d);
         if (d["pdf_ready"]) {
           $("#preparing_content").hide();
           $("#download_button_content").show();

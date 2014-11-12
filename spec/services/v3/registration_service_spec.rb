@@ -344,17 +344,59 @@ describe V3::RegistrationService do
       Registrant.stub(:find_by_uid).and_return(reg)
       reg.stub(:pdf_ready?).and_return(true)
     end
+    it "raises an error when the registrant isn't found" do
+      Registrant.stub(:find_by_uid).and_return(nil)
+      lambda {
+        V3::RegistrationService.check_pdf_ready(query)
+      }.should raise_error(V3::RegistrationService::InvalidUIDError)
+    end
+    
     it "finds the registrant" do
       Registrant.should_receive(:find_by_uid).with("123")
       V3::RegistrationService.check_pdf_ready(query).should be_true
     end
-    it "returns false if the registrant is not found" do
-      Registrant.stub(:find_by_uid).and_return(nil)
-      V3::RegistrationService.check_pdf_ready(query).should be_false
-    end
     it "returns false if the registrant pdf is not ready" do
       reg.stub(:pdf_ready?).and_return(false)
       V3::RegistrationService.check_pdf_ready(query).should be_false
+    end
+  end
+
+  describe 'stop_reminders' do
+    let(:query) do
+      { :UID=>"123"}
+    end
+    let(:reg) { mock_model(Registrant) }
+    before(:each) do
+      reg.stub(:email_address).and_return("email_addr")
+      reg.stub(:first_name).and_return("fn")
+      reg.stub(:last_name).and_return("ln")
+      reg.stub(:update_attributes).and_return(true)
+      Registrant.stub(:find_by_uid).and_return(reg)
+    end
+    it "raises an error when the registrant isn't found" do
+      Registrant.stub(:find_by_uid).and_return(nil)
+      lambda {
+        V3::RegistrationService.stop_reminders(query)
+      }.should raise_error(V3::RegistrationService::InvalidUIDError)
+    end
+    it "finds the registrant" do
+      Registrant.should_receive(:find_by_uid).with("123")
+      V3::RegistrationService.stop_reminders(query)
+    end
+    it "sets the registrant reminders_left to 0" do
+      reg.should_receive(:update_attributes).with(:reminders_left=>0)
+      V3::RegistrationService.stop_reminders(query)
+    end
+    it "returns wether the update was successful" do
+      V3::RegistrationService.stop_reminders(query)[:reminders_stopped].should be_true
+      reg.stub(:update_attributes).and_return(false)
+      V3::RegistrationService.stop_reminders(query)[:reminders_stopped].should be_false      
+    end
+    it "returns first name, last name and email address" do
+      r = V3::RegistrationService.stop_reminders(query)
+      r[:email_address].should == "email_addr"
+      r[:first_name].should == "fn"
+      r[:last_name].should == "ln"
     end
   end
 

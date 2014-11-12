@@ -80,6 +80,7 @@ Rocky::Application.routes.draw do
       resources :registrations, :only=>[:index, :create], :format=>'json' do
         collection do
           get "pdf_ready", :action=>"pdf_ready"
+          post "stop_reminders", :action=>"stop_reminders"
         end
       end
       resource :state_requirements, :only=>:show, :format=>'json'

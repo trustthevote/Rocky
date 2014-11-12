@@ -104,6 +104,19 @@ describe Api::V3::RegistrationsController do
     end
   end
 
+  describe 'stop_reminders' do
+    it "should catch errors" do
+      expect_api_error :message => 'error'
+      stop_reminders { raise ArgumentError.new('error') }
+    end
+    it "calls the reg service stop_reminders and returns registrant data and whether reminders were stopped" do
+      expect_api_response({:reminders_stopped => true, :UID=>"1234", :first_name=>"fn", :last_name=>"ln", :email_address=>"email"})
+      stop_reminders do
+        {:reminders_stopped => true, :first_name=>"fn", :last_name=>"ln", :email_address=>"email"}
+      end
+    end
+  end
+
   private
 
   def pdf_ready(&block)
@@ -111,7 +124,13 @@ describe Api::V3::RegistrationsController do
     V3::RegistrationService.stub(:check_pdf_ready).with(query, &block)
     get :pdf_ready, query.merge(:format=>'json')
   end
-
+  
+  def stop_reminders(&block)
+    query = { :UID=>"1234"}
+    V3::RegistrationService.stub(:stop_reminders).with(query, &block)
+    post :stop_reminders, query.merge(:format=>'json')
+  end
+  
   def registrations(&block)
     query = { :partner_id => nil, :partner_api_key => nil, :since => nil, :email=>nil }
     V3::RegistrationService.stub(:find_records).with(query, &block)

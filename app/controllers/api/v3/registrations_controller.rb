@@ -96,5 +96,20 @@ class Api::V3::RegistrationsController < Api::V3::BaseController
   rescue ArgumentError => e
     jsonp({ :message => e.message }, :status => 400)
   end
+  
+  def stop_reminders
+    query = {
+      :UID              => params[:UID]
+    }
+
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+    headers['Access-Control-Allow-Headers'] = '*'
+    headers['Access-Control-Max-Age'] = "1728000"
+
+    jsonp V3::RegistrationService.stop_reminders(query).merge(:UID=>params[:UID])
+  rescue ArgumentError => e
+    jsonp({ :message => e.message }, :status => 400)
+  end
 
 end
