@@ -26,7 +26,7 @@ class FinishesController < RegistrationStep
   CURRENT_STEP = 7
 
   def show
-    find_registrant(:tell_friend)
+    find_registrant(:remote)
     if params[:reminders]
       @registrant.update_attributes(:reminders_left => 0)
       @stop_reminders = true

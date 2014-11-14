@@ -28,10 +28,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe FinishesController do
   include Rails.application.routes.url_helpers
   render_views
-
+  
   describe "waiting for delayed job to complete registration" do
     before(:each) do
       @registrant = FactoryGirl.create(:step_5_registrant)
+      Registrant.any_instance.stub(:remote_pdf_ready?).and_return(false)
     end
     it "does not render :complete partial when still in step_5" do
       get :show, :registrant_id => @registrant.to_param
@@ -43,13 +44,14 @@ describe FinishesController do
   describe "complete registration" do
     before(:each) do
       @registrant = FactoryGirl.create(:completed_registrant)
+      Registrant.any_instance.stub(:remote_pdf_ready?).and_return(true)
     end
 
-    it "sets default content for message body" do
-      get :show, :registrant_id => @registrant.to_param
-      assert_match %r(Hey, I just registered to vote), assigns[:registrant].tell_message
-      assert_match Regexp.compile(Regexp.escape(root_path(:source => "email"))), assigns[:registrant].tell_message
-    end
+    # it "sets default content for message body" do
+    #   get :show, :registrant_id => @registrant.to_param
+    #   assert_match %r(Hey, I just registered to vote), assigns[:registrant].tell_message
+    #   assert_match Regexp.compile(Regexp.escape(root_path(:source => "email"))), assigns[:registrant].tell_message
+    # end
 
     it "shows no share links instead has the iframe" do
       get :show, :registrant_id => @registrant.to_param
@@ -69,13 +71,14 @@ describe FinishesController do
   describe "under 18" do
     before(:each) do
       @registrant = FactoryGirl.create(:under_18_finished_registrant)
+      Registrant.any_instance.stub(:remote_pdf_ready?).and_return(false)
     end
 
-    it "sets default content for message body" do
-      get :show, :registrant_id => @registrant.to_param
-      assert_match %r(Are you registered to vote\? I may not be old enough to vote), assigns[:registrant].tell_message
-      assert_match Regexp.compile(Regexp.escape(root_path(:source => "email"))), assigns[:registrant].tell_message
-    end
+    # it "sets default content for message body" do
+    #   get :show, :registrant_id => @registrant.to_param
+    #   assert_match %r(Are you registered to vote\? I may not be old enough to vote), assigns[:registrant].tell_message
+    #   assert_match Regexp.compile(Regexp.escape(root_path(:source => "email"))), assigns[:registrant].tell_message
+    # end
 
     it "does not show share links" do
       get :show, :registrant_id => @registrant.to_param
@@ -107,6 +110,7 @@ describe FinishesController do
   describe "stop reminders" do
     it "stops remaining emails from coming" do
       reg = FactoryGirl.create(:completed_registrant, :reminders_left => 2)
+      Registrant.any_instance.stub(:remote_pdf_ready?).and_return(true)
       get :show, :registrant_id => reg.to_param, :reminders => "stop"
       reg.reload
       assert_equal 0, reg.reminders_left
@@ -116,9 +120,10 @@ describe FinishesController do
       render_views
       it "should show thank you message" do
         reg = FactoryGirl.create(:completed_registrant, :reminders_left => 2)
+        Registrant.any_instance.stub(:remote_pdf_ready?).and_return(true)
         get :show, :registrant_id => reg.to_param, :reminders => "stop"
         assert_select "h1", "Thanks for Registering!"
-        assert_match /Hey, I just registered to vote/, assigns[:registrant].tell_message
+        #assert_match /Hey, I just registered to vote/, assigns[:registrant].tell_message
       end
     end
   end
@@ -127,9 +132,10 @@ describe FinishesController do
     render_views
     it "includes text about pending PDF" do
       reg = FactoryGirl.create(:step_5_registrant, :pdf_ready => false)
+      Registrant.any_instance.stub(:remote_pdf_ready?).and_return(false)
       get :show, :registrant_id => reg.to_param
       assert_select "h1", "Check Your Email"
-      assert_match /Hey, I just registered to vote/, assigns[:registrant].tell_message
+      #assert_match /Hey, I just registered to vote/, assigns[:registrant].tell_message
     end
   end
 

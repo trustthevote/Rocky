@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141110212955) do
+ActiveRecord::Schema.define(:version => 20141114165714) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(:version => 20141110212955) do
     t.integer  "remote_partner_id"
     t.string   "remote_uid"
     t.string   "remote_pdf_path"
+    t.string   "custom_stop_reminders_url"
   end
 
   add_index "registrants", ["abandoned", "status"], :name => "registrant_stale"

@@ -1364,6 +1364,22 @@ describe Registrant do
       @registrant = FactoryGirl.create(:maximal_registrant)
     end
     
+    describe '.remote_pdf_ready?(uid)' do
+      it "calls the core API" do
+        RestClient.should_receive(:get).with("#{RockyConf.api_host_name}/api/v3/registrations/pdf_ready.json?UID=uid").
+          and_return('{"pdf_ready": true, "UID": "uid"}')
+        Registrant.remote_pdf_ready?("uid").should be_true
+      end
+    end
+    describe '#remote_pdf_ready?' do
+      it "calls the class method using the local copies remote_uid value" do
+        @registrant.remote_uid = "ruid"
+        Registrant.stub(:remote_pdf_ready?)
+        Registrant.should_receive(:remote_pdf_ready?).with("ruid")
+        @registrant.remote_pdf_ready?
+      end
+    end
+    
     describe "merge" do
       
       it "generates PDF with merged data" do
@@ -1834,6 +1850,36 @@ describe Registrant do
 
         Airbrake.should_receive(:notify).with(kind_of(Hash))
         reg.deliver_reminder_email
+      end
+    end
+  end
+  
+  describe 'stop_reminders' do
+    describe '.stop_reminders(uid)' do
+      it "posts to the core API" do
+        RestClient.should_receive(:post).with("#{RockyConf.api_host_name}/api/v3/registrations/stop_reminders.json", {:UID=>"uid"}).and_return('{
+          "reminders_stopped": true
+        }')
+        Registrant.stop_reminders("uid")
+      end
+    end
+  
+    describe 'stop_reminders_url' do
+      let(:r) { Registrant.new({:uid=>"uid123"})}
+      context 'when custom url is bank' do
+        it "returns default url" do
+          r.stop_reminders_url.should == "https://register.example.com/registrants/uid123/finish?reminders=stop"
+        end
+      end
+      context 'when custom url is not blank' do
+        it "returns substituted url" do
+          r.custom_stop_reminders_url = "http://example.com/custom/<UID>/stop_reminders"
+          r.stop_reminders_url.should == "http://example.com/custom/uid123/stop_reminders"
+
+          r.custom_stop_reminders_url = "http://example.com/custom/MyUniqueId/stop_reminders"
+          r.stop_reminders_url.should == "http://example.com/custom/MyUniqueId/stop_reminders"
+        end
+        
       end
     end
   end

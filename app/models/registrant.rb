@@ -1038,9 +1038,8 @@ class Registrant < ActiveRecord::Base
     # enqueue_reminder_emails
   end
   
-  def remote_pdf_ready?
-    response = JSON.parse(RestClient.get("#{RockyConf.api_host_name}/api/v3/registrations/pdf_ready.json?UID=#{self.remote_uid}"))
-    
+  def self.remote_pdf_ready?(uid)
+    response = JSON.parse(RestClient.get("#{RockyConf.api_host_name}/api/v3/registrations/pdf_ready.json?UID=#{uid}"))    
     return (response["pdf_ready"] == true)
   rescue Exception => e
     begin
@@ -1049,6 +1048,35 @@ class Registrant < ActiveRecord::Base
       raise e
     end
     return false
+  end
+  
+  def self.stop_reminders(uid)
+    response = JSON.parse(RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations/stop_reminders.json", {:UID=>"uid"}))    
+    return response.symbolize_keys
+  rescue Exception => e
+    begin
+      Rails.logger.error e.response
+    rescue Exception => e2
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace
+    end
+    return {:reminders_stopped=>false}
+  end
+  
+  def stop_reminders_url
+    self.custom_stop_reminders_url.blank? ? default_stop_reminders_url : custom_stop_reminders_url_with_uid
+  end
+  
+  def default_stop_reminders_url
+    registrant_finish_url(self, :protocol => "https", :reminders => "stop", :host=>RockyConf.default_url_host)
+  end
+  
+  def custom_stop_reminders_url_with_uid
+    custom_stop_reminders_url.to_s.gsub("<UID>", self.uid)
+  end
+  
+  def remote_pdf_ready?
+    self.class.remote_pdf_ready?(self.remote_uid)
   end
   
   def to_api_hash
@@ -1115,7 +1143,8 @@ class Registrant < ActiveRecord::Base
       survey_question_1: survey_question_1,
       survey_answer_1: survey_answer_1, 
       survey_question_2: survey_question_2,
-      survey_answer_2: survey_answer_2, 
+      survey_answer_2: survey_answer_2,
+      custom_stop_reminders_url: "https://#{RockyConf.default_url_host}/registrants/<UID>/stop_reminders",
       async: true
     }
   end

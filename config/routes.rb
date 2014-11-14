@@ -13,12 +13,15 @@ Rocky::Application.routes.draw do
     resource "ineligible", :only => [:show, :update]
     resources "tell_friends", :only => :create
     resource "state_online_registration", :only=>:show
+    member do 
+      get "stop_reminders", :to=>'reminders#stop', :as=>'stop_reminders'
+    end
   end
 
   resource  "partner_session"
   match  "login",  :to => "partner_sessions#new", :as=>'login'
   match "logout", :to => "partner_sessions#destroy", :as=>'logout'
-
+  
   resource "partner", :path_names => {:new => "register", :edit => "profile"} do
     member do
       get "statistics"

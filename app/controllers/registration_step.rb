@@ -58,13 +58,13 @@ class RegistrationStep < ApplicationController
   
   def set_up_share_variables
     @root_url_escaped = CGI::escape(root_url)
-    @registrant.tell_message ||=
-      case @registrant.status.to_sym
-      when :under_18
-        I18n.t('email.tell_friend_under_18.body', :rtv_url => root_url(:source => "email"))
-      else
-        I18n.t('email.tell_friend.body', :rtv_url => root_url(:source => "email"))
-      end
+    # @registrant.tell_message ||=
+    #   case @registrant.status.to_sym
+    #   when :under_18
+    #     I18n.t('email.tell_friend_under_18.body', :rtv_url => root_url(:source => "email"))
+    #   else
+    #     I18n.t('email.tell_friend.body', :rtv_url => root_url(:source => "email"))
+    #   end
   end
   
 
