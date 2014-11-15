@@ -31,7 +31,6 @@ gem 'rest-client'
 gem 'diffy'
 gem 'asset_sync'
 
-
 group :development, :test do
   gem "rspec-rails", "~> 2.10.1"
   gem "rspec-spies",  "2.1.1"
@@ -39,7 +38,6 @@ group :development, :test do
   gem "rr", "= 0.10.11"
   
   gem "cucumber-rails", "1.1.0", :require=>false
-  gem "capybara-webkit", "~> 0.7.1"
   gem "webrat"
   gem "factory_girl_rails", :require=>false
   gem "database_cleaner"
@@ -60,6 +58,8 @@ group :development, :test do
 end
 
 group :test do
+  gem "capybara-webkit", "~> 0.7.1"
+  
   gem "webmock"
 end
 
