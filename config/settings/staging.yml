@@ -5,11 +5,6 @@ api_host_name: https://rtvstaging.osuosl.org
 ui_url_host: "register5staging.rockthevote.com"
 
 
-pdf_host_name: 'example-pdf.com'
-api_host_name: 'http://example-api.com'
-default_url_host: "register.example.com"
-
-
 
 hours_before_first_reminder: 0.0333
 hours_between_first_and_second_reminder: 0.0333
