@@ -148,9 +148,9 @@ class StateImporter
   
   def self.tmp_file_dir
     dir = Rails.root.join('tmp', 'translation_files')
-    if !File.exists?(dir)
-      FileUtils.mkdir_p(dir)
-    end
+    # if !File.exists?(dir)
+    #   FileUtils.mkdir_p(dir)
+    # end
     return dir
   end
   
