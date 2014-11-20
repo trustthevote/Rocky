@@ -1,3 +1,5 @@
+ruby "1.9.3-p125"
+
 source 'http://rubygems.org'
 
 gem "rake", "10.0.3"
