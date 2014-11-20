@@ -13,6 +13,8 @@ sponsor:
 
 from_address: "rocky@example.com"
 default_url_host: "register.example.com"
+ui_url_host: "register5.example.com"
+
 
 admin:
   from_address: "rtv-admins@osuosl.org"

@@ -1144,7 +1144,7 @@ class Registrant < ActiveRecord::Base
       survey_answer_1: survey_answer_1, 
       survey_question_2: survey_question_2,
       survey_answer_2: survey_answer_2,
-      custom_stop_reminders_url: "https://#{RockyConf.default_url_host}/registrants/<UID>/stop_reminders",
+      custom_stop_reminders_url: "https://#{RockyConf.ui_url_host}/registrants/<UID>/stop_reminders",
       async: true
     }
   end

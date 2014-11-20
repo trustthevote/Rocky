@@ -1,6 +1,12 @@
 pdf_host_name: 'rtvstaging.osuosl.org'
 from_address:  "register@rockthevote.com"
 default_url_host: "rtvstaging.osuosl.org"
+ui_url_host: "register5staging.rockthevote.com"
+
+
+pdf_host_name: 'example-pdf.com'
+api_host_name: 'http://example-api.com'
+default_url_host: "register.example.com"
 
 
 
