@@ -1083,7 +1083,7 @@ class Registrant < ActiveRecord::Base
     {
       lang: locale,
       partner_id: remote_partner_id,
-      send_confirmation_reminder_emails: send_confirmation_reminder_emails,
+      send_confirmation_reminder_emails: send_emails?,
       collect_email_address: collect_email_address,
       source_tracking_id: tracking_source,
       partner_tracking_id: tracking_id,
