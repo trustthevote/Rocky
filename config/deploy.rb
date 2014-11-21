@@ -65,12 +65,15 @@ set :branch, (rev rescue "master")    # cap deploy -Srev=[branch|tag|SHA1]
 set :group_writable, false
 set :use_sudo, false
 
-set :assets_role, [:app]
+set :assets_role, [:web, :util, :pdf]
 
 
 set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "enable"
 set :rvm_install_with_sudo, true 
+
+set :sync_assets, fetch(:sync_assets, true)
+
 
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby' 
@@ -88,12 +91,14 @@ load 'deploy/assets'
 
 
 
-after "deploy:update_code", "deploy:symlink_util_pdf", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners", "deploy:migrate"
+after "deploy:update_code", "deploy:symlink_web_pdf", "deploy:symlink_csv", "deploy:symlink_partners",  "deploy:migrate"
+after "deploy:finalize_update", "deploy:symlink_system"
+# , "deploy:symlink_util_pdf", 
 
 set :rake, 'bundle exec rake'
 
 before "deploy:restart", "deploy:import_states_yml"   # runs after migrations when migrating
-after "deploy:restart", "deploy:run_workers"
+after "deploy:restart", "deploy:run_pdf_workers", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
 
 namespace :admin do
@@ -112,12 +117,12 @@ end
 namespace :rvm do
   
   desc "Install passenger"
-  task :install_passenger, :roles => :app do
+  task :install_passenger, :roles => :web do
     run "gem install passenger --version=3.0.19", :shell => fetch(:rvm_shell)
   end
   
   desc "Install and setup RVM Passenger"
-  task :setup_passenger, :roles => :app do
+  task :setup_passenger, :roles => :web do
     run "passenger-install-apache2-module --auto", :shell => fetch(:rvm_shell)    
   end
 end
@@ -141,6 +146,17 @@ namespace :deploy do
     run "ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
   
+  after "deploy:assets:precompile", "deploy:asset_sync"
+  task :asset_sync, :roles => [:app] do
+    if sync_assets != 0
+      run <<-CMD
+        cd #{latest_release} &&
+        bundle exec rake assets:sync
+      CMD
+    end
+  end
+  
+  
   desc "import states.yml data"
   task :import_states_yml, :roles => [:app] do
     run <<-CMD
@@ -150,7 +166,7 @@ namespace :deploy do
   end
 
   desc "Link the database.yml, .env.{environment} files, and newrelic.yml files into the current release path."
-  task :symlink_configs, :roles => [:app, :util], :except => {:no_release => true} do
+  task :symlink_configs, :roles => [:web, :util, :pdf], :except => {:no_release => true} do
     run <<-CMD
       cd #{latest_release} &&
       ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml
@@ -165,15 +181,17 @@ namespace :deploy do
     CMD
   end
   
-  task :symlink_translations, :roles=>[:app], :except =>{:no_release => true} do
+  task :symlink_translations, :roles=>[:web], :except =>{:no_release => true} do
     run <<-CMD
+      mkdir -p #{shared_path}/translation_files &&
       cd #{latest_release} &&
+      rm -rf tmp/translation_files &&
       ln -nfs #{shared_path}/translation_files #{latest_release}/tmp/translation_files
     CMD
   end
 
   desc "Link the pdf dir to shared/pdfs"
-  task :symlink_web_pdf, :roles => [:web], :except => {:no_release => true} do
+  task :symlink_web_pdf, :roles => [:web, :util, :pdf], :except => {:no_release => true} do
     run <<-CMD
       mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/pdfs &&
       cd #{latest_release} &&
@@ -182,44 +200,56 @@ namespace :deploy do
     CMD
   end
   
-  desc "Link the pdf dir to /data/rocky/pdf"
-  task :symlink_util_pdf, :roles => [:util], :except => {:no_release => true} do
-    run <<-CMD
-      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/pdfs &&
-      cd #{latest_release} &&
-      rm -rf pdfs && 
-      ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html/pdfs public/pdfs
-    CMD
-  end
+  # desc "Link the pdf dir to /data/rocky/pdf"
+  # task :symlink_util_pdf, :roles => [:util], :except => {:no_release => true} do
+  #   run <<-CMD
+  #     cd #{latest_release} &&
+  #     rm -rf pdf &&
+  #     ln -nfs  #{ENV['SYMLINK_DATA_DIR']}/html pdf
+  #   CMD
+  # end
 
   
   desc "Link the csv dir to /data/rocky/csv"
-  task :symlink_csv, :roles => [:util], :except => {:no_release => true} do
+  task :symlink_csv, :roles => [:web, :util], :except => {:no_release => true} do
     run <<-CMD
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv &&
       cd #{latest_release} &&
       rm -rf csv &&
-      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv csv
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv csv &&
+      rm -rf public/csv &&
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_csv #{latest_release}/public/csv
     CMD
   end
 
 
   desc "Link the public/partners dir to the shared path"
-  task :symlink_partners, :roles=>[:app], :except => {:no_release => true} do
+  task :symlink_partners, :roles=>[:web, :pdf, :util], :except => {:no_release => true} do
     run <<-CMD
-      mkdir -p #{shared_path}/partner_assets &&
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets &&
       cd #{latest_release} &&
-      ln -nfs #{shared_path}/partner_assets #{latest_release}/public/partners
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/partner_assets #{latest_release}/public/partners
+    CMD
+  end  
+
+  desc "Link the public/system dir to the shared path"
+  task :symlink_system, :roles=>[:web, :pdf, :util], :except => {:no_release => true} do
+    run <<-CMD
+      mkdir -p #{ENV['SYMLINK_DATA_DIR']}/html/system_assets &&
+      cd #{latest_release} &&
+      rm -rf public/system && 
+      ln -nfs #{ENV['SYMLINK_DATA_DIR']}/html/system_assets #{latest_release}/public/system
     CMD
   end
 
   desc "Restarting mod_rails with restart.txt"
-  task :restart, :roles => :app, :except => { :no_release => true } do
+  task :restart, :roles => :web, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
   end
 
   [:start, :stop].each do |t|
     desc "#{t} task is a no-op with mod_rails"
-    task t, :roles => :app do ; end
+    task t, :roles => :web do ; end
   end
 
   desc "Run (or restart) worker processes on util server"
@@ -236,6 +266,21 @@ namespace :deploy do
     # nasty hack to make sure it stops
     unset(:latest_release)
   end
+  
+  desc "Run (or restart) pdf worker processes on pdf server"
+  task :run_pdf_workers, :roles => :pdf do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec ruby script/rocky_pdf_runner stop"
+    sleep 10
+    2.times do
+      run "cd #{latest_release} && RAILS_ENV=#{rails_env} TZ=:/etc/localtime bundle exec ruby script/rocky_pdf_runner start"
+    end
+  end
+
+  desc "Stop worker pdf processes on pdf server"
+  task :stop_pdf_workers, :roles => :pdf do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec ruby script/rocky_pdf_runner stop"
+  end
+  
 end
 
 
@@ -244,4 +289,3 @@ require './config/boot'
 require 'airbrake/capistrano'
 
 require 'bundler/capistrano'
-
