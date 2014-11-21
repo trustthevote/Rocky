@@ -25,6 +25,8 @@
 require "#{Rails.root}/app/services/v3"
 class Api::V3::RegistrationsController < Api::V3::BaseController
 
+  skip_before_filter :authenticate_everything, :only=>[:pdf_ready, :stop_reminders]
+
   # Lists registrations
   def index
     query = {
