@@ -30,12 +30,15 @@ class FinishesController < RegistrationStep
   def show
     find_registrant(:remote)
     @registrant_finish_iframe_url = @registrant.finish_iframe_url
+    @pdf_ready = false
     if params[:reminders]
       @registrant.update_attributes(:reminders_left => 0)
       @stop_reminders = true
     end
     if params[:share_only] 
       @share_only = true
+    elsif !params[:not_ready]
+      @pdf_ready = @registrant.remote_pdf_ready?
     end
     set_up_share_variables
   end

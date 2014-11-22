@@ -30,7 +30,7 @@
           if (uid = window.location.pathname.match(/pdfs\/.+\/(.+)\.pdf/)[1]) {
               $("#dialog").hide();
               $("#missing-pdf").show();
-              window.location.pathname = "/registrants/"+uid+"/finish"
+              window.location.pathname = "/registrants/"+uid+"/finish?not_ready=true"
           }              
       });
       
