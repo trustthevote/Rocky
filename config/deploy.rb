@@ -170,7 +170,7 @@ namespace :deploy do
     run <<-CMD
       cd #{latest_release} &&
       bundle exec rake import:states_and_zips
-    CMD    
+    CMD
   end
 
   desc "Link the database.yml, .env.{environment} files, and newrelic.yml files into the current release path."
