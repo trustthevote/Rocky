@@ -13,8 +13,6 @@
   </div>
 <% end -%>
 
-<div id="finish_page_iframe">
-  <iframe  border='0' height="550px" ALLOWTRANSPARENCY="true" frameborder="no" style='border:none !important; margin:0; padding:0; width:100%;' src='<%=@registrant.finish_iframe_url %>'></iframe>
-</div>
+<%= render "finishes/finish_iframe" %>
 
 <%= render :partial => 'finishes/adwords' %>

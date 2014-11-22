@@ -28,6 +28,7 @@ class RemindersController < RegistrationStep
   def stop
     @stop_reminders = true
     @registrant_attributes = Registrant.stop_reminders(params[:id])
+    @registrant_finish_iframe_url = @registrant_attributes[:finish_iframe_url]
     set_up_share_variables
   end
 

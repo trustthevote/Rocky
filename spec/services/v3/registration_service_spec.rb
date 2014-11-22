@@ -370,6 +370,7 @@ describe V3::RegistrationService do
       reg.stub(:email_address).and_return("email_addr")
       reg.stub(:first_name).and_return("fn")
       reg.stub(:last_name).and_return("ln")
+      reg.stub(:finish_iframe_url).and_return("iurl")
       reg.stub(:update_attributes).and_return(true)
       Registrant.stub(:find_by_uid).and_return(reg)
     end
@@ -397,6 +398,7 @@ describe V3::RegistrationService do
       r[:email_address].should == "email_addr"
       r[:first_name].should == "fn"
       r[:last_name].should == "ln"
+      r[:finish_iframe_url].should == "iurl"
     end
   end
 

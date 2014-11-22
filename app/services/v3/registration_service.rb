@@ -190,6 +190,7 @@ module V3
         :first_name=>reg.first_name,
         :last_name=> reg.last_name,
         :email_address=>reg.email_address,
+        :finish_iframe_url=> reg.finish_iframe_url,
         :reminders_stopped=>reg.update_attributes(:reminders_left=>0)
       }
     end

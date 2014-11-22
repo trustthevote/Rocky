@@ -27,6 +27,7 @@ class FinishesController < RegistrationStep
 
   def show
     find_registrant(:remote)
+    @registrant_finish_iframe_url = @registrant.finish_iframe_url
     if params[:reminders]
       @registrant.update_attributes(:reminders_left => 0)
       @stop_reminders = true
