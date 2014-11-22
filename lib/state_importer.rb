@@ -169,13 +169,13 @@ class StateImporter
   
   
   #< Initialization (fold)
-  def initialize(file_or_filename = nil)
+  def initialize(file_or_filename = nil,  skip_zci = false)
     @imported_states = []
     @imported_locales = []
     @imported_zip_addresses = []
     @messages = []
     @defaults = {}
-    
+    @skip_zip_county_import = skip_zci 
     file_name = file_or_filename || self.class.file_path
     
     begin
@@ -186,6 +186,8 @@ class StateImporter
     rescue
     end
   end
+
+  attr_accessor :skip_zip_county_import
   
   private
   
@@ -250,7 +252,7 @@ class StateImporter
         end
       end
     end
-    import_zip_county_addresses    
+    import_zip_county_addresses unless skip_zip_county_import 
   end
   
   def import_zip_county_addresses

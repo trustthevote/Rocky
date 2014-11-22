@@ -164,6 +164,14 @@ namespace :deploy do
       bundle exec rake import:states
     CMD
   end
+  
+  desc "import states.yml and zip code data"
+  task :import_states_and_zips, :roles=>[:app] do
+    run <<-CMD
+      cd #{latest_release} &&
+      bundle exec rake import:states_and_zips
+    CMD    
+  end
 
   desc "Link the database.yml, .env.{environment} files, and newrelic.yml files into the current release path."
   task :symlink_configs, :roles => [:web, :util, :pdf], :except => {:no_release => true} do

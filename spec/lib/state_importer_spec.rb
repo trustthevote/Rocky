@@ -316,6 +316,12 @@ YML
         si.should_receive(:import_zip_county_addresses)
         si.import
       end
+      it "doesn't run :import_zip_county_addresses when skip_zip_county_import is true" do
+        si.skip_zip_county_import = true
+        si.should_not_receive(:import_zip_county_addresses)
+        si.import
+      end
+      
     end
     describe "#import_state(row)" do
       let(:state) { mock(GeoState).as_null_object }
@@ -393,7 +399,6 @@ YML
 
     describe "#import_zip_county_addresses" do
       let(:si) { StateImporter.new }
-      
 
       it "creates a list of ZipCodeCountyAddress objects" do
         si.import_zip_county_addresses
