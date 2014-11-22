@@ -1051,7 +1051,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def self.stop_reminders(uid)
-    response = JSON.parse(RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations/stop_reminders.json", {:UID=>"uid"}))    
+    response = JSON.parse(RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations/stop_reminders.json", {:UID=>uid}))    
     return response.symbolize_keys
   rescue Exception => e
     begin
