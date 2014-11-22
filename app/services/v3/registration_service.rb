@@ -191,6 +191,7 @@ module V3
         :last_name=> reg.last_name,
         :email_address=>reg.email_address,
         :finish_iframe_url=> reg.finish_iframe_url,
+        :locale => reg.locale,
         :reminders_stopped=>reg.update_attributes(:reminders_left=>0)
       }
     end

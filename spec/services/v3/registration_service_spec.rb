@@ -371,6 +371,7 @@ describe V3::RegistrationService do
       reg.stub(:first_name).and_return("fn")
       reg.stub(:last_name).and_return("ln")
       reg.stub(:finish_iframe_url).and_return("iurl")
+      reg.stub(:locale).and_return('loc')
       reg.stub(:update_attributes).and_return(true)
       Registrant.stub(:find_by_uid).and_return(reg)
     end
@@ -399,6 +400,7 @@ describe V3::RegistrationService do
       r[:first_name].should == "fn"
       r[:last_name].should == "ln"
       r[:finish_iframe_url].should == "iurl"
+      r[:locale].should == "loc"
     end
   end
 
