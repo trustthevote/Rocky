@@ -25,6 +25,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Step2Controller do
+  before(:each) do
+    Partner.any_instance.stub(:valid_api_key?).and_return(true)
+  end
+  
   describe "#show" do
     it "should show the step 2 input form" do
       reg = FactoryGirl.create(:step_1_registrant)

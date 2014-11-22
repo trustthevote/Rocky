@@ -25,6 +25,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe TellFriendsController do
+  before(:each) do
+    Partner.any_instance.stub(:valid_api_key?).and_return(true)
+  end
+  
   describe "#create" do
     before(:each) do
       @registrant = FactoryGirl.create(:step_5_registrant)

@@ -29,6 +29,10 @@ describe RemindersController do
   include Rails.application.routes.url_helpers
   render_views
 
+  before(:each) do
+    Partner.any_instance.stub(:valid_api_key?).and_return(true)
+  end
+
   describe "stop reminders" do
     let(:uid) { "param" }
     before(:each) do

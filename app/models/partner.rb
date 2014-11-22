@@ -161,10 +161,19 @@ class Partner < ActiveRecord::Base
     self.id == DEFAULT_ID
   end
   
+  def self.primary_partner
+    @@primary_partner ||= self.where(:id=>DEFAULT_ID).first
+  end
+  def primary_partner
+    @primary_partner ||=  self.class.primary_partner
+  end
+  
+  def primary_partner_api_key
+    primary_partner ? primary_partner.api_key : nil
+  end
+  
   def valid_api_key?(key)
-     return true
-    # TODO: Need to validate general API keys for getting partner data (e.g. 5step/2step)
-    !key.blank? && !self.api_key.blank? && key == self.api_key
+    !key.blank? && !self.api_key.blank? && (key == self.api_key || key == self.primary_partner_api_key)
   end
 
   def can_be_whitelabeled?

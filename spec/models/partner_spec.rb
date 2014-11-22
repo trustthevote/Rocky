@@ -172,6 +172,10 @@ describe Partner do
   
   
   describe "#valid_api_key?(key)" do
+    let(:primary) { FactoryGirl.build(:partner, :api_key=>"1234")}
+    before(:each) do
+      Partner.stub(:primary_partner).and_return(primary)
+    end
     it "returns false when blank or not matching" do
       partner = FactoryGirl.build(:partner, :api_key=>"")
       partner.valid_api_key?("").should be_false
@@ -181,6 +185,10 @@ describe Partner do
     it "return true when matching" do
       partner = FactoryGirl.build(:partner, :api_key=>"abcdef")
       partner.valid_api_key?("abcdef").should be_true
+    end
+    it "returns true when matching the primary partner" do
+      partner = FactoryGirl.build(:partner, :api_key=>"abcdef")
+      partner.valid_api_key?("1234").should be_true
     end
   end
 

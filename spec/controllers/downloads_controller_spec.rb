@@ -27,6 +27,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe DownloadsController do
   render_views
 
+  before(:each) do
+    Partner.any_instance.stub(:valid_api_key?).and_return(true)
+  end
+  
   describe "when PDF is ready" do
     before(:each) do
       @registrant = FactoryGirl.create(:maximal_registrant)

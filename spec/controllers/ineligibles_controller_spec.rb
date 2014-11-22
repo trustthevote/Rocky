@@ -27,6 +27,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe IneligiblesController do
   render_views
 
+  before(:each) do
+    Partner.any_instance.stub(:valid_api_key?).and_return(true)
+  end
+
   describe "when 18 or over" do
     it "shows not-a-citizen message" do
       @registrant = FactoryGirl.create(:step_1_registrant, :us_citizen => false)

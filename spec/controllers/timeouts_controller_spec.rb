@@ -26,6 +26,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe TimeoutsController do
   render_views
+  before(:each) do
+    Partner.any_instance.stub(:valid_api_key?).and_return(true)
+  end
 
   it "shows timeout page" do
     get :index
