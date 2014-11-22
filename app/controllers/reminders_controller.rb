@@ -25,6 +25,8 @@
 class RemindersController < RegistrationStep
   CURRENT_STEP = 7
 
+  skip_before_filter :find_partner
+
   def stop
     @stop_reminders = true
     @registrant_attributes = Registrant.stop_reminders(params[:id])
