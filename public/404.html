@@ -18,11 +18,25 @@
 		}
 		h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
 	</style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
+  <div id='missing-pdf' class='dialog' style='display:none'>
+      <h1>Your PDF isn't ready yet.</h1>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function() {
+          if (uid = window.location.pathname.match(/pdfs\/.+\/(.+)\.pdf/)[1]) {
+              $("#dialog").hide();
+              $("#missing-pdf").show();
+              window.location.pathname = "/registrants/"+uid+"/finish"
+          }              
+      });
+      
+  </script>
+  
+  <div class="dialog" id="dialog">
     <h1>The page you were looking for doesn't exist.</h1>
     <p>
       You might be trying to access a page from an expired or completed voter registration session.
