@@ -24,6 +24,8 @@
 #***** END LICENSE BLOCK *****
 class FinishesController < RegistrationStep
   CURRENT_STEP = 7
+  
+  skip_before_filter :find_partner
 
   def show
     find_registrant(:remote)
