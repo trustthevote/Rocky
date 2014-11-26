@@ -319,22 +319,22 @@ class CA < StateCustomization
   end
   
   def self.disclosures
-    @disclosures ||= nil
-    if @disclosures.nil?
+    @@disclosures ||= nil
+    if @@disclosures.nil?
       self.load_disclosures
     end
-    @disclosures
+    @@disclosures
   end
   
   def self.load_disclosures
-    @disclosures = {}
+    @@disclosures = {}
     
     RockyConf.ovr_states.CA.languages.each do |locale|
-      @disclosures[locale.to_s] ||= {}
+      @@disclosures[locale.to_s] ||= {}
       NUM_DISCLOSURES.times do |i|
         num = i+1
         begin
-          @disclosures[locale.to_s][num] = RestClient.get(disclosure_url(locale, num)).to_s.force_encoding('UTF-8')
+          @@disclosures[locale.to_s][num] = RestClient.get(disclosure_url(locale, num)).to_s.force_encoding('UTF-8')
         rescue Exception=>e
           log_covr_error("While loading disclosures from #{disclosure_url(locale, num)} - #{e.message}\n#{e.backtrace.join("\n\t")}")
         end
