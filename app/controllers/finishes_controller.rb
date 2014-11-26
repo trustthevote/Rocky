@@ -37,7 +37,7 @@ class FinishesController < RegistrationStep
     end
     if params[:share_only] 
       @share_only = true
-    elsif !params[:not_ready]
+    elsif !params[:not_ready] && !params[:reminders]
       @pdf_ready = @registrant.remote_pdf_ready?
     end
     set_up_share_variables
