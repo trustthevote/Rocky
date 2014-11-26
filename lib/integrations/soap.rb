@@ -5,7 +5,7 @@ module Integrations
       if Rails.env.development?
         return File.new(Rails.root.join("spec/fixtures/files/covr/max_registrant_response.xml")).read
       else
-        return RestClient.post(url, xml_content, :content_type=>"application/soap+xml;charset=UTF-8")
+        return RestClient.post(url, xml_content, :content_type=>"application/soap+xml;charset=UTF-8", :timeout => 15)
       end
     end
     
