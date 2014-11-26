@@ -26,6 +26,8 @@ gem "haml"
 gem "rails-i18n"
 gem 'jquery-rails', '~> 2.1'
 
+gem 'dalli'
+
 group :pdf do
   gem 'wkhtmltopdf-binary', :git=>"https://github.com/amekelburg/wkhtmltopdf-binary"
   gem 'wicked_pdf'
