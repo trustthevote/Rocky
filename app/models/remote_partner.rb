@@ -4,6 +4,8 @@ class RemotePartner < ActiveResource::Base
   self.element_name = "partner"
   
   
+  
+  
   def self.find_by_id(id)
     if !id.blank?
       self.find(id)
@@ -12,6 +14,10 @@ class RemotePartner < ActiveResource::Base
     end
   rescue
     nil
+  end
+  
+  def self.element_path(id, prefix_options = {}, query_options = nil)
+    super(id, prefix_options, (query_options || {}).merge(:partner_API_key=>ENV['ROCKY_CORE_API_KEY']) )
   end
   
   def to_param
