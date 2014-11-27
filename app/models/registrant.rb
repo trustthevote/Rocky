@@ -1171,6 +1171,7 @@ class Registrant < ActiveRecord::Base
       while(!ready) do
         sleep(3)
         ready = Registrant.find(self.id).pdf_ready?
+        puts Registrant.find(self.id).inspect
         puts(self.id)
         puts(ready)
         
