@@ -1159,8 +1159,13 @@ class Registrant < ActiveRecord::Base
     if async
       queue_pdf
     else 
-      generate_pdf
-      finalize_pdf
+      queue_pdf
+      # block on return
+      while(!self.pdf_ready?) do
+        sleep(3)
+      end
+      # generate_pdf
+      # finalize_pdf
     end
 
     self.status = 'complete'

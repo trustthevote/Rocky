@@ -62,7 +62,7 @@ module V2
       reg = Registrant.build_from_api_data(attrs, finish_with_state)
 
       if reg.save
-        reg.enqueue_complete_registration_via_api unless finish_with_state
+        reg.enqueue_complete_registration_via_api(false) unless finish_with_state
       else
         validate_language(reg)
         raise_validation_error(reg)
