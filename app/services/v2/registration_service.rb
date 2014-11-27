@@ -64,11 +64,12 @@ module V2
       if reg.save        
         if !finish_with_state
           reg.enqueue_complete_registration_via_api
-          r = Registrant.find(reg.id)
-          while(!r.pdf_ready?) do
-            sleep(3)
-            r.reload
-            puts r.pdf_ready?
+          ready = false
+          while(!ready) do
+            sleep(5)
+            r = Registrant.where(:id=>reg.id).first
+            ready = r.pdf_ready?
+            puts ready
           end
         end          
       else
