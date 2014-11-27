@@ -91,6 +91,23 @@ class Partner < ActiveRecord::Base
     }
   })
   
+  def local_logo_original_dir
+    Rails.root.join("public/system/logos/#{id}/original")
+  end
+  
+  def upload_local_logo
+    Dir.glob(local_logo_original_dir.join('*.*')).each do |fn|
+      self.logo = File.open(fn)
+      self.save!
+    end
+  end
+  
+  def self.sync_all_logos
+    Partner.all.each do |p|
+      p.upload_local_logo
+    end
+  end
+  
 
   serialize :government_partner_zip_codes
 

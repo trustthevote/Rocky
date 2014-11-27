@@ -206,6 +206,8 @@ FactoryGirl.define do
     organization          "Consolidated Amalgamated, Inc."
     survey_question_1_en  "Hello?"
     survey_question_2_en  "Outta here?"
+    api_key               "abc123"
+    
   end
   
 

@@ -71,7 +71,6 @@ module V3
     end
 
     def self.find(query, only_public = false)
-
       partner = find_partner(query[:partner_id], query[:partner_api_key], only_public)
 
       data = {

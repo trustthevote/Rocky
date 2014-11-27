@@ -43,7 +43,7 @@ class PartnerAssetsFolder
   def old_directory
     connection.directories.get(@partner.partner_assets_bucket, prefix: @partner.absolute_old_assets_path)
   end
-  
+    
   def self.sync_all
     Partner.all.each do |p|
       PartnerAssetsFolder.new(p).sync_from_local
@@ -55,6 +55,7 @@ class PartnerAssetsFolder
       update_asset(File.basename(fn), File.open(fn))
     end
   end
+  
 
   # Updates the css
   def update_css(name, file)

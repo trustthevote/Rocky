@@ -72,9 +72,9 @@ RSpec.configure do |config|
   
   config.before(:each) do
     stub_request(:any, %r{http://example-api\.com/api/v3/partners/\d+\.json}).to_return do |req|
-      req.uri.to_s =~ /(\d+)\.json$/
+      req.uri.to_s =~ /(\d+)\.json(\?.+)?$/
       id = $1
-      {:body=>{:partner => V3::PartnerService.find(:partner_id=>id) }.to_json}
+      {:body=>{:partner => V3::PartnerService.find({:partner_id=>id, :partner_api_key=>'abc123'}) }.to_json}
     end
     stub_request(:any, %r{http://example-api\.com/api/v3/registrations.json}).to_return do |req|
       {:body=>{:pdfurl=>"http://example-api/pdfurl.pdf", :uid=>"uid"}.to_json}
