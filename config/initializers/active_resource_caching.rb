@@ -47,7 +47,7 @@ module ActiveResource
   end
 end
  
-if Rails.env.development?
+if Rails.env.development? || Rails.env.test?
   ActiveResource::Connection.cache_with :file_store, '/tmp/cache'
 else
   ActiveResource::Connection.cache_with :dalli_store,
