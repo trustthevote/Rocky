@@ -1171,6 +1171,9 @@ class Registrant < ActiveRecord::Base
       while(!ready) do
         sleep(3)
         ready = Registrant.find_by_id(self.id).pdf_ready?
+        puts(self.id)
+        puts(ready)
+        
       end
       # generate_pdf
       # finalize_pdf
