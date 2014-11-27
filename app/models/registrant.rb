@@ -1170,7 +1170,7 @@ class Registrant < ActiveRecord::Base
       # block on return
       while(!ready) do
         sleep(3)
-        ready = Registrant.find_by_id(self.id).pdf_ready?
+        ready = Registrant.find(self.id).pdf_ready?
         puts(self.id)
         puts(ready)
         
