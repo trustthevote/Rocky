@@ -111,7 +111,7 @@ module V3
           :zip_code => partner.zip_code,
           :phone => partner.phone,
           :custom_logo              => partner.custom_logo?,
-          :header_logo_url          => partner.logo(:header)
+          :header_logo_url          => partner.logo(:header),
           :whitelabeled             => partner.whitelabeled?,
         
           :application_css_present  => partner.application_css_present?,
