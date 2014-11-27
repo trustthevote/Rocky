@@ -1166,10 +1166,11 @@ class Registrant < ActiveRecord::Base
       self.status = 'complete'
       self.save
       
+      ready = self.pdf_ready?
       # block on return
-      while(!self.pdf_ready?) do
-        self.reload
+      while(!ready) do
         sleep(3)
+        ready = Registrant.find_by_id(self.id).pdf_ready?
       end
       # generate_pdf
       # finalize_pdf
