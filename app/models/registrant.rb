@@ -1158,8 +1158,14 @@ class Registrant < ActiveRecord::Base
   def complete_registration_via_api(async=true)
     if async
       queue_pdf
+      self.status = 'complete'
+      return self.save
+      
     else 
       queue_pdf
+      self.status = 'complete'
+      self.save
+      
       # block on return
       while(!self.pdf_ready?) do
         sleep(3)
@@ -1167,9 +1173,6 @@ class Registrant < ActiveRecord::Base
       # generate_pdf
       # finalize_pdf
     end
-
-    self.status = 'complete'
-    self.save
   end
   
 
