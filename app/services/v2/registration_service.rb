@@ -61,17 +61,8 @@ module V2
 
       reg = Registrant.build_from_api_data(attrs, finish_with_state)
 
-      if reg.save        
-        if !finish_with_state
-          reg.enqueue_complete_registration_via_api
-          ready = false
-          while(!ready) do
-            sleep(5)
-            r = Registrant.where(:id=>reg.id).first
-            ready = r.pdf_ready?
-            puts ready
-          end
-        end          
+      if reg.save
+        reg.enqueue_complete_registration_via_api unless finish_with_state
       else
         validate_language(reg)
         raise_validation_error(reg)

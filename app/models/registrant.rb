@@ -1162,22 +1162,11 @@ class Registrant < ActiveRecord::Base
       return self.save
       
     else 
-      queue_pdf
       self.status = 'complete'
       self.save
       
-      # ready = self.pdf_ready?
-      # # block on return
-      # while(!ready) do
-      #   sleep(3)
-      #   ready = Registrant.find(self.id).pdf_ready?
-      #   puts Registrant.find(self.id).inspect
-      #   puts(self.id)
-      #   puts(ready)
-      #
-      # end
-      # generate_pdf
-      # finalize_pdf
+      generate_pdf
+      finalize_pdf
     end
   end
   
