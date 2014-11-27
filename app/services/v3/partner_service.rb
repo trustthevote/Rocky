@@ -123,7 +123,7 @@ module V3
         
           :external_tracking_snippet => partner.external_tracking_snippet,
         
-          :primary =>partner.primary?,
+          :primary =>partner.primary?
           
         })
       end
