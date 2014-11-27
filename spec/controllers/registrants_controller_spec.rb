@@ -151,7 +151,7 @@ describe RegistrantsController do
         partner = RemotePartner.new
         partner.id = 1234
         partner.custom_logo = true
-        partner.header_logo_url = "abc123"
+        partner.header_logo_url = "http://abc123"
 
         RemotePartner.stub(:find).with(partner.to_param).and_return(partner)
         ActiveResource::Connection.cache.clear
@@ -159,7 +159,7 @@ describe RegistrantsController do
 
         assert_response :success
         assert_select "#header.partner"
-        assert_select "#partner-logo img[src=//#{partner.header_logo_url}]"
+        assert_select "#partner-logo img[src=http://abc123]"
       end
     end
       

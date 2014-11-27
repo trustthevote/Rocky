@@ -46,6 +46,8 @@ describe V3::PartnerService do
       expected_response = {
         :id                       => partner.id,
         :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
+        :custom_logo              => partner.custom_logo?,
+        :header_logo_url          => partner.logo(:header),
         :whitelabeled             => partner.whitelabeled?,
 
         :application_css_present  => partner.application_css_present?,
