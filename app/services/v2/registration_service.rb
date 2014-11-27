@@ -67,7 +67,7 @@ module V2
           r = Registrant.find(reg.id)
           while(!r.pdf_ready?) do
             sleep(3)
-            r = Registrant.find(reg.id)  
+            r.reload
             puts r.pdf_ready?
           end
         end          
