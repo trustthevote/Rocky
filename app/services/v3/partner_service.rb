@@ -110,7 +110,8 @@ module V3
           :state_id => partner.state_id,
           :zip_code => partner.zip_code,
           :phone => partner.phone,
-        
+          :custom_logo              => partner.custom_logo?,
+          :header_logo_url          => partner.logo(:header)
           :whitelabeled             => partner.whitelabeled?,
         
           :application_css_present  => partner.application_css_present?,
