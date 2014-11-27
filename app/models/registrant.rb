@@ -1168,6 +1168,7 @@ class Registrant < ActiveRecord::Base
       
       # block on return
       while(!self.pdf_ready?) do
+        self.reload
         sleep(3)
       end
       # generate_pdf
