@@ -1302,6 +1302,46 @@ describe Registrant do
     end
   end
 
+  describe "process UI registrant records" do
+    
+    describe 'self.old_ui_record_ids' do
+      it "finds registrant ids that haven't been updated in 30 minutes" do
+        where = "where"
+        Registrant.should_receive(:where).and_return(where)
+        where.should_receive(:pluck).with(:id)
+        Registrant.old_ui_record_ids
+      end
+    end
+    describe 'self.process_ui_records' do
+      it "deletes completed registrants" do
+        where = "where"
+        ui_timeout_minutes = "30"
+        time_length = "time_length"
+        ui_timeout_minutes.stub(:minutes).and_return(time_length)
+        time_length.stub(:ago).and_return("timeout")
+        Registrant.stub(:ui_timeout_minutes).and_return(ui_timeout_minutes)
+        Registrant.stub(:find_each)
+        Registrant.stub(:old_ui_record_ids)
+        Registrant.should_receive(:where).with("status='completed' AND updated_at < ?", "timeout").and_return(where)
+        where.should_receive(:delete_all)
+        Registrant.process_ui_records
+      end
+      
+      it "finds old_ui_record_ids in batches of 100" do
+        id_list = mock(Array)
+        Registrant.stub(:old_ui_record_ids).and_return(id_list)
+        Registrant.should_receive(:find_each).with(:batch_size=>100, :conditions=>["id in (?)", id_list])
+        Registrant.process_ui_records
+      end
+      it "submits data as-is for incomplete records"
+      context 'when the api response indicates success' do
+        it "deletes the record"
+        it "does not delete the record"
+      end
+    end
+  end
+  
+
   describe "stale records" do
     it "should become abandoned" do
       stale_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
@@ -1710,13 +1750,6 @@ describe Registrant do
       assert_nil reg.state_id_number
     end
     
-    describe '#to_api_hash' do
-      it "sends async = false for no-email registrations" do
-        pending
-      end
-      it "uses the remote_partner_id"
-    end
-
     describe "background processing" do
       describe "when there is a job queue (production, staging)" do
         it "should complete immediately" do
@@ -1727,6 +1760,27 @@ describe Registrant do
       end
     end
   end
+  
+  describe "data sent to api" do
+    let(:reg) { FactoryGirl.create(:step_5_registrant) }
+    before(:each) do
+      reg.stub(:survey_question_1).and_return("abc")
+      reg.stub(:survey_question_2).and_return("abc")
+    end
+    describe '#to_api_hash' do
+      it "sends async = false for no-email registrations" do
+        pending "Do no-email registrants get a priority queue or just immediate PDF gen?"
+        reg.stub(:email_address).and_return(" ")
+        reg.to_api_hash[:async].should be_false
+      end
+      it "uses the remote_partner_id" do
+        reg.stub(:partner_id).and_return(123)
+        reg.stub(:remote_partner_id).and_return(456)
+        reg.to_api_hash[:partner_id].should == 456
+      end
+    end
+  end
+
 
   describe "deliver_confirmation_email" do
     let(:r) { FactoryGirl.create(:maximal_registrant) }

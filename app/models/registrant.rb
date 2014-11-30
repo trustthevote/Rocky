@@ -437,6 +437,21 @@ class Registrant < ActiveRecord::Base
   def self.find_by_param!(param)
     find_by_param(param) || begin raise ActiveRecord::RecordNotFound end
   end
+  
+  def self.old_ui_record_ids
+    self.where("updated_at < ?", ui_timeout_minutes.minutes.ago).pluck(:id)
+  end
+
+  def self.ui_timeout_minutes
+    30
+  end
+  
+  def self.process_ui_records
+    self.where("status='completed' AND updated_at < ?", ui_timeout_minutes.minutes.ago).delete_all
+    self.find_each(batch_size: 100, conditions: ["id in (?)", self.old_ui_record_ids]) do |reg|
+      
+    end
+  end
 
   def self.abandon_stale_records
     id_list = self.where("(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago).pluck(:id)
