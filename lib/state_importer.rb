@@ -279,9 +279,11 @@ class StateImporter
         loc.save!
       end
       # Clear out all zca's first
-      ZipCodeCountyAddress.delete_all
-      imported_zip_addresses.each do |zca|
-        zca.save!
+      unless skip_zip_county_import
+        ZipCodeCountyAddress.delete_all
+        imported_zip_addresses.each do |zca|
+          zca.save!
+        end
       end
     end
   end
