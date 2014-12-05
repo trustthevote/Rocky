@@ -84,6 +84,7 @@ Rocky::Application.routes.draw do
         collection do
           get "pdf_ready", :action=>"pdf_ready"
           post "stop_reminders", :action=>"stop_reminders"
+          post "bulk", :action=>"bulk"
         end
       end
       resource :state_requirements, :only=>:show, :format=>'json'

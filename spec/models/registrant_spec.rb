@@ -1320,9 +1320,8 @@ describe Registrant do
         ui_timeout_minutes.stub(:minutes).and_return(time_length)
         time_length.stub(:ago).and_return("timeout")
         Registrant.stub(:ui_timeout_minutes).and_return(ui_timeout_minutes)
-        Registrant.stub(:find_each)
-        Registrant.stub(:old_ui_record_ids)
-        Registrant.should_receive(:where).with("status='completed' AND updated_at < ?", "timeout").and_return(where)
+        Registrant.stub(:old_ui_record_ids).and_return([])
+        Registrant.should_receive(:where).with("status='complete' AND updated_at < ?", "timeout").and_return(where)
         where.should_receive(:delete_all)
         Registrant.process_ui_records
       end
@@ -1330,13 +1329,67 @@ describe Registrant do
       it "finds old_ui_record_ids in batches of 100" do
         id_list = mock(Array)
         Registrant.stub(:old_ui_record_ids).and_return(id_list)
-        Registrant.should_receive(:find_each).with(:batch_size=>100, :conditions=>["id in (?)", id_list])
+        id_list.should_receive(:each_slice).with(100)
         Registrant.process_ui_records
       end
-      it "submits data as-is for incomplete records"
-      context 'when the api response indicates success' do
-        it "deletes the record"
-        it "does not delete the record"
+      context 'when there are incomplete records' do
+        let(:r0) { FactoryGirl.create(:maximal_registrant) }
+        let(:r1) { FactoryGirl.create(:step_1_registrant) }
+        let(:r2) { FactoryGirl.create(:step_2_registrant) }
+        let(:r3) { FactoryGirl.create(:step_3_registrant) }
+        let(:r4) { FactoryGirl.create(:step_4_registrant) }
+        let(:r5) { FactoryGirl.create(:step_5_registrant) }
+        let(:r1_state) { FactoryGirl.create(:step_1_registrant, :home_zip_code => '58001') } # North Dakota
+        let(:r1_age) { FactoryGirl.create(:step_1_registrant, :date_of_birth => 10.years.ago)  }
+        let(:r1_citizen) { FactoryGirl.create(:step_1_registrant, :us_citizen => false)  }
+        before(:each) do
+          [r0,
+          r1,
+          r2,
+          r3,
+          r4,
+          r5,
+          r1_state,
+          r1_age,
+          r1_citizen].each do |r|
+            r.remote_partner_id = r.partner_id
+            r.partner_id = nil
+            r.update_attributes(:updated_at=>1.hour.ago)
+          end
+          Partner.any_instance.stub(:valid_api_key?).and_return(true)
+        end
+        
+        it "submits data as-is for incomplete records" do
+          Registrant.count.should == 9
+          Registrant.all.each do |r|
+            r.remote_partner_id.should == 1
+            r.partner_id.should be_nil
+          end
+          Registrant.process_ui_records
+          Registrant.count.should == 8
+          Registrant.all.each do |r|
+            r.partner_id.should == 1
+            r.remote_partner_id.should be_nil
+            r.created_at.should > 1.minute.ago
+          end
+          
+        end
+        context 'when the api response has failures success' do
+          before(:each) do
+            r5.update_attributes(:updated_at=>1.hour.ago,
+              :remote_partner_id => nil,
+              :partner_id => 1)
+          end
+          it "does not delete the record" do
+            puts r5.remote_partner_id
+            Registrant.count.should == 9
+            Registrant.process_ui_records
+            r = Registrant.find(r5.id)
+            r.should == Registrant.first
+            r.updated_at.should < 30.minutes.ago
+            Registrant.count.should == 8
+          end
+        end        
       end
     end
   end

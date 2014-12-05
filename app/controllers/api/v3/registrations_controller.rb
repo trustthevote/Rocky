@@ -113,5 +113,13 @@ class Api::V3::RegistrationsController < Api::V3::BaseController
   rescue ArgumentError => e
     jsonp({ :message => e.message }, :status => 400)
   end
+  
+  def bulk
+    jsonp({
+        :registrants_added=>V3::RegistrationService.bulk_create(params[:registrants], params[:partner_id], params[:partner_API_key])
+    })
+  rescue ArgumentError => e
+    jsonp({ :message => e.message }, :status => 400)
+  end
 
 end

@@ -117,6 +117,20 @@ describe Api::V3::RegistrationsController do
     end
   end
 
+  describe 'bulk' do
+    it "should catch errors" do
+      expect_api_error :message => 'error'
+      bulk { raise ArgumentError.new('error') }
+    end
+    it "calls the reg service bulk_crate and returns list of results" do
+      expect_api_response({:registrants_added=>[[true],[false,"message"]]})
+      bulk do
+        [[true],[false,"message"]]
+      end
+    end
+  end
+
+
   private
 
   def pdf_ready(&block)
@@ -129,6 +143,12 @@ describe Api::V3::RegistrationsController do
     query = { :UID=>"1234"}
     V3::RegistrationService.stub(:stop_reminders).with(query, &block)
     post :stop_reminders, query.merge(:format=>'json')
+  end
+  def bulk(&block)
+    query = { :registrants=>[], :partner_id=>1, :partner_API_key=>"1"}
+    V3::RegistrationService.stub(:bulk_create).with([], 1, "1", &block)
+    post :bulk, query.merge(:format=>'json')
+    
   end
   
   def registrations(&block)

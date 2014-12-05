@@ -79,6 +79,15 @@ RSpec.configure do |config|
     stub_request(:any, %r{http://example-api\.com/api/v3/registrations.json}).to_return do |req|
       {:body=>{:pdfurl=>"http://example-api/pdfurl.pdf", :uid=>"uid"}.to_json}
     end
+    
+    stub_request(:any, %r{http://example-api\.com/api/v3/registrations/bulk.json}).to_return do |req|
+      json = JSON.parse(req.body).deep_symbolize_keys
+      r = {:body=>{
+        :registrants_added=>V3::RegistrationService.bulk_create(json[:registrants], json[:partner_id], json[:partner_API_key])
+      }.to_json}
+      r
+    end
+    
   end
   
 end

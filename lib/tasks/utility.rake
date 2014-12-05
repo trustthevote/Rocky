@@ -1,4 +1,10 @@
 namespace :utility do
+  desc "Go through UI registrants and submit stale records to the core system and delete records for transfered data"
+  task :process_ui_records => :environment do
+    Registrant.process_ui_records
+  end
+  
+  
   desc "Mark all stale registrations as abandoned and redact sensitive data"
   task :timeout_stale_registrations => :environment do
     Registrant.abandon_stale_records

@@ -447,9 +447,22 @@ class Registrant < ActiveRecord::Base
   end
   
   def self.process_ui_records
-    self.where("status='completed' AND updated_at < ?", ui_timeout_minutes.minutes.ago).delete_all
-    self.find_each(batch_size: 100, conditions: ["id in (?)", self.old_ui_record_ids]) do |reg|
+    self.where("status='complete' AND updated_at < ?", ui_timeout_minutes.minutes.ago).delete_all
+    self.old_ui_record_ids.each_slice(100) do |id_list|
+      registrants = self.where("id in (?)", id_list)
+      reg_hashes = registrants.collect {|r| r.to_bulk_api_hash }
       
+      created_records = JSON.parse(RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations/bulk.json", { 
+          :registrants => reg_hashes, 
+          :partner_id=>Partner::DEFAULT_ID, 
+          :partner_API_key=>ENV['ROCKY_CORE_API_KEY']
+      }.to_json))
+      
+      created_records["registrants_added"].each_with_index do |creation_status,idx|
+        if creation_status[0] == true
+          registrants[idx].delete
+        end
+      end
     end
   end
 
@@ -1162,6 +1175,21 @@ class Registrant < ActiveRecord::Base
       custom_stop_reminders_url: "https://#{RockyConf.ui_url_host}/registrants/<UID>/stop_reminders",
       async: true
     }
+  end
+
+  def to_bulk_api_hash
+    to_api_hash.merge({
+      status: status,
+      ineligible_non_participating_state: ineligible_non_participating_state?,
+      ineligible_age: ineligible_age?,
+      ineligible_non_citizen: ineligible_non_citizen?,
+      under_18_ok: under_18_ok?,
+      remind_when_18: remind_when_18?,
+      age: age,
+      javascript_disabled: javascript_disabled?,
+      using_state_online_registration: using_state_online_registration?,
+      finish_with_state: finish_with_state?
+    })
   end
 
   # Enqueues final registration actions for API calls

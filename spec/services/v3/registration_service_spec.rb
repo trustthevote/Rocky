@@ -406,4 +406,44 @@ describe V3::RegistrationService do
     end
   end
 
+
+  describe 'bulk_create' do
+    let(:data_list) do
+      [FactoryGirl.create(:step_1_registrant, :remote_partner_id=>1, :partner_id=>nil).to_bulk_api_hash,
+      FactoryGirl.create(:step_2_registrant).to_bulk_api_hash,
+      FactoryGirl.create(:step_3_registrant, :remote_partner_id=>1, :partner_id=>nil).to_bulk_api_hash,
+      FactoryGirl.create(:step_4_registrant).to_bulk_api_hash]
+    end
+    let(:partner) { FactoryGirl.create(:partner, :api_key=>"key") }
+    it "checks partner API key" do
+      lambda {
+        V3::RegistrationService.bulk_create(data_list, 0,  "asdasd")
+      }.should raise_error V3::PartnerService::INVALID_PARTNER_OR_API_KEY
+    end
+    
+    it "creates a reg record for each item in the api-style data list" do 
+      data_list.each do |data_item|
+        V3::RegistrationService.stub(:block_protected_attributes)
+        V3::RegistrationService.should_receive(:block_protected_attributes).with(data_item)
+        V3::RegistrationService.stub(:data_to_attrs)
+        V3::RegistrationService.should_receive(:data_to_attrs).with(data_item).and_return(data_item)
+        reg = mock_model(Registrant)
+        reg.stub(:status=)
+        reg.stub(:save!)
+        Registrant.stub(:new)
+        Registrant.should_receive(:new).with(data_item).and_return(reg)
+        reg.should_receive(:status=).with(data_item[:status])        
+        reg.should_receive(:save!)
+      end
+      V3::RegistrationService.bulk_create(data_list, partner.id, partner.api_key)
+    end
+    
+    it "returns a 1-1 array of success/failures for the data list" do
+      results = V3::RegistrationService.bulk_create(data_list, partner.id, partner.api_key)   
+      results[0][0].should be_true
+      results[1][0].should be_false
+      results[2][0].should be_true
+      results[3][0].should be_false
+    end
+  end
 end

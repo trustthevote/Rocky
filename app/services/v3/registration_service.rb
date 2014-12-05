@@ -78,6 +78,24 @@ module V3
       end
       return reg
     end
+    
+    def self.bulk_create(data_list, partner_id, partner_api_key)
+      partner = V3::PartnerService.find_partner(partner_id, partner_api_key)
+      return data_list.collect do |data|
+        begin 
+          block_protected_attributes(data)
+          attrs = data_to_attrs(data)
+          status = attrs.delete(:status)
+          async = attrs.delete(:async)
+          reg = Registrant.new(attrs)
+          reg.status = status
+          reg.save!
+          [true, reg.uid]
+        rescue Exception=>e
+          [false, e.message]
+        end
+      end
+    end
 
     # Lists records for the given registrant
     ALLOWED_PARAMETERS = [:partner_id, :gpartner_id, :partner_api_key, :gpartner_api_key, :since, :email, :callback]
