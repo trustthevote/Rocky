@@ -95,7 +95,7 @@ class Api::V3::RegistrationsController < Api::V3::BaseController
     headers['Access-Control-Max-Age'] = "1728000"
 
     jsonp :pdf_ready => V3::RegistrationService.check_pdf_ready(query), :UID=>params[:UID]
-  rescue ArgumentError => e
+  rescue Exception => e
     jsonp({ :message => e.message }, :status => 400)
   end
   
@@ -110,7 +110,7 @@ class Api::V3::RegistrationsController < Api::V3::BaseController
     headers['Access-Control-Max-Age'] = "1728000"
 
     jsonp V3::RegistrationService.stop_reminders(query).merge(:UID=>params[:UID])
-  rescue ArgumentError => e
+  rescue Exception => e
     jsonp({ :message => e.message }, :status => 400)
   end
   
@@ -118,7 +118,7 @@ class Api::V3::RegistrationsController < Api::V3::BaseController
     jsonp({
         :registrants_added=>V3::RegistrationService.bulk_create(params[:registrants], params[:partner_id], params[:partner_API_key])
     })
-  rescue ArgumentError => e
+  rescue Exception => e
     jsonp({ :message => e.message }, :status => 400)
   end
 
