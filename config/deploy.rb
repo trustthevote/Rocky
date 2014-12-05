@@ -80,6 +80,7 @@ before 'deploy:setup', 'rvm:install_ruby'
 before 'deploy:setup', 'rvm:install_passenger' 
 before 'deploy:setup', 'rvm:setup_passenger' 
 
+after 'deploy:setup', 'heroku:setup'
 
 before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
 
@@ -100,6 +101,8 @@ set :rake, 'bundle exec rake'
 before "deploy:restart", "deploy:import_states_yml"   # runs after migrations when migrating
 after "deploy:restart", "deploy:run_pdf_workers", "deploy:run_workers"
 after "deploy", "deploy:cleanup"
+
+after "deploy", "heroku:deploy"
 
 namespace :admin do
   desc "reset admin password and display"
@@ -126,6 +129,8 @@ namespace :rvm do
     run "passenger-install-apache2-module --auto", :shell => fetch(:rvm_shell)    
   end
 end
+
+
 
 namespace :deploy do
 
@@ -288,6 +293,44 @@ namespace :deploy do
   task :stop_pdf_workers, :roles => :pdf do
     run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec ruby script/rocky_pdf_runner stop"
   end
+  
+end
+
+after "heroku:setup", "heroku:set_config"
+
+namespace :heroku do
+  
+  
+  
+  desc "Deploy environement-specific branch to heroku remote"
+  task :deploy do
+    %x[git push #{heroku_remote} #{branch}:master]
+  end
+  
+  task :setup do
+  end
+  
+  task :set_config do
+    Dotenv.load(".env.#{rails_env}")
+    ['AIRBRAKE_API_KEY',
+     'SECRET_TOKEN',
+     'AWS_ACCESS_KEY_ID',
+     'AWS_SECRET_ACCESS_KEY',
+     'ROCKY_CORE_API_KEY'].each do |env_var|
+       #%x[heroku config:get #{env_var} --remote=#{heroku_remote}]
+       env_val = ENV[env_var]
+       Bundler.with_clean_env do
+         system("heroku config:set #{env_var}=#{env_val} --remote=#{heroku_remote}")
+       end       
+     end
+     Bundler.with_clean_env do
+       system("heroku config:set ROCKY_ROLE=UI --remote=#{heroku_remote}")
+       system("heroku config:set BUNDLE_WITHOUT=development:test:pdf --remote=#{heroku_remote}")
+       system("heroku config:set RAILS_ENV=#{rails_env} --remote=#{heroku_remote}")
+     end       
+   
+  end
+  
   
 end
 

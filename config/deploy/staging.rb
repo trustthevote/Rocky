@@ -31,6 +31,7 @@ role :pdf,  *(ENV['STAGING_PDF'].split(',').collect(&:strip))
 set :keep_releases, 3
 
 set :rails_env,    "staging"
+set :heroku_remote, "rocky5-staging"
 
 set :branch, "5.0.0"
 
