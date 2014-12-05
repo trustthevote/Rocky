@@ -297,7 +297,7 @@ namespace :deploy do
   
 end
 
-after "heroku:setup", "heroku:set_config"
+after "heroku:setup", "heroku:set_config", "heroku:addons"
 
 namespace :heroku do
   
@@ -332,7 +332,22 @@ namespace :heroku do
    
   end
   
-  
+  task :addons do
+    Bundler.with_clean_env do
+      #mysql DB
+      system("heroku addons:add cleardb --remote=#{heroku_remote}")
+      #sleep(5)
+      clear_db_url = IO.popen("heroku config:get CLEARDB_DATABASE_URL --remote=#{heroku_remote}").read
+      db_url = clear_db_url.gsub(/^mysql/,"mysql2").split(/[\r\n]+/).first
+      system("heroku config:set DATABASE_URL=#{db_url} --remote=#{heroku_remote}")
+      # MemCache
+      system("heroku addons:add memcachier --remote=#{heroku_remote}")
+      # outbound IP
+      system("heroku addons:add proximo --remote=#{heroku_remote}")      
+      # scehdueld tasks
+      system("heroku addons:add scheduler --remote=#{heroku_remote}")      
+    end
+  end
 end
 
 
