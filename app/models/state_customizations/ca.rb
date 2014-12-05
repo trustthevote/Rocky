@@ -380,7 +380,7 @@ class CA < StateCustomization
   end
   
   def self.extract_token_from_xml_response(xml_string)
-    if xml_string =~ XML_TOKEN_REGEXP
+    if xml_string.to_s =~ XML_TOKEN_REGEXP
       return $1
     else
       return nil
