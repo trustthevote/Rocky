@@ -1326,10 +1326,10 @@ describe Registrant do
         Registrant.process_ui_records
       end
       
-      it "finds old_ui_record_ids in batches of 100" do
+      it "finds old_ui_record_ids in batches of 10" do
         id_list = mock(Array)
         Registrant.stub(:old_ui_record_ids).and_return(id_list)
-        id_list.should_receive(:each_slice).with(100)
+        id_list.should_receive(:each_slice).with(10)
         Registrant.process_ui_records
       end
       context 'when there are incomplete records' do
