@@ -448,22 +448,24 @@ class Registrant < ActiveRecord::Base
   
   def self.process_ui_records
     self.where("status='complete' AND updated_at < ?", ui_timeout_minutes.minutes.ago).delete_all
-    self.old_ui_record_ids.each_slice(100) do |id_list|
+    results = {}
+    self.old_ui_record_ids.each_slice(10) do |id_list|
       registrants = self.where("id in (?)", id_list)
       reg_hashes = registrants.collect {|r| r.to_bulk_api_hash }
-      
-      created_records = JSON.parse(RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations/bulk.json", { 
+      created_records = JSON.parse(RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations/bulk.json", {
           :registrants => reg_hashes, 
           :partner_id=>Partner::DEFAULT_ID, 
           :partner_API_key=>ENV['ROCKY_CORE_API_KEY']
-      }.to_json))
+      }.to_json, :content_type => :json, :accept => :json))
       
       created_records["registrants_added"].each_with_index do |creation_status,idx|
+        results[registrants[idx].id] = creation_status
         if creation_status[0] == true
           registrants[idx].delete
         end
       end
     end
+    results
   end
 
   def self.abandon_stale_records
@@ -1120,7 +1122,7 @@ class Registrant < ActiveRecord::Base
       created_at: created_at.to_s(:db),
       updated_at: updated_at.to_s(:db),
 
-      date_of_birth: date_of_birth.to_s("%m-%d-%Y"),
+      date_of_birth: date_of_birth.blank? ? date_of_birth : date_of_birth.to_s("%m-%d-%Y"),
 
       id_number: state_id_number,
       email_address: email_address,
