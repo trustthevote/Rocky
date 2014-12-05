@@ -28,4 +28,7 @@ role :db,   ENV['PRODUCTION_DB'], :primary => true
 role :web,  *(ENV['PRODUCTION_WEB'].split(',').collect(&:strip))
 role :pdf,  *(ENV['PRODUCTION_PDF'].split(',').collect(&:strip))
 
-set :branch, "production"
+set :heroku_remote, "rocky5-production"
+
+set :branch, "5.0.0"
+# set :branch, "production"
