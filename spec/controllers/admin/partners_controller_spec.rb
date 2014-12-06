@@ -26,6 +26,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Admin::PartnersController do
 
+
+  describe 'for UI-only deploys' do
+    it "redirects to the core UI" do
+      old_role = ENV['ROCKY_ROLE']
+      ENV['ROCKY_ROLE'] = 'UI'
+      get :index
+      response.should redirect_to("#{RockyConf.api_host_name}/admin")
+      ENV['ROCKY_ROLE'] = old_role
+      
+    end
+  end
+  
+
   describe 'index' do
     it 'should render the index' do
       get :index
