@@ -32,7 +32,16 @@ end
 
 describe LogosController do
   render_views
-
+  describe 'for UI-only deploys' do
+    it "redirects to the core UI" do
+      old_role = ENV['ROCKY_ROLE']
+      ENV['ROCKY_ROLE'] = 'UI'
+      get :show
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      ENV['ROCKY_ROLE'] = old_role
+    end
+  end
+  
   before(:each) do
     activate_authlogic
     @partner = FactoryGirl.create(:partner)

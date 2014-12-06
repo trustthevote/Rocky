@@ -24,6 +24,8 @@
 #***** END LICENSE BLOCK *****
 class Api::V2::BaseController < ApplicationController
 
+  before_filter :ui_role_api_response
+
   protected
 
   # Renders the data as JSON and wraps into the <callback>(...); if

@@ -24,6 +24,8 @@
 #***** END LICENSE BLOCK *****
 class Api::V3::BaseController < ApplicationController
 
+  before_filter :ui_role_api_response
+  
   protected
 
   # Renders the data as JSON and wraps into the <callback>(...); if
@@ -35,5 +37,5 @@ class Api::V3::BaseController < ApplicationController
       render options.merge(:json => data)
     end
   end
-
+  
 end

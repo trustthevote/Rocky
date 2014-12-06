@@ -25,7 +25,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe QuestionsController do
-
+  describe 'for UI-only deploys' do
+    it "redirects to the core UI" do
+      old_role = ENV['ROCKY_ROLE']
+      ENV['ROCKY_ROLE'] = 'UI'
+      get :edit
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      ENV['ROCKY_ROLE'] = old_role
+    end
+  end
+  
   describe "when logged in" do
     before(:each) do
       activate_authlogic

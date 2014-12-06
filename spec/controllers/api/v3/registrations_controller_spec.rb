@@ -26,6 +26,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
 describe Api::V3::RegistrationsController do
 
+  describe 'calls to a UI role app' do
+    it "should return a message with 302" do
+      old_role = ENV['ROCKY_ROLE']
+      ENV['ROCKY_ROLE'] = 'UI'
+      
+      post :create
+      response.status.should == 302
+      response.body.should include("changed")
+      ENV['ROCKY_ROLE'] = old_role
+      
+    end
+  end
   describe 'create' do
     it 'should return URL of PDF to be generated' do
       expect_api_response :pdfurl => "https://example-pdf.com/123.pdf", :uid => "123"

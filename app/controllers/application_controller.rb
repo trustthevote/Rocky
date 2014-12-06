@@ -53,5 +53,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def ui_role_api_response
+    if ENV['ROCKY_ROLE'] == 'UI'
+      jsonp({:message=>"The API domain has changed: #{RockyConf.api_host_name}"}, :status=>302)
+    end
+  end
+  
   
 end

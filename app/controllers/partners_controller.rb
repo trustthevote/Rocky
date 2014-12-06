@@ -127,7 +127,6 @@ HTML
   end
 
   protected
-
   def partner_id
     current_partner && current_partner.to_param
   end

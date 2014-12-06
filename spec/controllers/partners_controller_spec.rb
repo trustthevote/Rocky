@@ -26,6 +26,35 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PartnersController do
 
+  describe 'for UI-only deploys' do
+    it "redirects to the core UI" do
+      old_role = ENV['ROCKY_ROLE']
+      ENV['ROCKY_ROLE'] = 'UI'
+      get :new
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      get :edit
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      get :show
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      get :embed_codes
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      get :registrations
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      get :statistics
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      get :download_csv
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      
+      post :update
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      
+      post :create
+      response.should redirect_to("#{RockyConf.api_host_name}/login")
+      
+      ENV['ROCKY_ROLE'] = old_role
+    end
+  end
+
   describe "registering" do
     it "creates a new partner" do
       assert_difference("Partner.count") do

@@ -24,6 +24,8 @@
 #***** END LICENSE BLOCK *****
 class PartnerBase < ApplicationController
   layout "partners"
+  before_filter :redirect_ui_role
+  
   helper_method :current_partner_session, :current_partner
   before_filter :init_nav_class
 
@@ -68,4 +70,11 @@ class PartnerBase < ApplicationController
   def init_nav_class
     @nav_class = Hash.new
   end
+  
+  def redirect_ui_role
+    if ENV['ROCKY_ROLE'] == 'UI'
+      redirect_to "#{RockyConf.api_host_name }/login"
+    end
+  end
+
 end
