@@ -27,6 +27,7 @@ class RegistrationStep < ApplicationController
   include ApplicationHelper
 
   layout "registration"
+  before_filter :redirect_app_role
   before_filter :find_partner
 
   rescue_from Registrant::AbandonedRecord do |exception|
@@ -119,5 +120,9 @@ class RegistrationStep < ApplicationController
     @collect_email_address = params[:collectemailaddress]
   end
   
-  
+  def redirect_app_role
+    if ENV['ROCKY_ROLE'] == 'APP'
+      redirect_to "//#{RockyConf.ui_url_host}"
+    end
+  end
 end

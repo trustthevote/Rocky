@@ -32,6 +32,20 @@ describe RegistrantsController do
     RemotePartner.stub(:find).with(nil).and_raise("Not Found")
   end
   
+
+  describe 'calls to a APP role app' do
+    it "should redirect to the UI server" do
+      old_role = ENV['ROCKY_ROLE']
+      ENV['ROCKY_ROLE'] = 'APP'
+      
+      get :new
+      response.should redirect_to("//#{RockyConf.ui_url_host}")
+      ENV['ROCKY_ROLE'] = old_role
+      
+    end
+  end
+  
+  
   describe "widget loader" do
     render_views
 
