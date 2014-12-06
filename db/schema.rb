@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141114165714) do
+ActiveRecord::Schema.define(:version => 20141206195748) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -114,6 +114,15 @@ ActiveRecord::Schema.define(:version => 20141114165714) do
   end
 
   add_index "pdf_generations", ["locked"], :name => "index_pdf_generations_on_locked"
+
+  create_table "priority_pdf_generations", :force => true do |t|
+    t.integer  "registrant_id"
+    t.boolean  "locked",        :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "priority_pdf_generations", ["locked"], :name => "index_priority_pdf_generations_on_locked"
 
   create_table "registrants", :force => true do |t|
     t.string   "status"

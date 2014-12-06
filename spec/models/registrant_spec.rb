@@ -1503,6 +1503,22 @@ describe Registrant do
     end
     
     describe 'generate_pdf' do
+      it "adds to the pdfgen queue" do
+        PdfGeneration.should_receive(:create!).with(:registrant_id=>@registrant.id)
+        @registrant.queue_pdf
+      end
+      context 'when email is blank' do
+        before(:each) do
+          @registrant.email_address = ''
+        end
+        it "uses the priority queue" do
+          PriorityPdfGeneration.should_receive(:create!).with(:registrant_id=>@registrant.id)
+          @registrant.queue_pdf
+        end
+      end
+    end
+    
+    describe 'generate_pdf' do
       let(:pdf_writer) { mock(PdfWriter) }
       before(:each) do
         pdf_writer.stub(:assign_attributes)
@@ -1821,11 +1837,6 @@ describe Registrant do
       reg.stub(:survey_question_2).and_return("abc")
     end
     describe '#to_api_hash' do
-      it "sends async = false for no-email registrations" do
-        pending "Do no-email registrants get a priority queue or just immediate PDF gen?"
-        reg.stub(:email_address).and_return(" ")
-        reg.to_api_hash[:async].should be_false
-      end
       it "uses the remote_partner_id" do
         reg.stub(:partner_id).and_return(123)
         reg.stub(:remote_partner_id).and_return(456)

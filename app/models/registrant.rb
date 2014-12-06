@@ -1233,7 +1233,11 @@ class Registrant < ActiveRecord::Base
   end
   
   def queue_pdf
-    PdfGeneration.create!(:registrant_id=>self.id)
+    klass = PdfGeneration
+    if self.email_address.blank?
+      klass = PriorityPdfGeneration
+    end
+    klass.create!(:registrant_id=>self.id)
   end
   
   def pdf_file_path(pdfpre=nil)

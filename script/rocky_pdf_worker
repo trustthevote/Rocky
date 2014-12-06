@@ -4,5 +4,6 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config/environ
 Dir.chdir(Rails.root)
 
 loop do
+  PriorityPdfGeneration.find_and_generate
   PdfGeneration.find_and_generate
 end

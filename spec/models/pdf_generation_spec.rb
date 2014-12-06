@@ -50,7 +50,7 @@ describe PdfGeneration do
           PdfGeneration.stub(:sleep)
         end
         it "pauses before returning" do
-          PdfGeneration.should_receive(:sleep)
+          PdfGeneration.should_receive(:sleep).with(3)
           PdfGeneration.retrieve
         end
         context 'when there are rows it should be retrieving' do

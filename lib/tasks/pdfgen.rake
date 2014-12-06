@@ -3,6 +3,7 @@ namespace :pdf do
   desc "Generate PDFs from the queue"
   task :generate => :environment do
     loop do
+      PriorityPdfGeneration.find_and_generate
       PdfGeneration.find_and_generate
     end
   end
