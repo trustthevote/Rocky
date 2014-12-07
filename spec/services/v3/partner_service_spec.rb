@@ -227,6 +227,7 @@ describe V3::PartnerService do
           registration_instructions_url: "http://register.rockthevote.com/reg-instructions?l=<LOCALE>&s=<STATE>",
           survey_question_2_zh_tw: "%E9%9B%BB%E5%AD%90%E9%83%B5%E4%BB%B6%E5%9C%B0%E5%9D%80",
           survey_question_1_ko: "KO One",
+          survey_question_2_ko: "KO Two",
           whitelabeled: true,
           from_email: "custom-from@rtv.org",
           finish_iframe_url: "http://example.com/iFrame-url",
@@ -244,6 +245,7 @@ describe V3::PartnerService do
       it 'should save the record' do
         p = V3::PartnerService.create_record(params)
         p.survey_question_1_ko.should == "KO One"
+        p.survey_question_2_ko.should == "KO Two"
         params2 = params.dup
         params2.delete(:government_partner_zip_codes)
         params2[:government_partner_state_id] = GeoState["MA"].id

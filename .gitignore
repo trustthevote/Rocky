@@ -32,7 +32,6 @@ coverage
 config/mobile.yml
 config/states_with_online_registration.yml
 config/database.yml
-config/newrelic.yml
 db/bootstrap/partners.yml
 log/*.log
 tmp/*
