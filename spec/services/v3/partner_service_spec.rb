@@ -202,13 +202,9 @@ describe V3::PartnerService do
 
 
 
-
     context 'complete record' do
-      #before { @partner = FactoryGirl.build(:api_created_partner) }
-      #before { Partner.stub(:new).with({}) { @partner } }
-
-      it 'should save the record' do
-        params = {
+      let(:params) do
+        {
           username: "a-custom-username",
           organization: "Org Name",
           url: "http://www.google.com",
@@ -243,13 +239,16 @@ describe V3::PartnerService do
           government_partner_zip_codes: ["02113", "02110"],
           partner_css_download_url: "http://www.google.com"
         }
-        V3::PartnerService.create_record(params).should
+      end
+
+      it 'should save the record' do
+        p = V3::PartnerService.create_record(params)
+        p.survey_question_1_ko.should == "KO One"
         params2 = params.dup
         params2.delete(:government_partner_zip_codes)
         params2[:government_partner_state_id] = GeoState["MA"].id
         params2[:email] = "contact_email+2@rtv.org"
         V3::PartnerService.create_record(params2).should
-        
       end
     end
 

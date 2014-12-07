@@ -52,7 +52,6 @@ describe Api::V3::PartnersController do
       partner.stub(:id) { 2342 }
       new_partner { partner }
     end
-
     it 'should catch invalid fields' do
       expect_api_error :message => "Error message", :field_name => "invalid_field"
       new_partner { raise V3::RegistrationService::ValidationError.new('invalid_field', 'Error message') }
