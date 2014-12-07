@@ -185,4 +185,5 @@ staging:
 # incurring any user-visible performance degredation.
 production:
   <<: *default_settings
-  enabled: true
+  monitor_mode: true
+  app_name: Rocky (Production)

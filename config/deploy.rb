@@ -317,7 +317,9 @@ namespace :heroku do
      'SECRET_TOKEN',
      'AWS_ACCESS_KEY_ID',
      'AWS_SECRET_ACCESS_KEY',
-     'ROCKY_CORE_API_KEY'].each do |env_var|
+     'ROCKY_CORE_API_KEY',
+     'NEW_RELIC_LICENSE_KEY',
+     'NEW_RELIC_APP_NAME'].each do |env_var|
        #%x[heroku config:get #{env_var} --remote=#{heroku_remote}]
        env_val = ENV[env_var]
        Bundler.with_clean_env do
