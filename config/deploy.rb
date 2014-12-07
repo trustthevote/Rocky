@@ -323,7 +323,7 @@ namespace :heroku do
        #%x[heroku config:get #{env_var} --remote=#{heroku_remote}]
        env_val = ENV[env_var]
        Bundler.with_clean_env do
-         system("heroku config:set #{env_var}=#{env_val} --remote=#{heroku_remote}")
+         system("heroku config:set #{env_var}='#{env_val}' --remote=#{heroku_remote}")
        end       
      end
      Bundler.with_clean_env do

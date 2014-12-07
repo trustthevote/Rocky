@@ -92,6 +92,8 @@ describe PartnerZip do
       p4.privacy_url.should == "http://example.com/privacy"
       p4.is_government_partner.should be_true
       p4.government_partner_zip_codes.should == ["02113","02110"]
+      p4.survey_question_1_ko.should == "KO Question 1"
+      p4.survey_question_2_zh_tw.should == "ZH-TW Question 2"
       
     end
     it "works when there's just a partner.css" do
