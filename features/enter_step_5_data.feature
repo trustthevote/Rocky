@@ -48,7 +48,7 @@ Feature: Step 5
       Then I should see "Additional Registration Information"
       
 
-    @cleanup_pdf
+    @cleanup_pdf @passing
     Scenario: enter data
      Given I have completed step 4
       When I go to the step 5 page

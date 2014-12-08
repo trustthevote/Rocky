@@ -1810,7 +1810,7 @@ describe Registrant do
     end
 
     it "calls the core API" do
-      RestClient.should_receive(:post).with("#{RockyConf.api_host_name}/api/v3/registrations.json", {:registration=>{"data"=>"value"}})
+      RestClient.should_receive(:post).with("#{RockyConf.api_host_name}/api/v3/registrations.json", {:registration=>{"data"=>"value"}}.to_json, {:content_type=>:json, :accept=>:json})
       reg.complete_registration
     end
     

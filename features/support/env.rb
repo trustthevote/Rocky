@@ -61,6 +61,10 @@ Before do
   I18n.locale = :en
   ActiveResource::Connection.cache.clear
   stub_partners
+  stub_registrant_creation_via_api
+  stub_ca_disclosures
+  
+  stub_bulk_process
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.

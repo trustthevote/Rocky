@@ -164,6 +164,11 @@ When /^the timeout_stale_registrations task has run$/ do
   Registrant.abandon_stale_records
 end
 
+
+When(/^the process_ui_records task has run$/) do
+  Registrant.process_ui_records
+end
+
 # Then /^I should be redirected to the mobile url with partner="([^\"]*)"$/ do |partner|
 #   response.should redirect_to(MobileConfig.redirect_url(:partner=>partner,:locale=>'en'))
 # end
@@ -223,8 +228,7 @@ end
 
 
 Then /^my status should be "([^\"]*)"$/ do |status|
-  @registrant.reload
-  @registrant.status.should == status
+  Registrant.last.status.should == status
 end
 
 Then /^my status should not be "([^\"]*)"$/ do |status|
@@ -264,8 +268,8 @@ Given(/^I have a state license$/) do
   @registrant.save
 end
 
-Given /^I have not downloaded the PDF before$/ do
-  `rm -f #{@registrant.pdf_file_path}`
+Given(/^the PDF is not ready$/) do
+  Registrant.any_instance.stub(:remote_pdf_ready?).and_return(false)
 end
 
 Given /there is localized state data/ do
@@ -273,7 +277,7 @@ Given /there is localized state data/ do
 end
 
 Then /^I should see a new download$/ do
-  assert File.exists?(@registrant.pdf_file_path)
+  assert File.exists?(Registrant.last.pdf_file_path)
 end
 
 Then /^I should see my email$/ do
@@ -438,6 +442,11 @@ Then(/^I should see the return XML from the API request$/) do
   page.should have_content "s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope"
   page.should have_content "<Success>true</Success>"
 end
+
+When(/^I'm testing$/) do
+  raise 'a'
+end
+
 
 
 After('@cleanup_pdf') do

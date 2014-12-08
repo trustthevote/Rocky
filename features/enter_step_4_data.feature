@@ -107,7 +107,7 @@ Feature: Step 4
       Then I should not see a checkbox for "I would like to volunteer with Rock the Vote"
     
     
-    @wip
+    @passing
     Scenario: User does not see RTV ask for volunteer if setting is false even if partner is true
       Given the following partner exists:
         | organization   | ask_for_volunteers | partner_ask_for_volunteers | 

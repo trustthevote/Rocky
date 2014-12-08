@@ -1046,7 +1046,7 @@ class Registrant < ActiveRecord::Base
   def complete_registration
     begin
       response = JSON.parse(RestClient.post("#{RockyConf.api_host_name}/api/v3/registrations.json", 
-        :registration => self.to_api_hash
+        {:registration => self.to_api_hash}.to_json, :content_type => :json, :accept => :json
       ))
       
       self.remote_uid = response["uid"]

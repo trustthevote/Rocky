@@ -3,7 +3,7 @@ Feature: Finish
   As a registrant
   I want to download reg form PDF
 
-    @cleanup_pdf
+    @cleanup_pdf @passing
     Scenario: download form
      Given I have completed step 4
       When I go to the step 5 page
@@ -12,8 +12,9 @@ Feature: Finish
       When I go to the download page
       Then I should see a new download
 
+    @passing
     Scenario: preparing form
      Given I have completed step 5
-       And I have not downloaded the PDF before
+       And the PDF is not ready
       When I go to the download page
       Then I should see "Preparing Registration Form"

@@ -83,7 +83,7 @@ Feature: Step 3
       When I go to the step 3 page
       And I press "registrant_submit"
       Then I should see "Hang on. You are eligible to register online in your state."
-      And I should see "Safe at Home Participants"
+      And I should see "en disclosure number 1"
       And I should see a checkbox for "registrant_ca_disclosures"
       
 

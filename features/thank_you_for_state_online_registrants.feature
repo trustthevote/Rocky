@@ -35,7 +35,7 @@ Feature: Thank you email for registrants who choose to register online with a st
     Then I should be sent a thank-you email
     And my status should be "complete"
 
-  @wip
+  @passing
   Scenario: Registrant from a whitelabeled partner who finished online gets sent a customized thank-you email from that partner
     Given the following partner exists:
       | organization   | rtv_sms_opt_in | partner_sms_opt_in | from_email                      | whitelabeled |
@@ -46,6 +46,7 @@ Feature: Thank you email for registrants who choose to register online with a st
     When I go to the step 4 page
     And I press "registrant_state_online_registration"
     And my session expires
+    And the process_ui_records task has run
     And the timeout_stale_registrations task has run
     Then I should be sent a thank-you email from that partner
     And my status should be "complete"
