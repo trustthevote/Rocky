@@ -1053,12 +1053,15 @@ class Registrant < ActiveRecord::Base
       self.remote_pdf_path = response["pdfurl"]
       self.save!
       redact_sensitive_data
+      return true
     rescue Exception => e
       begin
         Rails.logger.error e.response
-      rescue
-        raise e
+      rescue Exception => e2
+        Rails.logger.error e.message
+        Rails.logger.error e.backtrace
       end
+      raise "Error submiting to core API"
     end
     
     
@@ -1074,8 +1077,9 @@ class Registrant < ActiveRecord::Base
   rescue Exception => e
     begin
       Rails.logger.error e.response
-    rescue
-      raise e
+    rescue Exception => e2
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace
     end
     return false
   end

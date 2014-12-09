@@ -57,7 +57,10 @@ describe RemindersController do
           :reminders_stopped=>false
         })
       end
-      it "displays an error message"
+      it "displays an error message" do
+        get :stop, :id=>'id'
+        assert_select "h1", "Unknown error: the web administrators have been contacted."
+      end
     end
 
     describe "feedback page" do

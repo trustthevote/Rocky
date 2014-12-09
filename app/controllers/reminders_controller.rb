@@ -32,7 +32,7 @@ class RemindersController < RegistrationStep
     @registrant_attributes = Registrant.stop_reminders(params[:id])
     @partner = RemotePartner.find_by_id(@registrant_attributes[:partner_id]) || RemotePartner.find(Partner::DEFAULT_ID)
     @partner_id = @partner.id
-
+    
     @registrant_finish_iframe_url = @registrant_attributes[:finish_iframe_url]
     I18n.locale = @registrant_attributes[:locale]
     

@@ -1,6 +1,9 @@
 ---
 en:
   txt:
+    unknown_error: "Unknown error: the web administrators have been contacted."
+    error: "Something went wrong."
+    try_again: "Go back and try again."
     rtv_and_partner: Rock the Vote and %{partner_name}
     button:
       submit: Next Step
