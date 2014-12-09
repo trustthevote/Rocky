@@ -31,9 +31,19 @@ describe DownloadsController do
     Partner.any_instance.stub(:valid_api_key?).and_return(true)
   end
   
-  describe "when PDF is ready" do
+  describe 'when the registrant remote ID is blank' do
     before(:each) do
       @registrant = FactoryGirl.create(:maximal_registrant)
+    end
+    it "renders the error page" do
+      get :show, :registrant_id => @registrant.to_param
+      assert_template "error"
+    end
+  end
+  
+  describe "when PDF is ready" do
+    before(:each) do
+      @registrant = FactoryGirl.create(:maximal_registrant, :remote_uid=>"UID")
       Registrant.any_instance.stub(:remote_pdf_ready?).and_return(true)
     end
 
@@ -50,7 +60,7 @@ describe DownloadsController do
 
   describe "when PDF is not ready" do
     before(:each) do
-      @registrant = FactoryGirl.create(:step_5_registrant)
+      @registrant = FactoryGirl.create(:step_5_registrant, :remote_uid=>"UID")
       Registrant.any_instance.stub(:remote_pdf_ready?).and_return(false)
       
     end

@@ -270,6 +270,7 @@ end
 
 Given(/^the PDF is not ready$/) do
   Registrant.any_instance.stub(:remote_pdf_ready?).and_return(false)
+  Registrant.any_instance.stub(:remote_uid).and_return("auid")
 end
 
 Given /there is localized state data/ do
