@@ -1,6 +1,9 @@
 ---
 ko:
   txt:
+    unknown_error: 에러가 발생했습니다. 관리자에게 알려드렸습니다. (Unknown error)
+    error: 에러가 발생했습니다
+    try_again: 다시 시도할까요
     rtv_and_partner: Rock the Vote 와 %{partner_name}
     button:
       submit: 다음 단계
@@ -178,4 +181,3 @@ ko:
     status_text:
       message: 저는 이제 당당한 미국의 유권자가 되었습니다. 여러분도 등록해서 한표를 행사하세요!
       under_18_message: 유권자 등록은 매우 쉬워요!
-

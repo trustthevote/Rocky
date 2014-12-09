@@ -1,6 +1,9 @@
 ---
 ilo:
   txt:
+    unknown_error: Kamali nga error nacontaken ti web administrator.
+    error: Adda nagkamali.
+    try_again: Agsubli ken padasem manen.
     rtv_and_partner: Rock the Vote ken  %{partner_name}
     button:
       submit: Sumaruno nga Pagna
@@ -227,4 +230,3 @@ ilo:
     status_text:
       message: Nagrehistro-ak tapno makaboto, mabalin yo met!
       under_18_message: Agrehistro kayo tapno makaboto kayo. Nalaka laeng!
-

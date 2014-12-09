@@ -1,6 +1,9 @@
 ---
 ja:
   txt:
+    unknown_error: 不明のエラー：ウエブ管理者に連絡されました。
+    error: 何かがうまくいきませんでした
+    try_again: 戻って再度試してみますか
     rtv_and_partner: Rock the Voteと%{partner_name}
     button:
       submit: 次の段階
@@ -149,4 +152,3 @@ ja:
     status_text:
       message: 投票者登録を済ませました。あなたもできます！
       under_18_message: 投票者登録をして下さい。簡単です！
-

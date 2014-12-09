@@ -1,6 +1,9 @@
 ---
 zh-tw:
   txt:
+    unknown_error: 未能識別的錯誤：已聯繫網絡管理員。
+    error: 發生錯誤
+    try_again: 要返回再試一次嗎？
     rtv_and_partner: Rock the Vote 和 %{partner_name}
     button:
       submit: 下一步
@@ -151,4 +154,3 @@ zh-tw:
     status_text:
       message: 我剛剛完成了選民登記，你也可以登記！
       under_18_message: 確保進行選民登記。這是一件非常容易的事情！
-

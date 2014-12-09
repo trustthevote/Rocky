@@ -1,6 +1,9 @@
 ---
 km:
   txt:
+    unknown_error: មានការខុសក្នុងការធ្វើទម្រង់របស់អ្នក
+    error: អ្វីមួយខុស
+    try_again: ត្រឡប់ទៅវិញ ហើយ សាកល្បងម្តងទៀត
     rtv_and_partner: Rock the Vote និង %{partner_name}
     button:
       submit: វិធានការបន្ទាប់
@@ -218,4 +221,3 @@ km:
     status_text:
       message: ខ្ញុំទើបតែបានចុះឈ្មោះបោះឆ្នោត ហើយអ្នកក៏អាចធ្វើបានដែរ!
       under_18_message: ត្រូវប្រាកដថា អ្នកចុះឈ្មោះបោះឆ្នោត។ វាស្រួលទេ!
-

@@ -1,6 +1,10 @@
 ---
 tl:
   txt:
+    unknown_error: ! 'Hindi kilalang pagkakamali:  ang mga administrador ng web ay
+      na-kontak  na.'
+    error: May nangyaring kamalian
+    try_again: Bumalik at sumubok muli?
     rtv_and_partner: ! '"Rock the Vote" at %{partner_name}'
     button:
       submit: Susunod na Hakbang
@@ -250,4 +254,3 @@ tl:
     status_text:
       message: Karerehistro ko lamang para bumoto at kaya mo rin ito!
       under_18_message: Siguruhin mong magrehistro upang bumoto. Madali ito !
-

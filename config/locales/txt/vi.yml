@@ -1,6 +1,10 @@
 ---
 vi:
   txt:
+    unknown_error: ! 'Không nhận dạng được lỗi: đã liên lạc với những người quản lý
+      trang mạng.'
+    error: Một điều gì đó không đúng đã xảy ra
+    try_again: Xin vui lòng trở lại và thử lại lần nữa?
     rtv_and_partner: Rock the Vote và %{partner_name}
     button:
       submit: Bước tiếp theo
@@ -231,4 +235,3 @@ vi:
     status_text:
       message: Tôi vừa đăng ký đi bầu, và bạn cũng có thể!
       under_18_message: Hãy chắc chắn rằng bạn đăng ký đi bầu. Thật dễ dàng!
-

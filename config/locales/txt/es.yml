@@ -1,6 +1,9 @@
 ---
 es:
   txt:
+    unknown_error: ! 'Error desconocido: los administradores de red han sido contactados.'
+    error: Algo salió mal.
+    try_again: Regresar y volver a intentarlo.
     rtv_and_partner: Rock the Vote y %{partner_name}
     button:
       submit: Siguientes pasos
@@ -236,4 +239,3 @@ es:
     status_text:
       message: Acabo de inscribirme para votar y tú también puedes!
       under_18_message: Asegúrese de que usted inscribirse para votar. ¡ Es fácil!
-

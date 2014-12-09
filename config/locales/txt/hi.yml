@@ -1,6 +1,10 @@
 ---
 hi:
   txt:
+    unknown_error: ! 'एरर की पहचान नही हो रही है: वेब अधिकारियों के साथ संपर्क किया
+      गया है (Unknown error)'
+    error: कुछ ग़लत हुआ है
+    try_again: वापस जायें और फिर कॉरिश करें
     rtv_and_partner: Rock the vote और %{partner_name}
     button:
       submit: अगला कदम
@@ -243,4 +247,3 @@ hi:
         सकतें हैं!
       under_18_message: मतदान (वोट) के लिए खुद को पंजीकृत (रिजिस्टर) ज़रूर करवायें|
         यह आसान है!
-
