@@ -687,3 +687,537 @@ a.button_share_facebook, a.button_share_google_buzz, a.button_share_twitter {
 
 
 
+/* #Reset & Basics (Inspired by E. Meyers)
+================================================== */
+label {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+body {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #fff;
+    background-image: image-url('reg/container-repeater.gif');
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    background-size: auto auto;
+    color: #404040;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    overflow-x: hidden;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+ html {
+	overflow-x:hidden; 
+	height:100%;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+	color: #101010;
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    font-weight: inherit;
+    color: #B2272C;
+}
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+    font-weight: inherit;
+    color: #000;
+}
+h1 {
+    font-size: 28px;
+    line-height:40px;
+    text-transform:uppercase;
+    font-weight: 700;
+}
+h2 {
+    font-size: 25px;
+    line-height:29px;
+    text-transform:uppercase;
+    font-weight: 500;
+}
+h3 {
+    font-size: 14px;
+    line-height: 30px;
+    text-transform:uppercase;
+    font-weight: 400;
+}
+h4 {
+    font-size: 24px;
+    line-height: 27px;
+    text-transform:uppercase;
+    font-weight: 400;
+}
+h5 {
+    font-size: 20px;
+    line-height: 20px;
+    text-transform:uppercase;
+    font-weight: 800;
+}
+h6 {
+    font-size: 16px;
+    line-height: 20px;
+    text-transform:none;
+    font-weight: 700;
+}
+h3, h4, h5, h6 {
+    margin-bottom: 15px;
+}
+form.edit_registrant, form.new_registrant {
+    margin: 25px auto;
+    position: relative;
+    text-align: center;
+}
+#header {
+    background-image: image-url('reg/rtv-header.png');
+    background-repeat: no-repeat;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    margin-bottom: 60px;
+}
+#other_language_link {
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: lighter;
+    margin: 0;
+    padding: 5px 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#progress-bar {
+    float: right;
+    left: 0;
+    position: relative;
+    top: 100px;
+}
+#progress-bar li.progress-title {
+    font-size: 12px;
+    padding-right: 5px;
+}
+#container {
+    background: none repeat scroll 0 0 #FFFFFF;
+    min-height: 70%;
+}
+#main_inner {
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+#sticky_footer {
+background-color: #fff;
+}
+#footer {
+    border-top: medium none;
+    color: #444444;
+    font-family: 'open sans';
+    font-size: 12px;
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+}
+#footer p {
+    font-size: 100%;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+ul.checkbox h3 {
+    line-height: 28px;
+    margin-bottom: 5px;
+    margin-left: 12px;
+    overflow: hidden;
+    text-align: left;
+}
+
+/* #Links
+================================================== */
+a, a:visited {
+	color: #c62129;
+	text-decoration: none;
+}
+a:hover, a:focus {
+	color: #333;
+	text-decoration: underline;
+}
+p a, p a:visited {
+	line-height: inherit;
+	text-decoration: none;
+}
+a:focus {
+	outline:none;
+}
+
+/* #Buttons
+================================================== */
+
+.button, button, input[type="submit"], input[type="reset"],	input[type="button"] {
+	background: #B2272C;	
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border:none;
+	color: #fff;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	line-height: normal;
+	padding: 5px 25px;
+	-webkit-transition : all 0.3s ease-out;
+	-moz-transition : all 0.3s ease-out;
+	-o-transition :all 0.3s ease-out;
+	transition : all 0.3s ease-out; 
+	border-bottom: 1px solid #fff;
+	font-weight: 500;
+	border-radius: 0;
+	font-weight: 700;
+}	
+.button.smaller {
+	margin-top: 5px;
+	padding: 3px 10px;
+	font-size: 13px;
+	margin-bottom: 5px;
+}
+.button.smaller.kc-center {
+	margin-left: 90px;
+}
+.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
+	color: #B2272C;
+	background:#292929;
+	border-bottom: 1px solid #B2272C;
+}
+.button:active,	button:active, input[type="submit"]:active, input[type="reset"]:active, input[type="button"]:active {
+	  color: #B2272C;
+}
+.button.full-width,	button.full-width, input[type="submit"].full-width,	input[type="reset"].full-width,	input[type="button"].full-width {
+	width: 100%;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	text-align: center;
+}
+
+/* Fix for odd Mozilla border & padding issues */
+button::-moz-focus-inner, input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}	
+input {
+    -webkit-appearance: none; /*Safari/Chrome*/
+    -moz-appearance: none; /*Firefox*/
+    -ms-appearance: none; /*IE*/
+    -o-appearance: none; /*Opera*/
+    appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 34px;
+    width: 100%;
+    margin: 0;
+    padding: 6px 8px;
+    color: #404040;
+    border: 1px solid #bebebe;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 15px;
+    z-index: 3;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+input, textarea {
+    /*font: 15px/16px;*/
+	font-family: 'Open Sans';
+	font-weight: lighter;
+    color:#404040;
+}
+textarea {
+    border: 1px solid #bebebe;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 15px;
+    padding: 6px 8px;
+}
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+div.rollover_button a, div.rollover_button:hover a, div.rollover_button:active a, span.rollover_button a, span.rollover_button:hover a, span.rollover_button:active a {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    border-radius: 0;
+    display: inline-block;
+    padding: 0;
+    text-align: center;
+    white-space: normal;
+    width: auto;
+}
+form ul {
+    margin: 10px 0 10px 10px;
+    overflow: hidden;
+}
+form li {
+    float: left;
+    /*height: 40px;*/
+    margin-right: 5px;
+}
+.flat {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+/*ul.flat h3 {
+    float: left;
+    font-size: 14px;
+    height: 57px;
+    line-height: 35px;
+    line-height: 16px;
+    margin-right: 5px;
+    text-align: right;
+    width: 120px;
+}*/
+ul.flat h3 {
+    float: left;
+    font-size: 14px;
+    height: 57px;
+    line-height: 16px;
+    margin-top: 10px;
+    text-align: right;
+    width: 120px;
+}
+ul.stacked h3 {
+    font-size: 14px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    text-align: left;
+}
+ul.checkbox h3 input {
+    -moz-appearance: checkbox; /*Firefox*/
+    -ms-appearance: checkbox; /*IE*/
+    -o-appearance: checkbox; /*Opera*/
+    appearance: checkbox;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    height: 20px;
+    width: 20px;
+    -webkit-appearance: checkbox;
+}
+li.width_a div {
+    width: 300px;
+}
+li.width_a input, li.width_a select {
+    width: 295px;
+}
+ul.checkbox-step-1 li {
+    width: 460px;
+}
+li.width_f div {
+    width: 250px;
+}
+li.width_f input, li.width_f select {
+    width: 230px;
+}
+fieldset ul.checkbox li {
+    width: 100%;
+}
+ul.checkbox h3 label {
+    display: inline;
+    line-height: 20px;
+    margin-right: 10px;
+    width: 90%;
+}
+ul.flat .secondary div.flat-stack {
+    margin-left: 5px;
+    text-align: left;
+    width: 130px;
+}
+fieldset {
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+    margin: 10px 0;
+    padding: 5px;
+    text-align: left;
+}
+li.width_e input, li.width_e select {
+    width: 99%;
+}
+ul.question li, ul.question h3, ul.question div, ul.affirm h3, ul.affirm div {
+    margin-bottom: 5px;
+    text-align: left;
+    width: 100%;
+}
+fieldset.questions {
+    margin-top: 25px;
+}
+form hr {
+    background-color: #FFFFFF;
+    border: medium none;
+    color: #CCCCCC;
+    height: 1px;
+    margin: 0;
+}
+.instructions p {
+    color: #434343;
+    font-size: 13px;
+    line-height: 20px;
+    margin: -5px 20px 10px 135px;
+    text-align: left;
+}
+.checkbox-explanation p {
+    color: #434343;
+    font-size: 13px;
+    margin: -5px 75px 20px 110px;
+    text-align: left;
+}
+form.new_registrant p, form.edit_registrant {
+    font-size: 13px;
+    margin-top: 25px;
+}
+label.registrant_volunteer {
+    width: 90%;
+}
+input[type=radio] {
+    -moz-appearance: checkbox;
+    -webkit-appearance: checkbox;
+    padding: 0;
+    height:20px;
+    display:inline-block;
+    line-height:20px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:20px;
+    vertical-align:middle;
+    cursor:pointer;
+    width: 20px;
+}
+input, select, textarea {
+    font-family: "Open Sans",arial,sans-serif;
+    margin-left: 1px;
+}
+.race-dropdown input, .race-dropdown select, .race-dropdown textarea, .party-dropdown input, .party-dropdown select, .party-dropdown textarea {
+    margin-top: 7px;
+}
+.race-dropdown div.tooltip, .party-dropdown div.tooltip {
+    margin-left: 5px;
+    margin-top: 6px;
+    width: 25px !important;
+}
+
+/* CA specific
+================================================== */
+
+.step_4 h3 {
+    color: #000000;
+    font-weight: normal;
+    margin: 0 auto;
+    width: 400px;
+}
+ul.affirm {
+    margin: 0;
+    width: 100%;
+}
+.disclosures {
+    border: 1px solid #ccc;
+    font-size: 13px;
+    width: 525px;
+    text-align: left;
+}
+ul.affirm input {
+    float: left;
+    height: 20px;
+    margin-right: 10px;
+    margin-top: 5px;
+    width: 20px;
+    -moz-appearance: checkbox;
+    -webkit-appearance: checkbox;
+}
+
+/* online integration
+================================================== */
+#main_inner iframe {
+    margin: 1em 0;
+    width: 100%;
+}
+div.rollover_button a.button_share_facebook span, div.rollover_button a.button_share-google_buzz span, div.rollover_button a.button_share_twitter span, div.rollover_button:hover a.button_share_facebook span, div.rollover_button:hover a.button_share-google_buzz span, div.rollover_button:hover a.button_share_twitter span, div.rollover_button:active a.button_share_facebook span, div.rollover_button:active a.button_share-google_buzz span, div.rollover_button:active a.button_share_twitter span, span.rollover_button a.button_share_facebook span, span.rollover_button a.button_share-google_buzz span, span.rollover_button a.button_share_twitter span, span.rollover_button:hover a.button_share_facebook span, span.rollover_button:hover a.button_share-google_buzz span, span.rollover_button:hover a.button_share_twitter span, span.rollover_button:active a.button_share_facebook span, span.rollover_button:active a.button_share-google_buzz span, span.rollover_button:active a.button_share_twitter span {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    font-size: 14px;
+    height: 32px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+div.rollover_button a.button_share_twitter span, div.rollover_button:hover a.button_share_twitter span, div.rollover_button:active a.button_share_twitter span, span.rollover_button a.button_share_twitter span, span.rollover_button:hover a.button_share_twitter span, span.rollover_button:active a.button_share_twitter span {
+    background-image: none;
+}
+.state_online_registration .text {
+    float: left;
+    padding: 5px;
+    width: 100%;
+}
+.state_online_registration .share {
+    float: none;
+    text-align: center;
+    width: 400px;
+}
+.skip_state_registration > h1 {
+    margin-bottom: 20px;
+}
+
+/*for layout file*/
+#voterregtool iframe {
+    display: block;
+    margin: 0 auto;
+}
+.share div .rollover_button a.button_share_twitter, .share div .rollover_button a.button_share_twitter:hover, .share div .rollover_button:hover a.button_share_twitter, .share div .rollover_button:hover a.button_share_twitter:hover {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+}
+.share div .rollover_button a.button_share_facebook, .share div .rollover_button a.button_share_twitter, .share div .rollover_button a.button_share_facebook:hover, .share div .rollover_button a.button_share_twitter:hover, .share div .rollover_button:hover a.button_share_facebook, .share div .rollover_button:hover a.button_share_twitter, .share div .rollover_button:hover a.button_share_facebook:hover, .share div .rollover_button:hover a.button_share_twitter:hover {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    border-radius: 4px;
+    display: block;
+    padding: 5.5px 11px;
+    width: 90%;
+}
+.share div .rollover_button a.button_share_facebook span, .share div .rollover_button a.button_share_facebook span:hover, .share div .rollover_button a.button_share_twitter span, .share div .rollover_button a.button_share_twitter span:hover, .share div .rollover_button a.button_share_facebook:hover span, .share div .rollover_button a.button_share_facebook:hover span:hover, .share div .rollover_button a.button_share_twitter:hover span, .share div .rollover_button a.button_share_twitter:hover span:hover, .share div .rollover_button:hover a.button_share_facebook span, .share div .rollover_button:hover a.button_share_facebook span:hover, .share div .rollover_button:hover a.button_share_twitter span, .share div .rollover_button:hover a.button_share_twitter span:hover, .share div .rollover_button:hover a.button_share_facebook:hover span, .share div .rollover_button:hover a.button_share_facebook:hover span:hover, .share div .rollover_button:hover a.button_share_twitter:hover span, .share div .rollover_button:hover a.button_share_twitter:hover span:hover {
+    background-repeat: no-repeat;
+}
