@@ -54,14 +54,15 @@ iframe {
 }
 
 #header.partner {
-  background-image: image-url('reg/partner-header.jpg');
+    background-image: image-url('reg/rtv-partner-header.png');
+}
+#partner-logo {
+    left: 0px;
+    position: absolute;
+    top: 18px;
 }
 
-#partner-logo {
-  position: absolute;
-  top: 12px;
-  left: 20px;
-}
+
 #partner-logo img {
   width: 75px;
   height: 45px;
