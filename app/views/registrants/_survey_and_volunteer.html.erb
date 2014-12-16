@@ -28,7 +28,7 @@
         </li>
       </ul>
     <% end %>
-    <% if @registrant.partner.partner_ask_for_volunteers && !@registrant.partner.primary? %>
+    <% if @registrant.partner.partner_ask_for_volunteers? && !@registrant.partner.primary? %>
       <ul class="checkbox">
         <li class="spacer">&nbsp;</li>
         <li>
