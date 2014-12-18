@@ -1,7 +1,8 @@
-pdf_host_name: 'register.rockthevote.com'
-api_host_name: register-api.rockthevote.com
+pdf_host_name: 'vr.rockthevote.com'
+api_host_name: vr.rockthevote.com
 from_address: "register@rockthevote.com"
 default_url_host: "register.rockthevote.com"
+ui_url_host: "rocky5.herokuapp.com"
 
 
 states_with_online_registration:
