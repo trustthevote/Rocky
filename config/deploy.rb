@@ -297,7 +297,7 @@ namespace :deploy do
   
 end
 
-after "heroku:setup", "heroku:set_config", "heroku:addons"
+before "heroku:setup", "heroku:set_config", "heroku:addons"
 
 namespace :heroku do
   
@@ -309,8 +309,12 @@ namespace :heroku do
   end
   
   task :setup do
+    Bundler.with_clean_env do
+      system("heroku run bundle exec rake db:migrate --remote=#{heroku_remote}")
+      system("heroku run bundle exec rake db:bootstrap --remote=#{heroku_remote}")
+    end
   end
-  
+    
   task :set_config do
     Dotenv.load(".env.#{rails_env}")
     ['AIRBRAKE_API_KEY',
