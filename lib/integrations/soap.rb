@@ -12,7 +12,7 @@ module Integrations
     end
     
     def self.set_proximo_proxy
-      RestClient.proxy = ENV["PROXIMO_URL"].gsub(/^http:/,"https:")
+      RestClient.proxy = ENV["PROXIMO_URL"].to_s.gsub(/^http:/,"https:")
     end
     
   end
