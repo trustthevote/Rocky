@@ -14,7 +14,7 @@ gem "aasm", "= 3.0.16"
 gem 'rack-robustness'
 
 gem "authlogic", "= 3.3.0"
-gem "daemons", "= 1.0.10"
+gem 'daemons', '~> 1.1.9'
 gem "paperclip", "~> 3.0"
 gem "mysql2"
 gem "rubyzip"
