@@ -10,5 +10,5 @@ Daemons.run(script, :ARGV => ARGV,
             :dir_mode => :script,
             :dir => '../tmp/pids',
             :log_output => true,
-            :monitor => false,
+            :monitor => true,
             :multiple => true)
