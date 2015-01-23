@@ -109,9 +109,18 @@ class PartnerAssetsFolder
     @partner.send("#{name}_css_path")
   end
 
-
+  def ensure_dir(path)
+    FileUtils.mkdir_p File.dirname(path)
+  end
+  
   def update_file(path, file)
-    write_file(path, file.read)
+    if file.file_name == PartnerAssets::PDF_LOGO
+      path = absolute_pdf_logo_path(file.exension)
+      ensure_dir(path)
+      File.open(path, 'wb') { |f| f.write(file.read) }
+    else
+      write_file(path, file.read)
+    end
   end
 
   def write_file(path, content)
@@ -119,7 +128,7 @@ class PartnerAssetsFolder
       :key    => path,
       :body   => content,
       :public => true
-    )
+    )    
   end
 
   def update_path(path, file)
