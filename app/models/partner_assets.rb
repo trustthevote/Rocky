@@ -29,6 +29,16 @@ module PartnerAssets
   PART_CSS = "partner.css"
   PDF_LOGO = "pdf_logo" #.jpeg, .jpg or .gif
 
+  def self.is_pdf_logo?(name)
+    
+    return name =~ /^#{PDF_LOGO}\./
+  end
+  
+  def self.extension(name)
+    name =~ /\.(.+)$/
+    return $1
+  end
+
   def css_present?
     application_css_present? && registration_css_present?
   end

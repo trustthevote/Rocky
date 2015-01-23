@@ -88,6 +88,11 @@ class PartnerAssetsFolder
   # Deletes the asset
   def delete_asset(name)
     (f = existing(File.join(@partner.assets_path, File.basename(name)))) && f.destroy
+    if PartnerAssets.is_pdf_logo?(name)
+      local_path = @partner.absolute_pdf_logo_path(PartnerAssets.extension(name))
+      FileUtils.rm_f File.join(local_path)
+    end
+    
   end
 
 
@@ -114,13 +119,12 @@ class PartnerAssetsFolder
   end
   
   def update_file(path, file)
-    if file.file_name == PartnerAssets::PDF_LOGO
-      path = absolute_pdf_logo_path(file.exension)
-      ensure_dir(path)
-      File.open(path, 'wb') { |f| f.write(file.read) }
-    else
-      write_file(path, file.read)
+    if PartnerAssets.is_pdf_logo?(file.original_filename)
+      local_path = @partner.absolute_pdf_logo_path(PartnerAssets.extension(file.original_filename))
+      ensure_dir(local_path)
+      File.open(local_path, 'wb') { |f| f.write(file.read) }
     end
+    write_file(path, file.read)
   end
 
   def write_file(path, content)
