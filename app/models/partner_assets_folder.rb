@@ -119,8 +119,14 @@ class PartnerAssetsFolder
   end
   
   def update_file(path, file)
-    if PartnerAssets.is_pdf_logo?(file.original_filename)
-      local_path = @partner.absolute_pdf_logo_path(PartnerAssets.extension(file.original_filename))
+    filename = ""
+    begin
+      filename = file.original_filename
+    rescue
+      filename = File.basename(file)
+    end
+    if PartnerAssets.is_pdf_logo?(filename)
+      local_path = @partner.absolute_pdf_logo_path(PartnerAssets.extension(filename))
       ensure_dir(local_path)
       File.open(local_path, 'wb') { |f| f.write(file.read) }
     end
