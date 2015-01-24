@@ -1,6 +1,7 @@
 pdf_host_name: 'example-pdf.com'
 api_host_name: 'http://example-api.com'
 default_url_host: "register.example.com"
+ui_url_host: example.com
 use_https: false
 paperclip_options: 
   storage: "fog"
