@@ -121,7 +121,7 @@ class RegistrationStep < ApplicationController
   end
   
   def redirect_app_role
-    if ENV['ROCKY_ROLE'] == 'APP'
+    if ENV['ROCKY_ROLE'] == 'web'
       redirect_to "//#{RockyConf.ui_url_host}"
     end
   end

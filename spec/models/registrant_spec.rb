@@ -1984,9 +1984,9 @@ describe Registrant do
   
     describe 'stop_reminders_url' do
       let(:r) { Registrant.new({:uid=>"uid123"})}
-      context 'when custom url is bank' do
-        it "returns default url" do
-          r.stop_reminders_url.should == "https://register.example.com/registrants/uid123/finish?reminders=stop"
+      context 'when custom url is blank' do
+        it "returns default APP url" do
+          r.stop_reminders_url.should == "https://example-pdf.com/registrants/uid123/finish?reminders=stop"
         end
       end
       context 'when custom url is not blank' do

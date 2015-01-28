@@ -36,7 +36,7 @@ describe RegistrantsController do
   describe 'calls to a APP role app' do
     it "should redirect to the UI server" do
       old_role = ENV['ROCKY_ROLE']
-      ENV['ROCKY_ROLE'] = 'APP'
+      ENV['ROCKY_ROLE'] = 'web'
       
       get :new
       response.should redirect_to("//#{RockyConf.ui_url_host}")

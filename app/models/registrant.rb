@@ -1102,7 +1102,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def default_stop_reminders_url
-    registrant_finish_url(self, :protocol => "https", :reminders => "stop", :host=>RockyConf.default_url_host)
+    registrant_finish_url(self, :protocol => "https", :reminders => "stop", :host=>RockyConf.pdf_host_name)
   end
   
   def custom_stop_reminders_url_with_uid

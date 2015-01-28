@@ -116,9 +116,9 @@ describe FinishesController do
       assert_equal 0, reg.reminders_left
     end
     context 'when running in the APP role' do
-      it "does not reddirect to the UI system" do
+      it "does not redirect to the UI system" do
         old_role = ENV['ROCKY_ROLE']
-        ENV['ROCKY_ROLE'] = 'APP'
+        ENV['ROCKY_ROLE'] = 'web'
         reg = FactoryGirl.create(:completed_registrant, :reminders_left => 2)
         Registrant.any_instance.stub(:remote_pdf_ready?).and_return(true)
         get :show, :registrant_id => reg.to_param, :reminders => "stop"
