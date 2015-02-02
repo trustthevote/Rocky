@@ -13,8 +13,8 @@ class RemotePartner < ActiveResource::Base
     else
       nil
     end
-#  rescue
-#    nil
+ rescue
+   nil
   end
   
   def self.element_path(id, prefix_options = {}, query_options = nil)
