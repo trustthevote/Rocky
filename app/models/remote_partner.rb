@@ -6,14 +6,15 @@ class RemotePartner < ActiveResource::Base
   
   
   
-  def self.find_by_id(id)
+  def self.find_by_id(id, force_reload = false)
+    headers[:force_reload] = force_reload
     if !id.blank?
       self.find(id)
     else
       nil
     end
-  rescue
-    nil
+#  rescue
+#    nil
   end
   
   def self.element_path(id, prefix_options = {}, query_options = nil)

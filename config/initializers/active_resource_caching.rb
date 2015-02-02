@@ -18,7 +18,8 @@ module ActiveResourceCaching
 
 
   def get_with_cache(path, headers = {})
-    response = cache.read(path)
+    force_reload = headers.delete(:force_reload) == "true"
+    response = force_reload ? nil : cache.read(path)
     if response.nil?
       response = get_without_cache(path, headers)
       cache.write(path, response)
@@ -57,6 +58,6 @@ else
                        :failover => true,
                        :socket_timeout => 1.5,
                        :socket_failure_delay => 0.2,
-                       :expires_in => 5.minutes
+                       :expires_in => 96.hours
                       }
 end
