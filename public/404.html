@@ -32,7 +32,7 @@
               $("#missing-pdf").show();
               if (window.location.host == "register.rockthevote.com" || window.location.host == "rocky5.herokuapp.com") {
                   window.location.host = "vr.rockthevote.com";
-              } else if (window.location.host == "rocky5-staging.rockthevote.com") {
+              } else if (window.location.host == "rocky5-staging.herokuapp.com") {
                   window.location.host = "rtvstaging.osuosl.org";
               } else {
                   window.location.href = "/registrants/"+uid+"/finish?not_ready=true"
