@@ -77,7 +77,7 @@ module V2
       data = {
         :org_name                 => partner.organization,
         :org_URL                  => partner.url,
-        :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
+        :logo_image_URL           => "#{partner.logo.url}",
         :whitelabeled             => partner.whitelabeled?,
         :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
         :partner_ask_email_opt_in => partner.partner_email_opt_in?,
