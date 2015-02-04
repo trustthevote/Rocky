@@ -78,7 +78,7 @@ module V3
         #:org_name                 => partner.organization,
         #:org_URL                  => partner.url,
         
-        :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
+        :logo_image_URL           => "#{partner.logo.url}",
         :organization                 => partner.organization,
         :url => partner.url,
         :widget_image => partner.widget_image,
