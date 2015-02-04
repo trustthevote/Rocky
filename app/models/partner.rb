@@ -190,7 +190,7 @@ class Partner < ActiveRecord::Base
   end
   
   def valid_api_key?(key)
-    !key.blank? && !self.api_key.blank? && (key == self.api_key || key == self.primary_partner_api_key)
+    !key.blank? && ((!self.api_key.blank? &&  key == self.api_key) || key == self.primary_partner_api_key)
   end
 
   def can_be_whitelabeled?
