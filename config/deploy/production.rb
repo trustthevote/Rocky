@@ -30,5 +30,4 @@ role :pdf,  *(ENV['PRODUCTION_PDF'].split(',').collect(&:strip))
 
 set :heroku_remote, "rocky5-production"
 
-set :branch, "5.0.0"
-# set :branch, "production"
+set :branch, "production"
