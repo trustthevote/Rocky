@@ -91,6 +91,10 @@ class Partner < ActiveRecord::Base
     }
   })
   
+  def header_logo_url
+    self.logo(:header)
+  end
+  
   def local_logo_original_dir
     Rails.root.join("public/system/logos/#{id}/original")
   end
