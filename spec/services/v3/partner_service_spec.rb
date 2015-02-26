@@ -45,7 +45,7 @@ describe V3::PartnerService do
       partner = FactoryGirl.create(:whitelabel_partner)
       expected_response = {
         :id                       => partner.id,
-        :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
+        :logo_image_URL           => "#{partner.logo.url}",
         :custom_logo              => partner.custom_logo?,
         :header_logo_url          => partner.logo(:header),
         :whitelabeled             => partner.whitelabeled?,
@@ -88,7 +88,44 @@ describe V3::PartnerService do
         expected_response["survey_question_2_#{loc}".to_sym] = partner.send("survey_question_2_#{loc}")
       end
       
-      V3::PartnerService.find(:partner_id => partner.id, :partner_api_key => partner.api_key).should == expected_response 
+      response = V3::PartnerService.find(:partner_id => partner.id, :partner_api_key => partner.api_key)
+      expected_response.each do |key, value|
+        response[key].should == value
+      end
+      
+    end
+
+    it 'should return all V2 versions of the data' do
+      partner = FactoryGirl.create(:whitelabel_partner)
+      expected_response = {
+        :org_name                 => partner.organization,
+        :org_URL                  => partner.url,
+        :contact_name             => partner.name,
+        :contact_email            => partner.email,
+        :contact_phone            => partner.phone,
+        :contact_address          => partner.address,
+        :contact_city             => partner.city,
+        :contact_state            => partner.state_abbrev,
+        :contact_ZIP              => partner.zip_code,
+        :logo_image_URL           => "#{partner.logo.url}",
+        :whitelabeled             => partner.whitelabeled?,
+        :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
+        :partner_ask_email_opt_in => partner.partner_email_opt_in?,
+        :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
+        :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
+        :rtv_ask_volunteer        => partner.ask_for_volunteers?,
+        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?
+      }
+      
+      RockyConf.enabled_locales.each do |loc|
+        expected_response["survey_question_1_#{loc}".to_sym] = partner.send("survey_question_1_#{loc}")
+        expected_response["survey_question_2_#{loc}".to_sym] = partner.send("survey_question_2_#{loc}")
+      end
+      
+      response = V3::PartnerService.find(:partner_id => partner.id, :partner_api_key => partner.api_key)
+      expected_response.each do |key, value|
+        response[key].should == value
+      end
       
     end
 
@@ -97,7 +134,10 @@ describe V3::PartnerService do
       
       expected_response = {
         :id                       => partner.id,
-        :logo_image_URL           => "https://#{RockyConf.pdf_host_name}#{partner.logo.url}",
+        :org_name                 => partner.organization,
+        :org_URL                  => partner.url,
+        :whitelabeled             => partner.whitelabeled?,
+        :logo_image_URL           => "#{partner.logo.url}",
         
         :organization                 => partner.organization,
         :url => partner.url,
@@ -109,7 +149,17 @@ describe V3::PartnerService do
         :partner_email_opt_in => partner.partner_email_opt_in,
         :rtv_sms_opt_in => partner.rtv_sms_opt_in,
         :partner_sms_opt_in => partner.partner_sms_opt_in,
+        
+        :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
+        :partner_ask_email_opt_in => partner.partner_email_opt_in?,
+        :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
+        :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
+        :rtv_ask_volunteer        => partner.ask_for_volunteers?,
+        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?,
+        
+        :org_privacy_url => partner.privacy_url,
         :privacy_url => partner.privacy_url,
+        
         :finish_iframe_url => partner.finish_iframe_url,
         :is_government_partner => partner.is_government_partner?,
         :government_partner_state_id => partner.government_partner_state_id,

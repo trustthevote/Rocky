@@ -75,8 +75,9 @@ module V3
 
       data = {
         :id                       => partner.id,
-        #:org_name                 => partner.organization,
-        #:org_URL                  => partner.url,
+        :org_name                 => partner.organization,
+        :org_URL                  => partner.url,
+        :whitelabeled             => partner.whitelabeled?,
         
         :logo_image_URL           => "#{partner.logo.url}",
         :organization                 => partner.organization,
@@ -88,7 +89,17 @@ module V3
         :partner_email_opt_in => partner.partner_email_opt_in,
         :rtv_sms_opt_in => partner.rtv_sms_opt_in,
         :partner_sms_opt_in => partner.partner_sms_opt_in,
+        
+        :rtv_ask_email_opt_in     => partner.rtv_email_opt_in?,
+        :partner_ask_email_opt_in => partner.partner_email_opt_in?,
+        :rtv_ask_sms_opt_in       => partner.rtv_sms_opt_in?,
+        :partner_ask_sms_opt_in   => partner.partner_sms_opt_in?,
+        :rtv_ask_volunteer        => partner.ask_for_volunteers?,
+        :partner_ask_volunteer    => partner.partner_ask_for_volunteers?,
+        
+        :org_privacy_url => partner.privacy_url,
         :privacy_url => partner.privacy_url,
+        
         :finish_iframe_url => partner.finish_iframe_url,
         :is_government_partner => partner.is_government_partner?,
         :government_partner_state_id => partner.government_partner_state_id,
@@ -110,10 +121,17 @@ module V3
           :state_id => partner.state_id,
           :zip_code => partner.zip_code,
           :phone => partner.phone,
+          :contact_name           => partner.name,
+          :contact_email          => partner.email,
+          :contact_phone          => partner.phone,
+          :contact_address        => partner.address,
+          :contact_city           => partner.city,
+          :contact_state          => partner.state_abbrev,
+          :contact_ZIP            => partner.zip_code,
+          
           :custom_logo              => partner.custom_logo?,
           :header_logo_url          => partner.logo(:header),
-          :whitelabeled             => partner.whitelabeled?,
-        
+          
           :application_css_present  => partner.application_css_present?,
           :application_css_url      => partner.application_css_url,
           :registration_css_present => partner.registration_css_present?,
