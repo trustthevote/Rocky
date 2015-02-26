@@ -2,7 +2,7 @@
 # bundle exec ruby spec/api_load_test.rb  
 
 # Config
-NUM_THREADS = 50  # Number of concurrent users
+NUM_THREADS = 25  # Number of concurrent users
 NUM_REQUESTS = 20 # How many PDFs each user generates
 
 HOST = "https://rtvdemo:bullwinkle@rtvstaging-web1.osuosl.org"
@@ -101,12 +101,13 @@ end
 
 responses = {}
 request_count = 0
-start = Time.now
 
 threads = []
 
 # ActiveSupport - pre initialize the to_json method
 {a: 'b'}.to_json
+
+start = Time.now
 
 NUM_THREADS.times do |t|
   # new thread
