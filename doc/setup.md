@@ -232,6 +232,8 @@ Run the features with cucumber:
 
 ## Load Testing
 
+### From the development workstation
+
 There is a script at spec/api_load_test.rb that can run multi-threaded tests against the registration API.
 In the file, edit the config section at the top to specify the number of threads and requests-per-thread
 and other details like which server to test. 
@@ -244,6 +246,21 @@ a run off time for a maximal number of PdfGenerations in the queue.
 Once you have the monitor running, run the load test script via
 
     $ bundle exec ruby spec/api_load_test.rb
+    
+    
+### Loader.io
+    
+You can also do more extensive load tests with loader.io. You'll need to create an account and 
+verify the host you're testing against. Then create a new scenario with the Client Requests section set to
+
+    method: POST 
+    protocol: https
+    host: [the host you're testing]
+    path: api/v3/registrations.json?registration%5Bdate_of_birth%5D=11-05-1955&registration%5Blang%5D=en&registration%5Bcollect_email_address%5D=no&registration%5Bfirst_name%5D=firststage%20&registration%5Bmiddle_name%5D=middlestage&registration%5Blast_name%5D=lastStage&registration%5Bhome_address%5D=101%20Address%201&registration%5Bhome_unit%5D=420&registration%5Bhome_city%5D=Waltham&registration%5Bhome_state_id%5D=MA&registration%5Bhome_zip_code%5D=02453&registration%5Bname_title%5D=Mr.&registration%5Bpartner_id%5D=7&registration%5Bparty%5D=Democratic&registration%5Brace%5D=Other&registration%5Bid_number%5D=Waltham&registration%5Bus_citizen%5D=1&registration%5Bopt_in_email%5D=1&registration%5Bopt_in_sms%5D=0&registration%5Bphone%5D=123-456-7890&registration%5Bphone_type%5D=Home
+
+Depending on the host you're testing, you may also need to open Advanced Settings in the Test Settings section and set the 
+username and password under Basic authentication.
+
 
 ## Clean Start
 
