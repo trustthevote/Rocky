@@ -1,7 +1,17 @@
 # usage:
 # bundle exec ruby spec/api_load_test.rb  
 
-# View PDF queue:
+# Config
+NUM_THREADS = 50  # Number of concurrent users
+NUM_REQUESTS = 20 # How many PDFs each user generates
+
+HOST = "https://rtvdemo:bullwinkle@rtvstaging-web1.osuosl.org"
+
+PATH = "/api/v3/registrations.json"
+
+
+
+# View PDF queue status:
 # bundle exec rails c staging  (for example)
 # copy this method in then run it to see PriorityQueue lenghts
 def view_queue
@@ -29,13 +39,6 @@ end
 
 
   
-# Config
-NUM_THREADS = 50  # Number of concurrent users
-NUM_REQUESTS = 20 # How many PDFs each user generates
-
-HOST = "https://rtvdemo:bullwinkle@rtvstaging-web1.osuosl.org"
-
-PATH = "/api/v3/registrations.json"
 
 # This request does not use an email address
 require 'rest-client'
