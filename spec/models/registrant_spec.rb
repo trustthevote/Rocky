@@ -1397,9 +1397,9 @@ describe Registrant do
 
   describe "stale records" do
     it "should become abandoned" do
-      stale_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
-      fresh_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT - 10).seconds.ago)
-      complete_rec = FactoryGirl.create(:maximal_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
+      stale_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago)
+      fresh_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant.stale_timeout - 10).seconds.ago)
+      complete_rec = FactoryGirl.create(:maximal_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago)
 
       Registrant.abandon_stale_records
 
@@ -1410,8 +1410,8 @@ describe Registrant do
     it "should send an email if registrant chose to finish online with state" do
       GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
       
-      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>true)
-      stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
+      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>true)
+      stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>false)
       
       expect {
         Registrant.abandon_stale_records
@@ -1422,11 +1422,11 @@ describe Registrant do
       GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
       
       stale_state_online_reg = FactoryGirl.create(:step_2_registrant, 
-        :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, 
+        :updated_at => (Registrant.stale_timeout + 10).seconds.ago, 
         :finish_with_state=>true, 
         :collect_email_address=>'no',
         :email_address=>nil)
-      stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
+      stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>false)
       
       expect {
         Registrant.abandon_stale_records
@@ -1435,12 +1435,12 @@ describe Registrant do
     
     it "should not send an email to registrants that have been thanked" do
       GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
-      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>true)
       
       Registrant.abandon_stale_records
       
       
-      stale_state_online_reg_2 = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
+      stale_state_online_reg_2 = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>true)
       expect {
         Registrant.abandon_stale_records
       }.to change { ActionMailer::Base.deliveries.count }.by(1)
@@ -1450,6 +1450,54 @@ describe Registrant do
       }.to change { ActionMailer::Base.deliveries.count }.by(0)
       
     end
+    
+  end
+  
+  describe 'remove completed registrants' do
+    context 'when registrant records should be deleted' do
+      before(:each) do
+        @old_setting = RockyConf.expire_complete_registrants
+        RockyConf.expire_complete_registrants = true
+      end
+      after(:each) do
+        RockyConf.expire_complete_registrants = @old_setting
+      end
+      
+      it "deletes completed registrants older than the configured age" do
+        stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>true)
+        stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>false)
+        complete_online_registrant = FactoryGirl.create(:maximal_registrant)
+        Registrant.abandon_stale_records
+        Registrant.update_all(:updated_at => ((RockyConf.registrant_expiration_days+1).days.ago))
+        complete_online_registrant = FactoryGirl.create(:maximal_registrant)
+        
+        Registrant.count.should == 4
+        Registrant.remove_completed_registrants
+        Registrant.count.should == 1
+      end
+    end
+    
+    context 'when registrant records should not be deleted' do
+      before(:each) do
+        @old_setting = RockyConf.expire_complete_registrants
+        RockyConf.expire_complete_registrants = false
+      end
+      after(:each) do
+        RockyConf.expire_complete_registrants = @old_setting
+      end
+      
+      it "deletes completed registrants older than the configured age" do
+        stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>true)
+        stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant.stale_timeout + 10).seconds.ago, :finish_with_state=>false)
+        complete_online_registrant = FactoryGirl.create(:maximal_registrant)
+        Registrant.abandon_stale_records
+        Registrant.update_all(:updated_at => ((RockyConf.registrant_expiration_days+1).days.ago))
+        
+        Registrant.count.should == 3
+        Registrant.remove_completed_registrants
+        Registrant.count.should == 3
+      end
+    end 
   end
 
   describe "PDF" do

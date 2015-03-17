@@ -117,7 +117,7 @@ class RegistrationStep < ApplicationController
     @source = params[:source]
     @tracking = params[:tracking]
     @short_form = params[:short_form]
-    @collect_email_address = params[:collectemailaddress]
+    @collect_email_address = RockyConf.disable_email_collection ? 'no' : params[:collectemailaddress]
   end
   
   def redirect_app_role

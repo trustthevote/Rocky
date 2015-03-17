@@ -45,10 +45,41 @@ describe RegistrationStep do
     @rs.instance_variable_get("@registrant").should == @reg
   end
   
-  it 'should set collect_email_address' do
-    @rs.stub(:params).and_return({:collectemailaddress=>"val"})
-    @rs.send(:find_partner)
-    @rs.instance_variable_get("@collect_email_address").should == "val"
+  describe 'collect email address' do
+    context 'when not disabled in settings' do
+      before(:each) do
+        @old_setting = RockyConf.disable_email_collection
+        RockyConf.disable_email_collection = false
+      end
+      after(:each) do
+        RockyConf.disable_email_collection = @old_setting
+      end
+      
+      it 'should set collect_email_address' do
+        @rs.stub(:params).and_return({:collectemailaddress=>"val"})
+        @rs.send(:find_partner)
+        @rs.instance_variable_get("@collect_email_address").should == "val"
+      end      
+    end
+    context 'when disabled in settings' do
+      before(:each) do
+        @old_setting = RockyConf.disable_email_collection
+        RockyConf.disable_email_collection = true
+      end
+      after(:each) do
+        RockyConf.disable_email_collection = @old_setting
+      end
+      
+      it 'should set collect_email_address' do
+        @rs.stub(:params).and_return({:collectemailaddress=>"val"})
+        @rs.send(:find_partner)
+        @rs.instance_variable_get("@collect_email_address").should == "no"
+        @rs.stub(:params).and_return({})
+        @rs.send(:find_partner)
+        @rs.instance_variable_get("@collect_email_address").should == "no"
+      end      
+    end
+      
   end
   
   it "should set the registrant's finish_with_state flag to false if it was true" do

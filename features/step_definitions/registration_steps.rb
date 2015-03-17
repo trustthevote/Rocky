@@ -155,7 +155,7 @@ end
 When /^my session expires$/ do
   @registrant.reload
   Registrant.record_timestamps = false
-  @registrant.update_attributes!(:updated_at=>(2*Registrant::STALE_TIMEOUT).seconds.ago)
+  @registrant.update_attributes!(:updated_at=>(2*Registrant.stale_timeout).seconds.ago)
   Registrant.record_timestamps = true
 end
 

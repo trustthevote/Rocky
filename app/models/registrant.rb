@@ -49,7 +49,11 @@ class Registrant < ActiveRecord::Base
   TITLES = RockyConf.enabled_locales.collect{|l| TITLE_KEYS.collect{|key| I18n.t("txt.registration.titles.#{key}", :locale => l) } }.flatten
   SUFFIXES = RockyConf.enabled_locales.collect{|l| SUFFIX_KEYS.collect{|key| I18n.t("txt.registration.suffixes.#{key}", :locale => l) } }.flatten
   REMINDER_EMAILS_TO_SEND = 2
-  STALE_TIMEOUT = 30.minutes
+  # STALE_TIMEOUT = 30.minutes
+  def self.stale_timeout
+    RockyConf.abandoned_registrant_timeout_minutes.minutes
+  end
+  
   REMINDER_EMAIL_PRIORITY = 0
   WRAP_UP_PRIORITY = REMINDER_EMAIL_PRIORITY + 1
 
@@ -469,7 +473,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.abandon_stale_records
-    id_list = self.where("(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago).pluck(:id)
+    id_list = self.where("(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, self.stale_timeout.seconds.ago).pluck(:id)
     self.find_each(:batch_size=>500, :conditions => ["id in (?)", id_list]) do |reg|
       if reg.finish_with_state?
         reg.status = "complete"
@@ -482,6 +486,13 @@ class Registrant < ActiveRecord::Base
       Rails.logger.info "Registrant #{reg.id} abandoned at #{Time.now}"
     end
   end
+  
+  def self.remove_completed_registrants
+    if RockyConf.expire_complete_registrants && RockyConf.registrant_expiration_days > 0
+      self.where("(status = ? OR abandoned = ?) AND updated_at < ?", 'complete', true, RockyConf.registrant_expiration_days.days.ago).delete_all
+    end    
+  end
+  
 
   ### instance methods
   attr_accessor :attest_true
