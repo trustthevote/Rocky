@@ -56,6 +56,10 @@ partner_csv_expiration_minutes: 30
 disable_email_collection: false
 disable_registrant_emails: false
   
+
+# forwarded_states:
+#     VA: https://www.vote.virginia.gov
+
 ovr_states:
   CA:
     redirect_to_online_reg_url: true
