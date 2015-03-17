@@ -55,7 +55,7 @@ module Rocky
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password, :state_id_number, :password_confirmation]
+    config.filter_parameters += [:password, :state_id_number, :password_confirmation, :id_number]
 
 
     config.middleware.use ::Rack::Robustness do |g|
