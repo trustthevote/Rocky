@@ -54,6 +54,18 @@ describe PartnersController do
       ENV['ROCKY_ROLE'] = old_role
     end
   end
+  
+  describe 'when partner portal is disabled' do
+    it "redirects to the home page" do
+      @old_setting = RockyConf.disable_partner_portal
+      RockyConf.disable_partner_portal = true
+    
+      get :show
+      response.should redirect_to("/")
+    
+      RockyConf.disable_partner_portal = @old_setting
+    end
+  end
 
   describe "registering" do
     it "creates a new partner" do

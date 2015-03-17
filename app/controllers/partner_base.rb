@@ -24,6 +24,7 @@
 #***** END LICENSE BLOCK *****
 class PartnerBase < ApplicationController
   layout "partners"
+  before_filter :check_enabled
   before_filter :redirect_ui_role
   
   helper_method :current_partner_session, :current_partner
@@ -74,6 +75,12 @@ class PartnerBase < ApplicationController
   def redirect_ui_role
     if ENV['ROCKY_ROLE'] == 'UI'
       redirect_to "#{RockyConf.api_host_name }/login"
+    end
+  end
+  
+  def check_enabled
+    if RockyConf.disable_partner_portal
+      redirect_to "/"
     end
   end
 

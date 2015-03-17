@@ -25,4 +25,25 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PartnerSessionsController do
+  
+  it "renders the page when partner portal not disabled" do
+    @old_setting = RockyConf.disable_partner_portal
+    RockyConf.disable_partner_portal = false
+    
+    get :new
+    assert_response :success
+    
+    RockyConf.disable_partner_portal = @old_setting
+  end
+  
+  it "redirects to home page when partner portal disabled" do
+    @old_setting = RockyConf.disable_partner_portal
+    RockyConf.disable_partner_portal = true
+    
+    get :new
+    response.should redirect_to("/")
+    
+    RockyConf.disable_partner_portal = @old_setting
+  end
+  
 end

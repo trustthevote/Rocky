@@ -11,6 +11,8 @@ sponsor:
     Numbers not as high as you'd like?
     <a href="http://www.rockthevote.com/partner/how-to-get-it-out-there.html" target="_blank">Here are some ways to help market your tool.</a>
 
+disable_partner_portal: false
+
 from_address: "rocky@example.com"
 default_url_host: "register.example.com"
 ui_url_host: "register5.example.com"
