@@ -1919,6 +1919,13 @@ describe Registrant do
   
   describe 'send_emails?' do
     let(:r) { FactoryGirl.create(:maximal_registrant) }
+    it "is false if disabled in the settings" do
+      @old_setting = RockyConf.disable_registrant_emails
+      RockyConf.disable_registrant_emails = true
+      r.send_emails?.should be_false
+      RockyConf.disable_registrant_emails = @old_setting      
+    end
+    
     it "is true if email is present, collect_email_address is true and not building via api call" do
       r.send_emails?.should be_true
     end

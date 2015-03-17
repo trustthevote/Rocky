@@ -1383,7 +1383,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def send_emails?
-    !email_address.blank? && collect_email_address? && (!building_via_api_call? || send_confirmation_reminder_emails?)
+    !(RockyConf.disable_registrant_emails) && !email_address.blank? && collect_email_address? && (!building_via_api_call? || send_confirmation_reminder_emails?)
   end
 
   def deliver_confirmation_email

@@ -51,6 +51,7 @@ pdf_no_email_expiration_minutes: 10
 partner_csv_expiration_minutes: 30
 
 disable_email_collection: false
+disable_registrant_emails: false
   
 ovr_states:
   CA:
