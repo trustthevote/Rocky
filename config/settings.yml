@@ -57,7 +57,7 @@ disable_email_collection: false
 disable_registrant_emails: false
   
 
-# forwarded_states:
+# step_1_forwarding_states:
 #     VA: https://www.vote.virginia.gov
 
 ovr_states:
