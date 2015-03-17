@@ -33,6 +33,8 @@ describe Partner do
     end
   end
 
+  
+
   describe "survey questions for non en/es" do
     let(:p) { FactoryGirl.create(:partner) }
     describe "survey_question_1_zh-tw" do

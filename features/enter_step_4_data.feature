@@ -37,6 +37,7 @@ Feature: Step 4
       Then my value for "survey_question_1" should be "Who?"
       And my value for "survey_question_2" should be "What?"
         
+    
     @passing
     Scenario: Answer questions
       Given the following partner exists:

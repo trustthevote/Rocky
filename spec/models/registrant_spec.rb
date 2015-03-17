@@ -62,6 +62,23 @@ describe Registrant do
     end
   end
   
+  
+  describe 'survey questions' do
+    it "returns blank questions when survey questions disabled in the settings" do
+      r = FactoryGirl.create(:maximal_registrant)
+      r.question_1.should_not be_blank
+      r.question_2.should_not be_blank
+      
+      @old_setting = RockyConf.disable_survey_questions
+      RockyConf.disable_survey_questions = true
+      
+      r.question_1.should be_blank
+      r.question_2.should be_blank
+      
+      RockyConf.disable_survey_questions = @old_setting
+    end
+  end
+  
   describe "default opt-in flags" do
     it "should be false for new records" do
       r = Registrant.new
@@ -74,6 +91,134 @@ describe Registrant do
     end
   end
   
+  describe 'any_ask_for_volunteers?' do
+    let(:p) { Partner.new }
+    let(:r) { Registrant.new({partner: p}) }
+    before(:each) do
+      @old_setting =RockyConf.sponsor.allow_ask_for_volunteers
+      @old_setting2 =RockyConf.disable_opt_ins
+      p.partner_ask_for_volunteers = false
+      
+    end
+    after(:each) do
+      RockyConf.sponsor.allow_ask_for_volunteers = @old_setting
+      RockyConf.disable_opt_ins = @old_setting2
+    end
+    
+    it "returns true if partner.primary? and not disabled" do
+      p.stub(:primary?).and_return(true)
+      RockyConf.sponsor.allow_ask_for_volunteers = true
+      r.any_ask_for_volunteers?.should be_true
+    end    
+    it "returns true if partner.ask_for_volunteers? and not disabled" do
+      p.stub(:ask_for_volunteers?).and_return(true)
+      RockyConf.sponsor.allow_ask_for_volunteers = true
+      r.any_ask_for_volunteers?.should be_true      
+    end
+    it "returns false if disabled" do
+      p.stub(:primary?).and_return(true)
+      p.stub(:ask_for_volunteers?).and_return(true)
+      RockyConf.sponsor.allow_ask_for_volunteers = false
+      r.any_ask_for_volunteers?.should be_false            
+    end
+    
+    it "returns false if all opt-ins disabled" do
+      p.stub(:primary?).and_return(true)
+      p.stub(:ask_for_volunteers?).and_return(true)
+      RockyConf.sponsor.allow_ask_for_volunteers = true
+      RockyConf.disable_opt_ins = true
+      r.any_ask_for_volunteers?.should be_false            
+    end
+    
+    it "returns true if partner.partner_ask_for_volunteers? and partner isn't primary even if disabled" do
+      p.stub(:primary?).and_return(false)
+      p.stub(:ask_for_volunteers?).and_return(false)
+      RockyConf.sponsor.allow_ask_for_volunteers = false
+      p.partner_ask_for_volunteers = true
+      r.any_ask_for_volunteers?.should be_true
+    end
+  end
+  
+  describe 'any_email_opt_ins?' do
+    let(:p) { Partner.new }
+    let(:r) { Registrant.new({partner: p}) }
+    before(:each) do
+      @old_setting =RockyConf.disable_opt_ins
+      r.stub(:collect_email_address?).and_return(true)
+      p.stub(:primary?).and_return(false)
+      p.stub(:rtv_email_opt_in).and_return(false)
+      p.stub(:partner_email_opt_in).and_return(false)
+    end
+    after(:each) do
+      RockyConf.disable_opt_ins = @old_setting
+    end
+    it "returns false if no asks for opt-ins and parter is not primary" do
+      r.any_email_opt_ins?.should be_false
+    end
+    it "returns false if collect_email_address is false even if everything else is true" do
+      r.stub(:collect_email_address?).and_return(false)
+      p.stub(:primary?).and_return(true)
+      p.stub(:rtv_email_opt_in).and_return(true)
+      p.stub(:partner_email_opt_in).and_return(true)
+      r.any_email_opt_ins?.should be_false
+    end
+    it "returns true if partner is primary" do
+      p.stub(:primary?).and_return(true)
+      r.any_email_opt_ins?.should be_true
+    end
+    it "returns false if all opt-ins disabled" do
+      p.stub(:primary?).and_return(true)
+      RockyConf.disable_opt_ins = true
+      r.any_email_opt_ins?.should be_false
+    end
+    
+    it "returns true if partner has rtv_email_opt_in" do
+      p.stub(:rtv_email_opt_in).and_return(true)
+      r.any_email_opt_ins?.should be_true      
+    end
+    it "returns true if partner has partner_email_opt_in" do
+      p.stub(:partner_email_opt_in).and_return(true)
+      r.any_email_opt_ins?.should be_true      
+    end
+    
+  end
+  
+  describe 'any_phone_opt_ins?' do
+    let(:p) { Partner.new }
+    let(:r) { Registrant.new({partner: p}) }
+    before(:each) do
+      @old_setting =RockyConf.disable_opt_ins
+      p.stub(:primary?).and_return(false)
+      p.stub(:rtv_sms_opt_in).and_return(false)
+      p.stub(:partner_sms_opt_in).and_return(false)
+    end
+    after(:each) do
+      RockyConf.disable_opt_ins = @old_setting
+    end
+    it "returns false if all are false" do
+      r.any_phone_opt_ins?.should be_false
+    end
+    it "returns true if partner is primary" do
+      p.stub(:primary?).and_return(true)
+      r.any_phone_opt_ins?.should be_true
+    end
+    it "returns false if all opt-ins disabled" do
+      p.stub(:primary?).and_return(true)
+      RockyConf.disable_opt_ins = true
+      r.any_phone_opt_ins?.should be_false
+    end
+    
+    it "returns true if partner has rtv_email_opt_in" do
+      p.stub(:rtv_sms_opt_in).and_return(true)
+      r.any_phone_opt_ins?.should be_true      
+    end
+    it "returns true if partner has partner_email_opt_in" do
+      p.stub(:partner_sms_opt_in).and_return(true)
+      r.any_phone_opt_ins?.should be_true      
+    end
+  end
+  
+  
   describe "opt-in email flag" do
     it "should be false if there is no email address" do
       r= FactoryGirl.create(:maximal_registrant)
@@ -83,6 +228,8 @@ describe Registrant do
       r.opt_in_email.should be_false
     end
   end
+  
+  
   
   describe "rtv_and_partner_name" do
     it "returns Rock the Vote when there's no partner" do

@@ -344,10 +344,10 @@ class Registrant < ActiveRecord::Base
   end
 
   def question_1
-    partner.send("survey_question_1_#{self.locale}")
+    RockyConf.disable_survey_questions ? nil : partner.send("survey_question_1_#{self.locale}")
   end
   def question_2
-    partner.send("survey_question_2_#{self.locale}")
+    RockyConf.disable_survey_questions ? nil : partner.send("survey_question_2_#{self.locale}")
   end
 
   def collect_email_address?
@@ -355,15 +355,18 @@ class Registrant < ActiveRecord::Base
   end
   
   def any_email_opt_ins?
-    collect_email_address? && (partner.rtv_email_opt_in || partner.primary? || partner.partner_email_opt_in)
+    return false if RockyConf.disable_opt_ins
+    return collect_email_address? && (partner.rtv_email_opt_in || partner.primary? || partner.partner_email_opt_in)
   end
   
   def any_phone_opt_ins?
-    partner.rtv_sms_opt_in || partner.partner_sms_opt_in || partner.primary?
+    return false if RockyConf.disable_opt_ins
+    return partner.rtv_sms_opt_in || partner.partner_sms_opt_in || partner.primary?
   end
   
   def any_ask_for_volunteers?
-    ((partner.ask_for_volunteers? || partner.primary?) && RockyConf.sponsor.allow_ask_for_volunteers) || (partner.partner_ask_for_volunteers? && !partner.primary?)
+    return false if RockyConf.disable_opt_ins
+    return ((partner.ask_for_volunteers? || partner.primary?) && RockyConf.sponsor.allow_ask_for_volunteers) || (partner.partner_ask_for_volunteers? && !partner.primary?)
   end
   
   def not_require_email_address?
