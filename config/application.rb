@@ -65,6 +65,8 @@ module Rocky
       g.body{ |ex| ex.message }
       g.ensure(true) { |ex| env['rack.errors'].write(ex.message) }
     end
+    
+    config.middleware.insert_before ActionDispatch::ParamsParser, "CatchJsonParseErrors"
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
