@@ -34,7 +34,7 @@ The first group specifies values for the default/sponsor partner (partner id = 1
         <a href="http://www.rockthevote.com/partner/how-to-get-it-out-there.html" target="_blank">Here are some ways to help market your tool.</a>
 
         
-    allow_ask_for_volunteers
+`allow_ask_for_volunteers`
 
 In general, each partner can specify whether the registrant should be prompted to volunteer for the partner and whether to volunteer for the sponsor. When `allow_ask_for_volunteers` is false, the UI never prompts users to volunteer for sponsor regardless of each partner's settings.
 
