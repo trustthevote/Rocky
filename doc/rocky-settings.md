@@ -27,19 +27,53 @@ The first group specifies values for the default/sponsor partner (partner id = 1
       name: "Rock the Vote"
       url: "http://www.rockthevote.com"
       facebook_callback_url: <%= CGI.escape("http://www.rockthevote.com/register/fb") %>
-      partner_signup_url: "http://www.rockthevote.com/partner"
       footer_link_base_url: "http://www.rockthevote.com/voter-registration/online-application-system"
       footer_copyright: "&copy; Copyright %d, Rock the Vote"
       partner_comarketing_text: |
         Numbers not as high as you'd like?
         <a href="http://www.rockthevote.com/partner/how-to-get-it-out-there.html" target="_blank">Here are some ways to help market your tool.</a>
 
+### `allow_ask_for_volunteers`
+
+In general, each partner can specify whether the registrant should be prompted to volunteer for the partner and whether to volunteer for the sponsor. When `allow_ask_for_volunteers` is false, the UI never prompts users to volunteer for sponsor regardless of each partner's settings.
+
+### `barcode_prefix`
+
+Prefix for the ID content generated as a barcode on the PDFs
+
+### `name`
+
+Name of the primary sponsor, used in the partner portal.
+
+### `url`
+
+Website for the primary sponsor, used in the footer.
+
+### `facebook_callback_url`
+
+Used in the facebook share link.
+
+### `footer_link_base_url`
+
+Used in the footer as a prefix for a number of URLs.
+
+### `footer_copyright`
+
+Used in the footer.
+
+### `partner_comarketing_text`
+
+Displayed in the partner portal statistics page.
+
+## `disable_survey_questions`
+
+When true, does not display survey questions for sponsor or partner regardless of whether the questions are present.
+
+## `disable_opt_ins`
+
+When true, does not display the email, text-message or volunteer opt-ins for either the partner or
 
 
-
-
-disable_survey_questions: false
-disable_opt_ins: false
 
 disable_partner_portal: false
 
