@@ -76,10 +76,14 @@ There are thre cron jobs (generally ran on the utility server). One redacts sens
 is indicated in the configuration), and the third sends any pending reminder emails. They will generally look
 like this, but the frequency can vary from deployment to deployment:
 
-    */10 * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_timeout_stale_registrations staging2
-    */5  * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_remove_buckets staging2
-    0    * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_mail_reminders production
+    */10 * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_timeout_stale_registrations <environment>
+    */5  * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_remove_buckets <environment>
+    0    * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_mail_reminders <environment>
     
+For systems that do not retain registrant data, an additional cron job like the following is needed:
+
+    0    * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_remove_completed_registrants <environment>
+
 
 ### 1e. Email
 
@@ -88,7 +92,7 @@ Email to registrants is sent by the cron_mail_remeinders task (on whichever serv
 
 ## 2. Heroku configuration
 
-Describe how to set up the heroku branch stuff
+TODO: Describe how to set up the heroku branch mapping, everything else automated through deployment.
 
 
 ## 3. Application settings and Data

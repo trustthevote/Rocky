@@ -243,6 +243,8 @@ Number of *minutes* of inactivity after which an incomplete registration should 
 
 If true, and if the `utility:remove_completed_registrants` task is run, will delete completed and abandoned registrants after the `registrant_expiration_days` time has passed. The task can be schedule via cron.
 
+To synchronize registrant and PDF retention, you'll need to set `registrant_expiration_days` equal to `pdf_expiration_days` and make sure the `utility:remove_completed_registrants` and `utility:remove_buckets` tasks are run at the same time (via cron or otherwise).
+
 `registrant_expiration_days`
 
 Number of *days* after which a completed or abandoned registrant should be deleted. This does not need to be an integer, so to specify 1 hour, this setting should be 0.0417. Registrants are only deleted via the `utility:remove_completed_registrants` task and only if `expire_complete_registrants` is true.
@@ -310,7 +312,7 @@ URL for the UI system. If a request for the registration UI comes into the CORE 
 
 The host name for registrant PDF downloads. Should not include the protocol.
 
-`api_host_name` "https://vr.rockthevote.com"
+`api_host_name`
 
 The full URL for the CORE system API host - must include the http or https protocol.
 
