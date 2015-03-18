@@ -84,7 +84,7 @@ For systems that do not retain registrant data, an additional cron job like the 
 
     0    * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_remove_completed_registrants <environment>
 
-Note that this `utility:remove_completed_registrants` task is separate from the UI/heroku system's scheduler that runs 'utility:process_ui_records'
+Note that this `utility:remove_completed_registrants` task is separate from the UI/heroku system's scheduler that runs 'utility:process_ui_records' which deletes completed registrants and submits abandonded registrant data to the CORE system.
 
 ### 1e. Email
 
