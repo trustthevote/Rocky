@@ -10,6 +10,11 @@ namespace :utility do
     Registrant.abandon_stale_records
   end
   
+  desc "Mark all stale registrations as abandoned and redact sensitive data"
+  task :remove_completed_registrants => :environment do
+    Registrant.remove_completed_registrants
+  end
+  
   desc "Remove pdf directories that are past the expiration date"
   task :remove_buckets => :environment do
     BucketRemover.new.remove_buckets!
