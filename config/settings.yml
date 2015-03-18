@@ -19,6 +19,8 @@ disable_partner_portal: false
 from_address: "rocky@example.com"
 default_url_host: "register.example.com"
 ui_url_host: "register5.example.com"
+pdf_host_name: 'vr.rockthevote.com'
+api_host_name: "https://vr.rockthevote.com"
 
 
 admin:
