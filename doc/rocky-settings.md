@@ -1,4 +1,3 @@
-
 # 1. rails_config and settings.yml files
 
 There are a number of files used by the `rails_config` gem - `config/settings.yml`

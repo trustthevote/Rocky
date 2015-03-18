@@ -92,7 +92,15 @@ Email to registrants is sent by the cron_mail_remeinders task (on whichever serv
 
 ## 2. Heroku configuration
 
-TODO: Describe how to set up the heroku branch mapping, everything else automated through deployment.
+You'll want to follow these instructions to set up multiple heroku environments:
+https://devcenter.heroku.com/articles/multiple-environments
+
+The key element is 
+
+    heroku create --remote <environment_name>
+    
+Then in the cap deploy file, set the `heroku_remote` variable to the `<environment_name>` you specified.
+
 
 
 ## 3. Application settings and Data
@@ -102,18 +110,18 @@ TODO: Describe how to set up the heroku branch mapping, everything else automate
 
 The application is set up to import updates to state-specific data. You'll want
 to do this once before launching, then whenever changes are necessary. You can
-do this by updating the states.yml file in your repository and by doing a full
+do this by updating the `db/bootstrap/import/states.yml` file in your repository and by doing a full
 deploy.
 
 
 
-## 4. Configure deploy scripts
+## 4. Configure deploy scripts and .env
 
 The `rocky` application is set up to be deployed using capistrano with
 multistage. The repository contains the generic `config/deploy.rb` file with
 the main set of procedures for a deployment and there are a number of
 environment-specific files in `config/deploy/`. These files just contain a few
-settings which reference environment variables. These variables need to be set
+settings which mostly reference environment variables. These variables need to be set
 in your `.env` file (which only needs to exist on your development machine, or
 wherever you run your cap scripts from). See `.env.example` for a list of what
 values need to be specified.
@@ -135,7 +143,7 @@ passenger-install-apache2-module script.
 
 ### b. Deploy (various symlinks)
 
-Before running the first deploy, the deployment directory should have a shared/
+Before running the first deploy, the deployment directory should have a shared 
 directory set up with the following files:
 
 * `shared/config/database.yml`
