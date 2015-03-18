@@ -244,6 +244,8 @@ If true, and if the `utility:remove_completed_registrants` task is run, will del
 
 To synchronize registrant and PDF retention, you'll need to set `registrant_expiration_days` equal to `pdf_expiration_days` and make sure the `utility:remove_completed_registrants` and `utility:remove_buckets` tasks are run at the same time (via cron or otherwise).
 
+Note that this `utility:remove_completed_registrants` task is separate from the UI/heroku system's scheduler that runs 'utility:process_ui_records'
+
 `registrant_expiration_days`
 
 Number of *days* after which a completed or abandoned registrant should be deleted. This does not need to be an integer, so to specify 1 hour, this setting should be 0.0417. Registrants are only deleted via the `utility:remove_completed_registrants` task and only if `expire_complete_registrants` is true.

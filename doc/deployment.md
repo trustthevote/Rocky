@@ -84,6 +84,7 @@ For systems that do not retain registrant data, an additional cron job like the 
 
     0    * * * * rocky /var/www/register.rockthevote.com/rocky/current/script/cron_remove_completed_registrants <environment>
 
+Note that this `utility:remove_completed_registrants` task is separate from the UI/heroku system's scheduler that runs 'utility:process_ui_records'
 
 ### 1e. Email
 
@@ -140,6 +141,9 @@ tasks (see `config/deploy.rb`) that will install RVM, ruby (the version
 indicated in `.ruby-version`), set up a gemset (the gemset indicated in
 `.ruby-gemset`), install passenger into that gemset, and run the
 passenger-install-apache2-module script.
+
+After deploy:setup is run, the heroku UI app should have a scheduler task added
+to run the task `utility:process_ui_records`.
 
 ### b. Deploy (various symlinks)
 
