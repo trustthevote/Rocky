@@ -27,7 +27,7 @@ class Api::V3::PartnersController < Api::V3::BaseController
 
   def show(only_public = false)
     query = {
-      :partner_id      => params[:id],
+      :partner_id      => params[:id] || params[:partner_id],
       :partner_api_key => params[:partner_API_key] }
 
     jsonp V3::PartnerService.find(query, only_public)

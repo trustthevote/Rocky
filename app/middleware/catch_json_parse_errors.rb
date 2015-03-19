@@ -1,3 +1,4 @@
+# From https://robots.thoughtbot.com/catching-json-parse-errors-with-custom-middleware
 class CatchJsonParseErrors
   def initialize(app)
     @app = app
