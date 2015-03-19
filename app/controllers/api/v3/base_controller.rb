@@ -24,6 +24,7 @@
 #***** END LICENSE BLOCK *****
 class Api::V3::BaseController < ApplicationController
 
+  skip_before_filter :authenticate_everything
   before_filter :ui_role_api_response
   
   protected
