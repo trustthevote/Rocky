@@ -33,6 +33,6 @@ set :keep_releases, 3
 set :rails_env,    "staging"
 set :heroku_remote, "rocky5-staging"
 
-set :branch, "5.0.0"
+set :branch, "master"
 
 after "deploy:migrate", "deploy:symlink_translations"
