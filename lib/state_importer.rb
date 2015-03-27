@@ -41,11 +41,11 @@ class StateImporter
     end
     
     def self.base_uri
-      "http://eod.usvotefoundation.org"
+      "http://eod.staging.usvotefoundation.org"
     end
     
     def self.api_uri
-      "/api/v1"
+      "/api/v2"
     end
     
     def self.path(resource_type, params={})
@@ -88,7 +88,7 @@ class StateImporter
       # map region names to uri
       region_names = {}
       regions.each do |r|
-        region_names[r["resource_uri"]] = r["name"]
+        region_names[r["resource_uri"]] = r["region_name"]
       end
       
       region_address_list = []
