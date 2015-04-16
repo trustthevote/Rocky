@@ -45,6 +45,7 @@ public/partners
 reg_colorado.yml
 db/*.sqlite3
 rocky_test
+rocky_development
 # Ignore application configuration
 /config/application.yml
 
