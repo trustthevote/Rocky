@@ -28,7 +28,7 @@ class FinishesController < RegistrationStep
   skip_before_filter :find_partner, :redirect_app_role
 
   def show
-    find_registrant(:remote)
+    find_registrant(:finish)
     @registrant_finish_iframe_url = @registrant.finish_iframe_url
     @pdf_ready = false
     if params[:reminders]
