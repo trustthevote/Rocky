@@ -617,8 +617,8 @@ record_49:
   requires_party: true
   party_tooltip: wisconsin
   id_number_tooltip: wisconsin
-  sos_address: Government Accountability Board<br>17 West Main St, Suite 310<br>P.O.
-    Box 2973<br>Madison, WI 53701-2973
+  sos_address: Government Accountability Board<br>212 East Washington Avenue, Third
+    Floor<br>P.O. Box 7984<br>Madison, Wisconsin 53707-7984
   sos_phone: (608) 266-8005
   sos_url: https://myvote.wi.gov
   sub_18: 17_turn_18
