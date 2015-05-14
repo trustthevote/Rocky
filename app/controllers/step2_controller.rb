@@ -26,9 +26,11 @@ class Step2Controller < RegistrationStep
   CURRENT_STEP = 2
 
   def update    
+    # get rid of home_state_name
+    if params[:registrant]
+      params[:registrant].delete(:home_state_name)
+    end
     if params[:javascript_disabled] == "1" && params[:registrant]
-      # get rid of home_state_name
-      params.delete(:home_state_name)
       reg = params[:registrant]
       if reg[:has_mailing_address] == "0"
         reg[:has_mailing_address] = !"#{reg[:mailing_address]}#{reg[:mailing_unit]}#{reg[:mailing_city]}#{reg[:mailing_zip_code]}".blank?
