@@ -1206,9 +1206,10 @@ class Registrant < ActiveRecord::Base
   # Called from the worker queue to generate PDFs on the 'util' server
   def complete_registration_via_api(async=true)
     if async
-      queue_pdf
       self.status = 'complete'
-      return self.save
+      saved = self.save
+      queue_pdf
+      return saved
       
     else 
       self.status = 'complete'
