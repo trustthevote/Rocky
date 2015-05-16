@@ -65,7 +65,10 @@ module PdfQueueBase
       pdfgen = self.find(pdfgen_id, :include => :registrant)
       r = pdfgen.registrant
       if r && r.generate_pdf #(true)
-        r.finalize_pdf
+        finalized = r.finalize_pdf
+        if !finalized
+          Rails.logger.error "FAILED to finalize registrant #{r.id} from pdfgen id #{pdfgen_id} (#{r.errors.inspect})"
+        end
         # puts "Generated #{r.pdf_path}"
         pdfgen.delete
       else
