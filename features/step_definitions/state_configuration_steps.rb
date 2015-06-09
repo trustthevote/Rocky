@@ -49,5 +49,5 @@ Given(/^I override the tmp state_config file path and clear them$/) do
 end    
 
 Then(/^a tmp state_config file should be created$/) do
-  File.exists?(Rails.root.join("spec/fixtures/files/translator_ui/tmp/states-es.yml")).should be_true
+  File.exists?(Rails.root.join("spec/fixtures/files/translator_ui/tmp/states-es.yml")).should be_truthy
 end

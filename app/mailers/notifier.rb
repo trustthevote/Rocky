@@ -56,11 +56,16 @@ class Notifier < ActionMailer::Base
   protected
 
   def setup_registrant_email(registrant, kind)
+    partner = registrant.partner
+    subject = partner && partner.whitelabeled? && EmailTemplate.get_subject(partner, "#{kind}.#{registrant.locale}")
+    subject = subject.blank? ? I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym) : subject
     
-    m = mail(:subject=> I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym),
-      :from=>registrant.email_address_to_send_from,
-      :to=>registrant.email_address,
-      :date=> Time.now.to_s(:db)) do |format|
+    m = mail(
+        :subject=>subject,
+        :from=>registrant.email_address_to_send_from,
+        :to=>registrant.email_address,
+        :date=> Time.now.to_s(:db)
+      ) do |format|
         format.html { message_body(registrant, kind) }
     end
 

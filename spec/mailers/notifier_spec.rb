@@ -95,10 +95,12 @@ describe Notifier do
       partner    = FactoryGirl.create(:partner, :whitelabeled => true)
       registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
       EmailTemplate.set(partner, 'confirmation.en', 'PDF: <%= @pdf_url %>')
-
+      EmailTemplate.set_subject(partner, 'confirmation.en', 'Here is your pdf')
+      
       Notifier.confirmation(registrant).deliver
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{PDF: http://.*source=email})
+      email.subject.should == 'Here is your pdf'
       email.from.should include(RockyConf.from_address)
       
     end
@@ -130,10 +132,12 @@ describe Notifier do
       partner    = FactoryGirl.create(:partner, :whitelabeled => true)
       registrant = FactoryGirl.create(:step_2_registrant, :partner => partner, :locale => 'en', :last_name=>"test the template")
       EmailTemplate.set(partner, 'thank_you_external.en', 'HI: <%= @registrant.last_name %>')
+      EmailTemplate.set_subject(partner, 'thank_you_external.en', 'Thank you external')
 
       Notifier.thank_you_external(registrant).deliver
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{HI: test the template})
+      email.subject.should == 'Thank you external'
       email.from.should include(RockyConf.from_address)
     end
     it "sends from partner email when configured" do

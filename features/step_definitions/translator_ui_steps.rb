@@ -55,7 +55,7 @@ Then(/^I should see instructions provided in the english file$/) do
 end
 
 Then(/^a tmp translation file should be created$/) do
-  File.exists?(Rails.root.join("spec/fixtures/files/translator_ui/tmp/states-es.yml")).should be_true
+  File.exists?(Rails.root.join("spec/fixtures/files/translator_ui/tmp/states-es.yml")).should be_truthy
 end
 
 Then(/^there should not be an email sent$/) do

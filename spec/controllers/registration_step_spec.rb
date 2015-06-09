@@ -55,10 +55,10 @@ describe RegistrationStep do
     GeoState.stub(:states_with_online_registration).and_return([@reg.home_state_abbrev])
     #raise @reg.home_state_online_reg_enabled?.to_s + @reg.has_state_license?.to_s
     @reg.update_attributes(:finish_with_state=>true)
-    @reg.finish_with_state.should be_true
+    @reg.finish_with_state.should be_truthy
     @rs.send(:find_registrant, nil, { :id => @reg.to_param })
     @reg.reload
-    @reg.finish_with_state.should be_false
+    @reg.finish_with_state.should be_falsey
   end
   
 end

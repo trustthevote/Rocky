@@ -17,7 +17,8 @@ gem "authlogic", "= 3.3.0"
 gem 'daemons', '~> 1.1.9'
 gem "paperclip", "~> 3.0"
 gem "mysql2"
-gem "rubyzip"
+#gem "rubyzip"
+gem 'zip-zip'
 
 gem "dotenv-rails"
 
@@ -38,12 +39,12 @@ gem 'diffy'
 gem 'asset_sync'
 
 group :development, :test do
-  gem "rspec-rails", "~> 2.10.1"
-  gem "rspec-spies",  "2.1.1"
+  gem "rspec-rails", "~> 3.2.3"
+  #gem "rspec-spies",  "2.1.1"
   
   gem "rr", "= 0.10.11"
   
-  gem "cucumber-rails", "1.1.0", :require=>false
+  gem "cucumber-rails", "1.4.2", :require=>false
   gem "webrat"
   gem "factory_girl_rails", :require=>false
   gem "database_cleaner"
@@ -53,7 +54,7 @@ group :development, :test do
   gem "treetop", "= 1.4.10"
   # gem "selenium-client", "= 1.2.16"
   gem "capistrano", "= 2.15.5"
-  gem "rvm-capistrano"
+  gem "rvm-capistrano", require: false
   
   # Pito:
   gem "hpricot", "0.8.6"
@@ -64,7 +65,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara-webkit", "~> 0.7.1"
+  gem "capybara-webkit", "~> 1.5.2"
   
   gem "webmock"
 end

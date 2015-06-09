@@ -353,11 +353,11 @@ describe V3::RegistrationService do
     
     it "finds the registrant" do
       Registrant.should_receive(:find_by_uid).with("123")
-      V3::RegistrationService.check_pdf_ready(query).should be_true
+      V3::RegistrationService.check_pdf_ready(query).should be_truthy
     end
     it "returns false if the registrant pdf is not ready" do
       reg.stub(:pdf_ready?).and_return(false)
-      V3::RegistrationService.check_pdf_ready(query).should be_false
+      V3::RegistrationService.check_pdf_ready(query).should be_falsey
     end
   end
 
@@ -391,9 +391,9 @@ describe V3::RegistrationService do
       V3::RegistrationService.stop_reminders(query)
     end
     it "returns wether the update was successful" do
-      V3::RegistrationService.stop_reminders(query)[:reminders_stopped].should be_true
+      V3::RegistrationService.stop_reminders(query)[:reminders_stopped].should be_truthy
       reg.stub(:update_attributes).and_return(false)
-      V3::RegistrationService.stop_reminders(query)[:reminders_stopped].should be_false      
+      V3::RegistrationService.stop_reminders(query)[:reminders_stopped].should be_falsey      
     end
     it "returns first name, last name and email address" do
       r = V3::RegistrationService.stop_reminders(query)
@@ -440,10 +440,10 @@ describe V3::RegistrationService do
     
     it "returns a 1-1 array of success/failures for the data list" do
       results = V3::RegistrationService.bulk_create(data_list, partner.id, partner.api_key)   
-      results[0][0].should be_true
-      results[1][0].should be_false
-      results[2][0].should be_true
-      results[3][0].should be_false
+      results[0][0].should be_truthy
+      results[1][0].should be_falsey
+      results[2][0].should be_truthy
+      results[3][0].should be_falsey
     end
   end
 end

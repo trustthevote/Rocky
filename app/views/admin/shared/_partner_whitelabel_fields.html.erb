@@ -122,6 +122,8 @@
         <ul class="stacked">
           <li class="width_h">
             <h3><label><%= label %></label></h3>
+            <%= text_field_tag "template_subject[#{name}]", EmailTemplate.get_subject(@partner, name), :rows => 5 %>
+            <br/><br/>
             <%= text_area_tag "template[#{name}]", EmailTemplate.get(@partner, name), :rows => 5 %>
           </li>
         </ul>

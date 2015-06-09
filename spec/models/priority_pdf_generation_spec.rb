@@ -81,25 +81,25 @@ describe PriorityPdfGeneration do
     
     it "retrieves an id" do
       PriorityPdfGeneration.should_receive(:retrieve)
-      PriorityPdfGeneration.find_and_generate.should be_true
+      PriorityPdfGeneration.find_and_generate.should be_truthy
     end
     
     it "retrieves the registrant" do
       PriorityPdfGeneration.should_receive(:find).with("pdfgen_id", {:include=>:registrant})
-      PriorityPdfGeneration.find_and_generate.should be_true
+      PriorityPdfGeneration.find_and_generate.should be_truthy
     end
     
     it "generates the pdf" do
       r.should_receive(:generate_pdf)
-      PriorityPdfGeneration.find_and_generate.should be_true
+      PriorityPdfGeneration.find_and_generate.should be_truthy
     end
     it "finishes the pdf gen" do
       r.should_receive(:finalize_pdf)
-      PriorityPdfGeneration.find_and_generate.should be_true
+      PriorityPdfGeneration.find_and_generate.should be_truthy
     end
     it "deletes the pdfgen row" do
       pdfgen.should_receive(:delete)
-      PriorityPdfGeneration.find_and_generate.should be_true
+      PriorityPdfGeneration.find_and_generate.should be_truthy
     end
     
     context 'when there is no registrant' do
@@ -134,7 +134,7 @@ describe PriorityPdfGeneration do
     context 'when the pdfgenid is nil' do
       it "returns false" do
         PriorityPdfGeneration.stub(:retrieve).and_return(nil)
-        PriorityPdfGeneration.find_and_generate.should be_false
+        PriorityPdfGeneration.find_and_generate.should be_falsey
       end
     end
   end

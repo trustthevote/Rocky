@@ -42,6 +42,19 @@ describe EmailTemplate do
   before { @p = FactoryGirl.create(:partner) }
   before { EmailTemplate.set(@p, 'confirmation.en', 'body') }
 
+  describe 'set_subject' do
+    it 'should set an email subject fo the partner' do
+      EmailTemplate.set_subject(@p, 'confirmation.en', 'email subject')
+      EmailTemplate.order("updated_at DESC").last.subject.should == 'email subject'
+    end    
+  end
+  describe 'get_subject' do
+    it 'should get an email subject fo the partner' do
+      EmailTemplate.set_subject(@p, 'confirmation.en', 'retrieve subject')
+      EmailTemplate.get_subject(@p, 'confirmation.en').should == 'retrieve subject'
+    end    
+  end
+
   it 'should set a template for the partner' do
     EmailTemplate.get(@p, 'confirmation.en').should == 'body'
   end
@@ -56,8 +69,8 @@ describe EmailTemplate do
   end
 
   it 'should check if template is present' do
-    EmailTemplate.present?(@p, 'confirmation.en').should be_true
-    EmailTemplate.present?(@p, 'missing').should be_false
+    EmailTemplate.present?(@p, 'confirmation.en').should be_truthy
+    EmailTemplate.present?(@p, 'missing').should be_falsey
   end
 
 end

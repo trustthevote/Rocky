@@ -76,6 +76,7 @@ module PdfQueueBase
       end
     end
   rescue Exception => e
+    raise e
     Rails.logger.error "#{Time.now} Error finding and generating PDF:\n#{e.message}\n#{e.backtrace}"
     sleep(15)
     #raise e

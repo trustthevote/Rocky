@@ -65,22 +65,22 @@ describe Registrant do
   describe "default opt-in flags" do
     it "should be false for new records" do
       r = Registrant.new
-      r.opt_in_email.should be_false
-      r.opt_in_sms.should be_false
-      r.volunteer.should be_false
-      r.partner_opt_in_email.should be_false
-      r.partner_opt_in_sms.should be_false
-      r.partner_volunteer.should be_false
+      r.opt_in_email.should be_falsey
+      r.opt_in_sms.should be_falsey
+      r.volunteer.should be_falsey
+      r.partner_opt_in_email.should be_falsey
+      r.partner_opt_in_sms.should be_falsey
+      r.partner_volunteer.should be_falsey
     end
   end
   
   describe "opt-in email flag" do
     it "should be false if there is no email address" do
       r= FactoryGirl.create(:maximal_registrant)
-      r.opt_in_email.should be_true
+      r.opt_in_email.should be_truthy
       r.update_attributes(:email_address=>'', :collect_email_address=>'no')
       r.save!
-      r.opt_in_email.should be_false
+      r.opt_in_email.should be_falsey
     end
   end
   
@@ -136,14 +136,14 @@ describe Registrant do
       r.stub(:home_state_online_reg_enabled?).and_return(false)
       r.finish_with_state = true
       r.save!
-      r.finish_with_state.should be_false
+      r.finish_with_state.should be_falsey
     end
     it "can be set to true for enabled states" do
       r = FactoryGirl.build(:step_3_registrant)
       r.stub(:home_state_online_reg_enabled?).and_return(true)
       r.finish_with_state = true
       r.save!
-      r.finish_with_state.should be_true      
+      r.finish_with_state.should be_truthy      
     end
   end
   
@@ -605,7 +605,7 @@ describe Registrant do
         @reg.phone = ''
         
         @reg.opt_in_sms = true
-        @reg.valid?.should be_true
+        @reg.valid?.should be_truthy
         assert @reg.errors[:phone].empty?
       end
 
@@ -614,7 +614,7 @@ describe Registrant do
         @reg.phone = ''
 
         @reg.partner_opt_in_sms = true
-        @reg.valid?.should be_true
+        @reg.valid?.should be_truthy
         assert @reg.errors[:phone].empty?
       end
       
@@ -887,7 +887,7 @@ describe Registrant do
       reg = FactoryGirl.build(:step_3_registrant, :phone => "")
       
       reg.opt_in_sms = true
-      reg.valid?.should be_true
+      reg.valid?.should be_truthy
       assert reg.errors[:phone].empty?
     end
 
@@ -895,7 +895,7 @@ describe Registrant do
       reg = FactoryGirl.build(:step_3_registrant, :phone => "")
 
       reg.partner_opt_in_sms = true
-      reg.valid?.should be_true
+      reg.valid?.should be_truthy
       assert reg.errors[:phone].empty?
     end
     
@@ -1017,7 +1017,7 @@ describe Registrant do
       context "when localization nil" do
         it "returns false" do
           reg.home_state_id = nil
-          reg.home_state_allows_ovr?.should be_false
+          reg.home_state_allows_ovr?.should be_falsey
         end
       end
     end
@@ -1052,7 +1052,7 @@ describe Registrant do
       context "when home_state is nil" do
         it "returns false" do
           reg.home_state_id = nil
-          reg.home_state_has_ovr_pre_check?.should be_false
+          reg.home_state_has_ovr_pre_check?.should be_falsey
         end
       end
     end
@@ -1087,7 +1087,7 @@ describe Registrant do
     it "returns true if the state has a partial based on the state abbreviation" do
       reg = FactoryGirl.build(:step_1_registrant)
       File.stub(:exists?).with(File.join(Rails.root,'app/views/state_online_registrations/_pa_instructions.html.erb')) { true }
-      reg.has_home_state_online_registration_instructions?.should be_true
+      reg.has_home_state_online_registration_instructions?.should be_truthy
     end    
   end
   describe "home_state_online_registration_instructions_partial" do
@@ -1102,7 +1102,7 @@ describe Registrant do
     it "returns true if the state has a partial based on the state abbreviation" do
       reg = FactoryGirl.build(:step_1_registrant)
       File.stub(:exists?).with(File.join(Rails.root,'app/views/state_online_registrations/pa.html.erb')) { true }
-      reg.has_home_state_online_registration_view?.should be_true
+      reg.has_home_state_online_registration_view?.should be_truthy
     end    
   end
   describe "home_state_online_registration_view" do
@@ -1115,17 +1115,17 @@ describe Registrant do
   describe "use_short_form?" do
     it "returns false if short_form is false" do
       r = Registrant.new(:short_form=>false)
-      r.use_short_form?.should be_false
+      r.use_short_form?.should be_falsey
     end
     it "returns false if short_form is true and in_ovr_flow? is true" do
       r = Registrant.new(:short_form=>true)
       r.stub(:in_ovr_flow?) { true }
-      r.use_short_form?.should be_false
+      r.use_short_form?.should be_falsey
     end
     it "return true if short_form is true and in_ovr_flow is false" do
       r = Registrant.new(:short_form=>true)
       r.stub(:in_ovr_flow?) { false }
-      r.use_short_form?.should be_true
+      r.use_short_form?.should be_truthy
     end
   end
 
@@ -1133,13 +1133,13 @@ describe Registrant do
     it "is false for capitalizations and spacings of 'no'" do
       ['no', 'NO', 'No', 'nO', ' no', 'nO ', ' NO '].each do |v|
         r = Registrant.new(:collect_email_address=>v)
-        r.collect_email_address?.should be_false
+        r.collect_email_address?.should be_falsey
       end
     end
     it "is true for all other values" do
       ['n', '', nil, 'n-o', 'not', 'yes','optional'].each do |v|
         r = Registrant.new(:collect_email_address=>v)
-        r.collect_email_address?.should be_true
+        r.collect_email_address?.should be_truthy
       end
     end
   end
@@ -1147,27 +1147,27 @@ describe Registrant do
     # it "is false for all capitalizations and spacing of 'optional'" do
     #   ['optional', 'OPTIONAL', 'Optional', 'opTional', ' optionaL', 'OpTional ', ' optional '].each do |v|
     #     r = Registrant.new(:collect_email_address=>v)
-    #     r.require_email_address?.should be_false
+    #     r.require_email_address?.should be_falsey
     #   end
     # end
     # TODO: For now "optional" still means required
     it "is TRUE for all capitalizations and spacing of 'optional'" do
       ['optional', 'OPTIONAL', 'Optional', 'opTional', ' optionaL', 'OpTional ', ' optional '].each do |v|
         r = Registrant.new(:collect_email_address=>v)
-        r.require_email_address?.should be_true
+        r.require_email_address?.should be_truthy
       end
     end
     
     it "is false for all capitalizations and spacings of 'no'" do
       ['no', 'NO', 'No', 'nO', ' no', 'nO ', ' NO '].each do |v|
         r = Registrant.new(:collect_email_address=>v)
-        r.require_email_address?.should be_false
+        r.require_email_address?.should be_falsey
       end
     end
     it "is true for all other values" do
       ['n', '', nil, 'n-o', 'not', 'yes','opional'].each do |v|
         r = Registrant.new(:collect_email_address=>v)
-        r.require_email_address?.should be_true
+        r.require_email_address?.should be_truthy
       end
     end
   end
@@ -1461,7 +1461,7 @@ describe Registrant do
       it "calls the core API" do
         RestClient.should_receive(:get).with("#{RockyConf.api_host_name}/api/v3/registrations/pdf_ready.json?UID=uid").
           and_return('{"pdf_ready": true, "UID": "uid"}')
-        Registrant.remote_pdf_ready?("uid").should be_true
+        Registrant.remote_pdf_ready?("uid").should be_truthy
       end
     end
     describe '#remote_pdf_ready?' do
@@ -1486,7 +1486,7 @@ describe Registrant do
         `mkdir #{File.join(Rails.root, "public/pdfs/#{@registrant.bucket_code}")}`
         `touch #{@registrant.pdf_file_path}`
         assert_difference(%Q{Dir[File.join(Rails.root, "public/pdfs/#{@registrant.bucket_code}/*")].length} => 0) do
-          @registrant.generate_pdf.should be_true
+          @registrant.generate_pdf.should be_truthy
         end
       end
       after do
@@ -1872,25 +1872,25 @@ describe Registrant do
   describe 'send_emails?' do
     let(:r) { FactoryGirl.create(:maximal_registrant) }
     it "is true if email is present, collect_email_address is true and not building via api call" do
-      r.send_emails?.should be_true
+      r.send_emails?.should be_truthy
     end
     it "is true if email is present, collect_email_address is true and building via api call and send_confirmation_reminders is true" do
       r.building_via_api_call = true
       r.send_confirmation_reminder_emails = true
-      r.send_emails?.should be_true
+      r.send_emails?.should be_truthy
     end
     it "is false if email is blank" do
       r.email_address = ''
-      r.send_emails?.should be_false
+      r.send_emails?.should be_falsey
     end
     it "is false if collect_email_address is false" do
       r.collect_email_address = 'no'
-      r.send_emails?.should be_false
+      r.send_emails?.should be_falsey
     end
     it "is false if building_via_api and send_confirmation_reminders is false" do
       r.building_via_api_call = true
       r.send_confirmation_reminder_emails = false
-      r.send_emails?.should be_false
+      r.send_emails?.should be_falsey
     end
   end
   

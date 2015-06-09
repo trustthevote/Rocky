@@ -68,7 +68,8 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = true
-  
+
+  config.infer_spec_type_from_file_location!
   
   config.before(:each) do
     stub_request(:any, %r{http://example-api\.com/api/v3/partners/\d+\.json}).to_return do |req|

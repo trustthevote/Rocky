@@ -38,7 +38,7 @@ describe PartnerAssetsFolder do
     it 'should save asset file' do
       @file = File.new("#{fixture_files_path}/sample.css")
       @paf.update_css('application', @file)
-      @partner.application_css_present?.should be_true
+      @partner.application_css_present?.should be_truthy
     end
 
     context 'updating' do

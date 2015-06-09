@@ -76,30 +76,30 @@ describe PdfGeneration do
       pdfgen.stub(:registrant).and_return(r)
       pdfgen.stub(:delete).and_return(true)
       r.stub(:generate_pdf).and_return(true)
-      r.stub(:finalize_pdf)
+      r.stub(:finalize_pdf).and_return(true)
     end
     
     it "retrieves an id" do
       PdfGeneration.should_receive(:retrieve)
-      PdfGeneration.find_and_generate.should be_true
+      PdfGeneration.find_and_generate.should be_truthy
     end
     
     it "retrieves the registrant" do
       PdfGeneration.should_receive(:find).with("pdfgen_id", {:include=>:registrant})
-      PdfGeneration.find_and_generate.should be_true
+      PdfGeneration.find_and_generate.should be_truthy
     end
     
     it "generates the pdf" do
       r.should_receive(:generate_pdf)
-      PdfGeneration.find_and_generate.should be_true
+      PdfGeneration.find_and_generate.should be_truthy
     end
     it "finishes the pdf gen" do
       r.should_receive(:finalize_pdf)
-      PdfGeneration.find_and_generate.should be_true
+      PdfGeneration.find_and_generate.should be_truthy
     end
     it "deletes the pdfgen row" do
       pdfgen.should_receive(:delete)
-      PdfGeneration.find_and_generate.should be_true
+      PdfGeneration.find_and_generate.should be_truthy
     end
     
     context 'when there is no registrant' do
@@ -134,7 +134,7 @@ describe PdfGeneration do
     context 'when the pdfgenid is nil' do
       it "returns false" do
         PdfGeneration.stub(:retrieve).and_return(nil)
-        PdfGeneration.find_and_generate.should be_false
+        PdfGeneration.find_and_generate.should be_falsey
       end
     end
   end

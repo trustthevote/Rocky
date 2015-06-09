@@ -191,6 +191,7 @@ end
 Given(/^that partner has a custom thank\-you external email$/) do
   @partner ||= Partner.last
   EmailTemplate.set(@partner, "thank_you_external.en", "Custom partner for <%= @registrant_home_state_name %>, <%= @registrant_home_state_abbrev %>")
+  EmailTemplate.set_subject(@partner, "thank_you_external.en", "Custom Subject")
 end
 
 Then /^I should be sent a thank\-you email from that partner$/ do
@@ -199,7 +200,7 @@ Then /^I should be sent a thank\-you email from that partner$/ do
   email = ActionMailer::Base.deliveries.last
   email.to.should include(@registrant.email_address)
   email.from.should include(@partner.from_email)
-  email.subject.should == "Thank you for using the online voter registration tool"
+  email.subject.should == "Custom Subject"
   email.body.should == "Custom partner for #{registrant.home_state_name}, #{registrant.home_state_abbrev}"
 end
 
@@ -296,22 +297,22 @@ end
 
 Then /^I should be signed up for "([^\"]*)"$/ do |flag|
   @registrant.reload
-  @registrant.send(flag).should be_true
+  @registrant.send(flag).should be_truthy
 end
 
 Then /^I should not be signed up for "([^\"]*)"$/ do |flag|
   @registrant.reload
-  @registrant.send(flag).should be_false
+  @registrant.send(flag).should be_falsey
 end
 
 Then /^I should be recorded as having selected to finish with the state$/ do
   @registrant.reload
-  @registrant.finish_with_state.should be_true
+  @registrant.finish_with_state.should be_truthy
 end
 
 Then /^I should not be recorded as having selected to finish with the state$/ do
   @registrant.reload
-  @registrant.finish_with_state.should be_false
+  @registrant.finish_with_state.should be_falsey
 end
 
 

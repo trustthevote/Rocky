@@ -42,6 +42,7 @@ class Admin::PartnersController < Admin::BaseController
 
     if @partner.update_attributes(params[:partner])
       update_email_templates(@partner, params[:template])
+      update_email_template_subjects(@partner, params[:template_subject])
       update_custom_css(@partner, params[:css_files])
 
       redirect_to [ :admin, @partner ]
@@ -63,6 +64,11 @@ class Admin::PartnersController < Admin::BaseController
   def update_email_templates(partner, templates)
     (templates || {}).each do |name, body|
       EmailTemplate.set(partner, name, body)
+    end
+  end
+  def update_email_template_subjects(partner, subjects)
+    (subjects || {}).each do |name, subject|
+      EmailTemplate.set_subject(partner, name, subject)
     end
   end
 

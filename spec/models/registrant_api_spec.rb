@@ -50,13 +50,13 @@ describe Registrant do
     
     it "sets the finish_with_state_flag if passed in as true" do
       r = Registrant.build_from_api_data(:email_address=>"test@example.com")
-      r.finish_with_state.should be_false
+      r.finish_with_state.should be_falsey
        
       r = Registrant.build_from_api_data({:email_address=>"test@example.com"}, false)
-      r.finish_with_state.should be_false
+      r.finish_with_state.should be_falsey
       
       r = Registrant.build_from_api_data({:email_address=>"test@example.com"}, true)
-      r.finish_with_state.should be_true
+      r.finish_with_state.should be_truthy
     end
     
     it 'should require send_confirmation_reminder_emails if finish_with_state is true' do

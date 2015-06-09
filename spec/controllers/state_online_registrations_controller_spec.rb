@@ -38,9 +38,9 @@ describe StateOnlineRegistrationsController do
     it "sets the finish_with_state flag for the registrant to true" do
       reg = FactoryGirl.create(:step_1_registrant)
       GeoState.stub(:states_with_online_registration).and_return([reg.home_state_abbrev])
-      reg.finish_with_state.should be_false
+      reg.finish_with_state.should be_falsey
       get :show, :registrant_id => reg.to_param
-      assigns[:registrant].finish_with_state.should be_true
+      assigns[:registrant].finish_with_state.should be_truthy
     end
     it "assigns the iFrame url" do
       reg = FactoryGirl.create(:step_1_registrant, :home_zip_code=>"99400")

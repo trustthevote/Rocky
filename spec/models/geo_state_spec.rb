@@ -74,25 +74,25 @@ describe GeoState do
       RockyConf.stub(:states_with_online_registration) { ["AZ"] }
       RockyConf.stub(:ovr_states) { {} }
       s = GeoState.new(:abbreviation=>"AZ")
-      s.online_reg_enabled?(r.locale, r).should be_true
+      s.online_reg_enabled?(r.locale, r).should be_truthy
     end
     it "returns true if the state is in the config list and registrant's locale is included" do
       RockyConf.stub(:states_with_online_registration) { ["AZ"] }
       RockyConf.stub(:ovr_states) { {"AZ"=>{"languages"=>["en", "es"]}} }
       s = GeoState.new(:abbreviation=>"AZ")
-      s.online_reg_enabled?(r.locale, r).should be_true
+      s.online_reg_enabled?(r.locale, r).should be_truthy
     end
     it "returns false if the state is in the config list but the registrants locale is not enabled" do
       RockyConf.stub(:states_with_online_registration) { ["AZ"] }
       RockyConf.stub(:ovr_states) { {"AZ"=>{"languages" => ["en", "ko"]}} }      
       s = GeoState.new(:abbreviation=>"AZ")
-      s.online_reg_enabled?(r.locale, r).should be_false
+      s.online_reg_enabled?(r.locale, r).should be_falsey
     end
     it "returns false if the state is not in the config list" do
       RockyConf.stub(:states_with_online_registration) { ["CA"] }
       RockyConf.stub(:ovr_states) { {"CA"=>["en", "es"]} }      
       s = GeoState.new(:abbreviation=>"AZ")
-      s.online_reg_enabled?(r.locale, r).should be_false      
+      s.online_reg_enabled?(r.locale, r).should be_falsey      
     end
   end
 

@@ -216,15 +216,15 @@ describe Translation do
       t = Translation.new("core")
       t.stub(:blanks).and_return([])
       t.stub(:missing_variables).and_return([])
-      t.is_blank?("abc.def").should be_false
+      t.is_blank?("abc.def").should be_falsey
 
       t.stub(:blanks).and_return(["abc.def"])
       t.stub(:missing_variables).and_return([])
-      t.is_blank?("abc.def").should be_true
+      t.is_blank?("abc.def").should be_truthy
 
       t.stub(:blanks).and_return([])
       t.stub(:missing_variables).and_return(["abc.def"])
-      t.is_blank?("abc.def").should be_false
+      t.is_blank?("abc.def").should be_falsey
     end
   end
 
@@ -233,26 +233,26 @@ describe Translation do
       t = Translation.new("core")
       t.stub(:blanks).and_return([])
       t.stub(:missing_variables).and_return([])
-      t.is_missing_variable?("abc.def").should be_false
+      t.is_missing_variable?("abc.def").should be_falsey
 
       t.stub(:blanks).and_return(["abc.def"])
       t.stub(:missing_variables).and_return([])
-      t.is_missing_variable?("abc.def").should be_false
+      t.is_missing_variable?("abc.def").should be_falsey
 
       t.stub(:blanks).and_return([])
       t.stub(:missing_variables).and_return(["abc.def"])
-      t.is_missing_variable?("abc.def").should be_true
+      t.is_missing_variable?("abc.def").should be_truthy
     end
   end
   
   describe "#is_email?" do
     it "is true when the type is email" do
       t = Translation.new("email")
-      t.is_email?.should be_true
+      t.is_email?.should be_truthy
     end
     it "is false when the type is not email" do
       t = Translation.new("pdf")
-      t.is_email?.should be_false
+      t.is_email?.should be_falsey
     end
   end
   

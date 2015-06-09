@@ -43,11 +43,21 @@ class EmailTemplate < ActiveRecord::Base
     tmpl.body = body
     tmpl.save!
   end
+  def self.set_subject(partner, name, subject)
+    return unless partner
+    tmpl = EmailTemplate.find_or_initialize_by_partner_id_and_name(partner.id, name)
+    tmpl.subject = subject
+    tmpl.save!    
+  end
 
   # Returns the template body
   def self.get(partner, name)
     return nil unless partner
     EmailTemplate.find_by_partner_id_and_name(partner.id, name).try(:body)
+  end
+  def self.get_subject(partner, name)
+    return nil unless partner
+    EmailTemplate.find_by_partner_id_and_name(partner.id, name).try(:subject)
   end
 
   # Returns TRUE if the partner email template with this name is non-empty

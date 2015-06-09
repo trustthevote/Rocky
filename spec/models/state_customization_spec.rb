@@ -50,13 +50,13 @@ describe StateCustomization do
   
   describe "self.class_exists?(class_name)" do
     it "returns true for classes" do
-      StateCustomization.send(:class_exists?, "StateCustomization").should be_true
+      StateCustomization.send(:class_exists?, "StateCustomization").should be_truthy
     end
     it "returns false for modules" do
-      StateCustomization.send(:class_exists?, "ActiveRecord").should be_false
+      StateCustomization.send(:class_exists?, "ActiveRecord").should be_falsey
     end
     it "returns false when can't be instantiated" do
-      StateCustomization.send(:class_exists?, "AsdfsAsdf").should be_false
+      StateCustomization.send(:class_exists?, "AsdfsAsdf").should be_falsey
     end
   end
   
@@ -81,16 +81,16 @@ describe StateCustomization do
   describe "redirect_to_online_reg_url(registrant)" do
     let(:sc) { StateCustomization.new(state) }
     it "returns whether the state should redirect" do
-      sc.redirect_to_online_reg_url(nil).should be_false
+      sc.redirect_to_online_reg_url(nil).should be_falsey
       
       settings = mock("Setting")
       sc.stub(:ovr_settings).and_return(settings)
       
       settings.stub(:redirect_to_online_reg_url).and_return(true)
-      sc.redirect_to_online_reg_url(nil).should be_true
+      sc.redirect_to_online_reg_url(nil).should be_truthy
 
       settings.stub(:redirect_to_online_reg_url).and_return(false)
-      sc.redirect_to_online_reg_url(nil).should be_false
+      sc.redirect_to_online_reg_url(nil).should be_falsey
     end
     
   end
@@ -98,7 +98,7 @@ describe StateCustomization do
   describe "has_ovr_pre_check?(registrant)" do
     let(:sc) { StateCustomization.new(state) }
     it "returns false" do
-      sc.has_ovr_pre_check?(nil).should be_false
+      sc.has_ovr_pre_check?(nil).should be_falsey
     end
     
   end

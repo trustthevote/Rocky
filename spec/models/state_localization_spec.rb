@@ -60,7 +60,7 @@ describe StateLocalization do
         :locale=>"abc",
         :state=>geo_state
       )
-      loc.allows_ovr?(nil).should be_true
+      loc.allows_ovr?(nil).should be_truthy
     end
   end
   

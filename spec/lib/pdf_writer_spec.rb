@@ -59,26 +59,26 @@ describe PdfWriter do
     describe "#us_citizen?" do
       it "returns whether us_citizen == true" do
         pw.us_citizen = nil
-        pw.us_citizen?.should be_false
+        pw.us_citizen?.should be_falsey
         pw.us_citizen = "1"
-        pw.us_citizen?.should be_false
+        pw.us_citizen?.should be_falsey
         pw.us_citizen = "true"
-        pw.us_citizen?.should be_false
+        pw.us_citizen?.should be_falsey
         pw.us_citizen = true
-        pw.us_citizen?.should be_true        
+        pw.us_citizen?.should be_truthy        
       end
     end
     
     describe '#will_be_18_by_election?' do
       it "returns whether will_be_18_by_election == true" do
         pw.will_be_18_by_election = nil
-        pw.will_be_18_by_election?.should be_false
+        pw.will_be_18_by_election?.should be_falsey
         pw.will_be_18_by_election = "1"
-        pw.will_be_18_by_election?.should be_false
+        pw.will_be_18_by_election?.should be_falsey
         pw.will_be_18_by_election = "true"
-        pw.will_be_18_by_election?.should be_false
+        pw.will_be_18_by_election?.should be_falsey
         pw.will_be_18_by_election = true
-        pw.will_be_18_by_election?.should be_true        
+        pw.will_be_18_by_election?.should be_truthy        
       end
     end
 
@@ -163,11 +163,11 @@ describe PdfWriter do
     end
     it "returns false if the locale is blank" do
       pw.locale = ''
-      pw.registrant_to_html_string.should be_false
+      pw.registrant_to_html_string.should be_falsey
     end
     it "returns false if the home_state_id is blank" do
       pw.home_state_id = ''
-      pw.registrant_to_html_string.should be_false
+      pw.registrant_to_html_string.should be_falsey
     end
     it "sets the locale for rendering and resets after rending" do
       pw.locale = 'es'

@@ -151,7 +151,7 @@ describe Partner do
       p = FactoryGirl.build(:partner)
       p.partner_css_download_url = url
       p.save!
-      p.partner_css_present?.should be_true      
+      p.partner_css_present?.should be_truthy      
     end
     it "adds a validation error if the url is not http" do
       bad_url = "home_rtv_logo_wrong.png"
@@ -178,17 +178,17 @@ describe Partner do
     end
     it "returns false when blank or not matching" do
       partner = FactoryGirl.build(:partner, :api_key=>"")
-      partner.valid_api_key?("").should be_false
+      partner.valid_api_key?("").should be_falsey
       partner.api_key="abc"
-      partner.valid_api_key?("bca").should be_false
+      partner.valid_api_key?("bca").should be_falsey
     end
     it "return true when matching" do
       partner = FactoryGirl.build(:partner, :api_key=>"abcdef")
-      partner.valid_api_key?("abcdef").should be_true
+      partner.valid_api_key?("abcdef").should be_truthy
     end
     it "returns true when matching the primary partner" do
       partner = FactoryGirl.build(:partner, :api_key=>"abcdef")
-      partner.valid_api_key?("1234").should be_true
+      partner.valid_api_key?("1234").should be_truthy
     end
   end
 
@@ -360,26 +360,26 @@ describe Partner do
       it "returns true if the both custom css files are present" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").and_return(true)
-        partner.css_present?.should be_true
+        partner.css_present?.should be_truthy
       end
       it "returns false if the custom application css file is not present" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("application.css").and_return(false)
         paf.stub("asset_file_exists?").with("registration.css").and_return(true)
         
-        partner.css_present?.should be_false
+        partner.css_present?.should be_falsey
       end
       it "returns false if the custom registration css file is not present" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("application.css").and_return(true)
         paf.stub("asset_file_exists?").with("registration.css").and_return(false)
-        partner.css_present?.should be_false
+        partner.css_present?.should be_falsey
       end
       it "returns false if the both custom css files are not present" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("application.css").and_return(false)
         paf.stub("asset_file_exists?").with("registration.css").and_return(false)
-        partner.css_present?.should be_false
+        partner.css_present?.should be_falsey
       end
     end
 
@@ -389,22 +389,22 @@ describe Partner do
         paf.stub("asset_file_exists?").with("application.css").and_return(true)
         paf.stub("asset_file_exists?").with("registration.css").and_return(false)
         paf.stub("asset_file_exists?").with("partner.css").and_return(false)
-        partner.any_css_present?.should be_true
+        partner.any_css_present?.should be_truthy
 
         paf.stub("asset_file_exists?").with("application.css").and_return(false)
         paf.stub("asset_file_exists?").with("registration.css").and_return(true)
         paf.stub("asset_file_exists?").with("partner.css").and_return(false)
-        partner.any_css_present?.should be_true
+        partner.any_css_present?.should be_truthy
 
         paf.stub("asset_file_exists?").with("application.css").and_return(false)
         paf.stub("asset_file_exists?").with("registration.css").and_return(false)
         paf.stub("asset_file_exists?").with("partner.css").and_return(true)
-        partner.any_css_present?.should be_true
+        partner.any_css_present?.should be_truthy
 
         paf.stub("asset_file_exists?").with("application.css").and_return(true)
         paf.stub("asset_file_exists?").with("registration.css").and_return(true)
         paf.stub("asset_file_exists?").with("partner.css").and_return(true)
-        partner.any_css_present?.should be_true
+        partner.any_css_present?.should be_truthy
       end
       it "returns false if all css files are missing" do
         partner = FactoryGirl.build(:partner)
@@ -412,7 +412,7 @@ describe Partner do
         paf.stub("asset_file_exists?").with("registration.css").and_return(false)
         paf.stub("asset_file_exists?").with("partner.css").and_return(false)
 
-        partner.any_css_present?.should be_false
+        partner.any_css_present?.should be_falsey
       end
     end
 
@@ -420,36 +420,36 @@ describe Partner do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("application.css").and_return(true)
-        partner.application_css_present?.should be_true
+        partner.application_css_present?.should be_truthy
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("application.css").and_return(false)
-        partner.application_css_present?.should be_false
+        partner.application_css_present?.should be_falsey
       end
     end
     describe "#registration_css_present?" do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("registration.css").and_return(true)
-        partner.registration_css_present?.should be_true
+        partner.registration_css_present?.should be_truthy
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("registration.css").and_return(false)
-        partner.registration_css_present?.should be_false
+        partner.registration_css_present?.should be_falsey
       end
     end
     describe "#partner_css_present?" do
       it "returns true when the file exists" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("partner.css").and_return(true)
-        partner.partner_css_present?.should be_true
+        partner.partner_css_present?.should be_truthy
       end
       it "returns false when the file is missing" do
         partner = FactoryGirl.build(:partner)
         paf.stub("asset_file_exists?").with("partner.css").and_return(false)
-        partner.partner_css_present?.should be_false
+        partner.partner_css_present?.should be_falsey
       end
     end
 
@@ -483,7 +483,7 @@ describe Partner do
             partner.stub(:pdf_logo_ext).and_return(nil)
           end
           it "returns false" do
-            partner.pdf_logo_present?.should be_false
+            partner.pdf_logo_present?.should be_falsey
           end
           
         end
@@ -492,7 +492,7 @@ describe Partner do
             partner.stub(:pdf_logo_ext).and_return('val')
           end
           it "returns true" do
-            partner.pdf_logo_present?.should be_true
+            partner.pdf_logo_present?.should be_truthy
           end
         end
       end
@@ -614,13 +614,13 @@ describe Partner do
   describe "default opt-in sets" do
     it "should be true for RTV and false for partners" do
       partner = Partner.new
-      partner.rtv_email_opt_in.should be_true
-      partner.partner_email_opt_in.should be_false
-      partner.rtv_sms_opt_in.should be_true
-      partner.partner_sms_opt_in.should be_false
-      partner.ask_for_volunteers.should be_false
+      partner.rtv_email_opt_in.should be_truthy
+      partner.partner_email_opt_in.should be_falsey
+      partner.rtv_sms_opt_in.should be_truthy
+      partner.partner_sms_opt_in.should be_falsey
+      partner.ask_for_volunteers.should be_falsey
       partner.ask_for_volunteers?.should == RockyConf.sponsor.allow_ask_for_volunteers
-      partner.partner_ask_for_volunteers.should be_false
+      partner.partner_ask_for_volunteers.should be_falsey
     end
   end
 
@@ -651,10 +651,10 @@ describe Partner do
         Delayed::Job.stub(:enqueue)
       end
       it "sets the csv_ready for the partner to false" do
-        @partner.csv_ready.should be_true
+        @partner.csv_ready.should be_truthy
         @partner.generate_registrants_csv_async
         @partner.reload
-        @partner.csv_ready.should be_false
+        @partner.csv_ready.should be_falsey
       end
       it "sets up a delayed job to generate the csv" do
         @partner.generate_registrants_csv_async
@@ -1279,7 +1279,7 @@ describe Partner do
         p = FactoryGirl.create(:government_partner)
         p.government_partner_zip_codes = nil
         p.government_partner_state_id = nil
-        p.valid?.should be_false
+        p.valid?.should be_falsey
         p.errors[:government_partner_state_abbrev].should_not be_empty
         p.errors[:government_partner_zip_code_list].should_not be_empty
       end
@@ -1287,7 +1287,7 @@ describe Partner do
         p = FactoryGirl.create(:government_partner)
         p.government_partner_state_abbrev="MA"
         p.government_partner_zip_code_list="90000"
-        p.valid?.should be_false
+        p.valid?.should be_falsey
         p.errors[:government_partner_state_abbrev].should_not be_empty
         p.errors[:government_partner_zip_code_list].should_not be_empty
       end

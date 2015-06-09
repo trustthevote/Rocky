@@ -91,3 +91,16 @@ Feature: Admin UI
       And I should see "Row 1 is invalid"
       And I should see "Row 2 is invalid"
       And I should see "Row 3 is invalid"
+      
+    @passing
+    Scenario: Editing email for partner != 1
+      Given the following partner exists:
+        | id | name                | whitelabeled |
+        |  2 | Standard UI Partner | true         |
+      When I go to the partner edit page for that partner
+      Then I should see an email body field for "Confirmation" for each language
+      And I should see an email body field for "Reminder" for each language
+      And I should see an email body field for "Thank you external" for each language
+      And I should see an email subject field for "Confirmation" for each langauge
+      And I should see an email subject field for "Reminder" for each langauge
+      And I should see an email subject field for "Thank you external" for each langauge
