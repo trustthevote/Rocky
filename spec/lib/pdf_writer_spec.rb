@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PdfWriter do
   it "responds to the attributes needed for PDF generation" do
@@ -84,16 +84,17 @@ describe PdfWriter do
 
     describe 'yes_no values' do
       it "returns 'Yes' or 'No' based on the value of the attribute" do
-        pw.stub(:attrib).and_return(true)
+        def pw.attrib; true; end
+        allow(pw).to receive(:attrib).and_return(true)
         pw.yes_no_attrib.should == "Yes"
         
-        pw.stub(:attrib).and_return(false)
+        allow(pw).to receive(:attrib).and_return(false)
         pw.yes_no_attrib.should == "No"
         
-        pw.stub(:attrib).and_return("text")
+        allow(pw).to receive(:attrib).and_return("text")
         pw.yes_no_attrib.should == "Yes"
 
-        pw.stub(:attrib).and_return(nil)
+        allow(pw).to receive(:attrib).and_return(nil)
         pw.yes_no_attrib.should == "No"
       end
     end
@@ -176,7 +177,7 @@ describe PdfWriter do
       pw.registrant_to_html_string
     end
     it "uses the PdfRenderer" do
-      renderer = mock(PdfRenderer)
+      renderer = double(PdfRenderer)
       renderer.stub(:render_to_string).and_return("html output")
       PdfRenderer.should_receive(:new).with(pw).and_return(renderer)
       pw.registrant_to_html_string.should == "html output"
@@ -248,7 +249,7 @@ describe PdfWriter do
   describe '.write_html_from_html_string' do
     let(:r) { FactoryGirl.create(:maximal_registrant) }
     let(:pw) { r.pdf_writer }
-    let(:fstream) { mock(Object) }
+    let(:fstream) { double(Object) }
     let(:html) { "html" }
     before(:each) do
       FileUtils.stub(:mkdir_p).with("dir")
@@ -272,9 +273,9 @@ describe PdfWriter do
   describe '.write_pdf_from_html_string' do
     let(:r) { FactoryGirl.create(:maximal_registrant) }
     let(:pw) { r.pdf_writer }
-    let(:fstream) { mock(Object) }
+    let(:fstream) { double(Object) }
     let(:pdf) { "pdf" }
-    let(:wpdf) { mock(Object) }
+    let(:wpdf) { double(Object) }
     before(:each) do
       FileUtils.stub(:mkdir_p).with("dir")
       fstream.stub(:<<)

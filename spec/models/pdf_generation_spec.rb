@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PdfGeneration do
   
@@ -9,7 +9,7 @@ describe PdfGeneration do
   end
   
   describe '.retrieve' do
-    let(:selector) { mock(Object) }
+    let(:selector) { double(Object) }
     before(:each) do
       selector.stub(:lock).and_return(selector)
       selector.stub(:first).and_return(selector)
@@ -67,8 +67,8 @@ describe PdfGeneration do
   end
   
   describe '.find_and_generate' do
-    let(:pdfgen) { mock(PdfGeneration)}
-    let(:r) { mock(Registrant) }
+    let(:pdfgen) { double(PdfGeneration)}
+    let(:r) { double(Registrant) }
     
     before(:each) do
       PdfGeneration.stub(:retrieve).and_return("pdfgen_id")

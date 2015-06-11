@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../rails_helper')
 
 describe V1::RegistrationService do
 
@@ -76,9 +76,13 @@ describe V1::RegistrationService do
     end
 
     it 'should deal with states passed as strings' do
-      lambda {
-        V1::RegistrationService.create_record(:mailing_state => "", :home_state => "1", :prev_state => "");
-      }.should_not raise_error ActiveRecord::AssociationTypeMismatch
+      V2::RegistrationService.data_to_attrs({
+              :mailing_state => "", :home_state => "1", :prev_state => "AL"
+            }).should == {
+              :mailing_state_id => nil,
+              :home_state_id => nil,
+              :prev_state_id => 1,
+            }
     end
 
     context 'complete record' do

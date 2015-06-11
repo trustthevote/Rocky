@@ -25,15 +25,6 @@ class RemotePartner < ActiveResource::Base
     self.id.to_s
   end
   
-  (Partner.column_names + [:custom_logo, :header_logo_url]).each do |column|
-    define_method "#{column}" do
-      self.attributes[column] || nil
-    end
-    define_method "#{column}=" do |val|
-      self.attributes[column]= val
-    end
-  end
-  
   [:custom_logo, :whitelabeled, 
    :application_css_present, :registration_css_present, :partner_css_present,
         :ask_for_volunteers,
@@ -43,13 +34,21 @@ class RemotePartner < ActiveResource::Base
         :rtv_sms_opt_in,
         :partner_sms_opt_in
   ].each do |method|
-      
+     attr_accessor method
      define_method("#{method}?") do
        self.send("#{method}") == true
      end
       
   end
   
+  (Partner.column_names + [:custom_logo, :header_logo_url]).each do |column|
+    define_method "#{column}" do
+      self.attributes[column] || nil
+    end
+    define_method "#{column}=" do |val|
+      self.attributes[column]= val
+    end
+  end
 
   
 end

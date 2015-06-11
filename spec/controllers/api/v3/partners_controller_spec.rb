@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../../rails_helper')
 
 describe Api::V3::PartnersController do
 
@@ -48,7 +48,7 @@ describe Api::V3::PartnersController do
   describe "#create" do
     it "should return the ID of the created partner" do
       expect_api_response :partner_id => "2342"
-      partner = mock(Partner)
+      partner = double(Partner)
       partner.stub(:id) { 2342 }
       new_partner { partner }
     end

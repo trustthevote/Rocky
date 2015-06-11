@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PriorityPdfGeneration do
   
@@ -9,7 +9,7 @@ describe PriorityPdfGeneration do
   end
   
   describe '.retrieve' do
-    let(:selector) { mock(Object) }
+    let(:selector) { double(Object) }
     before(:each) do
       selector.stub(:lock).and_return(selector)
       selector.stub(:first).and_return(selector)
@@ -67,8 +67,8 @@ describe PriorityPdfGeneration do
   end
   
   describe '.find_and_generate' do
-    let(:pdfgen) { mock(PriorityPdfGeneration)}
-    let(:r) { mock(Registrant) }
+    let(:pdfgen) { double(PriorityPdfGeneration)}
+    let(:r) { double(Registrant) }
     
     before(:each) do
       PriorityPdfGeneration.stub(:retrieve).and_return("pdfgen_id")
@@ -76,7 +76,7 @@ describe PriorityPdfGeneration do
       pdfgen.stub(:registrant).and_return(r)
       pdfgen.stub(:delete).and_return(true)
       r.stub(:generate_pdf).and_return(true)
-      r.stub(:finalize_pdf)
+      r.stub(:finalize_pdf).and_return(true)
     end
     
     it "retrieves an id" do

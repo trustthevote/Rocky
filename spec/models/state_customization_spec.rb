@@ -23,7 +23,7 @@
 #
 #***** END LICENSE BLOCK *****
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe StateCustomization do
   let(:state) { GeoState.new(:abbreviation=>"AA") }
@@ -83,7 +83,7 @@ describe StateCustomization do
     it "returns whether the state should redirect" do
       sc.redirect_to_online_reg_url(nil).should be_falsey
       
-      settings = mock("Setting")
+      settings = double("Setting")
       sc.stub(:ovr_settings).and_return(settings)
       
       settings.stub(:redirect_to_online_reg_url).and_return(true)

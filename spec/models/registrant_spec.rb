@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Registrant do
   include Rails.application.routes.url_helpers
@@ -269,7 +269,7 @@ describe Registrant do
       describe "home_state_#{state_data}" do
         it "reads #{state_data} from the localization" do
           reg = Registrant.new
-          mock_localization = mock(StateLocalization)
+          mock_localization = double(StateLocalization)
           mock_localization.should_receive(state_data).and_return "a value"
           reg.stub(:localization).and_return(mock_localization)
           reg.send("home_state_#{state_data}").should == "a value"
@@ -1009,7 +1009,7 @@ describe Registrant do
     describe "home_state_allows_ovr?" do
       let(:reg) { FactoryGirl.build(:step_1_registrant) }
       it "pulls from the localization" do
-        mock_loc = mock(StateLocalization)
+        mock_loc = double(StateLocalization)
         mock_loc.should_receive(:allows_ovr?)
         reg.stub(:localization).and_return(mock_loc)
         reg.home_state_allows_ovr?
@@ -1044,7 +1044,7 @@ describe Registrant do
     describe "home_state_has_ovr_pre_check?" do
       let(:reg) { FactoryGirl.build(:step_1_registrant) }
       it "pulls from the home_state" do
-        mock_loc = mock(GeoState)
+        mock_loc = double(GeoState)
         mock_loc.should_receive(:has_ovr_pre_check?).with(reg)
         reg.stub(:home_state).and_return(mock_loc)
         reg.home_state_has_ovr_pre_check?
@@ -1060,7 +1060,7 @@ describe Registrant do
     describe "ovr_pre_check" do
       let(:reg) { FactoryGirl.create(:step_3_registrant) }
       it "calls on the home_state" do
-        mock_loc = mock(GeoState)
+        mock_loc = double(GeoState)
         mock_loc.should_receive(:ovr_pre_check).with(reg, nil)
         reg.stub(:home_state).and_return(mock_loc)
         reg.ovr_pre_check
@@ -1306,7 +1306,7 @@ describe Registrant do
     
     describe 'self.old_ui_record_ids' do
       it "finds registrant ids that haven't been updated in 30 minutes" do
-        where = "where"
+        where = double("where")
         Registrant.should_receive(:where).and_return(where)
         where.should_receive(:pluck).with(:id)
         Registrant.old_ui_record_ids
@@ -1314,9 +1314,9 @@ describe Registrant do
     end
     describe 'self.process_ui_records' do
       it "deletes completed registrants" do
-        where = "where"
-        ui_timeout_minutes = "30"
-        time_length = "time_length"
+        where = double("where")
+        ui_timeout_minutes = double("30")
+        time_length = double("time_length")
         ui_timeout_minutes.stub(:minutes).and_return(time_length)
         time_length.stub(:ago).and_return("timeout")
         Registrant.stub(:ui_timeout_minutes).and_return(ui_timeout_minutes)
@@ -1327,7 +1327,7 @@ describe Registrant do
       end
       
       it "finds old_ui_record_ids in batches of 10" do
-        id_list = mock(Array)
+        id_list = double(Array)
         Registrant.stub(:old_ui_record_ids).and_return(id_list)
         id_list.should_receive(:each_slice).with(10)
         Registrant.process_ui_records
@@ -1519,7 +1519,7 @@ describe Registrant do
     end
     
     describe 'generate_pdf' do
-      let(:pdf_writer) { mock(PdfWriter) }
+      let(:pdf_writer) { double(PdfWriter) }
       before(:each) do
         pdf_writer.stub(:assign_attributes)
         pdf_writer.stub(:valid?).and_return(true)
@@ -1570,7 +1570,7 @@ describe Registrant do
           @registrant.generate_pdf.should == false
         end
         it "does not send confirmation email" do
-          @registrant.should_not_receive(:deliver_confirmation_reminder_emails)
+          @registrant.should_not_receive(:deliver_confirmation_email)
           @registrant.generate_pdf
         end
       end
@@ -2089,7 +2089,7 @@ describe Registrant do
 
       # Disabled until spammers can be stopped
       # it "sends one email per recipient" do
-      #   mock(Notifier).deliver_tell_friends(anything).times(3)
+      #   double(Notifier).deliver_tell_friends(anything).times(3)
       #   Registrant.deliver_tell_friends_emails(@tell_params)
       # end
     end

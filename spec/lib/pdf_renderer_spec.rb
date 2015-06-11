@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PdfRenderer do
   let(:r) { FactoryGirl.create(:maximal_registrant, :locale=>'es') }

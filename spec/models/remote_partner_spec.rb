@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../rails_helper'
 
 describe RemotePartner do
   
@@ -81,6 +81,7 @@ describe RemotePartner do
           describe "#{method}?" do
             it "calls #{method}" do
               r = RemotePartner.new
+              r.stub(method)
               r.should_receive(method)
               r.send("#{method}?")
             end

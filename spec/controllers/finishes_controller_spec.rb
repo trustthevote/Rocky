@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 
 describe FinishesController do
@@ -83,7 +83,7 @@ describe FinishesController do
     it "does not show share links" do
       get :show, :registrant_id => @registrant.to_param
       
-      response.should have_selector("h1") do |headers|
+      response.body.should have_selector("h1") do |headers|
         headers.should have_content("You're on the list")
       end
       #assert_select "h1", "You're on the list!"

@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe MobileConfig do
   before(:each) do
@@ -56,7 +56,7 @@ describe MobileConfig do
   end
   describe "#is_mobile_request?(request)" do
     it "returns true when the request.user_agent matches one of the configured browsers" do
-      req = ''
+      req = spy(String)
       req.stub(:user_agent) { "Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30" }
       MobileConfig.is_mobile_request?(req).should be_truthy
       
@@ -64,7 +64,7 @@ describe MobileConfig do
       MobileConfig.is_mobile_request?(req).should be_truthy      
     end
     it "returns false when the request.user_agent doesn't match one of the configured browsers" do
-      req = ''
+      req = spy(String)
       req.stub(:user_agent) { "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-HK) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5" }
       MobileConfig.is_mobile_request?(req).should be_falsey
       

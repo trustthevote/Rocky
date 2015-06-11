@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Registrant do
 
@@ -43,7 +43,6 @@ describe Registrant do
     it 'should not require has_state_license' do
       r = Registrant.build_from_api_data(:has_state_license=>nil)
       r.stub(:at_least_step_2?) { true }
-      r.stub(:custom_step_2?) { true }
       r.valid?
       r.should have(0).errors_on(:has_state_license)
     end

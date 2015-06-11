@@ -122,7 +122,7 @@ class PdfWriter
     return false if !html_string
 
     if force_write || !html_exists?
-      PdfWriter.write_html_from_html_string(html_string, html_file_dir, html_file_path, force_write)
+      PdfWriter.write_html_from_html_string(html_string, html_file_dir, html_file_path)
     end
 
     return true

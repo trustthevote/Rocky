@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Step4Controller do
   before(:each) do
@@ -79,15 +79,15 @@ describe Step4Controller do
       let(:reg) { FactoryGirl.create(:step_3_registrant) }
       before(:each) do
         reg.stub(:has_ovr_pre_check?).and_return(true)
-        reg.stub(:some_code_to_execute)
+        reg.stub(:inspect)
         reg.stub(:ovr_pre_check) do
-          reg.some_code_to_execute
+          reg.inspect
         end
         Registrant.stub(:find_by_param!).and_return(reg)
       end
       
       it "should run the registrant's OVR precheck instead of the redirect" do
-        reg.should_receive(:some_code_to_execute)
+        reg.should_receive(:inspect)
         get :show, :registrant_id => reg.to_param
         assert_template("show")
       end

@@ -40,6 +40,8 @@ gem 'asset_sync'
 
 group :development, :test do
   gem "rspec-rails", "~> 3.2.3"
+  gem 'rspec-collection_matchers'
+  gem 'rspec-activemodel-mocks'
   #gem "rspec-spies",  "2.1.1"
   
   gem "rr", "= 0.10.11"

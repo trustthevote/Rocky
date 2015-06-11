@@ -23,7 +23,7 @@
 #
 #***** END LICENSE BLOCK *****
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe WA do
   let(:root_url) { "https://weiapplets.sos.wa.gov/myvote/myvote" }
@@ -33,7 +33,7 @@ describe WA do
   
   describe "online_reg_url(registrant)" do
     let(:wa) { WA.new(GeoState['WA']) }
-    let(:reg) { mock(Registrant) }
+    let(:reg) { double(Registrant) }
     context "when registrant is nil" do
       it "returns the root URL" do
         wa.online_reg_url(nil).should == root_url

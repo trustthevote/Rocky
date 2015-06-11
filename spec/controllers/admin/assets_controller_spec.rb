@@ -22,13 +22,13 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require 'spec_helper'
+require 'rails_helper'
 
 describe Admin::AssetsController do
 
-  before { @paf = stub }
-  before { @partner = FactoryGirl.create(:partner) }
-  before { controller.stub(:assets_folder) { @paf } }
+  before(:each) { @paf = double(PartnerAssetsFolder) }
+  before(:each) { @partner = FactoryGirl.create(:partner) }
+  before(:each) { controller.stub(:assets_folder) { @paf } }
 
   describe 'index' do
     before  { @paf.stub(:list_assets) { [] } }

@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../rails_helper'
 
 describe StateImporter do
   attr_accessor :csv_basic, :file_basic
@@ -230,7 +230,7 @@ YML
 
   describe ".new" do
     context "without parameters passed" do
-      let(:fs) { mock(File) }
+      let(:fs) { double(File) }
       let(:states_hash) { {'defaults'=>"defaults"} }
       before(:each) do
         File.stub(:open).and_return(fs)
@@ -259,14 +259,14 @@ YML
       
     end
     context "when passed a file" do
-      let(:file) { mock(File) }
+      let(:file) { double(File) }
       
     end
   end
 
   describe ".defaults" do
     it "returns defaults from a new instance" do
-      si = mock(StateImporter)
+      si = double(StateImporter)
       si.should_receive(:defaults).and_return("base-defaults")
       StateImporter.should_receive(:new).and_return(si)
       StateImporter.defaults.should == "base-defaults"
@@ -324,7 +324,7 @@ YML
       
     end
     describe "#import_state(row)" do
-      let(:state) { mock(GeoState).as_null_object }
+      let(:state) { double(GeoState).as_null_object }
       before(:each) do
         @row = states_hash[:record_0].stringify_keys
         si.stub(:import_localizations)
@@ -356,7 +356,7 @@ YML
     end
     
     describe "#import_localizations(state, row)" do
-      let(:state) { mock(GeoState).as_null_object }
+      let(:state) { double(GeoState).as_null_object }
       before(:each) do
         @row = states_hash[:record_0].stringify_keys
         state.stub(:name).and_return("state-name")
@@ -365,7 +365,7 @@ YML
       
       it "saves the translated values for each translation key" do
         I18n.available_locales.each do |locale|
-          loc = mock(StateLocalization)
+          loc = double(StateLocalization)
           state.should_receive(:get_localization).with(locale).and_return(loc)
 
           si.should_receive(:translate_list_item).with(
@@ -414,8 +414,8 @@ YML
     
     describe "#commit!" do
       let(:si) { StateImporter.new }
-      let(:state) { mock(GeoState) }
-      let(:loc) { mock(StateLocalization) }
+      let(:state) { double(GeoState) }
+      let(:loc) { double(StateLocalization) }
       let(:zca) { mock_model(ZipCodeCountyAddress) }
       before(:each) do
         state.stub(:save!)

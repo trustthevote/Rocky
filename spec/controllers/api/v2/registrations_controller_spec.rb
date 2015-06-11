@@ -22,14 +22,14 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../../rails_helper')
 
 describe Api::V2::RegistrationsController do
 
   describe 'create' do
     it 'should return URL of PDF to be generated' do
       expect_api_response :pdfurl => "https://example-pdf.com/123.pdf"
-      registrant= mock(Registrant)
+      registrant= double(Registrant)
       registrant.stub(:pdf_path) { '/123.pdf' }
       new_registration { registrant  }
     end

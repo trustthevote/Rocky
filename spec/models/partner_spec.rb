@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../rails_helper'
 
 describe Partner do
 
@@ -95,8 +95,8 @@ describe Partner do
     it "opens the file from the URL when saved" do
       url = "http://www.rockthevote.com/assets/images/structure/home_rtv_logo.png"
       p = FactoryGirl.build(:partner)
-      mock_io = mock("StringIO")
-      mock_uri = mock("URI")
+      mock_io = double("StringIO")
+      mock_uri = double("URI")
       mock_uri.stub(:path).and_return(url)
       mock_io.stub(:base_uri).and_return(mock_uri)
       p.stub(:open).with(url).and_return(mock_io)
@@ -134,8 +134,8 @@ describe Partner do
     it "opens the file from the URL when saved" do
       url = "http://www.rockthevote.com/assets/v4/css/base.css"
       p = FactoryGirl.build(:partner)
-      mock_io = mock("StringIO")
-      mock_uri = mock("URI")
+      mock_io = double("StringIO")
+      mock_uri = double("URI")
       mock_uri.stub(:path).and_return(url)
       mock_io.stub(:base_uri).and_return(mock_uri)
       mock_io.stub(:read).and_return("css contents")
@@ -256,7 +256,7 @@ describe Partner do
   end
 
   describe "whitelabeling" do
-    let(:paf) { mock(PartnerAssetsFolder) }
+    let(:paf) { double(PartnerAssetsFolder) }
     before(:each) do
       PartnerAssetsFolder.stub(:new).and_return(paf)
     end
@@ -333,6 +333,7 @@ describe Partner do
         end
         it "copies the CSS files to the partner path (with the correct names) from URLs" do
           pending "Don't need URL designation of assets yet"
+          raise "Fail"
         end
         it "does not set the partner as whitelabeled if the path functions fail" do
           @partner.stub(:application_css_present?).and_return(false)
@@ -696,7 +697,7 @@ describe Partner do
       before(:each) do
         @partner = FactoryGirl.create(:partner)        
         @t = Time.now
-        @file = "mock_object"
+        @file = double("mock_object")
         Time.stub(:now) { @t }
         @partner.stub(:generate_csv_file_name) { "fn.csv" }
         @partner.stub(:generate_registrants_csv) { "generated_csv" }

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe CA do
   let(:ca) { CA.new(GeoState['CA']) }
@@ -120,7 +120,7 @@ describe CA do
   
   describe "ovr_pre_check" do
     let(:reg) { FactoryGirl.create(:step_3_registrant) }
-    let(:con) { mock(Step3Controller) }
+    let(:con) { double(Step3Controller) }
     before(:each) do
       CA.stub(:build_soap_xml).with(reg).and_return("XML")
       CA.stub(:request_token).with("XML").and_return("stubbed response")

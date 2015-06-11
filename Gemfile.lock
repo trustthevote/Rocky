@@ -217,6 +217,12 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rr (0.10.11)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
+    rspec-collection_matchers (1.1.2)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.1)
@@ -329,6 +335,8 @@ DEPENDENCIES
   rake (= 10.0.3)
   rest-client
   rr (= 0.10.11)
+  rspec-activemodel-mocks
+  rspec-collection_matchers
   rspec-rails (~> 3.2.3)
   rvm-capistrano
   sass-rails

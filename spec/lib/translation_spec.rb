@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Translation do
   describe "self.language_name(locale)" do

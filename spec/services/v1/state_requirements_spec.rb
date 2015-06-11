@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../rails_helper')
 
 describe V1::StateRequirements do
 
@@ -76,7 +76,7 @@ describe V1::StateRequirements do
     it 'if state is not participating' do
       query = { :lang => 'en' }
       state = GeoState.new(:participating => false)
-      locale = mock(StateLocalization)
+      locale = double(StateLocalization)
       locale.stub(:not_participating_tooltip) { 'not participating' }
 
       V1::StateRequirements.stub(:find_state).with(query) { state }

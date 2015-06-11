@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe PasswordResetsController do
   describe "GET #new" do
@@ -58,7 +58,7 @@ describe PasswordResetsController do
   describe "POST #create" do
     context "with a valid email" do
       before do
-        fake_partner = Object.new
+        fake_partner = spy(Partner)
         fake_partner.stub(:deliver_password_reset_instructions!)
         Partner.stub(:find_by_login).with(anything) { fake_partner }
       end

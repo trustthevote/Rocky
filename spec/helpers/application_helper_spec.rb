@@ -22,7 +22,7 @@
 #                Pivotal Labs, Oregon State University Open Source Lab.
 #
 #***** END LICENSE BLOCK *****
-require File.dirname(__FILE__) + "/../spec_helper"
+require File.dirname(__FILE__) + "/../rails_helper"
 require 'hpricot'
 
 describe ApplicationHelper do
@@ -159,16 +159,10 @@ describe ApplicationHelper do
     end
   end
 
-  describe "rollover_button" do
-    it "is pending" do
-      pending
-    end
-  end
-
   describe "form helpers" do
     attr_accessor :form
     before(:each) do
-      @form = Object.new
+      @form = spy(Object)
       partner = Partner.new
       form.stub(:object) { partner }
       form.stub(:text_field) { '<input type="text">' }

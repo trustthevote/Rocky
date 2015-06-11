@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe NV do
   let(:root_url) { "https://nvsos.gov/sosvoterservices/Registration/step1.aspx?source=rtv&utm_source=rtv&utm_medium=rtv&utm_campaign=rtv" }
@@ -8,7 +8,7 @@ describe NV do
   
   describe "online_reg_url(registrant)" do
     let(:nv) { NV.new(GeoState['NV']) }
-    let(:reg) { mock(Registrant) }
+    let(:reg) { double(Registrant) }
     context "when registrant is nil" do
       it "returns the root URL" do
         nv.online_reg_url(nil).should == root_url
