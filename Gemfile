@@ -39,7 +39,7 @@ gem 'asset_sync'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.10.1"
-  gem "rspec-spies",  "2.1.1"
+  #gem "rspec-spies",  "2.1.1"
   
   gem "rr", "= 0.10.11"
   
