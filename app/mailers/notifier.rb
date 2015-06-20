@@ -24,7 +24,8 @@
 #***** END LICENSE BLOCK *****
 class Notifier < ActionMailer::Base
   def password_reset_instructions(partner)
-    @url = edit_password_reset_url(:id => partner.perishable_token)
+    @url = "http://#{RockyConf.pdf_host_name}#{edit_password_reset_url(:id => partner.perishable_token)}"
+    
     
     mail(:subject=> "Password Reset Instructions",
          :from => RockyConf.from_address,
