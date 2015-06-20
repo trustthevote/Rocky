@@ -17,20 +17,20 @@ gem "authlogic", "= 3.3.0"
 gem 'daemons', '~> 1.1.9'
 gem "paperclip", "~> 3.0"
 gem "mysql2"
-gem "rubyzip"
+gem "rubyzip", "~> 0.9.9"
 
-gem "dotenv-rails"
+gem "dotenv-rails", '~> 0.7.0'
 
 gem "haml"
 
-gem "rails-i18n"
+gem "rails-i18n", '~> 0.7.3'
 gem 'jquery-rails', '~> 2.1'
 
 gem 'dalli'
 
 group :pdf do
   gem 'wkhtmltopdf-binary', :git=>"https://github.com/amekelburg/wkhtmltopdf-binary"
-  gem 'wicked_pdf'
+  gem 'wicked_pdf', '~> 0.9.6'
 end
 
 gem 'rest-client'
@@ -84,4 +84,4 @@ gem "ledermann-rails-settings", :require => "rails-settings"
 
 gem 'json'
 
-gem "delayed_job_active_record"
+gem "delayed_job_active_record", "~> 0.4.4"
