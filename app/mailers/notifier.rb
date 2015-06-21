@@ -86,7 +86,7 @@ class Notifier < ActionMailer::Base
   end
 
   def message_body(registrant, kind)
-    @pdf_url = "http://#{RockyConf.pdf_host_name}#{registrant.pdf_path}?source=email"
+    @pdf_url = "http://#{RockyConf.pdf_host_name}#{registrant.pdf_download_path}?source=email"
     @cancel_reminders_url = registrant.stop_reminders_url.to_s.html_safe
     @locale               = registrant.locale.to_sym
     @registrar_phone      = registrant.home_state.registrar_phone.to_s.html_safe

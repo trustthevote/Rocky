@@ -56,7 +56,7 @@ class Api::V2::RegistrationsController < Api::V2::BaseController
   # Creates the record and returns the URL to the PDF file or
   # the error message with optional invalid field name.
   def create
-    pdf_path = V2::RegistrationService.create_record(params[:registration]).pdf_path
+    pdf_path = V2::RegistrationService.create_record(params[:registration]).pdf_download_path
     jsonp :pdfurl => "https://#{RockyConf.pdf_host_name}#{pdf_path}"
   rescue V2::RegistrationService::ValidationError => e
     jsonp({ :field_name => e.field, :message => e.message }, :status => 400)

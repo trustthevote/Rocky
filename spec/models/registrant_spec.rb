@@ -1621,6 +1621,18 @@ describe Registrant do
       end
     end
 
+    describe 'pdf_download_tracking' do
+      let(:reg) { FactoryGirl.create(:maximal_registrant) }
+      it 'has pdf_downloaded=false as the default state' do
+        r = Registrant.new
+        r.pdf_downloaded.should == false
+      end
+      describe 'pdf_download_path' do
+        it "returns the rails route for the download" do
+          reg.pdf_download_path.should == pdf_registrant_download_path(reg)
+        end        
+      end
+    end
   end
     
   describe "registration_instructions_url" do

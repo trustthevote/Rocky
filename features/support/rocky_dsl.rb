@@ -34,7 +34,7 @@ module RockyDsl
         r = V3::RegistrationService.create_record(params[:registration])
         # Also RUN the pdfgen
         PdfGeneration.find_and_generate
-        {:body=>{:pdfurl=>"https://#{RockyConf.pdf_host_name}#{r.pdf_path}", :uid=>r.uid}.to_json}
+        {:body=>{:pdfurl=>"https://#{RockyConf.pdf_host_name}#{r.pdf_download_path}", :uid=>r.uid}.to_json}
       rescue V3::RegistrationService::ValidationError => e
         raise({ :field_name => e.field, :message => e.message , :status => 400}.to_s)
       rescue V3::RegistrationService::SurveyQuestionError => e

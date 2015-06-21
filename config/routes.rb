@@ -8,7 +8,11 @@ Rocky::Application.routes.draw do
     resource "step_3", :controller => "step3", :only => [:show, :update]
     resource "step_4", :controller => "step4", :only => [:show, :update]
     resource "step_5", :controller => "step5", :only => [:show, :update]
-    resource "download", :only => :show
+    resource "download", :only => :show do
+      member do
+        get 'pdf'
+      end
+    end
     resource "finish", :only => :show
     resource "ineligible", :only => [:show, :update]
     resources "tell_friends", :only => :create

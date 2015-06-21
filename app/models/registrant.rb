@@ -1259,6 +1259,9 @@ class Registrant < ActiveRecord::Base
   def pdf_path(pdfpre = nil, file=false)
     pdf_writer.pdf_path(pdfpre, file)
   end
+  def pdf_download_path
+    pdf_registrant_download_path(self)
+  end
   
   def pdf_file_dir(pdfpre = nil)
     pdf_writer.pdf_file_dir(pdfpre)

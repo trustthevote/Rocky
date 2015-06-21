@@ -162,7 +162,7 @@ describe Notifier do
       email.from.should include(RockyConf.from_address)
       
       email.body.should include("http")
-      email.body.should include(registrant.pdf_path)
+      email.body.should include(registrant.pdf_download_path)
       assert_equal "UTF-8", email.charset
       assert_equal "quoted-printable", email.header['Content-Transfer-Encoding'].to_s
     end

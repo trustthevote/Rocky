@@ -44,4 +44,7 @@ class DownloadsController < RegistrationStep
     end
   end
 
+  def download
+  end
+
 end
