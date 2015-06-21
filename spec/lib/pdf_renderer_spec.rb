@@ -61,7 +61,7 @@ describe PdfRenderer do
     before(:each) do
       z = ZipCodeCountyAddress.find_by_zip("00501")
       if z.nil?
-        z = ZipCodeCountyAddress.new("00501")
+        z = ZipCodeCountyAddress.new(zip: "00501")
       end
       z.address = "A Office\n542 Forbes Avenue\nSuite 609\nPittsburgh, LA 15219-2913"
       z.geo_state_id = GeoState["NY"].id

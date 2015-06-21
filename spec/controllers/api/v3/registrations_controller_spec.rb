@@ -43,7 +43,7 @@ describe Api::V3::RegistrationsController do
       expect_api_response :pdfurl => "https://example-pdf.com/123.pdf", :uid => "123"
       registrant= double(Registrant)
       registrant.stub(:uid) { "123" }
-      registrant.stub(:pdf_path) { '/123.pdf' }
+      registrant.stub(:pdf_download_path) { '/123.pdf' }
       new_registration { registrant  }
     end
 
