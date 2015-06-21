@@ -118,8 +118,13 @@
       
     </div>
     <div class="whitelabeled">
+      <select class='locale-select'>
+        <%- I18n.available_locales.each do |loc| %>
+          <option value=<%= loc %> <%= loc.to_s=='en' ? 'selected' : '' %>><%= loc %></option>
+        <%- end %>
+      </select>
       <% EmailTemplate::TEMPLATE_NAMES.each do |name, label| %>
-        <ul class="stacked">
+        <ul class="stacked email-template email-template-<%= name.split('.').last %>">
           <li class="width_h">
             <h3><label><%= label %></label></h3>
             <%= text_field_tag "template_subject[#{name}]", EmailTemplate.get_subject(@partner, name), :rows => 5 %>

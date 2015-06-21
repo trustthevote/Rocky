@@ -1,0 +1,25 @@
+<style type="text/css">
+<!--
+.boxtext {
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  line-height: 1.5em;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+-->
+</style>
+
+
+<%= I18n.t('email.chaser.body.main', 
+  :registrant_first_name=>@registrant_first_name, 
+  :registrant_last_name=>@registrant_last_name,
+  :home_state_email_instructions => @home_state_email_instructions,
+  :registrar_address=>@registrar_address,
+  :cancel_reminders_url =>@cancel_reminders_url,
+  :registrar_phone=> @registrar_phone,
+  :registrar_url=>@registrar_url,
+  :rtv_link=>@rtv_link, :locale => @locale
+).html_safe %>
+

@@ -442,7 +442,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.ui_timeout_minutes
-    30
+    RockyConf.ui_timeout_minutes
   end
   
   def self.process_ui_records

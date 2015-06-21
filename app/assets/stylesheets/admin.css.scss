@@ -6,7 +6,12 @@ th { font-weight: bold; }
 
 .properties .label { font-weight: bold; text-align: right; }
 
-.whitelabeled { display: none; }
+.whitelabeled { 
+  display: none; 
+  .email-template {
+    display: none;
+  }
+}
 
 .actions {
   margin: 20px 0;
