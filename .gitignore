@@ -52,3 +52,17 @@ rocky_development
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+.env4
+.env5
+.rspec.bak
+.vagrant/
+Cheffile
+Cheffile.lock
+Vagrantfile
+cookbooks-site/
+cookbooks/
+server.crt
+server.csr
+server.key
+server.pass.key
