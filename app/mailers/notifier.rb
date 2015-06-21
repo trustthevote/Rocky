@@ -44,6 +44,10 @@ class Notifier < ActionMailer::Base
   def reminder(registrant)
     setup_registrant_email(registrant, 'reminder')
   end
+  
+  def chaser(registrant)
+    setup_registrant_email(registrant, 'chaser')
+  end
 
   def tell_friends(tell_params)
     @message = tell_params[:tell_message]

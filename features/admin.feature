@@ -101,6 +101,8 @@ Feature: Admin UI
       Then I should see an email body field for "Confirmation" for each language
       And I should see an email body field for "Reminder" for each language
       And I should see an email body field for "Thank you external" for each language
+      And I should see an email body field for "Chaser" for each language
       And I should see an email subject field for "Confirmation" for each langauge
       And I should see an email subject field for "Reminder" for each langauge
       And I should see an email subject field for "Thank you external" for each langauge
+      And I should see an email subject field for "Chaser" for each langauge

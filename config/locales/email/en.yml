@@ -159,6 +159,13 @@ en:
 
 
           Please send question or comments to: <a href="mailto:register@rockthevote.com">register@rockthevote.com</a><br>'
+    chaser:
+      subject: ! 'You can still register to vote'
+      body:
+        main: ! 'Dear %{registrant_first_name},<br><br>
+
+          You did''t finish registering. Go to <a href="http://register.rockthevote.com/">register.rockthevote.com</a></strong> 
+          to complete your voter registration.'        
     thank_you_external:
       subject: Thank you for using the online voter registration tool
       body:

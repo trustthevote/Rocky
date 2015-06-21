@@ -212,6 +212,45 @@ describe Notifier do
     
   end
 
+  describe "#chaser" do
+    it "delivers the expected email" do
+      registrant = FactoryGirl.create(:maximal_registrant, :reminders_left  => 1)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.chaser(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include(RockyConf.from_address)
+      
+      email.body.should include("http")
+      assert_equal "UTF-8", email.charset
+      assert_equal "quoted-printable", email.header['Content-Transfer-Encoding'].to_s
+    end
+    
+    it "delivers the expected email in a different locale" do
+      registrant = FactoryGirl.create(:maximal_registrant, :locale => 'es')
+      Notifier.chaser(registrant).deliver
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include(RockyConf.from_address)
+      
+      email.subject.should include(I18n.t("email.chaser.subject", :locale => :es))
+    end
+    it "uses partner template" do
+      partner    = FactoryGirl.create(:partner, :whitelabeled => true)
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en', first_name: 'First')
+      EmailTemplate.set(partner, 'chaser.en', "You didn't finish")
+      EmailTemplate.set_subject(partner, 'chaser.en', '<%= @registrant_first_name %>, You can still register to vote')
+      
+      
+      Notifier.chaser(registrant).deliver
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("You didn't finish")
+      email.subject.should == 'First, You can still register to vote'
+      email.from.should include(RockyConf.from_address)
+      
+    end
+    
+  end
+
   describe "#tell_friends" do
     it "delivers the expected emails" do
       tell_params = {
