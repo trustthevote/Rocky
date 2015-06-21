@@ -1627,10 +1627,31 @@ describe Registrant do
         r = Registrant.new
         r.pdf_downloaded.should == false
       end
+      it 'has pdf_downloaded_at=nil as the default state' do
+        r = Registrant.new
+        r.pdf_downloaded_at.should be_nil
+      end
       describe 'pdf_download_path' do
         it "returns the rails route for the download" do
           reg.pdf_download_path.should == pdf_registrant_download_path(reg)
         end        
+      end
+      describe 'download_pdf' do
+        before(:each) do
+          reg.stub(:save).and_return(true)
+          reg.download_pdf
+        end
+        subject { reg.download_pdf }
+        it 'sets pdf_downloaded to true' do
+          reg.pdf_downloaded.should == true
+        end
+        it 'sets the downloaded time stamp' do
+          reg.pdf_downloaded_at.should_not be_nil
+        end
+        it 'saves the registrant' do
+          reg.should have_received(:save)
+        end
+        it { should == reg.pdf_path }
       end
     end
   end

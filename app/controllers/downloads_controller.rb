@@ -44,7 +44,14 @@ class DownloadsController < RegistrationStep
     end
   end
 
-  def download
+  def pdf
+    find_registrant(:download)
+    if !@registrant.pdf_ready?
+      redirect_to registrant_finish_path(@registrant, not_ready: true)
+    else
+      pdf_path = @registrant.download_pdf
+      redirect_to pdf_path
+    end
   end
 
 end

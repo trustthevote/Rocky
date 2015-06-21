@@ -1252,6 +1252,13 @@ class Registrant < ActiveRecord::Base
     klass.create!(:registrant_id=>self.id)
   end
   
+  def download_pdf
+    self.pdf_downloaded = true
+    self.pdf_downloaded_at = DateTime.now
+    self.save
+    return pdf_path
+  end
+  
   def pdf_file_path(pdfpre=nil)
     pdf_writer.pdf_file_path(pdfpre)
   end
