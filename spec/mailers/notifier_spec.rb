@@ -35,6 +35,7 @@ describe Notifier do
       end
       email = ActionMailer::Base.deliveries.last
       email.body.should =~ /A request to reset your password has been made/i
+      email.body.should include(RockyConf.pdf_host_name)
       email.body.should include(partner.perishable_token)
     end
   end
@@ -93,14 +94,15 @@ describe Notifier do
 
     it "uses partner template" do
       partner    = FactoryGirl.create(:partner, :whitelabeled => true)
-      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en', first_name: 'First')
       EmailTemplate.set(partner, 'confirmation.en', 'PDF: <%= @pdf_url %>')
-      EmailTemplate.set_subject(partner, 'confirmation.en', 'Here is your pdf')
+      EmailTemplate.set_subject(partner, 'confirmation.en', '<%= @registrant_first_name %>, Here is your pdf')
+      
       
       Notifier.confirmation(registrant).deliver
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{PDF: http://.*source=email})
-      email.subject.should == 'Here is your pdf'
+      email.subject.should == 'First, Here is your pdf'
       email.from.should include(RockyConf.from_address)
       
     end

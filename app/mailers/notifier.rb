@@ -59,7 +59,12 @@ class Notifier < ActionMailer::Base
   def setup_registrant_email(registrant, kind)
     partner = registrant.partner
     subject = partner && partner.whitelabeled? && EmailTemplate.get_subject(partner, "#{kind}.#{registrant.locale}")
-    subject = subject.blank? ? I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym) : subject
+    
+    # call message_body first to set up instance variables
+    body = message_body(registrant, kind)
+    subject = subject.blank? ? I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym) : ERB.new(subject).result(binding)
+    
+    
     
     m = mail(
         :subject=>subject,
@@ -67,7 +72,7 @@ class Notifier < ActionMailer::Base
         :to=>registrant.email_address,
         :date=> Time.now.to_s(:db)
       ) do |format|
-        format.html { message_body(registrant, kind) }
+        format.html { body }
     end
 
     m.transport_encoding = "quoted-printable"
