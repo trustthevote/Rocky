@@ -25,6 +25,8 @@
 class DownloadsController < RegistrationStep
   CURRENT_STEP = 6
 
+  before_filter :redirect_app_role, only: :pdf
+  
   def show
     find_registrant(:download)
     if @registrant.remote_uid.blank?
