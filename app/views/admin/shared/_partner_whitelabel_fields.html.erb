@@ -118,6 +118,7 @@
       
     </div>
     <div class="whitelabeled">
+      Select a language for editing emails:
       <select class='locale-select'>
         <%- I18n.available_locales.each do |loc| %>
           <option value=<%= loc %> <%= loc.to_s=='en' ? 'selected' : '' %>><%= loc %></option>
