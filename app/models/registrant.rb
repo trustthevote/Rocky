@@ -49,7 +49,6 @@ class Registrant < ActiveRecord::Base
   TITLES = RockyConf.enabled_locales.collect{|l| TITLE_KEYS.collect{|key| I18n.t("txt.registration.titles.#{key}", :locale => l) } }.flatten
   SUFFIXES = RockyConf.enabled_locales.collect{|l| SUFFIX_KEYS.collect{|key| I18n.t("txt.registration.suffixes.#{key}", :locale => l) } }.flatten
   REMINDER_EMAILS_TO_SEND = 2
-  STALE_TIMEOUT = 30.minutes
   REMINDER_EMAIL_PRIORITY = 0
   WRAP_UP_PRIORITY = REMINDER_EMAIL_PRIORITY + 1
 
@@ -469,13 +468,21 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.abandon_stale_records
-    id_list = self.where("(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, STALE_TIMEOUT.seconds.ago).pluck(:id)
+    id_list = self.where("(abandoned != ?) AND (status != 'complete') AND (updated_at < ?)", true, RockyConf.minutes_before_abandoned.minutes.seconds.ago).pluck(:id)
     self.find_each(:batch_size=>500, :conditions => ["id in (?)", id_list]) do |reg|
       if reg.finish_with_state?
         reg.status = "complete"
         begin
           reg.deliver_thank_you_for_state_online_registration_email
         rescue Exception => e
+          Rails.logger.error(e)
+        end
+      else 
+        # Send chase email
+        begin
+          reg.deliver_chaser_email
+        rescue Exception => e
+          Rails.logger.error(e)
         end
       end
       reg.abandon!
@@ -1382,7 +1389,13 @@ class Registrant < ActiveRecord::Base
       enqueue_reminder_emails
     end
   end
-
+  
+  def deliver_chaser_email
+    if send_emails?
+      Notifier.chaser(self).deliver
+    end
+  end
+  
   def deliver_thank_you_for_state_online_registration_email
     if send_emails?
       Notifier.thank_you_external(self).deliver

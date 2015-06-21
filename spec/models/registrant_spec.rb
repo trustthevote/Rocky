@@ -1397,9 +1397,9 @@ describe Registrant do
 
   describe "stale records" do
     it "should become abandoned" do
-      stale_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
-      fresh_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (Registrant::STALE_TIMEOUT - 10).seconds.ago)
-      complete_rec = FactoryGirl.create(:maximal_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago)
+      stale_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago)
+      fresh_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes - 10).seconds.ago)
+      complete_rec = FactoryGirl.create(:maximal_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago)
 
       Registrant.abandon_stale_records
 
@@ -1407,49 +1407,77 @@ describe Registrant do
       assert !fresh_rec.reload.abandoned?
       assert !complete_rec.reload.abandoned?
     end
-    it "should send an email if registrant chose to finish online with state" do
-      GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
-      
-      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>true)
-      stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
+    
+    it "should send a chaser email" do
+      stale_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago)
+      fresh_rec = FactoryGirl.create(:step_4_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes - 10).seconds.ago)
+      complete_rec = FactoryGirl.create(:maximal_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago)
       
       expect {
         Registrant.abandon_stale_records
       }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      ActionMailer::Base.deliveries.last.subject.should == I18n.t('email.chaser.subject')
       
     end
-    it "should not send an email if registrant email is blank" do
-      GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
+
+    context "finish with state" do
+      before(:each) do
+        GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
       
-      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, 
-        :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, 
-        :finish_with_state=>true, 
-        :collect_email_address=>'no',
-        :email_address=>nil)
-      stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>false)
+      end
       
-      expect {
+      it "should not send a chaser email" do
+        stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>true)
+        expect {
+          Registrant.abandon_stale_records
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        ActionMailer::Base.deliveries.last.subject.should_not == I18n.t('email.chaser.subject')
+      end
+      
+      it "should send a thank you email if registrant chose to finish online with state" do
+        stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago, :finish_with_state=>true, :send_confirmation_reminder_emails=>true)
+        stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago, :finish_with_state=>false)
+      
+        expect {
+          Registrant.abandon_stale_records
+        }.to change { ActionMailer::Base.deliveries.count }.by(2)
+        ActionMailer::Base.deliveries.last(2).first.subject.should == I18n.t('email.thank_you_external.subject')
+        ActionMailer::Base.deliveries.last(2).last.subject.should == I18n.t('email.chaser.subject')
+      
+      end
+    
+      it "should not send an email if registrant email is blank" do
+        stale_state_online_reg = FactoryGirl.create(:step_2_registrant, 
+          :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago, 
+          :finish_with_state=>true, 
+          :collect_email_address=>'no',
+          :email_address=>nil)
+        stale_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago, :email_address=>nil, :collect_email_address=>'no', :finish_with_state=>false)
+      
+        expect {
+          Registrant.abandon_stale_records
+        }.to change { ActionMailer::Base.deliveries.count }.by(0)      
+      end
+      it "should not send an email to registrants that have been thanked" do
+        GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
+        stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago, :finish_with_state=>true)
+      
         Registrant.abandon_stale_records
-      }.to change { ActionMailer::Base.deliveries.count }.by(0)      
+      
+      
+        stale_state_online_reg_2 = FactoryGirl.create(:step_2_registrant, :updated_at => (RockyConf.minutes_before_abandoned.minutes + 10).seconds.ago, :finish_with_state=>true)
+        expect {
+          Registrant.abandon_stale_records
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      
+        expect {
+          Registrant.abandon_stale_records
+        }.to change { ActionMailer::Base.deliveries.count }.by(0)
+      
+      end
     end
     
-    it "should not send an email to registrants that have been thanked" do
-      GeoState.stub(:states_with_online_registration).and_return(['MA','PA'])
-      stale_state_online_reg = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
-      
-      Registrant.abandon_stale_records
-      
-      
-      stale_state_online_reg_2 = FactoryGirl.create(:step_2_registrant, :updated_at => (Registrant::STALE_TIMEOUT + 10).seconds.ago, :finish_with_state=>true)
-      expect {
-        Registrant.abandon_stale_records
-      }.to change { ActionMailer::Base.deliveries.count }.by(1)
-      
-      expect {
-        Registrant.abandon_stale_records
-      }.to change { ActionMailer::Base.deliveries.count }.by(0)
-      
-    end
+
   end
 
   describe "PDF" do
