@@ -20,18 +20,18 @@ gem "mysql2"
 #gem "rubyzip"
 gem 'zip-zip'
 
-gem "dotenv-rails"
+gem "dotenv-rails", '~> 0.7.0'
 
 gem "haml"
 
-gem "rails-i18n"
+gem "rails-i18n", '~> 0.7.3'
 gem 'jquery-rails', '~> 2.1'
 
 gem 'dalli'
 
 group :pdf do
   gem 'wkhtmltopdf-binary', :git=>"https://github.com/amekelburg/wkhtmltopdf-binary"
-  gem 'wicked_pdf'
+  gem 'wicked_pdf', '~> 0.9.6'
 end
 
 gem 'rest-client'
@@ -42,7 +42,6 @@ group :development, :test do
   gem "rspec-rails", "~> 3.2.3"
   gem 'rspec-collection_matchers'
   gem 'rspec-activemodel-mocks'
-  #gem "rspec-spies",  "2.1.1"
   
   gem "rr", "= 0.10.11"
   
@@ -87,4 +86,4 @@ gem "ledermann-rails-settings", :require => "rails-settings"
 
 gem 'json'
 
-gem "delayed_job_active_record"
+gem "delayed_job_active_record", "~> 0.4.4"

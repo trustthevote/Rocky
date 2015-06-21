@@ -1,5 +1,5 @@
 from_address:  "register@rockthevote.com"
-pdf_host_name: 'rtvstaging-web1.osuosl.org'
+pdf_host_name: 'rtvstaging.osuosl.org'
 default_url_host: "rtvstaging-web1.osuosl.org"
 api_host_name: https://rtvdemo:bullwinkle@rtvstaging-web1.osuosl.org
 ui_url_host: "rocky5-staging.herokuapp.com"
