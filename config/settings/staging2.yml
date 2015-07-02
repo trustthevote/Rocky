@@ -1,11 +1,16 @@
-pdf_host_name: 'rtvstaging2.osuosl.org'
 from_address:  "register@rockthevote.com"
-default_url_host: "rtvstaging2.osuosl.org"
+pdf_host_name: 'rtvstaging2.osuosl.org'
+default_url_host: "rtvstaging2-web.osuosl.org"
+api_host_name: https://rtvdemo:bullwinkle@rtvstaging2-web.osuosl.org
+ui_url_host: "rocky-staging2.herokuapp.com"
+
 
 hours_before_first_reminder: 0.0333
 hours_between_first_and_second_reminder: 0.0333
 pdf_expiration_days: .25
-admin_password: abc123
+minutes_before_abandoned: 5
+ui_timeout_minutes: 5
+
 
 states_with_online_registration:
   - CA

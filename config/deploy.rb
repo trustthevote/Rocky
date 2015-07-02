@@ -110,7 +110,7 @@ namespace :admin do
   task :reset_password, :roles => [:app] do
     run <<-CMD
       cd #{latest_release} &&
-      bundle exec rake admin:reset_password
+      RAILS_ENV=#{rails_env} bundle exec rake admin:reset_password
     CMD
   end
 end
@@ -152,22 +152,22 @@ namespace :deploy do
     run "ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
   
-  after "deploy:assets:precompile", "deploy:asset_sync"
-  task :asset_sync, :roles => [:app] do
-    if sync_assets != 0
-      run <<-CMD
-        cd #{latest_release} &&
-        bundle exec rake assets:sync
-      CMD
-    end
-  end
+  # after "deploy:assets:precompile", "deploy:asset_sync"
+  # task :asset_sync, :roles => [:app] do
+  #   if sync_assets != 0
+  #     run <<-CMD
+  #       cd #{latest_release} &&
+  #       bundle exec rake assets:sync
+  #     CMD
+  #   end
+  # end
   
   
   desc "import states.yml data"
   task :import_states_yml, :roles => [:app] do
     run <<-CMD
       cd #{latest_release} &&
-      bundle exec rake import:states
+      RAILS_ENV=#{rails_env} bundle exec rake import:states
     CMD
   end
   
@@ -175,7 +175,7 @@ namespace :deploy do
   task :import_states_and_zips, :roles=>[:app] do
     run <<-CMD
       cd #{latest_release} &&
-      bundle exec rake import:states_and_zips
+      RAILS_ENV=#{rails_env} bundle exec rake import:states_and_zips
     CMD
   end
 
@@ -268,15 +268,15 @@ namespace :deploy do
 
   desc "Run (or restart) worker processes on util server"
   task :run_workers, :roles => :util do
-    run "cd #{latest_release} && bundle exec ruby script/rocky_runner stop"
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec ruby script/rocky_runner stop"
     sleep 5
-    run "cd #{latest_release} && bundle exec ruby script/rocky_runner start"
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec ruby script/rocky_runner start"
     unset(:latest_release)
   end
 
   desc "Stop worker processes on util server"
   task :stop_workers, :roles => :util do
-    run "cd #{latest_release} && bundle exec ruby script/rocky_runner stop"
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec ruby script/rocky_runner stop"
     # nasty hack to make sure it stops
     unset(:latest_release)
   end
