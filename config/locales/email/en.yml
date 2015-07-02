@@ -162,10 +162,18 @@ en:
     chaser:
       subject: ! 'You can still register to vote'
       body:
-        main: ! 'Dear %{registrant_first_name},<br><br>
+        main: ! 'Hey %{registrant_first_name},<br><br>
 
-          You did''t finish registering. Go to <a href="http://register.rockthevote.com/">register.rockthevote.com</a></strong> 
-          to complete your voter registration.'        
+          I noticed that you didn’t finish filling out your online voter registration form. Registering with %{rtv_and_partner_name}''s online tool takes less time than it takes to…
+          Make popcorn
+          Take a Buzzfeed quiz
+          Listen to a Beyoncé song
+
+          We want you to be part of our vast community of empowered voters. Amplify your voice today by finishing the registration process and making sure you are ready for the next election!
+
+          %{rtv_and_partner_name}
+          
+          <strong><a href="http://register.rockthevote.com/">register.rockthevote.com</a></strong>'
     thank_you_external:
       subject: Thank you for using the online voter registration tool
       body:
