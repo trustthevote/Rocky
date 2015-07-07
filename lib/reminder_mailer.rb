@@ -27,12 +27,23 @@
 class ReminderMailer
 
   def deliver_reminders!
+    deliver_final_reminders
     deliver_reminders(reg_ids(1, second_reminder_time))
     deliver_reminders(reg_ids(2, first_reminder_time))
   end
 
+  def deliver_final_reminders
+    Registrant.find_each(batch_size: 500, conditions: ["reminders_left=0 AND pdf_downloaded = ? AND updated_at < ? AND final_reminder_delivered = ?", false, final_reminder_time, false]) do |reg|
+      reg.deliver_final_reminder_email
+    end
+  end
+
   def reg_ids(count, time)
     Registrant.where("reminders_left = ? AND updated_at < ?", count, time).pluck(:id)
+  end
+
+  def final_reminder_time
+    Time.now - AppConfig.hours_between_second_and_final_reminder.to_i
   end
 
   def second_reminder_time

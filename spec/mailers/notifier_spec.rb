@@ -212,6 +212,68 @@ describe Notifier do
     
   end
 
+  describe "#final_reminder" do
+    it "delivers the expected email" do
+      registrant = FactoryGirl.create(:maximal_registrant, :reminders_left  => 0)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.final_reminder(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include(RockyConf.from_address)
+      
+      email.body.should include("http")
+      email.body.should include(registrant.pdf_download_path)
+      assert_equal "UTF-8", email.charset
+      assert_equal "quoted-printable", email.header['Content-Transfer-Encoding'].to_s
+    end
+
+    it "includes state data" do
+      registrant = FactoryGirl.create(:maximal_registrant, :reminders_left  => 0)
+      registrant.home_state.registrar_phone = "this-is-the-phone"
+      registrant.home_state.registrar_address = "this-is-the-address"
+      registrant.home_state.registrar_url = "this-is-the-url"
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.final_reminder(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include(RockyConf.from_address)
+      
+      email.body.should include("this-is-the-phone")
+      email.body.should include("this-is-the-address")
+      email.body.should include("this-is-the-url")
+    end
+
+    it "delivers the expected email in a different locale" do
+      registrant = FactoryGirl.create(:maximal_registrant, :locale => 'es')
+      Notifier.final_reminder(registrant).deliver
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include(RockyConf.from_address)
+      
+      email.subject.should include(I18n.t("email.final_reminder.subject", :locale => :es))
+    end
+
+    it "includes cancel reminders link" do
+      registrant = FactoryGirl.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.final_reminder(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include(RockyConf.from_address)
+      
+      email.body.should match(%r{https://.*/registrants/#{registrant.to_param}/finish\?reminders=stop})
+    end
+    
+    it "sends from partner email when configured" do
+      partner    = FactoryGirl.create(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
+      Notifier.final_reminder(registrant).deliver
+      email = ActionMailer::Base.deliveries.last
+      email.from.should include("custom@partner.org")      
+    end
+    
+  end
+
+
   describe "#chaser" do
     it "delivers the expected email" do
       registrant = FactoryGirl.create(:maximal_registrant, :reminders_left  => 1)

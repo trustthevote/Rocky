@@ -1930,6 +1930,58 @@ describe Registrant do
     end
   end
   
+  describe 'deliver_final_reminder_email' do
+    let(:r) { FactoryGirl.create(:maximal_registrant) }
+    before(:each) do
+      r.stub(:send_emails?).and_return(true)
+    end
+    
+    it "sends the final_reminder email" do
+      email = double("email")
+      expect(email).to receive(:deliver)
+      expect(Notifier).to receive(:final_reminder).with(r) { email }
+      r.deliver_final_reminder_email
+    end
+    it "marks user has having had the final reminder delivered" do
+      expect(r.final_reminder_delivered).to eq(false)
+      r.deliver_final_reminder_email
+      expect(r.final_reminder_delivered).to eq(true)
+    end
+    context 'if send_emails? is false' do
+      before(:each) do
+        r.stub(:send_emails?).and_return(false)
+      end
+      it "does nothing" do
+        assert_difference('ActionMailer::Base.deliveries.size', 0) do
+          r.deliver_final_reminder_email
+        end
+        expect(r.final_reminder_delivered).to eq(false)
+      end
+    end
+    context 'if PDF has been downloaded' do
+      before(:each) do
+        r.stub(:pdf_downloaded).and_return(true)
+      end
+      
+      it "does nothing" do
+        assert_difference('ActionMailer::Base.deliveries.size', 0) do
+          r.deliver_final_reminder_email
+        end
+        expect(r.final_reminder_delivered).to eq(false)
+      end
+    end
+    context 'if final reminder has been sent' do
+      before(:each) do
+        r.stub(:final_reminder_delivered).and_return(true)
+      end
+      it "does nothing" do
+        assert_difference('ActionMailer::Base.deliveries.size', 0) do
+          r.deliver_final_reminder_email
+        end
+      end
+    end
+  end
+  
   describe 'send_emails?' do
     let(:r) { FactoryGirl.create(:maximal_registrant) }
     it "is true if email is present, collect_email_address is true and not building via api call" do

@@ -1432,6 +1432,14 @@ class Registrant < ActiveRecord::Base
       :error_message => "Email Delivery Error(#{error.class.name}): #{error.message}",
       :request => { :params => {:worker => "deliver_reminder_email", :registrant_id => self.id} })
   end
+  
+  def deliver_final_reminder_email
+    if send_emails? && !final_reminder_delivered && !pdf_downloaded
+      Notifier.final_reminder(self).deliver
+      self.final_reminder_delivered = true
+      self.save(validate: false)
+    end
+  end
 
   def redact_sensitive_data
     self.state_id_number = nil

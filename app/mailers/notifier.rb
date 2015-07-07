@@ -45,6 +45,10 @@ class Notifier < ActionMailer::Base
     setup_registrant_email(registrant, 'reminder')
   end
   
+  def final_reminder(registrant)
+    setup_registrant_email(registrant, 'final_reminder')
+  end
+  
   def chaser(registrant)
     setup_registrant_email(registrant, 'chaser')
   end

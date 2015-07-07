@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150621034509) do
+ActiveRecord::Schema.define(:version => 20150702212836) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(:version => 20150621034509) do
     t.string   "custom_stop_reminders_url"
     t.boolean  "pdf_downloaded",                                   :default => false
     t.datetime "pdf_downloaded_at"
+    t.boolean  "final_reminder_delivered",                         :default => false
   end
 
   add_index "registrants", ["abandoned", "status"], :name => "registrant_stale"

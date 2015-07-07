@@ -1,0 +1,43 @@
+<style type="text/css">
+<!--
+.boxtext {
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  line-height: 1.5em;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+-->
+</style>
+
+<%= I18n.t('email.final_reminder.body.greeting', :registrant_first_name=>@registrant_first_name, :registrant_last_name=>@registrant_last_name, :locale => @locale).html_safe %><br><br>
+
+<table style="float: right; margin: 0 0 15px 15px; width: 275px; border: 8px solid #cc0000;color:black" width="275" cellspacing="0" cellpadding="10">
+  <tr>
+    <td align="center" valign="middle" class="boxtext"><%= I18n.t('email.final_reminder.body.reminder', :locale => @locale).html_safe %></td>
+  </tr>
+</table>
+
+<%= I18n.t('email.final_reminder.body.main', 
+  :pdf_url=>@pdf_url, 
+  :home_state_email_instructions => @home_state_email_instructions,
+  :registrar_address=>@registrar_address,
+  :cancel_reminders_url =>@cancel_reminders_url,
+  :registrar_phone=> @registrar_phone,
+  :registrar_url=>@registrar_url,
+  :rtv_link=>@rtv_link, :locale => @locale
+).html_safe %>
+
+<hr size="3" align="left" width="100%" color="black"><br><br>
+
+<%= I18n.t('email.final_reminder.body.send_to_friends',
+  :rtv_link=>@rtv_link,
+  :registrant_first_name=>@registrant_first_name, :registrant_last_name=>@registrant_last_name, :locale => @locale).html_safe %>
+
+
+<hr size="3" align="left" width="100%" color="black"><br><br>
+
+<%= I18n.t('email.final_reminder.body.footer', :locale => @locale).html_safe %>
+
+
