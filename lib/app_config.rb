@@ -10,6 +10,9 @@ class AppConfig
   def self.hours_between_first_and_second_reminder
     setting_with_default(:hours_between_first_and_second_reminder, 24).to_f.hours
   end
+  def sekf.hours_between_second_and_final_reminder
+    setting_with_default(:hours_between_second_and_final_reminder, 24).to_f.hours
+  end
 
   def self.pdf_expiration_days
     setting_with_default(:pdf_expiration_days, 14).to_f.days
