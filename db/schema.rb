@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150702212836) do
+ActiveRecord::Schema.define(:version => 20150708214737) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20150702212836) do
     t.text     "survey_question_2"
     t.text     "external_tracking_snippet"
     t.string   "registration_instructions_url"
+    t.text     "pixel_tracking_codes"
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email"

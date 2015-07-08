@@ -150,6 +150,8 @@ class Partner < ActiveRecord::Base
 
   serialize :survey_question_1, Hash
   serialize :survey_question_2, Hash
+  serialize :pixel_tracking_codes, Hash
+  
   
   # Need to declare attributes for each enabled lang
   RockyConf.enabled_locales.each do |locale|
@@ -632,6 +634,18 @@ protected
         end
       else
         return self.send("survey_question_#{question_num}")[locale]
+      end
+    elsif method_name =~ /^(.+)_pixel_tracking_code(=?)$/
+      email_type = $1.to_s
+      setter = !($2.blank?)
+      if setter
+        if args.size == 1
+          self.pixel_tracking_codes[email_type] = args[0]
+        else
+          raise ArgumentError.new("Setting a pixel tracking code must have 1 argument")
+        end
+      else
+        return self.pixel_tracking_codes[email_type]
       end
     else
       return super 

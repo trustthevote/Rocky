@@ -61,3 +61,7 @@ Then(/^I should see an email subject field for "(.*?)" for each langauge$/) do |
   end
   
 end
+
+Then(/^I should see a pixel tracking field for "(.*?)"$/) do |email_type|
+  page.should have_field("partner[#{email_type}_pixel_tracking_code]")  
+end

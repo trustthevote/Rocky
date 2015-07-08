@@ -1227,6 +1227,18 @@ describe Partner do
     end
   end
 
+  describe 'pixel tracking' do
+    let(:p) { Partner.new }
+    describe "each email type has a pixel tracking code" do
+      EmailTemplate::EMAIL_TYPES.each do |et|
+        it "has a getter/setter for #{et}_pixel_tracking_code" do
+          p.send("#{et}_pixel_tracking_code=", "#{et} code for pixel tracking")
+          expect(p.send("#{et}_pixel_tracking_code")).to eq("#{et} code for pixel tracking")
+        end
+      end
+    end
+  end
+
   describe "Government Partners" do
     describe "Class Methods" do
       describe ".find_by_login(login)" do

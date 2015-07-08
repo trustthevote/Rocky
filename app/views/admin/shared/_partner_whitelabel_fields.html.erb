@@ -118,6 +118,15 @@
       
     </div>
     <div class="whitelabeled">
+      Enter pixel tracking codes:
+      <% EmailTemplate::EMAIL_TYPES.each do |t| %>
+        <ul class="stacked email-template email-template-<%= t %>">
+          <li class="width_h">
+            <h3><%= f.label "#{t}_pixel_tracking_code" %></h3>
+            <%= f.text_field "#{t}_pixel_tracking_code" %>
+      <%- end %>
+    </div>
+    <div class="whitelabeled">
       Select a language for editing emails:
       <select class='locale-select'>
         <%- I18n.available_locales.each do |loc| %>

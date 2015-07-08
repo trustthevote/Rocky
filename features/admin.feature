@@ -100,9 +100,16 @@ Feature: Admin UI
       When I go to the partner edit page for that partner
       Then I should see an email body field for "Confirmation" for each language
       And I should see an email body field for "Reminder" for each language
+      And I should see an email body field for "Final reminder" for each language
       And I should see an email body field for "Thank you external" for each language
       And I should see an email body field for "Chaser" for each language
       And I should see an email subject field for "Confirmation" for each langauge
       And I should see an email subject field for "Reminder" for each langauge
+      And I should see an email subject field for "Final reminder" for each langauge
       And I should see an email subject field for "Thank you external" for each langauge
       And I should see an email subject field for "Chaser" for each langauge
+      And I should see a pixel tracking field for "confirmation"
+      And I should see a pixel tracking field for "reminder"
+      And I should see a pixel tracking field for "final_reminder"
+      And I should see a pixel tracking field for "thank_you_external"
+      And I should see a pixel tracking field for "chaser"
