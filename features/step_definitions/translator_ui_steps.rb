@@ -1,5 +1,5 @@
 Given(/^I override the states I18n file for english and spanish$/) do 
-  Translation.stub(:base_directory).and_return {
+  Translation.stub(:base_directory) {
     Rails.root.join("spec/fixtures/files/translator_ui/locales")
   }
   I18n.load_path = Dir[Rails.root.join('spec/fixtures/files/translator_ui', 'locales', '*.{rb,yml}').to_s]
@@ -15,7 +15,7 @@ end
   
 
 Given(/^I override the set of available locales$/) do 
-  I18n.stub(:available_locales).and_return {
+  I18n.stub(:available_locales) {
     [:en, :es]
   }
 end

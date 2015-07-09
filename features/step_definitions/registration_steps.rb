@@ -110,7 +110,7 @@ Given(/^there is a stylesheet for Spanish$/) do
 end
 
 Then(/^the Spanish style sheet should be included$/) do
-  page.should have_xpath("//link[@href='/assets/locales/es.css']")
+  expect(page).to have_xpath("//link[@href='/assets/locales/es.css']", visible: false)
 end
 
 Given(/^there is not a stylesheet for Spanish$/) do
@@ -119,7 +119,7 @@ Given(/^there is not a stylesheet for Spanish$/) do
 end
 
 Then(/^the Spanish style sheet should not be included$/) do
-  page.should_not have_xpath("//link[@href='/assets/locales/es.css']")
+  page.should_not have_xpath("//link[@href='/assets/locales/es.css']", visible: false)
 end
 
 
@@ -201,7 +201,7 @@ Then /^I should be sent a thank\-you email from that partner$/ do
   email.to.should include(@registrant.email_address)
   email.from.should include(@partner.from_email)
   email.subject.should == "Custom Subject"
-  email.body.should == "Custom partner for #{registrant.home_state_name}, #{registrant.home_state_abbrev}"
+  email.body.should include("Custom partner for #{registrant.home_state_name}, #{registrant.home_state_abbrev}")
 end
 
 Then /^I should be sent a thank\-you email from RTV$/ do

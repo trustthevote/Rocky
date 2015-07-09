@@ -8,6 +8,9 @@
   </ul>
   
 </fieldset>
+
+
+
 <%- if @partner.can_be_whitelabeled? %>
   <fieldset>
     <legend>Whitelabeling</legend>
@@ -91,6 +94,7 @@
       </li>
     </ul>
     
+    
     <div class="whitelabeled">
       <ul class="stacked">
         <li class="width_e">
@@ -117,6 +121,7 @@
       </ul>
       
     </div>
+    
     <div class="whitelabeled">
       Enter pixel tracking codes:
       <% EmailTemplate::EMAIL_TYPES.each do |t| %>

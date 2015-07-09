@@ -3,10 +3,12 @@ Feature: Step 1
   As a registrant
   I want to enter step 1 data
 
+    @passing
     Scenario: start
       When I go to a new registration page
       Then I should see "New Registrant"
 
+    @passing
     Scenario: start in Spanish
       When I go to a new Spanish registration page
       Then I should not see "^New Registrant"

@@ -476,6 +476,7 @@ class Registrant < ActiveRecord::Base
           reg.deliver_thank_you_for_state_online_registration_email
         rescue Exception => e
           Rails.logger.error(e)
+          raise e
         end
       else 
         # Send chase email

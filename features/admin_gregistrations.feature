@@ -13,6 +13,7 @@ Feature: Admin gregistrations
       Then I should see "Government Organization Name"
       And I should see a link for "Standard Partners"
 
+    @passing
     Scenario: Create a new government partner
       When I go to the admin government partners page
       And I follow "Create New Government Partner"
@@ -32,7 +33,7 @@ Feature: Admin gregistrations
       And I fill in "Address" with "123 Main St"
       And I fill in "City" with "Boston"
       And I select "Massachusetts" from "State"
-      And I fill in "Zip" with "02110"
+      And I fill in "partner_zip_code" with "02110"
       And I fill in "Organization" with "Government Partner Organization Name"
       And I fill in "URL" with "http://www.google.com"
       And I fill in "Phone" with "1234567890"
@@ -43,6 +44,7 @@ Feature: Admin gregistrations
       And I should see "Government Partner Organization Name"
       And that partner's API code should not be blank
 
+    @passing
     Scenario: Define government partner zip codes by state
       Given the following government partner exists:
         | organization                 |
@@ -55,6 +57,7 @@ Feature: Admin gregistrations
       And I press "Save"
       Then that partner's government_partner_state should be "MA"
     
+    @passing
     Scenario: Define government partner zip codes via list
       Given the following government partner exists:
         | organization                 |

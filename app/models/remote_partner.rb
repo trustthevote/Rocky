@@ -41,6 +41,10 @@ class RemotePartner < ActiveResource::Base
       
   end
   
+  def default_pixel_tracking_code(email_type, reg)
+    Partner.default_pixel_tracking_code(email_type, reg)
+  end
+  
   (Partner.column_names + [:custom_logo, :header_logo_url]).each do |column|
     define_method "#{column}" do
       self.attributes[column] || nil

@@ -97,7 +97,7 @@ class Notifier < ActionMailer::Base
     partner = registrant.partner
     ptc = partner && partner.whitelabeled? && partner.send("#{kind}_pixel_tracking_code")
     if ptc.blank?
-      ptc = partner.default_pixel_tracking_code(kind)
+      ptc = partner.default_pixel_tracking_code(kind, registrant)
     end
     
     ptc = ERB.new(ptc.html_safe).result(binding)

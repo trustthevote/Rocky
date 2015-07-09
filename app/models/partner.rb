@@ -169,6 +169,17 @@ class Partner < ActiveRecord::Base
     end
   end
   
+  # Need to declare attributes for each email type pixel tracker
+  EmailTemplate::EMAIL_TYPES.each do |et|
+    attr_accessor "#{et}_pixel_tracking_code"
+    define_method("#{et}_pixel_tracking_code") do
+      method_missing("#{et}_pixel_tracking_code")
+    end
+    define_method("#{et}_pixel_tracking_code=") do |val|
+      method_missing("#{et}_pixel_tracking_code=", val)
+    end
+  end
+  
   
   include PartnerAssets
   
@@ -614,7 +625,11 @@ class Partner < ActiveRecord::Base
 
   end
   
-  def default_pixel_tracking_code(kind)
+  def default_pixel_tracking_code(kind, registrant)
+    self.class.default_pixel_tracking_code(kind, registrant)
+  end
+  
+  def self.default_pixel_tracking_code(kind, registrant)
     ea = kind
     ea = 'state_integrated' if ea == 'thank_you_external'
     ea = 'chase' if ea == 'chaser'

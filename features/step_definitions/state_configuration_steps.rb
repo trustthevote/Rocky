@@ -8,7 +8,7 @@
 # end
 
 Given(/^I override the states yml file$/) do
-  StateImporter.stub(:file_path).and_return {
+  allow(StateImporter).to receive(:file_path) {
     Rails.root.join('spec/fixtures/files/state_configuration/states.yml').to_s
   }
 end
