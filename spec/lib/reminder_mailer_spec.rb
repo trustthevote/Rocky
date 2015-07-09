@@ -55,7 +55,7 @@ describe ReminderMailer do
       expect(reg).to receive(:deliver_final_reminder_email)
       expect(Registrant).to receive(:find_each).with({
         batch_size: 500,
-        conditions: ["reminders_left=0 AND pdf_downloaded = ? AND updated_at < ? AND final_reminder_delivered = ?", false, frt, false ]
+        conditions: ["reminders_left=0 AND pdf_downloaded = ? AND updated_at < ? AND final_reminder_delivered = ? AND pdf_ready=?", false, frt, false, true ]
       }).and_yield(reg)
       rm.deliver_final_reminders
     end

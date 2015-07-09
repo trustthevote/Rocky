@@ -33,7 +33,7 @@ class ReminderMailer
   end
 
   def deliver_final_reminders
-    Registrant.find_each(batch_size: 500, conditions: ["reminders_left=0 AND pdf_downloaded = ? AND updated_at < ? AND final_reminder_delivered = ?", false, final_reminder_time, false]) do |reg|
+    Registrant.find_each(batch_size: 500, conditions: ["reminders_left=0 AND pdf_downloaded = ? AND updated_at < ? AND final_reminder_delivered = ? AND pdf_ready=?", false, final_reminder_time, false, true]) do |reg|
       reg.deliver_final_reminder_email
     end
   end

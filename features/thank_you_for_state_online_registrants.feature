@@ -102,7 +102,7 @@ Feature: Thank you email for registrants who choose to register online with a st
     Then I should not be sent a thank-you email
     And my status should not be "complete"
 
-  @passing
+  @wip
   Scenario: Registrant who at one point finished online but went back to the RTV form and had their session expire doesn't get sent a thank you email
     Given I have completed step 3 as a resident of "Washington" state
     And I have a state license

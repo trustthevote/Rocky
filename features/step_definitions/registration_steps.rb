@@ -224,7 +224,8 @@ Then /^I should be sent a thank\-you email in korean$/ do
 end
 
 Then /^I should not be sent a thank\-you email$/ do
-  ActionMailer::Base.deliveries.count.should == 0
+  ActionMailer::Base.deliveries.last.subject.should == I18n.t('email.chaser.subject')
+  ActionMailer::Base.deliveries.count.should == 1
 end
 
 
