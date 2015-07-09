@@ -68,11 +68,13 @@ class Notifier < ActionMailer::Base
     partner = registrant.partner
     subject = partner && partner.whitelabeled? && EmailTemplate.get_subject(partner, "#{kind}.#{registrant.locale}")
     
+    
     # call message_body first to set up instance variables
     body = message_body(registrant, kind)
+    
     subject = subject.blank? ? I18n.t("email.#{kind}.subject", :locale => registrant.locale.to_sym) : ERB.new(subject).result(binding)
     
-    
+    pixel_tracking_code = pixel_tracking(registrant, kind)
     
     m = mail(
         :subject=>subject,
@@ -80,13 +82,27 @@ class Notifier < ActionMailer::Base
         :to=>registrant.email_address,
         :date=> Time.now.to_s(:db)
       ) do |format|
-        format.html { body }
+        format.html { 
+          body.to_s + pixel_tracking_code.to_s.html_safe
+        }
     end
 
     m.transport_encoding = "quoted-printable"
     
     m
 
+  end
+
+  def pixel_tracking(registrant, kind)
+    partner = registrant.partner
+    ptc = partner && partner.whitelabeled? && partner.send("#{kind}_pixel_tracking_code")
+    if ptc.blank?
+      ptc = partner.default_pixel_tracking_code(kind)
+    end
+    
+    ptc = ERB.new(ptc.html_safe).result(binding)
+
+    return ptc.to_s.html_safe
   end
 
   def message_body(registrant, kind)

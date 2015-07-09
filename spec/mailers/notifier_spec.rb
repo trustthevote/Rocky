@@ -72,6 +72,15 @@ describe Notifier do
       
     end
 
+    it "includes pixel tracking" do
+      registrant = FactoryGirl.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.confirmation(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("http://www.google-analytics.com/collect?v=1&tid=UA-1913089-11&cid=#{registrant.uid}&t=event&ec=email&ea=confirmation_open")
+    end
+    
     it "includes cancel reminders link" do
       registrant = FactoryGirl.create(:maximal_registrant)
       assert_difference('ActionMailer::Base.deliveries.size', 1) do
@@ -136,9 +145,14 @@ describe Notifier do
       EmailTemplate.set(partner, 'thank_you_external.en', 'HI: <%= @registrant.last_name %>')
       EmailTemplate.set_subject(partner, 'thank_you_external.en', 'Thank you external')
 
+      partner.chaser_pixel_tracking_code="<unused code for <%= @registrant.uid %> />"
+      partner.thank_you_external_pixel_tracking_code="<some code for <%= @registrant.uid %> />"
+      
+
       Notifier.thank_you_external(registrant).deliver
       email = ActionMailer::Base.deliveries.last
       email.body.should match(%r{HI: test the template})
+      email.body.should include("<some code for #{registrant.uid} />")
       email.subject.should == 'Thank you external'
       email.from.should include(RockyConf.from_address)
     end
@@ -148,6 +162,14 @@ describe Notifier do
       Notifier.thank_you_external(registrant).deliver
       email = ActionMailer::Base.deliveries.last
       email.from.should include("custom@partner.org")      
+    end
+    it "includes pixel tracking" do
+      registrant = FactoryGirl.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.thank_you_external(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("http://www.google-analytics.com/collect?v=1&tid=UA-1913089-11&cid=#{registrant.uid}&t=event&ec=email&ea=state_integrated_open")
     end
     
   end
@@ -183,6 +205,15 @@ describe Notifier do
       email.body.should include("this-is-the-url")
     end
 
+    it "includes pixel tracking" do
+      registrant = FactoryGirl.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.reminder(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("http://www.google-analytics.com/collect?v=1&tid=UA-1913089-11&cid=#{registrant.uid}&t=event&ec=email&ea=reminder_open")
+    end
+    
     it "delivers the expected email in a different locale" do
       registrant = FactoryGirl.create(:maximal_registrant, :locale => 'es')
       Notifier.reminder(registrant).deliver
@@ -243,6 +274,15 @@ describe Notifier do
       email.body.should include("this-is-the-url")
     end
 
+    it "includes pixel tracking" do
+      registrant = FactoryGirl.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.final_reminder(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("http://www.google-analytics.com/collect?v=1&tid=UA-1913089-11&cid=#{registrant.uid}&t=event&ec=email&ea=final_reminder_open")
+    end
+    
     it "delivers the expected email in a different locale" do
       registrant = FactoryGirl.create(:maximal_registrant, :locale => 'es')
       Notifier.final_reminder(registrant).deliver
@@ -296,19 +336,30 @@ describe Notifier do
       
       email.subject.should include(I18n.t("email.chaser.subject", :locale => :es))
     end
+    
+    it "includes pixel tracking" do
+      registrant = FactoryGirl.create(:maximal_registrant)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        Notifier.chaser(registrant).deliver
+      end
+      email = ActionMailer::Base.deliveries.last
+      email.body.should include("http://www.google-analytics.com/collect?v=1&tid=UA-1913089-11&cid=#{registrant.uid}&t=event&ec=email&ea=chase_open")
+    end
+    
     it "uses partner template" do
       partner    = FactoryGirl.create(:partner, :whitelabeled => true)
       registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en', first_name: 'First')
       EmailTemplate.set(partner, 'chaser.en', "You didn't finish")
       EmailTemplate.set_subject(partner, 'chaser.en', '<%= @registrant_first_name %>, You can still register to vote')
-      
+      partner.chaser_pixel_tracking_code="<some code for <%= @registrant.uid %> />"
       
       Notifier.chaser(registrant).deliver
       email = ActionMailer::Base.deliveries.last
       email.body.should include("You didn't finish")
+      email.body.should include("<some code for #{registrant.uid} />")
       email.subject.should == 'First, You can still register to vote'
       email.from.should include(RockyConf.from_address)
-      
+
     end
     
   end
