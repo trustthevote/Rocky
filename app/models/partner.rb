@@ -625,15 +625,15 @@ class Partner < ActiveRecord::Base
 
   end
   
-  def default_pixel_tracking_code(kind, registrant)
-    self.class.default_pixel_tracking_code(kind, registrant)
+  def default_pixel_tracking_code(kind)
+    self.class.default_pixel_tracking_code(kind)
   end
   
-  def self.default_pixel_tracking_code(kind, registrant)
+  def self.default_pixel_tracking_code(kind)
     ea = kind
     ea = 'state_integrated' if ea == 'thank_you_external'
     ea = 'chase' if ea == 'chaser'
-    return "<img src=\"http://www.google-analytics.com/collect?v=1&tid=UA-1913089-11&cid=<%= @registrant.uid %>&t=event&ec=email&ea=#{ea}_open&el=<%= @registrant.partner_id %>&cs=reminder&cm=email&cn=ovr_email_opens&cm1=1&ul=en-us\" />"
+    return "<img src=\"http://www.google-analytics.com/collect?v=1&tid=UA-1913089-11&cid=<%= @registrant.uid %>&t=event&ec=email&ea=#{ea}_open&el=<%= @registrant.partner_id %>&cs=reminder&cm=email&cn=ovr_email_opens&cm1=1&ul=<%= @registrant.locale %>\" />"
     
   end
   
