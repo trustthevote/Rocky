@@ -15,7 +15,7 @@ Feature: State Config UI
     Then I should see default state settings
     And I should see all state settings
     
-  @wip
+  @passing
   Scenario: Submitting the state configs
     When I go to the state configurations page
     And I press "Save and Email Configurations"

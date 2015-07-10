@@ -156,6 +156,9 @@ FactoryGirl.define do
     building_via_api_call true
     will_be_18_by_election true
   end
+  factory :pdf_ready_maximal_registrant, :parent => :maximal_registrant do
+    pdf_ready true
+  end
 
   factory :api_created_partner, :class=>'partner' do
     organization "Org Name"

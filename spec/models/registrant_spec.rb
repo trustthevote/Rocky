@@ -1931,7 +1931,7 @@ describe Registrant do
   end
   
   describe 'deliver_final_reminder_email' do
-    let(:r) { FactoryGirl.create(:maximal_registrant) }
+    let(:r) { FactoryGirl.create(:pdf_ready_maximal_registrant) }
     before(:each) do
       r.stub(:send_emails?).and_return(true)
     end
@@ -1974,6 +1974,14 @@ describe Registrant do
       before(:each) do
         r.stub(:final_reminder_delivered).and_return(true)
       end
+      it "does nothing" do
+        assert_difference('ActionMailer::Base.deliveries.size', 0) do
+          r.deliver_final_reminder_email
+        end
+      end
+    end
+    context 'if the user is not complete' do
+      let(:r) { FactoryGirl.create(:step_1_registrant)}
       it "does nothing" do
         assert_difference('ActionMailer::Base.deliveries.size', 0) do
           r.deliver_final_reminder_email

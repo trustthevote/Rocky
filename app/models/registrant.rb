@@ -1435,7 +1435,7 @@ class Registrant < ActiveRecord::Base
   end
   
   def deliver_final_reminder_email
-    if send_emails? && !final_reminder_delivered && !pdf_downloaded
+    if send_emails? && !final_reminder_delivered && !pdf_downloaded && pdf_ready?
       Notifier.final_reminder(self).deliver
       self.final_reminder_delivered = true
       self.save(validate: false)
