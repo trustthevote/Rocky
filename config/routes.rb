@@ -73,7 +73,7 @@ Rocky::Application.routes.draw do
         end
       end
       
-      resources :registration_states, :as=>:gregistrationstates, :format=>'json', :only=>'index'      
+      resources :registration_states, :path=>'gregistrationstates', :as=>:gregistrationstates, :format=>'json', :only=>'index'      
       
       resources :partners, :path=>'partnerpublicprofiles', :only=>[], :format=>'json' do
         collection do
@@ -99,7 +99,7 @@ Rocky::Application.routes.draw do
         end
       end
       
-      resources :registration_states, :as=>:gregistrationstates, :format=>'json', :only=>'index'      
+      resources :registration_states, :path=>'gregistrationstates', :as=>:gregistrationstates, :format=>'json', :only=>'index'      
       
       resources :partners, :path=>'partnerpublicprofiles', :only=>[], :format=>'json' do
         collection do
