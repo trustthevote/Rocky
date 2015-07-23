@@ -5,7 +5,7 @@ vi:
       ca:
         online_instructions: Bạn có thể hoàn thành đăng ký cử tri trực tuyến của bạn
           với tiểu bang ngay bây giờ - qua việc sử dụng đơn đăng ký cung cấp bởi Thư
-          ký Bang Debra Bowen.
+          ký Bang.
         step_2:
           checkbox_text: Tôi là cư dân tiểu bang California, sống tại Hoa Kỳ.
           instruction_text: Bạn có đủ điều kiện để hoàn thành đăng ký của bạn bằng
@@ -14,8 +14,8 @@ vi:
       nv:
         online_instructions: <p>Dưới đây bạn có thể hoàn tất đăng ký cử tri trực tuyến
           của bạn với bang mình.  Đơn cử tri trực tuyến Nevada (NOVA) được cung cấp
-          bởi Thư ký Bang Nevada , Ross Miller, cho công dân Nevada đăng ký đi bầu,
-          hoặc thay đổi thông tin đăng ký hiện tại của họ. NOVA cũng có sẵn <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">
+          bởi Thư ký Bang Nevada, cho công dân Nevada đăng ký đi bầu, hoặc thay đổi
+          thông tin đăng ký hiện tại của họ. NOVA cũng có sẵn <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">
           tại đây </a></P><br/><p> Nếu bằng lái xe của bạn không hợp lệ, hoặc bang
           bạn không thể tìm thấy hay xác nhận hồ sơ xe của bạn - xin đừng lo  - bạn
           cũng có thể <a href="%{next_url}"> hoàn thành đăng ký của bạn với %{rtv_and_partner_name}</a>.
@@ -535,4 +535,3 @@ vi:
         tuyến.<br/>
 
         <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
-

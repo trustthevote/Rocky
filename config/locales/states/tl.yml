@@ -5,7 +5,7 @@ tl:
       ca:
         online_instructions: Maaari mong tapusin ang online na pagrerehistro ng botante
           sa iyong estado ngayon - sa pamamagitan ng paggamit ng aplikasyon na ibinigay
-          ng iyong Kalihim ng Estado, si Debra Bowen.
+          ng iyong Kalihim ng Estado, si Alex Padilla.
         step_2:
           checkbox_text: Ako ay mamamayan ng California, nakatira sa Estados Unidos
           instruction_text: Ikaw ay eligible na tapusin ang iyong pagrerehistro na
@@ -14,9 +14,10 @@ tl:
       nv:
         online_instructions: <p>Maaari mong tapusin ang iyong online na pagrerehistro
           ng botante sa estadong nasa ibaba. Ang Nevada Online Voter Application (NOVA)
-          ay ibinigay ng Kalihim ng Estado ng Nevada, si Ross Miller, para sa pagrerehistro
-          ng mga mamamayan ng Nevada upang bumoto, o para baguhin ang kanilang umiiral
-          na impormasyon ng pagrerehistro.  Ang NOVA ay makukuha rin dito <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">here</a>.</p>
+          ay ibinigay ng Kalihim ng Estado ng Nevada, si Barbara K. Cegavske, para
+          sa pagrerehistro ng mga mamamayan ng Nevada upang bumoto, o para baguhin
+          ang kanilang umiiral na impormasyon ng pagrerehistro.  Ang NOVA ay makukuha
+          rin dito <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">here</a>.</p>
           <br/> <p> Kung ang iyong lisensya ng pagmamaneho ay hindi valid o hindi
           mahanap o makumpirma ng estado ang iyong DMV record - huwag mag-alaala -
           maaari mo ring <a href="%{next_url}"> tapusin ang iyong pagrerehistro kasama
@@ -613,4 +614,3 @@ tl:
         online.<br/>
 
         <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
-

@@ -3,14 +3,15 @@ zh:
   states:
     custom:
       ca:
-        online_instructions: 您现在可以在州政府的网站上完成选民登记 - 使用由州务卿Debra Bowen 提供的应用程序。
+        online_instructions: 您现在可以在州政府的网站上完成选民登记 - 使用由州务卿Alex Padilla 提供的应用程序。
         step_2:
           checkbox_text: 我是加州的居民，居住在美国。
           instruction_text: 您可以使用州政府的网上选民登记系统完成您的登记。
         ca_disclosures: 我已阅读并同意接受上述通知。
       nv:
         online_instructions: <p>您可以在下面州政府的网站上完成您的选民登记。 Nevada Online Voter Application
-          (NOVA) 是由内华达州州务卿 Ross Miller提供，以便内华达州的公民投票，或更改现存的登记资料。 NOVA也可在<a href=\"https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov"">此处</a>找到</p><br/><p>若您的驾驶证或州身份证已失效或州政府不能找到或确认您的DMV记录-请不用担心-您依然可以在<a
+          (NOVA) 是由内华达州州务卿 Barbara K. Cegavske提供，以便内华达州的公民投票，或更改现存的登记资料。 NOVA也可在<a
+          href=\"https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov"">此处</a>找到</p><br/><p>若您的驾驶证或州身份证已失效或州政府不能找到或确认您的DMV记录-请不用担心-您依然可以在<a
           href="%{next_url}">与%{rtv_and_partner_name}</a>完成您的登记。您只需要打印，签名并邮寄。</p>
     parties:
       democratic: 民主党
@@ -191,4 +192,3 @@ zh:
         href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">online</a>.</i>'
       kansas: ! '<b>*首次进行登记的选民请注意: 您必须在州选投票的同时出示证明公民身份的文件！</b><br/><i>如果这是您首次在堪萨斯州登记，您的选民登记表格必须同时包含证明公民身份的文件才可以参加州选举（即：州长，州秘书长以及州议会选举）。否则您将只能够在联邦政府选举中投票。最常见的“证明文件”有出生证或护照的复印件，全部认可文件的详细列表可以在以下链接找到<a
         href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">online</a>.</i>'
-

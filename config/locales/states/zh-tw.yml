@@ -3,14 +3,15 @@ zh-tw:
   states:
     custom:
       ca:
-        online_instructions: 您現在可以在州政府的網站上完成選民登記-使用由州務卿Debra Bowen提供的應用程序。
+        online_instructions: 您現在可以在州政府的網站上完成選民登記-使用由州務卿Alex Padilla提供的應用程序。
         step_2:
           checkbox_text: 我是加州居民，居住在美國。
           instruction_text: 您可以使用州政府的網上選民登記系統完成您的登記。
         ca_disclosures: 我已閱讀並同意接受上述通知。
       nv:
         online_instructions: 您可以在下面的州政府網站完成您的網上選民登記。Nevada Online Voter Application
-          (NOVA) 是由內華達州州務卿 Ross Miller提供，以便內華達州的公民投票，或更改現存的登記資料。 NOVA也可在 <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">此處</a>找到.</p><br/>
+          (NOVA) 是由內華達州州務卿 Barbara K. Cegavske提供，以便內華達州的公民投票，或更改現存的登記資料。 NOVA也可在 <a
+          href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">此處</a>找到.</p><br/>
           <p>若您的駕駛證或州身份證已失效或州政府不能找到確認您的DMV記錄-請不用擔心-您依然可以在<a href="%{next_url}">與 %{rtv_and_partner_name}完成您的登記</a>。您只需要打印，簽名並郵寄。</p>
     parties:
       democratic: 民主黨
@@ -189,4 +190,3 @@ zh-tw:
       kansas: ! '<b>*請注意首次選民登記申請人：</b>您還必須提交證明公民身份在州選舉中投票！如果這是您第一次註冊在堪薩斯州，你的選民登記表還必須包括公民身份證明在州選舉（即州長，國務卿，與州議會）投票。否則，你只會有資格在聯邦選舉中投票。最常見的“證據”是你的出生證明或護照的複印件，但可以接受文件的完整列表可以在網上找到。<br/>
 
         <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">http://www.gotvoterid.com/proof-of-citizenship.html#evidence</a>'
-

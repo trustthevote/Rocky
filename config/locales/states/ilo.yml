@@ -5,7 +5,7 @@ ilo:
       ca:
         online_instructions: Mabalin mon nga ilep-pas iti online nga pagpaparehistrom
           dita estado nga pag-giyanam - usaren laeng iti applikasyon nga ited kenka
-          ti Sekretarya ti Estado nga pag-yanam, Debra Bowen.
+          ti Sekretarya ti Estado nga pag-yanam.
         step_2:
           checkbox_text: Ag-gi-gyanak ditoy Estados Unidos, iti estado ti California.
           instruction_text: Masapul nga ilep-pas mo iti pagrerehistro, ken usarem
@@ -14,9 +14,9 @@ ilo:
       nv:
         online_instructions: <p>Masapul mo nga ikumpleto iti online nga pagrerehistro
           ti botante nga sumarsaruno. Iti Nevada Online Voter Application (NOVA) inted
-          ni Sekretarya ti Estado Nevada, Ross Miller, tapno agrehistro dagiti botante
-          iti Nevada ken tapno isuda ket makaboto, wenno suktan ti agpayso nga impormasyon.
-          Masapul mo met iti NOVA na aksukat ka <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">ditoy</a>.</p><br/>
+          ni Sekretarya ti Estado Nevada, tapno agrehistro dagiti botante iti Nevada
+          ken tapno isuda ket makaboto, wenno suktan ti agpayso nga impormasyon. Masapul
+          mo met iti NOVA na aksukat ka <a href="https://nvsos.gov/sosvoterservices/Registration/step1.aspx?r=gov">ditoy</a>.</p><br/>
           <p> iti impormasyon ti driver's license iti invalido wenno iti DMV record
           - saan ka nga agdanag - mabalin mo met <a href="%{next_url}">ngalipasen
           ti rehistrasyon mo %{rtv_and_partner_name}</a>. - Masapul mo laeng nga iprenta,
@@ -540,4 +540,3 @@ ilo:
         to vote in federal elections.  The most common "proof" is a photocopy of your
         birth certificate or passport, but a full list of acceptable documentation
         can be found <a href="http://www.gotvoterid.com/proof-of-citizenship.html#evidence">online</a>.</i>'
-
