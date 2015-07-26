@@ -35,4 +35,4 @@ set :keep_releases, 3
 
 set :heroku_remote, "rocky-staging2"
 
-set :branch, "rocky6"
+set :branch, "rocky6.2"
