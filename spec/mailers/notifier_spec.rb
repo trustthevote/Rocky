@@ -116,6 +116,15 @@ describe Notifier do
       
     end
     
+    it "includes rtv link with original sponsor and email source" do
+      partner    = FactoryGirl.create(:partner)
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
+      Notifier.confirmation(registrant).deliver
+      email = ActionMailer::Base.deliveries.last
+      
+      email.body.should include("http://register.rockthevote.com/?partner=#{partner.id}&source=email-confirmation")
+    end
+    
     it "sends from partner email when configured" do
       partner    = FactoryGirl.create(:partner, :whitelabeled => true, :from_email=>"custom@partner.org")
       registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
@@ -360,6 +369,15 @@ describe Notifier do
       email.subject.should == 'First, You can still register to vote'
       email.from.should include(RockyConf.from_address)
 
+    end
+    
+    it "includes rtv link with original sponsor and email source" do
+      partner    = FactoryGirl.create(:partner)
+      registrant = FactoryGirl.create(:maximal_registrant, :partner => partner, :locale => 'en')
+      Notifier.chaser(registrant).deliver
+      email = ActionMailer::Base.deliveries.last
+      
+      email.body.should include("http://register.rockthevote.com/?partner=#{partner.id}&source=email-chaser")
     end
     
   end

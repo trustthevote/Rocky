@@ -1222,3 +1222,287 @@ div.rollover_button a.button_share_twitter span, div.rollover_button:hover a.but
 .share div .rollover_button a.button_share_facebook span, .share div .rollover_button a.button_share_facebook span:hover, .share div .rollover_button a.button_share_twitter span, .share div .rollover_button a.button_share_twitter span:hover, .share div .rollover_button a.button_share_facebook:hover span, .share div .rollover_button a.button_share_facebook:hover span:hover, .share div .rollover_button a.button_share_twitter:hover span, .share div .rollover_button a.button_share_twitter:hover span:hover, .share div .rollover_button:hover a.button_share_facebook span, .share div .rollover_button:hover a.button_share_facebook span:hover, .share div .rollover_button:hover a.button_share_twitter span, .share div .rollover_button:hover a.button_share_twitter span:hover, .share div .rollover_button:hover a.button_share_facebook:hover span, .share div .rollover_button:hover a.button_share_facebook:hover span:hover, .share div .rollover_button:hover a.button_share_twitter:hover span, .share div .rollover_button:hover a.button_share_twitter:hover span:hover {
     background-repeat: no-repeat;
 }
+
+#progress-bar li.progress-current {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #eeeeee;
+    background-image: none;
+    border-bottom-color: #ccc;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color: #ccc;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #ccc;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #ccc;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-radius: 4px;
+}
+
+#progress-bar li.progress-todo {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #c7c7c7;
+    background-image: none;
+    border-bottom-color: #ccc;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color: #ccc;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #ccc;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #ccc;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-radius: 4px;
+}
+
+#progress-bar li.progress-done {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #94e71e;
+    background-image: none;
+    border-bottom-color: #ccc;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color: #ccc;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #ccc;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #ccc;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-radius: 4px;
+}
+#progress-bar li {
+    line-height: 23px;
+}
+ul.checkbox h3 input {
+    -moz-appearance: checkbox;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    height: 20px;
+    width: 20px;
+}
+
+select {
+border: 1px solid #bebebe;
+-webkit-appearance: none;
+-moz-appearance: none;
+background: #fff image-url('reg/select-arrow.png') no-repeat 92% center;
+width: 100px;
+text-indent: 0.01px;
+text-overflow: "";
+color: #404040;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+-ms-border-radius: 4px;
+-o-border-radius: 4px;
+border-radius: 4px;
+font-size: 14px;
+padding: 6px 8px 6px 3px;
+text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+height: 34px;
+min-width: 75px;
+}
+#other_language_link select {
+    width: 163px;
+    padding-left: 5px;
+}
+
+.flat.race-dropdown select, .flat.party-dropdown select {
+    width: 256px;
+    background: #fff image-url('reg/select-arrow.png') no-repeat 96% center;
+    margin-top: 0;
+}
+#registrant_state_id_number {
+    width: 256px;
+}
+.flat.race-dropdown {
+    margin-top: 15px;
+}
+.step-4 ul.checkbox {
+    margin-top: 25px;
+}
+.review ul {
+    margin-bottom: 15px;
+}
+
+ul.affirm h3 {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #efefef;
+    border-bottom-color: #bebebe;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color: #bebebe;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #bebebe;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #bebebe;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.download {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ddd;
+    border-bottom-color: #bebebe;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color: #bebebe;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #bebebe;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #bebebe;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    position: relative;
+    width: 99%;
+}
+.download p {
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.6em;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 15px;
+    text-align: center;
+}
+li.width_c div {
+    max-width: 220px;
+    min-width: 90px;
+}
+li.width_c input, li.width_c select {
+    max-width: 128px;
+    min-width: 84px;
+}
+
+.step_4 h1 {
+    line-height: 32px;
+}
+.affirm h3 {
+    margin-top: 20px;
+}
+.step_4 h3 {
+    color: #000000;
+    font-weight: normal;
+    line-height: 25px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    width: 400px;
+}
+.review li {
+    font-size: 13px;
+    height: 17px;
+    line-height: 16px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+}
+.text p {
+    color: #434343;
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    text-align: center;
+}
+fieldset.no_border {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+#registrant_phone {
+    letter-spacing: 0;
+    padding-left: 6px;
+}
+.reason {
+    color: #434343;
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    width: 75%;
+}
+.error {
+    color: #b2272c;
+    font-weight: bolder;
+}
+#progress-bar li.progress-title {
+    min-width: 50px;
+}
