@@ -984,19 +984,37 @@ describe Partner do
     end
 
     describe "by registration date" do
-      it "should tally registrants by date bucket" do
+      it "should tally registrants by date bucket and PDF download state" do
         partner = FactoryGirl.create(:partner)
-        8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
-        5.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago) }
-        4.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago) }
-        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago) }
+        7.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago, pdf_downloaded: true) }
+
+        3.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago) }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.days.ago, pdf_downloaded: true) }
+
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago) }
+        2.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.weeks.ago, pdf_downloaded: true) }
+
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago) }
+        1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.months.ago, pdf_downloaded: true) }
+        
         1.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.years.ago) }
+
         stats = partner.registration_stats_completion_date
-        assert_equal  8, stats[:day_count]
-        assert_equal 13, stats[:week_count]
-        assert_equal 17, stats[:month_count]
-        assert_equal 19, stats[:year_count]
-        assert_equal 20, stats[:total_count]
+        assert_equal  8, stats[:day_count][:completed]
+        assert_equal  1, stats[:day_count][:downloaded]
+
+        assert_equal 13, stats[:week_count][:completed]
+        assert_equal 3, stats[:week_count][:downloaded]
+
+        assert_equal 17, stats[:month_count][:completed]
+        assert_equal 5, stats[:month_count][:downloaded]
+
+        assert_equal 19, stats[:year_count][:completed]
+        assert_equal 6, stats[:year_count][:downloaded]
+
+        assert_equal 20, stats[:total_count][:completed]
+        assert_equal 6, stats[:total_count][:downloaded]
       end
 
       it "only uses completed/step_5 registrations without finish_with_state for stats" do
@@ -1008,7 +1026,7 @@ describe Partner do
         8.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         8.times { FactoryGirl.create(:step_5_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         stats = partner.registration_stats_completion_date
-        assert_equal  16, stats[:day_count]
+        assert_equal  16, stats[:day_count][:completed]
       end
 
       it "should show percent complete" do
@@ -1016,7 +1034,7 @@ describe Partner do
         8.times { FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at => 2.hours.ago) }
         8.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.hours.ago) }
         stats = partner.registration_stats_completion_date
-        assert_equal 0.5, stats[:percent_complete]
+        assert_equal 0.5, stats[:percent_complete][:completed]
       end
 
       it "should not include :initial state registrants in calculations" do
@@ -1025,8 +1043,8 @@ describe Partner do
         5.times { FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago) }
         5.times { FactoryGirl.create(:step_1_registrant,  :partner => partner, :created_at => 2.days.ago, :status => :initial) }
         stats = partner.registration_stats_completion_date
-        assert_equal   5, stats[:week_count]
-        assert_equal 0.5, stats[:percent_complete]
+        assert_equal   5, stats[:week_count][:completed]
+        assert_equal 0.5, stats[:percent_complete][:completed]
       end
 
       it "should only include data for this partner" do
@@ -1036,8 +1054,8 @@ describe Partner do
         FactoryGirl.create(:step_4_registrant,  :partner => partner, :created_at => 2.days.ago)
         FactoryGirl.create(:maximal_registrant, :partner => other_partner, :created_at => 2.days.ago)
         stats = partner.registration_stats_completion_date
-        assert_equal   1, stats[:week_count]
-        assert_equal 0.5, stats[:percent_complete]
+        assert_equal   1, stats[:week_count][:completed]
+        assert_equal 0.5, stats[:percent_complete][:completed]
       end
     end
 

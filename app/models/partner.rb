@@ -349,12 +349,24 @@ class Partner < ActiveRecord::Base
   def registration_stats_completion_date
     conditions = "finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5') AND created_at >= ?"
     stats = {}
-    stats[:day_count] =   Registrant.count(:conditions => [conditions, false, self, 1.day.ago])
-    stats[:week_count] =  Registrant.count(:conditions => [conditions, false, self, 1.week.ago])
-    stats[:month_count] = Registrant.count(:conditions => [conditions, false, self, 1.month.ago])
-    stats[:year_count] =  Registrant.count(:conditions => [conditions, false, self, 1.year.ago])
-    stats[:total_count] = Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5')", false, self])
-    stats[:percent_complete] = stats[:total_count].to_f / Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status != 'initial')", false, self])
+    stats[:day_count] = {:completed => Registrant.count(:conditions => [conditions, false, self, 1.day.ago]) }
+    stats[:week_count] = {:completed => Registrant.count(:conditions => [conditions, false, self, 1.week.ago]) }
+    stats[:month_count] = {:completed => Registrant.count(:conditions => [conditions, false, self, 1.month.ago]) }
+    stats[:year_count] =  {:completed => Registrant.count(:conditions => [conditions, false, self, 1.year.ago]) }
+    stats[:total_count] = {:completed => Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5')", false, self]) }
+    stats[:percent_complete] = {:completed => stats[:total_count][:completed].to_f / Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status != 'initial')", false, self]) }
+    
+    conditions = "finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5') AND created_at >= ? AND pdf_downloaded = ?"
+
+    stats[:day_count][:downloaded] = Registrant.count(:conditions => [conditions, false, self, 1.day.ago, true])
+    stats[:week_count][:downloaded] = Registrant.count(:conditions => [conditions, false, self, 1.week.ago, true])
+    stats[:month_count][:downloaded] = Registrant.count(:conditions => [conditions, false, self, 1.month.ago, true])
+    stats[:year_count][:downloaded] = Registrant.count(:conditions => [conditions, false, self, 1.year.ago, true])
+    stats[:total_count][:downloaded] = Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status = 'complete' OR status = 'step_5') AND pdf_downloaded = ?", false, self, true])
+    stats[:percent_complete][:downloaded] = stats[:total_count][:downloaded].to_f / Registrant.count(:conditions => ["finish_with_state = ? AND partner_id = ? AND (status != 'initial')", false, self])
+
+
+    
     stats
   end
   

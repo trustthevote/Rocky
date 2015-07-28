@@ -173,7 +173,7 @@ p {
 
 #dash_left, #dash_right {
   position: relative;
-  height: 187px;
+  height: 240px;
   width: 295px;
 }
 
@@ -422,12 +422,19 @@ td#left_column, td#right_column {
   vertical-align: top;
 }
 
-.stats thead th, .stats thead td {
+.stats thead th, .stats thead td, .stats tfoot th, .stats tfoot td {
   padding-top: 6px;
   padding-bottom: 6px;
   color: #d8d8d8;
   background: #0b0b0b image-url('partner/stats_header_bg.gif') top left repeat-x;
   font-weight: bold;
+  
+  &.small {
+    font-size: .85em;
+    font-weight: normal;
+    background: #0b0b0b;
+  }
+  
 }
 
 .stats th, .stats td {
