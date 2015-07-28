@@ -115,6 +115,13 @@ describe FinishesController do
       reg.reload
       assert_equal 0, reg.reminders_left
     end
+    it "marks final reminder as delivered" do
+      reg = FactoryGirl.create(:completed_registrant, :reminders_left => 2)
+      Registrant.any_instance.stub(:remote_pdf_ready?).and_return(true)
+      get :show, :registrant_id => reg.to_param, :reminders => "stop"
+      reg.reload
+      assert_equal true, reg.final_reminder_delivered
+    end
     context 'when running in the APP role' do
       it "does not redirect to the UI system" do
         old_role = ENV['ROCKY_ROLE']

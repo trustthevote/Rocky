@@ -251,7 +251,7 @@ en:
 
           %{rtv_and_partner_name}<br><br>
           
-          <strong><a href="http://register.rockthevote.com/">register.rockthevote.com</a></strong>'
+          %{rtv_link}'
     thank_you_external:
       subject: Thank you for using the online voter registration tool
       body:

@@ -118,7 +118,7 @@ class Notifier < ActionMailer::Base
     @registrant_rtv_and_partner_name = registrant.rtv_and_partner_name.to_s.html_safe
     @registrant_home_state_name = registrant.home_state_name.to_s.html_safe
     @registrant_home_state_abbrev = registrant.home_state_abbrev.to_s.html_safe
-    @rtv_link = '<strong><a href="http://register.rockthevote.com/">register.rockthevote.com</a></strong>'.html_safe
+    @rtv_link = "<strong><a href=\"http://register.rockthevote.com/?partner=#{registrant.partner_id}&source=email-#{kind}\">register.rockthevote.com</a></strong>".html_safe
     @home_state_email_instructions = registrant.home_state_email_instructions.blank? ? '' : (registrant.home_state_email_instructions + "<br/><br/>").to_s.html_safe
 
     partner = registrant.partner

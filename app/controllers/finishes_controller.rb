@@ -32,7 +32,7 @@ class FinishesController < RegistrationStep
     @registrant_finish_iframe_url = @registrant.finish_iframe_url
     @pdf_ready = false
     if params[:reminders]
-      @registrant.update_attributes(:reminders_left => 0)
+      @registrant.update_attributes(:reminders_left => 0, final_reminder_delivered: true)
       @stop_reminders = true
     end
     if params[:share_only] 
