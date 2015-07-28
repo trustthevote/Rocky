@@ -29,7 +29,7 @@ Rocky::Application.routes.draw do
   resource "partner", :path_names => {:new => "register", :edit => "profile"} do
     member do
       get "statistics"
-      get "registrations"
+      post "registrations"
       get "download_csv"
       get "embed_codes"
     end

@@ -514,47 +514,58 @@ class Partner < ActiveRecord::Base
     Notifier.password_reset_instructions(self).deliver
   end
 
-  def generate_registrants_csv
+  def generate_registrants_csv(start_date=nil, end_date=nil)
+    conditions = [[]]
+    if start_date
+      conditions[0] << " created_at >= ? "
+      conditions << start_date
+    end
+    if end_date
+      conditions[0] << " created_at < ? "
+      conditions << end_date + 1.day
+    end
+    conditions[0] = conditions[0].join(" AND ")
+
     CSV.generate do |csv|
       csv << Registrant::CSV_HEADER
-      registrants.find_each(:batch_size=>500, :include => [:home_state, :mailing_state, :partner]) do |reg|
+      registrants.find_each(:batch_size=>500, :include => [:home_state, :mailing_state, :partner], conditions: conditions) do |reg|
         csv << reg.to_csv_array
       end
     end
   end
   
-  def generate_registrants_csv_async
+  def generate_registrants_csv_async(start_date=nil, end_date=nil)
     self.update_attributes!(:csv_ready=>false)
-    action = Delayed::PerformableMethod.new(self, :generate_registrants_csv_file, [])
+    action = Delayed::PerformableMethod.new(self, :generate_registrants_csv_file, [start_date, end_date])
     Delayed::Job.enqueue(action, CSV_GENERATION_PRIORITY, Time.now)
   end
   
-  def generate_registrants_csv_file
-    time_stamp = Time.now
-    self.csv_file_name = self.generate_csv_file_name(time_stamp)
+  def generate_registrants_csv_file(start_date=nil, end_date = nil)
+    time_stamp = end_date || Time.now
+    self.csv_file_name = self.generate_csv_file_name(time_stamp, start_date)
     file = File.open(csv_file_path, "w")
-    file.write generate_registrants_csv.force_encoding 'utf-8'
+    file.write generate_registrants_csv(start_date, end_date).force_encoding 'utf-8'
     file.close
     self.csv_ready = true
     self.save!
 
-    action = Delayed::PerformableMethod.new(self, :delete_registrants_csv_file, [])
+    action = Delayed::PerformableMethod.new(self, :delete_registrants_csv_file, [self.csv_file_name])
     Delayed::Job.enqueue(action, CSV_GENERATION_PRIORITY, AppConfig.partner_csv_expiration_minutes.from_now)
   end
   
-  def delete_registrants_csv_file
-    if File.exists?(csv_file_path)
-      File.delete(csv_file_path)
+  def delete_registrants_csv_file(file_name)
+    if File.exists?(csv_file_path(file_name))
+      File.delete(csv_file_path(file_name))
     end
   end
   
-  def generate_csv_file_name(date_time)
+  def generate_csv_file_name(end_time, start_date=nil)
     obfuscate = Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)}" )
-    "csv-#{obfuscate}-#{date_time.strftime('%Y%m%d-%H%M%S')}.csv"
+    "csv-#{obfuscate}-#{start_date ? "#{start_date.strftime('%Y%m%d')}-" : '' }#{end_time.strftime('%Y%m%d')}.csv"
   end
   
-  def csv_file_path
-    File.join(csv_path, csv_file_name)
+  def csv_file_path(file_name = nil)
+    File.join(csv_path, file_name || self.csv_file_name)
   end
   def csv_path
     path = File.join(Rails.root, "csv", self.id.to_s)

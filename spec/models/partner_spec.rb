@@ -626,8 +626,8 @@ describe Partner do
   end
 
   describe "CSV" do
+    let(:partner) { FactoryGirl.create(:partner) }
     it "can generate CSV of all registrants" do
-      partner = FactoryGirl.create(:partner)
       registrants = []
       3.times { registrants << FactoryGirl.create(:maximal_registrant, :partner => partner) }
       registrants << FactoryGirl.create(:step_1_registrant, :partner => partner)
@@ -643,6 +643,36 @@ describe Partner do
       assert_equal registrants[2].to_csv_array, csv[3]
       assert_equal registrants[3].to_csv_array, csv[4]
     end
+    
+    it "can generate CSV for registrants within a time span" do
+      registrants = []
+      3.times {|i| registrants << FactoryGirl.create(:maximal_registrant, :partner => partner, :created_at=> i.months.ago) }
+      registrants << FactoryGirl.create(:step_1_registrant, :partner => partner, :created_at=> 3.months.ago)
+
+      csv = CSV.parse(partner.generate_registrants_csv(2.months.ago.beginning_of_day, 1.months.ago.beginning_of_day))
+      assert_equal 3, csv.length # including header
+      assert_equal Registrant::CSV_HEADER, csv[0]
+      assert_equal registrants[1].to_csv_array, csv[1]
+      assert_equal registrants[2].to_csv_array, csv[2]
+
+
+      csv = CSV.parse(partner.generate_registrants_csv(2.months.ago.beginning_of_day))
+      assert_equal 4, csv.length # including header
+      assert_equal Registrant::CSV_HEADER, csv[0]
+      assert_equal registrants[0].to_csv_array, csv[1]
+      assert_equal registrants[1].to_csv_array, csv[2]
+      assert_equal registrants[2].to_csv_array, csv[3]
+
+
+      csv = CSV.parse(partner.generate_registrants_csv(nil, 1.months.ago.beginning_of_day))
+      assert_equal 4, csv.length # including header
+      assert_equal Registrant::CSV_HEADER, csv[0]
+      assert_equal registrants[1].to_csv_array, csv[1]
+      assert_equal registrants[2].to_csv_array, csv[2]
+      assert_equal registrants[3].to_csv_array, csv[3]
+
+    end
+
     describe "#generate_registrants_csv_async" do
       before(:each) do
         @partner= FactoryGirl.create(:partner, :csv_ready=>true)
@@ -659,7 +689,7 @@ describe Partner do
       end
       it "sets up a delayed job to generate the csv" do
         @partner.generate_registrants_csv_async
-        Delayed::PerformableMethod.should have_received(:new).with(@partner, :generate_registrants_csv_file, [])
+        Delayed::PerformableMethod.should have_received(:new).with(@partner, :generate_registrants_csv_file, [nil, nil])
         Delayed::Job.should have_received(:enqueue).with("action", Partner::CSV_GENERATION_PRIORITY, @t)
       end
     end
@@ -667,7 +697,7 @@ describe Partner do
       it "generates obfuscated file name" do
         Digest::SHA1.stub(:hexdigest).and_return("obfuscate")
         d = DateTime.now
-        Partner.new.generate_csv_file_name(d).should == "csv-obfuscate-#{d.strftime('%Y%m%d-%H%M%S')}.csv"
+        Partner.new.generate_csv_file_name(d).should == "csv-obfuscate-#{d.strftime('%Y%m%d')}.csv"
         #Digest::SHA1.hexdigest( "#{Time.now.usec} -- #{rand(1000000)} -- #{email_address} -- #{home_zip_code}" )
       end
     end
@@ -712,7 +742,7 @@ describe Partner do
       end
       it "generates obfuscated file names in partner directories with date/time stamp" do
         @partner.generate_registrants_csv_file
-        @partner.should have_received(:generate_csv_file_name).with(@t)
+        @partner.should have_received(:generate_csv_file_name).with(@t, nil)
       end
       it "saves newest export into csv/[partner_id] directory" do
         @partner.generate_registrants_csv_file
@@ -730,7 +760,7 @@ describe Partner do
       end
       it "sets a delayed job to delete the file" do
         @partner.generate_registrants_csv_file
-        Delayed::PerformableMethod.should have_received(:new).with(@partner, :delete_registrants_csv_file, [])
+        Delayed::PerformableMethod.should have_received(:new).with(@partner, :delete_registrants_csv_file, ['fn.csv'])
         Delayed::Job.should have_received(:enqueue).with("action", Partner::CSV_GENERATION_PRIORITY, AppConfig.partner_csv_expiration_minutes.from_now)        
       end
     end

@@ -219,6 +219,25 @@ div.login {
   margin: 0 auto;
 }
 
+form.form_downloadcsv {
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding: 20px;
+  .date_input {
+    float: left;
+    label {
+      display: block;
+    }
+    width: 25%;
+  }
+  .submit_button {
+    padding-top: 15px;
+    float: left;
+    width: 50%;
+  }
+}
+
 
 fieldset {
   margin: 10px 0;
@@ -476,8 +495,7 @@ a.button_customizetool      { width: 156px; height: 22px; }
 a.button_customizetool span { width: 156px; height: 22px; background-image: image-url('partner/button_customizetool_ro.gif'); }
 a.button_editprofile        { width: 127px; height: 22px; }
 a.button_editprofile span   { width: 127px; height: 22px; background-image: image-url('partner/button_editprofile_ro.gif'); }
-a.button_downloadcsv        { width: 258px; height: 22px; }
-a.button_downloadcsv span   { width: 258px; height: 22px; background-image: image-url('partner/button_downloadcsv_ro.gif'); }
+input.button_downloadcsv    { border: 0; width: 258px; height: 22px; background-image: image-url('partner/button_downloadcsv_ro.gif'); }
 a.button_save               { width: 207px; height: 36px; }
 a.button_save span          { width: 207px; height: 36px; background-image: image-url('partner/button_save_ro.gif'); }
 a.button_deletelogo         { width: 137px; height: 22px; }

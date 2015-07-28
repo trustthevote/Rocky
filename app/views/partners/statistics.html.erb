@@ -7,11 +7,20 @@
   </p>
 </div>
 
-<p class="top_leading">
-  <span class="button rollover_button">
-    <a class="button_downloadcsv" href="<%= registrations_partner_path(:format => :csv) %>"><span>Download CSV</span></a>
-  </span>
-</p>
+    <%= form_tag registrations_partner_path(:format => :csv), method: :post, :class=> 'form_downloadcsv' do %>
+      <div class='date_input'>
+        <%= label_tag :start_date, 'Start Date' %>
+        <%= text_field_tag 'start_date', nil, type: :date %>
+      </div>
+      <div class='date_input'>
+        <%= label_tag :end_date, 'End Date' %>
+        <%= text_field_tag 'end_date', nil, type: :date %>
+      </div>
+      <div class='submit_button'>
+        <%= submit_tag "", :class=>"button_downloadcsv", alt: "Download CSV" %>
+      </div>
+    <%- end %>
+  
 
 <table id="statistics" cellspacing="0">
   <tr>
