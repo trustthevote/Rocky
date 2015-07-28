@@ -323,21 +323,14 @@ class Partner < ActiveRecord::Base
   end
 
   def registration_stats_party
-    sql = <<-SQL
-      SELECT official_party_name, count(registrants.id) AS registrants_count FROM registrants
-      INNER JOIN geo_states ON geo_states.id = registrants.home_state_id
-      WHERE registrants.partner_id = #{self.id}
-        AND (status = 'complete' OR status = 'step_5')
-      GROUP BY official_party_name
-      ORDER BY registrants_count DESC, official_party_name
-    SQL
-    
-    stats = self.class.connection.select_all(sql)
-    total_count = stats.inject(0) { |sum, row| sum + row['registrants_count'].to_i }
-    stats.collect do |row|
-      { :party => row['official_party_name'],
-        :count => row['registrants_count'].to_i,
-        :percentage => percentage(row['registrants_count'], total_count)
+    parties_regs = Registrant.where(partner_id: self.id).where("status = ? OR status = ?", 'complete', 'step_5').group(:official_party_name).count
+
+    total_count = parties_regs.values.sum
+    parties_regs.to_a.sort {|a, b| b[1]<=>a[1] }.collect do |row|
+      {
+        :party=>row[0] || "Null (#{Registrant.where(partner_id: self.id).where("status = ? OR status = ?", 'complete', 'step_5').where(finish_with_state: true).count} finish with state)",
+        :count=>row[1].to_i,
+        :percentage=> percentage(row[1].to_i, total_count)
       }
     end
   end
