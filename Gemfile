@@ -76,7 +76,7 @@ group :assets do
   gem 'uglifier'
 end
 
-gem "nokogiri", "= 1.5.9"
+gem "nokogiri", "1.6.8.1"
 gem "mechanize", "= 2.7.1"
 gem "newrelic_rpm", "= 3.6.0.83"
 gem "airbrake"
